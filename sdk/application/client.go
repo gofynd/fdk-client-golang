@@ -96,7 +96,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetProductDetailBySlug Get a product
-    func (ca *Catalog)  GetProductDetailBySlug(Slug string, ) (*ProductDetail, error){
+    func (ca *Catalog)  GetProductDetailBySlug(Slug string) (*ProductDetail, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -137,7 +137,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetProductSizesBySlug Get the sizes of a product
-    func (ca *Catalog)  GetProductSizesBySlug(Slug string, StoreId string, ) (*ProductSizes, error){
+    func (ca *Catalog)  GetProductSizesBySlug(Slug string, StoreID string) (*ProductSizes, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -150,11 +150,11 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          StoreId string  `url:"store_id"`  
+          StoreID string  `url:"store_id"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           StoreId : StoreId,
+           StoreID : StoreID,
         }
         
          
@@ -187,7 +187,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetProductPriceBySlug Get price a product size
-    func (ca *Catalog)  GetProductPriceBySlug(Slug string, Size string, Pincode string, StoreId string, ) (*ProductSizePriceResponse, error){
+    func (ca *Catalog)  GetProductPriceBySlug(Slug string, Size string, Pincode string, StoreID string) (*ProductSizePriceResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -200,11 +200,11 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          StoreId string  `url:"store_id"`  
+          StoreID string  `url:"store_id"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           StoreId : StoreId,
+           StoreID : StoreID,
         }
         
          
@@ -237,7 +237,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetProductSellersBySlug List sellers of a product
-    func (ca *Catalog)  GetProductSellersBySlug(Slug string, Size string, Pincode string, PageNo int, PageSize int, ) (*ProductSizeSellersResponse, error){
+    func (ca *Catalog)  GetProductSellersBySlug(Slug string, Size string, Pincode string, PageNo int, PageSize int) (*ProductSizeSellersResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -318,7 +318,7 @@ func NewAppClient(config *AppConfig) *Client {
                 paginator.Next = func() (interface{}, error) {
                     response, err := ca.GetProductSellersBySlug(Slug, Size, Pincode, paginator.PageNo, PageSize)
                     if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextId)
+                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextID)
                     }
                     return response, err
                 }
@@ -330,7 +330,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetProductComparisonBySlugs Compare products
-    func (ca *Catalog)  GetProductComparisonBySlugs(Slug []string, ) (*ProductsComparisonResponse, error){
+    func (ca *Catalog)  GetProductComparisonBySlugs(Slug []string) (*ProductsComparisonResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -380,7 +380,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetSimilarComparisonProductBySlug Get comparison between similar products
-    func (ca *Catalog)  GetSimilarComparisonProductBySlug(Slug string, ) (*ProductCompareResponse, error){
+    func (ca *Catalog)  GetSimilarComparisonProductBySlug(Slug string) (*ProductCompareResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -421,7 +421,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetComparedFrequentlyProductBySlug Get comparison between frequently compared products with the given product
-    func (ca *Catalog)  GetComparedFrequentlyProductBySlug(Slug string, ) (*ProductFrequentlyComparedSimilarResponse, error){
+    func (ca *Catalog)  GetComparedFrequentlyProductBySlug(Slug string) (*ProductFrequentlyComparedSimilarResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -462,7 +462,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetProductSimilarByIdentifier Get similar products
-    func (ca *Catalog)  GetProductSimilarByIdentifier(Slug string, SimilarType string, ) (*SimilarProductByTypeResponse, error){
+    func (ca *Catalog)  GetProductSimilarByIdentifier(Slug string, SimilarType string) (*SimilarProductByTypeResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -503,7 +503,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetProductVariantsBySlug Get variant of a particular product
-    func (ca *Catalog)  GetProductVariantsBySlug(Slug string, ) (*ProductVariantsResponse, error){
+    func (ca *Catalog)  GetProductVariantsBySlug(Slug string) (*ProductVariantsResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -544,7 +544,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetProductStockByIds Get the stock of a product
-    func (ca *Catalog)  GetProductStockByIds(ItemId string, Alu string, SkuCode string, Ean string, Upc string, ) (*ProductStockStatusResponse, error){
+    func (ca *Catalog)  GetProductStockByIds(ItemID string, Alu string, SkuCode string, Ean string, Upc string) (*ProductStockStatusResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -557,7 +557,7 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          ItemId string  `url:"item_id"` 
+          ItemID string  `url:"item_id"` 
           Alu string  `url:"alu"` 
           SkuCode string  `url:"sku_code"` 
           Ean string  `url:"ean"` 
@@ -565,7 +565,7 @@ func NewAppClient(config *AppConfig) *Client {
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           ItemId : ItemId,
+           ItemID : ItemID,
            Alu : Alu,
            SkuCode : SkuCode,
            Ean : Ean,
@@ -602,7 +602,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetProductStockForTimeByIds Get the stock of a product
-    func (ca *Catalog)  GetProductStockForTimeByIds(Timestamp string, PageSize int, PageId string, ) (*ProductStockPolling, error){
+    func (ca *Catalog)  GetProductStockForTimeByIds(Timestamp string, PageSize int, PageID string) (*ProductStockPolling, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -617,13 +617,13 @@ func NewAppClient(config *AppConfig) *Client {
         type XQuery struct { 
           Timestamp string  `url:"timestamp"` 
           PageSize int  `url:"page_size"` 
-          PageId string  `url:"page_id"`  
+          PageID string  `url:"page_id"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
            Timestamp : Timestamp,
            PageSize : PageSize,
-           PageId : PageId,
+           PageID : PageID,
         }
         
          
@@ -675,9 +675,9 @@ func NewAppClient(config *AppConfig) *Client {
             func (ca *Catalog)  GetProductStockForTimeByIdsPaginator(Timestamp string , PageSize int ) *common.Paginator {
                 paginator := common.NewPaginator("cursor")
                 paginator.Next = func() (interface{}, error) {
-                    response, err := ca.GetProductStockForTimeByIds(Timestamp, PageSize, paginator.NextID, )
+                    response, err := ca.GetProductStockForTimeByIds(Timestamp, PageSize, paginator.NextID)
                     if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextId)
+                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextID)
                     }
                     return response, err
                 }
@@ -689,7 +689,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetProducts List the products
-    func (ca *Catalog)  GetProducts(Q string, F string, Filters bool, SortOn string, PageId string, PageSize int, PageNo int, PageType string, ) (*ProductListingResponse, error){
+    func (ca *Catalog)  GetProducts(Q string, F string, Filters bool, SortOn string, PageID string, PageSize int, PageNo int, PageType string) (*ProductListingResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -706,7 +706,7 @@ func NewAppClient(config *AppConfig) *Client {
           F string  `url:"f"` 
           Filters bool  `url:"filters"` 
           SortOn string  `url:"sort_on"` 
-          PageId string  `url:"page_id"` 
+          PageID string  `url:"page_id"` 
           PageSize int  `url:"page_size"` 
           PageNo int  `url:"page_no"` 
           PageType string  `url:"page_type"`  
@@ -717,7 +717,7 @@ func NewAppClient(config *AppConfig) *Client {
            F : F,
            Filters : Filters,
            SortOn : SortOn,
-           PageId : PageId,
+           PageID : PageID,
            PageSize : PageSize,
            PageNo : PageNo,
            PageType : PageType,
@@ -793,9 +793,9 @@ func NewAppClient(config *AppConfig) *Client {
             func (ca *Catalog)  GetProductsPaginator(Q string , F string , Filters bool , SortOn string , PageSize int ) *common.Paginator {
                 paginator := common.NewPaginator("cursor")
                 paginator.Next = func() (interface{}, error) {
-                    response, err := ca.GetProducts(Q, F, Filters, SortOn, paginator.NextID, PageSize, paginator.PageNo, PageType)
+                    response, err := ca.GetProducts(Q, F, Filters, SortOn, paginator.NextID, PageSize, paginator.PageNo, "cursor")
                     if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextId)
+                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextID)
                     }
                     return response, err
                 }
@@ -807,7 +807,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetBrands List all the brands
-    func (ca *Catalog)  GetBrands(Department string, PageNo int, PageSize int, ) (*BrandListingResponse, error){
+    func (ca *Catalog)  GetBrands(Department string, PageNo int, PageSize int) (*BrandListingResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -880,7 +880,7 @@ func NewAppClient(config *AppConfig) *Client {
                 paginator.Next = func() (interface{}, error) {
                     response, err := ca.GetBrands(Department, paginator.PageNo, PageSize)
                     if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextId)
+                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextID)
                     }
                     return response, err
                 }
@@ -892,7 +892,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetBrandDetailBySlug Get metadata of a brand
-    func (ca *Catalog)  GetBrandDetailBySlug(Slug string, ) (*BrandDetailResponse, error){
+    func (ca *Catalog)  GetBrandDetailBySlug(Slug string) (*BrandDetailResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -933,7 +933,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetCategories List all the categories
-    func (ca *Catalog)  GetCategories(Department string, ) (*CategoryListingResponse, error){
+    func (ca *Catalog)  GetCategories(Department string) (*CategoryListingResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -983,7 +983,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetCategoryDetailBySlug Get metadata of a category
-    func (ca *Catalog)  GetCategoryDetailBySlug(Slug string, ) (*CategoryMetaResponse, error){
+    func (ca *Catalog)  GetCategoryDetailBySlug(Slug string) (*CategoryMetaResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -1024,7 +1024,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetHomeProducts List the products
-    func (ca *Catalog)  GetHomeProducts(SortOn string, PageId string, PageSize int, ) (*HomeListingResponse, error){
+    func (ca *Catalog)  GetHomeProducts(SortOn string, PageID string, PageSize int) (*HomeListingResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -1038,13 +1038,13 @@ func NewAppClient(config *AppConfig) *Client {
         //Query holds query params
         type XQuery struct { 
           SortOn string  `url:"sort_on"` 
-          PageId string  `url:"page_id"` 
+          PageID string  `url:"page_id"` 
           PageSize int  `url:"page_size"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
            SortOn : SortOn,
-           PageId : PageId,
+           PageID : PageID,
            PageSize : PageSize,
         }
         
@@ -1099,7 +1099,7 @@ func NewAppClient(config *AppConfig) *Client {
                 paginator.Next = func() (interface{}, error) {
                     response, err := ca.GetHomeProducts(SortOn, paginator.NextID, PageSize)
                     if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextId)
+                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextID)
                     }
                     return response, err
                 }
@@ -1152,7 +1152,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetSearchResults Get relevant suggestions for a search query
-    func (ca *Catalog)  GetSearchResults(Q string, ) (*AutoCompleteResponse, error){
+    func (ca *Catalog)  GetSearchResults(Q string) (*AutoCompleteResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -1202,7 +1202,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetCollections List all the collections
-    func (ca *Catalog)  GetCollections(PageNo int, PageSize int, ) (*GetCollectionListingResponse, error){
+    func (ca *Catalog)  GetCollections(PageNo int, PageSize int) (*GetCollectionListingResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -1268,7 +1268,7 @@ func NewAppClient(config *AppConfig) *Client {
                 paginator.Next = func() (interface{}, error) {
                     response, err := ca.GetCollections(paginator.PageNo, PageSize)
                     if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextId)
+                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextID)
                     }
                     return response, err
                 }
@@ -1280,7 +1280,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetCollectionItemsBySlug Get the items in a collection
-    func (ca *Catalog)  GetCollectionItemsBySlug(Slug string, F string, Filters bool, SortOn string, PageId string, PageSize int, ) (*ProductListingResponse, error){
+    func (ca *Catalog)  GetCollectionItemsBySlug(Slug string, F string, Filters bool, SortOn string, PageID string, PageSize int) (*ProductListingResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -1296,7 +1296,7 @@ func NewAppClient(config *AppConfig) *Client {
           F string  `url:"f"` 
           Filters bool  `url:"filters"` 
           SortOn string  `url:"sort_on"` 
-          PageId string  `url:"page_id"` 
+          PageID string  `url:"page_id"` 
           PageSize int  `url:"page_size"`  
         }
         //Query params populating to struct
@@ -1304,7 +1304,7 @@ func NewAppClient(config *AppConfig) *Client {
            F : F,
            Filters : Filters,
            SortOn : SortOn,
-           PageId : PageId,
+           PageID : PageID,
            PageSize : PageSize,
         }
         
@@ -1374,7 +1374,7 @@ func NewAppClient(config *AppConfig) *Client {
                 paginator.Next = func() (interface{}, error) {
                     response, err := ca.GetCollectionItemsBySlug(Slug, F, Filters, SortOn, paginator.NextID, PageSize)
                     if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextId)
+                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextID)
                     }
                     return response, err
                 }
@@ -1386,7 +1386,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetCollectionDetailBySlug Get a particular collection
-    func (ca *Catalog)  GetCollectionDetailBySlug(Slug string, ) (*CollectionDetailResponse, error){
+    func (ca *Catalog)  GetCollectionDetailBySlug(Slug string) (*CollectionDetailResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -1427,7 +1427,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetFollowedListing Get a list of followed Products, Brands, Collections
-    func (ca *Catalog)  GetFollowedListing(CollectionType string, PageId string, PageSize int, ) (*GetFollowListingResponse, error){
+    func (ca *Catalog)  GetFollowedListing(CollectionType string, PageID string, PageSize int) (*GetFollowListingResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -1440,12 +1440,12 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          PageId string  `url:"page_id"` 
+          PageID string  `url:"page_id"` 
           PageSize int  `url:"page_size"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           PageId : PageId,
+           PageID : PageID,
            PageSize : PageSize,
         }
         
@@ -1500,7 +1500,7 @@ func NewAppClient(config *AppConfig) *Client {
                 paginator.Next = func() (interface{}, error) {
                     response, err := ca.GetFollowedListing(CollectionType, paginator.NextID, PageSize)
                     if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextId)
+                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextID)
                     }
                     return response, err
                 }
@@ -1512,7 +1512,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // UnfollowById UnFollow a Product
-    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionId string, ) (*FollowPostResponse, error){
+    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (*FollowPostResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -1530,7 +1530,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "delete",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionId),
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
             nil,
             nil,
             nil)
@@ -1553,7 +1553,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // FollowById Follow a particular Product
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionId string, ) (*FollowPostResponse, error){
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (*FollowPostResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -1571,7 +1571,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionId),
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
             nil,
             nil,
             nil)
@@ -1594,7 +1594,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetFollowerCountById Get Follow Count
-    func (ca *Catalog)  GetFollowerCountById(CollectionType string, CollectionId string, ) (*FollowerCountResponse, error){
+    func (ca *Catalog)  GetFollowerCountById(CollectionType string, CollectionID string) (*FollowerCountResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -1612,7 +1612,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/count/",CollectionType,CollectionId),
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/count/",CollectionType,CollectionID),
             nil,
             nil,
             nil)
@@ -1635,7 +1635,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetFollowIds Get the Ids of followed product, brand and collection.
-    func (ca *Catalog)  GetFollowIds(CollectionType string, ) (*FollowIdsResponse, error){
+    func (ca *Catalog)  GetFollowIds(CollectionType string) (*FollowIdsResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -1685,7 +1685,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetStores List store meta information.
-    func (ca *Catalog)  GetStores(PageNo int, PageSize int, Q string, Range int, Latitude int, Longitude int, ) (*StoreListingResponse, error){
+    func (ca *Catalog)  GetStores(PageNo int, PageSize int, Q string, Range int, Latitude int, Longitude int) (*StoreListingResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -1779,7 +1779,7 @@ func NewAppClient(config *AppConfig) *Client {
                 paginator.Next = func() (interface{}, error) {
                     response, err := ca.GetStores(paginator.PageNo, PageSize, Q, Range, Latitude, Longitude)
                     if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextId)
+                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextID)
                     }
                     return response, err
                 }
@@ -1801,7 +1801,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetCart Fetch all Items Added to  Cart
-    func (ca *Cart)  GetCart(Uid int, I bool, B bool, AssignCardId int, ) (*CartResponse, error){
+    func (ca *Cart)  GetCart(UID int, I bool, B bool, AssignCardID int) (*CartResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -1814,17 +1814,17 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid int  `url:"uid"` 
+          UID int  `url:"uid"` 
           I bool  `url:"i"` 
           B bool  `url:"b"` 
-          AssignCardId int  `url:"assign_card_id"`  
+          AssignCardID int  `url:"assign_card_id"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
+           UID : UID,
            I : I,
            B : B,
-           AssignCardId : AssignCardId,
+           AssignCardID : AssignCardID,
         }
         
          
@@ -1857,7 +1857,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetCartLastModified Fetch Last-Modified timestamp
-    func (ca *Cart)  GetCartLastModified(Uid int, ) (interface{}, error){
+    func (ca *Cart)  GetCartLastModified(UID int) (interface{}, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -1870,11 +1870,11 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid int  `url:"uid"`  
+          UID int  `url:"uid"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
+           UID : UID,
         }
         
          
@@ -1970,7 +1970,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // UpdateCart Update Items already added to Cart
-    func (ca *Cart)  UpdateCart(Uid int, I bool, B bool, body  UpdateCartRequest) (*UpdateCartResponse, error){
+    func (ca *Cart)  UpdateCart(UID int, I bool, B bool, body  UpdateCartRequest) (*UpdateCartResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -1983,13 +1983,13 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid int  `url:"uid"` 
+          UID int  `url:"uid"` 
           I bool  `url:"i"` 
           B bool  `url:"b"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
+           UID : UID,
            I : I,
            B : B,
         }
@@ -2035,7 +2035,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetItemCount Cart item count
-    func (ca *Cart)  GetItemCount(Uid int, ) (*CartItemCountResponse, error){
+    func (ca *Cart)  GetItemCount(UID int) (*CartItemCountResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -2048,11 +2048,11 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid int  `url:"uid"`  
+          UID int  `url:"uid"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
+           UID : UID,
         }
         
          
@@ -2085,7 +2085,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetCoupons Fetch Coupon
-    func (ca *Cart)  GetCoupons(Uid int, ) (*GetCouponResponse, error){
+    func (ca *Cart)  GetCoupons(UID int) (*GetCouponResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -2098,11 +2098,11 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid int  `url:"uid"`  
+          UID int  `url:"uid"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
+           UID : UID,
         }
         
          
@@ -2135,7 +2135,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // ApplyCoupon Apply Coupon
-    func (ca *Cart)  ApplyCoupon(I bool, B bool, P bool, Uid int, body  ApplyCouponRequest) (*CartResponse, error){
+    func (ca *Cart)  ApplyCoupon(I bool, B bool, P bool, UID int, body  ApplyCouponRequest) (*CartResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -2151,14 +2151,14 @@ func NewAppClient(config *AppConfig) *Client {
           I bool  `url:"i"` 
           B bool  `url:"b"` 
           P bool  `url:"p"` 
-          Uid int  `url:"uid"`  
+          UID int  `url:"uid"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
            I : I,
            B : B,
            P : P,
-           Uid : Uid,
+           UID : UID,
         }
         
          
@@ -2202,7 +2202,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // RemoveCoupon Remove Coupon Applied
-    func (ca *Cart)  RemoveCoupon(Uid int, ) (*CartResponse, error){
+    func (ca *Cart)  RemoveCoupon(UID int) (*CartResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -2215,11 +2215,11 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid int  `url:"uid"`  
+          UID int  `url:"uid"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
+           UID : UID,
         }
         
          
@@ -2252,7 +2252,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetBulkDiscountOffers Get discount offers based on quantity
-    func (ca *Cart)  GetBulkDiscountOffers(ItemId int, ArticleId string, Uid int, Slug string, ) (*BulkPriceResponse, error){
+    func (ca *Cart)  GetBulkDiscountOffers(ItemID int, ArticleID string, UID int, Slug string) (*BulkPriceResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -2265,16 +2265,16 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          ItemId int  `url:"item_id"` 
-          ArticleId string  `url:"article_id"` 
-          Uid int  `url:"uid"` 
+          ItemID int  `url:"item_id"` 
+          ArticleID string  `url:"article_id"` 
+          UID int  `url:"uid"` 
           Slug string  `url:"slug"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           ItemId : ItemId,
-           ArticleId : ArticleId,
-           Uid : Uid,
+           ItemID : ItemID,
+           ArticleID : ArticleID,
+           UID : UID,
            Slug : Slug,
         }
         
@@ -2308,7 +2308,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetAddresses Fetch Address
-    func (ca *Cart)  GetAddresses(Uid int, MobileNo string, CheckoutMode string, Tags string, IsDefault bool, ) (*GetAddressesResponse, error){
+    func (ca *Cart)  GetAddresses(UID int, MobileNo string, CheckoutMode string, Tags string, IsDefault bool) (*GetAddressesResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -2321,7 +2321,7 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid int  `url:"uid"` 
+          UID int  `url:"uid"` 
           MobileNo string  `url:"mobile_no"` 
           CheckoutMode string  `url:"checkout_mode"` 
           Tags string  `url:"tags"` 
@@ -2329,7 +2329,7 @@ func NewAppClient(config *AppConfig) *Client {
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
+           UID : UID,
            MobileNo : MobileNo,
            CheckoutMode : CheckoutMode,
            Tags : Tags,
@@ -2418,7 +2418,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetAddressById Fetch Single Address
-    func (ca *Cart)  GetAddressById(Id int, Uid int, MobileNo string, CheckoutMode string, Tags string, IsDefault bool, ) (*Address, error){
+    func (ca *Cart)  GetAddressById(ID int, UID int, MobileNo string, CheckoutMode string, Tags string, IsDefault bool) (*Address, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -2431,7 +2431,7 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid int  `url:"uid"` 
+          UID int  `url:"uid"` 
           MobileNo string  `url:"mobile_no"` 
           CheckoutMode string  `url:"checkout_mode"` 
           Tags string  `url:"tags"` 
@@ -2439,7 +2439,7 @@ func NewAppClient(config *AppConfig) *Client {
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
+           UID : UID,
            MobileNo : MobileNo,
            CheckoutMode : CheckoutMode,
            Tags : Tags,
@@ -2453,7 +2453,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/application/cart/v1.0/address/%d",Id),
+            fmt.Sprintf("/service/application/cart/v1.0/address/%d",ID),
             nil,
             xQuery,
             nil)
@@ -2476,7 +2476,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // UpdateAddress Update Address alreay added to account
-    func (ca *Cart)  UpdateAddress(Id int, body  Address) (*UpdateAddressResponse, error){
+    func (ca *Cart)  UpdateAddress(ID int, body  Address) (*UpdateAddressResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -2505,7 +2505,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "put",
-            fmt.Sprintf("/service/application/cart/v1.0/address/%d",Id),
+            fmt.Sprintf("/service/application/cart/v1.0/address/%d",ID),
             nil,
             nil,
             reqBody)
@@ -2528,7 +2528,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // RemoveAddress Remove Address Associated to the account
-    func (ca *Cart)  RemoveAddress(Id int, ) (*DeleteAddressResponse, error){
+    func (ca *Cart)  RemoveAddress(ID int) (*DeleteAddressResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -2546,7 +2546,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "delete",
-            fmt.Sprintf("/service/application/cart/v1.0/address/%d",Id),
+            fmt.Sprintf("/service/application/cart/v1.0/address/%d",ID),
             nil,
             nil,
             nil)
@@ -2569,7 +2569,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // SelectAddress Select Address from All Addresses
-    func (ca *Cart)  SelectAddress(Uid int, I bool, B bool, body  SelectCartAddressRequest) (*CartResponse, error){
+    func (ca *Cart)  SelectAddress(UID int, I bool, B bool, body  SelectCartAddressRequest) (*CartResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -2582,13 +2582,13 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid int  `url:"uid"` 
+          UID int  `url:"uid"` 
           I bool  `url:"i"` 
           B bool  `url:"b"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
+           UID : UID,
            I : I,
            B : B,
         }
@@ -2634,7 +2634,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // SelectPaymentMode Update Cart Payment
-    func (ca *Cart)  SelectPaymentMode(Uid string, body  UpdateCartPaymentRequest) (*CartResponse, error){
+    func (ca *Cart)  SelectPaymentMode(UID string, body  UpdateCartPaymentRequest) (*CartResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -2647,11 +2647,11 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid string  `url:"uid"`  
+          UID string  `url:"uid"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
+           UID : UID,
         }
         
          
@@ -2695,7 +2695,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // ValidateCouponForPayment Get Cart Payment for valid coupon
-    func (ca *Cart)  ValidateCouponForPayment(Uid string, AddressId string, PaymentMode string, PaymentIdentifier string, AggregatorName string, MerchantCode string, ) (*PaymentCouponValidate, error){
+    func (ca *Cart)  ValidateCouponForPayment(UID string, AddressID string, PaymentMode string, PaymentIdentifier string, AggregatorName string, MerchantCode string) (*PaymentCouponValidate, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -2708,8 +2708,8 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid string  `url:"uid"` 
-          AddressId string  `url:"address_id"` 
+          UID string  `url:"uid"` 
+          AddressID string  `url:"address_id"` 
           PaymentMode string  `url:"payment_mode"` 
           PaymentIdentifier string  `url:"payment_identifier"` 
           AggregatorName string  `url:"aggregator_name"` 
@@ -2717,8 +2717,8 @@ func NewAppClient(config *AppConfig) *Client {
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
-           AddressId : AddressId,
+           UID : UID,
+           AddressID : AddressID,
            PaymentMode : PaymentMode,
            PaymentIdentifier : PaymentIdentifier,
            AggregatorName : AggregatorName,
@@ -2755,7 +2755,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetShipments Get delivery date and options before checkout
-    func (ca *Cart)  GetShipments(P bool, Uid int, AddressId int, AreaCode string, ) (*CartShipmentsResponse, error){
+    func (ca *Cart)  GetShipments(P bool, UID int, AddressID int, AreaCode string) (*CartShipmentsResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -2769,15 +2769,15 @@ func NewAppClient(config *AppConfig) *Client {
         //Query holds query params
         type XQuery struct { 
           P bool  `url:"p"` 
-          Uid int  `url:"uid"` 
-          AddressId int  `url:"address_id"` 
+          UID int  `url:"uid"` 
+          AddressID int  `url:"address_id"` 
           AreaCode string  `url:"area_code"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
            P : P,
-           Uid : Uid,
-           AddressId : AddressId,
+           UID : UID,
+           AddressID : AddressID,
            AreaCode : AreaCode,
         }
         
@@ -2863,7 +2863,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // UpdateCartMeta Update Cart Meta
-    func (ca *Cart)  UpdateCartMeta(Uid int, body  CartMetaRequest) (*CartMetaResponse, error){
+    func (ca *Cart)  UpdateCartMeta(UID int, body  CartMetaRequest) (*CartMetaResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -2876,11 +2876,11 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid int  `url:"uid"`  
+          UID int  `url:"uid"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
+           UID : UID,
         }
         
          
@@ -2976,7 +2976,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetCartSharedItems Get shared cart snapshot and cart response
-    func (ca *Cart)  GetCartSharedItems(Token string, ) (*SharedCartResponse, error){
+    func (ca *Cart)  GetCartSharedItems(Token string) (*SharedCartResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -3017,7 +3017,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // UpdateCartWithSharedItems Merge or Replace existing cart
-    func (ca *Cart)  UpdateCartWithSharedItems(Token string, Action string, ) (*SharedCartResponse, error){
+    func (ca *Cart)  UpdateCartWithSharedItems(Token string, Action string) (*SharedCartResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -3068,7 +3068,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetTicket Get Ticket with the specific id
-    func (le *Lead)  GetTicket(Id string, ) (*Ticket, error){
+    func (le *Lead)  GetTicket(ID string) (*Ticket, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -3086,7 +3086,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             le.config,
             "get",
-            fmt.Sprintf("/service/application/lead/v1.0/ticket/%s",Id),
+            fmt.Sprintf("/service/application/lead/v1.0/ticket/%s",ID),
             nil,
             nil,
             nil)
@@ -3109,7 +3109,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // CreateHistory Create history for specific Ticket
-    func (le *Lead)  CreateHistory(TicketId string, body  TicketHistoryPayload) (*TicketHistory, error){
+    func (le *Lead)  CreateHistory(TicketID string, body  TicketHistoryPayload) (*TicketHistory, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -3138,7 +3138,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             le.config,
             "post",
-            fmt.Sprintf("/service/application/lead/v1.0/ticket/%s/history",TicketId),
+            fmt.Sprintf("/service/application/lead/v1.0/ticket/%s/history",TicketID),
             nil,
             nil,
             reqBody)
@@ -3213,7 +3213,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetCustomForm Get specific Custom Form using it's slug
-    func (le *Lead)  GetCustomForm(Slug string, ) (*CustomForm, error){
+    func (le *Lead)  GetCustomForm(Slug string) (*CustomForm, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -3306,7 +3306,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetParticipantsInsideVideoRoom Get participants of a specific Video Room using it's unique name
-    func (le *Lead)  GetParticipantsInsideVideoRoom(UniqueName string, ) (*GetParticipantsInsideVideoRoomResponse, error){
+    func (le *Lead)  GetParticipantsInsideVideoRoom(UniqueName string) (*GetParticipantsInsideVideoRoomResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -3347,7 +3347,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetTokenForVideoRoom Get Token to join a specific Video Room using it's unqiue name
-    func (le *Lead)  GetTokenForVideoRoom(UniqueName string, ) (*GetTokenForVideoRoomResponse, error){
+    func (le *Lead)  GetTokenForVideoRoom(UniqueName string) (*GetTokenForVideoRoomResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -3439,7 +3439,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetThemeForPreview Get theme for preview
-    func (th *Theme)  GetThemeForPreview(ThemeId string, ) (*ThemesSchema, error){
+    func (th *Theme)  GetThemeForPreview(ThemeID string) (*ThemesSchema, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -3457,7 +3457,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             th.config,
             "get",
-            fmt.Sprintf("/service/application/theme/v1.0/%s/preview",ThemeId),
+            fmt.Sprintf("/service/application/theme/v1.0/%s/preview",ThemeID),
             nil,
             nil,
             nil)
@@ -4653,7 +4653,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetPlatformConfig Get platform config
-    func (us *User)  GetPlatformConfig(Name string, ) (*PlatformSchema, error){
+    func (us *User)  GetPlatformConfig(Name string) (*PlatformSchema, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -4825,7 +4825,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // DeleteMobileNumber Delete mobile number from profile
-    func (us *User)  DeleteMobileNumber(Platform string, Active bool, Primary bool, Verified bool, CountryCode string, Phone string, ) (*LoginSuccess, error){
+    func (us *User)  DeleteMobileNumber(Platform string, Active bool, Primary bool, Verified bool, CountryCode string, Phone string) (*LoginSuccess, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -5059,7 +5059,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // DeleteEmail Delete email from profile
-    func (us *User)  DeleteEmail(Platform string, Active bool, Primary bool, Verified bool, Email string, ) (*LoginSuccess, error){
+    func (us *User)  DeleteEmail(Platform string, Active bool, Primary bool, Verified bool, Email string) (*LoginSuccess, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -5281,7 +5281,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetBlog Get Blog by slug
-    func (co *Content)  GetBlog(Slug string, ) (*CustomBlogSchema, error){
+    func (co *Content)  GetBlog(Slug string) (*CustomBlogSchema, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -5322,7 +5322,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetBlogs Get blogs
-    func (co *Content)  GetBlogs(PageNo int, PageSize int, ) (*BlogGetResponse, error){
+    func (co *Content)  GetBlogs(PageNo int, PageSize int) (*BlogGetResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -5388,7 +5388,7 @@ func NewAppClient(config *AppConfig) *Client {
                 paginator.Next = func() (interface{}, error) {
                     response, err := co.GetBlogs(paginator.PageNo, PageSize)
                     if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextId)
+                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextID)
                     }
                     return response, err
                 }
@@ -5482,7 +5482,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetFaqBySlug Get frequently asked question
-    func (co *Content)  GetFaqBySlug(Slug string, ) (*FaqSchema, error){
+    func (co *Content)  GetFaqBySlug(Slug string) (*FaqSchema, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -5523,7 +5523,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetFaqCategoryBySlug Get FAQ category by slug
-    func (co *Content)  GetFaqCategoryBySlug(Slug string, ) (*GetFaqCategoryBySlugSchema, error){
+    func (co *Content)  GetFaqCategoryBySlug(Slug string) (*GetFaqCategoryBySlugSchema, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -5564,7 +5564,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetFaqsByCategorySlug Get FAQs of a Faq Category slug
-    func (co *Content)  GetFaqsByCategorySlug(Slug string, ) (*GetFaqSchema, error){
+    func (co *Content)  GetFaqsByCategorySlug(Slug string) (*GetFaqSchema, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -5687,7 +5687,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetNavigations Get navigation
-    func (co *Content)  GetNavigations(PageNo int, PageSize int, ) (*NavigationGetResponse, error){
+    func (co *Content)  GetNavigations(PageNo int, PageSize int) (*NavigationGetResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -5753,7 +5753,7 @@ func NewAppClient(config *AppConfig) *Client {
                 paginator.Next = func() (interface{}, error) {
                     response, err := co.GetNavigations(paginator.PageNo, PageSize)
                     if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextId)
+                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextID)
                     }
                     return response, err
                 }
@@ -5765,7 +5765,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetPage Get Page by slug
-    func (co *Content)  GetPage(Slug string, ) (*CustomPageSchema, error){
+    func (co *Content)  GetPage(Slug string) (*CustomPageSchema, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -5806,7 +5806,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetPages Get pages
-    func (co *Content)  GetPages(PageNo int, PageSize int, ) (*PageGetResponse, error){
+    func (co *Content)  GetPages(PageNo int, PageSize int) (*PageGetResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -5872,7 +5872,7 @@ func NewAppClient(config *AppConfig) *Client {
                 paginator.Next = func() (interface{}, error) {
                     response, err := co.GetPages(paginator.PageNo, PageSize)
                     if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextId)
+                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextID)
                     }
                     return response, err
                 }
@@ -5925,7 +5925,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetSlideshows Get slideshows
-    func (co *Content)  GetSlideshows(PageNo int, PageSize int, ) (*SlideshowGetResponse, error){
+    func (co *Content)  GetSlideshows(PageNo int, PageSize int) (*SlideshowGetResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -5991,7 +5991,7 @@ func NewAppClient(config *AppConfig) *Client {
                 paginator.Next = func() (interface{}, error) {
                     response, err := co.GetSlideshows(paginator.PageNo, PageSize)
                     if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextId)
+                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextID)
                     }
                     return response, err
                 }
@@ -6003,7 +6003,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetSlideshow Get slideshow by slug
-    func (co *Content)  GetSlideshow(Slug string, ) (*SlideshowSchema, error){
+    func (co *Content)  GetSlideshow(Slug string) (*SlideshowSchema, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -6332,7 +6332,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetProductQRCodeBySlug Create product QR Code
-    func (sh *Share)  GetProductQRCodeBySlug(Slug string, ) (*QRCodeResp, error){
+    func (sh *Share)  GetProductQRCodeBySlug(Slug string) (*QRCodeResp, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -6373,7 +6373,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetCollectionQRCodeBySlug Create collection QR Code
-    func (sh *Share)  GetCollectionQRCodeBySlug(Slug string, ) (*QRCodeResp, error){
+    func (sh *Share)  GetCollectionQRCodeBySlug(Slug string) (*QRCodeResp, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -6414,7 +6414,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetUrlQRCode Create url QR Code
-    func (sh *Share)  GetUrlQRCode(Url string, ) (*QRCodeResp, error){
+    func (sh *Share)  GetUrlQRCode(URL string) (*QRCodeResp, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -6427,11 +6427,11 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Url string  `url:"url"`  
+          URL string  `url:"url"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Url : Url,
+           URL : URL,
         }
         
          
@@ -6516,7 +6516,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetShortLinkByHash Get short link by hash
-    func (sh *Share)  GetShortLinkByHash(Hash string, ) (*ShortLinkRes, error){
+    func (sh *Share)  GetShortLinkByHash(Hash string) (*ShortLinkRes, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -6557,7 +6557,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetOriginalShortLinkByHash Get original link by hash
-    func (sh *Share)  GetOriginalShortLinkByHash(Hash string, ) (*ShortLinkRes, error){
+    func (sh *Share)  GetOriginalShortLinkByHash(Hash string) (*ShortLinkRes, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -6886,7 +6886,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetOrderingStores Get deployment meta stores
-    func (co *Configuration)  GetOrderingStores(PageNo int, PageSize int, Q string, ) (*OrderingStores, error){
+    func (co *Configuration)  GetOrderingStores(PageNo int, PageSize int, Q string) (*OrderingStores, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -6959,7 +6959,7 @@ func NewAppClient(config *AppConfig) *Client {
                 paginator.Next = func() (interface{}, error) {
                     response, err := co.GetOrderingStores(paginator.PageNo, PageSize, Q)
                     if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextId)
+                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextID)
                     }
                     return response, err
                 }
@@ -7094,7 +7094,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetCurrencyById Get currency by id
-    func (co *Configuration)  GetCurrencyById(Id string, ) (*Currency, error){
+    func (co *Configuration)  GetCurrencyById(ID string) (*Currency, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -7112,7 +7112,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             co.config,
             "get",
-            fmt.Sprintf("/service/application/configuration/v1.0/currency/%s",Id),
+            fmt.Sprintf("/service/application/configuration/v1.0/currency/%s",ID),
             nil,
             nil,
             nil)
@@ -7269,7 +7269,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetAppStaffs Get Staff List.
-    func (co *Configuration)  GetAppStaffs(OrderIncent bool, OrderingStore int, User string, ) (*AppStaffResponse, error){
+    func (co *Configuration)  GetAppStaffs(OrderIncent bool, OrderingStore int, User string) (*AppStaffResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -7333,7 +7333,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetAggregatorsConfig Get payment gateway keys
-    func (pa *Payment)  GetAggregatorsConfig(XApiToken string, Refresh bool, ) (*AggregatorsConfigDetailResponse, error){
+    func (pa *Payment)  GetAggregatorsConfig(XAPIToken string, Refresh bool) (*AggregatorsConfigDetailResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -7357,7 +7357,7 @@ func NewAppClient(config *AppConfig) *Client {
         //Adding extra headers
         var xHeaders = make(map[string]string) 
         
-        xHeaders["x-api-token"]=  XApiToken;
+        xHeaders["x-api-token"]=  XAPIToken;
         
         
         //API call
@@ -7439,7 +7439,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetActiveCardAggregator Fetch active payment gateway for card
-    func (pa *Payment)  GetActiveCardAggregator(Refresh bool, ) (*ActiveCardPaymentGatewayResponse, error){
+    func (pa *Payment)  GetActiveCardAggregator(Refresh bool) (*ActiveCardPaymentGatewayResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -7489,7 +7489,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetActiveUserCards Fetch the list of saved cards of user.
-    func (pa *Payment)  GetActiveUserCards(ForceRefresh bool, ) (*ListCardsResponse, error){
+    func (pa *Payment)  GetActiveUserCards(ForceRefresh bool) (*ListCardsResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -7799,7 +7799,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetPaymentModeRoutes Get All Valid Payment Options
-    func (pa *Payment)  GetPaymentModeRoutes(Amount int, CartId string, Pincode string, CheckoutMode string, Refresh bool, AssignCardId string, UserDetails string, ) (*PaymentModeRouteResponse, error){
+    func (pa *Payment)  GetPaymentModeRoutes(Amount int, CartID string, Pincode string, CheckoutMode string, Refresh bool, AssignCardID string, UserDetails string) (*PaymentModeRouteResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -7813,21 +7813,21 @@ func NewAppClient(config *AppConfig) *Client {
         //Query holds query params
         type XQuery struct { 
           Amount int  `url:"amount"` 
-          CartId string  `url:"cart_id"` 
+          CartID string  `url:"cart_id"` 
           Pincode string  `url:"pincode"` 
           CheckoutMode string  `url:"checkout_mode"` 
           Refresh bool  `url:"refresh"` 
-          AssignCardId string  `url:"assign_card_id"` 
+          AssignCardID string  `url:"assign_card_id"` 
           UserDetails string  `url:"user_details"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
            Amount : Amount,
-           CartId : CartId,
+           CartID : CartID,
            Pincode : Pincode,
            CheckoutMode : CheckoutMode,
            Refresh : Refresh,
-           AssignCardId : AssignCardId,
+           AssignCardID : AssignCardID,
            UserDetails : UserDetails,
         }
         
@@ -7861,7 +7861,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetPosPaymentModeRoutes Get All Valid Payment Options for POS
-    func (pa *Payment)  GetPosPaymentModeRoutes(Amount int, CartId string, Pincode string, CheckoutMode string, Refresh bool, AssignCardId string, OrderType string, UserDetails string, ) (*PaymentModeRouteResponse, error){
+    func (pa *Payment)  GetPosPaymentModeRoutes(Amount int, CartID string, Pincode string, CheckoutMode string, Refresh bool, AssignCardID string, OrderType string, UserDetails string) (*PaymentModeRouteResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -7875,22 +7875,22 @@ func NewAppClient(config *AppConfig) *Client {
         //Query holds query params
         type XQuery struct { 
           Amount int  `url:"amount"` 
-          CartId string  `url:"cart_id"` 
+          CartID string  `url:"cart_id"` 
           Pincode string  `url:"pincode"` 
           CheckoutMode string  `url:"checkout_mode"` 
           Refresh bool  `url:"refresh"` 
-          AssignCardId string  `url:"assign_card_id"` 
+          AssignCardID string  `url:"assign_card_id"` 
           OrderType string  `url:"order_type"` 
           UserDetails string  `url:"user_details"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
            Amount : Amount,
-           CartId : CartId,
+           CartID : CartID,
            Pincode : Pincode,
            CheckoutMode : CheckoutMode,
            Refresh : Refresh,
-           AssignCardId : AssignCardId,
+           AssignCardID : AssignCardID,
            OrderType : OrderType,
            UserDetails : UserDetails,
         }
@@ -8018,7 +8018,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetUserBeneficiariesDetail List User Beneficiary
-    func (pa *Payment)  GetUserBeneficiariesDetail(OrderId string, ) (*OrderBeneficiaryResponse, error){
+    func (pa *Payment)  GetUserBeneficiariesDetail(OrderID string) (*OrderBeneficiaryResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -8031,11 +8031,11 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          OrderId string  `url:"order_id"`  
+          OrderID string  `url:"order_id"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           OrderId : OrderId,
+           OrderID : OrderID,
         }
         
          
@@ -8068,7 +8068,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // VerifyIfscCode Ifsc Code Verification
-    func (pa *Payment)  VerifyIfscCode(IfscCode string, ) (*IfscCodeResponse, error){
+    func (pa *Payment)  VerifyIfscCode(IfscCode string) (*IfscCodeResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -8118,7 +8118,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetOrderBeneficiariesDetail List Order Beneficiary
-    func (pa *Payment)  GetOrderBeneficiariesDetail(OrderId string, ) (*OrderBeneficiaryResponse, error){
+    func (pa *Payment)  GetOrderBeneficiariesDetail(OrderID string) (*OrderBeneficiaryResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -8131,11 +8131,11 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          OrderId string  `url:"order_id"`  
+          OrderID string  `url:"order_id"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           OrderId : OrderId,
+           OrderID : OrderID,
         }
         
          
@@ -8386,7 +8386,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetOrders Get Orders for application based on application Id
-    func (or *Order)  GetOrders(PageNo int, PageSize int, FromDate string, ToDate string, OrderStatus int, ) (*OrderList, error){
+    func (or *Order)  GetOrders(PageNo int, PageSize int, FromDate string, ToDate string, OrderStatus int) (*OrderList, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -8444,7 +8444,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetOrderById Get Order by order id for application based on application Id
-    func (or *Order)  GetOrderById(OrderId string, ) (*OrderById, error){
+    func (or *Order)  GetOrderById(OrderID string) (*OrderById, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -8462,7 +8462,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/order/v1.0/orders/%s",OrderId),
+            fmt.Sprintf("/service/application/order/v1.0/orders/%s",OrderID),
             nil,
             nil,
             nil)
@@ -8485,7 +8485,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetShipmentById Get Shipment by shipment id and order id for application based on application Id
-    func (or *Order)  GetShipmentById(ShipmentId string, ) (*ShipmentById, error){
+    func (or *Order)  GetShipmentById(ShipmentID string) (*ShipmentById, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -8503,7 +8503,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s",ShipmentId),
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s",ShipmentID),
             nil,
             nil,
             nil)
@@ -8526,7 +8526,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetShipmentReasons Get Shipment reasons by shipment id and order id for application based on application Id
-    func (or *Order)  GetShipmentReasons(ShipmentId string, ) (*ShipmentReasons, error){
+    func (or *Order)  GetShipmentReasons(ShipmentID string) (*ShipmentReasons, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -8544,7 +8544,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/reasons",ShipmentId),
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/reasons",ShipmentID),
             nil,
             nil,
             nil)
@@ -8567,7 +8567,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // UpdateShipmentStatus Update Shipment status by shipment id and order id for application based on application Id
-    func (or *Order)  UpdateShipmentStatus(ShipmentId string, body  ShipmentStatusUpdateBody) (*ShipmentStatusUpdate, error){
+    func (or *Order)  UpdateShipmentStatus(ShipmentID string, body  ShipmentStatusUpdateBody) (*ShipmentStatusUpdate, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -8596,7 +8596,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "put",
-            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/status",ShipmentId),
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/status",ShipmentID),
             nil,
             nil,
             reqBody)
@@ -8619,7 +8619,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // TrackShipment Track Shipment by shipment id and order id for application based on application Id
-    func (or *Order)  TrackShipment(ShipmentId string, ) (*ShipmentTrack, error){
+    func (or *Order)  TrackShipment(ShipmentID string) (*ShipmentTrack, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -8637,7 +8637,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/track",ShipmentId),
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/track",ShipmentID),
             nil,
             nil,
             nil)
@@ -8660,7 +8660,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetPosOrderById Get POS Order by order id for application based on application Id
-    func (or *Order)  GetPosOrderById(OrderId string, ) (*PosOrderById, error){
+    func (or *Order)  GetPosOrderById(OrderID string) (*PosOrderById, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -8678,7 +8678,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/order/v1.0/orders/pos-order/%s",OrderId),
+            fmt.Sprintf("/service/application/order/v1.0/orders/pos-order/%s",OrderID),
             nil,
             nil,
             nil)
@@ -8856,7 +8856,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetUserPointsHistory Get list of points transactions.
-    func (re *Rewards)  GetUserPointsHistory(PageId string, PageSize int, ) (*PointsHistoryResponse, error){
+    func (re *Rewards)  GetUserPointsHistory(PageID string, PageSize int) (*PointsHistoryResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -8869,12 +8869,12 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          PageId string  `url:"page_id"` 
+          PageID string  `url:"page_id"` 
           PageSize int  `url:"page_size"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           PageId : PageId,
+           PageID : PageID,
            PageSize : PageSize,
         }
         
@@ -8924,7 +8924,7 @@ func NewAppClient(config *AppConfig) *Client {
                 paginator.Next = func() (interface{}, error) {
                     response, err := re.GetUserPointsHistory(paginator.NextID, PageSize)
                     if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextId)
+                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextID)
                     }
                     return response, err
                 }
@@ -9143,7 +9143,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetAbuseReports Get list of abuse data
-    func (fe *Feedback)  GetAbuseReports(EntityId string, EntityType string, Id string, PageId string, PageSize int, ) (*ReportAbuseGetResponse, error){
+    func (fe *Feedback)  GetAbuseReports(EntityID string, EntityType string, ID string, PageID string, PageSize int) (*ReportAbuseGetResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -9156,14 +9156,14 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Id string  `url:"id"` 
-          PageId string  `url:"page_id"` 
+          ID string  `url:"id"` 
+          PageID string  `url:"page_id"` 
           PageSize int  `url:"page_size"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Id : Id,
-           PageId : PageId,
+           ID : ID,
+           PageID : PageID,
            PageSize : PageSize,
         }
         
@@ -9174,7 +9174,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fe.config,
             "get",
-            fmt.Sprintf("/service/application/feedback/v1.0/abuse/entity/%s/entity-id/%s",EntityId,EntityType),
+            fmt.Sprintf("/service/application/feedback/v1.0/abuse/entity/%s/entity-id/%s",EntityID,EntityType),
             nil,
             xQuery,
             nil)
@@ -9223,12 +9223,12 @@ func NewAppClient(config *AppConfig) *Client {
                 
             
             // GetAbuseReportsPaginator Get list of abuse data  
-            func (fe *Feedback)  GetAbuseReportsPaginator(EntityId string , EntityType string , Id string , PageSize int ) *common.Paginator {
+            func (fe *Feedback)  GetAbuseReportsPaginator(EntityID string , EntityType string , ID string , PageSize int ) *common.Paginator {
                 paginator := common.NewPaginator("cursor")
                 paginator.Next = func() (interface{}, error) {
-                    response, err := fe.GetAbuseReports(EntityId, EntityType, Id, paginator.NextID, PageSize)
+                    response, err := fe.GetAbuseReports(EntityID, EntityType, ID, paginator.NextID, PageSize)
                     if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextId)
+                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextID)
                     }
                     return response, err
                 }
@@ -9240,7 +9240,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetAttributes Get list of attribute data
-    func (fe *Feedback)  GetAttributes(PageNo int, PageSize int, ) (*AttributeResponse, error){
+    func (fe *Feedback)  GetAttributes(PageNo int, PageSize int) (*AttributeResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -9306,7 +9306,7 @@ func NewAppClient(config *AppConfig) *Client {
                 paginator.Next = func() (interface{}, error) {
                     response, err := fe.GetAttributes(paginator.PageNo, PageSize)
                     if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextId)
+                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextID)
                     }
                     return response, err
                 }
@@ -9370,7 +9370,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetAttribute Get single attribute data
-    func (fe *Feedback)  GetAttribute(Slug string, ) (*Attribute, error){
+    func (fe *Feedback)  GetAttribute(Slug string) (*Attribute, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -9567,7 +9567,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetComments Get list of comments
-    func (fe *Feedback)  GetComments(EntityType string, Id string, EntityId string, UserId string, PageId string, PageSize int, ) (*CommentGetResponse, error){
+    func (fe *Feedback)  GetComments(EntityType string, ID string, EntityID string, UserID string, PageID string, PageSize int) (*CommentGetResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -9580,18 +9580,18 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Id string  `url:"id"` 
-          EntityId string  `url:"entity_id"` 
-          UserId string  `url:"user_id"` 
-          PageId string  `url:"page_id"` 
+          ID string  `url:"id"` 
+          EntityID string  `url:"entity_id"` 
+          UserID string  `url:"user_id"` 
+          PageID string  `url:"page_id"` 
           PageSize int  `url:"page_size"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Id : Id,
-           EntityId : EntityId,
-           UserId : UserId,
-           PageId : PageId,
+           ID : ID,
+           EntityID : EntityID,
+           UserID : UserID,
+           PageID : PageID,
            PageSize : PageSize,
         }
         
@@ -9656,12 +9656,12 @@ func NewAppClient(config *AppConfig) *Client {
                 
             
             // GetCommentsPaginator Get list of comments  
-            func (fe *Feedback)  GetCommentsPaginator(EntityType string , Id string , EntityId string , UserId string , PageSize int ) *common.Paginator {
+            func (fe *Feedback)  GetCommentsPaginator(EntityType string , ID string , EntityID string , UserID string , PageSize int ) *common.Paginator {
                 paginator := common.NewPaginator("cursor")
                 paginator.Next = func() (interface{}, error) {
-                    response, err := fe.GetComments(EntityType, Id, EntityId, UserId, paginator.NextID, PageSize)
+                    response, err := fe.GetComments(EntityType, ID, EntityID, UserID, paginator.NextID, PageSize)
                     if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextId)
+                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextID)
                     }
                     return response, err
                 }
@@ -9673,7 +9673,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // CheckEligibility Checks eligibility and cloud media config
-    func (fe *Feedback)  CheckEligibility(EntityType string, EntityId string, ) (*CheckEligibilityResponse, error){
+    func (fe *Feedback)  CheckEligibility(EntityType string, EntityID string) (*CheckEligibilityResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -9691,7 +9691,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fe.config,
             "get",
-            fmt.Sprintf("/service/application/feedback/v1.0/config/entity/%s/entity-id/%s",EntityType,EntityId),
+            fmt.Sprintf("/service/application/feedback/v1.0/config/entity/%s/entity-id/%s",EntityType,EntityID),
             nil,
             nil,
             nil)
@@ -9859,7 +9859,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetMedias Get Media
-    func (fe *Feedback)  GetMedias(EntityType string, EntityId string, Id string, PageId string, PageSize int, ) (*MediaGetResponse, error){
+    func (fe *Feedback)  GetMedias(EntityType string, EntityID string, ID string, PageID string, PageSize int) (*MediaGetResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -9872,14 +9872,14 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Id string  `url:"id"` 
-          PageId string  `url:"page_id"` 
+          ID string  `url:"id"` 
+          PageID string  `url:"page_id"` 
           PageSize int  `url:"page_size"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Id : Id,
-           PageId : PageId,
+           ID : ID,
+           PageID : PageID,
            PageSize : PageSize,
         }
         
@@ -9890,7 +9890,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fe.config,
             "get",
-            fmt.Sprintf("/service/application/feedback/v1.0/media/entity/%s/entity-id/%s",EntityType,EntityId),
+            fmt.Sprintf("/service/application/feedback/v1.0/media/entity/%s/entity-id/%s",EntityType,EntityID),
             nil,
             xQuery,
             nil)
@@ -9939,12 +9939,12 @@ func NewAppClient(config *AppConfig) *Client {
                 
             
             // GetMediasPaginator Get Media  
-            func (fe *Feedback)  GetMediasPaginator(EntityType string , EntityId string , Id string , PageSize int ) *common.Paginator {
+            func (fe *Feedback)  GetMediasPaginator(EntityType string , EntityID string , ID string , PageSize int ) *common.Paginator {
                 paginator := common.NewPaginator("cursor")
                 paginator.Next = func() (interface{}, error) {
-                    response, err := fe.GetMedias(EntityType, EntityId, Id, paginator.NextID, PageSize)
+                    response, err := fe.GetMedias(EntityType, EntityID, ID, paginator.NextID, PageSize)
                     if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextId)
+                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextID)
                     }
                     return response, err
                 }
@@ -9956,7 +9956,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetReviewSummaries Get a review summary
-    func (fe *Feedback)  GetReviewSummaries(EntityType string, EntityId string, Id string, PageId string, PageSize int, ) (*RatingGetResponse, error){
+    func (fe *Feedback)  GetReviewSummaries(EntityType string, EntityID string, ID string, PageID string, PageSize int) (*RatingGetResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -9969,14 +9969,14 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Id string  `url:"id"` 
-          PageId string  `url:"page_id"` 
+          ID string  `url:"id"` 
+          PageID string  `url:"page_id"` 
           PageSize int  `url:"page_size"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Id : Id,
-           PageId : PageId,
+           ID : ID,
+           PageID : PageID,
            PageSize : PageSize,
         }
         
@@ -9987,7 +9987,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fe.config,
             "get",
-            fmt.Sprintf("/service/application/feedback/v1.0/rating/summary/entity/%s/entity-id/%s",EntityType,EntityId),
+            fmt.Sprintf("/service/application/feedback/v1.0/rating/summary/entity/%s/entity-id/%s",EntityType,EntityID),
             nil,
             xQuery,
             nil)
@@ -10036,12 +10036,12 @@ func NewAppClient(config *AppConfig) *Client {
                 
             
             // GetReviewSummariesPaginator Get a review summary  
-            func (fe *Feedback)  GetReviewSummariesPaginator(EntityType string , EntityId string , Id string , PageSize int ) *common.Paginator {
+            func (fe *Feedback)  GetReviewSummariesPaginator(EntityType string , EntityID string , ID string , PageSize int ) *common.Paginator {
                 paginator := common.NewPaginator("cursor")
                 paginator.Next = func() (interface{}, error) {
-                    response, err := fe.GetReviewSummaries(EntityType, EntityId, Id, paginator.NextID, PageSize)
+                    response, err := fe.GetReviewSummaries(EntityType, EntityID, ID, paginator.NextID, PageSize)
                     if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextId)
+                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextID)
                     }
                     return response, err
                 }
@@ -10157,7 +10157,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetReviews Get list of customer reviews
-    func (fe *Feedback)  GetReviews(EntityType string, EntityId string, Id string, UserId string, Media string, Rating []int, AttributeRating []string, Facets bool, Sort string, PageId string, PageSize int, ) (*ReviewGetResponse, error){
+    func (fe *Feedback)  GetReviews(EntityType string, EntityID string, ID string, UserID string, Media string, Rating []int, AttributeRating []string, Facets bool, Sort string, PageID string, PageSize int) (*ReviewGetResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -10170,26 +10170,26 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Id string  `url:"id"` 
-          UserId string  `url:"user_id"` 
+          ID string  `url:"id"` 
+          UserID string  `url:"user_id"` 
           Media string  `url:"media"` 
           Rating []int  `url:"rating"` 
           AttributeRating []string  `url:"attribute_rating"` 
           Facets bool  `url:"facets"` 
           Sort string  `url:"sort"` 
-          PageId string  `url:"page_id"` 
+          PageID string  `url:"page_id"` 
           PageSize int  `url:"page_size"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Id : Id,
-           UserId : UserId,
+           ID : ID,
+           UserID : UserID,
            Media : Media,
            Rating : Rating,
            AttributeRating : AttributeRating,
            Facets : Facets,
            Sort : Sort,
-           PageId : PageId,
+           PageID : PageID,
            PageSize : PageSize,
         }
         
@@ -10200,7 +10200,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fe.config,
             "get",
-            fmt.Sprintf("/service/application/feedback/v1.0/review/entity/%s/entity-id/%s",EntityType,EntityId),
+            fmt.Sprintf("/service/application/feedback/v1.0/review/entity/%s/entity-id/%s",EntityType,EntityID),
             nil,
             xQuery,
             nil)
@@ -10279,12 +10279,12 @@ func NewAppClient(config *AppConfig) *Client {
                 
             
             // GetReviewsPaginator Get list of customer reviews  
-            func (fe *Feedback)  GetReviewsPaginator(EntityType string , EntityId string , Id string , UserId string , Media string , Rating []int , AttributeRating []string , Facets bool , Sort string , PageSize int ) *common.Paginator {
+            func (fe *Feedback)  GetReviewsPaginator(EntityType string , EntityID string , ID string , UserID string , Media string , Rating []int , AttributeRating []string , Facets bool , Sort string , PageSize int ) *common.Paginator {
                 paginator := common.NewPaginator("cursor")
                 paginator.Next = func() (interface{}, error) {
-                    response, err := fe.GetReviews(EntityType, EntityId, Id, UserId, Media, Rating, AttributeRating, Facets, Sort, paginator.NextID, PageSize)
+                    response, err := fe.GetReviews(EntityType, EntityID, ID, UserID, Media, Rating, AttributeRating, Facets, Sort, paginator.NextID, PageSize)
                     if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextId)
+                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextID)
                     }
                     return response, err
                 }
@@ -10296,7 +10296,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetTemplates Get the templates for product or l3 type
-    func (fe *Feedback)  GetTemplates(TemplateId string, EntityId string, EntityType string, ) (*CursorGetResponse, error){
+    func (fe *Feedback)  GetTemplates(TemplateID string, EntityID string, EntityType string) (*CursorGetResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -10309,14 +10309,14 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          TemplateId string  `url:"template_id"` 
-          EntityId string  `url:"entity_id"` 
+          TemplateID string  `url:"template_id"` 
+          EntityID string  `url:"entity_id"` 
           EntityType string  `url:"entity_type"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           TemplateId : TemplateId,
-           EntityId : EntityId,
+           TemplateID : TemplateID,
+           EntityID : EntityID,
            EntityType : EntityType,
         }
         
@@ -10454,7 +10454,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetQuestionAndAnswers Get a list of QnA
-    func (fe *Feedback)  GetQuestionAndAnswers(EntityType string, EntityId string, Id string, ShowAnswer bool, PageId string, PageSize int, ) (*QNAGetResponse, error){
+    func (fe *Feedback)  GetQuestionAndAnswers(EntityType string, EntityID string, ID string, ShowAnswer bool, PageID string, PageSize int) (*QNAGetResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -10467,16 +10467,16 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Id string  `url:"id"` 
+          ID string  `url:"id"` 
           ShowAnswer bool  `url:"show_answer"` 
-          PageId string  `url:"page_id"` 
+          PageID string  `url:"page_id"` 
           PageSize int  `url:"page_size"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Id : Id,
+           ID : ID,
            ShowAnswer : ShowAnswer,
-           PageId : PageId,
+           PageID : PageID,
            PageSize : PageSize,
         }
         
@@ -10487,7 +10487,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fe.config,
             "get",
-            fmt.Sprintf("/service/application/feedback/v1.0/template/qna/entity/%s/entity-id/%s",EntityType,EntityId),
+            fmt.Sprintf("/service/application/feedback/v1.0/template/qna/entity/%s/entity-id/%s",EntityType,EntityID),
             nil,
             xQuery,
             nil)
@@ -10541,12 +10541,12 @@ func NewAppClient(config *AppConfig) *Client {
                 
             
             // GetQuestionAndAnswersPaginator Get a list of QnA  
-            func (fe *Feedback)  GetQuestionAndAnswersPaginator(EntityType string , EntityId string , Id string , ShowAnswer bool , PageSize int ) *common.Paginator {
+            func (fe *Feedback)  GetQuestionAndAnswersPaginator(EntityType string , EntityID string , ID string , ShowAnswer bool , PageSize int ) *common.Paginator {
                 paginator := common.NewPaginator("cursor")
                 paginator.Next = func() (interface{}, error) {
-                    response, err := fe.GetQuestionAndAnswers(EntityType, EntityId, Id, ShowAnswer, paginator.NextID, PageSize)
+                    response, err := fe.GetQuestionAndAnswers(EntityType, EntityID, ID, ShowAnswer, paginator.NextID, PageSize)
                     if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextId)
+                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextID)
                     }
                     return response, err
                 }
@@ -10558,7 +10558,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetVotes Get list of votes
-    func (fe *Feedback)  GetVotes(Id string, RefType string, PageNo int, PageSize int, ) (*VoteResponse, error){
+    func (fe *Feedback)  GetVotes(ID string, RefType string, PageNo int, PageSize int) (*VoteResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -10571,14 +10571,14 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Id string  `url:"id"` 
+          ID string  `url:"id"` 
           RefType string  `url:"ref_type"` 
           PageNo int  `url:"page_no"` 
           PageSize int  `url:"page_size"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Id : Id,
+           ID : ID,
            RefType : RefType,
            PageNo : PageNo,
            PageSize : PageSize,
@@ -10633,12 +10633,12 @@ func NewAppClient(config *AppConfig) *Client {
                 
             
             // GetVotesPaginator Get list of votes  
-            func (fe *Feedback)  GetVotesPaginator(Id string , RefType string , PageSize int ) *common.Paginator {
+            func (fe *Feedback)  GetVotesPaginator(ID string , RefType string , PageSize int ) *common.Paginator {
                 paginator := common.NewPaginator("number")
                 paginator.Next = func() (interface{}, error) {
-                    response, err := fe.GetVotes(Id, RefType, paginator.PageNo, PageSize)
+                    response, err := fe.GetVotes(ID, RefType, paginator.PageNo, PageSize)
                     if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextId)
+                        paginator.SetPaginator(response.Page.HasNext, response.Page.Current+1, response.Page.NextID)
                     }
                     return response, err
                 }
@@ -10764,7 +10764,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetCart Fetch all Items Added to  Cart
-    func (po *PosCart)  GetCart(Uid int, I bool, B bool, AssignCardId int, ) (*CartResponse, error){
+    func (po *PosCart)  GetCart(UID int, I bool, B bool, AssignCardID int) (*CartResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -10777,17 +10777,17 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid int  `url:"uid"` 
+          UID int  `url:"uid"` 
           I bool  `url:"i"` 
           B bool  `url:"b"` 
-          AssignCardId int  `url:"assign_card_id"`  
+          AssignCardID int  `url:"assign_card_id"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
+           UID : UID,
            I : I,
            B : B,
-           AssignCardId : AssignCardId,
+           AssignCardID : AssignCardID,
         }
         
          
@@ -10820,7 +10820,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetCartLastModified Fetch Last-Modified timestamp
-    func (po *PosCart)  GetCartLastModified(Uid int, ) (interface{}, error){
+    func (po *PosCart)  GetCartLastModified(UID int) (interface{}, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -10833,11 +10833,11 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid int  `url:"uid"`  
+          UID int  `url:"uid"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
+           UID : UID,
         }
         
          
@@ -10933,7 +10933,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // UpdateCart Update Items already added to Cart
-    func (po *PosCart)  UpdateCart(Uid int, I bool, B bool, body  UpdateCartRequest) (*UpdateCartResponse, error){
+    func (po *PosCart)  UpdateCart(UID int, I bool, B bool, body  UpdateCartRequest) (*UpdateCartResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -10946,13 +10946,13 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid int  `url:"uid"` 
+          UID int  `url:"uid"` 
           I bool  `url:"i"` 
           B bool  `url:"b"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
+           UID : UID,
            I : I,
            B : B,
         }
@@ -10998,7 +10998,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetItemCount Cart item count
-    func (po *PosCart)  GetItemCount(Uid int, ) (*CartItemCountResponse, error){
+    func (po *PosCart)  GetItemCount(UID int) (*CartItemCountResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -11011,11 +11011,11 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid int  `url:"uid"`  
+          UID int  `url:"uid"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
+           UID : UID,
         }
         
          
@@ -11048,7 +11048,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetCoupons Fetch Coupon
-    func (po *PosCart)  GetCoupons(Uid int, ) (*GetCouponResponse, error){
+    func (po *PosCart)  GetCoupons(UID int) (*GetCouponResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -11061,11 +11061,11 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid int  `url:"uid"`  
+          UID int  `url:"uid"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
+           UID : UID,
         }
         
          
@@ -11098,7 +11098,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // ApplyCoupon Apply Coupon
-    func (po *PosCart)  ApplyCoupon(I bool, B bool, P bool, Uid int, body  ApplyCouponRequest) (*CartResponse, error){
+    func (po *PosCart)  ApplyCoupon(I bool, B bool, P bool, UID int, body  ApplyCouponRequest) (*CartResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -11114,14 +11114,14 @@ func NewAppClient(config *AppConfig) *Client {
           I bool  `url:"i"` 
           B bool  `url:"b"` 
           P bool  `url:"p"` 
-          Uid int  `url:"uid"`  
+          UID int  `url:"uid"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
            I : I,
            B : B,
            P : P,
-           Uid : Uid,
+           UID : UID,
         }
         
          
@@ -11165,7 +11165,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // RemoveCoupon Remove Coupon Applied
-    func (po *PosCart)  RemoveCoupon(Uid int, ) (*CartResponse, error){
+    func (po *PosCart)  RemoveCoupon(UID int) (*CartResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -11178,11 +11178,11 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid int  `url:"uid"`  
+          UID int  `url:"uid"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
+           UID : UID,
         }
         
          
@@ -11215,7 +11215,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetBulkDiscountOffers Get discount offers based on quantity
-    func (po *PosCart)  GetBulkDiscountOffers(ItemId int, ArticleId string, Uid int, Slug string, ) (*BulkPriceResponse, error){
+    func (po *PosCart)  GetBulkDiscountOffers(ItemID int, ArticleID string, UID int, Slug string) (*BulkPriceResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -11228,16 +11228,16 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          ItemId int  `url:"item_id"` 
-          ArticleId string  `url:"article_id"` 
-          Uid int  `url:"uid"` 
+          ItemID int  `url:"item_id"` 
+          ArticleID string  `url:"article_id"` 
+          UID int  `url:"uid"` 
           Slug string  `url:"slug"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           ItemId : ItemId,
-           ArticleId : ArticleId,
-           Uid : Uid,
+           ItemID : ItemID,
+           ArticleID : ArticleID,
+           UID : UID,
            Slug : Slug,
         }
         
@@ -11271,7 +11271,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetAddresses Fetch Address
-    func (po *PosCart)  GetAddresses(Uid int, MobileNo string, CheckoutMode string, Tags string, IsDefault bool, ) (*GetAddressesResponse, error){
+    func (po *PosCart)  GetAddresses(UID int, MobileNo string, CheckoutMode string, Tags string, IsDefault bool) (*GetAddressesResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -11284,7 +11284,7 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid int  `url:"uid"` 
+          UID int  `url:"uid"` 
           MobileNo string  `url:"mobile_no"` 
           CheckoutMode string  `url:"checkout_mode"` 
           Tags string  `url:"tags"` 
@@ -11292,7 +11292,7 @@ func NewAppClient(config *AppConfig) *Client {
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
+           UID : UID,
            MobileNo : MobileNo,
            CheckoutMode : CheckoutMode,
            Tags : Tags,
@@ -11381,7 +11381,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetAddressById Fetch Single Address
-    func (po *PosCart)  GetAddressById(Id int, Uid int, MobileNo string, CheckoutMode string, Tags string, IsDefault bool, ) (*Address, error){
+    func (po *PosCart)  GetAddressById(ID int, UID int, MobileNo string, CheckoutMode string, Tags string, IsDefault bool) (*Address, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -11394,7 +11394,7 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid int  `url:"uid"` 
+          UID int  `url:"uid"` 
           MobileNo string  `url:"mobile_no"` 
           CheckoutMode string  `url:"checkout_mode"` 
           Tags string  `url:"tags"` 
@@ -11402,7 +11402,7 @@ func NewAppClient(config *AppConfig) *Client {
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
+           UID : UID,
            MobileNo : MobileNo,
            CheckoutMode : CheckoutMode,
            Tags : Tags,
@@ -11416,7 +11416,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             po.config,
             "get",
-            fmt.Sprintf("/service/application/pos/cart/v1.0/address/%d",Id),
+            fmt.Sprintf("/service/application/pos/cart/v1.0/address/%d",ID),
             nil,
             xQuery,
             nil)
@@ -11439,7 +11439,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // UpdateAddress Update Address alreay added to account
-    func (po *PosCart)  UpdateAddress(Id int, body  Address) (*UpdateAddressResponse, error){
+    func (po *PosCart)  UpdateAddress(ID int, body  Address) (*UpdateAddressResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -11468,7 +11468,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             po.config,
             "put",
-            fmt.Sprintf("/service/application/pos/cart/v1.0/address/%d",Id),
+            fmt.Sprintf("/service/application/pos/cart/v1.0/address/%d",ID),
             nil,
             nil,
             reqBody)
@@ -11491,7 +11491,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // RemoveAddress Remove Address Associated to the account
-    func (po *PosCart)  RemoveAddress(Id int, ) (*DeleteAddressResponse, error){
+    func (po *PosCart)  RemoveAddress(ID int) (*DeleteAddressResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -11509,7 +11509,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             po.config,
             "delete",
-            fmt.Sprintf("/service/application/pos/cart/v1.0/address/%d",Id),
+            fmt.Sprintf("/service/application/pos/cart/v1.0/address/%d",ID),
             nil,
             nil,
             nil)
@@ -11532,7 +11532,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // SelectAddress Select Address from All Addresses
-    func (po *PosCart)  SelectAddress(Uid int, I bool, B bool, body  SelectCartAddressRequest) (*CartResponse, error){
+    func (po *PosCart)  SelectAddress(UID int, I bool, B bool, body  SelectCartAddressRequest) (*CartResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -11545,13 +11545,13 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid int  `url:"uid"` 
+          UID int  `url:"uid"` 
           I bool  `url:"i"` 
           B bool  `url:"b"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
+           UID : UID,
            I : I,
            B : B,
         }
@@ -11597,7 +11597,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // SelectPaymentMode Update Cart Payment
-    func (po *PosCart)  SelectPaymentMode(Uid string, body  UpdateCartPaymentRequest) (*CartResponse, error){
+    func (po *PosCart)  SelectPaymentMode(UID string, body  UpdateCartPaymentRequest) (*CartResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -11610,11 +11610,11 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid string  `url:"uid"`  
+          UID string  `url:"uid"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
+           UID : UID,
         }
         
          
@@ -11658,7 +11658,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // ValidateCouponForPayment Get Cart Payment for valid coupon
-    func (po *PosCart)  ValidateCouponForPayment(Uid string, AddressId string, PaymentMode string, PaymentIdentifier string, AggregatorName string, MerchantCode string, ) (*PaymentCouponValidate, error){
+    func (po *PosCart)  ValidateCouponForPayment(UID string, AddressID string, PaymentMode string, PaymentIdentifier string, AggregatorName string, MerchantCode string) (*PaymentCouponValidate, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -11671,8 +11671,8 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid string  `url:"uid"` 
-          AddressId string  `url:"address_id"` 
+          UID string  `url:"uid"` 
+          AddressID string  `url:"address_id"` 
           PaymentMode string  `url:"payment_mode"` 
           PaymentIdentifier string  `url:"payment_identifier"` 
           AggregatorName string  `url:"aggregator_name"` 
@@ -11680,8 +11680,8 @@ func NewAppClient(config *AppConfig) *Client {
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
-           AddressId : AddressId,
+           UID : UID,
+           AddressID : AddressID,
            PaymentMode : PaymentMode,
            PaymentIdentifier : PaymentIdentifier,
            AggregatorName : AggregatorName,
@@ -11718,7 +11718,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetShipments Get delivery date and options before checkout
-    func (po *PosCart)  GetShipments(PickAtStoreUid int, OrderingStoreId int, P bool, Uid int, AddressId int, AreaCode string, OrderType string, ) (*CartShipmentsResponse, error){
+    func (po *PosCart)  GetShipments(PickAtStoreUID int, OrderingStoreID int, P bool, UID int, AddressID int, AreaCode string, OrderType string) (*CartShipmentsResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -11731,21 +11731,21 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          PickAtStoreUid int  `url:"pick_at_store_uid"` 
-          OrderingStoreId int  `url:"ordering_store_id"` 
+          PickAtStoreUID int  `url:"pick_at_store_uid"` 
+          OrderingStoreID int  `url:"ordering_store_id"` 
           P bool  `url:"p"` 
-          Uid int  `url:"uid"` 
-          AddressId int  `url:"address_id"` 
+          UID int  `url:"uid"` 
+          AddressID int  `url:"address_id"` 
           AreaCode string  `url:"area_code"` 
           OrderType string  `url:"order_type"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           PickAtStoreUid : PickAtStoreUid,
-           OrderingStoreId : OrderingStoreId,
+           PickAtStoreUID : PickAtStoreUID,
+           OrderingStoreID : OrderingStoreID,
            P : P,
-           Uid : Uid,
-           AddressId : AddressId,
+           UID : UID,
+           AddressID : AddressID,
            AreaCode : AreaCode,
            OrderType : OrderType,
         }
@@ -11780,7 +11780,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // UpdateShipments Update shipment delivery type and quantity before checkout
-    func (po *PosCart)  UpdateShipments(I bool, P bool, Uid int, AddressId int, OrderType string, body  UpdateCartShipmentRequest) (*CartShipmentsResponse, error){
+    func (po *PosCart)  UpdateShipments(I bool, P bool, UID int, AddressID int, OrderType string, body  UpdateCartShipmentRequest) (*CartShipmentsResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -11795,16 +11795,16 @@ func NewAppClient(config *AppConfig) *Client {
         type XQuery struct { 
           I bool  `url:"i"` 
           P bool  `url:"p"` 
-          Uid int  `url:"uid"` 
-          AddressId int  `url:"address_id"` 
+          UID int  `url:"uid"` 
+          AddressID int  `url:"address_id"` 
           OrderType string  `url:"order_type"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
            I : I,
            P : P,
-           Uid : Uid,
-           AddressId : AddressId,
+           UID : UID,
+           AddressID : AddressID,
            OrderType : OrderType,
         }
         
@@ -11849,7 +11849,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // CheckoutCart Checkout Cart
-    func (po *PosCart)  CheckoutCart(Uid int, body  CartPosCheckoutRequest) (*CartCheckoutResponse, error){
+    func (po *PosCart)  CheckoutCart(UID int, body  CartPosCheckoutRequest) (*CartCheckoutResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -11862,11 +11862,11 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid int  `url:"uid"`  
+          UID int  `url:"uid"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
+           UID : UID,
         }
         
          
@@ -11910,7 +11910,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // UpdateCartMeta Update Cart Meta
-    func (po *PosCart)  UpdateCartMeta(Uid int, body  CartMetaRequest) (*CartMetaResponse, error){
+    func (po *PosCart)  UpdateCartMeta(UID int, body  CartMetaRequest) (*CartMetaResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -11923,11 +11923,11 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          Uid int  `url:"uid"`  
+          UID int  `url:"uid"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           Uid : Uid,
+           UID : UID,
         }
         
          
@@ -11971,7 +11971,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetAvailableDeliveryModes Get available delivery modes for cart
-    func (po *PosCart)  GetAvailableDeliveryModes(AreaCode string, Uid int, ) (*CartDeliveryModesResponse, error){
+    func (po *PosCart)  GetAvailableDeliveryModes(AreaCode string, UID int) (*CartDeliveryModesResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -11985,12 +11985,12 @@ func NewAppClient(config *AppConfig) *Client {
         //Query holds query params
         type XQuery struct { 
           AreaCode string  `url:"area_code"` 
-          Uid int  `url:"uid"`  
+          UID int  `url:"uid"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
            AreaCode : AreaCode,
-           Uid : Uid,
+           UID : UID,
         }
         
          
@@ -12023,7 +12023,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetStoreAddressByUid Get list of stores for give uids
-    func (po *PosCart)  GetStoreAddressByUid(StoreUid int, ) (*StoreDetailsResponse, error){
+    func (po *PosCart)  GetStoreAddressByUid(StoreUID int) (*StoreDetailsResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -12036,11 +12036,11 @@ func NewAppClient(config *AppConfig) *Client {
         
         //Query holds query params
         type XQuery struct { 
-          StoreUid int  `url:"store_uid"`  
+          StoreUID int  `url:"store_uid"`  
         }
         //Query params populating to struct
         xQuery := XQuery{  
-           StoreUid : StoreUid,
+           StoreUID : StoreUID,
         }
         
          
@@ -12125,7 +12125,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetCartSharedItems Get shared cart snapshot and cart response
-    func (po *PosCart)  GetCartSharedItems(Token string, ) (*SharedCartResponse, error){
+    func (po *PosCart)  GetCartSharedItems(Token string) (*SharedCartResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -12166,7 +12166,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // UpdateCartWithSharedItems Merge or Replace existing cart
-    func (po *PosCart)  UpdateCartWithSharedItems(Token string, Action string, ) (*SharedCartResponse, error){
+    func (po *PosCart)  UpdateCartWithSharedItems(Token string, Action string) (*SharedCartResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -12269,7 +12269,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     // GetPincodeCity Get City from Pincode
-    func (lo *Logistic)  GetPincodeCity(Pincode string, ) (*GetPincodeCityResponse, error){
+    func (lo *Logistic)  GetPincodeCity(Pincode string) (*GetPincodeCityResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
