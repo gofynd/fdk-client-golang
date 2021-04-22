@@ -5280,6 +5280,47 @@ func NewAppClient(config *AppConfig) *Client {
     
   
     
+    // GetBlog Get Blog by slug
+    func (co *Content)  GetBlog(Slug string) (*CustomBlogSchema, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            getBlogResponse *CustomBlogSchema
+            
+	    )
+
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/application/content/v1.0/blogs/%s",Slug),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return &CustomBlogSchema{}, err
+            
+	    }
+        err = json.Unmarshal(response, &getBlogResponse)
+        if err != nil {
+           
+             return &CustomBlogSchema{}, common.NewFDKError(err.Error())
+            
+        }
+        return getBlogResponse, nil
+    }
+          
+    
+  
+    
     // GetBlogs Get blogs
     func (co *Content)  GetBlogs(PageNo int, PageSize int) (*BlogGetResponse, error){
         var (
@@ -5720,6 +5761,47 @@ func NewAppClient(config *AppConfig) *Client {
             }
 
        
+    
+  
+    
+    // GetPage Get Page by slug
+    func (co *Content)  GetPage(Slug string) (*CustomPageSchema, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            getPageResponse *CustomPageSchema
+            
+	    )
+
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/application/content/v1.0/pages/%s",Slug),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return &CustomPageSchema{}, err
+            
+	    }
+        err = json.Unmarshal(response, &getPageResponse)
+        if err != nil {
+           
+             return &CustomPageSchema{}, common.NewFDKError(err.Error())
+            
+        }
+        return getPageResponse, nil
+    }
+          
     
   
     
