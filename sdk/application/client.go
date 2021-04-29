@@ -190,7 +190,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/application/catalog/v1.0/products/%s/sizes/%s/pincode/%s/price/",Slug,Size,Pincode),
+            fmt.Sprintf("/service/application/catalog/v1.0/products/{slug}/sizes/{size}/pincode/%s/price/",Slug,Size,Pincode),
             nil,
             xQuery,
             nil)
@@ -242,7 +242,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/application/catalog/v1.0/products/%s/sizes/%s/pincode/%s/sellers/",Slug,Size,Pincode),
+            fmt.Sprintf("/service/application/catalog/v1.0/products/{slug}/sizes/{size}/pincode/%s/sellers/",Slug,Size,Pincode),
             nil,
             xQuery,
             nil)
@@ -333,7 +333,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/application/catalog/v1.0/products/compare/",),
+            fmt.Sprintf("",),
             nil,
             xQuery,
             nil)
@@ -456,7 +456,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/application/catalog/v1.0/products/%s/similar/%s/",Slug,SimilarType),
+            fmt.Sprintf("/service/application/catalog/v1.0/products/{slug}/similar/%s/",Slug,SimilarType),
             nil,
             nil,
             nil)
@@ -609,7 +609,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/application/catalog/v1.0/products/stock-status/poll/",),
+            fmt.Sprintf("",),
             nil,
             xQuery,
             nil)
@@ -1155,7 +1155,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/application/catalog/v1.0/auto-complete/",),
+            fmt.Sprintf("",),
             nil,
             xQuery,
             nil)
@@ -1506,7 +1506,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/{collection_type}/%s/",CollectionType,CollectionID),
             nil,
             nil,
             nil)
@@ -1547,7 +1547,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "delete",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/{collection_type}/%s/",CollectionType,CollectionID),
             nil,
             nil,
             nil)
@@ -1588,7 +1588,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/count/",CollectionType,CollectionID),
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/{collection_type}/%s/count/",CollectionType,CollectionID),
             nil,
             nil,
             nil)
@@ -3011,7 +3011,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "post",
-            fmt.Sprintf("/service/application/cart/v1.0/share-cart/%s/%s",Token,Action),
+            fmt.Sprintf("/service/application/cart/v1.0/share-cart/{token}/%s",Token,Action),
             nil,
             nil,
             nil)
@@ -4746,7 +4746,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             us.config,
             "delete",
-            fmt.Sprintf("/service/application/user/profile/v1.0/mobile",),
+            fmt.Sprintf("",),
             nil,
             xQuery,
             nil)
@@ -4978,7 +4978,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             us.config,
             "delete",
-            fmt.Sprintf("/service/application/user/profile/v1.0/email",),
+            fmt.Sprintf("",),
             nil,
             xQuery,
             nil)
@@ -5429,7 +5429,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             sh.config,
             "post",
-            fmt.Sprintf("/service/application/share/v1.0/qr/url/",),
+            fmt.Sprintf("",),
             nil,
             xQuery,
             nil)
@@ -6238,7 +6238,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             pa.config,
             "get",
-            fmt.Sprintf("/service/application/payment/v1.0/config/aggregators/key",),
+            fmt.Sprintf("",),
             xHeaders,
             xQuery,
             nil)
@@ -6712,7 +6712,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             pa.config,
             "get",
-            fmt.Sprintf("/service/application/payment/v1.0/payment/options",),
+            fmt.Sprintf("",),
             nil,
             xQuery,
             nil)
@@ -6776,7 +6776,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             pa.config,
             "get",
-            fmt.Sprintf("/service/application/payment/v1.0/payment/options/pos",),
+            fmt.Sprintf("",),
             nil,
             xQuery,
             nil)
@@ -6826,7 +6826,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             pa.config,
             "get",
-            fmt.Sprintf("/service/application/payment/v1.0/refund/user/beneficiary",),
+            fmt.Sprintf("",),
             nil,
             xQuery,
             nil)
@@ -6926,7 +6926,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             pa.config,
             "get",
-            fmt.Sprintf("/service/application/payment/v1.0/refund/order/beneficiaries",),
+            fmt.Sprintf("",),
             nil,
             xQuery,
             nil)
@@ -8403,7 +8403,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             po.config,
             "get",
-            fmt.Sprintf("/service/application/pos/cart/v1.0/available-delivery-mode",),
+            fmt.Sprintf("",),
             nil,
             xQuery,
             nil)
@@ -8453,7 +8453,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             po.config,
             "get",
-            fmt.Sprintf("/service/application/pos/cart/v1.0/store-address",),
+            fmt.Sprintf("",),
             nil,
             xQuery,
             nil)
@@ -8587,7 +8587,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             po.config,
             "post",
-            fmt.Sprintf("/service/application/pos/cart/v1.0/share-cart/%s/%s",Token,Action),
+            fmt.Sprintf("/service/application/pos/cart/v1.0/share-cart/{token}/%s",Token,Action),
             nil,
             nil,
             nil)
