@@ -1,9 +1,8 @@
-package application
+package platform
 
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -23,11 +22,13 @@ type RawRequest struct {
 	Headers     map[string]string
 	QueryParams interface{}
 	Body        map[string]interface{}
+	EncodeData  bool
 }
 
-//NewRequest process rew request body
-func NewRequest(conf *AppConfig, method, apiURL string, headers map[string]string, query interface{}, body map[string]interface{}) *RawRequest {
-	token := utils.EncodeToBase64(fmt.Sprintf("%s:%s", conf.ApplicationID, conf.ApplicationToken))
+//NewRequest prepares rew request body
+func NewRequest(conf *PlatformConfig, method, apiURL string, headers map[string]string, query interface{}, body map[string]interface{}) *RawRequest {
+	//GET token from oAuthClient
+	token := conf.GetAccessToken()
 	if headers == nil {
 		headers = make(map[string]string)
 	}
@@ -39,6 +40,7 @@ func NewRequest(conf *AppConfig, method, apiURL string, headers map[string]strin
 		Headers:     headers,
 		QueryParams: query,
 		Body:        body,
+		EncodeData:  false,
 	}
 }
 
@@ -92,11 +94,10 @@ func processHTTPRequest(r *RawRequest) (*http.Request, error) {
 		// }
 	}
 	if r.Method != "GET" && r.Body != nil && len(r.Body) > 0 {
-		reqBodyJSON, err := json.Marshal(r.Body)
+		payload, err = setRequestBody(r)
 		if err != nil {
-			return &http.Request{}, err
+			return &http.Request{}, errors.New("Failed to set request body, unable to sign request : " + err.Error())
 		}
-		payload = strings.NewReader(string(reqBodyJSON))
 	}
 	req, err := http.NewRequest(r.Method, r.APIURL, payload)
 	if err != nil {
@@ -127,4 +128,23 @@ func processHTTPResponse(res *http.Response) ([]byte, error) {
 		return []byte{}, errResp
 	}
 	return data, nil
+}
+
+func setRequestBody(r *RawRequest) (*strings.Reader, error) {
+	payload := &strings.Reader{}
+	reqBodyJSON, err := json.Marshal(r.Body)
+	if err != nil {
+		return &strings.Reader{}, err
+	}
+	if r.EncodeData {
+		reqBodyMap := make(map[string]string)
+		err = json.Unmarshal(reqBodyJSON, &reqBodyMap)
+		if err != nil {
+			return &strings.Reader{}, err
+		}
+		payload = strings.NewReader(utils.MapToURLEncodedString(reqBodyMap))
+	} else {
+		payload = strings.NewReader(string(reqBodyJSON))
+	}
+	return payload, nil
 }
