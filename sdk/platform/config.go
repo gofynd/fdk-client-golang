@@ -15,9 +15,9 @@ func NewPlatformConfig(companyID, apiKey, apiSecret, domain string) *PlatformCon
 }
 
 //SetOAuthClient sets OAuthClient into platform configuration
-func (p *PlatformConfig) SetOAuthClient() *OAuthClient {
+func (p *PlatformConfig) SetOAuthClient() {
 	p.OAuthClient = NewOAuthClient(p)
-	return p.OAuthClient
+
 }
 
 //GetAccessToken returns the access token
