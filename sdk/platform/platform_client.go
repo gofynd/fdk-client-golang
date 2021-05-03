@@ -37,10 +37,12 @@ type PlatformClient struct {
 	
 		Discount  *PlatformDiscount
 	
+		Webhook  *PlatformWebhook
+	
 	ApplicationClient *ApplicationClient //ApplicationClient embedded
 }
 
-// NewPlatformClient returns platform level services instance
+// NewPlatformClient returns platform company level service instances
 func NewPlatformClient(config *PlatformConfig) *PlatformClient {
 		return &PlatformClient{
 			config: config,
@@ -71,13 +73,15 @@ func NewPlatformClient(config *PlatformConfig) *PlatformClient {
 			
 				Discount:  NewPlatformDiscount(config),
 			
+				Webhook:  NewPlatformWebhook(config),
+			
 			ApplicationClient: &ApplicationClient{},
 		}
 }
 
-//NewApplicationClient
-func (p *PlatformClient) NewApplicationClient(appID string) *ApplicationClient {
-	return NewApplicationClient(appID, p.config)
+//SetPlatformApplicationClient sets platform application level service instances
+func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
+	p.ApplicationClient = NewApplicationClient(appID, p.config)
 }
 
 
@@ -2141,6 +2145,51 @@ func (p *PlatformClient) NewApplicationClient(appID string) *ApplicationClient {
   
     
     
+    // GetProductBundleDetail Get a particular Product Bundle details
+     func (ca *PlatformCatalog)  GetProductBundleDetail(
+         ID string) (GetProductBundleResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            getProductBundleDetailResponse GetProductBundleResponse
+            
+	    )
+     
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/product-bundle/%s/",ca.CompanyID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return GetProductBundleResponse{}, err
+            
+	    }
+        err = json.Unmarshal(response, &getProductBundleDetailResponse)
+        if err != nil {
+           
+             return GetProductBundleResponse{}, common.NewFDKError(err.Error())
+            
+        }
+        return getProductBundleDetailResponse, nil
+    }
+         
+        
+       
+    
+    
+  
+    
+    
     // UpdateProductBundle Update a Product Bundle
      func (ca *PlatformCatalog)  UpdateProductBundle(
          ID string, body  ProductBundleUpdateRequest) (GetProductBundleCreateResponse, error){
@@ -2188,51 +2237,6 @@ func (p *PlatformClient) NewApplicationClient(appID string) *ApplicationClient {
             
         }
         return updateProductBundleResponse, nil
-    }
-         
-        
-       
-    
-    
-  
-    
-    
-    // GetProductBundleDetail Get a particular Product Bundle details
-     func (ca *PlatformCatalog)  GetProductBundleDetail(
-         ID string) (GetProductBundleResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            getProductBundleDetailResponse GetProductBundleResponse
-            
-	    )
-     
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/product-bundle/%s/",ca.CompanyID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return GetProductBundleResponse{}, err
-            
-	    }
-        err = json.Unmarshal(response, &getProductBundleDetailResponse)
-        if err != nil {
-           
-             return GetProductBundleResponse{}, common.NewFDKError(err.Error())
-            
-        }
-        return getProductBundleDetailResponse, nil
     }
          
         
@@ -2352,6 +2356,51 @@ func (p *PlatformClient) NewApplicationClient(appID string) *ApplicationClient {
   
     
     
+    // GetSizeGuide Get a single size guide.
+     func (ca *PlatformCatalog)  GetSizeGuide(
+         ID string) (SizeGuideResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            getSizeGuideResponse SizeGuideResponse
+            
+	    )
+     
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/sizeguide/%s/",ca.CompanyID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return SizeGuideResponse{}, err
+            
+	    }
+        err = json.Unmarshal(response, &getSizeGuideResponse)
+        if err != nil {
+           
+             return SizeGuideResponse{}, common.NewFDKError(err.Error())
+            
+        }
+        return getSizeGuideResponse, nil
+    }
+         
+        
+       
+    
+    
+  
+    
+    
     // UpdateSizeGuide Edit a size guide.
      func (ca *PlatformCatalog)  UpdateSizeGuide(
          ID string, body  ValidateSizeGuide) (SuccessResponse, error){
@@ -2399,51 +2448,6 @@ func (p *PlatformClient) NewApplicationClient(appID string) *ApplicationClient {
             
         }
         return updateSizeGuideResponse, nil
-    }
-         
-        
-       
-    
-    
-  
-    
-    
-    // GetSizeGuide Get a single size guide.
-     func (ca *PlatformCatalog)  GetSizeGuide(
-         ID string) (SizeGuideResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            getSizeGuideResponse SizeGuideResponse
-            
-	    )
-     
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/sizeguide/%s/",ca.CompanyID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return SizeGuideResponse{}, err
-            
-	    }
-        err = json.Unmarshal(response, &getSizeGuideResponse)
-        if err != nil {
-           
-             return SizeGuideResponse{}, common.NewFDKError(err.Error())
-            
-        }
-        return getSizeGuideResponse, nil
     }
          
         
@@ -3496,6 +3500,51 @@ func (p *PlatformClient) NewApplicationClient(appID string) *ApplicationClient {
   
     
     
+    // GetCategoryData Get product category by uid
+     func (ca *PlatformCatalog)  GetCategoryData(
+         UID string) (Category, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            getCategoryDataResponse Category
+            
+	    )
+     
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/category/%s/",ca.CompanyID, UID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return Category{}, err
+            
+	    }
+        err = json.Unmarshal(response, &getCategoryDataResponse)
+        if err != nil {
+           
+             return Category{}, common.NewFDKError(err.Error())
+            
+        }
+        return getCategoryDataResponse, nil
+    }
+         
+        
+       
+    
+    
+  
+    
+    
     // UpdateCategory Update product categories
      func (ca *PlatformCatalog)  UpdateCategory(
          UID string, body  CategoryRequestBody) (CategoryUpdateResponse, error){
@@ -3543,51 +3592,6 @@ func (p *PlatformClient) NewApplicationClient(appID string) *ApplicationClient {
             
         }
         return updateCategoryResponse, nil
-    }
-         
-        
-       
-    
-    
-  
-    
-    
-    // GetCategoryData Get product category by uid
-     func (ca *PlatformCatalog)  GetCategoryData(
-         UID string) (Category, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            getCategoryDataResponse Category
-            
-	    )
-     
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/category/%s/",ca.CompanyID, UID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return Category{}, err
-            
-	    }
-        err = json.Unmarshal(response, &getCategoryDataResponse)
-        if err != nil {
-           
-             return Category{}, common.NewFDKError(err.Error())
-            
-        }
-        return getCategoryDataResponse, nil
     }
          
         
@@ -3707,62 +3711,6 @@ func (p *PlatformClient) NewApplicationClient(appID string) *ApplicationClient {
   
     
     
-    // EditProduct Edit a product.
-     func (ca *PlatformCatalog)  EditProduct(
-         ItemID float64, body  ProductCreateUpdate) (SuccessResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            editProductResponse SuccessResponse
-            
-	    )
-     
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-           return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "put",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return SuccessResponse{}, err
-            
-	    }
-        err = json.Unmarshal(response, &editProductResponse)
-        if err != nil {
-           
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-            
-        }
-        return editProductResponse, nil
-    }
-         
-        
-       
-    
-    
-  
-    
-    
     // DeleteProduct Delete a product.
      func (ca *PlatformCatalog)  DeleteProduct(
          ItemID float64) (SuccessResponse, error){
@@ -3851,6 +3799,62 @@ func (p *PlatformClient) NewApplicationClient(appID string) *ApplicationClient {
             
         }
         return getProductResponse, nil
+    }
+         
+        
+       
+    
+    
+  
+    
+    
+    // EditProduct Edit a product.
+     func (ca *PlatformCatalog)  EditProduct(
+         ItemID float64, body  ProductCreateUpdate) (SuccessResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            editProductResponse SuccessResponse
+            
+	    )
+     
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+           return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "put",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return SuccessResponse{}, err
+            
+	    }
+        err = json.Unmarshal(response, &editProductResponse)
+        if err != nil {
+           
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+            
+        }
+        return editProductResponse, nil
     }
          
         
@@ -4981,6 +4985,51 @@ func (p *PlatformClient) NewApplicationClient(appID string) *ApplicationClient {
   
     
     
+    // GetHsnCode Fetch Hsn Code.
+     func (ca *PlatformCatalog)  GetHsnCode(
+         ID string) (HsnCode, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            getHsnCodeResponse HsnCode
+            
+	    )
+     
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/hsn/{uid}/",ca.CompanyID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return HsnCode{}, err
+            
+	    }
+        err = json.Unmarshal(response, &getHsnCodeResponse)
+        if err != nil {
+           
+             return HsnCode{}, common.NewFDKError(err.Error())
+            
+        }
+        return getHsnCodeResponse, nil
+    }
+         
+        
+       
+    
+    
+  
+    
+    
     // UpdateHsnCode Update Hsn Code.
      func (ca *PlatformCatalog)  UpdateHsnCode(
          ID string, body  HsnUpsert) (HsnCode, error){
@@ -5028,51 +5077,6 @@ func (p *PlatformClient) NewApplicationClient(appID string) *ApplicationClient {
             
         }
         return updateHsnCodeResponse, nil
-    }
-         
-        
-       
-    
-    
-  
-    
-    
-    // GetHsnCode Fetch Hsn Code.
-     func (ca *PlatformCatalog)  GetHsnCode(
-         ID string) (HsnCode, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            getHsnCodeResponse HsnCode
-            
-	    )
-     
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/hsn/{uid}/",ca.CompanyID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return HsnCode{}, err
-            
-	    }
-        err = json.Unmarshal(response, &getHsnCodeResponse)
-        if err != nil {
-           
-             return HsnCode{}, common.NewFDKError(err.Error())
-            
-        }
-        return getHsnCodeResponse, nil
     }
          
         
@@ -5307,51 +5311,6 @@ func (p *PlatformClient) NewApplicationClient(appID string) *ApplicationClient {
   
     
     
-    // GetBrand Get a single brand.
-     func (co *PlatformCompanyProfile)  GetBrand(
-         BrandID string) (GetBrandResponseSerializer, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            getBrandResponse GetBrandResponseSerializer
-            
-	    )
-     
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            co.Config,
-            "get",
-            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/brand/%s",co.CompanyID, BrandID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return GetBrandResponseSerializer{}, err
-            
-	    }
-        err = json.Unmarshal(response, &getBrandResponse)
-        if err != nil {
-           
-             return GetBrandResponseSerializer{}, common.NewFDKError(err.Error())
-            
-        }
-        return getBrandResponse, nil
-    }
-         
-        
-       
-    
-    
-  
-    
-    
     // EditBrand Edit a brand.
      func (co *PlatformCompanyProfile)  EditBrand(
          BrandID string, body  CreateUpdateBrandRequestSerializer) (SuccessResponse, error){
@@ -5408,6 +5367,51 @@ func (p *PlatformClient) NewApplicationClient(appID string) *ApplicationClient {
   
     
     
+    // GetBrand Get a single brand.
+     func (co *PlatformCompanyProfile)  GetBrand(
+         BrandID string) (GetBrandResponseSerializer, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            getBrandResponse GetBrandResponseSerializer
+            
+	    )
+     
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.Config,
+            "get",
+            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/brand/%s",co.CompanyID, BrandID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return GetBrandResponseSerializer{}, err
+            
+	    }
+        err = json.Unmarshal(response, &getBrandResponse)
+        if err != nil {
+           
+             return GetBrandResponseSerializer{}, common.NewFDKError(err.Error())
+            
+        }
+        return getBrandResponse, nil
+    }
+         
+        
+       
+    
+    
+  
+    
+    
     // CreateBrand Create a Brand.
      func (co *PlatformCompanyProfile)  CreateBrand(
          body  CreateUpdateBrandRequestSerializer) (SuccessResponse, error){
@@ -5455,6 +5459,62 @@ func (p *PlatformClient) NewApplicationClient(appID string) *ApplicationClient {
             
         }
         return createBrandResponse, nil
+    }
+         
+        
+       
+    
+    
+  
+    
+    
+    // CreateCompanyBrandMapping Create a company brand mapping.
+     func (co *PlatformCompanyProfile)  CreateCompanyBrandMapping(
+         body  CompanyBrandPostRequestSerializer) (SuccessResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            createCompanyBrandMappingResponse SuccessResponse
+            
+	    )
+     
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+           return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            co.Config,
+            "post",
+            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/company-brand",co.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return SuccessResponse{}, err
+            
+	    }
+        err = json.Unmarshal(response, &createCompanyBrandMappingResponse)
+        if err != nil {
+           
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+            
+        }
+        return createCompanyBrandMappingResponse, nil
     }
          
         
@@ -5563,15 +5623,15 @@ func (p *PlatformClient) NewApplicationClient(appID string) *ApplicationClient {
   
     
     
-    // CreateCompanyBrandMapping Create a company brand mapping.
-     func (co *PlatformCompanyProfile)  CreateCompanyBrandMapping(
-         body  CompanyBrandPostRequestSerializer) (SuccessResponse, error){
+    // CreateLocation Create a location asscoiated to a company.
+     func (co *PlatformCompanyProfile)  CreateLocation(
+         body  LocationSerializer) (SuccessResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            createCompanyBrandMappingResponse SuccessResponse
+            createLocationResponse SuccessResponse
             
 	    )
      
@@ -5593,7 +5653,7 @@ func (p *PlatformClient) NewApplicationClient(appID string) *ApplicationClient {
         rawRequest = NewRequest(
             co.Config,
             "post",
-            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/company-brand",co.CompanyID),
+            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/location",co.CompanyID),
             nil,
             nil,
             reqBody)
@@ -5603,13 +5663,13 @@ func (p *PlatformClient) NewApplicationClient(appID string) *ApplicationClient {
              return SuccessResponse{}, err
             
 	    }
-        err = json.Unmarshal(response, &createCompanyBrandMappingResponse)
+        err = json.Unmarshal(response, &createLocationResponse)
         if err != nil {
            
              return SuccessResponse{}, common.NewFDKError(err.Error())
             
         }
-        return createCompanyBrandMappingResponse, nil
+        return createLocationResponse, nil
     }
          
         
@@ -5751,107 +5811,6 @@ func (p *PlatformClient) NewApplicationClient(appID string) *ApplicationClient {
   
     
     
-    // CreateLocation Create a location asscoiated to a company.
-     func (co *PlatformCompanyProfile)  CreateLocation(
-         body  LocationSerializer) (SuccessResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            createLocationResponse SuccessResponse
-            
-	    )
-     
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-           return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            co.Config,
-            "post",
-            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/location",co.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return SuccessResponse{}, err
-            
-	    }
-        err = json.Unmarshal(response, &createLocationResponse)
-        if err != nil {
-           
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-            
-        }
-        return createLocationResponse, nil
-    }
-         
-        
-       
-    
-    
-  
-    
-    
-    // GetLocationDetail Get details of a specific location.
-     func (co *PlatformCompanyProfile)  GetLocationDetail(
-         LocationID string) (GetLocationSerializer, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            getLocationDetailResponse GetLocationSerializer
-            
-	    )
-     
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            co.Config,
-            "get",
-            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/location/%s",co.CompanyID, LocationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return GetLocationSerializer{}, err
-            
-	    }
-        err = json.Unmarshal(response, &getLocationDetailResponse)
-        if err != nil {
-           
-             return GetLocationSerializer{}, common.NewFDKError(err.Error())
-            
-        }
-        return getLocationDetailResponse, nil
-    }
-         
-        
-       
-    
-    
-  
-    
-    
     // UpdateLocation Edit a location asscoiated to a company.
      func (co *PlatformCompanyProfile)  UpdateLocation(
          LocationID string, body  LocationSerializer) (SuccessResponse, error){
@@ -5899,6 +5858,51 @@ func (p *PlatformClient) NewApplicationClient(appID string) *ApplicationClient {
             
         }
         return updateLocationResponse, nil
+    }
+         
+        
+       
+    
+    
+  
+    
+    
+    // GetLocationDetail Get details of a specific location.
+     func (co *PlatformCompanyProfile)  GetLocationDetail(
+         LocationID string) (GetLocationSerializer, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            getLocationDetailResponse GetLocationSerializer
+            
+	    )
+     
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.Config,
+            "get",
+            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/location/%s",co.CompanyID, LocationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return GetLocationSerializer{}, err
+            
+	    }
+        err = json.Unmarshal(response, &getLocationDetailResponse)
+        if err != nil {
+           
+             return GetLocationSerializer{}, common.NewFDKError(err.Error())
+            
+        }
+        return getLocationDetailResponse, nil
     }
          
         
@@ -9771,6 +9775,183 @@ func (p *PlatformClient) NewApplicationClient(appID string) *ApplicationClient {
             
         }
         return cancelDownloadJobResponse, nil
+    }
+         
+        
+       
+    
+
+
+	
+   // PlatformWebhook holds PlatformWebhook object properties
+    type PlatformWebhook struct {
+        Config *PlatformConfig
+        CompanyID string
+    }
+    // NewPlatformWebhook returns new PlatformWebhook instance
+    func NewPlatformWebhook(config *PlatformConfig) *PlatformWebhook {
+        return &PlatformWebhook{Config: config, CompanyID: config.CompanyID}
+    }
+    
+    
+  
+    
+    
+    //PlatformGetSubscribersByCompanyAndEventIdXQuery holds query params
+    type PlatformGetSubscribersByCompanyAndEventIdXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        EventID float64  `url:"event_id,omitempty"`  
+    }
+    
+    // GetSubscribersByCompanyAndEventId Get Subscribers By Company And Event
+     func (we *PlatformWebhook)  GetSubscribersByCompanyAndEventId(
+         xQuery PlatformGetSubscribersByCompanyAndEventIdXQuery) (SubscriberConfigList, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            getSubscribersByCompanyAndEventIdResponse SubscriberConfigList
+            
+	    )
+     
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            we.Config,
+            "get",
+            fmt.Sprintf("/service/platform/webhook/v1.0/company/%s/subscriber/{event_id}",we.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return SubscriberConfigList{}, err
+            
+	    }
+        err = json.Unmarshal(response, &getSubscribersByCompanyAndEventIdResponse)
+        if err != nil {
+           
+             return SubscriberConfigList{}, common.NewFDKError(err.Error())
+            
+        }
+        return getSubscribersByCompanyAndEventIdResponse, nil
+    }
+         
+        
+       
+    
+    
+  
+    
+    
+    // RegisterSubscriberToEvent Register Subscriber
+     func (we *PlatformWebhook)  RegisterSubscriberToEvent(
+         body  SubscriberConfig) (SubscriberConfig, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            registerSubscriberToEventResponse SubscriberConfig
+            
+	    )
+     
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+           return SubscriberConfig{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             return SubscriberConfig{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            we.Config,
+            "post",
+            fmt.Sprintf("/service/platform/webhook/v1.0/company/%s/subscriber",we.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return SubscriberConfig{}, err
+            
+	    }
+        err = json.Unmarshal(response, &registerSubscriberToEventResponse)
+        if err != nil {
+           
+             return SubscriberConfig{}, common.NewFDKError(err.Error())
+            
+        }
+        return registerSubscriberToEventResponse, nil
+    }
+         
+        
+       
+    
+    
+  
+    
+    
+    // UpdateSubscriberConfig Update Subscriber
+     func (we *PlatformWebhook)  UpdateSubscriberConfig(
+         body  SubscriberConfig) (SubscriberConfig, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            updateSubscriberConfigResponse SubscriberConfig
+            
+	    )
+     
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+           return SubscriberConfig{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             return SubscriberConfig{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            we.Config,
+            "put",
+            fmt.Sprintf("/service/platform/webhook/v1.0/company/%s/subscriber",we.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return SubscriberConfig{}, err
+            
+	    }
+        err = json.Unmarshal(response, &updateSubscriberConfigResponse)
+        if err != nil {
+           
+             return SubscriberConfig{}, common.NewFDKError(err.Error())
+            
+        }
+        return updateSubscriberConfigResponse, nil
     }
          
         
