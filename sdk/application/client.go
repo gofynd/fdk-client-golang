@@ -4560,7 +4560,7 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // VerifyEmailOTP Verify OTP on email
-    func (us *User)  VerifyEmailOTP(xQuery UserVerifyEmailOTPXQuery, body  VerifyOtpRequestSchema) (VerifyOtpSuccess, error){
+    func (us *User)  VerifyEmailOTP(xQuery UserVerifyEmailOTPXQuery, body  VerifyEmailOtpRequestSchema) (VerifyOtpSuccess, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -4612,13 +4612,13 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // GetLoggedInUser Get logged in user
-    func (us *User)  GetLoggedInUser() (UserSchema, error){
+    func (us *User)  GetLoggedInUser() (UserObjectSchema, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            getLoggedInUserResponse UserSchema
+            getLoggedInUserResponse UserObjectSchema
             
 	    )
 
@@ -4636,13 +4636,13 @@ func NewAppClient(config *AppConfig) *Client {
         response, err = rawRequest.Execute()
         if err != nil {
 	 	   
-             return UserSchema{}, err
+             return UserObjectSchema{}, err
             
 	    }
         err = json.Unmarshal(response, &getLoggedInUserResponse)
         if err != nil {
            
-             return UserSchema{}, common.NewFDKError(err.Error())
+             return UserObjectSchema{}, common.NewFDKError(err.Error())
             
         }
         return getLoggedInUserResponse, nil

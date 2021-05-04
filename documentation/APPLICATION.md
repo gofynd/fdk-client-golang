@@ -7668,7 +7668,7 @@ Verify OTP on email
 
 | xQuery | struct | Includes properties such as `Platform`
 
-| body |  VerifyOtpRequestSchema | "Request body" 
+| body |  VerifyEmailOtpRequestSchema | "Request body" 
 
 
 Used to verify otp sent to email
@@ -7750,7 +7750,7 @@ Used to get logged in user details
 
 
 
-Schema: `UserSchema`
+Schema: `UserObjectSchema`
 
 
 *Examples:*
@@ -7759,7 +7759,7 @@ Schema: `UserSchema`
 default
 ```json
 {
-  "$ref": "#/components/examples/UserExample"
+  "$ref": "#/components/examples/UserExampleObject"
 }
 ```
 
