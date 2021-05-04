@@ -1647,47 +1647,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow a particular Product
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            followByIdResponse FollowPostResponse
-            
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return FollowPostResponse{}, err
-            
-	    }
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-           
-             return FollowPostResponse{}, common.NewFDKError(err.Error())
-            
-        }
-        return followByIdResponse, nil
-    }
-          
-    
-  
-    
-    
     // UnfollowById UnFollow a Product
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1723,6 +1682,47 @@ func NewAppClient(config *AppConfig) *Client {
             
         }
         return unfollowByIdResponse, nil
+    }
+          
+    
+  
+    
+    
+    // FollowById Follow a particular Product
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            followByIdResponse FollowPostResponse
+            
+	    )
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return FollowPostResponse{}, err
+            
+	    }
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+           
+             return FollowPostResponse{}, common.NewFDKError(err.Error())
+            
+        }
+        return followByIdResponse, nil
     }
           
     
@@ -8753,6 +8753,47 @@ func NewAppClient(config *AppConfig) *Client {
             
         }
         return getPointsOnProductResponse, nil
+    }
+          
+    
+  
+    
+    
+    // GetOfferByName Get offer by name.
+    func (re *Rewards)  GetOfferByName(Name string) (Offer, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            getOfferByNameResponse Offer
+            
+	    )
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            re.config,
+            "get",
+            fmt.Sprintf("/service/application/rewards/v1.0/offers/%s/",Name),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return Offer{}, err
+            
+	    }
+        err = json.Unmarshal(response, &getOfferByNameResponse)
+        if err != nil {
+           
+             return Offer{}, common.NewFDKError(err.Error())
+            
+        }
+        return getOfferByNameResponse, nil
     }
           
     

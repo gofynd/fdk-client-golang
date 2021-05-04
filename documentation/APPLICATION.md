@@ -49,8 +49,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [followById](#followbyid)
     * [unfollowById](#unfollowbyid)
+    * [followById](#followbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -237,6 +237,7 @@
 * [Rewards](#Rewards)
   * Methods
     * [getPointsOnProduct](#getpointsonproduct)
+    * [getOfferByName](#getofferbyname)
     * [getOrderDiscount](#getorderdiscount)
     * [getUserPoints](#getuserpoints)
     * [getUserPointsHistory](#getuserpointshistory)
@@ -1544,12 +1545,12 @@ Schema: `ErrorResponse`
 ---
 
 
-#### followById
-Follow a particular Product
+#### unfollowById
+UnFollow a Product
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1558,12 +1559,12 @@ Follow a particular Product
 | CollectionType | string | Type of collection followed. i. e. products, brands, collections | 
 
 
-| CollectionID | string | the `id` of the collection type you want to follow | 
+| CollectionID | string | the `id` of the collection type you want to unfollow | 
 
 
 
 
-Follow a particular Product specified by its uid. Pass the uid of the product in request URL
+You can undo a followed Product or Brand by its id, we refer this action as _unfollow_. Pass the uid of the product in request URL
 
 *Success Response:*
 
@@ -1597,12 +1598,12 @@ Schema: `ErrorResponse`
 ---
 
 
-#### unfollowById
-UnFollow a Product
+#### followById
+Follow a particular Product
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1611,12 +1612,12 @@ UnFollow a Product
 | CollectionType | string | Type of collection followed. i. e. products, brands, collections | 
 
 
-| CollectionID | string | the `id` of the collection type you want to unfollow | 
+| CollectionID | string | the `id` of the collection type you want to follow | 
 
 
 
 
-You can undo a followed Product or Brand by its id, we refer this action as _unfollow_. Pass the uid of the product in request URL
+Follow a particular Product specified by its uid. Pass the uid of the product in request URL
 
 *Success Response:*
 
@@ -13159,6 +13160,56 @@ ok
 
 
 Schema: `CatalogueOrderResponse`
+
+
+
+
+
+
+
+
+Bad request
+
+
+Schema: `Error`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOfferByName
+Get offer by name.
+
+```golang
+
+ data, err :=  Rewards.GetOfferByName(Name);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| Name | string | Offer name | 
+
+
+
+
+Get offer by name.
+
+*Success Response:*
+
+
+
+ok
+
+
+Schema: `Offer`
 
 
 
