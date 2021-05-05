@@ -9414,11 +9414,36 @@ package platform
     type Document struct {
 
         
-            URL string  `json:"url"`
             Type string  `json:"type"`
             Verified bool  `json:"verified"`
-            LegalName string  `json:"legal_name"`
+            URL string  `json:"url"`
             Value string  `json:"value"`
+            LegalName string  `json:"legal_name"`
+         
+    }
+    
+    // CompanyAddress used by CompanyProfile
+    type CompanyAddress struct {
+
+        
+            City string  `json:"city"`
+            Address2 string  `json:"address2"`
+            Address1 string  `json:"address1"`
+            Country string  `json:"country"`
+            State string  `json:"state"`
+            Latitude float64  `json:"latitude"`
+            Pincode float64  `json:"pincode"`
+            CountryCode string  `json:"country_code"`
+            Landmark string  `json:"landmark"`
+            Longitude float64  `json:"longitude"`
+         
+    }
+    
+    // ReferralInfo used by CompanyProfile
+    type ReferralInfo struct {
+
+        
+            ReferralCode string  `json:"referral_code"`
          
     }
     
@@ -9426,8 +9451,70 @@ package platform
     type BusinessCountryInfo struct {
 
         
-            CountryCode string  `json:"country_code"`
             Country string  `json:"country"`
+            CountryCode string  `json:"country_code"`
+         
+    }
+    
+    // CompanyStoreSerializerRequest used by CompanyProfile
+    type CompanyStoreSerializerRequest struct {
+
+        
+            Document Document  `json:"document"`
+            Address CompanyAddress  `json:"address"`
+            Name string  `json:"name"`
+            NotificationEmails []string  `json:"notification_emails"`
+            ReferralInfo ReferralInfo  `json:"referral_info"`
+            Warnings *map[string]interface{}  `json:"warnings"`
+            FranchiseEnabled bool  `json:"franchise_enabled"`
+            BusinessType string  `json:"business_type"`
+            UID float64  `json:"uid"`
+            Brands []float64  `json:"brands"`
+            BusinessCountryInfo BusinessCountryInfo  `json:"business_country_info"`
+            BusinessInfo string  `json:"business_info"`
+         
+    }
+    
+    // Website used by CompanyProfile
+    type Website struct {
+
+        
+            URL string  `json:"url"`
+         
+    }
+    
+    // BusinessDetails used by CompanyProfile
+    type BusinessDetails struct {
+
+        
+            Website Website  `json:"website"`
+         
+    }
+    
+    // GetAddressSerializer used by CompanyProfile
+    type GetAddressSerializer struct {
+
+        
+            City string  `json:"city"`
+            AddressType string  `json:"address_type"`
+            Address1 string  `json:"address1"`
+            Address2 string  `json:"address2"`
+            Country string  `json:"country"`
+            State string  `json:"state"`
+            Latitude float64  `json:"latitude"`
+            Pincode float64  `json:"pincode"`
+            CountryCode string  `json:"country_code"`
+            Landmark string  `json:"landmark"`
+            Longitude float64  `json:"longitude"`
+         
+    }
+    
+    // BusinessCountryInfo1 used by CompanyProfile
+    type BusinessCountryInfo1 struct {
+
+        
+            Country string  `json:"country"`
+            CountryCode string  `json:"country_code"`
          
     }
     
@@ -9449,117 +9536,30 @@ package platform
          
     }
     
-    // GetAddressSerializer used by CompanyProfile
-    type GetAddressSerializer struct {
-
-        
-            Address2 string  `json:"address2"`
-            CountryCode string  `json:"country_code"`
-            Country string  `json:"country"`
-            Longitude float64  `json:"longitude"`
-            Latitude float64  `json:"latitude"`
-            Landmark string  `json:"landmark"`
-            AddressType string  `json:"address_type"`
-            State string  `json:"state"`
-            Pincode float64  `json:"pincode"`
-            Address1 string  `json:"address1"`
-            City string  `json:"city"`
-         
-    }
-    
-    // Website used by CompanyProfile
-    type Website struct {
-
-        
-            URL string  `json:"url"`
-         
-    }
-    
-    // BusinessDetails used by CompanyProfile
-    type BusinessDetails struct {
-
-        
-            Website Website  `json:"website"`
-         
-    }
-    
     // GetCompanyProfileSerializerResponse used by CompanyProfile
     type GetCompanyProfileSerializerResponse struct {
 
         
-            FranchiseEnabled bool  `json:"franchise_enabled"`
-            Documents []Document  `json:"documents"`
-            ModifiedBy UserSerializer  `json:"modified_by"`
-            UID float64  `json:"uid"`
-            BusinessCountryInfo BusinessCountryInfo  `json:"business_country_info"`
-            CreatedBy UserSerializer  `json:"created_by"`
-            CompanyType string  `json:"company_type"`
-            ContactDetails ContactDetails  `json:"contact_details"`
-            VerifiedOn string  `json:"verified_on"`
-            Name string  `json:"name"`
-            BusinessInfo string  `json:"business_info"`
-            Warnings *map[string]interface{}  `json:"warnings"`
-            Stage string  `json:"stage"`
-            Addresses []GetAddressSerializer  `json:"addresses"`
-            BusinessType string  `json:"business_type"`
-            VerifiedBy UserSerializer  `json:"verified_by"`
-            ModifiedOn string  `json:"modified_on"`
-            CreatedOn string  `json:"created_on"`
             BusinessDetails BusinessDetails  `json:"business_details"`
-            NotificationEmails []string  `json:"notification_emails"`
-         
-    }
-    
-    // BusinessCountryInfo1 used by CompanyProfile
-    type BusinessCountryInfo1 struct {
-
-        
-            CountryCode string  `json:"country_code"`
-            Country string  `json:"country"`
-         
-    }
-    
-    // ReferralInfo used by CompanyProfile
-    type ReferralInfo struct {
-
-        
-            ReferralCode string  `json:"referral_code"`
-         
-    }
-    
-    // CompanyAddress used by CompanyProfile
-    type CompanyAddress struct {
-
-        
-            Address2 string  `json:"address2"`
-            CountryCode string  `json:"country_code"`
-            Country string  `json:"country"`
-            Longitude float64  `json:"longitude"`
-            Latitude float64  `json:"latitude"`
-            Landmark string  `json:"landmark"`
-            State string  `json:"state"`
-            Pincode float64  `json:"pincode"`
-            Address1 string  `json:"address1"`
-            City string  `json:"city"`
-         
-    }
-    
-    // CompanyStoreSerializerRequest used by CompanyProfile
-    type CompanyStoreSerializerRequest struct {
-
-        
-            BusinessCountryInfo BusinessCountryInfo1  `json:"business_country_info"`
-            Name string  `json:"name"`
+            ModifiedBy UserSerializer  `json:"modified_by"`
+            Documents []Document  `json:"documents"`
             FranchiseEnabled bool  `json:"franchise_enabled"`
-            BusinessType string  `json:"business_type"`
-            BusinessInfo string  `json:"business_info"`
-            Brands []float64  `json:"brands"`
-            ReferralInfo ReferralInfo  `json:"referral_info"`
+            VerifiedOn string  `json:"verified_on"`
+            CompanyType string  `json:"company_type"`
+            Addresses []GetAddressSerializer  `json:"addresses"`
+            Name string  `json:"name"`
+            CreatedBy UserSerializer  `json:"created_by"`
+            Stage string  `json:"stage"`
             Warnings *map[string]interface{}  `json:"warnings"`
-            Document Document  `json:"document"`
-            UID float64  `json:"uid"`
-            Address CompanyAddress  `json:"address"`
+            ModifiedOn string  `json:"modified_on"`
+            BusinessType string  `json:"business_type"`
+            CreatedOn string  `json:"created_on"`
+            VerifiedBy UserSerializer  `json:"verified_by"`
+            BusinessCountryInfo BusinessCountryInfo1  `json:"business_country_info"`
             NotificationEmails []string  `json:"notification_emails"`
+            ContactDetails ContactDetails  `json:"contact_details"`
+            UID float64  `json:"uid"`
+            BusinessInfo string  `json:"business_info"`
          
     }
     
@@ -9567,8 +9567,8 @@ package platform
     type DocumentsObj struct {
 
         
-            Pending float64  `json:"pending"`
             Verified float64  `json:"verified"`
+            Pending float64  `json:"pending"`
          
     }
     
@@ -9577,12 +9577,12 @@ package platform
 
         
             Brand DocumentsObj  `json:"brand"`
-            StoreDocuments DocumentsObj  `json:"store_documents"`
-            Product DocumentsObj  `json:"product"`
-            CompanyDocuments DocumentsObj  `json:"company_documents"`
-            UID float64  `json:"uid"`
             Store DocumentsObj  `json:"store"`
+            CompanyDocuments DocumentsObj  `json:"company_documents"`
+            Product DocumentsObj  `json:"product"`
+            UID float64  `json:"uid"`
             Stage string  `json:"stage"`
+            StoreDocuments DocumentsObj  `json:"store_documents"`
          
     }
     
@@ -9599,15 +9599,15 @@ package platform
     type CreateUpdateBrandRequestSerializer struct {
 
         
-            Name string  `json:"name"`
-            BrandTier string  `json:"brand_tier"`
-            Synonyms []string  `json:"synonyms"`
-            Banner BrandBannerSerializer  `json:"banner"`
             Description string  `json:"description"`
-            LocaleLanguage *map[string]interface{}  `json:"_locale_language"`
-            CompanyID float64  `json:"company_id"`
+            Name string  `json:"name"`
+            Banner BrandBannerSerializer  `json:"banner"`
             CustomJson *map[string]interface{}  `json:"_custom_json"`
+            LocaleLanguage *map[string]interface{}  `json:"_locale_language"`
+            Synonyms []string  `json:"synonyms"`
             UID float64  `json:"uid"`
+            CompanyID float64  `json:"company_id"`
+            BrandTier string  `json:"brand_tier"`
             Logo string  `json:"logo"`
          
     }
@@ -9617,8 +9617,8 @@ package platform
 
         
             Contact string  `json:"contact"`
-            UserID string  `json:"user_id"`
             Username string  `json:"username"`
+            UserID string  `json:"user_id"`
          
     }
     
@@ -9626,24 +9626,24 @@ package platform
     type GetBrandResponseSerializer struct {
 
         
-            Name string  `json:"name"`
-            RejectReason string  `json:"reject_reason"`
-            Synonyms []string  `json:"synonyms"`
-            Banner BrandBannerSerializer  `json:"banner"`
-            VerifiedBy UserSerializer1  `json:"verified_by"`
             Description string  `json:"description"`
-            LocaleLanguage *map[string]interface{}  `json:"_locale_language"`
-            ModifiedOn string  `json:"modified_on"`
-            ModifiedBy UserSerializer1  `json:"modified_by"`
-            CreatedBy UserSerializer1  `json:"created_by"`
-            Warnings *map[string]interface{}  `json:"warnings"`
-            CreatedOn string  `json:"created_on"`
-            CustomJson *map[string]interface{}  `json:"_custom_json"`
-            UID float64  `json:"uid"`
-            Logo string  `json:"logo"`
-            Stage string  `json:"stage"`
             SlugKey string  `json:"slug_key"`
+            Name string  `json:"name"`
+            Banner BrandBannerSerializer  `json:"banner"`
+            LocaleLanguage *map[string]interface{}  `json:"_locale_language"`
+            CreatedBy UserSerializer1  `json:"created_by"`
+            ModifiedBy UserSerializer1  `json:"modified_by"`
+            Warnings *map[string]interface{}  `json:"warnings"`
+            ModifiedOn string  `json:"modified_on"`
+            CreatedOn string  `json:"created_on"`
             VerifiedOn string  `json:"verified_on"`
+            UID float64  `json:"uid"`
+            Synonyms []string  `json:"synonyms"`
+            RejectReason string  `json:"reject_reason"`
+            VerifiedBy UserSerializer1  `json:"verified_by"`
+            Stage string  `json:"stage"`
+            CustomJson *map[string]interface{}  `json:"_custom_json"`
+            Logo string  `json:"logo"`
          
     }
     
@@ -9651,8 +9651,8 @@ package platform
     type CompanyBrandPostRequestSerializer struct {
 
         
-            Company float64  `json:"company"`
             Brands []float64  `json:"brands"`
+            Company float64  `json:"company"`
             UID float64  `json:"uid"`
          
     }
@@ -9661,19 +9661,19 @@ package platform
     type GetCompanySerializer struct {
 
         
-            Name string  `json:"name"`
-            RejectReason string  `json:"reject_reason"`
-            BusinessType string  `json:"business_type"`
-            VerifiedBy UserSerializer  `json:"verified_by"`
-            ModifiedOn string  `json:"modified_on"`
-            Addresses []GetAddressSerializer  `json:"addresses"`
-            ModifiedBy UserSerializer  `json:"modified_by"`
-            CreatedBy UserSerializer  `json:"created_by"`
-            CreatedOn string  `json:"created_on"`
             CompanyType string  `json:"company_type"`
-            UID float64  `json:"uid"`
-            Stage string  `json:"stage"`
+            Name string  `json:"name"`
+            CreatedBy UserSerializer  `json:"created_by"`
+            ModifiedBy UserSerializer  `json:"modified_by"`
+            ModifiedOn string  `json:"modified_on"`
+            BusinessType string  `json:"business_type"`
+            CreatedOn string  `json:"created_on"`
             VerifiedOn string  `json:"verified_on"`
+            UID float64  `json:"uid"`
+            RejectReason string  `json:"reject_reason"`
+            VerifiedBy UserSerializer  `json:"verified_by"`
+            Stage string  `json:"stage"`
+            Addresses []GetAddressSerializer  `json:"addresses"`
          
     }
     
@@ -9681,18 +9681,18 @@ package platform
     type CompanyBrandSerializer struct {
 
         
-            RejectReason string  `json:"reject_reason"`
             Brand GetBrandResponseSerializer  `json:"brand"`
-            VerifiedBy UserSerializer1  `json:"verified_by"`
-            ModifiedOn string  `json:"modified_on"`
-            ModifiedBy UserSerializer1  `json:"modified_by"`
             CreatedBy UserSerializer1  `json:"created_by"`
+            ModifiedBy UserSerializer1  `json:"modified_by"`
+            Company GetCompanySerializer  `json:"company"`
+            ModifiedOn string  `json:"modified_on"`
             Warnings *map[string]interface{}  `json:"warnings"`
             CreatedOn string  `json:"created_on"`
-            UID float64  `json:"uid"`
-            Company GetCompanySerializer  `json:"company"`
-            Stage string  `json:"stage"`
             VerifiedOn string  `json:"verified_on"`
+            UID float64  `json:"uid"`
+            RejectReason string  `json:"reject_reason"`
+            VerifiedBy UserSerializer1  `json:"verified_by"`
+            Stage string  `json:"stage"`
          
     }
     
@@ -9700,18 +9700,8 @@ package platform
     type CompanyBrandListSerializer struct {
 
         
-            Items []CompanyBrandSerializer  `json:"items"`
             Page Page  `json:"page"`
-         
-    }
-    
-    // LocationManagerSerializer used by CompanyProfile
-    type LocationManagerSerializer struct {
-
-        
-            Email string  `json:"email"`
-            Name string  `json:"name"`
-            MobileNo SellerPhoneNumber  `json:"mobile_no"`
+            Items []CompanyBrandSerializer  `json:"items"`
          
     }
     
@@ -9719,9 +9709,9 @@ package platform
     type InvoiceCredSerializer struct {
 
         
-            Password string  `json:"password"`
             Enabled bool  `json:"enabled"`
             Username string  `json:"username"`
+            Password string  `json:"password"`
          
     }
     
@@ -9738,17 +9728,17 @@ package platform
     type GetAddressSerializer1 struct {
 
         
-            Address2 string  `json:"address2"`
-            CountryCode string  `json:"country_code"`
-            Country string  `json:"country"`
-            Longitude float64  `json:"longitude"`
-            Latitude float64  `json:"latitude"`
-            Landmark string  `json:"landmark"`
-            AddressType string  `json:"address_type"`
-            State string  `json:"state"`
-            Pincode float64  `json:"pincode"`
-            Address1 string  `json:"address1"`
             City string  `json:"city"`
+            AddressType string  `json:"address_type"`
+            Address1 string  `json:"address1"`
+            Address2 string  `json:"address2"`
+            Country string  `json:"country"`
+            State string  `json:"state"`
+            Latitude float64  `json:"latitude"`
+            Pincode float64  `json:"pincode"`
+            CountryCode string  `json:"country_code"`
+            Landmark string  `json:"landmark"`
+            Longitude float64  `json:"longitude"`
          
     }
     
@@ -9761,12 +9751,22 @@ package platform
          
     }
     
+    // LocationManagerSerializer used by CompanyProfile
+    type LocationManagerSerializer struct {
+
+        
+            MobileNo SellerPhoneNumber  `json:"mobile_no"`
+            Name string  `json:"name"`
+            Email string  `json:"email"`
+         
+    }
+    
     // LocationTimingSerializer used by CompanyProfile
     type LocationTimingSerializer struct {
 
         
-            Hour float64  `json:"hour"`
             Minute float64  `json:"minute"`
+            Hour float64  `json:"hour"`
          
     }
     
@@ -9774,10 +9774,10 @@ package platform
     type LocationDayWiseSerializer struct {
 
         
-            Open bool  `json:"open"`
-            Opening LocationTimingSerializer  `json:"opening"`
-            Closing LocationTimingSerializer  `json:"closing"`
             Weekday string  `json:"weekday"`
+            Open bool  `json:"open"`
+            Closing LocationTimingSerializer  `json:"closing"`
+            Opening LocationTimingSerializer  `json:"opening"`
          
     }
     
@@ -9785,22 +9785,22 @@ package platform
     type LocationSerializer struct {
 
         
-            Name string  `json:"name"`
-            Manager LocationManagerSerializer  `json:"manager"`
-            DisplayName string  `json:"display_name"`
-            Documents []Document  `json:"documents"`
-            NotificationEmails []string  `json:"notification_emails"`
             GstCredentials InvoiceDetailsSerializer  `json:"gst_credentials"`
-            Warnings *map[string]interface{}  `json:"warnings"`
-            CustomJson *map[string]interface{}  `json:"_custom_json"`
-            Address GetAddressSerializer1  `json:"address"`
-            UID float64  `json:"uid"`
+            Name string  `json:"name"`
             Code string  `json:"code"`
+            Address GetAddressSerializer1  `json:"address"`
+            NotificationEmails []string  `json:"notification_emails"`
             ProductReturnConfig ProductReturnConfigSerializer  `json:"product_return_config"`
+            Manager LocationManagerSerializer  `json:"manager"`
             Company float64  `json:"company"`
+            Documents []Document  `json:"documents"`
+            Warnings *map[string]interface{}  `json:"warnings"`
+            DisplayName string  `json:"display_name"`
+            UID float64  `json:"uid"`
             Timing []LocationDayWiseSerializer  `json:"timing"`
-            Stage string  `json:"stage"`
             StoreType string  `json:"store_type"`
+            Stage string  `json:"stage"`
+            CustomJson *map[string]interface{}  `json:"_custom_json"`
             ContactNumbers []SellerPhoneNumber  `json:"contact_numbers"`
          
     }
@@ -9809,8 +9809,8 @@ package platform
     type LocationIntegrationType struct {
 
         
-            Order string  `json:"order"`
             Inventory string  `json:"inventory"`
+            Order string  `json:"order"`
          
     }
     
@@ -9818,31 +9818,31 @@ package platform
     type GetLocationSerializer struct {
 
         
-            Documents []Document  `json:"documents"`
-            GstCredentials InvoiceDetailsSerializer  `json:"gst_credentials"`
-            ModifiedBy UserSerializer1  `json:"modified_by"`
-            UID float64  `json:"uid"`
-            DisplayName string  `json:"display_name"`
-            CreatedBy UserSerializer1  `json:"created_by"`
-            Code string  `json:"code"`
-            ProductReturnConfig ProductReturnConfigSerializer  `json:"product_return_config"`
             Address GetAddressSerializer  `json:"address"`
+            ModifiedBy UserSerializer1  `json:"modified_by"`
+            Documents []Document  `json:"documents"`
+            DisplayName string  `json:"display_name"`
             VerifiedOn string  `json:"verified_on"`
+            Timing []LocationDayWiseSerializer  `json:"timing"`
+            GstCredentials InvoiceDetailsSerializer  `json:"gst_credentials"`
             Name string  `json:"name"`
-            PhoneNumber string  `json:"phone_number"`
-            Warnings *map[string]interface{}  `json:"warnings"`
-            CustomJson *map[string]interface{}  `json:"_custom_json"`
-            IntegrationType LocationIntegrationType  `json:"integration_type"`
-            Stage string  `json:"stage"`
+            CreatedBy UserSerializer1  `json:"created_by"`
+            Company GetCompanySerializer  `json:"company"`
             Manager LocationManagerSerializer  `json:"manager"`
-            VerifiedBy UserSerializer1  `json:"verified_by"`
+            ContactNumbers []SellerPhoneNumber  `json:"contact_numbers"`
+            Stage string  `json:"stage"`
+            Code string  `json:"code"`
+            Warnings *map[string]interface{}  `json:"warnings"`
             ModifiedOn string  `json:"modified_on"`
             CreatedOn string  `json:"created_on"`
-            Company GetCompanySerializer  `json:"company"`
-            Timing []LocationDayWiseSerializer  `json:"timing"`
-            NotificationEmails []string  `json:"notification_emails"`
             StoreType string  `json:"store_type"`
-            ContactNumbers []SellerPhoneNumber  `json:"contact_numbers"`
+            VerifiedBy UserSerializer1  `json:"verified_by"`
+            ProductReturnConfig ProductReturnConfigSerializer  `json:"product_return_config"`
+            PhoneNumber string  `json:"phone_number"`
+            NotificationEmails []string  `json:"notification_emails"`
+            UID float64  `json:"uid"`
+            IntegrationType LocationIntegrationType  `json:"integration_type"`
+            CustomJson *map[string]interface{}  `json:"_custom_json"`
          
     }
     
@@ -9850,8 +9850,8 @@ package platform
     type LocationListSerializer struct {
 
         
-            Items []GetLocationSerializer  `json:"items"`
             Page Page  `json:"page"`
+            Items []GetLocationSerializer  `json:"items"`
          
     }
     
