@@ -49,8 +49,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [unfollowById](#unfollowbyid)
     * [followById](#followbyid)
+    * [unfollowById](#unfollowbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -1545,12 +1545,12 @@ Schema: `ErrorResponse`
 ---
 
 
-#### unfollowById
-UnFollow a Product
+#### followById
+Follow a particular Product
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1559,12 +1559,12 @@ UnFollow a Product
 | CollectionType | string | Type of collection followed. i. e. products, brands, collections | 
 
 
-| CollectionID | string | the `id` of the collection type you want to unfollow | 
+| CollectionID | string | the `id` of the collection type you want to follow | 
 
 
 
 
-You can undo a followed Product or Brand by its id, we refer this action as _unfollow_. Pass the uid of the product in request URL
+Follow a particular Product specified by its uid. Pass the uid of the product in request URL
 
 *Success Response:*
 
@@ -1598,12 +1598,12 @@ Schema: `ErrorResponse`
 ---
 
 
-#### followById
-Follow a particular Product
+#### unfollowById
+UnFollow a Product
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1612,12 +1612,12 @@ Follow a particular Product
 | CollectionType | string | Type of collection followed. i. e. products, brands, collections | 
 
 
-| CollectionID | string | the `id` of the collection type you want to follow | 
+| CollectionID | string | the `id` of the collection type you want to unfollow | 
 
 
 
 
-Follow a particular Product specified by its uid. Pass the uid of the product in request URL
+You can undo a followed Product or Brand by its id, we refer this action as _unfollow_. Pass the uid of the product in request URL
 
 *Success Response:*
 
