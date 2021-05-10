@@ -8700,7 +8700,7 @@ Get Blog by slug
 
 ```golang
 
- data, err :=  Content.GetBlog(Slug);
+ data, err :=  Content.GetBlog(Slug, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -8708,6 +8708,9 @@ Get Blog by slug
 
 | Slug | string | The `slug` of a blog. Use this parameter to retrieve a particular blog | 
 
+
+
+| xQuery | struct | Includes properties such as `RootID`
 
 
 
@@ -9598,7 +9601,7 @@ Get Page by slug
 
 ```golang
 
- data, err :=  Content.GetPage(Slug);
+ data, err :=  Content.GetPage(Slug, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -9606,6 +9609,9 @@ Get Page by slug
 
 | Slug | string | The `slug` of a page. Use this parameter to retrieve a particular page | 
 
+
+
+| xQuery | struct | Includes properties such as `RootID`
 
 
 

@@ -5280,8 +5280,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //ContentGetBlogXQuery holds query params
+    type ContentGetBlogXQuery struct { 
+        RootID string  `url:"root_id,omitempty"`  
+    }
+    
     // GetBlog Get Blog by slug
-    func (co *Content)  GetBlog(Slug string) (CustomBlogSchema, error){
+    func (co *Content)  GetBlog(Slug string, xQuery ContentGetBlogXQuery) (CustomBlogSchema, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -5300,7 +5305,7 @@ func NewAppClient(config *AppConfig) *Client {
             "get",
             fmt.Sprintf("/service/application/content/v1.0/blogs/%s",Slug),
             nil,
-            nil,
+            xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -5786,8 +5791,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //ContentGetPageXQuery holds query params
+    type ContentGetPageXQuery struct { 
+        RootID string  `url:"root_id,omitempty"`  
+    }
+    
     // GetPage Get Page by slug
-    func (co *Content)  GetPage(Slug string) (CustomPageSchema, error){
+    func (co *Content)  GetPage(Slug string, xQuery ContentGetPageXQuery) (CustomPageSchema, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -5806,7 +5816,7 @@ func NewAppClient(config *AppConfig) *Client {
             "get",
             fmt.Sprintf("/service/application/content/v1.0/pages/%s",Slug),
             nil,
-            nil,
+            xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
