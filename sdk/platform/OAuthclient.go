@@ -57,6 +57,7 @@ type RawToken struct {
 
 //OAuthClient holds OAuth Client details
 type OAuthClient struct {
+	RawToken       RawToken
 	Config         *PlatformConfig
 	Token          string
 	RefreshToken   string
@@ -85,6 +86,7 @@ func (o *OAuthClient) GetAccessToken() string {
 
 //SetAccessToken sets access and refresh token
 func (o *OAuthClient) SetAccessToken(rawtoken RawToken) {
+	o.RawToken = rawtoken
 	o.TokenExpiresIn = rawtoken.ExpiresIn
 	o.Token = rawtoken.AccessToken
 	if rawtoken.RefreshToken != "" {

@@ -139,7 +139,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CatalogGetProductSizesBySlugXQuery holds query params
     type CatalogGetProductSizesBySlugXQuery struct { 
-        StoreID string  `url:"store_id,omitempty"`  
+        StoreID float64  `url:"store_id,omitempty"`  
     }
     
     // GetProductSizesBySlug Get the sizes of a product
@@ -188,7 +188,7 @@ func NewAppClient(config *AppConfig) *Client {
         StoreID string  `url:"store_id,omitempty"`  
     }
     
-    // GetProductPriceBySlug Get price a product size
+    // GetProductPriceBySlug Get the price of a product size at a PIN Code
     func (ca *Catalog)  GetProductPriceBySlug(Slug string, Size string, Pincode string, xQuery CatalogGetProductPriceBySlugXQuery) (ProductSizePriceResponse, error){
         var (
             rawRequest  *RawRequest
@@ -235,7 +235,7 @@ func NewAppClient(config *AppConfig) *Client {
         PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // GetProductSellersBySlug List sellers of a product
+    // GetProductSellersBySlug Get the sellers of a product size at a PIN Code
     func (ca *Catalog)  GetProductSellersBySlug(Slug string, Size string, Pincode string, xQuery CatalogGetProductSellersBySlugXQuery) (ProductSizeSellersResponse, error){
         var (
             rawRequest  *RawRequest
@@ -314,7 +314,7 @@ func NewAppClient(config *AppConfig) *Client {
                     
                 
             
-            // GetProductSellersBySlugPaginator List sellers of a product  
+            // GetProductSellersBySlugPaginator Get the sellers of a product size at a PIN Code  
             func (ca *Catalog)  GetProductSellersBySlugPaginator(Slug string  , Size string  , Pincode string  ,  xQuery CatalogGetProductSellersBySlugXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
                  
@@ -717,7 +717,7 @@ func NewAppClient(config *AppConfig) *Client {
         PageType string  `url:"page_type,omitempty"`  
     }
     
-    // GetProducts List the products
+    // GetProducts Get all the products
     func (ca *Catalog)  GetProducts(xQuery CatalogGetProductsXQuery) (ProductListingResponse, error){
         var (
             rawRequest  *RawRequest
@@ -812,7 +812,7 @@ func NewAppClient(config *AppConfig) *Client {
                     
                 
             
-            // GetProductsPaginator List the products  
+            // GetProductsPaginator Get all the products  
             func (ca *Catalog)  GetProductsPaginator( xQuery CatalogGetProductsXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("cursor")
                  
@@ -871,7 +871,7 @@ func NewAppClient(config *AppConfig) *Client {
         PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // GetBrands List all the brands
+    // GetBrands Get all the brands
     func (ca *Catalog)  GetBrands(xQuery CatalogGetBrandsXQuery) (BrandListingResponse, error){
         var (
             rawRequest  *RawRequest
@@ -933,7 +933,7 @@ func NewAppClient(config *AppConfig) *Client {
                     
                 
             
-            // GetBrandsPaginator List all the brands  
+            // GetBrandsPaginator Get all the brands  
             func (ca *Catalog)  GetBrandsPaginator( xQuery CatalogGetBrandsXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
                  
@@ -1647,7 +1647,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UnfollowById UnFollow a Product
+    // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
             rawRequest  *RawRequest
@@ -1688,7 +1688,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow a particular Product
+    // FollowById Follow an entity (product/brand/collection)
     func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
             rawRequest  *RawRequest
@@ -1775,7 +1775,7 @@ func NewAppClient(config *AppConfig) *Client {
         CollectionType string  `url:"collection_type,omitempty"`  
     }
     
-    // GetFollowIds Get the Ids of followed product, brand and collection.
+    // GetFollowIds Get the IDs of followed products, brands and collections.
     func (ca *Catalog)  GetFollowIds(xQuery CatalogGetFollowIdsXQuery) (FollowIdsResponse, error){
         var (
             rawRequest  *RawRequest
@@ -1826,7 +1826,7 @@ func NewAppClient(config *AppConfig) *Client {
         Longitude float64  `url:"longitude,omitempty"`  
     }
     
-    // GetStores List store meta information.
+    // GetStores Get store meta information.
     func (ca *Catalog)  GetStores(xQuery CatalogGetStoresXQuery) (StoreListingResponse, error){
         var (
             rawRequest  *RawRequest
@@ -1909,7 +1909,7 @@ func NewAppClient(config *AppConfig) *Client {
                     
                 
             
-            // GetStoresPaginator List store meta information.  
+            // GetStoresPaginator Get store meta information.  
             func (ca *Catalog)  GetStoresPaginator( xQuery CatalogGetStoresXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
                  
