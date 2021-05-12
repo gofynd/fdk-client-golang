@@ -3466,7 +3466,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetAppliedTheme Get applied theme for an application
+    // GetAppliedTheme Get the theme currently applied to an application
     func (th *Theme)  GetAppliedTheme() (ThemesSchema, error){
         var (
             rawRequest  *RawRequest
@@ -3507,7 +3507,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetThemeForPreview Get theme for preview
+    // GetThemeForPreview Get a theme for a preview
     func (th *Theme)  GetThemeForPreview(ThemeID string) (ThemesSchema, error){
         var (
             rawRequest  *RawRequest
@@ -3558,7 +3558,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // LoginWithFacebook Login/Register with Facebook
+    // LoginWithFacebook Login or Register using Facebook
     func (us *User)  LoginWithFacebook(body  OAuthRequestSchema) (AuthSuccess, error){
         var (
             rawRequest  *RawRequest
@@ -3610,7 +3610,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // LoginWithGoogle Login/Register with Google
+    // LoginWithGoogle Login or Register using Google
     func (us *User)  LoginWithGoogle(body  OAuthRequestSchema) (AuthSuccess, error){
         var (
             rawRequest  *RawRequest
@@ -3662,7 +3662,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // LoginWithGoogleAndroid Login/Register with Google for android
+    // LoginWithGoogleAndroid Login or Register using Google on Android
     func (us *User)  LoginWithGoogleAndroid(body  OAuthRequestSchema) (AuthSuccess, error){
         var (
             rawRequest  *RawRequest
@@ -3714,7 +3714,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // LoginWithGoogleIOS Login/Register with Google for ios
+    // LoginWithGoogleIOS Login or Register using Google on iOS
     func (us *User)  LoginWithGoogleIOS(body  OAuthRequestSchema) (AuthSuccess, error){
         var (
             rawRequest  *RawRequest
@@ -3771,7 +3771,7 @@ func NewAppClient(config *AppConfig) *Client {
         Platform string  `url:"platform,omitempty"`  
     }
     
-    // LoginWithOTP Login/Register with OTP
+    // LoginWithOTP Login or Register with OTP
     func (us *User)  LoginWithOTP(xQuery UserLoginWithOTPXQuery, body  SendOtpRequestSchema) (SendOtpResponse, error){
         var (
             rawRequest  *RawRequest
@@ -3823,7 +3823,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // LoginWithEmailAndPassword Login/Register with password
+    // LoginWithEmailAndPassword Login or Register with password
     func (us *User)  LoginWithEmailAndPassword(body  PasswordLoginRequestSchema) (LoginSuccess, error){
         var (
             rawRequest  *RawRequest
@@ -3932,7 +3932,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // ForgotPassword 
+    // ForgotPassword Forgot Password
     func (us *User)  ForgotPassword(body  ForgotPasswordRequestSchema) (LoginSuccess, error){
         var (
             rawRequest  *RawRequest
@@ -3984,7 +3984,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // SendResetToken 
+    // SendResetToken Reset Password using token
     func (us *User)  SendResetToken(body  CodeRequestBodySchema) (ResetPasswordSuccess, error){
         var (
             rawRequest  *RawRequest
@@ -4036,7 +4036,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // LoginWithToken Login/Register with token
+    // LoginWithToken Login or Register with token
     func (us *User)  LoginWithToken(body  TokenRequestBodySchema) (LoginSuccess, error){
         var (
             rawRequest  *RawRequest
@@ -4093,7 +4093,7 @@ func NewAppClient(config *AppConfig) *Client {
         Platform string  `url:"platform,omitempty"`  
     }
     
-    // RegisterWithForm Registration Form
+    // RegisterWithForm Registration using a form
     func (us *User)  RegisterWithForm(xQuery UserRegisterWithFormXQuery, body  FormRegisterRequestSchema) (RegisterFormSuccess, error){
         var (
             rawRequest  *RawRequest
@@ -4249,7 +4249,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // HasPassword Check if user has password
+    // HasPassword Check password
     func (us *User)  HasPassword() (HasPasswordSuccess, error){
         var (
             rawRequest  *RawRequest
@@ -4342,7 +4342,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // Logout Logout user
+    // Logout Logs out currently logged in user
     func (us *User)  Logout() (LogoutSuccess, error){
         var (
             rawRequest  *RawRequest
@@ -4698,7 +4698,7 @@ func NewAppClient(config *AppConfig) *Client {
         Name string  `url:"name,omitempty"`  
     }
     
-    // GetPlatformConfig Get platform config
+    // GetPlatformConfig Get platform configurations
     func (us *User)  GetPlatformConfig(xQuery UserGetPlatformConfigXQuery) (PlatformSchema, error){
         var (
             rawRequest  *RawRequest
@@ -4745,13 +4745,13 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // UpdateProfile Edit Profile Details
-    func (us *User)  UpdateProfile(xQuery UserUpdateProfileXQuery, body  EditProfileRequestSchema) (LoginSuccess, error){
+    func (us *User)  UpdateProfile(xQuery UserUpdateProfileXQuery, body  EditProfileRequestSchema) (ProfileEditSuccess, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            updateProfileResponse LoginSuccess
+            updateProfileResponse ProfileEditSuccess
             
 	    )
 
@@ -4762,11 +4762,11 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return LoginSuccess{}, common.NewFDKError(err.Error())
+           return ProfileEditSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return LoginSuccess{}, common.NewFDKError(err.Error())
+             return ProfileEditSuccess{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -4780,13 +4780,13 @@ func NewAppClient(config *AppConfig) *Client {
         response, err = rawRequest.Execute()
         if err != nil {
 	 	   
-             return LoginSuccess{}, err
+             return ProfileEditSuccess{}, err
             
 	    }
         err = json.Unmarshal(response, &updateProfileResponse)
         if err != nil {
            
-             return LoginSuccess{}, common.NewFDKError(err.Error())
+             return ProfileEditSuccess{}, common.NewFDKError(err.Error())
             
         }
         return updateProfileResponse, nil
@@ -8717,7 +8717,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetPointsOnProduct Get reward points that could be earned on any catalogue product.
+    // GetPointsOnProduct Get the eligibility of reward points on a product
     func (re *Rewards)  GetPointsOnProduct(body  CatalogueOrderRequest) (CatalogueOrderResponse, error){
         var (
             rawRequest  *RawRequest
@@ -8769,7 +8769,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetOfferByName Get offer by name.
+    // GetOfferByName Get offer by name
     func (re *Rewards)  GetOfferByName(Name string) (Offer, error){
         var (
             rawRequest  *RawRequest
@@ -8810,7 +8810,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetOrderDiscount Calculates the discount on order-amount based on amount ranges configured in order_discount reward.
+    // GetOrderDiscount Calculates the discount on order-amount
     func (re *Rewards)  GetOrderDiscount(body  OrderDiscountRequest) (OrderDiscountResponse, error){
         var (
             rawRequest  *RawRequest
@@ -8862,7 +8862,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetUserPoints Total available points of a user for current application
+    // GetUserPoints Get reward points available with a user
     func (re *Rewards)  GetUserPoints() (PointsResponse, error){
         var (
             rawRequest  *RawRequest
@@ -8880,7 +8880,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             re.config,
             "get",
-            "/service/application/rewards/v1.0/user/points",
+            "/service/application/rewards/v1.0/user/points/",
             nil,
             nil,
             nil)
@@ -8909,7 +8909,7 @@ func NewAppClient(config *AppConfig) *Client {
         PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // GetUserPointsHistory Get list of points transactions.
+    // GetUserPointsHistory Get all transactions of reward points
     func (re *Rewards)  GetUserPointsHistory(xQuery RewardsGetUserPointsHistoryXQuery) (PointsHistoryResponse, error){
         var (
             rawRequest  *RawRequest
@@ -8966,7 +8966,7 @@ func NewAppClient(config *AppConfig) *Client {
                     
                 
             
-            // GetUserPointsHistoryPaginator Get list of points transactions.  
+            // GetUserPointsHistoryPaginator Get all transactions of reward points  
             func (re *Rewards)  GetUserPointsHistoryPaginator( xQuery RewardsGetUserPointsHistoryXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("cursor")
                  
@@ -8994,7 +8994,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetUserReferralDetails User's referral details.
+    // GetUserReferralDetails Get referral details of a user
     func (re *Rewards)  GetUserReferralDetails() (ReferralDetailsResponse, error){
         var (
             rawRequest  *RawRequest
@@ -9035,7 +9035,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // RedeemReferralCode Redeems referral code and credits points to users points account.
+    // RedeemReferralCode Redeems a referral code and credits reward points to users
     func (re *Rewards)  RedeemReferralCode(body  RedeemReferralCodeRequest) (RedeemReferralCodeResponse, error){
         var (
             rawRequest  *RawRequest
