@@ -5335,51 +5335,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    // CbsOnboardGet Get company profile
-     func (co *PlatformCompanyProfile)  CbsOnboardGet(
-         ) (GetCompanyProfileSerializerResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            cbsOnboardGetResponse GetCompanyProfileSerializerResponse
-            
-	    )
-     
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            co.Config,
-            "get",
-            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s",co.CompanyID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return GetCompanyProfileSerializerResponse{}, err
-            
-	    }
-        err = json.Unmarshal(response, &cbsOnboardGetResponse)
-        if err != nil {
-           
-             return GetCompanyProfileSerializerResponse{}, common.NewFDKError(err.Error())
-            
-        }
-        return cbsOnboardGetResponse, nil
-    }
-         
-        
-       
-    
-    
-  
-    
-    
     // UpdateCompany Edit company profile
      func (co *PlatformCompanyProfile)  UpdateCompany(
          body  CompanyStoreSerializerRequest) (SuccessResponse, error){
@@ -5427,6 +5382,51 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             
         }
         return updateCompanyResponse, nil
+    }
+         
+        
+       
+    
+    
+  
+    
+    
+    // CbsOnboardGet Get company profile
+     func (co *PlatformCompanyProfile)  CbsOnboardGet(
+         ) (GetCompanyProfileSerializerResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            cbsOnboardGetResponse GetCompanyProfileSerializerResponse
+            
+	    )
+     
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.Config,
+            "get",
+            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s",co.CompanyID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return GetCompanyProfileSerializerResponse{}, err
+            
+	    }
+        err = json.Unmarshal(response, &cbsOnboardGetResponse)
+        if err != nil {
+           
+             return GetCompanyProfileSerializerResponse{}, common.NewFDKError(err.Error())
+            
+        }
+        return cbsOnboardGetResponse, nil
     }
          
         
@@ -5638,62 +5638,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    // CreateCompanyBrandMapping Create a company brand mapping.
-     func (co *PlatformCompanyProfile)  CreateCompanyBrandMapping(
-         body  CompanyBrandPostRequestSerializer) (SuccessResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            createCompanyBrandMappingResponse SuccessResponse
-            
-	    )
-     
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-           return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            co.Config,
-            "post",
-            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/company-brand",co.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return SuccessResponse{}, err
-            
-	    }
-        err = json.Unmarshal(response, &createCompanyBrandMappingResponse)
-        if err != nil {
-           
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-            
-        }
-        return createCompanyBrandMappingResponse, nil
-    }
-         
-        
-       
-    
-    
-  
-    
-    
     //PlatformGetBrandsXQuery holds query params
     type PlatformGetBrandsXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
@@ -5793,15 +5737,15 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    // CreateLocation Create a location asscoiated to a company.
-     func (co *PlatformCompanyProfile)  CreateLocation(
-         body  LocationSerializer) (SuccessResponse, error){
+    // CreateCompanyBrandMapping Create a company brand mapping.
+     func (co *PlatformCompanyProfile)  CreateCompanyBrandMapping(
+         body  CompanyBrandPostRequestSerializer) (SuccessResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            createLocationResponse SuccessResponse
+            createCompanyBrandMappingResponse SuccessResponse
             
 	    )
      
@@ -5823,7 +5767,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         rawRequest = NewRequest(
             co.Config,
             "post",
-            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/location",co.CompanyID),
+            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/company-brand",co.CompanyID),
             nil,
             nil,
             reqBody)
@@ -5833,13 +5777,13 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return SuccessResponse{}, err
             
 	    }
-        err = json.Unmarshal(response, &createLocationResponse)
+        err = json.Unmarshal(response, &createCompanyBrandMappingResponse)
         if err != nil {
            
              return SuccessResponse{}, common.NewFDKError(err.Error())
             
         }
-        return createLocationResponse, nil
+        return createCompanyBrandMappingResponse, nil
     }
          
         
@@ -5974,6 +5918,62 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
                 }
                 return paginator
             }
+        
+       
+    
+    
+  
+    
+    
+    // CreateLocation Create a location asscoiated to a company.
+     func (co *PlatformCompanyProfile)  CreateLocation(
+         body  LocationSerializer) (SuccessResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            createLocationResponse SuccessResponse
+            
+	    )
+     
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+           return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            co.Config,
+            "post",
+            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/location",co.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return SuccessResponse{}, err
+            
+	    }
+        err = json.Unmarshal(response, &createLocationResponse)
+        if err != nil {
+           
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+            
+        }
+        return createLocationResponse, nil
+    }
+         
         
        
     
