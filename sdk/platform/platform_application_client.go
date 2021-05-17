@@ -6640,7 +6640,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     type PlatformAppGetCampaignsXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
-        Sort *map[string]interface{}  `url:"sort,omitempty"`  
+        Sort map[string]interface{}  `url:"sort,omitempty"`  
     }
     
     // GetCampaigns Get campaigns
@@ -6939,7 +6939,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     type PlatformAppGetAudiencesXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
-        Sort *map[string]interface{}  `url:"sort,omitempty"`  
+        Sort map[string]interface{}  `url:"sort,omitempty"`  
     }
     
     // GetAudiences Get audiences
@@ -7302,7 +7302,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     type PlatformAppGetEmailProvidersXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
-        Sort *map[string]interface{}  `url:"sort,omitempty"`  
+        Sort map[string]interface{}  `url:"sort,omitempty"`  
     }
     
     // GetEmailProviders Get email providers
@@ -7559,7 +7559,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     type PlatformAppGetEmailTemplatesXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
-        Sort *map[string]interface{}  `url:"sort,omitempty"`  
+        Sort map[string]interface{}  `url:"sort,omitempty"`  
     }
     
     // GetEmailTemplates Get email templates
@@ -7721,7 +7721,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     type PlatformAppGetSystemEmailTemplatesXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
-        Sort *map[string]interface{}  `url:"sort,omitempty"`  
+        Sort map[string]interface{}  `url:"sort,omitempty"`  
     }
     
     // GetSystemEmailTemplates Get system email templates
@@ -8076,7 +8076,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     type PlatformAppGetJobsXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
-        Sort *map[string]interface{}  `url:"sort,omitempty"`  
+        Sort map[string]interface{}  `url:"sort,omitempty"`  
     }
     
     // GetJobs Get jobs
@@ -8238,7 +8238,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     type PlatformAppGetJobLogsXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
-        Sort *map[string]interface{}  `url:"sort,omitempty"`  
+        Sort map[string]interface{}  `url:"sort,omitempty"`  
     }
     
     // GetJobLogs Get job logs
@@ -8347,8 +8347,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     type PlatformAppGetCommunicationLogsXQuery struct { 
         PageID string  `url:"page_id,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
-        Sort *map[string]interface{}  `url:"sort,omitempty"` 
-        Query *map[string]interface{}  `url:"query,omitempty"`  
+        Sort map[string]interface{}  `url:"sort,omitempty"` 
+        Query map[string]interface{}  `url:"query,omitempty"`  
     }
     
     // GetCommunicationLogs Get communication logs
@@ -8469,7 +8469,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     type PlatformAppGetSmsProvidersXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
-        Sort *map[string]interface{}  `url:"sort,omitempty"`  
+        Sort map[string]interface{}  `url:"sort,omitempty"`  
     }
     
     // GetSmsProviders Get sms providers
@@ -8726,7 +8726,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     type PlatformAppGetSmsTemplatesXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
-        Sort *map[string]interface{}  `url:"sort,omitempty"`  
+        Sort map[string]interface{}  `url:"sort,omitempty"`  
     }
     
     // GetSmsTemplates Get sms templates
@@ -9025,7 +9025,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     type PlatformAppGetSystemSystemTemplatesXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
-        Sort *map[string]interface{}  `url:"sort,omitempty"`  
+        Sort map[string]interface{}  `url:"sort,omitempty"`  
     }
     
     // GetSystemSystemTemplates Get system sms templates
@@ -9574,14 +9574,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
   
     
-    // GetSearchKeywords Get a Search Keywords Details
-     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error){
+    // DeleteSearchKeywords Delete a Search Keywords
+     func (ca *PlatformAppCatalog)  DeleteSearchKeywords(ID string) (DeleteResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            getSearchKeywordsResponse GetSearchWordsDetailResponse
+            deleteSearchKeywordsResponse DeleteResponse
             
 	    )
         
@@ -9591,7 +9591,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         //API call
         rawRequest = NewRequest(
             ca.config,
-            "get",
+            "delete",
             fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
             nil,
             nil,
@@ -9599,16 +9599,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         response, err = rawRequest.Execute()
         if err != nil {
 	 	   
-             return GetSearchWordsDetailResponse{}, err
+             return DeleteResponse{}, err
             
 	    }
-        err = json.Unmarshal(response, &getSearchKeywordsResponse)
+        err = json.Unmarshal(response, &deleteSearchKeywordsResponse)
         if err != nil {
            
-             return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
+             return DeleteResponse{}, common.NewFDKError(err.Error())
             
         }
-        return getSearchKeywordsResponse, nil
+        return deleteSearchKeywordsResponse, nil
     }
            
        
@@ -9669,14 +9669,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
   
     
-    // DeleteSearchKeywords Delete a Search Keywords
-     func (ca *PlatformAppCatalog)  DeleteSearchKeywords(ID string) (DeleteResponse, error){
+    // GetSearchKeywords Get a Search Keywords Details
+     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            deleteSearchKeywordsResponse DeleteResponse
+            getSearchKeywordsResponse GetSearchWordsDetailResponse
             
 	    )
         
@@ -9686,7 +9686,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         //API call
         rawRequest = NewRequest(
             ca.config,
-            "delete",
+            "get",
             fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
             nil,
             nil,
@@ -9694,16 +9694,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         response, err = rawRequest.Execute()
         if err != nil {
 	 	   
-             return DeleteResponse{}, err
+             return GetSearchWordsDetailResponse{}, err
             
 	    }
-        err = json.Unmarshal(response, &deleteSearchKeywordsResponse)
+        err = json.Unmarshal(response, &getSearchKeywordsResponse)
         if err != nil {
            
-             return DeleteResponse{}, common.NewFDKError(err.Error())
+             return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
             
         }
-        return deleteSearchKeywordsResponse, nil
+        return getSearchKeywordsResponse, nil
     }
            
        
@@ -9806,14 +9806,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
   
     
-    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
-     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error){
+    // DeleteAutocompleteKeyword Delete a Autocomplete Keywords
+     func (ca *PlatformAppCatalog)  DeleteAutocompleteKeyword(ID string) (DeleteResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
+            deleteAutocompleteKeywordResponse DeleteResponse
             
 	    )
         
@@ -9823,7 +9823,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         //API call
         rawRequest = NewRequest(
             ca.config,
-            "get",
+            "delete",
             fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
             nil,
             nil,
@@ -9831,16 +9831,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         response, err = rawRequest.Execute()
         if err != nil {
 	 	   
-             return GetAutocompleteWordsResponse{}, err
+             return DeleteResponse{}, err
             
 	    }
-        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
+        err = json.Unmarshal(response, &deleteAutocompleteKeywordResponse)
         if err != nil {
            
-             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
+             return DeleteResponse{}, common.NewFDKError(err.Error())
             
         }
-        return getAutocompleteKeywordDetailResponse, nil
+        return deleteAutocompleteKeywordResponse, nil
     }
            
        
@@ -9901,14 +9901,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
   
     
-    // DeleteAutocompleteKeyword Delete a Autocomplete Keywords
-     func (ca *PlatformAppCatalog)  DeleteAutocompleteKeyword(ID string) (DeleteResponse, error){
+    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
+     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            deleteAutocompleteKeywordResponse DeleteResponse
+            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
             
 	    )
         
@@ -9918,7 +9918,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         //API call
         rawRequest = NewRequest(
             ca.config,
-            "delete",
+            "get",
             fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
             nil,
             nil,
@@ -9926,16 +9926,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         response, err = rawRequest.Execute()
         if err != nil {
 	 	   
-             return DeleteResponse{}, err
+             return GetAutocompleteWordsResponse{}, err
             
 	    }
-        err = json.Unmarshal(response, &deleteAutocompleteKeywordResponse)
+        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
         if err != nil {
            
-             return DeleteResponse{}, common.NewFDKError(err.Error())
+             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
             
         }
-        return deleteAutocompleteKeywordResponse, nil
+        return getAutocompleteKeywordDetailResponse, nil
     }
            
        
@@ -10465,48 +10465,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
   
     
-    // UpdateCollection Update a collection
-     func (ca *PlatformAppCatalog)  UpdateCollection(ID string) (CollectionCreateResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            updateCollectionResponse CollectionCreateResponse
-            
-	    )
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "put",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/collections/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return CollectionCreateResponse{}, err
-            
-	    }
-        err = json.Unmarshal(response, &updateCollectionResponse)
-        if err != nil {
-           
-             return CollectionCreateResponse{}, common.NewFDKError(err.Error())
-            
-        }
-        return updateCollectionResponse, nil
-    }
-           
-       
-    
-    
-  
-    
     // DeleteCollection Delete a Collection
      func (ca *PlatformAppCatalog)  DeleteCollection(ID string) (DeleteResponse, error){
         var (
@@ -10542,6 +10500,48 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             
         }
         return deleteCollectionResponse, nil
+    }
+           
+       
+    
+    
+  
+    
+    // UpdateCollection Update a collection
+     func (ca *PlatformAppCatalog)  UpdateCollection(ID string) (CollectionCreateResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            updateCollectionResponse CollectionCreateResponse
+            
+	    )
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "put",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/collections/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return CollectionCreateResponse{}, err
+            
+	    }
+        err = json.Unmarshal(response, &updateCollectionResponse)
+        if err != nil {
+           
+             return CollectionCreateResponse{}, common.NewFDKError(err.Error())
+            
+        }
+        return updateCollectionResponse, nil
     }
            
        

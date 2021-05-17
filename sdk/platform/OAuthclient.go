@@ -49,10 +49,11 @@ func (f *FdkOAuthCodeError) Error() string {
 
 //RawToken holds raw token details
 type RawToken struct {
-	ExpiresIn    int    `json:"expires_in"`
-	AccessToken  string `json:"access_token"`
-	RefreshToken string `json:"refresh_token"`
-	TokenType    string `json:"token_type"`
+	ExpiresIn    int                    `json:"expires_in"`
+	AccessToken  string                 `json:"access_token"`
+	RefreshToken string                 `json:"refresh_token"`
+	TokenType    string                 `json:"token_type"`
+	CurrentUser  map[string]interface{} `json:"current_user"`
 }
 
 //OAuthClient holds OAuth Client details
@@ -171,7 +172,9 @@ type Query struct {
 
 //VerifyCallback performs API call to get access and refresh token
 func (o *OAuthClient) VerifyCallback(query Query) error {
-
+	if query.Code == "" {
+		return NewFdkOAuthCodeError("Invalid authorization code")
+	}
 	token := utils.EncodeToBase64(fmt.Sprintf("%s:%s", o.Config.APIKey, o.Config.APISecret))
 	apiURL := fmt.Sprintf("/service/panel/authentication/v1.0/company/%s/oauth/token", o.Config.CompanyID)
 
@@ -199,7 +202,7 @@ func (o *OAuthClient) VerifyCallback(query Query) error {
 	if err != nil {
 		return NewFdkTokenIssueError(err.Error())
 	}
-	rawToken := RawToken{}
+	rawToken := RawToken{CurrentUser: make(map[string]interface{})}
 	err = json.Unmarshal(byteResponse, &rawToken)
 	if err != nil {
 		return NewFdkTokenIssueError(err.Error())
@@ -237,7 +240,7 @@ func (o *OAuthClient) renewAccessToken() error {
 	if err != nil {
 		return NewFdkTokenIssueError(err.Error())
 	}
-	rawToken := RawToken{}
+	rawToken := RawToken{CurrentUser: make(map[string]interface{})}
 	err = json.Unmarshal(byteResponse, &rawToken)
 	if err != nil {
 		return NewFdkTokenIssueError(err.Error())

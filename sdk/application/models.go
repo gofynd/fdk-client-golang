@@ -8,8 +8,8 @@ package application
 
         
             Type string  `json:"type"`
-            Query *map[string]interface{}  `json:"query"`
-            Params *map[string]interface{}  `json:"params"`
+            Query map[string]interface{}  `json:"query"`
+            Params map[string]interface{}  `json:"params"`
          
     }
     
@@ -65,7 +65,7 @@ package application
     type ProductDetail struct {
 
         
-            Attributes *map[string]interface{}  `json:"attributes"`
+            Attributes map[string]interface{}  `json:"attributes"`
             ImageNature string  `json:"image_nature"`
             Categories []ProductBrand  `json:"categories"`
             ProductOnlineDate string  `json:"product_online_date"`
@@ -280,7 +280,7 @@ package application
             Seller Seller  `json:"seller"`
             Discount string  `json:"discount"`
             ArticleAssignment ArticleAssignment  `json:"article_assignment"`
-            StrategyWiseListing []*map[string]interface{}  `json:"strategy_wise_listing"`
+            StrategyWiseListing []map[string]interface{}  `json:"strategy_wise_listing"`
             ArticleID string  `json:"article_id"`
             Price ProductStockPrice  `json:"price"`
             Store Store  `json:"store"`
@@ -426,7 +426,7 @@ package application
             ItemID float64  `json:"item_id"`
             Seller Seller  `json:"seller"`
             Size string  `json:"size"`
-            Identifier *map[string]interface{}  `json:"identifier"`
+            Identifier map[string]interface{}  `json:"identifier"`
             Price ProductStockPrice  `json:"price"`
             Store StoreDetail  `json:"store"`
             UID string  `json:"uid"`
@@ -454,7 +454,7 @@ package application
     type ProductListingDetail struct {
 
         
-            Attributes *map[string]interface{}  `json:"attributes"`
+            Attributes map[string]interface{}  `json:"attributes"`
             ImageNature string  `json:"image_nature"`
             Discount string  `json:"discount"`
             Categories []ProductBrand  `json:"categories"`
@@ -601,10 +601,10 @@ package application
 
         
             Name string  `json:"name"`
-            CustomJson *map[string]interface{}  `json:"_custom_json"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
             Banners ImageUrls  `json:"banners"`
             Action ProductListingAction  `json:"action"`
-            Childs []*map[string]interface{}  `json:"childs"`
+            Childs []map[string]interface{}  `json:"childs"`
             Slug string  `json:"slug"`
             UID float64  `json:"uid"`
          
@@ -615,7 +615,7 @@ package application
 
         
             Name string  `json:"name"`
-            CustomJson *map[string]interface{}  `json:"_custom_json"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
             Banners ImageUrls  `json:"banners"`
             Action ProductListingAction  `json:"action"`
             Childs []ThirdLevelChild  `json:"childs"`
@@ -629,7 +629,7 @@ package application
 
         
             Name string  `json:"name"`
-            CustomJson *map[string]interface{}  `json:"_custom_json"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
             Banners ImageUrls  `json:"banners"`
             Action ProductListingAction  `json:"action"`
             Childs []SecondLevelChild  `json:"childs"`
@@ -762,16 +762,16 @@ package application
     type GetCollectionDetailNest struct {
 
         
-            Schedule *map[string]interface{}  `json:"_schedule"`
+            Schedule map[string]interface{}  `json:"_schedule"`
             IsActive bool  `json:"is_active"`
             Logo Media  `json:"logo"`
             Action ProductListingAction  `json:"action"`
             Name string  `json:"name"`
             Banners ImageUrls  `json:"banners"`
-            Meta *map[string]interface{}  `json:"meta"`
+            Meta map[string]interface{}  `json:"meta"`
             Description string  `json:"description"`
             Tag []string  `json:"tag"`
-            Badge *map[string]interface{}  `json:"badge"`
+            Badge map[string]interface{}  `json:"badge"`
             Slug string  `json:"slug"`
             AllowSort bool  `json:"allow_sort"`
             AllowFacets bool  `json:"allow_facets"`
@@ -779,8 +779,8 @@ package application
             AppID string  `json:"app_id"`
             UID string  `json:"uid"`
             Type string  `json:"type"`
-            Cron *map[string]interface{}  `json:"cron"`
-            Query *map[string]interface{}  `json:"query"`
+            Cron map[string]interface{}  `json:"cron"`
+            Query map[string]interface{}  `json:"query"`
          
     }
     
@@ -798,23 +798,23 @@ package application
     type CollectionDetailResponse struct {
 
         
-            Schedule *map[string]interface{}  `json:"_schedule"`
+            Schedule map[string]interface{}  `json:"_schedule"`
             Name string  `json:"name"`
             IsActive bool  `json:"is_active"`
             Type string  `json:"type"`
             Banners ImageUrls  `json:"banners"`
-            Meta *map[string]interface{}  `json:"meta"`
+            Meta map[string]interface{}  `json:"meta"`
             Description string  `json:"description"`
             Tag []string  `json:"tag"`
-            Badge *map[string]interface{}  `json:"badge"`
+            Badge map[string]interface{}  `json:"badge"`
             Logo Media  `json:"logo"`
             Slug string  `json:"slug"`
             AllowSort bool  `json:"allow_sort"`
             AllowFacets bool  `json:"allow_facets"`
-            Cron *map[string]interface{}  `json:"cron"`
+            Cron map[string]interface{}  `json:"cron"`
             VisibleFacetsKeys []string  `json:"visible_facets_keys"`
             AppID string  `json:"app_id"`
-            Query *map[string]interface{}  `json:"query"`
+            Query map[string]interface{}  `json:"query"`
          
     }
     
@@ -1112,7 +1112,7 @@ package application
 
         
             Identifiers CartProductIdentifer  `json:"identifiers"`
-            BulkOffer *map[string]interface{}  `json:"bulk_offer"`
+            BulkOffer map[string]interface{}  `json:"bulk_offer"`
             Quantity float64  `json:"quantity"`
             Discount string  `json:"discount"`
             Product Product  `json:"product"`
@@ -1181,7 +1181,7 @@ package application
         
             Pos bool  `json:"pos"`
             Display string  `json:"display"`
-            ArticleAssignment *map[string]interface{}  `json:"article_assignment"`
+            ArticleAssignment map[string]interface{}  `json:"article_assignment"`
             ArticleID string  `json:"article_id"`
             SellerID float64  `json:"seller_id"`
             Quantity float64  `json:"quantity"`
@@ -1364,7 +1364,7 @@ package application
             Country string  `json:"country"`
             Name string  `json:"name"`
             IsDefaultAddress bool  `json:"is_default_address"`
-            GoogleMapPoint *map[string]interface{}  `json:"google_map_point"`
+            GoogleMapPoint map[string]interface{}  `json:"google_map_point"`
             Email string  `json:"email"`
             Landmark string  `json:"landmark"`
             GeoLocation GeoLocation  `json:"geo_location"`
@@ -1374,7 +1374,7 @@ package application
             AreaCode string  `json:"area_code"`
             AddressType string  `json:"address_type"`
             Area string  `json:"area"`
-            Meta *map[string]interface{}  `json:"meta"`
+            Meta map[string]interface{}  `json:"meta"`
             Phone string  `json:"phone"`
             CountryCode string  `json:"country_code"`
             State string  `json:"state"`
@@ -1478,7 +1478,7 @@ package application
             BoxType string  `json:"box_type"`
             Promise ShipmentPromise  `json:"promise"`
             OrderType string  `json:"order_type"`
-            DpOptions *map[string]interface{}  `json:"dp_options"`
+            DpOptions map[string]interface{}  `json:"dp_options"`
             Items []CartProductInfo  `json:"items"`
             FulfillmentID float64  `json:"fulfillment_id"`
             DpID float64  `json:"dp_id"`
@@ -1513,22 +1513,22 @@ package application
     type CartCheckoutRequest struct {
 
         
-            ExtraMeta *map[string]interface{}  `json:"extra_meta"`
-            BillingAddress *map[string]interface{}  `json:"billing_address"`
+            ExtraMeta map[string]interface{}  `json:"extra_meta"`
+            BillingAddress map[string]interface{}  `json:"billing_address"`
             CallbackURL string  `json:"callback_url"`
             PaymentIdentifier string  `json:"payment_identifier"`
-            DeliveryAddress *map[string]interface{}  `json:"delivery_address"`
+            DeliveryAddress map[string]interface{}  `json:"delivery_address"`
             BillingAddressID float64  `json:"billing_address_id"`
             OrderingStore float64  `json:"ordering_store"`
             PaymentAutoConfirm bool  `json:"payment_auto_confirm"`
-            Staff *map[string]interface{}  `json:"staff"`
+            Staff map[string]interface{}  `json:"staff"`
             MerchantCode string  `json:"merchant_code"`
             FyndstoreEmpID string  `json:"fyndstore_emp_id"`
             PaymentMode string  `json:"payment_mode"`
-            PaymentParams *map[string]interface{}  `json:"payment_params"`
+            PaymentParams map[string]interface{}  `json:"payment_params"`
             Aggregator string  `json:"aggregator"`
             AddressID float64  `json:"address_id"`
-            Meta *map[string]interface{}  `json:"meta"`
+            Meta map[string]interface{}  `json:"meta"`
          
     }
     
@@ -1539,7 +1539,7 @@ package application
             CodCharges float64  `json:"cod_charges"`
             UserType string  `json:"user_type"`
             Items []CartProductInfo  `json:"items"`
-            StoreEmps []*map[string]interface{}  `json:"store_emps"`
+            StoreEmps []map[string]interface{}  `json:"store_emps"`
             DeliveryCharges float64  `json:"delivery_charges"`
             DeliveryChargeOrderValue float64  `json:"delivery_charge_order_value"`
             Gstin string  `json:"gstin"`
@@ -1569,7 +1569,7 @@ package application
     type CartCheckoutResponse struct {
 
         
-            Data *map[string]interface{}  `json:"data"`
+            Data map[string]interface{}  `json:"data"`
             Cart CheckCart  `json:"cart"`
             AppInterceptURL string  `json:"app_intercept_url"`
             CallbackURL string  `json:"callback_url"`
@@ -1584,7 +1584,7 @@ package application
 
         
             Gstin string  `json:"gstin"`
-            PickUpCustomerDetails *map[string]interface{}  `json:"pick_up_customer_details"`
+            PickUpCustomerDetails map[string]interface{}  `json:"pick_up_customer_details"`
             CheckoutMode string  `json:"checkout_mode"`
             Comment string  `json:"comment"`
          
@@ -1611,7 +1611,7 @@ package application
 
         
             UID float64  `json:"uid"`
-            Meta *map[string]interface{}  `json:"meta"`
+            Meta map[string]interface{}  `json:"meta"`
          
     }
     
@@ -1628,11 +1628,11 @@ package application
     type SharedCartDetails struct {
 
         
-            User *map[string]interface{}  `json:"user"`
-            Source *map[string]interface{}  `json:"source"`
+            User map[string]interface{}  `json:"user"`
+            Source map[string]interface{}  `json:"source"`
             Token string  `json:"token"`
             CreatedOn string  `json:"created_on"`
-            Meta *map[string]interface{}  `json:"meta"`
+            Meta map[string]interface{}  `json:"meta"`
          
     }
     
@@ -1724,7 +1724,7 @@ package application
         
             Slug string  `json:"slug"`
             Title string  `json:"title"`
-            Inputs []*map[string]interface{}  `json:"inputs"`
+            Inputs []map[string]interface{}  `json:"inputs"`
             Description string  `json:"description"`
             HeaderImage string  `json:"header_image"`
             ShouldNotify bool  `json:"should_notify"`
@@ -1738,7 +1738,7 @@ package application
 
         
             Title string  `json:"title"`
-            Inputs []*map[string]interface{}  `json:"inputs"`
+            Inputs []map[string]interface{}  `json:"inputs"`
             Description string  `json:"description"`
             HeaderImage string  `json:"header_image"`
             ShouldNotify bool  `json:"should_notify"`
@@ -1792,7 +1792,7 @@ package application
 
         
             UniqueName string  `json:"unique_name"`
-            Notify []*map[string]interface{}  `json:"notify"`
+            Notify []map[string]interface{}  `json:"notify"`
          
     }
     
@@ -1803,7 +1803,7 @@ package application
             Priorities []Priority  `json:"priorities"`
             Categories []TicketCategory  `json:"categories"`
             Statuses []Status  `json:"statuses"`
-            Assignees []*map[string]interface{}  `json:"assignees"`
+            Assignees []map[string]interface{}  `json:"assignees"`
          
     }
     
@@ -1811,7 +1811,7 @@ package application
     type TicketHistoryPayload struct {
 
         
-            Value *map[string]interface{}  `json:"value"`
+            Value map[string]interface{}  `json:"value"`
             Type string  `json:"type"`
          
     }
@@ -1940,7 +1940,7 @@ package application
     type AddTicketPayload struct {
 
         
-            CreatedBy *map[string]interface{}  `json:"created_by"`
+            CreatedBy map[string]interface{}  `json:"created_by"`
             Status string  `json:"status"`
             Priority string  `json:"priority"`
             Category string  `json:"category"`
@@ -2022,9 +2022,9 @@ package application
             ShouldNotify bool  `json:"should_notify"`
             SuccessMessage string  `json:"success_message"`
             SubmitButton SubmitButton  `json:"submit_button"`
-            Inputs []*map[string]interface{}  `json:"inputs"`
+            Inputs []map[string]interface{}  `json:"inputs"`
             CreatedOn CreatedOn  `json:"created_on"`
-            CreatedBy *map[string]interface{}  `json:"created_by"`
+            CreatedBy map[string]interface{}  `json:"created_by"`
             PollForAssignment PollForAssignment  `json:"poll_for_assignment"`
             ID string  `json:"_id"`
          
@@ -2035,10 +2035,10 @@ package application
 
         
             Type string  `json:"type"`
-            Value *map[string]interface{}  `json:"value"`
+            Value map[string]interface{}  `json:"value"`
             TicketID string  `json:"ticket_id"`
             CreatedOn CreatedOn  `json:"created_on"`
-            CreatedBy *map[string]interface{}  `json:"created_by"`
+            CreatedBy map[string]interface{}  `json:"created_by"`
             ID string  `json:"_id"`
             UpdatedAt string  `json:"updated_at"`
             CreatedAt string  `json:"created_at"`
@@ -2059,10 +2059,10 @@ package application
             Source string  `json:"source"`
             Status Status  `json:"status"`
             Priority Priority  `json:"priority"`
-            CreatedBy *map[string]interface{}  `json:"created_by"`
-            AssignedTo *map[string]interface{}  `json:"assigned_to"`
+            CreatedBy map[string]interface{}  `json:"created_by"`
+            AssignedTo map[string]interface{}  `json:"assigned_to"`
             Tags []string  `json:"tags"`
-            CustomJson *map[string]interface{}  `json:"_custom_json"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
             ID string  `json:"_id"`
             UpdatedAt string  `json:"updated_at"`
             CreatedAt string  `json:"created_at"`
@@ -2189,10 +2189,10 @@ package application
             AvailablePages AvailablePages  `json:"available_pages"`
             AvailableSections []availableSectionSchema  `json:"available_sections"`
             Sections []sectionSchema  `json:"sections"`
-            Constants *map[string]interface{}  `json:"constants"`
-            Styles *map[string]interface{}  `json:"styles"`
+            Constants map[string]interface{}  `json:"constants"`
+            Styles map[string]interface{}  `json:"styles"`
             Config Config  `json:"config"`
-            Settings *map[string]interface{}  `json:"settings"`
+            Settings map[string]interface{}  `json:"settings"`
             Font Font  `json:"font"`
             ID string  `json:"_id"`
             V float64  `json:"__v"`
@@ -2219,7 +2219,7 @@ package application
             Blocks Blocks  `json:"blocks"`
             Name string  `json:"name"`
             Label string  `json:"label"`
-            Props *map[string]interface{}  `json:"props"`
+            Props map[string]interface{}  `json:"props"`
          
     }
     
@@ -2305,7 +2305,7 @@ package application
             Text string  `json:"text"`
             Value string  `json:"value"`
             Seo Seo  `json:"seo"`
-            Props *map[string]interface{}  `json:"props"`
+            Props map[string]interface{}  `json:"props"`
             Sections Sections  `json:"sections"`
          
     }
@@ -2350,7 +2350,7 @@ package application
     type GlobalSchema struct {
 
         
-            Props *map[string]interface{}  `json:"props"`
+            Props map[string]interface{}  `json:"props"`
          
     }
     
@@ -2358,7 +2358,7 @@ package application
     type ListSchema struct {
 
         
-            Global *map[string]interface{}  `json:"global"`
+            Global map[string]interface{}  `json:"global"`
             Page ConfigPage  `json:"page"`
             Name string  `json:"name"`
          
@@ -2381,7 +2381,7 @@ package application
     type Custom struct {
 
         
-            Props *map[string]interface{}  `json:"props"`
+            Props map[string]interface{}  `json:"props"`
          
     }
     
@@ -2389,7 +2389,7 @@ package application
     type ConfigPage struct {
 
         
-            Settings *map[string]interface{}  `json:"settings"`
+            Settings map[string]interface{}  `json:"settings"`
             Page string  `json:"page"`
          
     }
@@ -2487,8 +2487,8 @@ package application
             Blocks PageSectionsBlocks  `json:"blocks"`
             Name string  `json:"name"`
             Label string  `json:"label"`
-            Props *map[string]interface{}  `json:"props"`
-            Preset *map[string]interface{}  `json:"preset"`
+            Props map[string]interface{}  `json:"props"`
+            Preset map[string]interface{}  `json:"preset"`
             Predicate Predicate  `json:"predicate"`
          
     }
@@ -2548,7 +2548,7 @@ package application
         
             Selected string  `json:"selected"`
             ExactURL string  `json:"exact_url"`
-            Query *map[string]interface{}  `json:"query"`
+            Query map[string]interface{}  `json:"query"`
          
     }
     
@@ -3293,7 +3293,7 @@ package application
             ID string  `json:"_id"`
             RobotsTxt string  `json:"robots_txt"`
             SitemapEnabled bool  `json:"sitemap_enabled"`
-            CustomMetaTags []CustomMetaTag  `json:"custom_meta_tags"`
+            CustomMetaTags []map[string]interface{}  `json:"custom_meta_tags"`
             Details Detail  `json:"details"`
             CreatedAt string  `json:"created_at"`
             UpdatedAt string  `json:"updated_at"`
@@ -3374,7 +3374,7 @@ package application
             Start string  `json:"start"`
             End string  `json:"end"`
             Duration float64  `json:"duration"`
-            NextSchedule []NextSchedule  `json:"next_schedule"`
+            NextSchedule []map[string]interface{}  `json:"next_schedule"`
          
     }
     
@@ -3408,7 +3408,7 @@ package application
     type BlogGetResponse struct {
 
         
-            Items []BlogSchema  `json:"items"`
+            Items []map[string]interface{}  `json:"items"`
             Page Page  `json:"page"`
          
     }
@@ -3447,7 +3447,7 @@ package application
 
         
             ID string  `json:"_id"`
-            CustomJson *map[string]interface{}  `json:"_custom_json"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
             Application string  `json:"application"`
             Archived bool  `json:"archived"`
             Author Author  `json:"author"`
@@ -3496,7 +3496,7 @@ package application
 
         
             Application string  `json:"application"`
-            CustomJson *map[string]interface{}  `json:"_custom_json"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
             Author Author  `json:"author"`
             Content []ResourceContent  `json:"content"`
             FeatureImage Asset  `json:"feature_image"`
@@ -3577,8 +3577,8 @@ package application
     type ActionPage struct {
 
         
-            Params *map[string]interface{}  `json:"params"`
-            Query *map[string]interface{}  `json:"query"`
+            Params map[string]interface{}  `json:"params"`
+            Query map[string]interface{}  `json:"query"`
             URL string  `json:"url"`
             Type string  `json:"type"`
          
@@ -3647,7 +3647,7 @@ package application
     type AnnouncementsResponseSchema struct {
 
         
-            Announcements *map[string]interface{}  `json:"announcements"`
+            Announcements map[string][]AnnouncementSchema  `json:"announcements"`
             RefreshRate float64  `json:"refresh_rate"`
             RefreshPages []string  `json:"refresh_pages"`
          
@@ -3674,7 +3674,7 @@ package application
 
         
             Position string  `json:"position"`
-            Attributes *map[string]interface{}  `json:"attributes"`
+            Attributes map[string]interface{}  `json:"attributes"`
             Name string  `json:"name"`
             URL string  `json:"url"`
             Type string  `json:"type"`
@@ -3701,7 +3701,7 @@ package application
             Type string  `json:"type"`
             URL string  `json:"url"`
             Position string  `json:"position"`
-            Attributes *map[string]interface{}  `json:"attributes"`
+            Attributes map[string]interface{}  `json:"attributes"`
             Content string  `json:"content"`
          
     }
@@ -3725,7 +3725,7 @@ package application
             Info string  `json:"info"`
             RequestID string  `json:"request_id"`
             StackTrace string  `json:"stack_trace"`
-            Meta *map[string]interface{}  `json:"meta"`
+            Meta map[string]interface{}  `json:"meta"`
          
     }
     
@@ -3774,7 +3774,7 @@ package application
             Slug string  `json:"slug"`
             Application string  `json:"application"`
             IconURL string  `json:"icon_url"`
-            CustomJson *map[string]interface{}  `json:"_custom_json"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
          
     }
     
@@ -3820,7 +3820,7 @@ package application
     type GetFaqSchema struct {
 
         
-            Faqs []FaqSchema  `json:"faqs"`
+            Faqs []map[string]interface{}  `json:"faqs"`
          
     }
     
@@ -3868,7 +3868,7 @@ package application
     type LandingPageGetResponse struct {
 
         
-            Items []LandingPageSchema  `json:"items"`
+            Items []map[string]interface{}  `json:"items"`
             Page Page  `json:"page"`
          
     }
@@ -3885,7 +3885,7 @@ package application
             ID string  `json:"_id"`
             Application string  `json:"application"`
             Archived bool  `json:"archived"`
-            CustomJson *map[string]interface{}  `json:"_custom_json"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
          
     }
     
@@ -3893,7 +3893,7 @@ package application
     type DefaultNavigationResponse struct {
 
         
-            Items []NavigationSchema  `json:"items"`
+            Items []map[string]interface{}  `json:"items"`
          
     }
     
@@ -3901,7 +3901,7 @@ package application
     type NavigationGetResponse struct {
 
         
-            Items []NavigationSchema  `json:"items"`
+            Items []map[string]interface{}  `json:"items"`
             Page Page  `json:"page"`
          
     }
@@ -4002,7 +4002,7 @@ package application
             Schedule ScheduleSchema  `json:"_schedule"`
             CreatedAt string  `json:"created_at"`
             UpdatedAt string  `json:"updated_at"`
-            CustomJson *map[string]interface{}  `json:"_custom_json"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
          
     }
     
@@ -4026,7 +4026,7 @@ package application
     type PageGetResponse struct {
 
         
-            Items []PageSchema  `json:"items"`
+            Items []map[string]interface{}  `json:"items"`
             Page Page  `json:"page"`
          
     }
@@ -4035,7 +4035,7 @@ package application
     type PageSpec struct {
 
         
-            Specifications []PageSpecItem  `json:"specifications"`
+            Specifications []map[string]interface{}  `json:"specifications"`
          
     }
     
@@ -4073,7 +4073,7 @@ package application
             FeatureImage Asset  `json:"feature_image"`
             PageMeta []PageMeta  `json:"page_meta"`
             Schedule ScheduleSchema  `json:"_schedule"`
-            CustomJson *map[string]interface{}  `json:"_custom_json"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
             Orientation string  `json:"orientation"`
             Platform string  `json:"platform"`
             Published bool  `json:"published"`
@@ -4082,7 +4082,7 @@ package application
             Title string  `json:"title"`
             Type string  `json:"type"`
             Seo SEO  `json:"seo"`
-            Visibility *map[string]interface{}  `json:"visibility"`
+            Visibility map[string]interface{}  `json:"visibility"`
          
     }
     
@@ -4099,7 +4099,7 @@ package application
 
         
             Type string  `json:"type"`
-            Value *map[string]interface{}  `json:"value"`
+            Value map[string]interface{}  `json:"value"`
          
     }
     
@@ -4108,7 +4108,7 @@ package application
 
         
             Key string  `json:"key"`
-            Value *map[string]interface{}  `json:"value"`
+            Value map[string]interface{}  `json:"value"`
          
     }
     
@@ -4119,7 +4119,7 @@ package application
             Schedule CronSchedule  `json:"_schedule"`
             Application string  `json:"application"`
             Author Author  `json:"author"`
-            CustomJson *map[string]interface{}  `json:"_custom_json"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
             Orientation string  `json:"orientation"`
             Content []ResourceContent  `json:"content"`
             FeatureImage Asset  `json:"feature_image"`
@@ -4155,8 +4155,8 @@ package application
     type PageMetaSchema struct {
 
         
-            SystemPages []NavigationSchema  `json:"system_pages"`
-            CustomPages []PageSchema  `json:"custom_pages"`
+            SystemPages []map[string]interface{}  `json:"system_pages"`
+            CustomPages []map[string]interface{}  `json:"custom_pages"`
             ApplicationID string  `json:"application_id"`
          
     }
@@ -4165,7 +4165,7 @@ package application
     type SlideshowGetResponse struct {
 
         
-            Items []SlideshowSchema  `json:"items"`
+            Items []map[string]interface{}  `json:"items"`
             Page Page  `json:"page"`
          
     }
@@ -4183,7 +4183,7 @@ package application
             Media []SlideshowMedia  `json:"media"`
             Active bool  `json:"active"`
             Archived bool  `json:"archived"`
-            CustomJson *map[string]interface{}  `json:"_custom_json"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
          
     }
     
@@ -4279,7 +4279,7 @@ package application
             SubType string  `json:"sub_type"`
             ID string  `json:"_id"`
             Position string  `json:"position"`
-            Attributes *map[string]interface{}  `json:"attributes"`
+            Attributes map[string]interface{}  `json:"attributes"`
             Content string  `json:"content"`
          
     }
@@ -4903,8 +4903,8 @@ package application
 
         
             PageType string  `json:"page_type"`
-            Params *map[string]interface{}  `json:"params"`
-            Query *map[string]interface{}  `json:"query"`
+            Params map[string]interface{}  `json:"params"`
+            Query map[string]interface{}  `json:"query"`
          
     }
     
@@ -5848,7 +5848,7 @@ package application
     type AttachCardsResponse struct {
 
         
-            Data *map[string]interface{}  `json:"data"`
+            Data map[string]interface{}  `json:"data"`
             Success bool  `json:"success"`
             Message string  `json:"message"`
          
@@ -5932,7 +5932,7 @@ package application
             Payload string  `json:"payload"`
             PhoneNumber string  `json:"phone_number"`
             Aggregator string  `json:"aggregator"`
-            MerchantParams *map[string]interface{}  `json:"merchant_params"`
+            MerchantParams map[string]interface{}  `json:"merchant_params"`
          
     }
     
@@ -5940,7 +5940,7 @@ package application
     type ValidateCustomerResponse struct {
 
         
-            Data *map[string]interface{}  `json:"data"`
+            Data map[string]interface{}  `json:"data"`
             Success bool  `json:"success"`
             Message string  `json:"message"`
          
@@ -6099,7 +6099,7 @@ package application
     type AggregatorRoute struct {
 
         
-            Data *map[string]interface{}  `json:"data"`
+            Data map[string]interface{}  `json:"data"`
             PaymentFlow string  `json:"payment_flow"`
             APILink string  `json:"api_link"`
          
@@ -6312,7 +6312,7 @@ package application
     type RefundAccountResponse struct {
 
         
-            Data *map[string]interface{}  `json:"data"`
+            Data map[string]interface{}  `json:"data"`
             Success bool  `json:"success"`
             Message string  `json:"message"`
          
@@ -6449,7 +6449,7 @@ package application
 
         
             Status string  `json:"status"`
-            Shipments *map[string]interface{}  `json:"shipments"`
+            Shipments map[string]interface{}  `json:"shipments"`
          
     }
     
@@ -6457,7 +6457,7 @@ package application
     type ShipmentStatusUpdate struct {
 
         
-            Message []*map[string]interface{}  `json:"message"`
+            Message []map[string]interface{}  `json:"message"`
             Status bool  `json:"status"`
          
     }
@@ -6741,7 +6741,7 @@ package application
             ShipmentCreatedAt string  `json:"shipment_created_at"`
             ShipmentStatus ShipmentStatus  `json:"shipment_status"`
             UserInfo ShipmentUserInfo  `json:"user_info"`
-            SizeInfo *map[string]interface{}  `json:"size_info"`
+            SizeInfo map[string]interface{}  `json:"size_info"`
             TotalDetails ShipmentTotalDetails  `json:"total_details"`
          
     }
@@ -6870,7 +6870,7 @@ package application
             BannerImage Asset  `json:"banner_image"`
             CreatedAt string  `json:"created_at"`
             Name string  `json:"name"`
-            Rule *map[string]interface{}  `json:"rule"`
+            Rule map[string]interface{}  `json:"rule"`
             Share ShareMessages  `json:"share"`
             SubText string  `json:"sub_text"`
             Text string  `json:"text"`
@@ -7186,7 +7186,7 @@ package application
     type CursorGetResponse struct {
 
         
-            Items []*map[string]interface{}  `json:"items"`
+            Items []map[string]interface{}  `json:"items"`
             Page Page  `json:"page"`
          
     }
@@ -7217,7 +7217,7 @@ package application
             Exception string  `json:"exception"`
             Info string  `json:"info"`
             Message string  `json:"message"`
-            Meta *map[string]interface{}  `json:"meta"`
+            Meta map[string]interface{}  `json:"meta"`
             RequestID string  `json:"request_id"`
             StackTrace string  `json:"stack_trace"`
             Status float64  `json:"status"`
@@ -7307,7 +7307,7 @@ package application
     type NumberGetResponse struct {
 
         
-            Items []*map[string]interface{}  `json:"items"`
+            Items []map[string]interface{}  `json:"items"`
             Page PageNumber  `json:"page"`
          
     }
@@ -7665,21 +7665,21 @@ package application
             Pos bool  `json:"pos"`
             CallbackURL string  `json:"callback_url"`
             Files []Files  `json:"files"`
-            ExtraMeta *map[string]interface{}  `json:"extra_meta"`
+            ExtraMeta map[string]interface{}  `json:"extra_meta"`
             PickAtStoreUID float64  `json:"pick_at_store_uid"`
             OrderType string  `json:"order_type"`
-            Staff *map[string]interface{}  `json:"staff"`
-            PaymentParams *map[string]interface{}  `json:"payment_params"`
+            Staff map[string]interface{}  `json:"staff"`
+            PaymentParams map[string]interface{}  `json:"payment_params"`
             PaymentIdentifier string  `json:"payment_identifier"`
             Aggregator string  `json:"aggregator"`
             MerchantCode string  `json:"merchant_code"`
             BillingAddressID float64  `json:"billing_address_id"`
             FyndstoreEmpID string  `json:"fyndstore_emp_id"`
             OrderingStore float64  `json:"ordering_store"`
-            BillingAddress *map[string]interface{}  `json:"billing_address"`
+            BillingAddress map[string]interface{}  `json:"billing_address"`
             AddressID float64  `json:"address_id"`
-            DeliveryAddress *map[string]interface{}  `json:"delivery_address"`
-            Meta *map[string]interface{}  `json:"meta"`
+            DeliveryAddress map[string]interface{}  `json:"delivery_address"`
+            Meta map[string]interface{}  `json:"meta"`
          
     }
     
@@ -7821,7 +7821,7 @@ package application
         
             LocationDetails LocationDetails  `json:"location_details"`
             RequestUUID string  `json:"request_uuid"`
-            Error *map[string]interface{}  `json:"error"`
+            Error map[string]interface{}  `json:"error"`
             ToCity string  `json:"to_city"`
             Source string  `json:"source"`
             ToPincode string  `json:"to_pincode"`
@@ -7847,7 +7847,7 @@ package application
     type TatProductArticles struct {
 
         
-            Error *map[string]interface{}  `json:"error"`
+            Error map[string]interface{}  `json:"error"`
             Category LogisticResponseCategory  `json:"category"`
             Promise LogisticPromise  `json:"promise"`
          
