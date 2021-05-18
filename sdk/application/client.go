@@ -9097,7 +9097,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // CreateAbuseReport post a new abuse request
+    // CreateAbuseReport Post a new abuse request
     func (fe *Feedback)  CreateAbuseReport(body  ReportAbuseRequest) (InsertResponse, error){
         var (
             rawRequest  *RawRequest
@@ -9208,7 +9208,7 @@ func NewAppClient(config *AppConfig) *Client {
         PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // GetAbuseReports Get list of abuse data
+    // GetAbuseReports Get a list of abuse data
     func (fe *Feedback)  GetAbuseReports(EntityID string, EntityType string, xQuery FeedbackGetAbuseReportsXQuery) (ReportAbuseGetResponse, error){
         var (
             rawRequest  *RawRequest
@@ -9288,7 +9288,7 @@ func NewAppClient(config *AppConfig) *Client {
                     
                 
             
-            // GetAbuseReportsPaginator Get list of abuse data  
+            // GetAbuseReportsPaginator Get a list of abuse data  
             func (fe *Feedback)  GetAbuseReportsPaginator(EntityID string  , EntityType string  ,  xQuery FeedbackGetAbuseReportsXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("cursor")
                  
@@ -9326,7 +9326,7 @@ func NewAppClient(config *AppConfig) *Client {
         PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // GetAttributes Get list of attribute data
+    // GetAttributes Get a list of attribute data
     func (fe *Feedback)  GetAttributes(xQuery FeedbackGetAttributesXQuery) (AttributeResponse, error){
         var (
             rawRequest  *RawRequest
@@ -9381,7 +9381,7 @@ func NewAppClient(config *AppConfig) *Client {
                     
                 
             
-            // GetAttributesPaginator Get list of attribute data  
+            // GetAttributesPaginator Get a list of attribute data  
             func (fe *Feedback)  GetAttributesPaginator( xQuery FeedbackGetAttributesXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
                  
@@ -9461,7 +9461,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetAttribute Get single attribute data
+    // GetAttribute Get data of a single attribute
     func (fe *Feedback)  GetAttribute(Slug string) (Attribute, error){
         var (
             rawRequest  *RawRequest
@@ -9502,7 +9502,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UpdateAttribute Update attribute details
+    // UpdateAttribute Update details of an attribute 
     func (fe *Feedback)  UpdateAttribute(Slug string, body  UpdateAttributeRequest) (UpdateResponse, error){
         var (
             rawRequest  *RawRequest
@@ -9554,7 +9554,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // CreateComment post a new comment
+    // CreateComment Post a new comment
     func (fe *Feedback)  CreateComment(body  CommentRequest) (InsertResponse, error){
         var (
             rawRequest  *RawRequest
@@ -9606,7 +9606,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UpdateComment Update comment status
+    // UpdateComment Update the status of a comment
     func (fe *Feedback)  UpdateComment(body  UpdateCommentRequest) (UpdateResponse, error){
         var (
             rawRequest  *RawRequest
@@ -9667,7 +9667,7 @@ func NewAppClient(config *AppConfig) *Client {
         PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // GetComments Get list of comments
+    // GetComments Get a list of comments
     func (fe *Feedback)  GetComments(EntityType string, xQuery FeedbackGetCommentsXQuery) (CommentGetResponse, error){
         var (
             rawRequest  *RawRequest
@@ -9753,7 +9753,7 @@ func NewAppClient(config *AppConfig) *Client {
                     
                 
             
-            // GetCommentsPaginator Get list of comments  
+            // GetCommentsPaginator Get a list of comments  
             func (fe *Feedback)  GetCommentsPaginator(EntityType string  ,  xQuery FeedbackGetCommentsXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("cursor")
                  
@@ -9793,7 +9793,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // CheckEligibility Checks eligibility and cloud media config
+    // CheckEligibility Checks eligibility to rate and review, and shows the cloud media configuration
     func (fe *Feedback)  CheckEligibility(EntityType string, EntityID string) (CheckEligibilityResponse, error){
         var (
             rawRequest  *RawRequest
@@ -10519,7 +10519,7 @@ func NewAppClient(config *AppConfig) *Client {
         EntityType string  `url:"entity_type,omitempty"`  
     }
     
-    // GetTemplates Get the templates for product or l3 type
+    // GetTemplates Get the feedback templates for a product or l3
     func (fe *Feedback)  GetTemplates(xQuery FeedbackGetTemplatesXQuery) (CursorGetResponse, error){
         var (
             rawRequest  *RawRequest
@@ -10612,7 +10612,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UpdateQuestion Update question
+    // UpdateQuestion Update a question
     func (fe *Feedback)  UpdateQuestion(body  UpdateQNARequest) (UpdateResponse, error){
         var (
             rawRequest  *RawRequest
@@ -10803,7 +10803,7 @@ func NewAppClient(config *AppConfig) *Client {
         PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // GetVotes Get list of votes
+    // GetVotes Get a list of votes
     func (fe *Feedback)  GetVotes(xQuery FeedbackGetVotesXQuery) (VoteResponse, error){
         var (
             rawRequest  *RawRequest
@@ -10872,7 +10872,7 @@ func NewAppClient(config *AppConfig) *Client {
                     
                 
             
-            // GetVotesPaginator Get list of votes  
+            // GetVotesPaginator Get a list of votes  
             func (fe *Feedback)  GetVotesPaginator( xQuery FeedbackGetVotesXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
                  
@@ -10960,7 +10960,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UpdateVote Update vote
+    // UpdateVote Update a vote
     func (fe *Feedback)  UpdateVote(body  UpdateVoteRequest) (UpdateResponse, error){
         var (
             rawRequest  *RawRequest

@@ -13490,7 +13490,7 @@ Schema: `Error`
 
 
 #### createAbuseReport
-post a new abuse request
+Post a new abuse request
 
 ```golang
 
@@ -13503,13 +13503,13 @@ post a new abuse request
 | body |  ReportAbuseRequest | "Request body" 
 
 
-Report a new abuse for specific entity with description text.
+Use this API to report a specific entity (question/review/comment) for abuse.
 
 *Success Response:*
 
 
 
-ok
+Success. Returns an abuse ID.
 
 
 Schema: `InsertResponse`
@@ -13521,7 +13521,7 @@ Schema: `InsertResponse`
 
 
 
-Bad request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -13551,13 +13551,13 @@ Update abuse details
 | body |  UpdateAbuseStatusRequest | "Request body" 
 
 
-Update the abuse details like status and description text.
+Use this API to update the abuse details, i.e. status and description.
 
 *Success Response:*
 
 
 
-ok
+Success.
 
 
 Schema: `UpdateResponse`
@@ -13569,7 +13569,7 @@ Schema: `UpdateResponse`
 
 
 
-Bad request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -13586,7 +13586,7 @@ Schema: `FeedbackError`
 
 
 #### getAbuseReports
-Get list of abuse data
+Get a list of abuse data
 
 ```golang
 
@@ -13596,10 +13596,10 @@ Get list of abuse data
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| EntityID | string | entity id | 
+| EntityID | string | ID of the eligible entity as specified in the entity type (question ID/review ID/comment ID). | 
 
 
-| EntityType | string | entity type | 
+| EntityType | string | Type of entity, e.g. question, review or comment. | 
 
 
 
@@ -13611,13 +13611,13 @@ Get list of abuse data
 
 
 
-Get the list of abuse data from entity type and entity ID.
+Use this API to retrieve a list of abuse data from entity type and entity ID.
 
 *Success Response:*
 
 
 
-ok
+Success. Check the example shown below or refer `ReportAbuseGetResponse` for more details.
 
 
 Schema: `ReportAbuseGetResponse`
@@ -13629,7 +13629,7 @@ Schema: `ReportAbuseGetResponse`
 
 
 
-Bad request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -13646,7 +13646,7 @@ Schema: `FeedbackError`
 
 
 #### getAttributes
-Get list of attribute data
+Get a list of attribute data
 
 ```golang
 
@@ -13663,13 +13663,13 @@ Get list of attribute data
 
 
 
-Provides a list of all attribute data.
+Use this API to retrieve a list of all attribute data, e.g. quality, material, product fitting, packaging, etc.
 
 *Success Response:*
 
 
 
-ok
+Success. Check the example shown below or refer `AttributeResponse` for more details.
 
 
 Schema: `AttributeResponse`
@@ -13681,7 +13681,7 @@ Schema: `AttributeResponse`
 
 
 
-Bad request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -13711,13 +13711,13 @@ Add a new attribute request
 | body |  SaveAttributeRequest | "Request body" 
 
 
-Add a new attribute with its name, slug and description.
+Use this API to add a new attribute (e.g. product quality/material/value for money) with its name, slug and description.
 
 *Success Response:*
 
 
 
-ok
+Success. Returns an attribute ID.
 
 
 Schema: `InsertResponse`
@@ -13729,7 +13729,7 @@ Schema: `InsertResponse`
 
 
 
-Bad request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -13746,7 +13746,7 @@ Schema: `FeedbackError`
 
 
 #### getAttribute
-Get single attribute data
+Get data of a single attribute
 
 ```golang
 
@@ -13756,18 +13756,18 @@ Get single attribute data
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Slug | string | Slug of attribute | 
+| Slug | string | A short, human-readable, URL-friendly identifier of an attribute. You can get slug value from the endpoint 'service/application/feedback/v1.0/attributes'. | 
 
 
 
 
-Get a single attribute data from a given slug.
+Use this API to retrieve a single attribute data from a given slug.
 
 *Success Response:*
 
 
 
-ok
+Success. Check the example shown below or refer `Attribute` for more details.
 
 
 Schema: `Attribute`
@@ -13779,7 +13779,7 @@ Schema: `Attribute`
 
 
 
-Bad request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -13796,7 +13796,7 @@ Schema: `FeedbackError`
 
 
 #### updateAttribute
-Update attribute details
+Update details of an attribute 
 
 ```golang
 
@@ -13806,19 +13806,19 @@ Update attribute details
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Slug | string | Slug of attribute | 
+| Slug | string | A short, human-readable, URL-friendly identifier of an attribute. You can get slug value from the endpoint 'service/application/feedback/v1.0/attributes'. | 
 
 
 | body |  UpdateAttributeRequest | "Request body" 
 
 
-Update the attribute's name and description.
+Use this API update the attribute's name and description.
 
 *Success Response:*
 
 
 
-ok
+Success.
 
 
 Schema: `UpdateResponse`
@@ -13830,7 +13830,7 @@ Schema: `UpdateResponse`
 
 
 
-Bad request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -13847,7 +13847,7 @@ Schema: `FeedbackError`
 
 
 #### createComment
-post a new comment
+Post a new comment
 
 ```golang
 
@@ -13860,13 +13860,13 @@ post a new comment
 | body |  CommentRequest | "Request body" 
 
 
-This is used to add a new comment for specific entity.
+Use this API to add a new comment for a specific entity.
 
 *Success Response:*
 
 
 
-ok
+Success. Returns a comment ID.
 
 
 Schema: `InsertResponse`
@@ -13878,7 +13878,7 @@ Schema: `InsertResponse`
 
 
 
-Bad request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -13895,7 +13895,7 @@ Schema: `FeedbackError`
 
 
 #### updateComment
-Update comment status
+Update the status of a comment
 
 ```golang
 
@@ -13908,13 +13908,13 @@ Update comment status
 | body |  UpdateCommentRequest | "Request body" 
 
 
-Update the comment status (active/approve) or text.
+Use this API to update the comment status (active or approve) along with new comment if any.
 
 *Success Response:*
 
 
 
-ok
+Success.
 
 
 Schema: `UpdateResponse`
@@ -13926,7 +13926,7 @@ Schema: `UpdateResponse`
 
 
 
-Bad request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -13943,7 +13943,7 @@ Schema: `FeedbackError`
 
 
 #### getComments
-Get list of comments
+Get a list of comments
 
 ```golang
 
@@ -13953,7 +13953,7 @@ Get list of comments
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| EntityType | string | entity type | 
+| EntityType | string | Type of entity, e.g. question, review or comment. | 
 
 
 
@@ -13969,13 +13969,13 @@ Get list of comments
 
 
 
-Get the list of comments from specific entity type.
+Use this API to retrieve a list of comments for a specific entity type, e.g. products.
 
 *Success Response:*
 
 
 
-ok
+Success. Check the example shown below or refer `CommentGetResponse` for more details.
 
 
 Schema: `CommentGetResponse`
@@ -13987,7 +13987,7 @@ Schema: `CommentGetResponse`
 
 
 
-Bad request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -14004,7 +14004,7 @@ Schema: `FeedbackError`
 
 
 #### checkEligibility
-Checks eligibility and cloud media config
+Checks eligibility to rate and review, and shows the cloud media configuration
 
 ```golang
 
@@ -14014,21 +14014,21 @@ Checks eligibility and cloud media config
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| EntityType | string | entity type | 
+| EntityType | string | Type of entity, e.g. question, rate, review, answer, or comment. | 
 
 
-| EntityID | string | entity id | 
+| EntityID | string | ID of the eligible entity as specified in the entity type. | 
 
 
 
 
-Checks eligibility to rate and review and cloud media configuration
+Use this API to check whether an entity is eligible to be rated and reviewed. Moreover, it shows the cloud media configuration too.
 
 *Success Response:*
 
 
 
-ok
+Success. Returns a Product object. Check the example shown below or refer `CheckEligibilityResponse` for more details.
 
 
 Schema: `CheckEligibilityResponse`
@@ -14040,7 +14040,7 @@ Schema: `CheckEligibilityResponse`
 
 
 
-Bad request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -14069,13 +14069,13 @@ Delete Media
 
 
 
-Delete Media for the given entity IDs.
+Use this API to delete media for an entity ID.
 
 *Success Response:*
 
 
 
-ok
+Success.
 
 
 Schema: `UpdateResponse`
@@ -14087,7 +14087,7 @@ Schema: `UpdateResponse`
 
 
 
-Bad request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -14117,13 +14117,13 @@ Add Media
 | body |  AddMediaListRequest | "Request body" 
 
 
-Add Media list for specific entity.
+Use this API to add media to an entity, e.g. review.
 
 *Success Response:*
 
 
 
-ok
+Success. Returns media IDs.
 
 
 Schema: `InsertResponse`
@@ -14135,7 +14135,7 @@ Schema: `InsertResponse`
 
 
 
-Bad request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -14165,13 +14165,13 @@ Update Media
 | body |  UpdateMediaListRequest | "Request body" 
 
 
-Update Media (archive/approve) for the given entity.
+Use this API to update media (archive/approve) for an entity.
 
 *Success Response:*
 
 
 
-ok
+Success.
 
 
 Schema: `UpdateResponse`
@@ -14183,7 +14183,7 @@ Schema: `UpdateResponse`
 
 
 
-Bad request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -14210,10 +14210,10 @@ Get Media
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| EntityType | string | entity type | 
+| EntityType | string | Type of entity, e.g. question or product. | 
 
 
-| EntityID | string | entity id | 
+| EntityID | string | ID of the eligible entity as specified in the entity type(question ID/product ID). | 
 
 
 
@@ -14225,13 +14225,13 @@ Get Media
 
 
 
-Get Media from the given entity type and entity ID.
+Use this API to retrieve all media from an entity.
 
 *Success Response:*
 
 
 
-ok
+Success. Check the example shown below or refer `MediaGetResponse` for more details.
 
 
 Schema: `MediaGetResponse`
@@ -14243,7 +14243,7 @@ Schema: `MediaGetResponse`
 
 
 
-Bad request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -14270,10 +14270,10 @@ Get a review summary
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| EntityType | string | entity type | 
+| EntityType | string | Type of entity, e.g. product, delivery, seller, order placed, order delivered, application, or template. | 
 
 
-| EntityID | string | entity id | 
+| EntityID | string | ID of the eligible entity as specified in the entity type. | 
 
 
 
@@ -14285,14 +14285,13 @@ Get a review summary
 
 
 
-Review summary gives ratings and attribute metrics of a review per entity
-It gives following response data: review count, rating average. review metrics / attribute rating metrics which contains name, type, average and count.
+Review summary gives ratings and attribute metrics of a review per entity. Use this API to retrieve the following response data: review count, rating average. 'review metrics'/'attribute rating metrics' which contains name, type, average and count.
 
 *Success Response:*
 
 
 
-success
+Success. Check the example shown below or refer `RatingGetResponse` for more details.
 
 
 Schema: `RatingGetResponse`
@@ -14304,7 +14303,7 @@ Schema: `RatingGetResponse`
 
 
 
-Bad request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -14334,14 +14333,13 @@ Add customer reviews
 | body |  UpdateReviewRequest | "Request body" 
 
 
-Add customer reviews for specific entity with following data:
-attributes rating, entity rating, title, description, media resources and template id.
+Use this API to add customer reviews for a specific entity along with the following data: attributes rating, entity rating, title, description, media resources and template ID.
 
 *Success Response:*
 
 
 
-Success
+Success. Returns a review ID.
 
 
 Schema: `UpdateResponse`
@@ -14353,7 +14351,7 @@ Schema: `UpdateResponse`
 
 
 
-Bad Request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -14383,14 +14381,13 @@ Update customer reviews
 | body |  UpdateReviewRequest | "Request body" 
 
 
-Update customer reviews for specific entity with following data:
-attributes rating, entity rating, title, description, media resources and template id.
+Use this API to update customer reviews for a specific entity along with following data: attributes rating, entity rating, title, description, media resources and template ID.
 
 *Success Response:*
 
 
 
-Success
+Success.
 
 
 Schema: `UpdateResponse`
@@ -14402,7 +14399,7 @@ Schema: `UpdateResponse`
 
 
 
-Bad Request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -14429,10 +14426,10 @@ Get list of customer reviews
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| EntityType | string | entity type | 
+| EntityType | string | Type of entity, e.g. product, delivery, seller, l3, order placed, order delivered, application, or template. | 
 
 
-| EntityID | string | entity id | 
+| EntityID | string | ID of the eligible entity as specified in the entity type. | 
 
 
 
@@ -14456,13 +14453,13 @@ Get list of customer reviews
 
 
 
-This is used to get the list of customer reviews based on entity and provided filters.
+Use this API to retrieve a list of customer reviews based on entity and filters provided.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `ReviewGetResponse` for more details.
 
 
 Schema: `ReviewGetResponse`
@@ -14474,7 +14471,7 @@ Schema: `ReviewGetResponse`
 
 
 
-Bad Request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -14491,7 +14488,7 @@ Schema: `FeedbackError`
 
 
 #### getTemplates
-Get the templates for product or l3 type
+Get the feedback templates for a product or l3
 
 ```golang
 
@@ -14510,13 +14507,13 @@ Get the templates for product or l3 type
 
 
 
-This is used to get the templates details.
+Use this API to retrieve the details of the following feedback template. order, delivered, application, seller, order, placed, product
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `CursorGetResponse` for more details.
 
 
 Schema: `CursorGetResponse`
@@ -14528,7 +14525,7 @@ Schema: `CursorGetResponse`
 
 
 
-Bad Request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -14558,14 +14555,13 @@ Create a new question
 | body |  CreateQNARequest | "Request body" 
 
 
-This is used to create a new question with following data:
-tags, text, type, choices for MCQ type questions, maximum length of answer.
+Use this API to create a new question with following data- tags, text, type, choices for MCQ type questions, maximum length of answer.
 
 *Success Response:*
 
 
 
-ok
+Success. Returns a qna ID.
 
 
 Schema: `InsertResponse`
@@ -14577,7 +14573,7 @@ Schema: `InsertResponse`
 
 
 
-Bad request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -14594,7 +14590,7 @@ Schema: `FeedbackError`
 
 
 #### updateQuestion
-Update question
+Update a question
 
 ```golang
 
@@ -14607,13 +14603,13 @@ Update question
 | body |  UpdateQNARequest | "Request body" 
 
 
-This is used to update question's status, tags and choices.
+Use this API to update the status of a question, its tags and its choices.
 
 *Success Response:*
 
 
 
-ok
+Success.
 
 
 Schema: `UpdateResponse`
@@ -14625,7 +14621,7 @@ Schema: `UpdateResponse`
 
 
 
-Bad request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -14652,10 +14648,10 @@ Get a list of QnA
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| EntityType | string | entity type | 
+| EntityType | string | Type of entity, e.g. product, l3, etc. | 
 
 
-| EntityID | string | entity id | 
+| EntityID | string | ID of the eligible entity as specified in the entity type. | 
 
 
 
@@ -14669,13 +14665,13 @@ Get a list of QnA
 
 
 
-This is used to get a list of questions and its answers.
+Use this API to retrieve a list of questions and answers for a given entity.
 
 *Success Response:*
 
 
 
-ok
+Success. Check the example shown below or refer `QNAGetResponse` for more details.
 
 
 Schema: `QNAGetResponse`
@@ -14687,7 +14683,7 @@ Schema: `QNAGetResponse`
 
 
 
-Bad request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -14704,7 +14700,7 @@ Schema: `FeedbackError`
 
 
 #### getVotes
-Get list of votes
+Get a list of votes
 
 ```golang
 
@@ -14725,13 +14721,13 @@ Get list of votes
 
 
 
-This is used to get the list of votes of a current logged in user. Votes can be filtered using `ref_type` i.e. review | comment.
+Use this API to retrieve a list of votes of a current logged in user. Votes can be filtered using `ref_type`, i.e. review | comment.
 
 *Success Response:*
 
 
 
-ok
+Success. Check the example shown below or refer `VoteResponse` for more details.
 
 
 Schema: `VoteResponse`
@@ -14743,7 +14739,7 @@ Schema: `VoteResponse`
 
 
 
-Bad request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -14773,13 +14769,13 @@ Create a new vote
 | body |  VoteRequest | "Request body" 
 
 
-This is used to create a new vote and the actions can be upvote or downvote.
+Use this API to create a new vote, where the action could be an upvote or a downvote. This is useful when you want to give a vote (say upvote) to a review (ref_type) of a product (entity_type).
 
 *Success Response:*
 
 
 
-ok
+Success. Returns a vote ID.
 
 
 Schema: `InsertResponse`
@@ -14791,7 +14787,7 @@ Schema: `InsertResponse`
 
 
 
-Bad request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
@@ -14808,7 +14804,7 @@ Schema: `FeedbackError`
 
 
 #### updateVote
-Update vote
+Update a vote
 
 ```golang
 
@@ -14821,13 +14817,13 @@ Update vote
 | body |  UpdateVoteRequest | "Request body" 
 
 
-This is used to update the vote and the actions can be upvote or downvote.
+Use this API to update a vote with a new action, i.e. either an upvote or a downvote.
 
 *Success Response:*
 
 
 
-ok
+Success.
 
 
 Schema: `UpdateResponse`
@@ -14839,7 +14835,7 @@ Schema: `UpdateResponse`
 
 
 
-Bad request
+Bad request. See the error object in the response body for specific reason.
 
 
 Schema: `FeedbackError`
