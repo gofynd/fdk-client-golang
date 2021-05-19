@@ -6344,7 +6344,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetApplicationQRCode Create application QR Code
+    // GetApplicationQRCode Create QR Code of an app
     func (sh *Share)  GetApplicationQRCode() (QRCodeResp, error){
         var (
             rawRequest  *RawRequest
@@ -6385,7 +6385,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetProductQRCodeBySlug Create product QR Code
+    // GetProductQRCodeBySlug Create QR Code of a product
     func (sh *Share)  GetProductQRCodeBySlug(Slug string) (QRCodeResp, error){
         var (
             rawRequest  *RawRequest
@@ -6426,7 +6426,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetCollectionQRCodeBySlug Create collection QR Code
+    // GetCollectionQRCodeBySlug Create QR Code of a collection
     func (sh *Share)  GetCollectionQRCodeBySlug(Slug string) (QRCodeResp, error){
         var (
             rawRequest  *RawRequest
@@ -6472,7 +6472,7 @@ func NewAppClient(config *AppConfig) *Client {
         URL string  `url:"url,omitempty"`  
     }
     
-    // GetUrlQRCode Create url QR Code
+    // GetUrlQRCode Create QR Code of a URL
     func (sh *Share)  GetUrlQRCode(xQuery ShareGetUrlQRCodeXQuery) (QRCodeResp, error){
         var (
             rawRequest  *RawRequest
@@ -6513,7 +6513,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // CreateShortLink Create short link
+    // CreateShortLink Create a short link
     func (sh *Share)  CreateShortLink(body  ShortLinkReq) (ShortLinkRes, error){
         var (
             rawRequest  *RawRequest
@@ -10106,13 +10106,13 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // GetReviewSummaries Get a review summary
-    func (fe *Feedback)  GetReviewSummaries(EntityType string, EntityID string, xQuery FeedbackGetReviewSummariesXQuery) (RatingGetResponse, error){
+    func (fe *Feedback)  GetReviewSummaries(EntityType string, EntityID string, xQuery FeedbackGetReviewSummariesXQuery) (ReviewMetricGetResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            getReviewSummariesResponse RatingGetResponse
+            getReviewSummariesResponse ReviewMetricGetResponse
             
 	    )
 
@@ -10130,13 +10130,13 @@ func NewAppClient(config *AppConfig) *Client {
         response, err = rawRequest.Execute()
         if err != nil {
 	 	   
-             return RatingGetResponse{}, err
+             return ReviewMetricGetResponse{}, err
             
 	    }
         err = json.Unmarshal(response, &getReviewSummariesResponse)
         if err != nil {
            
-             return RatingGetResponse{}, common.NewFDKError(err.Error())
+             return ReviewMetricGetResponse{}, common.NewFDKError(err.Error())
             
         }
         return getReviewSummariesResponse, nil
@@ -10520,13 +10520,13 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // GetTemplates Get the feedback templates for a product or l3
-    func (fe *Feedback)  GetTemplates(xQuery FeedbackGetTemplatesXQuery) (CursorGetResponse, error){
+    func (fe *Feedback)  GetTemplates(xQuery FeedbackGetTemplatesXQuery) (TemplateGetResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            getTemplatesResponse CursorGetResponse
+            getTemplatesResponse TemplateGetResponse
             
 	    )
 
@@ -10544,13 +10544,13 @@ func NewAppClient(config *AppConfig) *Client {
         response, err = rawRequest.Execute()
         if err != nil {
 	 	   
-             return CursorGetResponse{}, err
+             return TemplateGetResponse{}, err
             
 	    }
         err = json.Unmarshal(response, &getTemplatesResponse)
         if err != nil {
            
-             return CursorGetResponse{}, common.NewFDKError(err.Error())
+             return TemplateGetResponse{}, common.NewFDKError(err.Error())
             
         }
         return getTemplatesResponse, nil

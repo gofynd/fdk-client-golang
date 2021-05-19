@@ -10441,7 +10441,7 @@ Schema: `BadRequest`
 
 
 #### getApplicationQRCode
-Create application QR Code
+Create QR Code of an app
 
 ```golang
 
@@ -10453,13 +10453,13 @@ Create application QR Code
 
 
 
-Create application QR Code
+Use this API to create a QR code of an app for sharing it with users who want to use the app.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `QRCodeResp` for more details.
 
 
 Schema: `QRCodeResp`
@@ -10476,7 +10476,7 @@ Schema: `QRCodeResp`
 
 
 #### getProductQRCodeBySlug
-Create product QR Code
+Create QR Code of a product
 
 ```golang
 
@@ -10486,18 +10486,18 @@ Create product QR Code
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Slug | string | The unique identifier of a product | 
+| Slug | string | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint. | 
 
 
 
 
-Create product QR Code
+Use this API to create a QR code of a product for sharing it with users who want to view/purchase the product.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `QRCodeResp` for more details.
 
 
 Schema: `QRCodeResp`
@@ -10526,7 +10526,7 @@ Schema: `ErrorRes`
 
 
 #### getCollectionQRCodeBySlug
-Create collection QR Code
+Create QR Code of a collection
 
 ```golang
 
@@ -10536,18 +10536,18 @@ Create collection QR Code
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Slug | string | The unique identifier of a collection | 
+| Slug | string | A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint. | 
 
 
 
 
-Create collection QR Code
+Use this API to create a QR code of a collection of products for sharing it with users who want to view/purchase the collection.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `QRCodeResp` for more details.
 
 
 Schema: `QRCodeResp`
@@ -10576,7 +10576,7 @@ Schema: `ErrorRes`
 
 
 #### getUrlQRCode
-Create url QR Code
+Create QR Code of a URL
 
 ```golang
 
@@ -10591,13 +10591,13 @@ Create url QR Code
 
 
 
-Create url QR Code
+Use this API to create a QR code of a URL for sharing it with users who want to visit the link.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `QRCodeResp` for more details.
 
 
 Schema: `QRCodeResp`
@@ -10626,7 +10626,7 @@ Schema: `ErrorRes`
 
 
 #### createShortLink
-Create short link
+Create a short link
 
 ```golang
 
@@ -10639,13 +10639,13 @@ Create short link
 | body |  ShortLinkReq | "Request body" 
 
 
-Create short link
+Use this API to create a short link that is easy to write/share/read as compared to long URLs.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `ShortLinkRes` for more details.
 
 
 Schema: `ShortLinkRes`
@@ -10684,18 +10684,18 @@ Get short link by hash
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Hash | string | Hash of short link | 
+| Hash | string | A string value used for converting long URL to short URL and vice-versa. | 
 
 
 
 
-Get short link by hash
+Use this API to get a short link by using a hash value.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `ShortLinkRes` for more details.
 
 
 Schema: `ShortLinkRes`
@@ -10734,18 +10734,18 @@ Get original link by hash
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Hash | string | Hash of short link | 
+| Hash | string | A string value used for converting long URL to short URL and vice-versa. | 
 
 
 
 
-Get original link by hash
+Use this API to retrieve the original link from a short-link by using a hash value.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `ShortLinkRes` for more details.
 
 
 Schema: `ShortLinkRes`
@@ -14291,10 +14291,10 @@ Review summary gives ratings and attribute metrics of a review per entity. Use t
 
 
 
-Success. Check the example shown below or refer `RatingGetResponse` for more details.
+Success. Check the example shown below or refer `ReviewMetricGetResponse` for more details.
 
 
-Schema: `RatingGetResponse`
+Schema: `ReviewMetricGetResponse`
 
 
 
@@ -14513,10 +14513,10 @@ Use this API to retrieve the details of the following feedback template. order, 
 
 
 
-Success. Check the example shown below or refer `CursorGetResponse` for more details.
+Success. Check the example shown below or refer `TemplateGetResponse` for more details.
 
 
-Schema: `CursorGetResponse`
+Schema: `TemplateGetResponse`
 
 
 
