@@ -1647,47 +1647,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UnfollowById Unfollow an entity (product/brand/collection)
-    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            unfollowByIdResponse FollowPostResponse
-            
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return FollowPostResponse{}, err
-            
-	    }
-        err = json.Unmarshal(response, &unfollowByIdResponse)
-        if err != nil {
-           
-             return FollowPostResponse{}, common.NewFDKError(err.Error())
-            
-        }
-        return unfollowByIdResponse, nil
-    }
-          
-    
-  
-    
-    
     // FollowById Follow an entity (product/brand/collection)
     func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1723,6 +1682,47 @@ func NewAppClient(config *AppConfig) *Client {
             
         }
         return followByIdResponse, nil
+    }
+          
+    
+  
+    
+    
+    // UnfollowById Unfollow an entity (product/brand/collection)
+    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            unfollowByIdResponse FollowPostResponse
+            
+	    )
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return FollowPostResponse{}, err
+            
+	    }
+        err = json.Unmarshal(response, &unfollowByIdResponse)
+        if err != nil {
+           
+             return FollowPostResponse{}, common.NewFDKError(err.Error())
+            
+        }
+        return unfollowByIdResponse, nil
     }
           
     
@@ -3178,7 +3178,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // CreateHistory Create history for specific Ticket
-    func (le *Lead)  CreateHistory(TicketID string, body  TicketHistoryPayload) (TicketHistory, error){
+    func (le *Lead)  CreateHistory(ID string, body  TicketHistoryPayload) (TicketHistory, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -3206,7 +3206,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             le.config,
             "post",
-            fmt.Sprintf("/service/application/lead/v1.0/ticket/%s/history",TicketID),
+            fmt.Sprintf("/service/application/lead/v1.0/ticket/%s/history",ID),
             nil,
             nil,
             reqBody)
