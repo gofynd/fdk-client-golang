@@ -3881,58 +3881,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    //PlatformGetProductXQuery holds query params
-    type PlatformGetProductXQuery struct { 
-        ItemCode string  `url:"item_code,omitempty"` 
-        BrandUID float64  `url:"brand_uid,omitempty"` 
-        UID float64  `url:"uid,omitempty"`  
-    }
-    
-    // GetProduct Get a single product.
-     func (ca *PlatformCatalog)  GetProduct(
-         ItemID float64, xQuery PlatformGetProductXQuery) (Product, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            getProductResponse Product
-            
-	    )
-     
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return Product{}, err
-            
-	    }
-        err = json.Unmarshal(response, &getProductResponse)
-        if err != nil {
-           
-             return Product{}, common.NewFDKError(err.Error())
-            
-        }
-        return getProductResponse, nil
-    }
-         
-        
-       
-    
-    
-  
-    
-    
     // EditProduct Edit a product.
      func (ca *PlatformCatalog)  EditProduct(
          ItemID float64, body  ProductCreateUpdate) (SuccessResponse, error){
@@ -3980,6 +3928,58 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             
         }
         return editProductResponse, nil
+    }
+         
+        
+       
+    
+    
+  
+    
+    
+    //PlatformGetProductXQuery holds query params
+    type PlatformGetProductXQuery struct { 
+        ItemCode string  `url:"item_code,omitempty"` 
+        BrandUID float64  `url:"brand_uid,omitempty"` 
+        UID float64  `url:"uid,omitempty"`  
+    }
+    
+    // GetProduct Get a single product.
+     func (ca *PlatformCatalog)  GetProduct(
+         ItemID float64, xQuery PlatformGetProductXQuery) (Product, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            getProductResponse Product
+            
+	    )
+     
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return Product{}, err
+            
+	    }
+        err = json.Unmarshal(response, &getProductResponse)
+        if err != nil {
+           
+             return Product{}, common.NewFDKError(err.Error())
+            
+        }
+        return getProductResponse, nil
     }
          
         
@@ -5481,51 +5481,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    // GetBrand Get a single brand.
-     func (co *PlatformCompanyProfile)  GetBrand(
-         BrandID string) (GetBrandResponseSerializer, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            getBrandResponse GetBrandResponseSerializer
-            
-	    )
-     
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            co.Config,
-            "get",
-            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/brand/%s",co.CompanyID, BrandID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return GetBrandResponseSerializer{}, err
-            
-	    }
-        err = json.Unmarshal(response, &getBrandResponse)
-        if err != nil {
-           
-             return GetBrandResponseSerializer{}, common.NewFDKError(err.Error())
-            
-        }
-        return getBrandResponse, nil
-    }
-         
-        
-       
-    
-    
-  
-    
-    
     // EditBrand Edit a brand.
      func (co *PlatformCompanyProfile)  EditBrand(
          BrandID string, body  CreateUpdateBrandRequestSerializer) (SuccessResponse, error){
@@ -5573,6 +5528,51 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             
         }
         return editBrandResponse, nil
+    }
+         
+        
+       
+    
+    
+  
+    
+    
+    // GetBrand Get a single brand.
+     func (co *PlatformCompanyProfile)  GetBrand(
+         BrandID string) (GetBrandResponseSerializer, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            getBrandResponse GetBrandResponseSerializer
+            
+	    )
+     
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.Config,
+            "get",
+            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/brand/%s",co.CompanyID, BrandID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return GetBrandResponseSerializer{}, err
+            
+	    }
+        err = json.Unmarshal(response, &getBrandResponse)
+        if err != nil {
+           
+             return GetBrandResponseSerializer{}, common.NewFDKError(err.Error())
+            
+        }
+        return getBrandResponse, nil
     }
          
         
@@ -5981,51 +5981,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    // GetLocationDetail Get details of a specific location.
-     func (co *PlatformCompanyProfile)  GetLocationDetail(
-         LocationID string) (GetLocationSerializer, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            getLocationDetailResponse GetLocationSerializer
-            
-	    )
-     
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            co.Config,
-            "get",
-            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/location/%s",co.CompanyID, LocationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return GetLocationSerializer{}, err
-            
-	    }
-        err = json.Unmarshal(response, &getLocationDetailResponse)
-        if err != nil {
-           
-             return GetLocationSerializer{}, common.NewFDKError(err.Error())
-            
-        }
-        return getLocationDetailResponse, nil
-    }
-         
-        
-       
-    
-    
-  
-    
-    
     // UpdateLocation Edit a location asscoiated to a company.
      func (co *PlatformCompanyProfile)  UpdateLocation(
          LocationID string, body  LocationSerializer) (SuccessResponse, error){
@@ -6073,6 +6028,51 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             
         }
         return updateLocationResponse, nil
+    }
+         
+        
+       
+    
+    
+  
+    
+    
+    // GetLocationDetail Get details of a specific location.
+     func (co *PlatformCompanyProfile)  GetLocationDetail(
+         LocationID string) (GetLocationSerializer, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            getLocationDetailResponse GetLocationSerializer
+            
+	    )
+     
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.Config,
+            "get",
+            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/location/%s",co.CompanyID, LocationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return GetLocationSerializer{}, err
+            
+	    }
+        err = json.Unmarshal(response, &getLocationDetailResponse)
+        if err != nil {
+           
+             return GetLocationSerializer{}, common.NewFDKError(err.Error())
+            
+        }
+        return getLocationDetailResponse, nil
     }
          
         
