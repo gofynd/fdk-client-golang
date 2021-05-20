@@ -5285,7 +5285,7 @@ func NewAppClient(config *AppConfig) *Client {
         RootID string  `url:"root_id,omitempty"`  
     }
     
-    // GetBlog Get Blog by slug
+    // GetBlog Get a blog
     func (co *Content)  GetBlog(Slug string, xQuery ContentGetBlogXQuery) (CustomBlogSchema, error){
         var (
             rawRequest  *RawRequest
@@ -5332,7 +5332,7 @@ func NewAppClient(config *AppConfig) *Client {
         PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // GetBlogs Get blogs
+    // GetBlogs Get a list of blogs
     func (co *Content)  GetBlogs(xQuery ContentGetBlogsXQuery) (BlogGetResponse, error){
         var (
             rawRequest  *RawRequest
@@ -5387,7 +5387,7 @@ func NewAppClient(config *AppConfig) *Client {
                     
                 
             
-            // GetBlogsPaginator Get blogs  
+            // GetBlogsPaginator Get a list of blogs  
             func (co *Content)  GetBlogsPaginator( xQuery ContentGetBlogsXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
                  
@@ -5415,7 +5415,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetFaqs Get frequently asked questions
+    // GetFaqs Get a list of FAQs
     func (co *Content)  GetFaqs() (FaqResponseSchema, error){
         var (
             rawRequest  *RawRequest
@@ -5456,7 +5456,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetFaqCategories Get FAQ categories list
+    // GetFaqCategories Get a list of FAQ categories
     func (co *Content)  GetFaqCategories() (GetFaqCategoriesSchema, error){
         var (
             rawRequest  *RawRequest
@@ -5497,7 +5497,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetFaqBySlug Get frequently asked question
+    // GetFaqBySlug Get an FAQ
     func (co *Content)  GetFaqBySlug(Slug string) (FaqSchema, error){
         var (
             rawRequest  *RawRequest
@@ -5538,7 +5538,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetFaqCategoryBySlug Get FAQ category by slug
+    // GetFaqCategoryBySlug Get the FAQ category
     func (co *Content)  GetFaqCategoryBySlug(Slug string) (GetFaqCategoryBySlugSchema, error){
         var (
             rawRequest  *RawRequest
@@ -5579,7 +5579,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetFaqsByCategorySlug Get FAQs of a Faq Category slug
+    // GetFaqsByCategorySlug Get FAQs using the slug of FAQ category
     func (co *Content)  GetFaqsByCategorySlug(Slug string) (GetFaqSchema, error){
         var (
             rawRequest  *RawRequest
@@ -5620,7 +5620,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetLandingPage Get landing page
+    // GetLandingPage Get the landing page
     func (co *Content)  GetLandingPage() (LandingPageSchema, error){
         var (
             rawRequest  *RawRequest
@@ -5708,7 +5708,7 @@ func NewAppClient(config *AppConfig) *Client {
         PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // GetNavigations Get navigation
+    // GetNavigations Get the navigation
     func (co *Content)  GetNavigations(xQuery ContentGetNavigationsXQuery) (NavigationGetResponse, error){
         var (
             rawRequest  *RawRequest
@@ -5763,7 +5763,7 @@ func NewAppClient(config *AppConfig) *Client {
                     
                 
             
-            // GetNavigationsPaginator Get navigation  
+            // GetNavigationsPaginator Get the navigation  
             func (co *Content)  GetNavigationsPaginator( xQuery ContentGetNavigationsXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
                  
@@ -5796,7 +5796,7 @@ func NewAppClient(config *AppConfig) *Client {
         RootID string  `url:"root_id,omitempty"`  
     }
     
-    // GetPage Get Page by slug
+    // GetPage Get a page
     func (co *Content)  GetPage(Slug string, xQuery ContentGetPageXQuery) (CustomPageSchema, error){
         var (
             rawRequest  *RawRequest
@@ -5843,7 +5843,7 @@ func NewAppClient(config *AppConfig) *Client {
         PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // GetPages Get pages
+    // GetPages Get all pages
     func (co *Content)  GetPages(xQuery ContentGetPagesXQuery) (PageGetResponse, error){
         var (
             rawRequest  *RawRequest
@@ -5898,7 +5898,7 @@ func NewAppClient(config *AppConfig) *Client {
                     
                 
             
-            // GetPagesPaginator Get pages  
+            // GetPagesPaginator Get all pages  
             func (co *Content)  GetPagesPaginator( xQuery ContentGetPagesXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
                  
@@ -5926,7 +5926,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetSEOConfiguration Get seo of application
+    // GetSEOConfiguration Get the SEO of an application
     func (co *Content)  GetSEOConfiguration() (SeoComponent, error){
         var (
             rawRequest  *RawRequest
@@ -5973,7 +5973,7 @@ func NewAppClient(config *AppConfig) *Client {
         PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // GetSlideshows Get slideshows
+    // GetSlideshows Get the slideshows
     func (co *Content)  GetSlideshows(xQuery ContentGetSlideshowsXQuery) (SlideshowGetResponse, error){
         var (
             rawRequest  *RawRequest
@@ -6028,7 +6028,7 @@ func NewAppClient(config *AppConfig) *Client {
                     
                 
             
-            // GetSlideshowsPaginator Get slideshows  
+            // GetSlideshowsPaginator Get the slideshows  
             func (co *Content)  GetSlideshowsPaginator( xQuery ContentGetSlideshowsXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
                  
@@ -6056,7 +6056,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetSlideshow Get slideshow by slug
+    // GetSlideshow Get a slideshow
     func (co *Content)  GetSlideshow(Slug string) (SlideshowSchema, error){
         var (
             rawRequest  *RawRequest
@@ -6097,7 +6097,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetSupportInformation Get support information
+    // GetSupportInformation Get the support information
     func (co *Content)  GetSupportInformation() (Support, error){
         var (
             rawRequest  *RawRequest
@@ -6138,7 +6138,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetTags Get Tags for application
+    // GetTags Get the tags associated with an application
     func (co *Content)  GetTags() (TagsSchema, error){
         var (
             rawRequest  *RawRequest
