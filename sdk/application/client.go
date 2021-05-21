@@ -1647,47 +1647,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            followByIdResponse FollowPostResponse
-            
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return FollowPostResponse{}, err
-            
-	    }
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-           
-             return FollowPostResponse{}, common.NewFDKError(err.Error())
-            
-        }
-        return followByIdResponse, nil
-    }
-          
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1723,6 +1682,47 @@ func NewAppClient(config *AppConfig) *Client {
             
         }
         return unfollowByIdResponse, nil
+    }
+          
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            followByIdResponse FollowPostResponse
+            
+	    )
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return FollowPostResponse{}, err
+            
+	    }
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+           
+             return FollowPostResponse{}, common.NewFDKError(err.Error())
+            
+        }
+        return followByIdResponse, nil
     }
           
     
@@ -10667,6 +10667,7 @@ func NewAppClient(config *AppConfig) *Client {
     //FeedbackGetQuestionAndAnswersXQuery holds query params
     type FeedbackGetQuestionAndAnswersXQuery struct { 
         ID string  `url:"id,omitempty"` 
+        UserID string  `url:"user_id,omitempty"` 
         ShowAnswer bool  `url:"show_answer,omitempty"` 
         PageID string  `url:"page_id,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"`  
@@ -10747,6 +10748,13 @@ func NewAppClient(config *AppConfig) *Client {
                     
                     
                     
+                        
+                    
+                    
+                
+                    
+                    
+                    
                     
                         
                     
@@ -10762,6 +10770,10 @@ func NewAppClient(config *AppConfig) *Client {
             // GetQuestionAndAnswersPaginator Get a list of QnA  
             func (fe *Feedback)  GetQuestionAndAnswersPaginator(EntityType string  , EntityID string  ,  xQuery FeedbackGetQuestionAndAnswersXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("cursor")
+                 
+                 
+                 
+                 
                  
                  
                  
