@@ -36,7 +36,7 @@ type Client struct {
 	
 		Rewards  *Rewards
 	
-		PosCart  *PosCart
+		Feedback  *Feedback
 	
 		Logistic  *Logistic
 	
@@ -72,7 +72,7 @@ func NewAppClient(config *AppConfig) *Client {
 			
 				Rewards:  NewRewards(config),
 			
-				PosCart:  NewPosCart(config),
+				Feedback:  NewFeedback(config),
 			
 				Logistic:  NewLogistic(config),
 			
@@ -2412,6 +2412,54 @@ func NewAppClient(config *AppConfig) *Client {
             
         }
         return getBulkDiscountOffersResponse, nil
+    }
+          
+    
+  
+    
+    
+    //CartApplyRewardPointsXQuery holds query params
+    type CartApplyRewardPointsXQuery struct { 
+        UID float64  `url:"uid,omitempty"` 
+        I bool  `url:"i,omitempty"` 
+        B bool  `url:"b,omitempty"`  
+    }
+    
+    // ApplyRewardPoints Fetch all Items Added to  Cart
+    func (ca *Cart)  ApplyRewardPoints(xQuery CartApplyRewardPointsXQuery) (CartResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            applyRewardPointsResponse CartResponse
+            
+	    )
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            "/service/application/cart/v1.0/redeem/points/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return CartResponse{}, err
+            
+	    }
+        err = json.Unmarshal(response, &applyRewardPointsResponse)
+        if err != nil {
+           
+             return CartResponse{}, common.NewFDKError(err.Error())
+            
+        }
+        return applyRewardPointsResponse, nil
     }
           
     
@@ -6653,7 +6701,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // StartUpload This operation initiates upload and returns storage link which is valid for 30 Minutes. You can use that storage link to make subsequent upload request with file buffer or blob.
+    // StartUpload Initiates an upload and returns a storage link that is valid for 30 minutes. You can use the storage link to make subsequent upload request with file buffer or blob.
     func (fi *FileStorage)  StartUpload(Namespace string, body  StartRequest) (StartResponse, error){
         var (
             rawRequest  *RawRequest
@@ -6705,7 +6753,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // CompleteUpload This will complete the upload process. After successfully uploading file, you can call this operation to complete the upload process.
+    // CompleteUpload Completes the upload process. After successfully uploading a file, call this API to finish the upload process.
     func (fi *FileStorage)  CompleteUpload(Namespace string, body  StartResponse) (CompleteResponse, error){
         var (
             rawRequest  *RawRequest
@@ -6938,7 +6986,7 @@ func NewAppClient(config *AppConfig) *Client {
         Q string  `url:"q,omitempty"`  
     }
     
-    // GetOrderingStores Get deployment meta stores
+    // GetOrderingStores Get deployment stores
     func (co *Configuration)  GetOrderingStores(xQuery ConfigurationGetOrderingStoresXQuery) (OrderingStores, error){
         var (
             rawRequest  *RawRequest
@@ -7000,7 +7048,7 @@ func NewAppClient(config *AppConfig) *Client {
                     
                 
             
-            // GetOrderingStoresPaginator Get deployment meta stores  
+            // GetOrderingStoresPaginator Get deployment stores  
             func (co *Configuration)  GetOrderingStoresPaginator( xQuery ConfigurationGetOrderingStoresXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
                  
@@ -7114,7 +7162,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetCurrencies Get application enabled currencies
+    // GetCurrencies Get currencies enabled in the application
     func (co *Configuration)  GetCurrencies() (CurrenciesResponse, error){
         var (
             rawRequest  *RawRequest
@@ -7155,7 +7203,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetCurrencyById Get currency by id
+    // GetCurrencyById Get currency by its ID
     func (co *Configuration)  GetCurrencyById(ID string) (Currency, error){
         var (
             rawRequest  *RawRequest
@@ -7237,7 +7285,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetOrderingStoreCookie Get ordering store signed cookie on selection of ordering store. This will be used by cart service to verify coupon against selected ordering store in cart.
+    // GetOrderingStoreCookie Get an Ordering Store signed cookie on selection of ordering store.
     func (co *Configuration)  GetOrderingStoreCookie(body  OrderingStoreSelectRequest) (SuccessMessageResponse, error){
         var (
             rawRequest  *RawRequest
@@ -7289,7 +7337,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // RemoveOrderingStoreCookie Unset ordering store signed cookie on change of sales channel selection via domain in universal fynd store app.
+    // RemoveOrderingStoreCookie Unset the Ordering Store signed cookie.
     func (co *Configuration)  RemoveOrderingStoreCookie() (SuccessMessageResponse, error){
         var (
             rawRequest  *RawRequest
@@ -7337,7 +7385,7 @@ func NewAppClient(config *AppConfig) *Client {
         User string  `url:"user,omitempty"`  
     }
     
-    // GetAppStaffs Get Staff List.
+    // GetAppStaffs Get a list of staff.
     func (co *Configuration)  GetAppStaffs(xQuery ConfigurationGetAppStaffsXQuery) (AppStaffResponse, error){
         var (
             rawRequest  *RawRequest
@@ -7415,7 +7463,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             pa.config,
             "get",
-            fmt.Sprintf("/service/application/payment/v1.0/config/aggregators/key",),
+            "/service/application/payment/v1.0/config/aggregators/key",
             xHeaders,
             xQuery,
             nil)
@@ -7495,7 +7543,7 @@ func NewAppClient(config *AppConfig) *Client {
         Refresh bool  `url:"refresh,omitempty"`  
     }
     
-    // GetActiveCardAggregator Fetch active payment gateway for card
+    // GetActiveCardAggregator Fetch active payment gateway for card payments
     func (pa *Payment)  GetActiveCardAggregator(xQuery PaymentGetActiveCardAggregatorXQuery) (ActiveCardPaymentGatewayResponse, error){
         var (
             rawRequest  *RawRequest
@@ -7541,7 +7589,7 @@ func NewAppClient(config *AppConfig) *Client {
         ForceRefresh bool  `url:"force_refresh,omitempty"`  
     }
     
-    // GetActiveUserCards Fetch the list of saved cards of user.
+    // GetActiveUserCards Fetch the list of cards saved by the user
     func (pa *Payment)  GetActiveUserCards(xQuery PaymentGetActiveUserCardsXQuery) (ListCardsResponse, error){
         var (
             rawRequest  *RawRequest
@@ -7582,7 +7630,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // DeleteUserCard Delete an user card.
+    // DeleteUserCard Delete a card
     func (pa *Payment)  DeleteUserCard(body  DeletehCardRequest) (DeleteCardsResponse, error){
         var (
             rawRequest  *RawRequest
@@ -7634,7 +7682,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // VerifyCustomerForPayment Validate customer for payment.
+    // VerifyCustomerForPayment Validate customer for payment
     func (pa *Payment)  VerifyCustomerForPayment(body  ValidateCustomerRequest) (ValidateCustomerResponse, error){
         var (
             rawRequest  *RawRequest
@@ -7738,7 +7786,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // InitialisePayment Payment Initialisation server to server for UPI and BharatQR.
+    // InitialisePayment Initialize a payment (server-to-server) for UPI and BharatQR
     func (pa *Payment)  InitialisePayment(body  PaymentInitializationRequest) (PaymentInitializationResponse, error){
         var (
             rawRequest  *RawRequest
@@ -7790,7 +7838,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // CheckAndUpdatePaymentStatus Continous polling to check status of payment on server.
+    // CheckAndUpdatePaymentStatus Performs continuous polling to check status of payment on the server
     func (pa *Payment)  CheckAndUpdatePaymentStatus(body  PaymentStatusUpdateRequest) (PaymentStatusUpdateResponse, error){
         var (
             rawRequest  *RawRequest
@@ -7853,7 +7901,7 @@ func NewAppClient(config *AppConfig) *Client {
         UserDetails string  `url:"user_details,omitempty"`  
     }
     
-    // GetPaymentModeRoutes Get All Valid Payment Options
+    // GetPaymentModeRoutes Get applicable payment options
     func (pa *Payment)  GetPaymentModeRoutes(xQuery PaymentGetPaymentModeRoutesXQuery) (PaymentModeRouteResponse, error){
         var (
             rawRequest  *RawRequest
@@ -7906,7 +7954,7 @@ func NewAppClient(config *AppConfig) *Client {
         UserDetails string  `url:"user_details,omitempty"`  
     }
     
-    // GetPosPaymentModeRoutes Get All Valid Payment Options for POS
+    // GetPosPaymentModeRoutes Get applicable payment options for Point-of-Sale (POS)
     func (pa *Payment)  GetPosPaymentModeRoutes(xQuery PaymentGetPosPaymentModeRoutesXQuery) (PaymentModeRouteResponse, error){
         var (
             rawRequest  *RawRequest
@@ -7947,7 +7995,48 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetActiveRefundTransferModes List Refund Transfer Mode
+    // GetRupifiBannerDetails Get CreditLine Offer
+    func (pa *Payment)  GetRupifiBannerDetails() (RupifiBannerResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            getRupifiBannerDetailsResponse RupifiBannerResponse
+            
+	    )
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            "/service/application/payment/v1.0/rupifi/banner",
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return RupifiBannerResponse{}, err
+            
+	    }
+        err = json.Unmarshal(response, &getRupifiBannerDetailsResponse)
+        if err != nil {
+           
+             return RupifiBannerResponse{}, common.NewFDKError(err.Error())
+            
+        }
+        return getRupifiBannerDetailsResponse, nil
+    }
+          
+    
+  
+    
+    
+    // GetActiveRefundTransferModes Lists the mode of refund
     func (pa *Payment)  GetActiveRefundTransferModes() (TransferModeResponse, error){
         var (
             rawRequest  *RawRequest
@@ -7988,7 +8077,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // EnableOrDisableRefundTransferMode Enable/Disable Refund Transfer Mode
+    // EnableOrDisableRefundTransferMode Enable/Disable a mode for transferring a refund
     func (pa *Payment)  EnableOrDisableRefundTransferMode(body  UpdateRefundTransferModeRequest) (UpdateRefundTransferModeResponse, error){
         var (
             rawRequest  *RawRequest
@@ -8045,7 +8134,7 @@ func NewAppClient(config *AppConfig) *Client {
         OrderID string  `url:"order_id,omitempty"`  
     }
     
-    // GetUserBeneficiariesDetail List User Beneficiary
+    // GetUserBeneficiariesDetail Lists the beneficiary of a refund
     func (pa *Payment)  GetUserBeneficiariesDetail(xQuery PaymentGetUserBeneficiariesDetailXQuery) (OrderBeneficiaryResponse, error){
         var (
             rawRequest  *RawRequest
@@ -8091,7 +8180,7 @@ func NewAppClient(config *AppConfig) *Client {
         IfscCode string  `url:"ifsc_code,omitempty"`  
     }
     
-    // VerifyIfscCode Ifsc Code Verification
+    // VerifyIfscCode Verify IFSC Code
     func (pa *Payment)  VerifyIfscCode(xQuery PaymentVerifyIfscCodeXQuery) (IfscCodeResponse, error){
         var (
             rawRequest  *RawRequest
@@ -8137,7 +8226,7 @@ func NewAppClient(config *AppConfig) *Client {
         OrderID string  `url:"order_id,omitempty"`  
     }
     
-    // GetOrderBeneficiariesDetail List Order Beneficiary
+    // GetOrderBeneficiariesDetail Lists the beneficiary of a refund
     func (pa *Payment)  GetOrderBeneficiariesDetail(xQuery PaymentGetOrderBeneficiariesDetailXQuery) (OrderBeneficiaryResponse, error){
         var (
             rawRequest  *RawRequest
@@ -8178,7 +8267,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // VerifyOtpAndAddBeneficiaryForBank Save Beneficiary details on otp validation.
+    // VerifyOtpAndAddBeneficiaryForBank Verify the beneficiary details using OTP
     func (pa *Payment)  VerifyOtpAndAddBeneficiaryForBank(body  AddBeneficiaryViaOtpVerificationRequest) (AddBeneficiaryViaOtpVerificationResponse, error){
         var (
             rawRequest  *RawRequest
@@ -8282,7 +8371,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // VerifyOtpAndAddBeneficiaryForWallet Send Otp on Adding wallet beneficiary
+    // VerifyOtpAndAddBeneficiaryForWallet Send OTP on adding a wallet beneficiary
     func (pa *Payment)  VerifyOtpAndAddBeneficiaryForWallet(body  WalletOtpRequest) (WalletOtpResponse, error){
         var (
             rawRequest  *RawRequest
@@ -8334,7 +8423,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UpdateDefaultBeneficiary Mark Default Beneficiary For Refund
+    // UpdateDefaultBeneficiary Set a default beneficiary for a refund
     func (pa *Payment)  UpdateDefaultBeneficiary(body  SetDefaultBeneficiaryRequest) (SetDefaultBeneficiaryResponse, error){
         var (
             rawRequest  *RawRequest
@@ -8405,7 +8494,7 @@ func NewAppClient(config *AppConfig) *Client {
         OrderStatus float64  `url:"order_status,omitempty"`  
     }
     
-    // GetOrders Get Orders for application based on application Id
+    // GetOrders Use this API to retrieve all the orders.
     func (or *Order)  GetOrders(xQuery OrderGetOrdersXQuery) (OrderList, error){
         var (
             rawRequest  *RawRequest
@@ -8446,7 +8535,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetOrderById Get Order by order id for application based on application Id
+    // GetOrderById Use this API to retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
     func (or *Order)  GetOrderById(OrderID string) (OrderById, error){
         var (
             rawRequest  *RawRequest
@@ -8487,7 +8576,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetShipmentById Get Shipment by shipment id and order id for application based on application Id
+    // GetShipmentById Use this API to retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
     func (or *Order)  GetShipmentById(ShipmentID string) (ShipmentById, error){
         var (
             rawRequest  *RawRequest
@@ -8528,7 +8617,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetShipmentReasons Get Shipment reasons by shipment id and order id for application based on application Id
+    // GetShipmentReasons Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
     func (or *Order)  GetShipmentReasons(ShipmentID string) (ShipmentReasons, error){
         var (
             rawRequest  *RawRequest
@@ -8569,7 +8658,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UpdateShipmentStatus Update Shipment status by shipment id and order id for application based on application Id
+    // UpdateShipmentStatus Use this API to update the status of a shipment using its shipment ID.
     func (or *Order)  UpdateShipmentStatus(ShipmentID string, body  ShipmentStatusUpdateBody) (ShipmentStatusUpdate, error){
         var (
             rawRequest  *RawRequest
@@ -8621,7 +8710,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // TrackShipment Track Shipment by shipment id and order id for application based on application Id
+    // TrackShipment Use this API to track a shipment using its shipment ID.
     func (or *Order)  TrackShipment(ShipmentID string) (ShipmentTrack, error){
         var (
             rawRequest  *RawRequest
@@ -8662,7 +8751,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetPosOrderById Get POS Order by order id for application based on application Id
+    // GetPosOrderById Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
     func (or *Order)  GetPosOrderById(OrderID string) (PosOrderById, error){
         var (
             rawRequest  *RawRequest
@@ -9081,127 +9170,26 @@ func NewAppClient(config *AppConfig) *Client {
           
     
 
-    // PosCart ...
-    type PosCart struct {
+    // Feedback ...
+    type Feedback struct {
         config *AppConfig
     }
-    // NewPosCart ...
-    func NewPosCart(config *AppConfig) *PosCart {
-        return &PosCart{config}
+    // NewFeedback ...
+    func NewFeedback(config *AppConfig) *Feedback {
+        return &Feedback{config}
     }
     
   
     
     
-    //PosCartGetCartXQuery holds query params
-    type PosCartGetCartXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
-        I bool  `url:"i,omitempty"` 
-        B bool  `url:"b,omitempty"` 
-        AssignCardID float64  `url:"assign_card_id,omitempty"`  
-    }
-    
-    // GetCart Fetch all Items Added to  Cart
-    func (po *PosCart)  GetCart(xQuery PosCartGetCartXQuery) (CartResponse, error){
+    // CreateAbuseReport Post a new abuse request
+    func (fe *Feedback)  CreateAbuseReport(body  ReportAbuseRequest) (InsertResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            getCartResponse CartResponse
-            
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            po.config,
-            "get",
-            "/service/application/pos/cart/v1.0/detail",
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return CartResponse{}, err
-            
-	    }
-        err = json.Unmarshal(response, &getCartResponse)
-        if err != nil {
-           
-             return CartResponse{}, common.NewFDKError(err.Error())
-            
-        }
-        return getCartResponse, nil
-    }
-          
-    
-  
-    
-    
-    //PosCartGetCartLastModifiedXQuery holds query params
-    type PosCartGetCartLastModifiedXQuery struct { 
-        UID float64  `url:"uid,omitempty"`  
-    }
-    
-    // GetCartLastModified Fetch Last-Modified timestamp
-    func (po *PosCart)  GetCartLastModified(xQuery PosCartGetCartLastModifiedXQuery) (interface{}, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-             getCartLastModifiedResponse interface{}
-            
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            po.config,
-            "head",
-            "/service/application/pos/cart/v1.0/detail",
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-            return getCartLastModifiedResponse, err
-            
-	    }
-        err = json.Unmarshal(response, &getCartLastModifiedResponse)
-        if err != nil {
-           
-            return getCartLastModifiedResponse, common.NewFDKError(err.Error())
-            
-        }
-        return getCartLastModifiedResponse, nil
-    }
-          
-    
-  
-    
-    
-    //PosCartAddItemsXQuery holds query params
-    type PosCartAddItemsXQuery struct { 
-        I bool  `url:"i,omitempty"` 
-        B bool  `url:"b,omitempty"`  
-    }
-    
-    // AddItems Add Items to Cart
-    func (po *PosCart)  AddItems(xQuery PosCartAddItemsXQuery, body  AddCartRequest) (AddCartResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            addItemsResponse AddCartResponse
+            createAbuseReportResponse InsertResponse
             
 	    )
 
@@ -9212,55 +9200,48 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return AddCartResponse{}, common.NewFDKError(err.Error())
+           return InsertResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return AddCartResponse{}, common.NewFDKError(err.Error())
+             return InsertResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
         rawRequest = NewRequest(
-            po.config,
+            fe.config,
             "post",
-            "/service/application/pos/cart/v1.0/detail",
+            "/service/application/feedback/v1.0/abuse",
             nil,
-            xQuery,
+            nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
 	 	   
-             return AddCartResponse{}, err
+             return InsertResponse{}, err
             
 	    }
-        err = json.Unmarshal(response, &addItemsResponse)
+        err = json.Unmarshal(response, &createAbuseReportResponse)
         if err != nil {
            
-             return AddCartResponse{}, common.NewFDKError(err.Error())
+             return InsertResponse{}, common.NewFDKError(err.Error())
             
         }
-        return addItemsResponse, nil
+        return createAbuseReportResponse, nil
     }
           
     
   
     
     
-    //PosCartUpdateCartXQuery holds query params
-    type PosCartUpdateCartXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
-        I bool  `url:"i,omitempty"` 
-        B bool  `url:"b,omitempty"`  
-    }
-    
-    // UpdateCart Update Items already added to Cart
-    func (po *PosCart)  UpdateCart(xQuery PosCartUpdateCartXQuery, body  UpdateCartRequest) (UpdateCartResponse, error){
+    // UpdateAbuseReport Update abuse details
+    func (fe *Feedback)  UpdateAbuseReport(body  UpdateAbuseStatusRequest) (UpdateResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            updateCartResponse UpdateCartResponse
+            updateAbuseReportResponse UpdateResponse
             
 	    )
 
@@ -9271,53 +9252,55 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return UpdateCartResponse{}, common.NewFDKError(err.Error())
+           return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return UpdateCartResponse{}, common.NewFDKError(err.Error())
+             return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
         rawRequest = NewRequest(
-            po.config,
+            fe.config,
             "put",
-            "/service/application/pos/cart/v1.0/detail",
+            "/service/application/feedback/v1.0/abuse",
             nil,
-            xQuery,
+            nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
 	 	   
-             return UpdateCartResponse{}, err
+             return UpdateResponse{}, err
             
 	    }
-        err = json.Unmarshal(response, &updateCartResponse)
+        err = json.Unmarshal(response, &updateAbuseReportResponse)
         if err != nil {
            
-             return UpdateCartResponse{}, common.NewFDKError(err.Error())
+             return UpdateResponse{}, common.NewFDKError(err.Error())
             
         }
-        return updateCartResponse, nil
+        return updateAbuseReportResponse, nil
     }
           
     
   
     
     
-    //PosCartGetItemCountXQuery holds query params
-    type PosCartGetItemCountXQuery struct { 
-        UID float64  `url:"uid,omitempty"`  
+    //FeedbackGetAbuseReportsXQuery holds query params
+    type FeedbackGetAbuseReportsXQuery struct { 
+        ID string  `url:"id,omitempty"` 
+        PageID string  `url:"page_id,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // GetItemCount Cart item count
-    func (po *PosCart)  GetItemCount(xQuery PosCartGetItemCountXQuery) (CartItemCountResponse, error){
+    // GetAbuseReports Get a list of abuse data
+    func (fe *Feedback)  GetAbuseReports(EntityID string, EntityType string, xQuery FeedbackGetAbuseReportsXQuery) (ReportAbuseGetResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            getItemCountResponse CartItemCountResponse
+            getAbuseReportsResponse ReportAbuseGetResponse
             
 	    )
 
@@ -9326,44 +9309,116 @@ func NewAppClient(config *AppConfig) *Client {
         
         //API call
         rawRequest = NewRequest(
-            po.config,
+            fe.config,
             "get",
-            "/service/application/pos/cart/v1.0/basic",
+            fmt.Sprintf("/service/application/feedback/v1.0/abuse/entity/%s/entity-id/%s",EntityID,EntityType),
             nil,
             xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
 	 	   
-             return CartItemCountResponse{}, err
+             return ReportAbuseGetResponse{}, err
             
 	    }
-        err = json.Unmarshal(response, &getItemCountResponse)
+        err = json.Unmarshal(response, &getAbuseReportsResponse)
         if err != nil {
            
-             return CartItemCountResponse{}, common.NewFDKError(err.Error())
+             return ReportAbuseGetResponse{}, common.NewFDKError(err.Error())
             
         }
-        return getItemCountResponse, nil
+        return getAbuseReportsResponse, nil
     }
           
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetAbuseReportsPaginator Get a list of abuse data  
+            func (fe *Feedback)  GetAbuseReportsPaginator(EntityID string  , EntityType string  ,  xQuery FeedbackGetAbuseReportsXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("cursor")
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 xQuery.PageID = paginator.NextID
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := fe.GetAbuseReports(EntityID, EntityType, xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
     
   
     
     
-    //PosCartGetCouponsXQuery holds query params
-    type PosCartGetCouponsXQuery struct { 
-        UID float64  `url:"uid,omitempty"`  
+    //FeedbackGetAttributesXQuery holds query params
+    type FeedbackGetAttributesXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // GetCoupons Fetch Coupon
-    func (po *PosCart)  GetCoupons(xQuery PosCartGetCouponsXQuery) (GetCouponResponse, error){
+    // GetAttributes Get a list of attribute data
+    func (fe *Feedback)  GetAttributes(xQuery FeedbackGetAttributesXQuery) (AttributeResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            getCouponsResponse GetCouponResponse
+            getAttributesResponse AttributeResponse
             
 	    )
 
@@ -9372,47 +9427,81 @@ func NewAppClient(config *AppConfig) *Client {
         
         //API call
         rawRequest = NewRequest(
-            po.config,
+            fe.config,
             "get",
-            "/service/application/pos/cart/v1.0/coupon",
+            "/service/application/feedback/v1.0/attributes",
             nil,
             xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
 	 	   
-             return GetCouponResponse{}, err
+             return AttributeResponse{}, err
             
 	    }
-        err = json.Unmarshal(response, &getCouponsResponse)
+        err = json.Unmarshal(response, &getAttributesResponse)
         if err != nil {
            
-             return GetCouponResponse{}, common.NewFDKError(err.Error())
+             return AttributeResponse{}, common.NewFDKError(err.Error())
             
         }
-        return getCouponsResponse, nil
+        return getAttributesResponse, nil
     }
           
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetAttributesPaginator Get a list of attribute data  
+            func (fe *Feedback)  GetAttributesPaginator( xQuery FeedbackGetAttributesXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                 
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := fe.GetAttributes(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
     
   
     
     
-    //PosCartApplyCouponXQuery holds query params
-    type PosCartApplyCouponXQuery struct { 
-        I bool  `url:"i,omitempty"` 
-        B bool  `url:"b,omitempty"` 
-        P bool  `url:"p,omitempty"` 
-        UID float64  `url:"uid,omitempty"`  
-    }
-    
-    // ApplyCoupon Apply Coupon
-    func (po *PosCart)  ApplyCoupon(xQuery PosCartApplyCouponXQuery, body  ApplyCouponRequest) (CartResponse, error){
+    // CreateAttribute Add a new attribute request
+    func (fe *Feedback)  CreateAttribute(body  SaveAttributeRequest) (InsertResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            applyCouponResponse CartResponse
+            createAttributeResponse InsertResponse
             
 	    )
 
@@ -9423,53 +9512,48 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CartResponse{}, common.NewFDKError(err.Error())
+           return InsertResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return CartResponse{}, common.NewFDKError(err.Error())
+             return InsertResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
         rawRequest = NewRequest(
-            po.config,
+            fe.config,
             "post",
-            "/service/application/pos/cart/v1.0/coupon",
+            "/service/application/feedback/v1.0/attributes",
             nil,
-            xQuery,
+            nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
 	 	   
-             return CartResponse{}, err
+             return InsertResponse{}, err
             
 	    }
-        err = json.Unmarshal(response, &applyCouponResponse)
+        err = json.Unmarshal(response, &createAttributeResponse)
         if err != nil {
            
-             return CartResponse{}, common.NewFDKError(err.Error())
+             return InsertResponse{}, common.NewFDKError(err.Error())
             
         }
-        return applyCouponResponse, nil
+        return createAttributeResponse, nil
     }
           
     
   
     
     
-    //PosCartRemoveCouponXQuery holds query params
-    type PosCartRemoveCouponXQuery struct { 
-        UID float64  `url:"uid,omitempty"`  
-    }
-    
-    // RemoveCoupon Remove Coupon Applied
-    func (po *PosCart)  RemoveCoupon(xQuery PosCartRemoveCouponXQuery) (CartResponse, error){
+    // GetAttribute Get data of a single attribute
+    func (fe *Feedback)  GetAttribute(Slug string) (Attribute, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            removeCouponResponse CartResponse
+            getAttributeResponse Attribute
             
 	    )
 
@@ -9478,138 +9562,412 @@ func NewAppClient(config *AppConfig) *Client {
         
         //API call
         rawRequest = NewRequest(
-            po.config,
+            fe.config,
+            "get",
+            fmt.Sprintf("/service/application/feedback/v1.0/attributes/%s",Slug),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return Attribute{}, err
+            
+	    }
+        err = json.Unmarshal(response, &getAttributeResponse)
+        if err != nil {
+           
+             return Attribute{}, common.NewFDKError(err.Error())
+            
+        }
+        return getAttributeResponse, nil
+    }
+          
+    
+  
+    
+    
+    // UpdateAttribute Update details of an attribute 
+    func (fe *Feedback)  UpdateAttribute(Slug string, body  UpdateAttributeRequest) (UpdateResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            updateAttributeResponse UpdateResponse
+            
+	    )
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+           return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "put",
+            fmt.Sprintf("/service/application/feedback/v1.0/attributes/%s",Slug),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return UpdateResponse{}, err
+            
+	    }
+        err = json.Unmarshal(response, &updateAttributeResponse)
+        if err != nil {
+           
+             return UpdateResponse{}, common.NewFDKError(err.Error())
+            
+        }
+        return updateAttributeResponse, nil
+    }
+          
+    
+  
+    
+    
+    // CreateComment Post a new comment
+    func (fe *Feedback)  CreateComment(body  CommentRequest) (InsertResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            createCommentResponse InsertResponse
+            
+	    )
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+           return InsertResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             return InsertResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "post",
+            "/service/application/feedback/v1.0/comment",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return InsertResponse{}, err
+            
+	    }
+        err = json.Unmarshal(response, &createCommentResponse)
+        if err != nil {
+           
+             return InsertResponse{}, common.NewFDKError(err.Error())
+            
+        }
+        return createCommentResponse, nil
+    }
+          
+    
+  
+    
+    
+    // UpdateComment Update the status of a comment
+    func (fe *Feedback)  UpdateComment(body  UpdateCommentRequest) (UpdateResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            updateCommentResponse UpdateResponse
+            
+	    )
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+           return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "put",
+            "/service/application/feedback/v1.0/comment",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return UpdateResponse{}, err
+            
+	    }
+        err = json.Unmarshal(response, &updateCommentResponse)
+        if err != nil {
+           
+             return UpdateResponse{}, common.NewFDKError(err.Error())
+            
+        }
+        return updateCommentResponse, nil
+    }
+          
+    
+  
+    
+    
+    //FeedbackGetCommentsXQuery holds query params
+    type FeedbackGetCommentsXQuery struct { 
+        ID string  `url:"id,omitempty"` 
+        EntityID string  `url:"entity_id,omitempty"` 
+        UserID string  `url:"user_id,omitempty"` 
+        PageID string  `url:"page_id,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetComments Get a list of comments
+    func (fe *Feedback)  GetComments(EntityType string, xQuery FeedbackGetCommentsXQuery) (CommentGetResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            getCommentsResponse CommentGetResponse
+            
+	    )
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "get",
+            fmt.Sprintf("/service/application/feedback/v1.0/comment/entity/%s",EntityType),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return CommentGetResponse{}, err
+            
+	    }
+        err = json.Unmarshal(response, &getCommentsResponse)
+        if err != nil {
+           
+             return CommentGetResponse{}, common.NewFDKError(err.Error())
+            
+        }
+        return getCommentsResponse, nil
+    }
+          
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetCommentsPaginator Get a list of comments  
+            func (fe *Feedback)  GetCommentsPaginator(EntityType string  ,  xQuery FeedbackGetCommentsXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("cursor")
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 xQuery.PageID = paginator.NextID
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := fe.GetComments(EntityType, xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
+    
+  
+    
+    
+    // CheckEligibility Checks eligibility to rate and review, and shows the cloud media configuration
+    func (fe *Feedback)  CheckEligibility(EntityType string, EntityID string) (CheckEligibilityResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            checkEligibilityResponse CheckEligibilityResponse
+            
+	    )
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "get",
+            fmt.Sprintf("/service/application/feedback/v1.0/config/entity/%s/entity-id/%s",EntityType,EntityID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return CheckEligibilityResponse{}, err
+            
+	    }
+        err = json.Unmarshal(response, &checkEligibilityResponse)
+        if err != nil {
+           
+             return CheckEligibilityResponse{}, common.NewFDKError(err.Error())
+            
+        }
+        return checkEligibilityResponse, nil
+    }
+          
+    
+  
+    
+    
+    // DeleteMedia Delete Media
+    func (fe *Feedback)  DeleteMedia() (UpdateResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            deleteMediaResponse UpdateResponse
+            
+	    )
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
             "delete",
-            "/service/application/pos/cart/v1.0/coupon",
+            "/service/application/feedback/v1.0/media/",
             nil,
-            xQuery,
+            nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
 	 	   
-             return CartResponse{}, err
+             return UpdateResponse{}, err
             
 	    }
-        err = json.Unmarshal(response, &removeCouponResponse)
+        err = json.Unmarshal(response, &deleteMediaResponse)
         if err != nil {
            
-             return CartResponse{}, common.NewFDKError(err.Error())
+             return UpdateResponse{}, common.NewFDKError(err.Error())
             
         }
-        return removeCouponResponse, nil
+        return deleteMediaResponse, nil
     }
           
     
   
     
     
-    //PosCartGetBulkDiscountOffersXQuery holds query params
-    type PosCartGetBulkDiscountOffersXQuery struct { 
-        ItemID float64  `url:"item_id,omitempty"` 
-        ArticleID string  `url:"article_id,omitempty"` 
-        UID float64  `url:"uid,omitempty"` 
-        Slug string  `url:"slug,omitempty"`  
-    }
-    
-    // GetBulkDiscountOffers Get discount offers based on quantity
-    func (po *PosCart)  GetBulkDiscountOffers(xQuery PosCartGetBulkDiscountOffersXQuery) (BulkPriceResponse, error){
+    // CreateMedia Add Media
+    func (fe *Feedback)  CreateMedia(body  AddMediaListRequest) (InsertResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            getBulkDiscountOffersResponse BulkPriceResponse
-            
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            po.config,
-            "get",
-            "/service/application/pos/cart/v1.0/bulk-price",
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return BulkPriceResponse{}, err
-            
-	    }
-        err = json.Unmarshal(response, &getBulkDiscountOffersResponse)
-        if err != nil {
-           
-             return BulkPriceResponse{}, common.NewFDKError(err.Error())
-            
-        }
-        return getBulkDiscountOffersResponse, nil
-    }
-          
-    
-  
-    
-    
-    //PosCartGetAddressesXQuery holds query params
-    type PosCartGetAddressesXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
-        MobileNo string  `url:"mobile_no,omitempty"` 
-        CheckoutMode string  `url:"checkout_mode,omitempty"` 
-        Tags string  `url:"tags,omitempty"` 
-        IsDefault bool  `url:"is_default,omitempty"`  
-    }
-    
-    // GetAddresses Fetch Address
-    func (po *PosCart)  GetAddresses(xQuery PosCartGetAddressesXQuery) (GetAddressesResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            getAddressesResponse GetAddressesResponse
-            
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            po.config,
-            "get",
-            "/service/application/pos/cart/v1.0/address",
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return GetAddressesResponse{}, err
-            
-	    }
-        err = json.Unmarshal(response, &getAddressesResponse)
-        if err != nil {
-           
-             return GetAddressesResponse{}, common.NewFDKError(err.Error())
-            
-        }
-        return getAddressesResponse, nil
-    }
-          
-    
-  
-    
-    
-    // AddAddress Add Address to the account
-    func (po *PosCart)  AddAddress(body  Address) (SaveAddressResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            addAddressResponse SaveAddressResponse
+            createMediaResponse InsertResponse
             
 	    )
 
@@ -9620,98 +9978,48 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return SaveAddressResponse{}, common.NewFDKError(err.Error())
+           return InsertResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return SaveAddressResponse{}, common.NewFDKError(err.Error())
+             return InsertResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
         rawRequest = NewRequest(
-            po.config,
+            fe.config,
             "post",
-            "/service/application/pos/cart/v1.0/address",
+            "/service/application/feedback/v1.0/media/",
             nil,
             nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
 	 	   
-             return SaveAddressResponse{}, err
+             return InsertResponse{}, err
             
 	    }
-        err = json.Unmarshal(response, &addAddressResponse)
+        err = json.Unmarshal(response, &createMediaResponse)
         if err != nil {
            
-             return SaveAddressResponse{}, common.NewFDKError(err.Error())
+             return InsertResponse{}, common.NewFDKError(err.Error())
             
         }
-        return addAddressResponse, nil
+        return createMediaResponse, nil
     }
           
     
   
     
     
-    //PosCartGetAddressByIdXQuery holds query params
-    type PosCartGetAddressByIdXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
-        MobileNo string  `url:"mobile_no,omitempty"` 
-        CheckoutMode string  `url:"checkout_mode,omitempty"` 
-        Tags string  `url:"tags,omitempty"` 
-        IsDefault bool  `url:"is_default,omitempty"`  
-    }
-    
-    // GetAddressById Fetch Single Address
-    func (po *PosCart)  GetAddressById(ID float64, xQuery PosCartGetAddressByIdXQuery) (Address, error){
+    // UpdateMedia Update Media
+    func (fe *Feedback)  UpdateMedia(body  UpdateMediaListRequest) (UpdateResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            getAddressByIdResponse Address
-            
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            po.config,
-            "get",
-            fmt.Sprintf("/service/application/pos/cart/v1.0/address/undefined",ID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return Address{}, err
-            
-	    }
-        err = json.Unmarshal(response, &getAddressByIdResponse)
-        if err != nil {
-           
-             return Address{}, common.NewFDKError(err.Error())
-            
-        }
-        return getAddressByIdResponse, nil
-    }
-          
-    
-  
-    
-    
-    // UpdateAddress Update Address alreay added to account
-    func (po *PosCart)  UpdateAddress(ID float64, body  Address) (UpdateAddressResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            updateAddressResponse UpdateAddressResponse
+            updateMediaResponse UpdateResponse
             
 	    )
 
@@ -9722,48 +10030,55 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return UpdateAddressResponse{}, common.NewFDKError(err.Error())
+           return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return UpdateAddressResponse{}, common.NewFDKError(err.Error())
+             return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
         rawRequest = NewRequest(
-            po.config,
+            fe.config,
             "put",
-            fmt.Sprintf("/service/application/pos/cart/v1.0/address/undefined",ID),
+            "/service/application/feedback/v1.0/media/",
             nil,
             nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
 	 	   
-             return UpdateAddressResponse{}, err
+             return UpdateResponse{}, err
             
 	    }
-        err = json.Unmarshal(response, &updateAddressResponse)
+        err = json.Unmarshal(response, &updateMediaResponse)
         if err != nil {
            
-             return UpdateAddressResponse{}, common.NewFDKError(err.Error())
+             return UpdateResponse{}, common.NewFDKError(err.Error())
             
         }
-        return updateAddressResponse, nil
+        return updateMediaResponse, nil
     }
           
     
   
     
     
-    // RemoveAddress Remove Address Associated to the account
-    func (po *PosCart)  RemoveAddress(ID float64) (DeleteAddressResponse, error){
+    //FeedbackGetMediasXQuery holds query params
+    type FeedbackGetMediasXQuery struct { 
+        ID string  `url:"id,omitempty"` 
+        PageID string  `url:"page_id,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetMedias Get Media
+    func (fe *Feedback)  GetMedias(EntityType string, EntityID string, xQuery FeedbackGetMediasXQuery) (MediaGetResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            removeAddressResponse DeleteAddressResponse
+            getMediasResponse MediaGetResponse
             
 	    )
 
@@ -9772,46 +10087,229 @@ func NewAppClient(config *AppConfig) *Client {
         
         //API call
         rawRequest = NewRequest(
-            po.config,
-            "delete",
-            fmt.Sprintf("/service/application/pos/cart/v1.0/address/undefined",ID),
+            fe.config,
+            "get",
+            fmt.Sprintf("/service/application/feedback/v1.0/media/entity/%s/entity-id/%s",EntityType,EntityID),
             nil,
-            nil,
+            xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
 	 	   
-             return DeleteAddressResponse{}, err
+             return MediaGetResponse{}, err
             
 	    }
-        err = json.Unmarshal(response, &removeAddressResponse)
+        err = json.Unmarshal(response, &getMediasResponse)
         if err != nil {
            
-             return DeleteAddressResponse{}, common.NewFDKError(err.Error())
+             return MediaGetResponse{}, common.NewFDKError(err.Error())
             
         }
-        return removeAddressResponse, nil
+        return getMediasResponse, nil
     }
           
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetMediasPaginator Get Media  
+            func (fe *Feedback)  GetMediasPaginator(EntityType string  , EntityID string  ,  xQuery FeedbackGetMediasXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("cursor")
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 xQuery.PageID = paginator.NextID
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := fe.GetMedias(EntityType, EntityID, xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
     
   
     
     
-    //PosCartSelectAddressXQuery holds query params
-    type PosCartSelectAddressXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
-        I bool  `url:"i,omitempty"` 
-        B bool  `url:"b,omitempty"`  
+    //FeedbackGetReviewSummariesXQuery holds query params
+    type FeedbackGetReviewSummariesXQuery struct { 
+        ID string  `url:"id,omitempty"` 
+        PageID string  `url:"page_id,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // SelectAddress Select Address from All Addresses
-    func (po *PosCart)  SelectAddress(xQuery PosCartSelectAddressXQuery, body  SelectCartAddressRequest) (CartResponse, error){
+    // GetReviewSummaries Get a review summary
+    func (fe *Feedback)  GetReviewSummaries(EntityType string, EntityID string, xQuery FeedbackGetReviewSummariesXQuery) (ReviewMetricGetResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            selectAddressResponse CartResponse
+            getReviewSummariesResponse ReviewMetricGetResponse
+            
+	    )
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "get",
+            fmt.Sprintf("/service/application/feedback/v1.0/rating/summary/entity/%s/entity-id/%s",EntityType,EntityID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return ReviewMetricGetResponse{}, err
+            
+	    }
+        err = json.Unmarshal(response, &getReviewSummariesResponse)
+        if err != nil {
+           
+             return ReviewMetricGetResponse{}, common.NewFDKError(err.Error())
+            
+        }
+        return getReviewSummariesResponse, nil
+    }
+          
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetReviewSummariesPaginator Get a review summary  
+            func (fe *Feedback)  GetReviewSummariesPaginator(EntityType string  , EntityID string  ,  xQuery FeedbackGetReviewSummariesXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("cursor")
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 xQuery.PageID = paginator.NextID
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := fe.GetReviewSummaries(EntityType, EntityID, xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
+    
+  
+    
+    
+    // CreateReview Add customer reviews
+    func (fe *Feedback)  CreateReview(body  UpdateReviewRequest) (UpdateResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            createReviewResponse UpdateResponse
             
 	    )
 
@@ -9822,53 +10320,48 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CartResponse{}, common.NewFDKError(err.Error())
+           return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return CartResponse{}, common.NewFDKError(err.Error())
+             return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
         rawRequest = NewRequest(
-            po.config,
+            fe.config,
             "post",
-            "/service/application/pos/cart/v1.0/select-address",
+            "/service/application/feedback/v1.0/review/",
             nil,
-            xQuery,
+            nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
 	 	   
-             return CartResponse{}, err
+             return UpdateResponse{}, err
             
 	    }
-        err = json.Unmarshal(response, &selectAddressResponse)
+        err = json.Unmarshal(response, &createReviewResponse)
         if err != nil {
            
-             return CartResponse{}, common.NewFDKError(err.Error())
+             return UpdateResponse{}, common.NewFDKError(err.Error())
             
         }
-        return selectAddressResponse, nil
+        return createReviewResponse, nil
     }
           
     
   
     
     
-    //PosCartSelectPaymentModeXQuery holds query params
-    type PosCartSelectPaymentModeXQuery struct { 
-        UID string  `url:"uid,omitempty"`  
-    }
-    
-    // SelectPaymentMode Update Cart Payment
-    func (po *PosCart)  SelectPaymentMode(xQuery PosCartSelectPaymentModeXQuery, body  UpdateCartPaymentRequest) (CartResponse, error){
+    // UpdateReview Update customer reviews
+    func (fe *Feedback)  UpdateReview(body  UpdateReviewRequest) (UpdateResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            selectPaymentModeResponse CartResponse
+            updateReviewResponse UpdateResponse
             
 	    )
 
@@ -9879,58 +10372,63 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CartResponse{}, common.NewFDKError(err.Error())
+           return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return CartResponse{}, common.NewFDKError(err.Error())
+             return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
         rawRequest = NewRequest(
-            po.config,
+            fe.config,
             "put",
-            "/service/application/pos/cart/v1.0/payment",
+            "/service/application/feedback/v1.0/review/",
             nil,
-            xQuery,
+            nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
 	 	   
-             return CartResponse{}, err
+             return UpdateResponse{}, err
             
 	    }
-        err = json.Unmarshal(response, &selectPaymentModeResponse)
+        err = json.Unmarshal(response, &updateReviewResponse)
         if err != nil {
            
-             return CartResponse{}, common.NewFDKError(err.Error())
+             return UpdateResponse{}, common.NewFDKError(err.Error())
             
         }
-        return selectPaymentModeResponse, nil
+        return updateReviewResponse, nil
     }
           
     
   
     
     
-    //PosCartValidateCouponForPaymentXQuery holds query params
-    type PosCartValidateCouponForPaymentXQuery struct { 
-        UID string  `url:"uid,omitempty"` 
-        AddressID string  `url:"address_id,omitempty"` 
-        PaymentMode string  `url:"payment_mode,omitempty"` 
-        PaymentIdentifier string  `url:"payment_identifier,omitempty"` 
-        AggregatorName string  `url:"aggregator_name,omitempty"` 
-        MerchantCode string  `url:"merchant_code,omitempty"`  
+    //FeedbackGetReviewsXQuery holds query params
+    type FeedbackGetReviewsXQuery struct { 
+        ID string  `url:"id,omitempty"` 
+        UserID string  `url:"user_id,omitempty"` 
+        Media string  `url:"media,omitempty"` 
+        Rating []float64  `url:"rating,omitempty"` 
+        AttributeRating []string  `url:"attribute_rating,omitempty"` 
+        Facets bool  `url:"facets,omitempty"` 
+        Sort string  `url:"sort,omitempty"` 
+        Active bool  `url:"active,omitempty"` 
+        Approve bool  `url:"approve,omitempty"` 
+        PageID string  `url:"page_id,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // ValidateCouponForPayment Get Cart Payment for valid coupon
-    func (po *PosCart)  ValidateCouponForPayment(xQuery PosCartValidateCouponForPaymentXQuery) (PaymentCouponValidate, error){
+    // GetReviews Get list of customer reviews
+    func (fe *Feedback)  GetReviews(EntityType string, EntityID string, xQuery FeedbackGetReviewsXQuery) (ReviewGetResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            validateCouponForPaymentResponse PaymentCouponValidate
+            getReviewsResponse ReviewGetResponse
             
 	    )
 
@@ -9939,50 +10437,205 @@ func NewAppClient(config *AppConfig) *Client {
         
         //API call
         rawRequest = NewRequest(
-            po.config,
+            fe.config,
             "get",
-            "/service/application/pos/cart/v1.0/payment/validate/",
+            fmt.Sprintf("/service/application/feedback/v1.0/review/entity/%s/entity-id/%s",EntityType,EntityID),
             nil,
             xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
 	 	   
-             return PaymentCouponValidate{}, err
+             return ReviewGetResponse{}, err
             
 	    }
-        err = json.Unmarshal(response, &validateCouponForPaymentResponse)
+        err = json.Unmarshal(response, &getReviewsResponse)
         if err != nil {
            
-             return PaymentCouponValidate{}, common.NewFDKError(err.Error())
+             return ReviewGetResponse{}, common.NewFDKError(err.Error())
             
         }
-        return validateCouponForPaymentResponse, nil
+        return getReviewsResponse, nil
     }
           
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetReviewsPaginator Get list of customer reviews  
+            func (fe *Feedback)  GetReviewsPaginator(EntityType string  , EntityID string  ,  xQuery FeedbackGetReviewsXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("cursor")
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 xQuery.PageID = paginator.NextID
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := fe.GetReviews(EntityType, EntityID, xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
     
   
     
     
-    //PosCartGetShipmentsXQuery holds query params
-    type PosCartGetShipmentsXQuery struct { 
-        PickAtStoreUID float64  `url:"pick_at_store_uid,omitempty"` 
-        OrderingStoreID float64  `url:"ordering_store_id,omitempty"` 
-        P bool  `url:"p,omitempty"` 
-        UID float64  `url:"uid,omitempty"` 
-        AddressID float64  `url:"address_id,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"` 
-        OrderType string  `url:"order_type,omitempty"`  
+    //FeedbackGetTemplatesXQuery holds query params
+    type FeedbackGetTemplatesXQuery struct { 
+        TemplateID string  `url:"template_id,omitempty"` 
+        EntityID string  `url:"entity_id,omitempty"` 
+        EntityType string  `url:"entity_type,omitempty"`  
     }
     
-    // GetShipments Get delivery date and options before checkout
-    func (po *PosCart)  GetShipments(xQuery PosCartGetShipmentsXQuery) (CartShipmentsResponse, error){
+    // GetTemplates Get the feedback templates for a product or l3
+    func (fe *Feedback)  GetTemplates(xQuery FeedbackGetTemplatesXQuery) (TemplateGetResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            getShipmentsResponse CartShipmentsResponse
+            getTemplatesResponse TemplateGetResponse
             
 	    )
 
@@ -9991,48 +10644,39 @@ func NewAppClient(config *AppConfig) *Client {
         
         //API call
         rawRequest = NewRequest(
-            po.config,
+            fe.config,
             "get",
-            "/service/application/pos/cart/v1.0/shipment",
+            "/service/application/feedback/v1.0/template/",
             nil,
             xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
 	 	   
-             return CartShipmentsResponse{}, err
+             return TemplateGetResponse{}, err
             
 	    }
-        err = json.Unmarshal(response, &getShipmentsResponse)
+        err = json.Unmarshal(response, &getTemplatesResponse)
         if err != nil {
            
-             return CartShipmentsResponse{}, common.NewFDKError(err.Error())
+             return TemplateGetResponse{}, common.NewFDKError(err.Error())
             
         }
-        return getShipmentsResponse, nil
+        return getTemplatesResponse, nil
     }
           
     
   
     
     
-    //PosCartUpdateShipmentsXQuery holds query params
-    type PosCartUpdateShipmentsXQuery struct { 
-        I bool  `url:"i,omitempty"` 
-        P bool  `url:"p,omitempty"` 
-        UID float64  `url:"uid,omitempty"` 
-        AddressID float64  `url:"address_id,omitempty"` 
-        OrderType string  `url:"order_type,omitempty"`  
-    }
-    
-    // UpdateShipments Update shipment delivery type and quantity before checkout
-    func (po *PosCart)  UpdateShipments(xQuery PosCartUpdateShipmentsXQuery, body  UpdateCartShipmentRequest) (CartShipmentsResponse, error){
+    // CreateQuestion Create a new question
+    func (fe *Feedback)  CreateQuestion(body  CreateQNARequest) (InsertResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            updateShipmentsResponse CartShipmentsResponse
+            createQuestionResponse InsertResponse
             
 	    )
 
@@ -10043,53 +10687,356 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CartShipmentsResponse{}, common.NewFDKError(err.Error())
+           return InsertResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return CartShipmentsResponse{}, common.NewFDKError(err.Error())
+             return InsertResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
         rawRequest = NewRequest(
-            po.config,
+            fe.config,
+            "post",
+            "/service/application/feedback/v1.0/template/qna/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return InsertResponse{}, err
+            
+	    }
+        err = json.Unmarshal(response, &createQuestionResponse)
+        if err != nil {
+           
+             return InsertResponse{}, common.NewFDKError(err.Error())
+            
+        }
+        return createQuestionResponse, nil
+    }
+          
+    
+  
+    
+    
+    // UpdateQuestion Update a question
+    func (fe *Feedback)  UpdateQuestion(body  UpdateQNARequest) (UpdateResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            updateQuestionResponse UpdateResponse
+            
+	    )
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+           return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
             "put",
-            "/service/application/pos/cart/v1.0/shipment",
+            "/service/application/feedback/v1.0/template/qna/",
             nil,
-            xQuery,
+            nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
 	 	   
-             return CartShipmentsResponse{}, err
+             return UpdateResponse{}, err
             
 	    }
-        err = json.Unmarshal(response, &updateShipmentsResponse)
+        err = json.Unmarshal(response, &updateQuestionResponse)
         if err != nil {
            
-             return CartShipmentsResponse{}, common.NewFDKError(err.Error())
+             return UpdateResponse{}, common.NewFDKError(err.Error())
             
         }
-        return updateShipmentsResponse, nil
+        return updateQuestionResponse, nil
     }
           
     
   
     
     
-    //PosCartCheckoutCartXQuery holds query params
-    type PosCartCheckoutCartXQuery struct { 
-        UID float64  `url:"uid,omitempty"`  
+    //FeedbackGetQuestionAndAnswersXQuery holds query params
+    type FeedbackGetQuestionAndAnswersXQuery struct { 
+        ID string  `url:"id,omitempty"` 
+        UserID string  `url:"user_id,omitempty"` 
+        ShowAnswer bool  `url:"show_answer,omitempty"` 
+        PageID string  `url:"page_id,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // CheckoutCart Checkout Cart
-    func (po *PosCart)  CheckoutCart(xQuery PosCartCheckoutCartXQuery, body  CartPosCheckoutRequest) (CartCheckoutResponse, error){
+    // GetQuestionAndAnswers Get a list of QnA
+    func (fe *Feedback)  GetQuestionAndAnswers(EntityType string, EntityID string, xQuery FeedbackGetQuestionAndAnswersXQuery) (QNAGetResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            checkoutCartResponse CartCheckoutResponse
+            getQuestionAndAnswersResponse QNAGetResponse
+            
+	    )
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "get",
+            fmt.Sprintf("/service/application/feedback/v1.0/template/qna/entity/%s/entity-id/%s",EntityType,EntityID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return QNAGetResponse{}, err
+            
+	    }
+        err = json.Unmarshal(response, &getQuestionAndAnswersResponse)
+        if err != nil {
+           
+             return QNAGetResponse{}, common.NewFDKError(err.Error())
+            
+        }
+        return getQuestionAndAnswersResponse, nil
+    }
+          
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetQuestionAndAnswersPaginator Get a list of QnA  
+            func (fe *Feedback)  GetQuestionAndAnswersPaginator(EntityType string  , EntityID string  ,  xQuery FeedbackGetQuestionAndAnswersXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("cursor")
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 xQuery.PageID = paginator.NextID
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := fe.GetQuestionAndAnswers(EntityType, EntityID, xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
+    
+  
+    
+    
+    //FeedbackGetVotesXQuery holds query params
+    type FeedbackGetVotesXQuery struct { 
+        ID string  `url:"id,omitempty"` 
+        RefType string  `url:"ref_type,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetVotes Get a list of votes
+    func (fe *Feedback)  GetVotes(xQuery FeedbackGetVotesXQuery) (VoteResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            getVotesResponse VoteResponse
+            
+	    )
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "get",
+            "/service/application/feedback/v1.0/vote/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+	 	   
+             return VoteResponse{}, err
+            
+	    }
+        err = json.Unmarshal(response, &getVotesResponse)
+        if err != nil {
+           
+             return VoteResponse{}, common.NewFDKError(err.Error())
+            
+        }
+        return getVotesResponse, nil
+    }
+          
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetVotesPaginator Get a list of votes  
+            func (fe *Feedback)  GetVotesPaginator( xQuery FeedbackGetVotesXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := fe.GetVotes(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
+    
+  
+    
+    
+    // CreateVote Create a new vote
+    func (fe *Feedback)  CreateVote(body  VoteRequest) (InsertResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+            createVoteResponse InsertResponse
             
 	    )
 
@@ -10100,53 +11047,48 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CartCheckoutResponse{}, common.NewFDKError(err.Error())
+           return InsertResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return CartCheckoutResponse{}, common.NewFDKError(err.Error())
+             return InsertResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
         rawRequest = NewRequest(
-            po.config,
+            fe.config,
             "post",
-            "/service/application/pos/cart/v1.0/checkout",
+            "/service/application/feedback/v1.0/vote/",
             nil,
-            xQuery,
+            nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
 	 	   
-             return CartCheckoutResponse{}, err
+             return InsertResponse{}, err
             
 	    }
-        err = json.Unmarshal(response, &checkoutCartResponse)
+        err = json.Unmarshal(response, &createVoteResponse)
         if err != nil {
            
-             return CartCheckoutResponse{}, common.NewFDKError(err.Error())
+             return InsertResponse{}, common.NewFDKError(err.Error())
             
         }
-        return checkoutCartResponse, nil
+        return createVoteResponse, nil
     }
           
     
   
     
     
-    //PosCartUpdateCartMetaXQuery holds query params
-    type PosCartUpdateCartMetaXQuery struct { 
-        UID float64  `url:"uid,omitempty"`  
-    }
-    
-    // UpdateCartMeta Update Cart Meta
-    func (po *PosCart)  UpdateCartMeta(xQuery PosCartUpdateCartMetaXQuery, body  CartMetaRequest) (CartMetaResponse, error){
+    // UpdateVote Update a vote
+    func (fe *Feedback)  UpdateVote(body  UpdateVoteRequest) (UpdateResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
             
-            updateCartMetaResponse CartMetaResponse
+            updateVoteResponse UpdateResponse
             
 	    )
 
@@ -10157,261 +11099,34 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CartMetaResponse{}, common.NewFDKError(err.Error())
+           return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return CartMetaResponse{}, common.NewFDKError(err.Error())
+             return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
         rawRequest = NewRequest(
-            po.config,
+            fe.config,
             "put",
-            "/service/application/pos/cart/v1.0/meta",
-            nil,
-            xQuery,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return CartMetaResponse{}, err
-            
-	    }
-        err = json.Unmarshal(response, &updateCartMetaResponse)
-        if err != nil {
-           
-             return CartMetaResponse{}, common.NewFDKError(err.Error())
-            
-        }
-        return updateCartMetaResponse, nil
-    }
-          
-    
-  
-    
-    
-    //PosCartGetAvailableDeliveryModesXQuery holds query params
-    type PosCartGetAvailableDeliveryModesXQuery struct { 
-        AreaCode string  `url:"area_code,omitempty"` 
-        UID float64  `url:"uid,omitempty"`  
-    }
-    
-    // GetAvailableDeliveryModes Get available delivery modes for cart
-    func (po *PosCart)  GetAvailableDeliveryModes(xQuery PosCartGetAvailableDeliveryModesXQuery) (CartDeliveryModesResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            getAvailableDeliveryModesResponse CartDeliveryModesResponse
-            
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            po.config,
-            "get",
-            fmt.Sprintf("/service/application/pos/cart/v1.0/available-delivery-mode",),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return CartDeliveryModesResponse{}, err
-            
-	    }
-        err = json.Unmarshal(response, &getAvailableDeliveryModesResponse)
-        if err != nil {
-           
-             return CartDeliveryModesResponse{}, common.NewFDKError(err.Error())
-            
-        }
-        return getAvailableDeliveryModesResponse, nil
-    }
-          
-    
-  
-    
-    
-    //PosCartGetStoreAddressByUidXQuery holds query params
-    type PosCartGetStoreAddressByUidXQuery struct { 
-        StoreUID float64  `url:"store_uid,omitempty"`  
-    }
-    
-    // GetStoreAddressByUid Get list of stores for give uids
-    func (po *PosCart)  GetStoreAddressByUid(xQuery PosCartGetStoreAddressByUidXQuery) (StoreDetailsResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            getStoreAddressByUidResponse StoreDetailsResponse
-            
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            po.config,
-            "get",
-            fmt.Sprintf("/service/application/pos/cart/v1.0/store-address",),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return StoreDetailsResponse{}, err
-            
-	    }
-        err = json.Unmarshal(response, &getStoreAddressByUidResponse)
-        if err != nil {
-           
-             return StoreDetailsResponse{}, common.NewFDKError(err.Error())
-            
-        }
-        return getStoreAddressByUidResponse, nil
-    }
-          
-    
-  
-    
-    
-    // GetCartShareLink Generate Cart sharing link token
-    func (po *PosCart)  GetCartShareLink(body  GetShareCartLinkRequest) (GetShareCartLinkResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            getCartShareLinkResponse GetShareCartLinkResponse
-            
-	    )
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-           return GetShareCartLinkResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             return GetShareCartLinkResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            po.config,
-            "post",
-            "/service/application/pos/cart/v1.0/share-cart",
+            "/service/application/feedback/v1.0/vote/",
             nil,
             nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
 	 	   
-             return GetShareCartLinkResponse{}, err
+             return UpdateResponse{}, err
             
 	    }
-        err = json.Unmarshal(response, &getCartShareLinkResponse)
+        err = json.Unmarshal(response, &updateVoteResponse)
         if err != nil {
            
-             return GetShareCartLinkResponse{}, common.NewFDKError(err.Error())
+             return UpdateResponse{}, common.NewFDKError(err.Error())
             
         }
-        return getCartShareLinkResponse, nil
-    }
-          
-    
-  
-    
-    
-    // GetCartSharedItems Get shared cart snapshot and cart response
-    func (po *PosCart)  GetCartSharedItems(Token string) (SharedCartResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            getCartSharedItemsResponse SharedCartResponse
-            
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            po.config,
-            "get",
-            fmt.Sprintf("/service/application/pos/cart/v1.0/share-cart/%s",Token),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return SharedCartResponse{}, err
-            
-	    }
-        err = json.Unmarshal(response, &getCartSharedItemsResponse)
-        if err != nil {
-           
-             return SharedCartResponse{}, common.NewFDKError(err.Error())
-            
-        }
-        return getCartSharedItemsResponse, nil
-    }
-          
-    
-  
-    
-    
-    // UpdateCartWithSharedItems Merge or Replace existing cart
-    func (po *PosCart)  UpdateCartWithSharedItems(Token string, Action string) (SharedCartResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            updateCartWithSharedItemsResponse SharedCartResponse
-            
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            po.config,
-            "post",
-            fmt.Sprintf("/service/application/pos/cart/v1.0/share-cart/%s/%s",Token,Action),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return SharedCartResponse{}, err
-            
-	    }
-        err = json.Unmarshal(response, &updateCartWithSharedItemsResponse)
-        if err != nil {
-           
-             return SharedCartResponse{}, common.NewFDKError(err.Error())
-            
-        }
-        return updateCartWithSharedItemsResponse, nil
+        return updateVoteResponse, nil
     }
           
     
@@ -10428,7 +11143,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetTatProduct Get Tat Product
+    // GetTatProduct Use this API to know the delivery turnaround time (TAT) by entering the product details along with the PIN Code of the location.
     func (lo *Logistic)  GetTatProduct(body  GetTatProductReqBody) (GetTatProductResponse, error){
         var (
             rawRequest  *RawRequest
@@ -10480,7 +11195,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetPincodeCity Get City from Pincode
+    // GetPincodeCity Use this API to retrieve a city by its PIN Code.
     func (lo *Logistic)  GetPincodeCity(Pincode string) (GetPincodeCityResponse, error){
         var (
             rawRequest  *RawRequest
