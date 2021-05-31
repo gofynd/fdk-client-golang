@@ -111,7 +111,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+    
   
+
     
     //PlatformAppGetTicketsXQuery holds query params
     type PlatformAppGetTicketsXQuery struct { 
@@ -124,14 +126,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetTickets Gets the list of Application level Tickets and/or ticket filters depending on query params
-     func (le *PlatformAppLead)  GetTickets(xQuery PlatformAppGetTicketsXQuery) (TicketList, error){
+     func (le *PlatformAppLead)  GetTickets(xQuery PlatformAppGetTicketsXQuery) (TicketList, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getTicketsResponse TicketList
-            
 	    )
         
          
@@ -147,17 +147,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return TicketList{}, err
-            
+            return TicketList{}, err
 	    }
+        
         err = json.Unmarshal(response, &getTicketsResponse)
         if err != nil {
-           
-             return TicketList{}, common.NewFDKError(err.Error())
-            
+            return TicketList{}, common.NewFDKError(err.Error())
         }
         return getTicketsResponse, nil
+        
     }
            
        
@@ -167,17 +165,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+    
   
+
     
     // GetTicket Retreives ticket details of a application level ticket
-     func (le *PlatformAppLead)  GetTicket(ID string) (Ticket, error){
+     func (le *PlatformAppLead)  GetTicket(ID string) (Ticket, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getTicketResponse Ticket
-            
 	    )
         
          
@@ -193,33 +191,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Ticket{}, err
-            
+            return Ticket{}, err
 	    }
+        
         err = json.Unmarshal(response, &getTicketResponse)
         if err != nil {
-           
-             return Ticket{}, common.NewFDKError(err.Error())
-            
+            return Ticket{}, common.NewFDKError(err.Error())
         }
         return getTicketResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // EditTicket Edits ticket details of a application level ticket
-     func (le *PlatformAppLead)  EditTicket(ID string, body  EditTicketPayload) (Ticket, error){
+     func (le *PlatformAppLead)  EditTicket(ID string, body  EditTicketPayload) (Ticket, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             editTicketResponse Ticket
-            
 	    )
         
          
@@ -229,11 +225,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return Ticket{}, common.NewFDKError(err.Error())
+            
+             return Ticket{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return Ticket{}, common.NewFDKError(err.Error())
+            
+             return Ticket{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -246,17 +244,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Ticket{}, err
-            
+            return Ticket{}, err
 	    }
+        
         err = json.Unmarshal(response, &editTicketResponse)
         if err != nil {
-           
-             return Ticket{}, common.NewFDKError(err.Error())
-            
+            return Ticket{}, common.NewFDKError(err.Error())
         }
         return editTicketResponse, nil
+        
     }
            
        
@@ -266,17 +262,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+    
   
+
     
     // CreateHistory Create history for specific application level ticket
-     func (le *PlatformAppLead)  CreateHistory(ID string, body  TicketHistoryPayload) (TicketHistory, error){
+     func (le *PlatformAppLead)  CreateHistory(ID string, body  TicketHistoryPayload) (TicketHistory, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createHistoryResponse TicketHistory
-            
 	    )
         
          
@@ -286,11 +282,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return TicketHistory{}, common.NewFDKError(err.Error())
+            
+             return TicketHistory{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return TicketHistory{}, common.NewFDKError(err.Error())
+            
+             return TicketHistory{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -303,33 +301,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return TicketHistory{}, err
-            
+            return TicketHistory{}, err
 	    }
+        
         err = json.Unmarshal(response, &createHistoryResponse)
         if err != nil {
-           
-             return TicketHistory{}, common.NewFDKError(err.Error())
-            
+            return TicketHistory{}, common.NewFDKError(err.Error())
         }
         return createHistoryResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetTicketHistory Gets history list for specific application level ticket
-     func (le *PlatformAppLead)  GetTicketHistory(ID string) (TicketHistoryList, error){
+     func (le *PlatformAppLead)  GetTicketHistory(ID string) (TicketHistoryList, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getTicketHistoryResponse TicketHistoryList
-            
 	    )
         
          
@@ -345,33 +341,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return TicketHistoryList{}, err
-            
+            return TicketHistoryList{}, err
 	    }
+        
         err = json.Unmarshal(response, &getTicketHistoryResponse)
         if err != nil {
-           
-             return TicketHistoryList{}, common.NewFDKError(err.Error())
-            
+            return TicketHistoryList{}, common.NewFDKError(err.Error())
         }
         return getTicketHistoryResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetCustomForm Get specific custom form using it's slug
-     func (le *PlatformAppLead)  GetCustomForm(Slug string) (CustomForm, error){
+     func (le *PlatformAppLead)  GetCustomForm(Slug string) (CustomForm, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getCustomFormResponse CustomForm
-            
 	    )
         
          
@@ -387,33 +381,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CustomForm{}, err
-            
+            return CustomForm{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCustomFormResponse)
         if err != nil {
-           
-             return CustomForm{}, common.NewFDKError(err.Error())
-            
+            return CustomForm{}, common.NewFDKError(err.Error())
         }
         return getCustomFormResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // EditCustomForm Edit the given custom form
-     func (le *PlatformAppLead)  EditCustomForm(Slug string, body  EditCustomFormPayload) (CustomForm, error){
+     func (le *PlatformAppLead)  EditCustomForm(Slug string, body  EditCustomFormPayload) (CustomForm, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             editCustomFormResponse CustomForm
-            
 	    )
         
          
@@ -423,11 +415,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CustomForm{}, common.NewFDKError(err.Error())
+            
+             return CustomForm{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return CustomForm{}, common.NewFDKError(err.Error())
+            
+             return CustomForm{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -440,33 +434,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CustomForm{}, err
-            
+            return CustomForm{}, err
 	    }
+        
         err = json.Unmarshal(response, &editCustomFormResponse)
         if err != nil {
-           
-             return CustomForm{}, common.NewFDKError(err.Error())
-            
+            return CustomForm{}, common.NewFDKError(err.Error())
         }
         return editCustomFormResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetCustomForms Get list of custom form
-     func (le *PlatformAppLead)  GetCustomForms() (CustomFormList, error){
+     func (le *PlatformAppLead)  GetCustomForms() (CustomFormList, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getCustomFormsResponse CustomFormList
-            
 	    )
         
          
@@ -482,33 +474,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CustomFormList{}, err
-            
+            return CustomFormList{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCustomFormsResponse)
         if err != nil {
-           
-             return CustomFormList{}, common.NewFDKError(err.Error())
-            
+            return CustomFormList{}, common.NewFDKError(err.Error())
         }
         return getCustomFormsResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // CreateCustomForm Creates a new custom form
-     func (le *PlatformAppLead)  CreateCustomForm(body  CreateCustomFormPayload) (CustomForm, error){
+     func (le *PlatformAppLead)  CreateCustomForm(body  CreateCustomFormPayload) (CustomForm, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createCustomFormResponse CustomForm
-            
 	    )
         
          
@@ -518,11 +508,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CustomForm{}, common.NewFDKError(err.Error())
+            
+             return CustomForm{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return CustomForm{}, common.NewFDKError(err.Error())
+            
+             return CustomForm{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -535,33 +527,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CustomForm{}, err
-            
+            return CustomForm{}, err
 	    }
+        
         err = json.Unmarshal(response, &createCustomFormResponse)
         if err != nil {
-           
-             return CustomForm{}, common.NewFDKError(err.Error())
-            
+            return CustomForm{}, common.NewFDKError(err.Error())
         }
         return createCustomFormResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetTokenForVideoRoom Get Token to join a specific Video Room using it's unqiue name
-     func (le *PlatformAppLead)  GetTokenForVideoRoom(UniqueName string) (GetTokenForVideoRoomResponse, error){
+     func (le *PlatformAppLead)  GetTokenForVideoRoom(UniqueName string) (GetTokenForVideoRoomResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getTokenForVideoRoomResponse GetTokenForVideoRoomResponse
-            
 	    )
         
          
@@ -577,33 +567,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetTokenForVideoRoomResponse{}, err
-            
+            return GetTokenForVideoRoomResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getTokenForVideoRoomResponse)
         if err != nil {
-           
-             return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
-            
+            return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
         }
         return getTokenForVideoRoomResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetVideoParticipants Get participants of a specific Video Room using it's unique name
-     func (le *PlatformAppLead)  GetVideoParticipants(UniqueName string) (GetParticipantsInsideVideoRoomResponse, error){
+     func (le *PlatformAppLead)  GetVideoParticipants(UniqueName string) (GetParticipantsInsideVideoRoomResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getVideoParticipantsResponse GetParticipantsInsideVideoRoomResponse
-            
 	    )
         
          
@@ -619,33 +607,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetParticipantsInsideVideoRoomResponse{}, err
-            
+            return GetParticipantsInsideVideoRoomResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getVideoParticipantsResponse)
         if err != nil {
-           
-             return GetParticipantsInsideVideoRoomResponse{}, common.NewFDKError(err.Error())
-            
+            return GetParticipantsInsideVideoRoomResponse{}, common.NewFDKError(err.Error())
         }
         return getVideoParticipantsResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // OpenVideoRoom Open a video room.
-     func (le *PlatformAppLead)  OpenVideoRoom(body  CreateVideoRoomPayload) (CreateVideoRoomResponse, error){
+     func (le *PlatformAppLead)  OpenVideoRoom(body  CreateVideoRoomPayload) (CreateVideoRoomResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             openVideoRoomResponse CreateVideoRoomResponse
-            
 	    )
         
          
@@ -655,11 +641,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CreateVideoRoomResponse{}, common.NewFDKError(err.Error())
+            
+             return CreateVideoRoomResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return CreateVideoRoomResponse{}, common.NewFDKError(err.Error())
+            
+             return CreateVideoRoomResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -672,33 +660,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CreateVideoRoomResponse{}, err
-            
+            return CreateVideoRoomResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &openVideoRoomResponse)
         if err != nil {
-           
-             return CreateVideoRoomResponse{}, common.NewFDKError(err.Error())
-            
+            return CreateVideoRoomResponse{}, common.NewFDKError(err.Error())
         }
         return openVideoRoomResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // CloseVideoRoom Close the video room and force all participants to leave.
-     func (le *PlatformAppLead)  CloseVideoRoom(UniqueName string) (CloseVideoRoomResponse, error){
+     func (le *PlatformAppLead)  CloseVideoRoom(UniqueName string) (CloseVideoRoomResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             closeVideoRoomResponse CloseVideoRoomResponse
-            
 	    )
         
          
@@ -714,17 +700,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CloseVideoRoomResponse{}, err
-            
+            return CloseVideoRoomResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &closeVideoRoomResponse)
         if err != nil {
-           
-             return CloseVideoRoomResponse{}, common.NewFDKError(err.Error())
-            
+            return CloseVideoRoomResponse{}, common.NewFDKError(err.Error())
         }
         return closeVideoRoomResponse, nil
+        
     }
            
        
@@ -744,7 +728,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     
+    
   
+
     
     //PlatformAppGetAttributesXQuery holds query params
     type PlatformAppGetAttributesXQuery struct { 
@@ -753,14 +739,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetAttributes Get list of attribute data
-     func (fe *PlatformAppFeedback)  GetAttributes(xQuery PlatformAppGetAttributesXQuery) (FeedbackAttributes, error){
+     func (fe *PlatformAppFeedback)  GetAttributes(xQuery PlatformAppGetAttributesXQuery) (FeedbackAttributes, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getAttributesResponse FeedbackAttributes
-            
 	    )
         
          
@@ -776,17 +760,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return FeedbackAttributes{}, err
-            
+            return FeedbackAttributes{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAttributesResponse)
         if err != nil {
-           
-             return FeedbackAttributes{}, common.NewFDKError(err.Error())
-            
+            return FeedbackAttributes{}, common.NewFDKError(err.Error())
         }
         return getAttributesResponse, nil
+        
     }
            
             
@@ -842,7 +824,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     //PlatformAppGetCustomerReviewsXQuery holds query params
     type PlatformAppGetCustomerReviewsXQuery struct { 
@@ -864,14 +848,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetCustomerReviews Get list of customer reviews [admin]
-     func (fe *PlatformAppFeedback)  GetCustomerReviews(xQuery PlatformAppGetCustomerReviewsXQuery) (GetReviewResponse, error){
+     func (fe *PlatformAppFeedback)  GetCustomerReviews(xQuery PlatformAppGetCustomerReviewsXQuery) (GetReviewResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getCustomerReviewsResponse GetReviewResponse
-            
 	    )
         
          
@@ -887,17 +869,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetReviewResponse{}, err
-            
+            return GetReviewResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCustomerReviewsResponse)
         if err != nil {
-           
-             return GetReviewResponse{}, common.NewFDKError(err.Error())
-            
+            return GetReviewResponse{}, common.NewFDKError(err.Error())
         }
         return getCustomerReviewsResponse, nil
+        
     }
            
             
@@ -1083,17 +1063,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // UpdateApprove update approve details
-     func (fe *PlatformAppFeedback)  UpdateApprove(ReviewID string, body  ApproveRequest) (UpdateResponse, error){
+     func (fe *PlatformAppFeedback)  UpdateApprove(ReviewID string, body  ApproveRequest) (UpdateResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateApproveResponse UpdateResponse
-            
 	    )
         
          
@@ -1103,11 +1083,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return UpdateResponse{}, common.NewFDKError(err.Error())
+            
+             return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return UpdateResponse{}, common.NewFDKError(err.Error())
+            
+             return UpdateResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -1120,33 +1102,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return UpdateResponse{}, err
-            
+            return UpdateResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateApproveResponse)
         if err != nil {
-           
-             return UpdateResponse{}, common.NewFDKError(err.Error())
-            
+            return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         return updateApproveResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetHistory get history details
-     func (fe *PlatformAppFeedback)  GetHistory(ReviewID string) ([]ActivityDump, error){
+     func (fe *PlatformAppFeedback)  GetHistory(ReviewID string) ([]ActivityDump, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getHistoryResponse []ActivityDump
-            
 	    )
         
          
@@ -1162,23 +1142,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return []ActivityDump{}, err
-            
+            return []ActivityDump{}, err
 	    }
+        
         err = json.Unmarshal(response, &getHistoryResponse)
         if err != nil {
-           
-             return []ActivityDump{}, common.NewFDKError(err.Error())
-            
+            return []ActivityDump{}, common.NewFDKError(err.Error())
         }
         return getHistoryResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetApplicationTemplatesXQuery holds query params
     type PlatformAppGetApplicationTemplatesXQuery struct { 
@@ -1187,14 +1167,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetApplicationTemplates Get list of templates
-     func (fe *PlatformAppFeedback)  GetApplicationTemplates(xQuery PlatformAppGetApplicationTemplatesXQuery) (TemplateGetResponse, error){
+     func (fe *PlatformAppFeedback)  GetApplicationTemplates(xQuery PlatformAppGetApplicationTemplatesXQuery) (TemplateGetResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getApplicationTemplatesResponse TemplateGetResponse
-            
 	    )
         
          
@@ -1210,17 +1188,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return TemplateGetResponse{}, err
-            
+            return TemplateGetResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getApplicationTemplatesResponse)
         if err != nil {
-           
-             return TemplateGetResponse{}, common.NewFDKError(err.Error())
-            
+            return TemplateGetResponse{}, common.NewFDKError(err.Error())
         }
         return getApplicationTemplatesResponse, nil
+        
     }
            
             
@@ -1276,17 +1252,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // CreateTemplate Create a new template
-     func (fe *PlatformAppFeedback)  CreateTemplate(body  TemplateRequestList) (InsertResponse, error){
+     func (fe *PlatformAppFeedback)  CreateTemplate(body  TemplateRequestList) (InsertResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createTemplateResponse InsertResponse
-            
 	    )
         
          
@@ -1296,11 +1272,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return InsertResponse{}, common.NewFDKError(err.Error())
+            
+             return InsertResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return InsertResponse{}, common.NewFDKError(err.Error())
+            
+             return InsertResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -1313,33 +1291,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return InsertResponse{}, err
-            
+            return InsertResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &createTemplateResponse)
         if err != nil {
-           
-             return InsertResponse{}, common.NewFDKError(err.Error())
-            
+            return InsertResponse{}, common.NewFDKError(err.Error())
         }
         return createTemplateResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetTemplateById Get a template by ID
-     func (fe *PlatformAppFeedback)  GetTemplateById(ID string) (Template, error){
+     func (fe *PlatformAppFeedback)  GetTemplateById(ID string) (Template, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getTemplateByIdResponse Template
-            
 	    )
         
          
@@ -1355,33 +1331,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Template{}, err
-            
+            return Template{}, err
 	    }
+        
         err = json.Unmarshal(response, &getTemplateByIdResponse)
         if err != nil {
-           
-             return Template{}, common.NewFDKError(err.Error())
-            
+            return Template{}, common.NewFDKError(err.Error())
         }
         return getTemplateByIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateTemplate Update a template's status
-     func (fe *PlatformAppFeedback)  UpdateTemplate(ID string, body  UpdateTemplateRequest) (UpdateResponse, error){
+     func (fe *PlatformAppFeedback)  UpdateTemplate(ID string, body  UpdateTemplateRequest) (UpdateResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateTemplateResponse UpdateResponse
-            
 	    )
         
          
@@ -1391,11 +1365,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return UpdateResponse{}, common.NewFDKError(err.Error())
+            
+             return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return UpdateResponse{}, common.NewFDKError(err.Error())
+            
+             return UpdateResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -1408,33 +1384,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return UpdateResponse{}, err
-            
+            return UpdateResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateTemplateResponse)
         if err != nil {
-           
-             return UpdateResponse{}, common.NewFDKError(err.Error())
-            
+            return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         return updateTemplateResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateTemplateStatus Update a template's status
-     func (fe *PlatformAppFeedback)  UpdateTemplateStatus(ID string, body  UpdateTemplateStatusRequest) (UpdateResponse, error){
+     func (fe *PlatformAppFeedback)  UpdateTemplateStatus(ID string, body  UpdateTemplateStatusRequest) (UpdateResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateTemplateStatusResponse UpdateResponse
-            
 	    )
         
          
@@ -1444,11 +1418,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return UpdateResponse{}, common.NewFDKError(err.Error())
+            
+             return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return UpdateResponse{}, common.NewFDKError(err.Error())
+            
+             return UpdateResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -1461,17 +1437,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return UpdateResponse{}, err
-            
+            return UpdateResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateTemplateStatusResponse)
         if err != nil {
-           
-             return UpdateResponse{}, common.NewFDKError(err.Error())
-            
+            return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         return updateTemplateStatusResponse, nil
+        
     }
            
        
@@ -1491,7 +1465,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     
+    
   
+
     
     //PlatformAppGetThemeLibraryXQuery holds query params
     type PlatformAppGetThemeLibraryXQuery struct { 
@@ -1500,14 +1476,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetThemeLibrary Gets list of themes in theme library
-     func (th *PlatformAppTheme)  GetThemeLibrary(xQuery PlatformAppGetThemeLibraryXQuery) (ThemesListingResponseSchema, error){
+     func (th *PlatformAppTheme)  GetThemeLibrary(xQuery PlatformAppGetThemeLibraryXQuery) (ThemesListingResponseSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getThemeLibraryResponse ThemesListingResponseSchema
-            
 	    )
         
          
@@ -1523,33 +1497,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ThemesListingResponseSchema{}, err
-            
+            return ThemesListingResponseSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getThemeLibraryResponse)
         if err != nil {
-           
-             return ThemesListingResponseSchema{}, common.NewFDKError(err.Error())
-            
+            return ThemesListingResponseSchema{}, common.NewFDKError(err.Error())
         }
         return getThemeLibraryResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // AddToThemeLibrary Add theme to theme library
-     func (th *PlatformAppTheme)  AddToThemeLibrary(body  AddThemeRequestSchema) (ThemesSchema, error){
+     func (th *PlatformAppTheme)  AddToThemeLibrary(body  AddThemeRequestSchema) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             addToThemeLibraryResponse ThemesSchema
-            
 	    )
         
          
@@ -1559,11 +1531,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return ThemesSchema{}, common.NewFDKError(err.Error())
+            
+             return ThemesSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return ThemesSchema{}, common.NewFDKError(err.Error())
+            
+             return ThemesSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -1576,33 +1550,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ThemesSchema{}, err
-            
+            return ThemesSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &addToThemeLibraryResponse)
         if err != nil {
-           
-             return ThemesSchema{}, common.NewFDKError(err.Error())
-            
+            return ThemesSchema{}, common.NewFDKError(err.Error())
         }
         return addToThemeLibraryResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // ApplyTheme Apply theme
-     func (th *PlatformAppTheme)  ApplyTheme(body  AddThemeRequestSchema) (ThemesSchema, error){
+     func (th *PlatformAppTheme)  ApplyTheme(body  AddThemeRequestSchema) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             applyThemeResponse ThemesSchema
-            
 	    )
         
          
@@ -1612,11 +1584,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return ThemesSchema{}, common.NewFDKError(err.Error())
+            
+             return ThemesSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return ThemesSchema{}, common.NewFDKError(err.Error())
+            
+             return ThemesSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -1629,33 +1603,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ThemesSchema{}, err
-            
+            return ThemesSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &applyThemeResponse)
         if err != nil {
-           
-             return ThemesSchema{}, common.NewFDKError(err.Error())
-            
+            return ThemesSchema{}, common.NewFDKError(err.Error())
         }
         return applyThemeResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // IsUpgradable Checks if theme is upgradable
-     func (th *PlatformAppTheme)  IsUpgradable(ThemeID string) (UpgradableThemeSchema, error){
+     func (th *PlatformAppTheme)  IsUpgradable(ThemeID string) (UpgradableThemeSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             isUpgradableResponse UpgradableThemeSchema
-            
 	    )
         
          
@@ -1671,33 +1643,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return UpgradableThemeSchema{}, err
-            
+            return UpgradableThemeSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &isUpgradableResponse)
         if err != nil {
-           
-             return UpgradableThemeSchema{}, common.NewFDKError(err.Error())
-            
+            return UpgradableThemeSchema{}, common.NewFDKError(err.Error())
         }
         return isUpgradableResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpgradeTheme Upgrades theme
-     func (th *PlatformAppTheme)  UpgradeTheme(ThemeID string) (ThemesSchema, error){
+     func (th *PlatformAppTheme)  UpgradeTheme(ThemeID string) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             upgradeThemeResponse ThemesSchema
-            
 	    )
         
          
@@ -1713,23 +1683,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ThemesSchema{}, err
-            
+            return ThemesSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &upgradeThemeResponse)
         if err != nil {
-           
-             return ThemesSchema{}, common.NewFDKError(err.Error())
-            
+            return ThemesSchema{}, common.NewFDKError(err.Error())
         }
         return upgradeThemeResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetPublicThemesXQuery holds query params
     type PlatformAppGetPublicThemesXQuery struct { 
@@ -1738,14 +1708,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetPublicThemes Gets public themes
-     func (th *PlatformAppTheme)  GetPublicThemes(xQuery PlatformAppGetPublicThemesXQuery) (ThemesListingResponseSchema, error){
+     func (th *PlatformAppTheme)  GetPublicThemes(xQuery PlatformAppGetPublicThemesXQuery) (ThemesListingResponseSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getPublicThemesResponse ThemesListingResponseSchema
-            
 	    )
         
          
@@ -1761,33 +1729,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ThemesListingResponseSchema{}, err
-            
+            return ThemesListingResponseSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getPublicThemesResponse)
         if err != nil {
-           
-             return ThemesListingResponseSchema{}, common.NewFDKError(err.Error())
-            
+            return ThemesListingResponseSchema{}, common.NewFDKError(err.Error())
         }
         return getPublicThemesResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // CreateTheme Create new theme
-     func (th *PlatformAppTheme)  CreateTheme(body  ThemesSchema) (ThemesSchema, error){
+     func (th *PlatformAppTheme)  CreateTheme(body  ThemesSchema) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createThemeResponse ThemesSchema
-            
 	    )
         
          
@@ -1797,11 +1763,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return ThemesSchema{}, common.NewFDKError(err.Error())
+            
+             return ThemesSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return ThemesSchema{}, common.NewFDKError(err.Error())
+            
+             return ThemesSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -1814,33 +1782,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ThemesSchema{}, err
-            
+            return ThemesSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &createThemeResponse)
         if err != nil {
-           
-             return ThemesSchema{}, common.NewFDKError(err.Error())
-            
+            return ThemesSchema{}, common.NewFDKError(err.Error())
         }
         return createThemeResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetAppliedTheme Get applied theme
-     func (th *PlatformAppTheme)  GetAppliedTheme() (ThemesSchema, error){
+     func (th *PlatformAppTheme)  GetAppliedTheme() (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getAppliedThemeResponse ThemesSchema
-            
 	    )
         
          
@@ -1856,33 +1822,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ThemesSchema{}, err
-            
+            return ThemesSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAppliedThemeResponse)
         if err != nil {
-           
-             return ThemesSchema{}, common.NewFDKError(err.Error())
-            
+            return ThemesSchema{}, common.NewFDKError(err.Error())
         }
         return getAppliedThemeResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetFonts Gets fonts
-     func (th *PlatformAppTheme)  GetFonts() (FontsSchema, error){
+     func (th *PlatformAppTheme)  GetFonts() (FontsSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getFontsResponse FontsSchema
-            
 	    )
         
          
@@ -1898,33 +1862,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return FontsSchema{}, err
-            
+            return FontsSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getFontsResponse)
         if err != nil {
-           
-             return FontsSchema{}, common.NewFDKError(err.Error())
-            
+            return FontsSchema{}, common.NewFDKError(err.Error())
         }
         return getFontsResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetThemeById Gets theme by id
-     func (th *PlatformAppTheme)  GetThemeById(ThemeID string) (ThemesSchema, error){
+     func (th *PlatformAppTheme)  GetThemeById(ThemeID string) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getThemeByIdResponse ThemesSchema
-            
 	    )
         
          
@@ -1940,33 +1902,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ThemesSchema{}, err
-            
+            return ThemesSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getThemeByIdResponse)
         if err != nil {
-           
-             return ThemesSchema{}, common.NewFDKError(err.Error())
-            
+            return ThemesSchema{}, common.NewFDKError(err.Error())
         }
         return getThemeByIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateTheme Update theme
-     func (th *PlatformAppTheme)  UpdateTheme(ThemeID string, body  ThemesSchema) (ThemesSchema, error){
+     func (th *PlatformAppTheme)  UpdateTheme(ThemeID string, body  ThemesSchema) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateThemeResponse ThemesSchema
-            
 	    )
         
          
@@ -1976,11 +1936,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return ThemesSchema{}, common.NewFDKError(err.Error())
+            
+             return ThemesSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return ThemesSchema{}, common.NewFDKError(err.Error())
+            
+             return ThemesSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -1993,33 +1955,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ThemesSchema{}, err
-            
+            return ThemesSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateThemeResponse)
         if err != nil {
-           
-             return ThemesSchema{}, common.NewFDKError(err.Error())
-            
+            return ThemesSchema{}, common.NewFDKError(err.Error())
         }
         return updateThemeResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // DeleteTheme Delete theme
-     func (th *PlatformAppTheme)  DeleteTheme(ThemeID string) (ThemesSchema, error){
+     func (th *PlatformAppTheme)  DeleteTheme(ThemeID string) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             deleteThemeResponse ThemesSchema
-            
 	    )
         
          
@@ -2035,33 +1995,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ThemesSchema{}, err
-            
+            return ThemesSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &deleteThemeResponse)
         if err != nil {
-           
-             return ThemesSchema{}, common.NewFDKError(err.Error())
-            
+            return ThemesSchema{}, common.NewFDKError(err.Error())
         }
         return deleteThemeResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetThemeForPreview Gets theme for preview
-     func (th *PlatformAppTheme)  GetThemeForPreview(ThemeID string) (ThemesSchema, error){
+     func (th *PlatformAppTheme)  GetThemeForPreview(ThemeID string) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getThemeForPreviewResponse ThemesSchema
-            
 	    )
         
          
@@ -2077,33 +2035,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ThemesSchema{}, err
-            
+            return ThemesSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getThemeForPreviewResponse)
         if err != nil {
-           
-             return ThemesSchema{}, common.NewFDKError(err.Error())
-            
+            return ThemesSchema{}, common.NewFDKError(err.Error())
         }
         return getThemeForPreviewResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // PublishTheme Publish theme
-     func (th *PlatformAppTheme)  PublishTheme(ThemeID string) (ThemesSchema, error){
+     func (th *PlatformAppTheme)  PublishTheme(ThemeID string) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             publishThemeResponse ThemesSchema
-            
 	    )
         
          
@@ -2119,33 +2075,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ThemesSchema{}, err
-            
+            return ThemesSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &publishThemeResponse)
         if err != nil {
-           
-             return ThemesSchema{}, common.NewFDKError(err.Error())
-            
+            return ThemesSchema{}, common.NewFDKError(err.Error())
         }
         return publishThemeResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UnpublishTheme Unpublish theme
-     func (th *PlatformAppTheme)  UnpublishTheme(ThemeID string) (ThemesSchema, error){
+     func (th *PlatformAppTheme)  UnpublishTheme(ThemeID string) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             unpublishThemeResponse ThemesSchema
-            
 	    )
         
          
@@ -2161,33 +2115,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ThemesSchema{}, err
-            
+            return ThemesSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &unpublishThemeResponse)
         if err != nil {
-           
-             return ThemesSchema{}, common.NewFDKError(err.Error())
-            
+            return ThemesSchema{}, common.NewFDKError(err.Error())
         }
         return unpublishThemeResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // ArchiveTheme Archive theme
-     func (th *PlatformAppTheme)  ArchiveTheme(ThemeID string) (ThemesSchema, error){
+     func (th *PlatformAppTheme)  ArchiveTheme(ThemeID string) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             archiveThemeResponse ThemesSchema
-            
 	    )
         
          
@@ -2203,33 +2155,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ThemesSchema{}, err
-            
+            return ThemesSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &archiveThemeResponse)
         if err != nil {
-           
-             return ThemesSchema{}, common.NewFDKError(err.Error())
-            
+            return ThemesSchema{}, common.NewFDKError(err.Error())
         }
         return archiveThemeResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UnarchiveTheme Unarchive theme
-     func (th *PlatformAppTheme)  UnarchiveTheme(ThemeID string) (ThemesSchema, error){
+     func (th *PlatformAppTheme)  UnarchiveTheme(ThemeID string) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             unarchiveThemeResponse ThemesSchema
-            
 	    )
         
          
@@ -2245,17 +2195,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ThemesSchema{}, err
-            
+            return ThemesSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &unarchiveThemeResponse)
         if err != nil {
-           
-             return ThemesSchema{}, common.NewFDKError(err.Error())
-            
+            return ThemesSchema{}, common.NewFDKError(err.Error())
         }
         return unarchiveThemeResponse, nil
+        
     }
            
        
@@ -2275,7 +2223,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     
+    
   
+
     
     //PlatformAppGetCustomersXQuery holds query params
     type PlatformAppGetCustomersXQuery struct { 
@@ -2285,14 +2235,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetCustomers Gets list of customers
-     func (us *PlatformAppUser)  GetCustomers(xQuery PlatformAppGetCustomersXQuery) (CustomerListResponseSchema, error){
+     func (us *PlatformAppUser)  GetCustomers(xQuery PlatformAppGetCustomersXQuery) (CustomerListResponseSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getCustomersResponse CustomerListResponseSchema
-            
 	    )
         
          
@@ -2308,23 +2256,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CustomerListResponseSchema{}, err
-            
+            return CustomerListResponseSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCustomersResponse)
         if err != nil {
-           
-             return CustomerListResponseSchema{}, common.NewFDKError(err.Error())
-            
+            return CustomerListResponseSchema{}, common.NewFDKError(err.Error())
         }
         return getCustomersResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppSearchUsersXQuery holds query params
     type PlatformAppSearchUsersXQuery struct { 
@@ -2332,14 +2280,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // SearchUsers Search users
-     func (us *PlatformAppUser)  SearchUsers(xQuery PlatformAppSearchUsersXQuery) (UserSearchResponseSchema, error){
+     func (us *PlatformAppUser)  SearchUsers(xQuery PlatformAppSearchUsersXQuery) (UserSearchResponseSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             searchUsersResponse UserSearchResponseSchema
-            
 	    )
         
          
@@ -2355,33 +2301,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return UserSearchResponseSchema{}, err
-            
+            return UserSearchResponseSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &searchUsersResponse)
         if err != nil {
-           
-             return UserSearchResponseSchema{}, common.NewFDKError(err.Error())
-            
+            return UserSearchResponseSchema{}, common.NewFDKError(err.Error())
         }
         return searchUsersResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetPlatformConfig Get platform config
-     func (us *PlatformAppUser)  GetPlatformConfig() (PlatformSchema, error){
+     func (us *PlatformAppUser)  GetPlatformConfig() (PlatformSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getPlatformConfigResponse PlatformSchema
-            
 	    )
         
          
@@ -2397,33 +2341,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PlatformSchema{}, err
-            
+            return PlatformSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getPlatformConfigResponse)
         if err != nil {
-           
-             return PlatformSchema{}, common.NewFDKError(err.Error())
-            
+            return PlatformSchema{}, common.NewFDKError(err.Error())
         }
         return getPlatformConfigResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdatePlatformConfig Update platform config
-     func (us *PlatformAppUser)  UpdatePlatformConfig(body  PlatformSchema) (PlatformSchema, error){
+     func (us *PlatformAppUser)  UpdatePlatformConfig(body  PlatformSchema) (PlatformSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updatePlatformConfigResponse PlatformSchema
-            
 	    )
         
          
@@ -2433,11 +2375,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return PlatformSchema{}, common.NewFDKError(err.Error())
+            
+             return PlatformSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return PlatformSchema{}, common.NewFDKError(err.Error())
+            
+             return PlatformSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -2450,17 +2394,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PlatformSchema{}, err
-            
+            return PlatformSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &updatePlatformConfigResponse)
         if err != nil {
-           
-             return PlatformSchema{}, common.NewFDKError(err.Error())
-            
+            return PlatformSchema{}, common.NewFDKError(err.Error())
         }
         return updatePlatformConfigResponse, nil
+        
     }
            
        
@@ -2480,7 +2422,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     
+    
   
+
     
     //PlatformAppGetAnnouncementsListXQuery holds query params
     type PlatformAppGetAnnouncementsListXQuery struct { 
@@ -2489,14 +2433,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetAnnouncementsList Get annoucements list
-     func (co *PlatformAppContent)  GetAnnouncementsList(xQuery PlatformAppGetAnnouncementsListXQuery) (GetAnnouncementListSchema, error){
+     func (co *PlatformAppContent)  GetAnnouncementsList(xQuery PlatformAppGetAnnouncementsListXQuery) (GetAnnouncementListSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getAnnouncementsListResponse GetAnnouncementListSchema
-            
 	    )
         
          
@@ -2512,17 +2454,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetAnnouncementListSchema{}, err
-            
+            return GetAnnouncementListSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAnnouncementsListResponse)
         if err != nil {
-           
-             return GetAnnouncementListSchema{}, common.NewFDKError(err.Error())
-            
+            return GetAnnouncementListSchema{}, common.NewFDKError(err.Error())
         }
         return getAnnouncementsListResponse, nil
+        
     }
            
             
@@ -2578,17 +2518,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // CreateAnnouncement Create an annoucement
-     func (co *PlatformAppContent)  CreateAnnouncement(body  AdminAnnouncementSchema) (CreateAnnouncementSchema, error){
+     func (co *PlatformAppContent)  CreateAnnouncement(body  AdminAnnouncementSchema) (CreateAnnouncementSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createAnnouncementResponse CreateAnnouncementSchema
-            
 	    )
         
          
@@ -2598,11 +2538,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CreateAnnouncementSchema{}, common.NewFDKError(err.Error())
+            
+             return CreateAnnouncementSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return CreateAnnouncementSchema{}, common.NewFDKError(err.Error())
+            
+             return CreateAnnouncementSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -2615,33 +2557,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CreateAnnouncementSchema{}, err
-            
+            return CreateAnnouncementSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &createAnnouncementResponse)
         if err != nil {
-           
-             return CreateAnnouncementSchema{}, common.NewFDKError(err.Error())
-            
+            return CreateAnnouncementSchema{}, common.NewFDKError(err.Error())
         }
         return createAnnouncementResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetAnnouncementById Get annoucement by id
-     func (co *PlatformAppContent)  GetAnnouncementById(AnnouncementID string) (AdminAnnouncementSchema, error){
+     func (co *PlatformAppContent)  GetAnnouncementById(AnnouncementID string) (AdminAnnouncementSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getAnnouncementByIdResponse AdminAnnouncementSchema
-            
 	    )
         
          
@@ -2657,33 +2597,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return AdminAnnouncementSchema{}, err
-            
+            return AdminAnnouncementSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAnnouncementByIdResponse)
         if err != nil {
-           
-             return AdminAnnouncementSchema{}, common.NewFDKError(err.Error())
-            
+            return AdminAnnouncementSchema{}, common.NewFDKError(err.Error())
         }
         return getAnnouncementByIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateAnnouncement Update an annoucement
-     func (co *PlatformAppContent)  UpdateAnnouncement(AnnouncementID string, body  AdminAnnouncementSchema) (CreateAnnouncementSchema, error){
+     func (co *PlatformAppContent)  UpdateAnnouncement(AnnouncementID string, body  AdminAnnouncementSchema) (CreateAnnouncementSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateAnnouncementResponse CreateAnnouncementSchema
-            
 	    )
         
          
@@ -2693,11 +2631,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CreateAnnouncementSchema{}, common.NewFDKError(err.Error())
+            
+             return CreateAnnouncementSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return CreateAnnouncementSchema{}, common.NewFDKError(err.Error())
+            
+             return CreateAnnouncementSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -2710,33 +2650,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CreateAnnouncementSchema{}, err
-            
+            return CreateAnnouncementSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateAnnouncementResponse)
         if err != nil {
-           
-             return CreateAnnouncementSchema{}, common.NewFDKError(err.Error())
-            
+            return CreateAnnouncementSchema{}, common.NewFDKError(err.Error())
         }
         return updateAnnouncementResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateAnnouncementSchedule Update schedule or published status of an annoucement
-     func (co *PlatformAppContent)  UpdateAnnouncementSchedule(AnnouncementID string, body  ScheduleSchema) (CreateAnnouncementSchema, error){
+     func (co *PlatformAppContent)  UpdateAnnouncementSchedule(AnnouncementID string, body  ScheduleSchema) (CreateAnnouncementSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateAnnouncementScheduleResponse CreateAnnouncementSchema
-            
 	    )
         
          
@@ -2746,11 +2684,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CreateAnnouncementSchema{}, common.NewFDKError(err.Error())
+            
+             return CreateAnnouncementSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return CreateAnnouncementSchema{}, common.NewFDKError(err.Error())
+            
+             return CreateAnnouncementSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -2763,33 +2703,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CreateAnnouncementSchema{}, err
-            
+            return CreateAnnouncementSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateAnnouncementScheduleResponse)
         if err != nil {
-           
-             return CreateAnnouncementSchema{}, common.NewFDKError(err.Error())
-            
+            return CreateAnnouncementSchema{}, common.NewFDKError(err.Error())
         }
         return updateAnnouncementScheduleResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // DeleteAnnouncement Delete annoucement by id
-     func (co *PlatformAppContent)  DeleteAnnouncement(AnnouncementID string) (CreateAnnouncementSchema, error){
+     func (co *PlatformAppContent)  DeleteAnnouncement(AnnouncementID string) (CreateAnnouncementSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             deleteAnnouncementResponse CreateAnnouncementSchema
-            
 	    )
         
          
@@ -2805,33 +2743,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CreateAnnouncementSchema{}, err
-            
+            return CreateAnnouncementSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &deleteAnnouncementResponse)
         if err != nil {
-           
-             return CreateAnnouncementSchema{}, common.NewFDKError(err.Error())
-            
+            return CreateAnnouncementSchema{}, common.NewFDKError(err.Error())
         }
         return deleteAnnouncementResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // CreateBlog Create blog
-     func (co *PlatformAppContent)  CreateBlog(body  BlogRequest) (BlogSchema, error){
+     func (co *PlatformAppContent)  CreateBlog(body  BlogRequest) (BlogSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createBlogResponse BlogSchema
-            
 	    )
         
          
@@ -2841,11 +2777,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return BlogSchema{}, common.NewFDKError(err.Error())
+            
+             return BlogSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return BlogSchema{}, common.NewFDKError(err.Error())
+            
+             return BlogSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -2858,23 +2796,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return BlogSchema{}, err
-            
+            return BlogSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &createBlogResponse)
         if err != nil {
-           
-             return BlogSchema{}, common.NewFDKError(err.Error())
-            
+            return BlogSchema{}, common.NewFDKError(err.Error())
         }
         return createBlogResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetBlogsXQuery holds query params
     type PlatformAppGetBlogsXQuery struct { 
@@ -2883,14 +2821,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetBlogs Get blogs
-     func (co *PlatformAppContent)  GetBlogs(xQuery PlatformAppGetBlogsXQuery) (BlogGetResponse, error){
+     func (co *PlatformAppContent)  GetBlogs(xQuery PlatformAppGetBlogsXQuery) (BlogGetResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getBlogsResponse BlogGetResponse
-            
 	    )
         
          
@@ -2906,17 +2842,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return BlogGetResponse{}, err
-            
+            return BlogGetResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getBlogsResponse)
         if err != nil {
-           
-             return BlogGetResponse{}, common.NewFDKError(err.Error())
-            
+            return BlogGetResponse{}, common.NewFDKError(err.Error())
         }
         return getBlogsResponse, nil
+        
     }
            
             
@@ -2972,17 +2906,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // UpdateBlog Update blog
-     func (co *PlatformAppContent)  UpdateBlog(ID string, body  BlogRequest) (BlogSchema, error){
+     func (co *PlatformAppContent)  UpdateBlog(ID string, body  BlogRequest) (BlogSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateBlogResponse BlogSchema
-            
 	    )
         
          
@@ -2992,11 +2926,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return BlogSchema{}, common.NewFDKError(err.Error())
+            
+             return BlogSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return BlogSchema{}, common.NewFDKError(err.Error())
+            
+             return BlogSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -3009,33 +2945,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return BlogSchema{}, err
-            
+            return BlogSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateBlogResponse)
         if err != nil {
-           
-             return BlogSchema{}, common.NewFDKError(err.Error())
-            
+            return BlogSchema{}, common.NewFDKError(err.Error())
         }
         return updateBlogResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // DeleteBlog Delete blogs
-     func (co *PlatformAppContent)  DeleteBlog(ID string) (BlogSchema, error){
+     func (co *PlatformAppContent)  DeleteBlog(ID string) (BlogSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             deleteBlogResponse BlogSchema
-            
 	    )
         
          
@@ -3051,33 +2985,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return BlogSchema{}, err
-            
+            return BlogSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &deleteBlogResponse)
         if err != nil {
-           
-             return BlogSchema{}, common.NewFDKError(err.Error())
-            
+            return BlogSchema{}, common.NewFDKError(err.Error())
         }
         return deleteBlogResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetComponentById Get components by component Id
-     func (co *PlatformAppContent)  GetComponentById(Slug string) (BlogSchema, error){
+     func (co *PlatformAppContent)  GetComponentById(Slug string) (BlogSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getComponentByIdResponse BlogSchema
-            
 	    )
         
          
@@ -3093,33 +3025,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return BlogSchema{}, err
-            
+            return BlogSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getComponentByIdResponse)
         if err != nil {
-           
-             return BlogSchema{}, common.NewFDKError(err.Error())
-            
+            return BlogSchema{}, common.NewFDKError(err.Error())
         }
         return getComponentByIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetFaqCategories Get FAQ categories list
-     func (co *PlatformAppContent)  GetFaqCategories() (GetFaqCategoriesSchema, error){
+     func (co *PlatformAppContent)  GetFaqCategories() (GetFaqCategoriesSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getFaqCategoriesResponse GetFaqCategoriesSchema
-            
 	    )
         
          
@@ -3135,33 +3065,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetFaqCategoriesSchema{}, err
-            
+            return GetFaqCategoriesSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getFaqCategoriesResponse)
         if err != nil {
-           
-             return GetFaqCategoriesSchema{}, common.NewFDKError(err.Error())
-            
+            return GetFaqCategoriesSchema{}, common.NewFDKError(err.Error())
         }
         return getFaqCategoriesResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetFaqCategoryBySlugOrId Get FAQ category by slug or id
-     func (co *PlatformAppContent)  GetFaqCategoryBySlugOrId(IDOrSlug string) (GetFaqCategoryBySlugSchema, error){
+     func (co *PlatformAppContent)  GetFaqCategoryBySlugOrId(IDOrSlug string) (GetFaqCategoryBySlugSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getFaqCategoryBySlugOrIdResponse GetFaqCategoryBySlugSchema
-            
 	    )
         
          
@@ -3177,33 +3105,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetFaqCategoryBySlugSchema{}, err
-            
+            return GetFaqCategoryBySlugSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getFaqCategoryBySlugOrIdResponse)
         if err != nil {
-           
-             return GetFaqCategoryBySlugSchema{}, common.NewFDKError(err.Error())
-            
+            return GetFaqCategoryBySlugSchema{}, common.NewFDKError(err.Error())
         }
         return getFaqCategoryBySlugOrIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // CreateFaqCategory Creates a FAQ category
-     func (co *PlatformAppContent)  CreateFaqCategory(body  CreateFaqCategoryRequestSchema) (CreateFaqCategorySchema, error){
+     func (co *PlatformAppContent)  CreateFaqCategory(body  CreateFaqCategoryRequestSchema) (CreateFaqCategorySchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createFaqCategoryResponse CreateFaqCategorySchema
-            
 	    )
         
          
@@ -3213,11 +3139,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CreateFaqCategorySchema{}, common.NewFDKError(err.Error())
+            
+             return CreateFaqCategorySchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return CreateFaqCategorySchema{}, common.NewFDKError(err.Error())
+            
+             return CreateFaqCategorySchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -3230,33 +3158,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CreateFaqCategorySchema{}, err
-            
+            return CreateFaqCategorySchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &createFaqCategoryResponse)
         if err != nil {
-           
-             return CreateFaqCategorySchema{}, common.NewFDKError(err.Error())
-            
+            return CreateFaqCategorySchema{}, common.NewFDKError(err.Error())
         }
         return createFaqCategoryResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateFaqCategory Updates a FAQ category
-     func (co *PlatformAppContent)  UpdateFaqCategory(ID string, body  UpdateFaqCategoryRequestSchema) (CreateFaqCategorySchema, error){
+     func (co *PlatformAppContent)  UpdateFaqCategory(ID string, body  UpdateFaqCategoryRequestSchema) (CreateFaqCategorySchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateFaqCategoryResponse CreateFaqCategorySchema
-            
 	    )
         
          
@@ -3266,11 +3192,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CreateFaqCategorySchema{}, common.NewFDKError(err.Error())
+            
+             return CreateFaqCategorySchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return CreateFaqCategorySchema{}, common.NewFDKError(err.Error())
+            
+             return CreateFaqCategorySchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -3283,33 +3211,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CreateFaqCategorySchema{}, err
-            
+            return CreateFaqCategorySchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateFaqCategoryResponse)
         if err != nil {
-           
-             return CreateFaqCategorySchema{}, common.NewFDKError(err.Error())
-            
+            return CreateFaqCategorySchema{}, common.NewFDKError(err.Error())
         }
         return updateFaqCategoryResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // DeleteFaqCategory Deletes a FAQ category
-     func (co *PlatformAppContent)  DeleteFaqCategory(ID string) (FaqSchema, error){
+     func (co *PlatformAppContent)  DeleteFaqCategory(ID string) (FaqSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             deleteFaqCategoryResponse FaqSchema
-            
 	    )
         
          
@@ -3325,33 +3251,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return FaqSchema{}, err
-            
+            return FaqSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &deleteFaqCategoryResponse)
         if err != nil {
-           
-             return FaqSchema{}, common.NewFDKError(err.Error())
-            
+            return FaqSchema{}, common.NewFDKError(err.Error())
         }
         return deleteFaqCategoryResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetFaqsByCategoryIdOrSlug Get FAQs of a Faq Category id or slug
-     func (co *PlatformAppContent)  GetFaqsByCategoryIdOrSlug(IDOrSlug string) (GetFaqSchema, error){
+     func (co *PlatformAppContent)  GetFaqsByCategoryIdOrSlug(IDOrSlug string) (GetFaqSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getFaqsByCategoryIdOrSlugResponse GetFaqSchema
-            
 	    )
         
          
@@ -3367,33 +3291,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetFaqSchema{}, err
-            
+            return GetFaqSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getFaqsByCategoryIdOrSlugResponse)
         if err != nil {
-           
-             return GetFaqSchema{}, common.NewFDKError(err.Error())
-            
+            return GetFaqSchema{}, common.NewFDKError(err.Error())
         }
         return getFaqsByCategoryIdOrSlugResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // AddFaq Creates FAQs for category whose `id` is specified
-     func (co *PlatformAppContent)  AddFaq(CategoryID string, body  CreateFaqSchema) (CreateFaqResponseSchema, error){
+     func (co *PlatformAppContent)  AddFaq(CategoryID string, body  CreateFaqSchema) (CreateFaqResponseSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             addFaqResponse CreateFaqResponseSchema
-            
 	    )
         
          
@@ -3403,11 +3325,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CreateFaqResponseSchema{}, common.NewFDKError(err.Error())
+            
+             return CreateFaqResponseSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return CreateFaqResponseSchema{}, common.NewFDKError(err.Error())
+            
+             return CreateFaqResponseSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -3420,33 +3344,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CreateFaqResponseSchema{}, err
-            
+            return CreateFaqResponseSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &addFaqResponse)
         if err != nil {
-           
-             return CreateFaqResponseSchema{}, common.NewFDKError(err.Error())
-            
+            return CreateFaqResponseSchema{}, common.NewFDKError(err.Error())
         }
         return addFaqResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateFaq Updates FAQ
-     func (co *PlatformAppContent)  UpdateFaq(CategoryID string, FaqID string, body  CreateFaqSchema) (CreateFaqResponseSchema, error){
+     func (co *PlatformAppContent)  UpdateFaq(CategoryID string, FaqID string, body  CreateFaqSchema) (CreateFaqResponseSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateFaqResponse CreateFaqResponseSchema
-            
 	    )
         
          
@@ -3456,11 +3378,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CreateFaqResponseSchema{}, common.NewFDKError(err.Error())
+            
+             return CreateFaqResponseSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return CreateFaqResponseSchema{}, common.NewFDKError(err.Error())
+            
+             return CreateFaqResponseSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -3473,33 +3397,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CreateFaqResponseSchema{}, err
-            
+            return CreateFaqResponseSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateFaqResponse)
         if err != nil {
-           
-             return CreateFaqResponseSchema{}, common.NewFDKError(err.Error())
-            
+            return CreateFaqResponseSchema{}, common.NewFDKError(err.Error())
         }
         return updateFaqResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // DeleteFaq Delete FAQ
-     func (co *PlatformAppContent)  DeleteFaq(CategoryID string, FaqID string) (CreateFaqResponseSchema, error){
+     func (co *PlatformAppContent)  DeleteFaq(CategoryID string, FaqID string) (CreateFaqResponseSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             deleteFaqResponse CreateFaqResponseSchema
-            
 	    )
         
          
@@ -3515,33 +3437,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CreateFaqResponseSchema{}, err
-            
+            return CreateFaqResponseSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &deleteFaqResponse)
         if err != nil {
-           
-             return CreateFaqResponseSchema{}, common.NewFDKError(err.Error())
-            
+            return CreateFaqResponseSchema{}, common.NewFDKError(err.Error())
         }
         return deleteFaqResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetFaqByIdOrSlug Get frequently asked question
-     func (co *PlatformAppContent)  GetFaqByIdOrSlug(IDOrSlug string) (CreateFaqResponseSchema, error){
+     func (co *PlatformAppContent)  GetFaqByIdOrSlug(IDOrSlug string) (CreateFaqResponseSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getFaqByIdOrSlugResponse CreateFaqResponseSchema
-            
 	    )
         
          
@@ -3557,23 +3477,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CreateFaqResponseSchema{}, err
-            
+            return CreateFaqResponseSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getFaqByIdOrSlugResponse)
         if err != nil {
-           
-             return CreateFaqResponseSchema{}, common.NewFDKError(err.Error())
-            
+            return CreateFaqResponseSchema{}, common.NewFDKError(err.Error())
         }
         return getFaqByIdOrSlugResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetLandingPagesXQuery holds query params
     type PlatformAppGetLandingPagesXQuery struct { 
@@ -3582,14 +3502,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetLandingPages Get landing-pages
-     func (co *PlatformAppContent)  GetLandingPages(xQuery PlatformAppGetLandingPagesXQuery) (LandingPageGetResponse, error){
+     func (co *PlatformAppContent)  GetLandingPages(xQuery PlatformAppGetLandingPagesXQuery) (LandingPageGetResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getLandingPagesResponse LandingPageGetResponse
-            
 	    )
         
          
@@ -3605,17 +3523,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return LandingPageGetResponse{}, err
-            
+            return LandingPageGetResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getLandingPagesResponse)
         if err != nil {
-           
-             return LandingPageGetResponse{}, common.NewFDKError(err.Error())
-            
+            return LandingPageGetResponse{}, common.NewFDKError(err.Error())
         }
         return getLandingPagesResponse, nil
+        
     }
            
             
@@ -3671,17 +3587,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // CreateLandingPage Create landing-page
-     func (co *PlatformAppContent)  CreateLandingPage(body  LandingPageSchema) (LandingPageSchema, error){
+     func (co *PlatformAppContent)  CreateLandingPage(body  LandingPageSchema) (LandingPageSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createLandingPageResponse LandingPageSchema
-            
 	    )
         
          
@@ -3691,11 +3607,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return LandingPageSchema{}, common.NewFDKError(err.Error())
+            
+             return LandingPageSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return LandingPageSchema{}, common.NewFDKError(err.Error())
+            
+             return LandingPageSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -3708,33 +3626,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return LandingPageSchema{}, err
-            
+            return LandingPageSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &createLandingPageResponse)
         if err != nil {
-           
-             return LandingPageSchema{}, common.NewFDKError(err.Error())
-            
+            return LandingPageSchema{}, common.NewFDKError(err.Error())
         }
         return createLandingPageResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateLandingPage Update landing-page
-     func (co *PlatformAppContent)  UpdateLandingPage(ID string, body  LandingPageSchema) (LandingPageSchema, error){
+     func (co *PlatformAppContent)  UpdateLandingPage(ID string, body  LandingPageSchema) (LandingPageSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateLandingPageResponse LandingPageSchema
-            
 	    )
         
          
@@ -3744,11 +3660,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return LandingPageSchema{}, common.NewFDKError(err.Error())
+            
+             return LandingPageSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return LandingPageSchema{}, common.NewFDKError(err.Error())
+            
+             return LandingPageSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -3761,33 +3679,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return LandingPageSchema{}, err
-            
+            return LandingPageSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateLandingPageResponse)
         if err != nil {
-           
-             return LandingPageSchema{}, common.NewFDKError(err.Error())
-            
+            return LandingPageSchema{}, common.NewFDKError(err.Error())
         }
         return updateLandingPageResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // DeleteLandingPage Delete landing-page
-     func (co *PlatformAppContent)  DeleteLandingPage(ID string) (LandingPageSchema, error){
+     func (co *PlatformAppContent)  DeleteLandingPage(ID string) (LandingPageSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             deleteLandingPageResponse LandingPageSchema
-            
 	    )
         
          
@@ -3803,33 +3719,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return LandingPageSchema{}, err
-            
+            return LandingPageSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &deleteLandingPageResponse)
         if err != nil {
-           
-             return LandingPageSchema{}, common.NewFDKError(err.Error())
-            
+            return LandingPageSchema{}, common.NewFDKError(err.Error())
         }
         return deleteLandingPageResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetLegalInformation Get legal information
-     func (co *PlatformAppContent)  GetLegalInformation() (ApplicationLegal, error){
+     func (co *PlatformAppContent)  GetLegalInformation() (ApplicationLegal, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getLegalInformationResponse ApplicationLegal
-            
 	    )
         
          
@@ -3845,33 +3759,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ApplicationLegal{}, err
-            
+            return ApplicationLegal{}, err
 	    }
+        
         err = json.Unmarshal(response, &getLegalInformationResponse)
         if err != nil {
-           
-             return ApplicationLegal{}, common.NewFDKError(err.Error())
-            
+            return ApplicationLegal{}, common.NewFDKError(err.Error())
         }
         return getLegalInformationResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateLegalInformation Save legal information
-     func (co *PlatformAppContent)  UpdateLegalInformation(body  ApplicationLegal) (ApplicationLegal, error){
+     func (co *PlatformAppContent)  UpdateLegalInformation(body  ApplicationLegal) (ApplicationLegal, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateLegalInformationResponse ApplicationLegal
-            
 	    )
         
          
@@ -3881,11 +3793,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return ApplicationLegal{}, common.NewFDKError(err.Error())
+            
+             return ApplicationLegal{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return ApplicationLegal{}, common.NewFDKError(err.Error())
+            
+             return ApplicationLegal{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -3898,23 +3812,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ApplicationLegal{}, err
-            
+            return ApplicationLegal{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateLegalInformationResponse)
         if err != nil {
-           
-             return ApplicationLegal{}, common.NewFDKError(err.Error())
-            
+            return ApplicationLegal{}, common.NewFDKError(err.Error())
         }
         return updateLegalInformationResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetNavigationsXQuery holds query params
     type PlatformAppGetNavigationsXQuery struct { 
@@ -3924,14 +3838,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetNavigations Get navigations
-     func (co *PlatformAppContent)  GetNavigations(xQuery PlatformAppGetNavigationsXQuery) (NavigationGetResponse, error){
+     func (co *PlatformAppContent)  GetNavigations(xQuery PlatformAppGetNavigationsXQuery) (NavigationGetResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getNavigationsResponse NavigationGetResponse
-            
 	    )
         
          
@@ -3947,17 +3859,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return NavigationGetResponse{}, err
-            
+            return NavigationGetResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getNavigationsResponse)
         if err != nil {
-           
-             return NavigationGetResponse{}, common.NewFDKError(err.Error())
-            
+            return NavigationGetResponse{}, common.NewFDKError(err.Error())
         }
         return getNavigationsResponse, nil
+        
     }
            
             
@@ -4023,17 +3933,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // CreateNavigation Create navigation
-     func (co *PlatformAppContent)  CreateNavigation(body  NavigationRequest) (NavigationSchema, error){
+     func (co *PlatformAppContent)  CreateNavigation(body  NavigationRequest) (NavigationSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createNavigationResponse NavigationSchema
-            
 	    )
         
          
@@ -4043,11 +3953,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return NavigationSchema{}, common.NewFDKError(err.Error())
+            
+             return NavigationSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return NavigationSchema{}, common.NewFDKError(err.Error())
+            
+             return NavigationSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -4060,33 +3972,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return NavigationSchema{}, err
-            
+            return NavigationSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &createNavigationResponse)
         if err != nil {
-           
-             return NavigationSchema{}, common.NewFDKError(err.Error())
-            
+            return NavigationSchema{}, common.NewFDKError(err.Error())
         }
         return createNavigationResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetDefaultNavigations Get default navigations
-     func (co *PlatformAppContent)  GetDefaultNavigations() (DefaultNavigationResponse, error){
+     func (co *PlatformAppContent)  GetDefaultNavigations() (DefaultNavigationResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getDefaultNavigationsResponse DefaultNavigationResponse
-            
 	    )
         
          
@@ -4102,23 +4012,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return DefaultNavigationResponse{}, err
-            
+            return DefaultNavigationResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getDefaultNavigationsResponse)
         if err != nil {
-           
-             return DefaultNavigationResponse{}, common.NewFDKError(err.Error())
-            
+            return DefaultNavigationResponse{}, common.NewFDKError(err.Error())
         }
         return getDefaultNavigationsResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetNavigationBySlugXQuery holds query params
     type PlatformAppGetNavigationBySlugXQuery struct { 
@@ -4126,14 +4036,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetNavigationBySlug Get navigation by slug
-     func (co *PlatformAppContent)  GetNavigationBySlug(Slug string, xQuery PlatformAppGetNavigationBySlugXQuery) (NavigationSchema, error){
+     func (co *PlatformAppContent)  GetNavigationBySlug(Slug string, xQuery PlatformAppGetNavigationBySlugXQuery) (NavigationSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getNavigationBySlugResponse NavigationSchema
-            
 	    )
         
          
@@ -4149,33 +4057,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return NavigationSchema{}, err
-            
+            return NavigationSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getNavigationBySlugResponse)
         if err != nil {
-           
-             return NavigationSchema{}, common.NewFDKError(err.Error())
-            
+            return NavigationSchema{}, common.NewFDKError(err.Error())
         }
         return getNavigationBySlugResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateNavigation Update navigation
-     func (co *PlatformAppContent)  UpdateNavigation(ID string, body  NavigationRequest) (NavigationSchema, error){
+     func (co *PlatformAppContent)  UpdateNavigation(ID string, body  NavigationRequest) (NavigationSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateNavigationResponse NavigationSchema
-            
 	    )
         
          
@@ -4185,11 +4091,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return NavigationSchema{}, common.NewFDKError(err.Error())
+            
+             return NavigationSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return NavigationSchema{}, common.NewFDKError(err.Error())
+            
+             return NavigationSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -4202,33 +4110,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return NavigationSchema{}, err
-            
+            return NavigationSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateNavigationResponse)
         if err != nil {
-           
-             return NavigationSchema{}, common.NewFDKError(err.Error())
-            
+            return NavigationSchema{}, common.NewFDKError(err.Error())
         }
         return updateNavigationResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // DeleteNavigation Delete navigation
-     func (co *PlatformAppContent)  DeleteNavigation(ID string) (NavigationSchema, error){
+     func (co *PlatformAppContent)  DeleteNavigation(ID string) (NavigationSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             deleteNavigationResponse NavigationSchema
-            
 	    )
         
          
@@ -4244,33 +4150,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return NavigationSchema{}, err
-            
+            return NavigationSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &deleteNavigationResponse)
         if err != nil {
-           
-             return NavigationSchema{}, common.NewFDKError(err.Error())
-            
+            return NavigationSchema{}, common.NewFDKError(err.Error())
         }
         return deleteNavigationResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetPageMeta Get page meta
-     func (co *PlatformAppContent)  GetPageMeta() (PageMetaSchema, error){
+     func (co *PlatformAppContent)  GetPageMeta() (PageMetaSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getPageMetaResponse PageMetaSchema
-            
 	    )
         
          
@@ -4286,33 +4190,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PageMetaSchema{}, err
-            
+            return PageMetaSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getPageMetaResponse)
         if err != nil {
-           
-             return PageMetaSchema{}, common.NewFDKError(err.Error())
-            
+            return PageMetaSchema{}, common.NewFDKError(err.Error())
         }
         return getPageMetaResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetPageSpec Get page spec
-     func (co *PlatformAppContent)  GetPageSpec() (PageSpec, error){
+     func (co *PlatformAppContent)  GetPageSpec() (PageSpec, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getPageSpecResponse PageSpec
-            
 	    )
         
          
@@ -4328,33 +4230,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PageSpec{}, err
-            
+            return PageSpec{}, err
 	    }
+        
         err = json.Unmarshal(response, &getPageSpecResponse)
         if err != nil {
-           
-             return PageSpec{}, common.NewFDKError(err.Error())
-            
+            return PageSpec{}, common.NewFDKError(err.Error())
         }
         return getPageSpecResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // CreatePage Create page
-     func (co *PlatformAppContent)  CreatePage(body  PageRequest) (PageSchema, error){
+     func (co *PlatformAppContent)  CreatePage(body  PageRequest) (PageSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createPageResponse PageSchema
-            
 	    )
         
          
@@ -4364,11 +4264,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return PageSchema{}, common.NewFDKError(err.Error())
+            
+             return PageSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return PageSchema{}, common.NewFDKError(err.Error())
+            
+             return PageSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -4381,23 +4283,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PageSchema{}, err
-            
+            return PageSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &createPageResponse)
         if err != nil {
-           
-             return PageSchema{}, common.NewFDKError(err.Error())
-            
+            return PageSchema{}, common.NewFDKError(err.Error())
         }
         return createPageResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetPagesXQuery holds query params
     type PlatformAppGetPagesXQuery struct { 
@@ -4406,14 +4308,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetPages Get pages
-     func (co *PlatformAppContent)  GetPages(xQuery PlatformAppGetPagesXQuery) (PageGetResponse, error){
+     func (co *PlatformAppContent)  GetPages(xQuery PlatformAppGetPagesXQuery) (PageGetResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getPagesResponse PageGetResponse
-            
 	    )
         
          
@@ -4429,17 +4329,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PageGetResponse{}, err
-            
+            return PageGetResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getPagesResponse)
         if err != nil {
-           
-             return PageGetResponse{}, common.NewFDKError(err.Error())
-            
+            return PageGetResponse{}, common.NewFDKError(err.Error())
         }
         return getPagesResponse, nil
+        
     }
            
             
@@ -4495,17 +4393,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // CreatePagePreview Create page preview
-     func (co *PlatformAppContent)  CreatePagePreview(body  PageRequest) (PageSchema, error){
+     func (co *PlatformAppContent)  CreatePagePreview(body  PageRequest) (PageSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createPagePreviewResponse PageSchema
-            
 	    )
         
          
@@ -4515,11 +4413,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return PageSchema{}, common.NewFDKError(err.Error())
+            
+             return PageSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return PageSchema{}, common.NewFDKError(err.Error())
+            
+             return PageSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -4532,33 +4432,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PageSchema{}, err
-            
+            return PageSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &createPagePreviewResponse)
         if err != nil {
-           
-             return PageSchema{}, common.NewFDKError(err.Error())
-            
+            return PageSchema{}, common.NewFDKError(err.Error())
         }
         return createPagePreviewResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdatePagePreview Update page
-     func (co *PlatformAppContent)  UpdatePagePreview(Slug string, body  PagePublishRequest) (PageSchema, error){
+     func (co *PlatformAppContent)  UpdatePagePreview(Slug string, body  PagePublishRequest) (PageSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updatePagePreviewResponse PageSchema
-            
 	    )
         
          
@@ -4568,11 +4466,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return PageSchema{}, common.NewFDKError(err.Error())
+            
+             return PageSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return PageSchema{}, common.NewFDKError(err.Error())
+            
+             return PageSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -4585,33 +4485,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PageSchema{}, err
-            
+            return PageSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &updatePagePreviewResponse)
         if err != nil {
-           
-             return PageSchema{}, common.NewFDKError(err.Error())
-            
+            return PageSchema{}, common.NewFDKError(err.Error())
         }
         return updatePagePreviewResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdatePage Update page
-     func (co *PlatformAppContent)  UpdatePage(ID string, body  PageSchema) (PageSchema, error){
+     func (co *PlatformAppContent)  UpdatePage(ID string, body  PageSchema) (PageSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updatePageResponse PageSchema
-            
 	    )
         
          
@@ -4621,11 +4519,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return PageSchema{}, common.NewFDKError(err.Error())
+            
+             return PageSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return PageSchema{}, common.NewFDKError(err.Error())
+            
+             return PageSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -4638,33 +4538,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PageSchema{}, err
-            
+            return PageSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &updatePageResponse)
         if err != nil {
-           
-             return PageSchema{}, common.NewFDKError(err.Error())
-            
+            return PageSchema{}, common.NewFDKError(err.Error())
         }
         return updatePageResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // DeletePage Delete page
-     func (co *PlatformAppContent)  DeletePage(ID string) (PageSchema, error){
+     func (co *PlatformAppContent)  DeletePage(ID string) (PageSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             deletePageResponse PageSchema
-            
 	    )
         
          
@@ -4680,33 +4578,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PageSchema{}, err
-            
+            return PageSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &deletePageResponse)
         if err != nil {
-           
-             return PageSchema{}, common.NewFDKError(err.Error())
-            
+            return PageSchema{}, common.NewFDKError(err.Error())
         }
         return deletePageResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetPageBySlug Get pages by component Id
-     func (co *PlatformAppContent)  GetPageBySlug(Slug string) (PageSchema, error){
+     func (co *PlatformAppContent)  GetPageBySlug(Slug string) (PageSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getPageBySlugResponse PageSchema
-            
 	    )
         
          
@@ -4722,33 +4618,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PageSchema{}, err
-            
+            return PageSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getPageBySlugResponse)
         if err != nil {
-           
-             return PageSchema{}, common.NewFDKError(err.Error())
-            
+            return PageSchema{}, common.NewFDKError(err.Error())
         }
         return getPageBySlugResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetSEOConfiguration Get seo of application
-     func (co *PlatformAppContent)  GetSEOConfiguration() (SeoComponent, error){
+     func (co *PlatformAppContent)  GetSEOConfiguration() (SeoComponent, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getSEOConfigurationResponse SeoComponent
-            
 	    )
         
          
@@ -4764,33 +4658,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SeoComponent{}, err
-            
+            return SeoComponent{}, err
 	    }
+        
         err = json.Unmarshal(response, &getSEOConfigurationResponse)
         if err != nil {
-           
-             return SeoComponent{}, common.NewFDKError(err.Error())
-            
+            return SeoComponent{}, common.NewFDKError(err.Error())
         }
         return getSEOConfigurationResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateSEOConfiguration Update seo of application
-     func (co *PlatformAppContent)  UpdateSEOConfiguration(body  SeoComponent) (SeoSchema, error){
+     func (co *PlatformAppContent)  UpdateSEOConfiguration(body  SeoComponent) (SeoSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateSEOConfigurationResponse SeoSchema
-            
 	    )
         
          
@@ -4800,11 +4692,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return SeoSchema{}, common.NewFDKError(err.Error())
+            
+             return SeoSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return SeoSchema{}, common.NewFDKError(err.Error())
+            
+             return SeoSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -4817,23 +4711,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SeoSchema{}, err
-            
+            return SeoSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateSEOConfigurationResponse)
         if err != nil {
-           
-             return SeoSchema{}, common.NewFDKError(err.Error())
-            
+            return SeoSchema{}, common.NewFDKError(err.Error())
         }
         return updateSEOConfigurationResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetSlideshowsXQuery holds query params
     type PlatformAppGetSlideshowsXQuery struct { 
@@ -4843,14 +4737,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetSlideshows Get slideshows
-     func (co *PlatformAppContent)  GetSlideshows(xQuery PlatformAppGetSlideshowsXQuery) (SlideshowGetResponse, error){
+     func (co *PlatformAppContent)  GetSlideshows(xQuery PlatformAppGetSlideshowsXQuery) (SlideshowGetResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getSlideshowsResponse SlideshowGetResponse
-            
 	    )
         
          
@@ -4866,17 +4758,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SlideshowGetResponse{}, err
-            
+            return SlideshowGetResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getSlideshowsResponse)
         if err != nil {
-           
-             return SlideshowGetResponse{}, common.NewFDKError(err.Error())
-            
+            return SlideshowGetResponse{}, common.NewFDKError(err.Error())
         }
         return getSlideshowsResponse, nil
+        
     }
            
             
@@ -4942,17 +4832,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // CreateSlideshow Create slideshow
-     func (co *PlatformAppContent)  CreateSlideshow(body  SlideshowRequest) (SlideshowSchema, error){
+     func (co *PlatformAppContent)  CreateSlideshow(body  SlideshowRequest) (SlideshowSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createSlideshowResponse SlideshowSchema
-            
 	    )
         
          
@@ -4962,11 +4852,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return SlideshowSchema{}, common.NewFDKError(err.Error())
+            
+             return SlideshowSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return SlideshowSchema{}, common.NewFDKError(err.Error())
+            
+             return SlideshowSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -4979,23 +4871,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SlideshowSchema{}, err
-            
+            return SlideshowSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &createSlideshowResponse)
         if err != nil {
-           
-             return SlideshowSchema{}, common.NewFDKError(err.Error())
-            
+            return SlideshowSchema{}, common.NewFDKError(err.Error())
         }
         return createSlideshowResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetSlideshowBySlugXQuery holds query params
     type PlatformAppGetSlideshowBySlugXQuery struct { 
@@ -5003,14 +4895,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetSlideshowBySlug Get slideshow by slug
-     func (co *PlatformAppContent)  GetSlideshowBySlug(Slug string, xQuery PlatformAppGetSlideshowBySlugXQuery) (SlideshowSchema, error){
+     func (co *PlatformAppContent)  GetSlideshowBySlug(Slug string, xQuery PlatformAppGetSlideshowBySlugXQuery) (SlideshowSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getSlideshowBySlugResponse SlideshowSchema
-            
 	    )
         
          
@@ -5026,33 +4916,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SlideshowSchema{}, err
-            
+            return SlideshowSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getSlideshowBySlugResponse)
         if err != nil {
-           
-             return SlideshowSchema{}, common.NewFDKError(err.Error())
-            
+            return SlideshowSchema{}, common.NewFDKError(err.Error())
         }
         return getSlideshowBySlugResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateSlideshow Update slideshow
-     func (co *PlatformAppContent)  UpdateSlideshow(ID string, body  SlideshowRequest) (SlideshowSchema, error){
+     func (co *PlatformAppContent)  UpdateSlideshow(ID string, body  SlideshowRequest) (SlideshowSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateSlideshowResponse SlideshowSchema
-            
 	    )
         
          
@@ -5062,11 +4950,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return SlideshowSchema{}, common.NewFDKError(err.Error())
+            
+             return SlideshowSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return SlideshowSchema{}, common.NewFDKError(err.Error())
+            
+             return SlideshowSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -5079,33 +4969,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SlideshowSchema{}, err
-            
+            return SlideshowSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateSlideshowResponse)
         if err != nil {
-           
-             return SlideshowSchema{}, common.NewFDKError(err.Error())
-            
+            return SlideshowSchema{}, common.NewFDKError(err.Error())
         }
         return updateSlideshowResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // DeleteSlideshow Delete slideshow
-     func (co *PlatformAppContent)  DeleteSlideshow(ID string) (SlideshowSchema, error){
+     func (co *PlatformAppContent)  DeleteSlideshow(ID string) (SlideshowSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             deleteSlideshowResponse SlideshowSchema
-            
 	    )
         
          
@@ -5121,33 +5009,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SlideshowSchema{}, err
-            
+            return SlideshowSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &deleteSlideshowResponse)
         if err != nil {
-           
-             return SlideshowSchema{}, common.NewFDKError(err.Error())
-            
+            return SlideshowSchema{}, common.NewFDKError(err.Error())
         }
         return deleteSlideshowResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetSupportInformation Get support information
-     func (co *PlatformAppContent)  GetSupportInformation() (Support, error){
+     func (co *PlatformAppContent)  GetSupportInformation() (Support, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getSupportInformationResponse Support
-            
 	    )
         
          
@@ -5163,33 +5049,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Support{}, err
-            
+            return Support{}, err
 	    }
+        
         err = json.Unmarshal(response, &getSupportInformationResponse)
         if err != nil {
-           
-             return Support{}, common.NewFDKError(err.Error())
-            
+            return Support{}, common.NewFDKError(err.Error())
         }
         return getSupportInformationResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateSupportInformation Update support data of application
-     func (co *PlatformAppContent)  UpdateSupportInformation(body  Support) (Support, error){
+     func (co *PlatformAppContent)  UpdateSupportInformation(body  Support) (Support, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateSupportInformationResponse Support
-            
 	    )
         
          
@@ -5199,11 +5083,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return Support{}, common.NewFDKError(err.Error())
+            
+             return Support{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return Support{}, common.NewFDKError(err.Error())
+            
+             return Support{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -5216,33 +5102,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Support{}, err
-            
+            return Support{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateSupportInformationResponse)
         if err != nil {
-           
-             return Support{}, common.NewFDKError(err.Error())
-            
+            return Support{}, common.NewFDKError(err.Error())
         }
         return updateSupportInformationResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateInjectableTag Updates a Tag
-     func (co *PlatformAppContent)  UpdateInjectableTag(body  CreateTagRequestSchema) (TagsSchema, error){
+     func (co *PlatformAppContent)  UpdateInjectableTag(body  CreateTagRequestSchema) (TagsSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateInjectableTagResponse TagsSchema
-            
 	    )
         
          
@@ -5252,11 +5136,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return TagsSchema{}, common.NewFDKError(err.Error())
+            
+             return TagsSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return TagsSchema{}, common.NewFDKError(err.Error())
+            
+             return TagsSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -5269,33 +5155,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return TagsSchema{}, err
-            
+            return TagsSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateInjectableTagResponse)
         if err != nil {
-           
-             return TagsSchema{}, common.NewFDKError(err.Error())
-            
+            return TagsSchema{}, common.NewFDKError(err.Error())
         }
         return updateInjectableTagResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // DeleteAllInjectableTags Delete tags for application
-     func (co *PlatformAppContent)  DeleteAllInjectableTags() (TagsSchema, error){
+     func (co *PlatformAppContent)  DeleteAllInjectableTags() (TagsSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             deleteAllInjectableTagsResponse TagsSchema
-            
 	    )
         
          
@@ -5311,33 +5195,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return TagsSchema{}, err
-            
+            return TagsSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &deleteAllInjectableTagsResponse)
         if err != nil {
-           
-             return TagsSchema{}, common.NewFDKError(err.Error())
-            
+            return TagsSchema{}, common.NewFDKError(err.Error())
         }
         return deleteAllInjectableTagsResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetInjectableTags Get tags for application
-     func (co *PlatformAppContent)  GetInjectableTags() (TagsSchema, error){
+     func (co *PlatformAppContent)  GetInjectableTags() (TagsSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getInjectableTagsResponse TagsSchema
-            
 	    )
         
          
@@ -5353,33 +5235,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return TagsSchema{}, err
-            
+            return TagsSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getInjectableTagsResponse)
         if err != nil {
-           
-             return TagsSchema{}, common.NewFDKError(err.Error())
-            
+            return TagsSchema{}, common.NewFDKError(err.Error())
         }
         return getInjectableTagsResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // AddInjectableTag Adds a Tag
-     func (co *PlatformAppContent)  AddInjectableTag(body  CreateTagRequestSchema) (TagsSchema, error){
+     func (co *PlatformAppContent)  AddInjectableTag(body  CreateTagRequestSchema) (TagsSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             addInjectableTagResponse TagsSchema
-            
 	    )
         
          
@@ -5389,11 +5269,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return TagsSchema{}, common.NewFDKError(err.Error())
+            
+             return TagsSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return TagsSchema{}, common.NewFDKError(err.Error())
+            
+             return TagsSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -5406,33 +5288,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return TagsSchema{}, err
-            
+            return TagsSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &addInjectableTagResponse)
         if err != nil {
-           
-             return TagsSchema{}, common.NewFDKError(err.Error())
-            
+            return TagsSchema{}, common.NewFDKError(err.Error())
         }
         return addInjectableTagResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // RemoveInjectableTag Removes a Tag
-     func (co *PlatformAppContent)  RemoveInjectableTag(body  RemoveHandpickedSchema) (TagsSchema, error){
+     func (co *PlatformAppContent)  RemoveInjectableTag(body  RemoveHandpickedSchema) (TagsSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             removeInjectableTagResponse TagsSchema
-            
 	    )
         
          
@@ -5442,11 +5322,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return TagsSchema{}, common.NewFDKError(err.Error())
+            
+             return TagsSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return TagsSchema{}, common.NewFDKError(err.Error())
+            
+             return TagsSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -5459,33 +5341,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return TagsSchema{}, err
-            
+            return TagsSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &removeInjectableTagResponse)
         if err != nil {
-           
-             return TagsSchema{}, common.NewFDKError(err.Error())
-            
+            return TagsSchema{}, common.NewFDKError(err.Error())
         }
         return removeInjectableTagResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // EditInjectableTag Edits a Tag by Id
-     func (co *PlatformAppContent)  EditInjectableTag(TagID string, body  UpdateHandpickedSchema) (TagsSchema, error){
+     func (co *PlatformAppContent)  EditInjectableTag(TagID string, body  UpdateHandpickedSchema) (TagsSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             editInjectableTagResponse TagsSchema
-            
 	    )
         
          
@@ -5495,11 +5375,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return TagsSchema{}, common.NewFDKError(err.Error())
+            
+             return TagsSchema{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return TagsSchema{}, common.NewFDKError(err.Error())
+            
+             return TagsSchema{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -5512,17 +5394,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return TagsSchema{}, err
-            
+            return TagsSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &editInjectableTagResponse)
         if err != nil {
-           
-             return TagsSchema{}, common.NewFDKError(err.Error())
-            
+            return TagsSchema{}, common.NewFDKError(err.Error())
         }
         return editInjectableTagResponse, nil
+        
     }
            
        
@@ -5542,17 +5422,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     
+    
   
+
     
     // CreatePickupLocation 
-     func (as *PlatformAppAssignment)  CreatePickupLocation(body  PickupPointSchema) (Success, error){
+     func (as *PlatformAppAssignment)  CreatePickupLocation(body  PickupPointSchema) (Success, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createPickupLocationResponse Success
-            
 	    )
         
          
@@ -5562,11 +5442,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return Success{}, common.NewFDKError(err.Error())
+            
+             return Success{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return Success{}, common.NewFDKError(err.Error())
+            
+             return Success{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -5579,23 +5461,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Success{}, err
-            
+            return Success{}, err
 	    }
+        
         err = json.Unmarshal(response, &createPickupLocationResponse)
         if err != nil {
-           
-             return Success{}, common.NewFDKError(err.Error())
-            
+            return Success{}, common.NewFDKError(err.Error())
         }
         return createPickupLocationResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetPickupLocationXQuery holds query params
     type PlatformAppGetPickupLocationXQuery struct { 
@@ -5605,14 +5487,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetPickupLocation 
-     func (as *PlatformAppAssignment)  GetPickupLocation(xQuery PlatformAppGetPickupLocationXQuery) (PickupPointResponse, error){
+     func (as *PlatformAppAssignment)  GetPickupLocation(xQuery PlatformAppGetPickupLocationXQuery) (PickupPointResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getPickupLocationResponse PickupPointResponse
-            
 	    )
         
          
@@ -5628,17 +5508,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PickupPointResponse{}, err
-            
+            return PickupPointResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getPickupLocationResponse)
         if err != nil {
-           
-             return PickupPointResponse{}, common.NewFDKError(err.Error())
-            
+            return PickupPointResponse{}, common.NewFDKError(err.Error())
         }
         return getPickupLocationResponse, nil
+        
     }
            
             
@@ -5704,17 +5582,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // UpdatePickupLocation 
-     func (as *PlatformAppAssignment)  UpdatePickupLocation(ID float64, body  PickupPointSchema) (Success, error){
+     func (as *PlatformAppAssignment)  UpdatePickupLocation(ID float64, body  PickupPointSchema) (Success, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updatePickupLocationResponse Success
-            
 	    )
         
          
@@ -5724,11 +5602,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return Success{}, common.NewFDKError(err.Error())
+            
+             return Success{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return Success{}, common.NewFDKError(err.Error())
+            
+             return Success{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -5741,33 +5621,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Success{}, err
-            
+            return Success{}, err
 	    }
+        
         err = json.Unmarshal(response, &updatePickupLocationResponse)
         if err != nil {
-           
-             return Success{}, common.NewFDKError(err.Error())
-            
+            return Success{}, common.NewFDKError(err.Error())
         }
         return updatePickupLocationResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetPickupLocationById 
-     func (as *PlatformAppAssignment)  GetPickupLocationById(ID float64, ) (PickupPointSchema, error){
+     func (as *PlatformAppAssignment)  GetPickupLocationById(ID float64, ) (PickupPointSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getPickupLocationByIdResponse PickupPointSchema
-            
 	    )
         
          
@@ -5783,33 +5661,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PickupPointSchema{}, err
-            
+            return PickupPointSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getPickupLocationByIdResponse)
         if err != nil {
-           
-             return PickupPointSchema{}, common.NewFDKError(err.Error())
-            
+            return PickupPointSchema{}, common.NewFDKError(err.Error())
         }
         return getPickupLocationByIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // CreatePickupConfiguration 
-     func (as *PlatformAppAssignment)  CreatePickupConfiguration(body  PickupConfiguration) (Success, error){
+     func (as *PlatformAppAssignment)  CreatePickupConfiguration(body  PickupConfiguration) (Success, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createPickupConfigurationResponse Success
-            
 	    )
         
          
@@ -5819,11 +5695,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return Success{}, common.NewFDKError(err.Error())
+            
+             return Success{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return Success{}, common.NewFDKError(err.Error())
+            
+             return Success{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -5836,33 +5714,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Success{}, err
-            
+            return Success{}, err
 	    }
+        
         err = json.Unmarshal(response, &createPickupConfigurationResponse)
         if err != nil {
-           
-             return Success{}, common.NewFDKError(err.Error())
-            
+            return Success{}, common.NewFDKError(err.Error())
         }
         return createPickupConfigurationResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetPickupConfiguration 
-     func (as *PlatformAppAssignment)  GetPickupConfiguration() (PickupResponse, error){
+     func (as *PlatformAppAssignment)  GetPickupConfiguration() (PickupResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getPickupConfigurationResponse PickupResponse
-            
 	    )
         
          
@@ -5878,33 +5754,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PickupResponse{}, err
-            
+            return PickupResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getPickupConfigurationResponse)
         if err != nil {
-           
-             return PickupResponse{}, common.NewFDKError(err.Error())
-            
+            return PickupResponse{}, common.NewFDKError(err.Error())
         }
         return getPickupConfigurationResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetAllocationConfiguration 
-     func (as *PlatformAppAssignment)  GetAllocationConfiguration() (ShippingResponse, error){
+     func (as *PlatformAppAssignment)  GetAllocationConfiguration() (ShippingResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getAllocationConfigurationResponse ShippingResponse
-            
 	    )
         
          
@@ -5920,33 +5794,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ShippingResponse{}, err
-            
+            return ShippingResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAllocationConfigurationResponse)
         if err != nil {
-           
-             return ShippingResponse{}, common.NewFDKError(err.Error())
-            
+            return ShippingResponse{}, common.NewFDKError(err.Error())
         }
         return getAllocationConfigurationResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // CreateAllocationConfiguration 
-     func (as *PlatformAppAssignment)  CreateAllocationConfiguration(body  ShippingSchema) (Success, error){
+     func (as *PlatformAppAssignment)  CreateAllocationConfiguration(body  ShippingSchema) (Success, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createAllocationConfigurationResponse Success
-            
 	    )
         
          
@@ -5956,11 +5828,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return Success{}, common.NewFDKError(err.Error())
+            
+             return Success{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return Success{}, common.NewFDKError(err.Error())
+            
+             return Success{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -5973,33 +5847,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Success{}, err
-            
+            return Success{}, err
 	    }
+        
         err = json.Unmarshal(response, &createAllocationConfigurationResponse)
         if err != nil {
-           
-             return Success{}, common.NewFDKError(err.Error())
-            
+            return Success{}, common.NewFDKError(err.Error())
         }
         return createAllocationConfigurationResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateAllocationConfiguration 
-     func (as *PlatformAppAssignment)  UpdateAllocationConfiguration(body  ShippingSchema) (Success, error){
+     func (as *PlatformAppAssignment)  UpdateAllocationConfiguration(body  ShippingSchema) (Success, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateAllocationConfigurationResponse Success
-            
 	    )
         
          
@@ -6009,11 +5881,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return Success{}, common.NewFDKError(err.Error())
+            
+             return Success{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return Success{}, common.NewFDKError(err.Error())
+            
+             return Success{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -6026,23 +5900,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Success{}, err
-            
+            return Success{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateAllocationConfigurationResponse)
         if err != nil {
-           
-             return Success{}, common.NewFDKError(err.Error())
-            
+            return Success{}, common.NewFDKError(err.Error())
         }
         return updateAllocationConfigurationResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetAllocationLocationsXQuery holds query params
     type PlatformAppGetAllocationLocationsXQuery struct { 
@@ -6053,14 +5927,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetAllocationLocations 
-     func (as *PlatformAppAssignment)  GetAllocationLocations(xQuery PlatformAppGetAllocationLocationsXQuery) (StoreListResponse, error){
+     func (as *PlatformAppAssignment)  GetAllocationLocations(xQuery PlatformAppGetAllocationLocationsXQuery) (StoreListResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getAllocationLocationsResponse StoreListResponse
-            
 	    )
         
          
@@ -6076,17 +5948,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return StoreListResponse{}, err
-            
+            return StoreListResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAllocationLocationsResponse)
         if err != nil {
-           
-             return StoreListResponse{}, common.NewFDKError(err.Error())
-            
+            return StoreListResponse{}, common.NewFDKError(err.Error())
         }
         return getAllocationLocationsResponse, nil
+        
     }
            
             
@@ -6162,17 +6032,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // GetAllocationLocationById 
-     func (as *PlatformAppAssignment)  GetAllocationLocationById(ID float64, ) (StoreResponse, error){
+     func (as *PlatformAppAssignment)  GetAllocationLocationById(ID float64, ) (StoreResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getAllocationLocationByIdResponse StoreResponse
-            
 	    )
         
          
@@ -6188,33 +6058,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return StoreResponse{}, err
-            
+            return StoreResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAllocationLocationByIdResponse)
         if err != nil {
-           
-             return StoreResponse{}, common.NewFDKError(err.Error())
-            
+            return StoreResponse{}, common.NewFDKError(err.Error())
         }
         return getAllocationLocationByIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateAllocationLocation 
-     func (as *PlatformAppAssignment)  UpdateAllocationLocation(ID float64, body  StoreSchema) (Success, error){
+     func (as *PlatformAppAssignment)  UpdateAllocationLocation(ID float64, body  StoreSchema) (Success, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateAllocationLocationResponse Success
-            
 	    )
         
          
@@ -6224,11 +6092,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return Success{}, common.NewFDKError(err.Error())
+            
+             return Success{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return Success{}, common.NewFDKError(err.Error())
+            
+             return Success{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -6241,33 +6111,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Success{}, err
-            
+            return Success{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateAllocationLocationResponse)
         if err != nil {
-           
-             return Success{}, common.NewFDKError(err.Error())
-            
+            return Success{}, common.NewFDKError(err.Error())
         }
         return updateAllocationLocationResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // CreateAllocationLocation 
-     func (as *PlatformAppAssignment)  CreateAllocationLocation(body  StoreSchema) (Success, error){
+     func (as *PlatformAppAssignment)  CreateAllocationLocation(body  StoreSchema) (Success, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createAllocationLocationResponse Success
-            
 	    )
         
          
@@ -6277,11 +6145,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return Success{}, common.NewFDKError(err.Error())
+            
+             return Success{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return Success{}, common.NewFDKError(err.Error())
+            
+             return Success{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -6294,23 +6164,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Success{}, err
-            
+            return Success{}, err
 	    }
+        
         err = json.Unmarshal(response, &createAllocationLocationResponse)
         if err != nil {
-           
-             return Success{}, common.NewFDKError(err.Error())
-            
+            return Success{}, common.NewFDKError(err.Error())
         }
         return createAllocationLocationResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetDestinationZonesXQuery holds query params
     type PlatformAppGetDestinationZonesXQuery struct { 
@@ -6320,14 +6190,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetDestinationZones 
-     func (as *PlatformAppAssignment)  GetDestinationZones(xQuery PlatformAppGetDestinationZonesXQuery) (ZoneListResponse, error){
+     func (as *PlatformAppAssignment)  GetDestinationZones(xQuery PlatformAppGetDestinationZonesXQuery) (ZoneListResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getDestinationZonesResponse ZoneListResponse
-            
 	    )
         
          
@@ -6343,17 +6211,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ZoneListResponse{}, err
-            
+            return ZoneListResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getDestinationZonesResponse)
         if err != nil {
-           
-             return ZoneListResponse{}, common.NewFDKError(err.Error())
-            
+            return ZoneListResponse{}, common.NewFDKError(err.Error())
         }
         return getDestinationZonesResponse, nil
+        
     }
            
             
@@ -6419,17 +6285,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // PostDestinationZone 
-     func (as *PlatformAppAssignment)  PostDestinationZone(body  ZoneSchema) (Success, error){
+     func (as *PlatformAppAssignment)  PostDestinationZone(body  ZoneSchema) (Success, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             postDestinationZoneResponse Success
-            
 	    )
         
          
@@ -6439,11 +6305,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return Success{}, common.NewFDKError(err.Error())
+            
+             return Success{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return Success{}, common.NewFDKError(err.Error())
+            
+             return Success{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -6456,33 +6324,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Success{}, err
-            
+            return Success{}, err
 	    }
+        
         err = json.Unmarshal(response, &postDestinationZoneResponse)
         if err != nil {
-           
-             return Success{}, common.NewFDKError(err.Error())
-            
+            return Success{}, common.NewFDKError(err.Error())
         }
         return postDestinationZoneResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetDestinationZoneById 
-     func (as *PlatformAppAssignment)  GetDestinationZoneById(ID float64, ) (ZoneSchema, error){
+     func (as *PlatformAppAssignment)  GetDestinationZoneById(ID float64, ) (ZoneSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getDestinationZoneByIdResponse ZoneSchema
-            
 	    )
         
          
@@ -6498,33 +6364,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ZoneSchema{}, err
-            
+            return ZoneSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getDestinationZoneByIdResponse)
         if err != nil {
-           
-             return ZoneSchema{}, common.NewFDKError(err.Error())
-            
+            return ZoneSchema{}, common.NewFDKError(err.Error())
         }
         return getDestinationZoneByIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateDestinationZone 
-     func (as *PlatformAppAssignment)  UpdateDestinationZone(ID float64, body  ZoneSchema) (Success, error){
+     func (as *PlatformAppAssignment)  UpdateDestinationZone(ID float64, body  ZoneSchema) (Success, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateDestinationZoneResponse Success
-            
 	    )
         
          
@@ -6534,11 +6398,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return Success{}, common.NewFDKError(err.Error())
+            
+             return Success{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return Success{}, common.NewFDKError(err.Error())
+            
+             return Success{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -6551,17 +6417,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Success{}, err
-            
+            return Success{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateDestinationZoneResponse)
         if err != nil {
-           
-             return Success{}, common.NewFDKError(err.Error())
-            
+            return Success{}, common.NewFDKError(err.Error())
         }
         return updateDestinationZoneResponse, nil
+        
     }
            
        
@@ -6581,7 +6445,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     
+    
   
+
     
     //PlatformAppGetCampaignsXQuery holds query params
     type PlatformAppGetCampaignsXQuery struct { 
@@ -6591,14 +6457,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetCampaigns Get campaigns
-     func (co *PlatformAppCommunication)  GetCampaigns(xQuery PlatformAppGetCampaignsXQuery) (Campaigns, error){
+     func (co *PlatformAppCommunication)  GetCampaigns(xQuery PlatformAppGetCampaignsXQuery) (Campaigns, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getCampaignsResponse Campaigns
-            
 	    )
         
          
@@ -6614,17 +6478,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Campaigns{}, err
-            
+            return Campaigns{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCampaignsResponse)
         if err != nil {
-           
-             return Campaigns{}, common.NewFDKError(err.Error())
-            
+            return Campaigns{}, common.NewFDKError(err.Error())
         }
         return getCampaignsResponse, nil
+        
     }
            
             
@@ -6690,17 +6552,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // CreateCampaign Create campaign
-     func (co *PlatformAppCommunication)  CreateCampaign(body  CampaignReq) (Campaign, error){
+     func (co *PlatformAppCommunication)  CreateCampaign(body  CampaignReq) (Campaign, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createCampaignResponse Campaign
-            
 	    )
         
          
@@ -6710,11 +6572,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return Campaign{}, common.NewFDKError(err.Error())
+            
+             return Campaign{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return Campaign{}, common.NewFDKError(err.Error())
+            
+             return Campaign{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -6727,33 +6591,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Campaign{}, err
-            
+            return Campaign{}, err
 	    }
+        
         err = json.Unmarshal(response, &createCampaignResponse)
         if err != nil {
-           
-             return Campaign{}, common.NewFDKError(err.Error())
-            
+            return Campaign{}, common.NewFDKError(err.Error())
         }
         return createCampaignResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetCampaignById Get campaign by id
-     func (co *PlatformAppCommunication)  GetCampaignById(ID string) (Campaign, error){
+     func (co *PlatformAppCommunication)  GetCampaignById(ID string) (Campaign, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getCampaignByIdResponse Campaign
-            
 	    )
         
          
@@ -6769,33 +6631,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Campaign{}, err
-            
+            return Campaign{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCampaignByIdResponse)
         if err != nil {
-           
-             return Campaign{}, common.NewFDKError(err.Error())
-            
+            return Campaign{}, common.NewFDKError(err.Error())
         }
         return getCampaignByIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateCampaignById Update campaign by id
-     func (co *PlatformAppCommunication)  UpdateCampaignById(ID string, body  CampaignReq) (Campaign, error){
+     func (co *PlatformAppCommunication)  UpdateCampaignById(ID string, body  CampaignReq) (Campaign, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateCampaignByIdResponse Campaign
-            
 	    )
         
          
@@ -6805,11 +6665,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return Campaign{}, common.NewFDKError(err.Error())
+            
+             return Campaign{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return Campaign{}, common.NewFDKError(err.Error())
+            
+             return Campaign{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -6822,33 +6684,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Campaign{}, err
-            
+            return Campaign{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateCampaignByIdResponse)
         if err != nil {
-           
-             return Campaign{}, common.NewFDKError(err.Error())
-            
+            return Campaign{}, common.NewFDKError(err.Error())
         }
         return updateCampaignByIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetStatsOfCampaignById Get stats of campaign by id
-     func (co *PlatformAppCommunication)  GetStatsOfCampaignById(ID string) (GetStats, error){
+     func (co *PlatformAppCommunication)  GetStatsOfCampaignById(ID string) (GetStats, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getStatsOfCampaignByIdResponse GetStats
-            
 	    )
         
          
@@ -6864,23 +6724,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetStats{}, err
-            
+            return GetStats{}, err
 	    }
+        
         err = json.Unmarshal(response, &getStatsOfCampaignByIdResponse)
         if err != nil {
-           
-             return GetStats{}, common.NewFDKError(err.Error())
-            
+            return GetStats{}, common.NewFDKError(err.Error())
         }
         return getStatsOfCampaignByIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetAudiencesXQuery holds query params
     type PlatformAppGetAudiencesXQuery struct { 
@@ -6890,14 +6750,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetAudiences Get audiences
-     func (co *PlatformAppCommunication)  GetAudiences(xQuery PlatformAppGetAudiencesXQuery) (Audiences, error){
+     func (co *PlatformAppCommunication)  GetAudiences(xQuery PlatformAppGetAudiencesXQuery) (Audiences, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getAudiencesResponse Audiences
-            
 	    )
         
          
@@ -6913,17 +6771,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Audiences{}, err
-            
+            return Audiences{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAudiencesResponse)
         if err != nil {
-           
-             return Audiences{}, common.NewFDKError(err.Error())
-            
+            return Audiences{}, common.NewFDKError(err.Error())
         }
         return getAudiencesResponse, nil
+        
     }
            
             
@@ -6989,17 +6845,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // CreateAudience Create audience
-     func (co *PlatformAppCommunication)  CreateAudience(body  AudienceReq) (Audience, error){
+     func (co *PlatformAppCommunication)  CreateAudience(body  AudienceReq) (Audience, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createAudienceResponse Audience
-            
 	    )
         
          
@@ -7009,11 +6865,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return Audience{}, common.NewFDKError(err.Error())
+            
+             return Audience{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return Audience{}, common.NewFDKError(err.Error())
+            
+             return Audience{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -7026,33 +6884,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Audience{}, err
-            
+            return Audience{}, err
 	    }
+        
         err = json.Unmarshal(response, &createAudienceResponse)
         if err != nil {
-           
-             return Audience{}, common.NewFDKError(err.Error())
-            
+            return Audience{}, common.NewFDKError(err.Error())
         }
         return createAudienceResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetBigqueryHeaders Get bigquery headers
-     func (co *PlatformAppCommunication)  GetBigqueryHeaders(body  BigqueryHeadersReq) (BigqueryHeadersRes, error){
+     func (co *PlatformAppCommunication)  GetBigqueryHeaders(body  BigqueryHeadersReq) (BigqueryHeadersRes, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getBigqueryHeadersResponse BigqueryHeadersRes
-            
 	    )
         
          
@@ -7062,11 +6918,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return BigqueryHeadersRes{}, common.NewFDKError(err.Error())
+            
+             return BigqueryHeadersRes{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return BigqueryHeadersRes{}, common.NewFDKError(err.Error())
+            
+             return BigqueryHeadersRes{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -7079,33 +6937,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return BigqueryHeadersRes{}, err
-            
+            return BigqueryHeadersRes{}, err
 	    }
+        
         err = json.Unmarshal(response, &getBigqueryHeadersResponse)
         if err != nil {
-           
-             return BigqueryHeadersRes{}, common.NewFDKError(err.Error())
-            
+            return BigqueryHeadersRes{}, common.NewFDKError(err.Error())
         }
         return getBigqueryHeadersResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetAudienceById Get audience by id
-     func (co *PlatformAppCommunication)  GetAudienceById(ID string) (Audience, error){
+     func (co *PlatformAppCommunication)  GetAudienceById(ID string) (Audience, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getAudienceByIdResponse Audience
-            
 	    )
         
          
@@ -7121,33 +6977,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Audience{}, err
-            
+            return Audience{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAudienceByIdResponse)
         if err != nil {
-           
-             return Audience{}, common.NewFDKError(err.Error())
-            
+            return Audience{}, common.NewFDKError(err.Error())
         }
         return getAudienceByIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateAudienceById Update audience by id
-     func (co *PlatformAppCommunication)  UpdateAudienceById(ID string, body  AudienceReq) (Audience, error){
+     func (co *PlatformAppCommunication)  UpdateAudienceById(ID string, body  AudienceReq) (Audience, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateAudienceByIdResponse Audience
-            
 	    )
         
          
@@ -7157,11 +7011,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return Audience{}, common.NewFDKError(err.Error())
+            
+             return Audience{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return Audience{}, common.NewFDKError(err.Error())
+            
+             return Audience{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -7174,33 +7030,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Audience{}, err
-            
+            return Audience{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateAudienceByIdResponse)
         if err != nil {
-           
-             return Audience{}, common.NewFDKError(err.Error())
-            
+            return Audience{}, common.NewFDKError(err.Error())
         }
         return updateAudienceByIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetNSampleRecordsFromCsv Get n sample records from csv
-     func (co *PlatformAppCommunication)  GetNSampleRecordsFromCsv(body  GetNRecordsCsvReq) (GetNRecordsCsvRes, error){
+     func (co *PlatformAppCommunication)  GetNSampleRecordsFromCsv(body  GetNRecordsCsvReq) (GetNRecordsCsvRes, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getNSampleRecordsFromCsvResponse GetNRecordsCsvRes
-            
 	    )
         
          
@@ -7210,11 +7064,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return GetNRecordsCsvRes{}, common.NewFDKError(err.Error())
+            
+             return GetNRecordsCsvRes{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return GetNRecordsCsvRes{}, common.NewFDKError(err.Error())
+            
+             return GetNRecordsCsvRes{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -7227,23 +7083,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetNRecordsCsvRes{}, err
-            
+            return GetNRecordsCsvRes{}, err
 	    }
+        
         err = json.Unmarshal(response, &getNSampleRecordsFromCsvResponse)
         if err != nil {
-           
-             return GetNRecordsCsvRes{}, common.NewFDKError(err.Error())
-            
+            return GetNRecordsCsvRes{}, common.NewFDKError(err.Error())
         }
         return getNSampleRecordsFromCsvResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetEmailProvidersXQuery holds query params
     type PlatformAppGetEmailProvidersXQuery struct { 
@@ -7253,14 +7109,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetEmailProviders Get email providers
-     func (co *PlatformAppCommunication)  GetEmailProviders(xQuery PlatformAppGetEmailProvidersXQuery) (EmailProviders, error){
+     func (co *PlatformAppCommunication)  GetEmailProviders(xQuery PlatformAppGetEmailProvidersXQuery) (EmailProviders, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getEmailProvidersResponse EmailProviders
-            
 	    )
         
          
@@ -7276,17 +7130,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return EmailProviders{}, err
-            
+            return EmailProviders{}, err
 	    }
+        
         err = json.Unmarshal(response, &getEmailProvidersResponse)
         if err != nil {
-           
-             return EmailProviders{}, common.NewFDKError(err.Error())
-            
+            return EmailProviders{}, common.NewFDKError(err.Error())
         }
         return getEmailProvidersResponse, nil
+        
     }
            
             
@@ -7352,17 +7204,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // CreateEmailProvider Create email provider
-     func (co *PlatformAppCommunication)  CreateEmailProvider(body  EmailProviderReq) (EmailProvider, error){
+     func (co *PlatformAppCommunication)  CreateEmailProvider(body  EmailProviderReq) (EmailProvider, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createEmailProviderResponse EmailProvider
-            
 	    )
         
          
@@ -7372,11 +7224,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return EmailProvider{}, common.NewFDKError(err.Error())
+            
+             return EmailProvider{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return EmailProvider{}, common.NewFDKError(err.Error())
+            
+             return EmailProvider{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -7389,33 +7243,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return EmailProvider{}, err
-            
+            return EmailProvider{}, err
 	    }
+        
         err = json.Unmarshal(response, &createEmailProviderResponse)
         if err != nil {
-           
-             return EmailProvider{}, common.NewFDKError(err.Error())
-            
+            return EmailProvider{}, common.NewFDKError(err.Error())
         }
         return createEmailProviderResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetEmailProviderById Get email provider by id
-     func (co *PlatformAppCommunication)  GetEmailProviderById(ID string) (EmailProvider, error){
+     func (co *PlatformAppCommunication)  GetEmailProviderById(ID string) (EmailProvider, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getEmailProviderByIdResponse EmailProvider
-            
 	    )
         
          
@@ -7431,33 +7283,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return EmailProvider{}, err
-            
+            return EmailProvider{}, err
 	    }
+        
         err = json.Unmarshal(response, &getEmailProviderByIdResponse)
         if err != nil {
-           
-             return EmailProvider{}, common.NewFDKError(err.Error())
-            
+            return EmailProvider{}, common.NewFDKError(err.Error())
         }
         return getEmailProviderByIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateEmailProviderById Update email provider by id
-     func (co *PlatformAppCommunication)  UpdateEmailProviderById(ID string, body  EmailProviderReq) (EmailProvider, error){
+     func (co *PlatformAppCommunication)  UpdateEmailProviderById(ID string, body  EmailProviderReq) (EmailProvider, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateEmailProviderByIdResponse EmailProvider
-            
 	    )
         
          
@@ -7467,11 +7317,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return EmailProvider{}, common.NewFDKError(err.Error())
+            
+             return EmailProvider{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return EmailProvider{}, common.NewFDKError(err.Error())
+            
+             return EmailProvider{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -7484,23 +7336,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return EmailProvider{}, err
-            
+            return EmailProvider{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateEmailProviderByIdResponse)
         if err != nil {
-           
-             return EmailProvider{}, common.NewFDKError(err.Error())
-            
+            return EmailProvider{}, common.NewFDKError(err.Error())
         }
         return updateEmailProviderByIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetEmailTemplatesXQuery holds query params
     type PlatformAppGetEmailTemplatesXQuery struct { 
@@ -7510,14 +7362,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetEmailTemplates Get email templates
-     func (co *PlatformAppCommunication)  GetEmailTemplates(xQuery PlatformAppGetEmailTemplatesXQuery) (EmailTemplates, error){
+     func (co *PlatformAppCommunication)  GetEmailTemplates(xQuery PlatformAppGetEmailTemplatesXQuery) (EmailTemplates, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getEmailTemplatesResponse EmailTemplates
-            
 	    )
         
          
@@ -7533,17 +7383,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return EmailTemplates{}, err
-            
+            return EmailTemplates{}, err
 	    }
+        
         err = json.Unmarshal(response, &getEmailTemplatesResponse)
         if err != nil {
-           
-             return EmailTemplates{}, common.NewFDKError(err.Error())
-            
+            return EmailTemplates{}, common.NewFDKError(err.Error())
         }
         return getEmailTemplatesResponse, nil
+        
     }
            
             
@@ -7609,17 +7457,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // CreateEmailTemplate Create email template
-     func (co *PlatformAppCommunication)  CreateEmailTemplate(body  EmailTemplateReq) (EmailTemplateRes, error){
+     func (co *PlatformAppCommunication)  CreateEmailTemplate(body  EmailTemplateReq) (EmailTemplateRes, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createEmailTemplateResponse EmailTemplateRes
-            
 	    )
         
          
@@ -7629,11 +7477,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return EmailTemplateRes{}, common.NewFDKError(err.Error())
+            
+             return EmailTemplateRes{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return EmailTemplateRes{}, common.NewFDKError(err.Error())
+            
+             return EmailTemplateRes{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -7646,23 +7496,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return EmailTemplateRes{}, err
-            
+            return EmailTemplateRes{}, err
 	    }
+        
         err = json.Unmarshal(response, &createEmailTemplateResponse)
         if err != nil {
-           
-             return EmailTemplateRes{}, common.NewFDKError(err.Error())
-            
+            return EmailTemplateRes{}, common.NewFDKError(err.Error())
         }
         return createEmailTemplateResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetSystemEmailTemplatesXQuery holds query params
     type PlatformAppGetSystemEmailTemplatesXQuery struct { 
@@ -7672,14 +7522,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetSystemEmailTemplates Get system email templates
-     func (co *PlatformAppCommunication)  GetSystemEmailTemplates(xQuery PlatformAppGetSystemEmailTemplatesXQuery) (SystemEmailTemplates, error){
+     func (co *PlatformAppCommunication)  GetSystemEmailTemplates(xQuery PlatformAppGetSystemEmailTemplatesXQuery) (SystemEmailTemplates, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getSystemEmailTemplatesResponse SystemEmailTemplates
-            
 	    )
         
          
@@ -7695,17 +7543,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SystemEmailTemplates{}, err
-            
+            return SystemEmailTemplates{}, err
 	    }
+        
         err = json.Unmarshal(response, &getSystemEmailTemplatesResponse)
         if err != nil {
-           
-             return SystemEmailTemplates{}, common.NewFDKError(err.Error())
-            
+            return SystemEmailTemplates{}, common.NewFDKError(err.Error())
         }
         return getSystemEmailTemplatesResponse, nil
+        
     }
            
             
@@ -7771,17 +7617,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // GetEmailTemplateById Get email template by id
-     func (co *PlatformAppCommunication)  GetEmailTemplateById(ID string) (EmailTemplate, error){
+     func (co *PlatformAppCommunication)  GetEmailTemplateById(ID string) (EmailTemplate, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getEmailTemplateByIdResponse EmailTemplate
-            
 	    )
         
          
@@ -7797,33 +7643,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return EmailTemplate{}, err
-            
+            return EmailTemplate{}, err
 	    }
+        
         err = json.Unmarshal(response, &getEmailTemplateByIdResponse)
         if err != nil {
-           
-             return EmailTemplate{}, common.NewFDKError(err.Error())
-            
+            return EmailTemplate{}, common.NewFDKError(err.Error())
         }
         return getEmailTemplateByIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateEmailTemplateById Update email template by id
-     func (co *PlatformAppCommunication)  UpdateEmailTemplateById(ID string, body  EmailTemplateReq) (EmailTemplateRes, error){
+     func (co *PlatformAppCommunication)  UpdateEmailTemplateById(ID string, body  EmailTemplateReq) (EmailTemplateRes, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateEmailTemplateByIdResponse EmailTemplateRes
-            
 	    )
         
          
@@ -7833,11 +7677,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return EmailTemplateRes{}, common.NewFDKError(err.Error())
+            
+             return EmailTemplateRes{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return EmailTemplateRes{}, common.NewFDKError(err.Error())
+            
+             return EmailTemplateRes{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -7850,33 +7696,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return EmailTemplateRes{}, err
-            
+            return EmailTemplateRes{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateEmailTemplateByIdResponse)
         if err != nil {
-           
-             return EmailTemplateRes{}, common.NewFDKError(err.Error())
-            
+            return EmailTemplateRes{}, common.NewFDKError(err.Error())
         }
         return updateEmailTemplateByIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // DeleteEmailTemplateById Delete email template by id
-     func (co *PlatformAppCommunication)  DeleteEmailTemplateById(ID string) (EmailTemplateDeleteSuccessRes, error){
+     func (co *PlatformAppCommunication)  DeleteEmailTemplateById(ID string) (EmailTemplateDeleteSuccessRes, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             deleteEmailTemplateByIdResponse EmailTemplateDeleteSuccessRes
-            
 	    )
         
          
@@ -7892,23 +7736,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return EmailTemplateDeleteSuccessRes{}, err
-            
+            return EmailTemplateDeleteSuccessRes{}, err
 	    }
+        
         err = json.Unmarshal(response, &deleteEmailTemplateByIdResponse)
         if err != nil {
-           
-             return EmailTemplateDeleteSuccessRes{}, common.NewFDKError(err.Error())
-            
+            return EmailTemplateDeleteSuccessRes{}, common.NewFDKError(err.Error())
         }
         return deleteEmailTemplateByIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetEventSubscriptionsXQuery holds query params
     type PlatformAppGetEventSubscriptionsXQuery struct { 
@@ -7918,14 +7762,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetEventSubscriptions Get event subscriptions
-     func (co *PlatformAppCommunication)  GetEventSubscriptions(xQuery PlatformAppGetEventSubscriptionsXQuery) (EventSubscriptions, error){
+     func (co *PlatformAppCommunication)  GetEventSubscriptions(xQuery PlatformAppGetEventSubscriptionsXQuery) (EventSubscriptions, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getEventSubscriptionsResponse EventSubscriptions
-            
 	    )
         
          
@@ -7941,17 +7783,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return EventSubscriptions{}, err
-            
+            return EventSubscriptions{}, err
 	    }
+        
         err = json.Unmarshal(response, &getEventSubscriptionsResponse)
         if err != nil {
-           
-             return EventSubscriptions{}, common.NewFDKError(err.Error())
-            
+            return EventSubscriptions{}, common.NewFDKError(err.Error())
         }
         return getEventSubscriptionsResponse, nil
+        
     }
            
             
@@ -8017,7 +7857,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     //PlatformAppGetJobsXQuery holds query params
     type PlatformAppGetJobsXQuery struct { 
@@ -8027,14 +7869,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetJobs Get jobs
-     func (co *PlatformAppCommunication)  GetJobs(xQuery PlatformAppGetJobsXQuery) (Jobs, error){
+     func (co *PlatformAppCommunication)  GetJobs(xQuery PlatformAppGetJobsXQuery) (Jobs, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getJobsResponse Jobs
-            
 	    )
         
          
@@ -8050,17 +7890,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Jobs{}, err
-            
+            return Jobs{}, err
 	    }
+        
         err = json.Unmarshal(response, &getJobsResponse)
         if err != nil {
-           
-             return Jobs{}, common.NewFDKError(err.Error())
-            
+            return Jobs{}, common.NewFDKError(err.Error())
         }
         return getJobsResponse, nil
+        
     }
            
             
@@ -8126,17 +7964,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // TriggerCampaignJob Trigger campaign job
-     func (co *PlatformAppCommunication)  TriggerCampaignJob(body  TriggerJobRequest) (TriggerJobResponse, error){
+     func (co *PlatformAppCommunication)  TriggerCampaignJob(body  TriggerJobRequest) (TriggerJobResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             triggerCampaignJobResponse TriggerJobResponse
-            
 	    )
         
          
@@ -8146,11 +7984,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return TriggerJobResponse{}, common.NewFDKError(err.Error())
+            
+             return TriggerJobResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return TriggerJobResponse{}, common.NewFDKError(err.Error())
+            
+             return TriggerJobResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -8163,23 +8003,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return TriggerJobResponse{}, err
-            
+            return TriggerJobResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &triggerCampaignJobResponse)
         if err != nil {
-           
-             return TriggerJobResponse{}, common.NewFDKError(err.Error())
-            
+            return TriggerJobResponse{}, common.NewFDKError(err.Error())
         }
         return triggerCampaignJobResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetJobLogsXQuery holds query params
     type PlatformAppGetJobLogsXQuery struct { 
@@ -8189,14 +8029,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetJobLogs Get job logs
-     func (co *PlatformAppCommunication)  GetJobLogs(xQuery PlatformAppGetJobLogsXQuery) (JobLogs, error){
+     func (co *PlatformAppCommunication)  GetJobLogs(xQuery PlatformAppGetJobLogsXQuery) (JobLogs, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getJobLogsResponse JobLogs
-            
 	    )
         
          
@@ -8212,17 +8050,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return JobLogs{}, err
-            
+            return JobLogs{}, err
 	    }
+        
         err = json.Unmarshal(response, &getJobLogsResponse)
         if err != nil {
-           
-             return JobLogs{}, common.NewFDKError(err.Error())
-            
+            return JobLogs{}, common.NewFDKError(err.Error())
         }
         return getJobLogsResponse, nil
+        
     }
            
             
@@ -8288,7 +8124,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     //PlatformAppGetCommunicationLogsXQuery holds query params
     type PlatformAppGetCommunicationLogsXQuery struct { 
@@ -8299,14 +8137,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetCommunicationLogs Get communication logs
-     func (co *PlatformAppCommunication)  GetCommunicationLogs(xQuery PlatformAppGetCommunicationLogsXQuery) (Logs, error){
+     func (co *PlatformAppCommunication)  GetCommunicationLogs(xQuery PlatformAppGetCommunicationLogsXQuery) (Logs, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getCommunicationLogsResponse Logs
-            
 	    )
         
          
@@ -8322,17 +8158,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Logs{}, err
-            
+            return Logs{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCommunicationLogsResponse)
         if err != nil {
-           
-             return Logs{}, common.NewFDKError(err.Error())
-            
+            return Logs{}, common.NewFDKError(err.Error())
         }
         return getCommunicationLogsResponse, nil
+        
     }
            
             
@@ -8410,7 +8244,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+    
   
+
     
     //PlatformAppGetSmsProvidersXQuery holds query params
     type PlatformAppGetSmsProvidersXQuery struct { 
@@ -8420,14 +8256,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetSmsProviders Get sms providers
-     func (co *PlatformAppCommunication)  GetSmsProviders(xQuery PlatformAppGetSmsProvidersXQuery) (SmsProviders, error){
+     func (co *PlatformAppCommunication)  GetSmsProviders(xQuery PlatformAppGetSmsProvidersXQuery) (SmsProviders, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getSmsProvidersResponse SmsProviders
-            
 	    )
         
          
@@ -8443,17 +8277,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SmsProviders{}, err
-            
+            return SmsProviders{}, err
 	    }
+        
         err = json.Unmarshal(response, &getSmsProvidersResponse)
         if err != nil {
-           
-             return SmsProviders{}, common.NewFDKError(err.Error())
-            
+            return SmsProviders{}, common.NewFDKError(err.Error())
         }
         return getSmsProvidersResponse, nil
+        
     }
            
             
@@ -8519,17 +8351,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // CreateSmsProvider Create sms provider
-     func (co *PlatformAppCommunication)  CreateSmsProvider(body  SmsProviderReq) (SmsProvider, error){
+     func (co *PlatformAppCommunication)  CreateSmsProvider(body  SmsProviderReq) (SmsProvider, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createSmsProviderResponse SmsProvider
-            
 	    )
         
          
@@ -8539,11 +8371,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return SmsProvider{}, common.NewFDKError(err.Error())
+            
+             return SmsProvider{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return SmsProvider{}, common.NewFDKError(err.Error())
+            
+             return SmsProvider{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -8556,33 +8390,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SmsProvider{}, err
-            
+            return SmsProvider{}, err
 	    }
+        
         err = json.Unmarshal(response, &createSmsProviderResponse)
         if err != nil {
-           
-             return SmsProvider{}, common.NewFDKError(err.Error())
-            
+            return SmsProvider{}, common.NewFDKError(err.Error())
         }
         return createSmsProviderResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetSmsProviderById Get sms provider by id
-     func (co *PlatformAppCommunication)  GetSmsProviderById(ID string) (SmsProvider, error){
+     func (co *PlatformAppCommunication)  GetSmsProviderById(ID string) (SmsProvider, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getSmsProviderByIdResponse SmsProvider
-            
 	    )
         
          
@@ -8598,33 +8430,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SmsProvider{}, err
-            
+            return SmsProvider{}, err
 	    }
+        
         err = json.Unmarshal(response, &getSmsProviderByIdResponse)
         if err != nil {
-           
-             return SmsProvider{}, common.NewFDKError(err.Error())
-            
+            return SmsProvider{}, common.NewFDKError(err.Error())
         }
         return getSmsProviderByIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateSmsProviderById Update sms provider by id
-     func (co *PlatformAppCommunication)  UpdateSmsProviderById(ID string, body  SmsProviderReq) (SmsProvider, error){
+     func (co *PlatformAppCommunication)  UpdateSmsProviderById(ID string, body  SmsProviderReq) (SmsProvider, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateSmsProviderByIdResponse SmsProvider
-            
 	    )
         
          
@@ -8634,11 +8464,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return SmsProvider{}, common.NewFDKError(err.Error())
+            
+             return SmsProvider{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return SmsProvider{}, common.NewFDKError(err.Error())
+            
+             return SmsProvider{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -8651,23 +8483,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SmsProvider{}, err
-            
+            return SmsProvider{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateSmsProviderByIdResponse)
         if err != nil {
-           
-             return SmsProvider{}, common.NewFDKError(err.Error())
-            
+            return SmsProvider{}, common.NewFDKError(err.Error())
         }
         return updateSmsProviderByIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetSmsTemplatesXQuery holds query params
     type PlatformAppGetSmsTemplatesXQuery struct { 
@@ -8677,14 +8509,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetSmsTemplates Get sms templates
-     func (co *PlatformAppCommunication)  GetSmsTemplates(xQuery PlatformAppGetSmsTemplatesXQuery) (SmsTemplates, error){
+     func (co *PlatformAppCommunication)  GetSmsTemplates(xQuery PlatformAppGetSmsTemplatesXQuery) (SmsTemplates, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getSmsTemplatesResponse SmsTemplates
-            
 	    )
         
          
@@ -8700,17 +8530,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SmsTemplates{}, err
-            
+            return SmsTemplates{}, err
 	    }
+        
         err = json.Unmarshal(response, &getSmsTemplatesResponse)
         if err != nil {
-           
-             return SmsTemplates{}, common.NewFDKError(err.Error())
-            
+            return SmsTemplates{}, common.NewFDKError(err.Error())
         }
         return getSmsTemplatesResponse, nil
+        
     }
            
             
@@ -8776,17 +8604,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // CreateSmsTemplate Create sms template
-     func (co *PlatformAppCommunication)  CreateSmsTemplate(body  SmsTemplateReq) (SmsTemplateRes, error){
+     func (co *PlatformAppCommunication)  CreateSmsTemplate(body  SmsTemplateReq) (SmsTemplateRes, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createSmsTemplateResponse SmsTemplateRes
-            
 	    )
         
          
@@ -8796,11 +8624,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return SmsTemplateRes{}, common.NewFDKError(err.Error())
+            
+             return SmsTemplateRes{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return SmsTemplateRes{}, common.NewFDKError(err.Error())
+            
+             return SmsTemplateRes{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -8813,33 +8643,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SmsTemplateRes{}, err
-            
+            return SmsTemplateRes{}, err
 	    }
+        
         err = json.Unmarshal(response, &createSmsTemplateResponse)
         if err != nil {
-           
-             return SmsTemplateRes{}, common.NewFDKError(err.Error())
-            
+            return SmsTemplateRes{}, common.NewFDKError(err.Error())
         }
         return createSmsTemplateResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetSmsTemplateById Get sms template by id
-     func (co *PlatformAppCommunication)  GetSmsTemplateById(ID string) (SmsTemplate, error){
+     func (co *PlatformAppCommunication)  GetSmsTemplateById(ID string) (SmsTemplate, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getSmsTemplateByIdResponse SmsTemplate
-            
 	    )
         
          
@@ -8855,33 +8683,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SmsTemplate{}, err
-            
+            return SmsTemplate{}, err
 	    }
+        
         err = json.Unmarshal(response, &getSmsTemplateByIdResponse)
         if err != nil {
-           
-             return SmsTemplate{}, common.NewFDKError(err.Error())
-            
+            return SmsTemplate{}, common.NewFDKError(err.Error())
         }
         return getSmsTemplateByIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateSmsTemplateById Update sms template by id
-     func (co *PlatformAppCommunication)  UpdateSmsTemplateById(ID string, body  SmsTemplateReq) (SmsTemplateRes, error){
+     func (co *PlatformAppCommunication)  UpdateSmsTemplateById(ID string, body  SmsTemplateReq) (SmsTemplateRes, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateSmsTemplateByIdResponse SmsTemplateRes
-            
 	    )
         
          
@@ -8891,11 +8717,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return SmsTemplateRes{}, common.NewFDKError(err.Error())
+            
+             return SmsTemplateRes{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return SmsTemplateRes{}, common.NewFDKError(err.Error())
+            
+             return SmsTemplateRes{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -8908,33 +8736,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SmsTemplateRes{}, err
-            
+            return SmsTemplateRes{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateSmsTemplateByIdResponse)
         if err != nil {
-           
-             return SmsTemplateRes{}, common.NewFDKError(err.Error())
-            
+            return SmsTemplateRes{}, common.NewFDKError(err.Error())
         }
         return updateSmsTemplateByIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // DeleteSmsTemplateById Delete sms template by id
-     func (co *PlatformAppCommunication)  DeleteSmsTemplateById(ID string) (SmsTemplateDeleteSuccessRes, error){
+     func (co *PlatformAppCommunication)  DeleteSmsTemplateById(ID string) (SmsTemplateDeleteSuccessRes, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             deleteSmsTemplateByIdResponse SmsTemplateDeleteSuccessRes
-            
 	    )
         
          
@@ -8950,23 +8776,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SmsTemplateDeleteSuccessRes{}, err
-            
+            return SmsTemplateDeleteSuccessRes{}, err
 	    }
+        
         err = json.Unmarshal(response, &deleteSmsTemplateByIdResponse)
         if err != nil {
-           
-             return SmsTemplateDeleteSuccessRes{}, common.NewFDKError(err.Error())
-            
+            return SmsTemplateDeleteSuccessRes{}, common.NewFDKError(err.Error())
         }
         return deleteSmsTemplateByIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetSystemSystemTemplatesXQuery holds query params
     type PlatformAppGetSystemSystemTemplatesXQuery struct { 
@@ -8976,14 +8802,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetSystemSystemTemplates Get system sms templates
-     func (co *PlatformAppCommunication)  GetSystemSystemTemplates(xQuery PlatformAppGetSystemSystemTemplatesXQuery) (SystemSmsTemplates, error){
+     func (co *PlatformAppCommunication)  GetSystemSystemTemplates(xQuery PlatformAppGetSystemSystemTemplatesXQuery) (SystemSmsTemplates, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getSystemSystemTemplatesResponse SystemSmsTemplates
-            
 	    )
         
          
@@ -8999,17 +8823,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SystemSmsTemplates{}, err
-            
+            return SystemSmsTemplates{}, err
 	    }
+        
         err = json.Unmarshal(response, &getSystemSystemTemplatesResponse)
         if err != nil {
-           
-             return SystemSmsTemplates{}, common.NewFDKError(err.Error())
-            
+            return SystemSmsTemplates{}, common.NewFDKError(err.Error())
         }
         return getSystemSystemTemplatesResponse, nil
+        
     }
            
             
@@ -9089,17 +8911,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     
+    
   
+
     
     // GetBrandPaymentGatewayConfig Get All Brand Payment Gateway Config Secret
-     func (pa *PlatformAppPayment)  GetBrandPaymentGatewayConfig() (PaymentGatewayConfigResponse, error){
+     func (pa *PlatformAppPayment)  GetBrandPaymentGatewayConfig() (PaymentGatewayConfigResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getBrandPaymentGatewayConfigResponse PaymentGatewayConfigResponse
-            
 	    )
         
          
@@ -9115,33 +8937,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PaymentGatewayConfigResponse{}, err
-            
+            return PaymentGatewayConfigResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getBrandPaymentGatewayConfigResponse)
         if err != nil {
-           
-             return PaymentGatewayConfigResponse{}, common.NewFDKError(err.Error())
-            
+            return PaymentGatewayConfigResponse{}, common.NewFDKError(err.Error())
         }
         return getBrandPaymentGatewayConfigResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // SaveBrandPaymentGatewayConfig Save Config Secret For Brand Payment Gateway
-     func (pa *PlatformAppPayment)  SaveBrandPaymentGatewayConfig(body  PaymentGatewayConfigRequest) (PaymentGatewayToBeReviewed, error){
+     func (pa *PlatformAppPayment)  SaveBrandPaymentGatewayConfig(body  PaymentGatewayConfigRequest) (PaymentGatewayToBeReviewed, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             saveBrandPaymentGatewayConfigResponse PaymentGatewayToBeReviewed
-            
 	    )
         
          
@@ -9151,11 +8971,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return PaymentGatewayToBeReviewed{}, common.NewFDKError(err.Error())
+            
+             return PaymentGatewayToBeReviewed{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return PaymentGatewayToBeReviewed{}, common.NewFDKError(err.Error())
+            
+             return PaymentGatewayToBeReviewed{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -9168,33 +8990,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PaymentGatewayToBeReviewed{}, err
-            
+            return PaymentGatewayToBeReviewed{}, err
 	    }
+        
         err = json.Unmarshal(response, &saveBrandPaymentGatewayConfigResponse)
         if err != nil {
-           
-             return PaymentGatewayToBeReviewed{}, common.NewFDKError(err.Error())
-            
+            return PaymentGatewayToBeReviewed{}, common.NewFDKError(err.Error())
         }
         return saveBrandPaymentGatewayConfigResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateBrandPaymentGatewayConfig Save Config Secret For Brand Payment Gateway
-     func (pa *PlatformAppPayment)  UpdateBrandPaymentGatewayConfig(body  PaymentGatewayConfigRequest) (PaymentGatewayToBeReviewed, error){
+     func (pa *PlatformAppPayment)  UpdateBrandPaymentGatewayConfig(body  PaymentGatewayConfigRequest) (PaymentGatewayToBeReviewed, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateBrandPaymentGatewayConfigResponse PaymentGatewayToBeReviewed
-            
 	    )
         
          
@@ -9204,11 +9024,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return PaymentGatewayToBeReviewed{}, common.NewFDKError(err.Error())
+            
+             return PaymentGatewayToBeReviewed{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return PaymentGatewayToBeReviewed{}, common.NewFDKError(err.Error())
+            
+             return PaymentGatewayToBeReviewed{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -9221,23 +9043,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PaymentGatewayToBeReviewed{}, err
-            
+            return PaymentGatewayToBeReviewed{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateBrandPaymentGatewayConfigResponse)
         if err != nil {
-           
-             return PaymentGatewayToBeReviewed{}, common.NewFDKError(err.Error())
-            
+            return PaymentGatewayToBeReviewed{}, common.NewFDKError(err.Error())
         }
         return updateBrandPaymentGatewayConfigResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetPaymentModeRoutesXQuery holds query params
     type PlatformAppGetPaymentModeRoutesXQuery struct { 
@@ -9246,14 +9068,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetPaymentModeRoutes Get All Valid Payment Options
-     func (pa *PlatformAppPayment)  GetPaymentModeRoutes(xQuery PlatformAppGetPaymentModeRoutesXQuery) (PaymentOptionsResponse, error){
+     func (pa *PlatformAppPayment)  GetPaymentModeRoutes(xQuery PlatformAppGetPaymentModeRoutesXQuery) (PaymentOptionsResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getPaymentModeRoutesResponse PaymentOptionsResponse
-            
 	    )
         
          
@@ -9269,17 +9089,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PaymentOptionsResponse{}, err
-            
+            return PaymentOptionsResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getPaymentModeRoutesResponse)
         if err != nil {
-           
-             return PaymentOptionsResponse{}, common.NewFDKError(err.Error())
-            
+            return PaymentOptionsResponse{}, common.NewFDKError(err.Error())
         }
         return getPaymentModeRoutesResponse, nil
+        
     }
            
        
@@ -9303,17 +9121,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+    
   
+
     
     // AddBeneficiaryDetails Save bank details for cancelled/returned order
-     func (pa *PlatformAppPayment)  AddBeneficiaryDetails(body  AddBeneficiaryDetailsRequest) (RefundAccountResponse, error){
+     func (pa *PlatformAppPayment)  AddBeneficiaryDetails(body  AddBeneficiaryDetailsRequest) (RefundAccountResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             addBeneficiaryDetailsResponse RefundAccountResponse
-            
 	    )
         
          
@@ -9323,11 +9141,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return RefundAccountResponse{}, common.NewFDKError(err.Error())
+            
+             return RefundAccountResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return RefundAccountResponse{}, common.NewFDKError(err.Error())
+            
+             return RefundAccountResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -9340,17 +9160,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return RefundAccountResponse{}, err
-            
+            return RefundAccountResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &addBeneficiaryDetailsResponse)
         if err != nil {
-           
-             return RefundAccountResponse{}, common.NewFDKError(err.Error())
-            
+            return RefundAccountResponse{}, common.NewFDKError(err.Error())
         }
         return addBeneficiaryDetailsResponse, nil
+        
     }
            
        
@@ -9358,7 +9176,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+    
   
+
     
     //PlatformAppGetUserOrderBeneficiariesXQuery holds query params
     type PlatformAppGetUserOrderBeneficiariesXQuery struct { 
@@ -9366,14 +9186,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetUserOrderBeneficiaries List Order Beneficiary
-     func (pa *PlatformAppPayment)  GetUserOrderBeneficiaries(xQuery PlatformAppGetUserOrderBeneficiariesXQuery) (OrderBeneficiaryResponse, error){
+     func (pa *PlatformAppPayment)  GetUserOrderBeneficiaries(xQuery PlatformAppGetUserOrderBeneficiariesXQuery) (OrderBeneficiaryResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getUserOrderBeneficiariesResponse OrderBeneficiaryResponse
-            
 	    )
         
          
@@ -9389,23 +9207,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return OrderBeneficiaryResponse{}, err
-            
+            return OrderBeneficiaryResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getUserOrderBeneficiariesResponse)
         if err != nil {
-           
-             return OrderBeneficiaryResponse{}, common.NewFDKError(err.Error())
-            
+            return OrderBeneficiaryResponse{}, common.NewFDKError(err.Error())
         }
         return getUserOrderBeneficiariesResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetUserBeneficiariesXQuery holds query params
     type PlatformAppGetUserBeneficiariesXQuery struct { 
@@ -9413,14 +9231,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetUserBeneficiaries List User Beneficiary
-     func (pa *PlatformAppPayment)  GetUserBeneficiaries(xQuery PlatformAppGetUserBeneficiariesXQuery) (OrderBeneficiaryResponse, error){
+     func (pa *PlatformAppPayment)  GetUserBeneficiaries(xQuery PlatformAppGetUserBeneficiariesXQuery) (OrderBeneficiaryResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getUserBeneficiariesResponse OrderBeneficiaryResponse
-            
 	    )
         
          
@@ -9436,17 +9252,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return OrderBeneficiaryResponse{}, err
-            
+            return OrderBeneficiaryResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getUserBeneficiariesResponse)
         if err != nil {
-           
-             return OrderBeneficiaryResponse{}, common.NewFDKError(err.Error())
-            
+            return OrderBeneficiaryResponse{}, common.NewFDKError(err.Error())
         }
         return getUserBeneficiariesResponse, nil
+        
     }
            
        
@@ -9480,17 +9294,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+    
   
+
     
     // TrackShipmentPlatform Track Shipment by shipment id, for application based on application Id
-     func (or *PlatformAppOrder)  TrackShipmentPlatform(ShipmentID string) (PlatformShipmentTrack, error){
+     func (or *PlatformAppOrder)  TrackShipmentPlatform(ShipmentID string) (PlatformShipmentTrack, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             trackShipmentPlatformResponse PlatformShipmentTrack
-            
 	    )
         
          
@@ -9506,33 +9320,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PlatformShipmentTrack{}, err
-            
+            return PlatformShipmentTrack{}, err
 	    }
+        
         err = json.Unmarshal(response, &trackShipmentPlatformResponse)
         if err != nil {
-           
-             return PlatformShipmentTrack{}, common.NewFDKError(err.Error())
-            
+            return PlatformShipmentTrack{}, common.NewFDKError(err.Error())
         }
         return trackShipmentPlatformResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // TrackOrder Track Order by order id, for application based on application Id
-     func (or *PlatformAppOrder)  TrackOrder(OrderID string) (PlatformOrderTrack, error){
+     func (or *PlatformAppOrder)  TrackOrder(OrderID string) (PlatformOrderTrack, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             trackOrderResponse PlatformOrderTrack
-            
 	    )
         
          
@@ -9548,33 +9360,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PlatformOrderTrack{}, err
-            
+            return PlatformOrderTrack{}, err
 	    }
+        
         err = json.Unmarshal(response, &trackOrderResponse)
         if err != nil {
-           
-             return PlatformOrderTrack{}, common.NewFDKError(err.Error())
-            
+            return PlatformOrderTrack{}, common.NewFDKError(err.Error())
         }
         return trackOrderResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // FailedOrders Get all failed orders application wise
-     func (or *PlatformAppOrder)  FailedOrders() (FailedOrders, error){
+     func (or *PlatformAppOrder)  FailedOrders() (FailedOrders, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             failedOrdersResponse FailedOrders
-            
 	    )
         
          
@@ -9590,33 +9400,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return FailedOrders{}, err
-            
+            return FailedOrders{}, err
 	    }
+        
         err = json.Unmarshal(response, &failedOrdersResponse)
         if err != nil {
-           
-             return FailedOrders{}, common.NewFDKError(err.Error())
-            
+            return FailedOrders{}, common.NewFDKError(err.Error())
         }
         return failedOrdersResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // ReprocessOrder Reprocess order by order id
-     func (or *PlatformAppOrder)  ReprocessOrder(OrderID string) (UpdateOrderReprocessResponse, error){
+     func (or *PlatformAppOrder)  ReprocessOrder(OrderID string) (UpdateOrderReprocessResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             reprocessOrderResponse UpdateOrderReprocessResponse
-            
 	    )
         
          
@@ -9632,17 +9440,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return UpdateOrderReprocessResponse{}, err
-            
+            return UpdateOrderReprocessResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &reprocessOrderResponse)
         if err != nil {
-           
-             return UpdateOrderReprocessResponse{}, common.NewFDKError(err.Error())
-            
+            return UpdateOrderReprocessResponse{}, common.NewFDKError(err.Error())
         }
         return reprocessOrderResponse, nil
+        
     }
            
        
@@ -9668,101 +9474,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     
-  
-    
-    // GetSearchKeywords Get a Search Keywords Details
-     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            getSearchKeywordsResponse GetSearchWordsDetailResponse
-            
-	    )
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return GetSearchWordsDetailResponse{}, err
-            
-	    }
-        err = json.Unmarshal(response, &getSearchKeywordsResponse)
-        if err != nil {
-           
-             return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
-            
-        }
-        return getSearchKeywordsResponse, nil
-    }
-           
-       
-    
     
   
-    
-    // DeleteSearchKeywords Delete a Search Keywords
-     func (ca *PlatformAppCatalog)  DeleteSearchKeywords(ID string) (DeleteResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            deleteSearchKeywordsResponse DeleteResponse
-            
-	    )
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return DeleteResponse{}, err
-            
-	    }
-        err = json.Unmarshal(response, &deleteSearchKeywordsResponse)
-        if err != nil {
-           
-             return DeleteResponse{}, common.NewFDKError(err.Error())
-            
-        }
-        return deleteSearchKeywordsResponse, nil
-    }
-           
-       
-    
-    
-  
+
     
     // UpdateSearchKeywords Update Search Keyword
-     func (ca *PlatformAppCatalog)  UpdateSearchKeywords(ID string, body  CreateSearchKeyword) (GetSearchWordsData, error){
+     func (ca *PlatformAppCatalog)  UpdateSearchKeywords(ID string, body  CreateSearchKeyword) (GetSearchWordsData, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateSearchKeywordsResponse GetSearchWordsData
-            
 	    )
         
          
@@ -9772,11 +9494,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return GetSearchWordsData{}, common.NewFDKError(err.Error())
+            
+             return GetSearchWordsData{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return GetSearchWordsData{}, common.NewFDKError(err.Error())
+            
+             return GetSearchWordsData{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -9789,33 +9513,111 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetSearchWordsData{}, err
-            
+            return GetSearchWordsData{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateSearchKeywordsResponse)
         if err != nil {
-           
-             return GetSearchWordsData{}, common.NewFDKError(err.Error())
-            
+            return GetSearchWordsData{}, common.NewFDKError(err.Error())
         }
         return updateSearchKeywordsResponse, nil
+        
     }
            
        
     
     
-  
     
-    // CreateCustomKeyword Add a Custom Search Keywords
-     func (ca *PlatformAppCatalog)  CreateCustomKeyword(body  CreateSearchKeyword) (GetSearchWordsData, error){
+  
+
+    
+    // DeleteSearchKeywords Delete a Search Keywords
+     func (ca *PlatformAppCatalog)  DeleteSearchKeywords(ID string) (DeleteResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
+            deleteSearchKeywordsResponse DeleteResponse
+	    )
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DeleteResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteSearchKeywordsResponse)
+        if err != nil {
+            return DeleteResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteSearchKeywordsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetSearchKeywords Get a Search Keywords Details
+     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getSearchKeywordsResponse GetSearchWordsDetailResponse
+	    )
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetSearchWordsDetailResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getSearchKeywordsResponse)
+        if err != nil {
+            return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
+        }
+        return getSearchKeywordsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // CreateCustomKeyword Add a Custom Search Keywords
+     func (ca *PlatformAppCatalog)  CreateCustomKeyword(body  CreateSearchKeyword) (GetSearchWordsData, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
             createCustomKeywordResponse GetSearchWordsData
-            
 	    )
         
          
@@ -9825,11 +9627,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return GetSearchWordsData{}, common.NewFDKError(err.Error())
+            
+             return GetSearchWordsData{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return GetSearchWordsData{}, common.NewFDKError(err.Error())
+            
+             return GetSearchWordsData{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -9842,33 +9646,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetSearchWordsData{}, err
-            
+            return GetSearchWordsData{}, err
 	    }
+        
         err = json.Unmarshal(response, &createCustomKeywordResponse)
         if err != nil {
-           
-             return GetSearchWordsData{}, common.NewFDKError(err.Error())
-            
+            return GetSearchWordsData{}, common.NewFDKError(err.Error())
         }
         return createCustomKeywordResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetAllSearchKeyword List all Search Custom Keyword Listing
-     func (ca *PlatformAppCatalog)  GetAllSearchKeyword() (GetSearchWordsResponse, error){
+     func (ca *PlatformAppCatalog)  GetAllSearchKeyword() (GetSearchWordsResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getAllSearchKeywordResponse GetSearchWordsResponse
-            
 	    )
         
          
@@ -9884,75 +9686,84 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetSearchWordsResponse{}, err
-            
+            return GetSearchWordsResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAllSearchKeywordResponse)
         if err != nil {
-           
-             return GetSearchWordsResponse{}, common.NewFDKError(err.Error())
-            
+            return GetSearchWordsResponse{}, common.NewFDKError(err.Error())
         }
         return getAllSearchKeywordResponse, nil
+        
     }
            
        
     
     
-  
     
-    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
-     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error){
+  
+
+    
+    // UpdateAutocompleteKeyword Create & Update Autocomplete Keyword
+     func (ca *PlatformAppCatalog)  UpdateAutocompleteKeyword(ID string, body  CreateAutocompleteKeyword) (GetAutocompleteWordsResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
-            
+            updateAutocompleteKeywordResponse GetAutocompleteWordsResponse
 	    )
         
          
         
         
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())       
+        }
+        
         //API call
         rawRequest = NewRequest(
             ca.config,
-            "get",
+            "put",
             fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
             nil,
             nil,
-            nil)
+            reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetAutocompleteWordsResponse{}, err
-            
+            return GetAutocompleteWordsResponse{}, err
 	    }
-        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
+        
+        err = json.Unmarshal(response, &updateAutocompleteKeywordResponse)
         if err != nil {
-           
-             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
-            
+            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
         }
-        return getAutocompleteKeywordDetailResponse, nil
+        return updateAutocompleteKeywordResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // DeleteAutocompleteKeyword Delete a Autocomplete Keywords
-     func (ca *PlatformAppCatalog)  DeleteAutocompleteKeyword(ID string) (DeleteResponse, error){
+     func (ca *PlatformAppCatalog)  DeleteAutocompleteKeyword(ID string) (DeleteResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             deleteAutocompleteKeywordResponse DeleteResponse
-            
 	    )
         
          
@@ -9968,86 +9779,71 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return DeleteResponse{}, err
-            
+            return DeleteResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &deleteAutocompleteKeywordResponse)
         if err != nil {
-           
-             return DeleteResponse{}, common.NewFDKError(err.Error())
-            
+            return DeleteResponse{}, common.NewFDKError(err.Error())
         }
         return deleteAutocompleteKeywordResponse, nil
+        
     }
            
        
     
     
-  
     
-    // UpdateAutocompleteKeyword Create & Update Autocomplete Keyword
-     func (ca *PlatformAppCatalog)  UpdateAutocompleteKeyword(ID string, body  CreateAutocompleteKeyword) (GetAutocompleteWordsResponse, error){
+  
+
+    
+    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
+     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            updateAutocompleteKeywordResponse GetAutocompleteWordsResponse
-            
+            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
 	    )
         
          
         
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-           return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
-        }
         
         //API call
         rawRequest = NewRequest(
             ca.config,
-            "put",
+            "get",
             fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
             nil,
             nil,
-            reqBody)
+            nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetAutocompleteWordsResponse{}, err
-            
+            return GetAutocompleteWordsResponse{}, err
 	    }
-        err = json.Unmarshal(response, &updateAutocompleteKeywordResponse)
+        
+        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
         if err != nil {
-           
-             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
-            
+            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
         }
-        return updateAutocompleteKeywordResponse, nil
+        return getAutocompleteKeywordDetailResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // CreateCustomAutocompleteRule Add a Custom Autocomplete Keywords
-     func (ca *PlatformAppCatalog)  CreateCustomAutocompleteRule(body  CreateAutocompleteKeyword) (CreateAutocompleteWordsResponse, error){
+     func (ca *PlatformAppCatalog)  CreateCustomAutocompleteRule(body  CreateAutocompleteKeyword) (CreateAutocompleteWordsResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createCustomAutocompleteRuleResponse CreateAutocompleteWordsResponse
-            
 	    )
         
          
@@ -10057,11 +9853,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CreateAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
+            
+             return CreateAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return CreateAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
+            
+             return CreateAutocompleteWordsResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -10074,33 +9872,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CreateAutocompleteWordsResponse{}, err
-            
+            return CreateAutocompleteWordsResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &createCustomAutocompleteRuleResponse)
         if err != nil {
-           
-             return CreateAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
-            
+            return CreateAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
         }
         return createCustomAutocompleteRuleResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetAutocompleteConfig List all Autocomplete Keyword Listing
-     func (ca *PlatformAppCatalog)  GetAutocompleteConfig() (GetAutocompleteWordsResponse, error){
+     func (ca *PlatformAppCatalog)  GetAutocompleteConfig() (GetAutocompleteWordsResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getAutocompleteConfigResponse GetAutocompleteWordsResponse
-            
 	    )
         
          
@@ -10116,17 +9912,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetAutocompleteWordsResponse{}, err
-            
+            return GetAutocompleteWordsResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAutocompleteConfigResponse)
         if err != nil {
-           
-             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
-            
+            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
         }
         return getAutocompleteConfigResponse, nil
+        
     }
            
        
@@ -10148,17 +9942,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+    
   
+
     
     // GetCatalogConfiguration Get configuration meta  details for catalog for admin panel
-     func (ca *PlatformAppCatalog)  GetCatalogConfiguration() (GetCatalogConfigurationMetaData, error){
+     func (ca *PlatformAppCatalog)  GetCatalogConfiguration() (GetCatalogConfigurationMetaData, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getCatalogConfigurationResponse GetCatalogConfigurationMetaData
-            
 	    )
         
          
@@ -10174,33 +9968,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetCatalogConfigurationMetaData{}, err
-            
+            return GetCatalogConfigurationMetaData{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCatalogConfigurationResponse)
         if err != nil {
-           
-             return GetCatalogConfigurationMetaData{}, common.NewFDKError(err.Error())
-            
+            return GetCatalogConfigurationMetaData{}, common.NewFDKError(err.Error())
         }
         return getCatalogConfigurationResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // CreateConfigurationProductListing Add configuration for products & listings
-     func (ca *PlatformAppCatalog)  CreateConfigurationProductListing(body  AppConfiguration) (GetAppCatalogConfiguration, error){
+     func (ca *PlatformAppCatalog)  CreateConfigurationProductListing(body  AppConfiguration) (GetAppCatalogConfiguration, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createConfigurationProductListingResponse GetAppCatalogConfiguration
-            
 	    )
         
          
@@ -10210,11 +10002,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return GetAppCatalogConfiguration{}, common.NewFDKError(err.Error())
+            
+             return GetAppCatalogConfiguration{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return GetAppCatalogConfiguration{}, common.NewFDKError(err.Error())
+            
+             return GetAppCatalogConfiguration{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -10227,33 +10021,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetAppCatalogConfiguration{}, err
-            
+            return GetAppCatalogConfiguration{}, err
 	    }
+        
         err = json.Unmarshal(response, &createConfigurationProductListingResponse)
         if err != nil {
-           
-             return GetAppCatalogConfiguration{}, common.NewFDKError(err.Error())
-            
+            return GetAppCatalogConfiguration{}, common.NewFDKError(err.Error())
         }
         return createConfigurationProductListingResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetConfigurations Get configured details for catalog
-     func (ca *PlatformAppCatalog)  GetConfigurations() (GetAppCatalogConfiguration, error){
+     func (ca *PlatformAppCatalog)  GetConfigurations() (GetAppCatalogConfiguration, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getConfigurationsResponse GetAppCatalogConfiguration
-            
 	    )
         
          
@@ -10269,33 +10061,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetAppCatalogConfiguration{}, err
-            
+            return GetAppCatalogConfiguration{}, err
 	    }
+        
         err = json.Unmarshal(response, &getConfigurationsResponse)
         if err != nil {
-           
-             return GetAppCatalogConfiguration{}, common.NewFDKError(err.Error())
-            
+            return GetAppCatalogConfiguration{}, common.NewFDKError(err.Error())
         }
         return getConfigurationsResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // CreateConfigurationByType Add configuration for categories and brands
-     func (ca *PlatformAppCatalog)  CreateConfigurationByType(Type string, body  AppConfiguration) (GetAppCatalogConfiguration, error){
+     func (ca *PlatformAppCatalog)  CreateConfigurationByType(Type string, body  AppConfiguration) (GetAppCatalogConfiguration, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createConfigurationByTypeResponse GetAppCatalogConfiguration
-            
 	    )
         
          
@@ -10305,11 +10095,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return GetAppCatalogConfiguration{}, common.NewFDKError(err.Error())
+            
+             return GetAppCatalogConfiguration{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return GetAppCatalogConfiguration{}, common.NewFDKError(err.Error())
+            
+             return GetAppCatalogConfiguration{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -10322,33 +10114,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetAppCatalogConfiguration{}, err
-            
+            return GetAppCatalogConfiguration{}, err
 	    }
+        
         err = json.Unmarshal(response, &createConfigurationByTypeResponse)
         if err != nil {
-           
-             return GetAppCatalogConfiguration{}, common.NewFDKError(err.Error())
-            
+            return GetAppCatalogConfiguration{}, common.NewFDKError(err.Error())
         }
         return createConfigurationByTypeResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetConfigurationByType Get configured details for catalog
-     func (ca *PlatformAppCatalog)  GetConfigurationByType(Type string) (GetAppCatalogEntityConfiguration, error){
+     func (ca *PlatformAppCatalog)  GetConfigurationByType(Type string) (GetAppCatalogEntityConfiguration, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getConfigurationByTypeResponse GetAppCatalogEntityConfiguration
-            
 	    )
         
          
@@ -10364,33 +10154,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetAppCatalogEntityConfiguration{}, err
-            
+            return GetAppCatalogEntityConfiguration{}, err
 	    }
+        
         err = json.Unmarshal(response, &getConfigurationByTypeResponse)
         if err != nil {
-           
-             return GetAppCatalogEntityConfiguration{}, common.NewFDKError(err.Error())
-            
+            return GetAppCatalogEntityConfiguration{}, common.NewFDKError(err.Error())
         }
         return getConfigurationByTypeResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetQueryFilters Get query filters to configure a collection
-     func (ca *PlatformAppCatalog)  GetQueryFilters() (GetCollectionQueryOptionResponse, error){
+     func (ca *PlatformAppCatalog)  GetQueryFilters() (GetCollectionQueryOptionResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getQueryFiltersResponse GetCollectionQueryOptionResponse
-            
 	    )
         
          
@@ -10406,33 +10194,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetCollectionQueryOptionResponse{}, err
-            
+            return GetCollectionQueryOptionResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getQueryFiltersResponse)
         if err != nil {
-           
-             return GetCollectionQueryOptionResponse{}, common.NewFDKError(err.Error())
-            
+            return GetCollectionQueryOptionResponse{}, common.NewFDKError(err.Error())
         }
         return getQueryFiltersResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // CreateCollection Add a Collection
-     func (ca *PlatformAppCatalog)  CreateCollection(body  CreateCollection) (CollectionCreateResponse, error){
+     func (ca *PlatformAppCatalog)  CreateCollection(body  CreateCollection) (CollectionCreateResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createCollectionResponse CollectionCreateResponse
-            
 	    )
         
          
@@ -10442,11 +10228,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CollectionCreateResponse{}, common.NewFDKError(err.Error())
+            
+             return CollectionCreateResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return CollectionCreateResponse{}, common.NewFDKError(err.Error())
+            
+             return CollectionCreateResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -10459,33 +10247,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CollectionCreateResponse{}, err
-            
+            return CollectionCreateResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &createCollectionResponse)
         if err != nil {
-           
-             return CollectionCreateResponse{}, common.NewFDKError(err.Error())
-            
+            return CollectionCreateResponse{}, common.NewFDKError(err.Error())
         }
         return createCollectionResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetAllCollections List all the collections
-     func (ca *PlatformAppCatalog)  GetAllCollections() (GetCollectionListingResponse, error){
+     func (ca *PlatformAppCatalog)  GetAllCollections() (GetCollectionListingResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getAllCollectionsResponse GetCollectionListingResponse
-            
 	    )
         
          
@@ -10501,33 +10287,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetCollectionListingResponse{}, err
-            
+            return GetCollectionListingResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAllCollectionsResponse)
         if err != nil {
-           
-             return GetCollectionListingResponse{}, common.NewFDKError(err.Error())
-            
+            return GetCollectionListingResponse{}, common.NewFDKError(err.Error())
         }
         return getAllCollectionsResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetCollectionDetail Get a particular collection
-     func (ca *PlatformAppCatalog)  GetCollectionDetail(Slug string) (CollectionDetailResponse, error){
+     func (ca *PlatformAppCatalog)  GetCollectionDetail(Slug string) (CollectionDetailResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getCollectionDetailResponse CollectionDetailResponse
-            
 	    )
         
          
@@ -10543,33 +10327,84 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CollectionDetailResponse{}, err
-            
+            return CollectionDetailResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCollectionDetailResponse)
         if err != nil {
-           
-             return CollectionDetailResponse{}, common.NewFDKError(err.Error())
-            
+            return CollectionDetailResponse{}, common.NewFDKError(err.Error())
         }
         return getCollectionDetailResponse, nil
+        
     }
            
        
     
     
-  
     
-    // DeleteCollection Delete a Collection
-     func (ca *PlatformAppCatalog)  DeleteCollection(ID string) (DeleteResponse, error){
+  
+
+    
+    // UpdateCollection Update a collection
+     func (ca *PlatformAppCatalog)  UpdateCollection(ID string, body  UpdateCollection) (UpdateCollection, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
+            updateCollectionResponse UpdateCollection
+	    )
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
             
+             return UpdateCollection{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return UpdateCollection{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "put",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/collections/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return UpdateCollection{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateCollectionResponse)
+        if err != nil {
+            return UpdateCollection{}, common.NewFDKError(err.Error())
+        }
+        return updateCollectionResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteCollection Delete a Collection
+     func (ca *PlatformAppCatalog)  DeleteCollection(ID string) (DeleteResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
             deleteCollectionResponse DeleteResponse
-            
 	    )
         
          
@@ -10585,86 +10420,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return DeleteResponse{}, err
-            
+            return DeleteResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &deleteCollectionResponse)
         if err != nil {
-           
-             return DeleteResponse{}, common.NewFDKError(err.Error())
-            
+            return DeleteResponse{}, common.NewFDKError(err.Error())
         }
         return deleteCollectionResponse, nil
+        
     }
            
        
     
     
-  
-    
-    // UpdateCollection Update a collection
-     func (ca *PlatformAppCatalog)  UpdateCollection(ID string, body  UpdateCollection) (UpdateCollection, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-            updateCollectionResponse UpdateCollection
-            
-	    )
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-           return UpdateCollection{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             return UpdateCollection{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "put",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/collections/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-	 	   
-             return UpdateCollection{}, err
-            
-	    }
-        err = json.Unmarshal(response, &updateCollectionResponse)
-        if err != nil {
-           
-             return UpdateCollection{}, common.NewFDKError(err.Error())
-            
-        }
-        return updateCollectionResponse, nil
-    }
-           
-       
-    
     
   
+
     
     // AddCollectionItems Add items to a collection
-     func (ca *PlatformAppCatalog)  AddCollectionItems(ID string, body  CollectionItemRequest) (UpdatedResponse, error){
+     func (ca *PlatformAppCatalog)  AddCollectionItems(ID string, body  CollectionItemRequest) (UpdatedResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             addCollectionItemsResponse UpdatedResponse
-            
 	    )
         
          
@@ -10674,11 +10454,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return UpdatedResponse{}, common.NewFDKError(err.Error())
+            
+             return UpdatedResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return UpdatedResponse{}, common.NewFDKError(err.Error())
+            
+             return UpdatedResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -10691,23 +10473,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return UpdatedResponse{}, err
-            
+            return UpdatedResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &addCollectionItemsResponse)
         if err != nil {
-           
-             return UpdatedResponse{}, common.NewFDKError(err.Error())
-            
+            return UpdatedResponse{}, common.NewFDKError(err.Error())
         }
         return addCollectionItemsResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetCollectionItemsXQuery holds query params
     type PlatformAppGetCollectionItemsXQuery struct { 
@@ -10717,14 +10499,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetCollectionItems Get the items for a collection
-     func (ca *PlatformAppCatalog)  GetCollectionItems(ID string, xQuery PlatformAppGetCollectionItemsXQuery) (GetCollectionItemsResponse, error){
+     func (ca *PlatformAppCatalog)  GetCollectionItems(ID string, xQuery PlatformAppGetCollectionItemsXQuery) (GetCollectionItemsResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getCollectionItemsResponse GetCollectionItemsResponse
-            
 	    )
         
          
@@ -10740,23 +10520,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetCollectionItemsResponse{}, err
-            
+            return GetCollectionItemsResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCollectionItemsResponse)
         if err != nil {
-           
-             return GetCollectionItemsResponse{}, common.NewFDKError(err.Error())
-            
+            return GetCollectionItemsResponse{}, common.NewFDKError(err.Error())
         }
         return getCollectionItemsResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetCatalogInsightsXQuery holds query params
     type PlatformAppGetCatalogInsightsXQuery struct { 
@@ -10764,14 +10544,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetCatalogInsights Analytics data of catalog and inventory.
-     func (ca *PlatformAppCatalog)  GetCatalogInsights(xQuery PlatformAppGetCatalogInsightsXQuery) (CatalogInsightResponse, error){
+     func (ca *PlatformAppCatalog)  GetCatalogInsights(xQuery PlatformAppGetCatalogInsightsXQuery) (CatalogInsightResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getCatalogInsightsResponse CatalogInsightResponse
-            
 	    )
         
          
@@ -10787,17 +10565,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CatalogInsightResponse{}, err
-            
+            return CatalogInsightResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCatalogInsightsResponse)
         if err != nil {
-           
-             return CatalogInsightResponse{}, common.NewFDKError(err.Error())
-            
+            return CatalogInsightResponse{}, common.NewFDKError(err.Error())
         }
         return getCatalogInsightsResponse, nil
+        
     }
            
        
@@ -10909,7 +10685,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+    
   
+
     
     //PlatformAppGetApplicationBrandsXQuery holds query params
     type PlatformAppGetApplicationBrandsXQuery struct { 
@@ -10919,14 +10697,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetApplicationBrands List all the brands
-     func (ca *PlatformAppCatalog)  GetApplicationBrands(xQuery PlatformAppGetApplicationBrandsXQuery) (BrandListingResponse, error){
+     func (ca *PlatformAppCatalog)  GetApplicationBrands(xQuery PlatformAppGetApplicationBrandsXQuery) (BrandListingResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getApplicationBrandsResponse BrandListingResponse
-            
 	    )
         
          
@@ -10942,17 +10718,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return BrandListingResponse{}, err
-            
+            return BrandListingResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getApplicationBrandsResponse)
         if err != nil {
-           
-             return BrandListingResponse{}, common.NewFDKError(err.Error())
-            
+            return BrandListingResponse{}, common.NewFDKError(err.Error())
         }
         return getApplicationBrandsResponse, nil
+        
     }
            
             
@@ -11018,17 +10792,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // GetDepartments List all the departments
-     func (ca *PlatformAppCatalog)  GetDepartments() (DepartmentResponse, error){
+     func (ca *PlatformAppCatalog)  GetDepartments() (DepartmentResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getDepartmentsResponse DepartmentResponse
-            
 	    )
         
          
@@ -11044,23 +10818,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return DepartmentResponse{}, err
-            
+            return DepartmentResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getDepartmentsResponse)
         if err != nil {
-           
-             return DepartmentResponse{}, common.NewFDKError(err.Error())
-            
+            return DepartmentResponse{}, common.NewFDKError(err.Error())
         }
         return getDepartmentsResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetCategoriesXQuery holds query params
     type PlatformAppGetCategoriesXQuery struct { 
@@ -11068,14 +10842,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetCategories List all the categories
-     func (ca *PlatformAppCatalog)  GetCategories(xQuery PlatformAppGetCategoriesXQuery) (CategoryListingResponse, error){
+     func (ca *PlatformAppCatalog)  GetCategories(xQuery PlatformAppGetCategoriesXQuery) (CategoryListingResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getCategoriesResponse CategoryListingResponse
-            
 	    )
         
          
@@ -11091,23 +10863,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CategoryListingResponse{}, err
-            
+            return CategoryListingResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCategoriesResponse)
         if err != nil {
-           
-             return CategoryListingResponse{}, common.NewFDKError(err.Error())
-            
+            return CategoryListingResponse{}, common.NewFDKError(err.Error())
         }
         return getCategoriesResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetAppicationProductsXQuery holds query params
     type PlatformAppGetAppicationProductsXQuery struct { 
@@ -11122,14 +10894,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetAppicationProducts List the products
-     func (ca *PlatformAppCatalog)  GetAppicationProducts(xQuery PlatformAppGetAppicationProductsXQuery) (ApplicationProductListingResponse, error){
+     func (ca *PlatformAppCatalog)  GetAppicationProducts(xQuery PlatformAppGetAppicationProductsXQuery) (ApplicationProductListingResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getAppicationProductsResponse ApplicationProductListingResponse
-            
 	    )
         
          
@@ -11145,17 +10915,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ApplicationProductListingResponse{}, err
-            
+            return ApplicationProductListingResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAppicationProductsResponse)
         if err != nil {
-           
-             return ApplicationProductListingResponse{}, common.NewFDKError(err.Error())
-            
+            return ApplicationProductListingResponse{}, common.NewFDKError(err.Error())
         }
         return getAppicationProductsResponse, nil
+        
     }
            
             
@@ -11271,17 +11039,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // GetProductDetailBySlug Get a product
-     func (ca *PlatformAppCatalog)  GetProductDetailBySlug(Slug string) (ProductDetail, error){
+     func (ca *PlatformAppCatalog)  GetProductDetailBySlug(Slug string) (ProductDetail, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getProductDetailBySlugResponse ProductDetail
-            
 	    )
         
          
@@ -11297,17 +11065,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ProductDetail{}, err
-            
+            return ProductDetail{}, err
 	    }
+        
         err = json.Unmarshal(response, &getProductDetailBySlugResponse)
         if err != nil {
-           
-             return ProductDetail{}, common.NewFDKError(err.Error())
-            
+            return ProductDetail{}, common.NewFDKError(err.Error())
         }
         return getProductDetailBySlugResponse, nil
+        
     }
            
        
@@ -11331,17 +11097,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+    
   
+
     
     // AppStartUpload This operation initiates upload and returns storage link which is valid for 30 Minutes. You can use that storage link to make subsequent upload request with file buffer or blob.
-     func (fi *PlatformAppFileStorage)  AppStartUpload(Namespace string, body  StartRequest) (StartResponse, error){
+     func (fi *PlatformAppFileStorage)  AppStartUpload(Namespace string, body  StartRequest) (StartResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             appStartUploadResponse StartResponse
-            
 	    )
         
          
@@ -11351,11 +11117,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return StartResponse{}, common.NewFDKError(err.Error())
+            
+             return StartResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return StartResponse{}, common.NewFDKError(err.Error())
+            
+             return StartResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -11368,33 +11136,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return StartResponse{}, err
-            
+            return StartResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &appStartUploadResponse)
         if err != nil {
-           
-             return StartResponse{}, common.NewFDKError(err.Error())
-            
+            return StartResponse{}, common.NewFDKError(err.Error())
         }
         return appStartUploadResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // AppCompleteUpload This will complete the upload process. After successfully uploading file, you can call this operation to complete the upload process.
-     func (fi *PlatformAppFileStorage)  AppCompleteUpload(Namespace string, body  StartResponse) (CompleteResponse, error){
+     func (fi *PlatformAppFileStorage)  AppCompleteUpload(Namespace string, body  StartResponse) (CompleteResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             appCompleteUploadResponse CompleteResponse
-            
 	    )
         
          
@@ -11404,11 +11170,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CompleteResponse{}, common.NewFDKError(err.Error())
+            
+             return CompleteResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return CompleteResponse{}, common.NewFDKError(err.Error())
+            
+             return CompleteResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -11421,17 +11189,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CompleteResponse{}, err
-            
+            return CompleteResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &appCompleteUploadResponse)
         if err != nil {
-           
-             return CompleteResponse{}, common.NewFDKError(err.Error())
-            
+            return CompleteResponse{}, common.NewFDKError(err.Error())
         }
         return appCompleteUploadResponse, nil
+        
     }
            
        
@@ -11441,7 +11207,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+    
   
+
     
     //PlatformAppAppCopyFilesXQuery holds query params
     type PlatformAppAppCopyFilesXQuery struct { 
@@ -11449,14 +11217,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // AppCopyFiles Copy Files
-     func (fi *PlatformAppFileStorage)  AppCopyFiles(xQuery PlatformAppAppCopyFilesXQuery, body  BulkRequest) (BulkResponse, error){
+     func (fi *PlatformAppFileStorage)  AppCopyFiles(xQuery PlatformAppAppCopyFilesXQuery, body  BulkRequest) (BulkResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             appCopyFilesResponse BulkResponse
-            
 	    )
         
          
@@ -11466,11 +11232,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return BulkResponse{}, common.NewFDKError(err.Error())
+            
+             return BulkResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return BulkResponse{}, common.NewFDKError(err.Error())
+            
+             return BulkResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -11483,17 +11251,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return BulkResponse{}, err
-            
+            return BulkResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &appCopyFilesResponse)
         if err != nil {
-           
-             return BulkResponse{}, common.NewFDKError(err.Error())
-            
+            return BulkResponse{}, common.NewFDKError(err.Error())
         }
         return appCopyFilesResponse, nil
+        
     }
            
        
@@ -11501,7 +11267,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+    
   
+
     
     //PlatformAppAppBrowseXQuery holds query params
     type PlatformAppAppBrowseXQuery struct { 
@@ -11509,14 +11277,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // AppBrowse Browse Files
-     func (fi *PlatformAppFileStorage)  AppBrowse(Namespace string, xQuery PlatformAppAppBrowseXQuery) (BrowseResponse, error){
+     func (fi *PlatformAppFileStorage)  AppBrowse(Namespace string, xQuery PlatformAppAppBrowseXQuery) (BrowseResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             appBrowseResponse BrowseResponse
-            
 	    )
         
          
@@ -11532,17 +11298,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return BrowseResponse{}, err
-            
+            return BrowseResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &appBrowseResponse)
         if err != nil {
-           
-             return BrowseResponse{}, common.NewFDKError(err.Error())
-            
+            return BrowseResponse{}, common.NewFDKError(err.Error())
         }
         return appBrowseResponse, nil
+        
     }
            
             
@@ -11608,17 +11372,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     
+    
   
+
     
     // CreateShortLink Create short link
-     func (sh *PlatformAppShare)  CreateShortLink(body  ShortLinkReq) (ShortLinkRes, error){
+     func (sh *PlatformAppShare)  CreateShortLink(body  ShortLinkReq) (ShortLinkRes, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createShortLinkResponse ShortLinkRes
-            
 	    )
         
          
@@ -11628,11 +11392,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return ShortLinkRes{}, common.NewFDKError(err.Error())
+            
+             return ShortLinkRes{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return ShortLinkRes{}, common.NewFDKError(err.Error())
+            
+             return ShortLinkRes{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -11645,23 +11411,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ShortLinkRes{}, err
-            
+            return ShortLinkRes{}, err
 	    }
+        
         err = json.Unmarshal(response, &createShortLinkResponse)
         if err != nil {
-           
-             return ShortLinkRes{}, common.NewFDKError(err.Error())
-            
+            return ShortLinkRes{}, common.NewFDKError(err.Error())
         }
         return createShortLinkResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetShortLinksXQuery holds query params
     type PlatformAppGetShortLinksXQuery struct { 
@@ -11673,14 +11439,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetShortLinks Get short links
-     func (sh *PlatformAppShare)  GetShortLinks(xQuery PlatformAppGetShortLinksXQuery) (ShortLinkList, error){
+     func (sh *PlatformAppShare)  GetShortLinks(xQuery PlatformAppGetShortLinksXQuery) (ShortLinkList, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getShortLinksResponse ShortLinkList
-            
 	    )
         
          
@@ -11696,17 +11460,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ShortLinkList{}, err
-            
+            return ShortLinkList{}, err
 	    }
+        
         err = json.Unmarshal(response, &getShortLinksResponse)
         if err != nil {
-           
-             return ShortLinkList{}, common.NewFDKError(err.Error())
-            
+            return ShortLinkList{}, common.NewFDKError(err.Error())
         }
         return getShortLinksResponse, nil
+        
     }
            
             
@@ -11792,17 +11554,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // GetShortLinkByHash Get short link by hash
-     func (sh *PlatformAppShare)  GetShortLinkByHash(Hash string) (ShortLinkRes, error){
+     func (sh *PlatformAppShare)  GetShortLinkByHash(Hash string) (ShortLinkRes, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getShortLinkByHashResponse ShortLinkRes
-            
 	    )
         
          
@@ -11818,33 +11580,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ShortLinkRes{}, err
-            
+            return ShortLinkRes{}, err
 	    }
+        
         err = json.Unmarshal(response, &getShortLinkByHashResponse)
         if err != nil {
-           
-             return ShortLinkRes{}, common.NewFDKError(err.Error())
-            
+            return ShortLinkRes{}, common.NewFDKError(err.Error())
         }
         return getShortLinkByHashResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateShortLinkById Update short link by id
-     func (sh *PlatformAppShare)  UpdateShortLinkById(ID string, body  ShortLinkReq) (ShortLinkRes, error){
+     func (sh *PlatformAppShare)  UpdateShortLinkById(ID string, body  ShortLinkReq) (ShortLinkRes, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateShortLinkByIdResponse ShortLinkRes
-            
 	    )
         
          
@@ -11854,11 +11614,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return ShortLinkRes{}, common.NewFDKError(err.Error())
+            
+             return ShortLinkRes{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return ShortLinkRes{}, common.NewFDKError(err.Error())
+            
+             return ShortLinkRes{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -11871,17 +11633,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ShortLinkRes{}, err
-            
+            return ShortLinkRes{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateShortLinkByIdResponse)
         if err != nil {
-           
-             return ShortLinkRes{}, common.NewFDKError(err.Error())
-            
+            return ShortLinkRes{}, common.NewFDKError(err.Error())
         }
         return updateShortLinkByIdResponse, nil
+        
     }
            
        
@@ -11901,17 +11661,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     
+    
   
+
     
     // GetBuildConfig Get latest build config
-     func (co *PlatformAppConfiguration)  GetBuildConfig(PlatformType string) (MobileAppConfiguration, error){
+     func (co *PlatformAppConfiguration)  GetBuildConfig(PlatformType string) (MobileAppConfiguration, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getBuildConfigResponse MobileAppConfiguration
-            
 	    )
         
          
@@ -11927,33 +11687,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return MobileAppConfiguration{}, err
-            
+            return MobileAppConfiguration{}, err
 	    }
+        
         err = json.Unmarshal(response, &getBuildConfigResponse)
         if err != nil {
-           
-             return MobileAppConfiguration{}, common.NewFDKError(err.Error())
-            
+            return MobileAppConfiguration{}, common.NewFDKError(err.Error())
         }
         return getBuildConfigResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateBuildConfig Update build config for next build
-     func (co *PlatformAppConfiguration)  UpdateBuildConfig(PlatformType string, body  MobileAppConfigRequest) (MobileAppConfiguration, error){
+     func (co *PlatformAppConfiguration)  UpdateBuildConfig(PlatformType string, body  MobileAppConfigRequest) (MobileAppConfiguration, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateBuildConfigResponse MobileAppConfiguration
-            
 	    )
         
          
@@ -11963,11 +11721,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return MobileAppConfiguration{}, common.NewFDKError(err.Error())
+            
+             return MobileAppConfiguration{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return MobileAppConfiguration{}, common.NewFDKError(err.Error())
+            
+             return MobileAppConfiguration{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -11980,33 +11740,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return MobileAppConfiguration{}, err
-            
+            return MobileAppConfiguration{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateBuildConfigResponse)
         if err != nil {
-           
-             return MobileAppConfiguration{}, common.NewFDKError(err.Error())
-            
+            return MobileAppConfiguration{}, common.NewFDKError(err.Error())
         }
         return updateBuildConfigResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetPreviousVersions Get previous build versions
-     func (co *PlatformAppConfiguration)  GetPreviousVersions(PlatformType string) (BuildVersionHistory, error){
+     func (co *PlatformAppConfiguration)  GetPreviousVersions(PlatformType string) (BuildVersionHistory, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getPreviousVersionsResponse BuildVersionHistory
-            
 	    )
         
          
@@ -12022,33 +11780,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return BuildVersionHistory{}, err
-            
+            return BuildVersionHistory{}, err
 	    }
+        
         err = json.Unmarshal(response, &getPreviousVersionsResponse)
         if err != nil {
-           
-             return BuildVersionHistory{}, common.NewFDKError(err.Error())
-            
+            return BuildVersionHistory{}, common.NewFDKError(err.Error())
         }
         return getPreviousVersionsResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetAppFeatures Get features of application
-     func (co *PlatformAppConfiguration)  GetAppFeatures() (AppFeatureResponse, error){
+     func (co *PlatformAppConfiguration)  GetAppFeatures() (AppFeatureResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getAppFeaturesResponse AppFeatureResponse
-            
 	    )
         
          
@@ -12064,33 +11820,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return AppFeatureResponse{}, err
-            
+            return AppFeatureResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAppFeaturesResponse)
         if err != nil {
-           
-             return AppFeatureResponse{}, common.NewFDKError(err.Error())
-            
+            return AppFeatureResponse{}, common.NewFDKError(err.Error())
         }
         return getAppFeaturesResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateAppFeatures Update features of application
-     func (co *PlatformAppConfiguration)  UpdateAppFeatures(body  AppFeatureRequest) (AppFeature, error){
+     func (co *PlatformAppConfiguration)  UpdateAppFeatures(body  AppFeatureRequest) (AppFeature, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateAppFeaturesResponse AppFeature
-            
 	    )
         
          
@@ -12100,11 +11854,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return AppFeature{}, common.NewFDKError(err.Error())
+            
+             return AppFeature{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return AppFeature{}, common.NewFDKError(err.Error())
+            
+             return AppFeature{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -12117,33 +11873,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return AppFeature{}, err
-            
+            return AppFeature{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateAppFeaturesResponse)
         if err != nil {
-           
-             return AppFeature{}, common.NewFDKError(err.Error())
-            
+            return AppFeature{}, common.NewFDKError(err.Error())
         }
         return updateAppFeaturesResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetAppBasicDetails Get basic application details
-     func (co *PlatformAppConfiguration)  GetAppBasicDetails() (ApplicationDetail, error){
+     func (co *PlatformAppConfiguration)  GetAppBasicDetails() (ApplicationDetail, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getAppBasicDetailsResponse ApplicationDetail
-            
 	    )
         
          
@@ -12159,33 +11913,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ApplicationDetail{}, err
-            
+            return ApplicationDetail{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAppBasicDetailsResponse)
         if err != nil {
-           
-             return ApplicationDetail{}, common.NewFDKError(err.Error())
-            
+            return ApplicationDetail{}, common.NewFDKError(err.Error())
         }
         return getAppBasicDetailsResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateAppBasicDetails Add or update application's basic details
-     func (co *PlatformAppConfiguration)  UpdateAppBasicDetails(body  ApplicationDetail) (ApplicationDetail, error){
+     func (co *PlatformAppConfiguration)  UpdateAppBasicDetails(body  ApplicationDetail) (ApplicationDetail, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateAppBasicDetailsResponse ApplicationDetail
-            
 	    )
         
          
@@ -12195,11 +11947,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return ApplicationDetail{}, common.NewFDKError(err.Error())
+            
+             return ApplicationDetail{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return ApplicationDetail{}, common.NewFDKError(err.Error())
+            
+             return ApplicationDetail{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -12212,33 +11966,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ApplicationDetail{}, err
-            
+            return ApplicationDetail{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateAppBasicDetailsResponse)
         if err != nil {
-           
-             return ApplicationDetail{}, common.NewFDKError(err.Error())
-            
+            return ApplicationDetail{}, common.NewFDKError(err.Error())
         }
         return updateAppBasicDetailsResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetAppContactInfo Get application information
-     func (co *PlatformAppConfiguration)  GetAppContactInfo() (ApplicationInformation, error){
+     func (co *PlatformAppConfiguration)  GetAppContactInfo() (ApplicationInformation, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getAppContactInfoResponse ApplicationInformation
-            
 	    )
         
          
@@ -12254,33 +12006,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ApplicationInformation{}, err
-            
+            return ApplicationInformation{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAppContactInfoResponse)
         if err != nil {
-           
-             return ApplicationInformation{}, common.NewFDKError(err.Error())
-            
+            return ApplicationInformation{}, common.NewFDKError(err.Error())
         }
         return getAppContactInfoResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateAppContactInfo Get application information
-     func (co *PlatformAppConfiguration)  UpdateAppContactInfo(body  ApplicationInformation) (ApplicationInformation, error){
+     func (co *PlatformAppConfiguration)  UpdateAppContactInfo(body  ApplicationInformation) (ApplicationInformation, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateAppContactInfoResponse ApplicationInformation
-            
 	    )
         
          
@@ -12290,11 +12040,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return ApplicationInformation{}, common.NewFDKError(err.Error())
+            
+             return ApplicationInformation{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return ApplicationInformation{}, common.NewFDKError(err.Error())
+            
+             return ApplicationInformation{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -12307,33 +12059,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ApplicationInformation{}, err
-            
+            return ApplicationInformation{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateAppContactInfoResponse)
         if err != nil {
-           
-             return ApplicationInformation{}, common.NewFDKError(err.Error())
-            
+            return ApplicationInformation{}, common.NewFDKError(err.Error())
         }
         return updateAppContactInfoResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetAppApiTokens Get social tokens
-     func (co *PlatformAppConfiguration)  GetAppApiTokens() (TokenResponse, error){
+     func (co *PlatformAppConfiguration)  GetAppApiTokens() (TokenResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getAppApiTokensResponse TokenResponse
-            
 	    )
         
          
@@ -12349,33 +12099,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return TokenResponse{}, err
-            
+            return TokenResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAppApiTokensResponse)
         if err != nil {
-           
-             return TokenResponse{}, common.NewFDKError(err.Error())
-            
+            return TokenResponse{}, common.NewFDKError(err.Error())
         }
         return getAppApiTokensResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateAppApiTokens Add social tokens
-     func (co *PlatformAppConfiguration)  UpdateAppApiTokens(body  TokenResponse) (TokenResponse, error){
+     func (co *PlatformAppConfiguration)  UpdateAppApiTokens(body  TokenResponse) (TokenResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateAppApiTokensResponse TokenResponse
-            
 	    )
         
          
@@ -12385,11 +12133,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return TokenResponse{}, common.NewFDKError(err.Error())
+            
+             return TokenResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return TokenResponse{}, common.NewFDKError(err.Error())
+            
+             return TokenResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -12402,23 +12152,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return TokenResponse{}, err
-            
+            return TokenResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateAppApiTokensResponse)
         if err != nil {
-           
-             return TokenResponse{}, common.NewFDKError(err.Error())
-            
+            return TokenResponse{}, common.NewFDKError(err.Error())
         }
         return updateAppApiTokensResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetAppCompaniesXQuery holds query params
     type PlatformAppGetAppCompaniesXQuery struct { 
@@ -12427,14 +12177,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetAppCompanies Application inventory enabled companies
-     func (co *PlatformAppConfiguration)  GetAppCompanies(xQuery PlatformAppGetAppCompaniesXQuery) (CompaniesResponse, error){
+     func (co *PlatformAppConfiguration)  GetAppCompanies(xQuery PlatformAppGetAppCompaniesXQuery) (CompaniesResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getAppCompaniesResponse CompaniesResponse
-            
 	    )
         
          
@@ -12450,17 +12198,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CompaniesResponse{}, err
-            
+            return CompaniesResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAppCompaniesResponse)
         if err != nil {
-           
-             return CompaniesResponse{}, common.NewFDKError(err.Error())
-            
+            return CompaniesResponse{}, common.NewFDKError(err.Error())
         }
         return getAppCompaniesResponse, nil
+        
     }
            
             
@@ -12516,7 +12262,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     //PlatformAppGetAppStoresXQuery holds query params
     type PlatformAppGetAppStoresXQuery struct { 
@@ -12525,14 +12273,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetAppStores Application inventory enabled stores
-     func (co *PlatformAppConfiguration)  GetAppStores(xQuery PlatformAppGetAppStoresXQuery) (StoresResponse, error){
+     func (co *PlatformAppConfiguration)  GetAppStores(xQuery PlatformAppGetAppStoresXQuery) (StoresResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getAppStoresResponse StoresResponse
-            
 	    )
         
          
@@ -12548,17 +12294,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return StoresResponse{}, err
-            
+            return StoresResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAppStoresResponse)
         if err != nil {
-           
-             return StoresResponse{}, common.NewFDKError(err.Error())
-            
+            return StoresResponse{}, common.NewFDKError(err.Error())
         }
         return getAppStoresResponse, nil
+        
     }
            
             
@@ -12614,17 +12358,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // GetInventoryConfig Get application configuration
-     func (co *PlatformAppConfiguration)  GetInventoryConfig() (ApplicationInventory, error){
+     func (co *PlatformAppConfiguration)  GetInventoryConfig() (ApplicationInventory, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getInventoryConfigResponse ApplicationInventory
-            
 	    )
         
          
@@ -12640,33 +12384,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ApplicationInventory{}, err
-            
+            return ApplicationInventory{}, err
 	    }
+        
         err = json.Unmarshal(response, &getInventoryConfigResponse)
         if err != nil {
-           
-             return ApplicationInventory{}, common.NewFDKError(err.Error())
-            
+            return ApplicationInventory{}, common.NewFDKError(err.Error())
         }
         return getInventoryConfigResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateInventoryConfig Update application configuration
-     func (co *PlatformAppConfiguration)  UpdateInventoryConfig(body  ApplicationInventory) (ApplicationInventory, error){
+     func (co *PlatformAppConfiguration)  UpdateInventoryConfig(body  ApplicationInventory) (ApplicationInventory, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateInventoryConfigResponse ApplicationInventory
-            
 	    )
         
          
@@ -12676,11 +12418,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return ApplicationInventory{}, common.NewFDKError(err.Error())
+            
+             return ApplicationInventory{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return ApplicationInventory{}, common.NewFDKError(err.Error())
+            
+             return ApplicationInventory{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -12693,33 +12437,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ApplicationInventory{}, err
-            
+            return ApplicationInventory{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateInventoryConfigResponse)
         if err != nil {
-           
-             return ApplicationInventory{}, common.NewFDKError(err.Error())
-            
+            return ApplicationInventory{}, common.NewFDKError(err.Error())
         }
         return updateInventoryConfigResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // PartiallyUpdateInventoryConfig Partially update application configuration
-     func (co *PlatformAppConfiguration)  PartiallyUpdateInventoryConfig(body  AppInventoryPartialUpdate) (ApplicationInventory, error){
+     func (co *PlatformAppConfiguration)  PartiallyUpdateInventoryConfig(body  AppInventoryPartialUpdate) (ApplicationInventory, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             partiallyUpdateInventoryConfigResponse ApplicationInventory
-            
 	    )
         
          
@@ -12729,11 +12471,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return ApplicationInventory{}, common.NewFDKError(err.Error())
+            
+             return ApplicationInventory{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return ApplicationInventory{}, common.NewFDKError(err.Error())
+            
+             return ApplicationInventory{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -12746,33 +12490,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ApplicationInventory{}, err
-            
+            return ApplicationInventory{}, err
 	    }
+        
         err = json.Unmarshal(response, &partiallyUpdateInventoryConfigResponse)
         if err != nil {
-           
-             return ApplicationInventory{}, common.NewFDKError(err.Error())
-            
+            return ApplicationInventory{}, common.NewFDKError(err.Error())
         }
         return partiallyUpdateInventoryConfigResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetAppCurrencyConfig Get application enabled currency list
-     func (co *PlatformAppConfiguration)  GetAppCurrencyConfig() (AppSupportedCurrency, error){
+     func (co *PlatformAppConfiguration)  GetAppCurrencyConfig() (AppSupportedCurrency, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getAppCurrencyConfigResponse AppSupportedCurrency
-            
 	    )
         
          
@@ -12788,33 +12530,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return AppSupportedCurrency{}, err
-            
+            return AppSupportedCurrency{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAppCurrencyConfigResponse)
         if err != nil {
-           
-             return AppSupportedCurrency{}, common.NewFDKError(err.Error())
-            
+            return AppSupportedCurrency{}, common.NewFDKError(err.Error())
         }
         return getAppCurrencyConfigResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateAppCurrencyConfig Add initial application supported currency
-     func (co *PlatformAppConfiguration)  UpdateAppCurrencyConfig(body  AppSupportedCurrency) (AppSupportedCurrency, error){
+     func (co *PlatformAppConfiguration)  UpdateAppCurrencyConfig(body  AppSupportedCurrency) (AppSupportedCurrency, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateAppCurrencyConfigResponse AppSupportedCurrency
-            
 	    )
         
          
@@ -12824,11 +12564,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return AppSupportedCurrency{}, common.NewFDKError(err.Error())
+            
+             return AppSupportedCurrency{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return AppSupportedCurrency{}, common.NewFDKError(err.Error())
+            
+             return AppSupportedCurrency{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -12841,23 +12583,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return AppSupportedCurrency{}, err
-            
+            return AppSupportedCurrency{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateAppCurrencyConfigResponse)
         if err != nil {
-           
-             return AppSupportedCurrency{}, common.NewFDKError(err.Error())
-            
+            return AppSupportedCurrency{}, common.NewFDKError(err.Error())
         }
         return updateAppCurrencyConfigResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetOrderingStoresByFilterXQuery holds query params
     type PlatformAppGetOrderingStoresByFilterXQuery struct { 
@@ -12866,14 +12608,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetOrderingStoresByFilter Get ordering store by filter
-     func (co *PlatformAppConfiguration)  GetOrderingStoresByFilter(xQuery PlatformAppGetOrderingStoresByFilterXQuery, body  FilterOrderingStoreRequest) (OrderingStores, error){
+     func (co *PlatformAppConfiguration)  GetOrderingStoresByFilter(xQuery PlatformAppGetOrderingStoresByFilterXQuery, body  FilterOrderingStoreRequest) (OrderingStores, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getOrderingStoresByFilterResponse OrderingStores
-            
 	    )
         
          
@@ -12883,11 +12623,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return OrderingStores{}, common.NewFDKError(err.Error())
+            
+             return OrderingStores{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return OrderingStores{}, common.NewFDKError(err.Error())
+            
+             return OrderingStores{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -12900,17 +12642,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return OrderingStores{}, err
-            
+            return OrderingStores{}, err
 	    }
+        
         err = json.Unmarshal(response, &getOrderingStoresByFilterResponse)
         if err != nil {
-           
-             return OrderingStores{}, common.NewFDKError(err.Error())
-            
+            return OrderingStores{}, common.NewFDKError(err.Error())
         }
         return getOrderingStoresByFilterResponse, nil
+        
     }
            
             
@@ -12966,17 +12706,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // UpdateOrderingStoreConfig Add/Update ordering store config
-     func (co *PlatformAppConfiguration)  UpdateOrderingStoreConfig(body  OrderingStoreConfig) (DeploymentMeta, error){
+     func (co *PlatformAppConfiguration)  UpdateOrderingStoreConfig(body  OrderingStoreConfig) (DeploymentMeta, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateOrderingStoreConfigResponse DeploymentMeta
-            
 	    )
         
          
@@ -12986,11 +12726,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return DeploymentMeta{}, common.NewFDKError(err.Error())
+            
+             return DeploymentMeta{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return DeploymentMeta{}, common.NewFDKError(err.Error())
+            
+             return DeploymentMeta{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -13003,33 +12745,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return DeploymentMeta{}, err
-            
+            return DeploymentMeta{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateOrderingStoreConfigResponse)
         if err != nil {
-           
-             return DeploymentMeta{}, common.NewFDKError(err.Error())
-            
+            return DeploymentMeta{}, common.NewFDKError(err.Error())
         }
         return updateOrderingStoreConfigResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetDomains Get attached domain list
-     func (co *PlatformAppConfiguration)  GetDomains() (DomainsResponse, error){
+     func (co *PlatformAppConfiguration)  GetDomains() (DomainsResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getDomainsResponse DomainsResponse
-            
 	    )
         
          
@@ -13045,33 +12785,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return DomainsResponse{}, err
-            
+            return DomainsResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getDomainsResponse)
         if err != nil {
-           
-             return DomainsResponse{}, common.NewFDKError(err.Error())
-            
+            return DomainsResponse{}, common.NewFDKError(err.Error())
         }
         return getDomainsResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // AddDomain Add new domain to application
-     func (co *PlatformAppConfiguration)  AddDomain(body  DomainAddRequest) (Domain, error){
+     func (co *PlatformAppConfiguration)  AddDomain(body  DomainAddRequest) (Domain, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             addDomainResponse Domain
-            
 	    )
         
          
@@ -13081,11 +12819,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return Domain{}, common.NewFDKError(err.Error())
+            
+             return Domain{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return Domain{}, common.NewFDKError(err.Error())
+            
+             return Domain{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -13098,33 +12838,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Domain{}, err
-            
+            return Domain{}, err
 	    }
+        
         err = json.Unmarshal(response, &addDomainResponse)
         if err != nil {
-           
-             return Domain{}, common.NewFDKError(err.Error())
-            
+            return Domain{}, common.NewFDKError(err.Error())
         }
         return addDomainResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // RemoveDomainById Remove attached domain
-     func (co *PlatformAppConfiguration)  RemoveDomainById(ID string) (SuccessMessageResponse, error){
+     func (co *PlatformAppConfiguration)  RemoveDomainById(ID string) (SuccessMessageResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             removeDomainByIdResponse SuccessMessageResponse
-            
 	    )
         
          
@@ -13140,33 +12878,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SuccessMessageResponse{}, err
-            
+            return SuccessMessageResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &removeDomainByIdResponse)
         if err != nil {
-           
-             return SuccessMessageResponse{}, common.NewFDKError(err.Error())
-            
+            return SuccessMessageResponse{}, common.NewFDKError(err.Error())
         }
         return removeDomainByIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // ChangeDomainType Change domain type
-     func (co *PlatformAppConfiguration)  ChangeDomainType(body  UpdateDomainTypeRequest) (DomainsResponse, error){
+     func (co *PlatformAppConfiguration)  ChangeDomainType(body  UpdateDomainTypeRequest) (DomainsResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             changeDomainTypeResponse DomainsResponse
-            
 	    )
         
          
@@ -13176,11 +12912,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return DomainsResponse{}, common.NewFDKError(err.Error())
+            
+             return DomainsResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return DomainsResponse{}, common.NewFDKError(err.Error())
+            
+             return DomainsResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -13193,33 +12931,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return DomainsResponse{}, err
-            
+            return DomainsResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &changeDomainTypeResponse)
         if err != nil {
-           
-             return DomainsResponse{}, common.NewFDKError(err.Error())
-            
+            return DomainsResponse{}, common.NewFDKError(err.Error())
         }
         return changeDomainTypeResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetDomainStatus Get domain connected status.
-     func (co *PlatformAppConfiguration)  GetDomainStatus(body  DomainStatusRequest) (DomainStatusResponse, error){
+     func (co *PlatformAppConfiguration)  GetDomainStatus(body  DomainStatusRequest) (DomainStatusResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getDomainStatusResponse DomainStatusResponse
-            
 	    )
         
          
@@ -13229,11 +12965,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return DomainStatusResponse{}, common.NewFDKError(err.Error())
+            
+             return DomainStatusResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return DomainStatusResponse{}, common.NewFDKError(err.Error())
+            
+             return DomainStatusResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -13246,17 +12984,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return DomainStatusResponse{}, err
-            
+            return DomainStatusResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getDomainStatusResponse)
         if err != nil {
-           
-             return DomainStatusResponse{}, common.NewFDKError(err.Error())
-            
+            return DomainStatusResponse{}, common.NewFDKError(err.Error())
         }
         return getDomainStatusResponse, nil
+        
     }
            
        
@@ -13266,17 +13002,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+    
   
+
     
     // GetApplicationById Get application data from id
-     func (co *PlatformAppConfiguration)  GetApplicationById() (Application, error){
+     func (co *PlatformAppConfiguration)  GetApplicationById() (Application, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getApplicationByIdResponse Application
-            
 	    )
         
          
@@ -13292,17 +13028,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Application{}, err
-            
+            return Application{}, err
 	    }
+        
         err = json.Unmarshal(response, &getApplicationByIdResponse)
         if err != nil {
-           
-             return Application{}, common.NewFDKError(err.Error())
-            
+            return Application{}, common.NewFDKError(err.Error())
         }
         return getApplicationByIdResponse, nil
+        
     }
            
        
@@ -13350,7 +13084,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     
+    
   
+
     
     //PlatformAppGetCouponsXQuery holds query params
     type PlatformAppGetCouponsXQuery struct { 
@@ -13365,14 +13101,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetCoupons Get with single coupon details or coupon list
-     func (ca *PlatformAppCart)  GetCoupons(xQuery PlatformAppGetCouponsXQuery) (CouponsResponse, error){
+     func (ca *PlatformAppCart)  GetCoupons(xQuery PlatformAppGetCouponsXQuery) (CouponsResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getCouponsResponse CouponsResponse
-            
 	    )
         
          
@@ -13388,17 +13122,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CouponsResponse{}, err
-            
+            return CouponsResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCouponsResponse)
         if err != nil {
-           
-             return CouponsResponse{}, common.NewFDKError(err.Error())
-            
+            return CouponsResponse{}, common.NewFDKError(err.Error())
         }
         return getCouponsResponse, nil
+        
     }
            
             
@@ -13514,17 +13246,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // CreateCoupon Create new coupon
-     func (ca *PlatformAppCart)  CreateCoupon(body  CouponAdd) (SuccessMessage, error){
+     func (ca *PlatformAppCart)  CreateCoupon(body  CouponAdd) (SuccessMessage, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createCouponResponse SuccessMessage
-            
 	    )
         
          
@@ -13534,11 +13266,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return SuccessMessage{}, common.NewFDKError(err.Error())
+            
+             return SuccessMessage{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return SuccessMessage{}, common.NewFDKError(err.Error())
+            
+             return SuccessMessage{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -13551,33 +13285,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SuccessMessage{}, err
-            
+            return SuccessMessage{}, err
 	    }
+        
         err = json.Unmarshal(response, &createCouponResponse)
         if err != nil {
-           
-             return SuccessMessage{}, common.NewFDKError(err.Error())
-            
+            return SuccessMessage{}, common.NewFDKError(err.Error())
         }
         return createCouponResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetCouponById Get with single coupon details or coupon list
-     func (ca *PlatformAppCart)  GetCouponById(ID string) (CouponUpdate, error){
+     func (ca *PlatformAppCart)  GetCouponById(ID string) (CouponUpdate, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getCouponByIdResponse CouponUpdate
-            
 	    )
         
          
@@ -13593,33 +13325,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CouponUpdate{}, err
-            
+            return CouponUpdate{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCouponByIdResponse)
         if err != nil {
-           
-             return CouponUpdate{}, common.NewFDKError(err.Error())
-            
+            return CouponUpdate{}, common.NewFDKError(err.Error())
         }
         return getCouponByIdResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateCoupon Update existing coupon configuration
-     func (ca *PlatformAppCart)  UpdateCoupon(ID string, body  CouponUpdate) (SuccessMessage, error){
+     func (ca *PlatformAppCart)  UpdateCoupon(ID string, body  CouponUpdate) (SuccessMessage, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateCouponResponse SuccessMessage
-            
 	    )
         
          
@@ -13629,11 +13359,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return SuccessMessage{}, common.NewFDKError(err.Error())
+            
+             return SuccessMessage{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return SuccessMessage{}, common.NewFDKError(err.Error())
+            
+             return SuccessMessage{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -13646,33 +13378,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SuccessMessage{}, err
-            
+            return SuccessMessage{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateCouponResponse)
         if err != nil {
-           
-             return SuccessMessage{}, common.NewFDKError(err.Error())
-            
+            return SuccessMessage{}, common.NewFDKError(err.Error())
         }
         return updateCouponResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateCouponPartially Update coupon archive state and schedule
-     func (ca *PlatformAppCart)  UpdateCouponPartially(ID string, body  CouponPartialUpdate) (SuccessMessage, error){
+     func (ca *PlatformAppCart)  UpdateCouponPartially(ID string, body  CouponPartialUpdate) (SuccessMessage, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateCouponPartiallyResponse SuccessMessage
-            
 	    )
         
          
@@ -13682,11 +13412,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return SuccessMessage{}, common.NewFDKError(err.Error())
+            
+             return SuccessMessage{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return SuccessMessage{}, common.NewFDKError(err.Error())
+            
+             return SuccessMessage{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -13699,17 +13431,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SuccessMessage{}, err
-            
+            return SuccessMessage{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateCouponPartiallyResponse)
         if err != nil {
-           
-             return SuccessMessage{}, common.NewFDKError(err.Error())
-            
+            return SuccessMessage{}, common.NewFDKError(err.Error())
         }
         return updateCouponPartiallyResponse, nil
+        
     }
            
        
@@ -13729,7 +13459,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     
+    
   
+
     
     //PlatformAppGetGiveawaysXQuery holds query params
     type PlatformAppGetGiveawaysXQuery struct { 
@@ -13738,14 +13470,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetGiveaways List of giveaways of the current application.
-     func (re *PlatformAppRewards)  GetGiveaways(xQuery PlatformAppGetGiveawaysXQuery) (GiveawayResponse, error){
+     func (re *PlatformAppRewards)  GetGiveaways(xQuery PlatformAppGetGiveawaysXQuery) (GiveawayResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getGiveawaysResponse GiveawayResponse
-            
 	    )
         
          
@@ -13761,17 +13491,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GiveawayResponse{}, err
-            
+            return GiveawayResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getGiveawaysResponse)
         if err != nil {
-           
-             return GiveawayResponse{}, common.NewFDKError(err.Error())
-            
+            return GiveawayResponse{}, common.NewFDKError(err.Error())
         }
         return getGiveawaysResponse, nil
+        
     }
            
             
@@ -13827,17 +13555,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // CreateGiveaway Adds a new giveaway.
-     func (re *PlatformAppRewards)  CreateGiveaway(body  Giveaway) (Giveaway, error){
+     func (re *PlatformAppRewards)  CreateGiveaway(body  Giveaway) (Giveaway, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             createGiveawayResponse Giveaway
-            
 	    )
         
          
@@ -13847,11 +13575,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return Giveaway{}, common.NewFDKError(err.Error())
+            
+             return Giveaway{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return Giveaway{}, common.NewFDKError(err.Error())
+            
+             return Giveaway{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -13864,33 +13594,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Giveaway{}, err
-            
+            return Giveaway{}, err
 	    }
+        
         err = json.Unmarshal(response, &createGiveawayResponse)
         if err != nil {
-           
-             return Giveaway{}, common.NewFDKError(err.Error())
-            
+            return Giveaway{}, common.NewFDKError(err.Error())
         }
         return createGiveawayResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetGiveawayByID Get giveaway by ID.
-     func (re *PlatformAppRewards)  GetGiveawayByID(ID string) (Giveaway, error){
+     func (re *PlatformAppRewards)  GetGiveawayByID(ID string) (Giveaway, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getGiveawayByIDResponse Giveaway
-            
 	    )
         
          
@@ -13906,33 +13634,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Giveaway{}, err
-            
+            return Giveaway{}, err
 	    }
+        
         err = json.Unmarshal(response, &getGiveawayByIDResponse)
         if err != nil {
-           
-             return Giveaway{}, common.NewFDKError(err.Error())
-            
+            return Giveaway{}, common.NewFDKError(err.Error())
         }
         return getGiveawayByIDResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateGiveaway Updates the giveaway by it's ID.
-     func (re *PlatformAppRewards)  UpdateGiveaway(ID string, body  Giveaway) (Giveaway, error){
+     func (re *PlatformAppRewards)  UpdateGiveaway(ID string, body  Giveaway) (Giveaway, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateGiveawayResponse Giveaway
-            
 	    )
         
          
@@ -13942,11 +13668,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return Giveaway{}, common.NewFDKError(err.Error())
+            
+             return Giveaway{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return Giveaway{}, common.NewFDKError(err.Error())
+            
+             return Giveaway{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -13959,33 +13687,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Giveaway{}, err
-            
+            return Giveaway{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateGiveawayResponse)
         if err != nil {
-           
-             return Giveaway{}, common.NewFDKError(err.Error())
-            
+            return Giveaway{}, common.NewFDKError(err.Error())
         }
         return updateGiveawayResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetOffers List of offer of the current application.
-     func (re *PlatformAppRewards)  GetOffers() ([]Offer, error){
+     func (re *PlatformAppRewards)  GetOffers() ([]Offer, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getOffersResponse []Offer
-            
 	    )
         
          
@@ -14001,33 +13727,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return []Offer{}, err
-            
+            return []Offer{}, err
 	    }
+        
         err = json.Unmarshal(response, &getOffersResponse)
         if err != nil {
-           
-             return []Offer{}, common.NewFDKError(err.Error())
-            
+            return []Offer{}, common.NewFDKError(err.Error())
         }
         return getOffersResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetOfferByName Get offer by name.
-     func (re *PlatformAppRewards)  GetOfferByName(Cookie string, Name string) (Offer, error){
+     func (re *PlatformAppRewards)  GetOfferByName(Cookie string, Name string) (Offer, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getOfferByNameResponse Offer
-            
 	    )
         
         
@@ -14047,33 +13771,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Offer{}, err
-            
+            return Offer{}, err
 	    }
+        
         err = json.Unmarshal(response, &getOfferByNameResponse)
         if err != nil {
-           
-             return Offer{}, common.NewFDKError(err.Error())
-            
+            return Offer{}, common.NewFDKError(err.Error())
         }
         return getOfferByNameResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateOfferByName Updates the offer by name.
-     func (re *PlatformAppRewards)  UpdateOfferByName(Name string, body  Offer) (Offer, error){
+     func (re *PlatformAppRewards)  UpdateOfferByName(Name string, body  Offer) (Offer, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateOfferByNameResponse Offer
-            
 	    )
         
          
@@ -14083,11 +13805,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return Offer{}, common.NewFDKError(err.Error())
+            
+             return Offer{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return Offer{}, common.NewFDKError(err.Error())
+            
+             return Offer{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -14100,33 +13824,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Offer{}, err
-            
+            return Offer{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateOfferByNameResponse)
         if err != nil {
-           
-             return Offer{}, common.NewFDKError(err.Error())
-            
+            return Offer{}, common.NewFDKError(err.Error())
         }
         return updateOfferByNameResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetUserAvailablePoints User's reward details.
-     func (re *PlatformAppRewards)  GetUserAvailablePoints(UserID string) (UserRes, error){
+     func (re *PlatformAppRewards)  GetUserAvailablePoints(UserID string) (UserRes, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getUserAvailablePointsResponse UserRes
-            
 	    )
         
          
@@ -14142,33 +13864,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return UserRes{}, err
-            
+            return UserRes{}, err
 	    }
+        
         err = json.Unmarshal(response, &getUserAvailablePointsResponse)
         if err != nil {
-           
-             return UserRes{}, common.NewFDKError(err.Error())
-            
+            return UserRes{}, common.NewFDKError(err.Error())
         }
         return getUserAvailablePointsResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // UpdateUserStatus Update User status
-     func (re *PlatformAppRewards)  UpdateUserStatus(UserID string, body  AppUser) (AppUser, error){
+     func (re *PlatformAppRewards)  UpdateUserStatus(UserID string, body  AppUser) (AppUser, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             updateUserStatusResponse AppUser
-            
 	    )
         
          
@@ -14178,11 +13898,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return AppUser{}, common.NewFDKError(err.Error())
+            
+             return AppUser{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return AppUser{}, common.NewFDKError(err.Error())
+            
+             return AppUser{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -14195,23 +13917,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return AppUser{}, err
-            
+            return AppUser{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateUserStatusResponse)
         if err != nil {
-           
-             return AppUser{}, common.NewFDKError(err.Error())
-            
+            return AppUser{}, common.NewFDKError(err.Error())
         }
         return updateUserStatusResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetUserPointsHistoryXQuery holds query params
     type PlatformAppGetUserPointsHistoryXQuery struct { 
@@ -14221,14 +13943,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetUserPointsHistory Get list of points transactions.
-     func (re *PlatformAppRewards)  GetUserPointsHistory(UserID string, xQuery PlatformAppGetUserPointsHistoryXQuery) (HistoryRes, error){
+     func (re *PlatformAppRewards)  GetUserPointsHistory(UserID string, xQuery PlatformAppGetUserPointsHistoryXQuery) (HistoryRes, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getUserPointsHistoryResponse HistoryRes
-            
 	    )
         
          
@@ -14244,17 +13964,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return HistoryRes{}, err
-            
+            return HistoryRes{}, err
 	    }
+        
         err = json.Unmarshal(response, &getUserPointsHistoryResponse)
         if err != nil {
-           
-             return HistoryRes{}, common.NewFDKError(err.Error())
-            
+            return HistoryRes{}, common.NewFDKError(err.Error())
         }
         return getUserPointsHistoryResponse, nil
+        
     }
            
             
@@ -14338,17 +14056,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     
+    
   
+
     
     // GetStatiscticsGroups Get statistics groups
-     func (an *PlatformAppAnalytics)  GetStatiscticsGroups() (StatsGroups, error){
+     func (an *PlatformAppAnalytics)  GetStatiscticsGroups() (StatsGroups, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getStatiscticsGroupsResponse StatsGroups
-            
 	    )
         
          
@@ -14364,33 +14082,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return StatsGroups{}, err
-            
+            return StatsGroups{}, err
 	    }
+        
         err = json.Unmarshal(response, &getStatiscticsGroupsResponse)
         if err != nil {
-           
-             return StatsGroups{}, common.NewFDKError(err.Error())
-            
+            return StatsGroups{}, common.NewFDKError(err.Error())
         }
         return getStatiscticsGroupsResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetStatiscticsGroupComponents Get statistics group components
-     func (an *PlatformAppAnalytics)  GetStatiscticsGroupComponents(GroupName string) (StatsGroupComponents, error){
+     func (an *PlatformAppAnalytics)  GetStatiscticsGroupComponents(GroupName string) (StatsGroupComponents, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getStatiscticsGroupComponentsResponse StatsGroupComponents
-            
 	    )
         
          
@@ -14406,32 +14122,30 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return StatsGroupComponents{}, err
-            
+            return StatsGroupComponents{}, err
 	    }
+        
         err = json.Unmarshal(response, &getStatiscticsGroupComponentsResponse)
         if err != nil {
-           
-             return StatsGroupComponents{}, common.NewFDKError(err.Error())
-            
+            return StatsGroupComponents{}, common.NewFDKError(err.Error())
         }
         return getStatiscticsGroupComponentsResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetComponentStatsCSV Get component statistics csv
-     func (an *PlatformAppAnalytics)  GetComponentStatsCSV(ComponentName string) (string, error){
+     func (an *PlatformAppAnalytics)  GetComponentStatsCSV(ComponentName string) ([]byte, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getComponentStatsCSVResponse string
             
 	    )
         
@@ -14448,32 +14162,26 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return "", err
-            
+            return []byte{}, err
 	    }
-        err = json.Unmarshal(response, &getComponentStatsCSVResponse)
-        if err != nil {
-           
-             return "", common.NewFDKError(err.Error())
-            
-        }
-        return getComponentStatsCSVResponse, nil
+        
+        return response, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetComponentStatsPDF Get component statistics pdf
-     func (an *PlatformAppAnalytics)  GetComponentStatsPDF(ComponentName string) (string, error){
+     func (an *PlatformAppAnalytics)  GetComponentStatsPDF(ComponentName string) ([]byte, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getComponentStatsPDFResponse string
             
 	    )
         
@@ -14490,33 +14198,27 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return "", err
-            
+            return []byte{}, err
 	    }
-        err = json.Unmarshal(response, &getComponentStatsPDFResponse)
-        if err != nil {
-           
-             return "", common.NewFDKError(err.Error())
-            
-        }
-        return getComponentStatsPDFResponse, nil
+        
+        return response, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetComponentStats Get component statistics
-     func (an *PlatformAppAnalytics)  GetComponentStats(ComponentName string) (StatsRes, error){
+     func (an *PlatformAppAnalytics)  GetComponentStats(ComponentName string) (StatsRes, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getComponentStatsResponse StatsRes
-            
 	    )
         
          
@@ -14532,23 +14234,23 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return StatsRes{}, err
-            
+            return StatsRes{}, err
 	    }
+        
         err = json.Unmarshal(response, &getComponentStatsResponse)
         if err != nil {
-           
-             return StatsRes{}, common.NewFDKError(err.Error())
-            
+            return StatsRes{}, common.NewFDKError(err.Error())
         }
         return getComponentStatsResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     //PlatformAppGetAbandonCartListXQuery holds query params
     type PlatformAppGetAbandonCartListXQuery struct { 
@@ -14557,14 +14259,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetAbandonCartList Get abandon carts list
-     func (an *PlatformAppAnalytics)  GetAbandonCartList(FromDate string, ToDate string, xQuery PlatformAppGetAbandonCartListXQuery) (AbandonCartsList, error){
+     func (an *PlatformAppAnalytics)  GetAbandonCartList(FromDate string, ToDate string, xQuery PlatformAppGetAbandonCartListXQuery) (AbandonCartsList, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getAbandonCartListResponse AbandonCartsList
-            
 	    )
         
          
@@ -14580,17 +14280,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return AbandonCartsList{}, err
-            
+            return AbandonCartsList{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAbandonCartListResponse)
         if err != nil {
-           
-             return AbandonCartsList{}, common.NewFDKError(err.Error())
-            
+            return AbandonCartsList{}, common.NewFDKError(err.Error())
         }
         return getAbandonCartListResponse, nil
+        
     }
            
             
@@ -14654,16 +14352,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
   
+
     
     // GetAbandonCartsCSV Get abandon carts csv
-     func (an *PlatformAppAnalytics)  GetAbandonCartsCSV(FromDate string, ToDate string) (string, error){
+     func (an *PlatformAppAnalytics)  GetAbandonCartsCSV(FromDate string, ToDate string) ([]byte, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getAbandonCartsCSVResponse string
             
 	    )
         
@@ -14680,33 +14378,27 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return "", err
-            
+            return []byte{}, err
 	    }
-        err = json.Unmarshal(response, &getAbandonCartsCSVResponse)
-        if err != nil {
-           
-             return "", common.NewFDKError(err.Error())
-            
-        }
-        return getAbandonCartsCSVResponse, nil
+        
+        return response, nil
+        
     }
            
        
     
     
+    
   
+
     
     // GetAbandonCartDetail Get abandon carts details
-     func (an *PlatformAppAnalytics)  GetAbandonCartDetail(CartID string) (AbandonCartDetail, error){
+     func (an *PlatformAppAnalytics)  GetAbandonCartDetail(CartID string) (AbandonCartDetail, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             getAbandonCartDetailResponse AbandonCartDetail
-            
 	    )
         
          
@@ -14722,17 +14414,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return AbandonCartDetail{}, err
-            
+            return AbandonCartDetail{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAbandonCartDetailResponse)
         if err != nil {
-           
-             return AbandonCartDetail{}, common.NewFDKError(err.Error())
-            
+            return AbandonCartDetail{}, common.NewFDKError(err.Error())
         }
         return getAbandonCartDetailResponse, nil
+        
     }
            
        
@@ -14760,17 +14450,17 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     
+    
   
+
     
     // AddProxyPath Add proxy path for external url
-     func (pa *PlatformAppPartner)  AddProxyPath(ExtensionID string, body  AddProxyReq) (AddProxyResponse, error){
+     func (pa *PlatformAppPartner)  AddProxyPath(ExtensionID string, body  AddProxyReq) (AddProxyResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             addProxyPathResponse AddProxyResponse
-            
 	    )
         
          
@@ -14780,11 +14470,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return AddProxyResponse{}, common.NewFDKError(err.Error())
+            
+             return AddProxyResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
-             return AddProxyResponse{}, common.NewFDKError(err.Error())
+            
+             return AddProxyResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -14797,33 +14489,31 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return AddProxyResponse{}, err
-            
+            return AddProxyResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &addProxyPathResponse)
         if err != nil {
-           
-             return AddProxyResponse{}, common.NewFDKError(err.Error())
-            
+            return AddProxyResponse{}, common.NewFDKError(err.Error())
         }
         return addProxyPathResponse, nil
+        
     }
            
        
     
     
+    
   
+
     
     // RemoveProxyPath Remove proxy path for external url
-     func (pa *PlatformAppPartner)  RemoveProxyPath(ExtensionID string, AttachedPath string) (RemoveProxyResponse, error){
+     func (pa *PlatformAppPartner)  RemoveProxyPath(ExtensionID string, AttachedPath string) (RemoveProxyResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
             removeProxyPathResponse RemoveProxyResponse
-            
 	    )
         
          
@@ -14839,17 +14529,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return RemoveProxyResponse{}, err
-            
+            return RemoveProxyResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &removeProxyPathResponse)
         if err != nil {
-           
-             return RemoveProxyResponse{}, common.NewFDKError(err.Error())
-            
+            return RemoveProxyResponse{}, common.NewFDKError(err.Error())
         }
         return removeProxyPathResponse, nil
+        
     }
            
        
