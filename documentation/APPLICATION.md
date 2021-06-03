@@ -67,6 +67,7 @@
     * [applyCoupon](#applycoupon)
     * [removeCoupon](#removecoupon)
     * [getBulkDiscountOffers](#getbulkdiscountoffers)
+    * [applyRewardPoints](#applyrewardpoints)
     * [getAddresses](#getaddresses)
     * [addAddress](#addaddress)
     * [getAddressById](#getaddressbyid)
@@ -96,6 +97,8 @@
 
 * [Theme](#Theme)
   * Methods
+    * [getAllPages](#getallpages)
+    * [getPage](#getpage)
     * [getAppliedTheme](#getappliedtheme)
     * [getThemeForPreview](#getthemeforpreview)
     
@@ -212,6 +215,7 @@
     * [checkAndUpdatePaymentStatus](#checkandupdatepaymentstatus)
     * [getPaymentModeRoutes](#getpaymentmoderoutes)
     * [getPosPaymentModeRoutes](#getpospaymentmoderoutes)
+    * [getRupifiBannerDetails](#getrupifibannerdetails)
     * [getActiveRefundTransferModes](#getactiverefundtransfermodes)
     * [enableOrDisableRefundTransferMode](#enableordisablerefundtransfermode)
     * [getUserBeneficiariesDetail](#getuserbeneficiariesdetail)
@@ -286,6 +290,7 @@
     * [applyCoupon](#applycoupon)
     * [removeCoupon](#removecoupon)
     * [getBulkDiscountOffers](#getbulkdiscountoffers)
+    * [applyRewardPoints](#applyrewardpoints)
     * [getAddresses](#getaddresses)
     * [addAddress](#addaddress)
     * [getAddressById](#getaddressbyid)
@@ -505,7 +510,9 @@ Get the sellers of a product size at a PIN Code
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
+
+
+| xQuery | struct | Includes properties such as `Strategy`, `PageNo`, `PageSize`
 
 
 
@@ -3251,6 +3258,49 @@ Unhandled api error
 
 
 Schema: `Object`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### applyRewardPoints
+Fetch all Items Added to  Cart
+
+```golang
+
+ data, err :=  Cart.ApplyRewardPoints(xQuery, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `UID`, `I`, `B`
+
+| body |  RewardPointRequest | "Request body" 
+
+
+Get all the details of a items added to cart  by uid. If successful, returns a Cart resource in the response body specified in CartResponse
+
+*Success Response:*
+
+
+
+The Cart object. See example below or refer CartResponse for details
+
+
+Schema: `CartResponse`
 
 
 
@@ -6238,6 +6288,155 @@ Default
 ## Theme
 
 
+#### getAllPages
+Get all pages of a theme
+
+```golang
+
+ data, err :=  Theme.GetAllPages(ThemeID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ThemeID | string | ID of the theme to be retrieved | 
+
+
+
+
+Use this API to retrieve all the available pages of a theme by its ID.
+
+*Success Response:*
+
+
+
+Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSchema` for more details.
+
+
+Schema: `AllAvailablePageSchema`
+
+
+*Examples:*
+
+
+All pages
+```json
+{
+  "$ref": "#/components/examples/AllAvailablePagesExample"
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+Schema: `BlitzkriegApiError`
+
+
+
+
+
+
+
+
+
+
+
+Schema: `BlitzkriegInternalServerError`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPage
+Get page of a theme
+
+```golang
+
+ data, err :=  Theme.GetPage(ThemeID, PageValue);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ThemeID | string | ID of the theme to be retrieved | 
+
+
+| PageValue | string | Value of the page to be retrieved | 
+
+
+
+
+Use this API to retrieve a page of a theme.
+
+*Success Response:*
+
+
+
+Success. Returns an object of the pages.  Refer `AvailablePageSchema` for more details.
+
+
+Schema: `AvailablePageSchema`
+
+
+*Examples:*
+
+
+Home page
+```json
+{
+  "$ref": "#/components/examples/AvailablePageExample"
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+Schema: `BlitzkriegApiError`
+
+
+
+
+
+
+
+
+
+
+
+Schema: `BlitzkriegInternalServerError`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getAppliedTheme
 Get the theme currently applied to an application
 
@@ -8720,10 +8919,10 @@ Use this API to get the details of a blog using its slug. Details include the ti
 
 
 
-Success. Returns a JSON object with blog details. Check the example shown below or refer `CustomBlogSchema` for more details.
+Success. Returns a JSON object with blog details. Check the example shown below or refer `BlogSchema` for more details.
 
 
-Schema: `CustomBlogSchema`
+Schema: `BlogSchema`
 
 
 *Examples:*
@@ -8732,7 +8931,7 @@ Schema: `CustomBlogSchema`
 default
 ```json
 {
-  "$ref": "#/components/examples/CustomBlog"
+  "$ref": "#/components/examples/BlogResponse"
 }
 ```
 
@@ -10268,13 +10467,13 @@ Get communication consent
 
 
 
-Get communication consent
+Use this API to retrieve the consent provided by the user for receiving communication messages over Email/SMS/WhatsApp.
 
 *Success Response:*
 
 
 
-Success
+Success. Returns all available communication opt-ins along with the consent details. Check the example shown below or refer `CommunicationConsent` for more details.
 
 
 Schema: `CommunicationConsent`
@@ -10315,13 +10514,13 @@ Upsert communication consent
 | body |  CommunicationConsentReq | "Request body" 
 
 
-Upsert communication consent
+Use this API to update and insert the consent provided by the user for receiving communication messages over Email/SMS/WhatsApp.
 
 *Success Response:*
 
 
 
-Success
+Success. Updates the channels for which user has consented. Check the example shown below or refer `CommunicationConsentRes` for more details.
 
 
 Schema: `CommunicationConsentRes`
@@ -10374,13 +10573,13 @@ Upsert push token of a user
 | body |  PushtokenReq | "Request body" 
 
 
-Upsert push token of a user
+Use this API to update and insert the push token of the user.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `PushtokenRes` for more details.
 
 
 Schema: `PushtokenRes`
@@ -10781,7 +10980,7 @@ Schema: `ErrorRes`
 
 
 #### startUpload
-This operation initiates upload and returns storage link which is valid for 30 Minutes. You can use that storage link to make subsequent upload request with file buffer or blob.
+Initiates an upload and returns a storage link that is valid for 30 minutes. You can use the storage link to make subsequent upload request with file buffer or blob.
 
 ```golang
 
@@ -10791,37 +10990,37 @@ This operation initiates upload and returns storage link which is valid for 30 M
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Namespace | string | bucket name | 
+| Namespace | string | Name of the bucket created for storing objects. | 
 
 
 | body |  StartRequest | "Request body" 
 
 
-Uploads an arbitrarily sized buffer or blob.
+Use this API to perform the first step of uploading (i.e. **Start**) an arbitrarily sized buffer or blob.
 
-It has three Major Steps:
+The three major steps are:
 * Start
 * Upload
 * Complete
 
 ### Start
 Initiates the assets upload using `startUpload`.
-It returns the storage link in response.
+It returns a storage link in response.
 
 ### Upload
 Use the storage link to upload a file (Buffer or Blob) to the File Storage.
-Make a `PUT` request on storage link received from `startUpload` api with file (Buffer or Blob) as a request body.
+Make a `PUT` request on storage link received from `startUpload` API with the file (Buffer or Blob) in the request body.
 
 ### Complete
-After successfully upload, call `completeUpload` api to complete the upload process.
-This operation will return the url for the uploaded file.
+After successfully upload, call the `completeUpload` API to finish the upload process.
+This operation will return the URL of the uploaded file.
 
 
 *Success Response:*
 
 
 
-Success
+Success. Next, call the `completeUpload` API and pass the response payload of this API to finish the upload process.
 
 
 Schema: `StartResponse`
@@ -10850,7 +11049,7 @@ Schema: `FailedResponse`
 
 
 #### completeUpload
-This will complete the upload process. After successfully uploading file, you can call this operation to complete the upload process.
+Completes the upload process. After successfully uploading a file, call this API to finish the upload process.
 
 ```golang
 
@@ -10860,30 +11059,30 @@ This will complete the upload process. After successfully uploading file, you ca
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Namespace | string | bucket name | 
+| Namespace | string | Name of the bucket created for storing objects. | 
 
 
 | body |  StartResponse | "Request body" 
 
 
-Uploads an arbitrarily sized buffer or blob.
+Use this API to perform the third step of uploading (i.e. **Complete**) an arbitrarily sized buffer or blob.
 
-It has three Major Steps:
+The three major steps are:
 * Start
 * Upload
 * Complete
 
 ### Start
 Initiates the assets upload using `startUpload`.
-It returns the storage link in response.
+It returns a storage link in response.
 
 ### Upload
 Use the storage link to upload a file (Buffer or Blob) to the File Storage.
-Make a `PUT` request on storage link received from `startUpload` api with file (Buffer or Blob) as a request body.
+Make a `PUT` request on storage link received from `startUpload` API with the file (Buffer or Blob) in the request body.
 
 ### Complete
-After successfully upload, call `completeUpload` api to complete the upload process.
-This operation will return the url for the uploaded file.
+After successfully upload, call the `completeUpload` API to finish the upload process.
+This operation will return the URL of the uploaded file.
 
 
 *Success Response:*
@@ -10938,13 +11137,13 @@ Get current application details
 
 
 
-Get current application details.
+Use this API to get the current application details which includes configurations that indicate the status of the website, domain, ID, tokens, images, etc.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `Application` for more details.
 
 
 Schema: `Application`
@@ -10985,13 +11184,13 @@ Get application, owner and seller information
 
 
 
-Get application information with owner and seller basic details
+Use this API to get the current application details which includes channel name, description, banner, logo, favicon, domain details, etc. This API also retrieves the seller and owner information such as address, email address, and phone number.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `ApplicationAboutResponse` for more details.
 
 
 Schema: `ApplicationAboutResponse`
@@ -11020,13 +11219,13 @@ Get basic application details
 
 
 
-Get basic application details like name
+Use this API to retrieve only the basic details of the application which includes channel name, description, banner, logo, favicon, domain details, etc.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `ApplicationDetail` for more details.
 
 
 Schema: `ApplicationDetail`
@@ -11055,13 +11254,13 @@ Get integration tokens
 
 
 
-Get tokens for multiple integrations like Facebook, Googlemaps, Segment, Firebase, etc. Note: token values are encrypted with AES encryption using secret key. Kindly reach to developers for secret key.
+Use this API to retrieve the tokens used while integrating Firebase, MoEngage, Segment, GTM, Freshchat, Safetynet, Google Map and Facebook. **Note** - Token values are encrypted with AES encryption using a secret key. Kindly reach out to the developers for obtaining the secret key.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `TokenResponse` for more details.
 
 
 Schema: `TokenResponse`
@@ -11078,7 +11277,7 @@ Schema: `TokenResponse`
 
 
 #### getOrderingStores
-Get deployment meta stores
+Get deployment stores
 
 ```golang
 
@@ -11097,13 +11296,13 @@ Get deployment meta stores
 
 
 
-Get deployment meta stores.
+Use this API to retrieve the details of all the deployment stores (the selling locations where the application will be utilized for placing orders).
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `OrderingStores` for more details.
 
 
 Schema: `OrderingStores`
@@ -11144,13 +11343,13 @@ Get features of application
 
 
 
-Get features of application
+Use this API to retrieve the configuration of features such as product detail, landing page, options in the login/registration screen, communication opt-in, cart options and many more.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `AppFeatureResponse` for more details.
 
 
 Schema: `AppFeatureResponse`
@@ -11191,13 +11390,13 @@ Get application information
 
 
 
-Get Application Current Information. This includes information about social links, address and contact information of company/seller/brand of the application.
+Use this API to retrieve information about the social links, address and contact information of the company/seller/brand operating the application.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `ApplicationAboutResponse` for more details.
 
 
 Schema: `ApplicationInformation`
@@ -11214,7 +11413,7 @@ Schema: `ApplicationInformation`
 
 
 #### getCurrencies
-Get application enabled currencies
+Get currencies enabled in the application
 
 ```golang
 
@@ -11226,13 +11425,13 @@ Get application enabled currencies
 
 
 
-Get currency list for allowed currencies under current application
+Use this API to get a list of currencies allowed in the current application. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
 
 *Success Response:*
 
 
 
-Currencies Success response
+Success. Check the example shown below or refer `CurrenciesResponse` for more details.
 
 
 Schema: `CurrenciesResponse`
@@ -11249,7 +11448,7 @@ Schema: `CurrenciesResponse`
 
 
 #### getCurrencyById
-Get currency by id
+Get currency by its ID
 
 ```golang
 
@@ -11259,18 +11458,18 @@ Get currency by id
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ID | string | Currency object id | 
+| ID | string | Object ID assigned to the currency | 
 
 
 
 
-Get currency object with symbol and name information by id.
+Use this API to retrieve a currency using its ID.
 
 *Success Response:*
 
 
 
-Success response
+Success. Check the example shown below or refer `Currency` for more details.
 
 
 Schema: `Currency`
@@ -11299,13 +11498,13 @@ Get list of languages
 
 
 
-Get list of supported languages under application.
+Use this API to get a list of languages supported in the application.
 
 *Success Response:*
 
 
 
-Success response
+Success. Check the example shown below or refer `LanguageResponse` for more details.
 
 
 Schema: `LanguageResponse`
@@ -11322,7 +11521,7 @@ Schema: `LanguageResponse`
 
 
 #### getOrderingStoreCookie
-Get ordering store signed cookie on selection of ordering store. This will be used by cart service to verify coupon against selected ordering store in cart.
+Get an Ordering Store signed cookie on selection of ordering store.
 
 ```golang
 
@@ -11335,7 +11534,7 @@ Get ordering store signed cookie on selection of ordering store. This will be us
 | body |  OrderingStoreSelectRequest | "Request body" 
 
 
-Get ordering store signed cookie on selection of ordering store.
+Use this API to get an Ordering Store signed cookie upon selecting an ordering store. This will be used by the cart service to verify a coupon against the selected ordering store in cart.
 
 *Success Response:*
 
@@ -11353,7 +11552,7 @@ Schema: `SuccessMessageResponse`
 
 
 
-Success
+API Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `NotFound`
@@ -11370,7 +11569,7 @@ Schema: `NotFound`
 
 
 #### removeOrderingStoreCookie
-Unset ordering store signed cookie on change of sales channel selection via domain in universal fynd store app.
+Unset the Ordering Store signed cookie.
 
 ```golang
 
@@ -11382,7 +11581,7 @@ Unset ordering store signed cookie on change of sales channel selection via doma
 
 
 
-Unset ordering store cookie.
+Use this API to unset the Ordering Store cookie upon changing the sales channel, by its domain URL, in the Universal Fynd Store app.
 
 *Success Response:*
 
@@ -11405,7 +11604,7 @@ Schema: `SuccessMessageResponse`
 
 
 #### getAppStaffs
-Get Staff List.
+Get a list of staff.
 
 ```golang
 
@@ -11424,13 +11623,13 @@ Get Staff List.
 
 
 
-Get a staff list based on the user's session token passed in the header.
+Use this API to get a list of staff including the names, employee code, incentive status, assigned ordering stores, and title of each staff added to the application.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `AppStaffResponse` for more details.
 
 
 Schema: `AppStaffResponse`
@@ -11442,7 +11641,7 @@ Schema: `AppStaffResponse`
 
 
 
-Request failed with internal server error.
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `UnhandledError`
@@ -11476,7 +11675,7 @@ Get payment gateway keys
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| XAPIToken | string | api token | 
+| XAPIToken | string | Used for basic authentication. | 
 
 
 
@@ -11484,13 +11683,13 @@ Get payment gateway keys
 
 
 
-Get payment gateway (key, secrets, merchant, sdk/api detail) to complete payment at front-end.
+Use this API to retrieve the payment gateway key, secrets, merchant, SDK/API details to complete a payment at front-end.
 
 *Success Response:*
 
 
 
-Keys of all payment gateway
+Success. Returns the keys of all payment gateways. Check the example shown below or refer `AggregatorsConfigDetailResponse` for more details.
 
 
 Schema: `AggregatorsConfigDetailResponse`
@@ -11502,7 +11701,7 @@ Schema: `AggregatorsConfigDetailResponse`
 
 
 
-Bad Request Error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -11514,7 +11713,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -11544,13 +11743,13 @@ Attach a saved card to customer.
 | body |  AttachCardRequest | "Request body" 
 
 
-Attach a saved card to customer at payment gateway i.e stripe and refresh card cache.
+Use this API to attach a customer's saved card at the payment gateway, such as Stripe.
 
 *Success Response:*
 
 
 
-List of cards objects
+Success. Check the example shown below or refer `AttachCardsResponse` for more details.
 
 
 Schema: `AttachCardsResponse`
@@ -11562,7 +11761,7 @@ Schema: `AttachCardsResponse`
 
 
 
-Bad request error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `any`
@@ -11574,7 +11773,7 @@ Schema: `any`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `any`
@@ -11591,7 +11790,7 @@ Schema: `any`
 
 
 #### getActiveCardAggregator
-Fetch active payment gateway for card
+Fetch active payment gateway for card payments
 
 ```golang
 
@@ -11606,13 +11805,13 @@ Fetch active payment gateway for card
 
 
 
-Fetch active payment gateway along with customer id for cards payments.
+Use this API to retrieve an active payment aggregator along with the Customer ID. This is applicable for cards payments only.
 
 *Success Response:*
 
 
 
-Object of payment gateway and customer id
+Success. Returns an active payment gateway. Check the example shown below or refer `ActiveCardPaymentGatewayResponse` for more details.
 
 
 Schema: `ActiveCardPaymentGatewayResponse`
@@ -11624,7 +11823,7 @@ Schema: `ActiveCardPaymentGatewayResponse`
 
 
 
-Bad request error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -11636,7 +11835,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -11653,7 +11852,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### getActiveUserCards
-Fetch the list of saved cards of user.
+Fetch the list of cards saved by the user
 
 ```golang
 
@@ -11668,13 +11867,13 @@ Fetch the list of saved cards of user.
 
 
 
-Fetch the list of saved cards of user from active payment gateway.
+Use this API to retrieve a list of cards stored by user from an active payment gateway.
 
 *Success Response:*
 
 
 
-List of cards objects
+Success. Returns a list of cards saved by the user. Check the example shown below or refer `ListCardsResponse` for more details.
 
 
 Schema: `ListCardsResponse`
@@ -11686,7 +11885,7 @@ Schema: `ListCardsResponse`
 
 
 
-Bad request error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -11698,7 +11897,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -11715,7 +11914,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### deleteUserCard
-Delete an user card.
+Delete a card
 
 ```golang
 
@@ -11728,13 +11927,13 @@ Delete an user card.
 | body |  DeletehCardRequest | "Request body" 
 
 
-Delete an added user card on payment gateway and remove from cache.
+Use this API to delete a card added by a user on the payment gateway and clear the cache.
 
 *Success Response:*
 
 
 
-List of cards objects
+Success. Returns a success message if card is deleted.
 
 
 Schema: `DeleteCardsResponse`
@@ -11746,7 +11945,7 @@ Schema: `DeleteCardsResponse`
 
 
 
-Bad request error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -11758,7 +11957,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -11775,7 +11974,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### verifyCustomerForPayment
-Validate customer for payment.
+Validate customer for payment
 
 ```golang
 
@@ -11788,13 +11987,13 @@ Validate customer for payment.
 | body |  ValidateCustomerRequest | "Request body" 
 
 
-Validate customer for payment i.e Simpl paylater, Rupifi loan.
+Use this API to check if the customer is eligible to use credit-line facilities such as Simpl Pay Later and Rupifi.
 
 *Success Response:*
 
 
 
-List of cards objects
+Success. Check the example shown below or refer `ValidateCustomerResponse` for more details.
 
 
 Schema: `ValidateCustomerResponse`
@@ -11806,7 +12005,7 @@ Schema: `ValidateCustomerResponse`
 
 
 
-Bad request error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -11818,7 +12017,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -11848,13 +12047,13 @@ Verify and charge payment
 | body |  ChargeCustomerRequest | "Request body" 
 
 
-Verify and charge payment server to server for Simpl & Mswipe.
+Use this API to verify and check the status of a payment transaction (server-to-server) made through aggregators like Simpl and Mswipe.
 
 *Success Response:*
 
 
 
-List of cards objects
+Success. Check the example shown below or refer `ChargeCustomerResponse` for more details.
 
 
 Schema: `ChargeCustomerResponse`
@@ -11866,7 +12065,7 @@ Schema: `ChargeCustomerResponse`
 
 
 
-Bad request error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -11878,7 +12077,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -11895,7 +12094,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### initialisePayment
-Payment Initialisation server to server for UPI and BharatQR.
+Initialize a payment (server-to-server) for UPI and BharatQR
 
 ```golang
 
@@ -11908,13 +12107,13 @@ Payment Initialisation server to server for UPI and BharatQR.
 | body |  PaymentInitializationRequest | "Request body" 
 
 
-Payment Initialisation for UPI & BharatQR code, UPI requests to app and QR code to be displayed on screen.
+PUse this API to inititate payment using UPI, BharatQR, wherein the UPI requests are send to the app and QR code is displayed on the screen.
 
 *Success Response:*
 
 
 
-List of cards objects
+Success. Check the example shown below or refer `PaymentInitializationResponse` for more details.
 
 
 Schema: `PaymentInitializationResponse`
@@ -11926,7 +12125,7 @@ Schema: `PaymentInitializationResponse`
 
 
 
-Bad request error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -11938,7 +12137,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -11955,7 +12154,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### checkAndUpdatePaymentStatus
-Continous polling to check status of payment on server.
+Performs continuous polling to check status of payment on the server
 
 ```golang
 
@@ -11968,13 +12167,13 @@ Continous polling to check status of payment on server.
 | body |  PaymentStatusUpdateRequest | "Request body" 
 
 
-Continous polling on interval to check status of payment untill timeout.
+Use this API to perform continuous polling at intervals to check the status of payment until timeout.
 
 *Success Response:*
 
 
 
-List of cards objects
+Success. Returns the status of payment. Check the example shown below or refer `PaymentStatusUpdateResponse` for more details.
 
 
 Schema: `PaymentStatusUpdateResponse`
@@ -11986,7 +12185,7 @@ Schema: `PaymentStatusUpdateResponse`
 
 
 
-Bad request error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -11998,7 +12197,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12015,7 +12214,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### getPaymentModeRoutes
-Get All Valid Payment Options
+Get applicable payment options
 
 ```golang
 
@@ -12042,13 +12241,13 @@ Get All Valid Payment Options
 
 
 
-Use this API to get Get All Valid Payment Options for making payment
+Use this API to get all valid payment options for doing a payment.
 
 *Success Response:*
 
 
 
-Success
+Success. Returns all available options for payment. Check the example shown below or refer `PaymentModeRouteResponse` for more details.
 
 
 Schema: `PaymentModeRouteResponse`
@@ -12060,7 +12259,7 @@ Schema: `PaymentModeRouteResponse`
 
 
 
-Bad Request Error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12072,7 +12271,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12089,7 +12288,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### getPosPaymentModeRoutes
-Get All Valid Payment Options for POS
+Get applicable payment options for Point-of-Sale (POS)
 
 ```golang
 
@@ -12118,13 +12317,13 @@ Get All Valid Payment Options for POS
 
 
 
-Use this API to get Get All Valid Payment Options for making payment
+Use this API to get all valid payment options for doing a payment in POS.
 
 *Success Response:*
 
 
 
-Success
+Success. Returns all available options for payment. Check the example shown below or refer `PaymentModeRouteResponse` for more details.
 
 
 Schema: `PaymentModeRouteResponse`
@@ -12136,7 +12335,7 @@ Schema: `PaymentModeRouteResponse`
 
 
 
-Bad Request Error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12148,7 +12347,66 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
+
+
+Schema: `HttpErrorCodeAndResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getRupifiBannerDetails
+Get CreditLine Offer
+
+```golang
+
+ data, err :=  Payment.GetRupifiBannerDetails();
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+Get CreditLine Offer if user is tentatively approved by rupifi
+
+*Success Response:*
+
+
+
+Success. Return CreditLine Offer detail. Check the example shown below or refer `RupifiBannerResponseSchema` for more details.
+
+
+Schema: `RupifiBannerResponse`
+
+
+
+
+
+
+
+
+Bad Request. See the error object in the response body to know the exact reason.
+
+
+Schema: `HttpErrorCodeAndResponse`
+
+
+
+
+
+
+
+
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12165,7 +12423,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### getActiveRefundTransferModes
-List Refund Transfer Mode
+Lists the mode of refund
 
 ```golang
 
@@ -12177,13 +12435,13 @@ List Refund Transfer Mode
 
 
 
-Get all active transfer mode for adding beneficiary details
+Use this API to retrieve eligible refund modes (such as Netbanking) and add the beneficiary details.
 
 *Success Response:*
 
 
 
-Refund Transfer Mode
+Success. Shows the available refund mode to choose, e.g. Netbanking. Check the example shown below or refer `TransferModeResponse` for more details.
 
 
 Schema: `TransferModeResponse`
@@ -12195,7 +12453,7 @@ Schema: `TransferModeResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12212,7 +12470,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### enableOrDisableRefundTransferMode
-Enable/Disable Refund Transfer Mode
+Enable/Disable a mode for transferring a refund
 
 ```golang
 
@@ -12231,7 +12489,7 @@ Activate or Deactivate Transfer Mode to collect Beneficiary Details for Refund
 
 
 
-Update Refund Transfer Mode.
+Success. Shows whether the refund mode was successfully enabled or disabled.
 
 
 Schema: `UpdateRefundTransferModeResponse`
@@ -12243,7 +12501,7 @@ Schema: `UpdateRefundTransferModeResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12260,7 +12518,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### getUserBeneficiariesDetail
-List User Beneficiary
+Lists the beneficiary of a refund
 
 ```golang
 
@@ -12275,13 +12533,13 @@ List User Beneficiary
 
 
 
-Get all active  beneficiary details added by the user for refund
+Use this API to get the details of all active beneficiary added by a user for refund.
 
 *Success Response:*
 
 
 
-List User Beneficiary
+Success. Returns the details of the beneficiary getting a refund. Check the example shown below or refer `OrderBeneficiaryResponse` for more details.
 
 
 Schema: `OrderBeneficiaryResponse`
@@ -12293,7 +12551,7 @@ Schema: `OrderBeneficiaryResponse`
 
 
 
-Bad Request Error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `NotFoundResourceError`
@@ -12305,7 +12563,7 @@ Schema: `NotFoundResourceError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12322,7 +12580,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### verifyIfscCode
-Ifsc Code Verification
+Verify IFSC Code
 
 ```golang
 
@@ -12337,13 +12595,13 @@ Ifsc Code Verification
 
 
 
-Get True/False for correct IFSC Code for adding bank details for refund
+Use this API to check whether the 11-digit IFSC code is valid and to fetch the bank details for refund.
 
 *Success Response:*
 
 
 
-Bank details on correct Ifsc Code
+Success. Shows whether the IFSC code is valid, and returns the bank details. Check the example shown below or refer `IfscCodeResponse` for more details.
 
 
 Schema: `IfscCodeResponse`
@@ -12355,7 +12613,7 @@ Schema: `IfscCodeResponse`
 
 
 
-Bad Request Error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `NotFoundResourceError`
@@ -12367,7 +12625,7 @@ Schema: `NotFoundResourceError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ErrorCodeDescription`
@@ -12384,7 +12642,7 @@ Schema: `ErrorCodeDescription`
 
 
 #### getOrderBeneficiariesDetail
-List Order Beneficiary
+Lists the beneficiary of a refund
 
 ```golang
 
@@ -12399,13 +12657,13 @@ List Order Beneficiary
 
 
 
-Get all active  beneficiary details added by the user for refund
+Use this API to get the details of all active beneficiary added by a user for refund.
 
 *Success Response:*
 
 
 
-List Order Beneficiary
+Success. Returns the details of the beneficiary getting a refund. Check the example shown below or refer `OrderBeneficiaryResponse` for more details.
 
 
 Schema: `OrderBeneficiaryResponse`
@@ -12417,7 +12675,7 @@ Schema: `OrderBeneficiaryResponse`
 
 
 
-Bad Request Error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `NotFoundResourceError`
@@ -12429,7 +12687,7 @@ Schema: `NotFoundResourceError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12446,7 +12704,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### verifyOtpAndAddBeneficiaryForBank
-Save Beneficiary details on otp validation.
+Verify the beneficiary details using OTP
 
 ```golang
 
@@ -12459,13 +12717,13 @@ Save Beneficiary details on otp validation.
 | body |  AddBeneficiaryViaOtpVerificationRequest | "Request body" 
 
 
-Save Beneficiary details on otp validation.
+Use this API to perform an OTP validation before saving the beneficiary details added for a refund.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `AddBeneficiaryViaOtpVerificationRequest` for more details.
 
 
 Schema: `AddBeneficiaryViaOtpVerificationResponse`
@@ -12477,7 +12735,7 @@ Schema: `AddBeneficiaryViaOtpVerificationResponse`
 
 
 
-Bad Request Error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `WrongOtpError`
@@ -12489,7 +12747,7 @@ Schema: `WrongOtpError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12519,13 +12777,13 @@ Save bank details for cancelled/returned order
 | body |  AddBeneficiaryDetailsRequest | "Request body" 
 
 
-Use this API to save bank details for returned/cancelled order to refund amount in his account.
+Use this API to save the bank details for a returned or cancelled order to refund the amount.
 
 *Success Response:*
 
 
 
-Success
+Success. Shows whether the beneficiary details were saved to a returned/cancelled order or not.
 
 
 Schema: `RefundAccountResponse`
@@ -12537,7 +12795,7 @@ Schema: `RefundAccountResponse`
 
 
 
-Bad Request Error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `NotFoundResourceError`
@@ -12549,7 +12807,7 @@ Schema: `NotFoundResourceError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12566,7 +12824,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### verifyOtpAndAddBeneficiaryForWallet
-Send Otp on Adding wallet beneficiary
+Send OTP on adding a wallet beneficiary
 
 ```golang
 
@@ -12579,13 +12837,13 @@ Send Otp on Adding wallet beneficiary
 | body |  WalletOtpRequest | "Request body" 
 
 
-Send Otp on Adding wallet beneficiary for user mobile verification
+Use this API to send an OTP while adding a wallet beneficiary by mobile no. verification.
 
 *Success Response:*
 
 
 
-WalletOtp
+Success. Sends the OTP to the given mobile number. Check the example shown below or refer `WalletOtpResponse` for more details.
 
 
 Schema: `WalletOtpResponse`
@@ -12597,7 +12855,7 @@ Schema: `WalletOtpResponse`
 
 
 
-Bad Request Error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `NotFoundResourceError`
@@ -12609,7 +12867,7 @@ Schema: `NotFoundResourceError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12626,7 +12884,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### updateDefaultBeneficiary
-Mark Default Beneficiary For Refund
+Set a default beneficiary for a refund
 
 ```golang
 
@@ -12639,13 +12897,13 @@ Mark Default Beneficiary For Refund
 | body |  SetDefaultBeneficiaryRequest | "Request body" 
 
 
-Mark Default Beneficiary ot of all Beneficiary Details for Refund
+Use this API to set a default beneficiary for getting a refund.
 
 *Success Response:*
 
 
 
-Set Default Beneficiary Response.
+Success. Check the example shown below or refer `SetDefaultBeneficiaryResponse` for more details.
 
 
 Schema: `SetDefaultBeneficiaryResponse`
@@ -12657,7 +12915,7 @@ Schema: `SetDefaultBeneficiaryResponse`
 
 
 
-Bad Request Error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `SetDefaultBeneficiaryResponse`
@@ -12669,7 +12927,7 @@ Schema: `SetDefaultBeneficiaryResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12693,7 +12951,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### getOrders
-Get Orders for application based on application Id
+Use this API to retrieve all the orders.
 
 ```golang
 
@@ -12716,13 +12974,13 @@ Get Orders for application based on application Id
 
 
 
-Get Orders
+Get all orders
 
 *Success Response:*
 
 
 
-Success
+Success. Returns all the orders. Check the example shown below or refer `OrderList` for more details.
 
 
 Schema: `OrderList`
@@ -12734,7 +12992,7 @@ Schema: `OrderList`
 
 
 
-API Error
+API Error. See the error object in the response body to know the exact reason.. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -12746,7 +13004,7 @@ Schema: `ApefaceApiError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -12763,7 +13021,7 @@ Schema: `ApefaceApiError`
 
 
 #### getOrderById
-Get Order by order id for application based on application Id
+Use this API to retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
 
 ```golang
 
@@ -12773,18 +13031,18 @@ Get Order by order id for application based on application Id
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| OrderID | string | Order Id | 
+| OrderID | string | A unique number used for identifying and tracking your orders. | 
 
 
 
 
-Get Order By Fynd Order Id
+Get details of an order
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `OrderById` for more details.
 
 
 Schema: `OrderById`
@@ -12796,7 +13054,7 @@ Schema: `OrderById`
 
 
 
-API Error
+API Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -12808,7 +13066,7 @@ Schema: `ApefaceApiError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -12825,7 +13083,7 @@ Schema: `ApefaceApiError`
 
 
 #### getShipmentById
-Get Shipment by shipment id and order id for application based on application Id
+Use this API to retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
 
 ```golang
 
@@ -12835,18 +13093,18 @@ Get Shipment by shipment id and order id for application based on application Id
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ShipmentID | string | Shipment Id | 
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
 
 
-Get Shipment
+Get details of a shipment
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `ShipmentById` for more details.
 
 
 Schema: `ShipmentById`
@@ -12858,7 +13116,7 @@ Schema: `ShipmentById`
 
 
 
-API Error
+API Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -12870,7 +13128,7 @@ Schema: `ApefaceApiError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -12887,7 +13145,7 @@ Schema: `ApefaceApiError`
 
 
 #### getShipmentReasons
-Get Shipment reasons by shipment id and order id for application based on application Id
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
 
 ```golang
 
@@ -12897,18 +13155,18 @@ Get Shipment reasons by shipment id and order id for application based on applic
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ShipmentID | string | Shipment Id | 
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
 
 
-Get Shipment Reasons
+Get reasons behind full or partial cancellation of a shipment
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `ShipmentReasons` for more details.
 
 
 Schema: `ShipmentReasons`
@@ -12920,7 +13178,7 @@ Schema: `ShipmentReasons`
 
 
 
-API Error
+API Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -12932,7 +13190,7 @@ Schema: `ApefaceApiError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -12949,7 +13207,7 @@ Schema: `ApefaceApiError`
 
 
 #### updateShipmentStatus
-Update Shipment status by shipment id and order id for application based on application Id
+Use this API to update the status of a shipment using its shipment ID.
 
 ```golang
 
@@ -12959,19 +13217,19 @@ Update Shipment status by shipment id and order id for application based on appl
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ShipmentID | string | Shipment Id | 
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
 | body |  ShipmentStatusUpdateBody | "Request body" 
 
 
-Update Shipment Status
+Update the shipment status
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `ShipmentStatusUpdateBody` for more details.
 
 
 Schema: `ShipmentStatusUpdate`
@@ -12983,7 +13241,7 @@ Schema: `ShipmentStatusUpdate`
 
 
 
-API Error
+API Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -12995,7 +13253,7 @@ Schema: `ApefaceApiError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -13012,7 +13270,7 @@ Schema: `ApefaceApiError`
 
 
 #### trackShipment
-Track Shipment by shipment id and order id for application based on application Id
+Use this API to track a shipment using its shipment ID.
 
 ```golang
 
@@ -13022,18 +13280,18 @@ Track Shipment by shipment id and order id for application based on application 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ShipmentID | string | Shipment Id | 
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
 
 
-Shipment Track
+Track shipment
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `ShipmentTrack` for more details.
 
 
 Schema: `ShipmentTrack`
@@ -13045,7 +13303,7 @@ Schema: `ShipmentTrack`
 
 
 
-API Error
+API Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -13057,7 +13315,7 @@ Schema: `ApefaceApiError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -13074,7 +13332,7 @@ Schema: `ApefaceApiError`
 
 
 #### getPosOrderById
-Get POS Order by order id for application based on application Id
+Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
 
 ```golang
 
@@ -13084,18 +13342,18 @@ Get POS Order by order id for application based on application Id
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| OrderID | string | Order Id | 
+| OrderID | string | A unique number used for identifying and tracking your orders. | 
 
 
 
 
-Get Order By Fynd Order Id
+Get POS Order
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `PosOrderById` for more details.
 
 
 Schema: `PosOrderById`
@@ -13107,7 +13365,7 @@ Schema: `PosOrderById`
 
 
 
-API Error
+API Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -13119,7 +13377,7 @@ Schema: `ApefaceApiError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -14449,7 +14707,11 @@ Get list of customer reviews
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `UserID`, `Media`, `Rating`, `AttributeRating`, `Facets`, `Sort`, `PageID`, `PageSize`
+
+
+
+
+| xQuery | struct | Includes properties such as `ID`, `UserID`, `Media`, `Rating`, `AttributeRating`, `Facets`, `Sort`, `Active`, `Approve`, `PageID`, `PageSize`
 
 
 
@@ -16290,6 +16552,49 @@ Unhandled api error
 
 
 Schema: `Object`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### applyRewardPoints
+Fetch all Items Added to  Cart
+
+```golang
+
+ data, err :=  PosCart.ApplyRewardPoints(xQuery, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `UID`, `I`, `B`
+
+| body |  RewardPointRequest | "Request body" 
+
+
+Get all the details of a items added to cart  by uid. If successful, returns a Cart resource in the response body specified in CartResponse
+
+*Success Response:*
+
+
+
+The Cart object. See example below or refer CartResponse for details
+
+
+Schema: `CartResponse`
 
 
 
@@ -19058,7 +19363,7 @@ Cart Merged/Replaced
 
 
 #### getTatProduct
-Get Tat Product
+Use this API to know the delivery turnaround time (TAT) by entering the product details along with the PIN Code of the location.
 
 ```golang
 
@@ -19071,13 +19376,13 @@ Get Tat Product
 | body |  GetTatProductReqBody | "Request body" 
 
 
-Get Tat Product
+Get TAT of a product
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `GetTatProductResponse` for more details.
 
 
 Schema: `GetTatProductResponse`
@@ -19089,7 +19394,7 @@ Schema: `GetTatProductResponse`
 
 
 
-API Error
+API Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -19101,7 +19406,7 @@ Schema: `ApefaceApiError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -19118,7 +19423,7 @@ Schema: `ApefaceApiError`
 
 
 #### getPincodeCity
-Get City from Pincode
+Use this API to retrieve a city by its PIN Code.
 
 ```golang
 
@@ -19128,18 +19433,18 @@ Get City from Pincode
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Pincode | string | Pincode | 
+| Pincode | string | The PIN Code of the area, e.g. 400059 | 
 
 
 
 
-Get City from Pincode
+Get city from PIN Code
 
 *Success Response:*
 
 
 
-Success
+Success. Returns a JSON object containing the city name, state and country identified by its PIN Code. Check the example shown below or refer `GetPincodeCityResponse` for more details.
 
 
 Schema: `GetPincodeCityResponse`
@@ -19151,7 +19456,7 @@ Schema: `GetPincodeCityResponse`
 
 
 
-API Error
+API Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -19163,7 +19468,7 @@ Schema: `ApefaceApiError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`

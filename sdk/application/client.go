@@ -93,6 +93,8 @@ func NewAppClient(config *AppConfig) *Client {
         return &Catalog{config}
     }
     
+    
+    
   
     
     
@@ -102,9 +104,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getProductDetailBySlugResponse ProductDetail
-            
+             getProductDetailBySlugResponse ProductDetail
 	    )
 
          
@@ -120,19 +120,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ProductDetail{}, err
-            
+            return ProductDetail{}, err
 	    }
+        
         err = json.Unmarshal(response, &getProductDetailBySlugResponse)
         if err != nil {
-           
-             return ProductDetail{}, common.NewFDKError(err.Error())
-            
+            return ProductDetail{}, common.NewFDKError(err.Error())
         }
-        return getProductDetailBySlugResponse, nil
+         return getProductDetailBySlugResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -148,9 +148,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getProductSizesBySlugResponse ProductSizes
-            
+             getProductSizesBySlugResponse ProductSizes
 	    )
 
          
@@ -166,19 +164,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ProductSizes{}, err
-            
+            return ProductSizes{}, err
 	    }
+        
         err = json.Unmarshal(response, &getProductSizesBySlugResponse)
         if err != nil {
-           
-             return ProductSizes{}, common.NewFDKError(err.Error())
-            
+            return ProductSizes{}, common.NewFDKError(err.Error())
         }
-        return getProductSizesBySlugResponse, nil
+         return getProductSizesBySlugResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -194,9 +192,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getProductPriceBySlugResponse ProductSizePriceResponse
-            
+             getProductPriceBySlugResponse ProductSizePriceResponse
 	    )
 
          
@@ -212,25 +208,26 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ProductSizePriceResponse{}, err
-            
+            return ProductSizePriceResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getProductPriceBySlugResponse)
         if err != nil {
-           
-             return ProductSizePriceResponse{}, common.NewFDKError(err.Error())
-            
+            return ProductSizePriceResponse{}, common.NewFDKError(err.Error())
         }
-        return getProductPriceBySlugResponse, nil
+         return getProductPriceBySlugResponse, nil
+        
     }
           
+    
+    
     
   
     
     
     //CatalogGetProductSellersBySlugXQuery holds query params
     type CatalogGetProductSellersBySlugXQuery struct { 
+        Strategy string  `url:"strategy,omitempty"` 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"`  
     }
@@ -241,9 +238,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getProductSellersBySlugResponse ProductSizeSellersResponse
-            
+             getProductSellersBySlugResponse ProductSizeSellersResponse
 	    )
 
          
@@ -259,17 +254,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ProductSizeSellersResponse{}, err
-            
+            return ProductSizeSellersResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getProductSellersBySlugResponse)
         if err != nil {
-           
-             return ProductSizeSellersResponse{}, common.NewFDKError(err.Error())
-            
+            return ProductSizeSellersResponse{}, common.NewFDKError(err.Error())
         }
-        return getProductSellersBySlugResponse, nil
+         return getProductSellersBySlugResponse, nil
+        
     }
           
             
@@ -294,6 +287,13 @@ func NewAppClient(config *AppConfig) *Client {
                     
                 
                     
+                    
+                    
+                    
+                        
+                    
+                    
+                
                     
                     
                     
@@ -319,6 +319,10 @@ func NewAppClient(config *AppConfig) *Client {
                 paginator := common.NewPaginator("number")
                  
                  
+                 
+                 
+                 
+                 
                  xQuery.PageNo  = paginator.PageNo
                  
                  
@@ -339,6 +343,8 @@ func NewAppClient(config *AppConfig) *Client {
             }
        
     
+    
+    
   
     
     
@@ -353,9 +359,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getProductComparisonBySlugsResponse ProductsComparisonResponse
-            
+             getProductComparisonBySlugsResponse ProductsComparisonResponse
 	    )
 
          
@@ -371,19 +375,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ProductsComparisonResponse{}, err
-            
+            return ProductsComparisonResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getProductComparisonBySlugsResponse)
         if err != nil {
-           
-             return ProductsComparisonResponse{}, common.NewFDKError(err.Error())
-            
+            return ProductsComparisonResponse{}, common.NewFDKError(err.Error())
         }
-        return getProductComparisonBySlugsResponse, nil
+         return getProductComparisonBySlugsResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -394,9 +398,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getSimilarComparisonProductBySlugResponse ProductCompareResponse
-            
+             getSimilarComparisonProductBySlugResponse ProductCompareResponse
 	    )
 
          
@@ -412,19 +414,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ProductCompareResponse{}, err
-            
+            return ProductCompareResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getSimilarComparisonProductBySlugResponse)
         if err != nil {
-           
-             return ProductCompareResponse{}, common.NewFDKError(err.Error())
-            
+            return ProductCompareResponse{}, common.NewFDKError(err.Error())
         }
-        return getSimilarComparisonProductBySlugResponse, nil
+         return getSimilarComparisonProductBySlugResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -435,9 +437,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getComparedFrequentlyProductBySlugResponse ProductFrequentlyComparedSimilarResponse
-            
+             getComparedFrequentlyProductBySlugResponse ProductFrequentlyComparedSimilarResponse
 	    )
 
          
@@ -453,19 +453,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ProductFrequentlyComparedSimilarResponse{}, err
-            
+            return ProductFrequentlyComparedSimilarResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getComparedFrequentlyProductBySlugResponse)
         if err != nil {
-           
-             return ProductFrequentlyComparedSimilarResponse{}, common.NewFDKError(err.Error())
-            
+            return ProductFrequentlyComparedSimilarResponse{}, common.NewFDKError(err.Error())
         }
-        return getComparedFrequentlyProductBySlugResponse, nil
+         return getComparedFrequentlyProductBySlugResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -476,9 +476,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getProductSimilarByIdentifierResponse SimilarProductByTypeResponse
-            
+             getProductSimilarByIdentifierResponse SimilarProductByTypeResponse
 	    )
 
          
@@ -494,19 +492,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SimilarProductByTypeResponse{}, err
-            
+            return SimilarProductByTypeResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getProductSimilarByIdentifierResponse)
         if err != nil {
-           
-             return SimilarProductByTypeResponse{}, common.NewFDKError(err.Error())
-            
+            return SimilarProductByTypeResponse{}, common.NewFDKError(err.Error())
         }
-        return getProductSimilarByIdentifierResponse, nil
+         return getProductSimilarByIdentifierResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -517,9 +515,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getProductVariantsBySlugResponse ProductVariantsResponse
-            
+             getProductVariantsBySlugResponse ProductVariantsResponse
 	    )
 
          
@@ -535,19 +531,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ProductVariantsResponse{}, err
-            
+            return ProductVariantsResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getProductVariantsBySlugResponse)
         if err != nil {
-           
-             return ProductVariantsResponse{}, common.NewFDKError(err.Error())
-            
+            return ProductVariantsResponse{}, common.NewFDKError(err.Error())
         }
-        return getProductVariantsBySlugResponse, nil
+         return getProductVariantsBySlugResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -567,9 +563,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getProductStockByIdsResponse ProductStockStatusResponse
-            
+             getProductStockByIdsResponse ProductStockStatusResponse
 	    )
 
          
@@ -585,19 +579,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ProductStockStatusResponse{}, err
-            
+            return ProductStockStatusResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getProductStockByIdsResponse)
         if err != nil {
-           
-             return ProductStockStatusResponse{}, common.NewFDKError(err.Error())
-            
+            return ProductStockStatusResponse{}, common.NewFDKError(err.Error())
         }
-        return getProductStockByIdsResponse, nil
+         return getProductStockByIdsResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -615,9 +609,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getProductStockForTimeByIdsResponse ProductStockPolling
-            
+             getProductStockForTimeByIdsResponse ProductStockPolling
 	    )
 
          
@@ -633,17 +625,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ProductStockPolling{}, err
-            
+            return ProductStockPolling{}, err
 	    }
+        
         err = json.Unmarshal(response, &getProductStockForTimeByIdsResponse)
         if err != nil {
-           
-             return ProductStockPolling{}, common.NewFDKError(err.Error())
-            
+            return ProductStockPolling{}, common.NewFDKError(err.Error())
         }
-        return getProductStockForTimeByIdsResponse, nil
+         return getProductStockForTimeByIdsResponse, nil
+        
     }
           
             
@@ -702,6 +692,8 @@ func NewAppClient(config *AppConfig) *Client {
             }
        
     
+    
+    
   
     
     
@@ -723,9 +715,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getProductsResponse ProductListingResponse
-            
+             getProductsResponse ProductListingResponse
 	    )
 
          
@@ -741,17 +731,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ProductListingResponse{}, err
-            
+            return ProductListingResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getProductsResponse)
         if err != nil {
-           
-             return ProductListingResponse{}, common.NewFDKError(err.Error())
-            
+            return ProductListingResponse{}, common.NewFDKError(err.Error())
         }
-        return getProductsResponse, nil
+         return getProductsResponse, nil
+        
     }
           
             
@@ -861,6 +849,8 @@ func NewAppClient(config *AppConfig) *Client {
             }
        
     
+    
+    
   
     
     
@@ -877,9 +867,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getBrandsResponse BrandListingResponse
-            
+             getBrandsResponse BrandListingResponse
 	    )
 
          
@@ -895,17 +883,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return BrandListingResponse{}, err
-            
+            return BrandListingResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getBrandsResponse)
         if err != nil {
-           
-             return BrandListingResponse{}, common.NewFDKError(err.Error())
-            
+            return BrandListingResponse{}, common.NewFDKError(err.Error())
         }
-        return getBrandsResponse, nil
+         return getBrandsResponse, nil
+        
     }
           
             
@@ -962,6 +948,8 @@ func NewAppClient(config *AppConfig) *Client {
             }
        
     
+    
+    
   
     
     
@@ -971,9 +959,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getBrandDetailBySlugResponse BrandDetailResponse
-            
+             getBrandDetailBySlugResponse BrandDetailResponse
 	    )
 
          
@@ -989,19 +975,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return BrandDetailResponse{}, err
-            
+            return BrandDetailResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getBrandDetailBySlugResponse)
         if err != nil {
-           
-             return BrandDetailResponse{}, common.NewFDKError(err.Error())
-            
+            return BrandDetailResponse{}, common.NewFDKError(err.Error())
         }
-        return getBrandDetailBySlugResponse, nil
+         return getBrandDetailBySlugResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -1017,9 +1003,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getCategoriesResponse CategoryListingResponse
-            
+             getCategoriesResponse CategoryListingResponse
 	    )
 
          
@@ -1035,19 +1019,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CategoryListingResponse{}, err
-            
+            return CategoryListingResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCategoriesResponse)
         if err != nil {
-           
-             return CategoryListingResponse{}, common.NewFDKError(err.Error())
-            
+            return CategoryListingResponse{}, common.NewFDKError(err.Error())
         }
-        return getCategoriesResponse, nil
+         return getCategoriesResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -1058,9 +1042,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getCategoryDetailBySlugResponse CategoryMetaResponse
-            
+             getCategoryDetailBySlugResponse CategoryMetaResponse
 	    )
 
          
@@ -1076,19 +1058,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CategoryMetaResponse{}, err
-            
+            return CategoryMetaResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCategoryDetailBySlugResponse)
         if err != nil {
-           
-             return CategoryMetaResponse{}, common.NewFDKError(err.Error())
-            
+            return CategoryMetaResponse{}, common.NewFDKError(err.Error())
         }
-        return getCategoryDetailBySlugResponse, nil
+         return getCategoryDetailBySlugResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -1106,9 +1088,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getHomeProductsResponse HomeListingResponse
-            
+             getHomeProductsResponse HomeListingResponse
 	    )
 
          
@@ -1124,17 +1104,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return HomeListingResponse{}, err
-            
+            return HomeListingResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getHomeProductsResponse)
         if err != nil {
-           
-             return HomeListingResponse{}, common.NewFDKError(err.Error())
-            
+            return HomeListingResponse{}, common.NewFDKError(err.Error())
         }
-        return getHomeProductsResponse, nil
+         return getHomeProductsResponse, nil
+        
     }
           
             
@@ -1193,6 +1171,8 @@ func NewAppClient(config *AppConfig) *Client {
             }
        
     
+    
+    
   
     
     
@@ -1202,9 +1182,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getDepartmentsResponse DepartmentResponse
-            
+             getDepartmentsResponse DepartmentResponse
 	    )
 
          
@@ -1220,19 +1198,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return DepartmentResponse{}, err
-            
+            return DepartmentResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getDepartmentsResponse)
         if err != nil {
-           
-             return DepartmentResponse{}, common.NewFDKError(err.Error())
-            
+            return DepartmentResponse{}, common.NewFDKError(err.Error())
         }
-        return getDepartmentsResponse, nil
+         return getDepartmentsResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -1248,9 +1226,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getSearchResultsResponse AutoCompleteResponse
-            
+             getSearchResultsResponse AutoCompleteResponse
 	    )
 
          
@@ -1266,19 +1242,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return AutoCompleteResponse{}, err
-            
+            return AutoCompleteResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getSearchResultsResponse)
         if err != nil {
-           
-             return AutoCompleteResponse{}, common.NewFDKError(err.Error())
-            
+            return AutoCompleteResponse{}, common.NewFDKError(err.Error())
         }
-        return getSearchResultsResponse, nil
+         return getSearchResultsResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -1295,9 +1271,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getCollectionsResponse GetCollectionListingResponse
-            
+             getCollectionsResponse GetCollectionListingResponse
 	    )
 
          
@@ -1313,17 +1287,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetCollectionListingResponse{}, err
-            
+            return GetCollectionListingResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCollectionsResponse)
         if err != nil {
-           
-             return GetCollectionListingResponse{}, common.NewFDKError(err.Error())
-            
+            return GetCollectionListingResponse{}, common.NewFDKError(err.Error())
         }
-        return getCollectionsResponse, nil
+         return getCollectionsResponse, nil
+        
     }
           
             
@@ -1369,6 +1341,8 @@ func NewAppClient(config *AppConfig) *Client {
             }
        
     
+    
+    
   
     
     
@@ -1387,9 +1361,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getCollectionItemsBySlugResponse ProductListingResponse
-            
+             getCollectionItemsBySlugResponse ProductListingResponse
 	    )
 
          
@@ -1405,17 +1377,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ProductListingResponse{}, err
-            
+            return ProductListingResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCollectionItemsBySlugResponse)
         if err != nil {
-           
-             return ProductListingResponse{}, common.NewFDKError(err.Error())
-            
+            return ProductListingResponse{}, common.NewFDKError(err.Error())
         }
-        return getCollectionItemsBySlugResponse, nil
+         return getCollectionItemsBySlugResponse, nil
+        
     }
           
             
@@ -1504,6 +1474,8 @@ func NewAppClient(config *AppConfig) *Client {
             }
        
     
+    
+    
   
     
     
@@ -1513,9 +1485,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getCollectionDetailBySlugResponse CollectionDetailResponse
-            
+             getCollectionDetailBySlugResponse CollectionDetailResponse
 	    )
 
          
@@ -1531,19 +1501,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CollectionDetailResponse{}, err
-            
+            return CollectionDetailResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCollectionDetailBySlugResponse)
         if err != nil {
-           
-             return CollectionDetailResponse{}, common.NewFDKError(err.Error())
-            
+            return CollectionDetailResponse{}, common.NewFDKError(err.Error())
         }
-        return getCollectionDetailBySlugResponse, nil
+         return getCollectionDetailBySlugResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -1560,9 +1530,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getFollowedListingResponse GetFollowListingResponse
-            
+             getFollowedListingResponse GetFollowListingResponse
 	    )
 
          
@@ -1578,17 +1546,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetFollowListingResponse{}, err
-            
+            return GetFollowListingResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getFollowedListingResponse)
         if err != nil {
-           
-             return GetFollowListingResponse{}, common.NewFDKError(err.Error())
-            
+            return GetFollowListingResponse{}, common.NewFDKError(err.Error())
         }
-        return getFollowedListingResponse, nil
+         return getFollowedListingResponse, nil
+        
     }
           
             
@@ -1644,6 +1610,8 @@ func NewAppClient(config *AppConfig) *Client {
             }
        
     
+    
+    
   
     
     
@@ -1653,9 +1621,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            unfollowByIdResponse FollowPostResponse
-            
+             unfollowByIdResponse FollowPostResponse
 	    )
 
          
@@ -1671,19 +1637,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return FollowPostResponse{}, err
-            
+            return FollowPostResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &unfollowByIdResponse)
         if err != nil {
-           
-             return FollowPostResponse{}, common.NewFDKError(err.Error())
-            
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
-        return unfollowByIdResponse, nil
+         return unfollowByIdResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -1694,9 +1660,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            followByIdResponse FollowPostResponse
-            
+             followByIdResponse FollowPostResponse
 	    )
 
          
@@ -1712,19 +1676,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return FollowPostResponse{}, err
-            
+            return FollowPostResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &followByIdResponse)
         if err != nil {
-           
-             return FollowPostResponse{}, common.NewFDKError(err.Error())
-            
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
-        return followByIdResponse, nil
+         return followByIdResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -1735,9 +1699,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getFollowerCountByIdResponse FollowerCountResponse
-            
+             getFollowerCountByIdResponse FollowerCountResponse
 	    )
 
          
@@ -1753,19 +1715,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return FollowerCountResponse{}, err
-            
+            return FollowerCountResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getFollowerCountByIdResponse)
         if err != nil {
-           
-             return FollowerCountResponse{}, common.NewFDKError(err.Error())
-            
+            return FollowerCountResponse{}, common.NewFDKError(err.Error())
         }
-        return getFollowerCountByIdResponse, nil
+         return getFollowerCountByIdResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -1781,9 +1743,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getFollowIdsResponse FollowIdsResponse
-            
+             getFollowIdsResponse FollowIdsResponse
 	    )
 
          
@@ -1799,19 +1759,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return FollowIdsResponse{}, err
-            
+            return FollowIdsResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getFollowIdsResponse)
         if err != nil {
-           
-             return FollowIdsResponse{}, common.NewFDKError(err.Error())
-            
+            return FollowIdsResponse{}, common.NewFDKError(err.Error())
         }
-        return getFollowIdsResponse, nil
+         return getFollowIdsResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -1832,9 +1792,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getStoresResponse StoreListingResponse
-            
+             getStoresResponse StoreListingResponse
 	    )
 
          
@@ -1850,17 +1808,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return StoreListingResponse{}, err
-            
+            return StoreListingResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getStoresResponse)
         if err != nil {
-           
-             return StoreListingResponse{}, common.NewFDKError(err.Error())
-            
+            return StoreListingResponse{}, common.NewFDKError(err.Error())
         }
-        return getStoresResponse, nil
+         return getStoresResponse, nil
+        
     }
           
             
@@ -1960,6 +1916,8 @@ func NewAppClient(config *AppConfig) *Client {
         return &Cart{config}
     }
     
+    
+    
   
     
     
@@ -1977,9 +1935,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getCartResponse CartResponse
-            
+             getCartResponse CartResponse
 	    )
 
          
@@ -1995,19 +1951,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CartResponse{}, err
-            
+            return CartResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCartResponse)
         if err != nil {
-           
-             return CartResponse{}, common.NewFDKError(err.Error())
-            
+            return CartResponse{}, common.NewFDKError(err.Error())
         }
-        return getCartResponse, nil
+         return getCartResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -2023,9 +1979,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-             getCartLastModifiedResponse interface{}
-            
+             
 	    )
 
          
@@ -2041,19 +1995,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-            return getCartLastModifiedResponse, err
-            
+            return []byte{}, err
 	    }
-        err = json.Unmarshal(response, &getCartLastModifiedResponse)
-        if err != nil {
-           
-            return getCartLastModifiedResponse, common.NewFDKError(err.Error())
-            
-        }
-        return getCartLastModifiedResponse, nil
+        
+        return response, nil
+        
     }
           
+    
+    
     
   
     
@@ -2070,9 +2020,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            addItemsResponse AddCartResponse
-            
+             addItemsResponse AddCartResponse
 	    )
 
          
@@ -2082,10 +2030,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return AddCartResponse{}, common.NewFDKError(err.Error())
+          
+             return AddCartResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return AddCartResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -2099,19 +2049,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return AddCartResponse{}, err
-            
+            return AddCartResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &addItemsResponse)
         if err != nil {
-           
-             return AddCartResponse{}, common.NewFDKError(err.Error())
-            
+            return AddCartResponse{}, common.NewFDKError(err.Error())
         }
-        return addItemsResponse, nil
+         return addItemsResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -2129,9 +2079,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            updateCartResponse UpdateCartResponse
-            
+             updateCartResponse UpdateCartResponse
 	    )
 
          
@@ -2141,10 +2089,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return UpdateCartResponse{}, common.NewFDKError(err.Error())
+          
+             return UpdateCartResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return UpdateCartResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -2158,19 +2108,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return UpdateCartResponse{}, err
-            
+            return UpdateCartResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateCartResponse)
         if err != nil {
-           
-             return UpdateCartResponse{}, common.NewFDKError(err.Error())
-            
+            return UpdateCartResponse{}, common.NewFDKError(err.Error())
         }
-        return updateCartResponse, nil
+         return updateCartResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -2186,9 +2136,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getItemCountResponse CartItemCountResponse
-            
+             getItemCountResponse CartItemCountResponse
 	    )
 
          
@@ -2204,19 +2152,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CartItemCountResponse{}, err
-            
+            return CartItemCountResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getItemCountResponse)
         if err != nil {
-           
-             return CartItemCountResponse{}, common.NewFDKError(err.Error())
-            
+            return CartItemCountResponse{}, common.NewFDKError(err.Error())
         }
-        return getItemCountResponse, nil
+         return getItemCountResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -2232,9 +2180,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getCouponsResponse GetCouponResponse
-            
+             getCouponsResponse GetCouponResponse
 	    )
 
          
@@ -2250,19 +2196,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetCouponResponse{}, err
-            
+            return GetCouponResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCouponsResponse)
         if err != nil {
-           
-             return GetCouponResponse{}, common.NewFDKError(err.Error())
-            
+            return GetCouponResponse{}, common.NewFDKError(err.Error())
         }
-        return getCouponsResponse, nil
+         return getCouponsResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -2281,9 +2227,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            applyCouponResponse CartResponse
-            
+             applyCouponResponse CartResponse
 	    )
 
          
@@ -2293,10 +2237,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CartResponse{}, common.NewFDKError(err.Error())
+          
+             return CartResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return CartResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -2310,19 +2256,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CartResponse{}, err
-            
+            return CartResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &applyCouponResponse)
         if err != nil {
-           
-             return CartResponse{}, common.NewFDKError(err.Error())
-            
+            return CartResponse{}, common.NewFDKError(err.Error())
         }
-        return applyCouponResponse, nil
+         return applyCouponResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -2338,9 +2284,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            removeCouponResponse CartResponse
-            
+             removeCouponResponse CartResponse
 	    )
 
          
@@ -2356,19 +2300,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CartResponse{}, err
-            
+            return CartResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &removeCouponResponse)
         if err != nil {
-           
-             return CartResponse{}, common.NewFDKError(err.Error())
-            
+            return CartResponse{}, common.NewFDKError(err.Error())
         }
-        return removeCouponResponse, nil
+         return removeCouponResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -2387,9 +2331,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getBulkDiscountOffersResponse BulkPriceResponse
-            
+             getBulkDiscountOffersResponse BulkPriceResponse
 	    )
 
          
@@ -2405,19 +2347,78 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return BulkPriceResponse{}, err
-            
+            return BulkPriceResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getBulkDiscountOffersResponse)
         if err != nil {
-           
-             return BulkPriceResponse{}, common.NewFDKError(err.Error())
-            
+            return BulkPriceResponse{}, common.NewFDKError(err.Error())
         }
-        return getBulkDiscountOffersResponse, nil
+         return getBulkDiscountOffersResponse, nil
+        
     }
           
+    
+    
+    
+  
+    
+    
+    //CartApplyRewardPointsXQuery holds query params
+    type CartApplyRewardPointsXQuery struct { 
+        UID float64  `url:"uid,omitempty"` 
+        I bool  `url:"i,omitempty"` 
+        B bool  `url:"b,omitempty"`  
+    }
+    
+    // ApplyRewardPoints Fetch all Items Added to  Cart
+    func (ca *Cart)  ApplyRewardPoints(xQuery CartApplyRewardPointsXQuery, body  RewardPointRequest) (CartResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             applyRewardPointsResponse CartResponse
+	    )
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return CartResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return CartResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            "/service/application/cart/v1.0/redeem/points/",
+            nil,
+            xQuery,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CartResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &applyRewardPointsResponse)
+        if err != nil {
+            return CartResponse{}, common.NewFDKError(err.Error())
+        }
+         return applyRewardPointsResponse, nil
+        
+    }
+          
+    
+    
     
   
     
@@ -2437,9 +2438,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getAddressesResponse GetAddressesResponse
-            
+             getAddressesResponse GetAddressesResponse
 	    )
 
          
@@ -2455,19 +2454,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetAddressesResponse{}, err
-            
+            return GetAddressesResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAddressesResponse)
         if err != nil {
-           
-             return GetAddressesResponse{}, common.NewFDKError(err.Error())
-            
+            return GetAddressesResponse{}, common.NewFDKError(err.Error())
         }
-        return getAddressesResponse, nil
+         return getAddressesResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -2478,9 +2477,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            addAddressResponse SaveAddressResponse
-            
+             addAddressResponse SaveAddressResponse
 	    )
 
          
@@ -2490,10 +2487,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return SaveAddressResponse{}, common.NewFDKError(err.Error())
+          
+             return SaveAddressResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return SaveAddressResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -2507,19 +2506,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SaveAddressResponse{}, err
-            
+            return SaveAddressResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &addAddressResponse)
         if err != nil {
-           
-             return SaveAddressResponse{}, common.NewFDKError(err.Error())
-            
+            return SaveAddressResponse{}, common.NewFDKError(err.Error())
         }
-        return addAddressResponse, nil
+         return addAddressResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -2539,9 +2538,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getAddressByIdResponse Address
-            
+             getAddressByIdResponse Address
 	    )
 
          
@@ -2557,19 +2554,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Address{}, err
-            
+            return Address{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAddressByIdResponse)
         if err != nil {
-           
-             return Address{}, common.NewFDKError(err.Error())
-            
+            return Address{}, common.NewFDKError(err.Error())
         }
-        return getAddressByIdResponse, nil
+         return getAddressByIdResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -2580,9 +2577,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            updateAddressResponse UpdateAddressResponse
-            
+             updateAddressResponse UpdateAddressResponse
 	    )
 
          
@@ -2592,10 +2587,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return UpdateAddressResponse{}, common.NewFDKError(err.Error())
+          
+             return UpdateAddressResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return UpdateAddressResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -2609,19 +2606,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return UpdateAddressResponse{}, err
-            
+            return UpdateAddressResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateAddressResponse)
         if err != nil {
-           
-             return UpdateAddressResponse{}, common.NewFDKError(err.Error())
-            
+            return UpdateAddressResponse{}, common.NewFDKError(err.Error())
         }
-        return updateAddressResponse, nil
+         return updateAddressResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -2632,9 +2629,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            removeAddressResponse DeleteAddressResponse
-            
+             removeAddressResponse DeleteAddressResponse
 	    )
 
          
@@ -2650,19 +2645,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return DeleteAddressResponse{}, err
-            
+            return DeleteAddressResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &removeAddressResponse)
         if err != nil {
-           
-             return DeleteAddressResponse{}, common.NewFDKError(err.Error())
-            
+            return DeleteAddressResponse{}, common.NewFDKError(err.Error())
         }
-        return removeAddressResponse, nil
+         return removeAddressResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -2680,9 +2675,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            selectAddressResponse CartResponse
-            
+             selectAddressResponse CartResponse
 	    )
 
          
@@ -2692,10 +2685,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CartResponse{}, common.NewFDKError(err.Error())
+          
+             return CartResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return CartResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -2709,19 +2704,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CartResponse{}, err
-            
+            return CartResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &selectAddressResponse)
         if err != nil {
-           
-             return CartResponse{}, common.NewFDKError(err.Error())
-            
+            return CartResponse{}, common.NewFDKError(err.Error())
         }
-        return selectAddressResponse, nil
+         return selectAddressResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -2737,9 +2732,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            selectPaymentModeResponse CartResponse
-            
+             selectPaymentModeResponse CartResponse
 	    )
 
          
@@ -2749,10 +2742,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CartResponse{}, common.NewFDKError(err.Error())
+          
+             return CartResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return CartResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -2766,19 +2761,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CartResponse{}, err
-            
+            return CartResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &selectPaymentModeResponse)
         if err != nil {
-           
-             return CartResponse{}, common.NewFDKError(err.Error())
-            
+            return CartResponse{}, common.NewFDKError(err.Error())
         }
-        return selectPaymentModeResponse, nil
+         return selectPaymentModeResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -2799,9 +2794,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            validateCouponForPaymentResponse PaymentCouponValidate
-            
+             validateCouponForPaymentResponse PaymentCouponValidate
 	    )
 
          
@@ -2817,19 +2810,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PaymentCouponValidate{}, err
-            
+            return PaymentCouponValidate{}, err
 	    }
+        
         err = json.Unmarshal(response, &validateCouponForPaymentResponse)
         if err != nil {
-           
-             return PaymentCouponValidate{}, common.NewFDKError(err.Error())
-            
+            return PaymentCouponValidate{}, common.NewFDKError(err.Error())
         }
-        return validateCouponForPaymentResponse, nil
+         return validateCouponForPaymentResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -2848,9 +2841,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getShipmentsResponse CartShipmentsResponse
-            
+             getShipmentsResponse CartShipmentsResponse
 	    )
 
          
@@ -2866,19 +2857,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CartShipmentsResponse{}, err
-            
+            return CartShipmentsResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getShipmentsResponse)
         if err != nil {
-           
-             return CartShipmentsResponse{}, common.NewFDKError(err.Error())
-            
+            return CartShipmentsResponse{}, common.NewFDKError(err.Error())
         }
-        return getShipmentsResponse, nil
+         return getShipmentsResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -2889,9 +2880,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            checkoutCartResponse CartCheckoutResponse
-            
+             checkoutCartResponse CartCheckoutResponse
 	    )
 
          
@@ -2901,10 +2890,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CartCheckoutResponse{}, common.NewFDKError(err.Error())
+          
+             return CartCheckoutResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return CartCheckoutResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -2918,19 +2909,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CartCheckoutResponse{}, err
-            
+            return CartCheckoutResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &checkoutCartResponse)
         if err != nil {
-           
-             return CartCheckoutResponse{}, common.NewFDKError(err.Error())
-            
+            return CartCheckoutResponse{}, common.NewFDKError(err.Error())
         }
-        return checkoutCartResponse, nil
+         return checkoutCartResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -2946,9 +2937,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            updateCartMetaResponse CartMetaResponse
-            
+             updateCartMetaResponse CartMetaResponse
 	    )
 
          
@@ -2958,10 +2947,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CartMetaResponse{}, common.NewFDKError(err.Error())
+          
+             return CartMetaResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return CartMetaResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -2975,19 +2966,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CartMetaResponse{}, err
-            
+            return CartMetaResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateCartMetaResponse)
         if err != nil {
-           
-             return CartMetaResponse{}, common.NewFDKError(err.Error())
-            
+            return CartMetaResponse{}, common.NewFDKError(err.Error())
         }
-        return updateCartMetaResponse, nil
+         return updateCartMetaResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -2998,9 +2989,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getCartShareLinkResponse GetShareCartLinkResponse
-            
+             getCartShareLinkResponse GetShareCartLinkResponse
 	    )
 
          
@@ -3010,10 +2999,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return GetShareCartLinkResponse{}, common.NewFDKError(err.Error())
+          
+             return GetShareCartLinkResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return GetShareCartLinkResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -3027,19 +3018,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetShareCartLinkResponse{}, err
-            
+            return GetShareCartLinkResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCartShareLinkResponse)
         if err != nil {
-           
-             return GetShareCartLinkResponse{}, common.NewFDKError(err.Error())
-            
+            return GetShareCartLinkResponse{}, common.NewFDKError(err.Error())
         }
-        return getCartShareLinkResponse, nil
+         return getCartShareLinkResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -3050,9 +3041,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getCartSharedItemsResponse SharedCartResponse
-            
+             getCartSharedItemsResponse SharedCartResponse
 	    )
 
          
@@ -3068,19 +3057,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SharedCartResponse{}, err
-            
+            return SharedCartResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCartSharedItemsResponse)
         if err != nil {
-           
-             return SharedCartResponse{}, common.NewFDKError(err.Error())
-            
+            return SharedCartResponse{}, common.NewFDKError(err.Error())
         }
-        return getCartSharedItemsResponse, nil
+         return getCartSharedItemsResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -3091,9 +3080,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            updateCartWithSharedItemsResponse SharedCartResponse
-            
+             updateCartWithSharedItemsResponse SharedCartResponse
 	    )
 
          
@@ -3109,17 +3096,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SharedCartResponse{}, err
-            
+            return SharedCartResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateCartWithSharedItemsResponse)
         if err != nil {
-           
-             return SharedCartResponse{}, common.NewFDKError(err.Error())
-            
+            return SharedCartResponse{}, common.NewFDKError(err.Error())
         }
-        return updateCartWithSharedItemsResponse, nil
+         return updateCartWithSharedItemsResponse, nil
+        
     }
           
     
@@ -3133,6 +3118,8 @@ func NewAppClient(config *AppConfig) *Client {
         return &Lead{config}
     }
     
+    
+    
   
     
     
@@ -3142,9 +3129,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getTicketResponse Ticket
-            
+             getTicketResponse Ticket
 	    )
 
          
@@ -3160,19 +3145,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Ticket{}, err
-            
+            return Ticket{}, err
 	    }
+        
         err = json.Unmarshal(response, &getTicketResponse)
         if err != nil {
-           
-             return Ticket{}, common.NewFDKError(err.Error())
-            
+            return Ticket{}, common.NewFDKError(err.Error())
         }
-        return getTicketResponse, nil
+         return getTicketResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -3183,9 +3168,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            createHistoryResponse TicketHistory
-            
+             createHistoryResponse TicketHistory
 	    )
 
          
@@ -3195,10 +3178,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return TicketHistory{}, common.NewFDKError(err.Error())
+          
+             return TicketHistory{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return TicketHistory{}, common.NewFDKError(err.Error())
         }
         
@@ -3212,19 +3197,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return TicketHistory{}, err
-            
+            return TicketHistory{}, err
 	    }
+        
         err = json.Unmarshal(response, &createHistoryResponse)
         if err != nil {
-           
-             return TicketHistory{}, common.NewFDKError(err.Error())
-            
+            return TicketHistory{}, common.NewFDKError(err.Error())
         }
-        return createHistoryResponse, nil
+         return createHistoryResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -3235,9 +3220,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            createTicketResponse Ticket
-            
+             createTicketResponse Ticket
 	    )
 
          
@@ -3247,10 +3230,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return Ticket{}, common.NewFDKError(err.Error())
+          
+             return Ticket{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return Ticket{}, common.NewFDKError(err.Error())
         }
         
@@ -3264,19 +3249,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Ticket{}, err
-            
+            return Ticket{}, err
 	    }
+        
         err = json.Unmarshal(response, &createTicketResponse)
         if err != nil {
-           
-             return Ticket{}, common.NewFDKError(err.Error())
-            
+            return Ticket{}, common.NewFDKError(err.Error())
         }
-        return createTicketResponse, nil
+         return createTicketResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -3287,9 +3272,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getCustomFormResponse CustomForm
-            
+             getCustomFormResponse CustomForm
 	    )
 
          
@@ -3305,19 +3288,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CustomForm{}, err
-            
+            return CustomForm{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCustomFormResponse)
         if err != nil {
-           
-             return CustomForm{}, common.NewFDKError(err.Error())
-            
+            return CustomForm{}, common.NewFDKError(err.Error())
         }
-        return getCustomFormResponse, nil
+         return getCustomFormResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -3328,9 +3311,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            submitCustomFormResponse SubmitCustomFormResponse
-            
+             submitCustomFormResponse SubmitCustomFormResponse
 	    )
 
          
@@ -3340,10 +3321,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return SubmitCustomFormResponse{}, common.NewFDKError(err.Error())
+          
+             return SubmitCustomFormResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return SubmitCustomFormResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -3357,19 +3340,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SubmitCustomFormResponse{}, err
-            
+            return SubmitCustomFormResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &submitCustomFormResponse)
         if err != nil {
-           
-             return SubmitCustomFormResponse{}, common.NewFDKError(err.Error())
-            
+            return SubmitCustomFormResponse{}, common.NewFDKError(err.Error())
         }
-        return submitCustomFormResponse, nil
+         return submitCustomFormResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -3380,9 +3363,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getParticipantsInsideVideoRoomResponse GetParticipantsInsideVideoRoomResponse
-            
+             getParticipantsInsideVideoRoomResponse GetParticipantsInsideVideoRoomResponse
 	    )
 
          
@@ -3398,19 +3379,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetParticipantsInsideVideoRoomResponse{}, err
-            
+            return GetParticipantsInsideVideoRoomResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getParticipantsInsideVideoRoomResponse)
         if err != nil {
-           
-             return GetParticipantsInsideVideoRoomResponse{}, common.NewFDKError(err.Error())
-            
+            return GetParticipantsInsideVideoRoomResponse{}, common.NewFDKError(err.Error())
         }
-        return getParticipantsInsideVideoRoomResponse, nil
+         return getParticipantsInsideVideoRoomResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -3421,9 +3402,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getTokenForVideoRoomResponse GetTokenForVideoRoomResponse
-            
+             getTokenForVideoRoomResponse GetTokenForVideoRoomResponse
 	    )
 
          
@@ -3439,17 +3418,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetTokenForVideoRoomResponse{}, err
-            
+            return GetTokenForVideoRoomResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getTokenForVideoRoomResponse)
         if err != nil {
-           
-             return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
-            
+            return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
         }
-        return getTokenForVideoRoomResponse, nil
+         return getTokenForVideoRoomResponse, nil
+        
     }
           
     
@@ -3463,6 +3440,86 @@ func NewAppClient(config *AppConfig) *Client {
         return &Theme{config}
     }
     
+    
+    
+  
+    
+    
+    // GetAllPages Get all pages of a theme
+    func (th *Theme)  GetAllPages(ThemeID string) (AllAvailablePageSchema, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getAllPagesResponse AllAvailablePageSchema
+	    )
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            th.config,
+            "get",
+            fmt.Sprintf("/service/application/theme/v1.0/%s/page",ThemeID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return AllAvailablePageSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAllPagesResponse)
+        if err != nil {
+            return AllAvailablePageSchema{}, common.NewFDKError(err.Error())
+        }
+         return getAllPagesResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetPage Get page of a theme
+    func (th *Theme)  GetPage(ThemeID string, PageValue string) (AvailablePageSchema, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getPageResponse AvailablePageSchema
+	    )
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            th.config,
+            "get",
+            fmt.Sprintf("/service/application/theme/v1.0/%s/%s",ThemeID,PageValue),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return AvailablePageSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPageResponse)
+        if err != nil {
+            return AvailablePageSchema{}, common.NewFDKError(err.Error())
+        }
+         return getPageResponse, nil
+        
+    }
+          
+    
+    
+    
   
     
     
@@ -3472,9 +3529,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getAppliedThemeResponse ThemesSchema
-            
+             getAppliedThemeResponse ThemesSchema
 	    )
 
          
@@ -3490,19 +3545,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ThemesSchema{}, err
-            
+            return ThemesSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAppliedThemeResponse)
         if err != nil {
-           
-             return ThemesSchema{}, common.NewFDKError(err.Error())
-            
+            return ThemesSchema{}, common.NewFDKError(err.Error())
         }
-        return getAppliedThemeResponse, nil
+         return getAppliedThemeResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -3513,9 +3568,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getThemeForPreviewResponse ThemesSchema
-            
+             getThemeForPreviewResponse ThemesSchema
 	    )
 
          
@@ -3531,17 +3584,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ThemesSchema{}, err
-            
+            return ThemesSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getThemeForPreviewResponse)
         if err != nil {
-           
-             return ThemesSchema{}, common.NewFDKError(err.Error())
-            
+            return ThemesSchema{}, common.NewFDKError(err.Error())
         }
-        return getThemeForPreviewResponse, nil
+         return getThemeForPreviewResponse, nil
+        
     }
           
     
@@ -3555,6 +3606,8 @@ func NewAppClient(config *AppConfig) *Client {
         return &User{config}
     }
     
+    
+    
   
     
     
@@ -3564,9 +3617,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            loginWithFacebookResponse AuthSuccess
-            
+             loginWithFacebookResponse AuthSuccess
 	    )
 
          
@@ -3576,10 +3627,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return AuthSuccess{}, common.NewFDKError(err.Error())
+          
+             return AuthSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return AuthSuccess{}, common.NewFDKError(err.Error())
         }
         
@@ -3593,19 +3646,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return AuthSuccess{}, err
-            
+            return AuthSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &loginWithFacebookResponse)
         if err != nil {
-           
-             return AuthSuccess{}, common.NewFDKError(err.Error())
-            
+            return AuthSuccess{}, common.NewFDKError(err.Error())
         }
-        return loginWithFacebookResponse, nil
+         return loginWithFacebookResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -3616,9 +3669,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            loginWithGoogleResponse AuthSuccess
-            
+             loginWithGoogleResponse AuthSuccess
 	    )
 
          
@@ -3628,10 +3679,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return AuthSuccess{}, common.NewFDKError(err.Error())
+          
+             return AuthSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return AuthSuccess{}, common.NewFDKError(err.Error())
         }
         
@@ -3645,19 +3698,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return AuthSuccess{}, err
-            
+            return AuthSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &loginWithGoogleResponse)
         if err != nil {
-           
-             return AuthSuccess{}, common.NewFDKError(err.Error())
-            
+            return AuthSuccess{}, common.NewFDKError(err.Error())
         }
-        return loginWithGoogleResponse, nil
+         return loginWithGoogleResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -3668,9 +3721,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            loginWithGoogleAndroidResponse AuthSuccess
-            
+             loginWithGoogleAndroidResponse AuthSuccess
 	    )
 
          
@@ -3680,10 +3731,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return AuthSuccess{}, common.NewFDKError(err.Error())
+          
+             return AuthSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return AuthSuccess{}, common.NewFDKError(err.Error())
         }
         
@@ -3697,19 +3750,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return AuthSuccess{}, err
-            
+            return AuthSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &loginWithGoogleAndroidResponse)
         if err != nil {
-           
-             return AuthSuccess{}, common.NewFDKError(err.Error())
-            
+            return AuthSuccess{}, common.NewFDKError(err.Error())
         }
-        return loginWithGoogleAndroidResponse, nil
+         return loginWithGoogleAndroidResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -3720,9 +3773,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            loginWithGoogleIOSResponse AuthSuccess
-            
+             loginWithGoogleIOSResponse AuthSuccess
 	    )
 
          
@@ -3732,10 +3783,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return AuthSuccess{}, common.NewFDKError(err.Error())
+          
+             return AuthSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return AuthSuccess{}, common.NewFDKError(err.Error())
         }
         
@@ -3749,19 +3802,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return AuthSuccess{}, err
-            
+            return AuthSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &loginWithGoogleIOSResponse)
         if err != nil {
-           
-             return AuthSuccess{}, common.NewFDKError(err.Error())
-            
+            return AuthSuccess{}, common.NewFDKError(err.Error())
         }
-        return loginWithGoogleIOSResponse, nil
+         return loginWithGoogleIOSResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -3777,9 +3830,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            loginWithOTPResponse SendOtpResponse
-            
+             loginWithOTPResponse SendOtpResponse
 	    )
 
          
@@ -3789,10 +3840,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return SendOtpResponse{}, common.NewFDKError(err.Error())
+          
+             return SendOtpResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return SendOtpResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -3806,19 +3859,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SendOtpResponse{}, err
-            
+            return SendOtpResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &loginWithOTPResponse)
         if err != nil {
-           
-             return SendOtpResponse{}, common.NewFDKError(err.Error())
-            
+            return SendOtpResponse{}, common.NewFDKError(err.Error())
         }
-        return loginWithOTPResponse, nil
+         return loginWithOTPResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -3829,9 +3882,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            loginWithEmailAndPasswordResponse LoginSuccess
-            
+             loginWithEmailAndPasswordResponse LoginSuccess
 	    )
 
          
@@ -3841,10 +3892,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return LoginSuccess{}, common.NewFDKError(err.Error())
+          
+             return LoginSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return LoginSuccess{}, common.NewFDKError(err.Error())
         }
         
@@ -3858,19 +3911,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return LoginSuccess{}, err
-            
+            return LoginSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &loginWithEmailAndPasswordResponse)
         if err != nil {
-           
-             return LoginSuccess{}, common.NewFDKError(err.Error())
-            
+            return LoginSuccess{}, common.NewFDKError(err.Error())
         }
-        return loginWithEmailAndPasswordResponse, nil
+         return loginWithEmailAndPasswordResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -3886,9 +3939,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            sendResetPasswordEmailResponse ResetPasswordSuccess
-            
+             sendResetPasswordEmailResponse ResetPasswordSuccess
 	    )
 
          
@@ -3898,10 +3949,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return ResetPasswordSuccess{}, common.NewFDKError(err.Error())
+          
+             return ResetPasswordSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return ResetPasswordSuccess{}, common.NewFDKError(err.Error())
         }
         
@@ -3915,19 +3968,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ResetPasswordSuccess{}, err
-            
+            return ResetPasswordSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &sendResetPasswordEmailResponse)
         if err != nil {
-           
-             return ResetPasswordSuccess{}, common.NewFDKError(err.Error())
-            
+            return ResetPasswordSuccess{}, common.NewFDKError(err.Error())
         }
-        return sendResetPasswordEmailResponse, nil
+         return sendResetPasswordEmailResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -3938,9 +3991,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            forgotPasswordResponse LoginSuccess
-            
+             forgotPasswordResponse LoginSuccess
 	    )
 
          
@@ -3950,10 +4001,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return LoginSuccess{}, common.NewFDKError(err.Error())
+          
+             return LoginSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return LoginSuccess{}, common.NewFDKError(err.Error())
         }
         
@@ -3967,19 +4020,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return LoginSuccess{}, err
-            
+            return LoginSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &forgotPasswordResponse)
         if err != nil {
-           
-             return LoginSuccess{}, common.NewFDKError(err.Error())
-            
+            return LoginSuccess{}, common.NewFDKError(err.Error())
         }
-        return forgotPasswordResponse, nil
+         return forgotPasswordResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -3990,9 +4043,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            sendResetTokenResponse ResetPasswordSuccess
-            
+             sendResetTokenResponse ResetPasswordSuccess
 	    )
 
          
@@ -4002,10 +4053,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return ResetPasswordSuccess{}, common.NewFDKError(err.Error())
+          
+             return ResetPasswordSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return ResetPasswordSuccess{}, common.NewFDKError(err.Error())
         }
         
@@ -4019,19 +4072,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ResetPasswordSuccess{}, err
-            
+            return ResetPasswordSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &sendResetTokenResponse)
         if err != nil {
-           
-             return ResetPasswordSuccess{}, common.NewFDKError(err.Error())
-            
+            return ResetPasswordSuccess{}, common.NewFDKError(err.Error())
         }
-        return sendResetTokenResponse, nil
+         return sendResetTokenResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -4042,9 +4095,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            loginWithTokenResponse LoginSuccess
-            
+             loginWithTokenResponse LoginSuccess
 	    )
 
          
@@ -4054,10 +4105,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return LoginSuccess{}, common.NewFDKError(err.Error())
+          
+             return LoginSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return LoginSuccess{}, common.NewFDKError(err.Error())
         }
         
@@ -4071,19 +4124,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return LoginSuccess{}, err
-            
+            return LoginSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &loginWithTokenResponse)
         if err != nil {
-           
-             return LoginSuccess{}, common.NewFDKError(err.Error())
-            
+            return LoginSuccess{}, common.NewFDKError(err.Error())
         }
-        return loginWithTokenResponse, nil
+         return loginWithTokenResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -4099,9 +4152,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            registerWithFormResponse RegisterFormSuccess
-            
+             registerWithFormResponse RegisterFormSuccess
 	    )
 
          
@@ -4111,10 +4162,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return RegisterFormSuccess{}, common.NewFDKError(err.Error())
+          
+             return RegisterFormSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return RegisterFormSuccess{}, common.NewFDKError(err.Error())
         }
         
@@ -4128,19 +4181,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return RegisterFormSuccess{}, err
-            
+            return RegisterFormSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &registerWithFormResponse)
         if err != nil {
-           
-             return RegisterFormSuccess{}, common.NewFDKError(err.Error())
-            
+            return RegisterFormSuccess{}, common.NewFDKError(err.Error())
         }
-        return registerWithFormResponse, nil
+         return registerWithFormResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -4151,9 +4204,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            verifyEmailResponse VerifyEmailSuccess
-            
+             verifyEmailResponse VerifyEmailSuccess
 	    )
 
          
@@ -4163,10 +4214,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return VerifyEmailSuccess{}, common.NewFDKError(err.Error())
+          
+             return VerifyEmailSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return VerifyEmailSuccess{}, common.NewFDKError(err.Error())
         }
         
@@ -4180,19 +4233,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return VerifyEmailSuccess{}, err
-            
+            return VerifyEmailSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &verifyEmailResponse)
         if err != nil {
-           
-             return VerifyEmailSuccess{}, common.NewFDKError(err.Error())
-            
+            return VerifyEmailSuccess{}, common.NewFDKError(err.Error())
         }
-        return verifyEmailResponse, nil
+         return verifyEmailResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -4203,9 +4256,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            verifyMobileResponse VerifyEmailSuccess
-            
+             verifyMobileResponse VerifyEmailSuccess
 	    )
 
          
@@ -4215,10 +4266,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return VerifyEmailSuccess{}, common.NewFDKError(err.Error())
+          
+             return VerifyEmailSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return VerifyEmailSuccess{}, common.NewFDKError(err.Error())
         }
         
@@ -4232,19 +4285,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return VerifyEmailSuccess{}, err
-            
+            return VerifyEmailSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &verifyMobileResponse)
         if err != nil {
-           
-             return VerifyEmailSuccess{}, common.NewFDKError(err.Error())
-            
+            return VerifyEmailSuccess{}, common.NewFDKError(err.Error())
         }
-        return verifyMobileResponse, nil
+         return verifyMobileResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -4255,9 +4308,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            hasPasswordResponse HasPasswordSuccess
-            
+             hasPasswordResponse HasPasswordSuccess
 	    )
 
          
@@ -4273,19 +4324,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return HasPasswordSuccess{}, err
-            
+            return HasPasswordSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &hasPasswordResponse)
         if err != nil {
-           
-             return HasPasswordSuccess{}, common.NewFDKError(err.Error())
-            
+            return HasPasswordSuccess{}, common.NewFDKError(err.Error())
         }
-        return hasPasswordResponse, nil
+         return hasPasswordResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -4296,9 +4347,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            updatePasswordResponse VerifyEmailSuccess
-            
+             updatePasswordResponse VerifyEmailSuccess
 	    )
 
          
@@ -4308,10 +4357,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return VerifyEmailSuccess{}, common.NewFDKError(err.Error())
+          
+             return VerifyEmailSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return VerifyEmailSuccess{}, common.NewFDKError(err.Error())
         }
         
@@ -4325,19 +4376,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return VerifyEmailSuccess{}, err
-            
+            return VerifyEmailSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &updatePasswordResponse)
         if err != nil {
-           
-             return VerifyEmailSuccess{}, common.NewFDKError(err.Error())
-            
+            return VerifyEmailSuccess{}, common.NewFDKError(err.Error())
         }
-        return updatePasswordResponse, nil
+         return updatePasswordResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -4348,9 +4399,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            logoutResponse LogoutSuccess
-            
+             logoutResponse LogoutSuccess
 	    )
 
          
@@ -4366,19 +4415,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return LogoutSuccess{}, err
-            
+            return LogoutSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &logoutResponse)
         if err != nil {
-           
-             return LogoutSuccess{}, common.NewFDKError(err.Error())
-            
+            return LogoutSuccess{}, common.NewFDKError(err.Error())
         }
-        return logoutResponse, nil
+         return logoutResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -4394,9 +4443,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            sendOTPOnMobileResponse OtpSuccess
-            
+             sendOTPOnMobileResponse OtpSuccess
 	    )
 
          
@@ -4406,10 +4453,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return OtpSuccess{}, common.NewFDKError(err.Error())
+          
+             return OtpSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return OtpSuccess{}, common.NewFDKError(err.Error())
         }
         
@@ -4423,19 +4472,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return OtpSuccess{}, err
-            
+            return OtpSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &sendOTPOnMobileResponse)
         if err != nil {
-           
-             return OtpSuccess{}, common.NewFDKError(err.Error())
-            
+            return OtpSuccess{}, common.NewFDKError(err.Error())
         }
-        return sendOTPOnMobileResponse, nil
+         return sendOTPOnMobileResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -4451,9 +4500,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            verifyMobileOTPResponse VerifyOtpSuccess
-            
+             verifyMobileOTPResponse VerifyOtpSuccess
 	    )
 
          
@@ -4463,10 +4510,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return VerifyOtpSuccess{}, common.NewFDKError(err.Error())
+          
+             return VerifyOtpSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return VerifyOtpSuccess{}, common.NewFDKError(err.Error())
         }
         
@@ -4480,19 +4529,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return VerifyOtpSuccess{}, err
-            
+            return VerifyOtpSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &verifyMobileOTPResponse)
         if err != nil {
-           
-             return VerifyOtpSuccess{}, common.NewFDKError(err.Error())
-            
+            return VerifyOtpSuccess{}, common.NewFDKError(err.Error())
         }
-        return verifyMobileOTPResponse, nil
+         return verifyMobileOTPResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -4508,9 +4557,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            sendOTPOnEmailResponse EmailOtpSuccess
-            
+             sendOTPOnEmailResponse EmailOtpSuccess
 	    )
 
          
@@ -4520,10 +4567,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return EmailOtpSuccess{}, common.NewFDKError(err.Error())
+          
+             return EmailOtpSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return EmailOtpSuccess{}, common.NewFDKError(err.Error())
         }
         
@@ -4537,19 +4586,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return EmailOtpSuccess{}, err
-            
+            return EmailOtpSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &sendOTPOnEmailResponse)
         if err != nil {
-           
-             return EmailOtpSuccess{}, common.NewFDKError(err.Error())
-            
+            return EmailOtpSuccess{}, common.NewFDKError(err.Error())
         }
-        return sendOTPOnEmailResponse, nil
+         return sendOTPOnEmailResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -4565,9 +4614,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            verifyEmailOTPResponse VerifyOtpSuccess
-            
+             verifyEmailOTPResponse VerifyOtpSuccess
 	    )
 
          
@@ -4577,10 +4624,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return VerifyOtpSuccess{}, common.NewFDKError(err.Error())
+          
+             return VerifyOtpSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return VerifyOtpSuccess{}, common.NewFDKError(err.Error())
         }
         
@@ -4594,19 +4643,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return VerifyOtpSuccess{}, err
-            
+            return VerifyOtpSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &verifyEmailOTPResponse)
         if err != nil {
-           
-             return VerifyOtpSuccess{}, common.NewFDKError(err.Error())
-            
+            return VerifyOtpSuccess{}, common.NewFDKError(err.Error())
         }
-        return verifyEmailOTPResponse, nil
+         return verifyEmailOTPResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -4617,9 +4666,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getLoggedInUserResponse UserObjectSchema
-            
+             getLoggedInUserResponse UserObjectSchema
 	    )
 
          
@@ -4635,19 +4682,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return UserObjectSchema{}, err
-            
+            return UserObjectSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getLoggedInUserResponse)
         if err != nil {
-           
-             return UserObjectSchema{}, common.NewFDKError(err.Error())
-            
+            return UserObjectSchema{}, common.NewFDKError(err.Error())
         }
-        return getLoggedInUserResponse, nil
+         return getLoggedInUserResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -4658,9 +4705,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getListOfActiveSessionsResponse SessionListSuccess
-            
+             getListOfActiveSessionsResponse SessionListSuccess
 	    )
 
          
@@ -4676,19 +4721,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SessionListSuccess{}, err
-            
+            return SessionListSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &getListOfActiveSessionsResponse)
         if err != nil {
-           
-             return SessionListSuccess{}, common.NewFDKError(err.Error())
-            
+            return SessionListSuccess{}, common.NewFDKError(err.Error())
         }
-        return getListOfActiveSessionsResponse, nil
+         return getListOfActiveSessionsResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -4704,9 +4749,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getPlatformConfigResponse PlatformSchema
-            
+             getPlatformConfigResponse PlatformSchema
 	    )
 
          
@@ -4722,19 +4765,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PlatformSchema{}, err
-            
+            return PlatformSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getPlatformConfigResponse)
         if err != nil {
-           
-             return PlatformSchema{}, common.NewFDKError(err.Error())
-            
+            return PlatformSchema{}, common.NewFDKError(err.Error())
         }
-        return getPlatformConfigResponse, nil
+         return getPlatformConfigResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -4750,9 +4793,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            updateProfileResponse ProfileEditSuccess
-            
+             updateProfileResponse ProfileEditSuccess
 	    )
 
          
@@ -4762,10 +4803,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return ProfileEditSuccess{}, common.NewFDKError(err.Error())
+          
+             return ProfileEditSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return ProfileEditSuccess{}, common.NewFDKError(err.Error())
         }
         
@@ -4779,19 +4822,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ProfileEditSuccess{}, err
-            
+            return ProfileEditSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateProfileResponse)
         if err != nil {
-           
-             return ProfileEditSuccess{}, common.NewFDKError(err.Error())
-            
+            return ProfileEditSuccess{}, common.NewFDKError(err.Error())
         }
-        return updateProfileResponse, nil
+         return updateProfileResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -4807,9 +4850,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            addMobileNumberResponse VerifyMobileOTPSuccess
-            
+             addMobileNumberResponse VerifyMobileOTPSuccess
 	    )
 
          
@@ -4819,10 +4860,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return VerifyMobileOTPSuccess{}, common.NewFDKError(err.Error())
+          
+             return VerifyMobileOTPSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return VerifyMobileOTPSuccess{}, common.NewFDKError(err.Error())
         }
         
@@ -4836,19 +4879,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return VerifyMobileOTPSuccess{}, err
-            
+            return VerifyMobileOTPSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &addMobileNumberResponse)
         if err != nil {
-           
-             return VerifyMobileOTPSuccess{}, common.NewFDKError(err.Error())
-            
+            return VerifyMobileOTPSuccess{}, common.NewFDKError(err.Error())
         }
-        return addMobileNumberResponse, nil
+         return addMobileNumberResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -4869,9 +4912,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            deleteMobileNumberResponse LoginSuccess
-            
+             deleteMobileNumberResponse LoginSuccess
 	    )
 
          
@@ -4887,19 +4928,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return LoginSuccess{}, err
-            
+            return LoginSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &deleteMobileNumberResponse)
         if err != nil {
-           
-             return LoginSuccess{}, common.NewFDKError(err.Error())
-            
+            return LoginSuccess{}, common.NewFDKError(err.Error())
         }
-        return deleteMobileNumberResponse, nil
+         return deleteMobileNumberResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -4910,9 +4951,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            setMobileNumberAsPrimaryResponse LoginSuccess
-            
+             setMobileNumberAsPrimaryResponse LoginSuccess
 	    )
 
          
@@ -4922,10 +4961,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return LoginSuccess{}, common.NewFDKError(err.Error())
+          
+             return LoginSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return LoginSuccess{}, common.NewFDKError(err.Error())
         }
         
@@ -4939,19 +4980,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return LoginSuccess{}, err
-            
+            return LoginSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &setMobileNumberAsPrimaryResponse)
         if err != nil {
-           
-             return LoginSuccess{}, common.NewFDKError(err.Error())
-            
+            return LoginSuccess{}, common.NewFDKError(err.Error())
         }
-        return setMobileNumberAsPrimaryResponse, nil
+         return setMobileNumberAsPrimaryResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -4967,9 +5008,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            sendVerificationLinkToMobileResponse SendMobileVerifyLinkSuccess
-            
+             sendVerificationLinkToMobileResponse SendMobileVerifyLinkSuccess
 	    )
 
          
@@ -4979,10 +5018,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return SendMobileVerifyLinkSuccess{}, common.NewFDKError(err.Error())
+          
+             return SendMobileVerifyLinkSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return SendMobileVerifyLinkSuccess{}, common.NewFDKError(err.Error())
         }
         
@@ -4996,19 +5037,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SendMobileVerifyLinkSuccess{}, err
-            
+            return SendMobileVerifyLinkSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &sendVerificationLinkToMobileResponse)
         if err != nil {
-           
-             return SendMobileVerifyLinkSuccess{}, common.NewFDKError(err.Error())
-            
+            return SendMobileVerifyLinkSuccess{}, common.NewFDKError(err.Error())
         }
-        return sendVerificationLinkToMobileResponse, nil
+         return sendVerificationLinkToMobileResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -5024,9 +5065,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            addEmailResponse VerifyEmailOTPSuccess
-            
+             addEmailResponse VerifyEmailOTPSuccess
 	    )
 
          
@@ -5036,10 +5075,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return VerifyEmailOTPSuccess{}, common.NewFDKError(err.Error())
+          
+             return VerifyEmailOTPSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return VerifyEmailOTPSuccess{}, common.NewFDKError(err.Error())
         }
         
@@ -5053,19 +5094,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return VerifyEmailOTPSuccess{}, err
-            
+            return VerifyEmailOTPSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &addEmailResponse)
         if err != nil {
-           
-             return VerifyEmailOTPSuccess{}, common.NewFDKError(err.Error())
-            
+            return VerifyEmailOTPSuccess{}, common.NewFDKError(err.Error())
         }
-        return addEmailResponse, nil
+         return addEmailResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -5085,9 +5126,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            deleteEmailResponse LoginSuccess
-            
+             deleteEmailResponse LoginSuccess
 	    )
 
          
@@ -5103,19 +5142,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return LoginSuccess{}, err
-            
+            return LoginSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &deleteEmailResponse)
         if err != nil {
-           
-             return LoginSuccess{}, common.NewFDKError(err.Error())
-            
+            return LoginSuccess{}, common.NewFDKError(err.Error())
         }
-        return deleteEmailResponse, nil
+         return deleteEmailResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -5126,9 +5165,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            setEmailAsPrimaryResponse LoginSuccess
-            
+             setEmailAsPrimaryResponse LoginSuccess
 	    )
 
          
@@ -5138,10 +5175,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return LoginSuccess{}, common.NewFDKError(err.Error())
+          
+             return LoginSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return LoginSuccess{}, common.NewFDKError(err.Error())
         }
         
@@ -5155,19 +5194,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return LoginSuccess{}, err
-            
+            return LoginSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &setEmailAsPrimaryResponse)
         if err != nil {
-           
-             return LoginSuccess{}, common.NewFDKError(err.Error())
-            
+            return LoginSuccess{}, common.NewFDKError(err.Error())
         }
-        return setEmailAsPrimaryResponse, nil
+         return setEmailAsPrimaryResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -5183,9 +5222,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            sendVerificationLinkToEmailResponse SendEmailVerifyLinkSuccess
-            
+             sendVerificationLinkToEmailResponse SendEmailVerifyLinkSuccess
 	    )
 
          
@@ -5195,10 +5232,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return SendEmailVerifyLinkSuccess{}, common.NewFDKError(err.Error())
+          
+             return SendEmailVerifyLinkSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return SendEmailVerifyLinkSuccess{}, common.NewFDKError(err.Error())
         }
         
@@ -5212,17 +5251,15 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SendEmailVerifyLinkSuccess{}, err
-            
+            return SendEmailVerifyLinkSuccess{}, err
 	    }
+        
         err = json.Unmarshal(response, &sendVerificationLinkToEmailResponse)
         if err != nil {
-           
-             return SendEmailVerifyLinkSuccess{}, common.NewFDKError(err.Error())
-            
+            return SendEmailVerifyLinkSuccess{}, common.NewFDKError(err.Error())
         }
-        return sendVerificationLinkToEmailResponse, nil
+         return sendVerificationLinkToEmailResponse, nil
+        
     }
           
     
@@ -5236,6 +5273,8 @@ func NewAppClient(config *AppConfig) *Client {
         return &Content{config}
     }
     
+    
+    
   
     
     
@@ -5245,9 +5284,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getAnnouncementsResponse AnnouncementsResponseSchema
-            
+             getAnnouncementsResponse AnnouncementsResponseSchema
 	    )
 
          
@@ -5263,19 +5300,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return AnnouncementsResponseSchema{}, err
-            
+            return AnnouncementsResponseSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAnnouncementsResponse)
         if err != nil {
-           
-             return AnnouncementsResponseSchema{}, common.NewFDKError(err.Error())
-            
+            return AnnouncementsResponseSchema{}, common.NewFDKError(err.Error())
         }
-        return getAnnouncementsResponse, nil
+         return getAnnouncementsResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -5286,14 +5323,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // GetBlog Get a blog
-    func (co *Content)  GetBlog(Slug string, xQuery ContentGetBlogXQuery) (CustomBlogSchema, error){
+    func (co *Content)  GetBlog(Slug string, xQuery ContentGetBlogXQuery) (BlogSchema, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getBlogResponse CustomBlogSchema
-            
+             getBlogResponse BlogSchema
 	    )
 
          
@@ -5309,19 +5344,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CustomBlogSchema{}, err
-            
+            return BlogSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getBlogResponse)
         if err != nil {
-           
-             return CustomBlogSchema{}, common.NewFDKError(err.Error())
-            
+            return BlogSchema{}, common.NewFDKError(err.Error())
         }
-        return getBlogResponse, nil
+         return getBlogResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -5338,9 +5373,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getBlogsResponse BlogGetResponse
-            
+             getBlogsResponse BlogGetResponse
 	    )
 
          
@@ -5356,17 +5389,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return BlogGetResponse{}, err
-            
+            return BlogGetResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getBlogsResponse)
         if err != nil {
-           
-             return BlogGetResponse{}, common.NewFDKError(err.Error())
-            
+            return BlogGetResponse{}, common.NewFDKError(err.Error())
         }
-        return getBlogsResponse, nil
+         return getBlogsResponse, nil
+        
     }
           
             
@@ -5412,6 +5443,8 @@ func NewAppClient(config *AppConfig) *Client {
             }
        
     
+    
+    
   
     
     
@@ -5421,9 +5454,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getFaqsResponse FaqResponseSchema
-            
+             getFaqsResponse FaqResponseSchema
 	    )
 
          
@@ -5439,19 +5470,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return FaqResponseSchema{}, err
-            
+            return FaqResponseSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getFaqsResponse)
         if err != nil {
-           
-             return FaqResponseSchema{}, common.NewFDKError(err.Error())
-            
+            return FaqResponseSchema{}, common.NewFDKError(err.Error())
         }
-        return getFaqsResponse, nil
+         return getFaqsResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -5462,9 +5493,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getFaqCategoriesResponse GetFaqCategoriesSchema
-            
+             getFaqCategoriesResponse GetFaqCategoriesSchema
 	    )
 
          
@@ -5480,19 +5509,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetFaqCategoriesSchema{}, err
-            
+            return GetFaqCategoriesSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getFaqCategoriesResponse)
         if err != nil {
-           
-             return GetFaqCategoriesSchema{}, common.NewFDKError(err.Error())
-            
+            return GetFaqCategoriesSchema{}, common.NewFDKError(err.Error())
         }
-        return getFaqCategoriesResponse, nil
+         return getFaqCategoriesResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -5503,9 +5532,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getFaqBySlugResponse FaqSchema
-            
+             getFaqBySlugResponse FaqSchema
 	    )
 
          
@@ -5521,19 +5548,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return FaqSchema{}, err
-            
+            return FaqSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getFaqBySlugResponse)
         if err != nil {
-           
-             return FaqSchema{}, common.NewFDKError(err.Error())
-            
+            return FaqSchema{}, common.NewFDKError(err.Error())
         }
-        return getFaqBySlugResponse, nil
+         return getFaqBySlugResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -5544,9 +5571,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getFaqCategoryBySlugResponse GetFaqCategoryBySlugSchema
-            
+             getFaqCategoryBySlugResponse GetFaqCategoryBySlugSchema
 	    )
 
          
@@ -5562,19 +5587,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetFaqCategoryBySlugSchema{}, err
-            
+            return GetFaqCategoryBySlugSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getFaqCategoryBySlugResponse)
         if err != nil {
-           
-             return GetFaqCategoryBySlugSchema{}, common.NewFDKError(err.Error())
-            
+            return GetFaqCategoryBySlugSchema{}, common.NewFDKError(err.Error())
         }
-        return getFaqCategoryBySlugResponse, nil
+         return getFaqCategoryBySlugResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -5585,9 +5610,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getFaqsByCategorySlugResponse GetFaqSchema
-            
+             getFaqsByCategorySlugResponse GetFaqSchema
 	    )
 
          
@@ -5603,19 +5626,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetFaqSchema{}, err
-            
+            return GetFaqSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getFaqsByCategorySlugResponse)
         if err != nil {
-           
-             return GetFaqSchema{}, common.NewFDKError(err.Error())
-            
+            return GetFaqSchema{}, common.NewFDKError(err.Error())
         }
-        return getFaqsByCategorySlugResponse, nil
+         return getFaqsByCategorySlugResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -5626,9 +5649,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getLandingPageResponse LandingPageSchema
-            
+             getLandingPageResponse LandingPageSchema
 	    )
 
          
@@ -5644,19 +5665,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return LandingPageSchema{}, err
-            
+            return LandingPageSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getLandingPageResponse)
         if err != nil {
-           
-             return LandingPageSchema{}, common.NewFDKError(err.Error())
-            
+            return LandingPageSchema{}, common.NewFDKError(err.Error())
         }
-        return getLandingPageResponse, nil
+         return getLandingPageResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -5667,9 +5688,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getLegalInformationResponse ApplicationLegal
-            
+             getLegalInformationResponse ApplicationLegal
 	    )
 
          
@@ -5685,19 +5704,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ApplicationLegal{}, err
-            
+            return ApplicationLegal{}, err
 	    }
+        
         err = json.Unmarshal(response, &getLegalInformationResponse)
         if err != nil {
-           
-             return ApplicationLegal{}, common.NewFDKError(err.Error())
-            
+            return ApplicationLegal{}, common.NewFDKError(err.Error())
         }
-        return getLegalInformationResponse, nil
+         return getLegalInformationResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -5714,9 +5733,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getNavigationsResponse NavigationGetResponse
-            
+             getNavigationsResponse NavigationGetResponse
 	    )
 
          
@@ -5732,17 +5749,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return NavigationGetResponse{}, err
-            
+            return NavigationGetResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getNavigationsResponse)
         if err != nil {
-           
-             return NavigationGetResponse{}, common.NewFDKError(err.Error())
-            
+            return NavigationGetResponse{}, common.NewFDKError(err.Error())
         }
-        return getNavigationsResponse, nil
+         return getNavigationsResponse, nil
+        
     }
           
             
@@ -5788,6 +5803,8 @@ func NewAppClient(config *AppConfig) *Client {
             }
        
     
+    
+    
   
     
     
@@ -5802,9 +5819,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getPageResponse CustomPageSchema
-            
+             getPageResponse CustomPageSchema
 	    )
 
          
@@ -5820,19 +5835,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CustomPageSchema{}, err
-            
+            return CustomPageSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getPageResponse)
         if err != nil {
-           
-             return CustomPageSchema{}, common.NewFDKError(err.Error())
-            
+            return CustomPageSchema{}, common.NewFDKError(err.Error())
         }
-        return getPageResponse, nil
+         return getPageResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -5849,9 +5864,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getPagesResponse PageGetResponse
-            
+             getPagesResponse PageGetResponse
 	    )
 
          
@@ -5867,17 +5880,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PageGetResponse{}, err
-            
+            return PageGetResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getPagesResponse)
         if err != nil {
-           
-             return PageGetResponse{}, common.NewFDKError(err.Error())
-            
+            return PageGetResponse{}, common.NewFDKError(err.Error())
         }
-        return getPagesResponse, nil
+         return getPagesResponse, nil
+        
     }
           
             
@@ -5923,6 +5934,8 @@ func NewAppClient(config *AppConfig) *Client {
             }
        
     
+    
+    
   
     
     
@@ -5932,9 +5945,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getSEOConfigurationResponse SeoComponent
-            
+             getSEOConfigurationResponse SeoComponent
 	    )
 
          
@@ -5950,19 +5961,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SeoComponent{}, err
-            
+            return SeoComponent{}, err
 	    }
+        
         err = json.Unmarshal(response, &getSEOConfigurationResponse)
         if err != nil {
-           
-             return SeoComponent{}, common.NewFDKError(err.Error())
-            
+            return SeoComponent{}, common.NewFDKError(err.Error())
         }
-        return getSEOConfigurationResponse, nil
+         return getSEOConfigurationResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -5979,9 +5990,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getSlideshowsResponse SlideshowGetResponse
-            
+             getSlideshowsResponse SlideshowGetResponse
 	    )
 
          
@@ -5997,17 +6006,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SlideshowGetResponse{}, err
-            
+            return SlideshowGetResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getSlideshowsResponse)
         if err != nil {
-           
-             return SlideshowGetResponse{}, common.NewFDKError(err.Error())
-            
+            return SlideshowGetResponse{}, common.NewFDKError(err.Error())
         }
-        return getSlideshowsResponse, nil
+         return getSlideshowsResponse, nil
+        
     }
           
             
@@ -6053,6 +6060,8 @@ func NewAppClient(config *AppConfig) *Client {
             }
        
     
+    
+    
   
     
     
@@ -6062,9 +6071,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getSlideshowResponse SlideshowSchema
-            
+             getSlideshowResponse SlideshowSchema
 	    )
 
          
@@ -6080,19 +6087,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SlideshowSchema{}, err
-            
+            return SlideshowSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getSlideshowResponse)
         if err != nil {
-           
-             return SlideshowSchema{}, common.NewFDKError(err.Error())
-            
+            return SlideshowSchema{}, common.NewFDKError(err.Error())
         }
-        return getSlideshowResponse, nil
+         return getSlideshowResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -6103,9 +6110,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getSupportInformationResponse Support
-            
+             getSupportInformationResponse Support
 	    )
 
          
@@ -6121,19 +6126,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Support{}, err
-            
+            return Support{}, err
 	    }
+        
         err = json.Unmarshal(response, &getSupportInformationResponse)
         if err != nil {
-           
-             return Support{}, common.NewFDKError(err.Error())
-            
+            return Support{}, common.NewFDKError(err.Error())
         }
-        return getSupportInformationResponse, nil
+         return getSupportInformationResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -6144,9 +6149,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getTagsResponse TagsSchema
-            
+             getTagsResponse TagsSchema
 	    )
 
          
@@ -6162,17 +6165,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return TagsSchema{}, err
-            
+            return TagsSchema{}, err
 	    }
+        
         err = json.Unmarshal(response, &getTagsResponse)
         if err != nil {
-           
-             return TagsSchema{}, common.NewFDKError(err.Error())
-            
+            return TagsSchema{}, common.NewFDKError(err.Error())
         }
-        return getTagsResponse, nil
+         return getTagsResponse, nil
+        
     }
           
     
@@ -6186,6 +6187,8 @@ func NewAppClient(config *AppConfig) *Client {
         return &Communication{config}
     }
     
+    
+    
   
     
     
@@ -6195,9 +6198,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getCommunicationConsentResponse CommunicationConsent
-            
+             getCommunicationConsentResponse CommunicationConsent
 	    )
 
          
@@ -6213,19 +6214,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CommunicationConsent{}, err
-            
+            return CommunicationConsent{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCommunicationConsentResponse)
         if err != nil {
-           
-             return CommunicationConsent{}, common.NewFDKError(err.Error())
-            
+            return CommunicationConsent{}, common.NewFDKError(err.Error())
         }
-        return getCommunicationConsentResponse, nil
+         return getCommunicationConsentResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -6236,9 +6237,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            upsertCommunicationConsentResponse CommunicationConsentRes
-            
+             upsertCommunicationConsentResponse CommunicationConsentRes
 	    )
 
          
@@ -6248,10 +6247,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CommunicationConsentRes{}, common.NewFDKError(err.Error())
+          
+             return CommunicationConsentRes{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return CommunicationConsentRes{}, common.NewFDKError(err.Error())
         }
         
@@ -6265,19 +6266,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CommunicationConsentRes{}, err
-            
+            return CommunicationConsentRes{}, err
 	    }
+        
         err = json.Unmarshal(response, &upsertCommunicationConsentResponse)
         if err != nil {
-           
-             return CommunicationConsentRes{}, common.NewFDKError(err.Error())
-            
+            return CommunicationConsentRes{}, common.NewFDKError(err.Error())
         }
-        return upsertCommunicationConsentResponse, nil
+         return upsertCommunicationConsentResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -6288,9 +6289,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            upsertAppPushtokenResponse PushtokenRes
-            
+             upsertAppPushtokenResponse PushtokenRes
 	    )
 
          
@@ -6300,10 +6299,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return PushtokenRes{}, common.NewFDKError(err.Error())
+          
+             return PushtokenRes{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return PushtokenRes{}, common.NewFDKError(err.Error())
         }
         
@@ -6317,17 +6318,15 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PushtokenRes{}, err
-            
+            return PushtokenRes{}, err
 	    }
+        
         err = json.Unmarshal(response, &upsertAppPushtokenResponse)
         if err != nil {
-           
-             return PushtokenRes{}, common.NewFDKError(err.Error())
-            
+            return PushtokenRes{}, common.NewFDKError(err.Error())
         }
-        return upsertAppPushtokenResponse, nil
+         return upsertAppPushtokenResponse, nil
+        
     }
           
     
@@ -6341,6 +6340,8 @@ func NewAppClient(config *AppConfig) *Client {
         return &Share{config}
     }
     
+    
+    
   
     
     
@@ -6350,9 +6351,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getApplicationQRCodeResponse QRCodeResp
-            
+             getApplicationQRCodeResponse QRCodeResp
 	    )
 
          
@@ -6368,19 +6367,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return QRCodeResp{}, err
-            
+            return QRCodeResp{}, err
 	    }
+        
         err = json.Unmarshal(response, &getApplicationQRCodeResponse)
         if err != nil {
-           
-             return QRCodeResp{}, common.NewFDKError(err.Error())
-            
+            return QRCodeResp{}, common.NewFDKError(err.Error())
         }
-        return getApplicationQRCodeResponse, nil
+         return getApplicationQRCodeResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -6391,9 +6390,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getProductQRCodeBySlugResponse QRCodeResp
-            
+             getProductQRCodeBySlugResponse QRCodeResp
 	    )
 
          
@@ -6409,19 +6406,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return QRCodeResp{}, err
-            
+            return QRCodeResp{}, err
 	    }
+        
         err = json.Unmarshal(response, &getProductQRCodeBySlugResponse)
         if err != nil {
-           
-             return QRCodeResp{}, common.NewFDKError(err.Error())
-            
+            return QRCodeResp{}, common.NewFDKError(err.Error())
         }
-        return getProductQRCodeBySlugResponse, nil
+         return getProductQRCodeBySlugResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -6432,9 +6429,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getCollectionQRCodeBySlugResponse QRCodeResp
-            
+             getCollectionQRCodeBySlugResponse QRCodeResp
 	    )
 
          
@@ -6450,19 +6445,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return QRCodeResp{}, err
-            
+            return QRCodeResp{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCollectionQRCodeBySlugResponse)
         if err != nil {
-           
-             return QRCodeResp{}, common.NewFDKError(err.Error())
-            
+            return QRCodeResp{}, common.NewFDKError(err.Error())
         }
-        return getCollectionQRCodeBySlugResponse, nil
+         return getCollectionQRCodeBySlugResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -6478,9 +6473,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getUrlQRCodeResponse QRCodeResp
-            
+             getUrlQRCodeResponse QRCodeResp
 	    )
 
          
@@ -6496,19 +6489,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return QRCodeResp{}, err
-            
+            return QRCodeResp{}, err
 	    }
+        
         err = json.Unmarshal(response, &getUrlQRCodeResponse)
         if err != nil {
-           
-             return QRCodeResp{}, common.NewFDKError(err.Error())
-            
+            return QRCodeResp{}, common.NewFDKError(err.Error())
         }
-        return getUrlQRCodeResponse, nil
+         return getUrlQRCodeResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -6519,9 +6512,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            createShortLinkResponse ShortLinkRes
-            
+             createShortLinkResponse ShortLinkRes
 	    )
 
          
@@ -6531,10 +6522,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return ShortLinkRes{}, common.NewFDKError(err.Error())
+          
+             return ShortLinkRes{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return ShortLinkRes{}, common.NewFDKError(err.Error())
         }
         
@@ -6548,19 +6541,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ShortLinkRes{}, err
-            
+            return ShortLinkRes{}, err
 	    }
+        
         err = json.Unmarshal(response, &createShortLinkResponse)
         if err != nil {
-           
-             return ShortLinkRes{}, common.NewFDKError(err.Error())
-            
+            return ShortLinkRes{}, common.NewFDKError(err.Error())
         }
-        return createShortLinkResponse, nil
+         return createShortLinkResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -6571,9 +6564,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getShortLinkByHashResponse ShortLinkRes
-            
+             getShortLinkByHashResponse ShortLinkRes
 	    )
 
          
@@ -6589,19 +6580,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ShortLinkRes{}, err
-            
+            return ShortLinkRes{}, err
 	    }
+        
         err = json.Unmarshal(response, &getShortLinkByHashResponse)
         if err != nil {
-           
-             return ShortLinkRes{}, common.NewFDKError(err.Error())
-            
+            return ShortLinkRes{}, common.NewFDKError(err.Error())
         }
-        return getShortLinkByHashResponse, nil
+         return getShortLinkByHashResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -6612,9 +6603,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getOriginalShortLinkByHashResponse ShortLinkRes
-            
+             getOriginalShortLinkByHashResponse ShortLinkRes
 	    )
 
          
@@ -6630,17 +6619,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ShortLinkRes{}, err
-            
+            return ShortLinkRes{}, err
 	    }
+        
         err = json.Unmarshal(response, &getOriginalShortLinkByHashResponse)
         if err != nil {
-           
-             return ShortLinkRes{}, common.NewFDKError(err.Error())
-            
+            return ShortLinkRes{}, common.NewFDKError(err.Error())
         }
-        return getOriginalShortLinkByHashResponse, nil
+         return getOriginalShortLinkByHashResponse, nil
+        
     }
           
     
@@ -6654,18 +6641,18 @@ func NewAppClient(config *AppConfig) *Client {
         return &FileStorage{config}
     }
     
+    
+    
   
     
     
-    // StartUpload This operation initiates upload and returns storage link which is valid for 30 Minutes. You can use that storage link to make subsequent upload request with file buffer or blob.
+    // StartUpload Initiates an upload and returns a storage link that is valid for 30 minutes. You can use the storage link to make subsequent upload request with file buffer or blob.
     func (fi *FileStorage)  StartUpload(Namespace string, body  StartRequest) (StartResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            startUploadResponse StartResponse
-            
+             startUploadResponse StartResponse
 	    )
 
          
@@ -6675,10 +6662,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return StartResponse{}, common.NewFDKError(err.Error())
+          
+             return StartResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return StartResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -6692,32 +6681,30 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return StartResponse{}, err
-            
+            return StartResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &startUploadResponse)
         if err != nil {
-           
-             return StartResponse{}, common.NewFDKError(err.Error())
-            
+            return StartResponse{}, common.NewFDKError(err.Error())
         }
-        return startUploadResponse, nil
+         return startUploadResponse, nil
+        
     }
           
+    
+    
     
   
     
     
-    // CompleteUpload This will complete the upload process. After successfully uploading file, you can call this operation to complete the upload process.
+    // CompleteUpload Completes the upload process. After successfully uploading a file, call this API to finish the upload process.
     func (fi *FileStorage)  CompleteUpload(Namespace string, body  StartResponse) (CompleteResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            completeUploadResponse CompleteResponse
-            
+             completeUploadResponse CompleteResponse
 	    )
 
          
@@ -6727,10 +6714,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CompleteResponse{}, common.NewFDKError(err.Error())
+          
+             return CompleteResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return CompleteResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -6744,17 +6733,15 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CompleteResponse{}, err
-            
+            return CompleteResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &completeUploadResponse)
         if err != nil {
-           
-             return CompleteResponse{}, common.NewFDKError(err.Error())
-            
+            return CompleteResponse{}, common.NewFDKError(err.Error())
         }
-        return completeUploadResponse, nil
+         return completeUploadResponse, nil
+        
     }
           
     
@@ -6768,6 +6755,8 @@ func NewAppClient(config *AppConfig) *Client {
         return &Configuration{config}
     }
     
+    
+    
   
     
     
@@ -6777,9 +6766,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getApplicationResponse Application
-            
+             getApplicationResponse Application
 	    )
 
          
@@ -6795,19 +6782,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Application{}, err
-            
+            return Application{}, err
 	    }
+        
         err = json.Unmarshal(response, &getApplicationResponse)
         if err != nil {
-           
-             return Application{}, common.NewFDKError(err.Error())
-            
+            return Application{}, common.NewFDKError(err.Error())
         }
-        return getApplicationResponse, nil
+         return getApplicationResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -6818,9 +6805,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getOwnerInfoResponse ApplicationAboutResponse
-            
+             getOwnerInfoResponse ApplicationAboutResponse
 	    )
 
          
@@ -6836,19 +6821,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ApplicationAboutResponse{}, err
-            
+            return ApplicationAboutResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getOwnerInfoResponse)
         if err != nil {
-           
-             return ApplicationAboutResponse{}, common.NewFDKError(err.Error())
-            
+            return ApplicationAboutResponse{}, common.NewFDKError(err.Error())
         }
-        return getOwnerInfoResponse, nil
+         return getOwnerInfoResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -6859,9 +6844,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getBasicDetailsResponse ApplicationDetail
-            
+             getBasicDetailsResponse ApplicationDetail
 	    )
 
          
@@ -6877,19 +6860,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ApplicationDetail{}, err
-            
+            return ApplicationDetail{}, err
 	    }
+        
         err = json.Unmarshal(response, &getBasicDetailsResponse)
         if err != nil {
-           
-             return ApplicationDetail{}, common.NewFDKError(err.Error())
-            
+            return ApplicationDetail{}, common.NewFDKError(err.Error())
         }
-        return getBasicDetailsResponse, nil
+         return getBasicDetailsResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -6900,9 +6883,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getIntegrationTokensResponse TokenResponse
-            
+             getIntegrationTokensResponse TokenResponse
 	    )
 
          
@@ -6918,19 +6899,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return TokenResponse{}, err
-            
+            return TokenResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getIntegrationTokensResponse)
         if err != nil {
-           
-             return TokenResponse{}, common.NewFDKError(err.Error())
-            
+            return TokenResponse{}, common.NewFDKError(err.Error())
         }
-        return getIntegrationTokensResponse, nil
+         return getIntegrationTokensResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -6942,15 +6923,13 @@ func NewAppClient(config *AppConfig) *Client {
         Q string  `url:"q,omitempty"`  
     }
     
-    // GetOrderingStores Get deployment meta stores
+    // GetOrderingStores Get deployment stores
     func (co *Configuration)  GetOrderingStores(xQuery ConfigurationGetOrderingStoresXQuery) (OrderingStores, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getOrderingStoresResponse OrderingStores
-            
+             getOrderingStoresResponse OrderingStores
 	    )
 
          
@@ -6966,17 +6945,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return OrderingStores{}, err
-            
+            return OrderingStores{}, err
 	    }
+        
         err = json.Unmarshal(response, &getOrderingStoresResponse)
         if err != nil {
-           
-             return OrderingStores{}, common.NewFDKError(err.Error())
-            
+            return OrderingStores{}, common.NewFDKError(err.Error())
         }
-        return getOrderingStoresResponse, nil
+         return getOrderingStoresResponse, nil
+        
     }
           
             
@@ -7004,7 +6981,7 @@ func NewAppClient(config *AppConfig) *Client {
                     
                 
             
-            // GetOrderingStoresPaginator Get deployment meta stores  
+            // GetOrderingStoresPaginator Get deployment stores  
             func (co *Configuration)  GetOrderingStoresPaginator( xQuery ConfigurationGetOrderingStoresXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
                  
@@ -7033,6 +7010,8 @@ func NewAppClient(config *AppConfig) *Client {
             }
        
     
+    
+    
   
     
     
@@ -7042,9 +7021,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getFeaturesResponse AppFeatureResponse
-            
+             getFeaturesResponse AppFeatureResponse
 	    )
 
          
@@ -7060,19 +7037,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return AppFeatureResponse{}, err
-            
+            return AppFeatureResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getFeaturesResponse)
         if err != nil {
-           
-             return AppFeatureResponse{}, common.NewFDKError(err.Error())
-            
+            return AppFeatureResponse{}, common.NewFDKError(err.Error())
         }
-        return getFeaturesResponse, nil
+         return getFeaturesResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -7083,9 +7060,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getContactInfoResponse ApplicationInformation
-            
+             getContactInfoResponse ApplicationInformation
 	    )
 
          
@@ -7101,32 +7076,30 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ApplicationInformation{}, err
-            
+            return ApplicationInformation{}, err
 	    }
+        
         err = json.Unmarshal(response, &getContactInfoResponse)
         if err != nil {
-           
-             return ApplicationInformation{}, common.NewFDKError(err.Error())
-            
+            return ApplicationInformation{}, common.NewFDKError(err.Error())
         }
-        return getContactInfoResponse, nil
+         return getContactInfoResponse, nil
+        
     }
           
+    
+    
     
   
     
     
-    // GetCurrencies Get application enabled currencies
+    // GetCurrencies Get currencies enabled in the application
     func (co *Configuration)  GetCurrencies() (CurrenciesResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getCurrenciesResponse CurrenciesResponse
-            
+             getCurrenciesResponse CurrenciesResponse
 	    )
 
          
@@ -7142,32 +7115,30 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CurrenciesResponse{}, err
-            
+            return CurrenciesResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCurrenciesResponse)
         if err != nil {
-           
-             return CurrenciesResponse{}, common.NewFDKError(err.Error())
-            
+            return CurrenciesResponse{}, common.NewFDKError(err.Error())
         }
-        return getCurrenciesResponse, nil
+         return getCurrenciesResponse, nil
+        
     }
           
+    
+    
     
   
     
     
-    // GetCurrencyById Get currency by id
+    // GetCurrencyById Get currency by its ID
     func (co *Configuration)  GetCurrencyById(ID string) (Currency, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getCurrencyByIdResponse Currency
-            
+             getCurrencyByIdResponse Currency
 	    )
 
          
@@ -7183,19 +7154,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Currency{}, err
-            
+            return Currency{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCurrencyByIdResponse)
         if err != nil {
-           
-             return Currency{}, common.NewFDKError(err.Error())
-            
+            return Currency{}, common.NewFDKError(err.Error())
         }
-        return getCurrencyByIdResponse, nil
+         return getCurrencyByIdResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -7206,9 +7177,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getLanguagesResponse LanguageResponse
-            
+             getLanguagesResponse LanguageResponse
 	    )
 
          
@@ -7224,32 +7193,30 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return LanguageResponse{}, err
-            
+            return LanguageResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getLanguagesResponse)
         if err != nil {
-           
-             return LanguageResponse{}, common.NewFDKError(err.Error())
-            
+            return LanguageResponse{}, common.NewFDKError(err.Error())
         }
-        return getLanguagesResponse, nil
+         return getLanguagesResponse, nil
+        
     }
           
+    
+    
     
   
     
     
-    // GetOrderingStoreCookie Get ordering store signed cookie on selection of ordering store. This will be used by cart service to verify coupon against selected ordering store in cart.
+    // GetOrderingStoreCookie Get an Ordering Store signed cookie on selection of ordering store.
     func (co *Configuration)  GetOrderingStoreCookie(body  OrderingStoreSelectRequest) (SuccessMessageResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getOrderingStoreCookieResponse SuccessMessageResponse
-            
+             getOrderingStoreCookieResponse SuccessMessageResponse
 	    )
 
          
@@ -7259,10 +7226,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return SuccessMessageResponse{}, common.NewFDKError(err.Error())
+          
+             return SuccessMessageResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return SuccessMessageResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -7276,32 +7245,30 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SuccessMessageResponse{}, err
-            
+            return SuccessMessageResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getOrderingStoreCookieResponse)
         if err != nil {
-           
-             return SuccessMessageResponse{}, common.NewFDKError(err.Error())
-            
+            return SuccessMessageResponse{}, common.NewFDKError(err.Error())
         }
-        return getOrderingStoreCookieResponse, nil
+         return getOrderingStoreCookieResponse, nil
+        
     }
           
+    
+    
     
   
     
     
-    // RemoveOrderingStoreCookie Unset ordering store signed cookie on change of sales channel selection via domain in universal fynd store app.
+    // RemoveOrderingStoreCookie Unset the Ordering Store signed cookie.
     func (co *Configuration)  RemoveOrderingStoreCookie() (SuccessMessageResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            removeOrderingStoreCookieResponse SuccessMessageResponse
-            
+             removeOrderingStoreCookieResponse SuccessMessageResponse
 	    )
 
          
@@ -7317,19 +7284,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SuccessMessageResponse{}, err
-            
+            return SuccessMessageResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &removeOrderingStoreCookieResponse)
         if err != nil {
-           
-             return SuccessMessageResponse{}, common.NewFDKError(err.Error())
-            
+            return SuccessMessageResponse{}, common.NewFDKError(err.Error())
         }
-        return removeOrderingStoreCookieResponse, nil
+         return removeOrderingStoreCookieResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -7341,15 +7308,13 @@ func NewAppClient(config *AppConfig) *Client {
         User string  `url:"user,omitempty"`  
     }
     
-    // GetAppStaffs Get Staff List.
+    // GetAppStaffs Get a list of staff.
     func (co *Configuration)  GetAppStaffs(xQuery ConfigurationGetAppStaffsXQuery) (AppStaffResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getAppStaffsResponse AppStaffResponse
-            
+             getAppStaffsResponse AppStaffResponse
 	    )
 
          
@@ -7365,17 +7330,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return AppStaffResponse{}, err
-            
+            return AppStaffResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAppStaffsResponse)
         if err != nil {
-           
-             return AppStaffResponse{}, common.NewFDKError(err.Error())
-            
+            return AppStaffResponse{}, common.NewFDKError(err.Error())
         }
-        return getAppStaffsResponse, nil
+         return getAppStaffsResponse, nil
+        
     }
           
     
@@ -7388,6 +7351,8 @@ func NewAppClient(config *AppConfig) *Client {
     func NewPayment(config *AppConfig) *Payment {
         return &Payment{config}
     }
+    
+    
     
   
     
@@ -7403,9 +7368,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getAggregatorsConfigResponse AggregatorsConfigDetailResponse
-            
+             getAggregatorsConfigResponse AggregatorsConfigDetailResponse
 	    )
 
         
@@ -7419,25 +7382,25 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             pa.config,
             "get",
-            fmt.Sprintf("/service/application/payment/v1.0/config/aggregators/key",),
+            "/service/application/payment/v1.0/config/aggregators/key",
             xHeaders,
             xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return AggregatorsConfigDetailResponse{}, err
-            
+            return AggregatorsConfigDetailResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAggregatorsConfigResponse)
         if err != nil {
-           
-             return AggregatorsConfigDetailResponse{}, common.NewFDKError(err.Error())
-            
+            return AggregatorsConfigDetailResponse{}, common.NewFDKError(err.Error())
         }
-        return getAggregatorsConfigResponse, nil
+         return getAggregatorsConfigResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -7448,9 +7411,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            attachCardToCustomerResponse AttachCardsResponse
-            
+             attachCardToCustomerResponse AttachCardsResponse
 	    )
 
          
@@ -7460,10 +7421,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return AttachCardsResponse{}, common.NewFDKError(err.Error())
+          
+             return AttachCardsResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return AttachCardsResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -7477,19 +7440,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return AttachCardsResponse{}, err
-            
+            return AttachCardsResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &attachCardToCustomerResponse)
         if err != nil {
-           
-             return AttachCardsResponse{}, common.NewFDKError(err.Error())
-            
+            return AttachCardsResponse{}, common.NewFDKError(err.Error())
         }
-        return attachCardToCustomerResponse, nil
+         return attachCardToCustomerResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -7499,15 +7462,13 @@ func NewAppClient(config *AppConfig) *Client {
         Refresh bool  `url:"refresh,omitempty"`  
     }
     
-    // GetActiveCardAggregator Fetch active payment gateway for card
+    // GetActiveCardAggregator Fetch active payment gateway for card payments
     func (pa *Payment)  GetActiveCardAggregator(xQuery PaymentGetActiveCardAggregatorXQuery) (ActiveCardPaymentGatewayResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getActiveCardAggregatorResponse ActiveCardPaymentGatewayResponse
-            
+             getActiveCardAggregatorResponse ActiveCardPaymentGatewayResponse
 	    )
 
          
@@ -7523,19 +7484,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ActiveCardPaymentGatewayResponse{}, err
-            
+            return ActiveCardPaymentGatewayResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getActiveCardAggregatorResponse)
         if err != nil {
-           
-             return ActiveCardPaymentGatewayResponse{}, common.NewFDKError(err.Error())
-            
+            return ActiveCardPaymentGatewayResponse{}, common.NewFDKError(err.Error())
         }
-        return getActiveCardAggregatorResponse, nil
+         return getActiveCardAggregatorResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -7545,15 +7506,13 @@ func NewAppClient(config *AppConfig) *Client {
         ForceRefresh bool  `url:"force_refresh,omitempty"`  
     }
     
-    // GetActiveUserCards Fetch the list of saved cards of user.
+    // GetActiveUserCards Fetch the list of cards saved by the user
     func (pa *Payment)  GetActiveUserCards(xQuery PaymentGetActiveUserCardsXQuery) (ListCardsResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getActiveUserCardsResponse ListCardsResponse
-            
+             getActiveUserCardsResponse ListCardsResponse
 	    )
 
          
@@ -7569,32 +7528,30 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ListCardsResponse{}, err
-            
+            return ListCardsResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getActiveUserCardsResponse)
         if err != nil {
-           
-             return ListCardsResponse{}, common.NewFDKError(err.Error())
-            
+            return ListCardsResponse{}, common.NewFDKError(err.Error())
         }
-        return getActiveUserCardsResponse, nil
+         return getActiveUserCardsResponse, nil
+        
     }
           
+    
+    
     
   
     
     
-    // DeleteUserCard Delete an user card.
+    // DeleteUserCard Delete a card
     func (pa *Payment)  DeleteUserCard(body  DeletehCardRequest) (DeleteCardsResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            deleteUserCardResponse DeleteCardsResponse
-            
+             deleteUserCardResponse DeleteCardsResponse
 	    )
 
          
@@ -7604,10 +7561,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return DeleteCardsResponse{}, common.NewFDKError(err.Error())
+          
+             return DeleteCardsResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return DeleteCardsResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -7621,32 +7580,30 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return DeleteCardsResponse{}, err
-            
+            return DeleteCardsResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &deleteUserCardResponse)
         if err != nil {
-           
-             return DeleteCardsResponse{}, common.NewFDKError(err.Error())
-            
+            return DeleteCardsResponse{}, common.NewFDKError(err.Error())
         }
-        return deleteUserCardResponse, nil
+         return deleteUserCardResponse, nil
+        
     }
           
+    
+    
     
   
     
     
-    // VerifyCustomerForPayment Validate customer for payment.
+    // VerifyCustomerForPayment Validate customer for payment
     func (pa *Payment)  VerifyCustomerForPayment(body  ValidateCustomerRequest) (ValidateCustomerResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            verifyCustomerForPaymentResponse ValidateCustomerResponse
-            
+             verifyCustomerForPaymentResponse ValidateCustomerResponse
 	    )
 
          
@@ -7656,10 +7613,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return ValidateCustomerResponse{}, common.NewFDKError(err.Error())
+          
+             return ValidateCustomerResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return ValidateCustomerResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -7673,19 +7632,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ValidateCustomerResponse{}, err
-            
+            return ValidateCustomerResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &verifyCustomerForPaymentResponse)
         if err != nil {
-           
-             return ValidateCustomerResponse{}, common.NewFDKError(err.Error())
-            
+            return ValidateCustomerResponse{}, common.NewFDKError(err.Error())
         }
-        return verifyCustomerForPaymentResponse, nil
+         return verifyCustomerForPaymentResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -7696,9 +7655,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            verifyAndChargePaymentResponse ChargeCustomerResponse
-            
+             verifyAndChargePaymentResponse ChargeCustomerResponse
 	    )
 
          
@@ -7708,10 +7665,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return ChargeCustomerResponse{}, common.NewFDKError(err.Error())
+          
+             return ChargeCustomerResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return ChargeCustomerResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -7725,32 +7684,30 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ChargeCustomerResponse{}, err
-            
+            return ChargeCustomerResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &verifyAndChargePaymentResponse)
         if err != nil {
-           
-             return ChargeCustomerResponse{}, common.NewFDKError(err.Error())
-            
+            return ChargeCustomerResponse{}, common.NewFDKError(err.Error())
         }
-        return verifyAndChargePaymentResponse, nil
+         return verifyAndChargePaymentResponse, nil
+        
     }
           
+    
+    
     
   
     
     
-    // InitialisePayment Payment Initialisation server to server for UPI and BharatQR.
+    // InitialisePayment Initialize a payment (server-to-server) for UPI and BharatQR
     func (pa *Payment)  InitialisePayment(body  PaymentInitializationRequest) (PaymentInitializationResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            initialisePaymentResponse PaymentInitializationResponse
-            
+             initialisePaymentResponse PaymentInitializationResponse
 	    )
 
          
@@ -7760,10 +7717,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return PaymentInitializationResponse{}, common.NewFDKError(err.Error())
+          
+             return PaymentInitializationResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return PaymentInitializationResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -7777,32 +7736,30 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PaymentInitializationResponse{}, err
-            
+            return PaymentInitializationResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &initialisePaymentResponse)
         if err != nil {
-           
-             return PaymentInitializationResponse{}, common.NewFDKError(err.Error())
-            
+            return PaymentInitializationResponse{}, common.NewFDKError(err.Error())
         }
-        return initialisePaymentResponse, nil
+         return initialisePaymentResponse, nil
+        
     }
           
+    
+    
     
   
     
     
-    // CheckAndUpdatePaymentStatus Continous polling to check status of payment on server.
+    // CheckAndUpdatePaymentStatus Performs continuous polling to check status of payment on the server
     func (pa *Payment)  CheckAndUpdatePaymentStatus(body  PaymentStatusUpdateRequest) (PaymentStatusUpdateResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            checkAndUpdatePaymentStatusResponse PaymentStatusUpdateResponse
-            
+             checkAndUpdatePaymentStatusResponse PaymentStatusUpdateResponse
 	    )
 
          
@@ -7812,10 +7769,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return PaymentStatusUpdateResponse{}, common.NewFDKError(err.Error())
+          
+             return PaymentStatusUpdateResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return PaymentStatusUpdateResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -7829,19 +7788,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PaymentStatusUpdateResponse{}, err
-            
+            return PaymentStatusUpdateResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &checkAndUpdatePaymentStatusResponse)
         if err != nil {
-           
-             return PaymentStatusUpdateResponse{}, common.NewFDKError(err.Error())
-            
+            return PaymentStatusUpdateResponse{}, common.NewFDKError(err.Error())
         }
-        return checkAndUpdatePaymentStatusResponse, nil
+         return checkAndUpdatePaymentStatusResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -7857,15 +7816,13 @@ func NewAppClient(config *AppConfig) *Client {
         UserDetails string  `url:"user_details,omitempty"`  
     }
     
-    // GetPaymentModeRoutes Get All Valid Payment Options
+    // GetPaymentModeRoutes Get applicable payment options
     func (pa *Payment)  GetPaymentModeRoutes(xQuery PaymentGetPaymentModeRoutesXQuery) (PaymentModeRouteResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getPaymentModeRoutesResponse PaymentModeRouteResponse
-            
+             getPaymentModeRoutesResponse PaymentModeRouteResponse
 	    )
 
          
@@ -7881,19 +7838,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PaymentModeRouteResponse{}, err
-            
+            return PaymentModeRouteResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getPaymentModeRoutesResponse)
         if err != nil {
-           
-             return PaymentModeRouteResponse{}, common.NewFDKError(err.Error())
-            
+            return PaymentModeRouteResponse{}, common.NewFDKError(err.Error())
         }
-        return getPaymentModeRoutesResponse, nil
+         return getPaymentModeRoutesResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -7910,15 +7867,13 @@ func NewAppClient(config *AppConfig) *Client {
         UserDetails string  `url:"user_details,omitempty"`  
     }
     
-    // GetPosPaymentModeRoutes Get All Valid Payment Options for POS
+    // GetPosPaymentModeRoutes Get applicable payment options for Point-of-Sale (POS)
     func (pa *Payment)  GetPosPaymentModeRoutes(xQuery PaymentGetPosPaymentModeRoutesXQuery) (PaymentModeRouteResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getPosPaymentModeRoutesResponse PaymentModeRouteResponse
-            
+             getPosPaymentModeRoutesResponse PaymentModeRouteResponse
 	    )
 
          
@@ -7934,32 +7889,69 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PaymentModeRouteResponse{}, err
-            
+            return PaymentModeRouteResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getPosPaymentModeRoutesResponse)
         if err != nil {
-           
-             return PaymentModeRouteResponse{}, common.NewFDKError(err.Error())
-            
+            return PaymentModeRouteResponse{}, common.NewFDKError(err.Error())
         }
-        return getPosPaymentModeRoutesResponse, nil
+         return getPosPaymentModeRoutesResponse, nil
+        
     }
           
+    
+    
     
   
     
     
-    // GetActiveRefundTransferModes List Refund Transfer Mode
+    // GetRupifiBannerDetails Get CreditLine Offer
+    func (pa *Payment)  GetRupifiBannerDetails() (RupifiBannerResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getRupifiBannerDetailsResponse RupifiBannerResponse
+	    )
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            "/service/application/payment/v1.0/rupifi/banner",
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return RupifiBannerResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getRupifiBannerDetailsResponse)
+        if err != nil {
+            return RupifiBannerResponse{}, common.NewFDKError(err.Error())
+        }
+         return getRupifiBannerDetailsResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetActiveRefundTransferModes Lists the mode of refund
     func (pa *Payment)  GetActiveRefundTransferModes() (TransferModeResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getActiveRefundTransferModesResponse TransferModeResponse
-            
+             getActiveRefundTransferModesResponse TransferModeResponse
 	    )
 
          
@@ -7975,32 +7967,30 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return TransferModeResponse{}, err
-            
+            return TransferModeResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getActiveRefundTransferModesResponse)
         if err != nil {
-           
-             return TransferModeResponse{}, common.NewFDKError(err.Error())
-            
+            return TransferModeResponse{}, common.NewFDKError(err.Error())
         }
-        return getActiveRefundTransferModesResponse, nil
+         return getActiveRefundTransferModesResponse, nil
+        
     }
           
+    
+    
     
   
     
     
-    // EnableOrDisableRefundTransferMode Enable/Disable Refund Transfer Mode
+    // EnableOrDisableRefundTransferMode Enable/Disable a mode for transferring a refund
     func (pa *Payment)  EnableOrDisableRefundTransferMode(body  UpdateRefundTransferModeRequest) (UpdateRefundTransferModeResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            enableOrDisableRefundTransferModeResponse UpdateRefundTransferModeResponse
-            
+             enableOrDisableRefundTransferModeResponse UpdateRefundTransferModeResponse
 	    )
 
          
@@ -8010,10 +8000,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return UpdateRefundTransferModeResponse{}, common.NewFDKError(err.Error())
+          
+             return UpdateRefundTransferModeResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return UpdateRefundTransferModeResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -8027,19 +8019,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return UpdateRefundTransferModeResponse{}, err
-            
+            return UpdateRefundTransferModeResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &enableOrDisableRefundTransferModeResponse)
         if err != nil {
-           
-             return UpdateRefundTransferModeResponse{}, common.NewFDKError(err.Error())
-            
+            return UpdateRefundTransferModeResponse{}, common.NewFDKError(err.Error())
         }
-        return enableOrDisableRefundTransferModeResponse, nil
+         return enableOrDisableRefundTransferModeResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -8049,15 +8041,13 @@ func NewAppClient(config *AppConfig) *Client {
         OrderID string  `url:"order_id,omitempty"`  
     }
     
-    // GetUserBeneficiariesDetail List User Beneficiary
+    // GetUserBeneficiariesDetail Lists the beneficiary of a refund
     func (pa *Payment)  GetUserBeneficiariesDetail(xQuery PaymentGetUserBeneficiariesDetailXQuery) (OrderBeneficiaryResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getUserBeneficiariesDetailResponse OrderBeneficiaryResponse
-            
+             getUserBeneficiariesDetailResponse OrderBeneficiaryResponse
 	    )
 
          
@@ -8073,19 +8063,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return OrderBeneficiaryResponse{}, err
-            
+            return OrderBeneficiaryResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getUserBeneficiariesDetailResponse)
         if err != nil {
-           
-             return OrderBeneficiaryResponse{}, common.NewFDKError(err.Error())
-            
+            return OrderBeneficiaryResponse{}, common.NewFDKError(err.Error())
         }
-        return getUserBeneficiariesDetailResponse, nil
+         return getUserBeneficiariesDetailResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -8095,15 +8085,13 @@ func NewAppClient(config *AppConfig) *Client {
         IfscCode string  `url:"ifsc_code,omitempty"`  
     }
     
-    // VerifyIfscCode Ifsc Code Verification
+    // VerifyIfscCode Verify IFSC Code
     func (pa *Payment)  VerifyIfscCode(xQuery PaymentVerifyIfscCodeXQuery) (IfscCodeResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            verifyIfscCodeResponse IfscCodeResponse
-            
+             verifyIfscCodeResponse IfscCodeResponse
 	    )
 
          
@@ -8119,19 +8107,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return IfscCodeResponse{}, err
-            
+            return IfscCodeResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &verifyIfscCodeResponse)
         if err != nil {
-           
-             return IfscCodeResponse{}, common.NewFDKError(err.Error())
-            
+            return IfscCodeResponse{}, common.NewFDKError(err.Error())
         }
-        return verifyIfscCodeResponse, nil
+         return verifyIfscCodeResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -8141,15 +8129,13 @@ func NewAppClient(config *AppConfig) *Client {
         OrderID string  `url:"order_id,omitempty"`  
     }
     
-    // GetOrderBeneficiariesDetail List Order Beneficiary
+    // GetOrderBeneficiariesDetail Lists the beneficiary of a refund
     func (pa *Payment)  GetOrderBeneficiariesDetail(xQuery PaymentGetOrderBeneficiariesDetailXQuery) (OrderBeneficiaryResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getOrderBeneficiariesDetailResponse OrderBeneficiaryResponse
-            
+             getOrderBeneficiariesDetailResponse OrderBeneficiaryResponse
 	    )
 
          
@@ -8165,32 +8151,30 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return OrderBeneficiaryResponse{}, err
-            
+            return OrderBeneficiaryResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getOrderBeneficiariesDetailResponse)
         if err != nil {
-           
-             return OrderBeneficiaryResponse{}, common.NewFDKError(err.Error())
-            
+            return OrderBeneficiaryResponse{}, common.NewFDKError(err.Error())
         }
-        return getOrderBeneficiariesDetailResponse, nil
+         return getOrderBeneficiariesDetailResponse, nil
+        
     }
           
+    
+    
     
   
     
     
-    // VerifyOtpAndAddBeneficiaryForBank Save Beneficiary details on otp validation.
+    // VerifyOtpAndAddBeneficiaryForBank Verify the beneficiary details using OTP
     func (pa *Payment)  VerifyOtpAndAddBeneficiaryForBank(body  AddBeneficiaryViaOtpVerificationRequest) (AddBeneficiaryViaOtpVerificationResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            verifyOtpAndAddBeneficiaryForBankResponse AddBeneficiaryViaOtpVerificationResponse
-            
+             verifyOtpAndAddBeneficiaryForBankResponse AddBeneficiaryViaOtpVerificationResponse
 	    )
 
          
@@ -8200,10 +8184,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return AddBeneficiaryViaOtpVerificationResponse{}, common.NewFDKError(err.Error())
+          
+             return AddBeneficiaryViaOtpVerificationResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return AddBeneficiaryViaOtpVerificationResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -8217,19 +8203,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return AddBeneficiaryViaOtpVerificationResponse{}, err
-            
+            return AddBeneficiaryViaOtpVerificationResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &verifyOtpAndAddBeneficiaryForBankResponse)
         if err != nil {
-           
-             return AddBeneficiaryViaOtpVerificationResponse{}, common.NewFDKError(err.Error())
-            
+            return AddBeneficiaryViaOtpVerificationResponse{}, common.NewFDKError(err.Error())
         }
-        return verifyOtpAndAddBeneficiaryForBankResponse, nil
+         return verifyOtpAndAddBeneficiaryForBankResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -8240,9 +8226,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            addBeneficiaryDetailsResponse RefundAccountResponse
-            
+             addBeneficiaryDetailsResponse RefundAccountResponse
 	    )
 
          
@@ -8252,10 +8236,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return RefundAccountResponse{}, common.NewFDKError(err.Error())
+          
+             return RefundAccountResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return RefundAccountResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -8269,32 +8255,30 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return RefundAccountResponse{}, err
-            
+            return RefundAccountResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &addBeneficiaryDetailsResponse)
         if err != nil {
-           
-             return RefundAccountResponse{}, common.NewFDKError(err.Error())
-            
+            return RefundAccountResponse{}, common.NewFDKError(err.Error())
         }
-        return addBeneficiaryDetailsResponse, nil
+         return addBeneficiaryDetailsResponse, nil
+        
     }
           
+    
+    
     
   
     
     
-    // VerifyOtpAndAddBeneficiaryForWallet Send Otp on Adding wallet beneficiary
+    // VerifyOtpAndAddBeneficiaryForWallet Send OTP on adding a wallet beneficiary
     func (pa *Payment)  VerifyOtpAndAddBeneficiaryForWallet(body  WalletOtpRequest) (WalletOtpResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            verifyOtpAndAddBeneficiaryForWalletResponse WalletOtpResponse
-            
+             verifyOtpAndAddBeneficiaryForWalletResponse WalletOtpResponse
 	    )
 
          
@@ -8304,10 +8288,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return WalletOtpResponse{}, common.NewFDKError(err.Error())
+          
+             return WalletOtpResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return WalletOtpResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -8321,32 +8307,30 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return WalletOtpResponse{}, err
-            
+            return WalletOtpResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &verifyOtpAndAddBeneficiaryForWalletResponse)
         if err != nil {
-           
-             return WalletOtpResponse{}, common.NewFDKError(err.Error())
-            
+            return WalletOtpResponse{}, common.NewFDKError(err.Error())
         }
-        return verifyOtpAndAddBeneficiaryForWalletResponse, nil
+         return verifyOtpAndAddBeneficiaryForWalletResponse, nil
+        
     }
           
+    
+    
     
   
     
     
-    // UpdateDefaultBeneficiary Mark Default Beneficiary For Refund
+    // UpdateDefaultBeneficiary Set a default beneficiary for a refund
     func (pa *Payment)  UpdateDefaultBeneficiary(body  SetDefaultBeneficiaryRequest) (SetDefaultBeneficiaryResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            updateDefaultBeneficiaryResponse SetDefaultBeneficiaryResponse
-            
+             updateDefaultBeneficiaryResponse SetDefaultBeneficiaryResponse
 	    )
 
          
@@ -8356,10 +8340,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return SetDefaultBeneficiaryResponse{}, common.NewFDKError(err.Error())
+          
+             return SetDefaultBeneficiaryResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return SetDefaultBeneficiaryResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -8373,17 +8359,15 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SetDefaultBeneficiaryResponse{}, err
-            
+            return SetDefaultBeneficiaryResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateDefaultBeneficiaryResponse)
         if err != nil {
-           
-             return SetDefaultBeneficiaryResponse{}, common.NewFDKError(err.Error())
-            
+            return SetDefaultBeneficiaryResponse{}, common.NewFDKError(err.Error())
         }
-        return updateDefaultBeneficiaryResponse, nil
+         return updateDefaultBeneficiaryResponse, nil
+        
     }
           
     
@@ -8397,6 +8381,8 @@ func NewAppClient(config *AppConfig) *Client {
         return &Order{config}
     }
     
+    
+    
   
     
     
@@ -8409,15 +8395,13 @@ func NewAppClient(config *AppConfig) *Client {
         OrderStatus float64  `url:"order_status,omitempty"`  
     }
     
-    // GetOrders Get Orders for application based on application Id
+    // GetOrders Use this API to retrieve all the orders.
     func (or *Order)  GetOrders(xQuery OrderGetOrdersXQuery) (OrderList, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getOrdersResponse OrderList
-            
+             getOrdersResponse OrderList
 	    )
 
          
@@ -8433,32 +8417,30 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return OrderList{}, err
-            
+            return OrderList{}, err
 	    }
+        
         err = json.Unmarshal(response, &getOrdersResponse)
         if err != nil {
-           
-             return OrderList{}, common.NewFDKError(err.Error())
-            
+            return OrderList{}, common.NewFDKError(err.Error())
         }
-        return getOrdersResponse, nil
+         return getOrdersResponse, nil
+        
     }
           
+    
+    
     
   
     
     
-    // GetOrderById Get Order by order id for application based on application Id
+    // GetOrderById Use this API to retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
     func (or *Order)  GetOrderById(OrderID string) (OrderById, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getOrderByIdResponse OrderById
-            
+             getOrderByIdResponse OrderById
 	    )
 
          
@@ -8474,32 +8456,30 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return OrderById{}, err
-            
+            return OrderById{}, err
 	    }
+        
         err = json.Unmarshal(response, &getOrderByIdResponse)
         if err != nil {
-           
-             return OrderById{}, common.NewFDKError(err.Error())
-            
+            return OrderById{}, common.NewFDKError(err.Error())
         }
-        return getOrderByIdResponse, nil
+         return getOrderByIdResponse, nil
+        
     }
           
+    
+    
     
   
     
     
-    // GetShipmentById Get Shipment by shipment id and order id for application based on application Id
+    // GetShipmentById Use this API to retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
     func (or *Order)  GetShipmentById(ShipmentID string) (ShipmentById, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getShipmentByIdResponse ShipmentById
-            
+             getShipmentByIdResponse ShipmentById
 	    )
 
          
@@ -8515,32 +8495,30 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ShipmentById{}, err
-            
+            return ShipmentById{}, err
 	    }
+        
         err = json.Unmarshal(response, &getShipmentByIdResponse)
         if err != nil {
-           
-             return ShipmentById{}, common.NewFDKError(err.Error())
-            
+            return ShipmentById{}, common.NewFDKError(err.Error())
         }
-        return getShipmentByIdResponse, nil
+         return getShipmentByIdResponse, nil
+        
     }
           
+    
+    
     
   
     
     
-    // GetShipmentReasons Get Shipment reasons by shipment id and order id for application based on application Id
+    // GetShipmentReasons Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
     func (or *Order)  GetShipmentReasons(ShipmentID string) (ShipmentReasons, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getShipmentReasonsResponse ShipmentReasons
-            
+             getShipmentReasonsResponse ShipmentReasons
 	    )
 
          
@@ -8556,32 +8534,30 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ShipmentReasons{}, err
-            
+            return ShipmentReasons{}, err
 	    }
+        
         err = json.Unmarshal(response, &getShipmentReasonsResponse)
         if err != nil {
-           
-             return ShipmentReasons{}, common.NewFDKError(err.Error())
-            
+            return ShipmentReasons{}, common.NewFDKError(err.Error())
         }
-        return getShipmentReasonsResponse, nil
+         return getShipmentReasonsResponse, nil
+        
     }
           
+    
+    
     
   
     
     
-    // UpdateShipmentStatus Update Shipment status by shipment id and order id for application based on application Id
+    // UpdateShipmentStatus Use this API to update the status of a shipment using its shipment ID.
     func (or *Order)  UpdateShipmentStatus(ShipmentID string, body  ShipmentStatusUpdateBody) (ShipmentStatusUpdate, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            updateShipmentStatusResponse ShipmentStatusUpdate
-            
+             updateShipmentStatusResponse ShipmentStatusUpdate
 	    )
 
          
@@ -8591,10 +8567,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return ShipmentStatusUpdate{}, common.NewFDKError(err.Error())
+          
+             return ShipmentStatusUpdate{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return ShipmentStatusUpdate{}, common.NewFDKError(err.Error())
         }
         
@@ -8608,32 +8586,30 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ShipmentStatusUpdate{}, err
-            
+            return ShipmentStatusUpdate{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateShipmentStatusResponse)
         if err != nil {
-           
-             return ShipmentStatusUpdate{}, common.NewFDKError(err.Error())
-            
+            return ShipmentStatusUpdate{}, common.NewFDKError(err.Error())
         }
-        return updateShipmentStatusResponse, nil
+         return updateShipmentStatusResponse, nil
+        
     }
           
+    
+    
     
   
     
     
-    // TrackShipment Track Shipment by shipment id and order id for application based on application Id
+    // TrackShipment Use this API to track a shipment using its shipment ID.
     func (or *Order)  TrackShipment(ShipmentID string) (ShipmentTrack, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            trackShipmentResponse ShipmentTrack
-            
+             trackShipmentResponse ShipmentTrack
 	    )
 
          
@@ -8649,32 +8625,30 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ShipmentTrack{}, err
-            
+            return ShipmentTrack{}, err
 	    }
+        
         err = json.Unmarshal(response, &trackShipmentResponse)
         if err != nil {
-           
-             return ShipmentTrack{}, common.NewFDKError(err.Error())
-            
+            return ShipmentTrack{}, common.NewFDKError(err.Error())
         }
-        return trackShipmentResponse, nil
+         return trackShipmentResponse, nil
+        
     }
           
+    
+    
     
   
     
     
-    // GetPosOrderById Get POS Order by order id for application based on application Id
+    // GetPosOrderById Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
     func (or *Order)  GetPosOrderById(OrderID string) (PosOrderById, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getPosOrderByIdResponse PosOrderById
-            
+             getPosOrderByIdResponse PosOrderById
 	    )
 
          
@@ -8690,17 +8664,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PosOrderById{}, err
-            
+            return PosOrderById{}, err
 	    }
+        
         err = json.Unmarshal(response, &getPosOrderByIdResponse)
         if err != nil {
-           
-             return PosOrderById{}, common.NewFDKError(err.Error())
-            
+            return PosOrderById{}, common.NewFDKError(err.Error())
         }
-        return getPosOrderByIdResponse, nil
+         return getPosOrderByIdResponse, nil
+        
     }
           
     
@@ -8714,6 +8686,8 @@ func NewAppClient(config *AppConfig) *Client {
         return &Rewards{config}
     }
     
+    
+    
   
     
     
@@ -8723,9 +8697,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getPointsOnProductResponse CatalogueOrderResponse
-            
+             getPointsOnProductResponse CatalogueOrderResponse
 	    )
 
          
@@ -8735,10 +8707,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CatalogueOrderResponse{}, common.NewFDKError(err.Error())
+          
+             return CatalogueOrderResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return CatalogueOrderResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -8752,19 +8726,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CatalogueOrderResponse{}, err
-            
+            return CatalogueOrderResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getPointsOnProductResponse)
         if err != nil {
-           
-             return CatalogueOrderResponse{}, common.NewFDKError(err.Error())
-            
+            return CatalogueOrderResponse{}, common.NewFDKError(err.Error())
         }
-        return getPointsOnProductResponse, nil
+         return getPointsOnProductResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -8775,9 +8749,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getOfferByNameResponse Offer
-            
+             getOfferByNameResponse Offer
 	    )
 
          
@@ -8793,19 +8765,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Offer{}, err
-            
+            return Offer{}, err
 	    }
+        
         err = json.Unmarshal(response, &getOfferByNameResponse)
         if err != nil {
-           
-             return Offer{}, common.NewFDKError(err.Error())
-            
+            return Offer{}, common.NewFDKError(err.Error())
         }
-        return getOfferByNameResponse, nil
+         return getOfferByNameResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -8816,9 +8788,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getOrderDiscountResponse OrderDiscountResponse
-            
+             getOrderDiscountResponse OrderDiscountResponse
 	    )
 
          
@@ -8828,10 +8798,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return OrderDiscountResponse{}, common.NewFDKError(err.Error())
+          
+             return OrderDiscountResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return OrderDiscountResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -8845,19 +8817,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return OrderDiscountResponse{}, err
-            
+            return OrderDiscountResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getOrderDiscountResponse)
         if err != nil {
-           
-             return OrderDiscountResponse{}, common.NewFDKError(err.Error())
-            
+            return OrderDiscountResponse{}, common.NewFDKError(err.Error())
         }
-        return getOrderDiscountResponse, nil
+         return getOrderDiscountResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -8868,9 +8840,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getUserPointsResponse PointsResponse
-            
+             getUserPointsResponse PointsResponse
 	    )
 
          
@@ -8886,19 +8856,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PointsResponse{}, err
-            
+            return PointsResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getUserPointsResponse)
         if err != nil {
-           
-             return PointsResponse{}, common.NewFDKError(err.Error())
-            
+            return PointsResponse{}, common.NewFDKError(err.Error())
         }
-        return getUserPointsResponse, nil
+         return getUserPointsResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -8915,9 +8885,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getUserPointsHistoryResponse PointsHistoryResponse
-            
+             getUserPointsHistoryResponse PointsHistoryResponse
 	    )
 
          
@@ -8933,17 +8901,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PointsHistoryResponse{}, err
-            
+            return PointsHistoryResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getUserPointsHistoryResponse)
         if err != nil {
-           
-             return PointsHistoryResponse{}, common.NewFDKError(err.Error())
-            
+            return PointsHistoryResponse{}, common.NewFDKError(err.Error())
         }
-        return getUserPointsHistoryResponse, nil
+         return getUserPointsHistoryResponse, nil
+        
     }
           
             
@@ -8991,6 +8957,8 @@ func NewAppClient(config *AppConfig) *Client {
             }
        
     
+    
+    
   
     
     
@@ -9000,9 +8968,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getUserReferralDetailsResponse ReferralDetailsResponse
-            
+             getUserReferralDetailsResponse ReferralDetailsResponse
 	    )
 
          
@@ -9018,19 +8984,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ReferralDetailsResponse{}, err
-            
+            return ReferralDetailsResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getUserReferralDetailsResponse)
         if err != nil {
-           
-             return ReferralDetailsResponse{}, common.NewFDKError(err.Error())
-            
+            return ReferralDetailsResponse{}, common.NewFDKError(err.Error())
         }
-        return getUserReferralDetailsResponse, nil
+         return getUserReferralDetailsResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -9041,9 +9007,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            redeemReferralCodeResponse RedeemReferralCodeResponse
-            
+             redeemReferralCodeResponse RedeemReferralCodeResponse
 	    )
 
          
@@ -9053,10 +9017,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return RedeemReferralCodeResponse{}, common.NewFDKError(err.Error())
+          
+             return RedeemReferralCodeResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return RedeemReferralCodeResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -9070,17 +9036,15 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return RedeemReferralCodeResponse{}, err
-            
+            return RedeemReferralCodeResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &redeemReferralCodeResponse)
         if err != nil {
-           
-             return RedeemReferralCodeResponse{}, common.NewFDKError(err.Error())
-            
+            return RedeemReferralCodeResponse{}, common.NewFDKError(err.Error())
         }
-        return redeemReferralCodeResponse, nil
+         return redeemReferralCodeResponse, nil
+        
     }
           
     
@@ -9094,6 +9058,8 @@ func NewAppClient(config *AppConfig) *Client {
         return &Feedback{config}
     }
     
+    
+    
   
     
     
@@ -9103,9 +9069,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            createAbuseReportResponse InsertResponse
-            
+             createAbuseReportResponse InsertResponse
 	    )
 
          
@@ -9115,10 +9079,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return InsertResponse{}, common.NewFDKError(err.Error())
+          
+             return InsertResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return InsertResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -9132,19 +9098,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return InsertResponse{}, err
-            
+            return InsertResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &createAbuseReportResponse)
         if err != nil {
-           
-             return InsertResponse{}, common.NewFDKError(err.Error())
-            
+            return InsertResponse{}, common.NewFDKError(err.Error())
         }
-        return createAbuseReportResponse, nil
+         return createAbuseReportResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -9155,9 +9121,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            updateAbuseReportResponse UpdateResponse
-            
+             updateAbuseReportResponse UpdateResponse
 	    )
 
          
@@ -9167,10 +9131,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return UpdateResponse{}, common.NewFDKError(err.Error())
+          
+             return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -9184,19 +9150,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return UpdateResponse{}, err
-            
+            return UpdateResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateAbuseReportResponse)
         if err != nil {
-           
-             return UpdateResponse{}, common.NewFDKError(err.Error())
-            
+            return UpdateResponse{}, common.NewFDKError(err.Error())
         }
-        return updateAbuseReportResponse, nil
+         return updateAbuseReportResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -9214,9 +9180,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getAbuseReportsResponse ReportAbuseGetResponse
-            
+             getAbuseReportsResponse ReportAbuseGetResponse
 	    )
 
          
@@ -9232,17 +9196,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ReportAbuseGetResponse{}, err
-            
+            return ReportAbuseGetResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAbuseReportsResponse)
         if err != nil {
-           
-             return ReportAbuseGetResponse{}, common.NewFDKError(err.Error())
-            
+            return ReportAbuseGetResponse{}, common.NewFDKError(err.Error())
         }
-        return getAbuseReportsResponse, nil
+         return getAbuseReportsResponse, nil
+        
     }
           
             
@@ -9317,6 +9279,8 @@ func NewAppClient(config *AppConfig) *Client {
             }
        
     
+    
+    
   
     
     
@@ -9332,9 +9296,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getAttributesResponse AttributeResponse
-            
+             getAttributesResponse AttributeResponse
 	    )
 
          
@@ -9350,17 +9312,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return AttributeResponse{}, err
-            
+            return AttributeResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAttributesResponse)
         if err != nil {
-           
-             return AttributeResponse{}, common.NewFDKError(err.Error())
-            
+            return AttributeResponse{}, common.NewFDKError(err.Error())
         }
-        return getAttributesResponse, nil
+         return getAttributesResponse, nil
+        
     }
           
             
@@ -9406,6 +9366,8 @@ func NewAppClient(config *AppConfig) *Client {
             }
        
     
+    
+    
   
     
     
@@ -9415,9 +9377,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            createAttributeResponse InsertResponse
-            
+             createAttributeResponse InsertResponse
 	    )
 
          
@@ -9427,10 +9387,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return InsertResponse{}, common.NewFDKError(err.Error())
+          
+             return InsertResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return InsertResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -9444,19 +9406,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return InsertResponse{}, err
-            
+            return InsertResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &createAttributeResponse)
         if err != nil {
-           
-             return InsertResponse{}, common.NewFDKError(err.Error())
-            
+            return InsertResponse{}, common.NewFDKError(err.Error())
         }
-        return createAttributeResponse, nil
+         return createAttributeResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -9467,9 +9429,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getAttributeResponse Attribute
-            
+             getAttributeResponse Attribute
 	    )
 
          
@@ -9485,19 +9445,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Attribute{}, err
-            
+            return Attribute{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAttributeResponse)
         if err != nil {
-           
-             return Attribute{}, common.NewFDKError(err.Error())
-            
+            return Attribute{}, common.NewFDKError(err.Error())
         }
-        return getAttributeResponse, nil
+         return getAttributeResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -9508,9 +9468,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            updateAttributeResponse UpdateResponse
-            
+             updateAttributeResponse UpdateResponse
 	    )
 
          
@@ -9520,10 +9478,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return UpdateResponse{}, common.NewFDKError(err.Error())
+          
+             return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -9537,19 +9497,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return UpdateResponse{}, err
-            
+            return UpdateResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateAttributeResponse)
         if err != nil {
-           
-             return UpdateResponse{}, common.NewFDKError(err.Error())
-            
+            return UpdateResponse{}, common.NewFDKError(err.Error())
         }
-        return updateAttributeResponse, nil
+         return updateAttributeResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -9560,9 +9520,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            createCommentResponse InsertResponse
-            
+             createCommentResponse InsertResponse
 	    )
 
          
@@ -9572,10 +9530,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return InsertResponse{}, common.NewFDKError(err.Error())
+          
+             return InsertResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return InsertResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -9589,19 +9549,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return InsertResponse{}, err
-            
+            return InsertResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &createCommentResponse)
         if err != nil {
-           
-             return InsertResponse{}, common.NewFDKError(err.Error())
-            
+            return InsertResponse{}, common.NewFDKError(err.Error())
         }
-        return createCommentResponse, nil
+         return createCommentResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -9612,9 +9572,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            updateCommentResponse UpdateResponse
-            
+             updateCommentResponse UpdateResponse
 	    )
 
          
@@ -9624,10 +9582,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return UpdateResponse{}, common.NewFDKError(err.Error())
+          
+             return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -9641,19 +9601,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return UpdateResponse{}, err
-            
+            return UpdateResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateCommentResponse)
         if err != nil {
-           
-             return UpdateResponse{}, common.NewFDKError(err.Error())
-            
+            return UpdateResponse{}, common.NewFDKError(err.Error())
         }
-        return updateCommentResponse, nil
+         return updateCommentResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -9673,9 +9633,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getCommentsResponse CommentGetResponse
-            
+             getCommentsResponse CommentGetResponse
 	    )
 
          
@@ -9691,17 +9649,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CommentGetResponse{}, err
-            
+            return CommentGetResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCommentsResponse)
         if err != nil {
-           
-             return CommentGetResponse{}, common.NewFDKError(err.Error())
-            
+            return CommentGetResponse{}, common.NewFDKError(err.Error())
         }
-        return getCommentsResponse, nil
+         return getCommentsResponse, nil
+        
     }
           
             
@@ -9790,6 +9746,8 @@ func NewAppClient(config *AppConfig) *Client {
             }
        
     
+    
+    
   
     
     
@@ -9799,9 +9757,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            checkEligibilityResponse CheckEligibilityResponse
-            
+             checkEligibilityResponse CheckEligibilityResponse
 	    )
 
          
@@ -9817,19 +9773,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CheckEligibilityResponse{}, err
-            
+            return CheckEligibilityResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &checkEligibilityResponse)
         if err != nil {
-           
-             return CheckEligibilityResponse{}, common.NewFDKError(err.Error())
-            
+            return CheckEligibilityResponse{}, common.NewFDKError(err.Error())
         }
-        return checkEligibilityResponse, nil
+         return checkEligibilityResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -9840,9 +9796,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            deleteMediaResponse UpdateResponse
-            
+             deleteMediaResponse UpdateResponse
 	    )
 
          
@@ -9858,19 +9812,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return UpdateResponse{}, err
-            
+            return UpdateResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &deleteMediaResponse)
         if err != nil {
-           
-             return UpdateResponse{}, common.NewFDKError(err.Error())
-            
+            return UpdateResponse{}, common.NewFDKError(err.Error())
         }
-        return deleteMediaResponse, nil
+         return deleteMediaResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -9881,9 +9835,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            createMediaResponse InsertResponse
-            
+             createMediaResponse InsertResponse
 	    )
 
          
@@ -9893,10 +9845,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return InsertResponse{}, common.NewFDKError(err.Error())
+          
+             return InsertResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return InsertResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -9910,19 +9864,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return InsertResponse{}, err
-            
+            return InsertResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &createMediaResponse)
         if err != nil {
-           
-             return InsertResponse{}, common.NewFDKError(err.Error())
-            
+            return InsertResponse{}, common.NewFDKError(err.Error())
         }
-        return createMediaResponse, nil
+         return createMediaResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -9933,9 +9887,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            updateMediaResponse UpdateResponse
-            
+             updateMediaResponse UpdateResponse
 	    )
 
          
@@ -9945,10 +9897,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return UpdateResponse{}, common.NewFDKError(err.Error())
+          
+             return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -9962,19 +9916,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return UpdateResponse{}, err
-            
+            return UpdateResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateMediaResponse)
         if err != nil {
-           
-             return UpdateResponse{}, common.NewFDKError(err.Error())
-            
+            return UpdateResponse{}, common.NewFDKError(err.Error())
         }
-        return updateMediaResponse, nil
+         return updateMediaResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -9992,9 +9946,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getMediasResponse MediaGetResponse
-            
+             getMediasResponse MediaGetResponse
 	    )
 
          
@@ -10010,17 +9962,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return MediaGetResponse{}, err
-            
+            return MediaGetResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getMediasResponse)
         if err != nil {
-           
-             return MediaGetResponse{}, common.NewFDKError(err.Error())
-            
+            return MediaGetResponse{}, common.NewFDKError(err.Error())
         }
-        return getMediasResponse, nil
+         return getMediasResponse, nil
+        
     }
           
             
@@ -10095,6 +10045,8 @@ func NewAppClient(config *AppConfig) *Client {
             }
        
     
+    
+    
   
     
     
@@ -10111,9 +10063,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getReviewSummariesResponse ReviewMetricGetResponse
-            
+             getReviewSummariesResponse ReviewMetricGetResponse
 	    )
 
          
@@ -10129,17 +10079,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ReviewMetricGetResponse{}, err
-            
+            return ReviewMetricGetResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getReviewSummariesResponse)
         if err != nil {
-           
-             return ReviewMetricGetResponse{}, common.NewFDKError(err.Error())
-            
+            return ReviewMetricGetResponse{}, common.NewFDKError(err.Error())
         }
-        return getReviewSummariesResponse, nil
+         return getReviewSummariesResponse, nil
+        
     }
           
             
@@ -10214,6 +10162,8 @@ func NewAppClient(config *AppConfig) *Client {
             }
        
     
+    
+    
   
     
     
@@ -10223,9 +10173,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            createReviewResponse UpdateResponse
-            
+             createReviewResponse UpdateResponse
 	    )
 
          
@@ -10235,10 +10183,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return UpdateResponse{}, common.NewFDKError(err.Error())
+          
+             return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -10252,19 +10202,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return UpdateResponse{}, err
-            
+            return UpdateResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &createReviewResponse)
         if err != nil {
-           
-             return UpdateResponse{}, common.NewFDKError(err.Error())
-            
+            return UpdateResponse{}, common.NewFDKError(err.Error())
         }
-        return createReviewResponse, nil
+         return createReviewResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -10275,9 +10225,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            updateReviewResponse UpdateResponse
-            
+             updateReviewResponse UpdateResponse
 	    )
 
          
@@ -10287,10 +10235,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return UpdateResponse{}, common.NewFDKError(err.Error())
+          
+             return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -10304,19 +10254,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return UpdateResponse{}, err
-            
+            return UpdateResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateReviewResponse)
         if err != nil {
-           
-             return UpdateResponse{}, common.NewFDKError(err.Error())
-            
+            return UpdateResponse{}, common.NewFDKError(err.Error())
         }
-        return updateReviewResponse, nil
+         return updateReviewResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -10330,6 +10280,8 @@ func NewAppClient(config *AppConfig) *Client {
         AttributeRating []string  `url:"attribute_rating,omitempty"` 
         Facets bool  `url:"facets,omitempty"` 
         Sort string  `url:"sort,omitempty"` 
+        Active bool  `url:"active,omitempty"` 
+        Approve bool  `url:"approve,omitempty"` 
         PageID string  `url:"page_id,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"`  
     }
@@ -10340,9 +10292,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getReviewsResponse ReviewGetResponse
-            
+             getReviewsResponse ReviewGetResponse
 	    )
 
          
@@ -10358,17 +10308,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return ReviewGetResponse{}, err
-            
+            return ReviewGetResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getReviewsResponse)
         if err != nil {
-           
-             return ReviewGetResponse{}, common.NewFDKError(err.Error())
-            
+            return ReviewGetResponse{}, common.NewFDKError(err.Error())
         }
-        return getReviewsResponse, nil
+         return getReviewsResponse, nil
+        
     }
           
             
@@ -10385,6 +10333,20 @@ func NewAppClient(config *AppConfig) *Client {
                     
                 
                     
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
                     
                     
                     
@@ -10490,6 +10452,14 @@ func NewAppClient(config *AppConfig) *Client {
                  
                  
                  
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
                  xQuery.PageID = paginator.NextID
                  
                  
@@ -10509,6 +10479,8 @@ func NewAppClient(config *AppConfig) *Client {
             }
        
     
+    
+    
   
     
     
@@ -10525,9 +10497,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getTemplatesResponse TemplateGetResponse
-            
+             getTemplatesResponse TemplateGetResponse
 	    )
 
          
@@ -10543,19 +10513,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return TemplateGetResponse{}, err
-            
+            return TemplateGetResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getTemplatesResponse)
         if err != nil {
-           
-             return TemplateGetResponse{}, common.NewFDKError(err.Error())
-            
+            return TemplateGetResponse{}, common.NewFDKError(err.Error())
         }
-        return getTemplatesResponse, nil
+         return getTemplatesResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -10566,9 +10536,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            createQuestionResponse InsertResponse
-            
+             createQuestionResponse InsertResponse
 	    )
 
          
@@ -10578,10 +10546,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return InsertResponse{}, common.NewFDKError(err.Error())
+          
+             return InsertResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return InsertResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -10595,19 +10565,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return InsertResponse{}, err
-            
+            return InsertResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &createQuestionResponse)
         if err != nil {
-           
-             return InsertResponse{}, common.NewFDKError(err.Error())
-            
+            return InsertResponse{}, common.NewFDKError(err.Error())
         }
-        return createQuestionResponse, nil
+         return createQuestionResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -10618,9 +10588,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            updateQuestionResponse UpdateResponse
-            
+             updateQuestionResponse UpdateResponse
 	    )
 
          
@@ -10630,10 +10598,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return UpdateResponse{}, common.NewFDKError(err.Error())
+          
+             return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -10647,19 +10617,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return UpdateResponse{}, err
-            
+            return UpdateResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateQuestionResponse)
         if err != nil {
-           
-             return UpdateResponse{}, common.NewFDKError(err.Error())
-            
+            return UpdateResponse{}, common.NewFDKError(err.Error())
         }
-        return updateQuestionResponse, nil
+         return updateQuestionResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -10679,9 +10649,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getQuestionAndAnswersResponse QNAGetResponse
-            
+             getQuestionAndAnswersResponse QNAGetResponse
 	    )
 
          
@@ -10697,17 +10665,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return QNAGetResponse{}, err
-            
+            return QNAGetResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getQuestionAndAnswersResponse)
         if err != nil {
-           
-             return QNAGetResponse{}, common.NewFDKError(err.Error())
-            
+            return QNAGetResponse{}, common.NewFDKError(err.Error())
         }
-        return getQuestionAndAnswersResponse, nil
+         return getQuestionAndAnswersResponse, nil
+        
     }
           
             
@@ -10804,6 +10770,8 @@ func NewAppClient(config *AppConfig) *Client {
             }
        
     
+    
+    
   
     
     
@@ -10821,9 +10789,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getVotesResponse VoteResponse
-            
+             getVotesResponse VoteResponse
 	    )
 
          
@@ -10839,17 +10805,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return VoteResponse{}, err
-            
+            return VoteResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getVotesResponse)
         if err != nil {
-           
-             return VoteResponse{}, common.NewFDKError(err.Error())
-            
+            return VoteResponse{}, common.NewFDKError(err.Error())
         }
-        return getVotesResponse, nil
+         return getVotesResponse, nil
+        
     }
           
             
@@ -10917,6 +10881,8 @@ func NewAppClient(config *AppConfig) *Client {
             }
        
     
+    
+    
   
     
     
@@ -10926,9 +10892,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            createVoteResponse InsertResponse
-            
+             createVoteResponse InsertResponse
 	    )
 
          
@@ -10938,10 +10902,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return InsertResponse{}, common.NewFDKError(err.Error())
+          
+             return InsertResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return InsertResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -10955,19 +10921,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return InsertResponse{}, err
-            
+            return InsertResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &createVoteResponse)
         if err != nil {
-           
-             return InsertResponse{}, common.NewFDKError(err.Error())
-            
+            return InsertResponse{}, common.NewFDKError(err.Error())
         }
-        return createVoteResponse, nil
+         return createVoteResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -10978,9 +10944,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            updateVoteResponse UpdateResponse
-            
+             updateVoteResponse UpdateResponse
 	    )
 
          
@@ -10990,10 +10954,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return UpdateResponse{}, common.NewFDKError(err.Error())
+          
+             return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return UpdateResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -11007,17 +10973,15 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return UpdateResponse{}, err
-            
+            return UpdateResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateVoteResponse)
         if err != nil {
-           
-             return UpdateResponse{}, common.NewFDKError(err.Error())
-            
+            return UpdateResponse{}, common.NewFDKError(err.Error())
         }
-        return updateVoteResponse, nil
+         return updateVoteResponse, nil
+        
     }
           
     
@@ -11030,6 +10994,8 @@ func NewAppClient(config *AppConfig) *Client {
     func NewPosCart(config *AppConfig) *PosCart {
         return &PosCart{config}
     }
+    
+    
     
   
     
@@ -11048,9 +11014,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getCartResponse CartResponse
-            
+             getCartResponse CartResponse
 	    )
 
          
@@ -11066,19 +11030,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CartResponse{}, err
-            
+            return CartResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCartResponse)
         if err != nil {
-           
-             return CartResponse{}, common.NewFDKError(err.Error())
-            
+            return CartResponse{}, common.NewFDKError(err.Error())
         }
-        return getCartResponse, nil
+         return getCartResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -11094,9 +11058,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-             getCartLastModifiedResponse interface{}
-            
+             
 	    )
 
          
@@ -11112,19 +11074,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-            return getCartLastModifiedResponse, err
-            
+            return []byte{}, err
 	    }
-        err = json.Unmarshal(response, &getCartLastModifiedResponse)
-        if err != nil {
-           
-            return getCartLastModifiedResponse, common.NewFDKError(err.Error())
-            
-        }
-        return getCartLastModifiedResponse, nil
+        
+        return response, nil
+        
     }
           
+    
+    
     
   
     
@@ -11141,9 +11099,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            addItemsResponse AddCartResponse
-            
+             addItemsResponse AddCartResponse
 	    )
 
          
@@ -11153,10 +11109,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return AddCartResponse{}, common.NewFDKError(err.Error())
+          
+             return AddCartResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return AddCartResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -11170,19 +11128,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return AddCartResponse{}, err
-            
+            return AddCartResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &addItemsResponse)
         if err != nil {
-           
-             return AddCartResponse{}, common.NewFDKError(err.Error())
-            
+            return AddCartResponse{}, common.NewFDKError(err.Error())
         }
-        return addItemsResponse, nil
+         return addItemsResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -11200,9 +11158,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            updateCartResponse UpdateCartResponse
-            
+             updateCartResponse UpdateCartResponse
 	    )
 
          
@@ -11212,10 +11168,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return UpdateCartResponse{}, common.NewFDKError(err.Error())
+          
+             return UpdateCartResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return UpdateCartResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -11229,19 +11187,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return UpdateCartResponse{}, err
-            
+            return UpdateCartResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateCartResponse)
         if err != nil {
-           
-             return UpdateCartResponse{}, common.NewFDKError(err.Error())
-            
+            return UpdateCartResponse{}, common.NewFDKError(err.Error())
         }
-        return updateCartResponse, nil
+         return updateCartResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -11257,9 +11215,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getItemCountResponse CartItemCountResponse
-            
+             getItemCountResponse CartItemCountResponse
 	    )
 
          
@@ -11275,19 +11231,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CartItemCountResponse{}, err
-            
+            return CartItemCountResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getItemCountResponse)
         if err != nil {
-           
-             return CartItemCountResponse{}, common.NewFDKError(err.Error())
-            
+            return CartItemCountResponse{}, common.NewFDKError(err.Error())
         }
-        return getItemCountResponse, nil
+         return getItemCountResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -11303,9 +11259,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getCouponsResponse GetCouponResponse
-            
+             getCouponsResponse GetCouponResponse
 	    )
 
          
@@ -11321,19 +11275,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetCouponResponse{}, err
-            
+            return GetCouponResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCouponsResponse)
         if err != nil {
-           
-             return GetCouponResponse{}, common.NewFDKError(err.Error())
-            
+            return GetCouponResponse{}, common.NewFDKError(err.Error())
         }
-        return getCouponsResponse, nil
+         return getCouponsResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -11352,9 +11306,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            applyCouponResponse CartResponse
-            
+             applyCouponResponse CartResponse
 	    )
 
          
@@ -11364,10 +11316,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CartResponse{}, common.NewFDKError(err.Error())
+          
+             return CartResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return CartResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -11381,19 +11335,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CartResponse{}, err
-            
+            return CartResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &applyCouponResponse)
         if err != nil {
-           
-             return CartResponse{}, common.NewFDKError(err.Error())
-            
+            return CartResponse{}, common.NewFDKError(err.Error())
         }
-        return applyCouponResponse, nil
+         return applyCouponResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -11409,9 +11363,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            removeCouponResponse CartResponse
-            
+             removeCouponResponse CartResponse
 	    )
 
          
@@ -11427,19 +11379,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CartResponse{}, err
-            
+            return CartResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &removeCouponResponse)
         if err != nil {
-           
-             return CartResponse{}, common.NewFDKError(err.Error())
-            
+            return CartResponse{}, common.NewFDKError(err.Error())
         }
-        return removeCouponResponse, nil
+         return removeCouponResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -11458,9 +11410,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getBulkDiscountOffersResponse BulkPriceResponse
-            
+             getBulkDiscountOffersResponse BulkPriceResponse
 	    )
 
          
@@ -11476,19 +11426,78 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return BulkPriceResponse{}, err
-            
+            return BulkPriceResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getBulkDiscountOffersResponse)
         if err != nil {
-           
-             return BulkPriceResponse{}, common.NewFDKError(err.Error())
-            
+            return BulkPriceResponse{}, common.NewFDKError(err.Error())
         }
-        return getBulkDiscountOffersResponse, nil
+         return getBulkDiscountOffersResponse, nil
+        
     }
           
+    
+    
+    
+  
+    
+    
+    //PosCartApplyRewardPointsXQuery holds query params
+    type PosCartApplyRewardPointsXQuery struct { 
+        UID float64  `url:"uid,omitempty"` 
+        I bool  `url:"i,omitempty"` 
+        B bool  `url:"b,omitempty"`  
+    }
+    
+    // ApplyRewardPoints Fetch all Items Added to  Cart
+    func (po *PosCart)  ApplyRewardPoints(xQuery PosCartApplyRewardPointsXQuery, body  RewardPointRequest) (CartResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             applyRewardPointsResponse CartResponse
+	    )
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return CartResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return CartResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            po.config,
+            "post",
+            "/service/application/pos/cart/v1.0/redeem/points/",
+            nil,
+            xQuery,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CartResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &applyRewardPointsResponse)
+        if err != nil {
+            return CartResponse{}, common.NewFDKError(err.Error())
+        }
+         return applyRewardPointsResponse, nil
+        
+    }
+          
+    
+    
     
   
     
@@ -11508,9 +11517,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getAddressesResponse GetAddressesResponse
-            
+             getAddressesResponse GetAddressesResponse
 	    )
 
          
@@ -11526,19 +11533,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetAddressesResponse{}, err
-            
+            return GetAddressesResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAddressesResponse)
         if err != nil {
-           
-             return GetAddressesResponse{}, common.NewFDKError(err.Error())
-            
+            return GetAddressesResponse{}, common.NewFDKError(err.Error())
         }
-        return getAddressesResponse, nil
+         return getAddressesResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -11549,9 +11556,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            addAddressResponse SaveAddressResponse
-            
+             addAddressResponse SaveAddressResponse
 	    )
 
          
@@ -11561,10 +11566,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return SaveAddressResponse{}, common.NewFDKError(err.Error())
+          
+             return SaveAddressResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return SaveAddressResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -11578,19 +11585,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SaveAddressResponse{}, err
-            
+            return SaveAddressResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &addAddressResponse)
         if err != nil {
-           
-             return SaveAddressResponse{}, common.NewFDKError(err.Error())
-            
+            return SaveAddressResponse{}, common.NewFDKError(err.Error())
         }
-        return addAddressResponse, nil
+         return addAddressResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -11610,9 +11617,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getAddressByIdResponse Address
-            
+             getAddressByIdResponse Address
 	    )
 
          
@@ -11628,19 +11633,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return Address{}, err
-            
+            return Address{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAddressByIdResponse)
         if err != nil {
-           
-             return Address{}, common.NewFDKError(err.Error())
-            
+            return Address{}, common.NewFDKError(err.Error())
         }
-        return getAddressByIdResponse, nil
+         return getAddressByIdResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -11651,9 +11656,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            updateAddressResponse UpdateAddressResponse
-            
+             updateAddressResponse UpdateAddressResponse
 	    )
 
          
@@ -11663,10 +11666,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return UpdateAddressResponse{}, common.NewFDKError(err.Error())
+          
+             return UpdateAddressResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return UpdateAddressResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -11680,19 +11685,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return UpdateAddressResponse{}, err
-            
+            return UpdateAddressResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateAddressResponse)
         if err != nil {
-           
-             return UpdateAddressResponse{}, common.NewFDKError(err.Error())
-            
+            return UpdateAddressResponse{}, common.NewFDKError(err.Error())
         }
-        return updateAddressResponse, nil
+         return updateAddressResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -11703,9 +11708,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            removeAddressResponse DeleteAddressResponse
-            
+             removeAddressResponse DeleteAddressResponse
 	    )
 
          
@@ -11721,19 +11724,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return DeleteAddressResponse{}, err
-            
+            return DeleteAddressResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &removeAddressResponse)
         if err != nil {
-           
-             return DeleteAddressResponse{}, common.NewFDKError(err.Error())
-            
+            return DeleteAddressResponse{}, common.NewFDKError(err.Error())
         }
-        return removeAddressResponse, nil
+         return removeAddressResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -11751,9 +11754,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            selectAddressResponse CartResponse
-            
+             selectAddressResponse CartResponse
 	    )
 
          
@@ -11763,10 +11764,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CartResponse{}, common.NewFDKError(err.Error())
+          
+             return CartResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return CartResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -11780,19 +11783,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CartResponse{}, err
-            
+            return CartResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &selectAddressResponse)
         if err != nil {
-           
-             return CartResponse{}, common.NewFDKError(err.Error())
-            
+            return CartResponse{}, common.NewFDKError(err.Error())
         }
-        return selectAddressResponse, nil
+         return selectAddressResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -11808,9 +11811,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            selectPaymentModeResponse CartResponse
-            
+             selectPaymentModeResponse CartResponse
 	    )
 
          
@@ -11820,10 +11821,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CartResponse{}, common.NewFDKError(err.Error())
+          
+             return CartResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return CartResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -11837,19 +11840,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CartResponse{}, err
-            
+            return CartResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &selectPaymentModeResponse)
         if err != nil {
-           
-             return CartResponse{}, common.NewFDKError(err.Error())
-            
+            return CartResponse{}, common.NewFDKError(err.Error())
         }
-        return selectPaymentModeResponse, nil
+         return selectPaymentModeResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -11870,9 +11873,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            validateCouponForPaymentResponse PaymentCouponValidate
-            
+             validateCouponForPaymentResponse PaymentCouponValidate
 	    )
 
          
@@ -11888,19 +11889,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return PaymentCouponValidate{}, err
-            
+            return PaymentCouponValidate{}, err
 	    }
+        
         err = json.Unmarshal(response, &validateCouponForPaymentResponse)
         if err != nil {
-           
-             return PaymentCouponValidate{}, common.NewFDKError(err.Error())
-            
+            return PaymentCouponValidate{}, common.NewFDKError(err.Error())
         }
-        return validateCouponForPaymentResponse, nil
+         return validateCouponForPaymentResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -11922,9 +11923,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getShipmentsResponse CartShipmentsResponse
-            
+             getShipmentsResponse CartShipmentsResponse
 	    )
 
          
@@ -11940,19 +11939,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CartShipmentsResponse{}, err
-            
+            return CartShipmentsResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getShipmentsResponse)
         if err != nil {
-           
-             return CartShipmentsResponse{}, common.NewFDKError(err.Error())
-            
+            return CartShipmentsResponse{}, common.NewFDKError(err.Error())
         }
-        return getShipmentsResponse, nil
+         return getShipmentsResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -11972,9 +11971,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            updateShipmentsResponse CartShipmentsResponse
-            
+             updateShipmentsResponse CartShipmentsResponse
 	    )
 
          
@@ -11984,10 +11981,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CartShipmentsResponse{}, common.NewFDKError(err.Error())
+          
+             return CartShipmentsResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return CartShipmentsResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -12001,19 +12000,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CartShipmentsResponse{}, err
-            
+            return CartShipmentsResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateShipmentsResponse)
         if err != nil {
-           
-             return CartShipmentsResponse{}, common.NewFDKError(err.Error())
-            
+            return CartShipmentsResponse{}, common.NewFDKError(err.Error())
         }
-        return updateShipmentsResponse, nil
+         return updateShipmentsResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -12029,9 +12028,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            checkoutCartResponse CartCheckoutResponse
-            
+             checkoutCartResponse CartCheckoutResponse
 	    )
 
          
@@ -12041,10 +12038,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CartCheckoutResponse{}, common.NewFDKError(err.Error())
+          
+             return CartCheckoutResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return CartCheckoutResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -12058,19 +12057,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CartCheckoutResponse{}, err
-            
+            return CartCheckoutResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &checkoutCartResponse)
         if err != nil {
-           
-             return CartCheckoutResponse{}, common.NewFDKError(err.Error())
-            
+            return CartCheckoutResponse{}, common.NewFDKError(err.Error())
         }
-        return checkoutCartResponse, nil
+         return checkoutCartResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -12086,9 +12085,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            updateCartMetaResponse CartMetaResponse
-            
+             updateCartMetaResponse CartMetaResponse
 	    )
 
          
@@ -12098,10 +12095,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return CartMetaResponse{}, common.NewFDKError(err.Error())
+          
+             return CartMetaResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return CartMetaResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -12115,19 +12114,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CartMetaResponse{}, err
-            
+            return CartMetaResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateCartMetaResponse)
         if err != nil {
-           
-             return CartMetaResponse{}, common.NewFDKError(err.Error())
-            
+            return CartMetaResponse{}, common.NewFDKError(err.Error())
         }
-        return updateCartMetaResponse, nil
+         return updateCartMetaResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -12144,9 +12143,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getAvailableDeliveryModesResponse CartDeliveryModesResponse
-            
+             getAvailableDeliveryModesResponse CartDeliveryModesResponse
 	    )
 
          
@@ -12162,19 +12159,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return CartDeliveryModesResponse{}, err
-            
+            return CartDeliveryModesResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getAvailableDeliveryModesResponse)
         if err != nil {
-           
-             return CartDeliveryModesResponse{}, common.NewFDKError(err.Error())
-            
+            return CartDeliveryModesResponse{}, common.NewFDKError(err.Error())
         }
-        return getAvailableDeliveryModesResponse, nil
+         return getAvailableDeliveryModesResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -12190,9 +12187,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getStoreAddressByUidResponse StoreDetailsResponse
-            
+             getStoreAddressByUidResponse StoreDetailsResponse
 	    )
 
          
@@ -12208,19 +12203,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return StoreDetailsResponse{}, err
-            
+            return StoreDetailsResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getStoreAddressByUidResponse)
         if err != nil {
-           
-             return StoreDetailsResponse{}, common.NewFDKError(err.Error())
-            
+            return StoreDetailsResponse{}, common.NewFDKError(err.Error())
         }
-        return getStoreAddressByUidResponse, nil
+         return getStoreAddressByUidResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -12231,9 +12226,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getCartShareLinkResponse GetShareCartLinkResponse
-            
+             getCartShareLinkResponse GetShareCartLinkResponse
 	    )
 
          
@@ -12243,10 +12236,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return GetShareCartLinkResponse{}, common.NewFDKError(err.Error())
+          
+             return GetShareCartLinkResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return GetShareCartLinkResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -12260,19 +12255,19 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetShareCartLinkResponse{}, err
-            
+            return GetShareCartLinkResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCartShareLinkResponse)
         if err != nil {
-           
-             return GetShareCartLinkResponse{}, common.NewFDKError(err.Error())
-            
+            return GetShareCartLinkResponse{}, common.NewFDKError(err.Error())
         }
-        return getCartShareLinkResponse, nil
+         return getCartShareLinkResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -12283,9 +12278,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getCartSharedItemsResponse SharedCartResponse
-            
+             getCartSharedItemsResponse SharedCartResponse
 	    )
 
          
@@ -12301,19 +12294,19 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SharedCartResponse{}, err
-            
+            return SharedCartResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getCartSharedItemsResponse)
         if err != nil {
-           
-             return SharedCartResponse{}, common.NewFDKError(err.Error())
-            
+            return SharedCartResponse{}, common.NewFDKError(err.Error())
         }
-        return getCartSharedItemsResponse, nil
+         return getCartSharedItemsResponse, nil
+        
     }
           
+    
+    
     
   
     
@@ -12324,9 +12317,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            updateCartWithSharedItemsResponse SharedCartResponse
-            
+             updateCartWithSharedItemsResponse SharedCartResponse
 	    )
 
          
@@ -12342,17 +12333,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return SharedCartResponse{}, err
-            
+            return SharedCartResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &updateCartWithSharedItemsResponse)
         if err != nil {
-           
-             return SharedCartResponse{}, common.NewFDKError(err.Error())
-            
+            return SharedCartResponse{}, common.NewFDKError(err.Error())
         }
-        return updateCartWithSharedItemsResponse, nil
+         return updateCartWithSharedItemsResponse, nil
+        
     }
           
     
@@ -12366,18 +12355,18 @@ func NewAppClient(config *AppConfig) *Client {
         return &Logistic{config}
     }
     
+    
+    
   
     
     
-    // GetTatProduct Get Tat Product
+    // GetTatProduct Use this API to know the delivery turnaround time (TAT) by entering the product details along with the PIN Code of the location.
     func (lo *Logistic)  GetTatProduct(body  GetTatProductReqBody) (GetTatProductResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getTatProductResponse GetTatProductResponse
-            
+             getTatProductResponse GetTatProductResponse
 	    )
 
          
@@ -12387,10 +12376,12 @@ func NewAppClient(config *AppConfig) *Client {
         var reqBody map[string]interface{}
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
-           return GetTatProductResponse{}, common.NewFDKError(err.Error())
+          
+             return GetTatProductResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
+             
              return GetTatProductResponse{}, common.NewFDKError(err.Error())
         }
         
@@ -12404,32 +12395,30 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetTatProductResponse{}, err
-            
+            return GetTatProductResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getTatProductResponse)
         if err != nil {
-           
-             return GetTatProductResponse{}, common.NewFDKError(err.Error())
-            
+            return GetTatProductResponse{}, common.NewFDKError(err.Error())
         }
-        return getTatProductResponse, nil
+         return getTatProductResponse, nil
+        
     }
           
+    
+    
     
   
     
     
-    // GetPincodeCity Get City from Pincode
+    // GetPincodeCity Use this API to retrieve a city by its PIN Code.
     func (lo *Logistic)  GetPincodeCity(Pincode string) (GetPincodeCityResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
-            getPincodeCityResponse GetPincodeCityResponse
-            
+             getPincodeCityResponse GetPincodeCityResponse
 	    )
 
          
@@ -12445,17 +12434,15 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-	 	   
-             return GetPincodeCityResponse{}, err
-            
+            return GetPincodeCityResponse{}, err
 	    }
+        
         err = json.Unmarshal(response, &getPincodeCityResponse)
         if err != nil {
-           
-             return GetPincodeCityResponse{}, common.NewFDKError(err.Error())
-            
+            return GetPincodeCityResponse{}, common.NewFDKError(err.Error())
         }
-        return getPincodeCityResponse, nil
+         return getPincodeCityResponse, nil
+        
     }
           
     
