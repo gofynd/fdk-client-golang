@@ -1829,7 +1829,7 @@ Schema: `ErrorResponse`
 
 
 #### getCart
-Fetch all Items Added to  Cart
+Fetch all items added to the cart
 
 ```golang
 
@@ -1850,13 +1850,13 @@ Fetch all Items Added to  Cart
 
 
 
-Get all the details of a items added to cart  by uid. If successful, returns a Cart resource in the response body specified in CartResponse
+Use this API to get details of all the items added to a cart.
 
 *Success Response:*
 
 
 
-The Cart object. See example below or refer CartResponse for details
+Success. Returns a Cart object. Check the example shown below or refer `CartResponse` for more details.
 
 
 Schema: `CartResponse`
@@ -1873,7 +1873,7 @@ Schema: `CartResponse`
 
 
 #### getCartLastModified
-Fetch Last-Modified timestamp
+Fetch last-modified timestamp
 
 ```golang
 
@@ -1888,13 +1888,13 @@ Fetch Last-Modified timestamp
 
 
 
-Fetch Last-Modified timestamp in header metadata
+Use this API to fetch Last-Modified timestamp in header metadata.
 
 *Success Response:*
 
 
 
-Fetch Last-Modified Timestamp Response
+Success. Receives last modifed timestamp in the header.
 
 
 
@@ -1905,7 +1905,7 @@ Fetch Last-Modified Timestamp Response
 
 
 #### addItems
-Add Items to Cart
+Add items to cart
 
 ```golang
 
@@ -1923,13 +1923,13 @@ Add Items to Cart
 | body |  AddCartRequest | "Request body" 
 
 
-<p>Add Items to cart. See `AddCartRequest` in schema of request body for the list of attributes needed to add items to a cart. On successful request, returns cart response containing details of items, coupons available etc.these attributes will be fetched from the folowing api's</p>
+Use this API to add items to the cart.
 
 *Success Response:*
 
 
 
-Response of the cart object including all item details included in .the cart,coupons etc.
+Success. Returns a cart object as shown below. Refer `AddCartResponse` for more details.
 
 
 Schema: `AddCartResponse`
@@ -2579,7 +2579,7 @@ Sorry, item is out of stock
 
 
 #### updateCart
-Update Items already added to Cart
+Update items in the cart
 
 ```golang
 
@@ -2599,13 +2599,13 @@ Update Items already added to Cart
 | body |  UpdateCartRequest | "Request body" 
 
 
-Request object containing attributes like item_quantity and item_size which can be updated .these attributes will be fetched from the folowing api's</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/{slug}/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/{identifier}​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
+Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/{slug}/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/{identifier}​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
 
 *Success Response:*
 
 
 
-Response of the cart object including all item with their updated details included in .the cart,coupons etc..
+Success. Updates and returns a cart object as shown below. Refer `UpdateCartResponse` for more details.
 
 
 Schema: `UpdateCartResponse`
@@ -2984,7 +2984,7 @@ Item updated in the cart
 
 
 #### getItemCount
-Cart item count
+Count items in the cart
 
 ```golang
 
@@ -2999,13 +2999,13 @@ Cart item count
 
 
 
-Get total count of item present in cart
+Use this API to get the total number of items present in cart.
 
 *Success Response:*
 
 
 
-OK
+Success. Returns the total count of items in a user's cart.
 
 
 Schema: `CartItemCountResponse`
@@ -3037,13 +3037,13 @@ Fetch Coupon
 
 
 
-Get all the details of a coupons applicable to cart  by uid. If successful, returns a Coupon resource in the response body specified in GetCouponResponse
+Use this API to get a list of available coupons along with their details.
 
 *Success Response:*
 
 
 
-Returns The Couppon object which has list of all available_coupon applicale for the cart. See example below or refer GetCouponResponse for details
+Success. Returns a coupon object which has a list of all the eligible coupons. Refer `GetCouponResponse` for more details.
 
 
 Schema: `GetCouponResponse`
@@ -3082,14 +3082,13 @@ Apply Coupon
 | body |  ApplyCouponRequest | "Request body" 
 
 
-<p>Apply Coupons on Items added to cart. On successful request, returns cart response containing details of items ,coupons applied etc.these attributes will be consumed by  api</p> <ul> <li> <font color="monochrome">coupon_code</font></li>
-</ul>
+Use this API to apply coupons on items in the cart.
 
 *Success Response:*
 
 
 
-Response of the Coupon object including all item details included in .the cart,coupons applied etc.
+Success. Returns coupons applied to the cart along with item details and price breakup. Refer `CartResponse` for more details.
 
 
 Schema: `CartResponse`
@@ -3127,7 +3126,7 @@ Remove Coupon applied on the cart by passing uid in request body.
 
 
 
-Response of the Coupon object including all item details included in .the cart,coupons removed etc.
+Success. Returns coupons removed from the cart along with item details and price breakup. Refer `CartResponse` for more details.
 
 
 Schema: `CartResponse`
@@ -3165,13 +3164,13 @@ Get discount offers based on quantity
 
 
 
-List applicable offers along with current, next and best offer for given product. Either one of **uid**, **item_id**, **slug** should be present*
+Use this API to get a list of applicable offers along with current, next and best offer for given product. Either one of **uid**, **item_id**, **slug** should be present*.
 
 *Success Response:*
 
 
 
-Offers found or not found with valid input
+Success. Returns a data object containing the seller details and available offers (if exists) on bulk products. Refer `BulkPriceResponse` for more details.
 
 
 Schema: `BulkPriceResponse`
@@ -3254,7 +3253,7 @@ Offers not found
 
 
 
-Unhandled api error
+Unhandled API error
 
 
 Schema: `Object`
@@ -3271,7 +3270,7 @@ Schema: `Object`
 
 
 #### applyRewardPoints
-Fetch all Items Added to  Cart
+Fetch rewards points for cart.
 
 ```golang
 
@@ -3291,13 +3290,13 @@ Fetch all Items Added to  Cart
 | body |  RewardPointRequest | "Request body" 
 
 
-Get all the details of a items added to cart  by uid. If successful, returns a Cart resource in the response body specified in CartResponse
+Use this API to get rewards points for cart.
 
 *Success Response:*
 
 
 
-The Cart object. See example below or refer CartResponse for details
+Success. Returns a Cart object. Check the example shown below or refer `CartResponse` for more details.
 
 
 Schema: `CartResponse`
@@ -3314,7 +3313,7 @@ Schema: `CartResponse`
 
 
 #### getAddresses
-Fetch Address
+Fetch address
 
 ```golang
 
@@ -3337,13 +3336,13 @@ Fetch Address
 
 
 
-Get all the addresses associated with the account. If successful, returns a Address resource in the response body specified in GetAddressesResponse.attibutes listed below are optional <ul> <li> <font color="monochrome">uid</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
+Use this API to get all the addresses associated with an account. If successful, returns a Address resource in the response body specified in GetAddressesResponse.attibutes listed below are optional <ul> <li> <font color="monochrome">uid</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
 
 *Success Response:*
 
 
 
-Returns The Address object which has list of all address saved for the account. See example below or refer GetAddressesResponse for details
+Success. Returns an Address object containing a list of address saved in the account. Refer `GetAddressesResponse` for more details.
 
 
 Schema: `GetAddressesResponse`
@@ -3360,7 +3359,7 @@ Schema: `GetAddressesResponse`
 
 
 #### addAddress
-Add Address to the account
+Add address to an account
 
 ```golang
 
@@ -3373,13 +3372,13 @@ Add Address to the account
 | body |  Address | "Request body" 
 
 
-<p>Add Address to account. See `Address` in schema of request body for the list of attributes needed to add Address to account. On successful request, returns response containing address_id ,is_default_address and success message.
+Use this API to add an address to an account.
 
 *Success Response:*
 
 
 
-Return Address Id on successfull completion of the request.
+Success. Returns the address ID, a flag whether the address is set as default, and a success message. Refer `SaveAddressResponse` for more details.
 
 
 Schema: `SaveAddressResponse`
@@ -3396,7 +3395,7 @@ Schema: `SaveAddressResponse`
 
 
 #### getAddressById
-Fetch Single Address
+Fetch a single address by its ID
 
 ```golang
 
@@ -3422,13 +3421,13 @@ Fetch Single Address
 
 
 
-Get a addresses with the given id. If successful, returns a Address resource in the response body specified in `Address`.attibutes listed below are optional <ul> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
+Use this API to get an addresses using its ID. If successful, returns a Address resource in the response body specified in `Address`. Attibutes listed below are optional <ul> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
 
 *Success Response:*
 
 
 
-Returns The Address object which has list of all address saved for the account. See example below or refer Address for details
+Success. Returns an Address object containing a list of address saved in the account. Refer `Address` for more details.
 
 
 Schema: `Address`
@@ -3445,7 +3444,7 @@ Schema: `Address`
 
 
 #### updateAddress
-Update Address alreay added to account
+Update address added to an account
 
 ```golang
 
@@ -3455,19 +3454,19 @@ Update Address alreay added to account
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ID | float64 | Address id | 
+| ID | float64 | ID allotted to the selected address | 
 
 
 | body |  Address | "Request body" 
 
 
-Request object containing attributes mentioned in  <font color="blue">Address </font> can be updated .these attributes are :</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
+Use this API to update an existing address in the account. Request object should contain attributes mentioned in  <font color="blue">Address </font> can be updated. These attributes are:</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
 
 *Success Response:*
 
 
 
-Response of the Address object containing address_id and sucess message.
+Success. Returns the address ID and a message indicating a successful address updation.
 
 
 Schema: `UpdateAddressResponse`
@@ -3484,7 +3483,7 @@ Schema: `UpdateAddressResponse`
 
 
 #### removeAddress
-Remove Address Associated to the account
+Remove address associated with an account
 
 ```golang
 
@@ -3494,18 +3493,18 @@ Remove Address Associated to the account
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ID | float64 | Address id | 
+| ID | float64 | ID allotted to the selected address | 
 
 
 
 
-Delete a Address by it's address_id. Returns an object that tells whether the address was deleted successfully
+Use this API to delete an address by its ID. This will returns an object that will indicate whether the address was deleted successfully or not.
 
 *Success Response:*
 
 
 
-Status object. Tells whether the operation was successful. See example below or refer DeleteAddressResponse
+Returns a Status object indicating the success or failure of address deletion.
 
 
 Schema: `DeleteAddressResponse`
@@ -3522,7 +3521,7 @@ Schema: `DeleteAddressResponse`
 
 
 #### selectAddress
-Select Address from All Addresses
+Select an address from available addresses
 
 ```golang
 
@@ -3542,13 +3541,13 @@ Select Address from All Addresses
 | body |  SelectCartAddressRequest | "Request body" 
 
 
-<p>Select Address from all addresses associated with the account in order to ship the cart items to .that address,otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, returns Cart object response.below are the address attributes which needs to be sent. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul>
+<p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul>
 
 *Success Response:*
 
 
 
-Response of the Address object containing Cart Object and success message.  .
+Success. Returns a Cart object as shown below. Refer `CartResponse` for more details.  .
 
 
 Schema: `CartResponse`
@@ -3560,7 +3559,7 @@ Schema: `CartResponse`
 
 
 
-Address or Pincode Error
+Address or PIN code error
 
 
 Schema: `Object`
@@ -3601,7 +3600,7 @@ Pincode Not Serviciable
 
 
 #### selectPaymentMode
-Update Cart Payment
+Update cart payment
 
 ```golang
 
@@ -3617,13 +3616,13 @@ Update Cart Payment
 | body |  UpdateCartPaymentRequest | "Request body" 
 
 
-Update Cart Payment for Your Account
+Use this API to update cart payment.
 
 *Success Response:*
 
 
 
-Cart response with payment options
+Success. Returns a Cart object as shown below. Refer `CartResponse` for more details.
 
 
 Schema: `CartResponse`
@@ -3640,7 +3639,7 @@ Schema: `CartResponse`
 
 
 #### validateCouponForPayment
-Get Cart Payment for valid coupon
+Verify the coupon eligibility against the payment mode
 
 ```golang
 
@@ -3665,13 +3664,13 @@ Get Cart Payment for valid coupon
 
 
 
-Validate coupon for selected payment mode
+Use this API to validate a coupon against the payment mode such as NetBanking, Wallet, UPI etc.
 
 *Success Response:*
 
 
 
-Cart Affiliates.
+Success. Returns a success message and the coupon validity. Refer `PaymentCouponValidate` for more details.
 
 
 Schema: `PaymentCouponValidate`
@@ -3709,13 +3708,13 @@ Get delivery date and options before checkout
 
 
 
-Shipment break up item wise with delivery date. Actual                      delivery will be during given dates only. Items will be                      delivered in group of shipments created.
+Use this API to get shipment details, expected delivery date, items and price breakup of the shipment.
 
 *Success Response:*
 
 
 
-OK
+Success. Returns delivery promise along with shipment details and price breakup. Refer `CartShipmentsResponse` for more details.
 
 
 Schema: `CartShipmentsResponse`
@@ -4367,7 +4366,7 @@ Shipment Generation Failed
 
 
 
-Unhandled api error
+Unhandled API error
 
 
 Schema: `Object`
@@ -4384,7 +4383,7 @@ Schema: `Object`
 
 
 #### checkoutCart
-Checkout Cart
+Checkout all items in the cart
 
 ```golang
 
@@ -4397,13 +4396,13 @@ Checkout Cart
 | body |  CartCheckoutRequest | "Request body" 
 
 
-Checkout all items in cart to payment and order generation.                         For COD only order will be generated while for other checkout mode                         user will be redirected to payment gateway
+Use this API to checkout all items in the cart for payment and order generation. For COD, order will be directly generated, whereas for other checkout modes, user will be redirected to a payment gateway.
 
 *Success Response:*
 
 
 
-OK
+Success. Returns the status of cart checkout. Refer `CartCheckoutResponse` for more details.
 
 
 Schema: `CartCheckoutResponse`
@@ -4797,7 +4796,7 @@ Successful checkout cod payment
 
 
 #### updateCartMeta
-Update Cart Meta
+Update the cart meta
 
 ```golang
 
@@ -4813,13 +4812,13 @@ Update Cart Meta
 | body |  CartMetaRequest | "Request body" 
 
 
-Update cart meta like checkout_mode, gstin.
+Use this API to update cart meta like checkout_mode and gstin.
 
 *Success Response:*
 
 
 
-Cart meta updated successfully
+Returns a message indicating the success of cart meta updation as shown below.
 
 
 Schema: `CartMetaResponse`
@@ -4848,7 +4847,7 @@ Schema: `CartMetaMissingResponse`
 
 
 #### getCartShareLink
-Generate Cart sharing link token
+Generate token for sharing the cart
 
 ```golang
 
@@ -4861,13 +4860,13 @@ Generate Cart sharing link token
 | body |  GetShareCartLinkRequest | "Request body" 
 
 
-Generates shared cart snapshot and returns shortlink token
+Use this API to generate a shared cart snapshot and return a shortlink token. The link can be shared with other users for getting the same items in their cart.
 
 *Success Response:*
 
 
 
-Token Generated successfully
+Returns a URL to share and a token as shown below.
 
 
 Schema: `GetShareCartLinkResponse`
@@ -4898,7 +4897,7 @@ Token Generated
 
 
 #### getCartSharedItems
-Get shared cart snapshot and cart response
+Get details of a shared cart
 
 ```golang
 
@@ -4908,18 +4907,18 @@ Get shared cart snapshot and cart response
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Token | string | Shared short link token. | 
+| Token | string | Token of the shared short link | 
 
 
 
 
-Returns shared cart response for sent token with `shared_cart_details`                    containing shared cart details in response.
+Use this API to get the shared cart details as per the token generated using the share-cart API.
 
 *Success Response:*
 
 
 
-Cart for valid token
+Success. Returns a Cart object as per the valid token. Refer `SharedCartResponse` for more details.
 
 
 Schema: `SharedCartResponse`
@@ -4931,7 +4930,7 @@ Schema: `SharedCartResponse`
 
 
 
-No cart found for sent token
+No cart found for the token sent
 
 
 Schema: `SharedCartResponse`
@@ -4948,7 +4947,7 @@ Schema: `SharedCartResponse`
 
 
 #### updateCartWithSharedItems
-Merge or Replace existing cart
+Merge or replace existing cart
 
 ```golang
 
@@ -4958,21 +4957,21 @@ Merge or Replace existing cart
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Token | string | Shared short link token. | 
+| Token | string | Token of the shared short link | 
 
 
-| Action | string | Operation to perform on existing cart, whether to merge or replace. | 
+| Action | string | Operation to perform on the existing cart merge or replace. | 
 
 
 
 
-Merge or Replace cart based on `action` parameter with shared cart of `token`
+Use this API to merge the shared cart with existing cart, or replace the existing cart with the shared cart. The `action` parameter is used to indicate the operation Merge or Replace.
 
 *Success Response:*
 
 
 
-Success of Merge or Replace of cart with `shared_cart_details`                    containing shared cart details in response
+Success. Returns a merged or replaced cart as per the valid token. Refer `SharedCartResponse` for more details.
 
 
 Schema: `SharedCartResponse`
@@ -15123,7 +15122,7 @@ Schema: `FeedbackError`
 
 
 #### getCart
-Fetch all Items Added to  Cart
+Fetch all items added to the cart
 
 ```golang
 
@@ -15144,13 +15143,13 @@ Fetch all Items Added to  Cart
 
 
 
-Get all the details of a items added to cart  by uid. If successful, returns a Cart resource in the response body specified in CartResponse
+Use this API to get details of all the items added to a cart.
 
 *Success Response:*
 
 
 
-The Cart object. See example below or refer CartResponse for details
+Success. Returns a Cart object. Check the example shown below or refer `CartResponse` for more details.
 
 
 Schema: `CartResponse`
@@ -15167,7 +15166,7 @@ Schema: `CartResponse`
 
 
 #### getCartLastModified
-Fetch Last-Modified timestamp
+Fetch last-modified timestamp
 
 ```golang
 
@@ -15182,13 +15181,13 @@ Fetch Last-Modified timestamp
 
 
 
-Fetch Last-Modified timestamp in header metadata
+Use this API to fetch Last-Modified timestamp in header metadata.
 
 *Success Response:*
 
 
 
-Fetch Last-Modified Timestamp Response
+Success. Receives last modifed timestamp in the header.
 
 
 
@@ -15199,7 +15198,7 @@ Fetch Last-Modified Timestamp Response
 
 
 #### addItems
-Add Items to Cart
+Add items to cart
 
 ```golang
 
@@ -15217,13 +15216,13 @@ Add Items to Cart
 | body |  AddCartRequest | "Request body" 
 
 
-<p>Add Items to cart. See `AddCartRequest` in schema of request body for the list of attributes needed to add items to a cart. On successful request, returns cart response containing details of items, coupons available etc.these attributes will be fetched from the folowing api's</p>
+Use this API to add items to the cart.
 
 *Success Response:*
 
 
 
-Response of the cart object including all item details included in .the cart,coupons etc.
+Success. Returns a cart object as shown below. Refer `AddCartResponse` for more details.
 
 
 Schema: `AddCartResponse`
@@ -15873,7 +15872,7 @@ Sorry, item is out of stock
 
 
 #### updateCart
-Update Items already added to Cart
+Update items in the cart
 
 ```golang
 
@@ -15893,13 +15892,13 @@ Update Items already added to Cart
 | body |  UpdateCartRequest | "Request body" 
 
 
-Request object containing attributes like item_quantity and item_size which can be updated .these attributes will be fetched from the folowing api's</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/{slug}/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/{identifier}​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
+Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/{slug}/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/{identifier}​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
 
 *Success Response:*
 
 
 
-Response of the cart object including all item with their updated details included in .the cart,coupons etc..
+Success. Updates and returns a cart object as shown below. Refer `UpdateCartResponse` for more details.
 
 
 Schema: `UpdateCartResponse`
@@ -16278,7 +16277,7 @@ Item updated in the cart
 
 
 #### getItemCount
-Cart item count
+Count items in the cart
 
 ```golang
 
@@ -16293,13 +16292,13 @@ Cart item count
 
 
 
-Get total count of item present in cart
+Use this API to get the total number of items present in cart.
 
 *Success Response:*
 
 
 
-OK
+Success. Returns the total count of items in a user's cart.
 
 
 Schema: `CartItemCountResponse`
@@ -16331,13 +16330,13 @@ Fetch Coupon
 
 
 
-Get all the details of a coupons applicable to cart  by uid. If successful, returns a Coupon resource in the response body specified in GetCouponResponse
+Use this API to get a list of available coupons along with their details.
 
 *Success Response:*
 
 
 
-Returns The Couppon object which has list of all available_coupon applicale for the cart. See example below or refer GetCouponResponse for details
+Success. Returns a coupon object which has a list of all the eligible coupons. Refer `GetCouponResponse` for more details.
 
 
 Schema: `GetCouponResponse`
@@ -16376,14 +16375,13 @@ Apply Coupon
 | body |  ApplyCouponRequest | "Request body" 
 
 
-<p>Apply Coupons on Items added to cart. On successful request, returns cart response containing details of items ,coupons applied etc.these attributes will be consumed by  api</p> <ul> <li> <font color="monochrome">coupon_code</font></li>
-</ul>
+Use this API to apply coupons on items in the cart.
 
 *Success Response:*
 
 
 
-Response of the Coupon object including all item details included in .the cart,coupons applied etc.
+Success. Returns coupons applied to the cart along with item details and price breakup. Refer `CartResponse` for more details.
 
 
 Schema: `CartResponse`
@@ -16421,7 +16419,7 @@ Remove Coupon applied on the cart by passing uid in request body.
 
 
 
-Response of the Coupon object including all item details included in .the cart,coupons removed etc.
+Success. Returns coupons removed from the cart along with item details and price breakup. Refer `CartResponse` for more details.
 
 
 Schema: `CartResponse`
@@ -16459,13 +16457,13 @@ Get discount offers based on quantity
 
 
 
-List applicable offers along with current, next and best offer for given product. Either one of **uid**, **item_id**, **slug** should be present*
+Use this API to get a list of applicable offers along with current, next and best offer for given product. Either one of **uid**, **item_id**, **slug** should be present*.
 
 *Success Response:*
 
 
 
-Offers found or not found with valid input
+Success. Returns a data object containing the seller details and available offers (if exists) on bulk products. Refer `BulkPriceResponse` for more details.
 
 
 Schema: `BulkPriceResponse`
@@ -16548,7 +16546,7 @@ Offers not found
 
 
 
-Unhandled api error
+Unhandled API error
 
 
 Schema: `Object`
@@ -16565,7 +16563,7 @@ Schema: `Object`
 
 
 #### applyRewardPoints
-Fetch all Items Added to  Cart
+Fetch rewards points for cart.
 
 ```golang
 
@@ -16585,13 +16583,13 @@ Fetch all Items Added to  Cart
 | body |  RewardPointRequest | "Request body" 
 
 
-Get all the details of a items added to cart  by uid. If successful, returns a Cart resource in the response body specified in CartResponse
+Use this API to get rewards points for cart.
 
 *Success Response:*
 
 
 
-The Cart object. See example below or refer CartResponse for details
+Success. Returns a Cart object. Check the example shown below or refer `CartResponse` for more details.
 
 
 Schema: `CartResponse`
@@ -16608,7 +16606,7 @@ Schema: `CartResponse`
 
 
 #### getAddresses
-Fetch Address
+Fetch address
 
 ```golang
 
@@ -16631,13 +16629,13 @@ Fetch Address
 
 
 
-Get all the addresses associated with the account. If successful, returns a Address resource in the response body specified in GetAddressesResponse.attibutes listed below are optional <ul> <li> <font color="monochrome">uid</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
+Use this API to get all the addresses associated with an account. If successful, returns a Address resource in the response body specified in GetAddressesResponse.attibutes listed below are optional <ul> <li> <font color="monochrome">uid</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
 
 *Success Response:*
 
 
 
-Returns The Address object which has list of all address saved for the account. See example below or refer GetAddressesResponse for details
+Success. Returns an Address object containing a list of address saved in the account. Refer `GetAddressesResponse` for more details.
 
 
 Schema: `GetAddressesResponse`
@@ -16654,7 +16652,7 @@ Schema: `GetAddressesResponse`
 
 
 #### addAddress
-Add Address to the account
+Add address to an account
 
 ```golang
 
@@ -16667,13 +16665,13 @@ Add Address to the account
 | body |  Address | "Request body" 
 
 
-<p>Add Address to account. See `Address` in schema of request body for the list of attributes needed to add Address to account. On successful request, returns response containing address_id ,is_default_address and success message.
+Use this API to add an address to an account.
 
 *Success Response:*
 
 
 
-Return Address Id on successfull completion of the request.
+Success. Returns the address ID, a flag whether the address is set as default, and a success message. Refer `SaveAddressResponse` for more details.
 
 
 Schema: `SaveAddressResponse`
@@ -16690,7 +16688,7 @@ Schema: `SaveAddressResponse`
 
 
 #### getAddressById
-Fetch Single Address
+Fetch a single address by its ID
 
 ```golang
 
@@ -16716,13 +16714,13 @@ Fetch Single Address
 
 
 
-Get a addresses with the given id. If successful, returns a Address resource in the response body specified in `Address`.attibutes listed below are optional <ul> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
+Use this API to get an addresses using its ID. If successful, returns a Address resource in the response body specified in `Address`. Attibutes listed below are optional <ul> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
 
 *Success Response:*
 
 
 
-Returns The Address object which has list of all address saved for the account. See example below or refer Address for details
+Success. Returns an Address object containing a list of address saved in the account. Refer `Address` for more details.
 
 
 Schema: `Address`
@@ -16739,7 +16737,7 @@ Schema: `Address`
 
 
 #### updateAddress
-Update Address alreay added to account
+Update address added to an account
 
 ```golang
 
@@ -16749,19 +16747,19 @@ Update Address alreay added to account
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ID | float64 | Address id | 
+| ID | float64 | ID allotted to the selected address | 
 
 
 | body |  Address | "Request body" 
 
 
-Request object containing attributes mentioned in  <font color="blue">Address </font> can be updated .these attributes are :</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
+Use this API to update an existing address in the account. Request object should contain attributes mentioned in  <font color="blue">Address </font> can be updated. These attributes are:</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
 
 *Success Response:*
 
 
 
-Response of the Address object containing address_id and sucess message.
+Success. Returns the address ID and a message indicating a successful address updation.
 
 
 Schema: `UpdateAddressResponse`
@@ -16778,7 +16776,7 @@ Schema: `UpdateAddressResponse`
 
 
 #### removeAddress
-Remove Address Associated to the account
+Remove address associated with an account
 
 ```golang
 
@@ -16788,18 +16786,18 @@ Remove Address Associated to the account
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ID | float64 | Address id | 
+| ID | float64 | ID allotted to the selected address | 
 
 
 
 
-Delete a Address by it's address_id. Returns an object that tells whether the address was deleted successfully
+Use this API to delete an address by its ID. This will returns an object that will indicate whether the address was deleted successfully or not.
 
 *Success Response:*
 
 
 
-Status object. Tells whether the operation was successful. See example below or refer DeleteAddressResponse
+Returns a Status object indicating the success or failure of address deletion.
 
 
 Schema: `DeleteAddressResponse`
@@ -16816,7 +16814,7 @@ Schema: `DeleteAddressResponse`
 
 
 #### selectAddress
-Select Address from All Addresses
+Select an address from available addresses
 
 ```golang
 
@@ -16836,13 +16834,13 @@ Select Address from All Addresses
 | body |  SelectCartAddressRequest | "Request body" 
 
 
-<p>Select Address from all addresses associated with the account in order to ship the cart items to .that address,otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, returns Cart object response.below are the address attributes which needs to be sent. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul>
+<p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul>
 
 *Success Response:*
 
 
 
-Response of the Address object containing Cart Object and success message.  .
+Success. Returns a Cart object as shown below. Refer `CartResponse` for more details.  .
 
 
 Schema: `CartResponse`
@@ -16854,7 +16852,7 @@ Schema: `CartResponse`
 
 
 
-Address or Pincode Error
+Address or PIN code error
 
 
 Schema: `Object`
@@ -16895,7 +16893,7 @@ Pincode Not Serviciable
 
 
 #### selectPaymentMode
-Update Cart Payment
+Update cart payment
 
 ```golang
 
@@ -16911,13 +16909,13 @@ Update Cart Payment
 | body |  UpdateCartPaymentRequest | "Request body" 
 
 
-Update Cart Payment for Your Account
+Use this API to update cart payment.
 
 *Success Response:*
 
 
 
-Cart response with payment options
+Success. Returns a Cart object as shown below. Refer `CartResponse` for more details.
 
 
 Schema: `CartResponse`
@@ -16934,7 +16932,7 @@ Schema: `CartResponse`
 
 
 #### validateCouponForPayment
-Get Cart Payment for valid coupon
+Verify the coupon eligibility against the payment mode
 
 ```golang
 
@@ -16959,13 +16957,13 @@ Get Cart Payment for valid coupon
 
 
 
-Validate coupon for selected payment mode
+Use this API to validate a coupon against the payment mode such as NetBanking, Wallet, UPI etc.
 
 *Success Response:*
 
 
 
-Cart Affiliates.
+Success. Returns a success message and the coupon validity. Refer `PaymentCouponValidate` for more details.
 
 
 Schema: `PaymentCouponValidate`
@@ -17009,13 +17007,13 @@ Get delivery date and options before checkout
 
 
 
-Shipment break up item wise with delivery date. Actual                      delivery will be during given dates only. Items will be                      delivered in group of shipments created.
+Use this API to get shipment details, expected delivery date, items and price breakup of the shipment.
 
 *Success Response:*
 
 
 
-OK
+Success. Returns delivery promise along with shipment details and price breakup. Refer `CartShipmentsResponse` for more details.
 
 
 Schema: `CartShipmentsResponse`
@@ -17667,7 +17665,7 @@ Shipment Generation Failed
 
 
 
-Unhandled api error
+Unhandled API error
 
 
 Schema: `Object`
@@ -17708,13 +17706,13 @@ Update shipment delivery type and quantity before checkout
 | body |  UpdateCartShipmentRequest | "Request body" 
 
 
-Shipment break up item wise with delivery date. Actual                      delivery will be during given dates only. Items will be                      delivered in group of shipments created. Update the shipment                      type and quantity as per customer preference for store pick up or home delivery
+Use this API to update the delivery type and quantity as per customer's preference for either store pick-up or home-delivery.
 
 *Success Response:*
 
 
 
-OK
+Success. Returns delivery promise along with shipment details and price breakup. Refer `CartShipmentsResponse` for more details.
 
 
 Schema: `CartShipmentsResponse`
@@ -18367,7 +18365,7 @@ Shipment Generation Failed
 
 
 
-Unhandled api error
+Unhandled API error
 
 
 Schema: `Object`
@@ -18384,7 +18382,7 @@ Schema: `Object`
 
 
 #### checkoutCart
-Checkout Cart
+Checkout all items in the cart
 
 ```golang
 
@@ -18400,13 +18398,13 @@ Checkout Cart
 | body |  CartPosCheckoutRequest | "Request body" 
 
 
-Checkout all items in cart to payment and order generation.                        For COD only order will be generated while for other checkout mode                        user will be redirected to payment gateway
+Use this API to checkout all items in the cart for payment and order generation. For COD, order will be generated directly, whereas for other checkout modes, user will be redirected to a payment gateway.
 
 *Success Response:*
 
 
 
-OK
+Success. Returns the status of cart checkout. Refer `CartCheckoutResponse` for more details.
 
 
 Schema: `CartCheckoutResponse`
@@ -18800,7 +18798,7 @@ Successful checkout cod payment
 
 
 #### updateCartMeta
-Update Cart Meta
+Update the cart meta
 
 ```golang
 
@@ -18816,13 +18814,13 @@ Update Cart Meta
 | body |  CartMetaRequest | "Request body" 
 
 
-Update cart meta like checkout_mode, gstin.
+Use this API to update cart meta like checkout_mode and gstin.
 
 *Success Response:*
 
 
 
-Cart meta updated successfully
+Returns a message indicating the success of cart meta updation as shown below.
 
 
 Schema: `CartMetaResponse`
@@ -18868,13 +18866,13 @@ Get available delivery modes for cart
 
 
 
-Get available delivery modes for cart and pick up store uid list. From given pick stores list user can pick up delivery. Use this uid to show store address
+Use this API to get the delivery modes (home-delivery/store-pickup) along with a list of pickup stores available for a given cart at a given PIN Code. User can then view the address of a pickup store with the help of /store-address API.
 
 *Success Response:*
 
 
 
-Returns Available delivery modes for cart and pick up available store uid for current cart items
+Success. Returns the available delivery mode available for a given PIN Code, along with the UID of all the eligible pickup stores.
 
 
 Schema: `CartDeliveryModesResponse`
@@ -18906,13 +18904,13 @@ Get list of stores for give uids
 
 
 
-Get list of stores by providing pick up available store uids.
+Use this API to get the store details by entering the unique identifier of the pickup stores shown in the response of /available-delivery-mode API.
 
 *Success Response:*
 
 
 
-Returns available store information with its address
+Success. Returns available store information with its address as shown below.
 
 
 Schema: `StoreDetailsResponse`
@@ -18929,7 +18927,7 @@ Schema: `StoreDetailsResponse`
 
 
 #### getCartShareLink
-Generate Cart sharing link token
+Generate token for sharing the cart
 
 ```golang
 
@@ -18942,13 +18940,13 @@ Generate Cart sharing link token
 | body |  GetShareCartLinkRequest | "Request body" 
 
 
-Generates shared cart snapshot and returns shortlink token
+Use this API to generate a shared cart snapshot and return a shortlink token. The link can be shared with other users for getting the same items in their cart.
 
 *Success Response:*
 
 
 
-Token Generated successfully
+Returns a URL to share and a token as shown below.
 
 
 Schema: `GetShareCartLinkResponse`
@@ -18979,7 +18977,7 @@ Token Generated
 
 
 #### getCartSharedItems
-Get shared cart snapshot and cart response
+Get details of a shared cart
 
 ```golang
 
@@ -18989,18 +18987,18 @@ Get shared cart snapshot and cart response
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Token | string | Shared short link token. | 
+| Token | string | Token of the shared short link | 
 
 
 
 
-Returns shared cart response for sent token with `shared_cart_details`                    containing shared cart details in response.
+Use this API to get the shared cart details as per the token generated using the share-cart API.
 
 *Success Response:*
 
 
 
-Cart for valid token
+Success. Returns a Cart object as per the valid token. Refer `SharedCartResponse` for more details.
 
 
 Schema: `SharedCartResponse`
@@ -19012,7 +19010,7 @@ Schema: `SharedCartResponse`
 
 
 
-No cart found for sent token
+No cart found for the token sent
 
 
 Schema: `SharedCartResponse`
@@ -19029,7 +19027,7 @@ Schema: `SharedCartResponse`
 
 
 #### updateCartWithSharedItems
-Merge or Replace existing cart
+Merge or replace existing cart
 
 ```golang
 
@@ -19039,21 +19037,21 @@ Merge or Replace existing cart
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Token | string | Shared short link token. | 
+| Token | string | Token of the shared short link | 
 
 
-| Action | string | Operation to perform on existing cart, whether to merge or replace. | 
+| Action | string | Operation to perform on the existing cart merge or replace. | 
 
 
 
 
-Merge or Replace cart based on `action` parameter with shared cart of `token`
+Use this API to merge the shared cart with existing cart, or replace the existing cart with the shared cart. The `action` parameter is used to indicate the operation Merge or Replace.
 
 *Success Response:*
 
 
 
-Success of Merge or Replace of cart with `shared_cart_details`                    containing shared cart details in response
+Success. Returns a merged or replaced cart as per the valid token. Refer `SharedCartResponse` for more details.
 
 
 Schema: `SharedCartResponse`
