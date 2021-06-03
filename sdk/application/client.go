@@ -227,6 +227,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CatalogGetProductSellersBySlugXQuery holds query params
     type CatalogGetProductSellersBySlugXQuery struct { 
+        Strategy string  `url:"strategy,omitempty"` 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"`  
     }
@@ -296,6 +297,13 @@ func NewAppClient(config *AppConfig) *Client {
                     
                     
                     
+                        
+                    
+                    
+                
+                    
+                    
+                    
                     
                 
                     
@@ -309,6 +317,10 @@ func NewAppClient(config *AppConfig) *Client {
             // GetProductSellersBySlugPaginator Get the sellers of a product size at a PIN Code  
             func (ca *Catalog)  GetProductSellersBySlugPaginator(Slug string  , Size string  , Pincode string  ,  xQuery CatalogGetProductSellersBySlugXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
+                 
+                 
+                 
+                 
                  
                  
                  xQuery.PageNo  = paginator.PageNo
@@ -1603,45 +1615,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UnfollowById Unfollow an entity (product/brand/collection)
-    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             unfollowByIdResponse FollowPostResponse
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &unfollowByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return unfollowByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // FollowById Follow an entity (product/brand/collection)
     func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1672,6 +1645,45 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return followByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UnfollowById Unfollow an entity (product/brand/collection)
+    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             unfollowByIdResponse FollowPostResponse
+	    )
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &unfollowByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return unfollowByIdResponse, nil
         
     }
           
@@ -2360,7 +2372,7 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // ApplyRewardPoints Fetch all Items Added to  Cart
-    func (ca *Cart)  ApplyRewardPoints(xQuery CartApplyRewardPointsXQuery) (CartResponse, error){
+    func (ca *Cart)  ApplyRewardPoints(xQuery CartApplyRewardPointsXQuery, body  RewardPointRequest) (CartResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -2371,6 +2383,19 @@ func NewAppClient(config *AppConfig) *Client {
          
         
         
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return CartResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return CartResponse{}, common.NewFDKError(err.Error())
+        }
+        
         //API call
         rawRequest = NewRequest(
             ca.config,
@@ -2378,7 +2403,7 @@ func NewAppClient(config *AppConfig) *Client {
             "/service/application/cart/v1.0/redeem/points/",
             nil,
             xQuery,
-            nil)
+            reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
             return CartResponse{}, err
@@ -11348,7 +11373,7 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // ApplyRewardPoints Fetch all Items Added to  Cart
-    func (po *PosCart)  ApplyRewardPoints(xQuery PosCartApplyRewardPointsXQuery) (CartResponse, error){
+    func (po *PosCart)  ApplyRewardPoints(xQuery PosCartApplyRewardPointsXQuery, body  RewardPointRequest) (CartResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -11359,6 +11384,19 @@ func NewAppClient(config *AppConfig) *Client {
          
         
         
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return CartResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return CartResponse{}, common.NewFDKError(err.Error())
+        }
+        
         //API call
         rawRequest = NewRequest(
             po.config,
@@ -11366,7 +11404,7 @@ func NewAppClient(config *AppConfig) *Client {
             "/service/application/pos/cart/v1.0/redeem/points/",
             nil,
             xQuery,
-            nil)
+            reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
             return CartResponse{}, err
