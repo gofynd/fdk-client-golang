@@ -3164,7 +3164,7 @@ Get discount offers based on quantity
 
 
 
-Use this API to get a list of applicable offers along with current, next and best offer for given product. Either one of **uid**, **item_id**, **slug** should be present*.
+Use this API to get a list of applicable offers along with current, next and best offer for given product. Either one of uid, item_id, slug should be present.
 
 *Success Response:*
 
@@ -16457,7 +16457,7 @@ Get discount offers based on quantity
 
 
 
-Use this API to get a list of applicable offers along with current, next and best offer for given product. Either one of **uid**, **item_id**, **slug** should be present*.
+Use this API to get a list of applicable offers along with current, next and best offer for given product. Either one of uid, item_id, slug should be present.
 
 *Success Response:*
 
@@ -18866,7 +18866,7 @@ Get available delivery modes for cart
 
 
 
-Use this API to get the delivery modes (home-delivery/store-pickup) along with a list of pickup stores available for a given cart at a given PIN Code. User can then view the address of a pickup store with the help of /store-address API.
+Use this API to get the delivery modes (home-delivery/store-pickup) along with a list of pickup stores available for a given cart at a given PIN Code. User can then view the address of a pickup store with the help of store-address API.
 
 *Success Response:*
 
@@ -18904,7 +18904,7 @@ Get list of stores for give uids
 
 
 
-Use this API to get the store details by entering the unique identifier of the pickup stores shown in the response of /available-delivery-mode API.
+Use this API to get the store details by entering the unique identifier of the pickup stores shown in the response of available-delivery-mode API.
 
 *Success Response:*
 
