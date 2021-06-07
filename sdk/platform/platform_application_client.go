@@ -1754,7 +1754,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         PageNo float64  `url:"page_no,omitempty"`  
     }
     
-    // GetThemeLibrary Gets list of themes in theme library
+    // GetThemeLibrary Get a list of themes from the theme library
      func (th *PlatformAppTheme)  GetThemeLibrary(xQuery PlatformAppGetThemeLibraryXQuery) (ThemesListingResponseSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -1794,7 +1794,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // AddToThemeLibrary Add theme to theme library
+    // AddToThemeLibrary Add a theme to the theme library
      func (th *PlatformAppTheme)  AddToThemeLibrary(body  AddThemeRequestSchema) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -1847,7 +1847,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // ApplyTheme Apply theme
+    // ApplyTheme Apply a theme
      func (th *PlatformAppTheme)  ApplyTheme(body  AddThemeRequestSchema) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -1940,7 +1940,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpgradeTheme Upgrades theme
+    // UpgradeTheme Upgrade a theme
      func (th *PlatformAppTheme)  UpgradeTheme(ThemeID string) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -1986,7 +1986,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         PageNo float64  `url:"page_no,omitempty"`  
     }
     
-    // GetPublicThemes Gets public themes
+    // GetPublicThemes Get all public themes
      func (th *PlatformAppTheme)  GetPublicThemes(xQuery PlatformAppGetPublicThemesXQuery) (ThemesListingResponseSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -2002,7 +2002,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             th.config,
             "get",
-            fmt.Sprintf("/service/platform/theme/v1.0/company/%s/application/%s/public/library",th.CompanyID, th.ApplicationID),
+            fmt.Sprintf("/service/platform/theme/v1.0/company/%s/application/%s/list/public",th.CompanyID, th.ApplicationID),
             nil,
             xQuery,
             nil)
@@ -2026,7 +2026,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // CreateTheme Create new theme
+    // CreateTheme Create a new theme
      func (th *PlatformAppTheme)  CreateTheme(body  ThemesSchema) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -2079,7 +2079,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetAppliedTheme Get applied theme
+    // GetAppliedTheme Get the applied theme
      func (th *PlatformAppTheme)  GetAppliedTheme() (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -2119,7 +2119,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetFonts Gets fonts
+    // GetFonts Get all the supported fonts in a theme
      func (th *PlatformAppTheme)  GetFonts() (FontsSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -2199,7 +2199,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateTheme Update theme
+    // UpdateTheme Update a theme
      func (th *PlatformAppTheme)  UpdateTheme(ThemeID string, body  ThemesSchema) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -2252,7 +2252,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteTheme Delete theme
+    // DeleteTheme Delete a theme
      func (th *PlatformAppTheme)  DeleteTheme(ThemeID string) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -2292,7 +2292,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetThemeForPreview Gets theme for preview
+    // GetThemeForPreview Get a theme preview
      func (th *PlatformAppTheme)  GetThemeForPreview(ThemeID string) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -2332,7 +2332,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // PublishTheme Publish theme
+    // PublishTheme Publish a theme
      func (th *PlatformAppTheme)  PublishTheme(ThemeID string) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -2372,7 +2372,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UnpublishTheme Unpublish theme
+    // UnpublishTheme Unpublish a theme
      func (th *PlatformAppTheme)  UnpublishTheme(ThemeID string) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -2412,7 +2412,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // ArchiveTheme Archive theme
+    // ArchiveTheme Archive a theme
      func (th *PlatformAppTheme)  ArchiveTheme(ThemeID string) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -2452,7 +2452,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UnarchiveTheme Unarchive theme
+    // UnarchiveTheme Unarchive a theme
      func (th *PlatformAppTheme)  UnarchiveTheme(ThemeID string) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -2513,7 +2513,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         PageNo float64  `url:"page_no,omitempty"`  
     }
     
-    // GetCustomers Gets list of customers
+    // GetCustomers Get a list of customers
      func (us *PlatformAppUser)  GetCustomers(xQuery PlatformAppGetCustomersXQuery) (CustomerListResponseSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -2558,7 +2558,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         Q string  `url:"q,omitempty"`  
     }
     
-    // SearchUsers Search users
+    // SearchUsers Search an existing user.
      func (us *PlatformAppUser)  SearchUsers(xQuery PlatformAppSearchUsersXQuery) (UserSearchResponseSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -2598,7 +2598,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetPlatformConfig Get platform config
+    // GetPlatformConfig Get platform configurations
      func (us *PlatformAppUser)  GetPlatformConfig() (PlatformSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -2638,7 +2638,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdatePlatformConfig Update platform config
+    // UpdatePlatformConfig Update platform configurations
      func (us *PlatformAppUser)  UpdatePlatformConfig(body  PlatformSchema) (PlatformSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -9563,36 +9563,49 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetSearchKeywords Get a Search Keywords Details
-     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
+    // UpdateSearchKeywords Update Search Keyword
+     func (ca *PlatformAppCatalog)  UpdateSearchKeywords(ID string, body  CreateSearchKeyword) (GetSearchWordsData, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getSearchKeywordsResponse GetSearchWordsDetailResponse
+            updateSearchKeywordsResponse GetSearchWordsData
 	    )
         
          
         
         
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return GetSearchWordsData{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return GetSearchWordsData{}, common.NewFDKError(err.Error())       
+        }
+        
         //API call
         rawRequest = NewRequest(
             ca.config,
-            "get",
+            "put",
             fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
             nil,
             nil,
-            nil)
+            reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return GetSearchWordsDetailResponse{}, err
+            return GetSearchWordsData{}, err
 	    }
         
-        err = json.Unmarshal(response, &getSearchKeywordsResponse)
+        err = json.Unmarshal(response, &updateSearchKeywordsResponse)
         if err != nil {
-            return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
+            return GetSearchWordsData{}, common.NewFDKError(err.Error())
         }
-        return getSearchKeywordsResponse, nil
+        return updateSearchKeywordsResponse, nil
         
     }
            
@@ -9643,49 +9656,36 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateSearchKeywords Update Search Keyword
-     func (ca *PlatformAppCatalog)  UpdateSearchKeywords(ID string, body  CreateSearchKeyword) (GetSearchWordsData, error) {
+    // GetSearchKeywords Get a Search Keywords Details
+     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            updateSearchKeywordsResponse GetSearchWordsData
+            getSearchKeywordsResponse GetSearchWordsDetailResponse
 	    )
         
          
         
         
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return GetSearchWordsData{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return GetSearchWordsData{}, common.NewFDKError(err.Error())       
-        }
-        
         //API call
         rawRequest = NewRequest(
             ca.config,
-            "put",
+            "get",
             fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
             nil,
             nil,
-            reqBody)
+            nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return GetSearchWordsData{}, err
+            return GetSearchWordsDetailResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &updateSearchKeywordsResponse)
+        err = json.Unmarshal(response, &getSearchKeywordsResponse)
         if err != nil {
-            return GetSearchWordsData{}, common.NewFDKError(err.Error())
+            return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
         }
-        return updateSearchKeywordsResponse, nil
+        return getSearchKeywordsResponse, nil
         
     }
            
@@ -9789,36 +9789,49 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
-     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
+    // UpdateAutocompleteKeyword Create & Update Autocomplete Keyword
+     func (ca *PlatformAppCatalog)  UpdateAutocompleteKeyword(ID string, body  CreateAutocompleteKeyword) (GetAutocompleteWordsResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
+            updateAutocompleteKeywordResponse GetAutocompleteWordsResponse
 	    )
         
          
         
         
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())       
+        }
+        
         //API call
         rawRequest = NewRequest(
             ca.config,
-            "get",
+            "put",
             fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
             nil,
             nil,
-            nil)
+            reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
             return GetAutocompleteWordsResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
+        err = json.Unmarshal(response, &updateAutocompleteKeywordResponse)
         if err != nil {
             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
         }
-        return getAutocompleteKeywordDetailResponse, nil
+        return updateAutocompleteKeywordResponse, nil
         
     }
            
@@ -9869,49 +9882,36 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateAutocompleteKeyword Create & Update Autocomplete Keyword
-     func (ca *PlatformAppCatalog)  UpdateAutocompleteKeyword(ID string, body  CreateAutocompleteKeyword) (GetAutocompleteWordsResponse, error) {
+    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
+     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            updateAutocompleteKeywordResponse GetAutocompleteWordsResponse
+            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
 	    )
         
          
         
         
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())       
-        }
-        
         //API call
         rawRequest = NewRequest(
             ca.config,
-            "put",
+            "get",
             fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
             nil,
             nil,
-            reqBody)
+            nil)
         response, err = rawRequest.Execute()
         if err != nil {
             return GetAutocompleteWordsResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &updateAutocompleteKeywordResponse)
+        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
         if err != nil {
             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
         }
-        return updateAutocompleteKeywordResponse, nil
+        return getAutocompleteKeywordDetailResponse, nil
         
     }
            

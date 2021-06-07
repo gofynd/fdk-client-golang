@@ -264,24 +264,24 @@
 
 * [Catalog](#Catalog)
   * Methods
-    * [getSearchKeywords](#getsearchkeywords)
-    * [deleteSearchKeywords](#deletesearchkeywords)
     * [updateSearchKeywords](#updatesearchkeywords)
+    * [deleteSearchKeywords](#deletesearchkeywords)
+    * [getSearchKeywords](#getsearchkeywords)
     * [getAllSearchKeyword](#getallsearchkeyword)
     * [createCustomKeyword](#createcustomkeyword)
-    * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
-    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [updateAutocompleteKeyword](#updateautocompletekeyword)
+    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
+    * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [getProductBundle](#getproductbundle)
     * [createProductBundle](#createproductbundle)
-    * [getProductBundleDetail](#getproductbundledetail)
     * [updateProductBundle](#updateproductbundle)
+    * [getProductBundleDetail](#getproductbundledetail)
     * [getSizeGuides](#getsizeguides)
     * [createSizeGuide](#createsizeguide)
-    * [getSizeGuide](#getsizeguide)
     * [updateSizeGuide](#updatesizeguide)
+    * [getSizeGuide](#getsizeguide)
     * [getCatalogConfiguration](#getcatalogconfiguration)
     * [getConfigurations](#getconfigurations)
     * [createConfigurationProductListing](#createconfigurationproductlisting)
@@ -317,13 +317,13 @@
     * [listTemplateBrandTypeValues](#listtemplatebrandtypevalues)
     * [listCategories](#listcategories)
     * [createCategories](#createcategories)
-    * [getCategoryData](#getcategorydata)
     * [updateCategory](#updatecategory)
+    * [getCategoryData](#getcategorydata)
     * [getProducts](#getproducts)
     * [createProduct](#createproduct)
-    * [getProduct](#getproduct)
-    * [deleteProduct](#deleteproduct)
     * [editProduct](#editproduct)
+    * [deleteProduct](#deleteproduct)
+    * [getProduct](#getproduct)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
     * [getProductBulkUploadHistory](#getproductbulkuploadhistory)
@@ -346,8 +346,8 @@
     * [exportInventoryConfig](#exportinventoryconfig)
     * [getAllHsnCodes](#getallhsncodes)
     * [createHsnCode](#createhsncode)
-    * [getHsnCode](#gethsncode)
     * [updateHsnCode](#updatehsncode)
+    * [getHsnCode](#gethsncode)
     * [bulkHsnCode](#bulkhsncode)
     * [getApplicationBrands](#getapplicationbrands)
     * [getDepartments](#getdepartments)
@@ -361,15 +361,15 @@
     * [updateCompany](#updatecompany)
     * [cbsOnboardGet](#cbsonboardget)
     * [getCompanyMetrics](#getcompanymetrics)
-    * [getBrand](#getbrand)
     * [editBrand](#editbrand)
+    * [getBrand](#getbrand)
     * [createBrand](#createbrand)
     * [createCompanyBrandMapping](#createcompanybrandmapping)
     * [getBrands](#getbrands)
     * [createLocation](#createlocation)
     * [getLocations](#getlocations)
-    * [getLocationDetail](#getlocationdetail)
     * [updateLocation](#updatelocation)
+    * [getLocationDetail](#getlocationdetail)
     * [createLocationBulk](#createlocationbulk)
     
 
@@ -5030,7 +5030,7 @@ Schema: `BlitzkriegInternalServerError`
 
 
 #### getThemeLibrary
-Gets list of themes in theme library
+Get a list of themes from the theme library
 
 ```golang
 
@@ -5040,10 +5040,10 @@ data, err := Theme.GetThemeLibrary(CompanyID, ApplicationID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
 
@@ -5052,13 +5052,13 @@ data, err := Theme.GetThemeLibrary(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `PageSize`, `PageNo`
 
 
-Gets list of themes in theme library
+Theme library is a personalized collection of themes that are chosen and added from the available themes. Use this API to fetch a list of themes from the library along with their configuration details. 
 
 *Success Response:*
 
 
 
-Themes list
+Success. Refer `ThemesListingResponseSchema` for more details.
 
 
 Schema: `ThemesListingResponseSchema`
@@ -5110,7 +5110,7 @@ Schema: `BlitzkriegApiError`
 
 
 #### addToThemeLibrary
-Add theme to theme library
+Add a theme to the theme library
 
 ```golang
 
@@ -5120,21 +5120,21 @@ data, err := Theme.AddToThemeLibrary(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
 | body |  AddThemeRequestSchema | "Request body" 
 
-Add theme to theme library
+Theme library is a personalized collection of themes that are chosen and added from the available themes. Use this API to choose a theme and add it to the theme library.
 
 *Success Response:*
 
 
 
-Theme
+Success. Refer `ThemesSchema` for more details.
 
 
 Schema: `ThemesSchema`
@@ -5186,7 +5186,7 @@ Schema: `BlitzkriegApiError`
 
 
 #### applyTheme
-Apply theme
+Apply a theme
 
 ```golang
 
@@ -5196,21 +5196,21 @@ data, err := Theme.ApplyTheme(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
 | body |  AddThemeRequestSchema | "Request body" 
 
-Apply theme
+Use this API to apply a theme to the website.
 
 *Success Response:*
 
 
 
-Theme
+Success. Refer `ThemesSchema` for more details.
 
 
 Schema: `ThemesSchema`
@@ -5272,23 +5272,23 @@ data, err := Theme.IsUpgradable(CompanyID, ApplicationID, ThemeID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
 | ThemeID | string | Theme ID | 
 
 
 
-Checks if theme is upgradable
+There's always a possibility that new features get added to a theme. Use this API to check if the applied theme has an upgrade available.
 
 *Success Response:*
 
 
 
-Upgradable Theme
+Success. If the boolean value of `upgrade` returns **true**, the theme can be upgraded. Refer `UpgradableThemeSchema` for more details.
 
 
 Schema: `UpgradableThemeSchema`
@@ -5340,7 +5340,7 @@ Schema: `BlitzkriegApiError`
 
 
 #### upgradeTheme
-Upgrades theme
+Upgrade a theme
 
 ```golang
 
@@ -5350,23 +5350,23 @@ data, err := Theme.UpgradeTheme(CompanyID, ApplicationID, ThemeID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
-| ThemeID | string | Theme ID | 
+| ThemeID | string | ID allotted to the theme. | 
 
 
 
-Upgrades theme
+Use this API to upgrade the current theme to its latest version.
 
 *Success Response:*
 
 
 
-Upgrades Theme
+Success. Upgrades the theme and shares the details of the new version in the response. Refer `ThemesSchema` for more details.
 
 
 Schema: `ThemesSchema`
@@ -5418,7 +5418,7 @@ Schema: `BlitzkriegApiError`
 
 
 #### getPublicThemes
-Gets public themes
+Get all public themes
 
 ```golang
 
@@ -5428,10 +5428,10 @@ data, err := Theme.GetPublicThemes(CompanyID, ApplicationID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
 
@@ -5440,13 +5440,13 @@ data, err := Theme.GetPublicThemes(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `PageSize`, `PageNo`
 
 
-Gets public themes
+Use this API to get a list of free themes that you can apply to your website.
 
 *Success Response:*
 
 
 
-Themes list
+Success. Refer `ThemesListingResponseSchema` for more details.
 
 
 Schema: `ThemesListingResponseSchema`
@@ -5498,7 +5498,7 @@ Schema: `BlitzkriegApiError`
 
 
 #### createTheme
-Create new theme
+Create a new theme
 
 ```golang
 
@@ -5508,15 +5508,15 @@ data, err := Theme.CreateTheme(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
 | body |  ThemesSchema | "Request body" 
 
-Create new theme
+Themes improve the look and appearance of a website. Use this API to create a theme.
 
 *Success Response:*
 
@@ -5574,7 +5574,7 @@ Schema: `BlitzkriegApiError`
 
 
 #### getAppliedTheme
-Get applied theme
+Get the applied theme
 
 ```golang
 
@@ -5584,20 +5584,20 @@ data, err := Theme.GetAppliedTheme(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
 
-Get applied theme
+Use this API to retrieve the theme that is currently applied to the website along with its details.
 
 *Success Response:*
 
 
 
-Theme
+Success. Refer `ThemesSchema` for more details.
 
 
 Schema: `ThemesSchema`
@@ -5649,7 +5649,7 @@ Schema: `BlitzkriegApiError`
 
 
 #### getFonts
-Gets fonts
+Get all the supported fonts in a theme
 
 ```golang
 
@@ -5659,20 +5659,20 @@ data, err := Theme.GetFonts(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
 
-Gets fonts
+Font is a collection of characters with a similar design. Use this API to retrieve a list of website fonts.
 
 *Success Response:*
 
 
 
-Fonts list
+Success. Refer `FontsSchema` for more details.
 
 
 Schema: `FontsSchema`
@@ -5734,23 +5734,23 @@ data, err := Theme.GetThemeById(CompanyID, ApplicationID, ThemeID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
-| ThemeID | string | Theme ID | 
+| ThemeID | string | ID allotted to the theme. | 
 
 
 
-Gets theme by id
+Use this API to retrieve the details of a specific theme by using its ID.
 
 *Success Response:*
 
 
 
-Theme
+Success. Refer `ThemesSchema` for more details.
 
 
 Schema: `ThemesSchema`
@@ -5802,7 +5802,7 @@ Schema: `BlitzkriegApiError`
 
 
 #### updateTheme
-Update theme
+Update a theme
 
 ```golang
 
@@ -5812,24 +5812,24 @@ data, err := Theme.UpdateTheme(CompanyID, ApplicationID, ThemeID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
-| ThemeID | string | Theme ID | 
+| ThemeID | string | ID allotted to the theme. | 
 
 
 | body |  ThemesSchema | "Request body" 
 
-Update theme
+Use this API to edit an existing theme. You can customize the website font, sections, images, styles, and many more.
 
 *Success Response:*
 
 
 
-Theme
+Success. Refer `ThemesSchema` for more details.
 
 
 Schema: `ThemesSchema`
@@ -5881,7 +5881,7 @@ Schema: `BlitzkriegApiError`
 
 
 #### deleteTheme
-Delete theme
+Delete a theme
 
 ```golang
 
@@ -5891,23 +5891,23 @@ data, err := Theme.DeleteTheme(CompanyID, ApplicationID, ThemeID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
-| ThemeID | string | Theme ID | 
+| ThemeID | string | ID allotted to the theme. | 
 
 
 
-Delete theme
+Use this API to delete a theme from the theme library.
 
 *Success Response:*
 
 
 
-Theme
+Success. Refer `ThemesSchema` for more details.
 
 
 Schema: `ThemesSchema`
@@ -5959,7 +5959,7 @@ Schema: `BlitzkriegApiError`
 
 
 #### getThemeForPreview
-Gets theme for preview
+Get a theme preview
 
 ```golang
 
@@ -5969,23 +5969,23 @@ data, err := Theme.GetThemeForPreview(CompanyID, ApplicationID, ThemeID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
-| ThemeID | string | Theme ID | 
+| ThemeID | string | ID allotted to the theme. | 
 
 
 
-Gets theme for preview
+A theme can be previewed before applying it. Use this API to retrieve the theme preview by using its ID.
 
 *Success Response:*
 
 
 
-Theme
+Success. Refer `ThemesSchema` for more details.
 
 
 Schema: `ThemesSchema`
@@ -6037,7 +6037,7 @@ Schema: `BlitzkriegApiError`
 
 
 #### publishTheme
-Publish theme
+Publish a theme
 
 ```golang
 
@@ -6047,23 +6047,23 @@ data, err := Theme.PublishTheme(CompanyID, ApplicationID, ThemeID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
-| ThemeID | string | Theme ID | 
+| ThemeID | string | ID allotted to the theme. | 
 
 
 
-Publish theme
+Use this API to publish a theme that is either newly created or edited.
 
 *Success Response:*
 
 
 
-Theme
+Success. Refer `ThemesSchema` for more details.
 
 
 Schema: `ThemesSchema`
@@ -6115,7 +6115,7 @@ Schema: `BlitzkriegApiError`
 
 
 #### unpublishTheme
-Unpublish theme
+Unpublish a theme
 
 ```golang
 
@@ -6125,23 +6125,23 @@ data, err := Theme.UnpublishTheme(CompanyID, ApplicationID, ThemeID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
-| ThemeID | string | Theme ID | 
+| ThemeID | string | ID allotted to the theme. | 
 
 
 
-Unpublish theme
+Use this API to remove an existing theme from the list of available themes.
 
 *Success Response:*
 
 
 
-Theme
+Success. Refer `ThemesSchema` for more details.
 
 
 Schema: `ThemesSchema`
@@ -6193,7 +6193,7 @@ Schema: `BlitzkriegApiError`
 
 
 #### archiveTheme
-Archive theme
+Archive a theme
 
 ```golang
 
@@ -6203,23 +6203,23 @@ data, err := Theme.ArchiveTheme(CompanyID, ApplicationID, ThemeID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
-| ThemeID | string | Theme ID | 
+| ThemeID | string | ID allotted to the theme. | 
 
 
 
-Archive theme
+Use this API to store an existing theme but not delete it so that it can be used in future if required. 
 
 *Success Response:*
 
 
 
-Theme
+Success. Refer `ThemesSchema` for more details.
 
 
 Schema: `ThemesSchema`
@@ -6271,7 +6271,7 @@ Schema: `BlitzkriegApiError`
 
 
 #### unarchiveTheme
-Unarchive theme
+Unarchive a theme
 
 ```golang
 
@@ -6281,23 +6281,23 @@ data, err := Theme.UnarchiveTheme(CompanyID, ApplicationID, ThemeID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
-| ThemeID | string | Theme ID | 
+| ThemeID | string | ID allotted to the theme. | 
 
 
 
-Unarchive theme
+Use this API to restore an archived theme and bring it back for editing or publishing. 
 
 *Success Response:*
 
 
 
-Theme
+Success. Refer `ThemesSchema` for more details.
 
 
 Schema: `ThemesSchema`
@@ -6356,7 +6356,7 @@ Schema: `BlitzkriegApiError`
 
 
 #### getCustomers
-Gets list of customers
+Get a list of customers
 
 ```golang
 
@@ -6366,10 +6366,10 @@ data, err := User.GetCustomers(CompanyID, ApplicationID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
 
@@ -6380,13 +6380,13 @@ data, err := User.GetCustomers(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `Q`, `PageSize`, `PageNo`
 
 
-Used to get application customers list
+Use this API to retrieve a list of customers who have registered in the application.
 
 *Success Response:*
 
 
 
-Customer list
+Success. Refer `CustomerListResponseSchema` for more details.
 
 
 Schema: `CustomerListResponseSchema`
@@ -6438,7 +6438,7 @@ Schema: `AuthenticationApiError`
 
 
 #### searchUsers
-Search users
+Search an existing user.
 
 ```golang
 
@@ -6448,23 +6448,23 @@ data, err := User.SearchUsers(CompanyID, ApplicationID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
 
 | xQuery | struct | Includes properties such as `Q`
 
 
-Search users
+Use this API to retrieve an existing user from a list.
 
 *Success Response:*
 
 
 
-User list
+Success. Returns first name, last name, emails, phone number and gender of the user. Refer `UserSearchResponseSchema` for more details.
 
 
 Schema: `UserSearchResponseSchema`
@@ -6505,7 +6505,7 @@ Schema: `AuthenticationApiError`
 
 
 #### getPlatformConfig
-Get platform config
+Get platform configurations
 
 ```golang
 
@@ -6515,20 +6515,20 @@ data, err := User.GetPlatformConfig(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
 
-Used to get platform config
+Use this API to get all the platform configurations such as mobile image, desktop image, social logins, and all other text.
 
 *Success Response:*
 
 
 
-Platform Config
+Success. Returns a JSON object containing the all the platform configurations. Refer `PlatformSchema` for more details.
 
 
 Schema: `PlatformSchema`
@@ -6569,7 +6569,7 @@ Schema: `AuthenticationApiError`
 
 
 #### updatePlatformConfig
-Update platform config
+Update platform configurations
 
 ```golang
 
@@ -6579,21 +6579,21 @@ data, err := User.UpdatePlatformConfig(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
 | body |  PlatformSchema | "Request body" 
 
-Used to update platform config
+Use this API to edit the existing platform configurations such as mobile image, desktop image, social logins, and all other text.
 
 *Success Response:*
 
 
 
-Platform Config
+Success. Returns a JSON object with the updated platform configurations. Refer `PlatformSchema` for more details.
 
 
 Schema: `PlatformSchema`
@@ -17463,12 +17463,12 @@ Schema: `HttpErrorCodeAndResponse`
 ## Catalog
 
 
-#### getSearchKeywords
-Get a Search Keywords Details
+#### updateSearchKeywords
+Update Search Keyword
 
 ```golang
 
-data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
+data, err := Catalog.UpdateSearchKeywords(CompanyID, ApplicationID, ID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -17480,20 +17480,21 @@ data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
 
 
+| body |  CreateSearchKeyword | "Request body" 
 
-Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
+Update Search Keyword by its id. On successful request, returns the updated collection
 
 *Success Response:*
 
 
 
-The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
+The Collection object. See example below or refer `GetSearchWordsDataSchema` for details.
 
 
-Schema: `GetSearchWordsDetailResponse`
+Schema: `GetSearchWordsData`
 
 
 
@@ -17573,12 +17574,12 @@ Schema: `ErrorResponse`
 ---
 
 
-#### updateSearchKeywords
-Update Search Keyword
+#### getSearchKeywords
+Get a Search Keywords Details
 
 ```golang
 
-data, err := Catalog.UpdateSearchKeywords(CompanyID, ApplicationID, ID, body);
+data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -17590,21 +17591,20 @@ data, err := Catalog.UpdateSearchKeywords(CompanyID, ApplicationID, ID, body);
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
 
 
-| body |  CreateSearchKeyword | "Request body" 
 
-Update Search Keyword by its id. On successful request, returns the updated collection
+Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
 
 *Success Response:*
 
 
 
-The Collection object. See example below or refer `GetSearchWordsDataSchema` for details.
+The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
 
 
-Schema: `GetSearchWordsData`
+Schema: `GetSearchWordsDetailResponse`
 
 
 
@@ -17734,12 +17734,12 @@ Schema: `ErrorResponse`
 ---
 
 
-#### getAutocompleteKeywordDetail
-Get a Autocomplete Keywords Details
+#### updateAutocompleteKeyword
+Create & Update Autocomplete Keyword
 
 ```golang
 
-data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
+data, err := Catalog.UpdateAutocompleteKeyword(CompanyID, ApplicationID, ID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -17751,17 +17751,18 @@ data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
 
 
+| body |  CreateAutocompleteKeyword | "Request body" 
 
-Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
+Update a mapping by it's id. On successful request, returns the updated Keyword mapping
 
 *Success Response:*
 
 
 
-The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
+The Mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details.
 
 
 Schema: `GetAutocompleteWordsResponse`
@@ -17844,12 +17845,12 @@ Schema: `ErrorResponse`
 ---
 
 
-#### updateAutocompleteKeyword
-Create & Update Autocomplete Keyword
+#### getAutocompleteKeywordDetail
+Get a Autocomplete Keywords Details
 
 ```golang
 
-data, err := Catalog.UpdateAutocompleteKeyword(CompanyID, ApplicationID, ID, body);
+data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -17861,18 +17862,17 @@ data, err := Catalog.UpdateAutocompleteKeyword(CompanyID, ApplicationID, ID, bod
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
 
 
-| body |  CreateAutocompleteKeyword | "Request body" 
 
-Update a mapping by it's id. On successful request, returns the updated Keyword mapping
+Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
 
 *Success Response:*
 
 
 
-The Mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details.
+The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
 
 
 Schema: `GetAutocompleteWordsResponse`
@@ -18107,58 +18107,6 @@ Schema: `ErrorResponse`
 ---
 
 
-#### getProductBundleDetail
-Get a particular Product Bundle details
-
-```golang
-
-data, err := Catalog.GetProductBundleDetail(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
-
-*Success Response:*
-
-
-
-The Collection object. See example below or refer `GetProductBundleResponse` for details
-
-
-Schema: `GetProductBundleResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateProductBundle
 Update a Product Bundle
 
@@ -18188,6 +18136,58 @@ The Collection object. See example below or refer `GetProductBundleCreateRespons
 
 
 Schema: `GetProductBundleCreateResponse`
+
+
+
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProductBundleDetail
+Get a particular Product Bundle details
+
+```golang
+
+data, err := Catalog.GetProductBundleDetail(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
+
+*Success Response:*
+
+
+
+The Collection object. See example below or refer `GetProductBundleResponse` for details
+
+
+Schema: `GetProductBundleResponse`
 
 
 
@@ -18322,58 +18322,6 @@ Schema: `ErrorResponse`
 ---
 
 
-#### getSizeGuide
-Get a single size guide.
-
-```golang
-
-data, err := Catalog.GetSizeGuide(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to size guide. | 
-
-
-| ID | string | Id of the size guide to be viewed. | 
-
-
-
-This API helps to get data associated to a size guide.
-
-*Success Response:*
-
-
-
-Brand object. See example below or refer `SizeGuideResponseSchema` for details
-
-
-Schema: `SizeGuideResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateSizeGuide
 Edit a size guide.
 
@@ -18403,6 +18351,58 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSizeGuide
+Get a single size guide.
+
+```golang
+
+data, err := Catalog.GetSizeGuide(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to size guide. | 
+
+
+| ID | string | Id of the size guide to be viewed. | 
+
+
+
+This API helps to get data associated to a size guide.
+
+*Success Response:*
+
+
+
+Brand object. See example below or refer `SizeGuideResponseSchema` for details
+
+
+Schema: `SizeGuideResponse`
 
 
 
@@ -20297,58 +20297,6 @@ Schema: `ErrorResponse`
 ---
 
 
-#### getCategoryData
-Get product category by uid
-
-```golang
-
-data, err := Catalog.GetCategoryData(CompanyID, UID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| UID | string | Category unique id | 
-
-
-
-This API gets meta associated to product categories.
-
-*Success Response:*
-
-
-
-Get Data for one category. See example below or refer `CategoryResponse` for details
-
-
-Schema: `SingleCategoryResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateCategory
 Update product categories
 
@@ -20378,6 +20326,58 @@ Category Meta. See example below or refer `CategoryUpdateResponse` for details
 
 
 Schema: `CategoryUpdateResponse`
+
+
+
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCategoryData
+Get product category by uid
+
+```golang
+
+data, err := Catalog.GetCategoryData(CompanyID, UID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| UID | string | Category unique id | 
+
+
+
+This API gets meta associated to product categories.
+
+*Success Response:*
+
+
+
+Get Data for one category. See example below or refer `CategoryResponse` for details
+
+
+Schema: `SingleCategoryResponse`
 
 
 
@@ -20512,41 +20512,35 @@ Schema: `ErrorResponse`
 ---
 
 
-#### getProduct
-Get a single product.
+#### editProduct
+Edit a product.
 
 ```golang
 
-data, err := Catalog.GetProduct(CompanyID, ItemID, xQuery);
+data, err := Catalog.EditProduct(CompanyID, ItemID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
 
 
-| CompanyID | float64 | Company Id of the product. | 
+| ItemID | float64 | Id of the product to be updated. | 
 
 
-| ItemID | float64 | Item Id of the product. | 
+| body |  ProductCreateUpdate | "Request body" 
 
-
-
-
-
-| xQuery | struct | Includes properties such as `ItemCode`, `BrandUID`, `UID`
-
-
-This API helps to get data associated to a particular product.
+This API allows to edit product.
 
 *Success Response:*
 
 
 
-Product object. See example below or refer `product.utils.format_product_response` for details
+Returns a success response
 
 
-Schema: `Product`
+Schema: `SuccessResponse`
 
 
 
@@ -20623,35 +20617,41 @@ Schema: `ErrorResponse`
 ---
 
 
-#### editProduct
-Edit a product.
+#### getProduct
+Get a single product.
 
 ```golang
 
-data, err := Catalog.EditProduct(CompanyID, ItemID, body);
+data, err := Catalog.GetProduct(CompanyID, ItemID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Id of the company associated to product that is to be viewed. | 
 
 
-| ItemID | float64 | Id of the product to be updated. | 
+| CompanyID | float64 | Company Id of the product. | 
 
 
-| body |  ProductCreateUpdate | "Request body" 
+| ItemID | float64 | Item Id of the product. | 
 
-This API allows to edit product.
+
+
+
+
+| xQuery | struct | Includes properties such as `ItemCode`, `BrandUID`, `UID`
+
+
+This API helps to get data associated to a particular product.
 
 *Success Response:*
 
 
 
-Returns a success response
+Product object. See example below or refer `product.utils.format_product_response` for details
 
 
-Schema: `SuccessResponse`
+Schema: `Product`
 
 
 
@@ -21832,12 +21832,12 @@ Schema: `ErrorResponse`
 ---
 
 
-#### getHsnCode
-Fetch Hsn Code.
+#### updateHsnCode
+Update Hsn Code.
 
 ```golang
 
-data, err := Catalog.GetHsnCode(CompanyID, ID);
+data, err := Catalog.UpdateHsnCode(CompanyID, ID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -21849,14 +21849,15 @@ data, err := Catalog.GetHsnCode(CompanyID, ID);
 | ID | string | Unique id | 
 
 
+| body |  HsnUpsert | "Request body" 
 
-Fetch Hsn Code.
+Update Hsn Code.
 
 *Success Response:*
 
 
 
-See example below details
+See example below for details
 
 
 Schema: `HsnCode`
@@ -21884,12 +21885,12 @@ Schema: `ErrorResponse`
 ---
 
 
-#### updateHsnCode
-Update Hsn Code.
+#### getHsnCode
+Fetch Hsn Code.
 
 ```golang
 
-data, err := Catalog.UpdateHsnCode(CompanyID, ID, body);
+data, err := Catalog.GetHsnCode(CompanyID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -21901,15 +21902,14 @@ data, err := Catalog.UpdateHsnCode(CompanyID, ID, body);
 | ID | string | Unique id | 
 
 
-| body |  HsnUpsert | "Request body" 
 
-Update Hsn Code.
+Fetch Hsn Code.
 
 *Success Response:*
 
 
 
-See example below for details
+See example below details
 
 
 Schema: `HsnCode`
@@ -22432,58 +22432,6 @@ Schema: `ErrorResponse`
 ---
 
 
-#### getBrand
-Get a single brand.
-
-```golang
-
-data, err := CompanyProfile.GetBrand(CompanyID, BrandID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to brand that is to be viewed. | 
-
-
-| BrandID | string | Id of the brand to be viewed. | 
-
-
-
-This API helps to get data associated to a particular brand.
-
-*Success Response:*
-
-
-
-Brand object. See example below or refer `GetBrandResponseSerializer` for details
-
-
-Schema: `GetBrandResponseSerializer`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### editBrand
 Edit a brand.
 
@@ -22513,6 +22461,58 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getBrand
+Get a single brand.
+
+```golang
+
+data, err := CompanyProfile.GetBrand(CompanyID, BrandID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to brand that is to be viewed. | 
+
+
+| BrandID | string | Id of the brand to be viewed. | 
+
+
+
+This API helps to get data associated to a particular brand.
+
+*Success Response:*
+
+
+
+Brand object. See example below or refer `GetBrandResponseSerializer` for details
+
+
+Schema: `GetBrandResponseSerializer`
 
 
 
@@ -22801,58 +22801,6 @@ Schema: `ErrorResponse`
 ---
 
 
-#### getLocationDetail
-Get details of a specific location.
-
-```golang
-
-data, err := CompanyProfile.GetLocationDetail(CompanyID, LocationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company inside which the location lies. | 
-
-
-| LocationID | string | Id of the location which you want to view. | 
-
-
-
-This API helps to get data associated to a specific location.
-
-*Success Response:*
-
-
-
-Brand object. See example below or refer `GetLocationSerializer` for details
-
-
-Schema: `GetLocationSerializer`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateLocation
 Edit a location asscoiated to a company.
 
@@ -22882,6 +22830,58 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getLocationDetail
+Get details of a specific location.
+
+```golang
+
+data, err := CompanyProfile.GetLocationDetail(CompanyID, LocationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company inside which the location lies. | 
+
+
+| LocationID | string | Id of the location which you want to view. | 
+
+
+
+This API helps to get data associated to a specific location.
+
+*Success Response:*
+
+
+
+Brand object. See example below or refer `GetLocationSerializer` for details
+
+
+Schema: `GetLocationSerializer`
 
 
 
@@ -30394,7 +30394,7 @@ Get Subscribers By Company And Event
 
 ```golang
 
-data, err := Webhook.GetSubscribersByCompanyAndEventId(CompanyID, xQuery);
+data, err := Webhook.GetSubscribersByCompanyAndEventId(CompanyID, EventID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -30407,8 +30407,9 @@ data, err := Webhook.GetSubscribersByCompanyAndEventId(CompanyID, xQuery);
 | CompanyID | string | Company ID of the application | 
 
 
+| EventID | float64 | Event Id of the application | 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `EventID`
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
 
 
 Get Subscribers By Company And Event
@@ -30444,7 +30445,7 @@ data, err := Webhook.RegisterSubscriberToEvent(CompanyID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID of the application | 
+| CompanyID | string | Company Id of the application | 
 
 
 | body |  SubscriberConfig | "Request body" 
