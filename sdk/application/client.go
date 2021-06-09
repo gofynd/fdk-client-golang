@@ -1929,7 +1929,7 @@ func NewAppClient(config *AppConfig) *Client {
         AssignCardID float64  `url:"assign_card_id,omitempty"`  
     }
     
-    // GetCart Fetch all Items Added to  Cart
+    // GetCart Fetch all items added to the cart
     func (ca *Cart)  GetCart(xQuery CartGetCartXQuery) (CartResponse, error){
         var (
             rawRequest  *RawRequest
@@ -1973,7 +1973,7 @@ func NewAppClient(config *AppConfig) *Client {
         UID float64  `url:"uid,omitempty"`  
     }
     
-    // GetCartLastModified Fetch Last-Modified timestamp
+    // GetCartLastModified Fetch last-modified timestamp
     func (ca *Cart)  GetCartLastModified(xQuery CartGetCartLastModifiedXQuery) (interface{}, error){
         var (
             rawRequest  *RawRequest
@@ -2014,7 +2014,7 @@ func NewAppClient(config *AppConfig) *Client {
         B bool  `url:"b,omitempty"`  
     }
     
-    // AddItems Add Items to Cart
+    // AddItems Add items to cart
     func (ca *Cart)  AddItems(xQuery CartAddItemsXQuery, body  AddCartRequest) (AddCartResponse, error){
         var (
             rawRequest  *RawRequest
@@ -2073,7 +2073,7 @@ func NewAppClient(config *AppConfig) *Client {
         B bool  `url:"b,omitempty"`  
     }
     
-    // UpdateCart Update Items already added to Cart
+    // UpdateCart Update items in the cart
     func (ca *Cart)  UpdateCart(xQuery CartUpdateCartXQuery, body  UpdateCartRequest) (UpdateCartResponse, error){
         var (
             rawRequest  *RawRequest
@@ -2130,7 +2130,7 @@ func NewAppClient(config *AppConfig) *Client {
         UID float64  `url:"uid,omitempty"`  
     }
     
-    // GetItemCount Cart item count
+    // GetItemCount Count items in the cart
     func (ca *Cart)  GetItemCount(xQuery CartGetItemCountXQuery) (CartItemCountResponse, error){
         var (
             rawRequest  *RawRequest
@@ -2371,7 +2371,7 @@ func NewAppClient(config *AppConfig) *Client {
         B bool  `url:"b,omitempty"`  
     }
     
-    // ApplyRewardPoints Fetch all Items Added to  Cart
+    // ApplyRewardPoints Apply reward points at cart
     func (ca *Cart)  ApplyRewardPoints(xQuery CartApplyRewardPointsXQuery, body  RewardPointRequest) (CartResponse, error){
         var (
             rawRequest  *RawRequest
@@ -2432,7 +2432,7 @@ func NewAppClient(config *AppConfig) *Client {
         IsDefault bool  `url:"is_default,omitempty"`  
     }
     
-    // GetAddresses Fetch Address
+    // GetAddresses Fetch address
     func (ca *Cart)  GetAddresses(xQuery CartGetAddressesXQuery) (GetAddressesResponse, error){
         var (
             rawRequest  *RawRequest
@@ -2471,7 +2471,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // AddAddress Add Address to the account
+    // AddAddress Add address to an account
     func (ca *Cart)  AddAddress(body  Address) (SaveAddressResponse, error){
         var (
             rawRequest  *RawRequest
@@ -2532,7 +2532,7 @@ func NewAppClient(config *AppConfig) *Client {
         IsDefault bool  `url:"is_default,omitempty"`  
     }
     
-    // GetAddressById Fetch Single Address
+    // GetAddressById Fetch a single address by its ID
     func (ca *Cart)  GetAddressById(ID float64, xQuery CartGetAddressByIdXQuery) (Address, error){
         var (
             rawRequest  *RawRequest
@@ -2571,7 +2571,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UpdateAddress Update Address alreay added to account
+    // UpdateAddress Update address added to an account
     func (ca *Cart)  UpdateAddress(ID float64, body  Address) (UpdateAddressResponse, error){
         var (
             rawRequest  *RawRequest
@@ -2623,7 +2623,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // RemoveAddress Remove Address Associated to the account
+    // RemoveAddress Remove address associated with an account
     func (ca *Cart)  RemoveAddress(ID float64) (DeleteAddressResponse, error){
         var (
             rawRequest  *RawRequest
@@ -2669,7 +2669,7 @@ func NewAppClient(config *AppConfig) *Client {
         B bool  `url:"b,omitempty"`  
     }
     
-    // SelectAddress Select Address from All Addresses
+    // SelectAddress Select an address from available addresses
     func (ca *Cart)  SelectAddress(xQuery CartSelectAddressXQuery, body  SelectCartAddressRequest) (CartResponse, error){
         var (
             rawRequest  *RawRequest
@@ -2726,7 +2726,7 @@ func NewAppClient(config *AppConfig) *Client {
         UID string  `url:"uid,omitempty"`  
     }
     
-    // SelectPaymentMode Update Cart Payment
+    // SelectPaymentMode Update cart payment
     func (ca *Cart)  SelectPaymentMode(xQuery CartSelectPaymentModeXQuery, body  UpdateCartPaymentRequest) (CartResponse, error){
         var (
             rawRequest  *RawRequest
@@ -2788,7 +2788,7 @@ func NewAppClient(config *AppConfig) *Client {
         MerchantCode string  `url:"merchant_code,omitempty"`  
     }
     
-    // ValidateCouponForPayment Get Cart Payment for valid coupon
+    // ValidateCouponForPayment Verify the coupon eligibility against the payment mode
     func (ca *Cart)  ValidateCouponForPayment(xQuery CartValidateCouponForPaymentXQuery) (PaymentCouponValidate, error){
         var (
             rawRequest  *RawRequest
@@ -2874,7 +2874,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // CheckoutCart Checkout Cart
+    // CheckoutCart Checkout all items in the cart
     func (ca *Cart)  CheckoutCart(body  CartCheckoutRequest) (CartCheckoutResponse, error){
         var (
             rawRequest  *RawRequest
@@ -2931,7 +2931,7 @@ func NewAppClient(config *AppConfig) *Client {
         UID float64  `url:"uid,omitempty"`  
     }
     
-    // UpdateCartMeta Update Cart Meta
+    // UpdateCartMeta Update the cart meta
     func (ca *Cart)  UpdateCartMeta(xQuery CartUpdateCartMetaXQuery, body  CartMetaRequest) (CartMetaResponse, error){
         var (
             rawRequest  *RawRequest
@@ -2983,7 +2983,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetCartShareLink Generate Cart sharing link token
+    // GetCartShareLink Generate token for sharing the cart
     func (ca *Cart)  GetCartShareLink(body  GetShareCartLinkRequest) (GetShareCartLinkResponse, error){
         var (
             rawRequest  *RawRequest
@@ -3035,7 +3035,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetCartSharedItems Get shared cart snapshot and cart response
+    // GetCartSharedItems Get details of a shared cart
     func (ca *Cart)  GetCartSharedItems(Token string) (SharedCartResponse, error){
         var (
             rawRequest  *RawRequest
@@ -3074,7 +3074,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UpdateCartWithSharedItems Merge or Replace existing cart
+    // UpdateCartWithSharedItems Merge or replace existing cart
     func (ca *Cart)  UpdateCartWithSharedItems(Token string, Action string) (SharedCartResponse, error){
         var (
             rawRequest  *RawRequest
@@ -10930,7 +10930,7 @@ func NewAppClient(config *AppConfig) *Client {
         AssignCardID float64  `url:"assign_card_id,omitempty"`  
     }
     
-    // GetCart Fetch all Items Added to  Cart
+    // GetCart Fetch all items added to the cart
     func (po *PosCart)  GetCart(xQuery PosCartGetCartXQuery) (CartResponse, error){
         var (
             rawRequest  *RawRequest
@@ -10974,7 +10974,7 @@ func NewAppClient(config *AppConfig) *Client {
         UID float64  `url:"uid,omitempty"`  
     }
     
-    // GetCartLastModified Fetch Last-Modified timestamp
+    // GetCartLastModified Fetch last-modified timestamp
     func (po *PosCart)  GetCartLastModified(xQuery PosCartGetCartLastModifiedXQuery) (interface{}, error){
         var (
             rawRequest  *RawRequest
@@ -11015,7 +11015,7 @@ func NewAppClient(config *AppConfig) *Client {
         B bool  `url:"b,omitempty"`  
     }
     
-    // AddItems Add Items to Cart
+    // AddItems Add items to cart
     func (po *PosCart)  AddItems(xQuery PosCartAddItemsXQuery, body  AddCartRequest) (AddCartResponse, error){
         var (
             rawRequest  *RawRequest
@@ -11074,7 +11074,7 @@ func NewAppClient(config *AppConfig) *Client {
         B bool  `url:"b,omitempty"`  
     }
     
-    // UpdateCart Update Items already added to Cart
+    // UpdateCart Update items in the cart
     func (po *PosCart)  UpdateCart(xQuery PosCartUpdateCartXQuery, body  UpdateCartRequest) (UpdateCartResponse, error){
         var (
             rawRequest  *RawRequest
@@ -11131,7 +11131,7 @@ func NewAppClient(config *AppConfig) *Client {
         UID float64  `url:"uid,omitempty"`  
     }
     
-    // GetItemCount Cart item count
+    // GetItemCount Count items in the cart
     func (po *PosCart)  GetItemCount(xQuery PosCartGetItemCountXQuery) (CartItemCountResponse, error){
         var (
             rawRequest  *RawRequest
@@ -11372,7 +11372,7 @@ func NewAppClient(config *AppConfig) *Client {
         B bool  `url:"b,omitempty"`  
     }
     
-    // ApplyRewardPoints Fetch all Items Added to  Cart
+    // ApplyRewardPoints Apply reward points at cart
     func (po *PosCart)  ApplyRewardPoints(xQuery PosCartApplyRewardPointsXQuery, body  RewardPointRequest) (CartResponse, error){
         var (
             rawRequest  *RawRequest
@@ -11433,7 +11433,7 @@ func NewAppClient(config *AppConfig) *Client {
         IsDefault bool  `url:"is_default,omitempty"`  
     }
     
-    // GetAddresses Fetch Address
+    // GetAddresses Fetch address
     func (po *PosCart)  GetAddresses(xQuery PosCartGetAddressesXQuery) (GetAddressesResponse, error){
         var (
             rawRequest  *RawRequest
@@ -11472,7 +11472,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // AddAddress Add Address to the account
+    // AddAddress Add address to an account
     func (po *PosCart)  AddAddress(body  Address) (SaveAddressResponse, error){
         var (
             rawRequest  *RawRequest
@@ -11533,7 +11533,7 @@ func NewAppClient(config *AppConfig) *Client {
         IsDefault bool  `url:"is_default,omitempty"`  
     }
     
-    // GetAddressById Fetch Single Address
+    // GetAddressById Fetch a single address by its ID
     func (po *PosCart)  GetAddressById(ID float64, xQuery PosCartGetAddressByIdXQuery) (Address, error){
         var (
             rawRequest  *RawRequest
@@ -11572,7 +11572,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UpdateAddress Update Address alreay added to account
+    // UpdateAddress Update address added to an account
     func (po *PosCart)  UpdateAddress(ID float64, body  Address) (UpdateAddressResponse, error){
         var (
             rawRequest  *RawRequest
@@ -11624,7 +11624,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // RemoveAddress Remove Address Associated to the account
+    // RemoveAddress Remove address associated with an account
     func (po *PosCart)  RemoveAddress(ID float64) (DeleteAddressResponse, error){
         var (
             rawRequest  *RawRequest
@@ -11670,7 +11670,7 @@ func NewAppClient(config *AppConfig) *Client {
         B bool  `url:"b,omitempty"`  
     }
     
-    // SelectAddress Select Address from All Addresses
+    // SelectAddress Select an address from available addresses
     func (po *PosCart)  SelectAddress(xQuery PosCartSelectAddressXQuery, body  SelectCartAddressRequest) (CartResponse, error){
         var (
             rawRequest  *RawRequest
@@ -11727,7 +11727,7 @@ func NewAppClient(config *AppConfig) *Client {
         UID string  `url:"uid,omitempty"`  
     }
     
-    // SelectPaymentMode Update Cart Payment
+    // SelectPaymentMode Update cart payment
     func (po *PosCart)  SelectPaymentMode(xQuery PosCartSelectPaymentModeXQuery, body  UpdateCartPaymentRequest) (CartResponse, error){
         var (
             rawRequest  *RawRequest
@@ -11789,7 +11789,7 @@ func NewAppClient(config *AppConfig) *Client {
         MerchantCode string  `url:"merchant_code,omitempty"`  
     }
     
-    // ValidateCouponForPayment Get Cart Payment for valid coupon
+    // ValidateCouponForPayment Verify the coupon eligibility against the payment mode
     func (po *PosCart)  ValidateCouponForPayment(xQuery PosCartValidateCouponForPaymentXQuery) (PaymentCouponValidate, error){
         var (
             rawRequest  *RawRequest
@@ -11944,7 +11944,7 @@ func NewAppClient(config *AppConfig) *Client {
         UID float64  `url:"uid,omitempty"`  
     }
     
-    // CheckoutCart Checkout Cart
+    // CheckoutCart Checkout all items in the cart
     func (po *PosCart)  CheckoutCart(xQuery PosCartCheckoutCartXQuery, body  CartPosCheckoutRequest) (CartCheckoutResponse, error){
         var (
             rawRequest  *RawRequest
@@ -12001,7 +12001,7 @@ func NewAppClient(config *AppConfig) *Client {
         UID float64  `url:"uid,omitempty"`  
     }
     
-    // UpdateCartMeta Update Cart Meta
+    // UpdateCartMeta Update the cart meta
     func (po *PosCart)  UpdateCartMeta(xQuery PosCartUpdateCartMetaXQuery, body  CartMetaRequest) (CartMetaResponse, error){
         var (
             rawRequest  *RawRequest
@@ -12142,7 +12142,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetCartShareLink Generate Cart sharing link token
+    // GetCartShareLink Generate token for sharing the cart
     func (po *PosCart)  GetCartShareLink(body  GetShareCartLinkRequest) (GetShareCartLinkResponse, error){
         var (
             rawRequest  *RawRequest
@@ -12194,7 +12194,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetCartSharedItems Get shared cart snapshot and cart response
+    // GetCartSharedItems Get details of a shared cart
     func (po *PosCart)  GetCartSharedItems(Token string) (SharedCartResponse, error){
         var (
             rawRequest  *RawRequest
@@ -12233,7 +12233,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UpdateCartWithSharedItems Merge or Replace existing cart
+    // UpdateCartWithSharedItems Merge or replace existing cart
     func (po *PosCart)  UpdateCartWithSharedItems(Token string, Action string) (SharedCartResponse, error){
         var (
             rawRequest  *RawRequest
