@@ -49,8 +49,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [followById](#followbyid)
     * [unfollowById](#unfollowbyid)
+    * [followById](#followbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -97,6 +97,8 @@
 
 * [Theme](#Theme)
   * Methods
+    * [getAllPages](#getallpages)
+    * [getPage](#getpage)
     * [getAppliedTheme](#getappliedtheme)
     * [getThemeForPreview](#getthemeforpreview)
     
@@ -1550,12 +1552,12 @@ Schema: `ErrorResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1569,7 +1571,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1603,12 +1605,12 @@ Schema: `ErrorResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1622,7 +1624,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -6283,6 +6285,155 @@ Default
 
 
 ## Theme
+
+
+#### getAllPages
+Get all pages of a theme
+
+```golang
+
+ data, err :=  Theme.GetAllPages(ThemeID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ThemeID | string | ID of the theme to be retrieved | 
+
+
+
+
+Use this API to retrieve all the available pages of a theme by its ID.
+
+*Success Response:*
+
+
+
+Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSchema` for more details.
+
+
+Schema: `AllAvailablePageSchema`
+
+
+*Examples:*
+
+
+All pages
+```json
+{
+  "$ref": "#/components/examples/AllAvailablePagesExample"
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+Schema: `BlitzkriegApiError`
+
+
+
+
+
+
+
+
+
+
+
+Schema: `BlitzkriegInternalServerError`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPage
+Get page of a theme
+
+```golang
+
+ data, err :=  Theme.GetPage(ThemeID, PageValue);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ThemeID | string | ID of the theme to be retrieved | 
+
+
+| PageValue | string | Value of the page to be retrieved | 
+
+
+
+
+Use this API to retrieve a page of a theme.
+
+*Success Response:*
+
+
+
+Success. Returns an object of the pages.  Refer `AvailablePageSchema` for more details.
+
+
+Schema: `AvailablePageSchema`
+
+
+*Examples:*
+
+
+Home page
+```json
+{
+  "$ref": "#/components/examples/AvailablePageExample"
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+Schema: `BlitzkriegApiError`
+
+
+
+
+
+
+
+
+
+
+
+Schema: `BlitzkriegInternalServerError`
+
+
+
+
+
+
+
+
+
+---
 
 
 #### getAppliedTheme
@@ -11108,10 +11259,10 @@ Use this API to retrieve the tokens used while integrating Firebase, MoEngage, S
 
 
 
-Success. Check the example shown below or refer `TokenResponse` for more details.
+Success. Check the example shown below or refer `AppTokenResponse` for more details.
 
 
-Schema: `TokenResponse`
+Schema: `AppTokenResponse`
 
 
 

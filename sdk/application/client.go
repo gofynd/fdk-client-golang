@@ -1615,45 +1615,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1684,6 +1645,45 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -3439,6 +3439,84 @@ func NewAppClient(config *AppConfig) *Client {
     func NewTheme(config *AppConfig) *Theme {
         return &Theme{config}
     }
+    
+    
+    
+  
+    
+    
+    // GetAllPages Get all pages of a theme
+    func (th *Theme)  GetAllPages(ThemeID string) (AllAvailablePageSchema, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getAllPagesResponse AllAvailablePageSchema
+	    )
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            th.config,
+            "get",
+            fmt.Sprintf("/service/application/theme/v1.0/%s/page",ThemeID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return AllAvailablePageSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAllPagesResponse)
+        if err != nil {
+            return AllAvailablePageSchema{}, common.NewFDKError(err.Error())
+        }
+         return getAllPagesResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetPage Get page of a theme
+    func (th *Theme)  GetPage(ThemeID string, PageValue string) (AvailablePageSchema, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getPageResponse AvailablePageSchema
+	    )
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            th.config,
+            "get",
+            fmt.Sprintf("/service/application/theme/v1.0/%s/%s",ThemeID,PageValue),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return AvailablePageSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPageResponse)
+        if err != nil {
+            return AvailablePageSchema{}, common.NewFDKError(err.Error())
+        }
+         return getPageResponse, nil
+        
+    }
+          
     
     
     
@@ -6800,12 +6878,12 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // GetIntegrationTokens Get integration tokens
-    func (co *Configuration)  GetIntegrationTokens() (TokenResponse, error){
+    func (co *Configuration)  GetIntegrationTokens() (AppTokenResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getIntegrationTokensResponse TokenResponse
+             getIntegrationTokensResponse AppTokenResponse
 	    )
 
          
@@ -6821,12 +6899,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return TokenResponse{}, err
+            return AppTokenResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &getIntegrationTokensResponse)
         if err != nil {
-            return TokenResponse{}, common.NewFDKError(err.Error())
+            return AppTokenResponse{}, common.NewFDKError(err.Error())
         }
          return getIntegrationTokensResponse, nil
         
