@@ -11742,7 +11742,7 @@ Attach a saved card to customer.
 | body |  AttachCardRequest | "Request body" 
 
 
-Use this API to attach a customer's saved card at the payment gateway, such as Stripe.
+Use this API to attach a customer's saved card at the payment gateway, such as Stripe, Juspay.
 
 *Success Response:*
 
@@ -12950,7 +12950,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### getOrders
-Use this API to retrieve all the orders.
+Get all orders
 
 ```golang
 
@@ -12973,7 +12973,7 @@ Use this API to retrieve all the orders.
 
 
 
-Get all orders
+Use this API to retrieve all the orders.
 
 *Success Response:*
 
@@ -13020,7 +13020,7 @@ Schema: `ApefaceApiError`
 
 
 #### getOrderById
-Use this API to retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
+Get details of an order
 
 ```golang
 
@@ -13035,7 +13035,7 @@ Use this API to retrieve order details such as tracking details, shipment, store
 
 
 
-Get details of an order
+Use this API to retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
 
 *Success Response:*
 
@@ -13082,7 +13082,7 @@ Schema: `ApefaceApiError`
 
 
 #### getShipmentById
-Use this API to retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
+Get details of a shipment
 
 ```golang
 
@@ -13097,7 +13097,7 @@ Use this API to retrieve shipment details such as price breakup, tracking detail
 
 
 
-Get details of a shipment
+Use this API to retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
 
 *Success Response:*
 
@@ -13144,7 +13144,7 @@ Schema: `ApefaceApiError`
 
 
 #### getShipmentReasons
-Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+Get reasons behind full or partial cancellation of a shipment
 
 ```golang
 
@@ -13159,7 +13159,7 @@ Use this API to retrieve the issues that led to the cancellation of bags within 
 
 
 
-Get reasons behind full or partial cancellation of a shipment
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
 
 *Success Response:*
 
@@ -13206,7 +13206,7 @@ Schema: `ApefaceApiError`
 
 
 #### updateShipmentStatus
-Use this API to update the status of a shipment using its shipment ID.
+Update the shipment status
 
 ```golang
 
@@ -13222,7 +13222,7 @@ Use this API to update the status of a shipment using its shipment ID.
 | body |  ShipmentStatusUpdateBody | "Request body" 
 
 
-Update the shipment status
+Use this API to update the status of a shipment using its shipment ID.
 
 *Success Response:*
 
@@ -13269,7 +13269,7 @@ Schema: `ApefaceApiError`
 
 
 #### trackShipment
-Use this API to track a shipment using its shipment ID.
+Track shipment
 
 ```golang
 
@@ -13284,7 +13284,7 @@ Use this API to track a shipment using its shipment ID.
 
 
 
-Track shipment
+Use this API to track a shipment using its shipment ID.
 
 *Success Response:*
 
@@ -13331,7 +13331,7 @@ Schema: `ApefaceApiError`
 
 
 #### getPosOrderById
-Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
+Get POS Order
 
 ```golang
 
@@ -13346,7 +13346,7 @@ Use this API to retrieve a POS order and all its details such as tracking detail
 
 
 
-Get POS Order
+Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
 
 *Success Response:*
 

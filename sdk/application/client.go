@@ -8395,7 +8395,7 @@ func NewAppClient(config *AppConfig) *Client {
         OrderStatus float64  `url:"order_status,omitempty"`  
     }
     
-    // GetOrders Use this API to retrieve all the orders.
+    // GetOrders Get all orders
     func (or *Order)  GetOrders(xQuery OrderGetOrdersXQuery) (OrderList, error){
         var (
             rawRequest  *RawRequest
@@ -8434,7 +8434,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetOrderById Use this API to retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
+    // GetOrderById Get details of an order
     func (or *Order)  GetOrderById(OrderID string) (OrderById, error){
         var (
             rawRequest  *RawRequest
@@ -8473,7 +8473,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetShipmentById Use this API to retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
+    // GetShipmentById Get details of a shipment
     func (or *Order)  GetShipmentById(ShipmentID string) (ShipmentById, error){
         var (
             rawRequest  *RawRequest
@@ -8512,7 +8512,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetShipmentReasons Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+    // GetShipmentReasons Get reasons behind full or partial cancellation of a shipment
     func (or *Order)  GetShipmentReasons(ShipmentID string) (ShipmentReasons, error){
         var (
             rawRequest  *RawRequest
@@ -8551,7 +8551,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UpdateShipmentStatus Use this API to update the status of a shipment using its shipment ID.
+    // UpdateShipmentStatus Update the shipment status
     func (or *Order)  UpdateShipmentStatus(ShipmentID string, body  ShipmentStatusUpdateBody) (ShipmentStatusUpdate, error){
         var (
             rawRequest  *RawRequest
@@ -8603,7 +8603,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // TrackShipment Use this API to track a shipment using its shipment ID.
+    // TrackShipment Track shipment
     func (or *Order)  TrackShipment(ShipmentID string) (ShipmentTrack, error){
         var (
             rawRequest  *RawRequest
@@ -8642,7 +8642,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetPosOrderById Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
+    // GetPosOrderById Get POS Order
     func (or *Order)  GetPosOrderById(OrderID string) (PosOrderById, error){
         var (
             rawRequest  *RawRequest
