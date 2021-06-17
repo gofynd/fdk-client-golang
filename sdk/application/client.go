@@ -1615,45 +1615,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1684,6 +1645,45 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -9936,6 +9936,7 @@ func NewAppClient(config *AppConfig) *Client {
     //FeedbackGetMediasXQuery holds query params
     type FeedbackGetMediasXQuery struct { 
         ID string  `url:"id,omitempty"` 
+        Type string  `url:"type,omitempty"` 
         PageID string  `url:"page_id,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"`  
     }
@@ -10004,6 +10005,13 @@ func NewAppClient(config *AppConfig) *Client {
                     
                     
                     
+                        
+                    
+                    
+                
+                    
+                    
+                    
                     
                         
                     
@@ -10019,6 +10027,10 @@ func NewAppClient(config *AppConfig) *Client {
             // GetMediasPaginator Get Media  
             func (fe *Feedback)  GetMediasPaginator(EntityType string  , EntityID string  ,  xQuery FeedbackGetMediasXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("cursor")
+                 
+                 
+                 
+                 
                  
                  
                  
@@ -12360,7 +12372,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetTatProduct Use this API to know the delivery turnaround time (TAT) by entering the product details along with the PIN Code of the location.
+    // GetTatProduct Get TAT of a product
     func (lo *Logistic)  GetTatProduct(body  GetTatProductReqBody) (GetTatProductResponse, error){
         var (
             rawRequest  *RawRequest
@@ -12412,7 +12424,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetPincodeCity Use this API to retrieve a city by its PIN Code.
+    // GetPincodeCity Get city from PIN Code
     func (lo *Logistic)  GetPincodeCity(Pincode string) (GetPincodeCityResponse, error){
         var (
             rawRequest  *RawRequest

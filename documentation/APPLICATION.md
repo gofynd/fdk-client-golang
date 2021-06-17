@@ -49,8 +49,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [followById](#followbyid)
     * [unfollowById](#unfollowbyid)
+    * [followById](#followbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -1552,12 +1552,12 @@ Schema: `ErrorResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1571,7 +1571,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1605,12 +1605,12 @@ Schema: `ErrorResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1624,7 +1624,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -14478,7 +14478,9 @@ Get Media
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `PageID`, `PageSize`
+
+
+| xQuery | struct | Includes properties such as `ID`, `Type`, `PageID`, `PageSize`
 
 
 
@@ -19361,7 +19363,7 @@ Cart Merged/Replaced
 
 
 #### getTatProduct
-Use this API to know the delivery turnaround time (TAT) by entering the product details along with the PIN Code of the location.
+Get TAT of a product
 
 ```golang
 
@@ -19374,7 +19376,7 @@ Use this API to know the delivery turnaround time (TAT) by entering the product 
 | body |  GetTatProductReqBody | "Request body" 
 
 
-Get TAT of a product
+Use this API to know the delivery turnaround time (TAT) by entering the product details along with the PIN Code of the location.
 
 *Success Response:*
 
@@ -19421,7 +19423,7 @@ Schema: `ApefaceApiError`
 
 
 #### getPincodeCity
-Use this API to retrieve a city by its PIN Code.
+Get city from PIN Code
 
 ```golang
 
@@ -19436,7 +19438,7 @@ Use this API to retrieve a city by its PIN Code.
 
 
 
-Get city from PIN Code
+Use this API to retrieve a city by its PIN Code.
 
 *Success Response:*
 
