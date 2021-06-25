@@ -29,6 +29,8 @@ type ApplicationClient struct {
 	 
 		Payment  *PlatformAppPayment
 	 
+		Order  *PlatformAppOrder
+	 
 		Catalog  *PlatformAppCatalog
 	 
 		FileStorage  *PlatformAppFileStorage
@@ -69,6 +71,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 				Communication:  NewPlatformAppCommunication(config, appID),
 			 
 				Payment:  NewPlatformAppPayment(config, appID),
+			 
+				Order:  NewPlatformAppOrder(config, appID),
 			 
 				Catalog:  NewPlatformAppCatalog(config, appID),
 			 
@@ -129,6 +133,26 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getTicketsResponse TicketList
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -173,6 +197,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getTicketResponse Ticket
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -213,6 +245,30 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             editTicketResponse Ticket
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -259,6 +315,10 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+    
+    
+    
+    
   
 
     
@@ -270,6 +330,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createHistoryResponse TicketHistory
 	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -323,6 +395,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getTicketHistoryResponse TicketHistoryList
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -363,6 +443,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getCustomFormResponse CustomForm
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -403,6 +491,32 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             editCustomFormResponse CustomForm
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -456,6 +570,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getCustomFormsResponse CustomFormList
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -496,6 +616,30 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createCustomFormResponse CustomForm
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -551,6 +695,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getTokenForVideoRoomResponse GetTokenForVideoRoomResponse
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -593,6 +745,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getVideoParticipantsResponse GetParticipantsInsideVideoRoomResponse
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -633,6 +793,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             openVideoRoomResponse CreateVideoRoomResponse
 	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -686,6 +856,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             closeVideoRoomResponse CloseVideoRoomResponse
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -712,6 +890,90 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
            
        
+    
+    
+    
+  
+
+    
+    //PlatformAppGetASDFXQuery holds query params
+    type PlatformAppGetASDFXQuery struct { 
+        InQuery PriorityEnum  `url:"in_query,omitempty"`  
+    }
+    
+    // GetASDF Get Token to join a specific Video Room using it's unqiue name
+     func (le *PlatformAppLead)  GetASDF(InHeader PriorityEnum, InPath PriorityEnum, xQuery PlatformAppGetASDFXQuery) (GetTokenForVideoRoomResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getASDFResponse GetTokenForVideoRoomResponse
+	    )
+
+        
+
+         
+            
+                
+                //enum validation inside query params
+                err = xQuery.InQuery.IsValid()
+                if err != nil {
+                    
+                    return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
+                }
+                
+            
+        
+
+        
+        
+               //enum validation inside path params
+                err = InPath.IsValid()
+                if err != nil {
+                    
+                    return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
+                }
+        
+        
+        
+        
+        //Adding extra headers
+        var xHeaders = make(map[string]string) 
+        
+         
+         //enum validation inside headers
+         err = InHeader.IsValid()
+         if err != nil {
+              return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
+         }
+         xHeaders["in_header"] =  string(InHeader)
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            le.config,
+            "get",
+            fmt.Sprintf("/service/platform/lead/company/%s/application/%s/asdf/%s/asdf",le.CompanyID, le.ApplicationID, InPath),
+            xHeaders,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetTokenForVideoRoomResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getASDFResponse)
+        if err != nil {
+            return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
+        }
+        return getASDFResponse, nil
+        
+    }
+           
+       
+    
+    
     
 
  
@@ -746,6 +1008,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getAttributesResponse FeedbackAttributes
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -855,6 +1129,44 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getCustomerReviewsResponse GetReviewResponse
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -1075,6 +1387,22 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateApproveResponse UpdateResponse
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -1128,6 +1456,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getHistoryResponse []ActivityDump
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -1174,6 +1510,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getApplicationTemplatesResponse TemplateGetResponse
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -1264,6 +1612,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createTemplateResponse InsertResponse
 	    )
+
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -1317,6 +1673,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getTemplateByIdResponse Template
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -1357,6 +1721,30 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateTemplateResponse UpdateResponse
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -1410,6 +1798,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateTemplateStatusResponse UpdateResponse
 	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -1477,6 +1877,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getAllPagesResponse AllAvailablePageSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -1517,6 +1925,34 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createPageResponse AvailablePageSchema
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -1570,6 +2006,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateMultiplePagesResponse AllAvailablePageSchema
 	    )
+
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -1623,6 +2069,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getPageResponse AvailablePageSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
+        
+        
         
          
         
@@ -1663,6 +2119,36 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updatePageResponse AvailablePageSchema
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+        
         
          
         
@@ -1716,6 +2202,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             deletePageResponse AvailablePageSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
+        
+        
         
          
         
@@ -1762,6 +2258,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getThemeLibraryResponse ThemesListingResponseSchema
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -1802,6 +2310,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             addToThemeLibraryResponse ThemesSchema
 	    )
+
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -1855,6 +2371,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             applyThemeResponse ThemesSchema
 	    )
+
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -1908,6 +2432,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             isUpgradableResponse UpgradableThemeSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -1948,6 +2480,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             upgradeThemeResponse ThemesSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -1994,6 +2534,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getPublicThemesResponse ThemesListingResponseSchema
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -2034,6 +2586,58 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createThemeResponse ThemesSchema
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -2087,6 +2691,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getAppliedThemeResponse ThemesSchema
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -2127,6 +2737,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getFontsResponse FontsSchema
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -2167,6 +2783,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getThemeByIdResponse ThemesSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -2207,6 +2831,60 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateThemeResponse ThemesSchema
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -2260,6 +2938,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             deleteThemeResponse ThemesSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -2300,6 +2986,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getThemeForPreviewResponse ThemesSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -2340,6 +3034,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             publishThemeResponse ThemesSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -2380,6 +3082,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             unpublishThemeResponse ThemesSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -2420,6 +3130,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             archiveThemeResponse ThemesSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -2460,6 +3178,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             unarchiveThemeResponse ThemesSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -2521,6 +3247,20 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getCustomersResponse CustomerListResponseSchema
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -2566,6 +3306,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             searchUsersResponse UserSearchResponseSchema
 	    )
+
+        
+
+         
+            
+                
+            
+        
+
+        
         
          
         
@@ -2598,6 +3348,213 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // CreateUser Create user
+     func (us *PlatformAppUser)  CreateUser(body  CreateUserRequestSchema) (CreateUserResponseSchema, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            createUserResponse CreateUserResponseSchema
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return CreateUserResponseSchema{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return CreateUserResponseSchema{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "post",
+            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/customers",us.CompanyID, us.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CreateUserResponseSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createUserResponse)
+        if err != nil {
+            return CreateUserResponseSchema{}, common.NewFDKError(err.Error())
+        }
+        return createUserResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdateUser Update user
+     func (us *PlatformAppUser)  UpdateUser(UserID string, body  UpdateUserRequestSchema) (CreateUserResponseSchema, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateUserResponse CreateUserResponseSchema
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return CreateUserResponseSchema{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return CreateUserResponseSchema{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "put",
+            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/customers/%s",us.CompanyID, us.ApplicationID, UserID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CreateUserResponseSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateUserResponse)
+        if err != nil {
+            return CreateUserResponseSchema{}, common.NewFDKError(err.Error())
+        }
+        return updateUserResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // CreateUserSession Create user session
+     func (us *PlatformAppUser)  CreateUserSession(body  CreateUserSessionRequestSchema) (CreateUserSessionResponseSchema, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            createUserSessionResponse CreateUserSessionResponseSchema
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return CreateUserSessionResponseSchema{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return CreateUserSessionResponseSchema{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "post",
+            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/customers/session",us.CompanyID, us.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CreateUserSessionResponseSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createUserSessionResponse)
+        if err != nil {
+            return CreateUserSessionResponseSchema{}, common.NewFDKError(err.Error())
+        }
+        return createUserSessionResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // GetPlatformConfig Get platform configurations
      func (us *PlatformAppUser)  GetPlatformConfig() (PlatformSchema, error) {
         var (
@@ -2606,6 +3563,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getPlatformConfigResponse PlatformSchema
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -2646,6 +3609,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updatePlatformConfigResponse PlatformSchema
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -2711,7 +3722,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // GetAnnouncementsList Get annoucements list
+    // GetAnnouncementsList Get a list of announcements
      func (co *PlatformAppContent)  GetAnnouncementsList(xQuery PlatformAppGetAnnouncementsListXQuery) (GetAnnouncementListSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -2719,6 +3730,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getAnnouncementsListResponse GetAnnouncementListSchema
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -2770,7 +3793,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             
             
             
-            // GetAnnouncementsListPaginator Get annoucements list  
+            // GetAnnouncementsListPaginator Get a list of announcements  
             func (co *PlatformAppContent)  GetAnnouncementsListPaginator( xQuery PlatformAppGetAnnouncementsListXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
                 
@@ -2801,7 +3824,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // CreateAnnouncement Create an annoucement
+    // CreateAnnouncement Create an announcement
      func (co *PlatformAppContent)  CreateAnnouncement(body  AdminAnnouncementSchema) (CreateAnnouncementSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -2809,6 +3832,34 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createAnnouncementResponse CreateAnnouncementSchema
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -2854,7 +3905,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetAnnouncementById Get annoucement by id
+    // GetAnnouncementById Get announcement by ID
      func (co *PlatformAppContent)  GetAnnouncementById(AnnouncementID string) (AdminAnnouncementSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -2862,6 +3913,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getAnnouncementByIdResponse AdminAnnouncementSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -2894,7 +3953,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateAnnouncement Update an annoucement
+    // UpdateAnnouncement Update an announcement
      func (co *PlatformAppContent)  UpdateAnnouncement(AnnouncementID string, body  AdminAnnouncementSchema) (CreateAnnouncementSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -2902,6 +3961,36 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateAnnouncementResponse CreateAnnouncementSchema
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -2947,7 +4036,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateAnnouncementSchedule Update schedule or published status of an annoucement
+    // UpdateAnnouncementSchedule Update the schedule and the publish status of an announcement
      func (co *PlatformAppContent)  UpdateAnnouncementSchedule(AnnouncementID string, body  ScheduleSchema) (CreateAnnouncementSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -2955,6 +4044,24 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateAnnouncementScheduleResponse CreateAnnouncementSchema
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -3000,7 +4107,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteAnnouncement Delete annoucement by id
+    // DeleteAnnouncement Delete announcement by id
      func (co *PlatformAppContent)  DeleteAnnouncement(AnnouncementID string) (CreateAnnouncementSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -3008,6 +4115,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             deleteAnnouncementResponse CreateAnnouncementSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -3040,7 +4155,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // CreateBlog Create blog
+    // CreateBlog Create a blog
      func (co *PlatformAppContent)  CreateBlog(body  BlogRequest) (BlogSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -3048,6 +4163,36 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createBlogResponse BlogSchema
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -3107,6 +4252,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getBlogsResponse BlogGetResponse
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -3189,7 +4346,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateBlog Update blog
+    // UpdateBlog Update a blog
      func (co *PlatformAppContent)  UpdateBlog(ID string, body  BlogRequest) (BlogSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -3197,6 +4354,38 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateBlogResponse BlogSchema
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -3250,6 +4439,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             deleteBlogResponse BlogSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -3282,7 +4479,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetComponentById Get components by component Id
+    // GetComponentById Get components of a blog
      func (co *PlatformAppContent)  GetComponentById(Slug string) (BlogSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -3290,6 +4487,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getComponentByIdResponse BlogSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -3322,7 +4527,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetFaqCategories Get FAQ categories list
+    // GetFaqCategories Get a list of FAQ categories
      func (co *PlatformAppContent)  GetFaqCategories() (GetFaqCategoriesSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -3330,6 +4535,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getFaqCategoriesResponse GetFaqCategoriesSchema
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -3362,7 +4573,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetFaqCategoryBySlugOrId Get FAQ category by slug or id
+    // GetFaqCategoryBySlugOrId Get an FAQ category by slug or id
      func (co *PlatformAppContent)  GetFaqCategoryBySlugOrId(IDOrSlug string) (GetFaqCategoryBySlugSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -3370,6 +4581,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getFaqCategoryBySlugOrIdResponse GetFaqCategoryBySlugSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -3402,7 +4621,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // CreateFaqCategory Creates a FAQ category
+    // CreateFaqCategory Create an FAQ category
      func (co *PlatformAppContent)  CreateFaqCategory(body  CreateFaqCategoryRequestSchema) (CreateFaqCategorySchema, error) {
         var (
             rawRequest  *RawRequest
@@ -3410,6 +4629,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createFaqCategoryResponse CreateFaqCategorySchema
 	    )
+
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -3455,7 +4682,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateFaqCategory Updates a FAQ category
+    // UpdateFaqCategory Update an FAQ category
      func (co *PlatformAppContent)  UpdateFaqCategory(ID string, body  UpdateFaqCategoryRequestSchema) (CreateFaqCategorySchema, error) {
         var (
             rawRequest  *RawRequest
@@ -3463,6 +4690,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateFaqCategoryResponse CreateFaqCategorySchema
 	    )
+
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -3508,7 +4745,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteFaqCategory Deletes a FAQ category
+    // DeleteFaqCategory Delete an FAQ category
      func (co *PlatformAppContent)  DeleteFaqCategory(ID string) (FaqSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -3516,6 +4753,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             deleteFaqCategoryResponse FaqSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -3548,7 +4793,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetFaqsByCategoryIdOrSlug Get FAQs of a Faq Category id or slug
+    // GetFaqsByCategoryIdOrSlug Get question and answers within an FAQ category
      func (co *PlatformAppContent)  GetFaqsByCategoryIdOrSlug(IDOrSlug string) (GetFaqSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -3556,6 +4801,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getFaqsByCategoryIdOrSlugResponse GetFaqSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -3588,7 +4841,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // AddFaq Creates FAQs for category whose `id` is specified
+    // AddFaq Create an FAQ
      func (co *PlatformAppContent)  AddFaq(CategoryID string, body  CreateFaqSchema) (CreateFaqResponseSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -3596,6 +4849,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             addFaqResponse CreateFaqResponseSchema
 	    )
+
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -3641,7 +4904,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateFaq Updates FAQ
+    // UpdateFaq Update an FAQ
      func (co *PlatformAppContent)  UpdateFaq(CategoryID string, FaqID string, body  CreateFaqSchema) (CreateFaqResponseSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -3649,6 +4912,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateFaqResponse CreateFaqResponseSchema
 	    )
+
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+        
         
          
         
@@ -3694,7 +4969,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteFaq Delete FAQ
+    // DeleteFaq Delete an FAQ
      func (co *PlatformAppContent)  DeleteFaq(CategoryID string, FaqID string) (CreateFaqResponseSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -3702,6 +4977,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             deleteFaqResponse CreateFaqResponseSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
+        
+        
         
          
         
@@ -3734,7 +5019,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetFaqByIdOrSlug Get frequently asked question
+    // GetFaqByIdOrSlug Get an FAQ
      func (co *PlatformAppContent)  GetFaqByIdOrSlug(IDOrSlug string) (CreateFaqResponseSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -3742,6 +5027,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getFaqByIdOrSlugResponse CreateFaqResponseSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -3780,7 +5073,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // GetLandingPages Get landing-pages
+    // GetLandingPages Get landing pages
      func (co *PlatformAppContent)  GetLandingPages(xQuery PlatformAppGetLandingPagesXQuery) (LandingPageGetResponse, error) {
         var (
             rawRequest  *RawRequest
@@ -3788,6 +5081,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getLandingPagesResponse LandingPageGetResponse
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -3839,7 +5144,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             
             
             
-            // GetLandingPagesPaginator Get landing-pages  
+            // GetLandingPagesPaginator Get landing pages  
             func (co *PlatformAppContent)  GetLandingPagesPaginator( xQuery PlatformAppGetLandingPagesXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
                 
@@ -3870,7 +5175,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // CreateLandingPage Create landing-page
+    // CreateLandingPage Create a landing page
      func (co *PlatformAppContent)  CreateLandingPage(body  LandingPageSchema) (LandingPageSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -3878,6 +5183,30 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createLandingPageResponse LandingPageSchema
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -3923,7 +5252,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateLandingPage Update landing-page
+    // UpdateLandingPage Update a landing page
      func (co *PlatformAppContent)  UpdateLandingPage(ID string, body  LandingPageSchema) (LandingPageSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -3931,6 +5260,32 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateLandingPageResponse LandingPageSchema
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -3976,7 +5331,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteLandingPage Delete landing-page
+    // DeleteLandingPage Delete a landing page
      func (co *PlatformAppContent)  DeleteLandingPage(ID string) (LandingPageSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -3984,6 +5339,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             deleteLandingPageResponse LandingPageSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -4024,6 +5387,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getLegalInformationResponse ApplicationLegal
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -4064,6 +5433,28 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateLegalInformationResponse ApplicationLegal
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -4124,6 +5515,20 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getNavigationsResponse NavigationGetResponse
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -4216,7 +5621,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // CreateNavigation Create navigation
+    // CreateNavigation Create a navigation
      func (co *PlatformAppContent)  CreateNavigation(body  NavigationRequest) (NavigationSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -4224,6 +5629,22 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createNavigationResponse NavigationSchema
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -4277,6 +5698,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getDefaultNavigationsResponse DefaultNavigationResponse
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -4314,7 +5741,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         DevicePlatform string  `url:"device_platform,omitempty"`  
     }
     
-    // GetNavigationBySlug Get navigation by slug
+    // GetNavigationBySlug Get a navigation by slug
      func (co *PlatformAppContent)  GetNavigationBySlug(Slug string, xQuery PlatformAppGetNavigationBySlugXQuery) (NavigationSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -4322,6 +5749,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getNavigationBySlugResponse NavigationSchema
 	    )
+
+        
+
+         
+            
+                
+            
+        
+
+        
+        
+        
         
          
         
@@ -4354,7 +5793,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateNavigation Update navigation
+    // UpdateNavigation Update a navigation
      func (co *PlatformAppContent)  UpdateNavigation(ID string, body  NavigationRequest) (NavigationSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -4362,6 +5801,24 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateNavigationResponse NavigationSchema
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -4407,7 +5864,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteNavigation Delete navigation
+    // DeleteNavigation Delete a navigation
      func (co *PlatformAppContent)  DeleteNavigation(ID string) (NavigationSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -4415,6 +5872,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             deleteNavigationResponse NavigationSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -4455,6 +5920,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getPageMetaResponse PageMetaSchema
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -4495,6 +5966,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getPageSpecResponse PageSpec
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -4527,7 +6004,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // CreatePage Create page
+    // CreatePage Create a page
      func (co *PlatformAppContent)  CreatePage(body  PageRequest) (PageSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -4535,6 +6012,38 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createPageResponse PageSchema
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -4586,7 +6095,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // GetPages Get pages
+    // GetPages Get a list of pages
      func (co *PlatformAppContent)  GetPages(xQuery PlatformAppGetPagesXQuery) (PageGetResponse, error) {
         var (
             rawRequest  *RawRequest
@@ -4594,6 +6103,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getPagesResponse PageGetResponse
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -4645,7 +6166,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             
             
             
-            // GetPagesPaginator Get pages  
+            // GetPagesPaginator Get a list of pages  
             func (co *PlatformAppContent)  GetPagesPaginator( xQuery PlatformAppGetPagesXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
                 
@@ -4676,7 +6197,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // CreatePagePreview Create page preview
+    // CreatePagePreview Create a page preview
      func (co *PlatformAppContent)  CreatePagePreview(body  PageRequest) (PageSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -4684,6 +6205,38 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createPagePreviewResponse PageSchema
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -4729,7 +6282,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdatePagePreview Update page
+    // UpdatePagePreview Change the publish status of a page
      func (co *PlatformAppContent)  UpdatePagePreview(Slug string, body  PagePublishRequest) (PageSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -4737,6 +6290,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updatePagePreviewResponse PageSchema
 	    )
+
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -4782,7 +6345,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdatePage Update page
+    // UpdatePage Update a page
      func (co *PlatformAppContent)  UpdatePage(ID string, body  PageSchema) (PageSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -4790,6 +6353,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updatePageResponse PageSchema
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -4835,7 +6446,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeletePage Delete page
+    // DeletePage Delete a page
      func (co *PlatformAppContent)  DeletePage(ID string) (PageSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -4843,6 +6454,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             deletePageResponse PageSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -4883,6 +6502,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getPageBySlugResponse PageSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -4915,7 +6542,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetSEOConfiguration Get seo of application
+    // GetSEOConfiguration Get SEO configuration of an application
      func (co *PlatformAppContent)  GetSEOConfiguration() (SeoComponent, error) {
         var (
             rawRequest  *RawRequest
@@ -4923,6 +6550,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getSEOConfigurationResponse SeoComponent
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -4955,7 +6588,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateSEOConfiguration Update seo of application
+    // UpdateSEOConfiguration Update SEO of application
      func (co *PlatformAppContent)  UpdateSEOConfiguration(body  SeoComponent) (SeoSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -4963,6 +6596,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateSEOConfigurationResponse SeoSchema
 	    )
+
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -5023,6 +6664,20 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getSlideshowsResponse SlideshowGetResponse
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -5115,7 +6770,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // CreateSlideshow Create slideshow
+    // CreateSlideshow Create a slideshow
      func (co *PlatformAppContent)  CreateSlideshow(body  SlideshowRequest) (SlideshowSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -5123,6 +6778,22 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createSlideshowResponse SlideshowSchema
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -5181,6 +6852,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getSlideshowBySlugResponse SlideshowSchema
 	    )
+
+        
+
+         
+            
+                
+            
+        
+
+        
+        
+        
         
          
         
@@ -5213,7 +6896,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateSlideshow Update slideshow
+    // UpdateSlideshow Update a slideshow
      func (co *PlatformAppContent)  UpdateSlideshow(ID string, body  SlideshowRequest) (SlideshowSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -5221,6 +6904,24 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateSlideshowResponse SlideshowSchema
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -5266,7 +6967,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteSlideshow Delete slideshow
+    // DeleteSlideshow Delete a slideshow
      func (co *PlatformAppContent)  DeleteSlideshow(ID string) (SlideshowSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -5274,6 +6975,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             deleteSlideshowResponse SlideshowSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -5314,6 +7023,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getSupportInformationResponse Support
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -5346,7 +7061,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateSupportInformation Update support data of application
+    // UpdateSupportInformation Update the support data of an application
      func (co *PlatformAppContent)  UpdateSupportInformation(body  Support) (Support, error) {
         var (
             rawRequest  *RawRequest
@@ -5354,6 +7069,26 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateSupportInformationResponse Support
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -5399,7 +7134,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateInjectableTag Updates a Tag
+    // UpdateInjectableTag Update a tag
      func (co *PlatformAppContent)  UpdateInjectableTag(body  CreateTagRequestSchema) (TagsSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -5407,6 +7142,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateInjectableTagResponse TagsSchema
 	    )
+
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -5452,7 +7195,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteAllInjectableTags Delete tags for application
+    // DeleteAllInjectableTags Delete tags in application
      func (co *PlatformAppContent)  DeleteAllInjectableTags() (TagsSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -5460,6 +7203,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             deleteAllInjectableTagsResponse TagsSchema
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -5492,7 +7241,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetInjectableTags Get tags for application
+    // GetInjectableTags Get all the tags in an application
      func (co *PlatformAppContent)  GetInjectableTags() (TagsSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -5500,6 +7249,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getInjectableTagsResponse TagsSchema
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -5532,7 +7287,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // AddInjectableTag Adds a Tag
+    // AddInjectableTag Add a tag
      func (co *PlatformAppContent)  AddInjectableTag(body  CreateTagRequestSchema) (TagsSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -5540,6 +7295,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             addInjectableTagResponse TagsSchema
 	    )
+
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -5585,7 +7348,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // RemoveInjectableTag Removes a Tag
+    // RemoveInjectableTag Remove a tag
      func (co *PlatformAppContent)  RemoveInjectableTag(body  RemoveHandpickedSchema) (TagsSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -5593,6 +7356,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             removeInjectableTagResponse TagsSchema
 	    )
+
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -5638,7 +7409,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // EditInjectableTag Edits a Tag by Id
+    // EditInjectableTag Edit a tag by id
      func (co *PlatformAppContent)  EditInjectableTag(TagID string, body  UpdateHandpickedSchema) (TagsSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -5646,6 +7417,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             editInjectableTagResponse TagsSchema
 	    )
+
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -5713,6 +7494,34 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createPickupLocationResponse Success
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -5773,6 +7582,20 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getPickupLocationResponse PickupPointResponse
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -5873,6 +7696,36 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updatePickupLocationResponse Success
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -5926,6 +7779,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getPickupLocationByIdResponse PickupPointSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -5966,6 +7827,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createPickupConfigurationResponse Success
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -6019,6 +7892,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getPickupConfigurationResponse PickupResponse
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -6059,6 +7938,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getAllocationConfigurationResponse ShippingResponse
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -6099,6 +7984,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createAllocationConfigurationResponse Success
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -6152,6 +8049,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateAllocationConfigurationResponse Success
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -6213,6 +8122,22 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getAllocationLocationsResponse StoreListResponse
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -6323,6 +8248,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getAllocationLocationByIdResponse StoreResponse
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -6363,6 +8296,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateAllocationLocationResponse Success
 	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -6416,6 +8361,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createAllocationLocationResponse Success
 	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -6476,6 +8431,20 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getDestinationZonesResponse ZoneListResponse
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -6576,6 +8545,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             postDestinationZoneResponse Success
 	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -6629,6 +8608,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getDestinationZoneByIdResponse ZoneSchema
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -6669,6 +8656,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateDestinationZoneResponse Success
 	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -6743,6 +8742,20 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getCampaignsResponse Campaigns
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -6843,6 +8856,30 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createCampaignResponse Campaign
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -6896,6 +8933,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getCampaignByIdResponse Campaign
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -6936,6 +8981,32 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateCampaignByIdResponse Campaign
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -6989,6 +9060,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getStatsOfCampaignByIdResponse GetStats
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -7036,6 +9115,20 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getAudiencesResponse Audiences
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -7136,6 +9229,30 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createAudienceResponse Audience
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -7189,6 +9306,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getBigqueryHeadersResponse BigqueryHeadersRes
 	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -7242,6 +9369,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getAudienceByIdResponse Audience
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -7282,6 +9417,32 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateAudienceByIdResponse Audience
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -7335,6 +9496,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getNSampleRecordsFromCsvResponse GetNRecordsCsvRes
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -7395,6 +9568,20 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getEmailProvidersResponse EmailProviders
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -7495,6 +9682,24 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createEmailProviderResponse EmailProvider
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -7548,6 +9753,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getEmailProviderByIdResponse EmailProvider
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -7588,6 +9801,26 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateEmailProviderByIdResponse EmailProvider
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -7648,6 +9881,20 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getEmailTemplatesResponse EmailTemplates
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -7748,6 +9995,40 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createEmailTemplateResponse EmailTemplateRes
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -7808,6 +10089,20 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getSystemEmailTemplatesResponse SystemEmailTemplates
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -7908,6 +10203,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getEmailTemplateByIdResponse EmailTemplate
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -7948,6 +10251,42 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateEmailTemplateByIdResponse EmailTemplateRes
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -8001,6 +10340,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             deleteEmailTemplateByIdResponse EmailTemplateDeleteSuccessRes
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -8048,6 +10395,20 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getEventSubscriptionsResponse EventSubscriptions
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -8155,6 +10516,20 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getJobsResponse Jobs
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -8255,6 +10630,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             triggerCampaignJobResponse TriggerJobResponse
 	    )
+
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -8315,6 +10698,20 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getJobLogsResponse JobLogs
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -8423,6 +10820,22 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getCommunicationLogsResponse Logs
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -8542,6 +10955,20 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getSmsProvidersResponse SmsProviders
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -8642,6 +11069,26 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createSmsProviderResponse SmsProvider
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -8695,6 +11142,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getSmsProviderByIdResponse SmsProvider
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -8735,6 +11190,28 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateSmsProviderByIdResponse SmsProvider
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -8795,6 +11272,20 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getSmsTemplatesResponse SmsTemplates
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -8895,6 +11386,24 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createSmsTemplateResponse SmsTemplateRes
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -8948,6 +11457,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getSmsTemplateByIdResponse SmsTemplate
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -8988,6 +11505,26 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateSmsTemplateByIdResponse SmsTemplateRes
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -9041,6 +11578,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             deleteSmsTemplateByIdResponse SmsTemplateDeleteSuccessRes
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -9088,6 +11633,20 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getSystemSystemTemplatesResponse SystemSmsTemplates
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -9202,6 +11761,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getBrandPaymentGatewayConfigResponse PaymentGatewayConfigResponse
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -9242,6 +11807,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             saveBrandPaymentGatewayConfigResponse PaymentGatewayToBeReviewed
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -9295,6 +11872,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateBrandPaymentGatewayConfigResponse PaymentGatewayToBeReviewed
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -9354,6 +11943,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getPaymentModeRoutesResponse PaymentOptionsResponse
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -9412,6 +12013,22 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             addBeneficiaryDetailsResponse RefundAccountResponse
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -9472,6 +12089,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getUserOrderBeneficiariesResponse OrderBeneficiaryResponse
 	    )
+
+        
+
+         
+            
+                
+            
+        
+
+        
         
          
         
@@ -9517,6 +12144,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getUserBeneficiariesResponse OrderBeneficiaryResponse
 	    )
+
+        
+
+         
+            
+                
+            
+        
+
+        
         
          
         
@@ -9547,6 +12184,399 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
  
 	 
+   // PlatformAppOrder holds PlatformAppOrder object properties
+    type PlatformAppOrder struct {
+        config *PlatformConfig
+        CompanyID string
+        ApplicationID string
+    }
+    // NewPlatformAppOrder returns new PlatformAppOrder instance
+    func NewPlatformAppOrder(config *PlatformConfig, appID string) *PlatformAppOrder {
+        return &PlatformAppOrder{config, config.CompanyID, appID}
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+    
+    // TrackShipmentPlatform Track Shipment by shipment id, for application based on application Id
+     func (or *PlatformAppOrder)  TrackShipmentPlatform(ShipmentID string) (PlatformShipmentTrack, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            trackShipmentPlatformResponse PlatformShipmentTrack
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/platform/order/v1.0/company/%s/application/%s/orders/shipments/%s/track",or.CompanyID, or.ApplicationID, ShipmentID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PlatformShipmentTrack{}, err
+	    }
+        
+        err = json.Unmarshal(response, &trackShipmentPlatformResponse)
+        if err != nil {
+            return PlatformShipmentTrack{}, common.NewFDKError(err.Error())
+        }
+        return trackShipmentPlatformResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // TrackOrder Track Order by order id, for application based on application Id
+     func (or *PlatformAppOrder)  TrackOrder(OrderID string) (PlatformOrderTrack, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            trackOrderResponse PlatformOrderTrack
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "post",
+            fmt.Sprintf("/service/platform/order/v1.0/company/%s/application/%s/orders/%s/track",or.CompanyID, or.ApplicationID, OrderID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PlatformOrderTrack{}, err
+	    }
+        
+        err = json.Unmarshal(response, &trackOrderResponse)
+        if err != nil {
+            return PlatformOrderTrack{}, common.NewFDKError(err.Error())
+        }
+        return trackOrderResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // FailedOrders Get all failed orders application wise
+     func (or *PlatformAppOrder)  FailedOrders() (FailedOrders, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            failedOrdersResponse FailedOrders
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/platform/order/v1.0/company/%s/application/%s/orders/failed",or.CompanyID, or.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FailedOrders{}, err
+	    }
+        
+        err = json.Unmarshal(response, &failedOrdersResponse)
+        if err != nil {
+            return FailedOrders{}, common.NewFDKError(err.Error())
+        }
+        return failedOrdersResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // ReprocessOrder Reprocess order by order id
+     func (or *PlatformAppOrder)  ReprocessOrder(OrderID string) (UpdateOrderReprocessResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            reprocessOrderResponse UpdateOrderReprocessResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "post",
+            fmt.Sprintf("/service/platform/order/v1.0/company/%s/application/%s/orders/%s/reprocess",or.CompanyID, or.ApplicationID, OrderID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return UpdateOrderReprocessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &reprocessOrderResponse)
+        if err != nil {
+            return UpdateOrderReprocessResponse{}, common.NewFDKError(err.Error())
+        }
+        return reprocessOrderResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdateShipment Use this API to update the shipment using its shipment ID.
+     func (or *PlatformAppOrder)  UpdateShipment(ShipmentID string, body  ShipmentUpdateRequest) (ShipmentUpdateResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateShipmentResponse ShipmentUpdateResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return ShipmentUpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return ShipmentUpdateResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "post",
+            fmt.Sprintf("/service/platform/order/v1.0/company/%s/application/%s/orders/shipments/%s/update",or.CompanyID, or.ApplicationID, ShipmentID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ShipmentUpdateResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateShipmentResponse)
+        if err != nil {
+            return ShipmentUpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        return updateShipmentResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetPlatformShipmentReasons Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+     func (or *PlatformAppOrder)  GetPlatformShipmentReasons() (ShipmentReasonsResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getPlatformShipmentReasonsResponse ShipmentReasonsResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/platform/order/v1.0/company/%s/application/%s/orders/shipments/reasons/:action",or.CompanyID, or.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ShipmentReasonsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPlatformShipmentReasonsResponse)
+        if err != nil {
+            return ShipmentReasonsResponse{}, common.NewFDKError(err.Error())
+        }
+        return getPlatformShipmentReasonsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetShipmentTrackDetails Use this API to track a shipment using its shipment ID.
+     func (or *PlatformAppOrder)  GetShipmentTrackDetails(OrderID string, ShipmentID string) (ShipmentTrackResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getShipmentTrackDetailsResponse ShipmentTrackResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/platform/order/v1.0/company/%s/application/%s/orders/%s/shipments/%s/track",or.CompanyID, or.ApplicationID, OrderID, ShipmentID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ShipmentTrackResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getShipmentTrackDetailsResponse)
+        if err != nil {
+            return ShipmentTrackResponse{}, common.NewFDKError(err.Error())
+        }
+        return getShipmentTrackDetailsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+ 
+	 
    // PlatformAppCatalog holds PlatformAppCatalog object properties
     type PlatformAppCatalog struct {
         config *PlatformConfig
@@ -9563,6 +12593,102 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // DeleteSearchKeywords Delete a Search Keywords
+     func (ca *PlatformAppCatalog)  DeleteSearchKeywords(ID string) (DeleteResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteSearchKeywordsResponse DeleteResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DeleteResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteSearchKeywordsResponse)
+        if err != nil {
+            return DeleteResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteSearchKeywordsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetSearchKeywords Get a Search Keywords Details
+     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getSearchKeywordsResponse GetSearchWordsDetailResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetSearchWordsDetailResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getSearchKeywordsResponse)
+        if err != nil {
+            return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
+        }
+        return getSearchKeywordsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // UpdateSearchKeywords Update Search Keyword
      func (ca *PlatformAppCatalog)  UpdateSearchKeywords(ID string, body  CreateSearchKeyword) (GetSearchWordsData, error) {
         var (
@@ -9571,6 +12697,24 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateSearchKeywordsResponse GetSearchWordsData
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -9616,126 +12760,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteSearchKeywords Delete a Search Keywords
-     func (ca *PlatformAppCatalog)  DeleteSearchKeywords(ID string) (DeleteResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteSearchKeywordsResponse DeleteResponse
-	    )
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return DeleteResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteSearchKeywordsResponse)
-        if err != nil {
-            return DeleteResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteSearchKeywordsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetSearchKeywords Get a Search Keywords Details
-     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getSearchKeywordsResponse GetSearchWordsDetailResponse
-	    )
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetSearchWordsDetailResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getSearchKeywordsResponse)
-        if err != nil {
-            return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
-        }
-        return getSearchKeywordsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetAllSearchKeyword List all Search Custom Keyword Listing
-     func (ca *PlatformAppCatalog)  GetAllSearchKeyword() (GetSearchWordsResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAllSearchKeywordResponse GetSearchWordsResponse
-	    )
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/",ca.CompanyID, ca.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetSearchWordsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAllSearchKeywordResponse)
-        if err != nil {
-            return GetSearchWordsResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAllSearchKeywordResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // CreateCustomKeyword Add a Custom Search Keywords
      func (ca *PlatformAppCatalog)  CreateCustomKeyword(body  CreateSearchKeyword) (GetSearchWordsData, error) {
         var (
@@ -9744,6 +12768,22 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createCustomKeywordResponse GetSearchWordsData
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -9789,6 +12829,148 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // GetAllSearchKeyword List all Search Custom Keyword Listing
+     func (ca *PlatformAppCatalog)  GetAllSearchKeyword() (GetSearchWordsResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAllSearchKeywordResponse GetSearchWordsResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/",ca.CompanyID, ca.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetSearchWordsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAllSearchKeywordResponse)
+        if err != nil {
+            return GetSearchWordsResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAllSearchKeywordResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteAutocompleteKeyword Delete a Autocomplete Keywords
+     func (ca *PlatformAppCatalog)  DeleteAutocompleteKeyword(ID string) (DeleteResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteAutocompleteKeywordResponse DeleteResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DeleteResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteAutocompleteKeywordResponse)
+        if err != nil {
+            return DeleteResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteAutocompleteKeywordResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
+     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAutocompleteKeywordDetailResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // UpdateAutocompleteKeyword Create & Update Autocomplete Keyword
      func (ca *PlatformAppCatalog)  UpdateAutocompleteKeyword(ID string, body  CreateAutocompleteKeyword) (GetAutocompleteWordsResponse, error) {
         var (
@@ -9797,6 +12979,24 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateAutocompleteKeywordResponse GetAutocompleteWordsResponse
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -9842,126 +13042,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteAutocompleteKeyword Delete a Autocomplete Keywords
-     func (ca *PlatformAppCatalog)  DeleteAutocompleteKeyword(ID string) (DeleteResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteAutocompleteKeywordResponse DeleteResponse
-	    )
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return DeleteResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteAutocompleteKeywordResponse)
-        if err != nil {
-            return DeleteResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteAutocompleteKeywordResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
-     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
-	    )
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAutocompleteKeywordDetailResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetAutocompleteConfig List all Autocomplete Keyword Listing
-     func (ca *PlatformAppCatalog)  GetAutocompleteConfig() (GetAutocompleteWordsResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAutocompleteConfigResponse GetAutocompleteWordsResponse
-	    )
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/",ca.CompanyID, ca.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAutocompleteConfigResponse)
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAutocompleteConfigResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // CreateCustomAutocompleteRule Add a Custom Autocomplete Keywords
      func (ca *PlatformAppCatalog)  CreateCustomAutocompleteRule(body  CreateAutocompleteKeyword) (CreateAutocompleteWordsResponse, error) {
         var (
@@ -9970,6 +13050,22 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createCustomAutocompleteRuleResponse CreateAutocompleteWordsResponse
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -10012,6 +13108,52 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+  
+
+    
+    // GetAutocompleteConfig List all Autocomplete Keyword Listing
+     func (ca *PlatformAppCatalog)  GetAutocompleteConfig() (GetAutocompleteWordsResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAutocompleteConfigResponse GetAutocompleteWordsResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/",ca.CompanyID, ca.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAutocompleteConfigResponse)
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAutocompleteConfigResponse, nil
+        
+    }
+           
+       
+    
+    
+    
     
     
     
@@ -10039,6 +13181,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getCatalogConfigurationResponse GetCatalogConfigurationMetaData
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -10071,46 +13219,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetConfigurations Get configured details for catalog
-     func (ca *PlatformAppCatalog)  GetConfigurations() (GetAppCatalogConfiguration, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getConfigurationsResponse GetAppCatalogConfiguration
-	    )
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/",ca.CompanyID, ca.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetAppCatalogConfiguration{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getConfigurationsResponse)
-        if err != nil {
-            return GetAppCatalogConfiguration{}, common.NewFDKError(err.Error())
-        }
-        return getConfigurationsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // CreateConfigurationProductListing Add configuration for products & listings
      func (ca *PlatformAppCatalog)  CreateConfigurationProductListing(body  AppConfiguration) (GetAppCatalogConfiguration, error) {
         var (
@@ -10119,6 +13227,22 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createConfigurationProductListingResponse GetAppCatalogConfiguration
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -10164,14 +13288,20 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetConfigurationByType Get configured details for catalog
-     func (ca *PlatformAppCatalog)  GetConfigurationByType(Type string) (GetAppCatalogEntityConfiguration, error) {
+    // GetConfigurations Get configured details for catalog
+     func (ca *PlatformAppCatalog)  GetConfigurations() (GetAppCatalogConfiguration, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getConfigurationByTypeResponse GetAppCatalogEntityConfiguration
+            getConfigurationsResponse GetAppCatalogConfiguration
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -10180,20 +13310,20 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/%s/",ca.CompanyID, ca.ApplicationID, Type),
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/",ca.CompanyID, ca.ApplicationID),
             nil,
             nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return GetAppCatalogEntityConfiguration{}, err
+            return GetAppCatalogConfiguration{}, err
 	    }
         
-        err = json.Unmarshal(response, &getConfigurationByTypeResponse)
+        err = json.Unmarshal(response, &getConfigurationsResponse)
         if err != nil {
-            return GetAppCatalogEntityConfiguration{}, common.NewFDKError(err.Error())
+            return GetAppCatalogConfiguration{}, common.NewFDKError(err.Error())
         }
-        return getConfigurationByTypeResponse, nil
+        return getConfigurationsResponse, nil
         
     }
            
@@ -10212,6 +13342,24 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createConfigurationByTypeResponse GetAppCatalogConfiguration
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -10257,6 +13405,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // GetConfigurationByType Get configured details for catalog
+     func (ca *PlatformAppCatalog)  GetConfigurationByType(Type string) (GetAppCatalogEntityConfiguration, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getConfigurationByTypeResponse GetAppCatalogEntityConfiguration
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/%s/",ca.CompanyID, ca.ApplicationID, Type),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetAppCatalogEntityConfiguration{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getConfigurationByTypeResponse)
+        if err != nil {
+            return GetAppCatalogEntityConfiguration{}, common.NewFDKError(err.Error())
+        }
+        return getConfigurationByTypeResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // GetQueryFilters Get query filters to configure a collection
      func (ca *PlatformAppCatalog)  GetQueryFilters() (GetCollectionQueryOptionResponse, error) {
         var (
@@ -10265,6 +13461,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getQueryFiltersResponse GetCollectionQueryOptionResponse
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -10297,46 +13499,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetAllCollections List all the collections
-     func (ca *PlatformAppCatalog)  GetAllCollections() (GetCollectionListingResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAllCollectionsResponse GetCollectionListingResponse
-	    )
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/collections/",ca.CompanyID, ca.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetCollectionListingResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAllCollectionsResponse)
-        if err != nil {
-            return GetCollectionListingResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAllCollectionsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // CreateCollection Add a Collection
      func (ca *PlatformAppCatalog)  CreateCollection(body  CreateCollection) (CollectionCreateResponse, error) {
         var (
@@ -10345,6 +13507,58 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createCollectionResponse CollectionCreateResponse
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -10390,6 +13604,52 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // GetAllCollections List all the collections
+     func (ca *PlatformAppCatalog)  GetAllCollections() (GetCollectionListingResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAllCollectionsResponse GetCollectionListingResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/collections/",ca.CompanyID, ca.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetCollectionListingResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAllCollectionsResponse)
+        if err != nil {
+            return GetCollectionListingResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAllCollectionsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // GetCollectionDetail Get a particular collection
      func (ca *PlatformAppCatalog)  GetCollectionDetail(Slug string) (CollectionDetailResponse, error) {
         var (
@@ -10398,6 +13658,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getCollectionDetailResponse CollectionDetailResponse
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -10430,6 +13698,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // DeleteCollection Delete a Collection
+     func (ca *PlatformAppCatalog)  DeleteCollection(ID string) (DeleteResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteCollectionResponse DeleteResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/collections/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DeleteResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteCollectionResponse)
+        if err != nil {
+            return DeleteResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteCollectionResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // UpdateCollection Update a collection
      func (ca *PlatformAppCatalog)  UpdateCollection(ID string, body  UpdateCollection) (UpdateCollection, error) {
         var (
@@ -10438,6 +13754,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateCollectionResponse UpdateCollection
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -10483,93 +13847,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteCollection Delete a Collection
-     func (ca *PlatformAppCatalog)  DeleteCollection(ID string) (DeleteResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteCollectionResponse DeleteResponse
-	    )
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/collections/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return DeleteResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteCollectionResponse)
-        if err != nil {
-            return DeleteResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteCollectionResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    //PlatformAppGetCollectionItemsXQuery holds query params
-    type PlatformAppGetCollectionItemsXQuery struct { 
-        SortOn string  `url:"sort_on,omitempty"` 
-        PageID string  `url:"page_id,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
-    }
-    
-    // GetCollectionItems Get the items for a collection
-     func (ca *PlatformAppCatalog)  GetCollectionItems(ID string, xQuery PlatformAppGetCollectionItemsXQuery) (GetCollectionItemsResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getCollectionItemsResponse GetCollectionItemsResponse
-	    )
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/collections/%s/items/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetCollectionItemsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getCollectionItemsResponse)
-        if err != nil {
-            return GetCollectionItemsResponse{}, common.NewFDKError(err.Error())
-        }
-        return getCollectionItemsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // AddCollectionItems Add items to a collection
      func (ca *PlatformAppCatalog)  AddCollectionItems(ID string, body  CollectionItemRequest) (UpdatedResponse, error) {
         var (
@@ -10578,6 +13855,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             addCollectionItemsResponse UpdatedResponse
 	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -10623,6 +13912,69 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    //PlatformAppGetCollectionItemsXQuery holds query params
+    type PlatformAppGetCollectionItemsXQuery struct { 
+        SortOn string  `url:"sort_on,omitempty"` 
+        PageID string  `url:"page_id,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetCollectionItems Get the items for a collection
+     func (ca *PlatformAppCatalog)  GetCollectionItems(ID string, xQuery PlatformAppGetCollectionItemsXQuery) (GetCollectionItemsResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getCollectionItemsResponse GetCollectionItemsResponse
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/collections/%s/items/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetCollectionItemsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getCollectionItemsResponse)
+        if err != nil {
+            return GetCollectionItemsResponse{}, common.NewFDKError(err.Error())
+        }
+        return getCollectionItemsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     //PlatformAppGetCatalogInsightsXQuery holds query params
     type PlatformAppGetCatalogInsightsXQuery struct { 
         Brand string  `url:"brand,omitempty"`  
@@ -10636,6 +13988,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getCatalogInsightsResponse CatalogInsightResponse
 	    )
+
+        
+
+         
+            
+                
+            
+        
+
+        
         
          
         
@@ -10789,6 +14151,20 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getApplicationBrandsResponse BrandListingResponse
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -10889,6 +14265,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getDepartmentsResponse DepartmentResponse
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -10934,6 +14316,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getCategoriesResponse CategoryListingResponse
 	    )
+
+        
+
+         
+            
+                
+            
+        
+
+        
         
          
         
@@ -10986,6 +14378,30 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getAppicationProductsResponse ApplicationProductListingResponse
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -11136,6 +14552,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getProductDetailBySlugResponse ProductDetail
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -11194,6 +14618,24 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             appStartUploadResponse StartResponse
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -11247,6 +14689,34 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             appCompleteUploadResponse CompleteResponse
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -11309,6 +14779,22 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             appCopyFilesResponse BulkResponse
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+            
+                
+            
+        
+
+        
         
          
         
@@ -11369,6 +14855,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             browseResponse BrowseResponse
 	    )
+
+        
+
+         
+            
+                
+            
+        
+
+        
+        
+        
         
          
         
@@ -11469,6 +14967,36 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createShortLinkResponse ShortLinkRes
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -11531,6 +15059,24 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getShortLinksResponse ShortLinkList
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -11651,6 +15197,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getShortLinkByHashResponse ShortLinkRes
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -11691,6 +15245,38 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateShortLinkByIdResponse ShortLinkRes
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -11758,6 +15344,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getBuildConfigResponse MobileAppConfiguration
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -11798,6 +15392,22 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateBuildConfigResponse MobileAppConfiguration
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -11851,6 +15461,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getPreviousVersionsResponse BuildVersionHistory
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -11891,6 +15509,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getAppFeaturesResponse AppFeatureResponse
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -11931,6 +15555,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateAppFeaturesResponse AppFeature
 	    )
+
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -11984,6 +15616,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getAppBasicDetailsResponse ApplicationDetail
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -12024,6 +15662,30 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateAppBasicDetailsResponse ApplicationDetail
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -12077,6 +15739,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getAppContactInfoResponse ApplicationInformation
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -12117,6 +15785,34 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateAppContactInfoResponse ApplicationInformation
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -12170,6 +15866,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getAppApiTokensResponse TokenResponse
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -12210,6 +15912,24 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateAppApiTokensResponse TokenResponse
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -12269,6 +15989,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getAppCompaniesResponse CompaniesResponse
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -12365,6 +16097,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getAppStoresResponse StoresResponse
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -12455,6 +16199,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getInventoryConfigResponse ApplicationInventory
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -12495,6 +16245,46 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateInventoryConfigResponse ApplicationInventory
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -12548,6 +16338,22 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             partiallyUpdateInventoryConfigResponse ApplicationInventory
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -12601,6 +16407,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getAppCurrencyConfigResponse AppSupportedCurrency
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -12641,6 +16453,24 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateAppCurrencyConfigResponse AppSupportedCurrency
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -12700,6 +16530,24 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getOrderingStoresByFilterResponse OrderingStores
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -12803,6 +16651,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateOrderingStoreConfigResponse DeploymentMeta
 	    )
+
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -12856,6 +16712,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getDomainsResponse DomainsResponse
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -12896,6 +16758,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             addDomainResponse Domain
 	    )
+
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -12949,6 +16819,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             removeDomainByIdResponse SuccessMessageResponse
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -12989,6 +16867,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             changeDomainTypeResponse DomainsResponse
 	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -13042,6 +16930,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getDomainStatusResponse DomainStatusResponse
 	    )
+
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -13099,6 +16995,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getApplicationByIdResponse Application
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -13193,6 +17095,30 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getCouponsResponse CouponsResponse
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -13343,6 +17269,44 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createCouponResponse SuccessMessage
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -13396,6 +17360,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getCouponByIdResponse CouponUpdate
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -13436,6 +17408,46 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateCouponResponse SuccessMessage
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -13489,6 +17501,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateCouponPartiallyResponse SuccessMessage
 	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -13547,6 +17571,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             fetchCartItemsResponse CartDetail
 	    )
+
+        
+
+         
+            
+                
+            
+        
+
+        
         
          
         
@@ -13587,6 +17621,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             fetchAndvalidateCartItemsResponse OpenapiCartDetailsResponse
 	    )
+
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -13640,6 +17682,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             checkCartServiceabilityResponse CartDetailsResponseSerializer
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -13693,6 +17747,50 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             checkoutCartItemsResponse map[string]interface{}
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -13746,6 +17844,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateCheckoutPaymentStatusResponse map[string]interface{}
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -13819,6 +17929,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getGiveawaysResponse GiveawayResponse
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
         
          
         
@@ -13909,6 +18031,36 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             createGiveawayResponse Giveaway
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
         
          
         
@@ -13962,6 +18114,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getGiveawayByIDResponse Giveaway
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -14002,6 +18162,38 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateGiveawayResponse Giveaway
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -14055,6 +18247,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getOffersResponse []Offer
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -14095,12 +18293,22 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getOfferByNameResponse Offer
 	    )
+
+        
+
+         
+
+        
+        
+        
         
         
         //Adding extra headers
         var xHeaders = make(map[string]string) 
         
-        xHeaders["cookie"]=  Cookie;
+         
+         xHeaders["cookie"] =  Cookie
+         
         
         
         //API call
@@ -14139,6 +18347,42 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateOfferByNameResponse Offer
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -14192,6 +18436,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getUserAvailablePointsResponse UserRes
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -14232,6 +18484,28 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             updateUserStatusResponse AppUser
 	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -14292,6 +18566,22 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getUserPointsHistoryResponse HistoryRes
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
         
          
         
@@ -14410,6 +18700,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getStatiscticsGroupsResponse StatsGroups
 	    )
+
+        
+
+         
+
+        
         
          
         
@@ -14450,6 +18746,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getStatiscticsGroupComponentsResponse StatsGroupComponents
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -14490,6 +18794,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -14526,6 +18838,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -14562,6 +18882,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getComponentStatsResponse StatsRes
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -14608,6 +18936,22 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getAbandonCartListResponse AbandonCartsList
 	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+        
         
          
         
@@ -14706,6 +19050,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             
 	    )
+
+        
+
+         
+
+        
+        
+        
+        
+        
         
          
         
@@ -14742,6 +19096,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             getAbandonCartDetailResponse AbandonCartDetail
 	    )
+
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -14804,6 +19166,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             addProxyPathResponse AddProxyResponse
 	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
         
          
         
@@ -14857,6 +19231,16 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             err         error
             removeProxyPathResponse RemoveProxyResponse
 	    )
+
+        
+
+         
+
+        
+        
+        
+        
+        
         
          
         

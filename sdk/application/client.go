@@ -107,6 +107,14 @@ func NewAppClient(config *AppConfig) *Client {
              getProductDetailBySlugResponse ProductDetail
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -151,6 +159,18 @@ func NewAppClient(config *AppConfig) *Client {
              getProductSizesBySlugResponse ProductSizes
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+        
+        
+    
          
         
         
@@ -183,7 +203,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CatalogGetProductPriceBySlugXQuery holds query params
     type CatalogGetProductPriceBySlugXQuery struct { 
-        StoreID string  `url:"store_id,omitempty"`  
+        StoreID float64  `url:"store_id,omitempty"`  
     }
     
     // GetProductPriceBySlug Get the price of a product size at a PIN Code
@@ -195,6 +215,22 @@ func NewAppClient(config *AppConfig) *Client {
              getProductPriceBySlugResponse ProductSizePriceResponse
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+        
+        
+        
+        
+        
+        
+    
          
         
         
@@ -241,6 +277,26 @@ func NewAppClient(config *AppConfig) *Client {
              getProductSellersBySlugResponse ProductSizeSellersResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+        
+        
+        
+    
          
         
         
@@ -362,6 +418,16 @@ func NewAppClient(config *AppConfig) *Client {
              getProductComparisonBySlugsResponse ProductsComparisonResponse
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -401,6 +467,14 @@ func NewAppClient(config *AppConfig) *Client {
              getSimilarComparisonProductBySlugResponse ProductCompareResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -440,6 +514,14 @@ func NewAppClient(config *AppConfig) *Client {
              getComparedFrequentlyProductBySlugResponse ProductFrequentlyComparedSimilarResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -479,6 +561,16 @@ func NewAppClient(config *AppConfig) *Client {
              getProductSimilarByIdentifierResponse SimilarProductByTypeResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+        
+        
+    
          
         
         
@@ -518,6 +610,14 @@ func NewAppClient(config *AppConfig) *Client {
              getProductVariantsBySlugResponse ProductVariantsResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -566,6 +666,24 @@ func NewAppClient(config *AppConfig) *Client {
              getProductStockByIdsResponse ProductStockStatusResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -612,6 +730,20 @@ func NewAppClient(config *AppConfig) *Client {
              getProductStockForTimeByIdsResponse ProductStockPolling
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -718,6 +850,30 @@ func NewAppClient(config *AppConfig) *Client {
              getProductsResponse ProductListingResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -870,6 +1026,20 @@ func NewAppClient(config *AppConfig) *Client {
              getBrandsResponse BrandListingResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -962,6 +1132,14 @@ func NewAppClient(config *AppConfig) *Client {
              getBrandDetailBySlugResponse BrandDetailResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -1006,6 +1184,16 @@ func NewAppClient(config *AppConfig) *Client {
              getCategoriesResponse CategoryListingResponse
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -1045,6 +1233,14 @@ func NewAppClient(config *AppConfig) *Client {
              getCategoryDetailBySlugResponse CategoryMetaResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -1091,6 +1287,20 @@ func NewAppClient(config *AppConfig) *Client {
              getHomeProductsResponse HomeListingResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -1185,6 +1395,12 @@ func NewAppClient(config *AppConfig) *Client {
              getDepartmentsResponse DepartmentResponse
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -1229,6 +1445,16 @@ func NewAppClient(config *AppConfig) *Client {
              getSearchResultsResponse AutoCompleteResponse
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -1274,6 +1500,18 @@ func NewAppClient(config *AppConfig) *Client {
              getCollectionsResponse GetCollectionListingResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -1364,6 +1602,26 @@ func NewAppClient(config *AppConfig) *Client {
              getCollectionItemsBySlugResponse ProductListingResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+    
          
         
         
@@ -1488,6 +1746,14 @@ func NewAppClient(config *AppConfig) *Client {
              getCollectionDetailBySlugResponse CollectionDetailResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -1533,6 +1799,20 @@ func NewAppClient(config *AppConfig) *Client {
              getFollowedListingResponse GetFollowListingResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+    
          
         
         
@@ -1624,6 +1904,16 @@ func NewAppClient(config *AppConfig) *Client {
              unfollowByIdResponse FollowPostResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+        
+        
+    
          
         
         
@@ -1663,6 +1953,16 @@ func NewAppClient(config *AppConfig) *Client {
              followByIdResponse FollowPostResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+        
+        
+    
          
         
         
@@ -1702,6 +2002,16 @@ func NewAppClient(config *AppConfig) *Client {
              getFollowerCountByIdResponse FollowerCountResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+        
+        
+    
          
         
         
@@ -1746,6 +2056,16 @@ func NewAppClient(config *AppConfig) *Client {
              getFollowIdsResponse FollowIdsResponse
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -1795,6 +2115,26 @@ func NewAppClient(config *AppConfig) *Client {
              getStoresResponse StoreListingResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -1923,7 +2263,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartGetCartXQuery holds query params
     type CartGetCartXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
+        ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
         AssignCardID float64  `url:"assign_card_id,omitempty"`  
@@ -1938,6 +2278,22 @@ func NewAppClient(config *AppConfig) *Client {
              getCartResponse CartResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -1970,7 +2326,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartGetCartLastModifiedXQuery holds query params
     type CartGetCartLastModifiedXQuery struct { 
-        UID float64  `url:"uid,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // GetCartLastModified Fetch last-modified timestamp
@@ -1982,6 +2338,16 @@ func NewAppClient(config *AppConfig) *Client {
              
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -2023,6 +2389,20 @@ func NewAppClient(config *AppConfig) *Client {
              addItemsResponse AddCartResponse
 	    )
 
+        
+            
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -2068,7 +2448,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartUpdateCartXQuery holds query params
     type CartUpdateCartXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
+        ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"`  
     }
@@ -2082,6 +2462,24 @@ func NewAppClient(config *AppConfig) *Client {
              updateCartResponse UpdateCartResponse
 	    )
 
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -2127,7 +2525,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartGetItemCountXQuery holds query params
     type CartGetItemCountXQuery struct { 
-        UID float64  `url:"uid,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // GetItemCount Count items in the cart
@@ -2139,6 +2537,16 @@ func NewAppClient(config *AppConfig) *Client {
              getItemCountResponse CartItemCountResponse
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -2183,6 +2591,16 @@ func NewAppClient(config *AppConfig) *Client {
              getCouponsResponse GetCouponResponse
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -2230,6 +2648,24 @@ func NewAppClient(config *AppConfig) *Client {
              applyCouponResponse CartResponse
 	    )
 
+        
+            
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -2287,6 +2723,16 @@ func NewAppClient(config *AppConfig) *Client {
              removeCouponResponse CartResponse
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -2334,6 +2780,22 @@ func NewAppClient(config *AppConfig) *Client {
              getBulkDiscountOffersResponse BulkPriceResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -2371,7 +2833,7 @@ func NewAppClient(config *AppConfig) *Client {
         B bool  `url:"b,omitempty"`  
     }
     
-    // ApplyRewardPoints Fetch rewards points for cart.
+    // ApplyRewardPoints Apply reward points at cart
     func (ca *Cart)  ApplyRewardPoints(xQuery CartApplyRewardPointsXQuery, body  RewardPointRequest) (CartResponse, error){
         var (
             rawRequest  *RawRequest
@@ -2380,6 +2842,22 @@ func NewAppClient(config *AppConfig) *Client {
              applyRewardPointsResponse CartResponse
 	    )
 
+        
+            
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -2425,7 +2903,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartGetAddressesXQuery holds query params
     type CartGetAddressesXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
+        CartID string  `url:"cart_id,omitempty"` 
         MobileNo string  `url:"mobile_no,omitempty"` 
         CheckoutMode string  `url:"checkout_mode,omitempty"` 
         Tags string  `url:"tags,omitempty"` 
@@ -2441,6 +2919,24 @@ func NewAppClient(config *AppConfig) *Client {
              getAddressesResponse GetAddressesResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -2480,6 +2976,58 @@ func NewAppClient(config *AppConfig) *Client {
              addAddressResponse SaveAddressResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -2525,7 +3073,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartGetAddressByIdXQuery holds query params
     type CartGetAddressByIdXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
+        CartID string  `url:"cart_id,omitempty"` 
         MobileNo string  `url:"mobile_no,omitempty"` 
         CheckoutMode string  `url:"checkout_mode,omitempty"` 
         Tags string  `url:"tags,omitempty"` 
@@ -2533,7 +3081,7 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // GetAddressById Fetch a single address by its ID
-    func (ca *Cart)  GetAddressById(ID float64, xQuery CartGetAddressByIdXQuery) (Address, error){
+    func (ca *Cart)  GetAddressById(ID string, xQuery CartGetAddressByIdXQuery) (Address, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -2541,6 +3089,26 @@ func NewAppClient(config *AppConfig) *Client {
              getAddressByIdResponse Address
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+    
          
         
         
@@ -2548,7 +3116,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/application/cart/v1.0/address/undefined",ID),
+            fmt.Sprintf("/service/application/cart/v1.0/address/%s",ID),
             nil,
             xQuery,
             nil)
@@ -2580,6 +3148,60 @@ func NewAppClient(config *AppConfig) *Client {
              updateAddressResponse UpdateAddressResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -2632,6 +3254,14 @@ func NewAppClient(config *AppConfig) *Client {
              removeAddressResponse DeleteAddressResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -2664,7 +3294,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartSelectAddressXQuery holds query params
     type CartSelectAddressXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
+        CartID string  `url:"cart_id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"`  
     }
@@ -2678,6 +3308,28 @@ func NewAppClient(config *AppConfig) *Client {
              selectAddressResponse CartResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -2735,6 +3387,28 @@ func NewAppClient(config *AppConfig) *Client {
              selectPaymentModeResponse CartResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -2797,6 +3471,26 @@ func NewAppClient(config *AppConfig) *Client {
              validateCouponForPaymentResponse PaymentCouponValidate
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -2844,6 +3538,22 @@ func NewAppClient(config *AppConfig) *Client {
              getShipmentsResponse CartShipmentsResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -2883,6 +3593,44 @@ func NewAppClient(config *AppConfig) *Client {
              checkoutCartResponse CartCheckoutResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -2940,6 +3688,24 @@ func NewAppClient(config *AppConfig) *Client {
              updateCartMetaResponse CartMetaResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -2992,6 +3758,16 @@ func NewAppClient(config *AppConfig) *Client {
              getCartShareLinkResponse GetShareCartLinkResponse
 	    )
 
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -3044,6 +3820,14 @@ func NewAppClient(config *AppConfig) *Client {
              getCartSharedItemsResponse SharedCartResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -3083,6 +3867,16 @@ func NewAppClient(config *AppConfig) *Client {
              updateCartWithSharedItemsResponse SharedCartResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+        
+        
+    
          
         
         
@@ -3132,6 +3926,14 @@ func NewAppClient(config *AppConfig) *Client {
              getTicketResponse Ticket
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -3171,6 +3973,18 @@ func NewAppClient(config *AppConfig) *Client {
              createHistoryResponse TicketHistory
 	    )
 
+        
+            
+        
+            
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -3223,6 +4037,22 @@ func NewAppClient(config *AppConfig) *Client {
              createTicketResponse Ticket
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -3275,6 +4105,14 @@ func NewAppClient(config *AppConfig) *Client {
              getCustomFormResponse CustomForm
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -3314,6 +4152,18 @@ func NewAppClient(config *AppConfig) *Client {
              submitCustomFormResponse SubmitCustomFormResponse
 	    )
 
+        
+            
+        
+            
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -3366,6 +4216,14 @@ func NewAppClient(config *AppConfig) *Client {
              getParticipantsInsideVideoRoomResponse GetParticipantsInsideVideoRoomResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -3405,6 +4263,14 @@ func NewAppClient(config *AppConfig) *Client {
              getTokenForVideoRoomResponse GetTokenForVideoRoomResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -3426,6 +4292,85 @@ func NewAppClient(config *AppConfig) *Client {
             return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
         }
          return getTokenForVideoRoomResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //LeadGetASDFXQuery holds query params
+    type LeadGetASDFXQuery struct { 
+        InQuery PriorityEnum  `url:"in_query,omitempty"`  
+    }
+    
+    // GetASDF Get Token to join a specific Video Room using it's unqiue name
+    func (le *Lead)  GetASDF(InHeader PriorityEnum, InPath PriorityEnum, xQuery LeadGetASDFXQuery) (GetTokenForVideoRoomResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getASDFResponse GetTokenForVideoRoomResponse
+	    )
+
+        
+
+        
+            
+                
+                //enum validation inside query params
+                err = xQuery.InQuery.IsValid()
+                if err != nil {
+                    return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
+                }
+                
+            
+        
+
+        
+        
+               //enum validation inside path params
+                err = InPath.IsValid()
+                if err != nil {
+                    return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
+                }
+        
+        
+    
+        
+        //Adding extra headers
+        var xHeaders = make(map[string]string) 
+        
+         
+         //enum validation inside headers
+         err = InHeader.IsValid()
+         if err != nil {
+              return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
+         }
+         xHeaders["in_header"] =  string(InHeader)
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            le.config,
+            "get",
+            fmt.Sprintf("/service/application/lead/asdf/%s/asdf",InPath),
+            xHeaders,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetTokenForVideoRoomResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getASDFResponse)
+        if err != nil {
+            return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
+        }
+         return getASDFResponse, nil
         
     }
           
@@ -3454,6 +4399,14 @@ func NewAppClient(config *AppConfig) *Client {
              getAllPagesResponse AllAvailablePageSchema
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -3493,6 +4446,16 @@ func NewAppClient(config *AppConfig) *Client {
              getPageResponse AvailablePageSchema
 	    )
 
+        
+
+        
+
+        
+        
+        
+        
+        
+    
          
         
         
@@ -3532,6 +4495,12 @@ func NewAppClient(config *AppConfig) *Client {
              getAppliedThemeResponse ThemesSchema
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -3571,6 +4540,14 @@ func NewAppClient(config *AppConfig) *Client {
              getThemeForPreviewResponse ThemesSchema
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -3620,6 +4597,18 @@ func NewAppClient(config *AppConfig) *Client {
              loginWithFacebookResponse AuthSuccess
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -3672,6 +4661,18 @@ func NewAppClient(config *AppConfig) *Client {
              loginWithGoogleResponse AuthSuccess
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -3724,6 +4725,18 @@ func NewAppClient(config *AppConfig) *Client {
              loginWithGoogleAndroidResponse AuthSuccess
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -3776,6 +4789,18 @@ func NewAppClient(config *AppConfig) *Client {
              loginWithGoogleIOSResponse AuthSuccess
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -3833,6 +4858,22 @@ func NewAppClient(config *AppConfig) *Client {
              loginWithOTPResponse SendOtpResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -3885,6 +4926,18 @@ func NewAppClient(config *AppConfig) *Client {
              loginWithEmailAndPasswordResponse LoginSuccess
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -3942,6 +4995,20 @@ func NewAppClient(config *AppConfig) *Client {
              sendResetPasswordEmailResponse ResetPasswordSuccess
 	    )
 
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -3994,6 +5061,16 @@ func NewAppClient(config *AppConfig) *Client {
              forgotPasswordResponse LoginSuccess
 	    )
 
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -4046,6 +5123,14 @@ func NewAppClient(config *AppConfig) *Client {
              sendResetTokenResponse ResetPasswordSuccess
 	    )
 
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -4098,6 +5183,14 @@ func NewAppClient(config *AppConfig) *Client {
              loginWithTokenResponse LoginSuccess
 	    )
 
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -4155,6 +5248,30 @@ func NewAppClient(config *AppConfig) *Client {
              registerWithFormResponse RegisterFormSuccess
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -4207,6 +5324,14 @@ func NewAppClient(config *AppConfig) *Client {
              verifyEmailResponse VerifyEmailSuccess
 	    )
 
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -4259,6 +5384,14 @@ func NewAppClient(config *AppConfig) *Client {
              verifyMobileResponse VerifyEmailSuccess
 	    )
 
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -4311,6 +5444,12 @@ func NewAppClient(config *AppConfig) *Client {
              hasPasswordResponse HasPasswordSuccess
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -4350,6 +5489,16 @@ func NewAppClient(config *AppConfig) *Client {
              updatePasswordResponse VerifyEmailSuccess
 	    )
 
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -4402,6 +5551,12 @@ func NewAppClient(config *AppConfig) *Client {
              logoutResponse LogoutSuccess
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -4446,6 +5601,30 @@ func NewAppClient(config *AppConfig) *Client {
              sendOTPOnMobileResponse OtpSuccess
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -4503,6 +5682,22 @@ func NewAppClient(config *AppConfig) *Client {
              verifyMobileOTPResponse VerifyOtpSuccess
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -4560,6 +5755,24 @@ func NewAppClient(config *AppConfig) *Client {
              sendOTPOnEmailResponse EmailOtpSuccess
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -4617,6 +5830,24 @@ func NewAppClient(config *AppConfig) *Client {
              verifyEmailOTPResponse VerifyOtpSuccess
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -4669,6 +5900,12 @@ func NewAppClient(config *AppConfig) *Client {
              getLoggedInUserResponse UserObjectSchema
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -4708,6 +5945,12 @@ func NewAppClient(config *AppConfig) *Client {
              getListOfActiveSessionsResponse SessionListSuccess
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -4752,6 +5995,16 @@ func NewAppClient(config *AppConfig) *Client {
              getPlatformConfigResponse PlatformSchema
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -4796,6 +6049,38 @@ func NewAppClient(config *AppConfig) *Client {
              updateProfileResponse ProfileEditSuccess
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -4853,6 +6138,20 @@ func NewAppClient(config *AppConfig) *Client {
              addMobileNumberResponse VerifyMobileOTPSuccess
 	    )
 
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -4915,6 +6214,26 @@ func NewAppClient(config *AppConfig) *Client {
              deleteMobileNumberResponse LoginSuccess
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -4954,6 +6273,22 @@ func NewAppClient(config *AppConfig) *Client {
              setMobileNumberAsPrimaryResponse LoginSuccess
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -5011,6 +6346,26 @@ func NewAppClient(config *AppConfig) *Client {
              sendVerificationLinkToMobileResponse SendMobileVerifyLinkSuccess
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -5068,6 +6423,18 @@ func NewAppClient(config *AppConfig) *Client {
              addEmailResponse VerifyEmailOTPSuccess
 	    )
 
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -5129,6 +6496,24 @@ func NewAppClient(config *AppConfig) *Client {
              deleteEmailResponse LoginSuccess
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -5168,6 +6553,14 @@ func NewAppClient(config *AppConfig) *Client {
              setEmailAsPrimaryResponse LoginSuccess
 	    )
 
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -5225,6 +6618,18 @@ func NewAppClient(config *AppConfig) *Client {
              sendVerificationLinkToEmailResponse SendEmailVerifyLinkSuccess
 	    )
 
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -5287,6 +6692,12 @@ func NewAppClient(config *AppConfig) *Client {
              getAnnouncementsResponse AnnouncementsResponseSchema
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -5331,6 +6742,18 @@ func NewAppClient(config *AppConfig) *Client {
              getBlogResponse BlogSchema
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+        
+        
+    
          
         
         
@@ -5376,6 +6799,18 @@ func NewAppClient(config *AppConfig) *Client {
              getBlogsResponse BlogGetResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -5457,6 +6892,12 @@ func NewAppClient(config *AppConfig) *Client {
              getFaqsResponse FaqResponseSchema
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -5496,6 +6937,12 @@ func NewAppClient(config *AppConfig) *Client {
              getFaqCategoriesResponse GetFaqCategoriesSchema
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -5535,6 +6982,14 @@ func NewAppClient(config *AppConfig) *Client {
              getFaqBySlugResponse FaqSchema
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -5574,6 +7029,14 @@ func NewAppClient(config *AppConfig) *Client {
              getFaqCategoryBySlugResponse GetFaqCategoryBySlugSchema
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -5613,6 +7076,14 @@ func NewAppClient(config *AppConfig) *Client {
              getFaqsByCategorySlugResponse GetFaqSchema
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -5652,6 +7123,12 @@ func NewAppClient(config *AppConfig) *Client {
              getLandingPageResponse LandingPageSchema
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -5691,6 +7168,12 @@ func NewAppClient(config *AppConfig) *Client {
              getLegalInformationResponse ApplicationLegal
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -5736,6 +7219,18 @@ func NewAppClient(config *AppConfig) *Client {
              getNavigationsResponse NavigationGetResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -5822,6 +7317,18 @@ func NewAppClient(config *AppConfig) *Client {
              getPageResponse CustomPageSchema
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+        
+        
+    
          
         
         
@@ -5867,6 +7374,18 @@ func NewAppClient(config *AppConfig) *Client {
              getPagesResponse PageGetResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -5948,6 +7467,12 @@ func NewAppClient(config *AppConfig) *Client {
              getSEOConfigurationResponse SeoComponent
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -5993,6 +7518,18 @@ func NewAppClient(config *AppConfig) *Client {
              getSlideshowsResponse SlideshowGetResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -6074,6 +7611,14 @@ func NewAppClient(config *AppConfig) *Client {
              getSlideshowResponse SlideshowSchema
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -6113,6 +7658,12 @@ func NewAppClient(config *AppConfig) *Client {
              getSupportInformationResponse Support
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -6152,6 +7703,12 @@ func NewAppClient(config *AppConfig) *Client {
              getTagsResponse TagsSchema
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -6201,6 +7758,12 @@ func NewAppClient(config *AppConfig) *Client {
              getCommunicationConsentResponse CommunicationConsent
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -6240,6 +7803,18 @@ func NewAppClient(config *AppConfig) *Client {
              upsertCommunicationConsentResponse CommunicationConsentRes
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -6292,6 +7867,22 @@ func NewAppClient(config *AppConfig) *Client {
              upsertAppPushtokenResponse PushtokenRes
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -6354,6 +7945,12 @@ func NewAppClient(config *AppConfig) *Client {
              getApplicationQRCodeResponse QRCodeResp
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -6393,6 +7990,14 @@ func NewAppClient(config *AppConfig) *Client {
              getProductQRCodeBySlugResponse QRCodeResp
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -6432,6 +8037,14 @@ func NewAppClient(config *AppConfig) *Client {
              getCollectionQRCodeBySlugResponse QRCodeResp
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -6476,6 +8089,16 @@ func NewAppClient(config *AppConfig) *Client {
              getUrlQRCodeResponse QRCodeResp
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -6515,6 +8138,36 @@ func NewAppClient(config *AppConfig) *Client {
              createShortLinkResponse ShortLinkRes
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -6567,6 +8220,14 @@ func NewAppClient(config *AppConfig) *Client {
              getShortLinkByHashResponse ShortLinkRes
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -6606,6 +8267,14 @@ func NewAppClient(config *AppConfig) *Client {
              getOriginalShortLinkByHashResponse ShortLinkRes
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -6655,6 +8324,24 @@ func NewAppClient(config *AppConfig) *Client {
              startUploadResponse StartResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -6707,6 +8394,34 @@ func NewAppClient(config *AppConfig) *Client {
              completeUploadResponse CompleteResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -6769,6 +8484,12 @@ func NewAppClient(config *AppConfig) *Client {
              getApplicationResponse Application
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -6808,6 +8529,12 @@ func NewAppClient(config *AppConfig) *Client {
              getOwnerInfoResponse ApplicationAboutResponse
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -6847,6 +8574,12 @@ func NewAppClient(config *AppConfig) *Client {
              getBasicDetailsResponse ApplicationDetail
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -6878,14 +8611,20 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // GetIntegrationTokens Get integration tokens
-    func (co *Configuration)  GetIntegrationTokens() (TokenResponse, error){
+    func (co *Configuration)  GetIntegrationTokens() (AppTokenResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getIntegrationTokensResponse TokenResponse
+             getIntegrationTokensResponse AppTokenResponse
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -6899,12 +8638,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return TokenResponse{}, err
+            return AppTokenResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &getIntegrationTokensResponse)
         if err != nil {
-            return TokenResponse{}, common.NewFDKError(err.Error())
+            return AppTokenResponse{}, common.NewFDKError(err.Error())
         }
          return getIntegrationTokensResponse, nil
         
@@ -6932,6 +8671,20 @@ func NewAppClient(config *AppConfig) *Client {
              getOrderingStoresResponse OrderingStores
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -7024,6 +8777,12 @@ func NewAppClient(config *AppConfig) *Client {
              getFeaturesResponse AppFeatureResponse
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -7063,6 +8822,12 @@ func NewAppClient(config *AppConfig) *Client {
              getContactInfoResponse ApplicationInformation
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -7102,6 +8867,12 @@ func NewAppClient(config *AppConfig) *Client {
              getCurrenciesResponse CurrenciesResponse
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -7141,6 +8912,14 @@ func NewAppClient(config *AppConfig) *Client {
              getCurrencyByIdResponse Currency
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -7180,6 +8959,12 @@ func NewAppClient(config *AppConfig) *Client {
              getLanguagesResponse LanguageResponse
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -7219,6 +9004,14 @@ func NewAppClient(config *AppConfig) *Client {
              getOrderingStoreCookieResponse SuccessMessageResponse
 	    )
 
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -7271,6 +9064,12 @@ func NewAppClient(config *AppConfig) *Client {
              removeOrderingStoreCookieResponse SuccessMessageResponse
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -7317,6 +9116,20 @@ func NewAppClient(config *AppConfig) *Client {
              getAppStaffsResponse AppStaffResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -7372,10 +9185,22 @@ func NewAppClient(config *AppConfig) *Client {
 	    )
 
         
+
+        
+            
+                
+            
+        
+
+        
+    
+        
         //Adding extra headers
         var xHeaders = make(map[string]string) 
         
-        xHeaders["x-api-token"]=  XAPIToken;
+         
+         xHeaders["x-api-token"] =  XAPIToken
+         
         
         
         //API call
@@ -7414,6 +9239,20 @@ func NewAppClient(config *AppConfig) *Client {
              attachCardToCustomerResponse AttachCardsResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -7471,6 +9310,16 @@ func NewAppClient(config *AppConfig) *Client {
              getActiveCardAggregatorResponse ActiveCardPaymentGatewayResponse
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -7515,6 +9364,16 @@ func NewAppClient(config *AppConfig) *Client {
              getActiveUserCardsResponse ListCardsResponse
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -7554,6 +9413,14 @@ func NewAppClient(config *AppConfig) *Client {
              deleteUserCardResponse DeleteCardsResponse
 	    )
 
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -7606,6 +9473,22 @@ func NewAppClient(config *AppConfig) *Client {
              verifyCustomerForPaymentResponse ValidateCustomerResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -7658,6 +9541,22 @@ func NewAppClient(config *AppConfig) *Client {
              verifyAndChargePaymentResponse ChargeCustomerResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -7710,6 +9609,30 @@ func NewAppClient(config *AppConfig) *Client {
              initialisePaymentResponse PaymentInitializationResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -7762,6 +9685,34 @@ func NewAppClient(config *AppConfig) *Client {
              checkAndUpdatePaymentStatusResponse PaymentStatusUpdateResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -7825,6 +9776,28 @@ func NewAppClient(config *AppConfig) *Client {
              getPaymentModeRoutesResponse PaymentModeRouteResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -7876,6 +9849,30 @@ func NewAppClient(config *AppConfig) *Client {
              getPosPaymentModeRoutesResponse PaymentModeRouteResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -7915,6 +9912,12 @@ func NewAppClient(config *AppConfig) *Client {
              getRupifiBannerDetailsResponse RupifiBannerResponse
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -7954,6 +9957,12 @@ func NewAppClient(config *AppConfig) *Client {
              getActiveRefundTransferModesResponse TransferModeResponse
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -7993,6 +10002,16 @@ func NewAppClient(config *AppConfig) *Client {
              enableOrDisableRefundTransferModeResponse UpdateRefundTransferModeResponse
 	    )
 
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -8050,6 +10069,16 @@ func NewAppClient(config *AppConfig) *Client {
              getUserBeneficiariesDetailResponse OrderBeneficiaryResponse
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -8094,6 +10123,16 @@ func NewAppClient(config *AppConfig) *Client {
              verifyIfscCodeResponse IfscCodeResponse
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -8138,6 +10177,16 @@ func NewAppClient(config *AppConfig) *Client {
              getOrderBeneficiariesDetailResponse OrderBeneficiaryResponse
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -8177,6 +10226,18 @@ func NewAppClient(config *AppConfig) *Client {
              verifyOtpAndAddBeneficiaryForBankResponse AddBeneficiaryViaOtpVerificationResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -8229,6 +10290,22 @@ func NewAppClient(config *AppConfig) *Client {
              addBeneficiaryDetailsResponse RefundAccountResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -8281,6 +10358,16 @@ func NewAppClient(config *AppConfig) *Client {
              verifyOtpAndAddBeneficiaryForWalletResponse WalletOtpResponse
 	    )
 
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -8333,6 +10420,16 @@ func NewAppClient(config *AppConfig) *Client {
              updateDefaultBeneficiaryResponse SetDefaultBeneficiaryResponse
 	    )
 
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -8395,7 +10492,7 @@ func NewAppClient(config *AppConfig) *Client {
         OrderStatus float64  `url:"order_status,omitempty"`  
     }
     
-    // GetOrders Use this API to retrieve all the orders.
+    // GetOrders Get all orders
     func (or *Order)  GetOrders(xQuery OrderGetOrdersXQuery) (OrderList, error){
         var (
             rawRequest  *RawRequest
@@ -8404,6 +10501,24 @@ func NewAppClient(config *AppConfig) *Client {
              getOrdersResponse OrderList
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -8434,7 +10549,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetOrderById Use this API to retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
+    // GetOrderById Get details of an order
     func (or *Order)  GetOrderById(OrderID string) (OrderById, error){
         var (
             rawRequest  *RawRequest
@@ -8443,6 +10558,14 @@ func NewAppClient(config *AppConfig) *Client {
              getOrderByIdResponse OrderById
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -8473,7 +10596,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetShipmentById Use this API to retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
+    // GetShipmentById Get details of a shipment
     func (or *Order)  GetShipmentById(ShipmentID string) (ShipmentById, error){
         var (
             rawRequest  *RawRequest
@@ -8482,6 +10605,14 @@ func NewAppClient(config *AppConfig) *Client {
              getShipmentByIdResponse ShipmentById
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -8512,7 +10643,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetShipmentReasons Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+    // GetShipmentReasons Get reasons behind full or partial cancellation of a shipment
     func (or *Order)  GetShipmentReasons(ShipmentID string) (ShipmentReasons, error){
         var (
             rawRequest  *RawRequest
@@ -8521,6 +10652,14 @@ func NewAppClient(config *AppConfig) *Client {
              getShipmentReasonsResponse ShipmentReasons
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -8551,7 +10690,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UpdateShipmentStatus Use this API to update the status of a shipment using its shipment ID.
+    // UpdateShipmentStatus Update the shipment status
     func (or *Order)  UpdateShipmentStatus(ShipmentID string, body  ShipmentStatusUpdateBody) (ShipmentStatusUpdate, error){
         var (
             rawRequest  *RawRequest
@@ -8560,6 +10699,18 @@ func NewAppClient(config *AppConfig) *Client {
              updateShipmentStatusResponse ShipmentStatusUpdate
 	    )
 
+        
+            
+        
+            
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -8603,7 +10754,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // TrackShipment Use this API to track a shipment using its shipment ID.
+    // TrackShipment Track shipment
     func (or *Order)  TrackShipment(ShipmentID string) (ShipmentTrack, error){
         var (
             rawRequest  *RawRequest
@@ -8612,6 +10763,14 @@ func NewAppClient(config *AppConfig) *Client {
              trackShipmentResponse ShipmentTrack
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -8642,7 +10801,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetPosOrderById Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
+    // GetPosOrderById Get POS Order
     func (or *Order)  GetPosOrderById(OrderID string) (PosOrderById, error){
         var (
             rawRequest  *RawRequest
@@ -8651,6 +10810,14 @@ func NewAppClient(config *AppConfig) *Client {
              getPosOrderByIdResponse PosOrderById
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -8700,6 +10867,14 @@ func NewAppClient(config *AppConfig) *Client {
              getPointsOnProductResponse CatalogueOrderResponse
 	    )
 
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -8752,6 +10927,14 @@ func NewAppClient(config *AppConfig) *Client {
              getOfferByNameResponse Offer
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -8791,6 +10974,16 @@ func NewAppClient(config *AppConfig) *Client {
              getOrderDiscountResponse OrderDiscountResponse
 	    )
 
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -8843,6 +11036,12 @@ func NewAppClient(config *AppConfig) *Client {
              getUserPointsResponse PointsResponse
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -8888,6 +11087,18 @@ func NewAppClient(config *AppConfig) *Client {
              getUserPointsHistoryResponse PointsHistoryResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -8971,6 +11182,12 @@ func NewAppClient(config *AppConfig) *Client {
              getUserReferralDetailsResponse ReferralDetailsResponse
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -9010,6 +11227,16 @@ func NewAppClient(config *AppConfig) *Client {
              redeemReferralCodeResponse RedeemReferralCodeResponse
 	    )
 
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -9072,6 +11299,18 @@ func NewAppClient(config *AppConfig) *Client {
              createAbuseReportResponse InsertResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -9124,6 +11363,26 @@ func NewAppClient(config *AppConfig) *Client {
              updateAbuseReportResponse UpdateResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -9183,6 +11442,24 @@ func NewAppClient(config *AppConfig) *Client {
              getAbuseReportsResponse ReportAbuseGetResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+        
+    
          
         
         
@@ -9299,6 +11576,18 @@ func NewAppClient(config *AppConfig) *Client {
              getAttributesResponse AttributeResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -9380,6 +11669,18 @@ func NewAppClient(config *AppConfig) *Client {
              createAttributeResponse InsertResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -9432,6 +11733,14 @@ func NewAppClient(config *AppConfig) *Client {
              getAttributeResponse Attribute
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -9471,6 +11780,20 @@ func NewAppClient(config *AppConfig) *Client {
              updateAttributeResponse UpdateResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -9523,6 +11846,18 @@ func NewAppClient(config *AppConfig) *Client {
              createCommentResponse InsertResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -9575,6 +11910,20 @@ func NewAppClient(config *AppConfig) *Client {
              updateCommentResponse UpdateResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -9636,6 +11985,26 @@ func NewAppClient(config *AppConfig) *Client {
              getCommentsResponse CommentGetResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+    
          
         
         
@@ -9760,6 +12129,16 @@ func NewAppClient(config *AppConfig) *Client {
              checkEligibilityResponse CheckEligibilityResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+        
+        
+    
          
         
         
@@ -9799,6 +12178,12 @@ func NewAppClient(config *AppConfig) *Client {
              deleteMediaResponse UpdateResponse
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -9838,6 +12223,22 @@ func NewAppClient(config *AppConfig) *Client {
              createMediaResponse InsertResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -9890,6 +12291,20 @@ func NewAppClient(config *AppConfig) *Client {
              updateMediaResponse UpdateResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -9936,6 +12351,7 @@ func NewAppClient(config *AppConfig) *Client {
     //FeedbackGetMediasXQuery holds query params
     type FeedbackGetMediasXQuery struct { 
         ID string  `url:"id,omitempty"` 
+        Type string  `url:"type,omitempty"` 
         PageID string  `url:"page_id,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"`  
     }
@@ -9949,6 +12365,26 @@ func NewAppClient(config *AppConfig) *Client {
              getMediasResponse MediaGetResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+        
+    
          
         
         
@@ -10004,6 +12440,13 @@ func NewAppClient(config *AppConfig) *Client {
                     
                     
                     
+                        
+                    
+                    
+                
+                    
+                    
+                    
                     
                         
                     
@@ -10019,6 +12462,10 @@ func NewAppClient(config *AppConfig) *Client {
             // GetMediasPaginator Get Media  
             func (fe *Feedback)  GetMediasPaginator(EntityType string  , EntityID string  ,  xQuery FeedbackGetMediasXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("cursor")
+                 
+                 
+                 
+                 
                  
                  
                  
@@ -10066,6 +12513,24 @@ func NewAppClient(config *AppConfig) *Client {
              getReviewSummariesResponse ReviewMetricGetResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+        
+    
          
         
         
@@ -10176,6 +12641,40 @@ func NewAppClient(config *AppConfig) *Client {
              createReviewResponse UpdateResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -10228,6 +12727,40 @@ func NewAppClient(config *AppConfig) *Client {
              updateReviewResponse UpdateResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -10295,6 +12828,40 @@ func NewAppClient(config *AppConfig) *Client {
              getReviewsResponse ReviewGetResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+        
+    
          
         
         
@@ -10500,6 +13067,20 @@ func NewAppClient(config *AppConfig) *Client {
              getTemplatesResponse TemplateGetResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -10539,6 +13120,28 @@ func NewAppClient(config *AppConfig) *Client {
              createQuestionResponse InsertResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -10591,6 +13194,22 @@ func NewAppClient(config *AppConfig) *Client {
              updateQuestionResponse UpdateResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -10652,6 +13271,28 @@ func NewAppClient(config *AppConfig) *Client {
              getQuestionAndAnswersResponse QNAGetResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+        
+    
          
         
         
@@ -10792,6 +13433,22 @@ func NewAppClient(config *AppConfig) *Client {
              getVotesResponse VoteResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -10895,6 +13552,22 @@ func NewAppClient(config *AppConfig) *Client {
              createVoteResponse InsertResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -10947,6 +13620,22 @@ func NewAppClient(config *AppConfig) *Client {
              updateVoteResponse UpdateResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -11002,7 +13691,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartGetCartXQuery holds query params
     type PosCartGetCartXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
+        ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
         AssignCardID float64  `url:"assign_card_id,omitempty"`  
@@ -11017,6 +13706,22 @@ func NewAppClient(config *AppConfig) *Client {
              getCartResponse CartResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -11049,7 +13754,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartGetCartLastModifiedXQuery holds query params
     type PosCartGetCartLastModifiedXQuery struct { 
-        UID float64  `url:"uid,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // GetCartLastModified Fetch last-modified timestamp
@@ -11061,6 +13766,16 @@ func NewAppClient(config *AppConfig) *Client {
              
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -11102,6 +13817,18 @@ func NewAppClient(config *AppConfig) *Client {
              addItemsResponse AddCartResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -11147,7 +13874,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartUpdateCartXQuery holds query params
     type PosCartUpdateCartXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
+        ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"`  
     }
@@ -11161,6 +13888,20 @@ func NewAppClient(config *AppConfig) *Client {
              updateCartResponse UpdateCartResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -11206,7 +13947,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartGetItemCountXQuery holds query params
     type PosCartGetItemCountXQuery struct { 
-        UID float64  `url:"uid,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // GetItemCount Count items in the cart
@@ -11218,6 +13959,16 @@ func NewAppClient(config *AppConfig) *Client {
              getItemCountResponse CartItemCountResponse
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -11262,6 +14013,16 @@ func NewAppClient(config *AppConfig) *Client {
              getCouponsResponse GetCouponResponse
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -11309,6 +14070,22 @@ func NewAppClient(config *AppConfig) *Client {
              applyCouponResponse CartResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -11366,6 +14143,16 @@ func NewAppClient(config *AppConfig) *Client {
              removeCouponResponse CartResponse
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -11413,6 +14200,22 @@ func NewAppClient(config *AppConfig) *Client {
              getBulkDiscountOffersResponse BulkPriceResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -11450,7 +14253,7 @@ func NewAppClient(config *AppConfig) *Client {
         B bool  `url:"b,omitempty"`  
     }
     
-    // ApplyRewardPoints Fetch rewards points for cart.
+    // ApplyRewardPoints Apply reward points at cart
     func (po *PosCart)  ApplyRewardPoints(xQuery PosCartApplyRewardPointsXQuery, body  RewardPointRequest) (CartResponse, error){
         var (
             rawRequest  *RawRequest
@@ -11459,6 +14262,20 @@ func NewAppClient(config *AppConfig) *Client {
              applyRewardPointsResponse CartResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -11504,7 +14321,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartGetAddressesXQuery holds query params
     type PosCartGetAddressesXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
+        CartID string  `url:"cart_id,omitempty"` 
         MobileNo string  `url:"mobile_no,omitempty"` 
         CheckoutMode string  `url:"checkout_mode,omitempty"` 
         Tags string  `url:"tags,omitempty"` 
@@ -11520,6 +14337,24 @@ func NewAppClient(config *AppConfig) *Client {
              getAddressesResponse GetAddressesResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -11559,6 +14394,12 @@ func NewAppClient(config *AppConfig) *Client {
              addAddressResponse SaveAddressResponse
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -11604,7 +14445,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartGetAddressByIdXQuery holds query params
     type PosCartGetAddressByIdXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
+        CartID string  `url:"cart_id,omitempty"` 
         MobileNo string  `url:"mobile_no,omitempty"` 
         CheckoutMode string  `url:"checkout_mode,omitempty"` 
         Tags string  `url:"tags,omitempty"` 
@@ -11612,7 +14453,7 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // GetAddressById Fetch a single address by its ID
-    func (po *PosCart)  GetAddressById(ID float64, xQuery PosCartGetAddressByIdXQuery) (Address, error){
+    func (po *PosCart)  GetAddressById(ID string, xQuery PosCartGetAddressByIdXQuery) (Address, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -11620,6 +14461,26 @@ func NewAppClient(config *AppConfig) *Client {
              getAddressByIdResponse Address
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+    
          
         
         
@@ -11627,7 +14488,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             po.config,
             "get",
-            fmt.Sprintf("/service/application/pos/cart/v1.0/address/undefined",ID),
+            fmt.Sprintf("/service/application/pos/cart/v1.0/address/%s",ID),
             nil,
             xQuery,
             nil)
@@ -11659,6 +14520,14 @@ func NewAppClient(config *AppConfig) *Client {
              updateAddressResponse UpdateAddressResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -11711,6 +14580,14 @@ func NewAppClient(config *AppConfig) *Client {
              removeAddressResponse DeleteAddressResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -11743,7 +14620,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartSelectAddressXQuery holds query params
     type PosCartSelectAddressXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
+        CartID string  `url:"cart_id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"`  
     }
@@ -11757,6 +14634,20 @@ func NewAppClient(config *AppConfig) *Client {
              selectAddressResponse CartResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -11814,6 +14705,16 @@ func NewAppClient(config *AppConfig) *Client {
              selectPaymentModeResponse CartResponse
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -11876,6 +14777,26 @@ func NewAppClient(config *AppConfig) *Client {
              validateCouponForPaymentResponse PaymentCouponValidate
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -11926,6 +14847,28 @@ func NewAppClient(config *AppConfig) *Client {
              getShipmentsResponse CartShipmentsResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -11974,6 +14917,26 @@ func NewAppClient(config *AppConfig) *Client {
              updateShipmentsResponse CartShipmentsResponse
 	    )
 
+        
+            
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -12031,6 +14994,56 @@ func NewAppClient(config *AppConfig) *Client {
              checkoutCartResponse CartCheckoutResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -12088,6 +15101,16 @@ func NewAppClient(config *AppConfig) *Client {
              updateCartMetaResponse CartMetaResponse
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -12146,6 +15169,18 @@ func NewAppClient(config *AppConfig) *Client {
              getAvailableDeliveryModesResponse CartDeliveryModesResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -12190,6 +15225,16 @@ func NewAppClient(config *AppConfig) *Client {
              getStoreAddressByUidResponse StoreDetailsResponse
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+    
          
         
         
@@ -12229,6 +15274,12 @@ func NewAppClient(config *AppConfig) *Client {
              getCartShareLinkResponse GetShareCartLinkResponse
 	    )
 
+        
+
+        
+
+        
+    
          
         
         
@@ -12281,6 +15332,14 @@ func NewAppClient(config *AppConfig) *Client {
              getCartSharedItemsResponse SharedCartResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         
@@ -12320,6 +15379,16 @@ func NewAppClient(config *AppConfig) *Client {
              updateCartWithSharedItemsResponse SharedCartResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+        
+        
+    
          
         
         
@@ -12360,7 +15429,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetTatProduct Use this API to know the delivery turnaround time (TAT) by entering the product details along with the PIN Code of the location.
+    // GetTatProduct Get TAT of a product
     func (lo *Logistic)  GetTatProduct(body  GetTatProductReqBody) (GetTatProductResponse, error){
         var (
             rawRequest  *RawRequest
@@ -12369,6 +15438,18 @@ func NewAppClient(config *AppConfig) *Client {
              getTatProductResponse GetTatProductResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
          
         
         
@@ -12412,7 +15493,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetPincodeCity Use this API to retrieve a city by its PIN Code.
+    // GetPincodeCity Get city from PIN Code
     func (lo *Logistic)  GetPincodeCity(Pincode string) (GetPincodeCityResponse, error){
         var (
             rawRequest  *RawRequest
@@ -12421,6 +15502,14 @@ func NewAppClient(config *AppConfig) *Client {
              getPincodeCityResponse GetPincodeCityResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+    
          
         
         

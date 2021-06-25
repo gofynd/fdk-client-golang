@@ -10,6 +10,7 @@
 * [Billing](#Billing) - Handle platform subscription 
 * [Communication](#Communication) - Manages email, sms, push notifications sent to users 
 * [Payment](#Payment) - Collect payment through many payment gateway i.e Stripe, Razorpay, Juspay etc.into Fynd or Self account 
+* [Order](#Order) - Handles Platform websites OMS 
 * [Catalog](#Catalog) - Catalog API's allows you to access list of products, prices, seller details, similar features, variants and many more useful features.  
 * [CompanyProfile](#CompanyProfile) - Company Profile API's allows you to access list of products, prices, seller details, similar features, variants and many more useful features.  
 * [FileStorage](#FileStorage) - File Storage 
@@ -17,7 +18,6 @@
 * [Inventory](#Inventory) -  
 * [Configuration](#Configuration) - Application configuration apis 
 * [Cart](#Cart) - Cart APIs 
-* [Marketplaces](#Marketplaces) - Marketplaces 
 * [Rewards](#Rewards) - Rewards 
 * [Analytics](#Analytics) - Perceptor analytics 
 * [Discount](#Discount) - Discount 
@@ -41,6 +41,8 @@
     * [editTicket](#editticket)
     * [createHistory](#createhistory)
     * [getTicketHistory](#gettickethistory)
+    * [getFeedbacks](#getfeedbacks)
+    * [submitFeedback](#submitfeedback)
     * [createHistory](#createhistory)
     * [getTicketHistory](#gettickethistory)
     * [getCustomForm](#getcustomform)
@@ -53,6 +55,8 @@
     * [getVideoParticipants](#getvideoparticipants)
     * [openVideoRoom](#openvideoroom)
     * [closeVideoRoom](#closevideoroom)
+    * [getASDF](#getasdf)
+    * [getASDF](#getasdf)
     
 
 * [Feedback](#Feedback)
@@ -99,6 +103,9 @@
   * Methods
     * [getCustomers](#getcustomers)
     * [searchUsers](#searchusers)
+    * [createUser](#createuser)
+    * [updateUser](#updateuser)
+    * [createUserSession](#createusersession)
     * [getPlatformConfig](#getplatformconfig)
     * [updatePlatformConfig](#updateplatformconfig)
     
@@ -262,39 +269,62 @@
     * [getUserBeneficiaries](#getuserbeneficiaries)
     
 
+* [Order](#Order)
+  * Methods
+    * [shipmentStatusUpdate](#shipmentstatusupdate)
+    * [activityStatus](#activitystatus)
+    * [storeProcessShipmentUpdate](#storeprocessshipmentupdate)
+    * [checkRefund](#checkrefund)
+    * [getOrdersByCompanyId](#getordersbycompanyid)
+    * [getOrderDetails](#getorderdetails)
+    * [getPicklistOrdersByCompanyId](#getpicklistordersbycompanyid)
+    * [trackShipmentPlatform](#trackshipmentplatform)
+    * [trackOrder](#trackorder)
+    * [failedOrders](#failedorders)
+    * [reprocessOrder](#reprocessorder)
+    * [updateShipment](#updateshipment)
+    * [getPlatformShipmentReasons](#getplatformshipmentreasons)
+    * [getShipmentTrackDetails](#getshipmenttrackdetails)
+    * [getShipmentAddress](#getshipmentaddress)
+    * [updateShipmentAddress](#updateshipmentaddress)
+    * [getPing](#getping)
+    * [voiceCallback](#voicecallback)
+    * [voiceClickToCall](#voiceclicktocall)
+    
+
 * [Catalog](#Catalog)
   * Methods
-    * [updateSearchKeywords](#updatesearchkeywords)
     * [deleteSearchKeywords](#deletesearchkeywords)
     * [getSearchKeywords](#getsearchkeywords)
-    * [getAllSearchKeyword](#getallsearchkeyword)
+    * [updateSearchKeywords](#updatesearchkeywords)
     * [createCustomKeyword](#createcustomkeyword)
-    * [updateAutocompleteKeyword](#updateautocompletekeyword)
+    * [getAllSearchKeyword](#getallsearchkeyword)
     * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
-    * [getAutocompleteConfig](#getautocompleteconfig)
+    * [updateAutocompleteKeyword](#updateautocompletekeyword)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
-    * [getProductBundle](#getproductbundle)
+    * [getAutocompleteConfig](#getautocompleteconfig)
     * [createProductBundle](#createproductbundle)
-    * [updateProductBundle](#updateproductbundle)
+    * [getProductBundle](#getproductbundle)
     * [getProductBundleDetail](#getproductbundledetail)
-    * [getSizeGuides](#getsizeguides)
+    * [updateProductBundle](#updateproductbundle)
     * [createSizeGuide](#createsizeguide)
-    * [updateSizeGuide](#updatesizeguide)
+    * [getSizeGuides](#getsizeguides)
     * [getSizeGuide](#getsizeguide)
+    * [updateSizeGuide](#updatesizeguide)
     * [getCatalogConfiguration](#getcatalogconfiguration)
-    * [getConfigurations](#getconfigurations)
     * [createConfigurationProductListing](#createconfigurationproductlisting)
-    * [getConfigurationByType](#getconfigurationbytype)
+    * [getConfigurations](#getconfigurations)
     * [createConfigurationByType](#createconfigurationbytype)
+    * [getConfigurationByType](#getconfigurationbytype)
     * [getQueryFilters](#getqueryfilters)
-    * [getAllCollections](#getallcollections)
     * [createCollection](#createcollection)
+    * [getAllCollections](#getallcollections)
     * [getCollectionDetail](#getcollectiondetail)
-    * [updateCollection](#updatecollection)
     * [deleteCollection](#deletecollection)
-    * [getCollectionItems](#getcollectionitems)
+    * [updateCollection](#updatecollection)
     * [addCollectionItems](#addcollectionitems)
+    * [getCollectionItems](#getcollectionitems)
     * [getCatalogInsights](#getcataloginsights)
     * [getSellerInsights](#getsellerinsights)
     * [createMarketplaceOptin](#createmarketplaceoptin)
@@ -315,39 +345,39 @@
     * [listHSNCodes](#listhsncodes)
     * [listProductTemplateExportDetails](#listproducttemplateexportdetails)
     * [listTemplateBrandTypeValues](#listtemplatebrandtypevalues)
-    * [listCategories](#listcategories)
     * [createCategories](#createcategories)
-    * [updateCategory](#updatecategory)
+    * [listCategories](#listcategories)
     * [getCategoryData](#getcategorydata)
-    * [getProducts](#getproducts)
+    * [updateCategory](#updatecategory)
     * [createProduct](#createproduct)
-    * [editProduct](#editproduct)
+    * [getProducts](#getproducts)
     * [deleteProduct](#deleteproduct)
     * [getProduct](#getproduct)
+    * [editProduct](#editproduct)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
-    * [getProductBulkUploadHistory](#getproductbulkuploadhistory)
     * [updateProductAssetsInBulk](#updateproductassetsinbulk)
-    * [createProductsInBulk](#createproductsinbulk)
+    * [getProductBulkUploadHistory](#getproductbulkuploadhistory)
     * [deleteProductBulkJob](#deleteproductbulkjob)
+    * [createProductsInBulk](#createproductsinbulk)
     * [getCompanyTags](#getcompanytags)
-    * [getProductAssetsInBulk](#getproductassetsinbulk)
     * [createProductAssetsInBulk](#createproductassetsinbulk)
+    * [getProductAssetsInBulk](#getproductassetsinbulk)
     * [deleteSize](#deletesize)
-    * [getInventory](#getinventory)
     * [addInventory](#addinventory)
+    * [getInventory](#getinventory)
     * [deleteInventory](#deleteinventory)
-    * [getInventoryBulkUploadHistory](#getinventorybulkuploadhistory)
     * [createBulkInventoryJob](#createbulkinventoryjob)
-    * [createBulkInventory](#createbulkinventory)
+    * [getInventoryBulkUploadHistory](#getinventorybulkuploadhistory)
     * [deleteBulkInventoryJob](#deletebulkinventoryjob)
-    * [getInventoryExport](#getinventoryexport)
+    * [createBulkInventory](#createbulkinventory)
     * [createInventoryExportJob](#createinventoryexportjob)
+    * [getInventoryExport](#getinventoryexport)
     * [exportInventoryConfig](#exportinventoryconfig)
-    * [getAllHsnCodes](#getallhsncodes)
     * [createHsnCode](#createhsncode)
-    * [updateHsnCode](#updatehsncode)
+    * [getAllHsnCodes](#getallhsncodes)
     * [getHsnCode](#gethsncode)
+    * [updateHsnCode](#updatehsncode)
     * [bulkHsnCode](#bulkhsncode)
     * [getApplicationBrands](#getapplicationbrands)
     * [getDepartments](#getdepartments)
@@ -464,29 +494,6 @@
     * [checkCartServiceability](#checkcartserviceability)
     * [checkoutCartItems](#checkoutcartitems)
     * [updateCheckoutPaymentStatus](#updatecheckoutpaymentstatus)
-    
-
-* [Marketplaces](#Marketplaces)
-  * Methods
-    * [getAvailableChannels](#getavailablechannels)
-    * [getChannels](#getchannels)
-    * [getChannel](#getchannel)
-    * [registerMyntraChannel](#registermyntrachannel)
-    * [updateMyntraChannelCredentials](#updatemyntrachannelcredentials)
-    * [registerAmazonChannel](#registeramazonchannel)
-    * [updateAmazonChannelCredentials](#updateamazonchannelcredentials)
-    * [registerFlipkartChannel](#registerflipkartchannel)
-    * [updateFlipkartChannelCredentials](#updateflipkartchannelcredentials)
-    * [registerTatacliqChannel](#registertatacliqchannel)
-    * [updateTatacliqChannelCredentials](#updatetatacliqchannelcredentials)
-    * [registerAjioChannel](#registerajiochannel)
-    * [updateAjioChannelCredentials](#updateajiochannelcredentials)
-    * [updateChannelInventorySyncConfig](#updatechannelinventorysyncconfig)
-    * [getChannelLocationConfig](#getchannellocationconfig)
-    * [updateChannelLocationConfig](#updatechannellocationconfig)
-    * [getChannelStatus](#getchannelstatus)
-    * [updateChannelStatus](#updatechannelstatus)
-    * [triggerChannelInventoryUpdates](#triggerchannelinventoryupdates)
     
 
 * [Rewards](#Rewards)
@@ -2898,6 +2905,147 @@ Default
 ---
 
 
+#### getFeedbacks
+Gets a list of feedback submitted against that ticket
+
+```golang
+
+data, err := Lead.GetFeedbacks(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for ticket | 
+
+
+| ID | string | Ticket ID for which feedbacks are to be fetched | 
+
+
+
+Gets a list of feedback submitted against that ticket
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `TicketFeedbackList`
+
+
+*Examples:*
+
+
+Default
+```json
+{
+  "value": {
+    "items": [
+      {
+        "_id": "60c255bf00ecabfad19e9601",
+        "company_id": "1",
+        "ticket_id": "6095812876d2bf17143cb3b3",
+        "user": {
+          "_id": "5f8147abbd1a0a870f61f1a6",
+          "authenticated": true,
+          "user_id": "5f8147abbd1a0a870f61f1a6"
+        },
+        "category": "customers",
+        "response": {
+          "audio": 2,
+          "video": 6
+        },
+        "createdAt": "2021-06-10T18:11:11.349Z",
+        "updatedAt": "2021-06-10T18:11:11.349Z",
+        "__v": 0
+      }
+    ]
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### submitFeedback
+Submit a response for feeback form against that ticket
+
+```golang
+
+data, err := Lead.SubmitFeedback(CompanyID, ID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for ticket | 
+
+
+| ID | string | Ticket ID for which feedback is to be submitted | 
+
+
+| body |  TicketFeedbackPayload | "Request body" 
+
+Submit a response for feeback form against that ticket
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `TicketFeedback`
+
+
+*Examples:*
+
+
+Default
+```json
+{
+  "value": {
+    "_id": "60c255bf00ecabfad19e9601",
+    "company_id": "1",
+    "ticket_id": "6095812876d2bf17143cb3b3",
+    "user": {
+      "_id": "5f8147abbd1a0a870f61f1a6",
+      "authenticated": true,
+      "user_id": "5f8147abbd1a0a870f61f1a6"
+    },
+    "category": "customers",
+    "response": {
+      "audio": 2,
+      "video": 6
+    },
+    "createdAt": "2021-06-10T18:11:11.349Z",
+    "updatedAt": "2021-06-10T18:11:11.349Z",
+    "__v": 0
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
 #### createHistory
 Create history for specific application level ticket
 
@@ -3989,6 +4137,127 @@ Default
 {
   "value": {
     "success": true
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getASDF
+Get Token to join a specific Video Room using it's unqiue name
+
+```golang
+
+data, err := Lead.GetASDF(CompanyID, ApplicationID, InHeader, InPath, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID of the application | 
+
+
+| ApplicationID | string | Application ID for video room | 
+
+
+
+
+| InHeader | PriorityEnum | For adding support for enum | 
+
+
+| InPath | PriorityEnum | For adding support for enum | 
+
+| xQuery | struct | Includes properties such as `InQuery`
+
+
+Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetTokenForVideoRoomResponse`
+
+
+*Examples:*
+
+
+Default
+```json
+{
+  "value": {
+    "access_token": "your_token_to_the_room"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getASDF
+Get Token to join a specific Video Room using it's unqiue name
+
+```golang
+
+data, err := Lead.GetASDF(CompanyID, InHeader, InPath, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID of the application | 
+
+
+
+
+| InHeader | PriorityEnum | For adding support for enum | 
+
+
+| InPath | PriorityEnum | For adding support for enum | 
+
+| xQuery | struct | Includes properties such as `InQuery`
+
+
+Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetTokenForVideoRoomResponse`
+
+
+*Examples:*
+
+
+Default
+```json
+{
+  "value": {
+    "access_token": "your_token_to_the_room"
   }
 }
 ```
@@ -6504,6 +6773,204 @@ Schema: `AuthenticationApiError`
 ---
 
 
+#### createUser
+Create user
+
+```golang
+
+data, err := User.CreateUser(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID | 
+
+
+| ApplicationID | string | Application ID | 
+
+
+| body |  CreateUserRequestSchema | "Request body" 
+
+Create user
+
+*Success Response:*
+
+
+
+User create
+
+
+Schema: `CreateUserResponseSchema`
+
+
+
+
+
+
+
+
+
+
+
+Schema: `AuthenticationApiError`
+
+
+
+
+
+
+
+
+
+
+
+Schema: `AuthenticationApiError`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateUser
+Update user
+
+```golang
+
+data, err := User.UpdateUser(CompanyID, ApplicationID, UserID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID | 
+
+
+| ApplicationID | string | Application ID | 
+
+
+| UserID | string | User ID | 
+
+
+| body |  UpdateUserRequestSchema | "Request body" 
+
+Update user
+
+*Success Response:*
+
+
+
+User update
+
+
+Schema: `CreateUserResponseSchema`
+
+
+
+
+
+
+
+
+
+
+
+Schema: `AuthenticationApiError`
+
+
+
+
+
+
+
+
+
+
+
+Schema: `AuthenticationApiError`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createUserSession
+Create user session
+
+```golang
+
+data, err := User.CreateUserSession(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID | 
+
+
+| ApplicationID | string | Application ID | 
+
+
+| body |  CreateUserSessionRequestSchema | "Request body" 
+
+Create user session
+
+*Success Response:*
+
+
+
+Create user session
+
+
+Schema: `CreateUserSessionResponseSchema`
+
+
+
+
+
+
+
+
+
+
+
+Schema: `AuthenticationApiError`
+
+
+
+
+
+
+
+
+
+
+
+Schema: `AuthenticationApiError`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getPlatformConfig
 Get platform configurations
 
@@ -6641,7 +7108,7 @@ Schema: `AuthenticationApiError`
 
 
 #### getAnnouncementsList
-Get annoucements list
+Get a list of announcements
 
 ```golang
 
@@ -6651,10 +7118,10 @@ data, err := Content.GetAnnouncementsList(CompanyID, ApplicationID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
 
@@ -6663,13 +7130,13 @@ data, err := Content.GetAnnouncementsList(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`
 
 
-Get list of announcements
+Announcements are useful to highlight a message or information on top of a webpage. Use this API to retrieve a list of announcements.	
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `GetAnnouncementListSchema` for more details.
 
 
 Schema: `GetAnnouncementListSchema`
@@ -6692,7 +7159,7 @@ success
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6715,7 +7182,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6743,7 +7210,7 @@ default
 
 
 #### createAnnouncement
-Create an annoucement
+Create an announcement
 
 ```golang
 
@@ -6753,21 +7220,21 @@ data, err := Content.CreateAnnouncement(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
 | body |  AdminAnnouncementSchema | "Request body" 
 
-Create an announcement
+Announcements are useful to highlight a message or information on top of a webpage. Use this API to create an announcement.
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `CreateAnnouncementSchema` for more details.
 
 
 Schema: `CreateAnnouncementSchema`
@@ -6790,7 +7257,7 @@ success
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6813,7 +7280,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6841,7 +7308,7 @@ default
 
 
 #### getAnnouncementById
-Get annoucement by id
+Get announcement by ID
 
 ```golang
 
@@ -6851,23 +7318,23 @@ data, err := Content.GetAnnouncementById(CompanyID, ApplicationID, AnnouncementI
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| AnnouncementID | string | Announcement ID | 
+| AnnouncementID | string | ID allotted to the announcement. | 
 
 
 
-Get announcement by id
+Use this API to retrieve an announcement and its details such as the target platform and pages on which it's applicable
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `AdminAnnouncementSchema` for more details.
 
 
 Schema: `AdminAnnouncementSchema`
@@ -6890,7 +7357,7 @@ success
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6913,7 +7380,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6941,7 +7408,7 @@ default
 
 
 #### updateAnnouncement
-Update an annoucement
+Update an announcement
 
 ```golang
 
@@ -6951,24 +7418,24 @@ data, err := Content.UpdateAnnouncement(CompanyID, ApplicationID, AnnouncementID
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| AnnouncementID | string | Announcement ID | 
+| AnnouncementID | string | ID allotted to the announcement. | 
 
 
 | body |  AdminAnnouncementSchema | "Request body" 
 
-Update an announcement
+Use this API to edit an existing announcement and its details such as the target platform and pages on which it's applicable
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `CreateAnnouncementSchema` for more details.
 
 
 Schema: `CreateAnnouncementSchema`
@@ -6991,7 +7458,7 @@ success
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -7014,7 +7481,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -7042,7 +7509,7 @@ default
 
 
 #### updateAnnouncementSchedule
-Update schedule or published status of an annoucement
+Update the schedule and the publish status of an announcement
 
 ```golang
 
@@ -7052,24 +7519,24 @@ data, err := Content.UpdateAnnouncementSchedule(CompanyID, ApplicationID, Announ
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| AnnouncementID | string | Announcement ID | 
+| AnnouncementID | string | ID allotted to the announcement. | 
 
 
 | body |  ScheduleSchema | "Request body" 
 
-Update schedule or published status of an announcement
+Use this API to edit the duration, i.e. start date-time and end date-time of an announcement. Moreover, you can enable/disable an announcement using this API.
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `CreateAnnouncementSchema` for more details.
 
 
 Schema: `CreateAnnouncementSchema`
@@ -7092,7 +7559,7 @@ success
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -7115,7 +7582,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -7143,7 +7610,7 @@ default
 
 
 #### deleteAnnouncement
-Delete annoucement by id
+Delete announcement by id
 
 ```golang
 
@@ -7153,23 +7620,23 @@ data, err := Content.DeleteAnnouncement(CompanyID, ApplicationID, AnnouncementID
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| AnnouncementID | string | Announcement ID | 
+| AnnouncementID | string | ID allotted to the announcement. | 
 
 
 
-Delete announcement by id
+Use this API to delete an existing announcement.
 
 *Success Response:*
 
 
 
-Success
+Success.
 
 
 Schema: `CreateAnnouncementSchema`
@@ -7192,7 +7659,7 @@ success
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -7215,7 +7682,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -7243,7 +7710,7 @@ default
 
 
 #### createBlog
-Create blog
+Create a blog
 
 ```golang
 
@@ -7253,21 +7720,21 @@ data, err := Content.CreateBlog(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application Id | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
 | body |  BlogRequest | "Request body" 
 
-Use this to create a blog.
+Use this API to create a blog.
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `BlogSchema` for more details.
 
 
 Schema: `BlogSchema`
@@ -7290,7 +7757,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -7322,7 +7789,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -7369,10 +7836,10 @@ data, err := Content.GetBlogs(CompanyID, ApplicationID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application Id | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
 
@@ -7381,13 +7848,13 @@ data, err := Content.GetBlogs(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`
 
 
-Use this to get blogs.
+Use this API to get a list of blogs along with their details, such as the title, reading time, publish status, feature image, tags, author, etc.
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `BlogGetResponse` for more details.
 
 
 Schema: `BlogGetResponse`
@@ -7410,7 +7877,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -7433,7 +7900,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -7461,7 +7928,7 @@ default
 
 
 #### updateBlog
-Update blog
+Update a blog
 
 ```golang
 
@@ -7471,24 +7938,24 @@ data, err := Content.UpdateBlog(CompanyID, ApplicationID, ID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application Id | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| ID | string | Blog Id | 
+| ID | string | ID allotted to the blog. | 
 
 
 | body |  BlogRequest | "Request body" 
 
-Use this to update blog.
+Use this API to update the details of an existing blog which includes title, feature image, content, SEO details, expiry, etc.
 
 *Success Response:*
 
 
 
-Success
+Success.
 
 
 Schema: `BlogSchema`
@@ -7511,7 +7978,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -7543,7 +8010,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -7590,23 +8057,23 @@ data, err := Content.DeleteBlog(CompanyID, ApplicationID, ID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application Id | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| ID | string | Blog Id | 
+| ID | string | ID allotted to the blog. | 
 
 
 
-Use this to delete blogs.
+Use this API to delete a blog.
 
 *Success Response:*
 
 
 
-Success
+Success.
 
 
 Schema: `BlogSchema`
@@ -7629,7 +8096,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -7652,7 +8119,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -7680,7 +8147,7 @@ default
 
 
 #### getComponentById
-Get components by component Id
+Get components of a blog
 
 ```golang
 
@@ -7690,23 +8157,23 @@ data, err := Content.GetComponentById(CompanyID, ApplicationID, Slug);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application Id | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| Slug | string | slug of page to be fetched | 
+| Slug | string | A short, human-readable, URL-friendly identifier of a blog page. You can get slug value of a blog from `getBlogs` API. | 
 
 
 
-The endpoint fetches the component by component Id
+Use this API to retrieve the components of a blog, such as title, slug, feature image, content, schedule, publish status, author, etc.
 
 *Success Response:*
 
 
 
-A JSON object with components
+Success. Returns a a JSON object with components. Refer `BlogSchema` for more details.
 
 
 Schema: `BlogSchema`
@@ -7729,7 +8196,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -7752,7 +8219,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -7780,7 +8247,7 @@ default
 
 
 #### getFaqCategories
-Get FAQ categories list
+Get a list of FAQ categories
 
 ```golang
 
@@ -7790,20 +8257,20 @@ data, err := Content.GetFaqCategories(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
 
-Get list of FAQ categories
+FAQs can be divided into categories. Use this API to get a list of FAQ categories.
 
 *Success Response:*
 
 
 
-Get FAQ Categories
+Success. Refer `GetFaqCategoriesSchema` for more details.
 
 
 Schema: `GetFaqCategoriesSchema`
@@ -7815,7 +8282,7 @@ Schema: `GetFaqCategoriesSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -7838,7 +8305,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -7866,7 +8333,7 @@ default
 
 
 #### getFaqCategoryBySlugOrId
-Get FAQ category by slug or id
+Get an FAQ category by slug or id
 
 ```golang
 
@@ -7876,23 +8343,23 @@ data, err := Content.GetFaqCategoryBySlugOrId(CompanyID, ApplicationID, IDOrSlug
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| IDOrSlug | string | Slug or Id of FAQ Category | 
+| IDOrSlug | string | ID or the slug allotted to an FAQ category. Slug is a short, human-readable, URL-friendly identifier of an object. You can get slug value of an FAQ category from `getFaqCategories` API. | 
 
 
 
-Get FAQ category by slug or id
+FAQs can be divided into categories. Use this API to get an FAQ categories using its slug or ID.
 
 *Success Response:*
 
 
 
-Get FAQ Categories
+Success. Refer `GetFaqCategoryBySlugSchema` for more details.
 
 
 Schema: `GetFaqCategoryBySlugSchema`
@@ -7904,7 +8371,7 @@ Schema: `GetFaqCategoryBySlugSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -7927,7 +8394,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -7955,7 +8422,7 @@ default
 
 
 #### createFaqCategory
-Creates a FAQ category
+Create an FAQ category
 
 ```golang
 
@@ -7965,21 +8432,21 @@ data, err := Content.CreateFaqCategory(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
 | body |  CreateFaqCategoryRequestSchema | "Request body" 
 
-Add Faq Category
+FAQs help users to solve an issue or know more about a process. FAQs can be categorized separately, for e.g. some questions can be related to payment, some could be related to purchase, shipping, navigating, etc. Use this API to create an FAQ category.
 
 *Success Response:*
 
 
 
-Create a FAQ Category
+Success.
 
 
 Schema: `CreateFaqCategorySchema`
@@ -7991,7 +8458,7 @@ Schema: `CreateFaqCategorySchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -8014,7 +8481,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -8042,7 +8509,7 @@ default
 
 
 #### updateFaqCategory
-Updates a FAQ category
+Update an FAQ category
 
 ```golang
 
@@ -8052,24 +8519,24 @@ data, err := Content.UpdateFaqCategory(CompanyID, ApplicationID, ID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| ID | string | Faq category ID | 
+| ID | string | ID allotted to an FAQ category. | 
 
 
 | body |  UpdateFaqCategoryRequestSchema | "Request body" 
 
-Update Faq Category
+Use this API to edit an existing FAQ category.
 
 *Success Response:*
 
 
 
-Update a FAQ Category
+Success.
 
 
 Schema: `CreateFaqCategorySchema`
@@ -8081,7 +8548,7 @@ Schema: `CreateFaqCategorySchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -8104,7 +8571,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -8132,7 +8599,7 @@ default
 
 
 #### deleteFaqCategory
-Deletes a FAQ category
+Delete an FAQ category
 
 ```golang
 
@@ -8142,23 +8609,23 @@ data, err := Content.DeleteFaqCategory(CompanyID, ApplicationID, ID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| ID | string | Faq category ID | 
+| ID | string | ID allotted to an FAQ category. | 
 
 
 
-Delete Faq Category
+Use this API to delete an FAQ category.
 
 *Success Response:*
 
 
 
-Delete a FAQ Category
+Success.
 
 
 Schema: `FaqSchema`
@@ -8170,7 +8637,7 @@ Schema: `FaqSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -8193,7 +8660,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -8221,7 +8688,7 @@ default
 
 
 #### getFaqsByCategoryIdOrSlug
-Get FAQs of a Faq Category id or slug
+Get question and answers within an FAQ category
 
 ```golang
 
@@ -8231,23 +8698,23 @@ data, err := Content.GetFaqsByCategoryIdOrSlug(CompanyID, ApplicationID, IDOrSlu
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| IDOrSlug | string | Faq category ID or slug | 
+| IDOrSlug | string | ID or the slug allotted to an FAQ category. Slug is a short, human-readable, URL-friendly identifier of an object. You can get slug value of an FAQ category from `getFaqCategories` API. | 
 
 
 
-Get FAQs of a Faq Category `id` or `slug`
+Use this API to retrieve all the commonly asked question and answers belonging to an FAQ category.
 
 *Success Response:*
 
 
 
-Get FAQs by slug/id of FAQ Category
+Success. Refer `GetFaqSchema` for more details.
 
 
 Schema: `GetFaqSchema`
@@ -8259,7 +8726,7 @@ Schema: `GetFaqSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -8282,7 +8749,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -8310,7 +8777,7 @@ default
 
 
 #### addFaq
-Creates FAQs for category whose `id` is specified
+Create an FAQ
 
 ```golang
 
@@ -8320,24 +8787,24 @@ data, err := Content.AddFaq(CompanyID, ApplicationID, CategoryID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| CategoryID | string | Faq category ID | 
+| CategoryID | string | ID allotted to an FAQ category. | 
 
 
 | body |  CreateFaqSchema | "Request body" 
 
-Creates FAQs for category whose `id` is specified
+FAQs help users to solve an issue or know more about a process. Use this API to create an FAQ for a given FAQ category.
 
 *Success Response:*
 
 
 
-Create a FAQ for FAQ Category
+Success.
 
 
 Schema: `CreateFaqResponseSchema`
@@ -8349,7 +8816,7 @@ Schema: `CreateFaqResponseSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -8372,7 +8839,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -8400,7 +8867,7 @@ default
 
 
 #### updateFaq
-Updates FAQ
+Update an FAQ
 
 ```golang
 
@@ -8410,27 +8877,27 @@ data, err := Content.UpdateFaq(CompanyID, ApplicationID, CategoryID, FaqID, body
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| CategoryID | string | Faq category ID | 
+| CategoryID | string | ID allotted to an FAQ category. | 
 
 
-| FaqID | string | Faq ID | 
+| FaqID | string | ID allotted to an FAQ. | 
 
 
 | body |  CreateFaqSchema | "Request body" 
 
-Updates FAQ
+Use this API to edit an existing FAQ.
 
 *Success Response:*
 
 
 
-Update FAQ by id
+Success.
 
 
 Schema: `CreateFaqResponseSchema`
@@ -8442,7 +8909,7 @@ Schema: `CreateFaqResponseSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -8465,7 +8932,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -8493,7 +8960,7 @@ default
 
 
 #### deleteFaq
-Delete FAQ
+Delete an FAQ
 
 ```golang
 
@@ -8503,26 +8970,26 @@ data, err := Content.DeleteFaq(CompanyID, ApplicationID, CategoryID, FaqID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| CategoryID | string | Faq category ID | 
+| CategoryID | string | ID allotted to an FAQ category. | 
 
 
-| FaqID | string | Faq ID | 
+| FaqID | string | ID allotted to an FAQ. | 
 
 
 
-Delete FAQ
+Use this API to delete an existing FAQ.
 
 *Success Response:*
 
 
 
-Delete FAQ by id
+Success.
 
 
 Schema: `CreateFaqResponseSchema`
@@ -8534,7 +9001,7 @@ Schema: `CreateFaqResponseSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -8557,7 +9024,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -8585,7 +9052,7 @@ default
 
 
 #### getFaqByIdOrSlug
-Get frequently asked question
+Get an FAQ
 
 ```golang
 
@@ -8595,23 +9062,23 @@ data, err := Content.GetFaqByIdOrSlug(CompanyID, ApplicationID, IDOrSlug);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| IDOrSlug | string | Slug or Id of FAQ | 
+| IDOrSlug | string | ID or the slug allotted to an FAQ category. Slug is a short, human-readable, URL-friendly identifier of an object. You can get slug value of an FAQ category from `getFaqCategories` API. | 
 
 
 
-Get frequently asked questions list. These will be helpful for users to using website.
+Use this API to retrieve a specific FAQ. You will get the question and answer of that FAQ.
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `CreateFaqResponseSchema` for more details.
 
 
 Schema: `CreateFaqResponseSchema`
@@ -8623,7 +9090,7 @@ Schema: `CreateFaqResponseSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -8646,7 +9113,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -8674,7 +9141,7 @@ default
 
 
 #### getLandingPages
-Get landing-pages
+Get landing pages
 
 ```golang
 
@@ -8684,10 +9151,10 @@ data, err := Content.GetLandingPages(CompanyID, ApplicationID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
 
@@ -8696,13 +9163,13 @@ data, err := Content.GetLandingPages(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`
 
 
-Use this to get landing-pages.
+Landing page is the first page that a prospect lands upon while visiting a website. Use this API to fetch a list of landing pages.
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `LandingPageGetResponse` for more details.
 
 
 Schema: `LandingPageGetResponse`
@@ -8725,7 +9192,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -8748,7 +9215,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -8776,7 +9243,7 @@ default
 
 
 #### createLandingPage
-Create landing-page
+Create a landing page
 
 ```golang
 
@@ -8786,21 +9253,21 @@ data, err := Content.CreateLandingPage(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
 | body |  LandingPageSchema | "Request body" 
 
-Use this to create landing-page.
+Landing page is the first page that a prospect lands upon while visiting a website. Use this API to create a landing page.
 
 *Success Response:*
 
 
 
-Success
+Success.
 
 
 Schema: `LandingPageSchema`
@@ -8823,7 +9290,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -8846,7 +9313,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -8874,7 +9341,7 @@ default
 
 
 #### updateLandingPage
-Update landing-page
+Update a landing page
 
 ```golang
 
@@ -8884,24 +9351,24 @@ data, err := Content.UpdateLandingPage(CompanyID, ApplicationID, ID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| ID | string | Landing page ID | 
+| ID | string | ID allotted to a landing page. | 
 
 
 | body |  LandingPageSchema | "Request body" 
 
-Use this to update landing-page.
+Use this API to edit the details of an existing landing page.
 
 *Success Response:*
 
 
 
-Success
+Success.
 
 
 Schema: `LandingPageSchema`
@@ -8924,7 +9391,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -8947,7 +9414,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -8975,7 +9442,7 @@ default
 
 
 #### deleteLandingPage
-Delete landing-page
+Delete a landing page
 
 ```golang
 
@@ -8985,23 +9452,23 @@ data, err := Content.DeleteLandingPage(CompanyID, ApplicationID, ID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| ID | string | Landing page ID | 
+| ID | string | ID allotted to a landing page. | 
 
 
 
-Use this to delete landing-page.
+Use this API to delete an existing landing page.
 
 *Success Response:*
 
 
 
-Success
+Success.
 
 
 Schema: `LandingPageSchema`
@@ -9047,7 +9514,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -9070,7 +9537,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -9108,20 +9575,20 @@ data, err := Content.GetLegalInformation(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
 
-Get legal information of application, which includes policy, Terms and Conditions, and FAQ information of application.
+Use this API to get the legal information of an application, which includes Policy, Terms and Conditions, Shipping Policy and FAQ regarding the application.
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `ApplicationLegal` for more details.
 
 
 Schema: `ApplicationLegal`
@@ -9144,7 +9611,7 @@ Success
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -9167,7 +9634,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -9205,21 +9672,21 @@ data, err := Content.UpdateLegalInformation(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
 | body |  ApplicationLegal | "Request body" 
 
-Save legal information of application, which includes Policy, Terms and Conditions, and FAQ information of application.
+Use this API to edit, update and save the legal information of an application, which includes Policy, Terms and Conditions, Shipping Policy and FAQ regarding the application.
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `ApplicationLegal` for more details.
 
 
 Schema: `ApplicationLegal`
@@ -9231,7 +9698,7 @@ Schema: `ApplicationLegal`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -9254,7 +9721,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -9292,10 +9759,10 @@ data, err := Content.GetNavigations(CompanyID, ApplicationID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
 
@@ -9306,13 +9773,13 @@ data, err := Content.GetNavigations(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `DevicePlatform`, `PageNo`, `PageSize`
 
 
-Use this to get navigations.
+Use this API to fetch the navigations details which includes the items of the navigation pane. It also shows the orientation, links, sub-navigations, etc.
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `NavigationGetResponse` for more details.
 
 
 Schema: `NavigationGetResponse`
@@ -9335,7 +9802,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -9358,7 +9825,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -9386,7 +9853,7 @@ default
 
 
 #### createNavigation
-Create navigation
+Create a navigation
 
 ```golang
 
@@ -9396,21 +9863,21 @@ data, err := Content.CreateNavigation(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
 | body |  NavigationRequest | "Request body" 
 
-Use this to create navigation.
+Navigation is the arrangement of navigational items to ease the accessibility of resources for users on a website. Use this API to create a navigation.
 
 *Success Response:*
 
 
 
-Success
+Success.
 
 
 Schema: `NavigationSchema`
@@ -9433,7 +9900,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -9456,7 +9923,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -9494,20 +9961,20 @@ data, err := Content.GetDefaultNavigations(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
 
-Use this to get default navigations.
+On any website (application), there are navigations that are present by default. Use this API to retrieve those default navigations.
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `DefaultNavigationResponse` for more details.
 
 
 Schema: `DefaultNavigationResponse`
@@ -9530,7 +9997,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -9553,7 +10020,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -9581,7 +10048,7 @@ default
 
 
 #### getNavigationBySlug
-Get navigation by slug
+Get a navigation by slug
 
 ```golang
 
@@ -9591,26 +10058,26 @@ data, err := Content.GetNavigationBySlug(CompanyID, ApplicationID, Slug, xQuery)
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| Slug | string | Slug | 
+| Slug | string | A short, human-readable, URL-friendly identifier of a navigation. You can get slug value of a navigation from `getNavigations` API. | 
 
 
 
 | xQuery | struct | Includes properties such as `DevicePlatform`
 
 
-Use this to get navigation by slug.
+Use this API to retrieve a navigation by its slug.
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `NavigationSchema` for more details.
 
 
 Schema: `NavigationSchema`
@@ -9633,7 +10100,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -9656,7 +10123,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -9684,7 +10151,7 @@ default
 
 
 #### updateNavigation
-Update navigation
+Update a navigation
 
 ```golang
 
@@ -9694,24 +10161,24 @@ data, err := Content.UpdateNavigation(CompanyID, ApplicationID, ID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| ID | string | Navigation ID | 
+| ID | string | ID allotted to the navigation. | 
 
 
 | body |  NavigationRequest | "Request body" 
 
-Use this to update navigation.
+Use this API to edit the details of an existing navigation.
 
 *Success Response:*
 
 
 
-Success
+Success.
 
 
 Schema: `NavigationSchema`
@@ -9734,7 +10201,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -9757,7 +10224,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -9785,7 +10252,7 @@ default
 
 
 #### deleteNavigation
-Delete navigation
+Delete a navigation
 
 ```golang
 
@@ -9795,23 +10262,23 @@ data, err := Content.DeleteNavigation(CompanyID, ApplicationID, ID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| ID | string | Navigation ID | 
+| ID | string | ID allotted to the navigation. | 
 
 
 
-Use this to delete navigation.
+Use this API to delete an existing navigation.
 
 *Success Response:*
 
 
 
-Success
+Success.
 
 
 Schema: `NavigationSchema`
@@ -10014,7 +10481,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -10037,7 +10504,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -10075,20 +10542,20 @@ data, err := Content.GetPageMeta(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application Id | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
 
-Use this to get Page Meta.
+Use this API to get the meta of custom pages (blog, page) and default system pages (e.g. home/brand/category/collection).
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `PageMetaSchema` for more details.
 
 
 Schema: `PageMetaSchema`
@@ -10111,7 +10578,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -10134,7 +10601,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -10172,20 +10639,20 @@ data, err := Content.GetPageSpec(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
 
-Use this to get page spec.
+Use this API to get the specifications of a page, such as page type, display name, params and query.
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `PageSpec` for more details.
 
 
 Schema: `PageSpec`
@@ -10234,7 +10701,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -10257,7 +10724,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -10285,7 +10752,7 @@ default
 
 
 #### createPage
-Create page
+Create a page
 
 ```golang
 
@@ -10295,21 +10762,21 @@ data, err := Content.CreatePage(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application Id | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
 | body |  PageRequest | "Request body" 
 
-Use this to create a page.
+Use this API to create a custom page using a title, seo, publish status, feature image, tags, meta, etc.
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `PageSchema` for more details.
 
 
 Schema: `PageSchema`
@@ -10332,7 +10799,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -10355,7 +10822,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -10383,7 +10850,7 @@ default
 
 
 #### getPages
-Get pages
+Get a list of pages
 
 ```golang
 
@@ -10393,10 +10860,10 @@ data, err := Content.GetPages(CompanyID, ApplicationID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application Id | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
 
@@ -10405,13 +10872,13 @@ data, err := Content.GetPages(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`
 
 
-Use this to get pages.
+Use this API to retrieve a list of pages.
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `PageGetResponse` for more details.
 
 
 Schema: `PageGetResponse`
@@ -10434,7 +10901,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -10457,7 +10924,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -10485,7 +10952,7 @@ default
 
 
 #### createPagePreview
-Create page preview
+Create a page preview
 
 ```golang
 
@@ -10495,21 +10962,21 @@ data, err := Content.CreatePagePreview(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application Id | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
 | body |  PageRequest | "Request body" 
 
-Use this to create a page preview.
+Use this API to create a page preview to check the appearance of a custom page.
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `PageSchema` for more details.
 
 
 Schema: `PageSchema`
@@ -10532,7 +10999,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -10555,7 +11022,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -10583,7 +11050,7 @@ default
 
 
 #### updatePagePreview
-Update page
+Change the publish status of a page
 
 ```golang
 
@@ -10593,24 +11060,24 @@ data, err := Content.UpdatePagePreview(CompanyID, ApplicationID, Slug, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application Id | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| Slug | string | Page publish slug | 
+| Slug | string | A short, human-readable, URL-friendly identifier of a page. You can get slug value of a page from `getPages` API. | 
 
 
 | body |  PagePublishRequest | "Request body" 
 
-Use this to update page.
+Use this API to change the publish status of an existing page. Allows you to publish and unpublish the page.
 
 *Success Response:*
 
 
 
-Success
+Success.
 
 
 Schema: `PageSchema`
@@ -10633,7 +11100,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -10656,7 +11123,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -10684,7 +11151,7 @@ default
 
 
 #### updatePage
-Update page
+Update a page
 
 ```golang
 
@@ -10694,24 +11161,24 @@ data, err := Content.UpdatePage(CompanyID, ApplicationID, ID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application Id | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| ID | string | Page Id | 
+| ID | string | ID allotted to the page. | 
 
 
 | body |  PageSchema | "Request body" 
 
-Use this to update page.
+Use this API to edit the details of an existing page, such as its title, seo, publish status, feature image, tags, schedule, etc.
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `PageSchema` for more details.
 
 
 Schema: `PageSchema`
@@ -10734,7 +11201,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -10757,7 +11224,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -10785,7 +11252,7 @@ default
 
 
 #### deletePage
-Delete page
+Delete a page
 
 ```golang
 
@@ -10795,23 +11262,23 @@ data, err := Content.DeletePage(CompanyID, ApplicationID, ID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application Id | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| ID | string | Page Id | 
+| ID | string | ID allotted to the page. | 
 
 
 
-Use this to delete page.
+Use this API to delete an existing page.
 
 *Success Response:*
 
 
 
-Success
+Success.
 
 
 Schema: `PageSchema`
@@ -10834,7 +11301,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -10857,7 +11324,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -10895,23 +11362,23 @@ data, err := Content.GetPageBySlug(CompanyID, ApplicationID, Slug);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application Id | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| Slug | string | Slug of page to be fetched | 
+| Slug | string | A short, human-readable, URL-friendly identifier of a page. You can get slug value of a page from `getPages` API. | 
 
 
 
-The endpoint fetches the component by component Id
+Use this API to retrieve the components of a page, such as its title, seo, publish status, feature image, tags, schedule, etc.
 
 *Success Response:*
 
 
 
-A JSON object with page
+Success. Returns a JSON object of components. Refer `PageSchema` for more details.
 
 
 Schema: `PageSchema`
@@ -10934,7 +11401,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -10957,7 +11424,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -10985,7 +11452,7 @@ default
 
 
 #### getSEOConfiguration
-Get seo of application
+Get SEO configuration of an application
 
 ```golang
 
@@ -10995,20 +11462,20 @@ data, err := Content.GetSEOConfiguration(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
 
-Get seo of application
+Use this API to know how the SEO is configured in the application. This includes the sitemap, robot.txt, custom meta tags, etc.
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `SeoComponent` for more details.
 
 
 Schema: `SeoComponent`
@@ -11031,7 +11498,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -11054,7 +11521,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -11082,7 +11549,7 @@ default
 
 
 #### updateSEOConfiguration
-Update seo of application
+Update SEO of application
 
 ```golang
 
@@ -11092,21 +11559,21 @@ data, err := Content.UpdateSEOConfiguration(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
 | body |  SeoComponent | "Request body" 
 
-Update seo of application
+Use this API to edit the SEO details of an application. This includes the sitemap, robot.txt, custom meta tags, etc.
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `SeoSchema` for more details.
 
 
 Schema: `SeoSchema`
@@ -11152,7 +11619,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -11175,7 +11642,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -11213,10 +11680,10 @@ data, err := Content.GetSlideshows(CompanyID, ApplicationID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
 
@@ -11227,13 +11694,13 @@ data, err := Content.GetSlideshows(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `DevicePlatform`, `PageNo`, `PageSize`
 
 
-Use this to get slideshows.
+A slideshow is a group of images, videos or a combination of both that are shown on the website in the form of slides. Use this API to fetch a list of slideshows.
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `SlideshowGetResponse` for more details.
 
 
 Schema: `SlideshowGetResponse`
@@ -11256,7 +11723,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -11279,7 +11746,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -11307,7 +11774,7 @@ default
 
 
 #### createSlideshow
-Create slideshow
+Create a slideshow
 
 ```golang
 
@@ -11317,21 +11784,21 @@ data, err := Content.CreateSlideshow(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
 | body |  SlideshowRequest | "Request body" 
 
-Use this to create slideshow.
+A slideshow is a group of images, videos or a combination of both that are shown on the website in the form of slides. Use this API to create a slideshow.
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `SlideshowSchema` for more details.
 
 
 Schema: `SlideshowSchema`
@@ -11354,7 +11821,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -11377,7 +11844,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -11415,26 +11882,26 @@ data, err := Content.GetSlideshowBySlug(CompanyID, ApplicationID, Slug, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| Slug | string | Slug | 
+| Slug | string | A short, human-readable, URL-friendly identifier of a slideshow. You can get slug value of a page from `getSlideshows` API. | 
 
 
 
 | xQuery | struct | Includes properties such as `DevicePlatform`
 
 
-Use this to get slideshow by slug.
+Use this API to retrieve the details of a slideshow by its slug.
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `SlideshowSchema` for more details.
 
 
 Schema: `SlideshowSchema`
@@ -11457,7 +11924,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -11480,7 +11947,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -11508,7 +11975,7 @@ default
 
 
 #### updateSlideshow
-Update slideshow
+Update a slideshow
 
 ```golang
 
@@ -11518,24 +11985,24 @@ data, err := Content.UpdateSlideshow(CompanyID, ApplicationID, ID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| ID | string | Slideshow ID | 
+| ID | string | ID allotted to the slideshow. | 
 
 
 | body |  SlideshowRequest | "Request body" 
 
-Use this to update slideshow.
+Use this API to edit the details of an existing slideshow.
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `SlideshowSchema` for more details.
 
 
 Schema: `SlideshowSchema`
@@ -11558,7 +12025,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -11581,7 +12048,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -11609,7 +12076,7 @@ default
 
 
 #### deleteSlideshow
-Delete slideshow
+Delete a slideshow
 
 ```golang
 
@@ -11619,23 +12086,23 @@ data, err := Content.DeleteSlideshow(CompanyID, ApplicationID, ID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| ID | string | Slideshow ID | 
+| ID | string | ID allotted to the slideshow. | 
 
 
 
-Use this to delete slideshow.
+Use this API to delete an existing slideshow.
 
 *Success Response:*
 
 
 
-Success
+Success.
 
 
 Schema: `SlideshowSchema`
@@ -11697,7 +12164,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -11720,7 +12187,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -11758,20 +12225,20 @@ data, err := Content.GetSupportInformation(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
 
-Get contact details for customer support. Including emails and phone numbers
+Use this API to get the contact details for customer support, including emails and phone numbers.
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `Support` for more details.
 
 
 Schema: `Support`
@@ -11794,7 +12261,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -11817,7 +12284,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -11845,7 +12312,7 @@ default
 
 
 #### updateSupportInformation
-Update support data of application
+Update the support data of an application
 
 ```golang
 
@@ -11855,21 +12322,21 @@ data, err := Content.UpdateSupportInformation(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
 | body |  Support | "Request body" 
 
-Update support data of application
+Use this API to edit the existing contact details for customer support, including emails and phone numbers.
 
 *Success Response:*
 
 
 
-Success
+Success. Refer `Support` for more details.
 
 
 Schema: `Support`
@@ -11892,7 +12359,7 @@ default
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -11915,7 +12382,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -11943,7 +12410,7 @@ default
 
 
 #### updateInjectableTag
-Updates a Tag
+Update a tag
 
 ```golang
 
@@ -11953,21 +12420,21 @@ data, err := Content.UpdateInjectableTag(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
 | body |  CreateTagRequestSchema | "Request body" 
 
-Update tag
+Use this API to edit the details of an existing tag. This includes the tag name, tag type (css/js), url and position of the tag.
 
 *Success Response:*
 
 
 
-Tags Array
+Success.
 
 
 Schema: `TagsSchema`
@@ -11979,7 +12446,7 @@ Schema: `TagsSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -12002,7 +12469,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -12030,7 +12497,7 @@ default
 
 
 #### deleteAllInjectableTags
-Delete tags for application
+Delete tags in application
 
 ```golang
 
@@ -12040,20 +12507,20 @@ data, err := Content.DeleteAllInjectableTags(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
 
-Delete tags for application
+Use this API to delete all the existing tags at once.
 
 *Success Response:*
 
 
 
-Tags Array
+Success.
 
 
 Schema: `TagsSchema`
@@ -12065,7 +12532,7 @@ Schema: `TagsSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -12088,7 +12555,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -12116,7 +12583,7 @@ default
 
 
 #### getInjectableTags
-Get tags for application
+Get all the tags in an application
 
 ```golang
 
@@ -12126,20 +12593,20 @@ data, err := Content.GetInjectableTags(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
 
-Get tags for application
+Use this API to get all the CSS and JS injected in the application in the form of tags.
 
 *Success Response:*
 
 
 
-Tags Array
+Success. Refer `TagsSchema` for more details.
 
 
 Schema: `TagsSchema`
@@ -12151,7 +12618,7 @@ Schema: `TagsSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -12174,7 +12641,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -12202,7 +12669,7 @@ default
 
 
 #### addInjectableTag
-Adds a Tag
+Add a tag
 
 ```golang
 
@@ -12212,21 +12679,21 @@ data, err := Content.AddInjectableTag(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
 | body |  CreateTagRequestSchema | "Request body" 
 
-Add tag
+CSS and JS can be injected in the application (website) with the help of tags. Use this API to create such tags by entering the tag name, tag type (css/js), url and position of the tag.
 
 *Success Response:*
 
 
 
-Tags Array
+Success.
 
 
 Schema: `TagsSchema`
@@ -12238,7 +12705,7 @@ Schema: `TagsSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -12261,7 +12728,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -12289,7 +12756,7 @@ default
 
 
 #### removeInjectableTag
-Removes a Tag
+Remove a tag
 
 ```golang
 
@@ -12299,21 +12766,21 @@ data, err := Content.RemoveInjectableTag(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
 | body |  RemoveHandpickedSchema | "Request body" 
 
-Remove a particular tag
+Use this API to delete an existing tag.
 
 *Success Response:*
 
 
 
-Tags Array
+Success.
 
 
 Schema: `TagsSchema`
@@ -12325,7 +12792,7 @@ Schema: `TagsSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -12348,7 +12815,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -12376,7 +12843,7 @@ default
 
 
 #### editInjectableTag
-Edits a Tag by Id
+Edit a tag by id
 
 ```golang
 
@@ -12386,24 +12853,24 @@ data, err := Content.EditInjectableTag(CompanyID, ApplicationID, TagID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
 
 
-| ApplicationID | string | Application ID | 
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
-| TagID | string | Tag ID | 
+| TagID | string | ID allotted to the tag. | 
 
 
 | body |  UpdateHandpickedSchema | "Request body" 
 
-Edits a particular tag
+Use this API to edit the details of an existing tag by its ID.
 
 *Success Response:*
 
 
 
-Tags Array
+Success.
 
 
 Schema: `TagsSchema`
@@ -12415,7 +12882,7 @@ Schema: `TagsSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -12438,7 +12905,7 @@ default
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -17460,53 +17927,59 @@ Schema: `HttpErrorCodeAndResponse`
 ---
 
 
-## Catalog
+## Order
 
 
-#### updateSearchKeywords
-Update Search Keyword
+#### shipmentStatusUpdate
+Update status of Shipment
 
 ```golang
 
-data, err := Catalog.UpdateSearchKeywords(CompanyID, ApplicationID, ID, body);
+data, err := Order.ShipmentStatusUpdate(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+| CompanyID | string | Company Id | 
 
 
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+| body |  UpdateShipmentStatusBody | "Request body" 
 
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
-
-
-| body |  CreateSearchKeyword | "Request body" 
-
-Update Search Keyword by its id. On successful request, returns the updated collection
+Update Shipment Status
 
 *Success Response:*
 
 
 
-The Collection object. See example below or refer `GetSearchWordsDataSchema` for details.
+Success
 
 
-Schema: `GetSearchWordsData`
-
-
-
+Schema: `UpdateShipmentStatusResponse`
 
 
 
 
 
-Bad request. See the error object in the response body for specific reason
 
 
-Schema: `ErrorResponse`
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
 
 
 
@@ -17517,6 +17990,1233 @@ Schema: `ErrorResponse`
 
 
 ---
+
+
+#### activityStatus
+Get Activity Status
+
+```golang
+
+data, err := Order.ActivityStatus(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+
+| xQuery | struct | Includes properties such as `BagID`
+
+
+Get Activity Status
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetActivityStatus`
+
+
+
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### storeProcessShipmentUpdate
+Update Store Process-Shipment
+
+```golang
+
+data, err := Order.StoreProcessShipmentUpdate(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+| body |  UpdateProcessShipmenstRequestBody | "Request body" 
+
+Update Store Process-Shipment
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `UpdateProcessShipmenstRequestResponse`
+
+
+
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### checkRefund
+Check Refund is available or not
+
+```golang
+
+data, err := Order.CheckRefund(CompanyID, ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+| ShipmentID | string | Shipment Id | 
+
+
+
+Check Refund is available or not
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `Object`
+
+
+
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOrdersByCompanyId
+Get Orders for company based on Company Id
+
+```golang
+
+data, err := Order.GetOrdersByCompanyId(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `Q`, `Stage`, `SalesChannels`, `OrderID`, `Stores`, `Status`, `ShortenUrls`, `FilterType`
+
+
+Get Orders
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `OrderListing`
+
+
+
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOrderDetails
+Get Order Details for company based on Company Id and Order Id
+
+```golang
+
+data, err := Order.GetOrderDetails(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `OrderID`, `Next`, `Previous`
+
+
+Get Orders
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `OrderDetails`
+
+
+
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPicklistOrdersByCompanyId
+Get Orders for company based on Company Id
+
+```golang
+
+data, err := Order.GetPicklistOrdersByCompanyId(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `Q`, `Stage`, `SalesChannels`, `OrderID`, `Stores`, `Status`, `ShortenUrls`, `FilterType`
+
+
+Get Orders
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `OrderPicklistListing`
+
+
+
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### trackShipmentPlatform
+Track Shipment by shipment id, for application based on application Id
+
+```golang
+
+data, err := Order.TrackShipmentPlatform(CompanyID, ApplicationID, ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+| ApplicationID | string | Application Id | 
+
+
+| ShipmentID | string | Shipment Id | 
+
+
+
+Shipment Track
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `PlatformShipmentTrack`
+
+
+
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### trackOrder
+Track Order by order id, for application based on application Id
+
+```golang
+
+data, err := Order.TrackOrder(CompanyID, ApplicationID, OrderID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+| ApplicationID | string | Application Id | 
+
+
+| OrderID | string | Order Id | 
+
+
+
+Order Track
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `PlatformOrderTrack`
+
+
+
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### failedOrders
+Get all failed orders application wise
+
+```golang
+
+data, err := Order.FailedOrders(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+| ApplicationID | string | Application Id | 
+
+
+
+Failed Orders
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `FailedOrders`
+
+
+
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### reprocessOrder
+Reprocess order by order id
+
+```golang
+
+data, err := Order.ReprocessOrder(CompanyID, ApplicationID, OrderID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+| ApplicationID | string | Application Id | 
+
+
+| OrderID | string | Order Id | 
+
+
+
+Order Reprocess
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `UpdateOrderReprocessResponse`
+
+
+
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateShipment
+Use this API to update the shipment using its shipment ID.
+
+```golang
+
+data, err := Order.UpdateShipment(CompanyID, ApplicationID, ShipmentID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+| ApplicationID | string | Application Id | 
+
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| body |  ShipmentUpdateRequest | "Request body" 
+
+Update the shipment
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ShipmentUpdateRequest` for more details.
+
+
+Schema: `ShipmentUpdateResponse`
+
+
+
+
+
+
+
+
+API Error. See the error object in the response body to know the exact reason.
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+Internal Server Error. See the error object in the response body to know the exact reason.
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPlatformShipmentReasons
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+
+```golang
+
+data, err := Order.GetPlatformShipmentReasons(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+| ApplicationID | string | Application Id | 
+
+
+
+Get reasons behind full or partial cancellation of a shipment
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ShipmentReasonsResponse` for more details.
+
+
+Schema: `ShipmentReasonsResponse`
+
+
+
+
+
+
+
+
+API Error. See the error object in the response body to know the exact reason.
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+Internal Server Error. See the error object in the response body to know the exact reason.
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentTrackDetails
+Use this API to track a shipment using its shipment ID.
+
+```golang
+
+data, err := Order.GetShipmentTrackDetails(CompanyID, ApplicationID, OrderID, ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+| ApplicationID | string | Application Id | 
+
+
+| OrderID | string | ID of the order. | 
+
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+
+Track shipment
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ShipmentTrackResponse` for more details.
+
+
+Schema: `ShipmentTrackResponse`
+
+
+
+
+
+
+
+
+API Error. See the error object in the response body to know the exact reason.
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+Internal Server Error. See the error object in the response body to know the exact reason.
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentAddress
+Use this API to get address of a shipment using its shipment ID and Address Category.
+
+```golang
+
+data, err := Order.GetShipmentAddress(CompanyID, ShipmentID, AddressCategory);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| AddressCategory | string | Category of the address it falls into(billing or delivery). | 
+
+
+
+Get Shipment Address
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `GetShipmentAddressResponse` for more details.
+
+
+Schema: `GetShipmentAddressResponse`
+
+
+
+
+
+
+
+
+API Error. See the error object in the response body to know the exact reason.
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+Internal Server Error. See the error object in the response body to know the exact reason.
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateShipmentAddress
+Use this API to update address of a shipment using its shipment ID and Address Category.
+
+```golang
+
+data, err := Order.UpdateShipmentAddress(CompanyID, ShipmentID, AddressCategory, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| AddressCategory | string | Category of the address it falls into(billing or delivery). | 
+
+
+| body |  UpdateShipmentAddressRequest | "Request body" 
+
+Update Shipment Address
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `UpdateShipmentAddressResponse` for more details.
+
+
+Schema: `UpdateShipmentAddressResponse`
+
+
+
+
+
+
+
+
+API Error. See the error object in the response body to know the exact reason.
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+Internal Server Error. See the error object in the response body to know the exact reason.
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPing
+Get Ping
+
+```golang
+
+data, err := Order.GetPing(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+
+Get Ping
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetPingResponse`
+
+
+
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### voiceCallback
+Get Voice Callback
+
+```golang
+
+data, err := Order.VoiceCallback(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+
+Voice Callback
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetVoiceCallbackResponse`
+
+
+
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### voiceClickToCall
+Get Voice Click to Call
+
+```golang
+
+data, err := Order.VoiceClickToCall(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Caller`, `Receiver`
+
+
+Voice Click to Call
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetClickToCallResponse`
+
+
+
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+
+
+
+---
+
+
+
+---
+
+
+## Catalog
 
 
 #### deleteSearchKeywords
@@ -17629,12 +19329,12 @@ Schema: `ErrorResponse`
 ---
 
 
-#### getAllSearchKeyword
-List all Search Custom Keyword Listing
+#### updateSearchKeywords
+Update Search Keyword
 
 ```golang
 
-data, err := Catalog.GetAllSearchKeyword(CompanyID, ApplicationID);
+data, err := Catalog.UpdateSearchKeywords(CompanyID, ApplicationID, ID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -17646,17 +19346,21 @@ data, err := Catalog.GetAllSearchKeyword(CompanyID, ApplicationID);
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
 
-Custom Search Keyword allows you to map conditions with keywords to give you the ultimate results
+
+| body |  CreateSearchKeyword | "Request body" 
+
+Update Search Keyword by its id. On successful request, returns the updated collection
 
 *Success Response:*
 
 
 
-List of custom search keywords. See example below or refer `GetSearchWordsResponseSchema` for details
+The Collection object. See example below or refer `GetSearchWordsDataSchema` for details.
 
 
-Schema: `GetSearchWordsResponse`
+Schema: `GetSearchWordsData`
 
 
 
@@ -17734,12 +19438,12 @@ Schema: `ErrorResponse`
 ---
 
 
-#### updateAutocompleteKeyword
-Create & Update Autocomplete Keyword
+#### getAllSearchKeyword
+List all Search Custom Keyword Listing
 
 ```golang
 
-data, err := Catalog.UpdateAutocompleteKeyword(CompanyID, ApplicationID, ID, body);
+data, err := Catalog.GetAllSearchKeyword(CompanyID, ApplicationID);
 ```
 
 | Argument  |  Type  | Description |
@@ -17751,21 +19455,17 @@ data, err := Catalog.UpdateAutocompleteKeyword(CompanyID, ApplicationID, ID, bod
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
 
-
-| body |  CreateAutocompleteKeyword | "Request body" 
-
-Update a mapping by it's id. On successful request, returns the updated Keyword mapping
+Custom Search Keyword allows you to map conditions with keywords to give you the ultimate results
 
 *Success Response:*
 
 
 
-The Mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details.
+List of custom search keywords. See example below or refer `GetSearchWordsResponseSchema` for details
 
 
-Schema: `GetAutocompleteWordsResponse`
+Schema: `GetSearchWordsResponse`
 
 
 
@@ -17900,12 +19600,12 @@ Schema: `ErrorResponse`
 ---
 
 
-#### getAutocompleteConfig
-List all Autocomplete Keyword Listing
+#### updateAutocompleteKeyword
+Create & Update Autocomplete Keyword
 
 ```golang
 
-data, err := Catalog.GetAutocompleteConfig(CompanyID, ApplicationID);
+data, err := Catalog.UpdateAutocompleteKeyword(CompanyID, ApplicationID, ID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -17917,14 +19617,18 @@ data, err := Catalog.GetAutocompleteConfig(CompanyID, ApplicationID);
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
 
-Custom Autocomplete Keyword allows you to map conditions with keywords to give you the ultimate results
+
+| body |  CreateAutocompleteKeyword | "Request body" 
+
+Update a mapping by it's id. On successful request, returns the updated Keyword mapping
 
 *Success Response:*
 
 
 
-List of custom autocomplete keywords. See example below or refer `GetAutocompleteWordsResponseSchema` for details
+The Mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details.
 
 
 Schema: `GetAutocompleteWordsResponse`
@@ -18005,6 +19709,108 @@ Schema: `ErrorResponse`
 ---
 
 
+#### getAutocompleteConfig
+List all Autocomplete Keyword Listing
+
+```golang
+
+data, err := Catalog.GetAutocompleteConfig(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+
+Custom Autocomplete Keyword allows you to map conditions with keywords to give you the ultimate results
+
+*Success Response:*
+
+
+
+List of custom autocomplete keywords. See example below or refer `GetAutocompleteWordsResponseSchema` for details
+
+
+Schema: `GetAutocompleteWordsResponse`
+
+
+
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createProductBundle
+Create Product Bundle
+
+```golang
+
+data, err := Catalog.CreateProductBundle(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| body |  ProductBundleRequest | "Request body" 
+
+Create Product Bundle. See `ProductBundleRequest` for the request body parameter need to create a product bundle. On successful request, returns in `ProductBundleRequest` with id
+
+*Success Response:*
+
+
+
+Get bundle with id that is added. See example below or refer `GetProductBundleCreateResponse` for details
+
+
+Schema: `GetProductBundleCreateResponse`
+
+
+
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getProductBundle
 List all Product Bundles
 
@@ -18057,12 +19863,12 @@ Schema: `ErrorResponse`
 ---
 
 
-#### createProductBundle
-Create Product Bundle
+#### getProductBundleDetail
+Get a particular Product Bundle details
 
 ```golang
 
-data, err := Catalog.CreateProductBundle(CompanyID, body);
+data, err := Catalog.GetProductBundleDetail(CompanyID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -18071,18 +19877,20 @@ data, err := Catalog.CreateProductBundle(CompanyID, body);
 | CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
 
 
-| body |  ProductBundleRequest | "Request body" 
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
 
-Create Product Bundle. See `ProductBundleRequest` for the request body parameter need to create a product bundle. On successful request, returns in `ProductBundleRequest` with id
+
+
+Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
 
 *Success Response:*
 
 
 
-Get bundle with id that is added. See example below or refer `GetProductBundleCreateResponse` for details
+The Collection object. See example below or refer `GetProductBundleResponse` for details
 
 
-Schema: `GetProductBundleCreateResponse`
+Schema: `GetProductBundleResponse`
 
 
 
@@ -18160,34 +19968,32 @@ Schema: `ErrorResponse`
 ---
 
 
-#### getProductBundleDetail
-Get a particular Product Bundle details
+#### createSizeGuide
+Create a size guide.
 
 ```golang
 
-data, err := Catalog.GetProductBundleDetail(CompanyID, ID);
+data, err := Catalog.CreateSizeGuide(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+| CompanyID | string | Id of the company inside which the size guide is to be created. | 
 
 
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+| body |  ValidateSizeGuide | "Request body" 
 
-
-
-Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
+This API allows to create a size guide associated to a brand.
 
 *Success Response:*
 
 
 
-The Collection object. See example below or refer `GetProductBundleResponse` for details
+Returns a success response
 
 
-Schema: `GetProductBundleResponse`
+Schema: `SuccessResponse`
 
 
 
@@ -18272,32 +20078,34 @@ Schema: `ErrorResponse`
 ---
 
 
-#### createSizeGuide
-Create a size guide.
+#### getSizeGuide
+Get a single size guide.
 
 ```golang
 
-data, err := Catalog.CreateSizeGuide(CompanyID, body);
+data, err := Catalog.GetSizeGuide(CompanyID, ID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Id of the company inside which the size guide is to be created. | 
+| CompanyID | string | Id of the company associated to size guide. | 
 
 
-| body |  ValidateSizeGuide | "Request body" 
+| ID | string | Id of the size guide to be viewed. | 
 
-This API allows to create a size guide associated to a brand.
+
+
+This API helps to get data associated to a size guide.
 
 *Success Response:*
 
 
 
-Returns a success response
+Brand object. See example below or refer `SizeGuideResponseSchema` for details
 
 
-Schema: `SuccessResponse`
+Schema: `SizeGuideResponse`
 
 
 
@@ -18375,58 +20183,6 @@ Schema: `ErrorResponse`
 ---
 
 
-#### getSizeGuide
-Get a single size guide.
-
-```golang
-
-data, err := Catalog.GetSizeGuide(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to size guide. | 
-
-
-| ID | string | Id of the size guide to be viewed. | 
-
-
-
-This API helps to get data associated to a size guide.
-
-*Success Response:*
-
-
-
-Brand object. See example below or refer `SizeGuideResponseSchema` for details
-
-
-Schema: `SizeGuideResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getCatalogConfiguration
 Get configuration meta  details for catalog for admin panel
 
@@ -18455,6 +20211,59 @@ configuration details for catalog. See example below or refer `GetCatalogConfigu
 
 
 Schema: `GetCatalogConfigurationMetaData`
+
+
+
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createConfigurationProductListing
+Add configuration for products & listings
+
+```golang
+
+data, err := Catalog.CreateConfigurationProductListing(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  AppConfiguration | "Request body" 
+
+Add configuration for products & listing.
+
+*Success Response:*
+
+
+
+success flag will tell whether the operation was successful.
+
+
+Schema: `GetAppCatalogConfiguration`
 
 
 
@@ -18531,12 +20340,12 @@ Schema: `ErrorResponse`
 ---
 
 
-#### createConfigurationProductListing
-Add configuration for products & listings
+#### createConfigurationByType
+Add configuration for categories and brands
 
 ```golang
 
-data, err := Catalog.CreateConfigurationProductListing(CompanyID, ApplicationID, body);
+data, err := Catalog.CreateConfigurationByType(CompanyID, ApplicationID, Type, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -18548,9 +20357,12 @@ data, err := Catalog.CreateConfigurationProductListing(CompanyID, ApplicationID,
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
+| Type | string | type can be brands, categories etc. | 
+
+
 | body |  AppConfiguration | "Request body" 
 
-Add configuration for products & listing.
+Add configuration for categories & brands.
 
 *Success Response:*
 
@@ -18639,62 +20451,6 @@ Schema: `ErrorResponse`
 ---
 
 
-#### createConfigurationByType
-Add configuration for categories and brands
-
-```golang
-
-data, err := Catalog.CreateConfigurationByType(CompanyID, ApplicationID, Type, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| Type | string | type can be brands, categories etc. | 
-
-
-| body |  AppConfiguration | "Request body" 
-
-Add configuration for categories & brands.
-
-*Success Response:*
-
-
-
-success flag will tell whether the operation was successful.
-
-
-Schema: `GetAppCatalogConfiguration`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getQueryFilters
 Get query filters to configure a collection
 
@@ -18723,58 +20479,6 @@ The attached items of an collection. See example below or refer `GetCollectionQu
 
 
 Schema: `GetCollectionQueryOptionResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAllCollections
-List all the collections
-
-```golang
-
-data, err := Catalog.GetAllCollections(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-
-A Collection allows you to organize your products into hierarchical groups. For example, a dress might be in the category _Clothing_, the individual product might also be in the collection _Summer_. On successful request, returns all the collections as specified in `CollectionListingSchema`
-
-*Success Response:*
-
-
-
-List of collections. See example below or refer `GetCollectionListingResponse` for details
-
-
-Schema: `GetCollectionListingResponse`
 
 
 
@@ -18852,6 +20556,58 @@ Schema: `ErrorResponse`
 ---
 
 
+#### getAllCollections
+List all the collections
+
+```golang
+
+data, err := Catalog.GetAllCollections(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+
+A Collection allows you to organize your products into hierarchical groups. For example, a dress might be in the category _Clothing_, the individual product might also be in the collection _Summer_. On successful request, returns all the collections as specified in `CollectionListingSchema`
+
+*Success Response:*
+
+
+
+List of collections. See example below or refer `GetCollectionListingResponse` for details
+
+
+Schema: `GetCollectionListingResponse`
+
+
+
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getCollectionDetail
 Get a particular collection
 
@@ -18883,6 +20639,61 @@ The Collection object. See example below or refer `CollectionDetailResponse` for
 
 
 Schema: `CollectionDetailResponse`
+
+
+
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteCollection
+Delete a Collection
+
+```golang
+
+data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier of a collection. | 
+
+
+
+Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -18963,12 +20774,12 @@ Schema: `ErrorResponse`
 ---
 
 
-#### deleteCollection
-Delete a Collection
+#### addCollectionItems
+Add items to a collection
 
 ```golang
 
-data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
+data, err := Catalog.AddCollectionItems(CompanyID, ApplicationID, ID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -18983,17 +20794,18 @@ data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
 | ID | string | A `id` is a unique identifier of a collection. | 
 
 
+| body |  CollectionItemRequest | "Request body" 
 
-Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
+Adds items to a collection specified by its `id`. See `CollectionItemRequest` for the list of attributes needed to add items to an collection.
 
 *Success Response:*
 
 
 
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+Status object. Tells whether the operation was successful.
 
 
-Schema: `DeleteResponse`
+Schema: `UpdatedResponse`
 
 
 
@@ -19056,62 +20868,6 @@ The attached items of an collection. See example below or refer `GetCollectionIt
 
 
 Schema: `GetCollectionItemsResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### addCollectionItems
-Add items to a collection
-
-```golang
-
-data, err := Catalog.AddCollectionItems(CompanyID, ApplicationID, ID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier of a collection. | 
-
-
-| body |  CollectionItemRequest | "Request body" 
-
-Adds items to a collection specified by its `id`. See `CollectionItemRequest` for the list of attributes needed to add items to an collection.
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful.
-
-
-Schema: `UpdatedResponse`
 
 
 
@@ -20187,6 +21943,56 @@ Schema: `PTErrorResponse`
 ---
 
 
+#### createCategories
+Create product categories
+
+```golang
+
+data, err := Catalog.CreateCategories(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| body |  CategoryRequestBody | "Request body" 
+
+This API lets user create product categories
+
+*Success Response:*
+
+
+
+Category Meta. See example below or refer `CategoryCreateResponse` for details
+
+
+Schema: `CategoryCreateResponse`
+
+
+
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### listCategories
 Get product categories list
 
@@ -20247,12 +22053,12 @@ Schema: `ErrorResponse`
 ---
 
 
-#### createCategories
-Create product categories
+#### getCategoryData
+Get product category by uid
 
 ```golang
 
-data, err := Catalog.CreateCategories(CompanyID, body);
+data, err := Catalog.GetCategoryData(CompanyID, UID);
 ```
 
 | Argument  |  Type  | Description |
@@ -20261,18 +22067,20 @@ data, err := Catalog.CreateCategories(CompanyID, body);
 | CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
 
 
-| body |  CategoryRequestBody | "Request body" 
+| UID | string | Category unique id | 
 
-This API lets user create product categories
+
+
+This API gets meta associated to product categories.
 
 *Success Response:*
 
 
 
-Category Meta. See example below or refer `CategoryCreateResponse` for details
+Get Data for one category. See example below or refer `CategoryResponse` for details
 
 
-Schema: `CategoryCreateResponse`
+Schema: `SingleCategoryResponse`
 
 
 
@@ -20350,34 +22158,32 @@ Schema: `ErrorResponse`
 ---
 
 
-#### getCategoryData
-Get product category by uid
+#### createProduct
+Create a product.
 
 ```golang
 
-data, err := Catalog.GetCategoryData(CompanyID, UID);
+data, err := Catalog.CreateProduct(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
 
 
-| UID | string | Category unique id | 
+| body |  ProductCreateUpdate | "Request body" 
 
-
-
-This API gets meta associated to product categories.
+This API allows to create product.
 
 *Success Response:*
 
 
 
-Get Data for one category. See example below or refer `CategoryResponse` for details
+Returns a success response
 
 
-Schema: `SingleCategoryResponse`
+Schema: `SuccessResponse`
 
 
 
@@ -20438,109 +22244,6 @@ Product Meta. See example below for details
 
 
 Schema: `ProductListingResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createProduct
-Create a product.
-
-```golang
-
-data, err := Catalog.CreateProduct(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to product that is to be viewed. | 
-
-
-| body |  ProductCreateUpdate | "Request body" 
-
-This API allows to create product.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### editProduct
-Edit a product.
-
-```golang
-
-data, err := Catalog.EditProduct(CompanyID, ItemID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to product that is to be viewed. | 
-
-
-| ItemID | float64 | Id of the product to be updated. | 
-
-
-| body |  ProductCreateUpdate | "Request body" 
-
-This API allows to edit product.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
 
 
 
@@ -20676,6 +22379,59 @@ Schema: `ErrorResponse`
 ---
 
 
+#### editProduct
+Edit a product.
+
+```golang
+
+data, err := Catalog.EditProduct(CompanyID, ItemID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+
+
+| ItemID | float64 | Id of the product to be updated. | 
+
+
+| body |  ProductCreateUpdate | "Request body" 
+
+This API allows to edit product.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getProductValidation
 Validate product/size data
 
@@ -20784,6 +22540,56 @@ Schema: `ErrorResponse`
 ---
 
 
+#### updateProductAssetsInBulk
+Create a Bulk asset upload Job.
+
+```golang
+
+data, err := Catalog.UpdateProductAssetsInBulk(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+
+
+| body |  BulkJob | "Request body" 
+
+This API helps to create a bulk asset upload job.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getProductBulkUploadHistory
 Get a list of all bulk product upload jobs.
 
@@ -20838,23 +22644,25 @@ Schema: `ErrorResponse`
 ---
 
 
-#### updateProductAssetsInBulk
-Create a Bulk asset upload Job.
+#### deleteProductBulkJob
+Delete Bulk product job.
 
 ```golang
 
-data, err := Catalog.UpdateProductAssetsInBulk(CompanyID, body);
+data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
 
 
-| body |  BulkJob | "Request body" 
+| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
 
-This API helps to create a bulk asset upload job.
+
+
+This API allows to delete bulk product job associated with company.
 
 *Success Response:*
 
@@ -20941,58 +22749,6 @@ Schema: `ErrorResponse`
 ---
 
 
-#### deleteProductBulkJob
-Delete Bulk product job.
-
-```golang
-
-data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
-
-
-| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
-
-
-
-This API allows to delete bulk product job associated with company.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getCompanyTags
 Get a list of all tags associated with company.
 
@@ -21018,6 +22774,56 @@ Tag List. See example below for details
 
 
 Schema: `ProductTagsViewResponse`
+
+
+
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createProductAssetsInBulk
+Create a Bulk asset upload Job.
+
+```golang
+
+data, err := Catalog.CreateProductAssetsInBulk(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+
+
+| body |  ProductBulkAssets | "Request body" 
+
+This API helps to create a bulk asset upload job.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
@@ -21096,56 +22902,6 @@ Schema: `ErrorResponse`
 ---
 
 
-#### createProductAssetsInBulk
-Create a Bulk asset upload Job.
-
-```golang
-
-data, err := Catalog.CreateProductAssetsInBulk(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
-
-
-| body |  ProductBulkAssets | "Request body" 
-
-This API helps to create a bulk asset upload job.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### deleteSize
 Delete a Size associated with product.
 
@@ -21177,6 +22933,62 @@ Returns a success response
 
 
 Schema: `ProductSizeDeleteResponse`
+
+
+
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### addInventory
+Add Inventory for particular size and store.
+
+```golang
+
+data, err := Catalog.AddInventory(CompanyID, ItemID, Size, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+
+
+| ItemID | float64 | Item code of the product of which size is to be get. | 
+
+
+| Size | string | Size in which inventory is to be added. | 
+
+
+| body |  InventoryRequest | "Request body" 
+
+This API allows add Inventory for particular size and store.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
@@ -21261,62 +23073,6 @@ Schema: `ErrorResponse`
 ---
 
 
-#### addInventory
-Add Inventory for particular size and store.
-
-```golang
-
-data, err := Catalog.AddInventory(CompanyID, ItemID, Size, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to product that is to be viewed. | 
-
-
-| ItemID | float64 | Item code of the product of which size is to be get. | 
-
-
-| Size | string | Size in which inventory is to be added. | 
-
-
-| body |  InventoryRequest | "Request body" 
-
-This API allows add Inventory for particular size and store.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### deleteInventory
 Delete a Inventory.
 
@@ -21348,6 +23104,56 @@ Returns a success response
 
 
 Schema: `InventoryDelete`
+
+
+
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createBulkInventoryJob
+Create a Bulk Inventory upload Job.
+
+```golang
+
+data, err := Catalog.CreateBulkInventoryJob(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id in which Inventory to be uploaded. | 
+
+
+| body |  BulkJob | "Request body" 
+
+This API helps to create a bulk Inventory upload job.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `CommonResponse`
 
 
 
@@ -21426,23 +23232,22 @@ Schema: `ErrorResponse`
 ---
 
 
-#### createBulkInventoryJob
-Create a Bulk Inventory upload Job.
+#### deleteBulkInventoryJob
+Delete Bulk Inventory job.
 
 ```golang
 
-data, err := Catalog.CreateBulkInventoryJob(CompanyID, body);
+data, err := Catalog.DeleteBulkInventoryJob(CompanyID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which Inventory to be uploaded. | 
+| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
 
 
-| body |  BulkJob | "Request body" 
 
-This API helps to create a bulk Inventory upload job.
+This API allows to delete bulk Inventory job associated with company.
 
 *Success Response:*
 
@@ -21451,7 +23256,7 @@ This API helps to create a bulk Inventory upload job.
 Returns a success response
 
 
-Schema: `CommonResponse`
+Schema: `SuccessResponse`
 
 
 
@@ -21526,22 +23331,23 @@ Schema: `ErrorResponse`
 ---
 
 
-#### deleteBulkInventoryJob
-Delete Bulk Inventory job.
+#### createInventoryExportJob
+Create a Inventory export Job.
 
 ```golang
 
-data, err := Catalog.DeleteBulkInventoryJob(CompanyID);
+data, err := Catalog.CreateInventoryExportJob(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
 
 
+| body |  InventoryExportRequest | "Request body" 
 
-This API allows to delete bulk Inventory job associated with company.
+This API helps to create a Inventory export job.
 
 *Success Response:*
 
@@ -21624,56 +23430,6 @@ Schema: `ErrorResponse`
 ---
 
 
-#### createInventoryExportJob
-Create a Inventory export Job.
-
-```golang
-
-data, err := Catalog.CreateInventoryExportJob(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
-
-
-| body |  InventoryExportRequest | "Request body" 
-
-This API helps to create a Inventory export job.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### exportInventoryConfig
 Get List of different filters for inventory export
 
@@ -21711,6 +23467,56 @@ Schema: `InventoryConfig`
 
 
 Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createHsnCode
+Create Hsn Code.
+
+```golang
+
+data, err := Catalog.CreateHsnCode(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| body |  HsnUpsert | "Request body" 
+
+Create Hsn Code.
+
+*Success Response:*
+
+
+
+See example below for details
+
+
+Schema: `HsnCode`
+
+
+
+
+
+
+
+
+Bad request.
 
 
 Schema: `ErrorResponse`
@@ -21782,12 +23588,12 @@ Schema: `ErrorResponse`
 ---
 
 
-#### createHsnCode
-Create Hsn Code.
+#### getHsnCode
+Fetch Hsn Code.
 
 ```golang
 
-data, err := Catalog.CreateHsnCode(CompanyID, body);
+data, err := Catalog.GetHsnCode(CompanyID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -21796,15 +23602,17 @@ data, err := Catalog.CreateHsnCode(CompanyID, body);
 | CompanyID | string | company id | 
 
 
-| body |  HsnUpsert | "Request body" 
+| ID | string | Unique id | 
 
-Create Hsn Code.
+
+
+Fetch Hsn Code.
 
 *Success Response:*
 
 
 
-See example below for details
+See example below details
 
 
 Schema: `HsnCode`
@@ -21858,58 +23666,6 @@ Update Hsn Code.
 
 
 See example below for details
-
-
-Schema: `HsnCode`
-
-
-
-
-
-
-
-
-Bad request.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getHsnCode
-Fetch Hsn Code.
-
-```golang
-
-data, err := Catalog.GetHsnCode(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ID | string | Unique id | 
-
-
-
-Fetch Hsn Code.
-
-*Success Response:*
-
-
-
-See example below details
 
 
 Schema: `HsnCode`
@@ -22298,7 +24054,7 @@ data, err := CompanyProfile.UpdateCompany(CompanyID, body);
 | CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
 
 
-| body |  CompanyStoreSerializerRequest | "Request body" 
+| body |  UpdateCompany | "Request body" 
 
 This API allows to edit the company profile of the seller account.
 
@@ -27527,997 +29283,6 @@ Invalid Hash
   }
 }
 ```
-
-
-
-
-
-
-
-
-
----
-
-
-
----
-
-
-## Marketplaces
-
-
-#### getAvailableChannels
-Get available marketplace channels
-
-```golang
-
-data, err := Marketplaces.GetAvailableChannels(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-
-Get available marketplace channels
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `Object`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getChannels
-Get all registered marketplace channels for a seller
-
-```golang
-
-data, err := Marketplaces.GetChannels(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-
-Get all registered marketplace channels for a seller
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `Object`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getChannel
-Get registered marketplace channel credential configuration for a seller
-
-```golang
-
-data, err := Marketplaces.GetChannel(CompanyID, Channel);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| Channel | string | Name of marketplace channel | 
-
-
-
-Get registered marketplace channel credentials configuration for a seller
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `Object`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### registerMyntraChannel
-Create Myntra marketplace channel for a seller
-
-```golang
-
-data, err := Marketplaces.RegisterMyntraChannel(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| body |  MyntraPayload | "Request body" 
-
-Create Myntra marketplace channel for a seller
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `MkpResp`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateMyntraChannelCredentials
-Update Myntra marketplace channel credentials for a seller
-
-```golang
-
-data, err := Marketplaces.UpdateMyntraChannelCredentials(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| body |  MyntraPayload | "Request body" 
-
-Update Myntra marketplace channel credentials for a seller
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `MkpResp`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### registerAmazonChannel
-Create Amazon marketplace channel for a seller
-
-```golang
-
-data, err := Marketplaces.RegisterAmazonChannel(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| body |  AmazonPayload | "Request body" 
-
-Create Amazon marketplace channel for a seller
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `MkpResp`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateAmazonChannelCredentials
-Update Amazon marketplace channel credentials for a seller
-
-```golang
-
-data, err := Marketplaces.UpdateAmazonChannelCredentials(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| body |  AmazonPayload | "Request body" 
-
-Update Amazon marketplace channel credentials for a seller
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `MkpResp`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### registerFlipkartChannel
-Create Flipkart / Flipkart Assured marketplace channel for a seller
-
-```golang
-
-data, err := Marketplaces.RegisterFlipkartChannel(CompanyID, FlipkartChannel, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| FlipkartChannel | string | Name of marketplace channel | 
-
-
-| body |  FlipkartPayload | "Request body" 
-
-Create Flipkart / Flipkart Assured marketplace channel for a seller
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `MkpResp`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateFlipkartChannelCredentials
-Update Flipkart / Flipkart Assured marketplace channel credentials for a seller
-
-```golang
-
-data, err := Marketplaces.UpdateFlipkartChannelCredentials(CompanyID, FlipkartChannel, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| FlipkartChannel | string | Name of marketplace channel | 
-
-
-| body |  FlipkartPayload | "Request body" 
-
-Update Flipkart / Flipkart Assured marketplace channel credentials for a seller
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `MkpResp`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### registerTatacliqChannel
-Create Tatacliq / Tatacliq Luxury marketplace channel for a seller
-
-```golang
-
-data, err := Marketplaces.RegisterTatacliqChannel(CompanyID, TatacliqChannel, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| TatacliqChannel | string | Name of marketplace channel | 
-
-
-| body |  TatacliqPayload | "Request body" 
-
-Create Tatacliq / Tatacliq Luxury marketplace channel for a seller
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `MkpResp`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateTatacliqChannelCredentials
-Update Tatacliq / Tatacliq Luxury Assured marketplace channel credentials for a seller
-
-```golang
-
-data, err := Marketplaces.UpdateTatacliqChannelCredentials(CompanyID, TatacliqChannel, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| TatacliqChannel | string | Name of marketplace channel | 
-
-
-| body |  TatacliqPayload | "Request body" 
-
-Update Tatacliq / Tatacliq Luxury marketplace channel credentials for a seller
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `MkpResp`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### registerAjioChannel
-Create Ajio marketplace channel for a seller
-
-```golang
-
-data, err := Marketplaces.RegisterAjioChannel(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| body |  AjioPayload | "Request body" 
-
-Create Ajio marketplace channel for a seller
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `MkpResp`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateAjioChannelCredentials
-Update Ajio marketplace channel credentials for a seller
-
-```golang
-
-data, err := Marketplaces.UpdateAjioChannelCredentials(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| body |  AjioPayload | "Request body" 
-
-Update Ajio marketplace channel credentials for a seller
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `MkpResp`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateChannelInventorySyncConfig
-Update inventory sync configuration of marketplace channel for a seller
-
-```golang
-
-data, err := Marketplaces.UpdateChannelInventorySyncConfig(CompanyID, Channel, xQuery, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| Channel | string | Name of marketplace channel | 
-
-
-
-| xQuery | struct | Includes properties such as `ValidateCred`
-
-| body |  InventorySyncConfig | "Request body" 
-
-Update inventory sync configuration of marketplace channel for a seller
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `MkpResp`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getChannelLocationConfig
-Get marketplace channel location config for a seller
-
-```golang
-
-data, err := Marketplaces.GetChannelLocationConfig(CompanyID, Channel);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| Channel | string | Name of marketplace channel | 
-
-
-
-Get marketplace channel location config for a seller
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `StoreMapping`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateChannelLocationConfig
-update marketplace channel location config for a seller
-
-```golang
-
-data, err := Marketplaces.UpdateChannelLocationConfig(CompanyID, Channel, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| Channel | string | Name of marketplace channel | 
-
-
-| body |  StoreMappingPayload | "Request body" 
-
-update marketplace channel location config for a seller
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `StoreMapping`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getChannelStatus
-Get marketplace channel active status for a seller
-
-```golang
-
-data, err := Marketplaces.GetChannelStatus(CompanyID, Channel);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| Channel | string | Name of marketplace channel | 
-
-
-
-Get marketplace channel active status for a seller
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `StatusPayload`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateChannelStatus
-Update marketplace channel active status for a seller
-
-```golang
-
-data, err := Marketplaces.UpdateChannelStatus(CompanyID, Channel, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| Channel | string | Name of marketplace channel | 
-
-
-| body |  StatusPayload | "Request body" 
-
-Update marketplace channel active status for a seller
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `StatusResp`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### triggerChannelInventoryUpdates
-Trigger marketplace channel inventory updates for a seller
-
-```golang
-
-data, err := Marketplaces.TriggerChannelInventoryUpdates(CompanyID, Channel, UpdateType, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| Channel | string | Name of marketplace channel | 
-
-
-| UpdateType | string | Inventory update type | 
-
-
-| body |  SyncPayload | "Request body" 
-
-Trigger marketplace channel inventory updates for a seller
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `SyncResp`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
 
 
 

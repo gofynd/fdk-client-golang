@@ -19,6 +19,8 @@ type PlatformClient struct {
 	
 		Payment  *PlatformPayment
 	
+		Order  *PlatformOrder
+	
 		Catalog  *PlatformCatalog
 	
 		CompanyProfile  *PlatformCompanyProfile
@@ -28,8 +30,6 @@ type PlatformClient struct {
 		Inventory  *PlatformInventory
 	
 		Configuration  *PlatformConfiguration
-	
-		Marketplaces  *PlatformMarketplaces
 	
 		Analytics  *PlatformAnalytics
 	
@@ -53,6 +53,8 @@ func NewPlatformClient(config *PlatformConfig) *PlatformClient {
 			
 				Payment:  NewPlatformPayment(config),
 			
+				Order:  NewPlatformOrder(config),
+			
 				Catalog:  NewPlatformCatalog(config),
 			
 				CompanyProfile:  NewPlatformCompanyProfile(config),
@@ -62,8 +64,6 @@ func NewPlatformClient(config *PlatformConfig) *PlatformClient {
 				Inventory:  NewPlatformInventory(config),
 			
 				Configuration:  NewPlatformConfiguration(config),
-			
-				Marketplaces:  NewPlatformMarketplaces(config),
 			
 				Analytics:  NewPlatformAnalytics(config),
 			
@@ -121,6 +121,30 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             getTicketsResponse TicketList
 	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
 
          
         
@@ -274,6 +298,22 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             createTicketResponse Ticket
 	    )
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+
          
         
         
@@ -333,6 +373,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getTicketResponse Ticket
 	    )
 
+        
+
+        
+
+        
+        
+        
+
          
         
         
@@ -376,6 +424,30 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             editTicketResponse Ticket
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
 
          
         
@@ -438,6 +510,18 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             createHistoryResponse TicketHistory
 	    )
 
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
+
          
         
         
@@ -495,6 +579,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getTicketHistoryResponse TicketHistoryList
 	    )
 
+        
+
+        
+
+        
+        
+        
+
          
         
         
@@ -516,6 +608,125 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return TicketHistoryList{}, common.NewFDKError(err.Error())
         }
         return getTicketHistoryResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetFeedbacks Gets a list of feedback submitted against that ticket
+     func (le *PlatformLead)  GetFeedbacks(ID string) (TicketFeedbackList, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getFeedbacksResponse TicketFeedbackList
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            le.Config,
+            "get",
+            fmt.Sprintf("/service/platform/lead/v1.0/company/%s/ticket/%s/feedback",le.CompanyID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return TicketFeedbackList{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getFeedbacksResponse)
+        if err != nil {
+             return TicketFeedbackList{}, common.NewFDKError(err.Error())
+        }
+        return getFeedbacksResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // SubmitFeedback Submit a response for feeback form against that ticket
+     func (le *PlatformLead)  SubmitFeedback(ID string, body  TicketFeedbackPayload) (TicketFeedback, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            submitFeedbackResponse TicketFeedback
+	    )
+
+        
+        
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return TicketFeedback{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return TicketFeedback{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            le.Config,
+            "post",
+            fmt.Sprintf("/service/platform/lead/v1.0/company/%s/ticket/%s/feedback",le.CompanyID, ID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return TicketFeedback{}, err
+	    }
+        
+        err = json.Unmarshal(response, &submitFeedbackResponse)
+        if err != nil {
+             return TicketFeedback{}, common.NewFDKError(err.Error())
+        }
+        return submitFeedbackResponse, nil
         
     }
          
@@ -550,6 +761,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             getTokenForVideoRoomResponse GetTokenForVideoRoomResponse
 	    )
+
+        
+
+        
+
+        
+        
+        
 
          
         
@@ -597,6 +816,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getVideoParticipantsResponse GetParticipantsInsideVideoRoomResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+
          
         
         
@@ -630,6 +857,94 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
     
     
+    
+    
+    
+   
+  
+    
+    
+    //PlatformGetASDFXQuery holds query params
+    type PlatformGetASDFXQuery struct { 
+        InQuery PriorityEnum  `url:"in_query,omitempty"`  
+    }
+    
+
+
+    // GetASDF Get Token to join a specific Video Room using it's unqiue name
+     func (le *PlatformLead)  GetASDF(InHeader PriorityEnum, InPath PriorityEnum, xQuery PlatformGetASDFXQuery) (GetTokenForVideoRoomResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getASDFResponse GetTokenForVideoRoomResponse
+	    )
+
+        
+
+        
+            
+                
+                //enum validation inside query params
+                err = xQuery.InQuery.IsValid()
+                if err != nil {
+                    
+                    return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
+                 }
+                
+            
+        
+
+        
+        
+               //enum validation inside path params
+                err = InPath.IsValid()
+                if err != nil {
+                    
+                    return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
+                 }
+        
+        
+
+        
+        //Adding extra headers
+        var xHeaders = make(map[string]string) 
+        
+         
+         //enum validation inside headers
+         err = InHeader.IsValid()
+         if err != nil {
+              return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
+         }
+         xHeaders["in_header"] =  string(InHeader)
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            le.Config,
+            "get",
+            fmt.Sprintf("/service/platform/lead/company/%s/asdf/%s/asdf",le.CompanyID, InPath),
+            xHeaders,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetTokenForVideoRoomResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getASDFResponse)
+        if err != nil {
+             return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
+        }
+        return getASDFResponse, nil
+        
+    }
+         
+        
+       
+    
 
 
 	
@@ -659,6 +974,24 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             createSubscriptionChargeResponse CreateSubscriptionResponse
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
 
          
         
@@ -717,6 +1050,16 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getSubscriptionChargeResponse EntitySubscription
 	    )
 
+        
+
+        
+
+        
+        
+        
+        
+        
+
          
         
         
@@ -760,6 +1103,16 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             cancelSubscriptionChargeResponse EntitySubscription
 	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
 
          
         
@@ -805,6 +1158,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getInvoicesResponse Invoices
 	    )
 
+        
+
+        
+
+        
+
          
         
         
@@ -848,6 +1207,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             getInvoiceByIdResponse Invoice
 	    )
+
+        
+
+        
+
+        
+        
+        
 
          
         
@@ -893,6 +1260,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getCustomerDetailResponse SubscriptionCustomer
 	    )
 
+        
+
+        
+
+        
+
          
         
         
@@ -936,6 +1309,24 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             upsertCustomerDetailResponse SubscriptionCustomer
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -994,6 +1385,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getSubscriptionResponse SubscriptionStatus
 	    )
 
+        
+
+        
+
+        
+
          
         
         
@@ -1038,6 +1435,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getFeatureLimitConfigResponse SubscriptionLimit
 	    )
 
+        
+
+        
+
+        
+
          
         
         
@@ -1081,6 +1484,22 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             activateSubscriptionPlanResponse SubscriptionActivateRes
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -1138,6 +1557,20 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             cancelSubscriptionPlanResponse CancelSubscriptionRes
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -1266,6 +1699,18 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             getSystemNotificationsResponse SystemNotifications
 	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
 
          
         
@@ -1405,6 +1850,16 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getAllPayoutsResponse PayoutsResponse
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+
          
         
         
@@ -1448,6 +1903,24 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             savePayoutResponse PayoutResponse
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -1506,6 +1979,26 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             updatePayoutResponse UpdatePayoutResponse
 	    )
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
+
          
         
         
@@ -1562,6 +2055,20 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             activateAndDectivatePayoutResponse UpdatePayoutResponse
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
 
          
         
@@ -1620,6 +2127,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             deletePayoutResponse DeletePayoutResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+
          
         
         
@@ -1663,6 +2178,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             getSubscriptionPaymentMethodResponse SubscriptionPaymentMethodResponse
 	    )
+
+        
+
+        
+
+        
 
          
         
@@ -1714,6 +2235,18 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             deleteSubscriptionPaymentMethodResponse DeleteSubscriptionPaymentMethodResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+
          
         
         
@@ -1758,6 +2291,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getSubscriptionConfigResponse SubscriptionConfigResponse
 	    )
 
+        
+
+        
+
+        
+
          
         
         
@@ -1801,6 +2340,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             saveSubscriptionSetupIntentResponse SaveSubscriptionSetupIntentResponse
 	    )
+
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -1866,6 +2413,16 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             verifyIfscCodeResponse IfscCodeResponse
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+
          
         
         
@@ -1896,6 +2453,834 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
     
     
+    
+
+
+	
+   // PlatformOrder holds PlatformOrder object properties
+    type PlatformOrder struct {
+        Config *PlatformConfig
+        CompanyID string
+    }
+    // NewPlatformOrder returns new PlatformOrder instance
+    func NewPlatformOrder(config *PlatformConfig) *PlatformOrder {
+        return &PlatformOrder{Config: config, CompanyID: config.CompanyID}
+    }
+    
+    
+   
+  
+    
+    
+
+
+    // ShipmentStatusUpdate Update status of Shipment
+     func (or *PlatformOrder)  ShipmentStatusUpdate(body  UpdateShipmentStatusBody) (UpdateShipmentStatusResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            shipmentStatusUpdateResponse UpdateShipmentStatusResponse
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return UpdateShipmentStatusResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return UpdateShipmentStatusResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "post",
+            fmt.Sprintf("/service/platform/order/v1.0/company/%s/actions/status",or.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return UpdateShipmentStatusResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &shipmentStatusUpdateResponse)
+        if err != nil {
+             return UpdateShipmentStatusResponse{}, common.NewFDKError(err.Error())
+        }
+        return shipmentStatusUpdateResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformActivityStatusXQuery holds query params
+    type PlatformActivityStatusXQuery struct { 
+        BagID string  `url:"bag_id,omitempty"`  
+    }
+    
+
+
+    // ActivityStatus Get Activity Status
+     func (or *PlatformOrder)  ActivityStatus(xQuery PlatformActivityStatusXQuery) (GetActivityStatus, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            activityStatusResponse GetActivityStatus
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "get",
+            fmt.Sprintf("/service/platform/order/v1.0/company/%s/actions/activity/status",or.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetActivityStatus{}, err
+	    }
+        
+        err = json.Unmarshal(response, &activityStatusResponse)
+        if err != nil {
+             return GetActivityStatus{}, common.NewFDKError(err.Error())
+        }
+        return activityStatusResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // StoreProcessShipmentUpdate Update Store Process-Shipment
+     func (or *PlatformOrder)  StoreProcessShipmentUpdate(body  UpdateProcessShipmenstRequestBody) (UpdateProcessShipmenstRequestResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            storeProcessShipmentUpdateResponse UpdateProcessShipmenstRequestResponse
+	    )
+
+        
+        
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return UpdateProcessShipmenstRequestResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return UpdateProcessShipmenstRequestResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "post",
+            fmt.Sprintf("/service/platform/order/v1.0/company/%s/actions/store/process-shipments",or.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return UpdateProcessShipmenstRequestResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &storeProcessShipmentUpdateResponse)
+        if err != nil {
+             return UpdateProcessShipmenstRequestResponse{}, common.NewFDKError(err.Error())
+        }
+        return storeProcessShipmentUpdateResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // CheckRefund Check Refund is available or not
+     func (or *PlatformOrder)  CheckRefund(ShipmentID string) (map[string]interface{}, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            checkRefundResponse map[string]interface{}
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "get",
+            fmt.Sprintf("/service/platform/order/v1.0/company/%s/actions/check-refund/%s",or.CompanyID, ShipmentID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return map[string]interface{}{}, err
+	    }
+        
+        err = json.Unmarshal(response, &checkRefundResponse)
+        if err != nil {
+             return map[string]interface{}{}, common.NewFDKError(err.Error())
+        }
+        return checkRefundResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetOrdersByCompanyIdXQuery holds query params
+    type PlatformGetOrdersByCompanyIdXQuery struct { 
+        PageNo string  `url:"page_no,omitempty"` 
+        PageSize string  `url:"page_size,omitempty"` 
+        FromDate string  `url:"from_date,omitempty"` 
+        ToDate string  `url:"to_date,omitempty"` 
+        Q string  `url:"q,omitempty"` 
+        Stage string  `url:"stage,omitempty"` 
+        SalesChannels string  `url:"sales_channels,omitempty"` 
+        OrderID string  `url:"order_id,omitempty"` 
+        Stores string  `url:"stores,omitempty"` 
+        Status string  `url:"status,omitempty"` 
+        ShortenUrls bool  `url:"shorten_urls,omitempty"` 
+        FilterType string  `url:"filter_type,omitempty"`  
+    }
+    
+
+
+    // GetOrdersByCompanyId Get Orders for company based on Company Id
+     func (or *PlatformOrder)  GetOrdersByCompanyId(xQuery PlatformGetOrdersByCompanyIdXQuery) (OrderListing, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getOrdersByCompanyIdResponse OrderListing
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "get",
+            fmt.Sprintf("/service/platform/order/v1.0/company/%s/orders",or.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return OrderListing{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getOrdersByCompanyIdResponse)
+        if err != nil {
+             return OrderListing{}, common.NewFDKError(err.Error())
+        }
+        return getOrdersByCompanyIdResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetOrderDetailsXQuery holds query params
+    type PlatformGetOrderDetailsXQuery struct { 
+        OrderID string  `url:"order_id,omitempty"` 
+        Next string  `url:"next,omitempty"` 
+        Previous string  `url:"previous,omitempty"`  
+    }
+    
+
+
+    // GetOrderDetails Get Order Details for company based on Company Id and Order Id
+     func (or *PlatformOrder)  GetOrderDetails(xQuery PlatformGetOrderDetailsXQuery) (OrderDetails, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getOrderDetailsResponse OrderDetails
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "get",
+            fmt.Sprintf("/service/platform/order/v1.0/company/%s/orders/details",or.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return OrderDetails{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getOrderDetailsResponse)
+        if err != nil {
+             return OrderDetails{}, common.NewFDKError(err.Error())
+        }
+        return getOrderDetailsResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetPicklistOrdersByCompanyIdXQuery holds query params
+    type PlatformGetPicklistOrdersByCompanyIdXQuery struct { 
+        PageNo string  `url:"page_no,omitempty"` 
+        PageSize string  `url:"page_size,omitempty"` 
+        FromDate string  `url:"from_date,omitempty"` 
+        ToDate string  `url:"to_date,omitempty"` 
+        Q string  `url:"q,omitempty"` 
+        Stage string  `url:"stage,omitempty"` 
+        SalesChannels string  `url:"sales_channels,omitempty"` 
+        OrderID string  `url:"order_id,omitempty"` 
+        Stores string  `url:"stores,omitempty"` 
+        Status string  `url:"status,omitempty"` 
+        ShortenUrls bool  `url:"shorten_urls,omitempty"` 
+        FilterType string  `url:"filter_type,omitempty"`  
+    }
+    
+
+
+    // GetPicklistOrdersByCompanyId Get Orders for company based on Company Id
+     func (or *PlatformOrder)  GetPicklistOrdersByCompanyId(xQuery PlatformGetPicklistOrdersByCompanyIdXQuery) (OrderPicklistListing, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getPicklistOrdersByCompanyIdResponse OrderPicklistListing
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "get",
+            fmt.Sprintf("/service/platform/order/v1.0/company/%s/orders/picklist",or.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return OrderPicklistListing{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPicklistOrdersByCompanyIdResponse)
+        if err != nil {
+             return OrderPicklistListing{}, common.NewFDKError(err.Error())
+        }
+        return getPicklistOrdersByCompanyIdResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
+  
+    
+    
+
+
+    // GetShipmentAddress Use this API to get address of a shipment using its shipment ID and Address Category.
+     func (or *PlatformOrder)  GetShipmentAddress(ShipmentID string, AddressCategory string) (GetShipmentAddressResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getShipmentAddressResponse GetShipmentAddressResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "get",
+            fmt.Sprintf("/service/platform/order/v1.0/company/%s/orders/shipments/%s/address/%s",or.CompanyID, ShipmentID, AddressCategory),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetShipmentAddressResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getShipmentAddressResponse)
+        if err != nil {
+             return GetShipmentAddressResponse{}, common.NewFDKError(err.Error())
+        }
+        return getShipmentAddressResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // UpdateShipmentAddress Use this API to update address of a shipment using its shipment ID and Address Category.
+     func (or *PlatformOrder)  UpdateShipmentAddress(ShipmentID string, AddressCategory string, body  UpdateShipmentAddressRequest) (UpdateShipmentAddressResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateShipmentAddressResponse UpdateShipmentAddressResponse
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return UpdateShipmentAddressResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return UpdateShipmentAddressResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "post",
+            fmt.Sprintf("/service/platform/order/v1.0/company/%s/orders/shipments/%s/address/%s",or.CompanyID, ShipmentID, AddressCategory),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return UpdateShipmentAddressResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateShipmentAddressResponse)
+        if err != nil {
+             return UpdateShipmentAddressResponse{}, common.NewFDKError(err.Error())
+        }
+        return updateShipmentAddressResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetPing Get Ping
+     func (or *PlatformOrder)  GetPing() (GetPingResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getPingResponse GetPingResponse
+	    )
+
+        
+
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "get",
+            fmt.Sprintf("/service/platform/order/v1.0/company/%s/ping",or.CompanyID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetPingResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPingResponse)
+        if err != nil {
+             return GetPingResponse{}, common.NewFDKError(err.Error())
+        }
+        return getPingResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // VoiceCallback Get Voice Callback
+     func (or *PlatformOrder)  VoiceCallback() (GetVoiceCallbackResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            voiceCallbackResponse GetVoiceCallbackResponse
+	    )
+
+        
+
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "get",
+            fmt.Sprintf("/service/platform/order/v1.0/company/%s/voice/callback",or.CompanyID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetVoiceCallbackResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &voiceCallbackResponse)
+        if err != nil {
+             return GetVoiceCallbackResponse{}, common.NewFDKError(err.Error())
+        }
+        return voiceCallbackResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformVoiceClickToCallXQuery holds query params
+    type PlatformVoiceClickToCallXQuery struct { 
+        Caller string  `url:"caller,omitempty"` 
+        Receiver string  `url:"receiver,omitempty"`  
+    }
+    
+
+
+    // VoiceClickToCall Get Voice Click to Call
+     func (or *PlatformOrder)  VoiceClickToCall(xQuery PlatformVoiceClickToCallXQuery) (GetClickToCallResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            voiceClickToCallResponse GetClickToCallResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "get",
+            fmt.Sprintf("/service/platform/order/v1.0/company/%s/voice/click-to-call",or.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetClickToCallResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &voiceClickToCallResponse)
+        if err != nil {
+             return GetClickToCallResponse{}, common.NewFDKError(err.Error())
+        }
+        return voiceClickToCallResponse, nil
+        
+    }
+         
+        
+       
     
 
 
@@ -1935,55 +3320,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    //PlatformGetProductBundleXQuery holds query params
-    type PlatformGetProductBundleXQuery struct { 
-        Q string  `url:"q,omitempty"`  
-    }
-    
-
-
-    // GetProductBundle List all Product Bundles
-     func (ca *PlatformCatalog)  GetProductBundle(xQuery PlatformGetProductBundleXQuery) (GetProductBundleListingResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getProductBundleResponse GetProductBundleListingResponse
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/product-bundle/",ca.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return GetProductBundleListingResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProductBundleResponse)
-        if err != nil {
-             return GetProductBundleListingResponse{}, common.NewFDKError(err.Error())
-        }
-        return getProductBundleResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
 
 
     // CreateProductBundle Create Product Bundle
@@ -1995,6 +3331,38 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             createProductBundleResponse GetProductBundleCreateResponse
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -2041,6 +3409,117 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformGetProductBundleXQuery holds query params
+    type PlatformGetProductBundleXQuery struct { 
+        Q string  `url:"q,omitempty"`  
+    }
+    
+
+
+    // GetProductBundle List all Product Bundles
+     func (ca *PlatformCatalog)  GetProductBundle(xQuery PlatformGetProductBundleXQuery) (GetProductBundleListingResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getProductBundleResponse GetProductBundleListingResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/product-bundle/",ca.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetProductBundleListingResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductBundleResponse)
+        if err != nil {
+             return GetProductBundleListingResponse{}, common.NewFDKError(err.Error())
+        }
+        return getProductBundleResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetProductBundleDetail Get a particular Product Bundle details
+     func (ca *PlatformCatalog)  GetProductBundleDetail(ID string) (GetProductBundleResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getProductBundleDetailResponse GetProductBundleResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/product-bundle/%s/",ca.CompanyID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetProductBundleResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductBundleDetailResponse)
+        if err != nil {
+             return GetProductBundleResponse{}, common.NewFDKError(err.Error())
+        }
+        return getProductBundleDetailResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
 
 
     // UpdateProductBundle Update a Product Bundle
@@ -2052,6 +3531,36 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             updateProductBundleResponse GetProductBundleCreateResponse
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
 
          
         
@@ -2100,103 +3609,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetProductBundleDetail Get a particular Product Bundle details
-     func (ca *PlatformCatalog)  GetProductBundleDetail(ID string) (GetProductBundleResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getProductBundleDetailResponse GetProductBundleResponse
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/product-bundle/%s/",ca.CompanyID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return GetProductBundleResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProductBundleDetailResponse)
-        if err != nil {
-             return GetProductBundleResponse{}, common.NewFDKError(err.Error())
-        }
-        return getProductBundleDetailResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformGetSizeGuidesXQuery holds query params
-    type PlatformGetSizeGuidesXQuery struct { 
-        Active bool  `url:"active,omitempty"` 
-        Q string  `url:"q,omitempty"` 
-        Tag string  `url:"tag,omitempty"` 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
-    }
-    
-
-
-    // GetSizeGuides Get list of size guides
-     func (ca *PlatformCatalog)  GetSizeGuides(xQuery PlatformGetSizeGuidesXQuery) (ListSizeGuide, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getSizeGuidesResponse ListSizeGuide
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/sizeguide",ca.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return ListSizeGuide{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getSizeGuidesResponse)
-        if err != nil {
-             return ListSizeGuide{}, common.NewFDKError(err.Error())
-        }
-        return getSizeGuidesResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
     // CreateSizeGuide Create a size guide.
      func (ca *PlatformCatalog)  CreateSizeGuide(body  ValidateSizeGuide) (SuccessResponse, error){
         
@@ -2206,6 +3618,42 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             createSizeGuideResponse SuccessResponse
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -2252,6 +3700,129 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformGetSizeGuidesXQuery holds query params
+    type PlatformGetSizeGuidesXQuery struct { 
+        Active bool  `url:"active,omitempty"` 
+        Q string  `url:"q,omitempty"` 
+        Tag string  `url:"tag,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // GetSizeGuides Get list of size guides
+     func (ca *PlatformCatalog)  GetSizeGuides(xQuery PlatformGetSizeGuidesXQuery) (ListSizeGuide, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getSizeGuidesResponse ListSizeGuide
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/sizeguide",ca.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ListSizeGuide{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getSizeGuidesResponse)
+        if err != nil {
+             return ListSizeGuide{}, common.NewFDKError(err.Error())
+        }
+        return getSizeGuidesResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetSizeGuide Get a single size guide.
+     func (ca *PlatformCatalog)  GetSizeGuide(ID string) (SizeGuideResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getSizeGuideResponse SizeGuideResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/sizeguide/%s/",ca.CompanyID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SizeGuideResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getSizeGuideResponse)
+        if err != nil {
+             return SizeGuideResponse{}, common.NewFDKError(err.Error())
+        }
+        return getSizeGuideResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
 
 
     // UpdateSizeGuide Edit a size guide.
@@ -2263,6 +3834,44 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             updateSizeGuideResponse SuccessResponse
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
 
          
         
@@ -2298,50 +3907,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return SuccessResponse{}, common.NewFDKError(err.Error())
         }
         return updateSizeGuideResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // GetSizeGuide Get a single size guide.
-     func (ca *PlatformCatalog)  GetSizeGuide(ID string) (SizeGuideResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getSizeGuideResponse SizeGuideResponse
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/sizeguide/%s/",ca.CompanyID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SizeGuideResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getSizeGuideResponse)
-        if err != nil {
-             return SizeGuideResponse{}, common.NewFDKError(err.Error())
-        }
-        return getSizeGuideResponse, nil
         
     }
          
@@ -2393,6 +3958,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getSellerInsightsResponse CrossSellingResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+
          
         
         
@@ -2436,6 +4009,22 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             createMarketplaceOptinResponse UpdatedResponse
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
 
          
         
@@ -2494,6 +4083,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getMarketplaceOptinDetailResponse GetOptInPlatform
 	    )
 
+        
+
+        
+
+        
+
          
         
         
@@ -2537,6 +4132,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             getCompanyDetailResponse OptinCompanyDetail
 	    )
+
+        
+
+        
+
+        
 
          
         
@@ -2591,6 +4192,24 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getCompanyBrandDetailResponse OptinCompanyBrandDetailsView
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
          
         
         
@@ -2634,6 +4253,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             getCompanyMetricsResponse OptinCompanyMetrics
 	    )
+
+        
+
+        
+
+        
 
          
         
@@ -2686,6 +4311,20 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getStoreDetailResponse OptinStoreDetails
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
          
         
         
@@ -2729,6 +4368,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             getGenderAttributeResponse GenderDetail
 	    )
+
+        
+
+        
+
+        
+        
+        
 
          
         
@@ -2779,6 +4426,18 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             listProductTemplateCategoriesResponse ProdcutTemplateCategoriesResponse
 	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
 
          
         
@@ -2833,6 +4492,24 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             listDepartmentsDataResponse DepartmentsResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
          
         
         
@@ -2876,6 +4553,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             getDepartmentDataResponse DepartmentsResponse
 	    )
+
+        
+
+        
+
+        
+        
+        
 
          
         
@@ -2926,6 +4611,16 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             listProductTemplateResponse TemplatesResponse
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+
          
         
         
@@ -2970,6 +4665,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             validateProductTemplateResponse TemplatesValidationResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+
          
         
         
@@ -3013,6 +4716,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             
 	    )
+
+        
+
+        
+
+        
+        
+        
 
          
         
@@ -3059,6 +4770,16 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+
          
         
         
@@ -3104,6 +4825,16 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             validateProductTemplateSchemaResponse InventoryValidationResponse
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+
          
         
         
@@ -3148,6 +4879,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             listHSNCodesResponse HSNCodesResponse
 	    )
 
+        
+
+        
+
+        
+
          
         
         
@@ -3191,6 +4928,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             listProductTemplateExportDetailsResponse ProductDownloadsResponse
 	    )
+
+        
+
+        
+
+        
 
          
         
@@ -3241,6 +4984,16 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             listTemplateBrandTypeValuesResponse ProductConfigurationDownloads
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+
          
         
         
@@ -3273,59 +5026,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    //PlatformListCategoriesXQuery holds query params
-    type PlatformListCategoriesXQuery struct { 
-        Level string  `url:"level,omitempty"` 
-        Departments string  `url:"departments,omitempty"` 
-        Q string  `url:"q,omitempty"` 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
-    }
-    
-
-
-    // ListCategories Get product categories list
-     func (ca *PlatformCatalog)  ListCategories(xQuery PlatformListCategoriesXQuery) (CategoryResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            listCategoriesResponse CategoryResponse
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/category/",ca.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return CategoryResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &listCategoriesResponse)
-        if err != nil {
-             return CategoryResponse{}, common.NewFDKError(err.Error())
-        }
-        return listCategoriesResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
 
 
     // CreateCategories Create product categories
@@ -3337,6 +5037,34 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             createCategoriesResponse CategoryCreateResponse
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -3383,6 +5111,129 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformListCategoriesXQuery holds query params
+    type PlatformListCategoriesXQuery struct { 
+        Level string  `url:"level,omitempty"` 
+        Departments string  `url:"departments,omitempty"` 
+        Q string  `url:"q,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // ListCategories Get product categories list
+     func (ca *PlatformCatalog)  ListCategories(xQuery PlatformListCategoriesXQuery) (CategoryResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            listCategoriesResponse CategoryResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/category/",ca.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return CategoryResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &listCategoriesResponse)
+        if err != nil {
+             return CategoryResponse{}, common.NewFDKError(err.Error())
+        }
+        return listCategoriesResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetCategoryData Get product category by uid
+     func (ca *PlatformCatalog)  GetCategoryData(UID string) (SingleCategoryResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getCategoryDataResponse SingleCategoryResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/category/%s/",ca.CompanyID, UID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SingleCategoryResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getCategoryDataResponse)
+        if err != nil {
+             return SingleCategoryResponse{}, common.NewFDKError(err.Error())
+        }
+        return getCategoryDataResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
 
 
     // UpdateCategory Update product categories
@@ -3394,6 +5245,36 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             updateCategoryResponse CategoryUpdateResponse
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
 
          
         
@@ -3442,103 +5323,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetCategoryData Get product category by uid
-     func (ca *PlatformCatalog)  GetCategoryData(UID string) (SingleCategoryResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getCategoryDataResponse SingleCategoryResponse
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/category/%s/",ca.CompanyID, UID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SingleCategoryResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getCategoryDataResponse)
-        if err != nil {
-             return SingleCategoryResponse{}, common.NewFDKError(err.Error())
-        }
-        return getCategoryDataResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformGetProductsXQuery holds query params
-    type PlatformGetProductsXQuery struct { 
-        BrandIds float64  `url:"brand_ids,omitempty"` 
-        CategoryIds float64  `url:"category_ids,omitempty"` 
-        Search string  `url:"search,omitempty"` 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
-    }
-    
-
-
-    // GetProducts Get product list
-     func (ca *PlatformCatalog)  GetProducts(xQuery PlatformGetProductsXQuery) (ProductListingResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getProductsResponse ProductListingResponse
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/",ca.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return ProductListingResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProductsResponse)
-        if err != nil {
-             return ProductListingResponse{}, common.NewFDKError(err.Error())
-        }
-        return getProductsResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
     // CreateProduct Create a product.
      func (ca *PlatformCatalog)  CreateProduct(body  ProductCreateUpdate) (SuccessResponse, error){
         
@@ -3548,6 +5332,86 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             createProductResponse SuccessResponse
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -3594,52 +5458,66 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformGetProductsXQuery holds query params
+    type PlatformGetProductsXQuery struct { 
+        BrandIds float64  `url:"brand_ids,omitempty"` 
+        CategoryIds float64  `url:"category_ids,omitempty"` 
+        Search string  `url:"search,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
 
 
-    // EditProduct Edit a product.
-     func (ca *PlatformCatalog)  EditProduct(ItemID float64, body  ProductCreateUpdate) (SuccessResponse, error){
+    // GetProducts Get product list
+     func (ca *PlatformCatalog)  GetProducts(xQuery PlatformGetProductsXQuery) (ProductListingResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            editProductResponse SuccessResponse
+            getProductsResponse ProductListingResponse
 	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
 
          
         
         
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        
         //API call
         rawRequest = NewRequest(
             ca.Config,
-            "put",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/",ca.CompanyID),
             nil,
-            nil,
-            reqBody)
+            xQuery,
+            nil)
         response, err = rawRequest.Execute()
         if err != nil {
-             return SuccessResponse{}, err
+             return ProductListingResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &editProductResponse)
+        err = json.Unmarshal(response, &getProductsResponse)
         if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
+             return ProductListingResponse{}, common.NewFDKError(err.Error())
         }
-        return editProductResponse, nil
+        return getProductsResponse, nil
         
     }
          
@@ -3662,6 +5540,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             deleteProductResponse SuccessResponse
 	    )
+
+        
+
+        
+
+        
+        
+        
 
          
         
@@ -3714,6 +5600,22 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getProductResponse Product
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+
          
         
         
@@ -3748,6 +5650,145 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
+    // EditProduct Edit a product.
+     func (ca *PlatformCatalog)  EditProduct(ItemID float64, body  ProductCreateUpdate) (SuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            editProductResponse SuccessResponse
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "put",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &editProductResponse)
+        if err != nil {
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return editProductResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
     // GetProductValidation Validate product/size data
      func (ca *PlatformCatalog)  GetProductValidation() (ValidateProduct, error){
         
@@ -3757,6 +5798,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             getProductValidationResponse ValidateProduct
 	    )
+
+        
+
+        
+
+        
 
          
         
@@ -3809,6 +5856,22 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getProductSizeResponse ProductListingResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+
          
         
         
@@ -3841,56 +5904,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    //PlatformGetProductBulkUploadHistoryXQuery holds query params
-    type PlatformGetProductBulkUploadHistoryXQuery struct { 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
-    }
-    
-
-
-    // GetProductBulkUploadHistory Get a list of all bulk product upload jobs.
-     func (ca *PlatformCatalog)  GetProductBulkUploadHistory(xQuery PlatformGetProductBulkUploadHistoryXQuery) (ProductBulkRequestList, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getProductBulkUploadHistoryResponse ProductBulkRequestList
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/bulk",ca.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return ProductBulkRequestList{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProductBulkUploadHistoryResponse)
-        if err != nil {
-             return ProductBulkRequestList{}, common.NewFDKError(err.Error())
-        }
-        return getProductBulkUploadHistoryResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
 
 
     // UpdateProductAssetsInBulk Create a Bulk asset upload Job.
@@ -3902,6 +5915,46 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             updateProductAssetsInBulkResponse SuccessResponse
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -3948,6 +6001,120 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformGetProductBulkUploadHistoryXQuery holds query params
+    type PlatformGetProductBulkUploadHistoryXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // GetProductBulkUploadHistory Get a list of all bulk product upload jobs.
+     func (ca *PlatformCatalog)  GetProductBulkUploadHistory(xQuery PlatformGetProductBulkUploadHistoryXQuery) (ProductBulkRequestList, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getProductBulkUploadHistoryResponse ProductBulkRequestList
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/bulk",ca.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ProductBulkRequestList{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductBulkUploadHistoryResponse)
+        if err != nil {
+             return ProductBulkRequestList{}, common.NewFDKError(err.Error())
+        }
+        return getProductBulkUploadHistoryResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // DeleteProductBulkJob Delete Bulk product job.
+     func (ca *PlatformCatalog)  DeleteProductBulkJob(BatchID float64) (SuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteProductBulkJobResponse SuccessResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/bulk/undefined",ca.CompanyID, BatchID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteProductBulkJobResponse)
+        if err != nil {
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteProductBulkJobResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
 
 
     // CreateProductsInBulk Create products in bulk associated with given batch Id.
@@ -3959,6 +6126,22 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             createProductsInBulkResponse SuccessResponse
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
 
          
         
@@ -4007,50 +6190,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // DeleteProductBulkJob Delete Bulk product job.
-     func (ca *PlatformCatalog)  DeleteProductBulkJob(BatchID float64) (SuccessResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteProductBulkJobResponse SuccessResponse
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/bulk/undefined",ca.CompanyID, BatchID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteProductBulkJobResponse)
-        if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteProductBulkJobResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
     // GetCompanyTags Get a list of all tags associated with company.
      func (ca *PlatformCatalog)  GetCompanyTags() (ProductTagsViewResponse, error){
         
@@ -4060,6 +6199,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             getCompanyTagsResponse ProductTagsViewResponse
 	    )
+
+        
+
+        
+
+        
 
          
         
@@ -4093,56 +6238,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    //PlatformGetProductAssetsInBulkXQuery holds query params
-    type PlatformGetProductAssetsInBulkXQuery struct { 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
-    }
-    
-
-
-    // GetProductAssetsInBulk Get a list of all bulk asset jobs.
-     func (ca *PlatformCatalog)  GetProductAssetsInBulk(xQuery PlatformGetProductAssetsInBulkXQuery) (BulkAssetResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getProductAssetsInBulkResponse BulkAssetResponse
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/assets/bulk/",ca.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return BulkAssetResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProductAssetsInBulkResponse)
-        if err != nil {
-             return BulkAssetResponse{}, common.NewFDKError(err.Error())
-        }
-        return getProductAssetsInBulkResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
 
 
     // CreateProductAssetsInBulk Create a Bulk asset upload Job.
@@ -4154,6 +6249,18 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             createProductAssetsInBulkResponse SuccessResponse
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -4200,6 +6307,68 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformGetProductAssetsInBulkXQuery holds query params
+    type PlatformGetProductAssetsInBulkXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // GetProductAssetsInBulk Get a list of all bulk asset jobs.
+     func (ca *PlatformCatalog)  GetProductAssetsInBulk(xQuery PlatformGetProductAssetsInBulkXQuery) (BulkAssetResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getProductAssetsInBulkResponse BulkAssetResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/assets/bulk/",ca.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return BulkAssetResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductAssetsInBulkResponse)
+        if err != nil {
+             return BulkAssetResponse{}, common.NewFDKError(err.Error())
+        }
+        return getProductAssetsInBulkResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
 
 
     // DeleteSize Delete a Size associated with product.
@@ -4211,6 +6380,16 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             deleteSizeResponse ProductSizeDeleteResponse
 	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
 
          
         
@@ -4244,56 +6423,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    //PlatformGetInventoryXQuery holds query params
-    type PlatformGetInventoryXQuery struct { 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
-    }
-    
-
-
-    // GetInventory Get Inventory for company
-     func (ca *PlatformCatalog)  GetInventory(ItemID string, Size string, xQuery PlatformGetInventoryXQuery) (InventoryResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getInventoryResponse InventoryResponse
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/%s/sizes/%s/",ca.CompanyID, ItemID, Size),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return InventoryResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getInventoryResponse)
-        if err != nil {
-             return InventoryResponse{}, common.NewFDKError(err.Error())
-        }
-        return getInventoryResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
 
 
     // AddInventory Add Inventory for particular size and store.
@@ -4305,6 +6434,22 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             addInventoryResponse SuccessResponse
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+        
 
          
         
@@ -4351,6 +6496,72 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformGetInventoryXQuery holds query params
+    type PlatformGetInventoryXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // GetInventory Get Inventory for company
+     func (ca *PlatformCatalog)  GetInventory(ItemID string, Size string, xQuery PlatformGetInventoryXQuery) (InventoryResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getInventoryResponse InventoryResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/%s/sizes/%s/",ca.CompanyID, ItemID, Size),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return InventoryResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getInventoryResponse)
+        if err != nil {
+             return InventoryResponse{}, common.NewFDKError(err.Error())
+        }
+        return getInventoryResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
 
 
     // DeleteInventory Delete a Inventory.
@@ -4362,6 +6573,16 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             deleteInventoryResponse InventoryDelete
 	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
 
          
         
@@ -4395,56 +6616,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    //PlatformGetInventoryBulkUploadHistoryXQuery holds query params
-    type PlatformGetInventoryBulkUploadHistoryXQuery struct { 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
-    }
-    
-
-
-    // GetInventoryBulkUploadHistory Get a list of all bulk Inventory upload jobs.
-     func (ca *PlatformCatalog)  GetInventoryBulkUploadHistory(xQuery PlatformGetInventoryBulkUploadHistoryXQuery) (BulkInventoryGet, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getInventoryBulkUploadHistoryResponse BulkInventoryGet
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/inventory/bulk/",ca.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return BulkInventoryGet{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getInventoryBulkUploadHistoryResponse)
-        if err != nil {
-             return BulkInventoryGet{}, common.NewFDKError(err.Error())
-        }
-        return getInventoryBulkUploadHistoryResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
 
 
     // CreateBulkInventoryJob Create a Bulk Inventory upload Job.
@@ -4456,6 +6627,46 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             createBulkInventoryJobResponse CommonResponse
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -4502,6 +6713,118 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformGetInventoryBulkUploadHistoryXQuery holds query params
+    type PlatformGetInventoryBulkUploadHistoryXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // GetInventoryBulkUploadHistory Get a list of all bulk Inventory upload jobs.
+     func (ca *PlatformCatalog)  GetInventoryBulkUploadHistory(xQuery PlatformGetInventoryBulkUploadHistoryXQuery) (BulkInventoryGet, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getInventoryBulkUploadHistoryResponse BulkInventoryGet
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/inventory/bulk/",ca.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return BulkInventoryGet{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getInventoryBulkUploadHistoryResponse)
+        if err != nil {
+             return BulkInventoryGet{}, common.NewFDKError(err.Error())
+        }
+        return getInventoryBulkUploadHistoryResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // DeleteBulkInventoryJob Delete Bulk Inventory job.
+     func (ca *PlatformCatalog)  DeleteBulkInventoryJob() (SuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteBulkInventoryJobResponse SuccessResponse
+	    )
+
+        
+
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/inventory/bulk/<batch_id>/",ca.CompanyID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteBulkInventoryJobResponse)
+        if err != nil {
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteBulkInventoryJobResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
 
 
     // CreateBulkInventory Create products in bulk associated with given batch Id.
@@ -4513,6 +6836,20 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             createBulkInventoryResponse SuccessResponse
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -4561,94 +6898,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // DeleteBulkInventoryJob Delete Bulk Inventory job.
-     func (ca *PlatformCatalog)  DeleteBulkInventoryJob() (SuccessResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteBulkInventoryJobResponse SuccessResponse
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/inventory/bulk/<batch_id>/",ca.CompanyID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteBulkInventoryJobResponse)
-        if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteBulkInventoryJobResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // GetInventoryExport Get Inventory export history.
-     func (ca *PlatformCatalog)  GetInventoryExport() (InventoryExportJob, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getInventoryExportResponse InventoryExportJob
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/inventory/download/",ca.CompanyID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return InventoryExportJob{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getInventoryExportResponse)
-        if err != nil {
-             return InventoryExportJob{}, common.NewFDKError(err.Error())
-        }
-        return getInventoryExportResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
     // CreateInventoryExportJob Create a Inventory export Job.
      func (ca *PlatformCatalog)  CreateInventoryExportJob(body  InventoryExportRequest) (SuccessResponse, error){
         
@@ -4658,6 +6907,18 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             createInventoryExportJobResponse SuccessResponse
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -4704,6 +6965,56 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+
+
+    // GetInventoryExport Get Inventory export history.
+     func (ca *PlatformCatalog)  GetInventoryExport() (InventoryExportJob, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getInventoryExportResponse InventoryExportJob
+	    )
+
+        
+
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/inventory/download/",ca.CompanyID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return InventoryExportJob{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getInventoryExportResponse)
+        if err != nil {
+             return InventoryExportJob{}, common.NewFDKError(err.Error())
+        }
+        return getInventoryExportResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
     //PlatformExportInventoryConfigXQuery holds query params
     type PlatformExportInventoryConfigXQuery struct { 
         FilterType string  `url:"filter_type,omitempty"`  
@@ -4720,6 +7031,16 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             exportInventoryConfigResponse InventoryConfig
 	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
 
          
         
@@ -4753,57 +7074,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    //PlatformGetAllHsnCodesXQuery holds query params
-    type PlatformGetAllHsnCodesXQuery struct { 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"` 
-        Q string  `url:"q,omitempty"`  
-    }
-    
-
-
-    // GetAllHsnCodes Hsn Code List.
-     func (ca *PlatformCatalog)  GetAllHsnCodes(xQuery PlatformGetAllHsnCodesXQuery) (HsnCodesListingResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAllHsnCodesResponse HsnCodesListingResponse
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/hsn/",ca.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return HsnCodesListingResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAllHsnCodesResponse)
-        if err != nil {
-             return HsnCodesListingResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAllHsnCodesResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
 
 
     // CreateHsnCode Create Hsn Code.
@@ -4815,6 +7085,32 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             createHsnCodeResponse HsnCode
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -4861,6 +7157,123 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformGetAllHsnCodesXQuery holds query params
+    type PlatformGetAllHsnCodesXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        Q string  `url:"q,omitempty"`  
+    }
+    
+
+
+    // GetAllHsnCodes Hsn Code List.
+     func (ca *PlatformCatalog)  GetAllHsnCodes(xQuery PlatformGetAllHsnCodesXQuery) (HsnCodesListingResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAllHsnCodesResponse HsnCodesListingResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/hsn/",ca.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return HsnCodesListingResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAllHsnCodesResponse)
+        if err != nil {
+             return HsnCodesListingResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAllHsnCodesResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetHsnCode Fetch Hsn Code.
+     func (ca *PlatformCatalog)  GetHsnCode(ID string) (HsnCode, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getHsnCodeResponse HsnCode
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/hsn/%s/",ca.CompanyID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return HsnCode{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getHsnCodeResponse)
+        if err != nil {
+             return HsnCode{}, common.NewFDKError(err.Error())
+        }
+        return getHsnCodeResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
 
 
     // UpdateHsnCode Update Hsn Code.
@@ -4872,6 +7285,34 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             updateHsnCodeResponse HsnCode
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
 
          
         
@@ -4920,50 +7361,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetHsnCode Fetch Hsn Code.
-     func (ca *PlatformCatalog)  GetHsnCode(ID string) (HsnCode, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getHsnCodeResponse HsnCode
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/hsn/%s/",ca.CompanyID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return HsnCode{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getHsnCodeResponse)
-        if err != nil {
-             return HsnCode{}, common.NewFDKError(err.Error())
-        }
-        return getHsnCodeResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
     // BulkHsnCode Bulk Create or Update Hsn Code.
      func (ca *PlatformCatalog)  BulkHsnCode(body  BulkHsnUpsert) (BulkHsnResponse, error){
         
@@ -4973,6 +7370,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             bulkHsnCodeResponse BulkHsnResponse
 	    )
+
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -5045,7 +7450,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
 
     // UpdateCompany Edit company profile
-     func (co *PlatformCompanyProfile)  UpdateCompany(body  CompanyStoreSerializerRequest) (SuccessResponse, error){
+     func (co *PlatformCompanyProfile)  UpdateCompany(body  UpdateCompany) (SuccessResponse, error){
         
         var (
             rawRequest  *RawRequest
@@ -5053,6 +7458,32 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             updateCompanyResponse SuccessResponse
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -5111,6 +7542,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             cbsOnboardGetResponse GetCompanyProfileSerializerResponse
 	    )
 
+        
+
+        
+
+        
+
          
         
         
@@ -5155,6 +7592,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getCompanyMetricsResponse MetricsSerializer
 	    )
 
+        
+
+        
+
+        
+
          
         
         
@@ -5198,6 +7641,34 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             editBrandResponse SuccessResponse
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
 
          
         
@@ -5256,6 +7727,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getBrandResponse GetBrandResponseSerializer
 	    )
 
+        
+
+        
+
+        
+        
+        
+
          
         
         
@@ -5299,6 +7778,32 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             createBrandResponse SuccessResponse
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -5356,6 +7861,18 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             createCompanyBrandMappingResponse SuccessResponse
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -5419,6 +7936,18 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             getBrandsResponse CompanyBrandListSerializer
 	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
 
          
         
@@ -5512,6 +8041,46 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             createLocationResponse SuccessResponse
 	    )
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+
          
         
         
@@ -5577,6 +8146,24 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             getLocationsResponse LocationListSerializer
 	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
 
          
         
@@ -5700,6 +8287,48 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             updateLocationResponse SuccessResponse
 	    )
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
+
          
         
         
@@ -5757,6 +8386,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getLocationDetailResponse GetLocationSerializer
 	    )
 
+        
+
+        
+
+        
+        
+        
+
          
         
         
@@ -5800,6 +8437,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             createLocationBulkResponse SuccessResponse
 	    )
+
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -5871,6 +8516,24 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             startUploadResponse StartResponse
 	    )
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
+
          
         
         
@@ -5927,6 +8590,34 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             completeUploadResponse CompleteResponse
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
 
          
         
@@ -5989,6 +8680,16 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getSignUrlsResponse SignUrlResponse
 	    )
 
+        
+        
+        
+        
+        
+
+        
+
+        
+
          
         
         
@@ -6050,6 +8751,22 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             copyFilesResponse BulkResponse
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+
+        
+            
+                
+            
+        
+
+        
 
          
         
@@ -6114,6 +8831,18 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             browseResponse BrowseResponse
 	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+        
+        
 
          
         
@@ -6208,6 +8937,16 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+
          
         
         
@@ -6267,6 +9006,18 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getJobsByCompanyResponse ResponseEnvelopeListJobConfigRawDTO
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+
          
         
         
@@ -6310,6 +9061,28 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             updateJobResponse ResponseEnvelopeString
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -6367,6 +9140,28 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             createJobResponse ResponseEnvelopeString
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -6431,6 +9226,20 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getJobByCompanyAndIntegrationResponse ResponseEnvelopeListJobConfigDTO
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+
          
         
         
@@ -6475,6 +9284,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getJobConfigDefaultsResponse ResponseEnvelopeJobConfigDTO
 	    )
 
+        
+
+        
+
+        
+
          
         
         
@@ -6518,6 +9333,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             getJobByCodeResponse ResponseEnvelopeJobConfigDTO
 	    )
+
+        
+
+        
+
+        
+        
+        
 
          
         
@@ -6568,6 +9391,20 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             getJobCodesByCompanyAndIntegrationResponse ResponseEnvelopeListJobConfigListDTO
 	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
 
          
         
@@ -6676,6 +9513,18 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             createApplicationResponse CreateAppResponse
 	    )
 
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+
          
         
         
@@ -6739,6 +9588,20 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             getApplicationsResponse ApplicationsResponse
 	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
 
          
         
@@ -6844,6 +9707,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getCurrenciesResponse CurrenciesResponse
 	    )
 
+        
+
+        
+
+        
+
          
         
         
@@ -6887,6 +9756,16 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             getDomainAvailibilityResponse DomainSuggestionsResponse
 	    )
+
+        
+        
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -6945,6 +9824,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getIntegrationByIdResponse Integration
 	    )
 
+        
+
+        
+
+        
+        
+        
+
          
         
         
@@ -6994,6 +9881,18 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             getAvailableOptInsResponse GetIntegrationsOptInsResponse
 	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
 
          
         
@@ -7092,6 +9991,22 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             getSelectedOptInsResponse GetIntegrationsOptInsResponse
 	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+        
 
          
         
@@ -7199,6 +10114,22 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getIntegrationLevelConfigResponse IntegrationConfigResponse
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+        
+
          
         
         
@@ -7243,6 +10174,18 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getIntegrationByLevelIdResponse IntegrationLevel
 	    )
 
+        
+
+        
+
+        
+        
+        
+        
+        
+        
+        
+
          
         
         
@@ -7286,6 +10229,18 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             getLevelActiveIntegrationsResponse OptedStoreIntegration
 	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+        
+        
 
          
         
@@ -7336,6 +10291,16 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getBrandsByCompanyResponse BrandsByCompanyResponse
 	    )
 
+        
+
+        
+            
+                
+            
+        
+
+        
+
          
         
         
@@ -7385,6 +10350,22 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             getCompanyByBrandsResponse CompanyByBrandsResponse
 	    )
+
+        
+        
+        
+        
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
 
          
         
@@ -7497,6 +10478,24 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getStoreByBrandsResponse StoreByBrandsResponse
 	    )
 
+        
+        
+        
+        
+        
+        
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+
          
         
         
@@ -7608,6 +10607,18 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getOtherSellerApplicationsResponse OtherSellerApplications
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+
          
         
         
@@ -7700,6 +10711,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getOtherSellerApplicationByIdResponse OptedApplicationResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+
          
         
         
@@ -7744,6 +10763,18 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             optOutFromApplicationResponse SuccessMessageResponse
 	    )
 
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
+
          
         
         
@@ -7778,1042 +10809,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return SuccessMessageResponse{}, common.NewFDKError(err.Error())
         }
         return optOutFromApplicationResponse, nil
-        
-    }
-         
-        
-       
-    
-
-
-	
-   // PlatformMarketplaces holds PlatformMarketplaces object properties
-    type PlatformMarketplaces struct {
-        Config *PlatformConfig
-        CompanyID string
-    }
-    // NewPlatformMarketplaces returns new PlatformMarketplaces instance
-    func NewPlatformMarketplaces(config *PlatformConfig) *PlatformMarketplaces {
-        return &PlatformMarketplaces{Config: config, CompanyID: config.CompanyID}
-    }
-    
-    
-   
-  
-    
-    
-
-
-    // GetAvailableChannels Get available marketplace channels
-     func (ma *PlatformMarketplaces)  GetAvailableChannels() (map[string]interface{}, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAvailableChannelsResponse map[string]interface{}
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ma.Config,
-            "get",
-            fmt.Sprintf("/service/platform/marketplaces/v1.0/company/%s/all-channels",ma.CompanyID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return map[string]interface{}{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAvailableChannelsResponse)
-        if err != nil {
-             return map[string]interface{}{}, common.NewFDKError(err.Error())
-        }
-        return getAvailableChannelsResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // GetChannels Get all registered marketplace channels for a seller
-     func (ma *PlatformMarketplaces)  GetChannels() (map[string]interface{}, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getChannelsResponse map[string]interface{}
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ma.Config,
-            "get",
-            fmt.Sprintf("/service/platform/marketplaces/v1.0/company/%s/channels/",ma.CompanyID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return map[string]interface{}{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getChannelsResponse)
-        if err != nil {
-             return map[string]interface{}{}, common.NewFDKError(err.Error())
-        }
-        return getChannelsResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // GetChannel Get registered marketplace channel credential configuration for a seller
-     func (ma *PlatformMarketplaces)  GetChannel(Channel string) (map[string]interface{}, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getChannelResponse map[string]interface{}
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ma.Config,
-            "get",
-            fmt.Sprintf("/service/platform/marketplaces/v1.0/company/%s/channels/%s",ma.CompanyID, Channel),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return map[string]interface{}{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getChannelResponse)
-        if err != nil {
-             return map[string]interface{}{}, common.NewFDKError(err.Error())
-        }
-        return getChannelResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // RegisterMyntraChannel Create Myntra marketplace channel for a seller
-     func (ma *PlatformMarketplaces)  RegisterMyntraChannel(body  MyntraPayload) (MkpResp, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            registerMyntraChannelResponse MkpResp
-	    )
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ma.Config,
-            "post",
-            fmt.Sprintf("/service/platform/marketplaces/v1.0/company/%s/channels/myntra_in",ma.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return MkpResp{}, err
-	    }
-        
-        err = json.Unmarshal(response, &registerMyntraChannelResponse)
-        if err != nil {
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        return registerMyntraChannelResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // UpdateMyntraChannelCredentials Update Myntra marketplace channel credentials for a seller
-     func (ma *PlatformMarketplaces)  UpdateMyntraChannelCredentials(body  MyntraPayload) (MkpResp, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateMyntraChannelCredentialsResponse MkpResp
-	    )
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ma.Config,
-            "put",
-            fmt.Sprintf("/service/platform/marketplaces/v1.0/company/%s/channels/myntra_in",ma.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return MkpResp{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateMyntraChannelCredentialsResponse)
-        if err != nil {
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        return updateMyntraChannelCredentialsResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // RegisterAmazonChannel Create Amazon marketplace channel for a seller
-     func (ma *PlatformMarketplaces)  RegisterAmazonChannel(body  AmazonPayload) (MkpResp, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            registerAmazonChannelResponse MkpResp
-	    )
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ma.Config,
-            "post",
-            fmt.Sprintf("/service/platform/marketplaces/v1.0/company/%s/channels/amazon_in",ma.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return MkpResp{}, err
-	    }
-        
-        err = json.Unmarshal(response, &registerAmazonChannelResponse)
-        if err != nil {
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        return registerAmazonChannelResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // UpdateAmazonChannelCredentials Update Amazon marketplace channel credentials for a seller
-     func (ma *PlatformMarketplaces)  UpdateAmazonChannelCredentials(body  AmazonPayload) (MkpResp, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateAmazonChannelCredentialsResponse MkpResp
-	    )
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ma.Config,
-            "put",
-            fmt.Sprintf("/service/platform/marketplaces/v1.0/company/%s/channels/amazon_in",ma.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return MkpResp{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateAmazonChannelCredentialsResponse)
-        if err != nil {
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        return updateAmazonChannelCredentialsResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // RegisterFlipkartChannel Create Flipkart / Flipkart Assured marketplace channel for a seller
-     func (ma *PlatformMarketplaces)  RegisterFlipkartChannel(FlipkartChannel string, body  FlipkartPayload) (MkpResp, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            registerFlipkartChannelResponse MkpResp
-	    )
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ma.Config,
-            "post",
-            fmt.Sprintf("/service/platform/marketplaces/v1.0/company/%s/channels/%s",ma.CompanyID, FlipkartChannel),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return MkpResp{}, err
-	    }
-        
-        err = json.Unmarshal(response, &registerFlipkartChannelResponse)
-        if err != nil {
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        return registerFlipkartChannelResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // UpdateFlipkartChannelCredentials Update Flipkart / Flipkart Assured marketplace channel credentials for a seller
-     func (ma *PlatformMarketplaces)  UpdateFlipkartChannelCredentials(FlipkartChannel string, body  FlipkartPayload) (MkpResp, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateFlipkartChannelCredentialsResponse MkpResp
-	    )
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ma.Config,
-            "put",
-            fmt.Sprintf("/service/platform/marketplaces/v1.0/company/%s/channels/%s",ma.CompanyID, FlipkartChannel),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return MkpResp{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateFlipkartChannelCredentialsResponse)
-        if err != nil {
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        return updateFlipkartChannelCredentialsResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // RegisterTatacliqChannel Create Tatacliq / Tatacliq Luxury marketplace channel for a seller
-     func (ma *PlatformMarketplaces)  RegisterTatacliqChannel(TatacliqChannel string, body  TatacliqPayload) (MkpResp, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            registerTatacliqChannelResponse MkpResp
-	    )
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ma.Config,
-            "post",
-            fmt.Sprintf("/service/platform/marketplaces/v1.0/company/%s/channels/%s",ma.CompanyID, TatacliqChannel),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return MkpResp{}, err
-	    }
-        
-        err = json.Unmarshal(response, &registerTatacliqChannelResponse)
-        if err != nil {
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        return registerTatacliqChannelResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // UpdateTatacliqChannelCredentials Update Tatacliq / Tatacliq Luxury Assured marketplace channel credentials for a seller
-     func (ma *PlatformMarketplaces)  UpdateTatacliqChannelCredentials(TatacliqChannel string, body  TatacliqPayload) (MkpResp, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateTatacliqChannelCredentialsResponse MkpResp
-	    )
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ma.Config,
-            "put",
-            fmt.Sprintf("/service/platform/marketplaces/v1.0/company/%s/channels/%s",ma.CompanyID, TatacliqChannel),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return MkpResp{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateTatacliqChannelCredentialsResponse)
-        if err != nil {
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        return updateTatacliqChannelCredentialsResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // RegisterAjioChannel Create Ajio marketplace channel for a seller
-     func (ma *PlatformMarketplaces)  RegisterAjioChannel(body  AjioPayload) (MkpResp, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            registerAjioChannelResponse MkpResp
-	    )
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ma.Config,
-            "post",
-            fmt.Sprintf("/service/platform/marketplaces/v1.0/company/%s/channels/ajio_in",ma.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return MkpResp{}, err
-	    }
-        
-        err = json.Unmarshal(response, &registerAjioChannelResponse)
-        if err != nil {
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        return registerAjioChannelResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // UpdateAjioChannelCredentials Update Ajio marketplace channel credentials for a seller
-     func (ma *PlatformMarketplaces)  UpdateAjioChannelCredentials(body  AjioPayload) (MkpResp, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateAjioChannelCredentialsResponse MkpResp
-	    )
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ma.Config,
-            "put",
-            fmt.Sprintf("/service/platform/marketplaces/v1.0/company/%s/channels/ajio_in",ma.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return MkpResp{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateAjioChannelCredentialsResponse)
-        if err != nil {
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        return updateAjioChannelCredentialsResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformUpdateChannelInventorySyncConfigXQuery holds query params
-    type PlatformUpdateChannelInventorySyncConfigXQuery struct { 
-        ValidateCred string  `url:"validate_cred,omitempty"`  
-    }
-    
-
-
-    // UpdateChannelInventorySyncConfig Update inventory sync configuration of marketplace channel for a seller
-     func (ma *PlatformMarketplaces)  UpdateChannelInventorySyncConfig(Channel string, xQuery PlatformUpdateChannelInventorySyncConfigXQuery, body  InventorySyncConfig) (MkpResp, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateChannelInventorySyncConfigResponse MkpResp
-	    )
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ma.Config,
-            "put",
-            fmt.Sprintf("/service/platform/marketplaces/company/%s/v1.0/channels/%s/inventory/config",ma.CompanyID, Channel),
-            nil,
-            xQuery,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return MkpResp{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateChannelInventorySyncConfigResponse)
-        if err != nil {
-             return MkpResp{}, common.NewFDKError(err.Error())
-        }
-        return updateChannelInventorySyncConfigResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // GetChannelLocationConfig Get marketplace channel location config for a seller
-     func (ma *PlatformMarketplaces)  GetChannelLocationConfig(Channel string) (StoreMapping, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getChannelLocationConfigResponse StoreMapping
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ma.Config,
-            "get",
-            fmt.Sprintf("/service/platform/marketplaces/v1.0/company/%s/channels/%s/location/config",ma.CompanyID, Channel),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return StoreMapping{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getChannelLocationConfigResponse)
-        if err != nil {
-             return StoreMapping{}, common.NewFDKError(err.Error())
-        }
-        return getChannelLocationConfigResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // UpdateChannelLocationConfig update marketplace channel location config for a seller
-     func (ma *PlatformMarketplaces)  UpdateChannelLocationConfig(Channel string, body  StoreMappingPayload) (StoreMapping, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateChannelLocationConfigResponse StoreMapping
-	    )
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return StoreMapping{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return StoreMapping{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ma.Config,
-            "put",
-            fmt.Sprintf("/service/platform/marketplaces/v1.0/company/%s/channels/%s/location/config",ma.CompanyID, Channel),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return StoreMapping{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateChannelLocationConfigResponse)
-        if err != nil {
-             return StoreMapping{}, common.NewFDKError(err.Error())
-        }
-        return updateChannelLocationConfigResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // GetChannelStatus Get marketplace channel active status for a seller
-     func (ma *PlatformMarketplaces)  GetChannelStatus(Channel string) (StatusPayload, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getChannelStatusResponse StatusPayload
-	    )
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ma.Config,
-            "get",
-            fmt.Sprintf("/service/platform/marketplaces/v1.0/company/%s/channels/%s/status",ma.CompanyID, Channel),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return StatusPayload{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getChannelStatusResponse)
-        if err != nil {
-             return StatusPayload{}, common.NewFDKError(err.Error())
-        }
-        return getChannelStatusResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // UpdateChannelStatus Update marketplace channel active status for a seller
-     func (ma *PlatformMarketplaces)  UpdateChannelStatus(Channel string, body  StatusPayload) (StatusResp, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateChannelStatusResponse StatusResp
-	    )
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return StatusResp{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return StatusResp{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ma.Config,
-            "put",
-            fmt.Sprintf("/service/platform/marketplaces/v1.0/company/%s/channels/%s/status",ma.CompanyID, Channel),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return StatusResp{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateChannelStatusResponse)
-        if err != nil {
-             return StatusResp{}, common.NewFDKError(err.Error())
-        }
-        return updateChannelStatusResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // TriggerChannelInventoryUpdates Trigger marketplace channel inventory updates for a seller
-     func (ma *PlatformMarketplaces)  TriggerChannelInventoryUpdates(Channel string, UpdateType string, body  SyncPayload) (SyncResp, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            triggerChannelInventoryUpdatesResponse SyncResp
-	    )
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return SyncResp{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return SyncResp{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ma.Config,
-            "post",
-            fmt.Sprintf("/service/platform/marketplaces/v1.0/company/%s/channels/%s/inventory/%s/sync",ma.CompanyID, Channel, UpdateType),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SyncResp{}, err
-	    }
-        
-        err = json.Unmarshal(response, &triggerChannelInventoryUpdatesResponse)
-        if err != nil {
-             return SyncResp{}, common.NewFDKError(err.Error())
-        }
-        return triggerChannelInventoryUpdatesResponse, nil
         
     }
          
@@ -8865,6 +10860,24 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             createExportJobResponse ExportJobRes
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
 
          
         
@@ -8923,6 +10936,16 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getExportJobStatusResponse ExportJobStatusRes
 	    )
 
+        
+
+        
+
+        
+        
+        
+        
+        
+
          
         
         
@@ -8972,6 +10995,28 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             getLogsListResponse GetLogsListRes
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
 
          
         
@@ -9087,6 +11132,32 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             searchLogsResponse SearchLogRes
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
 
          
         
@@ -9223,6 +11294,32 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getDiscountsResponse ListOrCalender
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
          
         
         
@@ -9266,6 +11363,36 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             createDiscountResponse DiscountJob
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -9324,6 +11451,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getDiscountResponse DiscountJob
 	    )
 
+        
+
+        
+
+        
+        
+        
+
          
         
         
@@ -9367,6 +11502,38 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             updateDiscountResponse DiscountJob
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
 
          
         
@@ -9430,6 +11597,52 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             validateDiscountFileResponse FileJobResponse
 	    )
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+            
+                
+            
+        
+
+        
+
          
         
         
@@ -9486,6 +11699,18 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             downloadDiscountFileResponse FileJobResponse
 	    )
+
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
 
          
         
@@ -9544,6 +11769,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getValidationJobResponse FileJobResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+
          
         
         
@@ -9587,6 +11820,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             cancelValidationJobResponse CancelJobResponse
 	    )
+
+        
+
+        
+
+        
+        
+        
 
          
         
@@ -9632,6 +11873,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getDownloadJobResponse FileJobResponse
 	    )
 
+        
+
+        
+
+        
+        
+        
+
          
         
         
@@ -9675,6 +11924,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             cancelDownloadJobResponse CancelJobResponse
 	    )
+
+        
+
+        
+
+        
+        
+        
 
          
         
@@ -9739,6 +11996,20 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             getSubscribersByCompanyAndEventIdResponse SubscriberConfigList
 	    )
 
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+
          
         
         
@@ -9782,6 +12053,32 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             registerSubscriberToEventResponse SubscriberConfig
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
 
          
         
@@ -9839,6 +12136,32 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             err         error
             updateSubscriberConfigResponse SubscriberConfig
 	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
 
          
         

@@ -93,6 +93,7 @@
     * [submitCustomForm](#submitcustomform)
     * [getParticipantsInsideVideoRoom](#getparticipantsinsidevideoroom)
     * [getTokenForVideoRoom](#gettokenforvideoroom)
+    * [getASDF](#getasdf)
     
 
 * [Theme](#Theme)
@@ -1846,7 +1847,7 @@ Fetch all items added to the cart
 
 
 
-| xQuery | struct | Includes properties such as `UID`, `I`, `B`, `AssignCardID`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`
 
 
 
@@ -1884,7 +1885,7 @@ Fetch last-modified timestamp
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `UID`
+| xQuery | struct | Includes properties such as `ID`
 
 
 
@@ -2594,7 +2595,7 @@ Update items in the cart
 
 
 
-| xQuery | struct | Includes properties such as `UID`, `I`, `B`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`
 
 | body |  UpdateCartRequest | "Request body" 
 
@@ -2995,7 +2996,7 @@ Count items in the cart
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `UID`
+| xQuery | struct | Includes properties such as `ID`
 
 
 
@@ -3270,7 +3271,7 @@ Schema: `Object`
 
 
 #### applyRewardPoints
-Fetch rewards points for cart.
+Apply reward points at cart
 
 ```golang
 
@@ -3290,7 +3291,7 @@ Fetch rewards points for cart.
 | body |  RewardPointRequest | "Request body" 
 
 
-Use this API to get rewards points for cart.
+Use this API to redeem a fixed no. of reward points by applying it to the cart.
 
 *Success Response:*
 
@@ -3332,7 +3333,7 @@ Fetch address
 
 
 
-| xQuery | struct | Includes properties such as `UID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -3405,7 +3406,7 @@ Fetch a single address by its ID
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ID | float64 |  | 
+| ID | string |  | 
 
 
 
@@ -3417,7 +3418,7 @@ Fetch a single address by its ID
 
 
 
-| xQuery | struct | Includes properties such as `UID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -3536,7 +3537,7 @@ Select an address from available addresses
 
 
 
-| xQuery | struct | Includes properties such as `UID`, `I`, `B`
+| xQuery | struct | Includes properties such as `CartID`, `I`, `B`
 
 | body |  SelectCartAddressRequest | "Request body" 
 
@@ -6242,6 +6243,63 @@ Get Token to join a specific Video Room using it's unqiue name
 
 | UniqueName | string | Unique name of Video Room | 
 
+
+
+
+Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetTokenForVideoRoomResponse`
+
+
+*Examples:*
+
+
+Default
+```json
+{
+  "value": {
+    "access_token": "your_token_to_the_room"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getASDF
+Get Token to join a specific Video Room using it's unqiue name
+
+```golang
+
+ data, err :=  Lead.GetASDF(InHeader, InPath, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+| InHeader | PriorityEnum | For adding support for enum | 
+
+
+| InPath | PriorityEnum | For adding support for enum | 
+
+| xQuery | struct | Includes properties such as `InQuery`
 
 
 
@@ -11259,10 +11317,10 @@ Use this API to retrieve the tokens used while integrating Firebase, MoEngage, S
 
 
 
-Success. Check the example shown below or refer `TokenResponse` for more details.
+Success. Check the example shown below or refer `AppTokenResponse` for more details.
 
 
-Schema: `TokenResponse`
+Schema: `AppTokenResponse`
 
 
 
@@ -11742,7 +11800,7 @@ Attach a saved card to customer.
 | body |  AttachCardRequest | "Request body" 
 
 
-Use this API to attach a customer's saved card at the payment gateway, such as Stripe.
+Use this API to attach a customer's saved card at the payment gateway, such as Stripe, Juspay.
 
 *Success Response:*
 
@@ -12950,7 +13008,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### getOrders
-Use this API to retrieve all the orders.
+Get all orders
 
 ```golang
 
@@ -12973,7 +13031,7 @@ Use this API to retrieve all the orders.
 
 
 
-Get all orders
+Use this API to retrieve all the orders.
 
 *Success Response:*
 
@@ -13020,7 +13078,7 @@ Schema: `ApefaceApiError`
 
 
 #### getOrderById
-Use this API to retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
+Get details of an order
 
 ```golang
 
@@ -13035,7 +13093,7 @@ Use this API to retrieve order details such as tracking details, shipment, store
 
 
 
-Get details of an order
+Use this API to retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
 
 *Success Response:*
 
@@ -13082,7 +13140,7 @@ Schema: `ApefaceApiError`
 
 
 #### getShipmentById
-Use this API to retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
+Get details of a shipment
 
 ```golang
 
@@ -13097,7 +13155,7 @@ Use this API to retrieve shipment details such as price breakup, tracking detail
 
 
 
-Get details of a shipment
+Use this API to retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
 
 *Success Response:*
 
@@ -13144,7 +13202,7 @@ Schema: `ApefaceApiError`
 
 
 #### getShipmentReasons
-Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+Get reasons behind full or partial cancellation of a shipment
 
 ```golang
 
@@ -13159,7 +13217,7 @@ Use this API to retrieve the issues that led to the cancellation of bags within 
 
 
 
-Get reasons behind full or partial cancellation of a shipment
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
 
 *Success Response:*
 
@@ -13206,7 +13264,7 @@ Schema: `ApefaceApiError`
 
 
 #### updateShipmentStatus
-Use this API to update the status of a shipment using its shipment ID.
+Update the shipment status
 
 ```golang
 
@@ -13222,7 +13280,7 @@ Use this API to update the status of a shipment using its shipment ID.
 | body |  ShipmentStatusUpdateBody | "Request body" 
 
 
-Update the shipment status
+Use this API to update the status of a shipment using its shipment ID.
 
 *Success Response:*
 
@@ -13269,7 +13327,7 @@ Schema: `ApefaceApiError`
 
 
 #### trackShipment
-Use this API to track a shipment using its shipment ID.
+Track shipment
 
 ```golang
 
@@ -13284,7 +13342,7 @@ Use this API to track a shipment using its shipment ID.
 
 
 
-Track shipment
+Use this API to track a shipment using its shipment ID.
 
 *Success Response:*
 
@@ -13331,7 +13389,7 @@ Schema: `ApefaceApiError`
 
 
 #### getPosOrderById
-Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
+Get POS Order
 
 ```golang
 
@@ -13346,7 +13404,7 @@ Use this API to retrieve a POS order and all its details such as tracking detail
 
 
 
-Get POS Order
+Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
 
 *Success Response:*
 
@@ -14478,7 +14536,9 @@ Get Media
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `PageID`, `PageSize`
+
+
+| xQuery | struct | Includes properties such as `ID`, `Type`, `PageID`, `PageSize`
 
 
 
@@ -15139,7 +15199,7 @@ Fetch all items added to the cart
 
 
 
-| xQuery | struct | Includes properties such as `UID`, `I`, `B`, `AssignCardID`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`
 
 
 
@@ -15177,7 +15237,7 @@ Fetch last-modified timestamp
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `UID`
+| xQuery | struct | Includes properties such as `ID`
 
 
 
@@ -15887,7 +15947,7 @@ Update items in the cart
 
 
 
-| xQuery | struct | Includes properties such as `UID`, `I`, `B`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`
 
 | body |  UpdateCartRequest | "Request body" 
 
@@ -16288,7 +16348,7 @@ Count items in the cart
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `UID`
+| xQuery | struct | Includes properties such as `ID`
 
 
 
@@ -16563,7 +16623,7 @@ Schema: `Object`
 
 
 #### applyRewardPoints
-Fetch rewards points for cart.
+Apply reward points at cart
 
 ```golang
 
@@ -16583,7 +16643,7 @@ Fetch rewards points for cart.
 | body |  RewardPointRequest | "Request body" 
 
 
-Use this API to get rewards points for cart.
+Use this API to redeem a fixed no. of reward points by applying it to the cart.
 
 *Success Response:*
 
@@ -16625,7 +16685,7 @@ Fetch address
 
 
 
-| xQuery | struct | Includes properties such as `UID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -16698,7 +16758,7 @@ Fetch a single address by its ID
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ID | float64 |  | 
+| ID | string |  | 
 
 
 
@@ -16710,7 +16770,7 @@ Fetch a single address by its ID
 
 
 
-| xQuery | struct | Includes properties such as `UID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -16829,7 +16889,7 @@ Select an address from available addresses
 
 
 
-| xQuery | struct | Includes properties such as `UID`, `I`, `B`
+| xQuery | struct | Includes properties such as `CartID`, `I`, `B`
 
 | body |  SelectCartAddressRequest | "Request body" 
 
@@ -19361,7 +19421,7 @@ Cart Merged/Replaced
 
 
 #### getTatProduct
-Use this API to know the delivery turnaround time (TAT) by entering the product details along with the PIN Code of the location.
+Get TAT of a product
 
 ```golang
 
@@ -19374,7 +19434,7 @@ Use this API to know the delivery turnaround time (TAT) by entering the product 
 | body |  GetTatProductReqBody | "Request body" 
 
 
-Get TAT of a product
+Use this API to know the delivery turnaround time (TAT) by entering the product details along with the PIN Code of the location.
 
 *Success Response:*
 
@@ -19421,7 +19481,7 @@ Schema: `ApefaceApiError`
 
 
 #### getPincodeCity
-Use this API to retrieve a city by its PIN Code.
+Get city from PIN Code
 
 ```golang
 
@@ -19436,7 +19496,7 @@ Use this API to retrieve a city by its PIN Code.
 
 
 
-Get city from PIN Code
+Use this API to retrieve a city by its PIN Code.
 
 *Success Response:*
 
