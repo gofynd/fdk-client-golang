@@ -1488,7 +1488,8 @@ func NewAppClient(config *AppConfig) *Client {
     //CatalogGetCollectionsXQuery holds query params
     type CatalogGetCollectionsXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
+        PageSize float64  `url:"page_size,omitempty"` 
+        Tag string  `url:"tag,omitempty"`  
     }
     
     // GetCollections List all the collections
@@ -1503,6 +1504,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -1553,6 +1556,13 @@ func NewAppClient(config *AppConfig) *Client {
                     
                     
                 
+                    
+                    
+                    
+                        
+                    
+                    
+                
             
             // GetCollectionsPaginator List all the collections  
             func (ca *Catalog)  GetCollectionsPaginator( xQuery CatalogGetCollectionsXQuery ) *common.Paginator {
@@ -1560,6 +1570,10 @@ func NewAppClient(config *AppConfig) *Client {
                  
                  
                  xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
                  
                  
                  
@@ -4288,85 +4302,6 @@ func NewAppClient(config *AppConfig) *Client {
             return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
         }
          return getTokenForVideoRoomResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    //LeadGetASDFXQuery holds query params
-    type LeadGetASDFXQuery struct { 
-        InQuery PriorityEnum  `url:"in_query,omitempty"`  
-    }
-    
-    // GetASDF Get Token to join a specific Video Room using it's unqiue name
-    func (le *Lead)  GetASDF(InHeader PriorityEnum, InPath PriorityEnum, xQuery LeadGetASDFXQuery) (GetTokenForVideoRoomResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getASDFResponse GetTokenForVideoRoomResponse
-	    )
-
-        
-
-        
-            
-                
-                //enum validation inside query params
-                err = xQuery.InQuery.IsValid()
-                if err != nil {
-                    return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
-                }
-                
-            
-        
-
-        
-        
-               //enum validation inside path params
-                err = InPath.IsValid()
-                if err != nil {
-                    return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
-                }
-        
-        
-    
-        
-        //Adding extra headers
-        var xHeaders = make(map[string]string) 
-        
-         
-         //enum validation inside headers
-         err = InHeader.IsValid()
-         if err != nil {
-              return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
-         }
-         xHeaders["in_header"] =  string(InHeader)
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            le.config,
-            "get",
-            fmt.Sprintf("/service/application/lead/asdf/%s/asdf",InPath),
-            xHeaders,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetTokenForVideoRoomResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getASDFResponse)
-        if err != nil {
-            return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
-        }
-         return getASDFResponse, nil
         
     }
           
@@ -11327,7 +11262,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fe.config,
             "post",
-            "/service/application/feedback/v1.0/abuse",
+            "/service/application/feedback/v1.0/abuse/",
             nil,
             nil,
             reqBody)
@@ -11399,7 +11334,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fe.config,
             "put",
-            "/service/application/feedback/v1.0/abuse",
+            "/service/application/feedback/v1.0/abuse/",
             nil,
             nil,
             reqBody)
@@ -11591,7 +11526,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fe.config,
             "get",
-            "/service/application/feedback/v1.0/attributes",
+            "/service/application/feedback/v1.0/attributes/",
             nil,
             xQuery,
             nil)
@@ -11697,7 +11632,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fe.config,
             "post",
-            "/service/application/feedback/v1.0/attributes",
+            "/service/application/feedback/v1.0/attributes/",
             nil,
             nil,
             reqBody)
@@ -11874,7 +11809,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fe.config,
             "post",
-            "/service/application/feedback/v1.0/comment",
+            "/service/application/feedback/v1.0/comment/",
             nil,
             nil,
             reqBody)
@@ -11940,7 +11875,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fe.config,
             "put",
-            "/service/application/feedback/v1.0/comment",
+            "/service/application/feedback/v1.0/comment/",
             nil,
             nil,
             reqBody)

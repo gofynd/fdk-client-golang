@@ -93,7 +93,6 @@
     * [submitCustomForm](#submitcustomform)
     * [getParticipantsInsideVideoRoom](#getparticipantsinsidevideoroom)
     * [getTokenForVideoRoom](#gettokenforvideoroom)
-    * [getASDF](#getasdf)
     
 
 * [Theme](#Theme)
@@ -1349,7 +1348,9 @@ List all the collections
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Tag`
 
 
 
@@ -6243,63 +6244,6 @@ Get Token to join a specific Video Room using it's unqiue name
 
 | UniqueName | string | Unique name of Video Room | 
 
-
-
-
-Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `GetTokenForVideoRoomResponse`
-
-
-*Examples:*
-
-
-Default
-```json
-{
-  "value": {
-    "access_token": "your_token_to_the_room"
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getASDF
-Get Token to join a specific Video Room using it's unqiue name
-
-```golang
-
- data, err :=  Lead.GetASDF(InHeader, InPath, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-| InHeader | PriorityEnum | For adding support for enum | 
-
-
-| InPath | PriorityEnum | For adding support for enum | 
-
-| xQuery | struct | Includes properties such as `InQuery`
 
 
 
