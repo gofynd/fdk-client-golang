@@ -3,6 +3,7 @@
 
 * [Catalog](#Catalog) - Catalog API's allows you to access list of products, prices, seller details, similar features, variants and many more useful features.  
 * [Cart](#Cart) - Cart APIs 
+* [Common](#Common) - Application configuration apis 
 * [Lead](#Lead) - Handles communication between Staff and Users 
 * [Theme](#Theme) - Responsible for themes 
 * [User](#User) - Authentication Service 
@@ -82,6 +83,11 @@
     * [getCartShareLink](#getcartsharelink)
     * [getCartSharedItems](#getcartshareditems)
     * [updateCartWithSharedItems](#updatecartwithshareditems)
+    
+
+* [Common](#Common)
+  * Methods
+    * [getLocations](#getlocations)
     
 
 * [Lead](#Lead)
@@ -5263,6 +5269,53 @@ Cart Merged/Replaced
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+---
+
+
+
+---
+
+
+## Common
+
+
+#### getLocations
+Get countries, states, cities
+
+```golang
+
+ data, err :=  Common.GetLocations(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+| xQuery | struct | Includes properties such as `LocationType`, `ID`
+
+
+
+
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `Locations`
 
 
 
@@ -14320,11 +14373,14 @@ Delete Media
 
 ```golang
 
- data, err :=  Feedback.DeleteMedia();
+ data, err :=  Feedback.DeleteMedia(xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Ids`
 
 
 

@@ -14,6 +14,8 @@ type Client struct {
 	
 		Cart  *Cart
 	
+		Common  *Common
+	
 		Lead  *Lead
 	
 		Theme  *Theme
@@ -51,6 +53,8 @@ func NewAppClient(config *AppConfig) *Client {
 				Catalog:  NewCatalog(config),
 			
 				Cart:  NewCart(config),
+			
+				Common:  NewCommon(config),
 			
 				Lead:  NewLead(config),
 			
@@ -1489,7 +1493,7 @@ func NewAppClient(config *AppConfig) *Client {
     type CatalogGetCollectionsXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
-        Tag string  `url:"tag,omitempty"`  
+        Tag []string  `url:"tag,omitempty"`  
     }
     
     // GetCollections List all the collections
@@ -3906,6 +3910,73 @@ func NewAppClient(config *AppConfig) *Client {
             return SharedCartResponse{}, common.NewFDKError(err.Error())
         }
          return updateCartWithSharedItemsResponse, nil
+        
+    }
+          
+    
+
+    // Common ...
+    type Common struct {
+        config *AppConfig
+    }
+    // NewCommon ...
+    func NewCommon(config *AppConfig) *Common {
+        return &Common{config}
+    }
+    
+    
+    
+  
+    
+    
+    //CommonGetLocationsXQuery holds query params
+    type CommonGetLocationsXQuery struct { 
+        LocationType string  `url:"location_type,omitempty"` 
+        ID string  `url:"id,omitempty"`  
+    }
+    
+    // GetLocations Get countries, states, cities
+    func (co *Common)  GetLocations(xQuery CommonGetLocationsXQuery) (Locations, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getLocationsResponse Locations
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            "/service/common/configuration/v1.0/location",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return Locations{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getLocationsResponse)
+        if err != nil {
+            return Locations{}, common.NewFDKError(err.Error())
+        }
+         return getLocationsResponse, nil
         
     }
           
@@ -10228,6 +10299,10 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
+            
+        
 
         
 
@@ -12096,8 +12171,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //FeedbackDeleteMediaXQuery holds query params
+    type FeedbackDeleteMediaXQuery struct { 
+        Ids []string  `url:"ids,omitempty"`  
+    }
+    
     // DeleteMedia Delete Media
-    func (fe *Feedback)  DeleteMedia() (UpdateResponse, error){
+    func (fe *Feedback)  DeleteMedia(xQuery FeedbackDeleteMediaXQuery) (UpdateResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -12107,6 +12187,10 @@ func NewAppClient(config *AppConfig) *Client {
 
         
 
+        
+            
+                
+            
         
 
         
@@ -12118,9 +12202,9 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fe.config,
             "delete",
-            "/service/application/feedback/v1.0/media/",
+            fmt.Sprintf("/service/application/feedback/v1.0/media/",),
             nil,
-            nil,
+            xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
