@@ -10232,6 +10232,10 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
+            
+        
 
         
 
@@ -12100,8 +12104,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //FeedbackDeleteMediaXQuery holds query params
+    type FeedbackDeleteMediaXQuery struct { 
+        Ids []string  `url:"ids,omitempty"`  
+    }
+    
     // DeleteMedia Delete Media
-    func (fe *Feedback)  DeleteMedia() (UpdateResponse, error){
+    func (fe *Feedback)  DeleteMedia(xQuery FeedbackDeleteMediaXQuery) (UpdateResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -12111,6 +12120,10 @@ func NewAppClient(config *AppConfig) *Client {
 
         
 
+        
+            
+                
+            
         
 
         
@@ -12122,9 +12135,9 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fe.config,
             "delete",
-            "/service/application/feedback/v1.0/media/",
+            fmt.Sprintf("/service/application/feedback/v1.0/media/",),
             nil,
-            nil,
+            xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {

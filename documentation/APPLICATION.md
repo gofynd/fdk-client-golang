@@ -14320,11 +14320,14 @@ Delete Media
 
 ```golang
 
- data, err :=  Feedback.DeleteMedia();
+ data, err :=  Feedback.DeleteMedia(xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Ids`
 
 
 
