@@ -3,6 +3,7 @@
 
 * [Catalog](#Catalog) - Catalog API's allows you to access list of products, prices, seller details, similar features, variants and many more useful features.  
 * [Cart](#Cart) - Cart APIs 
+* [Common](#Common) - Application configuration apis 
 * [Lead](#Lead) - Handles communication between Staff and Users 
 * [Theme](#Theme) - Responsible for themes 
 * [User](#User) - Authentication Service 
@@ -82,6 +83,11 @@
     * [getCartShareLink](#getcartsharelink)
     * [getCartSharedItems](#getcartshareditems)
     * [updateCartWithSharedItems](#updatecartwithshareditems)
+    
+
+* [Common](#Common)
+  * Methods
+    * [getLocations](#getlocations)
     
 
 * [Lead](#Lead)
@@ -359,18 +365,6 @@ Schema: `ProductDetail`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -404,18 +398,6 @@ Success. Returns a ProductSize object. Check the example shown below or refer `P
 
 
 Schema: `ProductSizes`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -463,18 +445,6 @@ Success. Returns a ProductSizePrice object. Check the example shown below or ref
 
 
 Schema: `ProductSizePriceResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -534,18 +504,6 @@ Schema: `ProductSizeSellersResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -576,18 +534,6 @@ Success. Returns an array of objects containing the attributes for comparision. 
 
 
 Schema: `ProductsComparisonResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -634,18 +580,6 @@ Schema: `ProductCompareResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -676,18 +610,6 @@ Success. Returns an array of objects containing the attributes for comparision. 
 
 
 Schema: `ProductFrequentlyComparedSimilarResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -737,18 +659,6 @@ Schema: `SimilarProductByTypeResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -779,18 +689,6 @@ Success. Returns all variants of a product. Check the example shown below or ref
 
 
 Schema: `ProductVariantsResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -845,18 +743,6 @@ Schema: `ProductStockStatusResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -891,18 +777,6 @@ Success. Returns the status of the product stock.Check the example shown below o
 
 
 Schema: `ProductStockPolling`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -963,18 +837,6 @@ Schema: `ProductListingResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -1009,18 +871,6 @@ Success. Returns a paginated list of brands. Check the example shown below or re
 
 
 Schema: `BrandListingResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -1067,18 +917,6 @@ Schema: `BrandDetailResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -1117,18 +955,6 @@ Schema: `CategoryListingResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -1159,18 +985,6 @@ Success. Returns metadata of a category. Check the example shown below or refer 
 
 
 Schema: `CategoryMetaResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -1221,18 +1035,6 @@ Schema: `HomeListingResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -1260,18 +1062,6 @@ List of Departments. See example below or refer `DepartmentResponse` for details
 
 
 Schema: `DepartmentResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -1318,18 +1108,6 @@ Schema: `AutoCompleteResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -1364,18 +1142,6 @@ Success. Returns a list of collections. Check the example shown below or refer `
 
 
 Schema: `GetCollectionListingResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -1433,18 +1199,6 @@ Schema: `ProductListingResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -1475,18 +1229,6 @@ Success. Returns a Collection object. Check the example shown below or refer `Co
 
 
 Schema: `CollectionDetailResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -1538,18 +1280,6 @@ Schema: `GetFollowListingResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -1583,18 +1313,6 @@ Success. Returns a response object. Check the example shown below or refer `Foll
 
 
 Schema: `FollowPostResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -1644,18 +1362,6 @@ Schema: `FollowPostResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -1697,18 +1403,6 @@ Schema: `FollowerCountResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -1739,18 +1433,6 @@ Success. Returns the IDs of all the Products, Brands and Collections which were 
 
 
 Schema: `FollowIdsResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -1807,18 +1489,6 @@ Schema: `StoreListingResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -1848,7 +1518,7 @@ Fetch all items added to the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`
+| xQuery | struct | Includes properties such as `UID`, `I`, `B`, `AssignCardID`
 
 
 
@@ -1861,7 +1531,7 @@ Use this API to get details of all the items added to a cart.
 Success. Returns a Cart object. Check the example shown below or refer `CartResponse` for more details.
 
 
-Schema: `CartDetailResponse`
+Schema: `CartResponse`
 
 
 
@@ -1886,7 +1556,7 @@ Fetch last-modified timestamp
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+| xQuery | struct | Includes properties such as `UID`
 
 
 
@@ -1931,10 +1601,10 @@ Use this API to add items to the cart.
 
 
 
-Success. Returns a cart object as shown below. Refer `AddRequestCartResponse` for more details.
+Success. Returns a cart object as shown below. Refer `AddCartResponse` for more details.
 
 
-Schema: `AddCartDetailResponse`
+Schema: `AddCartResponse`
 
 
 *Examples:*
@@ -2596,7 +2266,7 @@ Update items in the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`
+| xQuery | struct | Includes properties such as `UID`, `I`, `B`
 
 | body |  UpdateCartRequest | "Request body" 
 
@@ -2607,10 +2277,10 @@ Use this API to update items added to the cart with the help of a request object
 
 
 
-Success. Updates and returns a cart object as shown below. Refer `UpdateRequestCartResponse` for more details.
+Success. Updates and returns a cart object as shown below. Refer `UpdateCartResponse` for more details.
 
 
-Schema: `UpdateCartDetailResponse`
+Schema: `UpdateCartResponse`
 
 
 *Examples:*
@@ -2997,7 +2667,7 @@ Count items in the cart
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+| xQuery | struct | Includes properties such as `UID`
 
 
 
@@ -3035,7 +2705,7 @@ Fetch Coupon
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+| xQuery | struct | Includes properties such as `UID`
 
 
 
@@ -3079,7 +2749,7 @@ Apply Coupon
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `P`, `ID`
+| xQuery | struct | Includes properties such as `I`, `B`, `P`, `UID`
 
 | body |  ApplyCouponRequest | "Request body" 
 
@@ -3087,18 +2757,6 @@ Apply Coupon
 Use this API to apply coupons on items in the cart.
 
 *Success Response:*
-
-
-
-Success. Returns coupons applied to the cart along with item details and price breakup. Refer `CartResponse` for more details.
-
-
-Schema: `CartDetailResponse`
-
-
-
-
-
 
 
 
@@ -3118,7 +2776,7 @@ Remove Coupon Applied
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+| xQuery | struct | Includes properties such as `UID`
 
 
 
@@ -3131,7 +2789,7 @@ Remove Coupon applied on the cart by passing uid in request body.
 Success. Returns coupons removed from the cart along with item details and price breakup. Refer `CartResponse` for more details.
 
 
-Schema: `CartDetailResponse`
+Schema: `CartResponse`
 
 
 
@@ -3255,18 +2913,6 @@ Offers not found
 
 
 
-Unhandled API error
-
-
-Schema: `Object`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -3287,7 +2933,7 @@ Apply reward points at cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`
+| xQuery | struct | Includes properties such as `UID`, `I`, `B`
 
 | body |  RewardPointRequest | "Request body" 
 
@@ -3301,7 +2947,7 @@ Use this API to redeem a fixed no. of reward points by applying it to the cart.
 Success. Returns a Cart object. Check the example shown below or refer `CartResponse` for more details.
 
 
-Schema: `CartDetailResponse`
+Schema: `CartResponse`
 
 
 
@@ -3334,7 +2980,7 @@ Fetch address
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+| xQuery | struct | Includes properties such as `UID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -3407,7 +3053,7 @@ Fetch a single address by its ID
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ID | string |  | 
+| ID | float64 |  | 
 
 
 
@@ -3419,7 +3065,7 @@ Fetch a single address by its ID
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+| xQuery | struct | Includes properties such as `UID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -3456,7 +3102,7 @@ Update address added to an account
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ID | string | ID allotted to the selected address | 
+| ID | float64 | ID allotted to the selected address | 
 
 
 | body |  Address | "Request body" 
@@ -3465,18 +3111,6 @@ Update address added to an account
 Use this API to update an existing address in the account. Request object should contain attributes mentioned in  <font color="blue">Address </font> can be updated. These attributes are:</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
 
 *Success Response:*
-
-
-
-Success. Returns the address ID and a message indicating a successful address updation.
-
-
-Schema: `UpdateAddressResponse`
-
-
-
-
-
 
 
 
@@ -3495,7 +3129,7 @@ Remove address associated with an account
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ID | string | ID allotted to the selected address | 
+| ID | float64 | ID allotted to the selected address | 
 
 
 
@@ -3503,18 +3137,6 @@ Remove address associated with an account
 Use this API to delete an address by its ID. This will returns an object that will indicate whether the address was deleted successfully or not.
 
 *Success Response:*
-
-
-
-Returns a Status object indicating the success or failure of address deletion.
-
-
-Schema: `DeleteAddressResponse`
-
-
-
-
-
 
 
 
@@ -3538,7 +3160,7 @@ Select an address from available addresses
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `I`, `B`
+| xQuery | struct | Includes properties such as `UID`, `I`, `B`
 
 | body |  SelectCartAddressRequest | "Request body" 
 
@@ -3546,54 +3168,6 @@ Select an address from available addresses
 <p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul>
 
 *Success Response:*
-
-
-
-Success. Returns a Cart object as shown below. Refer `CartResponse` for more details.  .
-
-
-Schema: `CartDetailResponse`
-
-
-
-
-
-
-
-
-Address or PIN code error
-
-
-Schema: `Object`
-
-
-*Examples:*
-
-
-Address Not Found
-```json
-{
-  "value": {
-    "status": "ERROR",
-    "message": "ADDRESS_NOT_FOUND"
-  }
-}
-```
-
-Pincode Not Serviciable
-```json
-{
-  "value": {
-    "status": "ERROR",
-    "message": "PINCODE_NOT_SERVICIABLE"
-  }
-}
-```
-
-
-
-
-
 
 
 
@@ -3613,7 +3187,7 @@ Update cart payment
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+| xQuery | struct | Includes properties such as `UID`
 
 | body |  UpdateCartPaymentRequest | "Request body" 
 
@@ -3627,7 +3201,7 @@ Use this API to update cart payment.
 Success. Returns a Cart object as shown below. Refer `CartResponse` for more details.
 
 
-Schema: `CartDetailResponse`
+Schema: `CartResponse`
 
 
 
@@ -3662,7 +3236,7 @@ Verify the coupon eligibility against the payment mode
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
+| xQuery | struct | Includes properties such as `UID`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
 
 
 
@@ -3706,7 +3280,7 @@ Get delivery date and options before checkout
 
 
 
-| xQuery | struct | Includes properties such as `P`, `ID`, `AddressID`, `AreaCode`
+| xQuery | struct | Includes properties such as `P`, `UID`, `AddressID`, `AreaCode`
 
 
 
@@ -4368,18 +3942,6 @@ Shipment Generation Failed
 
 
 
-Unhandled API error
-
-
-Schema: `Object`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -4395,7 +3957,7 @@ Checkout all items in the cart
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  CartCheckoutDetailRequest | "Request body" 
+| body |  CartCheckoutRequest | "Request body" 
 
 
 Use this API to checkout all items in the cart for payment and order generation. For COD, order will be directly generated, whereas for other checkout modes, user will be redirected to a payment gateway.
@@ -4809,7 +4371,7 @@ Update the cart meta
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+| xQuery | struct | Includes properties such as `UID`
 
 | body |  CartMetaRequest | "Request body" 
 
@@ -4824,18 +4386,6 @@ Returns a message indicating the success of cart meta updation as shown below.
 
 
 Schema: `CartMetaResponse`
-
-
-
-
-
-
-
-
-Missing required Field
-
-
-Schema: `CartMetaMissingResponse`
 
 
 
@@ -4921,18 +4471,6 @@ Use this API to get the shared cart details as per the token generated using the
 
 
 Success. Returns a Cart object as per the valid token. Refer `SharedCartResponse` for more details.
-
-
-Schema: `SharedCartResponse`
-
-
-
-
-
-
-
-
-No cart found for the token sent
 
 
 Schema: `SharedCartResponse`
@@ -5263,6 +4801,53 @@ Cart Merged/Replaced
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+---
+
+
+
+---
+
+
+## Common
+
+
+#### getLocations
+Get countries, states, cities
+
+```golang
+
+ data, err :=  Common.GetLocations(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+| xQuery | struct | Includes properties such as `LocationType`, `ID`
+
+
+
+
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `Locations`
 
 
 
@@ -6335,30 +5920,6 @@ All pages
 
 
 
-
-
-Schema: `BlitzkriegApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `BlitzkriegInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -6402,30 +5963,6 @@ Home page
   "$ref": "#/components/examples/AvailablePageExample"
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-Schema: `BlitzkriegApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `BlitzkriegInternalServerError`
 
 
 
@@ -6481,30 +6018,6 @@ Applied Theme
 
 
 
-
-
-Schema: `BlitzkriegApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `BlitzkriegInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -6545,30 +6058,6 @@ Preview Theme
   "$ref": "#/components/examples/Themes"
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-Schema: `BlitzkriegApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `BlitzkriegInternalServerError`
 
 
 
@@ -6632,30 +6121,6 @@ Success
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -6694,30 +6159,6 @@ Success
   "$ref": "#/components/examples/AuthSuccess"
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -6774,30 +6215,6 @@ Success
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -6836,30 +6253,6 @@ Success
   "$ref": "#/components/examples/AuthSuccess"
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -6919,30 +6312,6 @@ Success
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -6990,30 +6359,6 @@ Success
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -7044,30 +6389,6 @@ Success. Check the example shown below or refer `ResetPasswordSuccess` for more 
 
 
 Schema: `ResetPasswordSuccess`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -7124,30 +6445,6 @@ Success
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -7175,30 +6472,6 @@ Success. Check the example shown below or refer `ResetPasswordSuccess` for more 
 
 
 Schema: `ResetPasswordSuccess`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -7255,42 +6528,6 @@ Success
 
 
 
-
-
-Schema: `Object`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -7321,30 +6558,6 @@ Success. Check the example shown below or refer `RegisterFormSuccess` for more d
 
 
 Schema: `RegisterFormSuccess`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -7390,30 +6603,6 @@ Schema: `VerifyEmailSuccess`
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -7450,30 +6639,6 @@ Schema: `VerifyEmailSuccess`
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -7500,30 +6665,6 @@ Success. Returns a boolean value. Check the example shown below or refer `HasPas
 
 
 Schema: `HasPasswordSuccess`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -7569,30 +6710,6 @@ Schema: `VerifyEmailSuccess`
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -7619,30 +6736,6 @@ Success. Returns a success message as shown below. Refer `LogoutSuccess` for mor
 
 
 Schema: `LogoutSuccess`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -7682,30 +6775,6 @@ Success. Returns a JSON object as shown below. Refer `OtpSuccess` for more detai
 
 
 Schema: `OtpSuccess`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -7765,30 +6834,6 @@ default
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -7819,30 +6864,6 @@ Success. Returns a JSON object as shown below. Refer `EmailOtpSuccess` for more 
 
 
 Schema: `EmailOtpSuccess`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -7902,30 +6923,6 @@ default
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -7972,30 +6969,6 @@ default
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -8022,30 +6995,6 @@ Success. Returns a JSON object containing an array of sessions. Refer `SessionLi
 
 
 Schema: `SessionListSuccess`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -8084,30 +7033,6 @@ Success. Returns a JSON object containing the all the platform configurations. R
 
 
 Schema: `PlatformSchema`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -8167,30 +7092,6 @@ default
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -8232,30 +7133,6 @@ default
   "$ref": "#/components/examples/VerifyMobileOTP"
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -8324,30 +7201,6 @@ default
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -8386,30 +7239,6 @@ default
   "$ref": "#/components/examples/UserExampleObject"
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -8469,30 +7298,6 @@ default
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -8534,30 +7339,6 @@ default
   "$ref": "#/components/examples/VerifyEmailOTP"
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -8624,30 +7405,6 @@ default
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -8695,30 +7452,6 @@ default
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -8749,30 +7482,6 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
 
 
 Schema: `SendEmailVerifyLinkSuccess`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -8845,52 +7554,6 @@ No Announcement enabled
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
 
 ---
 
@@ -8933,52 +7596,6 @@ default
 ```json
 {
   "$ref": "#/components/examples/BlogResponse"
-}
-```
-
-
-
-
-
-
-
-
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
 }
 ```
 
@@ -9040,52 +7657,6 @@ default
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
 
 ---
 
@@ -9132,52 +7703,6 @@ default
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
 
 ---
 
@@ -9205,52 +7730,6 @@ Success. Returns a JSON object with categories of FAQ. Check the example shown b
 
 
 Schema: `GetFaqCategoriesSchema`
-
-
-
-
-
-
-
-
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
 
 
 
@@ -9297,52 +7776,6 @@ Schema: `FaqSchema`
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
 
 ---
 
@@ -9373,52 +7806,6 @@ Success. Returns a FAQ category with its slug. Check the example shown below or 
 
 
 Schema: `GetFaqCategoryBySlugSchema`
-
-
-
-
-
-
-
-
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
 
 
 
@@ -9465,52 +7852,6 @@ Schema: `GetFaqSchema`
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
 
 ---
 
@@ -9547,52 +7888,6 @@ default
 ```json
 {
   "$ref": "#/components/examples/LandingPageResponse"
-}
-```
-
-
-
-
-
-
-
-
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
 }
 ```
 
@@ -9649,52 +7944,6 @@ Success
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
 
 ---
 
@@ -9736,52 +7985,6 @@ default
 ```json
 {
   "$ref": "#/components/examples/NavigationGetResponse"
-}
-```
-
-
-
-
-
-
-
-
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
 }
 ```
 
@@ -9844,52 +8047,6 @@ default
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
 
 ---
 
@@ -9941,52 +8098,6 @@ default
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
 
 ---
 
@@ -10023,52 +8134,6 @@ Success
 ```json
 {
   "$ref": "#/components/examples/Seo"
-}
-```
-
-
-
-
-
-
-
-
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
 }
 ```
 
@@ -10130,52 +8195,6 @@ default
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
 
 ---
 
@@ -10215,52 +8234,6 @@ default
 ```json
 {
   "$ref": "#/components/examples/SlideshowResponse"
-}
-```
-
-
-
-
-
-
-
-
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
 }
 ```
 
@@ -10317,52 +8290,6 @@ default
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
 
 ---
 
@@ -10390,52 +8317,6 @@ Success. Returns a JSON object containing all the tags injected in the applicati
 
 
 Schema: `TagsSchema`
-
-
-
-
-
-
-
-
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
 
 
 
@@ -10544,18 +8425,6 @@ default
 
 
 
-Bad request
-
-
-Schema: `BadRequest`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -10609,18 +8478,6 @@ reset
   "$ref": "#/components/examples/PushtokenResponseReset"
 }
 ```
-
-
-
-
-
-
-
-
-Bad request
-
-
-Schema: `BadRequest`
 
 
 
@@ -10709,18 +8566,6 @@ Schema: `QRCodeResp`
 
 
 
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -10751,18 +8596,6 @@ Success. Check the example shown below or refer `QRCodeResp` for more details.
 
 
 Schema: `QRCodeResp`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
 
 
 
@@ -10809,18 +8642,6 @@ Schema: `QRCodeResp`
 
 
 
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -10849,18 +8670,6 @@ Success. Check the example shown below or refer `ShortLinkRes` for more details.
 
 
 Schema: `ShortLinkRes`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
 
 
 
@@ -10907,18 +8716,6 @@ Schema: `ShortLinkRes`
 
 
 
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -10949,18 +8746,6 @@ Success. Check the example shown below or refer `ShortLinkRes` for more details.
 
 
 Schema: `ShortLinkRes`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
 
 
 
@@ -11033,18 +8818,6 @@ Schema: `StartResponse`
 
 
 
-Failed
-
-
-Schema: `FailedResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -11102,18 +8875,6 @@ Schema: `CompleteResponse`
 
 
 
-Failed
-
-
-Schema: `FailedResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -11148,18 +8909,6 @@ Success. Check the example shown below or refer `Application` for more details.
 
 
 Schema: `Application`
-
-
-
-
-
-
-
-
-Not found
-
-
-Schema: `NotFound`
 
 
 
@@ -11315,18 +9064,6 @@ Schema: `OrderingStores`
 
 
 
-Not found
-
-
-Schema: `NotFound`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -11354,18 +9091,6 @@ Success. Check the example shown below or refer `AppFeatureResponse` for more de
 
 
 Schema: `AppFeatureResponse`
-
-
-
-
-
-
-
-
-Not found
-
-
-Schema: `NotFound`
 
 
 
@@ -11553,18 +9278,6 @@ Schema: `SuccessMessageResponse`
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `NotFound`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -11642,18 +9355,6 @@ Schema: `AppStaffResponse`
 
 
 
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `UnhandledError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -11702,30 +9403,6 @@ Schema: `AggregatorsConfigDetailResponse`
 
 
 
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -11754,30 +9431,6 @@ Success. Check the example shown below or refer `AttachCardsResponse` for more d
 
 
 Schema: `AttachCardsResponse`
-
-
-
-
-
-
-
-
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `any`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `any`
 
 
 
@@ -11824,30 +9477,6 @@ Schema: `ActiveCardPaymentGatewayResponse`
 
 
 
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -11878,30 +9507,6 @@ Success. Returns a list of cards saved by the user. Check the example shown belo
 
 
 Schema: `ListCardsResponse`
-
-
-
-
-
-
-
-
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
 
 
 
@@ -11946,30 +9551,6 @@ Schema: `DeleteCardsResponse`
 
 
 
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -11998,30 +9579,6 @@ Success. Check the example shown below or refer `ValidateCustomerResponse` for m
 
 
 Schema: `ValidateCustomerResponse`
-
-
-
-
-
-
-
-
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
 
 
 
@@ -12066,30 +9623,6 @@ Schema: `ChargeCustomerResponse`
 
 
 
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -12126,30 +9659,6 @@ Schema: `PaymentInitializationResponse`
 
 
 
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -12178,30 +9687,6 @@ Success. Returns the status of payment. Check the example shown below or refer `
 
 
 Schema: `PaymentStatusUpdateResponse`
-
-
-
-
-
-
-
-
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
 
 
 
@@ -12252,30 +9737,6 @@ Success. Returns all available options for payment. Check the example shown belo
 
 
 Schema: `PaymentModeRouteResponse`
-
-
-
-
-
-
-
-
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
 
 
 
@@ -12336,30 +9797,6 @@ Schema: `PaymentModeRouteResponse`
 
 
 
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -12387,30 +9824,6 @@ Success. Return CreditLine Offer detail. Check the example shown below or refer 
 
 
 Schema: `RupifiBannerResponse`
-
-
-
-
-
-
-
-
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
 
 
 
@@ -12454,18 +9867,6 @@ Schema: `TransferModeResponse`
 
 
 
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -12494,18 +9895,6 @@ Success. Shows whether the refund mode was successfully enabled or disabled.
 
 
 Schema: `UpdateRefundTransferModeResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
 
 
 
@@ -12552,30 +9941,6 @@ Schema: `OrderBeneficiaryResponse`
 
 
 
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `NotFoundResourceError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -12606,30 +9971,6 @@ Success. Shows whether the IFSC code is valid, and returns the bank details. Che
 
 
 Schema: `IfscCodeResponse`
-
-
-
-
-
-
-
-
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `NotFoundResourceError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorCodeDescription`
 
 
 
@@ -12676,30 +10017,6 @@ Schema: `OrderBeneficiaryResponse`
 
 
 
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `NotFoundResourceError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -12728,30 +10045,6 @@ Success. Check the example shown below or refer `AddBeneficiaryViaOtpVerificatio
 
 
 Schema: `AddBeneficiaryViaOtpVerificationResponse`
-
-
-
-
-
-
-
-
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `WrongOtpError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
 
 
 
@@ -12796,30 +10089,6 @@ Schema: `RefundAccountResponse`
 
 
 
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `NotFoundResourceError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -12856,30 +10125,6 @@ Schema: `WalletOtpResponse`
 
 
 
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `NotFoundResourceError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -12908,30 +10153,6 @@ Success. Check the example shown below or refer `SetDefaultBeneficiaryResponse` 
 
 
 Schema: `SetDefaultBeneficiaryResponse`
-
-
-
-
-
-
-
-
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `SetDefaultBeneficiaryResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
 
 
 
@@ -12993,30 +10214,6 @@ Schema: `OrderList`
 
 
 
-API Error. See the error object in the response body to know the exact reason.. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -13047,30 +10244,6 @@ Success. Check the example shown below or refer `OrderById` for more details.
 
 
 Schema: `OrderById`
-
-
-
-
-
-
-
-
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
 
 
 
@@ -13117,30 +10290,6 @@ Schema: `ShipmentById`
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -13171,30 +10320,6 @@ Success. Check the example shown below or refer `ShipmentReasons` for more detai
 
 
 Schema: `ShipmentReasons`
-
-
-
-
-
-
-
-
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
 
 
 
@@ -13242,30 +10367,6 @@ Schema: `ShipmentStatusUpdate`
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -13304,30 +10405,6 @@ Schema: `ShipmentTrack`
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -13358,30 +10435,6 @@ Success. Check the example shown below or refer `PosOrderById` for more details.
 
 
 Schema: `PosOrderById`
-
-
-
-
-
-
-
-
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
 
 
 
@@ -13433,18 +10486,6 @@ Schema: `CatalogueOrderResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `Error`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -13475,18 +10516,6 @@ Success. Check example below or refer `Offer` for more details.
 
 
 Schema: `Offer`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `Error`
 
 
 
@@ -13531,18 +10560,6 @@ Schema: `OrderDiscountResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `Error`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -13570,18 +10587,6 @@ Success. Check example below or refer `PointsResponse` for more details.
 
 
 Schema: `PointsResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `Error`
 
 
 
@@ -13630,18 +10635,6 @@ Schema: `PointsHistoryResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `Error`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -13669,18 +10662,6 @@ Success. Check example below or refer `ReferralDetailsResponse` for more details
 
 
 Schema: `ReferralDetailsResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `Error`
 
 
 
@@ -13717,18 +10698,6 @@ Success. Check example below or refer `RedeemReferralCodeResponse` for more deta
 
 
 Schema: `RedeemReferralCodeResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `Error`
 
 
 
@@ -13780,18 +10749,6 @@ Schema: `InsertResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -13820,18 +10777,6 @@ Success.
 
 
 Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
 
 
 
@@ -13888,18 +10833,6 @@ Schema: `ReportAbuseGetResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -13932,18 +10865,6 @@ Success. Check the example shown below or refer `AttributeResponse` for more det
 
 
 Schema: `AttributeResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
 
 
 
@@ -13988,18 +10909,6 @@ Schema: `InsertResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -14030,18 +10939,6 @@ Success. Check the example shown below or refer `Attribute` for more details.
 
 
 Schema: `Attribute`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
 
 
 
@@ -14089,18 +10986,6 @@ Schema: `UpdateResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -14137,18 +11022,6 @@ Schema: `InsertResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -14177,18 +11050,6 @@ Success.
 
 
 Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
 
 
 
@@ -14246,18 +11107,6 @@ Schema: `CommentGetResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -14291,18 +11140,6 @@ Success. Returns a Product object. Check the example shown below or refer `Check
 
 
 Schema: `CheckEligibilityResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
 
 
 
@@ -14349,18 +11186,6 @@ Schema: `UpdateResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -14397,18 +11222,6 @@ Schema: `InsertResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -14437,18 +11250,6 @@ Success.
 
 
 Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
 
 
 
@@ -14507,18 +11308,6 @@ Schema: `MediaGetResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -14567,18 +11356,6 @@ Schema: `ReviewMetricGetResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -14615,18 +11392,6 @@ Schema: `UpdateResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -14655,18 +11420,6 @@ Success.
 
 
 Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
 
 
 
@@ -14739,18 +11492,6 @@ Schema: `ReviewGetResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -14785,18 +11526,6 @@ Success. Check the example shown below or refer `TemplateGetResponse` for more d
 
 
 Schema: `TemplateGetResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
 
 
 
@@ -14841,18 +11570,6 @@ Schema: `InsertResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -14881,18 +11598,6 @@ Success.
 
 
 Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
 
 
 
@@ -14953,18 +11658,6 @@ Schema: `QNAGetResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -15009,18 +11702,6 @@ Schema: `VoteResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -15049,18 +11730,6 @@ Success. Returns a vote ID.
 
 
 Schema: `InsertResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
 
 
 
@@ -15105,18 +11774,6 @@ Schema: `UpdateResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -15146,7 +11803,7 @@ Fetch all items added to the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`
+| xQuery | struct | Includes properties such as `UID`, `I`, `B`, `AssignCardID`
 
 
 
@@ -15159,7 +11816,7 @@ Use this API to get details of all the items added to a cart.
 Success. Returns a Cart object. Check the example shown below or refer `CartResponse` for more details.
 
 
-Schema: `CartDetailResponse`
+Schema: `CartResponse`
 
 
 
@@ -15184,7 +11841,7 @@ Fetch last-modified timestamp
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+| xQuery | struct | Includes properties such as `UID`
 
 
 
@@ -15229,10 +11886,10 @@ Use this API to add items to the cart.
 
 
 
-Success. Returns a cart object as shown below. Refer `AddRequestCartResponse` for more details.
+Success. Returns a cart object as shown below. Refer `AddCartResponse` for more details.
 
 
-Schema: `AddCartDetailResponse`
+Schema: `AddCartResponse`
 
 
 *Examples:*
@@ -15894,7 +12551,7 @@ Update items in the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`
+| xQuery | struct | Includes properties such as `UID`, `I`, `B`
 
 | body |  UpdateCartRequest | "Request body" 
 
@@ -15905,10 +12562,10 @@ Use this API to update items added to the cart with the help of a request object
 
 
 
-Success. Updates and returns a cart object as shown below. Refer `UpdateRequestCartResponse` for more details.
+Success. Updates and returns a cart object as shown below. Refer `UpdateCartResponse` for more details.
 
 
-Schema: `UpdateCartDetailResponse`
+Schema: `UpdateCartResponse`
 
 
 *Examples:*
@@ -16295,7 +12952,7 @@ Count items in the cart
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+| xQuery | struct | Includes properties such as `UID`
 
 
 
@@ -16333,7 +12990,7 @@ Fetch Coupon
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+| xQuery | struct | Includes properties such as `UID`
 
 
 
@@ -16377,7 +13034,7 @@ Apply Coupon
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `P`, `ID`
+| xQuery | struct | Includes properties such as `I`, `B`, `P`, `UID`
 
 | body |  ApplyCouponRequest | "Request body" 
 
@@ -16385,18 +13042,6 @@ Apply Coupon
 Use this API to apply coupons on items in the cart.
 
 *Success Response:*
-
-
-
-Success. Returns coupons applied to the cart along with item details and price breakup. Refer `CartResponse` for more details.
-
-
-Schema: `CartDetailResponse`
-
-
-
-
-
 
 
 
@@ -16416,7 +13061,7 @@ Remove Coupon Applied
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+| xQuery | struct | Includes properties such as `UID`
 
 
 
@@ -16429,7 +13074,7 @@ Remove Coupon applied on the cart by passing uid in request body.
 Success. Returns coupons removed from the cart along with item details and price breakup. Refer `CartResponse` for more details.
 
 
-Schema: `CartDetailResponse`
+Schema: `CartResponse`
 
 
 
@@ -16553,18 +13198,6 @@ Offers not found
 
 
 
-Unhandled API error
-
-
-Schema: `Object`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -16585,7 +13218,7 @@ Apply reward points at cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`
+| xQuery | struct | Includes properties such as `UID`, `I`, `B`
 
 | body |  RewardPointRequest | "Request body" 
 
@@ -16599,7 +13232,7 @@ Use this API to redeem a fixed no. of reward points by applying it to the cart.
 Success. Returns a Cart object. Check the example shown below or refer `CartResponse` for more details.
 
 
-Schema: `CartDetailResponse`
+Schema: `CartResponse`
 
 
 
@@ -16632,7 +13265,7 @@ Fetch address
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+| xQuery | struct | Includes properties such as `UID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -16705,7 +13338,7 @@ Fetch a single address by its ID
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ID | string |  | 
+| ID | float64 |  | 
 
 
 
@@ -16717,7 +13350,7 @@ Fetch a single address by its ID
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+| xQuery | struct | Includes properties such as `UID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -16754,7 +13387,7 @@ Update address added to an account
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ID | string | ID allotted to the selected address | 
+| ID | float64 | ID allotted to the selected address | 
 
 
 | body |  Address | "Request body" 
@@ -16763,18 +13396,6 @@ Update address added to an account
 Use this API to update an existing address in the account. Request object should contain attributes mentioned in  <font color="blue">Address </font> can be updated. These attributes are:</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
 
 *Success Response:*
-
-
-
-Success. Returns the address ID and a message indicating a successful address updation.
-
-
-Schema: `UpdateAddressResponse`
-
-
-
-
-
 
 
 
@@ -16793,7 +13414,7 @@ Remove address associated with an account
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ID | string | ID allotted to the selected address | 
+| ID | float64 | ID allotted to the selected address | 
 
 
 
@@ -16801,18 +13422,6 @@ Remove address associated with an account
 Use this API to delete an address by its ID. This will returns an object that will indicate whether the address was deleted successfully or not.
 
 *Success Response:*
-
-
-
-Returns a Status object indicating the success or failure of address deletion.
-
-
-Schema: `DeleteAddressResponse`
-
-
-
-
-
 
 
 
@@ -16836,7 +13445,7 @@ Select an address from available addresses
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `I`, `B`
+| xQuery | struct | Includes properties such as `UID`, `I`, `B`
 
 | body |  SelectCartAddressRequest | "Request body" 
 
@@ -16844,54 +13453,6 @@ Select an address from available addresses
 <p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul>
 
 *Success Response:*
-
-
-
-Success. Returns a Cart object as shown below. Refer `CartResponse` for more details.  .
-
-
-Schema: `CartDetailResponse`
-
-
-
-
-
-
-
-
-Address or PIN code error
-
-
-Schema: `Object`
-
-
-*Examples:*
-
-
-Address Not Found
-```json
-{
-  "value": {
-    "status": "ERROR",
-    "message": "ADDRESS_NOT_FOUND"
-  }
-}
-```
-
-Pincode Not Serviciable
-```json
-{
-  "value": {
-    "status": "ERROR",
-    "message": "PINCODE_NOT_SERVICIABLE"
-  }
-}
-```
-
-
-
-
-
 
 
 
@@ -16911,7 +13472,7 @@ Update cart payment
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+| xQuery | struct | Includes properties such as `UID`
 
 | body |  UpdateCartPaymentRequest | "Request body" 
 
@@ -16925,7 +13486,7 @@ Use this API to update cart payment.
 Success. Returns a Cart object as shown below. Refer `CartResponse` for more details.
 
 
-Schema: `CartDetailResponse`
+Schema: `CartResponse`
 
 
 
@@ -16960,7 +13521,7 @@ Verify the coupon eligibility against the payment mode
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
+| xQuery | struct | Includes properties such as `UID`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
 
 
 
@@ -17010,7 +13571,7 @@ Get delivery date and options before checkout
 
 
 
-| xQuery | struct | Includes properties such as `PickAtStoreUID`, `OrderingStoreID`, `P`, `ID`, `AddressID`, `AreaCode`, `OrderType`
+| xQuery | struct | Includes properties such as `PickAtStoreUID`, `OrderingStoreID`, `P`, `UID`, `AddressID`, `AreaCode`, `OrderType`
 
 
 
@@ -17672,18 +14233,6 @@ Shipment Generation Failed
 
 
 
-Unhandled API error
-
-
-Schema: `Object`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -17708,7 +14257,7 @@ Update shipment delivery type and quantity before checkout
 
 
 
-| xQuery | struct | Includes properties such as `I`, `P`, `ID`, `AddressID`, `OrderType`
+| xQuery | struct | Includes properties such as `I`, `P`, `UID`, `AddressID`, `OrderType`
 
 | body |  UpdateCartShipmentRequest | "Request body" 
 
@@ -18372,18 +14921,6 @@ Shipment Generation Failed
 
 
 
-Unhandled API error
-
-
-Schema: `Object`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -18400,9 +14937,9 @@ Checkout all items in the cart
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+| xQuery | struct | Includes properties such as `UID`
 
-| body |  CartPosCheckoutDetailRequest | "Request body" 
+| body |  CartPosCheckoutRequest | "Request body" 
 
 
 Use this API to checkout all items in the cart for payment and order generation. For COD, order will be generated directly, whereas for other checkout modes, user will be redirected to a payment gateway.
@@ -18816,7 +15353,7 @@ Update the cart meta
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+| xQuery | struct | Includes properties such as `UID`
 
 | body |  CartMetaRequest | "Request body" 
 
@@ -18831,18 +15368,6 @@ Returns a message indicating the success of cart meta updation as shown below.
 
 
 Schema: `CartMetaResponse`
-
-
-
-
-
-
-
-
-Missing required Field
-
-
-Schema: `CartMetaMissingResponse`
 
 
 
@@ -18869,7 +15394,7 @@ Get available delivery modes for cart
 
 
 
-| xQuery | struct | Includes properties such as `AreaCode`, `ID`
+| xQuery | struct | Includes properties such as `AreaCode`, `UID`
 
 
 
@@ -19006,18 +15531,6 @@ Use this API to get the shared cart details as per the token generated using the
 
 
 Success. Returns a Cart object as per the valid token. Refer `SharedCartResponse` for more details.
-
-
-Schema: `SharedCartResponse`
-
-
-
-
-
-
-
-
-No cart found for the token sent
 
 
 Schema: `SharedCartResponse`
@@ -19399,30 +15912,6 @@ Schema: `GetTatProductResponse`
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -19453,30 +15942,6 @@ Success. Returns a JSON object containing the city name, state and country ident
 
 
 Schema: `GetPincodeCityResponse`
-
-
-
-
-
-
-
-
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
 
 
 
