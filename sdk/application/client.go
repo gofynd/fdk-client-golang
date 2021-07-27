@@ -2281,19 +2281,19 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartGetCartXQuery holds query params
     type CartGetCartXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
+        ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
         AssignCardID float64  `url:"assign_card_id,omitempty"`  
     }
     
     // GetCart Fetch all items added to the cart
-    func (ca *Cart)  GetCart(xQuery CartGetCartXQuery) (CartResponse, error){
+    func (ca *Cart)  GetCart(xQuery CartGetCartXQuery) (CartDetailResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getCartResponse CartResponse
+             getCartResponse CartDetailResponse
 	    )
 
         
@@ -2325,12 +2325,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return CartResponse{}, err
+            return CartDetailResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &getCartResponse)
         if err != nil {
-            return CartResponse{}, common.NewFDKError(err.Error())
+            return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
          return getCartResponse, nil
         
@@ -2344,7 +2344,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartGetCartLastModifiedXQuery holds query params
     type CartGetCartLastModifiedXQuery struct { 
-        UID float64  `url:"uid,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // GetCartLastModified Fetch last-modified timestamp
@@ -2399,12 +2399,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // AddItems Add items to cart
-    func (ca *Cart)  AddItems(xQuery CartAddItemsXQuery, body  AddCartRequest) (AddCartResponse, error){
+    func (ca *Cart)  AddItems(xQuery CartAddItemsXQuery, body  AddCartRequest) (AddCartDetailResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             addItemsResponse AddCartResponse
+             addItemsResponse AddCartDetailResponse
 	    )
 
         
@@ -2429,12 +2429,12 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return AddCartResponse{}, common.NewFDKError(err.Error())
+             return AddCartDetailResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return AddCartResponse{}, common.NewFDKError(err.Error())
+             return AddCartDetailResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -2447,12 +2447,12 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return AddCartResponse{}, err
+            return AddCartDetailResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &addItemsResponse)
         if err != nil {
-            return AddCartResponse{}, common.NewFDKError(err.Error())
+            return AddCartDetailResponse{}, common.NewFDKError(err.Error())
         }
          return addItemsResponse, nil
         
@@ -2466,18 +2466,18 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartUpdateCartXQuery holds query params
     type CartUpdateCartXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
+        ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"`  
     }
     
     // UpdateCart Update items in the cart
-    func (ca *Cart)  UpdateCart(xQuery CartUpdateCartXQuery, body  UpdateCartRequest) (UpdateCartResponse, error){
+    func (ca *Cart)  UpdateCart(xQuery CartUpdateCartXQuery, body  UpdateCartRequest) (UpdateCartDetailResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             updateCartResponse UpdateCartResponse
+             updateCartResponse UpdateCartDetailResponse
 	    )
 
         
@@ -2506,12 +2506,12 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return UpdateCartResponse{}, common.NewFDKError(err.Error())
+             return UpdateCartDetailResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return UpdateCartResponse{}, common.NewFDKError(err.Error())
+             return UpdateCartDetailResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -2524,12 +2524,12 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return UpdateCartResponse{}, err
+            return UpdateCartDetailResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &updateCartResponse)
         if err != nil {
-            return UpdateCartResponse{}, common.NewFDKError(err.Error())
+            return UpdateCartDetailResponse{}, common.NewFDKError(err.Error())
         }
          return updateCartResponse, nil
         
@@ -2543,7 +2543,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartGetItemCountXQuery holds query params
     type CartGetItemCountXQuery struct { 
-        UID float64  `url:"uid,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // GetItemCount Count items in the cart
@@ -2597,7 +2597,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartGetCouponsXQuery holds query params
     type CartGetCouponsXQuery struct { 
-        UID float64  `url:"uid,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // GetCoupons Fetch Coupon
@@ -2654,7 +2654,7 @@ func NewAppClient(config *AppConfig) *Client {
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
         P bool  `url:"p,omitempty"` 
-        UID float64  `url:"uid,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // ApplyCoupon Apply Coupon
@@ -2725,16 +2725,16 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartRemoveCouponXQuery holds query params
     type CartRemoveCouponXQuery struct { 
-        UID float64  `url:"uid,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // RemoveCoupon Remove Coupon Applied
-    func (ca *Cart)  RemoveCoupon(xQuery CartRemoveCouponXQuery) (CartResponse, error){
+    func (ca *Cart)  RemoveCoupon(xQuery CartRemoveCouponXQuery) (CartDetailResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             removeCouponResponse CartResponse
+             removeCouponResponse CartDetailResponse
 	    )
 
         
@@ -2760,12 +2760,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return CartResponse{}, err
+            return CartDetailResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &removeCouponResponse)
         if err != nil {
-            return CartResponse{}, common.NewFDKError(err.Error())
+            return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
          return removeCouponResponse, nil
         
@@ -2842,18 +2842,18 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartApplyRewardPointsXQuery holds query params
     type CartApplyRewardPointsXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
+        ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"`  
     }
     
     // ApplyRewardPoints Apply reward points at cart
-    func (ca *Cart)  ApplyRewardPoints(xQuery CartApplyRewardPointsXQuery, body  RewardPointRequest) (CartResponse, error){
+    func (ca *Cart)  ApplyRewardPoints(xQuery CartApplyRewardPointsXQuery, body  RewardPointRequest) (CartDetailResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             applyRewardPointsResponse CartResponse
+             applyRewardPointsResponse CartDetailResponse
 	    )
 
         
@@ -2880,12 +2880,12 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return CartResponse{}, common.NewFDKError(err.Error())
+             return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return CartResponse{}, common.NewFDKError(err.Error())
+             return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -2898,12 +2898,12 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return CartResponse{}, err
+            return CartDetailResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &applyRewardPointsResponse)
         if err != nil {
-            return CartResponse{}, common.NewFDKError(err.Error())
+            return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
          return applyRewardPointsResponse, nil
         
@@ -2917,7 +2917,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartGetAddressesXQuery holds query params
     type CartGetAddressesXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
+        CartID string  `url:"cart_id,omitempty"` 
         MobileNo string  `url:"mobile_no,omitempty"` 
         CheckoutMode string  `url:"checkout_mode,omitempty"` 
         Tags string  `url:"tags,omitempty"` 
@@ -3085,7 +3085,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartGetAddressByIdXQuery holds query params
     type CartGetAddressByIdXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
+        CartID string  `url:"cart_id,omitempty"` 
         MobileNo string  `url:"mobile_no,omitempty"` 
         CheckoutMode string  `url:"checkout_mode,omitempty"` 
         Tags string  `url:"tags,omitempty"` 
@@ -3093,7 +3093,7 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // GetAddressById Fetch a single address by its ID
-    func (ca *Cart)  GetAddressById(ID float64, xQuery CartGetAddressByIdXQuery) (Address, error){
+    func (ca *Cart)  GetAddressById(ID string, xQuery CartGetAddressByIdXQuery) (Address, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -3128,7 +3128,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/application/cart/v1.0/address/undefined",ID),
+            fmt.Sprintf("/service/application/cart/v1.0/address/%s",ID),
             nil,
             xQuery,
             nil)
@@ -3152,7 +3152,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // UpdateAddress Update address added to an account
-    func (ca *Cart)  UpdateAddress(ID float64, body  Address) (interface{}, error){
+    func (ca *Cart)  UpdateAddress(ID string, body  Address) (interface{}, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -3232,7 +3232,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "put",
-            fmt.Sprintf("/service/application/cart/v1.0/address/undefined",ID),
+            fmt.Sprintf("/service/application/cart/v1.0/address/%s",ID),
             nil,
             nil,
             reqBody)
@@ -3252,7 +3252,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // RemoveAddress Remove address associated with an account
-    func (ca *Cart)  RemoveAddress(ID float64) (interface{}, error){
+    func (ca *Cart)  RemoveAddress(ID string) (interface{}, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -3275,7 +3275,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "delete",
-            fmt.Sprintf("/service/application/cart/v1.0/address/undefined",ID),
+            fmt.Sprintf("/service/application/cart/v1.0/address/%s",ID),
             nil,
             nil,
             nil)
@@ -3296,7 +3296,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartSelectAddressXQuery holds query params
     type CartSelectAddressXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
+        CartID string  `url:"cart_id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"`  
     }
@@ -3371,16 +3371,16 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartSelectPaymentModeXQuery holds query params
     type CartSelectPaymentModeXQuery struct { 
-        UID string  `url:"uid,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // SelectPaymentMode Update cart payment
-    func (ca *Cart)  SelectPaymentMode(xQuery CartSelectPaymentModeXQuery, body  UpdateCartPaymentRequest) (CartResponse, error){
+    func (ca *Cart)  SelectPaymentMode(xQuery CartSelectPaymentModeXQuery, body  UpdateCartPaymentRequest) (CartDetailResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             selectPaymentModeResponse CartResponse
+             selectPaymentModeResponse CartDetailResponse
 	    )
 
         
@@ -3413,12 +3413,12 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return CartResponse{}, common.NewFDKError(err.Error())
+             return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return CartResponse{}, common.NewFDKError(err.Error())
+             return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -3431,12 +3431,12 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return CartResponse{}, err
+            return CartDetailResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &selectPaymentModeResponse)
         if err != nil {
-            return CartResponse{}, common.NewFDKError(err.Error())
+            return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
          return selectPaymentModeResponse, nil
         
@@ -3450,7 +3450,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartValidateCouponForPaymentXQuery holds query params
     type CartValidateCouponForPaymentXQuery struct { 
-        UID string  `url:"uid,omitempty"` 
+        ID string  `url:"id,omitempty"` 
         AddressID string  `url:"address_id,omitempty"` 
         PaymentMode string  `url:"payment_mode,omitempty"` 
         PaymentIdentifier string  `url:"payment_identifier,omitempty"` 
@@ -3520,8 +3520,8 @@ func NewAppClient(config *AppConfig) *Client {
     //CartGetShipmentsXQuery holds query params
     type CartGetShipmentsXQuery struct { 
         P bool  `url:"p,omitempty"` 
-        UID float64  `url:"uid,omitempty"` 
-        AddressID float64  `url:"address_id,omitempty"` 
+        ID string  `url:"id,omitempty"` 
+        AddressID string  `url:"address_id,omitempty"` 
         AreaCode string  `url:"area_code,omitempty"`  
     }
     
@@ -3581,7 +3581,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // CheckoutCart Checkout all items in the cart
-    func (ca *Cart)  CheckoutCart(body  CartCheckoutRequest) (CartCheckoutResponse, error){
+    func (ca *Cart)  CheckoutCart(body  CartCheckoutDetailRequest) (CartCheckoutResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -3672,7 +3672,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartUpdateCartMetaXQuery holds query params
     type CartUpdateCartMetaXQuery struct { 
-        UID float64  `url:"uid,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // UpdateCartMeta Update the cart meta
@@ -3754,6 +3754,8 @@ func NewAppClient(config *AppConfig) *Client {
              getCartShareLinkResponse GetShareCartLinkResponse
 	    )
 
+        
+            
         
             
         
@@ -13688,19 +13690,19 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartGetCartXQuery holds query params
     type PosCartGetCartXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
+        ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
         AssignCardID float64  `url:"assign_card_id,omitempty"`  
     }
     
     // GetCart Fetch all items added to the cart
-    func (po *PosCart)  GetCart(xQuery PosCartGetCartXQuery) (CartResponse, error){
+    func (po *PosCart)  GetCart(xQuery PosCartGetCartXQuery) (CartDetailResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getCartResponse CartResponse
+             getCartResponse CartDetailResponse
 	    )
 
         
@@ -13732,12 +13734,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return CartResponse{}, err
+            return CartDetailResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &getCartResponse)
         if err != nil {
-            return CartResponse{}, common.NewFDKError(err.Error())
+            return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
          return getCartResponse, nil
         
@@ -13751,7 +13753,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartGetCartLastModifiedXQuery holds query params
     type PosCartGetCartLastModifiedXQuery struct { 
-        UID float64  `url:"uid,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // GetCartLastModified Fetch last-modified timestamp
@@ -13806,12 +13808,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // AddItems Add items to cart
-    func (po *PosCart)  AddItems(xQuery PosCartAddItemsXQuery, body  AddCartRequest) (AddCartResponse, error){
+    func (po *PosCart)  AddItems(xQuery PosCartAddItemsXQuery, body  AddCartRequest) (AddCartDetailResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             addItemsResponse AddCartResponse
+             addItemsResponse AddCartDetailResponse
 	    )
 
         
@@ -13834,12 +13836,12 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return AddCartResponse{}, common.NewFDKError(err.Error())
+             return AddCartDetailResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return AddCartResponse{}, common.NewFDKError(err.Error())
+             return AddCartDetailResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -13852,12 +13854,12 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return AddCartResponse{}, err
+            return AddCartDetailResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &addItemsResponse)
         if err != nil {
-            return AddCartResponse{}, common.NewFDKError(err.Error())
+            return AddCartDetailResponse{}, common.NewFDKError(err.Error())
         }
          return addItemsResponse, nil
         
@@ -13871,18 +13873,18 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartUpdateCartXQuery holds query params
     type PosCartUpdateCartXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
+        ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"`  
     }
     
     // UpdateCart Update items in the cart
-    func (po *PosCart)  UpdateCart(xQuery PosCartUpdateCartXQuery, body  UpdateCartRequest) (UpdateCartResponse, error){
+    func (po *PosCart)  UpdateCart(xQuery PosCartUpdateCartXQuery, body  UpdateCartRequest) (UpdateCartDetailResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             updateCartResponse UpdateCartResponse
+             updateCartResponse UpdateCartDetailResponse
 	    )
 
         
@@ -13907,12 +13909,12 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return UpdateCartResponse{}, common.NewFDKError(err.Error())
+             return UpdateCartDetailResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return UpdateCartResponse{}, common.NewFDKError(err.Error())
+             return UpdateCartDetailResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -13925,12 +13927,12 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return UpdateCartResponse{}, err
+            return UpdateCartDetailResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &updateCartResponse)
         if err != nil {
-            return UpdateCartResponse{}, common.NewFDKError(err.Error())
+            return UpdateCartDetailResponse{}, common.NewFDKError(err.Error())
         }
          return updateCartResponse, nil
         
@@ -13944,7 +13946,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartGetItemCountXQuery holds query params
     type PosCartGetItemCountXQuery struct { 
-        UID float64  `url:"uid,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // GetItemCount Count items in the cart
@@ -13998,7 +14000,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartGetCouponsXQuery holds query params
     type PosCartGetCouponsXQuery struct { 
-        UID float64  `url:"uid,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // GetCoupons Fetch Coupon
@@ -14055,7 +14057,7 @@ func NewAppClient(config *AppConfig) *Client {
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
         P bool  `url:"p,omitempty"` 
-        UID float64  `url:"uid,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // ApplyCoupon Apply Coupon
@@ -14124,16 +14126,16 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartRemoveCouponXQuery holds query params
     type PosCartRemoveCouponXQuery struct { 
-        UID float64  `url:"uid,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // RemoveCoupon Remove Coupon Applied
-    func (po *PosCart)  RemoveCoupon(xQuery PosCartRemoveCouponXQuery) (CartResponse, error){
+    func (po *PosCart)  RemoveCoupon(xQuery PosCartRemoveCouponXQuery) (CartDetailResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             removeCouponResponse CartResponse
+             removeCouponResponse CartDetailResponse
 	    )
 
         
@@ -14159,12 +14161,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return CartResponse{}, err
+            return CartDetailResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &removeCouponResponse)
         if err != nil {
-            return CartResponse{}, common.NewFDKError(err.Error())
+            return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
          return removeCouponResponse, nil
         
@@ -14241,18 +14243,18 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartApplyRewardPointsXQuery holds query params
     type PosCartApplyRewardPointsXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
+        ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"`  
     }
     
     // ApplyRewardPoints Apply reward points at cart
-    func (po *PosCart)  ApplyRewardPoints(xQuery PosCartApplyRewardPointsXQuery, body  RewardPointRequest) (CartResponse, error){
+    func (po *PosCart)  ApplyRewardPoints(xQuery PosCartApplyRewardPointsXQuery, body  RewardPointRequest) (CartDetailResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             applyRewardPointsResponse CartResponse
+             applyRewardPointsResponse CartDetailResponse
 	    )
 
         
@@ -14277,12 +14279,12 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return CartResponse{}, common.NewFDKError(err.Error())
+             return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return CartResponse{}, common.NewFDKError(err.Error())
+             return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -14295,12 +14297,12 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return CartResponse{}, err
+            return CartDetailResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &applyRewardPointsResponse)
         if err != nil {
-            return CartResponse{}, common.NewFDKError(err.Error())
+            return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
          return applyRewardPointsResponse, nil
         
@@ -14314,7 +14316,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartGetAddressesXQuery holds query params
     type PosCartGetAddressesXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
+        CartID string  `url:"cart_id,omitempty"` 
         MobileNo string  `url:"mobile_no,omitempty"` 
         CheckoutMode string  `url:"checkout_mode,omitempty"` 
         Tags string  `url:"tags,omitempty"` 
@@ -14438,7 +14440,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartGetAddressByIdXQuery holds query params
     type PosCartGetAddressByIdXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
+        CartID string  `url:"cart_id,omitempty"` 
         MobileNo string  `url:"mobile_no,omitempty"` 
         CheckoutMode string  `url:"checkout_mode,omitempty"` 
         Tags string  `url:"tags,omitempty"` 
@@ -14446,7 +14448,7 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // GetAddressById Fetch a single address by its ID
-    func (po *PosCart)  GetAddressById(ID float64, xQuery PosCartGetAddressByIdXQuery) (Address, error){
+    func (po *PosCart)  GetAddressById(ID string, xQuery PosCartGetAddressByIdXQuery) (Address, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -14481,7 +14483,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             po.config,
             "get",
-            fmt.Sprintf("/service/application/pos/cart/v1.0/address/undefined",ID),
+            fmt.Sprintf("/service/application/pos/cart/v1.0/address/%s",ID),
             nil,
             xQuery,
             nil)
@@ -14505,7 +14507,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // UpdateAddress Update address added to an account
-    func (po *PosCart)  UpdateAddress(ID float64, body  Address) (interface{}, error){
+    func (po *PosCart)  UpdateAddress(ID string, body  Address) (interface{}, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -14541,7 +14543,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             po.config,
             "put",
-            fmt.Sprintf("/service/application/pos/cart/v1.0/address/undefined",ID),
+            fmt.Sprintf("/service/application/pos/cart/v1.0/address/%s",ID),
             nil,
             nil,
             reqBody)
@@ -14561,7 +14563,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // RemoveAddress Remove address associated with an account
-    func (po *PosCart)  RemoveAddress(ID float64) (interface{}, error){
+    func (po *PosCart)  RemoveAddress(ID string) (interface{}, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -14584,7 +14586,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             po.config,
             "delete",
-            fmt.Sprintf("/service/application/pos/cart/v1.0/address/undefined",ID),
+            fmt.Sprintf("/service/application/pos/cart/v1.0/address/%s",ID),
             nil,
             nil,
             nil)
@@ -14605,7 +14607,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartSelectAddressXQuery holds query params
     type PosCartSelectAddressXQuery struct { 
-        UID float64  `url:"uid,omitempty"` 
+        CartID string  `url:"cart_id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"`  
     }
@@ -14674,16 +14676,16 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartSelectPaymentModeXQuery holds query params
     type PosCartSelectPaymentModeXQuery struct { 
-        UID string  `url:"uid,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // SelectPaymentMode Update cart payment
-    func (po *PosCart)  SelectPaymentMode(xQuery PosCartSelectPaymentModeXQuery, body  UpdateCartPaymentRequest) (CartResponse, error){
+    func (po *PosCart)  SelectPaymentMode(xQuery PosCartSelectPaymentModeXQuery, body  UpdateCartPaymentRequest) (CartDetailResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             selectPaymentModeResponse CartResponse
+             selectPaymentModeResponse CartDetailResponse
 	    )
 
         
@@ -14704,12 +14706,12 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return CartResponse{}, common.NewFDKError(err.Error())
+             return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return CartResponse{}, common.NewFDKError(err.Error())
+             return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -14722,12 +14724,12 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return CartResponse{}, err
+            return CartDetailResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &selectPaymentModeResponse)
         if err != nil {
-            return CartResponse{}, common.NewFDKError(err.Error())
+            return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
          return selectPaymentModeResponse, nil
         
@@ -14741,7 +14743,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartValidateCouponForPaymentXQuery holds query params
     type PosCartValidateCouponForPaymentXQuery struct { 
-        UID string  `url:"uid,omitempty"` 
+        ID string  `url:"id,omitempty"` 
         AddressID string  `url:"address_id,omitempty"` 
         PaymentMode string  `url:"payment_mode,omitempty"` 
         PaymentIdentifier string  `url:"payment_identifier,omitempty"` 
@@ -14813,8 +14815,8 @@ func NewAppClient(config *AppConfig) *Client {
         PickAtStoreUID float64  `url:"pick_at_store_uid,omitempty"` 
         OrderingStoreID float64  `url:"ordering_store_id,omitempty"` 
         P bool  `url:"p,omitempty"` 
-        UID float64  `url:"uid,omitempty"` 
-        AddressID float64  `url:"address_id,omitempty"` 
+        ID string  `url:"id,omitempty"` 
+        AddressID string  `url:"address_id,omitempty"` 
         AreaCode string  `url:"area_code,omitempty"` 
         OrderType string  `url:"order_type,omitempty"`  
     }
@@ -14884,8 +14886,8 @@ func NewAppClient(config *AppConfig) *Client {
     type PosCartUpdateShipmentsXQuery struct { 
         I bool  `url:"i,omitempty"` 
         P bool  `url:"p,omitempty"` 
-        UID float64  `url:"uid,omitempty"` 
-        AddressID float64  `url:"address_id,omitempty"` 
+        ID string  `url:"id,omitempty"` 
+        AddressID string  `url:"address_id,omitempty"` 
         OrderType string  `url:"order_type,omitempty"`  
     }
     
@@ -14963,11 +14965,11 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartCheckoutCartXQuery holds query params
     type PosCartCheckoutCartXQuery struct { 
-        UID float64  `url:"uid,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // CheckoutCart Checkout all items in the cart
-    func (po *PosCart)  CheckoutCart(xQuery PosCartCheckoutCartXQuery, body  CartPosCheckoutRequest) (CartCheckoutResponse, error){
+    func (po *PosCart)  CheckoutCart(xQuery PosCartCheckoutCartXQuery, body  CartPosCheckoutDetailRequest) (CartCheckoutResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -15070,7 +15072,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartUpdateCartMetaXQuery holds query params
     type PosCartUpdateCartMetaXQuery struct { 
-        UID float64  `url:"uid,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // UpdateCartMeta Update the cart meta
@@ -15138,7 +15140,7 @@ func NewAppClient(config *AppConfig) *Client {
     //PosCartGetAvailableDeliveryModesXQuery holds query params
     type PosCartGetAvailableDeliveryModesXQuery struct { 
         AreaCode string  `url:"area_code,omitempty"` 
-        UID float64  `url:"uid,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // GetAvailableDeliveryModes Get available delivery modes for cart

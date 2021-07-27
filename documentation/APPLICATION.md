@@ -1518,7 +1518,7 @@ Fetch all items added to the cart
 
 
 
-| xQuery | struct | Includes properties such as `UID`, `I`, `B`, `AssignCardID`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`
 
 
 
@@ -1528,10 +1528,10 @@ Use this API to get details of all the items added to a cart.
 
 
 
-Success. Returns a Cart object. Check the example shown below or refer `CartResponse` for more details.
+Success. Returns a Cart object. Check the example shown below or refer `CartDetailResponse` for more details.
 
 
-Schema: `CartResponse`
+Schema: `CartDetailResponse`
 
 
 
@@ -1556,7 +1556,7 @@ Fetch last-modified timestamp
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `UID`
+| xQuery | struct | Includes properties such as `ID`
 
 
 
@@ -1601,10 +1601,10 @@ Use this API to add items to the cart.
 
 
 
-Success. Returns a cart object as shown below. Refer `AddCartResponse` for more details.
+Success. Returns a cart object as shown below. Refer `AddCartDetailResponse` for more details.
 
 
-Schema: `AddCartResponse`
+Schema: `AddCartDetailResponse`
 
 
 *Examples:*
@@ -2266,7 +2266,7 @@ Update items in the cart
 
 
 
-| xQuery | struct | Includes properties such as `UID`, `I`, `B`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`
 
 | body |  UpdateCartRequest | "Request body" 
 
@@ -2277,10 +2277,10 @@ Use this API to update items added to the cart with the help of a request object
 
 
 
-Success. Updates and returns a cart object as shown below. Refer `UpdateCartResponse` for more details.
+Success. Updates and returns a cart object as shown below. Refer `UpdateCartDetailResponse` for more details.
 
 
-Schema: `UpdateCartResponse`
+Schema: `UpdateCartDetailResponse`
 
 
 *Examples:*
@@ -2667,7 +2667,7 @@ Count items in the cart
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `UID`
+| xQuery | struct | Includes properties such as `ID`
 
 
 
@@ -2705,7 +2705,7 @@ Fetch Coupon
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `UID`
+| xQuery | struct | Includes properties such as `ID`
 
 
 
@@ -2749,7 +2749,7 @@ Apply Coupon
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `P`, `UID`
+| xQuery | struct | Includes properties such as `I`, `B`, `P`, `ID`
 
 | body |  ApplyCouponRequest | "Request body" 
 
@@ -2776,7 +2776,7 @@ Remove Coupon Applied
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `UID`
+| xQuery | struct | Includes properties such as `ID`
 
 
 
@@ -2786,10 +2786,10 @@ Remove Coupon applied on the cart by passing uid in request body.
 
 
 
-Success. Returns coupons removed from the cart along with item details and price breakup. Refer `CartResponse` for more details.
+Success. Returns coupons removed from the cart along with item details and price breakup. Refer `CartDetailResponse` for more details.
 
 
-Schema: `CartResponse`
+Schema: `CartDetailResponse`
 
 
 
@@ -2933,7 +2933,7 @@ Apply reward points at cart
 
 
 
-| xQuery | struct | Includes properties such as `UID`, `I`, `B`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`
 
 | body |  RewardPointRequest | "Request body" 
 
@@ -2944,10 +2944,10 @@ Use this API to redeem a fixed no. of reward points by applying it to the cart.
 
 
 
-Success. Returns a Cart object. Check the example shown below or refer `CartResponse` for more details.
+Success. Returns a Cart object. Check the example shown below or refer `CartDetailResponse` for more details.
 
 
-Schema: `CartResponse`
+Schema: `CartDetailResponse`
 
 
 
@@ -2980,7 +2980,7 @@ Fetch address
 
 
 
-| xQuery | struct | Includes properties such as `UID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -3053,7 +3053,7 @@ Fetch a single address by its ID
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ID | float64 |  | 
+| ID | string |  | 
 
 
 
@@ -3065,7 +3065,7 @@ Fetch a single address by its ID
 
 
 
-| xQuery | struct | Includes properties such as `UID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -3102,7 +3102,7 @@ Update address added to an account
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ID | float64 | ID allotted to the selected address | 
+| ID | string | ID allotted to the selected address | 
 
 
 | body |  Address | "Request body" 
@@ -3129,7 +3129,7 @@ Remove address associated with an account
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ID | float64 | ID allotted to the selected address | 
+| ID | string | ID allotted to the selected address | 
 
 
 
@@ -3160,7 +3160,7 @@ Select an address from available addresses
 
 
 
-| xQuery | struct | Includes properties such as `UID`, `I`, `B`
+| xQuery | struct | Includes properties such as `CartID`, `I`, `B`
 
 | body |  SelectCartAddressRequest | "Request body" 
 
@@ -3187,7 +3187,7 @@ Update cart payment
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `UID`
+| xQuery | struct | Includes properties such as `ID`
 
 | body |  UpdateCartPaymentRequest | "Request body" 
 
@@ -3198,10 +3198,10 @@ Use this API to update cart payment.
 
 
 
-Success. Returns a Cart object as shown below. Refer `CartResponse` for more details.
+Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for more details.
 
 
-Schema: `CartResponse`
+Schema: `CartDetailResponse`
 
 
 
@@ -3236,7 +3236,7 @@ Verify the coupon eligibility against the payment mode
 
 
 
-| xQuery | struct | Includes properties such as `UID`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
+| xQuery | struct | Includes properties such as `ID`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
 
 
 
@@ -3280,7 +3280,7 @@ Get delivery date and options before checkout
 
 
 
-| xQuery | struct | Includes properties such as `P`, `UID`, `AddressID`, `AreaCode`
+| xQuery | struct | Includes properties such as `P`, `ID`, `AddressID`, `AreaCode`
 
 
 
@@ -3957,7 +3957,7 @@ Checkout all items in the cart
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  CartCheckoutRequest | "Request body" 
+| body |  CartCheckoutDetailRequest | "Request body" 
 
 
 Use this API to checkout all items in the cart for payment and order generation. For COD, order will be directly generated, whereas for other checkout modes, user will be redirected to a payment gateway.
@@ -3966,7 +3966,7 @@ Use this API to checkout all items in the cart for payment and order generation.
 
 
 
-Success. Returns the status of cart checkout. Refer `CartCheckoutResponse` for more details.
+Success. Returns the status of cart checkout. Refer `CartCheckoutResponseSchema` for more details.
 
 
 Schema: `CartCheckoutResponse`
@@ -4371,7 +4371,7 @@ Update the cart meta
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `UID`
+| xQuery | struct | Includes properties such as `ID`
 
 | body |  CartMetaRequest | "Request body" 
 
@@ -11803,7 +11803,7 @@ Fetch all items added to the cart
 
 
 
-| xQuery | struct | Includes properties such as `UID`, `I`, `B`, `AssignCardID`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`
 
 
 
@@ -11813,10 +11813,10 @@ Use this API to get details of all the items added to a cart.
 
 
 
-Success. Returns a Cart object. Check the example shown below or refer `CartResponse` for more details.
+Success. Returns a Cart object. Check the example shown below or refer `CartDetailResponse` for more details.
 
 
-Schema: `CartResponse`
+Schema: `CartDetailResponse`
 
 
 
@@ -11841,7 +11841,7 @@ Fetch last-modified timestamp
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `UID`
+| xQuery | struct | Includes properties such as `ID`
 
 
 
@@ -11886,10 +11886,10 @@ Use this API to add items to the cart.
 
 
 
-Success. Returns a cart object as shown below. Refer `AddCartResponse` for more details.
+Success. Returns a cart object as shown below. Refer `AddCartDetailResponse` for more details.
 
 
-Schema: `AddCartResponse`
+Schema: `AddCartDetailResponse`
 
 
 *Examples:*
@@ -12551,7 +12551,7 @@ Update items in the cart
 
 
 
-| xQuery | struct | Includes properties such as `UID`, `I`, `B`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`
 
 | body |  UpdateCartRequest | "Request body" 
 
@@ -12562,10 +12562,10 @@ Use this API to update items added to the cart with the help of a request object
 
 
 
-Success. Updates and returns a cart object as shown below. Refer `UpdateCartResponse` for more details.
+Success. Updates and returns a cart object as shown below. Refer `UpdateCartDetailResponse` for more details.
 
 
-Schema: `UpdateCartResponse`
+Schema: `UpdateCartDetailResponse`
 
 
 *Examples:*
@@ -12952,7 +12952,7 @@ Count items in the cart
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `UID`
+| xQuery | struct | Includes properties such as `ID`
 
 
 
@@ -12990,7 +12990,7 @@ Fetch Coupon
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `UID`
+| xQuery | struct | Includes properties such as `ID`
 
 
 
@@ -13034,7 +13034,7 @@ Apply Coupon
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `P`, `UID`
+| xQuery | struct | Includes properties such as `I`, `B`, `P`, `ID`
 
 | body |  ApplyCouponRequest | "Request body" 
 
@@ -13061,7 +13061,7 @@ Remove Coupon Applied
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `UID`
+| xQuery | struct | Includes properties such as `ID`
 
 
 
@@ -13071,10 +13071,10 @@ Remove Coupon applied on the cart by passing uid in request body.
 
 
 
-Success. Returns coupons removed from the cart along with item details and price breakup. Refer `CartResponse` for more details.
+Success. Returns coupons removed from the cart along with item details and price breakup. Refer `CartDetailResponse` for more details.
 
 
-Schema: `CartResponse`
+Schema: `CartDetailResponse`
 
 
 
@@ -13218,7 +13218,7 @@ Apply reward points at cart
 
 
 
-| xQuery | struct | Includes properties such as `UID`, `I`, `B`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`
 
 | body |  RewardPointRequest | "Request body" 
 
@@ -13229,10 +13229,10 @@ Use this API to redeem a fixed no. of reward points by applying it to the cart.
 
 
 
-Success. Returns a Cart object. Check the example shown below or refer `CartResponse` for more details.
+Success. Returns a Cart object. Check the example shown below or refer `CartDetailResponse` for more details.
 
 
-Schema: `CartResponse`
+Schema: `CartDetailResponse`
 
 
 
@@ -13265,7 +13265,7 @@ Fetch address
 
 
 
-| xQuery | struct | Includes properties such as `UID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -13338,7 +13338,7 @@ Fetch a single address by its ID
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ID | float64 |  | 
+| ID | string |  | 
 
 
 
@@ -13350,7 +13350,7 @@ Fetch a single address by its ID
 
 
 
-| xQuery | struct | Includes properties such as `UID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -13387,7 +13387,7 @@ Update address added to an account
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ID | float64 | ID allotted to the selected address | 
+| ID | string | ID allotted to the selected address | 
 
 
 | body |  Address | "Request body" 
@@ -13414,7 +13414,7 @@ Remove address associated with an account
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ID | float64 | ID allotted to the selected address | 
+| ID | string | ID allotted to the selected address | 
 
 
 
@@ -13445,7 +13445,7 @@ Select an address from available addresses
 
 
 
-| xQuery | struct | Includes properties such as `UID`, `I`, `B`
+| xQuery | struct | Includes properties such as `CartID`, `I`, `B`
 
 | body |  SelectCartAddressRequest | "Request body" 
 
@@ -13472,7 +13472,7 @@ Update cart payment
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `UID`
+| xQuery | struct | Includes properties such as `ID`
 
 | body |  UpdateCartPaymentRequest | "Request body" 
 
@@ -13483,10 +13483,10 @@ Use this API to update cart payment.
 
 
 
-Success. Returns a Cart object as shown below. Refer `CartResponse` for more details.
+Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for more details.
 
 
-Schema: `CartResponse`
+Schema: `CartDetailResponse`
 
 
 
@@ -13521,7 +13521,7 @@ Verify the coupon eligibility against the payment mode
 
 
 
-| xQuery | struct | Includes properties such as `UID`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
+| xQuery | struct | Includes properties such as `ID`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
 
 
 
@@ -13571,7 +13571,7 @@ Get delivery date and options before checkout
 
 
 
-| xQuery | struct | Includes properties such as `PickAtStoreUID`, `OrderingStoreID`, `P`, `UID`, `AddressID`, `AreaCode`, `OrderType`
+| xQuery | struct | Includes properties such as `PickAtStoreUID`, `OrderingStoreID`, `P`, `ID`, `AddressID`, `AreaCode`, `OrderType`
 
 
 
@@ -14257,7 +14257,7 @@ Update shipment delivery type and quantity before checkout
 
 
 
-| xQuery | struct | Includes properties such as `I`, `P`, `UID`, `AddressID`, `OrderType`
+| xQuery | struct | Includes properties such as `I`, `P`, `ID`, `AddressID`, `OrderType`
 
 | body |  UpdateCartShipmentRequest | "Request body" 
 
@@ -14937,9 +14937,9 @@ Checkout all items in the cart
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `UID`
+| xQuery | struct | Includes properties such as `ID`
 
-| body |  CartPosCheckoutRequest | "Request body" 
+| body |  CartPosCheckoutDetailRequest | "Request body" 
 
 
 Use this API to checkout all items in the cart for payment and order generation. For COD, order will be generated directly, whereas for other checkout modes, user will be redirected to a payment gateway.
@@ -15353,7 +15353,7 @@ Update the cart meta
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `UID`
+| xQuery | struct | Includes properties such as `ID`
 
 | body |  CartMetaRequest | "Request body" 
 
@@ -15394,7 +15394,7 @@ Get available delivery modes for cart
 
 
 
-| xQuery | struct | Includes properties such as `AreaCode`, `UID`
+| xQuery | struct | Includes properties such as `AreaCode`, `ID`
 
 
 
