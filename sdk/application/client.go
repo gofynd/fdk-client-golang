@@ -2658,12 +2658,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // ApplyCoupon Apply Coupon
-    func (ca *Cart)  ApplyCoupon(xQuery CartApplyCouponXQuery, body  ApplyCouponRequest) (interface{}, error){
+    func (ca *Cart)  ApplyCoupon(xQuery CartApplyCouponXQuery, body  ApplyCouponRequest) (CartDetailResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             
+             applyCouponResponse CartDetailResponse
 	    )
 
         
@@ -2692,12 +2692,12 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return []byte{}, common.NewFDKError(err.Error())
+             return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return []byte{}, common.NewFDKError(err.Error())
+             return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -2710,10 +2710,14 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return []byte{}, err
+            return CartDetailResponse{}, err
 	    }
         
-        return response, nil
+        err = json.Unmarshal(response, &applyCouponResponse)
+        if err != nil {
+            return CartDetailResponse{}, common.NewFDKError(err.Error())
+        }
+         return applyCouponResponse, nil
         
     }
           
@@ -3152,12 +3156,12 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // UpdateAddress Update address added to an account
-    func (ca *Cart)  UpdateAddress(ID string, body  Address) (interface{}, error){
+    func (ca *Cart)  UpdateAddress(ID string, body  Address) (UpdateAddressResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             
+             updateAddressResponse UpdateAddressResponse
 	    )
 
         
@@ -3220,12 +3224,12 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return []byte{}, common.NewFDKError(err.Error())
+             return UpdateAddressResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return []byte{}, common.NewFDKError(err.Error())
+             return UpdateAddressResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -3238,10 +3242,14 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return []byte{}, err
+            return UpdateAddressResponse{}, err
 	    }
         
-        return response, nil
+        err = json.Unmarshal(response, &updateAddressResponse)
+        if err != nil {
+            return UpdateAddressResponse{}, common.NewFDKError(err.Error())
+        }
+         return updateAddressResponse, nil
         
     }
           
@@ -3252,12 +3260,12 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // RemoveAddress Remove address associated with an account
-    func (ca *Cart)  RemoveAddress(ID string) (interface{}, error){
+    func (ca *Cart)  RemoveAddress(ID string) (DeleteAddressResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             
+             removeAddressResponse DeleteAddressResponse
 	    )
 
         
@@ -3281,10 +3289,14 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return []byte{}, err
+            return DeleteAddressResponse{}, err
 	    }
         
-        return response, nil
+        err = json.Unmarshal(response, &removeAddressResponse)
+        if err != nil {
+            return DeleteAddressResponse{}, common.NewFDKError(err.Error())
+        }
+         return removeAddressResponse, nil
         
     }
           
@@ -3302,12 +3314,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // SelectAddress Select an address from available addresses
-    func (ca *Cart)  SelectAddress(xQuery CartSelectAddressXQuery, body  SelectCartAddressRequest) (interface{}, error){
+    func (ca *Cart)  SelectAddress(xQuery CartSelectAddressXQuery, body  SelectCartAddressRequest) (CartDetailResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             
+             selectAddressResponse CartDetailResponse
 	    )
 
         
@@ -3338,12 +3350,12 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return []byte{}, common.NewFDKError(err.Error())
+             return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return []byte{}, common.NewFDKError(err.Error())
+             return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -3356,10 +3368,14 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return []byte{}, err
+            return CartDetailResponse{}, err
 	    }
         
-        return response, nil
+        err = json.Unmarshal(response, &selectAddressResponse)
+        if err != nil {
+            return CartDetailResponse{}, common.NewFDKError(err.Error())
+        }
+         return selectAddressResponse, nil
         
     }
           
@@ -4574,8 +4590,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //UserLoginWithFacebookXQuery holds query params
+    type UserLoginWithFacebookXQuery struct { 
+        Platform string  `url:"platform,omitempty"`  
+    }
+    
     // LoginWithFacebook Login or Register using Facebook
-    func (us *User)  LoginWithFacebook(body  OAuthRequestSchema) (AuthSuccess, error){
+    func (us *User)  LoginWithFacebook(xQuery UserLoginWithFacebookXQuery, body  OAuthRequestSchema) (AuthSuccess, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -4591,6 +4612,10 @@ func NewAppClient(config *AppConfig) *Client {
             
         
 
+        
+            
+                
+            
         
 
         
@@ -4617,7 +4642,7 @@ func NewAppClient(config *AppConfig) *Client {
             "post",
             "/service/application/user/authentication/v1.0/login/facebook-token",
             nil,
-            nil,
+            xQuery,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -4638,8 +4663,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //UserLoginWithGoogleXQuery holds query params
+    type UserLoginWithGoogleXQuery struct { 
+        Platform string  `url:"platform,omitempty"`  
+    }
+    
     // LoginWithGoogle Login or Register using Google
-    func (us *User)  LoginWithGoogle(body  OAuthRequestSchema) (AuthSuccess, error){
+    func (us *User)  LoginWithGoogle(xQuery UserLoginWithGoogleXQuery, body  OAuthRequestSchema) (AuthSuccess, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -4655,6 +4685,10 @@ func NewAppClient(config *AppConfig) *Client {
             
         
 
+        
+            
+                
+            
         
 
         
@@ -4681,7 +4715,7 @@ func NewAppClient(config *AppConfig) *Client {
             "post",
             "/service/application/user/authentication/v1.0/login/google-token",
             nil,
-            nil,
+            xQuery,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -4702,8 +4736,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //UserLoginWithGoogleAndroidXQuery holds query params
+    type UserLoginWithGoogleAndroidXQuery struct { 
+        Platform string  `url:"platform,omitempty"`  
+    }
+    
     // LoginWithGoogleAndroid Login or Register using Google on Android
-    func (us *User)  LoginWithGoogleAndroid(body  OAuthRequestSchema) (AuthSuccess, error){
+    func (us *User)  LoginWithGoogleAndroid(xQuery UserLoginWithGoogleAndroidXQuery, body  OAuthRequestSchema) (AuthSuccess, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -4719,6 +4758,10 @@ func NewAppClient(config *AppConfig) *Client {
             
         
 
+        
+            
+                
+            
         
 
         
@@ -4745,7 +4788,7 @@ func NewAppClient(config *AppConfig) *Client {
             "post",
             "/service/application/user/authentication/v1.0/login/google-android",
             nil,
-            nil,
+            xQuery,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -4766,8 +4809,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //UserLoginWithGoogleIOSXQuery holds query params
+    type UserLoginWithGoogleIOSXQuery struct { 
+        Platform string  `url:"platform,omitempty"`  
+    }
+    
     // LoginWithGoogleIOS Login or Register using Google on iOS
-    func (us *User)  LoginWithGoogleIOS(body  OAuthRequestSchema) (AuthSuccess, error){
+    func (us *User)  LoginWithGoogleIOS(xQuery UserLoginWithGoogleIOSXQuery, body  OAuthRequestSchema) (AuthSuccess, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -4783,6 +4831,10 @@ func NewAppClient(config *AppConfig) *Client {
             
         
 
+        
+            
+                
+            
         
 
         
@@ -4809,7 +4861,7 @@ func NewAppClient(config *AppConfig) *Client {
             "post",
             "/service/application/user/authentication/v1.0/login/google-ios",
             nil,
-            nil,
+            xQuery,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -7295,12 +7347,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // GetPage Get a page
-    func (co *Content)  GetPage(Slug string, xQuery ContentGetPageXQuery) (CustomPageSchema, error){
+    func (co *Content)  GetPage(Slug string, xQuery ContentGetPageXQuery) (PageSchema, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getPageResponse CustomPageSchema
+             getPageResponse PageSchema
 	    )
 
         
@@ -7328,12 +7380,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return CustomPageSchema{}, err
+            return PageSchema{}, err
 	    }
         
         err = json.Unmarshal(response, &getPageResponse)
         if err != nil {
-            return CustomPageSchema{}, common.NewFDKError(err.Error())
+            return PageSchema{}, common.NewFDKError(err.Error())
         }
          return getPageResponse, nil
         
@@ -14061,12 +14113,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // ApplyCoupon Apply Coupon
-    func (po *PosCart)  ApplyCoupon(xQuery PosCartApplyCouponXQuery, body  ApplyCouponRequest) (interface{}, error){
+    func (po *PosCart)  ApplyCoupon(xQuery PosCartApplyCouponXQuery, body  ApplyCouponRequest) (CartDetailResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             
+             applyCouponResponse CartDetailResponse
 	    )
 
         
@@ -14093,12 +14145,12 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return []byte{}, common.NewFDKError(err.Error())
+             return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return []byte{}, common.NewFDKError(err.Error())
+             return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -14111,10 +14163,14 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return []byte{}, err
+            return CartDetailResponse{}, err
 	    }
         
-        return response, nil
+        err = json.Unmarshal(response, &applyCouponResponse)
+        if err != nil {
+            return CartDetailResponse{}, common.NewFDKError(err.Error())
+        }
+         return applyCouponResponse, nil
         
     }
           
@@ -14507,12 +14563,12 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // UpdateAddress Update address added to an account
-    func (po *PosCart)  UpdateAddress(ID string, body  Address) (interface{}, error){
+    func (po *PosCart)  UpdateAddress(ID string, body  Address) (UpdateAddressResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             
+             updateAddressResponse UpdateAddressResponse
 	    )
 
         
@@ -14531,12 +14587,12 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return []byte{}, common.NewFDKError(err.Error())
+             return UpdateAddressResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return []byte{}, common.NewFDKError(err.Error())
+             return UpdateAddressResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -14549,10 +14605,14 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return []byte{}, err
+            return UpdateAddressResponse{}, err
 	    }
         
-        return response, nil
+        err = json.Unmarshal(response, &updateAddressResponse)
+        if err != nil {
+            return UpdateAddressResponse{}, common.NewFDKError(err.Error())
+        }
+         return updateAddressResponse, nil
         
     }
           
@@ -14563,12 +14623,12 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // RemoveAddress Remove address associated with an account
-    func (po *PosCart)  RemoveAddress(ID string) (interface{}, error){
+    func (po *PosCart)  RemoveAddress(ID string) (DeleteAddressResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             
+             removeAddressResponse DeleteAddressResponse
 	    )
 
         
@@ -14592,10 +14652,14 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return []byte{}, err
+            return DeleteAddressResponse{}, err
 	    }
         
-        return response, nil
+        err = json.Unmarshal(response, &removeAddressResponse)
+        if err != nil {
+            return DeleteAddressResponse{}, common.NewFDKError(err.Error())
+        }
+         return removeAddressResponse, nil
         
     }
           
@@ -14613,12 +14677,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // SelectAddress Select an address from available addresses
-    func (po *PosCart)  SelectAddress(xQuery PosCartSelectAddressXQuery, body  SelectCartAddressRequest) (interface{}, error){
+    func (po *PosCart)  SelectAddress(xQuery PosCartSelectAddressXQuery, body  SelectCartAddressRequest) (CartDetailResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             
+             selectAddressResponse CartDetailResponse
 	    )
 
         
@@ -14643,12 +14707,12 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return []byte{}, common.NewFDKError(err.Error())
+             return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return []byte{}, common.NewFDKError(err.Error())
+             return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -14661,10 +14725,14 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return []byte{}, err
+            return CartDetailResponse{}, err
 	    }
         
-        return response, nil
+        err = json.Unmarshal(response, &selectAddressResponse)
+        if err != nil {
+            return CartDetailResponse{}, common.NewFDKError(err.Error())
+        }
+         return selectAddressResponse, nil
         
     }
           

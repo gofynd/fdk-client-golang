@@ -6318,6 +6318,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
             
         
+            
+        
 
          
 
@@ -17195,12 +17197,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
     
     // CreateCoupon Create new coupon
-     func (ca *PlatformAppCart)  CreateCoupon(body  CouponAdd) (interface{}, error) {
+     func (ca *PlatformAppCart)  CreateCoupon(body  CouponAdd) (SuccessMessage, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
+            createCouponResponse SuccessMessage
 	    )
 
         
@@ -17249,12 +17251,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
             
-             return []byte{}, common.NewFDKError(err.Error())
+             return SuccessMessage{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
             
-             return []byte{}, common.NewFDKError(err.Error())       
+             return SuccessMessage{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -17267,10 +17269,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return []byte{}, err
+            return SuccessMessage{}, err
 	    }
         
-        return response, nil
+        err = json.Unmarshal(response, &createCouponResponse)
+        if err != nil {
+            return SuccessMessage{}, common.NewFDKError(err.Error())
+        }
+        return createCouponResponse, nil
         
     }
            
@@ -18810,12 +18816,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
     
     // RemoveProxyPath Remove proxy path for external url
-     func (pa *PlatformAppPartner)  RemoveProxyPath(ExtensionID string, AttachedPath string) (interface{}, error) {
+     func (pa *PlatformAppPartner)  RemoveProxyPath(ExtensionID string, AttachedPath string) (RemoveProxyResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
+            removeProxyPathResponse RemoveProxyResponse
 	    )
 
         
@@ -18841,10 +18847,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return []byte{}, err
+            return RemoveProxyResponse{}, err
 	    }
         
-        return response, nil
+        err = json.Unmarshal(response, &removeProxyPathResponse)
+        if err != nil {
+            return RemoveProxyResponse{}, common.NewFDKError(err.Error())
+        }
+        return removeProxyPathResponse, nil
         
     }
            

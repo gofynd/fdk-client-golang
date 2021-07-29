@@ -2760,6 +2760,18 @@ Use this API to apply coupons on items in the cart.
 
 
 
+Success. Returns coupons applied to the cart along with item details and price breakup. Refer `CartDetailResponse` for more details.
+
+
+Schema: `CartDetailResponse`
+
+
+
+
+
+
+
+
 
 ---
 
@@ -3114,6 +3126,18 @@ Use this API to update an existing address in the account. Request object should
 
 
 
+Success. Returns the address ID and a message indicating a successful address updation.
+
+
+Schema: `UpdateAddressResponse`
+
+
+
+
+
+
+
+
 
 ---
 
@@ -3137,6 +3161,18 @@ Remove address associated with an account
 Use this API to delete an address by its ID. This will returns an object that will indicate whether the address was deleted successfully or not.
 
 *Success Response:*
+
+
+
+Returns a Status object indicating the success or failure of address deletion.
+
+
+Schema: `DeleteAddressResponse`
+
+
+
+
+
 
 
 
@@ -3168,6 +3204,18 @@ Select an address from available addresses
 <p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul>
 
 *Success Response:*
+
+
+
+Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for more details.  .
+
+
+Schema: `CartDetailResponse`
+
+
+
+
+
 
 
 
@@ -6082,11 +6130,14 @@ Login or Register using Facebook
 
 ```golang
 
- data, err :=  User.LoginWithFacebook(body);
+ data, err :=  User.LoginWithFacebook(xQuery, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Platform`
 
 | body |  OAuthRequestSchema | "Request body" 
 
@@ -6129,11 +6180,14 @@ Login or Register using Google
 
 ```golang
 
- data, err :=  User.LoginWithGoogle(body);
+ data, err :=  User.LoginWithGoogle(xQuery, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Platform`
 
 | body |  OAuthRequestSchema | "Request body" 
 
@@ -6176,11 +6230,14 @@ Login or Register using Google on Android
 
 ```golang
 
- data, err :=  User.LoginWithGoogleAndroid(body);
+ data, err :=  User.LoginWithGoogleAndroid(xQuery, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Platform`
 
 | body |  OAuthRequestSchema | "Request body" 
 
@@ -6223,11 +6280,14 @@ Login or Register using Google on iOS
 
 ```golang
 
- data, err :=  User.LoginWithGoogleIOS(body);
+ data, err :=  User.LoginWithGoogleIOS(xQuery, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Platform`
 
 | body |  OAuthRequestSchema | "Request body" 
 
@@ -8027,7 +8087,7 @@ Use this API to get the details of a page using its slug. Details include the ti
 Success. Returns a JSON object with page details. Check the example shown below or refer `CustomPageSchema` for more details.
 
 
-Schema: `CustomPageSchema`
+Schema: `PageSchema`
 
 
 *Examples:*
@@ -13045,6 +13105,18 @@ Use this API to apply coupons on items in the cart.
 
 
 
+Success. Returns coupons applied to the cart along with item details and price breakup. Refer `CartDetailResponse` for more details.
+
+
+Schema: `CartDetailResponse`
+
+
+
+
+
+
+
+
 
 ---
 
@@ -13399,6 +13471,18 @@ Use this API to update an existing address in the account. Request object should
 
 
 
+Success. Returns the address ID and a message indicating a successful address updation.
+
+
+Schema: `UpdateAddressResponse`
+
+
+
+
+
+
+
+
 
 ---
 
@@ -13422,6 +13506,18 @@ Remove address associated with an account
 Use this API to delete an address by its ID. This will returns an object that will indicate whether the address was deleted successfully or not.
 
 *Success Response:*
+
+
+
+Returns a Status object indicating the success or failure of address deletion.
+
+
+Schema: `DeleteAddressResponse`
+
+
+
+
+
 
 
 
@@ -13453,6 +13549,18 @@ Select an address from available addresses
 <p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul>
 
 *Success Response:*
+
+
+
+Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for more details.  .
+
+
+Schema: `CartDetailResponse`
+
+
+
+
+
 
 
 
