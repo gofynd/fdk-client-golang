@@ -7243,7 +7243,7 @@ package application
             Claimed bool  `json:"claimed"`
             CreatedAt string  `json:"created_at"`
             ExpiresOn string  `json:"expires_on"`
-            Meta string  `json:"meta"`
+            Meta map[string]interface{}  `json:"meta"`
             Points float64  `json:"points"`
             RemainingPoints float64  `json:"remaining_points"`
             Text1 string  `json:"text_1"`
@@ -7259,7 +7259,7 @@ package application
     type PointsHistoryResponse struct {
 
         
-            History []PointsHistory  `json:"history"`
+            Items []PointsHistory  `json:"items"`
             Page Page  `json:"page"`
          
     }
