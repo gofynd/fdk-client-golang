@@ -1467,7 +1467,9 @@ Get store meta information.
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`, `Range`, `Latitude`, `Longitude`
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`, `City`, `Range`, `Latitude`, `Longitude`
 
 
 
@@ -9783,7 +9785,7 @@ Get applicable payment options
 
 
 
-| xQuery | struct | Includes properties such as `Amount`, `CartID`, `Pincode`, `CheckoutMode`, `Refresh`, `AssignCardID`, `UserDetails`
+| xQuery | struct | Includes properties such as `Amount`, `CartID`, `Pincode`, `CheckoutMode`, `Refresh`, `CardReference`, `UserDetails`
 
 
 
@@ -9835,7 +9837,7 @@ Get applicable payment options for Point-of-Sale (POS)
 
 
 
-| xQuery | struct | Includes properties such as `Amount`, `CartID`, `Pincode`, `CheckoutMode`, `Refresh`, `AssignCardID`, `OrderType`, `UserDetails`
+| xQuery | struct | Includes properties such as `Amount`, `CartID`, `Pincode`, `CheckoutMode`, `Refresh`, `CardReference`, `OrderType`, `UserDetails`
 
 
 

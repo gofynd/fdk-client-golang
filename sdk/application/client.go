@@ -2119,6 +2119,7 @@ func NewAppClient(config *AppConfig) *Client {
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
         Q string  `url:"q,omitempty"` 
+        City string  `url:"city,omitempty"` 
         Range float64  `url:"range,omitempty"` 
         Latitude float64  `url:"latitude,omitempty"` 
         Longitude float64  `url:"longitude,omitempty"`  
@@ -2136,6 +2137,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -2222,6 +2225,13 @@ func NewAppClient(config *AppConfig) *Client {
                     
                     
                 
+                    
+                    
+                    
+                        
+                    
+                    
+                
             
             // GetStoresPaginator Get store meta information.  
             func (ca *Catalog)  GetStoresPaginator( xQuery CatalogGetStoresXQuery ) *common.Paginator {
@@ -2229,6 +2239,10 @@ func NewAppClient(config *AppConfig) *Client {
                  
                  
                  xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
                  
                  
                  
@@ -9801,7 +9815,7 @@ func NewAppClient(config *AppConfig) *Client {
         Pincode string  `url:"pincode,omitempty"` 
         CheckoutMode string  `url:"checkout_mode,omitempty"` 
         Refresh bool  `url:"refresh,omitempty"` 
-        AssignCardID string  `url:"assign_card_id,omitempty"` 
+        CardReference string  `url:"card_reference,omitempty"` 
         UserDetails string  `url:"user_details,omitempty"`  
     }
     
@@ -9873,7 +9887,7 @@ func NewAppClient(config *AppConfig) *Client {
         Pincode string  `url:"pincode,omitempty"` 
         CheckoutMode string  `url:"checkout_mode,omitempty"` 
         Refresh bool  `url:"refresh,omitempty"` 
-        AssignCardID string  `url:"assign_card_id,omitempty"` 
+        CardReference string  `url:"card_reference,omitempty"` 
         OrderType string  `url:"order_type,omitempty"` 
         UserDetails string  `url:"user_details,omitempty"`  
     }
