@@ -271,6 +271,7 @@
     * [verifyIfscCode](#verifyifsccode)
     * [getUserOrderBeneficiaries](#getuserorderbeneficiaries)
     * [getUserBeneficiaries](#getuserbeneficiaries)
+    * [confirmPayment](#confirmpayment)
     
 
 * [Order](#Order)
@@ -299,24 +300,24 @@
 
 * [Catalog](#Catalog)
   * Methods
-    * [deleteSearchKeywords](#deletesearchkeywords)
-    * [updateSearchKeywords](#updatesearchkeywords)
     * [getSearchKeywords](#getsearchkeywords)
+    * [updateSearchKeywords](#updatesearchkeywords)
+    * [deleteSearchKeywords](#deletesearchkeywords)
     * [createCustomKeyword](#createcustomkeyword)
     * [getAllSearchKeyword](#getallsearchkeyword)
-    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
-    * [updateAutocompleteKeyword](#updateautocompletekeyword)
     * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
+    * [updateAutocompleteKeyword](#updateautocompletekeyword)
+    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createProductBundle](#createproductbundle)
     * [getProductBundle](#getproductbundle)
-    * [updateProductBundle](#updateproductbundle)
     * [getProductBundleDetail](#getproductbundledetail)
+    * [updateProductBundle](#updateproductbundle)
     * [createSizeGuide](#createsizeguide)
     * [getSizeGuides](#getsizeguides)
-    * [updateSizeGuide](#updatesizeguide)
     * [getSizeGuide](#getsizeguide)
+    * [updateSizeGuide](#updatesizeguide)
     * [getCatalogConfiguration](#getcatalogconfiguration)
     * [createConfigurationProductListing](#createconfigurationproductlisting)
     * [getConfigurations](#getconfigurations)
@@ -326,8 +327,8 @@
     * [createCollection](#createcollection)
     * [getAllCollections](#getallcollections)
     * [getCollectionDetail](#getcollectiondetail)
-    * [deleteCollection](#deletecollection)
     * [updateCollection](#updatecollection)
+    * [deleteCollection](#deletecollection)
     * [addCollectionItems](#addcollectionitems)
     * [getCollectionItems](#getcollectionitems)
     * [getCatalogInsights](#getcataloginsights)
@@ -352,19 +353,19 @@
     * [listTemplateBrandTypeValues](#listtemplatebrandtypevalues)
     * [createCategories](#createcategories)
     * [listCategories](#listcategories)
-    * [updateCategory](#updatecategory)
     * [getCategoryData](#getcategorydata)
+    * [updateCategory](#updatecategory)
     * [createProduct](#createproduct)
     * [getProducts](#getproducts)
-    * [deleteProduct](#deleteproduct)
-    * [editProduct](#editproduct)
     * [getProduct](#getproduct)
+    * [editProduct](#editproduct)
+    * [deleteProduct](#deleteproduct)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
     * [updateProductAssetsInBulk](#updateproductassetsinbulk)
     * [getProductBulkUploadHistory](#getproductbulkuploadhistory)
-    * [deleteProductBulkJob](#deleteproductbulkjob)
     * [createProductsInBulk](#createproductsinbulk)
+    * [deleteProductBulkJob](#deleteproductbulkjob)
     * [getCompanyTags](#getcompanytags)
     * [createProductAssetsInBulk](#createproductassetsinbulk)
     * [getProductAssetsInBulk](#getproductassetsinbulk)
@@ -375,37 +376,38 @@
     * [deleteInventory](#deleteinventory)
     * [createBulkInventoryJob](#createbulkinventoryjob)
     * [getInventoryBulkUploadHistory](#getinventorybulkuploadhistory)
-    * [deleteBulkInventoryJob](#deletebulkinventoryjob)
     * [createBulkInventory](#createbulkinventory)
+    * [deleteBulkInventoryJob](#deletebulkinventoryjob)
     * [createInventoryExportJob](#createinventoryexportjob)
     * [getInventoryExport](#getinventoryexport)
     * [exportInventoryConfig](#exportinventoryconfig)
     * [createHsnCode](#createhsncode)
     * [getAllHsnCodes](#getallhsncodes)
-    * [updateHsnCode](#updatehsncode)
     * [getHsnCode](#gethsncode)
+    * [updateHsnCode](#updatehsncode)
     * [bulkHsnCode](#bulkhsncode)
     * [getApplicationBrands](#getapplicationbrands)
     * [getDepartments](#getdepartments)
     * [getCategories](#getcategories)
     * [getAppicationProducts](#getappicationproducts)
     * [getProductDetailBySlug](#getproductdetailbyslug)
+    * [getAppProducts](#getappproducts)
     
 
 * [CompanyProfile](#CompanyProfile)
   * Methods
-    * [updateCompany](#updatecompany)
     * [cbsOnboardGet](#cbsonboardget)
+    * [updateCompany](#updatecompany)
     * [getCompanyMetrics](#getcompanymetrics)
-    * [getBrand](#getbrand)
     * [editBrand](#editbrand)
+    * [getBrand](#getbrand)
     * [createBrand](#createbrand)
     * [createCompanyBrandMapping](#createcompanybrandmapping)
     * [getBrands](#getbrands)
     * [createLocation](#createlocation)
     * [getLocations](#getlocations)
-    * [getLocationDetail](#getlocationdetail)
     * [updateLocation](#updatelocation)
+    * [getLocationDetail](#getlocationdetail)
     * [createLocationBulk](#createlocationbulk)
     
 
@@ -436,7 +438,9 @@
     * [getJobsByCompany](#getjobsbycompany)
     * [updateJob](#updatejob)
     * [createJob](#createjob)
+    * [getJobSteps](#getjobsteps)
     * [getJobByCompanyAndIntegration](#getjobbycompanyandintegration)
+    * [disable](#disable)
     * [getJobConfigDefaults](#getjobconfigdefaults)
     * [getJobByCode](#getjobbycode)
     * [getJobCodeMetrics](#getjobcodemetrics)
@@ -496,6 +500,9 @@
     * [getCouponById](#getcouponbyid)
     * [updateCoupon](#updatecoupon)
     * [updateCouponPartially](#updatecouponpartially)
+    * [fetchAndvalidateCartItems](#fetchandvalidatecartitems)
+    * [checkCartServiceability](#checkcartserviceability)
+    * [checkoutCart](#checkoutcart)
     
 
 * [Rewards](#Rewards)
@@ -8083,7 +8090,7 @@ Get page meta
 
 ```golang
 
-data, err := Content.GetPageMeta(CompanyID, ApplicationID);
+data, err := Content.GetPageMeta(CompanyID, ApplicationID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -8094,6 +8101,11 @@ data, err := Content.GetPageMeta(CompanyID, ApplicationID);
 
 | ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
+
+
+
+
+| xQuery | struct | Includes properties such as `PageType`, `CartPages`
 
 
 Use this API to get the meta of custom pages (blog, page) and default system pages (e.g. home/brand/category/collection).
@@ -13422,6 +13434,47 @@ Schema: `OrderBeneficiaryResponse`
 ---
 
 
+#### confirmPayment
+Confirm payment after successful payment from payment gateway
+
+```golang
+
+data, err := Payment.ConfirmPayment(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| body |  PaymentConfirmationRequest | "Request body" 
+
+Use this API to confirm payment after payment gateway accepted payment.
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `PaymentConfirmationResponseSchema` for more details.
+
+
+Schema: `PaymentConfirmationResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ---
 
@@ -14327,12 +14380,12 @@ Schema: `GetClickToCallResponse`
 ## Catalog
 
 
-#### deleteSearchKeywords
-Delete a Search Keywords
+#### getSearchKeywords
+Get a Search Keywords Details
 
 ```golang
 
-data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
+data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -14344,20 +14397,20 @@ data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
 
 
 
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
 
 *Success Response:*
 
 
 
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
 
 
-Schema: `DeleteResponse`
+Schema: `GetSearchWordsDetailResponse`
 
 
 
@@ -14414,12 +14467,12 @@ Schema: `GetSearchWordsData`
 ---
 
 
-#### getSearchKeywords
-Get a Search Keywords Details
+#### deleteSearchKeywords
+Delete a Search Keywords
 
 ```golang
 
-data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
+data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -14431,20 +14484,20 @@ data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
 
 
 
-Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
 
 *Success Response:*
 
 
 
-The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
 
 
-Schema: `GetSearchWordsDetailResponse`
+Schema: `DeleteResponse`
 
 
 
@@ -14538,12 +14591,12 @@ Schema: `GetSearchWordsResponse`
 ---
 
 
-#### deleteAutocompleteKeyword
-Delete a Autocomplete Keywords
+#### getAutocompleteKeywordDetail
+Get a Autocomplete Keywords Details
 
 ```golang
 
-data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
+data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -14555,20 +14608,20 @@ data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
 
 
 
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
 
 *Success Response:*
 
 
 
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
 
 
-Schema: `DeleteResponse`
+Schema: `GetAutocompleteWordsResponse`
 
 
 
@@ -14625,12 +14678,12 @@ Schema: `GetAutocompleteWordsResponse`
 ---
 
 
-#### getAutocompleteKeywordDetail
-Get a Autocomplete Keywords Details
+#### deleteAutocompleteKeyword
+Delete a Autocomplete Keywords
 
 ```golang
 
-data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
+data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -14642,20 +14695,20 @@ data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
 
 
 
-Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
 
 *Success Response:*
 
 
 
-The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
 
 
-Schema: `GetAutocompleteWordsResponse`
+Schema: `DeleteResponse`
 
 
 
@@ -14827,6 +14880,46 @@ Schema: `GetProductBundleListingResponse`
 ---
 
 
+#### getProductBundleDetail
+Get a particular Product Bundle details
+
+```golang
+
+data, err := Catalog.GetProductBundleDetail(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
+
+*Success Response:*
+
+
+
+The Collection object. See example below or refer `GetProductBundleResponse` for details
+
+
+Schema: `GetProductBundleResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateProductBundle
 Update a Product Bundle
 
@@ -14856,46 +14949,6 @@ The Collection object. See example below or refer `GetProductBundleCreateRespons
 
 
 Schema: `GetProductBundleCreateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getProductBundleDetail
-Get a particular Product Bundle details
-
-```golang
-
-data, err := Catalog.GetProductBundleDetail(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
-
-*Success Response:*
-
-
-
-The Collection object. See example below or refer `GetProductBundleResponse` for details
-
-
-Schema: `GetProductBundleResponse`
 
 
 
@@ -14994,6 +15047,46 @@ Schema: `ListSizeGuide`
 ---
 
 
+#### getSizeGuide
+Get a single size guide.
+
+```golang
+
+data, err := Catalog.GetSizeGuide(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to size guide. | 
+
+
+| ID | string | Id of the size guide to be viewed. | 
+
+
+
+This API helps to get data associated to a size guide.
+
+*Success Response:*
+
+
+
+Brand object. See example below or refer `SizeGuideResponseSchema` for details
+
+
+Schema: `SizeGuideResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateSizeGuide
 Edit a size guide.
 
@@ -15023,46 +15116,6 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getSizeGuide
-Get a single size guide.
-
-```golang
-
-data, err := Catalog.GetSizeGuide(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to size guide. | 
-
-
-| ID | string | Id of the size guide to be viewed. | 
-
-
-
-This API helps to get data associated to a size guide.
-
-*Success Response:*
-
-
-
-Brand object. See example below or refer `SizeGuideResponseSchema` for details
-
-
-Schema: `SizeGuideResponse`
 
 
 
@@ -15447,49 +15500,6 @@ Schema: `CollectionDetailResponse`
 ---
 
 
-#### deleteCollection
-Delete a Collection
-
-```golang
-
-data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier of a collection. | 
-
-
-
-Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateCollection
 Update a collection
 
@@ -15522,6 +15532,49 @@ The Collection object. See example below or refer `UpdateCollectionSchema` for d
 
 
 Schema: `UpdateCollection`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteCollection
+Delete a Collection
+
+```golang
+
+data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier of a collection. | 
+
+
+
+Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -16525,6 +16578,46 @@ Schema: `CategoryResponse`
 ---
 
 
+#### getCategoryData
+Get product category by uid
+
+```golang
+
+data, err := Catalog.GetCategoryData(CompanyID, UID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| UID | string | Category unique id | 
+
+
+
+This API gets meta associated to product categories.
+
+*Success Response:*
+
+
+
+Get Data for one category. See example below or refer `CategoryResponse` for details
+
+
+Schema: `SingleCategoryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateCategory
 Update product categories
 
@@ -16554,46 +16647,6 @@ Category Meta. See example below or refer `CategoryUpdateResponse` for details
 
 
 Schema: `CategoryUpdateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getCategoryData
-Get product category by uid
-
-```golang
-
-data, err := Catalog.GetCategoryData(CompanyID, UID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| UID | string | Category unique id | 
-
-
-
-This API gets meta associated to product categories.
-
-*Success Response:*
-
-
-
-Get Data for one category. See example below or refer `CategoryResponse` for details
-
-
-Schema: `SingleCategoryResponse`
 
 
 
@@ -16698,34 +16751,41 @@ Schema: `ProductListingResponse`
 ---
 
 
-#### deleteProduct
-Delete a product.
+#### getProduct
+Get a single product.
 
 ```golang
 
-data, err := Catalog.DeleteProduct(CompanyID, ItemID);
+data, err := Catalog.GetProduct(CompanyID, ItemID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
 
 
-| ItemID | float64 | Id of the product to be updated. | 
+| CompanyID | float64 | Company Id of the product. | 
+
+
+| ItemID | float64 | Item Id of the product. | 
 
 
 
-This API allows to delete product.
+
+
+| xQuery | struct | Includes properties such as `ItemCode`, `BrandUID`, `UID`
+
+
+This API helps to get data associated to a particular product.
 
 *Success Response:*
 
 
 
-Returns a success response
+Product object. See example below or refer `product.utils.format_product_response` for details
 
 
-Schema: `SuccessResponse`
+Schema: `Product`
 
 
 
@@ -16779,41 +16839,34 @@ Schema: `SuccessResponse`
 ---
 
 
-#### getProduct
-Get a single product.
+#### deleteProduct
+Delete a product.
 
 ```golang
 
-data, err := Catalog.GetProduct(CompanyID, ItemID, xQuery);
+data, err := Catalog.DeleteProduct(CompanyID, ItemID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
+| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
 
 
-| CompanyID | float64 | Company Id of the product. | 
-
-
-| ItemID | float64 | Item Id of the product. | 
-
+| ItemID | float64 | Id of the product to be updated. | 
 
 
 
-
-| xQuery | struct | Includes properties such as `ItemCode`, `BrandUID`, `UID`
-
-
-This API helps to get data associated to a particular product.
+This API allows to delete product.
 
 *Success Response:*
 
 
 
-Product object. See example below or refer `product.utils.format_product_response` for details
+Returns a success response
 
 
-Schema: `Product`
+Schema: `SuccessResponse`
 
 
 
@@ -16990,25 +17043,26 @@ Schema: `ProductBulkRequestList`
 ---
 
 
-#### deleteProductBulkJob
-Delete Bulk product job.
+#### createProductsInBulk
+Create products in bulk associated with given batch Id.
 
 ```golang
 
-data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
+data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
 
 
-| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
+| BatchID | string | Batch Id in which assets to be uploaded. | 
 
 
+| body |  BulkProductRequest | "Request body" 
 
-This API allows to delete bulk product job associated with company.
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -17030,26 +17084,25 @@ Schema: `SuccessResponse`
 ---
 
 
-#### createProductsInBulk
-Create products in bulk associated with given batch Id.
+#### deleteProductBulkJob
+Delete Bulk product job.
 
 ```golang
 
-data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
+data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
 
 
-| BatchID | string | Batch Id in which assets to be uploaded. | 
+| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
 
 
-| body |  BulkProductRequest | "Request body" 
 
-This API helps to create products in bulk push to kafka for approval/creation.
+This API allows to delete bulk product job associated with company.
 
 *Success Response:*
 
@@ -17503,25 +17556,26 @@ Schema: `BulkInventoryGet`
 ---
 
 
-#### deleteBulkInventoryJob
-Delete Bulk Inventory job.
+#### createBulkInventory
+Create products in bulk associated with given batch Id.
 
 ```golang
 
-data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
+data, err := Catalog.CreateBulkInventory(CompanyID, BatchID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
+| CompanyID | float64 | Company Id in which Inventory is to be uploaded. | 
 
 
-| BatchID | string | Batch Id of the bulk delete job. | 
+| BatchID | string | Batch Id of the bulk create job. | 
 
 
+| body |  InventoryBulkRequest | "Request body" 
 
-This API allows to delete bulk Inventory job associated with company.
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -17543,26 +17597,25 @@ Schema: `SuccessResponse`
 ---
 
 
-#### createBulkInventory
-Create products in bulk associated with given batch Id.
+#### deleteBulkInventoryJob
+Delete Bulk Inventory job.
 
 ```golang
 
-data, err := Catalog.CreateBulkInventory(CompanyID, BatchID, body);
+data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which Inventory is to be uploaded. | 
+| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
 
 
-| BatchID | string | Batch Id of the bulk create job. | 
+| BatchID | string | Batch Id of the bulk delete job. | 
 
 
-| body |  InventoryBulkRequest | "Request body" 
 
-This API helps to create products in bulk push to kafka for approval/creation.
+This API allows to delete bulk Inventory job associated with company.
 
 *Success Response:*
 
@@ -17781,6 +17834,46 @@ Schema: `HsnCodesListingResponse`
 ---
 
 
+#### getHsnCode
+Fetch Hsn Code.
+
+```golang
+
+data, err := Catalog.GetHsnCode(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ID | string | Unique id | 
+
+
+
+Fetch Hsn Code.
+
+*Success Response:*
+
+
+
+See example below details
+
+
+Schema: `HsnCode`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateHsnCode
 Update Hsn Code.
 
@@ -17807,46 +17900,6 @@ Update Hsn Code.
 
 
 See example below for details
-
-
-Schema: `HsnCode`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getHsnCode
-Fetch Hsn Code.
-
-```golang
-
-data, err := Catalog.GetHsnCode(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ID | string | Unique id | 
-
-
-
-Fetch Hsn Code.
-
-*Success Response:*
-
-
-
-See example below details
 
 
 Schema: `HsnCode`
@@ -18130,11 +18183,99 @@ Schema: `ProductDetail`
 ---
 
 
+#### getAppProducts
+Get applicationwise products
+
+```golang
+
+data, err := Catalog.GetAppProducts(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `BrandIds`, `CategoryIds`, `DepartmentIds`, `PageNo`, `PageSize`
+
+
+Products are the core resource of an application. Products can be associated by categories, collections, brands and more. If successful, returns a Product resource in the response body specified in `ApplicationProductListingResponseDatabasePowered`
+
+*Success Response:*
+
+
+
+The Product object. See example below or refer `ApplicationProductListingResponseDatabasePowered` for details.
+
+
+Schema: `ProductListingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ---
 
 
 ## CompanyProfile
+
+
+#### cbsOnboardGet
+Get company profile
+
+```golang
+
+data, err := CompanyProfile.CbsOnboardGet(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+
+This API allows to view the company profile of the seller account.
+
+*Success Response:*
+
+
+
+Company profile object. See example below or refer `GetCompanyProfileSerializerResponse` for details
+
+
+Schema: `GetCompanyProfileSerializerResponse`
+
+
+
+
+
+
+
+
+
+---
 
 
 #### updateCompany
@@ -18163,43 +18304,6 @@ Returns a success message
 
 
 Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### cbsOnboardGet
-Get company profile
-
-```golang
-
-data, err := CompanyProfile.CbsOnboardGet(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-
-This API allows to view the company profile of the seller account.
-
-*Success Response:*
-
-
-
-Company profile object. See example below or refer `GetCompanyProfileSerializerResponse` for details
-
-
-Schema: `GetCompanyProfileSerializerResponse`
 
 
 
@@ -18249,46 +18353,6 @@ Schema: `MetricsSerializer`
 ---
 
 
-#### getBrand
-Get a single brand.
-
-```golang
-
-data, err := CompanyProfile.GetBrand(CompanyID, BrandID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to brand that is to be viewed. | 
-
-
-| BrandID | string | Id of the brand to be viewed. | 
-
-
-
-This API helps to get data associated to a particular brand.
-
-*Success Response:*
-
-
-
-Brand object. See example below or refer `GetBrandResponseSerializer` for details
-
-
-Schema: `GetBrandResponseSerializer`
-
-
-
-
-
-
-
-
-
----
-
-
 #### editBrand
 Edit a brand.
 
@@ -18318,6 +18382,46 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getBrand
+Get a single brand.
+
+```golang
+
+data, err := CompanyProfile.GetBrand(CompanyID, BrandID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to brand that is to be viewed. | 
+
+
+| BrandID | string | Id of the brand to be viewed. | 
+
+
+
+This API helps to get data associated to a particular brand.
+
+*Success Response:*
+
+
+
+Brand object. See example below or refer `GetBrandResponseSerializer` for details
+
+
+Schema: `GetBrandResponseSerializer`
 
 
 
@@ -18423,7 +18527,9 @@ data, err := CompanyProfile.GetBrands(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`
 
 
 This API helps to get view brands associated to a particular company.
@@ -18534,46 +18640,6 @@ Schema: `LocationListSerializer`
 ---
 
 
-#### getLocationDetail
-Get details of a specific location.
-
-```golang
-
-data, err := CompanyProfile.GetLocationDetail(CompanyID, LocationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company inside which the location lies. | 
-
-
-| LocationID | string | Id of the location which you want to view. | 
-
-
-
-This API helps to get data associated to a specific location.
-
-*Success Response:*
-
-
-
-Brand object. See example below or refer `GetLocationSerializer` for details
-
-
-Schema: `GetLocationSerializer`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateLocation
 Edit a location asscoiated to a company.
 
@@ -18603,6 +18669,46 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getLocationDetail
+Get details of a specific location.
+
+```golang
+
+data, err := CompanyProfile.GetLocationDetail(CompanyID, LocationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company inside which the location lies. | 
+
+
+| LocationID | string | Id of the location which you want to view. | 
+
+
+
+This API helps to get data associated to a specific location.
+
+*Success Response:*
+
+
+
+Brand object. See example below or refer `GetLocationSerializer` for details
+
+
+Schema: `GetLocationSerializer`
 
 
 
@@ -19465,6 +19571,46 @@ Schema: `ResponseEnvelopeString`
 ---
 
 
+#### getJobSteps
+Get Job Code Steps
+
+```golang
+
+data, err := Inventory.GetJobSteps(CompanyID, JobID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| JobID | float64 | Job Id | 
+
+
+
+REST Endpoint that returns Inventory Job Steps
+
+*Success Response:*
+
+
+
+Successful operation
+
+
+Schema: `ResponseEnvelopeListJobStepsDTO`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getJobByCompanyAndIntegration
 Get Job Configs By Company And Integration
 
@@ -19498,6 +19644,46 @@ Successful operation
 
 
 Schema: `ResponseEnvelopeListJobConfigDTO`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### disable
+Disable Job Config
+
+```golang
+
+data, err := Inventory.Disable(CompanyID, IntegrationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| IntegrationID | string | IntegrationId | 
+
+
+
+REST Endpoint that disables Inventory Job Config
+
+*Success Response:*
+
+
+
+Successful operation
+
+
+Schema: `ResponseEnvelopeString`
 
 
 
@@ -19607,7 +19793,11 @@ data, err := Inventory.GetJobCodeMetrics(CompanyID, Code, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Status`, `Date`
 
 
 REST Endpoint that returns Inventory Run History For A Job Code
@@ -21787,6 +21977,659 @@ Coupon schedule updated successfully
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### fetchAndvalidateCartItems
+Fetch Cart Details
+
+```golang
+
+data, err := Cart.FetchAndvalidateCartItems(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current Application _id | 
+
+
+| body |  OpenapiCartDetailsRequest | "Request body" 
+
+Get all the details of cart for a list of provided `cart_items`
+
+*Success Response:*
+
+
+
+Cart details with breakup
+
+
+Schema: `OpenapiCartDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### checkCartServiceability
+Check Pincode Serviceability
+
+```golang
+
+data, err := Cart.CheckCartServiceability(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current Application _id | 
+
+
+| body |  OpenApiCartServiceabilityRequest | "Request body" 
+
+Check Pincode serviceability for cart items provided in `cart_items` and address pincode in `shipping_address`
+
+*Success Response:*
+
+
+
+Cart details with pincode validity information at item level
+
+
+Schema: `OpenApiCartServiceabilityResponse`
+
+
+*Examples:*
+
+
+Valid pincode
+```json
+{
+  "value": {
+    "items": [
+      {
+        "quantity": 1,
+        "message": "",
+        "coupon_message": "",
+        "product": {
+          "type": "product",
+          "uid": 803140,
+          "name": "Green Solid T-Shirt",
+          "slug": "celio-green-solid-t-shirt-803140-dd9e2c",
+          "brand": {
+            "uid": 44,
+            "name": "celio"
+          },
+          "categories": [
+            {
+              "uid": 192,
+              "name": "T-Shirts"
+            }
+          ],
+          "images": [
+            {
+              "aspect_ratio": "16:25",
+              "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/44_NEMIEL@GREENBRITISH/1_1548161273344.jpg",
+              "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/44_NEMIEL@GREENBRITISH/1_1548161273344.jpg"
+            }
+          ],
+          "action": {
+            "type": "product",
+            "url": "https://api.addsale.com/platform/content/v1/products/celio-green-solid-t-shirt-803140-dd9e2c/",
+            "query": {
+              "product_slug": [
+                "celio-green-solid-t-shirt-803140-dd9e2c"
+              ]
+            }
+          }
+        },
+        "article": {
+          "type": "article",
+          "uid": "25_44_A7050_NEMIEL@GREENBRITISH_S",
+          "size": "S",
+          "seller": {
+            "uid": 25,
+            "name": "CELIO FUTURE FASHION PRIVATE LIMITED"
+          },
+          "store": {
+            "uid": 1486,
+            "name": "Forum Mall"
+          },
+          "quantity": 1,
+          "price": {
+            "base": {
+              "marked": 1299,
+              "effective": 649.5,
+              "currency_code": "INR"
+            },
+            "converted": {
+              "marked": 1299,
+              "effective": 649.5,
+              "currency_code": "INR"
+            }
+          }
+        },
+        "key": "803140_S",
+        "discount": "50% OFF",
+        "price": {
+          "base": {
+            "add_on": 0,
+            "marked": 1299,
+            "effective": 649.5,
+            "selling": 649.5,
+            "currency_code": "INR"
+          },
+          "converted": {
+            "add_on": 0,
+            "marked": 1299,
+            "effective": 649.5,
+            "selling": 649.5,
+            "currency_code": "INR"
+          }
+        },
+        "availability": {
+          "sizes": [
+            "L",
+            "XL",
+            "M",
+            "S"
+          ],
+          "other_store_quantity": 0,
+          "out_of_stock": false,
+          "deliverable": true,
+          "is_valid": true,
+          "delivery_promise": {
+            "timestamp": {
+              "min": 1605306343,
+              "max": 1605468343
+            },
+            "formatted": {
+              "min": "Sat, 14 Nov",
+              "max": "Mon, 16 Nov"
+            }
+          },
+          "available_sizes": [
+            {
+              "is_available": true,
+              "display": "L",
+              "value": "L"
+            },
+            {
+              "is_available": true,
+              "display": "XXL",
+              "value": "XXL"
+            },
+            {
+              "is_available": true,
+              "display": "XL",
+              "value": "XL"
+            },
+            {
+              "is_available": true,
+              "display": "M",
+              "value": "M"
+            },
+            {
+              "is_available": true,
+              "display": "S",
+              "value": "S"
+            },
+            {
+              "is_available": false,
+              "display": "30",
+              "value": "30"
+            }
+          ]
+        },
+        "bulk_offer": {}
+      },
+      {
+        "quantity": 1,
+        "message": "Out of stock. Please remove item",
+        "coupon_message": "",
+        "product": {
+          "type": "product",
+          "uid": 803140,
+          "name": "Green Solid T-Shirt",
+          "slug": "celio-green-solid-t-shirt-803140-dd9e2c",
+          "brand": {
+            "uid": 44,
+            "name": "celio"
+          },
+          "categories": [
+            {
+              "uid": 192,
+              "name": "T-Shirts"
+            }
+          ],
+          "images": [
+            {
+              "aspect_ratio": "16:25",
+              "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/44_NEMIEL@GREENBRITISH/1_1548161273344.jpg",
+              "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/44_NEMIEL@GREENBRITISH/1_1548161273344.jpg"
+            }
+          ],
+          "action": {
+            "type": "product",
+            "url": "https://api.addsale.com/platform/content/v1/products/celio-green-solid-t-shirt-803140-dd9e2c/",
+            "query": {
+              "product_slug": [
+                "celio-green-solid-t-shirt-803140-dd9e2c"
+              ]
+            }
+          }
+        },
+        "article": {},
+        "key": "803140_S",
+        "discount": "",
+        "price": {
+          "base": {
+            "add_on": 0,
+            "marked": 1299,
+            "effective": 1299,
+            "selling": 1299,
+            "currency_code": "INR"
+          },
+          "converted": {
+            "add_on": 0,
+            "marked": 1299,
+            "effective": 1299,
+            "selling": 1299,
+            "currency_code": "INR"
+          }
+        },
+        "availability": {
+          "sizes": [
+            "L",
+            "XXL",
+            "XL",
+            "M",
+            "S"
+          ],
+          "other_store_quantity": 0,
+          "out_of_stock": true,
+          "deliverable": false,
+          "is_valid": false,
+          "delivery_promise": {
+            "timestamp": {
+              "min": 1605306343,
+              "max": 1605468343
+            },
+            "formatted": {
+              "min": "Sat, 14 Nov",
+              "max": "Mon, 16 Nov"
+            }
+          },
+          "available_sizes": [
+            {
+              "is_available": true,
+              "display": "L",
+              "value": "L"
+            },
+            {
+              "is_available": true,
+              "display": "XXL",
+              "value": "XXL"
+            },
+            {
+              "is_available": true,
+              "display": "XL",
+              "value": "XL"
+            },
+            {
+              "is_available": true,
+              "display": "M",
+              "value": "M"
+            },
+            {
+              "is_available": true,
+              "display": "S",
+              "value": "S"
+            },
+            {
+              "is_available": false,
+              "display": "30",
+              "value": "30"
+            }
+          ]
+        },
+        "bulk_offer": {}
+      }
+    ],
+    "delivery_promise": {
+      "timestamp": {
+        "min": 1605306343,
+        "max": 1605468343
+      },
+      "formatted": {
+        "min": "Sat, 14 Nov",
+        "max": "Mon, 16 Nov"
+      }
+    },
+    "is_valid": true
+  }
+}
+```
+
+Invalid pincode
+```json
+{
+  "value": {
+    "message": "All of the items in your cart are not deliverable to 800108",
+    "is_valid": false,
+    "items": [
+      {
+        "discount": "15% OFF",
+        "price": {
+          "base": {
+            "add_on": 0,
+            "marked": 2195,
+            "effective": 1866,
+            "selling": 1866,
+            "currency_code": "INR"
+          },
+          "converted": {
+            "add_on": 0,
+            "marked": 2195,
+            "effective": 1866,
+            "selling": 1866,
+            "currency_code": "INR"
+          }
+        },
+        "product": {
+          "type": "product",
+          "uid": 876245,
+          "name": "Brown Sandals",
+          "slug": "red-chief-brown-sandals-876245-c92507",
+          "brand": {
+            "uid": 433,
+            "name": ""
+          },
+          "categories": [
+            {
+              "uid": 176,
+              "name": ""
+            }
+          ],
+          "images": [
+            {
+              "aspect_ratio": "16:25",
+              "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/433_RC330004/1_1564147181287.jpg",
+              "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/433_RC330004/1_1564147181287.jpg"
+            }
+          ],
+          "action": {
+            "type": "product",
+            "url": "https://api.addsale.com/platform/content/v1/products/red-chief-brown-sandals-876245-c92507/",
+            "query": {
+              "product_slug": [
+                "red-chief-brown-sandals-876245-c92507"
+              ]
+            }
+          },
+          "item_code": "RC330004"
+        },
+        "bulk_offer": {},
+        "key": "876245_6",
+        "message": "We are not delivering to 800108",
+        "delivery_promise": null,
+        "coupon_message": "",
+        "availability": {
+          "sizes": [
+            "7",
+            "6",
+            "10",
+            "8"
+          ],
+          "other_store_quantity": 21,
+          "out_of_stock": false,
+          "deliverable": false,
+          "is_valid": true,
+          "available_sizes": [
+            {
+              "is_available": false,
+              "display": "9",
+              "value": "9"
+            },
+            {
+              "is_available": true,
+              "display": "10",
+              "value": "10"
+            },
+            {
+              "is_available": true,
+              "display": "6",
+              "value": "6"
+            },
+            {
+              "is_available": true,
+              "display": "7",
+              "value": "7"
+            },
+            {
+              "is_available": true,
+              "display": "8",
+              "value": "8"
+            }
+          ]
+        },
+        "quantity": 1,
+        "article": {
+          "type": "article",
+          "uid": "304_433_LGPL30402_RC330004_6",
+          "size": "6",
+          "seller": {
+            "uid": 304,
+            "name": "LEAYAN GLOBAL PVT. LTD."
+          },
+          "store": {
+            "uid": 9767,
+            "name": "Udyog Kunj, Kanpur"
+          },
+          "quantity": 3,
+          "price": {
+            "base": {
+              "marked": 2195,
+              "effective": 1866,
+              "currency_code": "INR"
+            },
+            "converted": {
+              "marked": 2195,
+              "effective": 1866,
+              "currency_code": "INR"
+            }
+          }
+        }
+      },
+      {
+        "discount": "15% OFF",
+        "price": {
+          "base": {
+            "add_on": 0,
+            "marked": 2195,
+            "effective": 1866,
+            "selling": 1866,
+            "currency_code": "INR"
+          },
+          "converted": {
+            "add_on": 0,
+            "marked": 2195,
+            "effective": 1866,
+            "selling": 1866,
+            "currency_code": "INR"
+          }
+        },
+        "product": {
+          "type": "product",
+          "uid": 876245,
+          "name": "Brown Sandals",
+          "slug": "red-chief-brown-sandals-876245-c92507",
+          "brand": {
+            "uid": 433,
+            "name": ""
+          },
+          "categories": [
+            {
+              "uid": 176,
+              "name": ""
+            }
+          ],
+          "images": [
+            {
+              "aspect_ratio": "16:25",
+              "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/433_RC330004/1_1564147181287.jpg",
+              "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/433_RC330004/1_1564147181287.jpg"
+            }
+          ],
+          "action": {
+            "type": "product",
+            "url": "https://api.addsale.com/platform/content/v1/products/red-chief-brown-sandals-876245-c92507/",
+            "query": {
+              "product_slug": [
+                "red-chief-brown-sandals-876245-c92507"
+              ]
+            }
+          },
+          "item_code": "RC330004"
+        },
+        "bulk_offer": {},
+        "key": "876245_6",
+        "message": "We are not delivering to 800108",
+        "coupon_message": "",
+        "availability": {
+          "sizes": [
+            "7",
+            "6",
+            "10",
+            "8"
+          ],
+          "other_store_quantity": 21,
+          "out_of_stock": false,
+          "deliverable": false,
+          "is_valid": true,
+          "available_sizes": [
+            {
+              "is_available": false,
+              "display": "9",
+              "value": "9"
+            },
+            {
+              "is_available": true,
+              "display": "10",
+              "value": "10"
+            },
+            {
+              "is_available": true,
+              "display": "6",
+              "value": "6"
+            },
+            {
+              "is_available": true,
+              "display": "7",
+              "value": "7"
+            },
+            {
+              "is_available": true,
+              "display": "8",
+              "value": "8"
+            }
+          ]
+        },
+        "quantity": 1,
+        "article": {
+          "type": "article",
+          "uid": "304_433_LGPL30402_RC330004_6",
+          "size": "6",
+          "seller": {
+            "uid": 304,
+            "name": "LEAYAN GLOBAL PVT. LTD."
+          },
+          "store": {
+            "uid": 9767,
+            "name": "Udyog Kunj, Kanpur"
+          },
+          "quantity": 3,
+          "price": {
+            "base": {
+              "marked": 2195,
+              "effective": 1866,
+              "currency_code": "INR"
+            },
+            "converted": {
+              "marked": 2195,
+              "effective": 1866,
+              "currency_code": "INR"
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### checkoutCart
+Create Fynd order with cart details
+
+```golang
+
+data, err := Cart.CheckoutCart(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current Application _id | 
+
+
+| body |  OpenApiPlatformCheckoutReq | "Request body" 
+
+Generate Fynd order for cart details send with provided `cart_items`
+
+*Success Response:*
+
+
+
+Checkout cart and create Fynd order id
+
+
+Schema: `OpenApiCheckoutResponse`
 
 
 
