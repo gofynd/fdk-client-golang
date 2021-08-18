@@ -12110,6 +12110,69 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
            
        
     
+    
+    
+  
+
+    
+    // ConfirmPayment Confirm payment after successful payment from payment gateway
+     func (pa *PlatformAppPayment)  ConfirmPayment(body  PaymentConfirmationRequest) (PaymentConfirmationResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            confirmPaymentResponse PaymentConfirmationResponse
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PaymentConfirmationResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PaymentConfirmationResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/confirm",pa.CompanyID, pa.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PaymentConfirmationResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &confirmPaymentResponse)
+        if err != nil {
+            return PaymentConfirmationResponse{}, common.NewFDKError(err.Error())
+        }
+        return confirmPaymentResponse, nil
+        
+    }
+           
+       
+    
 
  
 	 
