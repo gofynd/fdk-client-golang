@@ -1913,55 +1913,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UnfollowById Unfollow an entity (product/brand/collection)
-    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             unfollowByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &unfollowByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return unfollowByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // FollowById Follow an entity (product/brand/collection)
     func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -2002,6 +1953,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return followByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UnfollowById Unfollow an entity (product/brand/collection)
+    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             unfollowByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &unfollowByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return unfollowByIdResponse, nil
         
     }
           
@@ -8820,6 +8820,53 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // GetStoreDetailById Get ordering store details
+    func (co *Configuration)  GetStoreDetailById(StoreID float64) (OrderingStore, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getStoreDetailByIdResponse OrderingStore
+	    )
+
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/application/configuration/v1.0/ordering-store/stores/undefined",StoreID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return OrderingStore{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getStoreDetailByIdResponse)
+        if err != nil {
+            return OrderingStore{}, common.NewFDKError(err.Error())
+        }
+         return getStoreDetailByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // GetFeatures Get features of application
     func (co *Configuration)  GetFeatures() (AppFeatureResponse, error){
         var (
@@ -8910,7 +8957,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetCurrencies Get currencies enabled in the application
+    // GetCurrencies Get all currencies list
     func (co *Configuration)  GetCurrencies() (CurrenciesResponse, error){
         var (
             rawRequest  *RawRequest
@@ -8993,6 +9040,51 @@ func NewAppClient(config *AppConfig) *Client {
             return Currency{}, common.NewFDKError(err.Error())
         }
          return getCurrencyByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetAppCurrencies Get currencies enabled in the application
+    func (co *Configuration)  GetAppCurrencies() (AppCurrencyResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getAppCurrenciesResponse AppCurrencyResponse
+	    )
+
+        
+
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            "/service/application/configuration/v1.0/currency",
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return AppCurrencyResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAppCurrenciesResponse)
+        if err != nil {
+            return AppCurrencyResponse{}, common.NewFDKError(err.Error())
+        }
+         return getAppCurrenciesResponse, nil
         
     }
           
