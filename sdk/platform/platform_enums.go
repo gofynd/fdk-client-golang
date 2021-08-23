@@ -167,3 +167,29 @@ import (
 
 
 
+
+
+    //SubscriberStatus used by Webhook
+    type SubscriberStatus  string
+    
+    const (
+            
+            //ACTIVE defines constant for the `active` 
+            ACTIVE SubscriberStatus = "active"
+            
+            
+            //INACTIVE defines constant for the `inactive` 
+            INACTIVE SubscriberStatus = "inactive"
+            
+            
+       )
+
+    //IsValid return error if enum is invalid
+    func (su SubscriberStatus) IsValid() error {
+      switch su {
+        case  ACTIVE, INACTIVE : 
+        return nil
+      }
+      return errors.New("Invalid SubscriberStatus type")
+    }
+
