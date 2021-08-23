@@ -28,12 +28,16 @@ import (
             HIGH PriorityEnum = "high"
             
             
+            //URGENT defines constant for the `urgent` 
+            URGENT PriorityEnum = "urgent"
+            
+            
        )
 
     //IsValid return error if enum is invalid
     func (pr PriorityEnum) IsValid() error {
       switch pr {
-        case  LOW, MEDIUM, HIGH : 
+        case  LOW, MEDIUM, HIGH, URGENT : 
         return nil
       }
       return errors.New("Invalid PriorityEnum type")

@@ -4604,13 +4604,8 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    //UserLoginWithFacebookXQuery holds query params
-    type UserLoginWithFacebookXQuery struct { 
-        Platform string  `url:"platform,omitempty"`  
-    }
-    
     // LoginWithFacebook Login or Register using Facebook
-    func (us *User)  LoginWithFacebook(xQuery UserLoginWithFacebookXQuery, body  OAuthRequestSchema) (AuthSuccess, error){
+    func (us *User)  LoginWithFacebook(body  OAuthRequestSchema) (AuthSuccess, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -4626,10 +4621,6 @@ func NewAppClient(config *AppConfig) *Client {
             
         
 
-        
-            
-                
-            
         
 
         
@@ -4656,7 +4647,7 @@ func NewAppClient(config *AppConfig) *Client {
             "post",
             "/service/application/user/authentication/v1.0/login/facebook-token",
             nil,
-            xQuery,
+            nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -4677,13 +4668,8 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    //UserLoginWithGoogleXQuery holds query params
-    type UserLoginWithGoogleXQuery struct { 
-        Platform string  `url:"platform,omitempty"`  
-    }
-    
     // LoginWithGoogle Login or Register using Google
-    func (us *User)  LoginWithGoogle(xQuery UserLoginWithGoogleXQuery, body  OAuthRequestSchema) (AuthSuccess, error){
+    func (us *User)  LoginWithGoogle(body  OAuthRequestSchema) (AuthSuccess, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -4699,10 +4685,6 @@ func NewAppClient(config *AppConfig) *Client {
             
         
 
-        
-            
-                
-            
         
 
         
@@ -4729,7 +4711,7 @@ func NewAppClient(config *AppConfig) *Client {
             "post",
             "/service/application/user/authentication/v1.0/login/google-token",
             nil,
-            xQuery,
+            nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -4750,13 +4732,8 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    //UserLoginWithGoogleAndroidXQuery holds query params
-    type UserLoginWithGoogleAndroidXQuery struct { 
-        Platform string  `url:"platform,omitempty"`  
-    }
-    
     // LoginWithGoogleAndroid Login or Register using Google on Android
-    func (us *User)  LoginWithGoogleAndroid(xQuery UserLoginWithGoogleAndroidXQuery, body  OAuthRequestSchema) (AuthSuccess, error){
+    func (us *User)  LoginWithGoogleAndroid(body  OAuthRequestSchema) (AuthSuccess, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -4772,10 +4749,6 @@ func NewAppClient(config *AppConfig) *Client {
             
         
 
-        
-            
-                
-            
         
 
         
@@ -4802,7 +4775,7 @@ func NewAppClient(config *AppConfig) *Client {
             "post",
             "/service/application/user/authentication/v1.0/login/google-android",
             nil,
-            xQuery,
+            nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -4823,13 +4796,8 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    //UserLoginWithGoogleIOSXQuery holds query params
-    type UserLoginWithGoogleIOSXQuery struct { 
-        Platform string  `url:"platform,omitempty"`  
-    }
-    
     // LoginWithGoogleIOS Login or Register using Google on iOS
-    func (us *User)  LoginWithGoogleIOS(xQuery UserLoginWithGoogleIOSXQuery, body  OAuthRequestSchema) (AuthSuccess, error){
+    func (us *User)  LoginWithGoogleIOS(body  OAuthRequestSchema) (AuthSuccess, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -4845,10 +4813,6 @@ func NewAppClient(config *AppConfig) *Client {
             
         
 
-        
-            
-                
-            
         
 
         
@@ -4875,7 +4839,7 @@ func NewAppClient(config *AppConfig) *Client {
             "post",
             "/service/application/user/authentication/v1.0/login/google-ios",
             nil,
-            xQuery,
+            nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -7988,7 +7952,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetApplicationQRCode Create QR Code of an app
+    // GetApplicationQRCode Create application QR Code
     func (sh *Share)  GetApplicationQRCode() (QRCodeResp, error){
         var (
             rawRequest  *RawRequest
@@ -8033,7 +7997,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetProductQRCodeBySlug Create QR Code of a product
+    // GetProductQRCodeBySlug Create product QR Code
     func (sh *Share)  GetProductQRCodeBySlug(Slug string) (QRCodeResp, error){
         var (
             rawRequest  *RawRequest
@@ -8080,7 +8044,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetCollectionQRCodeBySlug Create QR Code of a collection
+    // GetCollectionQRCodeBySlug Create collection QR Code
     func (sh *Share)  GetCollectionQRCodeBySlug(Slug string) (QRCodeResp, error){
         var (
             rawRequest  *RawRequest
@@ -8132,7 +8096,7 @@ func NewAppClient(config *AppConfig) *Client {
         URL string  `url:"url,omitempty"`  
     }
     
-    // GetUrlQRCode Create QR Code of a URL
+    // GetUrlQRCode Create url QR Code
     func (sh *Share)  GetUrlQRCode(xQuery ShareGetUrlQRCodeXQuery) (QRCodeResp, error){
         var (
             rawRequest  *RawRequest
@@ -8181,7 +8145,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // CreateShortLink Create a short link
+    // CreateShortLink Create short link
     func (sh *Share)  CreateShortLink(body  ShortLinkReq) (ShortLinkRes, error){
         var (
             rawRequest  *RawRequest
@@ -8820,6 +8784,53 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // GetStoreDetailById Get ordering store details
+    func (co *Configuration)  GetStoreDetailById(StoreID float64) (OrderingStore, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getStoreDetailByIdResponse OrderingStore
+	    )
+
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/application/configuration/v1.0/ordering-store/stores/undefined",StoreID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return OrderingStore{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getStoreDetailByIdResponse)
+        if err != nil {
+            return OrderingStore{}, common.NewFDKError(err.Error())
+        }
+         return getStoreDetailByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // GetFeatures Get features of application
     func (co *Configuration)  GetFeatures() (AppFeatureResponse, error){
         var (
@@ -8910,7 +8921,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetCurrencies Get currencies enabled in the application
+    // GetCurrencies Get all currencies list
     func (co *Configuration)  GetCurrencies() (CurrenciesResponse, error){
         var (
             rawRequest  *RawRequest
@@ -8993,6 +9004,51 @@ func NewAppClient(config *AppConfig) *Client {
             return Currency{}, common.NewFDKError(err.Error())
         }
          return getCurrencyByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetAppCurrencies Get currencies enabled in the application
+    func (co *Configuration)  GetAppCurrencies() (AppCurrencyResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getAppCurrenciesResponse AppCurrencyResponse
+	    )
+
+        
+
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            "/service/application/configuration/v1.0/currency",
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return AppCurrencyResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAppCurrenciesResponse)
+        if err != nil {
+            return AppCurrencyResponse{}, common.NewFDKError(err.Error())
+        }
+         return getAppCurrenciesResponse, nil
         
     }
           
@@ -10405,6 +10461,68 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // AddRefundBankAccountUsingOTP Save bank details for cancelled/returned order
+    func (pa *Payment)  AddRefundBankAccountUsingOTP(body  AddBeneficiaryDetailsOTPRequest) (RefundAccountResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             addRefundBankAccountUsingOTPResponse RefundAccountResponse
+	    )
+
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return RefundAccountResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return RefundAccountResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            "/service/application/payment/v1.0/refund/account/otp",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return RefundAccountResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &addRefundBankAccountUsingOTPResponse)
+        if err != nil {
+            return RefundAccountResponse{}, common.NewFDKError(err.Error())
+        }
+         return addRefundBankAccountUsingOTPResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // VerifyOtpAndAddBeneficiaryForWallet Send OTP on adding a wallet beneficiary
     func (pa *Payment)  VerifyOtpAndAddBeneficiaryForWallet(body  WalletOtpRequest) (WalletOtpResponse, error){
         var (
@@ -10895,6 +11013,170 @@ func NewAppClient(config *AppConfig) *Client {
             return PosOrderById{}, common.NewFDKError(err.Error())
         }
          return getPosOrderByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetCustomerDetailsByShipmentId Get Customer Details by Shipment Id
+    func (or *Order)  GetCustomerDetailsByShipmentId(OrderID string, ShipmentID string) (CustomerDetailsByShipmentId, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getCustomerDetailsByShipmentIdResponse CustomerDetailsByShipmentId
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/application/order/v1.0/orders/%s/shipments/%s/customer-details",OrderID,ShipmentID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CustomerDetailsByShipmentId{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getCustomerDetailsByShipmentIdResponse)
+        if err != nil {
+            return CustomerDetailsByShipmentId{}, common.NewFDKError(err.Error())
+        }
+         return getCustomerDetailsByShipmentIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // SendOtpToShipmentCustomer Send and Resend Otp code to Order-Shipment customer
+    func (or *Order)  SendOtpToShipmentCustomer(OrderID string, ShipmentID string) (sendOTPApplicationResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             sendOtpToShipmentCustomerResponse sendOTPApplicationResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "post",
+            fmt.Sprintf("/service/application/order/v1.0/orders/%s/shipments/%s/otp/send/",OrderID,ShipmentID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return sendOTPApplicationResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &sendOtpToShipmentCustomerResponse)
+        if err != nil {
+            return sendOTPApplicationResponse{}, common.NewFDKError(err.Error())
+        }
+         return sendOtpToShipmentCustomerResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // VerifyOtpShipmentCustomer Verify Otp code
+    func (or *Order)  VerifyOtpShipmentCustomer(OrderID string, ShipmentID string, body  ReqBodyVerifyOTPShipment) (ResponseVerifyOTPShipment, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             verifyOtpShipmentCustomerResponse ResponseVerifyOTPShipment
+	    )
+
+        
+            
+        
+            
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return ResponseVerifyOTPShipment{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return ResponseVerifyOTPShipment{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "post",
+            fmt.Sprintf("/service/application/order/v1.0/orders/%s/shipments/%s/otp/verify",OrderID,ShipmentID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ResponseVerifyOTPShipment{}, err
+	    }
+        
+        err = json.Unmarshal(response, &verifyOtpShipmentCustomerResponse)
+        if err != nil {
+            return ResponseVerifyOTPShipment{}, common.NewFDKError(err.Error())
+        }
+         return verifyOtpShipmentCustomerResponse, nil
         
     }
           

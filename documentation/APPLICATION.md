@@ -198,10 +198,12 @@
     * [getBasicDetails](#getbasicdetails)
     * [getIntegrationTokens](#getintegrationtokens)
     * [getOrderingStores](#getorderingstores)
+    * [getStoreDetailById](#getstoredetailbyid)
     * [getFeatures](#getfeatures)
     * [getContactInfo](#getcontactinfo)
     * [getCurrencies](#getcurrencies)
     * [getCurrencyById](#getcurrencybyid)
+    * [getAppCurrencies](#getappcurrencies)
     * [getLanguages](#getlanguages)
     * [getOrderingStoreCookie](#getorderingstorecookie)
     * [removeOrderingStoreCookie](#removeorderingstorecookie)
@@ -229,6 +231,7 @@
     * [getOrderBeneficiariesDetail](#getorderbeneficiariesdetail)
     * [verifyOtpAndAddBeneficiaryForBank](#verifyotpandaddbeneficiaryforbank)
     * [addBeneficiaryDetails](#addbeneficiarydetails)
+    * [addRefundBankAccountUsingOTP](#addrefundbankaccountusingotp)
     * [verifyOtpAndAddBeneficiaryForWallet](#verifyotpandaddbeneficiaryforwallet)
     * [updateDefaultBeneficiary](#updatedefaultbeneficiary)
     
@@ -242,6 +245,9 @@
     * [updateShipmentStatus](#updateshipmentstatus)
     * [trackShipment](#trackshipment)
     * [getPosOrderById](#getposorderbyid)
+    * [getCustomerDetailsByShipmentId](#getcustomerdetailsbyshipmentid)
+    * [sendOtpToShipmentCustomer](#sendotptoshipmentcustomer)
+    * [verifyOtpShipmentCustomer](#verifyotpshipmentcustomer)
     
 
 * [Rewards](#Rewards)
@@ -6132,14 +6138,11 @@ Login or Register using Facebook
 
 ```golang
 
- data, err :=  User.LoginWithFacebook(xQuery, body);
+ data, err :=  User.LoginWithFacebook(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
-
-
-| xQuery | struct | Includes properties such as `Platform`
 
 | body |  OAuthRequestSchema | "Request body" 
 
@@ -6182,14 +6185,11 @@ Login or Register using Google
 
 ```golang
 
- data, err :=  User.LoginWithGoogle(xQuery, body);
+ data, err :=  User.LoginWithGoogle(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
-
-
-| xQuery | struct | Includes properties such as `Platform`
 
 | body |  OAuthRequestSchema | "Request body" 
 
@@ -6232,14 +6232,11 @@ Login or Register using Google on Android
 
 ```golang
 
- data, err :=  User.LoginWithGoogleAndroid(xQuery, body);
+ data, err :=  User.LoginWithGoogleAndroid(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
-
-
-| xQuery | struct | Includes properties such as `Platform`
 
 | body |  OAuthRequestSchema | "Request body" 
 
@@ -6282,14 +6279,11 @@ Login or Register using Google on iOS
 
 ```golang
 
- data, err :=  User.LoginWithGoogleIOS(xQuery, body);
+ data, err :=  User.LoginWithGoogleIOS(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
-
-
-| xQuery | struct | Includes properties such as `Platform`
 
 | body |  OAuthRequestSchema | "Request body" 
 
@@ -8560,7 +8554,7 @@ reset
 
 
 #### getApplicationQRCode
-Create QR Code of an app
+Create application QR Code
 
 ```golang
 
@@ -8572,13 +8566,13 @@ Create QR Code of an app
 
 
 
-Use this API to create a QR code of an app for sharing it with users who want to use the app.
+Create application QR Code
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `QRCodeResp` for more details.
+Success
 
 
 Schema: `QRCodeResp`
@@ -8595,7 +8589,7 @@ Schema: `QRCodeResp`
 
 
 #### getProductQRCodeBySlug
-Create QR Code of a product
+Create product QR Code
 
 ```golang
 
@@ -8605,18 +8599,18 @@ Create QR Code of a product
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Slug | string | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint. | 
+| Slug | string | The unique identifier of a product | 
 
 
 
 
-Use this API to create a QR code of a product for sharing it with users who want to view/purchase the product.
+Create product QR Code
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `QRCodeResp` for more details.
+Success
 
 
 Schema: `QRCodeResp`
@@ -8633,7 +8627,7 @@ Schema: `QRCodeResp`
 
 
 #### getCollectionQRCodeBySlug
-Create QR Code of a collection
+Create collection QR Code
 
 ```golang
 
@@ -8643,18 +8637,18 @@ Create QR Code of a collection
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Slug | string | A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint. | 
+| Slug | string | The unique identifier of a collection | 
 
 
 
 
-Use this API to create a QR code of a collection of products for sharing it with users who want to view/purchase the collection.
+Create collection QR Code
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `QRCodeResp` for more details.
+Success
 
 
 Schema: `QRCodeResp`
@@ -8671,7 +8665,7 @@ Schema: `QRCodeResp`
 
 
 #### getUrlQRCode
-Create QR Code of a URL
+Create url QR Code
 
 ```golang
 
@@ -8686,13 +8680,13 @@ Create QR Code of a URL
 
 
 
-Use this API to create a QR code of a URL for sharing it with users who want to visit the link.
+Create url QR Code
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `QRCodeResp` for more details.
+Success
 
 
 Schema: `QRCodeResp`
@@ -8709,7 +8703,7 @@ Schema: `QRCodeResp`
 
 
 #### createShortLink
-Create a short link
+Create short link
 
 ```golang
 
@@ -8722,13 +8716,13 @@ Create a short link
 | body |  ShortLinkReq | "Request body" 
 
 
-Use this API to create a short link that is easy to write/share/read as compared to long URLs.
+Create short link
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `ShortLinkRes` for more details.
+Success
 
 
 Schema: `ShortLinkRes`
@@ -8755,18 +8749,18 @@ Get short link by hash
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Hash | string | A string value used for converting long URL to short URL and vice-versa. | 
+| Hash | string | Hash of short link | 
 
 
 
 
-Use this API to get a short link by using a hash value.
+Get short link by hash
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `ShortLinkRes` for more details.
+Success
 
 
 Schema: `ShortLinkRes`
@@ -8793,18 +8787,18 @@ Get original link by hash
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Hash | string | A string value used for converting long URL to short URL and vice-versa. | 
+| Hash | string | Hash of short link | 
 
 
 
 
-Use this API to retrieve the original link from a short-link by using a hash value.
+Get original link by hash
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `ShortLinkRes` for more details.
+Success
 
 
 Schema: `ShortLinkRes`
@@ -9130,6 +9124,44 @@ Schema: `OrderingStores`
 ---
 
 
+#### getStoreDetailById
+Get ordering store details
+
+```golang
+
+ data, err :=  Configuration.GetStoreDetailById(StoreID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| StoreID | float64 | Store uid | 
+
+
+
+
+Use this API to retrieve the details of given stores uid (the selling locations where the application will be utilized for placing orders).
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `OrderingStore` for more details.
+
+
+Schema: `OrderingStore`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getFeatures
 Get features of application
 
@@ -9201,7 +9233,7 @@ Schema: `ApplicationInformation`
 
 
 #### getCurrencies
-Get currencies enabled in the application
+Get all currencies list
 
 ```golang
 
@@ -9213,7 +9245,7 @@ Get currencies enabled in the application
 
 
 
-Use this API to get a list of currencies allowed in the current application. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
+Use this API to get a list of currencies available. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
 
 *Success Response:*
 
@@ -9261,6 +9293,41 @@ Success. Check the example shown below or refer `Currency` for more details.
 
 
 Schema: `Currency`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAppCurrencies
+Get currencies enabled in the application
+
+```golang
+
+ data, err :=  Configuration.GetAppCurrencies();
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+Use this API to get a list of currencies allowed in the current application. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `AppCurrencyResponse` for more details.
+
+
+Schema: `AppCurrencyResponse`
 
 
 
@@ -10155,6 +10222,42 @@ Schema: `RefundAccountResponse`
 ---
 
 
+#### addRefundBankAccountUsingOTP
+Save bank details for cancelled/returned order
+
+```golang
+
+ data, err :=  Payment.AddRefundBankAccountUsingOTP(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  AddBeneficiaryDetailsOTPRequest | "Request body" 
+
+
+Use this API to save bank details for returned/cancelled order to refund amount in his account.
+
+*Success Response:*
+
+
+
+Success. Shows whether the beneficiary details were saved to a returned/cancelled order or not.
+
+
+Schema: `RefundAccountResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### verifyOtpAndAddBeneficiaryForWallet
 Send OTP on adding a wallet beneficiary
 
@@ -10497,6 +10600,130 @@ Success. Check the example shown below or refer `PosOrderById` for more details.
 
 
 Schema: `PosOrderById`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCustomerDetailsByShipmentId
+Get Customer Details by Shipment Id
+
+```golang
+
+ data, err :=  Order.GetCustomerDetailsByShipmentId(OrderID, ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| OrderID | string | A unique number used for identifying and tracking your orders. | 
+
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+
+
+Use this API to retrieve customer details such as mobileno using Shipment ID.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `CustomerDetailsByShipmentId` for more details.
+
+
+Schema: `CustomerDetailsByShipmentId`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### sendOtpToShipmentCustomer
+Send and Resend Otp code to Order-Shipment customer
+
+```golang
+
+ data, err :=  Order.SendOtpToShipmentCustomer(OrderID, ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| OrderID | string | A unique number used for identifying and tracking your orders. | 
+
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+
+
+Use this API to send OTP to the customer of the mapped Shipment.
+
+*Success Response:*
+
+
+
+Success to acknowledge the service was notified
+
+
+Schema: `sendOTPApplicationResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### verifyOtpShipmentCustomer
+Verify Otp code
+
+```golang
+
+ data, err :=  Order.VerifyOtpShipmentCustomer(OrderID, ShipmentID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| OrderID | string | A unique number used for identifying and tracking your orders. | 
+
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| body |  ReqBodyVerifyOTPShipment | "Request body" 
+
+
+Use this API to verify OTP and create a session token with custom payload.
+
+*Success Response:*
+
+
+
+Success, the code is valid and returns a session token
+
+
+Schema: `ResponseVerifyOTPShipment`
 
 
 

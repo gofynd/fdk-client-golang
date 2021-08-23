@@ -26,12 +26,16 @@ import (
             HIGH PriorityEnum = "high"
             
             
+            //URGENT defines constant for the `urgent` 
+            URGENT PriorityEnum = "urgent"
+            
+            
        )
 
     //IsValid return error if enum is invalid
     func (pr PriorityEnum) IsValid() error {
       switch pr {
-        case  LOW, MEDIUM, HIGH : 
+        case  LOW, MEDIUM, HIGH, URGENT : 
         return nil
       }
       return errors.New("Invalid PriorityEnum type")
@@ -167,4 +171,29 @@ import (
 
 
 
+
+
+    //SubscriberStatus used by Webhook
+    type SubscriberStatus  string
+    
+    const (
+            
+            //ACTIVE defines constant for the `active` 
+            ACTIVE SubscriberStatus = "active"
+            
+            
+            //INACTIVE defines constant for the `inactive` 
+            INACTIVE SubscriberStatus = "inactive"
+            
+            
+       )
+
+    //IsValid return error if enum is invalid
+    func (su SubscriberStatus) IsValid() error {
+      switch su {
+        case  ACTIVE, INACTIVE : 
+        return nil
+      }
+      return errors.New("Invalid SubscriberStatus type")
+    }
 
