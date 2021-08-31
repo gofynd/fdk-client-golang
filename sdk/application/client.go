@@ -2283,8 +2283,8 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    //CatalogGetAppStoresXQuery holds query params
-    type CatalogGetAppStoresXQuery struct { 
+    //CatalogGetInStockLocationsXQuery holds query params
+    type CatalogGetInStockLocationsXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
         Q string  `url:"q,omitempty"` 
@@ -2294,13 +2294,13 @@ func NewAppClient(config *AppConfig) *Client {
         Longitude float64  `url:"longitude,omitempty"`  
     }
     
-    // GetAppStores Get store meta information.
-    func (ca *Catalog)  GetAppStores(xQuery CatalogGetAppStoresXQuery) (ApplicationStoreListing, error){
+    // GetInStockLocations Get store meta information.
+    func (ca *Catalog)  GetInStockLocations(xQuery CatalogGetInStockLocationsXQuery) (ApplicationStoreListing, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getAppStoresResponse ApplicationStoreListing
+             getInStockLocationsResponse ApplicationStoreListing
 	    )
 
         
@@ -2332,7 +2332,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            "/service/application/catalog/v1.0/app-locations/",
+            "/service/application/catalog/v1.0/in-stock-locations/",
             nil,
             xQuery,
             nil)
@@ -2341,11 +2341,11 @@ func NewAppClient(config *AppConfig) *Client {
             return ApplicationStoreListing{}, err
 	    }
         
-        err = json.Unmarshal(response, &getAppStoresResponse)
+        err = json.Unmarshal(response, &getInStockLocationsResponse)
         if err != nil {
             return ApplicationStoreListing{}, common.NewFDKError(err.Error())
         }
-         return getAppStoresResponse, nil
+         return getInStockLocationsResponse, nil
         
     }
           
@@ -2402,8 +2402,8 @@ func NewAppClient(config *AppConfig) *Client {
                     
                 
             
-            // GetAppStoresPaginator Get store meta information.  
-            func (ca *Catalog)  GetAppStoresPaginator( xQuery CatalogGetAppStoresXQuery ) *common.Paginator {
+            // GetInStockLocationsPaginator Get store meta information.  
+            func (ca *Catalog)  GetInStockLocationsPaginator( xQuery CatalogGetInStockLocationsXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
                  
                  
@@ -2437,7 +2437,7 @@ func NewAppClient(config *AppConfig) *Client {
                  
                  
                 paginator.Next = func() (interface{}, error) {
-                    response, err := ca.GetAppStores(xQuery)
+                    response, err := ca.GetInStockLocations(xQuery)
                     if response.Page.HasNext {
                         paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
                     }

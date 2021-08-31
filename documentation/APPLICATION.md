@@ -55,7 +55,7 @@
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
-    * [getAppStores](#getappstores)
+    * [getInStockLocations](#getinstocklocations)
     
 
 * [Cart](#Cart)
@@ -1502,12 +1502,12 @@ Schema: `StoreListingResponse`
 ---
 
 
-#### getAppStores
+#### getInStockLocations
 Get store meta information.
 
 ```golang
 
- data, err :=  Catalog.GetAppStores(xQuery);
+ data, err :=  Catalog.GetInStockLocations(xQuery);
 ```
 
 | Argument  |  Type  | Description |
