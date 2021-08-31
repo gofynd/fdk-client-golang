@@ -1913,55 +1913,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -2002,6 +1953,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -2332,7 +2332,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            "/service/application/catalog/v1.0/in-stock-locations/",
+            "/service/application/catalog/v1.0/in-stock/locations/",
             nil,
             xQuery,
             nil)
@@ -2446,6 +2446,53 @@ func NewAppClient(config *AppConfig) *Client {
                 return paginator
             }
        
+    
+    
+    
+  
+    
+    
+    // GetLocationDetailsById Get store meta information.
+    func (ca *Catalog)  GetLocationDetailsById(LocationID float64) (StoreDetails, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getLocationDetailsByIdResponse StoreDetails
+	    )
+
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/application/catalog/v1.0/in-stock/locations/undefined/",LocationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return StoreDetails{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getLocationDetailsByIdResponse)
+        if err != nil {
+            return StoreDetails{}, common.NewFDKError(err.Error())
+        }
+         return getLocationDetailsByIdResponse, nil
+        
+    }
+          
     
 
     // Cart ...
@@ -4241,6 +4288,13 @@ func NewAppClient(config *AppConfig) *Client {
             
         
             
+                //enum validation inside request body
+                err = body.Type.IsValid()
+                if err != nil {
+                
+                    return TicketHistory{}, common.NewFDKError(err.Error())
+                }
+            
         
 
         
@@ -4306,6 +4360,13 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+                //enum validation inside request body
+                err = body.Priority.IsValid()
+                if err != nil {
+                
+                    return Ticket{}, common.NewFDKError(err.Error())
+                }
             
         
             
