@@ -4072,6 +4072,13 @@ func NewAppClient(config *AppConfig) *Client {
             
         
             
+                //enum validation inside request body
+                err = body.Type.IsValid()
+                if err != nil {
+                
+                    return TicketHistory{}, common.NewFDKError(err.Error())
+                }
+            
         
 
         
@@ -4137,6 +4144,13 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+                //enum validation inside request body
+                err = body.Priority.IsValid()
+                if err != nil {
+                
+                    return Ticket{}, common.NewFDKError(err.Error())
+                }
             
         
             
