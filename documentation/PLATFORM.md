@@ -536,6 +536,7 @@
     * [getSubscribersByCompany](#getsubscribersbycompany)
     * [registerSubscriberToEvent](#registersubscribertoevent)
     * [updateSubscriberConfig](#updatesubscriberconfig)
+    * [getSubscribersByExtensionId](#getsubscribersbyextensionid)
     * [getSubscriberById](#getsubscriberbyid)
     * [fetchAllEventConfigurations](#fetchalleventconfigurations)
     
@@ -23372,6 +23373,51 @@ Success
 
 
 Schema: `SubscriberConfig`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSubscribersByExtensionId
+Get Subscribers By Extension ID
+
+```golang
+
+data, err := Webhook.GetSubscribersByExtensionId(CompanyID, ExtensionID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+
+| CompanyID | float64 | Company ID of the application | 
+
+
+| ExtensionID | string | Extension ID | 
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
+
+
+Get Subscribers By ExtensionID
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `SubscriberResponse`
 
 
 

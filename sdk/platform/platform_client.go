@@ -12494,6 +12494,70 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformGetSubscribersByExtensionIdXQuery holds query params
+    type PlatformGetSubscribersByExtensionIdXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // GetSubscribersByExtensionId Get Subscribers By Extension ID
+     func (we *PlatformWebhook)  GetSubscribersByExtensionId(ExtensionID string, xQuery PlatformGetSubscribersByExtensionIdXQuery) (SubscriberResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getSubscribersByExtensionIdResponse SubscriberResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            we.Config,
+            "get",
+            fmt.Sprintf("/service/platform/webhook/v1.0/company/%s/extension/%s/subscriber",we.CompanyID, ExtensionID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SubscriberResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getSubscribersByExtensionIdResponse)
+        if err != nil {
+             return SubscriberResponse{}, common.NewFDKError(err.Error())
+        }
+        return getSubscribersByExtensionIdResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
 
 
     // GetSubscriberById Get Subscriber By Subscriber ID
