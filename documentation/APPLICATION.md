@@ -55,6 +55,8 @@
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
+    * [getInStockLocations](#getinstocklocations)
+    * [getLocationDetailsById](#getlocationdetailsbyid)
     
 
 * [Cart](#Cart)
@@ -1489,6 +1491,94 @@ Success. Returns a list of selling locations. Check the example shown below or r
 
 
 Schema: `StoreListingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getInStockLocations
+Get store meta information.
+
+```golang
+
+ data, err :=  Catalog.GetInStockLocations(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`, `City`, `Range`, `Latitude`, `Longitude`
+
+
+
+Use this API to get a list of stores in a specific application.
+
+*Success Response:*
+
+
+
+Success. Returns a list of selling locations. Check the example shown below or refer `StoreListingResponse` for more details.
+
+
+Schema: `ApplicationStoreListing`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getLocationDetailsById
+Get store meta information.
+
+```golang
+
+ data, err :=  Catalog.GetLocationDetailsById(LocationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| LocationID | float64 | Unique Location ID. | 
+
+
+
+
+Use this API to get meta details for a store.
+
+*Success Response:*
+
+
+
+Success. Returns a metadata object. Check the example shown below or refer `StoreDetails` for more details.
+
+
+Schema: `StoreDetails`
 
 
 
