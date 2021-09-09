@@ -13153,7 +13153,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         PageID string  `url:"page_id,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
         PageNo float64  `url:"page_no,omitempty"` 
-        PageType string  `url:"page_type,omitempty"`  
+        PageType string  `url:"page_type,omitempty"` 
+        ItemIds []string  `url:"item_ids,omitempty"`  
     }
     
     // GetAppicationProducts List the products
@@ -13168,6 +13169,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
 
          
+            
+                
             
                 
             
@@ -13250,6 +13253,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
              
             
             
+             
+            
+            
+            
+            
+            
             
             
             
@@ -13311,6 +13320,10 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
                  
                  
                  xQuery.PageType = "cursor"
+                 
+                 
+                 
+                 
                  
                  
                 paginator.Next = func() (interface{}, error) {
@@ -13383,6 +13396,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         BrandIds []float64  `url:"brand_ids,omitempty"` 
         CategoryIds []float64  `url:"category_ids,omitempty"` 
         DepartmentIds []float64  `url:"department_ids,omitempty"` 
+        Tags []string  `url:"tags,omitempty"` 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
         Q string  `url:"q,omitempty"`  
@@ -13400,6 +13414,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
 
          
+            
+                
             
                 
             

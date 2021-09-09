@@ -344,7 +344,7 @@
     * [updateProductAssetsInBulk](#updateproductassetsinbulk)
     * [createProductsInBulk](#createproductsinbulk)
     * [deleteProductBulkJob](#deleteproductbulkjob)
-    * [getCompanyTags](#getcompanytags)
+    * [getProductTags](#getproducttags)
     * [getProductAssetsInBulk](#getproductassetsinbulk)
     * [createProductAssetsInBulk](#createproductassetsinbulk)
     * [deleteSize](#deletesize)
@@ -374,8 +374,8 @@
 
 * [CompanyProfile](#CompanyProfile)
   * Methods
-    * [updateCompany](#updatecompany)
     * [cbsOnboardGet](#cbsonboardget)
+    * [updateCompany](#updatecompany)
     * [getCompanyMetrics](#getcompanymetrics)
     * [editBrand](#editbrand)
     * [getBrand](#getbrand)
@@ -16325,22 +16325,22 @@ Schema: `SuccessResponse`
 ---
 
 
-#### getCompanyTags
+#### getProductTags
 Get a list of all tags associated with company.
 
 ```golang
 
-data, err := Catalog.GetCompanyTags(CompanyID);
+data, err := Catalog.GetProductTags(CompanyID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id of the product size. | 
+| CompanyID | float64 | Company Id for which tags to be fetched. | 
 
 
 
-This API helps to get tags data associated to a particular copmpany.
+This API helps to get tags data associated to a particular company.
 
 *Success Response:*
 
@@ -17316,7 +17316,9 @@ data, err := Catalog.GetAppicationProducts(CompanyID, ApplicationID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `Q`, `F`, `Filters`, `SortOn`, `PageID`, `PageSize`, `PageNo`, `PageType`
+
+
+| xQuery | struct | Includes properties such as `Q`, `F`, `Filters`, `SortOn`, `PageID`, `PageSize`, `PageNo`, `PageType`, `ItemIds`
 
 
 List all the products associated with a brand, collection or category in a requested sort order. The API additionally supports arbitrary search queries that may refer the name of any product, brand, category or collection. If successful, returns a paginated list of products specified in `ApplicationProductListingResponse`
@@ -17412,7 +17414,9 @@ data, err := Catalog.GetAppProducts(CompanyID, ApplicationID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `BrandIds`, `CategoryIds`, `DepartmentIds`, `PageNo`, `PageSize`, `Q`
+
+
+| xQuery | struct | Includes properties such as `BrandIds`, `CategoryIds`, `DepartmentIds`, `Tags`, `PageNo`, `PageSize`, `Q`
 
 
 Products are the core resource of an application. Products can be associated by categories, collections, brands and more. If successful, returns a Product resource in the response body specified in `ApplicationProductListingResponseDatabasePowered`
@@ -17444,6 +17448,43 @@ Schema: `ProductListingResponse`
 ## CompanyProfile
 
 
+#### cbsOnboardGet
+Get company profile
+
+```golang
+
+data, err := CompanyProfile.CbsOnboardGet(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+
+This API allows to view the company profile of the seller account.
+
+*Success Response:*
+
+
+
+Company profile object. See example below or refer `GetCompanyProfileSerializerResponse` for details
+
+
+Schema: `GetCompanyProfileSerializerResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateCompany
 Edit company profile
 
@@ -17470,43 +17511,6 @@ Returns a success message
 
 
 Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### cbsOnboardGet
-Get company profile
-
-```golang
-
-data, err := CompanyProfile.CbsOnboardGet(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-
-This API allows to view the company profile of the seller account.
-
-*Success Response:*
-
-
-
-Company profile object. See example below or refer `GetCompanyProfileSerializerResponse` for details
-
-
-Schema: `GetCompanyProfileSerializerResponse`
 
 
 
