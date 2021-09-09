@@ -2476,7 +2476,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/application/catalog/v1.0/in-stock/locations/undefined/",LocationID),
+            fmt.Sprintf("/service/application/catalog/v1.0/locations/undefined/",LocationID),
             nil,
             nil,
             nil)
