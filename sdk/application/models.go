@@ -5740,7 +5740,7 @@ package application
     type ApplicationRedirections struct {
 
         
-            From string  `json:"from"`
+            RedirectFrom string  `json:"redirect_from"`
             RedirectTo string  `json:"redirect_to"`
             Type string  `json:"type"`
          

@@ -4978,6 +4978,114 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //UserLoginWithGoogleOauthXQuery holds query params
+    type UserLoginWithGoogleOauthXQuery struct { 
+        Platform string  `url:"platform,omitempty"`  
+    }
+    
+    // LoginWithGoogleOauth Login or Register using Google
+    func (us *User)  LoginWithGoogleOauth(xQuery UserLoginWithGoogleOauthXQuery) (AuthSuccess, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             loginWithGoogleOauthResponse AuthSuccess
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "get",
+            "/service/application/user/authentication/v1.0/login/google",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return AuthSuccess{}, err
+	    }
+        
+        err = json.Unmarshal(response, &loginWithGoogleOauthResponse)
+        if err != nil {
+            return AuthSuccess{}, common.NewFDKError(err.Error())
+        }
+         return loginWithGoogleOauthResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //UserLoginWithGoogleAndRedirectXQuery holds query params
+    type UserLoginWithGoogleAndRedirectXQuery struct { 
+        Platform string  `url:"platform,omitempty"`  
+    }
+    
+    // LoginWithGoogleAndRedirect Login or Register using Google
+    func (us *User)  LoginWithGoogleAndRedirect(xQuery UserLoginWithGoogleAndRedirectXQuery) (AuthSuccess, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             loginWithGoogleAndRedirectResponse AuthSuccess
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "get",
+            "/service/application/user/authentication/v1.0/login/google/callback",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return AuthSuccess{}, err
+	    }
+        
+        err = json.Unmarshal(response, &loginWithGoogleAndRedirectResponse)
+        if err != nil {
+            return AuthSuccess{}, common.NewFDKError(err.Error())
+        }
+         return loginWithGoogleAndRedirectResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     //UserLoginWithGoogleAndroidXQuery holds query params
     type UserLoginWithGoogleAndroidXQuery struct { 
         Platform string  `url:"platform,omitempty"`  
