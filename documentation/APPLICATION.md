@@ -116,7 +116,6 @@
     * [loginWithFacebook](#loginwithfacebook)
     * [loginWithGoogle](#loginwithgoogle)
     * [loginWithGoogleOauth](#loginwithgoogleoauth)
-    * [loginWithGoogleAndRedirect](#loginwithgoogleandredirect)
     * [loginWithGoogleAndroid](#loginwithgoogleandroid)
     * [loginWithGoogleIOS](#loginwithgoogleios)
     * [loginWithOTP](#loginwithotp)
@@ -6348,55 +6347,6 @@ Use this API to login or register using Google Account credentials.
 
 
 Success. Returns a google url and redirect to same
-
-
-Schema: `AuthSuccess`
-
-
-*Examples:*
-
-
-Success
-```json
-{
-  "$ref": "#/components/examples/AuthSuccess"
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### loginWithGoogleAndRedirect
-Login or Register using Google
-
-```golang
-
- data, err :=  User.LoginWithGoogleAndRedirect(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-| xQuery | struct | Includes properties such as `Platform`
-
-
-
-Use this API to login or register using Google Account credentials.
-
-*Success Response:*
-
-
-
-Success. Returns a JSON object with the user details. Check the example shown below or refer `AuthSuccess` for more details.
 
 
 Schema: `AuthSuccess`
