@@ -6336,7 +6336,9 @@ Login or Register using Google
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `Platform`
+
+
+| xQuery | struct | Includes properties such as `Platform`, `RedirectURL`
 
 
 
@@ -9614,13 +9616,7 @@ Get a list of staff.
 
 
 
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `OrderIncent`, `OrderingStore`, `User`, `Permission`
+| xQuery | struct | Includes properties such as `OrderIncent`, `OrderingStore`, `User`
 
 
 

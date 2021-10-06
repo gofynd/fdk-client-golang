@@ -4980,7 +4980,8 @@ func NewAppClient(config *AppConfig) *Client {
     
     //UserLoginWithGoogleOauthXQuery holds query params
     type UserLoginWithGoogleOauthXQuery struct { 
-        Platform string  `url:"platform,omitempty"`  
+        Platform string  `url:"platform,omitempty"` 
+        RedirectURL string  `url:"redirect_url,omitempty"`  
     }
     
     // LoginWithGoogleOauth Login or Register using Google
@@ -4995,6 +4996,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -9528,12 +9531,9 @@ func NewAppClient(config *AppConfig) *Client {
     
     //ConfigurationGetAppStaffsXQuery holds query params
     type ConfigurationGetAppStaffsXQuery struct { 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"` 
         OrderIncent bool  `url:"order_incent,omitempty"` 
         OrderingStore float64  `url:"ordering_store,omitempty"` 
-        User string  `url:"user,omitempty"` 
-        Permission string  `url:"permission,omitempty"`  
+        User string  `url:"user,omitempty"`  
     }
     
     // GetAppStaffs Get a list of staff.
@@ -9548,12 +9548,6 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
-            
-                
-            
-                
-            
-                
             
                 
             
@@ -9589,92 +9583,6 @@ func NewAppClient(config *AppConfig) *Client {
         
     }
           
-            
-            
-            
-            
-                
-                    
-                    
-                    
-                    
-                
-                    
-                    
-                    
-                        
-                    
-                    
-                
-                    
-                    
-                    
-                        
-                    
-                    
-                
-                    
-                    
-                    
-                        
-                    
-                    
-                
-                    
-                    
-                    
-                        
-                    
-                    
-                
-                    
-                    
-                    
-                        
-                    
-                    
-                
-            
-            // GetAppStaffsPaginator Get a list of staff.  
-            func (co *Configuration)  GetAppStaffsPaginator( xQuery ConfigurationGetAppStaffsXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                 
-                 
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetAppStaffs(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-       
     
 
     // Payment ...
