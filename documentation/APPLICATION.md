@@ -50,11 +50,13 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [unfollowById](#unfollowbyid)
     * [followById](#followbyid)
+    * [unfollowById](#unfollowbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
+    * [getInStockLocations](#getinstocklocations)
+    * [getLocationDetailsById](#getlocationdetailsbyid)
     
 
 * [Cart](#Cart)
@@ -1290,12 +1292,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1309,7 +1311,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1331,12 +1333,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1350,7 +1352,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1489,6 +1491,94 @@ Success. Returns a list of selling locations. Check the example shown below or r
 
 
 Schema: `StoreListingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getInStockLocations
+Get store meta information.
+
+```golang
+
+ data, err :=  Catalog.GetInStockLocations(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`, `City`, `Range`, `Latitude`, `Longitude`
+
+
+
+Use this API to get a list of stores in a specific application.
+
+*Success Response:*
+
+
+
+Success. Returns a list of selling locations. Check the example shown below or refer `StoreListingResponse` for more details.
+
+
+Schema: `ApplicationStoreListing`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getLocationDetailsById
+Get store meta information.
+
+```golang
+
+ data, err :=  Catalog.GetLocationDetailsById(LocationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| LocationID | float64 | Unique Location ID. | 
+
+
+
+
+Use this API to get meta details for a store.
+
+*Success Response:*
+
+
+
+Success. Returns a metadata object. Check the example shown below or refer `StoreDetails` for more details.
+
+
+Schema: `StoreDetails`
 
 
 
@@ -6138,11 +6228,14 @@ Login or Register using Facebook
 
 ```golang
 
- data, err :=  User.LoginWithFacebook(body);
+ data, err :=  User.LoginWithFacebook(xQuery, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Platform`
 
 | body |  OAuthRequestSchema | "Request body" 
 
@@ -6185,11 +6278,14 @@ Login or Register using Google
 
 ```golang
 
- data, err :=  User.LoginWithGoogle(body);
+ data, err :=  User.LoginWithGoogle(xQuery, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Platform`
 
 | body |  OAuthRequestSchema | "Request body" 
 
@@ -6232,11 +6328,14 @@ Login or Register using Google on Android
 
 ```golang
 
- data, err :=  User.LoginWithGoogleAndroid(body);
+ data, err :=  User.LoginWithGoogleAndroid(xQuery, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Platform`
 
 | body |  OAuthRequestSchema | "Request body" 
 
@@ -6279,11 +6378,14 @@ Login or Register using Google on iOS
 
 ```golang
 
- data, err :=  User.LoginWithGoogleIOS(body);
+ data, err :=  User.LoginWithGoogleIOS(xQuery, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Platform`
 
 | body |  OAuthRequestSchema | "Request body" 
 

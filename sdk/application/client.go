@@ -1913,55 +1913,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UnfollowById Unfollow an entity (product/brand/collection)
-    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             unfollowByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &unfollowByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return unfollowByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // FollowById Follow an entity (product/brand/collection)
     func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -2002,6 +1953,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return followByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UnfollowById Unfollow an entity (product/brand/collection)
+    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             unfollowByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &unfollowByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return unfollowByIdResponse, nil
         
     }
           
@@ -2277,6 +2277,222 @@ func NewAppClient(config *AppConfig) *Client {
                 return paginator
             }
        
+    
+    
+    
+  
+    
+    
+    //CatalogGetInStockLocationsXQuery holds query params
+    type CatalogGetInStockLocationsXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        Q string  `url:"q,omitempty"` 
+        City string  `url:"city,omitempty"` 
+        Range float64  `url:"range,omitempty"` 
+        Latitude float64  `url:"latitude,omitempty"` 
+        Longitude float64  `url:"longitude,omitempty"`  
+    }
+    
+    // GetInStockLocations Get store meta information.
+    func (ca *Catalog)  GetInStockLocations(xQuery CatalogGetInStockLocationsXQuery) (ApplicationStoreListing, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getInStockLocationsResponse ApplicationStoreListing
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            "/service/application/catalog/v1.0/in-stock/locations/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationStoreListing{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getInStockLocationsResponse)
+        if err != nil {
+            return ApplicationStoreListing{}, common.NewFDKError(err.Error())
+        }
+         return getInStockLocationsResponse, nil
+        
+    }
+          
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetInStockLocationsPaginator Get store meta information.  
+            func (ca *Catalog)  GetInStockLocationsPaginator( xQuery CatalogGetInStockLocationsXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                 
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := ca.GetInStockLocations(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
+    
+    
+    
+  
+    
+    
+    // GetLocationDetailsById Get store meta information.
+    func (ca *Catalog)  GetLocationDetailsById(LocationID float64) (StoreDetails, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getLocationDetailsByIdResponse StoreDetails
+	    )
+
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/application/catalog/v1.0/locations/undefined/",LocationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return StoreDetails{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getLocationDetailsByIdResponse)
+        if err != nil {
+            return StoreDetails{}, common.NewFDKError(err.Error())
+        }
+         return getLocationDetailsByIdResponse, nil
+        
+    }
+          
     
 
     // Cart ...
@@ -4072,6 +4288,13 @@ func NewAppClient(config *AppConfig) *Client {
             
         
             
+                //enum validation inside request body
+                err = body.Type.IsValid()
+                if err != nil {
+                
+                    return TicketHistory{}, common.NewFDKError(err.Error())
+                }
+            
         
 
         
@@ -4137,6 +4360,13 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+                //enum validation inside request body
+                err = body.Priority.IsValid()
+                if err != nil {
+                
+                    return Ticket{}, common.NewFDKError(err.Error())
+                }
             
         
             
@@ -4604,8 +4834,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //UserLoginWithFacebookXQuery holds query params
+    type UserLoginWithFacebookXQuery struct { 
+        Platform string  `url:"platform,omitempty"`  
+    }
+    
     // LoginWithFacebook Login or Register using Facebook
-    func (us *User)  LoginWithFacebook(body  OAuthRequestSchema) (AuthSuccess, error){
+    func (us *User)  LoginWithFacebook(xQuery UserLoginWithFacebookXQuery, body  OAuthRequestSchema) (AuthSuccess, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -4621,6 +4856,10 @@ func NewAppClient(config *AppConfig) *Client {
             
         
 
+        
+            
+                
+            
         
 
         
@@ -4647,7 +4886,7 @@ func NewAppClient(config *AppConfig) *Client {
             "post",
             "/service/application/user/authentication/v1.0/login/facebook-token",
             nil,
-            nil,
+            xQuery,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -4668,8 +4907,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //UserLoginWithGoogleXQuery holds query params
+    type UserLoginWithGoogleXQuery struct { 
+        Platform string  `url:"platform,omitempty"`  
+    }
+    
     // LoginWithGoogle Login or Register using Google
-    func (us *User)  LoginWithGoogle(body  OAuthRequestSchema) (AuthSuccess, error){
+    func (us *User)  LoginWithGoogle(xQuery UserLoginWithGoogleXQuery, body  OAuthRequestSchema) (AuthSuccess, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -4685,6 +4929,10 @@ func NewAppClient(config *AppConfig) *Client {
             
         
 
+        
+            
+                
+            
         
 
         
@@ -4711,7 +4959,7 @@ func NewAppClient(config *AppConfig) *Client {
             "post",
             "/service/application/user/authentication/v1.0/login/google-token",
             nil,
-            nil,
+            xQuery,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -4732,8 +4980,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //UserLoginWithGoogleAndroidXQuery holds query params
+    type UserLoginWithGoogleAndroidXQuery struct { 
+        Platform string  `url:"platform,omitempty"`  
+    }
+    
     // LoginWithGoogleAndroid Login or Register using Google on Android
-    func (us *User)  LoginWithGoogleAndroid(body  OAuthRequestSchema) (AuthSuccess, error){
+    func (us *User)  LoginWithGoogleAndroid(xQuery UserLoginWithGoogleAndroidXQuery, body  OAuthRequestSchema) (AuthSuccess, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -4749,6 +5002,10 @@ func NewAppClient(config *AppConfig) *Client {
             
         
 
+        
+            
+                
+            
         
 
         
@@ -4775,7 +5032,7 @@ func NewAppClient(config *AppConfig) *Client {
             "post",
             "/service/application/user/authentication/v1.0/login/google-android",
             nil,
-            nil,
+            xQuery,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -4796,8 +5053,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //UserLoginWithGoogleIOSXQuery holds query params
+    type UserLoginWithGoogleIOSXQuery struct { 
+        Platform string  `url:"platform,omitempty"`  
+    }
+    
     // LoginWithGoogleIOS Login or Register using Google on iOS
-    func (us *User)  LoginWithGoogleIOS(body  OAuthRequestSchema) (AuthSuccess, error){
+    func (us *User)  LoginWithGoogleIOS(xQuery UserLoginWithGoogleIOSXQuery, body  OAuthRequestSchema) (AuthSuccess, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -4813,6 +5075,10 @@ func NewAppClient(config *AppConfig) *Client {
             
         
 
+        
+            
+                
+            
         
 
         
@@ -4839,7 +5105,7 @@ func NewAppClient(config *AppConfig) *Client {
             "post",
             "/service/application/user/authentication/v1.0/login/google-ios",
             nil,
-            nil,
+            xQuery,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
