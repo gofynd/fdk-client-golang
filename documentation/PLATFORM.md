@@ -20883,7 +20883,7 @@ data, err := Configuration.UpdateLevelIntegration(CompanyID, ID, Level, body);
 | Level | string | Integration level | 
 
 
-| body |  IntegrationLevel | "Request body" 
+| body |  UpdateIntegrationLevelRequest | "Request body" 
 
 Update a store level opt-in for integration
 

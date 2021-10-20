@@ -10851,7 +10851,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
 
     // UpdateLevelIntegration Update a store level opt-in for integration
-     func (co *PlatformConfiguration)  UpdateLevelIntegration(ID string, Level string, body  IntegrationLevel) (IntegrationLevel, error){
+     func (co *PlatformConfiguration)  UpdateLevelIntegration(ID string, Level string, body  UpdateIntegrationLevelRequest) (IntegrationLevel, error){
         
         var (
             rawRequest  *RawRequest
@@ -10860,30 +10860,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             updateLevelIntegrationResponse IntegrationLevel
 	    )
 
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         

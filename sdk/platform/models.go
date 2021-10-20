@@ -12172,6 +12172,14 @@ package platform
          
     }
     
+    // UpdateIntegrationLevelRequest used by Configuration
+    type UpdateIntegrationLevelRequest struct {
+
+        
+            Items []IntegrationLevel  `json:"items"`
+         
+    }
+    
     // OptedStoreIntegration used by Configuration
     type OptedStoreIntegration struct {
 
