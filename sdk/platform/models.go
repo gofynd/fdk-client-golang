@@ -12135,7 +12135,7 @@ package platform
             Support []string  `json:"support"`
             ID string  `json:"_id"`
             Name string  `json:"name"`
-            Meta IntegrationMeta  `json:"meta"`
+            Meta []IntegrationMeta  `json:"meta"`
             Icon string  `json:"icon"`
             Owner string  `json:"owner"`
             CreatedAt string  `json:"created_at"`
@@ -12165,7 +12165,7 @@ package platform
             Integration string  `json:"integration"`
             Level string  `json:"level"`
             UID float64  `json:"uid"`
-            Meta []interface{}  `json:"meta"`
+            Meta []IntegrationMeta  `json:"meta"`
             Token string  `json:"token"`
             CreatedAt string  `json:"created_at"`
             UpdatedAt string  `json:"updated_at"`
