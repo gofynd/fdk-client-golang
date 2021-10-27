@@ -1913,55 +1913,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -2002,6 +1953,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -5172,6 +5172,79 @@ func NewAppClient(config *AppConfig) *Client {
             return AuthSuccess{}, common.NewFDKError(err.Error())
         }
          return loginWithGoogleIOSResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //UserLoginWithAppleIOSXQuery holds query params
+    type UserLoginWithAppleIOSXQuery struct { 
+        Platform string  `url:"platform,omitempty"`  
+    }
+    
+    // LoginWithAppleIOS Login or Register using Apple on iOS
+    func (us *User)  LoginWithAppleIOS(xQuery UserLoginWithAppleIOSXQuery, body  OAuthRequestSchema) (AuthSuccess, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             loginWithAppleIOSResponse AuthSuccess
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return AuthSuccess{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return AuthSuccess{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "post",
+            "/service/application/user/authentication/v1.0/login/apple-ios",
+            nil,
+            xQuery,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return AuthSuccess{}, err
+	    }
+        
+        err = json.Unmarshal(response, &loginWithAppleIOSResponse)
+        if err != nil {
+            return AuthSuccess{}, common.NewFDKError(err.Error())
+        }
+         return loginWithAppleIOSResponse, nil
         
     }
           
