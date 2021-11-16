@@ -8144,6 +8144,161 @@ func NewAppClient(config *AppConfig) *Client {
     }
           
     
+    
+    
+  
+    
+    
+    //ContentGetPageV2XQuery holds query params
+    type ContentGetPageV2XQuery struct { 
+        RootID string  `url:"root_id,omitempty"`  
+    }
+    
+    // GetPageV2 Get a page
+    func (co *Content)  GetPageV2(Slug string, xQuery ContentGetPageV2XQuery) (PageSchema, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getPageV2Response PageSchema
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/application/content/v2.0/pages/%s",Slug),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PageSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPageV2Response)
+        if err != nil {
+            return PageSchema{}, common.NewFDKError(err.Error())
+        }
+         return getPageV2Response, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //ContentGetPagesV2XQuery holds query params
+    type ContentGetPagesV2XQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetPagesV2 Get all pages
+    func (co *Content)  GetPagesV2(xQuery ContentGetPagesV2XQuery) (PageGetResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getPagesV2Response PageGetResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            "/service/application/content/v2.0/pages/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PageGetResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPagesV2Response)
+        if err != nil {
+            return PageGetResponse{}, common.NewFDKError(err.Error())
+        }
+         return getPagesV2Response, nil
+        
+    }
+          
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetPagesV2Paginator Get all pages  
+            func (co *Content)  GetPagesV2Paginator( xQuery ContentGetPagesV2XQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                 
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := co.GetPagesV2(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
+    
 
     // Communication ...
     type Communication struct {
