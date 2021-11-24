@@ -50,8 +50,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [followById](#followbyid)
     * [unfollowById](#unfollowbyid)
+    * [followById](#followbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -115,7 +115,6 @@
   * Methods
     * [loginWithFacebook](#loginwithfacebook)
     * [loginWithGoogle](#loginwithgoogle)
-    * [loginWithGoogleOauth](#loginwithgoogleoauth)
     * [loginWithGoogleAndroid](#loginwithgoogleandroid)
     * [loginWithGoogleIOS](#loginwithgoogleios)
     * [loginWithAppleIOS](#loginwithappleios)
@@ -1296,12 +1295,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1315,7 +1314,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1337,12 +1336,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1356,7 +1355,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -6301,57 +6300,6 @@ Use this API to login or register using Google Account credentials.
 
 
 Success. Returns a JSON object with the user details. Check the example shown below or refer `AuthSuccess` for more details.
-
-
-Schema: `AuthSuccess`
-
-
-*Examples:*
-
-
-Success
-```json
-{
-  "$ref": "#/components/examples/AuthSuccess"
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### loginWithGoogleOauth
-Login or Register using Google
-
-```golang
-
- data, err :=  User.LoginWithGoogleOauth(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-| xQuery | struct | Includes properties such as `Platform`, `RedirectURL`
-
-
-
-Use this API to login or register using Google Account credentials.
-
-*Success Response:*
-
-
-
-Success. Returns a google url and redirect to same
 
 
 Schema: `AuthSuccess`

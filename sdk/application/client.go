@@ -1913,55 +1913,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -2002,6 +1953,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -4969,63 +4969,6 @@ func NewAppClient(config *AppConfig) *Client {
             return AuthSuccess{}, common.NewFDKError(err.Error())
         }
          return loginWithGoogleResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    //UserLoginWithGoogleOauthXQuery holds query params
-    type UserLoginWithGoogleOauthXQuery struct { 
-        Platform string  `url:"platform,omitempty"` 
-        RedirectURL string  `url:"redirect_url,omitempty"`  
-    }
-    
-    // LoginWithGoogleOauth Login or Register using Google
-    func (us *User)  LoginWithGoogleOauth(xQuery UserLoginWithGoogleOauthXQuery) (AuthSuccess, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             loginWithGoogleOauthResponse AuthSuccess
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-        
-
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            us.config,
-            "get",
-            "/service/application/user/authentication/v1.0/login/google",
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return AuthSuccess{}, err
-	    }
-        
-        err = json.Unmarshal(response, &loginWithGoogleOauthResponse)
-        if err != nil {
-            return AuthSuccess{}, common.NewFDKError(err.Error())
-        }
-         return loginWithGoogleOauthResponse, nil
         
     }
           
