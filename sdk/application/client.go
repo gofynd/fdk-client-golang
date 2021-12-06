@@ -8813,6 +8813,70 @@ func NewAppClient(config *AppConfig) *Client {
     }
           
     
+    
+    
+  
+    
+    
+    // SignUrls Explain here
+    func (fi *FileStorage)  SignUrls(CompanyID float64, body  SignUrlRequest) (SignUrlResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             signUrlsResponse SignUrlResponse
+	    )
+
+        
+            
+        
+            
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return SignUrlResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return SignUrlResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.config,
+            "post",
+            fmt.Sprintf("/service/application/assets/v1.0/company/undefined/sign-urls/",CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return SignUrlResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &signUrlsResponse)
+        if err != nil {
+            return SignUrlResponse{}, common.NewFDKError(err.Error())
+        }
+         return signUrlsResponse, nil
+        
+    }
+          
+    
 
     // Configuration ...
     type Configuration struct {

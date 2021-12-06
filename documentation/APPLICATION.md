@@ -192,6 +192,7 @@
   * Methods
     * [startUpload](#startupload)
     * [completeUpload](#completeupload)
+    * [signUrls](#signurls)
     
 
 * [Configuration](#Configuration)
@@ -9076,6 +9077,45 @@ Success
 
 
 Schema: `CompleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### signUrls
+Explain here
+
+```golang
+
+ data, err :=  FileStorage.SignUrls(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | company_id | 
+
+
+| body |  SignUrlRequest | "Request body" 
+
+
+Describe here
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `SignUrlResponse`
 
 
 
