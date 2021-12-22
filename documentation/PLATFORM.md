@@ -360,15 +360,15 @@
     * [cbsOnboardGet](#cbsonboardget)
     * [updateCompany](#updatecompany)
     * [getCompanyMetrics](#getcompanymetrics)
-    * [getBrand](#getbrand)
     * [editBrand](#editbrand)
+    * [getBrand](#getbrand)
     * [createBrand](#createbrand)
-    * [getBrands](#getbrands)
     * [createCompanyBrandMapping](#createcompanybrandmapping)
-    * [getLocations](#getlocations)
+    * [getBrands](#getbrands)
     * [createLocation](#createlocation)
-    * [getLocationDetail](#getlocationdetail)
+    * [getLocations](#getlocations)
     * [updateLocation](#updatelocation)
+    * [getLocationDetail](#getlocationdetail)
     * [createLocationBulk](#createlocationbulk)
     
 
@@ -502,6 +502,18 @@
 
 * [Discount](#Discount)
   * Methods
+    * [getDiscounts](#getdiscounts)
+    * [createDiscount](#creatediscount)
+    * [getDiscount](#getdiscount)
+    * [updateDiscount](#updatediscount)
+    * [fetchDiscountJobs](#fetchdiscountjobs)
+    * [getDiscountDetails](#getdiscountdetails)
+    * [validateDiscountFile](#validatediscountfile)
+    * [downloadDiscountFile](#downloaddiscountfile)
+    * [getValidationJob](#getvalidationjob)
+    * [cancelValidationJob](#cancelvalidationjob)
+    * [getDownloadJob](#getdownloadjob)
+    * [cancelDownloadJob](#canceldownloadjob)
     
 
 * [Partner](#Partner)
@@ -16985,46 +16997,6 @@ Schema: `MetricsSerializer`
 ---
 
 
-#### getBrand
-Get a single brand.
-
-```golang
-
-data, err := CompanyProfile.GetBrand(CompanyID, BrandID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to brand that is to be viewed. | 
-
-
-| BrandID | string | Id of the brand to be viewed. | 
-
-
-
-This API helps to get data associated to a particular brand.
-
-*Success Response:*
-
-
-
-Brand object. See example below or refer `GetBrandResponseSerializer` for details
-
-
-Schema: `GetBrandResponseSerializer`
-
-
-
-
-
-
-
-
-
----
-
-
 #### editBrand
 Edit a brand.
 
@@ -17066,6 +17038,46 @@ Schema: `SuccessResponse`
 ---
 
 
+#### getBrand
+Get a single brand.
+
+```golang
+
+data, err := CompanyProfile.GetBrand(CompanyID, BrandID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to brand that is to be viewed. | 
+
+
+| BrandID | string | Id of the brand to be viewed. | 
+
+
+
+This API helps to get data associated to a particular brand.
+
+*Success Response:*
+
+
+
+Brand object. See example below or refer `GetBrandResponseSerializer` for details
+
+
+Schema: `GetBrandResponseSerializer`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### createBrand
 Create a Brand.
 
@@ -17083,6 +17095,44 @@ data, err := CompanyProfile.CreateBrand(CompanyID, body);
 | body |  CreateUpdateBrandRequestSerializer | "Request body" 
 
 This API allows to create a brand associated to a company.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createCompanyBrandMapping
+Create a company brand mapping.
+
+```golang
+
+data, err := CompanyProfile.CreateCompanyBrandMapping(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company inside which the brand is to be mapped. | 
+
+
+| body |  CompanyBrandPostRequestSerializer | "Request body" 
+
+This API allows to create a company brand mapping, for a already existing brand in the system.
 
 *Success Response:*
 
@@ -17148,23 +17198,23 @@ Schema: `CompanyBrandListSerializer`
 ---
 
 
-#### createCompanyBrandMapping
-Create a company brand mapping.
+#### createLocation
+Create a location asscoiated to a company.
 
 ```golang
 
-data, err := CompanyProfile.CreateCompanyBrandMapping(CompanyID, body);
+data, err := CompanyProfile.CreateLocation(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Id of the company inside which the brand is to be mapped. | 
+| CompanyID | string | Id of the company inside which the location is to be created. | 
 
 
-| body |  CompanyBrandPostRequestSerializer | "Request body" 
+| body |  LocationSerializer | "Request body" 
 
-This API allows to create a company brand mapping, for a already existing brand in the system.
+This API allows to create a location associated to a company.
 
 *Success Response:*
 
@@ -17234,12 +17284,12 @@ Schema: `LocationListSerializer`
 ---
 
 
-#### createLocation
-Create a location asscoiated to a company.
+#### updateLocation
+Edit a location asscoiated to a company.
 
 ```golang
 
-data, err := CompanyProfile.CreateLocation(CompanyID, body);
+data, err := CompanyProfile.UpdateLocation(CompanyID, LocationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -17248,9 +17298,12 @@ data, err := CompanyProfile.CreateLocation(CompanyID, body);
 | CompanyID | string | Id of the company inside which the location is to be created. | 
 
 
+| LocationID | string | Id of the location which you want to edit. | 
+
+
 | body |  LocationSerializer | "Request body" 
 
-This API allows to create a location associated to a company.
+This API allows to edit a location associated to a company.
 
 *Success Response:*
 
@@ -17300,47 +17353,6 @@ Brand object. See example below or refer `GetLocationSerializer` for details
 
 
 Schema: `GetLocationSerializer`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateLocation
-Edit a location asscoiated to a company.
-
-```golang
-
-data, err := CompanyProfile.UpdateLocation(CompanyID, LocationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company inside which the location is to be created. | 
-
-
-| LocationID | string | Id of the location which you want to edit. | 
-
-
-| body |  LocationSerializer | "Request body" 
-
-This API allows to edit a location associated to a company.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
 
 
 
@@ -22440,6 +22452,504 @@ Schema: `SearchLogRes`
 
 
 ## Discount
+
+
+#### getDiscounts
+Fetch discount list.
+
+```golang
+
+data, err := Discount.GetDiscounts(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | company_id | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `View`, `Q`, `PageNo`, `PageSize`, `Archived`, `Month`, `Year`, `Type`, `AppIds`
+
+
+Fetch discount list.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `ListOrCalender`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createDiscount
+Create Discount.
+
+```golang
+
+data, err := Discount.CreateDiscount(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | company_id | 
+
+
+| body |  CreateUpdateDiscount | "Request body" 
+
+Create Discount.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `DiscountJob`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDiscount
+Fetch discount.
+
+```golang
+
+data, err := Discount.GetDiscount(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | company_id | 
+
+
+| ID | string | unique id. | 
+
+
+
+Fetch discount.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `DiscountJob`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateDiscount
+Create Discount.
+
+```golang
+
+data, err := Discount.UpdateDiscount(CompanyID, ID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | company_id | 
+
+
+| ID | string | id | 
+
+
+| body |  CreateUpdateDiscount | "Request body" 
+
+Create Discount.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `DiscountJob`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### fetchDiscountJobs
+Fetch Discount Jobs.
+
+```golang
+
+data, err := Discount.FetchDiscountJobs(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | company_id | 
+
+
+| ApplicationID | string | application id | 
+
+
+
+Fetch Discount Jobs.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `ListOrCalender`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDiscountDetails
+Get Discounts.
+
+```golang
+
+data, err := Discount.GetDiscountDetails(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | company_id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| body |  InternalDiscountQuery | "Request body" 
+
+Get Discounts.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `DiscountList`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### validateDiscountFile
+Validate File.
+
+```golang
+
+data, err := Discount.ValidateDiscountFile(CompanyID, xQuery, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | company_id | 
+
+
+
+| xQuery | struct | Includes properties such as `Discount`
+
+| body |  DiscountJob | "Request body" 
+
+Validate File.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `FileJobResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### downloadDiscountFile
+Validate File.
+
+```golang
+
+data, err := Discount.DownloadDiscountFile(CompanyID, Type, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | company_id | 
+
+
+| Type | string | type | 
+
+
+| body |  DownloadFileJob | "Request body" 
+
+Validate File.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `FileJobResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getValidationJob
+Validate File Job.
+
+```golang
+
+data, err := Discount.GetValidationJob(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | company_id | 
+
+
+| ID | string | id | 
+
+
+
+Validate File Job.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `FileJobResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### cancelValidationJob
+Cancel Validation Job.
+
+```golang
+
+data, err := Discount.CancelValidationJob(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | company_id | 
+
+
+| ID | string | id | 
+
+
+
+Cancel Validation Job.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `CancelJobResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDownloadJob
+Download File Job.
+
+```golang
+
+data, err := Discount.GetDownloadJob(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | company_id | 
+
+
+| ID | string | id | 
+
+
+
+Download File Job.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `FileJobResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### cancelDownloadJob
+Cancel Download Job.
+
+```golang
+
+data, err := Discount.CancelDownloadJob(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | company_id | 
+
+
+| ID | string | id | 
+
+
+
+Cancel Download Job.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `CancelJobResponse`
+
+
+
+
+
+
+
+
+
+---
 
 
 

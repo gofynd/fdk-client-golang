@@ -41,6 +41,8 @@ type ApplicationClient struct {
 	 
 		Analytics  *PlatformAppAnalytics
 	 
+		Discount  *PlatformAppDiscount
+	 
 		Partner  *PlatformAppPartner
 	 
 }
@@ -79,6 +81,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 				Rewards:  NewPlatformAppRewards(config, appID),
 			 
 				Analytics:  NewPlatformAppAnalytics(config, appID),
+			 
+				Discount:  NewPlatformAppDiscount(config, appID),
 			 
 				Partner:  NewPlatformAppPartner(config, appID),
 			 
@@ -18070,6 +18074,155 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
            
        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+ 
+	 
+   // PlatformAppDiscount holds PlatformAppDiscount object properties
+    type PlatformAppDiscount struct {
+        config *PlatformConfig
+        CompanyID string
+        ApplicationID string
+    }
+    // NewPlatformAppDiscount returns new PlatformAppDiscount instance
+    func NewPlatformAppDiscount(config *PlatformConfig, appID string) *PlatformAppDiscount {
+        return &PlatformAppDiscount{config, config.CompanyID, appID}
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+    
+    // FetchDiscountJobs Fetch Discount Jobs.
+     func (di *PlatformAppDiscount)  FetchDiscountJobs() (ListOrCalender, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            fetchDiscountJobsResponse ListOrCalender
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            di.config,
+            "get",
+            fmt.Sprintf("/service/platform/discount/v1.0/company/%s/application/%s/job/",di.CompanyID, di.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ListOrCalender{}, err
+	    }
+        
+        err = json.Unmarshal(response, &fetchDiscountJobsResponse)
+        if err != nil {
+            return ListOrCalender{}, common.NewFDKError(err.Error())
+        }
+        return fetchDiscountJobsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetDiscountDetails Get Discounts.
+     func (di *PlatformAppDiscount)  GetDiscountDetails(body  InternalDiscountQuery) (DiscountList, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getDiscountDetailsResponse DiscountList
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return DiscountList{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return DiscountList{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            di.config,
+            "post",
+            fmt.Sprintf("/service/platform/discount/v1.0/company/%s/application/%s/discount/",di.CompanyID, di.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DiscountList{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getDiscountDetailsResponse)
+        if err != nil {
+            return DiscountList{}, common.NewFDKError(err.Error())
+        }
+        return getDiscountDetailsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+    
     
     
     
