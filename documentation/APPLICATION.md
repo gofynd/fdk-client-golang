@@ -117,6 +117,7 @@
     * [loginWithGoogle](#loginwithgoogle)
     * [loginWithGoogleAndroid](#loginwithgoogleandroid)
     * [loginWithGoogleIOS](#loginwithgoogleios)
+    * [loginWithAppleIOS](#loginwithappleios)
     * [loginWithOTP](#loginwithotp)
     * [loginWithEmailAndPassword](#loginwithemailandpassword)
     * [sendResetPasswordEmail](#sendresetpasswordemail)
@@ -160,13 +161,13 @@
     * [getLandingPage](#getlandingpage)
     * [getLegalInformation](#getlegalinformation)
     * [getNavigations](#getnavigations)
-    * [getPage](#getpage)
-    * [getPages](#getpages)
     * [getSEOConfiguration](#getseoconfiguration)
     * [getSlideshows](#getslideshows)
     * [getSlideshow](#getslideshow)
     * [getSupportInformation](#getsupportinformation)
     * [getTags](#gettags)
+    * [getPage](#getpage)
+    * [getPages](#getpages)
     
 
 * [Communication](#Communication)
@@ -191,6 +192,7 @@
   * Methods
     * [startUpload](#startupload)
     * [completeUpload](#completeupload)
+    * [signUrls](#signurls)
     
 
 * [Configuration](#Configuration)
@@ -2369,7 +2371,7 @@ Update items in the cart
 | body |  UpdateCartRequest | "Request body" 
 
 
-Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/{slug}/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/{identifier}​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
+<p>Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/:slug/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/:identifier​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
 
 *Success Response:*
 
@@ -3218,7 +3220,7 @@ Update address added to an account
 | body |  Address | "Request body" 
 
 
-Use this API to update an existing address in the account. Request object should contain attributes mentioned in  <font color="blue">Address </font> can be updated. These attributes are:</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
+<p>Use this API to update an existing address in the account. Request object should contain attributes mentioned in  <font color="blue">Address </font> can be updated. These attributes are:</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
 
 *Success Response:*
 
@@ -3299,7 +3301,7 @@ Select an address from available addresses
 | body |  SelectCartAddressRequest | "Request body" 
 
 
-<p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul>
+<p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul></p>
 
 *Success Response:*
 
@@ -6423,6 +6425,56 @@ Success
 ---
 
 
+#### loginWithAppleIOS
+Login or Register using Apple on iOS
+
+```golang
+
+ data, err :=  User.LoginWithAppleIOS(xQuery, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Platform`
+
+| body |  OAuthRequestAppleSchema | "Request body" 
+
+
+Use this API to login or register in iOS app using Apple Account credentials.
+
+*Success Response:*
+
+
+
+Success. Returns a JSON object with the user details. Check the example shown below or refer `AuthSuccess` for more details.
+
+
+Schema: `AuthSuccess`
+
+
+*Examples:*
+
+
+Success
+```json
+{
+  "$ref": "#/components/examples/AuthSuccess"
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
 #### loginWithOTP
 Login or Register with OTP
 
@@ -8157,109 +8209,6 @@ default
 ---
 
 
-#### getPage
-Get a page
-
-```golang
-
- data, err :=  Content.GetPage(Slug, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| Slug | string | A short, human-readable, URL-friendly identifier of a page. You can get slug value from the endpoint /service/application/content/v1.0/pages/. | 
-
-
-
-| xQuery | struct | Includes properties such as `RootID`
-
-
-
-Use this API to get the details of a page using its slug. Details include the title, seo, publish status, feature image, tags, meta, etc.
-
-*Success Response:*
-
-
-
-Success. Returns a JSON object with page details. Check the example shown below or refer `CustomPageSchema` for more details.
-
-
-Schema: `PageSchema`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/PageResponse"
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPages
-Get all pages
-
-```golang
-
- data, err :=  Content.GetPages(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-
-
-Use this API to get a list of pages.
-
-*Success Response:*
-
-
-
-Success. Returns a list of pages along with their details. Check the example shown below or refer `PageGetResponse` for more details.
-
-
-Schema: `PageGetResponse`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/PageGetResponse"
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
 #### getSEOConfiguration
 Get the SEO of an application
 
@@ -8487,6 +8436,109 @@ Schema: `TagsSchema`
 ---
 
 
+#### getPage
+Get a page
+
+```golang
+
+ data, err :=  Content.GetPage(Slug, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| Slug | string | A short, human-readable, URL-friendly identifier of a page. You can get slug value from the endpoint /service/application/content/v2.0/pages/. | 
+
+
+
+| xQuery | struct | Includes properties such as `RootID`
+
+
+
+Use this API to get the details of a page using its slug. Details include the title, seo, publish status, feature image, tags, meta, etc.
+
+*Success Response:*
+
+
+
+Success. Returns a JSON object with page details. Check the example shown below or refer `CustomPageSchema` for more details.
+
+
+Schema: `PageSchema`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "$ref": "#/components/examples/PageStorefrontResponse"
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPages
+Get all pages
+
+```golang
+
+ data, err :=  Content.GetPages(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
+
+
+
+Use this API to get a list of pages.
+
+*Success Response:*
+
+
+
+Success. Returns a list of pages along with their details. Check the example shown below or refer `PageGetStorefrontResponse` for more details.
+
+
+Schema: `PageGetResponse`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "$ref": "#/components/examples/PageGetStorefrontResponse"
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ---
 
@@ -8656,7 +8708,7 @@ reset
 
 
 #### getApplicationQRCode
-Create application QR Code
+Create QR Code of an app
 
 ```golang
 
@@ -8668,13 +8720,13 @@ Create application QR Code
 
 
 
-Create application QR Code
+Use this API to create a QR code of an app for sharing it with users who want to use the app.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `QRCodeResp` for more details.
 
 
 Schema: `QRCodeResp`
@@ -8691,7 +8743,7 @@ Schema: `QRCodeResp`
 
 
 #### getProductQRCodeBySlug
-Create product QR Code
+Create QR Code of a product
 
 ```golang
 
@@ -8701,18 +8753,18 @@ Create product QR Code
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Slug | string | The unique identifier of a product | 
+| Slug | string | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint. | 
 
 
 
 
-Create product QR Code
+Use this API to create a QR code of a product for sharing it with users who want to view/purchase the product.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `QRCodeResp` for more details.
 
 
 Schema: `QRCodeResp`
@@ -8729,7 +8781,7 @@ Schema: `QRCodeResp`
 
 
 #### getCollectionQRCodeBySlug
-Create collection QR Code
+Create QR Code of a collection
 
 ```golang
 
@@ -8739,18 +8791,18 @@ Create collection QR Code
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Slug | string | The unique identifier of a collection | 
+| Slug | string | A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint. | 
 
 
 
 
-Create collection QR Code
+Use this API to create a QR code of a collection of products for sharing it with users who want to view/purchase the collection.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `QRCodeResp` for more details.
 
 
 Schema: `QRCodeResp`
@@ -8767,7 +8819,7 @@ Schema: `QRCodeResp`
 
 
 #### getUrlQRCode
-Create url QR Code
+Create QR Code of a URL
 
 ```golang
 
@@ -8782,13 +8834,13 @@ Create url QR Code
 
 
 
-Create url QR Code
+Use this API to create a QR code of a URL for sharing it with users who want to visit the link.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `QRCodeResp` for more details.
 
 
 Schema: `QRCodeResp`
@@ -8805,7 +8857,7 @@ Schema: `QRCodeResp`
 
 
 #### createShortLink
-Create short link
+Create a short link
 
 ```golang
 
@@ -8818,13 +8870,13 @@ Create short link
 | body |  ShortLinkReq | "Request body" 
 
 
-Create short link
+Use this API to create a short link that is easy to write/share/read as compared to long URLs.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `ShortLinkRes` for more details.
 
 
 Schema: `ShortLinkRes`
@@ -8851,18 +8903,18 @@ Get short link by hash
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Hash | string | Hash of short link | 
+| Hash | string | A string value used for converting long URL to short URL and vice-versa. | 
 
 
 
 
-Get short link by hash
+Use this API to get a short link by using a hash value.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `ShortLinkRes` for more details.
 
 
 Schema: `ShortLinkRes`
@@ -8889,18 +8941,18 @@ Get original link by hash
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Hash | string | Hash of short link | 
+| Hash | string | A string value used for converting long URL to short URL and vice-versa. | 
 
 
 
 
-Get original link by hash
+Use this API to retrieve the original link from a short-link by using a hash value.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `ShortLinkRes` for more details.
 
 
 Schema: `ShortLinkRes`
@@ -9025,6 +9077,45 @@ Success
 
 
 Schema: `CompleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### signUrls
+Explain here
+
+```golang
+
+ data, err :=  FileStorage.SignUrls(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | company_id | 
+
+
+| body |  SignUrlRequest | "Request body" 
+
+
+Describe here
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `SignUrlResponse`
 
 
 
@@ -12947,7 +13038,7 @@ Update items in the cart
 | body |  UpdateCartRequest | "Request body" 
 
 
-Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/{slug}/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/{identifier}​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
+<p>Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/:slug/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/:identifier​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
 
 *Success Response:*
 
@@ -13796,7 +13887,7 @@ Update address added to an account
 | body |  Address | "Request body" 
 
 
-Use this API to update an existing address in the account. Request object should contain attributes mentioned in  <font color="blue">Address </font> can be updated. These attributes are:</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
+<p>Use this API to update an existing address in the account. Request object should contain attributes mentioned in  <font color="blue">Address </font> can be updated. These attributes are:</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
 
 *Success Response:*
 
@@ -13877,7 +13968,7 @@ Select an address from available addresses
 | body |  SelectCartAddressRequest | "Request body" 
 
 
-<p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul>
+<p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul></p>
 
 *Success Response:*
 

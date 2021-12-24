@@ -4005,8 +4005,6 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
-            
-        
 
         
 
@@ -5117,6 +5115,79 @@ func NewAppClient(config *AppConfig) *Client {
             return AuthSuccess{}, common.NewFDKError(err.Error())
         }
          return loginWithGoogleIOSResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //UserLoginWithAppleIOSXQuery holds query params
+    type UserLoginWithAppleIOSXQuery struct { 
+        Platform string  `url:"platform,omitempty"`  
+    }
+    
+    // LoginWithAppleIOS Login or Register using Apple on iOS
+    func (us *User)  LoginWithAppleIOS(xQuery UserLoginWithAppleIOSXQuery, body  OAuthRequestAppleSchema) (AuthSuccess, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             loginWithAppleIOSResponse AuthSuccess
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return AuthSuccess{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return AuthSuccess{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "post",
+            "/service/application/user/authentication/v1.0/login/apple-ios",
+            nil,
+            xQuery,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return AuthSuccess{}, err
+	    }
+        
+        err = json.Unmarshal(response, &loginWithAppleIOSResponse)
+        if err != nil {
+            return AuthSuccess{}, common.NewFDKError(err.Error())
+        }
+         return loginWithAppleIOSResponse, nil
         
     }
           
@@ -7585,161 +7656,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    //ContentGetPageXQuery holds query params
-    type ContentGetPageXQuery struct { 
-        RootID string  `url:"root_id,omitempty"`  
-    }
-    
-    // GetPage Get a page
-    func (co *Content)  GetPage(Slug string, xQuery ContentGetPageXQuery) (PageSchema, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getPageResponse PageSchema
-	    )
-
-        
-
-        
-            
-                
-            
-        
-
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            co.config,
-            "get",
-            fmt.Sprintf("/service/application/content/v1.0/pages/%s",Slug),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return PageSchema{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getPageResponse)
-        if err != nil {
-            return PageSchema{}, common.NewFDKError(err.Error())
-        }
-         return getPageResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    //ContentGetPagesXQuery holds query params
-    type ContentGetPagesXQuery struct { 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
-    }
-    
-    // GetPages Get all pages
-    func (co *Content)  GetPages(xQuery ContentGetPagesXQuery) (PageGetResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getPagesResponse PageGetResponse
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-        
-
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            co.config,
-            "get",
-            "/service/application/content/v1.0/pages/",
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return PageGetResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getPagesResponse)
-        if err != nil {
-            return PageGetResponse{}, common.NewFDKError(err.Error())
-        }
-         return getPagesResponse, nil
-        
-    }
-          
-            
-            
-            
-            
-                
-                    
-                    
-                    
-                    
-                
-                    
-                    
-                    
-                        
-                    
-                    
-                
-            
-            // GetPagesPaginator Get all pages  
-            func (co *Content)  GetPagesPaginator( xQuery ContentGetPagesXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                 
-                 
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetPages(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-       
-    
-    
-    
-  
-    
-    
     // GetSEOConfiguration Get the SEO of an application
     func (co *Content)  GetSEOConfiguration() (SeoComponent, error){
         var (
@@ -8016,6 +7932,161 @@ func NewAppClient(config *AppConfig) *Client {
     }
           
     
+    
+    
+  
+    
+    
+    //ContentGetPageXQuery holds query params
+    type ContentGetPageXQuery struct { 
+        RootID string  `url:"root_id,omitempty"`  
+    }
+    
+    // GetPage Get a page
+    func (co *Content)  GetPage(Slug string, xQuery ContentGetPageXQuery) (PageSchema, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getPageResponse PageSchema
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/application/content/v2.0/pages/%s",Slug),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PageSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPageResponse)
+        if err != nil {
+            return PageSchema{}, common.NewFDKError(err.Error())
+        }
+         return getPageResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //ContentGetPagesXQuery holds query params
+    type ContentGetPagesXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetPages Get all pages
+    func (co *Content)  GetPages(xQuery ContentGetPagesXQuery) (PageGetResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getPagesResponse PageGetResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            "/service/application/content/v2.0/pages/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PageGetResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPagesResponse)
+        if err != nil {
+            return PageGetResponse{}, common.NewFDKError(err.Error())
+        }
+         return getPagesResponse, nil
+        
+    }
+          
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetPagesPaginator Get all pages  
+            func (co *Content)  GetPagesPaginator( xQuery ContentGetPagesXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                 
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := co.GetPages(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
+    
 
     // Communication ...
     type Communication struct {
@@ -8218,7 +8289,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetApplicationQRCode Create application QR Code
+    // GetApplicationQRCode Create QR Code of an app
     func (sh *Share)  GetApplicationQRCode() (QRCodeResp, error){
         var (
             rawRequest  *RawRequest
@@ -8263,7 +8334,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetProductQRCodeBySlug Create product QR Code
+    // GetProductQRCodeBySlug Create QR Code of a product
     func (sh *Share)  GetProductQRCodeBySlug(Slug string) (QRCodeResp, error){
         var (
             rawRequest  *RawRequest
@@ -8310,7 +8381,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetCollectionQRCodeBySlug Create collection QR Code
+    // GetCollectionQRCodeBySlug Create QR Code of a collection
     func (sh *Share)  GetCollectionQRCodeBySlug(Slug string) (QRCodeResp, error){
         var (
             rawRequest  *RawRequest
@@ -8362,7 +8433,7 @@ func NewAppClient(config *AppConfig) *Client {
         URL string  `url:"url,omitempty"`  
     }
     
-    // GetUrlQRCode Create url QR Code
+    // GetUrlQRCode Create QR Code of a URL
     func (sh *Share)  GetUrlQRCode(xQuery ShareGetUrlQRCodeXQuery) (QRCodeResp, error){
         var (
             rawRequest  *RawRequest
@@ -8411,7 +8482,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // CreateShortLink Create short link
+    // CreateShortLink Create a short link
     func (sh *Share)  CreateShortLink(body  ShortLinkReq) (ShortLinkRes, error){
         var (
             rawRequest  *RawRequest
@@ -8738,6 +8809,70 @@ func NewAppClient(config *AppConfig) *Client {
             return CompleteResponse{}, common.NewFDKError(err.Error())
         }
          return completeUploadResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // SignUrls Explain here
+    func (fi *FileStorage)  SignUrls(CompanyID float64, body  SignUrlRequest) (SignUrlResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             signUrlsResponse SignUrlResponse
+	    )
+
+        
+            
+        
+            
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return SignUrlResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return SignUrlResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.config,
+            "post",
+            fmt.Sprintf("/service/application/assets/v1.0/company/undefined/sign-urls/",CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return SignUrlResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &signUrlsResponse)
+        if err != nil {
+            return SignUrlResponse{}, common.NewFDKError(err.Error())
+        }
+         return signUrlsResponse, nil
         
     }
           
