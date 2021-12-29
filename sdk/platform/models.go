@@ -6439,6 +6439,7 @@ package platform
             BreakupValues ShipmentBreakupValues  `json:"breakup_values"`
             ID string  `json:"id"`
             DpDetails DpDetails  `json:"dp_details"`
+            PaymentMethods map[string]interface{}  `json:"payment_methods"`
             Invoice ShipmentInvoice  `json:"invoice"`
             FulfillingStore PlatformFulfillingStore  `json:"fulfilling_store"`
             Payments Payments  `json:"payments"`
