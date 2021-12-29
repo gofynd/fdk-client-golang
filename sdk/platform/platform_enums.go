@@ -9,162 +9,230 @@ import (
 
 
 
-    //PriorityEnum used by Lead
-    type PriorityEnum  string
+
+
+
+
+    //PageType used by Content
+    type PageType  string
     
     const (
             
-            //LOW defines constant for the `low` 
-            LOW PriorityEnum = "low"
+            //ABOUT-US defines constant for the `about-us` 
+            ABOUT-US PageType = "about-us"
             
             
-            //MEDIUM defines constant for the `medium` 
-            MEDIUM PriorityEnum = "medium"
+            //ADDRESSES defines constant for the `addresses` 
+            ADDRESSES PageType = "addresses"
             
             
-            //HIGH defines constant for the `high` 
-            HIGH PriorityEnum = "high"
+            //BLOG defines constant for the `blog` 
+            BLOG PageType = "blog"
             
             
-       )
-
-    //IsValid return error if enum is invalid
-    func (pr PriorityEnum) IsValid() error {
-      switch pr {
-        case  LOW, MEDIUM, HIGH : 
-        return nil
-      }
-      return errors.New("Invalid PriorityEnum type")
-    }
-
-
-
-    //HistoryTypeEnum used by Lead
-    type HistoryTypeEnum  string
-    
-    const (
-            
-            //RATING defines constant for the `rating` 
-            RATING HistoryTypeEnum = "rating"
+            //BRANDS defines constant for the `brands` 
+            BRANDS PageType = "brands"
             
             
-            //LOG defines constant for the `log` 
-            LOG HistoryTypeEnum = "log"
+            //CARDS defines constant for the `cards` 
+            CARDS PageType = "cards"
             
             
-            //COMMENT defines constant for the `comment` 
-            COMMENT HistoryTypeEnum = "comment"
+            //CART defines constant for the `cart` 
+            CART PageType = "cart"
             
             
-       )
-
-    //IsValid return error if enum is invalid
-    func (hi HistoryTypeEnum) IsValid() error {
-      switch hi {
-        case  RATING, LOG, COMMENT : 
-        return nil
-      }
-      return errors.New("Invalid HistoryTypeEnum type")
-    }
-
-
-
-    //TicketAssetType used by Lead
-    type TicketAssetType  string
-    
-    const (
-            
-            //IMAGE defines constant for the `image` 
-            IMAGE TicketAssetType = "image"
-            
-            
-            //VIDEO defines constant for the `video` 
-            VIDEO TicketAssetType = "video"
-            
-            
-            //FILE defines constant for the `file` 
-            FILE TicketAssetType = "file"
-            
-            
-            //YOUTUBE defines constant for the `youtube` 
-            YOUTUBE TicketAssetType = "youtube"
-            
-            
-            //PRODUCT defines constant for the `product` 
-            PRODUCT TicketAssetType = "product"
-            
-            
-            //COLLECTION defines constant for the `collection` 
-            COLLECTION TicketAssetType = "collection"
+            //CATEGORIES defines constant for the `categories` 
+            CATEGORIES PageType = "categories"
             
             
             //BRAND defines constant for the `brand` 
-            BRAND TicketAssetType = "brand"
+            BRAND PageType = "brand"
             
             
-            //SHIPMENT defines constant for the `shipment` 
-            SHIPMENT TicketAssetType = "shipment"
+            //CATEGORY defines constant for the `category` 
+            CATEGORY PageType = "category"
             
             
-            //ORDER defines constant for the `order` 
-            ORDER TicketAssetType = "order"
+            //COLLECTION defines constant for the `collection` 
+            COLLECTION PageType = "collection"
+            
+            
+            //COLLECTIONS defines constant for the `collections` 
+            COLLECTIONS PageType = "collections"
+            
+            
+            //CONTACT-US defines constant for the `contact-us` 
+            CONTACT-US PageType = "contact-us"
+            
+            
+            //EXTERNAL defines constant for the `external` 
+            EXTERNAL PageType = "external"
+            
+            
+            //FAQ defines constant for the `faq` 
+            FAQ PageType = "faq"
+            
+            
+            //FRESHCHAT defines constant for the `freshchat` 
+            FRESHCHAT PageType = "freshchat"
+            
+            
+            //HOME defines constant for the `home` 
+            HOME PageType = "home"
+            
+            
+            //NOTIFICATION-SETTINGS defines constant for the `notification-settings` 
+            NOTIFICATION-SETTINGS PageType = "notification-settings"
+            
+            
+            //ORDERS defines constant for the `orders` 
+            ORDERS PageType = "orders"
+            
+            
+            //PAGE defines constant for the `page` 
+            PAGE PageType = "page"
+            
+            
+            //POLICY defines constant for the `policy` 
+            POLICY PageType = "policy"
+            
+            
+            //PRODUCT defines constant for the `product` 
+            PRODUCT PageType = "product"
+            
+            
+            //PRODUCT-REVIEWS defines constant for the `product-reviews` 
+            PRODUCT-REVIEWS PageType = "product-reviews"
+            
+            
+            //ADD-PRODUCT-REVIEW defines constant for the `add-product-review` 
+            ADD-PRODUCT-REVIEW PageType = "add-product-review"
+            
+            
+            //PRODUCT-REQUEST defines constant for the `product-request` 
+            PRODUCT-REQUEST PageType = "product-request"
+            
+            
+            //PRODUCTS defines constant for the `products` 
+            PRODUCTS PageType = "products"
+            
+            
+            //PROFILE defines constant for the `profile` 
+            PROFILE PageType = "profile"
+            
+            
+            //PROFILE-BASIC defines constant for the `profile-basic` 
+            PROFILE-BASIC PageType = "profile-basic"
+            
+            
+            //PROFILE-COMPANY defines constant for the `profile-company` 
+            PROFILE-COMPANY PageType = "profile-company"
+            
+            
+            //PROFILE-EMAILS defines constant for the `profile-emails` 
+            PROFILE-EMAILS PageType = "profile-emails"
+            
+            
+            //PROFILE-PHONES defines constant for the `profile-phones` 
+            PROFILE-PHONES PageType = "profile-phones"
+            
+            
+            //RATE-US defines constant for the `rate-us` 
+            RATE-US PageType = "rate-us"
+            
+            
+            //REFER-EARN defines constant for the `refer-earn` 
+            REFER-EARN PageType = "refer-earn"
+            
+            
+            //SETTINGS defines constant for the `settings` 
+            SETTINGS PageType = "settings"
+            
+            
+            //SHARED-CART defines constant for the `shared-cart` 
+            SHARED-CART PageType = "shared-cart"
+            
+            
+            //TNC defines constant for the `tnc` 
+            TNC PageType = "tnc"
+            
+            
+            //TRACK-ORDER defines constant for the `track-order` 
+            TRACK-ORDER PageType = "track-order"
+            
+            
+            //WISHLIST defines constant for the `wishlist` 
+            WISHLIST PageType = "wishlist"
+            
+            
+            //SECTIONS defines constant for the `sections` 
+            SECTIONS PageType = "sections"
+            
+            
+            //FORM defines constant for the `form` 
+            FORM PageType = "form"
+            
+            
+            //CART-DELIVERY defines constant for the `cart-delivery` 
+            CART-DELIVERY PageType = "cart-delivery"
+            
+            
+            //CART-PAYMENT defines constant for the `cart-payment` 
+            CART-PAYMENT PageType = "cart-payment"
+            
+            
+            //CART-REVIEW defines constant for the `cart-review` 
+            CART-REVIEW PageType = "cart-review"
             
             
        )
 
     //IsValid return error if enum is invalid
-    func (ti TicketAssetType) IsValid() error {
-      switch ti {
-        case  IMAGE, VIDEO, FILE, YOUTUBE, PRODUCT, COLLECTION, BRAND, SHIPMENT, ORDER : 
+    func (pa PageType) IsValid() error {
+      switch pa {
+        case  ABOUT-US, ADDRESSES, BLOG, BRANDS, CARDS, CART, CATEGORIES, BRAND, CATEGORY, COLLECTION, COLLECTIONS, CONTACT-US, EXTERNAL, FAQ, FRESHCHAT, HOME, NOTIFICATION-SETTINGS, ORDERS, PAGE, POLICY, PRODUCT, PRODUCT-REVIEWS, ADD-PRODUCT-REVIEW, PRODUCT-REQUEST, PRODUCTS, PROFILE, PROFILE-BASIC, PROFILE-COMPANY, PROFILE-EMAILS, PROFILE-PHONES, RATE-US, REFER-EARN, SETTINGS, SHARED-CART, TNC, TRACK-ORDER, WISHLIST, SECTIONS, FORM, CART-DELIVERY, CART-PAYMENT, CART-REVIEW : 
         return nil
       }
-      return errors.New("Invalid TicketAssetType type")
+      return errors.New("Invalid PageType type")
     }
 
 
 
-    //TicketSourceEnum used by Lead
-    type TicketSourceEnum  string
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //SubscriberStatus used by Webhook
+    type SubscriberStatus  string
     
     const (
             
-            //PLATFORM_PANEL defines constant for the `platform_panel` 
-            PLATFORM_PANEL TicketSourceEnum = "platform_panel"
+            //ACTIVE defines constant for the `active` 
+            ACTIVE SubscriberStatus = "active"
             
             
-            //SALES_CHANNEL defines constant for the `sales_channel` 
-            SALES_CHANNEL TicketSourceEnum = "sales_channel"
+            //INACTIVE defines constant for the `inactive` 
+            INACTIVE SubscriberStatus = "inactive"
             
             
        )
 
     //IsValid return error if enum is invalid
-    func (ti TicketSourceEnum) IsValid() error {
-      switch ti {
-        case  PLATFORM_PANEL, SALES_CHANNEL : 
+    func (su SubscriberStatus) IsValid() error {
+      switch su {
+        case  ACTIVE, INACTIVE : 
         return nil
       }
-      return errors.New("Invalid TicketSourceEnum type")
+      return errors.New("Invalid SubscriberStatus type")
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

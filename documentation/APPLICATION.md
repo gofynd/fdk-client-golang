@@ -14,7 +14,6 @@
 * [Configuration](#Configuration) - Application configuration apis 
 * [Payment](#Payment) - Collect payment through many payment gateway i.e Stripe, Razorpay, Juspay etc.into Fynd or Self account 
 * [Order](#Order) - Handles Platform websites OMS 
-* [Rewards](#Rewards) - Earn and redeem reward points 
 * [Feedback](#Feedback) - User Reviews and Rating System 
 * [PosCart](#PosCart) - Cart APIs 
 * [Logistic](#Logistic) - Handles Platform websites OMS 
@@ -55,6 +54,8 @@
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
+    * [getInStockLocations](#getinstocklocations)
+    * [getLocationDetailsById](#getlocationdetailsbyid)
     
 
 * [Cart](#Cart)
@@ -115,6 +116,7 @@
     * [loginWithGoogle](#loginwithgoogle)
     * [loginWithGoogleAndroid](#loginwithgoogleandroid)
     * [loginWithGoogleIOS](#loginwithgoogleios)
+    * [loginWithAppleIOS](#loginwithappleios)
     * [loginWithOTP](#loginwithotp)
     * [loginWithEmailAndPassword](#loginwithemailandpassword)
     * [sendResetPasswordEmail](#sendresetpasswordemail)
@@ -150,6 +152,7 @@
     * [getAnnouncements](#getannouncements)
     * [getBlog](#getblog)
     * [getBlogs](#getblogs)
+    * [getDataLoaders](#getdataloaders)
     * [getFaqs](#getfaqs)
     * [getFaqCategories](#getfaqcategories)
     * [getFaqBySlug](#getfaqbyslug)
@@ -158,13 +161,13 @@
     * [getLandingPage](#getlandingpage)
     * [getLegalInformation](#getlegalinformation)
     * [getNavigations](#getnavigations)
-    * [getPage](#getpage)
-    * [getPages](#getpages)
     * [getSEOConfiguration](#getseoconfiguration)
     * [getSlideshows](#getslideshows)
     * [getSlideshow](#getslideshow)
     * [getSupportInformation](#getsupportinformation)
     * [getTags](#gettags)
+    * [getPage](#getpage)
+    * [getPages](#getpages)
     
 
 * [Communication](#Communication)
@@ -189,6 +192,7 @@
   * Methods
     * [startUpload](#startupload)
     * [completeUpload](#completeupload)
+    * [signUrls](#signurls)
     
 
 * [Configuration](#Configuration)
@@ -198,10 +202,12 @@
     * [getBasicDetails](#getbasicdetails)
     * [getIntegrationTokens](#getintegrationtokens)
     * [getOrderingStores](#getorderingstores)
+    * [getStoreDetailById](#getstoredetailbyid)
     * [getFeatures](#getfeatures)
     * [getContactInfo](#getcontactinfo)
     * [getCurrencies](#getcurrencies)
     * [getCurrencyById](#getcurrencybyid)
+    * [getAppCurrencies](#getappcurrencies)
     * [getLanguages](#getlanguages)
     * [getOrderingStoreCookie](#getorderingstorecookie)
     * [removeOrderingStoreCookie](#removeorderingstorecookie)
@@ -229,6 +235,7 @@
     * [getOrderBeneficiariesDetail](#getorderbeneficiariesdetail)
     * [verifyOtpAndAddBeneficiaryForBank](#verifyotpandaddbeneficiaryforbank)
     * [addBeneficiaryDetails](#addbeneficiarydetails)
+    * [addRefundBankAccountUsingOTP](#addrefundbankaccountusingotp)
     * [verifyOtpAndAddBeneficiaryForWallet](#verifyotpandaddbeneficiaryforwallet)
     * [updateDefaultBeneficiary](#updatedefaultbeneficiary)
     
@@ -242,17 +249,9 @@
     * [updateShipmentStatus](#updateshipmentstatus)
     * [trackShipment](#trackshipment)
     * [getPosOrderById](#getposorderbyid)
-    
-
-* [Rewards](#Rewards)
-  * Methods
-    * [getPointsOnProduct](#getpointsonproduct)
-    * [getOfferByName](#getofferbyname)
-    * [getOrderDiscount](#getorderdiscount)
-    * [getUserPoints](#getuserpoints)
-    * [getUserPointsHistory](#getuserpointshistory)
-    * [getUserReferralDetails](#getuserreferraldetails)
-    * [redeemReferralCode](#redeemreferralcode)
+    * [getCustomerDetailsByShipmentId](#getcustomerdetailsbyshipmentid)
+    * [sendOtpToShipmentCustomer](#sendotptoshipmentcustomer)
+    * [verifyOtpShipmentCustomer](#verifyotpshipmentcustomer)
     
 
 * [Feedback](#Feedback)
@@ -1495,6 +1494,94 @@ Schema: `StoreListingResponse`
 ---
 
 
+#### getInStockLocations
+Get store meta information.
+
+```golang
+
+ data, err :=  Catalog.GetInStockLocations(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`, `City`, `Range`, `Latitude`, `Longitude`
+
+
+
+Use this API to get a list of stores in a specific application.
+
+*Success Response:*
+
+
+
+Success. Returns a list of selling locations. Check the example shown below or refer `StoreListingResponse` for more details.
+
+
+Schema: `ApplicationStoreListing`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getLocationDetailsById
+Get store meta information.
+
+```golang
+
+ data, err :=  Catalog.GetLocationDetailsById(LocationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| LocationID | float64 | Unique Location ID. | 
+
+
+
+
+Use this API to get meta details for a store.
+
+*Success Response:*
+
+
+
+Success. Returns a metadata object. Check the example shown below or refer `StoreDetails` for more details.
+
+
+Schema: `StoreDetails`
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ---
 
@@ -2273,7 +2360,7 @@ Update items in the cart
 | body |  UpdateCartRequest | "Request body" 
 
 
-Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/{slug}/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/{identifier}​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
+<p>Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/:slug/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/:identifier​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
 
 *Success Response:*
 
@@ -3122,7 +3209,7 @@ Update address added to an account
 | body |  Address | "Request body" 
 
 
-Use this API to update an existing address in the account. Request object should contain attributes mentioned in  <font color="blue">Address </font> can be updated. These attributes are:</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
+<p>Use this API to update an existing address in the account. Request object should contain attributes mentioned in  <font color="blue">Address </font> can be updated. These attributes are:</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
 
 *Success Response:*
 
@@ -3203,7 +3290,7 @@ Select an address from available addresses
 | body |  SelectCartAddressRequest | "Request body" 
 
 
-<p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul>
+<p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul></p>
 
 *Success Response:*
 
@@ -5162,13 +5249,13 @@ Create history for specific Ticket
 
 ```golang
 
- data, err :=  Lead.CreateHistory(ID, body);
+ data, err :=  Lead.CreateHistory(TicketID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ID | string | Ticket ID for which history is created | 
+| TicketID | string | Ticket ID for which history is created | 
 
 
 | body |  TicketHistoryPayload | "Request body" 
@@ -5194,7 +5281,7 @@ Default
 {
   "value": {
     "_id": "601a9d52c26687d086c499ef",
-    "ticket_id": "41",
+    "ticket_id": "6012f38557751ee8fc162cf7",
     "type": "comment",
     "value": {
       "text": "d",
@@ -6295,6 +6382,56 @@ Login or Register using Google on iOS
 
 
 Use this API to login or register in iOS app using Google Account credentials.
+
+*Success Response:*
+
+
+
+Success. Returns a JSON object with the user details. Check the example shown below or refer `AuthSuccess` for more details.
+
+
+Schema: `AuthSuccess`
+
+
+*Examples:*
+
+
+Success
+```json
+{
+  "$ref": "#/components/examples/AuthSuccess"
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### loginWithAppleIOS
+Login or Register using Apple on iOS
+
+```golang
+
+ data, err :=  User.LoginWithAppleIOS(xQuery, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Platform`
+
+| body |  OAuthRequestAppleSchema | "Request body" 
+
+
+Use this API to login or register in iOS app using Apple Account credentials.
 
 *Success Response:*
 
@@ -7723,6 +7860,41 @@ default
 ---
 
 
+#### getDataLoaders
+Get the data loaders associated with an application
+
+```golang
+
+ data, err :=  Content.GetDataLoaders();
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+Use this API to get all selected data loaders of the application in the form of tags.
+
+*Success Response:*
+
+
+
+Success. Returns a JSON object containing all the data loaders injected in the application. Check the example shown below or refer `DataLoaderSchema` for more details.
+
+
+Schema: `DataLoaderSchema`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getFaqs
 Get a list of FAQs
 
@@ -8061,109 +8233,6 @@ default
 ---
 
 
-#### getPage
-Get a page
-
-```golang
-
- data, err :=  Content.GetPage(Slug, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| Slug | string | A short, human-readable, URL-friendly identifier of a page. You can get slug value from the endpoint /service/application/content/v1.0/pages/. | 
-
-
-
-| xQuery | struct | Includes properties such as `RootID`
-
-
-
-Use this API to get the details of a page using its slug. Details include the title, seo, publish status, feature image, tags, meta, etc.
-
-*Success Response:*
-
-
-
-Success. Returns a JSON object with page details. Check the example shown below or refer `CustomPageSchema` for more details.
-
-
-Schema: `PageSchema`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/PageResponse"
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPages
-Get all pages
-
-```golang
-
- data, err :=  Content.GetPages(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-
-
-Use this API to get a list of pages.
-
-*Success Response:*
-
-
-
-Success. Returns a list of pages along with their details. Check the example shown below or refer `PageGetResponse` for more details.
-
-
-Schema: `PageGetResponse`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/PageGetResponse"
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
 #### getSEOConfiguration
 Get the SEO of an application
 
@@ -8391,6 +8460,109 @@ Schema: `TagsSchema`
 ---
 
 
+#### getPage
+Get a page
+
+```golang
+
+ data, err :=  Content.GetPage(Slug, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| Slug | string | A short, human-readable, URL-friendly identifier of a page. You can get slug value from the endpoint /service/application/content/v2.0/pages/. | 
+
+
+
+| xQuery | struct | Includes properties such as `RootID`
+
+
+
+Use this API to get the details of a page using its slug. Details include the title, seo, publish status, feature image, tags, meta, etc.
+
+*Success Response:*
+
+
+
+Success. Returns a JSON object with page details. Check the example shown below or refer `CustomPageSchema` for more details.
+
+
+Schema: `PageSchema`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "$ref": "#/components/examples/PageStorefrontResponse"
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPages
+Get all pages
+
+```golang
+
+ data, err :=  Content.GetPages(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
+
+
+
+Use this API to get a list of pages.
+
+*Success Response:*
+
+
+
+Success. Returns a list of pages along with their details. Check the example shown below or refer `PageGetStorefrontResponse` for more details.
+
+
+Schema: `PageGetResponse`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "$ref": "#/components/examples/PageGetStorefrontResponse"
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ---
 
@@ -8560,7 +8732,7 @@ reset
 
 
 #### getApplicationQRCode
-Create QR Code of an app
+Create application QR Code
 
 ```golang
 
@@ -8572,13 +8744,13 @@ Create QR Code of an app
 
 
 
-Use this API to create a QR code of an app for sharing it with users who want to use the app.
+Create application QR Code
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `QRCodeResp` for more details.
+Success
 
 
 Schema: `QRCodeResp`
@@ -8595,7 +8767,7 @@ Schema: `QRCodeResp`
 
 
 #### getProductQRCodeBySlug
-Create QR Code of a product
+Create product QR Code
 
 ```golang
 
@@ -8605,18 +8777,18 @@ Create QR Code of a product
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Slug | string | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint. | 
+| Slug | string | The unique identifier of a product | 
 
 
 
 
-Use this API to create a QR code of a product for sharing it with users who want to view/purchase the product.
+Create product QR Code
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `QRCodeResp` for more details.
+Success
 
 
 Schema: `QRCodeResp`
@@ -8633,7 +8805,7 @@ Schema: `QRCodeResp`
 
 
 #### getCollectionQRCodeBySlug
-Create QR Code of a collection
+Create collection QR Code
 
 ```golang
 
@@ -8643,18 +8815,18 @@ Create QR Code of a collection
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Slug | string | A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint. | 
+| Slug | string | The unique identifier of a collection | 
 
 
 
 
-Use this API to create a QR code of a collection of products for sharing it with users who want to view/purchase the collection.
+Create collection QR Code
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `QRCodeResp` for more details.
+Success
 
 
 Schema: `QRCodeResp`
@@ -8671,7 +8843,7 @@ Schema: `QRCodeResp`
 
 
 #### getUrlQRCode
-Create QR Code of a URL
+Create url QR Code
 
 ```golang
 
@@ -8686,13 +8858,13 @@ Create QR Code of a URL
 
 
 
-Use this API to create a QR code of a URL for sharing it with users who want to visit the link.
+Create url QR Code
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `QRCodeResp` for more details.
+Success
 
 
 Schema: `QRCodeResp`
@@ -8709,7 +8881,7 @@ Schema: `QRCodeResp`
 
 
 #### createShortLink
-Create a short link
+Create short link
 
 ```golang
 
@@ -8722,13 +8894,13 @@ Create a short link
 | body |  ShortLinkReq | "Request body" 
 
 
-Use this API to create a short link that is easy to write/share/read as compared to long URLs.
+Create short link
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `ShortLinkRes` for more details.
+Success
 
 
 Schema: `ShortLinkRes`
@@ -8755,18 +8927,18 @@ Get short link by hash
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Hash | string | A string value used for converting long URL to short URL and vice-versa. | 
+| Hash | string | Hash of short link | 
 
 
 
 
-Use this API to get a short link by using a hash value.
+Get short link by hash
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `ShortLinkRes` for more details.
+Success
 
 
 Schema: `ShortLinkRes`
@@ -8793,18 +8965,18 @@ Get original link by hash
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Hash | string | A string value used for converting long URL to short URL and vice-versa. | 
+| Hash | string | Hash of short link | 
 
 
 
 
-Use this API to retrieve the original link from a short-link by using a hash value.
+Get original link by hash
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `ShortLinkRes` for more details.
+Success
 
 
 Schema: `ShortLinkRes`
@@ -8929,6 +9101,42 @@ Success
 
 
 Schema: `CompleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### signUrls
+Explain here
+
+```golang
+
+ data, err :=  FileStorage.SignUrls(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  SignUrlRequest | "Request body" 
+
+
+Describe here
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `SignUrlResponse`
 
 
 
@@ -9130,6 +9338,44 @@ Schema: `OrderingStores`
 ---
 
 
+#### getStoreDetailById
+Get ordering store details
+
+```golang
+
+ data, err :=  Configuration.GetStoreDetailById(StoreID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| StoreID | float64 | Store uid | 
+
+
+
+
+Use this API to retrieve the details of given stores uid (the selling locations where the application will be utilized for placing orders).
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `OrderingStore` for more details.
+
+
+Schema: `OrderingStore`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getFeatures
 Get features of application
 
@@ -9201,7 +9447,7 @@ Schema: `ApplicationInformation`
 
 
 #### getCurrencies
-Get currencies enabled in the application
+Get all currencies list
 
 ```golang
 
@@ -9213,7 +9459,7 @@ Get currencies enabled in the application
 
 
 
-Use this API to get a list of currencies allowed in the current application. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
+Use this API to get a list of currencies available. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
 
 *Success Response:*
 
@@ -9261,6 +9507,41 @@ Success. Check the example shown below or refer `Currency` for more details.
 
 
 Schema: `Currency`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAppCurrencies
+Get currencies enabled in the application
+
+```golang
+
+ data, err :=  Configuration.GetAppCurrencies();
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+Use this API to get a list of currencies allowed in the current application. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `AppCurrencyResponse` for more details.
+
+
+Schema: `AppCurrencyResponse`
 
 
 
@@ -10155,6 +10436,42 @@ Schema: `RefundAccountResponse`
 ---
 
 
+#### addRefundBankAccountUsingOTP
+Save bank details for cancelled/returned order
+
+```golang
+
+ data, err :=  Payment.AddRefundBankAccountUsingOTP(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  AddBeneficiaryDetailsOTPRequest | "Request body" 
+
+
+Use this API to save bank details for returned/cancelled order to refund amount in his account.
+
+*Success Response:*
+
+
+
+Success. Shows whether the beneficiary details were saved to a returned/cancelled order or not.
+
+
+Schema: `RefundAccountResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### verifyOtpAndAddBeneficiaryForWallet
 Send OTP on adding a wallet beneficiary
 
@@ -10509,75 +10826,35 @@ Schema: `PosOrderById`
 ---
 
 
-
----
-
-
-## Rewards
-
-
-#### getPointsOnProduct
-Get the eligibility of reward points on a product
+#### getCustomerDetailsByShipmentId
+Get Customer Details by Shipment Id
 
 ```golang
 
- data, err :=  Rewards.GetPointsOnProduct(body);
+ data, err :=  Order.GetCustomerDetailsByShipmentId(OrderID, ShipmentID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  CatalogueOrderRequest | "Request body" 
+| OrderID | string | A unique number used for identifying and tracking your orders. | 
 
 
-Use this API to evaluate the amount of reward points that could be earned on any catalogue product.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `CatalogueOrderRequest` for more details.
-
-
-Schema: `CatalogueOrderResponse`
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
 
 
-
-
-
-
-
----
-
-
-#### getOfferByName
-Get offer by name
-
-```golang
-
- data, err :=  Rewards.GetOfferByName(Name);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| Name | string | The name given to the offer. | 
-
-
-
-
-Use this API to get the offer details and configuration by entering the name of the offer.
+Use this API to retrieve customer details such as mobileno using Shipment ID.
 
 *Success Response:*
 
 
 
-Success. Check example below or refer `Offer` for more details.
+Success. Check the example shown below or refer `CustomerDetailsByShipmentId` for more details.
 
 
-Schema: `Offer`
+Schema: `CustomerDetailsByShipmentId`
 
 
 
@@ -10590,30 +10867,35 @@ Schema: `Offer`
 ---
 
 
-#### getOrderDiscount
-Calculates the discount on order-amount
+#### sendOtpToShipmentCustomer
+Send and Resend Otp code to Order-Shipment customer
 
 ```golang
 
- data, err :=  Rewards.GetOrderDiscount(body);
+ data, err :=  Order.SendOtpToShipmentCustomer(OrderID, ShipmentID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  OrderDiscountRequest | "Request body" 
+| OrderID | string | A unique number used for identifying and tracking your orders. | 
 
 
-Use this API to calculate the discount on order-amount based on all the amount range configured in order_discount.
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+
+
+Use this API to send OTP to the customer of the mapped Shipment.
 
 *Success Response:*
 
 
 
-Success. Check example below or refer `OrderDiscountResponse` for more details.
+Success to acknowledge the service was notified
 
 
-Schema: `OrderDiscountResponse`
+Schema: `sendOTPApplicationResponse`
 
 
 
@@ -10626,140 +10908,36 @@ Schema: `OrderDiscountResponse`
 ---
 
 
-#### getUserPoints
-Get reward points available with a user
+#### verifyOtpShipmentCustomer
+Verify Otp code
 
 ```golang
 
- data, err :=  Rewards.GetUserPoints();
+ data, err :=  Order.VerifyOtpShipmentCustomer(OrderID, ShipmentID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
+| OrderID | string | A unique number used for identifying and tracking your orders. | 
 
 
-Use this API to retrieve total available points of a user for current application
-
-*Success Response:*
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
-
-Success. Check example below or refer `PointsResponse` for more details.
-
-
-Schema: `PointsResponse`
+| body |  ReqBodyVerifyOTPShipment | "Request body" 
 
 
-
-
-
-
-
-
-
----
-
-
-#### getUserPointsHistory
-Get all transactions of reward points
-
-```golang
-
- data, err :=  Rewards.GetUserPointsHistory(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-| xQuery | struct | Includes properties such as `PageID`, `PageSize`
-
-
-
-Use this API to get a list of points transactions. The list of points history is paginated.
+Use this API to verify OTP and create a session token with custom payload.
 
 *Success Response:*
 
 
 
-Success. Check example below or refer `PointsHistoryResponse` for more details.
+Success, the code is valid and returns a session token
 
 
-Schema: `PointsHistoryResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getUserReferralDetails
-Get referral details of a user
-
-```golang
-
- data, err :=  Rewards.GetUserReferralDetails();
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-Use this API to retrieve the referral details a user has configured in the application.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `ReferralDetailsResponse` for more details.
-
-
-Schema: `ReferralDetailsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### redeemReferralCode
-Redeems a referral code and credits reward points to users
-
-```golang
-
- data, err :=  Rewards.RedeemReferralCode(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  RedeemReferralCodeRequest | "Request body" 
-
-
-Use this API to enter a referral code following which, the configured points would be credited to a user's reward points account.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `RedeemReferralCodeResponse` for more details.
-
-
-Schema: `RedeemReferralCodeResponse`
+Schema: `ResponseVerifyOTPShipment`
 
 
 
@@ -11219,14 +11397,11 @@ Delete Media
 
 ```golang
 
- data, err :=  Feedback.DeleteMedia(xQuery);
+ data, err :=  Feedback.DeleteMedia();
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
-
-
-| xQuery | struct | Includes properties such as `Ids`
 
 
 
@@ -12618,7 +12793,7 @@ Update items in the cart
 | body |  UpdateCartRequest | "Request body" 
 
 
-Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/{slug}/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/{identifier}​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
+<p>Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/:slug/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/:identifier​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
 
 *Success Response:*
 
@@ -13467,7 +13642,7 @@ Update address added to an account
 | body |  Address | "Request body" 
 
 
-Use this API to update an existing address in the account. Request object should contain attributes mentioned in  <font color="blue">Address </font> can be updated. These attributes are:</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
+<p>Use this API to update an existing address in the account. Request object should contain attributes mentioned in  <font color="blue">Address </font> can be updated. These attributes are:</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
 
 *Success Response:*
 
@@ -13548,7 +13723,7 @@ Select an address from available addresses
 | body |  SelectCartAddressRequest | "Request body" 
 
 
-<p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul>
+<p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul></p>
 
 *Success Response:*
 

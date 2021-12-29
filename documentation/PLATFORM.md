@@ -7,7 +7,6 @@
 * [Theme](#Theme) - Responsible for themes 
 * [User](#User) - Authentication Service 
 * [Content](#Content) - Content System 
-* [Assignment](#Assignment) -  
 * [Billing](#Billing) - Handle platform subscription 
 * [Communication](#Communication) - Manages email, sms, push notifications sent to users 
 * [Payment](#Payment) - Collect payment through many payment gateway i.e Stripe, Razorpay, Juspay etc.into Fynd or Self account 
@@ -16,11 +15,8 @@
 * [CompanyProfile](#CompanyProfile) - Company Profile API's allows you to access list of products, prices, seller details, similar features, variants and many more useful features.  
 * [FileStorage](#FileStorage) - File Storage 
 * [Share](#Share) - Short link and QR Code 
-* [Inventory](#Inventory) -  
 * [Configuration](#Configuration) - Application configuration apis 
 * [Cart](#Cart) - Cart APIs 
-* [Rewards](#Rewards) - Rewards 
-* [Analytics](#Analytics) - Perceptor analytics 
 * [Discount](#Discount) - Discount 
 * [Partner](#Partner) - Partner configuration apis 
 * [Webhook](#Webhook) - Webhook dispatcher with retry and one event to many subscriber vice versa 
@@ -47,8 +43,6 @@
     * [editTicket](#editticket)
     * [createHistory](#createhistory)
     * [getTicketHistory](#gettickethistory)
-    * [getFeedbacks](#getfeedbacks)
-    * [submitFeedback](#submitfeedback)
     * [createHistory](#createhistory)
     * [getTicketHistory](#gettickethistory)
     * [getCustomForm](#getcustomform)
@@ -56,8 +50,6 @@
     * [getCustomForms](#getcustomforms)
     * [createCustomForm](#createcustomform)
     * [getTokenForVideoRoom](#gettokenforvideoroom)
-    * [getTokenForVideoRoom](#gettokenforvideoroom)
-    * [getVideoParticipants](#getvideoparticipants)
     * [getVideoParticipants](#getvideoparticipants)
     * [openVideoRoom](#openvideoroom)
     * [closeVideoRoom](#closevideoroom)
@@ -127,6 +119,11 @@
     * [updateBlog](#updateblog)
     * [deleteBlog](#deleteblog)
     * [getComponentById](#getcomponentbyid)
+    * [addDataLoader](#adddataloader)
+    * [getDataLoaders](#getdataloaders)
+    * [deleteDataLoader](#deletedataloader)
+    * [editDataLoader](#editdataloader)
+    * [selectDataLoader](#selectdataloader)
     * [getFaqCategories](#getfaqcategories)
     * [getFaqCategoryBySlugOrId](#getfaqcategorybyslugorid)
     * [createFaqCategory](#createfaqcategory)
@@ -151,13 +148,11 @@
     * [deleteNavigation](#deletenavigation)
     * [getPageMeta](#getpagemeta)
     * [getPageSpec](#getpagespec)
-    * [createPage](#createpage)
-    * [getPages](#getpages)
     * [createPagePreview](#createpagepreview)
     * [updatePagePreview](#updatepagepreview)
-    * [updatePage](#updatepage)
     * [deletePage](#deletepage)
-    * [getPageBySlug](#getpagebyslug)
+    * [updatePathRedirectionRules](#updatepathredirectionrules)
+    * [getPathRedirectionRules](#getpathredirectionrules)
     * [getSEOConfiguration](#getseoconfiguration)
     * [updateSEOConfiguration](#updateseoconfiguration)
     * [getSlideshows](#getslideshows)
@@ -173,27 +168,10 @@
     * [addInjectableTag](#addinjectabletag)
     * [removeInjectableTag](#removeinjectabletag)
     * [editInjectableTag](#editinjectabletag)
-    
-
-* [Assignment](#Assignment)
-  * Methods
-    * [createPickupLocation](#createpickuplocation)
-    * [getPickupLocation](#getpickuplocation)
-    * [updatePickupLocation](#updatepickuplocation)
-    * [getPickupLocationById](#getpickuplocationbyid)
-    * [createPickupConfiguration](#createpickupconfiguration)
-    * [getPickupConfiguration](#getpickupconfiguration)
-    * [getAllocationConfiguration](#getallocationconfiguration)
-    * [createAllocationConfiguration](#createallocationconfiguration)
-    * [updateAllocationConfiguration](#updateallocationconfiguration)
-    * [getAllocationLocations](#getallocationlocations)
-    * [getAllocationLocationById](#getallocationlocationbyid)
-    * [updateAllocationLocation](#updateallocationlocation)
-    * [createAllocationLocation](#createallocationlocation)
-    * [getDestinationZones](#getdestinationzones)
-    * [postDestinationZone](#postdestinationzone)
-    * [getDestinationZoneById](#getdestinationzonebyid)
-    * [updateDestinationZone](#updatedestinationzone)
+    * [createPage](#createpage)
+    * [getPages](#getpages)
+    * [updatePage](#updatepage)
+    * [getPageBySlug](#getpagebyslug)
     
 
 * [Billing](#Billing)
@@ -271,6 +249,7 @@
     * [verifyIfscCode](#verifyifsccode)
     * [getUserOrderBeneficiaries](#getuserorderbeneficiaries)
     * [getUserBeneficiaries](#getuserbeneficiaries)
+    * [confirmPayment](#confirmpayment)
     
 
 * [Order](#Order)
@@ -279,6 +258,7 @@
     * [activityStatus](#activitystatus)
     * [storeProcessShipmentUpdate](#storeprocessshipmentupdate)
     * [checkRefund](#checkrefund)
+    * [ShipmentBagsCanBreak](#shipmentbagscanbreak)
     * [getOrdersByCompanyId](#getordersbycompanyid)
     * [getOrderLanesCountByCompanyId](#getorderlanescountbycompanyid)
     * [getOrderDetails](#getorderdetails)
@@ -365,7 +345,7 @@
     * [getProductBulkUploadHistory](#getproductbulkuploadhistory)
     * [deleteProductBulkJob](#deleteproductbulkjob)
     * [createProductsInBulk](#createproductsinbulk)
-    * [getCompanyTags](#getcompanytags)
+    * [getProductTags](#getproducttags)
     * [createProductAssetsInBulk](#createproductassetsinbulk)
     * [getProductAssetsInBulk](#getproductassetsinbulk)
     * [deleteSize](#deletesize)
@@ -390,6 +370,8 @@
     * [getCategories](#getcategories)
     * [getAppicationProducts](#getappicationproducts)
     * [getProductDetailBySlug](#getproductdetailbyslug)
+    * [getAppProducts](#getappproducts)
+    * [getOptimalLocations](#getoptimallocations)
     
 
 * [CompanyProfile](#CompanyProfile)
@@ -397,15 +379,15 @@
     * [updateCompany](#updatecompany)
     * [cbsOnboardGet](#cbsonboardget)
     * [getCompanyMetrics](#getcompanymetrics)
-    * [getBrand](#getbrand)
     * [editBrand](#editbrand)
+    * [getBrand](#getbrand)
     * [createBrand](#createbrand)
     * [createCompanyBrandMapping](#createcompanybrandmapping)
     * [getBrands](#getbrands)
     * [createLocation](#createlocation)
     * [getLocations](#getlocations)
-    * [getLocationDetail](#getlocationdetail)
     * [updateLocation](#updatelocation)
+    * [getLocationDetail](#getlocationdetail)
     * [createLocationBulk](#createlocationbulk)
     
 
@@ -431,18 +413,6 @@
     * [updateShortLinkById](#updateshortlinkbyid)
     
 
-* [Inventory](#Inventory)
-  * Methods
-    * [getJobsByCompany](#getjobsbycompany)
-    * [updateJob](#updatejob)
-    * [createJob](#createjob)
-    * [getJobByCompanyAndIntegration](#getjobbycompanyandintegration)
-    * [getJobConfigDefaults](#getjobconfigdefaults)
-    * [getJobByCode](#getjobbycode)
-    * [getJobCodeMetrics](#getjobcodemetrics)
-    * [getJobCodesByCompanyAndIntegration](#getjobcodesbycompanyandintegration)
-    
-
 * [Configuration](#Configuration)
   * Methods
     * [getBuildConfig](#getbuildconfig)
@@ -463,8 +433,10 @@
     * [partiallyUpdateInventoryConfig](#partiallyupdateinventoryconfig)
     * [getAppCurrencyConfig](#getappcurrencyconfig)
     * [updateAppCurrencyConfig](#updateappcurrencyconfig)
+    * [getAppSupportedCurrency](#getappsupportedcurrency)
     * [getOrderingStoresByFilter](#getorderingstoresbyfilter)
     * [updateOrderingStoreConfig](#updateorderingstoreconfig)
+    * [getStaffOrderingStores](#getstafforderingstores)
     * [getDomains](#getdomains)
     * [addDomain](#adddomain)
     * [removeDomainById](#removedomainbyid)
@@ -479,7 +451,9 @@
     * [getAvailableOptIns](#getavailableoptins)
     * [getSelectedOptIns](#getselectedoptins)
     * [getIntegrationLevelConfig](#getintegrationlevelconfig)
+    * [updateLevelIntegration](#updatelevelintegration)
     * [getIntegrationByLevelId](#getintegrationbylevelid)
+    * [updateLevelUidIntegration](#updateleveluidintegration)
     * [getLevelActiveIntegrations](#getlevelactiveintegrations)
     * [getBrandsByCompany](#getbrandsbycompany)
     * [getCompanyByBrands](#getcompanybybrands)
@@ -496,36 +470,9 @@
     * [getCouponById](#getcouponbyid)
     * [updateCoupon](#updatecoupon)
     * [updateCouponPartially](#updatecouponpartially)
-    
-
-* [Rewards](#Rewards)
-  * Methods
-    * [getGiveaways](#getgiveaways)
-    * [createGiveaway](#creategiveaway)
-    * [getGiveawayByID](#getgiveawaybyid)
-    * [updateGiveaway](#updategiveaway)
-    * [getOffers](#getoffers)
-    * [getOfferByName](#getofferbyname)
-    * [updateOfferByName](#updateofferbyname)
-    * [getUserAvailablePoints](#getuseravailablepoints)
-    * [updateUserStatus](#updateuserstatus)
-    * [getUserPointsHistory](#getuserpointshistory)
-    
-
-* [Analytics](#Analytics)
-  * Methods
-    * [getStatiscticsGroups](#getstatiscticsgroups)
-    * [getStatiscticsGroupComponents](#getstatiscticsgroupcomponents)
-    * [getComponentStatsCSV](#getcomponentstatscsv)
-    * [getComponentStatsPDF](#getcomponentstatspdf)
-    * [getComponentStats](#getcomponentstats)
-    * [getAbandonCartList](#getabandoncartlist)
-    * [getAbandonCartsCSV](#getabandoncartscsv)
-    * [getAbandonCartDetail](#getabandoncartdetail)
-    * [createExportJob](#createexportjob)
-    * [getExportJobStatus](#getexportjobstatus)
-    * [getLogsList](#getlogslist)
-    * [searchLogs](#searchlogs)
+    * [fetchAndvalidateCartItems](#fetchandvalidatecartitems)
+    * [checkCartServiceability](#checkcartserviceability)
+    * [checkoutCart](#checkoutcart)
     
 
 * [Discount](#Discount)
@@ -553,6 +500,7 @@
     * [getSubscribersByCompany](#getsubscribersbycompany)
     * [registerSubscriberToEvent](#registersubscribertoevent)
     * [updateSubscriberConfig](#updatesubscriberconfig)
+    * [getSubscribersByExtensionId](#getsubscribersbyextensionid)
     * [getSubscriberById](#getsubscriberbyid)
     * [fetchAllEventConfigurations](#fetchalleventconfigurations)
     
@@ -1711,7 +1659,7 @@ Retreives ticket details of a company level ticket with ticket ID
 
 ```golang
 
-data, err := Lead.GetTicket(CompanyID, ID);
+data, err := Lead.GetTicket(CompanyID, TicketID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1720,7 +1668,7 @@ data, err := Lead.GetTicket(CompanyID, ID);
 | CompanyID | string | Company ID for which the data will be returned | 
 
 
-| ID | string | Tiket ID of the ticket to be fetched | 
+| TicketID | string | Tiket ID of the ticket to be fetched | 
 
 
 
@@ -1952,7 +1900,7 @@ Edits ticket details of a company level ticket
 
 ```golang
 
-data, err := Lead.EditTicket(CompanyID, ID, body);
+data, err := Lead.EditTicket(CompanyID, TicketID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -1961,7 +1909,7 @@ data, err := Lead.EditTicket(CompanyID, ID, body);
 | CompanyID | string | Company ID for ticket | 
 
 
-| ID | string | Ticket ID of ticket to be edited | 
+| TicketID | string | Ticket ID of ticket to be edited | 
 
 
 | body |  EditTicketPayload | "Request body" 
@@ -2194,7 +2142,7 @@ Retreives ticket details of a application level ticket
 
 ```golang
 
-data, err := Lead.GetTicket(CompanyID, ApplicationID, ID);
+data, err := Lead.GetTicket(CompanyID, ApplicationID, TicketID);
 ```
 
 | Argument  |  Type  | Description |
@@ -2206,7 +2154,7 @@ data, err := Lead.GetTicket(CompanyID, ApplicationID, ID);
 | ApplicationID | string | Application ID for which the data will be returned | 
 
 
-| ID | string | Tiket ID of the ticket to be fetched | 
+| TicketID | string | Tiket ID of the ticket to be fetched | 
 
 
 
@@ -2439,7 +2387,7 @@ Edits ticket details of a application level ticket
 
 ```golang
 
-data, err := Lead.EditTicket(CompanyID, ApplicationID, ID, body);
+data, err := Lead.EditTicket(CompanyID, ApplicationID, TicketID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -2451,7 +2399,7 @@ data, err := Lead.EditTicket(CompanyID, ApplicationID, ID, body);
 | ApplicationID | string | Application ID for ticket | 
 
 
-| ID | string | Ticket ID of ticket to be edited | 
+| TicketID | string | Ticket ID of ticket to be edited | 
 
 
 | body |  EditTicketPayload | "Request body" 
@@ -2685,7 +2633,7 @@ Create history for specific company level ticket
 
 ```golang
 
-data, err := Lead.CreateHistory(CompanyID, ID, body);
+data, err := Lead.CreateHistory(CompanyID, TicketID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -2694,7 +2642,7 @@ data, err := Lead.CreateHistory(CompanyID, ID, body);
 | CompanyID | string | Company ID for ticket | 
 
 
-| ID | string | Ticket ID for which history is created | 
+| TicketID | string | Ticket ID for which history is created | 
 
 
 | body |  TicketHistoryPayload | "Request body" 
@@ -2719,7 +2667,7 @@ Default
 {
   "value": {
     "_id": "601a9d52c26687d086c499ef",
-    "ticket_id": "43",
+    "ticket_id": "6012f38557751ee8fc162cf7",
     "type": "comment",
     "value": {
       "text": "d",
@@ -2771,7 +2719,7 @@ Gets history list for specific company level ticket
 
 ```golang
 
-data, err := Lead.GetTicketHistory(CompanyID, ID);
+data, err := Lead.GetTicketHistory(CompanyID, TicketID);
 ```
 
 | Argument  |  Type  | Description |
@@ -2780,7 +2728,7 @@ data, err := Lead.GetTicketHistory(CompanyID, ID);
 | CompanyID | string | Company ID for ticket | 
 
 
-| ID | string | Ticket ID for which history is to be fetched | 
+| TicketID | string | Ticket ID for which history is to be fetched | 
 
 
 
@@ -2806,7 +2754,7 @@ Default
     "docs": [
       {
         "_id": "602e5384204225eed5cadae7",
-        "ticket_id": "41",
+        "ticket_id": "602d2652ce284d0b008d5c97",
         "type": "comment",
         "value": {
           "text": "hello service",
@@ -2872,7 +2820,7 @@ Default
       },
       {
         "_id": "60372aa78a046d4d79c46e15",
-        "ticket_id": "41",
+        "ticket_id": "602d2652ce284d0b008d5c97",
         "type": "diff",
         "value": {
           "status": [
@@ -2955,153 +2903,12 @@ Default
 ---
 
 
-#### getFeedbacks
-Gets a list of feedback submitted against that ticket
-
-```golang
-
-data, err := Lead.GetFeedbacks(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company ID for ticket | 
-
-
-| ID | string | Ticket ID for which feedbacks are to be fetched | 
-
-
-
-Gets a list of feedback submitted against that ticket
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `TicketFeedbackList`
-
-
-*Examples:*
-
-
-Default
-```json
-{
-  "value": {
-    "items": [
-      {
-        "_id": "60c255bf00ecabfad19e9601",
-        "company_id": "1",
-        "ticket_id": "6095812876d2bf17143cb3b3",
-        "user": {
-          "_id": "5f8147abbd1a0a870f61f1a6",
-          "authenticated": true,
-          "user_id": "5f8147abbd1a0a870f61f1a6"
-        },
-        "category": "customers",
-        "response": {
-          "audio": 2,
-          "video": 6
-        },
-        "createdAt": "2021-06-10T18:11:11.349Z",
-        "updatedAt": "2021-06-10T18:11:11.349Z",
-        "__v": 0
-      }
-    ]
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### submitFeedback
-Submit a response for feeback form against that ticket
-
-```golang
-
-data, err := Lead.SubmitFeedback(CompanyID, ID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company ID for ticket | 
-
-
-| ID | string | Ticket ID for which feedback is to be submitted | 
-
-
-| body |  TicketFeedbackPayload | "Request body" 
-
-Submit a response for feeback form against that ticket
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `TicketFeedback`
-
-
-*Examples:*
-
-
-Default
-```json
-{
-  "value": {
-    "_id": "60c255bf00ecabfad19e9601",
-    "company_id": "1",
-    "ticket_id": "6095812876d2bf17143cb3b3",
-    "user": {
-      "_id": "5f8147abbd1a0a870f61f1a6",
-      "authenticated": true,
-      "user_id": "5f8147abbd1a0a870f61f1a6"
-    },
-    "category": "customers",
-    "response": {
-      "audio": 2,
-      "video": 6
-    },
-    "createdAt": "2021-06-10T18:11:11.349Z",
-    "updatedAt": "2021-06-10T18:11:11.349Z",
-    "__v": 0
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
 #### createHistory
 Create history for specific application level ticket
 
 ```golang
 
-data, err := Lead.CreateHistory(CompanyID, ApplicationID, ID, body);
+data, err := Lead.CreateHistory(CompanyID, ApplicationID, TicketID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -3113,7 +2920,7 @@ data, err := Lead.CreateHistory(CompanyID, ApplicationID, ID, body);
 | ApplicationID | string | Application ID for ticket | 
 
 
-| ID | string | Ticket ID for which history is created | 
+| TicketID | string | Ticket ID for which history is created | 
 
 
 | body |  TicketHistoryPayload | "Request body" 
@@ -3138,7 +2945,7 @@ Default
 {
   "value": {
     "_id": "601a9d52c26687d086c499ef",
-    "ticket_id": "41",
+    "ticket_id": "6012f38557751ee8fc162cf7",
     "type": "comment",
     "value": {
       "text": "d",
@@ -3190,7 +2997,7 @@ Gets history list for specific application level ticket
 
 ```golang
 
-data, err := Lead.GetTicketHistory(CompanyID, ApplicationID, ID);
+data, err := Lead.GetTicketHistory(CompanyID, ApplicationID, TicketID);
 ```
 
 | Argument  |  Type  | Description |
@@ -3202,7 +3009,7 @@ data, err := Lead.GetTicketHistory(CompanyID, ApplicationID, ID);
 | ApplicationID | string | Application ID for ticket | 
 
 
-| ID | string | Ticket ID for which history is to be fetched | 
+| TicketID | string | Ticket ID for which history is to be fetched | 
 
 
 
@@ -3228,7 +3035,7 @@ Default
     "docs": [
       {
         "_id": "602e5384204225eed5cadae7",
-        "ticket_id": "41",
+        "ticket_id": "602d2652ce284d0b008d5c97",
         "type": "comment",
         "value": {
           "text": "hello service",
@@ -3294,7 +3101,7 @@ Default
       },
       {
         "_id": "60372aa78a046d4d79c46e15",
-        "ticket_id": "41",
+        "ticket_id": "602d2652ce284d0b008d5c97",
         "type": "diff",
         "value": {
           "status": [
@@ -3879,59 +3686,6 @@ Get Token to join a specific Video Room using it's unqiue name
 
 ```golang
 
-data, err := Lead.GetTokenForVideoRoom(CompanyID, UniqueName);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id for video room | 
-
-
-| UniqueName | string | Unique name of video room | 
-
-
-
-Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `GetTokenForVideoRoomResponse`
-
-
-*Examples:*
-
-
-Default
-```json
-{
-  "value": {
-    "access_token": "your_token_to_the_room"
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getTokenForVideoRoom
-Get Token to join a specific Video Room using it's unqiue name
-
-```golang
-
 data, err := Lead.GetTokenForVideoRoom(CompanyID, ApplicationID, UniqueName);
 ```
 
@@ -3968,59 +3722,6 @@ Default
 {
   "value": {
     "access_token": "your_token_to_the_room"
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getVideoParticipants
-Get participants of a specific Video Room using it's unique name
-
-```golang
-
-data, err := Lead.GetVideoParticipants(CompanyID, UniqueName);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id for video room | 
-
-
-| UniqueName | string | Unique name of Video Room | 
-
-
-
-Get participants of a specific Video Room using it's unique name, this can be used to check if people are already there in the room and also to show their names.
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `GetParticipantsInsideVideoRoomResponse`
-
-
-*Examples:*
-
-
-Default
-```json
-{
-  "value": {
-    "participants": []
   }
 }
 ```
@@ -6805,6 +6506,217 @@ default
 ---
 
 
+#### addDataLoader
+Adds a data loader
+
+```golang
+
+data, err := Content.AddDataLoader(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
+
+
+| body |  DataLoaderSchema | "Request body" 
+
+Use this API to add data loader. This includes the data loader name, operationId, service name and its type (url/function) with corresponding value.
+
+*Success Response:*
+
+
+
+Success.
+
+
+Schema: `DataLoaderResponseSchema`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDataLoaders
+Get all the data loaders in an application
+
+```golang
+
+data, err := Content.GetDataLoaders(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
+
+
+
+Use this to get all data loaders of an application
+
+*Success Response:*
+
+
+
+Success. Refer `DataLoaderResponseSchema` for more details.
+
+
+Schema: `Array<DataLoaderResponseSchema>`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteDataLoader
+Delete data loader in application
+
+```golang
+
+data, err := Content.DeleteDataLoader(CompanyID, ApplicationID, DataLoaderID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
+
+
+| DataLoaderID | string | ID allotted to the data loader. | 
+
+
+
+Use this API to delete data loader.
+
+*Success Response:*
+
+
+
+Success.
+
+
+Schema: `DataLoaderResponseSchema`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### editDataLoader
+Edit a data loader by id
+
+```golang
+
+data, err := Content.EditDataLoader(CompanyID, ApplicationID, DataLoaderID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
+
+
+| DataLoaderID | string | ID allotted to the data loader. | 
+
+
+| body |  DataLoaderSchema | "Request body" 
+
+Use this API to edit the details of an existing data loader by its ID.
+
+*Success Response:*
+
+
+
+Success.
+
+
+Schema: `DataLoaderResponseSchema`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### selectDataLoader
+Select a data loader by id
+
+```golang
+
+data, err := Content.SelectDataLoader(CompanyID, ApplicationID, DataLoaderID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
+
+
+| DataLoaderID | string | ID allotted to the data loader. | 
+
+
+
+Use this API to select a data loader to be used in applications.
+
+*Success Response:*
+
+
+
+Success.
+
+
+Schema: `DataLoaderResponseSchema`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getFaqCategories
 Get a list of FAQ categories
 
@@ -8206,114 +8118,6 @@ default
 ---
 
 
-#### createPage
-Create a page
-
-```golang
-
-data, err := Content.CreatePage(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
-
-
-| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
-
-
-| body |  PageRequest | "Request body" 
-
-Use this API to create a custom page using a title, seo, publish status, feature image, tags, meta, etc.
-
-*Success Response:*
-
-
-
-Success. Refer `PageSchema` for more details.
-
-
-Schema: `PageSchema`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/PageResponse"
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPages
-Get a list of pages
-
-```golang
-
-data, err := Content.GetPages(CompanyID, ApplicationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
-
-
-| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-
-Use this API to retrieve a list of pages.
-
-*Success Response:*
-
-
-
-Success. Refer `PageGetResponse` for more details.
-
-
-Schema: `PageGetResponse`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/PageGetResponse"
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
 #### createPagePreview
 Create a page preview
 
@@ -8421,61 +8225,6 @@ default
 ---
 
 
-#### updatePage
-Update a page
-
-```golang
-
-data, err := Content.UpdatePage(CompanyID, ApplicationID, ID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
-
-
-| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
-
-
-| ID | string | ID allotted to the page. | 
-
-
-| body |  PageSchema | "Request body" 
-
-Use this API to edit the details of an existing page, such as its title, seo, publish status, feature image, tags, schedule, etc.
-
-*Success Response:*
-
-
-
-Success. Refer `PageSchema` for more details.
-
-
-Schema: `PageSchema`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/PageResponse"
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
 #### deletePage
 Delete a page
 
@@ -8530,12 +8279,12 @@ default
 ---
 
 
-#### getPageBySlug
-Get pages by component Id
+#### updatePathRedirectionRules
+Save path based redirection rules
 
 ```golang
 
-data, err := Content.GetPageBySlug(CompanyID, ApplicationID, Slug);
+data, err := Content.UpdatePathRedirectionRules(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -8547,29 +8296,67 @@ data, err := Content.GetPageBySlug(CompanyID, ApplicationID, Slug);
 | ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| Slug | string | A short, human-readable, URL-friendly identifier of a page. You can get slug value of a page from `getPages` API. | 
+| body |  PathMappingSchema | "Request body" 
 
-
-
-Use this API to retrieve the components of a page, such as its title, seo, publish status, feature image, tags, schedule, etc.
+Use this API to add, update or delete path-based redirection rules
 
 *Success Response:*
 
 
 
-Success. Returns a JSON object of components. Refer `PageSchema` for more details.
+Success. Refer `PathMappingSchema` for more details.
 
 
-Schema: `PageSchema`
+Schema: `PathMappingSchema`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPathRedirectionRules
+Get path based redirection rules
+
+```golang
+
+data, err := Content.GetPathRedirectionRules(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+
+
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
+
+
+
+Use this API to get path based redirection rules.
+
+*Success Response:*
+
+
+
+Success. Refer `PathMappingSchema` for more details.
+
+
+Schema: `PathMappingSchema`
 
 
 *Examples:*
 
 
-default
+Success
 ```json
 {
-  "$ref": "#/components/examples/PageResponse"
+  "$ref": "#/components/examples/PathMapping"
 }
 ```
 
@@ -9318,7 +9105,7 @@ Use this API to delete an existing tag.
 Success.
 
 
-Schema: `TagsSchema`
+Schema: `TagDeleteSuccessResponse`
 
 
 
@@ -9375,91 +9162,46 @@ Schema: `TagsSchema`
 ---
 
 
-
----
-
-
-## Assignment
-
-
-#### createPickupLocation
-
+#### createPage
+Create a page
 
 ```golang
 
-data, err := Assignment.CreatePickupLocation(CompanyID, ApplicationID, body);
+data, err := Content.CreatePage(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application Id | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| body |  PickupPointSchema | "Request body" 
+| body |  PageRequest | "Request body" 
 
-Create a new Pickup point for an application.
-
+Use this API to create a custom page using a title, seo, publish status, feature image, tags, meta, etc.
 
 *Success Response:*
 
 
 
-Success Response - Store Updated
+Success. Refer `PageSchema` for more details.
 
 
-Schema: `Success`
+Schema: `PageSchema`
 
 
+*Examples:*
 
 
-
-
-
-
-
----
-
-
-#### getPickupLocation
-
-
-```golang
-
-data, err := Assignment.GetPickupLocation(CompanyID, ApplicationID, xQuery);
+default
+```json
+{
+  "$ref": "#/components/examples/PageResponse"
+}
 ```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-
-
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-| xQuery | struct | Includes properties such as `Q`, `PageNo`, `PageSize`
-
-
-Update list of pickup points for an application.
-
-
-*Success Response:*
-
-
-
-Success Response
-
-
-Schema: `PickupPointResponse`
 
 
 
@@ -9472,41 +9214,50 @@ Schema: `PickupPointResponse`
 ---
 
 
-#### updatePickupLocation
-
+#### getPages
+Get a list of pages
 
 ```golang
 
-data, err := Assignment.UpdatePickupLocation(ID, CompanyID, ApplicationID, body);
+data, err := Content.GetPages(CompanyID, ApplicationID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ID | float64 | Pickup Point ID | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| CompanyID | float64 | Company Id | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| ApplicationID | string | Application Id | 
 
 
-| body |  PickupPointSchema | "Request body" 
 
-Update Pickup Point for an application. Pickup Point once created
-can be updated using this API. 'x-application-id'm and request body are required to trigger
-a successful update.
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
 
+
+Use this API to retrieve a list of pages.
 
 *Success Response:*
 
 
 
-Success Response - Store Updated
+Success. Refer `PageGetResponse` for more details.
 
 
-Schema: `Success`
+Schema: `PageGetResponse`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "$ref": "#/components/examples/PageGetResponse"
+}
+```
 
 
 
@@ -9519,39 +9270,49 @@ Schema: `Success`
 ---
 
 
-#### getPickupLocationById
-
+#### updatePage
+Update a page
 
 ```golang
 
-data, err := Assignment.GetPickupLocationById(ID, CompanyID, ApplicationID);
+data, err := Content.UpdatePage(CompanyID, ApplicationID, ID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ID | float64 | Pickup Point Id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| CompanyID | float64 | Company Id | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| ApplicationID | string | Application Id | 
+| ID | string | ID allotted to the page. | 
 
 
+| body |  PageSchema | "Request body" 
 
-This API returns Pickup point data for an id. Returns not found if no data exists for the
-store id passed.
-
+Use this API to edit the details of an existing page, such as its title, seo, publish status, feature image, tags, schedule, etc.
 
 *Success Response:*
 
 
 
-Success Response
+Success. Refer `PageSchema` for more details.
 
 
-Schema: `PickupPointSchema`
+Schema: `PageSchema`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "$ref": "#/components/examples/PageResponse"
+}
+```
 
 
 
@@ -9564,583 +9325,48 @@ Schema: `PickupPointSchema`
 ---
 
 
-#### createPickupConfiguration
-
+#### getPageBySlug
+Get pages by component Id
 
 ```golang
 
-data, err := Assignment.CreatePickupConfiguration(CompanyID, ApplicationID, body);
+data, err := Content.GetPageBySlug(CompanyID, ApplicationID, Slug);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Application Id | 
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
 
-| body |  PickupConfiguration | "Request body" 
+| Slug | string | A short, human-readable, URL-friendly identifier of a page. You can get slug value of a page from `getPages` API. | 
 
-Create a new pickup configuration for an application id. Only one configuration can be
-created per application id.
 
+
+Use this API to retrieve the components of a page, such as its title, seo, publish status, feature image, tags, schedule, etc.
 
 *Success Response:*
 
 
 
-Success Response - Store Updated
+Success. Returns a JSON object of components. Refer `PageSchema` for more details.
 
 
-Schema: `Success`
+Schema: `PageSchema`
 
 
+*Examples:*
 
 
-
-
-
-
-
----
-
-
-#### getPickupConfiguration
-
-
-```golang
-
-data, err := Assignment.GetPickupConfiguration(CompanyID, ApplicationID);
+default
+```json
+{
+  "$ref": "#/components/examples/PageResponse"
+}
 ```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-
-Let pickup configuration for an application. z-application-id is required in
-the header to fetch the data.
-
-
-*Success Response:*
-
-
-
-Success Response
-
-
-Schema: `PickupResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAllocationConfiguration
-
-
-```golang
-
-data, err := Assignment.GetAllocationConfiguration(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-
-Get Shipping configuration for an application. Returns the global shipping configuration
-including shipping priority and default strategy, etc. Every application can have one set of
-configuration each. The endpoint requires an application id to get the data.
-
-
-*Success Response:*
-
-
-
-Success Response
-
-
-Schema: `ShippingResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createAllocationConfiguration
-
-
-```golang
-
-data, err := Assignment.CreateAllocationConfiguration(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| body |  ShippingSchema | "Request body" 
-
-Create a new Shipping configuration for an application The configuration is for
-all the stores under an application. There can be only one configuration for an
-application i.e, for an application configuration can be created only once.
-
-
-*Success Response:*
-
-
-
-Success Response - Store Updated
-
-
-Schema: `Success`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateAllocationConfiguration
-
-
-```golang
-
-data, err := Assignment.UpdateAllocationConfiguration(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| body |  ShippingSchema | "Request body" 
-
-Update Shipping configuration for an application. Application configuration once created
-can be updated using this API. 'x-application-id'm and request body are required to trigger
-a successful update.
-
-
-*Success Response:*
-
-
-
-Success Response - Store Updated
-
-
-Schema: `Success`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAllocationLocations
-
-
-```golang
-
-data, err := Assignment.GetAllocationLocations(CompanyID, ApplicationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-
-
-
-
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-| xQuery | struct | Includes properties such as `Q`, `PageNo`, `PageSize`, `Type`
-
-
-List Stores of an application. Two types of stores are listed,
-some having allocation types as standard and others, advanced.
-API has support for pagination, filter by type and search by name.
-
-
-*Success Response:*
-
-
-
-Success Response
-
-
-Schema: `StoreListResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAllocationLocationById
-
-
-```golang
-
-data, err := Assignment.GetAllocationLocationById(ID, CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ID | float64 | Store Id | 
-
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-
-This API returns store data for an id. Returns not found if no data exists for the
-store id passed. The data is returned from sixspeed database which includes only the
-shipping configuration of the stores including store id and app id.
-
-
-*Success Response:*
-
-
-
-Success Response
-
-
-Schema: `StoreResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateAllocationLocation
-
-
-```golang
-
-data, err := Assignment.UpdateAllocationLocation(ID, CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ID | float64 | Store Id | 
-
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| body |  StoreSchema | "Request body" 
-
-A store configuration once created can be updated via this API. Store id in request params
-and udpated request body are required to successfully update the store data.
-
-
-*Success Response:*
-
-
-
-Success Response - Store Updated
-
-
-Schema: `Success`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createAllocationLocation
-
-
-```golang
-
-data, err := Assignment.CreateAllocationLocation(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| body |  StoreSchema | "Request body" 
-
-Create a new store shipping configuratiion. The configuration is stored into the
-sixspeed database. One one store data can be created for one store id. Ther can be one
-default configuration and multiple non-default ones. The default is not binded with product
-tags while others are required to be.
-
-
-*Success Response:*
-
-
-
-Success Response - Store Updated
-
-
-Schema: `Success`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getDestinationZones
-
-
-```golang
-
-data, err := Assignment.GetDestinationZones(CompanyID, ApplicationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-
-
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-| xQuery | struct | Includes properties such as `Q`, `PageNo`, `PageSize`
-
-
-Get a list of zones created, where every zone has a unique name and id. They can be
-of three different types, radius, pincode and country.
-
-
-*Success Response:*
-
-
-
-Success Response
-
-
-Schema: `ZoneListResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### postDestinationZone
-
-
-```golang
-
-data, err := Assignment.PostDestinationZone(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| body |  ZoneSchema | "Request body" 
-
-This API lets you create a zone which can be used further be mapped with store
-configuration rules to defined a shipping rule. Either of the three details need to
-be passed, zone_detail, pincode and region.
-
-
-*Success Response:*
-
-
-
-Success Response - Zone Created
-
-
-Schema: `Success`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getDestinationZoneById
-
-
-```golang
-
-data, err := Assignment.GetDestinationZoneById(ID, CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ID | float64 | Store Id | 
-
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-
-Returns zone data for the specified zone id. Id is the required parameter and returns
-not found if no data is found for the passed zone id.
-
-
-*Success Response:*
-
-
-
-Success Response
-
-
-Schema: `ZoneSchema`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateDestinationZone
-
-
-```golang
-
-data, err := Assignment.UpdateDestinationZone(ID, CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ID | float64 | Store Id | 
-
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| body |  ZoneSchema | "Request body" 
-
-Zone once created can be updated using this API. Zone id and request body are the required
-data to update a zone.
-
-
-*Success Response:*
-
-
-
-Success Response - Zone Updated
-
-
-Schema: `Success`
 
 
 
@@ -13106,7 +12332,7 @@ List Subscription Payment Method
 
 ```golang
 
-data, err := Payment.GetSubscriptionPaymentMethod(CompanyID);
+data, err := Payment.GetSubscriptionPaymentMethod(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -13114,6 +12340,9 @@ data, err := Payment.GetSubscriptionPaymentMethod(CompanyID);
 
 | CompanyID | float64 | Company Id | 
 
+
+
+| xQuery | struct | Includes properties such as `UniqueExternalID`
 
 
 Get all  Subscription  Payment Method
@@ -13422,6 +12651,47 @@ Schema: `OrderBeneficiaryResponse`
 ---
 
 
+#### confirmPayment
+Confirm payment after successful payment from payment gateway
+
+```golang
+
+data, err := Payment.ConfirmPayment(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| body |  PaymentConfirmationRequest | "Request body" 
+
+Use this API to confirm payment after payment gateway accepted payment.
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `PaymentConfirmationResponseSchema` for more details.
+
+
+Schema: `PaymentConfirmationResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ---
 
@@ -13585,6 +12855,44 @@ Schema: `Object`
 ---
 
 
+#### ShipmentBagsCanBreak
+Decides if Shipment bags can break
+
+```golang
+
+data, err := Order.ShipmentBagsCanBreak(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+| body |  CanBreakRequestBody | "Request body" 
+
+Decides if Shipment bags can break
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `CanBreakResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getOrdersByCompanyId
 Get Orders for company based on Company Id
 
@@ -13622,7 +12930,13 @@ data, err := Order.GetOrdersByCompanyId(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `Q`, `Stage`, `SalesChannels`, `OrderID`, `Stores`, `Status`, `ShortenUrls`, `FilterType`
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `IsPrioritySort`, `LockStatus`, `Q`, `Stage`, `SalesChannels`, `OrderID`, `Stores`, `Status`, `Dp`, `ShortenUrls`, `FilterType`
 
 
 Get Orders
@@ -16140,7 +15454,7 @@ data, err := Catalog.ListProductTemplate(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `Departments`
+| xQuery | struct | Includes properties such as `Department`
 
 
 Allows you to list all product templates, also can filter by department
@@ -16673,7 +15987,9 @@ data, err := Catalog.GetProducts(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `BrandIds`, `CategoryIds`, `ItemIds`, `DepartmentIds`, `ItemCode`, `Q`, `PageNo`, `PageSize`
+
+
+| xQuery | struct | Includes properties such as `BrandIds`, `CategoryIds`, `ItemIds`, `DepartmentIds`, `ItemCode`, `Q`, `Tags`, `PageNo`, `PageSize`
 
 
 This API gets meta associated to products.
@@ -16799,9 +16115,7 @@ data, err := Catalog.GetProduct(CompanyID, ItemID, xQuery);
 
 
 
-
-
-| xQuery | struct | Includes properties such as `ItemCode`, `BrandUID`, `UID`
+| xQuery | struct | Includes properties such as `ItemCode`, `BrandUID`
 
 
 This API helps to get data associated to a particular product.
@@ -17071,22 +16385,22 @@ Schema: `SuccessResponse`
 ---
 
 
-#### getCompanyTags
+#### getProductTags
 Get a list of all tags associated with company.
 
 ```golang
 
-data, err := Catalog.GetCompanyTags(CompanyID);
+data, err := Catalog.GetProductTags(CompanyID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id of the product size. | 
+| CompanyID | float64 | Company Id for which tags to be fetched. | 
 
 
 
-This API helps to get tags data associated to a particular copmpany.
+This API helps to get tags data associated to a particular company.
 
 *Success Response:*
 
@@ -17300,7 +16614,9 @@ data, err := Catalog.GetInventoryBySize(CompanyID, ItemID, Size, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`, `Sellable`
 
 
 This API allows get Inventory data for particular company grouped by size and store.
@@ -18062,7 +17378,9 @@ data, err := Catalog.GetAppicationProducts(CompanyID, ApplicationID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `Q`, `F`, `Filters`, `SortOn`, `PageID`, `PageSize`, `PageNo`, `PageType`
+
+
+| xQuery | struct | Includes properties such as `Q`, `F`, `Filters`, `SortOn`, `PageID`, `PageSize`, `PageNo`, `PageType`, `ItemIds`
 
 
 List all the products associated with a brand, collection or category in a requested sort order. The API additionally supports arbitrary search queries that may refer the name of any product, brand, category or collection. If successful, returns a paginated list of products specified in `ApplicationProductListingResponse`
@@ -18118,6 +17436,99 @@ The Product object. See example below or refer `ProductDetail` for details.
 
 
 Schema: `ProductDetail`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAppProducts
+Get applicationwise products
+
+```golang
+
+data, err := Catalog.GetAppProducts(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `BrandIds`, `CategoryIds`, `DepartmentIds`, `Tags`, `PageNo`, `PageSize`, `Q`
+
+
+Products are the core resource of an application. Products can be associated by categories, collections, brands and more. If successful, returns a Product resource in the response body specified in `ApplicationProductListingResponseDatabasePowered`
+
+*Success Response:*
+
+
+
+The Product object. See example below or refer `ApplicationProductListingResponseDatabasePowered` for details.
+
+
+Schema: `ProductListingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOptimalLocations
+Location Reassignment
+
+```golang
+
+data, err := Catalog.GetOptimalLocations(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company inside which the location is to be created. | 
+
+
+| body |  AssignStore | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `StoreAssignResponse`
 
 
 
@@ -18249,46 +17660,6 @@ Schema: `MetricsSerializer`
 ---
 
 
-#### getBrand
-Get a single brand.
-
-```golang
-
-data, err := CompanyProfile.GetBrand(CompanyID, BrandID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to brand that is to be viewed. | 
-
-
-| BrandID | string | Id of the brand to be viewed. | 
-
-
-
-This API helps to get data associated to a particular brand.
-
-*Success Response:*
-
-
-
-Brand object. See example below or refer `GetBrandResponseSerializer` for details
-
-
-Schema: `GetBrandResponseSerializer`
-
-
-
-
-
-
-
-
-
----
-
-
 #### editBrand
 Edit a brand.
 
@@ -18318,6 +17689,46 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getBrand
+Get a single brand.
+
+```golang
+
+data, err := CompanyProfile.GetBrand(CompanyID, BrandID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to brand that is to be viewed. | 
+
+
+| BrandID | string | Id of the brand to be viewed. | 
+
+
+
+This API helps to get data associated to a particular brand.
+
+*Success Response:*
+
+
+
+Brand object. See example below or refer `GetBrandResponseSerializer` for details
+
+
+Schema: `GetBrandResponseSerializer`
 
 
 
@@ -18423,7 +17834,9 @@ data, err := CompanyProfile.GetBrands(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`
 
 
 This API helps to get view brands associated to a particular company.
@@ -18534,46 +17947,6 @@ Schema: `LocationListSerializer`
 ---
 
 
-#### getLocationDetail
-Get details of a specific location.
-
-```golang
-
-data, err := CompanyProfile.GetLocationDetail(CompanyID, LocationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company inside which the location lies. | 
-
-
-| LocationID | string | Id of the location which you want to view. | 
-
-
-
-This API helps to get data associated to a specific location.
-
-*Success Response:*
-
-
-
-Brand object. See example below or refer `GetLocationSerializer` for details
-
-
-Schema: `GetLocationSerializer`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateLocation
 Edit a location asscoiated to a company.
 
@@ -18603,6 +17976,46 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getLocationDetail
+Get details of a specific location.
+
+```golang
+
+data, err := CompanyProfile.GetLocationDetail(CompanyID, LocationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company inside which the location lies. | 
+
+
+| LocationID | string | Id of the location which you want to view. | 
+
+
+
+This API helps to get data associated to a specific location.
+
+*Success Response:*
+
+
+
+Brand object. See example below or refer `GetLocationSerializer` for details
+
+
+Schema: `GetLocationSerializer`
 
 
 
@@ -19328,343 +18741,6 @@ Success
 
 
 Schema: `ShortLinkRes`
-
-
-
-
-
-
-
-
-
----
-
-
-
----
-
-
-## Inventory
-
-
-#### getJobsByCompany
-Get Job Configs For A Company
-
-```golang
-
-data, err := Inventory.GetJobsByCompany(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-
-REST Endpoint that returns all job configs for a company
-
-*Success Response:*
-
-
-
-Successful operation
-
-
-Schema: `ResponseEnvelopeListJobConfigRawDTO`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateJob
-Updates An Existing Job Config
-
-```golang
-
-data, err := Inventory.UpdateJob(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| body |  JobConfigDTO | "Request body" 
-
-REST Endpoint that updates a job config
-
-*Success Response:*
-
-
-
-Job Config Updated Successfully
-
-
-Schema: `ResponseEnvelopeString`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createJob
-Creates A New Job Config
-
-```golang
-
-data, err := Inventory.CreateJob(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| body |  JobConfigDTO | "Request body" 
-
-REST Endpoint that creates a new job config
-
-*Success Response:*
-
-
-
-Job Config Created Successfully
-
-
-Schema: `ResponseEnvelopeString`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getJobByCompanyAndIntegration
-Get Job Configs By Company And Integration
-
-```golang
-
-data, err := Inventory.GetJobByCompanyAndIntegration(CompanyID, IntegrationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| IntegrationID | string | Integration Id | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-
-REST Endpoint that returns all job configs by company And integration
-
-*Success Response:*
-
-
-
-Successful operation
-
-
-Schema: `ResponseEnvelopeListJobConfigDTO`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getJobConfigDefaults
-Get Job Configs Defaults
-
-```golang
-
-data, err := Inventory.GetJobConfigDefaults(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-
-REST Endpoint that returns default fields job configs by company And integration
-
-*Success Response:*
-
-
-
-Successful operation
-
-
-Schema: `ResponseEnvelopeJobConfigDTO`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getJobByCode
-Get Job Config By Code
-
-```golang
-
-data, err := Inventory.GetJobByCode(CompanyID, Code);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| Code | string | Job Code | 
-
-
-
-REST Endpoint that returns job config by code
-
-*Success Response:*
-
-
-
-Successful operation
-
-
-Schema: `ResponseEnvelopeJobConfigDTO`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getJobCodeMetrics
-Get Job Metrics
-
-```golang
-
-data, err := Inventory.GetJobCodeMetrics(CompanyID, Code, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| Code | string | Code | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-
-REST Endpoint that returns Inventory Run History For A Job Code
-
-*Success Response:*
-
-
-
-Successful operation
-
-
-Schema: `ResponseEnvelopeJobMetricsDto`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getJobCodesByCompanyAndIntegration
-Get Job Codes By Company And Integration
-
-```golang
-
-data, err := Inventory.GetJobCodesByCompanyAndIntegration(CompanyID, IntegrationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| IntegrationID | string | Integration Id | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-
-REST Endpoint that returns all job codes by company And integration
-
-*Success Response:*
-
-
-
-Successful operation
-
-
-Schema: `ResponseEnvelopeListJobConfigListDTO`
 
 
 
@@ -20431,6 +19507,46 @@ Schema: `AppSupportedCurrency`
 ---
 
 
+#### getAppSupportedCurrency
+Get currencies enabled in the application
+
+```golang
+
+data, err := Configuration.GetAppSupportedCurrency(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current application id | 
+
+
+
+Use this API to get a list of currencies allowed in the current application. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `AppCurrencyResponse` for more details.
+
+
+Schema: `AppCurrencyResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getOrderingStoresByFilter
 Get ordering store by filter
 
@@ -20506,6 +19622,53 @@ Success
 
 
 Schema: `DeploymentMeta`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getStaffOrderingStores
+Get deployment stores
+
+```golang
+
+data, err := Configuration.GetStaffOrderingStores(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current application id | 
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`
+
+
+Use this API to retrieve the details of all stores access given to the staff member (the selling locations where the application will be utilized for placing orders).
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `OrderingStoresResponse` for more details.
+
+
+Schema: `OrderingStoresResponse`
 
 
 
@@ -21143,6 +20306,50 @@ Schema: `IntegrationConfigResponse`
 ---
 
 
+#### updateLevelIntegration
+Update a store level opt-in for integration
+
+```golang
+
+data, err := Configuration.UpdateLevelIntegration(CompanyID, ID, Level, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ID | string | Integration id | 
+
+
+| Level | string | Integration level | 
+
+
+| body |  UpdateIntegrationLevelRequest | "Request body" 
+
+Update a store level opt-in for integration
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `IntegrationLevel`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getIntegrationByLevelId
 Get level data for integration
 
@@ -21168,6 +20375,53 @@ data, err := Configuration.GetIntegrationByLevelId(CompanyID, ID, Level, UID);
 
 
 Get level data for integration
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `IntegrationLevel`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateLevelUidIntegration
+Update a store level opt-in for integration
+
+```golang
+
+data, err := Configuration.UpdateLevelUidIntegration(CompanyID, ID, Level, UID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ID | string | Integration id | 
+
+
+| Level | string | Integration level | 
+
+
+| UID | float64 | Integration level uid | 
+
+
+| body |  IntegrationLevel | "Request body" 
+
+Update a store level opt-in for integration
 
 *Success Response:*
 
@@ -21799,46 +21053,35 @@ Coupon schedule updated successfully
 ---
 
 
-
----
-
-
-## Rewards
-
-
-#### getGiveaways
-List of giveaways of the current application.
+#### fetchAndvalidateCartItems
+Fetch Cart Details
 
 ```golang
 
-data, err := Rewards.GetGiveaways(CompanyID, ApplicationID, xQuery);
+data, err := Cart.FetchAndvalidateCartItems(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | company id | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | application id | 
+| ApplicationID | string | Current Application _id | 
 
 
+| body |  OpenapiCartDetailsRequest | "Request body" 
 
-
-
-| xQuery | struct | Includes properties such as `PageID`, `PageSize`
-
-
-List of giveaways of the current application.
+Get all the details of cart for a list of provided `cart_items`
 
 *Success Response:*
 
 
 
-ok
+Cart details with breakup
 
 
-Schema: `GiveawayResponse`
+Schema: `OpenapiCartDetailsResponse`
 
 
 
@@ -21851,35 +21094,565 @@ Schema: `GiveawayResponse`
 ---
 
 
-#### createGiveaway
-Adds a new giveaway.
+#### checkCartServiceability
+Check Pincode Serviceability
 
 ```golang
 
-data, err := Rewards.CreateGiveaway(CompanyID, ApplicationID, body);
+data, err := Cart.CheckCartServiceability(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | company id | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | application id | 
+| ApplicationID | string | Current Application _id | 
 
 
-| body |  Giveaway | "Request body" 
+| body |  OpenApiCartServiceabilityRequest | "Request body" 
 
-Adds a new giveaway.
+Check Pincode serviceability for cart items provided in `cart_items` and address pincode in `shipping_address`
 
 *Success Response:*
 
 
 
-ok
+Cart details with pincode validity information at item level
 
 
-Schema: `Giveaway`
+Schema: `OpenApiCartServiceabilityResponse`
+
+
+*Examples:*
+
+
+Valid pincode
+```json
+{
+  "value": {
+    "items": [
+      {
+        "quantity": 1,
+        "message": "",
+        "coupon_message": "",
+        "product": {
+          "type": "product",
+          "uid": 803140,
+          "name": "Green Solid T-Shirt",
+          "slug": "celio-green-solid-t-shirt-803140-dd9e2c",
+          "brand": {
+            "uid": 44,
+            "name": "celio"
+          },
+          "categories": [
+            {
+              "uid": 192,
+              "name": "T-Shirts"
+            }
+          ],
+          "images": [
+            {
+              "aspect_ratio": "16:25",
+              "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/44_NEMIEL@GREENBRITISH/1_1548161273344.jpg",
+              "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/44_NEMIEL@GREENBRITISH/1_1548161273344.jpg"
+            }
+          ],
+          "action": {
+            "type": "product",
+            "url": "https://api.addsale.com/platform/content/v1/products/celio-green-solid-t-shirt-803140-dd9e2c/",
+            "query": {
+              "product_slug": [
+                "celio-green-solid-t-shirt-803140-dd9e2c"
+              ]
+            }
+          }
+        },
+        "article": {
+          "type": "article",
+          "uid": "25_44_A7050_NEMIEL@GREENBRITISH_S",
+          "size": "S",
+          "seller": {
+            "uid": 25,
+            "name": "CELIO FUTURE FASHION PRIVATE LIMITED"
+          },
+          "store": {
+            "uid": 1486,
+            "name": "Forum Mall"
+          },
+          "quantity": 1,
+          "price": {
+            "base": {
+              "marked": 1299,
+              "effective": 649.5,
+              "currency_code": "INR"
+            },
+            "converted": {
+              "marked": 1299,
+              "effective": 649.5,
+              "currency_code": "INR"
+            }
+          }
+        },
+        "key": "803140_S",
+        "discount": "50% OFF",
+        "price": {
+          "base": {
+            "add_on": 0,
+            "marked": 1299,
+            "effective": 649.5,
+            "selling": 649.5,
+            "currency_code": "INR"
+          },
+          "converted": {
+            "add_on": 0,
+            "marked": 1299,
+            "effective": 649.5,
+            "selling": 649.5,
+            "currency_code": "INR"
+          }
+        },
+        "availability": {
+          "sizes": [
+            "L",
+            "XL",
+            "M",
+            "S"
+          ],
+          "other_store_quantity": 0,
+          "out_of_stock": false,
+          "deliverable": true,
+          "is_valid": true,
+          "delivery_promise": {
+            "timestamp": {
+              "min": 1605306343,
+              "max": 1605468343
+            },
+            "formatted": {
+              "min": "Sat, 14 Nov",
+              "max": "Mon, 16 Nov"
+            }
+          },
+          "available_sizes": [
+            {
+              "is_available": true,
+              "display": "L",
+              "value": "L"
+            },
+            {
+              "is_available": true,
+              "display": "XXL",
+              "value": "XXL"
+            },
+            {
+              "is_available": true,
+              "display": "XL",
+              "value": "XL"
+            },
+            {
+              "is_available": true,
+              "display": "M",
+              "value": "M"
+            },
+            {
+              "is_available": true,
+              "display": "S",
+              "value": "S"
+            },
+            {
+              "is_available": false,
+              "display": "30",
+              "value": "30"
+            }
+          ]
+        },
+        "bulk_offer": {}
+      },
+      {
+        "quantity": 1,
+        "message": "Out of stock. Please remove item",
+        "coupon_message": "",
+        "product": {
+          "type": "product",
+          "uid": 803140,
+          "name": "Green Solid T-Shirt",
+          "slug": "celio-green-solid-t-shirt-803140-dd9e2c",
+          "brand": {
+            "uid": 44,
+            "name": "celio"
+          },
+          "categories": [
+            {
+              "uid": 192,
+              "name": "T-Shirts"
+            }
+          ],
+          "images": [
+            {
+              "aspect_ratio": "16:25",
+              "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/44_NEMIEL@GREENBRITISH/1_1548161273344.jpg",
+              "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/44_NEMIEL@GREENBRITISH/1_1548161273344.jpg"
+            }
+          ],
+          "action": {
+            "type": "product",
+            "url": "https://api.addsale.com/platform/content/v1/products/celio-green-solid-t-shirt-803140-dd9e2c/",
+            "query": {
+              "product_slug": [
+                "celio-green-solid-t-shirt-803140-dd9e2c"
+              ]
+            }
+          }
+        },
+        "article": {},
+        "key": "803140_S",
+        "discount": "",
+        "price": {
+          "base": {
+            "add_on": 0,
+            "marked": 1299,
+            "effective": 1299,
+            "selling": 1299,
+            "currency_code": "INR"
+          },
+          "converted": {
+            "add_on": 0,
+            "marked": 1299,
+            "effective": 1299,
+            "selling": 1299,
+            "currency_code": "INR"
+          }
+        },
+        "availability": {
+          "sizes": [
+            "L",
+            "XXL",
+            "XL",
+            "M",
+            "S"
+          ],
+          "other_store_quantity": 0,
+          "out_of_stock": true,
+          "deliverable": false,
+          "is_valid": false,
+          "delivery_promise": {
+            "timestamp": {
+              "min": 1605306343,
+              "max": 1605468343
+            },
+            "formatted": {
+              "min": "Sat, 14 Nov",
+              "max": "Mon, 16 Nov"
+            }
+          },
+          "available_sizes": [
+            {
+              "is_available": true,
+              "display": "L",
+              "value": "L"
+            },
+            {
+              "is_available": true,
+              "display": "XXL",
+              "value": "XXL"
+            },
+            {
+              "is_available": true,
+              "display": "XL",
+              "value": "XL"
+            },
+            {
+              "is_available": true,
+              "display": "M",
+              "value": "M"
+            },
+            {
+              "is_available": true,
+              "display": "S",
+              "value": "S"
+            },
+            {
+              "is_available": false,
+              "display": "30",
+              "value": "30"
+            }
+          ]
+        },
+        "bulk_offer": {}
+      }
+    ],
+    "delivery_promise": {
+      "timestamp": {
+        "min": 1605306343,
+        "max": 1605468343
+      },
+      "formatted": {
+        "min": "Sat, 14 Nov",
+        "max": "Mon, 16 Nov"
+      }
+    },
+    "is_valid": true
+  }
+}
+```
+
+Invalid pincode
+```json
+{
+  "value": {
+    "message": "All of the items in your cart are not deliverable to 800108",
+    "is_valid": false,
+    "items": [
+      {
+        "discount": "15% OFF",
+        "price": {
+          "base": {
+            "add_on": 0,
+            "marked": 2195,
+            "effective": 1866,
+            "selling": 1866,
+            "currency_code": "INR"
+          },
+          "converted": {
+            "add_on": 0,
+            "marked": 2195,
+            "effective": 1866,
+            "selling": 1866,
+            "currency_code": "INR"
+          }
+        },
+        "product": {
+          "type": "product",
+          "uid": 876245,
+          "name": "Brown Sandals",
+          "slug": "red-chief-brown-sandals-876245-c92507",
+          "brand": {
+            "uid": 433,
+            "name": ""
+          },
+          "categories": [
+            {
+              "uid": 176,
+              "name": ""
+            }
+          ],
+          "images": [
+            {
+              "aspect_ratio": "16:25",
+              "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/433_RC330004/1_1564147181287.jpg",
+              "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/433_RC330004/1_1564147181287.jpg"
+            }
+          ],
+          "action": {
+            "type": "product",
+            "url": "https://api.addsale.com/platform/content/v1/products/red-chief-brown-sandals-876245-c92507/",
+            "query": {
+              "product_slug": [
+                "red-chief-brown-sandals-876245-c92507"
+              ]
+            }
+          },
+          "item_code": "RC330004"
+        },
+        "bulk_offer": {},
+        "key": "876245_6",
+        "message": "We are not delivering to 800108",
+        "delivery_promise": null,
+        "coupon_message": "",
+        "availability": {
+          "sizes": [
+            "7",
+            "6",
+            "10",
+            "8"
+          ],
+          "other_store_quantity": 21,
+          "out_of_stock": false,
+          "deliverable": false,
+          "is_valid": true,
+          "available_sizes": [
+            {
+              "is_available": false,
+              "display": "9",
+              "value": "9"
+            },
+            {
+              "is_available": true,
+              "display": "10",
+              "value": "10"
+            },
+            {
+              "is_available": true,
+              "display": "6",
+              "value": "6"
+            },
+            {
+              "is_available": true,
+              "display": "7",
+              "value": "7"
+            },
+            {
+              "is_available": true,
+              "display": "8",
+              "value": "8"
+            }
+          ]
+        },
+        "quantity": 1,
+        "article": {
+          "type": "article",
+          "uid": "304_433_LGPL30402_RC330004_6",
+          "size": "6",
+          "seller": {
+            "uid": 304,
+            "name": "LEAYAN GLOBAL PVT. LTD."
+          },
+          "store": {
+            "uid": 9767,
+            "name": "Udyog Kunj, Kanpur"
+          },
+          "quantity": 3,
+          "price": {
+            "base": {
+              "marked": 2195,
+              "effective": 1866,
+              "currency_code": "INR"
+            },
+            "converted": {
+              "marked": 2195,
+              "effective": 1866,
+              "currency_code": "INR"
+            }
+          }
+        }
+      },
+      {
+        "discount": "15% OFF",
+        "price": {
+          "base": {
+            "add_on": 0,
+            "marked": 2195,
+            "effective": 1866,
+            "selling": 1866,
+            "currency_code": "INR"
+          },
+          "converted": {
+            "add_on": 0,
+            "marked": 2195,
+            "effective": 1866,
+            "selling": 1866,
+            "currency_code": "INR"
+          }
+        },
+        "product": {
+          "type": "product",
+          "uid": 876245,
+          "name": "Brown Sandals",
+          "slug": "red-chief-brown-sandals-876245-c92507",
+          "brand": {
+            "uid": 433,
+            "name": ""
+          },
+          "categories": [
+            {
+              "uid": 176,
+              "name": ""
+            }
+          ],
+          "images": [
+            {
+              "aspect_ratio": "16:25",
+              "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/433_RC330004/1_1564147181287.jpg",
+              "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/433_RC330004/1_1564147181287.jpg"
+            }
+          ],
+          "action": {
+            "type": "product",
+            "url": "https://api.addsale.com/platform/content/v1/products/red-chief-brown-sandals-876245-c92507/",
+            "query": {
+              "product_slug": [
+                "red-chief-brown-sandals-876245-c92507"
+              ]
+            }
+          },
+          "item_code": "RC330004"
+        },
+        "bulk_offer": {},
+        "key": "876245_6",
+        "message": "We are not delivering to 800108",
+        "coupon_message": "",
+        "availability": {
+          "sizes": [
+            "7",
+            "6",
+            "10",
+            "8"
+          ],
+          "other_store_quantity": 21,
+          "out_of_stock": false,
+          "deliverable": false,
+          "is_valid": true,
+          "available_sizes": [
+            {
+              "is_available": false,
+              "display": "9",
+              "value": "9"
+            },
+            {
+              "is_available": true,
+              "display": "10",
+              "value": "10"
+            },
+            {
+              "is_available": true,
+              "display": "6",
+              "value": "6"
+            },
+            {
+              "is_available": true,
+              "display": "7",
+              "value": "7"
+            },
+            {
+              "is_available": true,
+              "display": "8",
+              "value": "8"
+            }
+          ]
+        },
+        "quantity": 1,
+        "article": {
+          "type": "article",
+          "uid": "304_433_LGPL30402_RC330004_6",
+          "size": "6",
+          "seller": {
+            "uid": 304,
+            "name": "LEAYAN GLOBAL PVT. LTD."
+          },
+          "store": {
+            "uid": 9767,
+            "name": "Udyog Kunj, Kanpur"
+          },
+          "quantity": 3,
+          "price": {
+            "base": {
+              "marked": 2195,
+              "effective": 1866,
+              "currency_code": "INR"
+            },
+            "converted": {
+              "marked": 2195,
+              "effective": 1866,
+              "currency_code": "INR"
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+```
 
 
 
@@ -21892,884 +21665,35 @@ Schema: `Giveaway`
 ---
 
 
-#### getGiveawayByID
-Get giveaway by ID.
+#### checkoutCart
+Create Fynd order with cart details
 
 ```golang
 
-data, err := Rewards.GetGiveawayByID(CompanyID, ApplicationID, ID);
+data, err := Cart.CheckoutCart(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | company id | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | application id | 
+| ApplicationID | string | Current Application _id | 
 
 
-| ID | string | Giveaway ID | 
+| body |  OpenApiPlatformCheckoutReq | "Request body" 
 
-
-
-Get giveaway by ID.
+Generate Fynd order for cart details send with provided `cart_items`
 
 *Success Response:*
 
 
 
-ok
+Checkout cart and create Fynd order id
 
 
-Schema: `Giveaway`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateGiveaway
-Updates the giveaway by it's ID.
-
-```golang
-
-data, err := Rewards.UpdateGiveaway(CompanyID, ApplicationID, ID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-| ID | string | Giveaway ID | 
-
-
-| body |  Giveaway | "Request body" 
-
-Updates the giveaway by it's ID.
-
-*Success Response:*
-
-
-
-ok
-
-
-Schema: `Giveaway`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getOffers
-List of offer of the current application.
-
-```golang
-
-data, err := Rewards.GetOffers(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-
-List of offer of the current application.
-
-*Success Response:*
-
-
-
-ok
-
-
-Schema: `Array<Offer>`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getOfferByName
-Get offer by name.
-
-```golang
-
-data, err := Rewards.GetOfferByName(CompanyID, ApplicationID, Cookie, Name);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-| Cookie | string | User's session cookie. This cookie is set in browser cookie when logged-in to fynd's authentication system i.e. `Grimlock` or by using grimlock-backend SDK for backend implementation. | 
-
-
-| Name | string | Offer name | 
-
-
-
-Get offer by name.
-
-*Success Response:*
-
-
-
-ok
-
-
-Schema: `Offer`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateOfferByName
-Updates the offer by name.
-
-```golang
-
-data, err := Rewards.UpdateOfferByName(CompanyID, ApplicationID, Name, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-| Name | string | Offer name | 
-
-
-| body |  Offer | "Request body" 
-
-Updates the offer by name.
-
-*Success Response:*
-
-
-
-ok
-
-
-Schema: `Offer`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getUserAvailablePoints
-User's reward details.
-
-```golang
-
-data, err := Rewards.GetUserAvailablePoints(CompanyID, ApplicationID, UserID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-| UserID | string | user id | 
-
-
-
-User's reward details.
-
-*Success Response:*
-
-
-
-ok
-
-
-Schema: `UserRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateUserStatus
-Update User status
-
-```golang
-
-data, err := Rewards.UpdateUserStatus(CompanyID, ApplicationID, UserID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-| UserID | string | user id | 
-
-
-| body |  AppUser | "Request body" 
-
-Update user status, active/archive
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `AppUser`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getUserPointsHistory
-Get list of points transactions.
-
-```golang
-
-data, err := Rewards.GetUserPointsHistory(CompanyID, ApplicationID, UserID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-| UserID | string | user id | 
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageID`, `PageLimit`, `PageSize`
-
-
-Get list of points transactions.
-The list of points history is paginated.
-
-*Success Response:*
-
-
-
-ok
-
-
-Schema: `HistoryRes`
-
-
-
-
-
-
-
-
-
----
-
-
-
----
-
-
-## Analytics
-
-
-#### getStatiscticsGroups
-Get statistics groups
-
-```golang
-
-data, err := Analytics.GetStatiscticsGroups(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-
-Get statistics groups
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `StatsGroups`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getStatiscticsGroupComponents
-Get statistics group components
-
-```golang
-
-data, err := Analytics.GetStatiscticsGroupComponents(CompanyID, ApplicationID, GroupName);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| GroupName | string | Group name | 
-
-
-
-Get statistics group components
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `StatsGroupComponents`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getComponentStatsCSV
-Get component statistics csv
-
-```golang
-
-data, err := Analytics.GetComponentStatsCSV(CompanyID, ApplicationID, ComponentName);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| ComponentName | string | Component name | 
-
-
-
-Get component statistics csv
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `string`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getComponentStatsPDF
-Get component statistics pdf
-
-```golang
-
-data, err := Analytics.GetComponentStatsPDF(CompanyID, ApplicationID, ComponentName);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| ComponentName | string | Component name | 
-
-
-
-Get component statistics pdf
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `string`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getComponentStats
-Get component statistics
-
-```golang
-
-data, err := Analytics.GetComponentStats(CompanyID, ApplicationID, ComponentName);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| ComponentName | string | Component name | 
-
-
-
-Get component statistics
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `StatsRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAbandonCartList
-Get abandon carts list
-
-```golang
-
-data, err := Analytics.GetAbandonCartList(CompanyID, ApplicationID, FromDate, ToDate, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| FromDate | string | From date | 
-
-
-| ToDate | string | To date | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-
-Get abandon carts list
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `AbandonCartsList`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAbandonCartsCSV
-Get abandon carts csv
-
-```golang
-
-data, err := Analytics.GetAbandonCartsCSV(CompanyID, ApplicationID, FromDate, ToDate);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| FromDate | string | From date | 
-
-
-| ToDate | string | To date | 
-
-
-
-Get abandon carts csv
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `string`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAbandonCartDetail
-Get abandon carts details
-
-```golang
-
-data, err := Analytics.GetAbandonCartDetail(CompanyID, ApplicationID, CartID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| CartID | string | Cart Id | 
-
-
-
-Get abandon cart details
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `AbandonCartDetail`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createExportJob
-Create data export job in required format
-
-```golang
-
-data, err := Analytics.CreateExportJob(CompanyID, ExportType, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ExportType | string | Export type / format | 
-
-
-| body |  ExportJobReq | "Request body" 
-
-Create data export job in required format
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `ExportJobRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getExportJobStatus
-Get data export job status
-
-```golang
-
-data, err := Analytics.GetExportJobStatus(CompanyID, ExportType, JobID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ExportType | string | Export type / format | 
-
-
-| JobID | string | Export job id | 
-
-
-
-Get data export job status
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `ExportJobStatusRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getLogsList
-Get logs list
-
-```golang
-
-data, err := Analytics.GetLogsList(CompanyID, LogType, xQuery, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| LogType | string | Log type | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-| body |  GetLogsListReq | "Request body" 
-
-Get logs list
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `GetLogsListRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### searchLogs
-Search logs
-
-```golang
-
-data, err := Analytics.SearchLogs(CompanyID, LogType, xQuery, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-
-
-
-
-| LogType | string | Log type | 
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-| body |  SearchLogReq | "Request body" 
-
-Search logs
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `SearchLogRes`
+Schema: `OpenApiCheckoutResponse`
 
 
 
@@ -23327,7 +22251,9 @@ data, err := Webhook.GetSubscribersByCompany(CompanyID, xQuery);
 
 | CompanyID | float64 | Company ID of the application | 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `ExtensionID`
 
 
 Get Subscribers By CompanyId
@@ -23416,6 +22342,51 @@ Success
 
 
 Schema: `SubscriberConfig`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSubscribersByExtensionId
+Get Subscribers By Extension ID
+
+```golang
+
+data, err := Webhook.GetSubscribersByExtensionId(CompanyID, ExtensionID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+
+| CompanyID | float64 | Company ID of the application | 
+
+
+| ExtensionID | string | Extension ID | 
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
+
+
+Get Subscribers By ExtensionID
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `SubscriberResponse`
 
 
 
