@@ -57,6 +57,8 @@
     * [getStores](#getstores)
     * [getInStockLocations](#getinstocklocations)
     * [getLocationDetailsById](#getlocationdetailsbyid)
+    * [getProductPriceBySlugV2](#getproductpricebyslugv2)
+    * [getProductSellersBySlugV2](#getproductsellersbyslugv2)
     
 
 * [Cart](#Cart)
@@ -136,7 +138,7 @@
     * [verifyEmailOTP](#verifyemailotp)
     * [getLoggedInUser](#getloggedinuser)
     * [getListOfActiveSessions](#getlistofactivesessions)
-    * [getFreshchatRestoreId](#getfreshchatrestoreid)
+    * [setFreshchatRestoreId](#setfreshchatrestoreid)
     * [getUserStore](#getuserstore)
     * [getPlatformConfig](#getplatformconfig)
     * [updateProfile](#updateprofile)
@@ -1583,6 +1585,102 @@ Success. Returns a metadata object. Check the example shown below or refer `Stor
 
 
 Schema: `StoreDetails`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProductPriceBySlugV2
+Get the price of a product size at a PIN Code
+
+```golang
+
+ data, err :=  Catalog.GetProductPriceBySlugV2(Slug, Size, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| Slug | string | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ | 
+
+
+| Size | string | A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `StoreID`, `Pincode`
+
+
+
+Prices may vary for different sizes of a product. Use this API to retrieve the price of a product size at all the selling locations near to a PIN Code.
+
+*Success Response:*
+
+
+
+Success. Returns a ProductSizePriceV2 object. Check the example shown below or refer `ProductSizePriceResponseV2` for more details.
+
+
+Schema: `ProductSizePriceResponseV2`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProductSellersBySlugV2
+Get the sellers of a product size at a PIN Code
+
+```golang
+
+ data, err :=  Catalog.GetProductSellersBySlugV2(Slug, Size, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| Slug | string | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ | 
+
+
+| Size | string | A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes | 
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Pincode`, `Strategy`, `PageNo`, `PageSize`
+
+
+
+A product of a particular size may be sold by multiple sellers. Use this API to fetch the sellers having the stock of a particular size at a given PIN Code.
+
+*Success Response:*
+
+
+
+Success. Returns a ProductSizeSellerV2 object. Check the example shown below or refer `ProductSizeSellersResponseV2` for more details.
+
+
+Schema: `ProductSizeSellersResponseV2`
 
 
 
@@ -7219,12 +7317,12 @@ Schema: `SessionListSuccess`
 ---
 
 
-#### getFreshchatRestoreId
+#### setFreshchatRestoreId
 Get freshchat restore ID
 
 ```golang
 
- data, err :=  User.GetFreshchatRestoreId(body);
+ data, err :=  User.SetFreshchatRestoreId(body);
 ```
 
 | Argument  |  Type  | Description |

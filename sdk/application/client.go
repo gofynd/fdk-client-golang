@@ -2494,6 +2494,214 @@ func NewAppClient(config *AppConfig) *Client {
     }
           
     
+    
+    
+  
+    
+    
+    //CatalogGetProductPriceBySlugV2XQuery holds query params
+    type CatalogGetProductPriceBySlugV2XQuery struct { 
+        StoreID float64  `url:"store_id,omitempty"` 
+        Pincode string  `url:"pincode,omitempty"`  
+    }
+    
+    // GetProductPriceBySlugV2 Get the price of a product size at a PIN Code
+    func (ca *Catalog)  GetProductPriceBySlugV2(Slug string, Size string, xQuery CatalogGetProductPriceBySlugV2XQuery) (ProductSizePriceResponseV2, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getProductPriceBySlugV2Response ProductSizePriceResponseV2
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/application/catalog/v2.0/products/%s/sizes/%s/price/",Slug,Size),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ProductSizePriceResponseV2{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductPriceBySlugV2Response)
+        if err != nil {
+            return ProductSizePriceResponseV2{}, common.NewFDKError(err.Error())
+        }
+         return getProductPriceBySlugV2Response, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //CatalogGetProductSellersBySlugV2XQuery holds query params
+    type CatalogGetProductSellersBySlugV2XQuery struct { 
+        Pincode string  `url:"pincode,omitempty"` 
+        Strategy string  `url:"strategy,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetProductSellersBySlugV2 Get the sellers of a product size at a PIN Code
+    func (ca *Catalog)  GetProductSellersBySlugV2(Slug string, Size string, xQuery CatalogGetProductSellersBySlugV2XQuery) (ProductSizeSellersResponseV2, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getProductSellersBySlugV2Response ProductSizeSellersResponseV2
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/application/catalog/v2.0/products/%s/sizes/%s/sellers/",Slug,Size),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ProductSizeSellersResponseV2{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductSellersBySlugV2Response)
+        if err != nil {
+            return ProductSizeSellersResponseV2{}, common.NewFDKError(err.Error())
+        }
+         return getProductSellersBySlugV2Response, nil
+        
+    }
+          
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetProductSellersBySlugV2Paginator Get the sellers of a product size at a PIN Code  
+            func (ca *Catalog)  GetProductSellersBySlugV2Paginator(Slug string  , Size string  ,  xQuery CatalogGetProductSellersBySlugV2XQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := ca.GetProductSellersBySlugV2(Slug, Size, xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
+    
 
     // Cart ...
     type Cart struct {
@@ -6334,13 +6542,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetFreshchatRestoreId Get freshchat restore ID
-    func (us *User)  GetFreshchatRestoreId(body  FreshchatRestoreIdRequestSchema) (UserStoreSchema, error){
+    // SetFreshchatRestoreId Get freshchat restore ID
+    func (us *User)  SetFreshchatRestoreId(body  FreshchatRestoreIdRequestSchema) (UserStoreSchema, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getFreshchatRestoreIdResponse UserStoreSchema
+             setFreshchatRestoreIdResponse UserStoreSchema
 	    )
 
         
@@ -6380,11 +6588,11 @@ func NewAppClient(config *AppConfig) *Client {
             return UserStoreSchema{}, err
 	    }
         
-        err = json.Unmarshal(response, &getFreshchatRestoreIdResponse)
+        err = json.Unmarshal(response, &setFreshchatRestoreIdResponse)
         if err != nil {
             return UserStoreSchema{}, common.NewFDKError(err.Error())
         }
-         return getFreshchatRestoreIdResponse, nil
+         return setFreshchatRestoreIdResponse, nil
         
     }
           
