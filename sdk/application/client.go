@@ -1913,55 +1913,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -2002,6 +1953,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -6334,6 +6334,111 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // GetFreshchatRestoreId Get freshchat restore ID
+    func (us *User)  GetFreshchatRestoreId(body  FreshchatRestoreIdRequestSchema) (UserStoreSchema, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getFreshchatRestoreIdResponse UserStoreSchema
+	    )
+
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return UserStoreSchema{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return UserStoreSchema{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "post",
+            "/service/application/user/authentication/v1.0/user_store/freshchat-restore-id",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return UserStoreSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getFreshchatRestoreIdResponse)
+        if err != nil {
+            return UserStoreSchema{}, common.NewFDKError(err.Error())
+        }
+         return getFreshchatRestoreIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetUserStore Get user store
+    func (us *User)  GetUserStore() (UserStoreSchema, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getUserStoreResponse UserStoreSchema
+	    )
+
+        
+
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "get",
+            "/service/application/user/authentication/v1.0/user_store/store",
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return UserStoreSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getUserStoreResponse)
+        if err != nil {
+            return UserStoreSchema{}, common.NewFDKError(err.Error())
+        }
+         return getUserStoreResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     //UserGetPlatformConfigXQuery holds query params
     type UserGetPlatformConfigXQuery struct { 
         Name string  `url:"name,omitempty"`  
@@ -7230,51 +7335,6 @@ func NewAppClient(config *AppConfig) *Client {
                 return paginator
             }
        
-    
-    
-    
-  
-    
-    
-    // GetDataLoaders Get the data loaders associated with an application
-    func (co *Content)  GetDataLoaders() (DataLoaderSchema, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getDataLoadersResponse DataLoaderSchema
-	    )
-
-        
-
-        
-
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            co.config,
-            "get",
-            "/service/application/content/v1.0/data-loader",
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return DataLoaderSchema{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getDataLoadersResponse)
-        if err != nil {
-            return DataLoaderSchema{}, common.NewFDKError(err.Error())
-        }
-         return getDataLoadersResponse, nil
-        
-    }
-          
     
     
     
@@ -8864,7 +8924,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // SignUrls Explain here
-    func (fi *FileStorage)  SignUrls(CompanyID float64, body  SignUrlRequest) (SignUrlResponse, error){
+    func (fi *FileStorage)  SignUrls(body  SignUrlRequest) (SignUrlResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -8880,8 +8940,6 @@ func NewAppClient(config *AppConfig) *Client {
 
         
 
-        
-        
         
     
          
@@ -8904,7 +8962,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fi.config,
             "post",
-            fmt.Sprintf("/service/application/assets/v1.0/company/undefined/sign-urls/",CompanyID),
+            "/service/application/assets/v1.0/sign-urls/",
             nil,
             nil,
             reqBody)
