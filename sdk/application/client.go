@@ -7549,6 +7549,51 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // GetDataLoaders Get the data loaders associated with an application
+    func (co *Content)  GetDataLoaders() (DataLoaderSchema, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getDataLoadersResponse DataLoaderSchema
+	    )
+
+        
+
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            "/service/application/content/v1.0/data-loader",
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DataLoaderSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getDataLoadersResponse)
+        if err != nil {
+            return DataLoaderSchema{}, common.NewFDKError(err.Error())
+        }
+         return getDataLoadersResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // GetFaqs Get a list of FAQs
     func (co *Content)  GetFaqs() (FaqResponseSchema, error){
         var (
