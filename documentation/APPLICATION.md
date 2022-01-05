@@ -50,13 +50,15 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [followById](#followbyid)
     * [unfollowById](#unfollowbyid)
+    * [followById](#followbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
     * [getInStockLocations](#getinstocklocations)
     * [getLocationDetailsById](#getlocationdetailsbyid)
+    * [getProductPriceBySlugV2](#getproductpricebyslugv2)
+    * [getProductSellersBySlugV2](#getproductsellersbyslugv2)
     
 
 * [Cart](#Cart)
@@ -1293,12 +1295,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1312,7 +1314,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1334,12 +1336,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1353,7 +1355,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1580,6 +1582,102 @@ Success. Returns a metadata object. Check the example shown below or refer `Stor
 
 
 Schema: `StoreDetails`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProductPriceBySlugV2
+Get the price of a product size at a PIN Code
+
+```golang
+
+ data, err :=  Catalog.GetProductPriceBySlugV2(Slug, Size, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| Slug | string | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ | 
+
+
+| Size | string | A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `StoreID`, `Pincode`
+
+
+
+Prices may vary for different sizes of a product. Use this API to retrieve the price of a product size at all the selling locations near to a PIN Code.
+
+*Success Response:*
+
+
+
+Success. Returns a ProductSizePriceV2 object. Check the example shown below or refer `ProductSizePriceResponseV2` for more details.
+
+
+Schema: `ProductSizePriceResponseV2`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProductSellersBySlugV2
+Get the sellers of a product size at a PIN Code
+
+```golang
+
+ data, err :=  Catalog.GetProductSellersBySlugV2(Slug, Size, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| Slug | string | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ | 
+
+
+| Size | string | A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes | 
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Pincode`, `Strategy`, `PageNo`, `PageSize`
+
+
+
+A product of a particular size may be sold by multiple sellers. Use this API to fetch the sellers having the stock of a particular size at a given PIN Code.
+
+*Success Response:*
+
+
+
+Success. Returns a ProductSizeSellerV2 object. Check the example shown below or refer `ProductSizeSellersResponseV2` for more details.
+
+
+Schema: `ProductSizeSellersResponseV2`
 
 
 
