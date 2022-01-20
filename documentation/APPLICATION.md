@@ -50,8 +50,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [followById](#followbyid)
     * [unfollowById](#unfollowbyid)
+    * [followById](#followbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -59,7 +59,6 @@
     * [getLocationDetailsById](#getlocationdetailsbyid)
     * [getProductPriceBySlugV2](#getproductpricebyslugv2)
     * [getProductSellersBySlugV2](#getproductsellersbyslugv2)
-    * [getProductBundlesBySlug](#getproductbundlesbyslug)
     
 
 * [Cart](#Cart)
@@ -234,6 +233,7 @@
     * [getPaymentModeRoutes](#getpaymentmoderoutes)
     * [getPosPaymentModeRoutes](#getpospaymentmoderoutes)
     * [getRupifiBannerDetails](#getrupifibannerdetails)
+    * [getEpaylaterBannerDetails](#getepaylaterbannerdetails)
     * [getActiveRefundTransferModes](#getactiverefundtransfermodes)
     * [enableOrDisableRefundTransferMode](#enableordisablerefundtransfermode)
     * [getUserBeneficiariesDetail](#getuserbeneficiariesdetail)
@@ -244,6 +244,10 @@
     * [addRefundBankAccountUsingOTP](#addrefundbankaccountusingotp)
     * [verifyOtpAndAddBeneficiaryForWallet](#verifyotpandaddbeneficiaryforwallet)
     * [updateDefaultBeneficiary](#updatedefaultbeneficiary)
+    * [CustomerCreditSummary](#customercreditsummary)
+    * [RedirectToAggregator](#redirecttoaggregator)
+    * [CheckCredit](#checkcredit)
+    * [CheckCredit](#checkcredit)
     
 
 * [Order](#Order)
@@ -1300,12 +1304,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1319,7 +1323,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1341,12 +1345,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1360,7 +1364,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1683,46 +1687,6 @@ Success. Returns a ProductSizeSellerV2 object. Check the example shown below or 
 
 
 Schema: `ProductSizeSellersResponseV2`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getProductBundlesBySlug
-Get product bundles
-
-```golang
-
- data, err :=  Catalog.GetProductBundlesBySlug(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-| xQuery | struct | Includes properties such as `Slug`, `ID`
-
-
-
-Use this API to retrieve products bundles to the one specified by its slug.
-
-*Success Response:*
-
-
-
-Success. Returns a group of products bundle.
-
-
-Schema: `ProductBundle`
 
 
 
@@ -16782,6 +16746,41 @@ Schema: `RupifiBannerResponse`
 ---
 
 
+#### getEpaylaterBannerDetails
+Get Epaylater Enabled
+
+```golang
+
+ data, err :=  Payment.GetEpaylaterBannerDetails();
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+Get Epaylater Enabled if user is tentatively approved by epaylater
+
+*Success Response:*
+
+
+
+Success. Return Epaylater Offer detail. Check the example shown below or refer `EpaylaterBannerResponseSchema` for more details.
+
+
+Schema: `EpaylaterBannerResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getActiveRefundTransferModes
 Lists the mode of refund
 
@@ -17135,6 +17134,156 @@ Success. Check the example shown below or refer `SetDefaultBeneficiaryResponse` 
 
 
 Schema: `SetDefaultBeneficiaryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### CustomerCreditSummary
+API to fetch the customer credit summary
+
+```golang
+
+ data, err :=  Payment.CustomerCreditSummary(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Aggregator`
+
+
+
+Use this API to fetch the customer credit summary.
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `CustomerCreditSummaryResponseSchema` for more details.
+
+
+Schema: `CustomerCreditSummaryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### RedirectToAggregator
+API to get the redirect url to redirect the user to aggregator's page
+
+```golang
+
+ data, err :=  Payment.RedirectToAggregator(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Aggregator`
+
+
+
+Use this API to get the redirect url to redirect the user to aggregator's page
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `RedirectToAggregatorResponseSchema` for more details.
+
+
+Schema: `RedirectToAggregatorResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### CheckCredit
+API to fetch the customer credit summary
+
+```golang
+
+ data, err :=  Payment.CheckCredit(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Aggregator`
+
+
+
+Use this API to fetch the customer credit summary.
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `CheckCreditResponseSchema` for more details.
+
+
+Schema: `CheckCreditResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### CheckCredit
+API to fetch the customer credit summary
+
+```golang
+
+ data, err :=  Payment.CheckCredit(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  CustomerOnboardingRequest | "Request body" 
+
+
+Use this API to fetch the customer credit summary.
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `CustomerOnboardingResponseSchema` for more details.
+
+
+Schema: `CustomerOnboardingResponse`
 
 
 

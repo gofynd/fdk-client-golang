@@ -1913,55 +1913,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -2002,6 +1953,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -2701,63 +2701,6 @@ func NewAppClient(config *AppConfig) *Client {
                 return paginator
             }
        
-    
-    
-    
-  
-    
-    
-    //CatalogGetProductBundlesBySlugXQuery holds query params
-    type CatalogGetProductBundlesBySlugXQuery struct { 
-        Slug string  `url:"slug,omitempty"` 
-        ID string  `url:"id,omitempty"`  
-    }
-    
-    // GetProductBundlesBySlug Get product bundles
-    func (ca *Catalog)  GetProductBundlesBySlug(xQuery CatalogGetProductBundlesBySlugXQuery) (ProductBundle, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getProductBundlesBySlugResponse ProductBundle
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-        
-
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            "/service/application/catalog/v1.0/product-grouping/",
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ProductBundle{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProductBundlesBySlugResponse)
-        if err != nil {
-            return ProductBundle{}, common.NewFDKError(err.Error())
-        }
-         return getProductBundlesBySlugResponse, nil
-        
-    }
-          
     
 
     // Cart ...
@@ -10876,6 +10819,51 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // GetEpaylaterBannerDetails Get Epaylater Enabled
+    func (pa *Payment)  GetEpaylaterBannerDetails() (EpaylaterBannerResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getEpaylaterBannerDetailsResponse EpaylaterBannerResponse
+	    )
+
+        
+
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            "/service/application/payment/v1.0/epaylater/banner",
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return EpaylaterBannerResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getEpaylaterBannerDetailsResponse)
+        if err != nil {
+            return EpaylaterBannerResponse{}, common.NewFDKError(err.Error())
+        }
+         return getEpaylaterBannerDetailsResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // GetActiveRefundTransferModes Lists the mode of refund
     func (pa *Payment)  GetActiveRefundTransferModes() (TransferModeResponse, error){
         var (
@@ -11458,6 +11446,232 @@ func NewAppClient(config *AppConfig) *Client {
             return SetDefaultBeneficiaryResponse{}, common.NewFDKError(err.Error())
         }
          return updateDefaultBeneficiaryResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //PaymentCustomerCreditSummaryXQuery holds query params
+    type PaymentCustomerCreditSummaryXQuery struct { 
+        Aggregator string  `url:"aggregator,omitempty"`  
+    }
+    
+    // CustomerCreditSummary API to fetch the customer credit summary
+    func (pa *Payment)  CustomerCreditSummary(xQuery PaymentCustomerCreditSummaryXQuery) (CustomerCreditSummaryResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             CustomerCreditSummaryResponse CustomerCreditSummaryResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            "/service/application/payment/v1.0/payment/credit-summary/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CustomerCreditSummaryResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &CustomerCreditSummaryResponse)
+        if err != nil {
+            return CustomerCreditSummaryResponse{}, common.NewFDKError(err.Error())
+        }
+         return CustomerCreditSummaryResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //PaymentRedirectToAggregatorXQuery holds query params
+    type PaymentRedirectToAggregatorXQuery struct { 
+        Aggregator string  `url:"aggregator,omitempty"`  
+    }
+    
+    // RedirectToAggregator API to get the redirect url to redirect the user to aggregator's page
+    func (pa *Payment)  RedirectToAggregator(xQuery PaymentRedirectToAggregatorXQuery) (RedirectToAggregatorResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             RedirectToAggregatorResponse RedirectToAggregatorResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            "/service/application/payment/v1.0/payment/redirect-to-aggregator/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return RedirectToAggregatorResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &RedirectToAggregatorResponse)
+        if err != nil {
+            return RedirectToAggregatorResponse{}, common.NewFDKError(err.Error())
+        }
+         return RedirectToAggregatorResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //PaymentCheckCreditXQuery holds query params
+    type PaymentCheckCreditXQuery struct { 
+        Aggregator string  `url:"aggregator,omitempty"`  
+    }
+    
+    // CheckCredit API to fetch the customer credit summary
+    func (pa *Payment)  CheckCredit(xQuery PaymentCheckCreditXQuery) (CheckCreditResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             CheckCreditResponse CheckCreditResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            "/service/application/payment/v1.0/check-credits/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CheckCreditResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &CheckCreditResponse)
+        if err != nil {
+            return CheckCreditResponse{}, common.NewFDKError(err.Error())
+        }
+         return CheckCreditResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // CheckCredit API to fetch the customer credit summary
+    func (pa *Payment)  CheckCredit(body  CustomerOnboardingRequest) (CustomerOnboardingResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             CheckCreditResponse CustomerOnboardingResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return CustomerOnboardingResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return CustomerOnboardingResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            "/service/application/payment/v1.0/credit-onboard/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CustomerOnboardingResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &CheckCreditResponse)
+        if err != nil {
+            return CustomerOnboardingResponse{}, common.NewFDKError(err.Error())
+        }
+         return CheckCreditResponse, nil
         
     }
           
