@@ -73,56 +73,56 @@ import (
 
 
 
-    //TicketAssetType used by Lead
-    type TicketAssetType  string
+    //TicketAssetTypeEnum used by Lead
+    type TicketAssetTypeEnum  string
     
     const (
             
             //IMAGE defines constant for the `image` 
-            IMAGE TicketAssetType = "image"
+            IMAGE TicketAssetTypeEnum = "image"
             
             
             //VIDEO defines constant for the `video` 
-            VIDEO TicketAssetType = "video"
+            VIDEO TicketAssetTypeEnum = "video"
             
             
             //FILE defines constant for the `file` 
-            FILE TicketAssetType = "file"
+            FILE TicketAssetTypeEnum = "file"
             
             
             //YOUTUBE defines constant for the `youtube` 
-            YOUTUBE TicketAssetType = "youtube"
+            YOUTUBE TicketAssetTypeEnum = "youtube"
             
             
             //PRODUCT defines constant for the `product` 
-            PRODUCT TicketAssetType = "product"
+            PRODUCT TicketAssetTypeEnum = "product"
             
             
             //COLLECTION defines constant for the `collection` 
-            COLLECTION TicketAssetType = "collection"
+            COLLECTION TicketAssetTypeEnum = "collection"
             
             
             //BRAND defines constant for the `brand` 
-            BRAND TicketAssetType = "brand"
+            BRAND TicketAssetTypeEnum = "brand"
             
             
             //SHIPMENT defines constant for the `shipment` 
-            SHIPMENT TicketAssetType = "shipment"
+            SHIPMENT TicketAssetTypeEnum = "shipment"
             
             
             //ORDER defines constant for the `order` 
-            ORDER TicketAssetType = "order"
+            ORDER TicketAssetTypeEnum = "order"
             
             
        )
 
     //IsValid return error if enum is invalid
-    func (ti TicketAssetType) IsValid() error {
+    func (ti TicketAssetTypeEnum) IsValid() error {
       switch ti {
         case  IMAGE, VIDEO, FILE, YOUTUBE, PRODUCT, COLLECTION, BRAND, SHIPMENT, ORDER : 
         return nil
       }
-      return errors.New("Invalid TicketAssetType type")
+      return errors.New("Invalid TicketAssetTypeEnum type")
     }
 
 
@@ -372,12 +372,16 @@ import (
             INACTIVE SubscriberStatus = "inactive"
             
             
+            //BLOCKED defines constant for the `blocked` 
+            BLOCKED SubscriberStatus = "blocked"
+            
+            
        )
 
     //IsValid return error if enum is invalid
     func (su SubscriberStatus) IsValid() error {
       switch su {
-        case  ACTIVE, INACTIVE : 
+        case  ACTIVE, INACTIVE, BLOCKED : 
         return nil
       }
       return errors.New("Invalid SubscriberStatus type")
