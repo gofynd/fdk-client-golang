@@ -1913,55 +1913,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UnfollowById Unfollow an entity (product/brand/collection)
-    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             unfollowByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &unfollowByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return unfollowByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // FollowById Follow an entity (product/brand/collection)
     func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -2002,6 +1953,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return followByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UnfollowById Unfollow an entity (product/brand/collection)
+    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             unfollowByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &unfollowByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return unfollowByIdResponse, nil
         
     }
           
@@ -4131,8 +4131,6 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
-            
-        
 
         
 
@@ -4405,6 +4403,63 @@ func NewAppClient(config *AppConfig) *Client {
             return SharedCartResponse{}, common.NewFDKError(err.Error())
         }
          return updateCartWithSharedItemsResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //CartGetPromotionOffersXQuery holds query params
+    type CartGetPromotionOffersXQuery struct { 
+        Slug string  `url:"slug,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetPromotionOffers Fetch available promotions
+    func (ca *Cart)  GetPromotionOffers(xQuery CartGetPromotionOffersXQuery) (PromotionOffersResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getPromotionOffersResponse PromotionOffersResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            "/service/application/cart/v1.0/available-promotions",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PromotionOffersResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPromotionOffersResponse)
+        if err != nil {
+            return PromotionOffersResponse{}, common.NewFDKError(err.Error())
+        }
+         return getPromotionOffersResponse, nil
         
     }
           
@@ -6590,111 +6645,6 @@ func NewAppClient(config *AppConfig) *Client {
             return SessionListSuccess{}, common.NewFDKError(err.Error())
         }
          return getListOfActiveSessionsResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // SetFreshchatRestoreId Get freshchat restore ID
-    func (us *User)  SetFreshchatRestoreId(body  FreshchatRestoreIdRequestSchema) (UserStoreSchema, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             setFreshchatRestoreIdResponse UserStoreSchema
-	    )
-
-        
-            
-        
-
-        
-
-        
-    
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return UserStoreSchema{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return UserStoreSchema{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            us.config,
-            "post",
-            "/service/application/user/authentication/v1.0/user_store/freshchat-restore-id",
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return UserStoreSchema{}, err
-	    }
-        
-        err = json.Unmarshal(response, &setFreshchatRestoreIdResponse)
-        if err != nil {
-            return UserStoreSchema{}, common.NewFDKError(err.Error())
-        }
-         return setFreshchatRestoreIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // GetUserStore Get user store
-    func (us *User)  GetUserStore() (UserStoreSchema, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getUserStoreResponse UserStoreSchema
-	    )
-
-        
-
-        
-
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            us.config,
-            "get",
-            "/service/application/user/authentication/v1.0/user_store/store",
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return UserStoreSchema{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getUserStoreResponse)
-        if err != nil {
-            return UserStoreSchema{}, common.NewFDKError(err.Error())
-        }
-         return getUserStoreResponse, nil
         
     }
           
@@ -16432,8 +16382,6 @@ func NewAppClient(config *AppConfig) *Client {
              checkoutCartResponse CartCheckoutResponse
 	    )
 
-        
-            
         
             
         

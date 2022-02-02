@@ -372,12 +372,16 @@ import (
             INACTIVE SubscriberStatus = "inactive"
             
             
+            //BLOCKED defines constant for the `blocked` 
+            BLOCKED SubscriberStatus = "blocked"
+            
+            
        )
 
     //IsValid return error if enum is invalid
     func (su SubscriberStatus) IsValid() error {
       switch su {
-        case  ACTIVE, INACTIVE : 
+        case  ACTIVE, INACTIVE, BLOCKED : 
         return nil
       }
       return errors.New("Invalid SubscriberStatus type")
