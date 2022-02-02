@@ -57,6 +57,7 @@
     * [getStores](#getstores)
     * [getInStockLocations](#getinstocklocations)
     * [getLocationDetailsById](#getlocationdetailsbyid)
+    * [getProductBundlesBySlug](#getproductbundlesbyslug)
     * [getProductPriceBySlugV2](#getproductpricebyslugv2)
     * [getProductSellersBySlugV2](#getproductsellersbyslugv2)
     
@@ -1582,6 +1583,46 @@ Success. Returns a metadata object. Check the example shown below or refer `Stor
 
 
 Schema: `StoreDetails`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProductBundlesBySlug
+Get product bundles
+
+```golang
+
+ data, err :=  Catalog.GetProductBundlesBySlug(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+| xQuery | struct | Includes properties such as `Slug`, `ID`
+
+
+
+Use this API to retrieve products bundles to the one specified by its slug.
+
+*Success Response:*
+
+
+
+Success. Returns a group of products bundle.
+
+
+Schema: `ProductBundle`
 
 
 

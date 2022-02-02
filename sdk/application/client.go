@@ -2499,6 +2499,63 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //CatalogGetProductBundlesBySlugXQuery holds query params
+    type CatalogGetProductBundlesBySlugXQuery struct { 
+        Slug string  `url:"slug,omitempty"` 
+        ID string  `url:"id,omitempty"`  
+    }
+    
+    // GetProductBundlesBySlug Get product bundles
+    func (ca *Catalog)  GetProductBundlesBySlug(xQuery CatalogGetProductBundlesBySlugXQuery) (ProductBundle, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getProductBundlesBySlugResponse ProductBundle
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            "/service/application/catalog/v1.0/product-grouping/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ProductBundle{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductBundlesBySlugResponse)
+        if err != nil {
+            return ProductBundle{}, common.NewFDKError(err.Error())
+        }
+         return getProductBundlesBySlugResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     //CatalogGetProductPriceBySlugV2XQuery holds query params
     type CatalogGetProductPriceBySlugV2XQuery struct { 
         StoreID float64  `url:"store_id,omitempty"` 
