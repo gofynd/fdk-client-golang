@@ -1924,6 +1924,11 @@ Product has been added to your cart
           "key": "751083_10",
           "article": {
             "type": "article",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS",
+            "product_group_tags": [
+              "test"
+            ],
             "uid": "612_9_SE61201_19100302_10",
             "size": "10",
             "seller": {
@@ -2376,6 +2381,11 @@ Sorry, item is out of stock
           "discount": "67% OFF",
           "article": {
             "type": "article",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS",
+            "product_group_tags": [
+              "test"
+            ],
             "uid": "604_902_SSTC60401_636BLUE_1",
             "size": "1",
             "seller": {
@@ -2599,6 +2609,11 @@ Nothing updated
           "discount": "67% OFF",
           "article": {
             "type": "article",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS",
+            "product_group_tags": [
+              "test"
+            ],
             "uid": "604_902_SSTC60401_636BLUE_1",
             "size": "1",
             "seller": {
@@ -2827,6 +2842,11 @@ Item updated in the cart
           },
           "article": {
             "type": "article",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS",
+            "product_group_tags": [
+              "test"
+            ],
             "uid": "507_9_96099_35656851_7",
             "size": "7",
             "seller": {
@@ -19227,6 +19247,11 @@ Product has been added to your cart
           "key": "751083_10",
           "article": {
             "type": "article",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS",
+            "product_group_tags": [
+              "test"
+            ],
             "uid": "612_9_SE61201_19100302_10",
             "size": "10",
             "seller": {
@@ -19679,6 +19704,11 @@ Sorry, item is out of stock
           "discount": "67% OFF",
           "article": {
             "type": "article",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS",
+            "product_group_tags": [
+              "test"
+            ],
             "uid": "604_902_SSTC60401_636BLUE_1",
             "size": "1",
             "seller": {
@@ -19902,6 +19932,11 @@ Nothing updated
           "discount": "67% OFF",
           "article": {
             "type": "article",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS",
+            "product_group_tags": [
+              "test"
+            ],
             "uid": "604_902_SSTC60401_636BLUE_1",
             "size": "1",
             "seller": {
@@ -20130,6 +20165,11 @@ Item updated in the cart
           },
           "article": {
             "type": "article",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS",
+            "product_group_tags": [
+              "test"
+            ],
             "uid": "507_9_96099_35656851_7",
             "size": "7",
             "seller": {
