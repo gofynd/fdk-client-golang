@@ -5000,12 +5000,12 @@ package platform
     type PaymentGatewayConfigResponse struct {
 
         
-            Success bool  `json:"success"`
-            AppID string  `json:"app_id"`
-            ExcludedFields []string  `json:"excluded_fields"`
-            DisplayFields []string  `json:"display_fields"`
             Aggregators []map[string]interface{}  `json:"aggregators"`
+            AppID string  `json:"app_id"`
             Created bool  `json:"created"`
+            Success bool  `json:"success"`
+            DisplayFields []string  `json:"display_fields"`
+            ExcludedFields []string  `json:"excluded_fields"`
          
     }
     
@@ -5013,9 +5013,9 @@ package platform
     type ErrorCodeDescription struct {
 
         
-            Success bool  `json:"success"`
             Description string  `json:"description"`
             Code string  `json:"code"`
+            Success bool  `json:"success"`
          
     }
     
@@ -5023,11 +5023,11 @@ package platform
     type PaymentGatewayConfig struct {
 
         
+            ConfigType string  `json:"config_type"`
+            MerchantSalt string  `json:"merchant_salt"`
             Secret string  `json:"secret"`
             IsActive bool  `json:"is_active"`
             Key string  `json:"key"`
-            ConfigType string  `json:"config_type"`
-            MerchantSalt string  `json:"merchant_salt"`
          
     }
     
@@ -5035,9 +5035,9 @@ package platform
     type PaymentGatewayConfigRequest struct {
 
         
+            IsActive bool  `json:"is_active"`
             AppID string  `json:"app_id"`
             AggregatorName PaymentGatewayConfig  `json:"aggregator_name"`
-            IsActive bool  `json:"is_active"`
          
     }
     
@@ -5045,8 +5045,8 @@ package platform
     type PaymentGatewayToBeReviewed struct {
 
         
-            Success bool  `json:"success"`
             Aggregator []string  `json:"aggregator"`
+            Success bool  `json:"success"`
          
     }
     
@@ -5072,8 +5072,8 @@ package platform
     type PaymentModeLogo struct {
 
         
-            Small string  `json:"small"`
             Large string  `json:"large"`
+            Small string  `json:"small"`
          
     }
     
@@ -5081,34 +5081,34 @@ package platform
     type PaymentModeList struct {
 
         
-            LogoURL PaymentModeLogo  `json:"logo_url"`
-            IntentApp []map[string]interface{}  `json:"intent_app"`
-            RetryCount float64  `json:"retry_count"`
-            Code string  `json:"code"`
-            CardToken string  `json:"card_token"`
-            CardBrandImage string  `json:"card_brand_image"`
-            ExpYear float64  `json:"exp_year"`
             IntentAppErrorList []string  `json:"intent_app_error_list"`
-            FyndVpa string  `json:"fynd_vpa"`
-            CardReference string  `json:"card_reference"`
-            CardBrand string  `json:"card_brand"`
-            DisplayName string  `json:"display_name"`
-            Timeout float64  `json:"timeout"`
-            IntentFlow bool  `json:"intent_flow"`
-            MerchantCode string  `json:"merchant_code"`
-            CardNumber string  `json:"card_number"`
-            DisplayPriority float64  `json:"display_priority"`
-            Name string  `json:"name"`
-            CardFingerprint string  `json:"card_fingerprint"`
             AggregatorName string  `json:"aggregator_name"`
+            CardReference string  `json:"card_reference"`
             CardID string  `json:"card_id"`
             CardIssuer string  `json:"card_issuer"`
-            ExpMonth float64  `json:"exp_month"`
-            CardName string  `json:"card_name"`
-            CardType string  `json:"card_type"`
             CardIsin string  `json:"card_isin"`
-            Expired bool  `json:"expired"`
+            IntentFlow bool  `json:"intent_flow"`
             Nickname string  `json:"nickname"`
+            MerchantCode string  `json:"merchant_code"`
+            CardType string  `json:"card_type"`
+            CardFingerprint string  `json:"card_fingerprint"`
+            DisplayName string  `json:"display_name"`
+            RetryCount float64  `json:"retry_count"`
+            CardBrand string  `json:"card_brand"`
+            Timeout float64  `json:"timeout"`
+            LogoURL PaymentModeLogo  `json:"logo_url"`
+            DisplayPriority float64  `json:"display_priority"`
+            CardBrandImage string  `json:"card_brand_image"`
+            ExpMonth float64  `json:"exp_month"`
+            CardToken string  `json:"card_token"`
+            IntentApp []map[string]interface{}  `json:"intent_app"`
+            CardName string  `json:"card_name"`
+            CardNumber string  `json:"card_number"`
+            Code string  `json:"code"`
+            Expired bool  `json:"expired"`
+            Name string  `json:"name"`
+            FyndVpa string  `json:"fynd_vpa"`
+            ExpYear float64  `json:"exp_year"`
          
     }
     
@@ -5116,13 +5116,13 @@ package platform
     type RootPaymentMode struct {
 
         
-            DisplayName string  `json:"display_name"`
+            AggregatorName string  `json:"aggregator_name"`
             AnonymousEnable bool  `json:"anonymous_enable"`
-            List []PaymentModeList  `json:"list"`
-            AddCardEnabled bool  `json:"add_card_enabled"`
             DisplayPriority float64  `json:"display_priority"`
             Name string  `json:"name"`
-            AggregatorName string  `json:"aggregator_name"`
+            DisplayName string  `json:"display_name"`
+            List []PaymentModeList  `json:"list"`
+            AddCardEnabled bool  `json:"add_card_enabled"`
          
     }
     
@@ -5147,11 +5147,11 @@ package platform
     type PayoutsResponse struct {
 
         
-            MoreAttributes map[string]interface{}  `json:"more_attributes"`
             TransferType string  `json:"transfer_type"`
-            IsActive bool  `json:"is_active"`
             PayoutsAggregators []map[string]interface{}  `json:"payouts_aggregators"`
             Customers map[string]interface{}  `json:"customers"`
+            MoreAttributes map[string]interface{}  `json:"more_attributes"`
+            IsActive bool  `json:"is_active"`
             UniqueTransferNo map[string]interface{}  `json:"unique_transfer_no"`
             IsDefault bool  `json:"is_default"`
          
@@ -5161,15 +5161,15 @@ package platform
     type PayoutBankDetails struct {
 
         
-            AccountNo string  `json:"account_no"`
-            AccountHolder string  `json:"account_holder"`
-            Country string  `json:"country"`
-            BranchName string  `json:"branch_name"`
             BankName string  `json:"bank_name"`
+            Country string  `json:"country"`
             AccountType string  `json:"account_type"`
-            Pincode float64  `json:"pincode"`
             IfscCode string  `json:"ifsc_code"`
+            Pincode float64  `json:"pincode"`
             City string  `json:"city"`
+            AccountNo string  `json:"account_no"`
+            BranchName string  `json:"branch_name"`
+            AccountHolder string  `json:"account_holder"`
             State string  `json:"state"`
          
     }
@@ -5179,11 +5179,11 @@ package platform
 
         
             TransferType string  `json:"transfer_type"`
+            BankDetails PayoutBankDetails  `json:"bank_details"`
+            Users map[string]interface{}  `json:"users"`
+            Aggregator string  `json:"aggregator"`
             UniqueExternalID string  `json:"unique_external_id"`
             IsActive bool  `json:"is_active"`
-            Aggregator string  `json:"aggregator"`
-            Users map[string]interface{}  `json:"users"`
-            BankDetails PayoutBankDetails  `json:"bank_details"`
          
     }
     
@@ -5191,15 +5191,15 @@ package platform
     type PayoutResponse struct {
 
         
-            Success bool  `json:"success"`
-            TransferType string  `json:"transfer_type"`
-            Payouts map[string]interface{}  `json:"payouts"`
-            IsActive bool  `json:"is_active"`
-            Created bool  `json:"created"`
-            Aggregator string  `json:"aggregator"`
             PaymentStatus string  `json:"payment_status"`
-            Users map[string]interface{}  `json:"users"`
+            TransferType string  `json:"transfer_type"`
             BankDetails map[string]interface{}  `json:"bank_details"`
+            Users map[string]interface{}  `json:"users"`
+            Aggregator string  `json:"aggregator"`
+            Payouts map[string]interface{}  `json:"payouts"`
+            Created bool  `json:"created"`
+            Success bool  `json:"success"`
+            IsActive bool  `json:"is_active"`
             UniqueTransferNo string  `json:"unique_transfer_no"`
          
     }
@@ -5208,8 +5208,8 @@ package platform
     type UpdatePayoutResponse struct {
 
         
-            Success bool  `json:"success"`
             IsActive bool  `json:"is_active"`
+            Success bool  `json:"success"`
             IsDefault bool  `json:"is_default"`
          
     }
@@ -5218,9 +5218,9 @@ package platform
     type UpdatePayoutRequest struct {
 
         
-            IsDefault bool  `json:"is_default"`
             IsActive bool  `json:"is_active"`
             UniqueExternalID string  `json:"unique_external_id"`
+            IsDefault bool  `json:"is_default"`
          
     }
     
@@ -5236,8 +5236,8 @@ package platform
     type SubscriptionPaymentMethodResponse struct {
 
         
-            Success bool  `json:"success"`
             Data []map[string]interface{}  `json:"data"`
+            Success bool  `json:"success"`
          
     }
     
@@ -5253,9 +5253,9 @@ package platform
     type SubscriptionConfigResponse struct {
 
         
-            Success bool  `json:"success"`
             Aggregator string  `json:"aggregator"`
             Config map[string]interface{}  `json:"config"`
+            Success bool  `json:"success"`
          
     }
     
@@ -5271,8 +5271,8 @@ package platform
     type SaveSubscriptionSetupIntentResponse struct {
 
         
-            Success bool  `json:"success"`
             Data map[string]interface{}  `json:"data"`
+            Success bool  `json:"success"`
          
     }
     
@@ -5280,17 +5280,17 @@ package platform
     type BeneficiaryModeDetails struct {
 
         
-            AccountHolder string  `json:"account_holder"`
-            AccountNo string  `json:"account_no"`
-            Mobile string  `json:"mobile"`
-            Comment string  `json:"comment"`
-            BranchName string  `json:"branch_name"`
             BankName string  `json:"bank_name"`
-            IfscCode string  `json:"ifsc_code"`
-            Wallet string  `json:"wallet"`
-            Email string  `json:"email"`
-            Address string  `json:"address"`
             Vpa string  `json:"vpa"`
+            Address string  `json:"address"`
+            Email string  `json:"email"`
+            Comment string  `json:"comment"`
+            IfscCode string  `json:"ifsc_code"`
+            AccountNo string  `json:"account_no"`
+            BranchName string  `json:"branch_name"`
+            AccountHolder string  `json:"account_holder"`
+            Mobile string  `json:"mobile"`
+            Wallet string  `json:"wallet"`
          
     }
     
@@ -5298,13 +5298,13 @@ package platform
     type AddBeneficiaryDetailsRequest struct {
 
         
-            ShipmentID string  `json:"shipment_id"`
-            RequestID string  `json:"request_id"`
-            Delights bool  `json:"delights"`
-            OrderID string  `json:"order_id"`
-            TransferMode string  `json:"transfer_mode"`
             Details BeneficiaryModeDetails  `json:"details"`
+            ShipmentID string  `json:"shipment_id"`
             Otp string  `json:"otp"`
+            Delights bool  `json:"delights"`
+            TransferMode string  `json:"transfer_mode"`
+            OrderID string  `json:"order_id"`
+            RequestID string  `json:"request_id"`
          
     }
     
@@ -5312,10 +5312,10 @@ package platform
     type RefundAccountResponse struct {
 
         
-            IsVerifiedFlag bool  `json:"is_verified_flag"`
+            Message string  `json:"message"`
             Data map[string]interface{}  `json:"data"`
             Success bool  `json:"success"`
-            Message string  `json:"message"`
+            IsVerifiedFlag bool  `json:"is_verified_flag"`
          
     }
     
@@ -5323,9 +5323,9 @@ package platform
     type NotFoundResourceError struct {
 
         
-            Success bool  `json:"success"`
             Description string  `json:"description"`
             Code string  `json:"code"`
+            Success bool  `json:"success"`
          
     }
     
@@ -5333,9 +5333,9 @@ package platform
     type IfscCodeResponse struct {
 
         
-            Success bool  `json:"success"`
-            BranchName string  `json:"branch_name"`
             BankName string  `json:"bank_name"`
+            BranchName string  `json:"branch_name"`
+            Success bool  `json:"success"`
          
     }
     
@@ -5343,25 +5343,25 @@ package platform
     type OrderBeneficiaryDetails struct {
 
         
-            BeneficiaryID string  `json:"beneficiary_id"`
-            Mobile bool  `json:"mobile"`
-            Comment bool  `json:"comment"`
-            CreatedOn string  `json:"created_on"`
-            ModifiedOn string  `json:"modified_on"`
-            Email string  `json:"email"`
-            TransferMode string  `json:"transfer_mode"`
-            DisplayName string  `json:"display_name"`
-            Address string  `json:"address"`
-            Title string  `json:"title"`
-            AccountHolder string  `json:"account_holder"`
-            IfscCode string  `json:"ifsc_code"`
-            IsActive bool  `json:"is_active"`
-            ID float64  `json:"id"`
-            AccountNo string  `json:"account_no"`
-            BranchName bool  `json:"branch_name"`
-            BankName string  `json:"bank_name"`
             Subtitle string  `json:"subtitle"`
+            AccountNo string  `json:"account_no"`
+            AccountHolder string  `json:"account_holder"`
+            IsActive bool  `json:"is_active"`
+            ModifiedOn string  `json:"modified_on"`
+            BeneficiaryID string  `json:"beneficiary_id"`
+            BankName string  `json:"bank_name"`
+            ID float64  `json:"id"`
+            IfscCode string  `json:"ifsc_code"`
+            Email string  `json:"email"`
+            Comment bool  `json:"comment"`
+            DisplayName string  `json:"display_name"`
             DelightsUserName string  `json:"delights_user_name"`
+            TransferMode string  `json:"transfer_mode"`
+            BranchName bool  `json:"branch_name"`
+            Mobile bool  `json:"mobile"`
+            Title string  `json:"title"`
+            Address string  `json:"address"`
+            CreatedOn string  `json:"created_on"`
          
     }
     
@@ -5369,8 +5369,8 @@ package platform
     type OrderBeneficiaryResponse struct {
 
         
-            Beneficiaries []OrderBeneficiaryDetails  `json:"beneficiaries"`
             ShowBeneficiaryDetails bool  `json:"show_beneficiary_details"`
+            Beneficiaries []OrderBeneficiaryDetails  `json:"beneficiaries"`
          
     }
     
@@ -5378,11 +5378,11 @@ package platform
     type MultiTenderPaymentMeta struct {
 
         
-            PaymentID string  `json:"payment_id"`
             PaymentGateway string  `json:"payment_gateway"`
+            PaymentID string  `json:"payment_id"`
+            ExtraMeta map[string]interface{}  `json:"extra_meta"`
             OrderID string  `json:"order_id"`
             CurrentStatus string  `json:"current_status"`
-            ExtraMeta map[string]interface{}  `json:"extra_meta"`
          
     }
     
@@ -5391,9 +5391,9 @@ package platform
 
         
             Meta MultiTenderPaymentMeta  `json:"meta"`
-            Name string  `json:"name"`
-            Mode string  `json:"mode"`
             Amount float64  `json:"amount"`
+            Mode string  `json:"mode"`
+            Name string  `json:"name"`
          
     }
     
@@ -5410,9 +5410,9 @@ package platform
     type PaymentConfirmationResponse struct {
 
         
-            Success bool  `json:"success"`
-            OrderID string  `json:"order_id"`
             Message string  `json:"message"`
+            OrderID string  `json:"order_id"`
+            Success bool  `json:"success"`
          
     }
     
@@ -10239,8 +10239,8 @@ package platform
     type ContactDetails struct {
 
         
-            Emails []string  `json:"emails"`
             Phone []SellerPhoneNumber  `json:"phone"`
+            Emails []string  `json:"emails"`
          
     }
     
@@ -10264,27 +10264,27 @@ package platform
     type GetCompanyProfileSerializerResponse struct {
 
         
-            Name string  `json:"name"`
-            VerifiedBy UserSerializer  `json:"verified_by"`
-            ModifiedOn string  `json:"modified_on"`
-            Addresses []GetAddressSerializer  `json:"addresses"`
+            NotificationEmails []string  `json:"notification_emails"`
+            VerifiedOn string  `json:"verified_on"`
+            ModifiedBy UserSerializer  `json:"modified_by"`
             CompanyType string  `json:"company_type"`
             FranchiseEnabled bool  `json:"franchise_enabled"`
-            UID float64  `json:"uid"`
-            BusinessCountryInfo BusinessCountryInfo  `json:"business_country_info"`
-            VerifiedOn string  `json:"verified_on"`
-            ContactDetails ContactDetails  `json:"contact_details"`
-            Documents []Document  `json:"documents"`
-            Mode string  `json:"mode"`
-            ModifiedBy UserSerializer  `json:"modified_by"`
-            BusinessDetails BusinessDetails  `json:"business_details"`
             BusinessType string  `json:"business_type"`
-            BusinessInfo string  `json:"business_info"`
             Stage string  `json:"stage"`
-            CreatedBy UserSerializer  `json:"created_by"`
+            VerifiedBy UserSerializer  `json:"verified_by"`
+            BusinessCountryInfo BusinessCountryInfo  `json:"business_country_info"`
+            ContactDetails ContactDetails  `json:"contact_details"`
+            UID float64  `json:"uid"`
             CreatedOn string  `json:"created_on"`
-            NotificationEmails []string  `json:"notification_emails"`
+            CreatedBy UserSerializer  `json:"created_by"`
+            BusinessInfo string  `json:"business_info"`
             Warnings map[string]interface{}  `json:"warnings"`
+            Documents []Document  `json:"documents"`
+            Name string  `json:"name"`
+            Mode string  `json:"mode"`
+            ModifiedOn string  `json:"modified_on"`
+            Addresses []GetAddressSerializer  `json:"addresses"`
+            BusinessDetails BusinessDetails  `json:"business_details"`
          
     }
     
@@ -10292,17 +10292,17 @@ package platform
     type CreateUpdateAddressSerializer struct {
 
         
-            State string  `json:"state"`
-            City string  `json:"city"`
-            Pincode float64  `json:"pincode"`
-            Address1 string  `json:"address1"`
             Address2 string  `json:"address2"`
-            AddressType string  `json:"address_type"`
             Latitude float64  `json:"latitude"`
             Longitude float64  `json:"longitude"`
-            Country string  `json:"country"`
-            Landmark string  `json:"landmark"`
             CountryCode string  `json:"country_code"`
+            Address1 string  `json:"address1"`
+            State string  `json:"state"`
+            City string  `json:"city"`
+            Country string  `json:"country"`
+            AddressType string  `json:"address_type"`
+            Pincode float64  `json:"pincode"`
+            Landmark string  `json:"landmark"`
          
     }
     
@@ -10310,19 +10310,19 @@ package platform
     type UpdateCompany struct {
 
         
-            BusinessDetails BusinessDetails  `json:"business_details"`
-            CompanyType string  `json:"company_type"`
             NotificationEmails []string  `json:"notification_emails"`
-            FranchiseEnabled bool  `json:"franchise_enabled"`
             RejectReason string  `json:"reject_reason"`
-            Name string  `json:"name"`
-            BusinessType string  `json:"business_type"`
-            ContactDetails ContactDetails  `json:"contact_details"`
-            CustomJson map[string]interface{}  `json:"_custom_json"`
-            BusinessInfo string  `json:"business_info"`
             Documents []Document  `json:"documents"`
-            Warnings map[string]interface{}  `json:"warnings"`
+            CompanyType string  `json:"company_type"`
+            Name string  `json:"name"`
+            FranchiseEnabled bool  `json:"franchise_enabled"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
             Addresses []CreateUpdateAddressSerializer  `json:"addresses"`
+            ContactDetails ContactDetails  `json:"contact_details"`
+            BusinessType string  `json:"business_type"`
+            BusinessInfo string  `json:"business_info"`
+            Warnings map[string]interface{}  `json:"warnings"`
+            BusinessDetails BusinessDetails  `json:"business_details"`
          
     }
     
@@ -10340,12 +10340,12 @@ package platform
 
         
             Product DocumentsObj  `json:"product"`
-            CompanyDocuments DocumentsObj  `json:"company_documents"`
             UID float64  `json:"uid"`
-            Store DocumentsObj  `json:"store"`
-            Brand DocumentsObj  `json:"brand"`
             StoreDocuments DocumentsObj  `json:"store_documents"`
+            CompanyDocuments DocumentsObj  `json:"company_documents"`
+            Brand DocumentsObj  `json:"brand"`
             Stage string  `json:"stage"`
+            Store DocumentsObj  `json:"store"`
          
     }
     
@@ -10353,25 +10353,8 @@ package platform
     type BrandBannerSerializer struct {
 
         
-            Portrait string  `json:"portrait"`
             Landscape string  `json:"landscape"`
-         
-    }
-    
-    // CreateUpdateBrandRequestSerializer used by CompanyProfile
-    type CreateUpdateBrandRequestSerializer struct {
-
-        
-            Logo string  `json:"logo"`
-            Banner BrandBannerSerializer  `json:"banner"`
-            BrandTier string  `json:"brand_tier"`
-            Synonyms []string  `json:"synonyms"`
-            CompanyID float64  `json:"company_id"`
-            Description string  `json:"description"`
-            UID float64  `json:"uid"`
-            Name string  `json:"name"`
-            LocaleLanguage map[string]interface{}  `json:"_locale_language"`
-            CustomJson map[string]interface{}  `json:"_custom_json"`
+            Portrait string  `json:"portrait"`
          
     }
     
@@ -10379,35 +10362,42 @@ package platform
     type GetBrandResponseSerializer struct {
 
         
-            Banner BrandBannerSerializer  `json:"banner"`
-            Name string  `json:"name"`
-            VerifiedBy UserSerializer1  `json:"verified_by"`
-            ModifiedOn string  `json:"modified_on"`
-            Synonyms []string  `json:"synonyms"`
-            UID float64  `json:"uid"`
             RejectReason string  `json:"reject_reason"`
             VerifiedOn string  `json:"verified_on"`
-            Mode string  `json:"mode"`
             ModifiedBy UserSerializer1  `json:"modified_by"`
-            CustomJson map[string]interface{}  `json:"_custom_json"`
             Stage string  `json:"stage"`
-            CreatedBy UserSerializer1  `json:"created_by"`
-            CreatedOn string  `json:"created_on"`
-            Logo string  `json:"logo"`
-            Description string  `json:"description"`
-            SlugKey string  `json:"slug_key"`
+            VerifiedBy UserSerializer1  `json:"verified_by"`
             LocaleLanguage map[string]interface{}  `json:"_locale_language"`
+            Logo string  `json:"logo"`
+            UID float64  `json:"uid"`
+            Synonyms []string  `json:"synonyms"`
+            CreatedOn string  `json:"created_on"`
+            CreatedBy UserSerializer1  `json:"created_by"`
+            Banner BrandBannerSerializer  `json:"banner"`
             Warnings map[string]interface{}  `json:"warnings"`
+            SlugKey string  `json:"slug_key"`
+            Description string  `json:"description"`
+            Name string  `json:"name"`
+            Mode string  `json:"mode"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
+            ModifiedOn string  `json:"modified_on"`
          
     }
     
-    // CompanyBrandPostRequestSerializer used by CompanyProfile
-    type CompanyBrandPostRequestSerializer struct {
+    // CreateUpdateBrandRequestSerializer used by CompanyProfile
+    type CreateUpdateBrandRequestSerializer struct {
 
         
-            Brands []float64  `json:"brands"`
             UID float64  `json:"uid"`
-            Company float64  `json:"company"`
+            BrandTier string  `json:"brand_tier"`
+            Synonyms []string  `json:"synonyms"`
+            Description string  `json:"description"`
+            Name string  `json:"name"`
+            Banner BrandBannerSerializer  `json:"banner"`
+            LocaleLanguage map[string]interface{}  `json:"_locale_language"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
+            Logo string  `json:"logo"`
+            CompanyID float64  `json:"company_id"`
          
     }
     
@@ -10415,18 +10405,18 @@ package platform
     type CompanyBrandSerializer struct {
 
         
-            CreatedBy UserSerializer1  `json:"created_by"`
-            CreatedOn string  `json:"created_on"`
             UID float64  `json:"uid"`
             RejectReason string  `json:"reject_reason"`
             VerifiedOn string  `json:"verified_on"`
-            Stage string  `json:"stage"`
-            Brand GetBrandResponseSerializer  `json:"brand"`
-            Company GetCompanySerializer  `json:"company"`
-            Warnings map[string]interface{}  `json:"warnings"`
-            VerifiedBy UserSerializer1  `json:"verified_by"`
-            ModifiedOn string  `json:"modified_on"`
             ModifiedBy UserSerializer1  `json:"modified_by"`
+            Company GetCompanySerializer  `json:"company"`
+            CreatedOn string  `json:"created_on"`
+            VerifiedBy UserSerializer1  `json:"verified_by"`
+            CreatedBy UserSerializer1  `json:"created_by"`
+            Brand GetBrandResponseSerializer  `json:"brand"`
+            ModifiedOn string  `json:"modified_on"`
+            Stage string  `json:"stage"`
+            Warnings map[string]interface{}  `json:"warnings"`
          
     }
     
@@ -10439,21 +10429,31 @@ package platform
          
     }
     
+    // CompanyBrandPostRequestSerializer used by CompanyProfile
+    type CompanyBrandPostRequestSerializer struct {
+
+        
+            UID float64  `json:"uid"`
+            Company float64  `json:"company"`
+            Brands []float64  `json:"brands"`
+         
+    }
+    
     // GetAddressSerializer1 used by CompanyProfile
     type GetAddressSerializer1 struct {
 
         
-            State string  `json:"state"`
-            City string  `json:"city"`
-            Pincode float64  `json:"pincode"`
-            Address1 string  `json:"address1"`
-            AddressType string  `json:"address_type"`
             Address2 string  `json:"address2"`
             Latitude float64  `json:"latitude"`
             Longitude float64  `json:"longitude"`
-            Country string  `json:"country"`
-            Landmark string  `json:"landmark"`
             CountryCode string  `json:"country_code"`
+            Address1 string  `json:"address1"`
+            State string  `json:"state"`
+            City string  `json:"city"`
+            Country string  `json:"country"`
+            AddressType string  `json:"address_type"`
+            Pincode float64  `json:"pincode"`
+            Landmark string  `json:"landmark"`
          
     }
     
@@ -10461,23 +10461,23 @@ package platform
     type LocationSerializer struct {
 
         
-            StoreType string  `json:"store_type"`
-            ProductReturnConfig ProductReturnConfigSerializer  `json:"product_return_config"`
-            NotificationEmails []string  `json:"notification_emails"`
-            DisplayName string  `json:"display_name"`
-            Timing []LocationDayWiseSerializer  `json:"timing"`
             UID float64  `json:"uid"`
-            Name string  `json:"name"`
-            CustomJson map[string]interface{}  `json:"_custom_json"`
-            Warnings map[string]interface{}  `json:"warnings"`
-            GstCredentials InvoiceDetailsSerializer  `json:"gst_credentials"`
+            StoreType string  `json:"store_type"`
+            Timing []LocationDayWiseSerializer  `json:"timing"`
+            NotificationEmails []string  `json:"notification_emails"`
+            Documents []Document  `json:"documents"`
+            ContactNumbers []SellerPhoneNumber  `json:"contact_numbers"`
             Company float64  `json:"company"`
             Address GetAddressSerializer1  `json:"address"`
-            Code string  `json:"code"`
-            Documents []Document  `json:"documents"`
-            Stage string  `json:"stage"`
+            Name string  `json:"name"`
             Manager LocationManagerSerializer  `json:"manager"`
-            ContactNumbers []SellerPhoneNumber  `json:"contact_numbers"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
+            DisplayName string  `json:"display_name"`
+            ProductReturnConfig ProductReturnConfigSerializer  `json:"product_return_config"`
+            Stage string  `json:"stage"`
+            Warnings map[string]interface{}  `json:"warnings"`
+            Code string  `json:"code"`
+            GstCredentials InvoiceDetailsSerializer  `json:"gst_credentials"`
          
     }
     
