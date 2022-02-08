@@ -89,6 +89,7 @@
     * [getCartSharedItems](#getcartshareditems)
     * [updateCartWithSharedItems](#updatecartwithshareditems)
     * [getPromotionOffers](#getpromotionoffers)
+    * [getLadderOffers](#getladderoffers)
     
 
 * [Common](#Common)
@@ -5155,6 +5156,46 @@ Success. Returns a array containing the available offers (if exists) on product 
 
 
 Schema: `PromotionOffersResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getLadderOffers
+Fetch ladder price promotion
+
+```golang
+
+ data, err :=  Cart.GetLadderOffers(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+| xQuery | struct | Includes properties such as `Slug`, `PageSize`
+
+
+
+Use this API to get applicable ladder price promotion for current product
+
+*Success Response:*
+
+
+
+Success. Returns a object containing the applicable ladder price offers (if exists) on product. Refer `PromotionOffersResponse` for more details.
+
+
+Schema: `LadderPriceOffers`
 
 
 

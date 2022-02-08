@@ -4464,6 +4464,63 @@ func NewAppClient(config *AppConfig) *Client {
     }
           
     
+    
+    
+  
+    
+    
+    //CartGetLadderOffersXQuery holds query params
+    type CartGetLadderOffersXQuery struct { 
+        Slug string  `url:"slug,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetLadderOffers Fetch ladder price promotion
+    func (ca *Cart)  GetLadderOffers(xQuery CartGetLadderOffersXQuery) (LadderPriceOffers, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getLadderOffersResponse LadderPriceOffers
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            "/service/application/cart/v1.0/available-ladder-prices",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return LadderPriceOffers{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getLadderOffersResponse)
+        if err != nil {
+            return LadderPriceOffers{}, common.NewFDKError(err.Error())
+        }
+         return getLadderOffersResponse, nil
+        
+    }
+          
+    
 
     // Common ...
     type Common struct {

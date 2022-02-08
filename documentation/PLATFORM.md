@@ -390,18 +390,18 @@
 
 * [CompanyProfile](#CompanyProfile)
   * Methods
-    * [updateCompany](#updatecompany)
     * [cbsOnboardGet](#cbsonboardget)
+    * [updateCompany](#updatecompany)
     * [getCompanyMetrics](#getcompanymetrics)
-    * [editBrand](#editbrand)
     * [getBrand](#getbrand)
+    * [editBrand](#editbrand)
     * [createBrand](#createbrand)
-    * [createCompanyBrandMapping](#createcompanybrandmapping)
     * [getBrands](#getbrands)
-    * [createLocation](#createlocation)
+    * [createCompanyBrandMapping](#createcompanybrandmapping)
     * [getLocations](#getlocations)
-    * [updateLocation](#updatelocation)
+    * [createLocation](#createlocation)
     * [getLocationDetail](#getlocationdetail)
+    * [updateLocation](#updatelocation)
     * [createLocationBulk](#createlocationbulk)
     
 
@@ -56678,6 +56678,43 @@ Schema: `LocationListSerializer`
 ## CompanyProfile
 
 
+#### cbsOnboardGet
+Get company profile
+
+```golang
+
+data, err := CompanyProfile.CbsOnboardGet(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+
+This API allows to view the company profile of the seller account.
+
+*Success Response:*
+
+
+
+Company profile object. See example below or refer `GetCompanyProfileSerializerResponse` for details
+
+
+Schema: `GetCompanyProfileSerializerResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateCompany
 Edit company profile
 
@@ -56716,43 +56753,6 @@ Schema: `SuccessResponse`
 ---
 
 
-#### cbsOnboardGet
-Get company profile
-
-```golang
-
-data, err := CompanyProfile.CbsOnboardGet(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-
-This API allows to view the company profile of the seller account.
-
-*Success Response:*
-
-
-
-Company profile object. See example below or refer `GetCompanyProfileSerializerResponse` for details
-
-
-Schema: `GetCompanyProfileSerializerResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getCompanyMetrics
 Get company metrics
 
@@ -56778,6 +56778,46 @@ Metrics response object. See example below or refer `MetricsSerializer` for deta
 
 
 Schema: `MetricsSerializer`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getBrand
+Get a single brand.
+
+```golang
+
+data, err := CompanyProfile.GetBrand(CompanyID, BrandID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to brand that is to be viewed. | 
+
+
+| BrandID | string | Id of the brand to be viewed. | 
+
+
+
+This API helps to get data associated to a particular brand.
+
+*Success Response:*
+
+
+
+Brand object. See example below or refer `GetBrandResponseSerializer` for details
+
+
+Schema: `GetBrandResponseSerializer`
 
 
 
@@ -56831,46 +56871,6 @@ Schema: `SuccessResponse`
 ---
 
 
-#### getBrand
-Get a single brand.
-
-```golang
-
-data, err := CompanyProfile.GetBrand(CompanyID, BrandID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to brand that is to be viewed. | 
-
-
-| BrandID | string | Id of the brand to be viewed. | 
-
-
-
-This API helps to get data associated to a particular brand.
-
-*Success Response:*
-
-
-
-Brand object. See example below or refer `GetBrandResponseSerializer` for details
-
-
-Schema: `GetBrandResponseSerializer`
-
-
-
-
-
-
-
-
-
----
-
-
 #### createBrand
 Create a Brand.
 
@@ -56888,44 +56888,6 @@ data, err := CompanyProfile.CreateBrand(CompanyID, body);
 | body |  CreateUpdateBrandRequestSerializer | "Request body" 
 
 This API allows to create a brand associated to a company.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createCompanyBrandMapping
-Create a company brand mapping.
-
-```golang
-
-data, err := CompanyProfile.CreateCompanyBrandMapping(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company inside which the brand is to be mapped. | 
-
-
-| body |  CompanyBrandPostRequestSerializer | "Request body" 
-
-This API allows to create a company brand mapping, for a already existing brand in the system.
 
 *Success Response:*
 
@@ -56991,23 +56953,23 @@ Schema: `CompanyBrandListSerializer`
 ---
 
 
-#### createLocation
-Create a location asscoiated to a company.
+#### createCompanyBrandMapping
+Create a company brand mapping.
 
 ```golang
 
-data, err := CompanyProfile.CreateLocation(CompanyID, body);
+data, err := CompanyProfile.CreateCompanyBrandMapping(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Id of the company inside which the location is to be created. | 
+| CompanyID | string | Id of the company inside which the brand is to be mapped. | 
 
 
-| body |  LocationSerializer | "Request body" 
+| body |  CompanyBrandPostRequestSerializer | "Request body" 
 
-This API allows to create a location associated to a company.
+This API allows to create a company brand mapping, for a already existing brand in the system.
 
 *Success Response:*
 
@@ -57077,12 +57039,12 @@ Schema: `LocationListSerializer`
 ---
 
 
-#### updateLocation
-Edit a location asscoiated to a company.
+#### createLocation
+Create a location asscoiated to a company.
 
 ```golang
 
-data, err := CompanyProfile.UpdateLocation(CompanyID, LocationID, body);
+data, err := CompanyProfile.CreateLocation(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -57091,12 +57053,9 @@ data, err := CompanyProfile.UpdateLocation(CompanyID, LocationID, body);
 | CompanyID | string | Id of the company inside which the location is to be created. | 
 
 
-| LocationID | string | Id of the location which you want to edit. | 
-
-
 | body |  LocationSerializer | "Request body" 
 
-This API allows to edit a location associated to a company.
+This API allows to create a location associated to a company.
 
 *Success Response:*
 
@@ -57146,6 +57105,47 @@ Brand object. See example below or refer `GetLocationSerializer` for details
 
 
 Schema: `GetLocationSerializer`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateLocation
+Edit a location asscoiated to a company.
+
+```golang
+
+data, err := CompanyProfile.UpdateLocation(CompanyID, LocationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company inside which the location is to be created. | 
+
+
+| LocationID | string | Id of the location which you want to edit. | 
+
+
+| body |  LocationSerializer | "Request body" 
+
+This API allows to edit a location associated to a company.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
@@ -63221,7 +63221,7 @@ Get Subscribers By ExtensionID
 Success
 
 
-Schema: `SubscriberResponse`
+Schema: `SubscriberConfigList`
 
 
 
@@ -63298,7 +63298,7 @@ Get All Webhook Events
 Success
 
 
-Schema: `EventConfigList`
+Schema: `EventConfigResponse`
 
 
 
