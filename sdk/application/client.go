@@ -4300,7 +4300,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            "/service/application/cart/v1.0/available-ladder-prices",
+            fmt.Sprintf("/service/application/cart/v1.0/available-ladder-prices",),
             nil,
             xQuery,
             nil)
