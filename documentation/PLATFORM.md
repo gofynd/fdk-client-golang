@@ -37,10 +37,15 @@
 
 * [Lead](#Lead)
   * Methods
+    * [getTickets](#gettickets)
     * [createTicket](#createticket)
     * [getTickets](#gettickets)
     * [getTicket](#getticket)
     * [editTicket](#editticket)
+    * [getTicket](#getticket)
+    * [editTicket](#editticket)
+    * [createHistory](#createhistory)
+    * [getTicketHistory](#gettickethistory)
     * [getFeedbacks](#getfeedbacks)
     * [submitFeedback](#submitfeedback)
     * [createHistory](#createhistory)
@@ -50,6 +55,8 @@
     * [getCustomForms](#getcustomforms)
     * [createCustomForm](#createcustomform)
     * [getTokenForVideoRoom](#gettokenforvideoroom)
+    * [getTokenForVideoRoom](#gettokenforvideoroom)
+    * [getVideoParticipants](#getvideoparticipants)
     * [getVideoParticipants](#getvideoparticipants)
     * [openVideoRoom](#openvideoroom)
     * [closeVideoRoom](#closevideoroom)
@@ -265,6 +272,7 @@
     * [getOrdersByCompanyId](#getordersbycompanyid)
     * [getOrderLanesCountByCompanyId](#getorderlanescountbycompanyid)
     * [getOrderDetails](#getorderdetails)
+    * [getOrderDetails](#getorderdetails)
     * [getPicklistOrdersByCompanyId](#getpicklistordersbycompanyid)
     * [trackShipmentPlatform](#trackshipmentplatform)
     * [trackOrder](#trackorder)
@@ -283,38 +291,38 @@
 
 * [Catalog](#Catalog)
   * Methods
+    * [deleteSearchKeywords](#deletesearchkeywords)
     * [updateSearchKeywords](#updatesearchkeywords)
     * [getSearchKeywords](#getsearchkeywords)
-    * [deleteSearchKeywords](#deletesearchkeywords)
-    * [getAllSearchKeyword](#getallsearchkeyword)
     * [createCustomKeyword](#createcustomkeyword)
+    * [getAllSearchKeyword](#getallsearchkeyword)
+    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [updateAutocompleteKeyword](#updateautocompletekeyword)
     * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
-    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
-    * [getAutocompleteConfig](#getautocompleteconfig)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
-    * [getProductBundle](#getproductbundle)
+    * [getAutocompleteConfig](#getautocompleteconfig)
     * [createProductBundle](#createproductbundle)
+    * [getProductBundle](#getproductbundle)
     * [updateProductBundle](#updateproductbundle)
     * [getProductBundleDetail](#getproductbundledetail)
-    * [getSizeGuides](#getsizeguides)
     * [createSizeGuide](#createsizeguide)
+    * [getSizeGuides](#getsizeguides)
     * [updateSizeGuide](#updatesizeguide)
     * [getSizeGuide](#getsizeguide)
     * [upsertAppProductMeta](#upsertappproductmeta)
     * [getCatalogConfiguration](#getcatalogconfiguration)
-    * [getConfigurations](#getconfigurations)
     * [createConfigurationProductListing](#createconfigurationproductlisting)
-    * [getConfigurationByType](#getconfigurationbytype)
+    * [getConfigurations](#getconfigurations)
     * [createConfigurationByType](#createconfigurationbytype)
+    * [getConfigurationByType](#getconfigurationbytype)
     * [getQueryFilters](#getqueryfilters)
-    * [getAllCollections](#getallcollections)
     * [createCollection](#createcollection)
+    * [getAllCollections](#getallcollections)
     * [getCollectionDetail](#getcollectiondetail)
-    * [updateCollection](#updatecollection)
     * [deleteCollection](#deletecollection)
-    * [getCollectionItems](#getcollectionitems)
+    * [updateCollection](#updatecollection)
     * [addCollectionItems](#addcollectionitems)
+    * [getCollectionItems](#getcollectionitems)
     * [getCatalogInsights](#getcataloginsights)
     * [getSellerInsights](#getsellerinsights)
     * [createMarketplaceOptin](#createmarketplaceoptin)
@@ -335,39 +343,39 @@
     * [listHSNCodes](#listhsncodes)
     * [listProductTemplateExportDetails](#listproducttemplateexportdetails)
     * [listTemplateBrandTypeValues](#listtemplatebrandtypevalues)
-    * [listCategories](#listcategories)
     * [createCategories](#createcategories)
+    * [listCategories](#listcategories)
     * [updateCategory](#updatecategory)
     * [getCategoryData](#getcategorydata)
-    * [getProducts](#getproducts)
     * [createProduct](#createproduct)
+    * [getProducts](#getproducts)
+    * [deleteProduct](#deleteproduct)
     * [editProduct](#editproduct)
     * [getProduct](#getproduct)
-    * [deleteProduct](#deleteproduct)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
-    * [getProductBulkUploadHistory](#getproductbulkuploadhistory)
     * [updateProductAssetsInBulk](#updateproductassetsinbulk)
+    * [getProductBulkUploadHistory](#getproductbulkuploadhistory)
     * [deleteProductBulkJob](#deleteproductbulkjob)
     * [createProductsInBulk](#createproductsinbulk)
     * [getProductTags](#getproducttags)
-    * [getProductAssetsInBulk](#getproductassetsinbulk)
     * [createProductAssetsInBulk](#createproductassetsinbulk)
+    * [getProductAssetsInBulk](#getproductassetsinbulk)
     * [deleteSize](#deletesize)
-    * [getInventoryBySize](#getinventorybysize)
     * [addInventory](#addinventory)
+    * [getInventoryBySize](#getinventorybysize)
     * [getInventoryBySizeIdentifier](#getinventorybysizeidentifier)
     * [getDiscountedInventoryBySizeIdentifier](#getdiscountedinventorybysizeidentifier)
     * [deleteInventory](#deleteinventory)
-    * [getInventoryBulkUploadHistory](#getinventorybulkuploadhistory)
     * [createBulkInventoryJob](#createbulkinventoryjob)
+    * [getInventoryBulkUploadHistory](#getinventorybulkuploadhistory)
     * [deleteBulkInventoryJob](#deletebulkinventoryjob)
     * [createBulkInventory](#createbulkinventory)
-    * [getInventoryExport](#getinventoryexport)
     * [createInventoryExportJob](#createinventoryexportjob)
+    * [getInventoryExport](#getinventoryexport)
     * [exportInventoryConfig](#exportinventoryconfig)
-    * [getAllHsnCodes](#getallhsncodes)
     * [createHsnCode](#createhsncode)
+    * [getAllHsnCodes](#getallhsncodes)
     * [updateHsnCode](#updatehsncode)
     * [getHsnCode](#gethsncode)
     * [bulkHsnCode](#bulkhsncode)
@@ -383,18 +391,18 @@
 
 * [CompanyProfile](#CompanyProfile)
   * Methods
-    * [updateCompany](#updatecompany)
     * [cbsOnboardGet](#cbsonboardget)
+    * [updateCompany](#updatecompany)
     * [getCompanyMetrics](#getcompanymetrics)
-    * [getBrand](#getbrand)
     * [editBrand](#editbrand)
+    * [getBrand](#getbrand)
     * [createBrand](#createbrand)
     * [getBrands](#getbrands)
     * [createCompanyBrandMapping](#createcompanybrandmapping)
     * [getLocations](#getlocations)
     * [createLocation](#createlocation)
-    * [getLocationDetail](#getlocationdetail)
     * [updateLocation](#updatelocation)
+    * [getLocationDetail](#getlocationdetail)
     * [createLocationBulk](#createlocationbulk)
     
 
@@ -407,6 +415,7 @@
     * [getSignUrls](#getsignurls)
     * [copyFiles](#copyfiles)
     * [appCopyFiles](#appcopyfiles)
+    * [browse](#browse)
     * [browse](#browse)
     * [proxy](#proxy)
     
@@ -613,6 +622,434 @@ Schema: `Locations`
 
 
 ## Lead
+
+
+#### getTickets
+Gets the list of company level tickets and/or ticket filters depending on query params
+
+```golang
+
+data, err := Lead.GetTickets(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Items`, `Filters`, `Q`, `Status`, `Priority`, `Category`, `PageNo`, `PageSize`
+
+
+Gets the list of company level tickets and/or ticket filters
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `TicketList`
+
+
+*Examples:*
+
+
+Without items
+```json
+{
+  "value": {
+    "filters": {
+      "statuses": [
+        {
+          "display": "Pending",
+          "color": "#eae22b",
+          "key": "pending"
+        },
+        {
+          "display": "In Progress",
+          "color": "#ffa951",
+          "key": "in_progress"
+        },
+        {
+          "display": "Resolved",
+          "color": "#20c3a6",
+          "key": "resolved"
+        },
+        {
+          "display": "Closed",
+          "color": "#41434c",
+          "key": "closed"
+        }
+      ],
+      "priorities": [
+        {
+          "display": "Low",
+          "color": "#fed766",
+          "key": "low"
+        },
+        {
+          "display": "Medium",
+          "color": "#f37736",
+          "key": "medium"
+        },
+        {
+          "display": "High",
+          "color": "#fe4a49",
+          "key": "high"
+        }
+      ],
+      "assignees": [],
+      "categories": [
+        {
+          "form": {
+            "login_required": false,
+            "should_notify": false,
+            "inputs": [
+              {
+                "type": "email",
+                "showRegexInput": false,
+                "enum": [],
+                "regex": "\\S+@\\S+\\.\\S+",
+                "display": "email",
+                "required": true,
+                "key": "email"
+              }
+            ],
+            "available_assignees": [],
+            "_id": "602e900a2042255c03cadaf0",
+            "title": "service-test-satyen",
+            "description": "testing form from service",
+            "slug": "service-test-satyen",
+            "header_image": "https://hdn-1.addsale.com/x0/support-ticket/files/free/original/KZL86aN5l-service-test-satyen.jpeg",
+            "application_id": "000000000000000000000001",
+            "created_on": {
+              "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
+              "platform": "web",
+              "meta": {
+                "browser": {
+                  "name": "Chrome",
+                  "version": "88.0.4324.150"
+                },
+                "os": {
+                  "name": "macOS",
+                  "version": "11.2.0"
+                },
+                "platform": {
+                  "type": "desktop",
+                  "vendor": "Apple"
+                },
+                "engine": {
+                  "name": "Blink"
+                }
+              }
+            },
+            "created_by": "5f8147abbd1a0a870f61f1a6",
+            "createdAt": "2021-02-18T16:04:26.495Z",
+            "updatedAt": "2021-02-18T16:04:26.495Z",
+            "__v": 0
+          },
+          "key": "service-test-satyen",
+          "display": "service-test-satyen"
+        }
+      ]
+    }
+  }
+}
+```
+
+With items
+```json
+{
+  "value": {
+    "docs": [
+      {
+        "_id": "602d2652ce284d0b008d5c97",
+        "status": {
+          "display": "Pending",
+          "color": "#eae22b",
+          "key": "pending"
+        },
+        "priority": {
+          "display": "Medium",
+          "color": "#f37736",
+          "key": "medium"
+        },
+        "assigned_to": {
+          "agent_id": "5e79e721768c6bf54b783146",
+          "gender": "male",
+          "accountType": "user",
+          "active": true,
+          "profilePicUrl": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
+          "hasOldPasswordHash": false,
+          "_id": "5e79e721768c6bf54b783146",
+          "emails": [
+            {
+              "active": true,
+              "primary": true,
+              "verified": true,
+              "email": "nikhilmshchs@gmail.com"
+            },
+            {
+              "active": true,
+              "primary": false,
+              "verified": true,
+              "email": "nikhilmanapure@gofynd.com"
+            },
+            {
+              "active": true,
+              "primary": false,
+              "verified": true,
+              "email": "nikhilmanapure@fynd.com"
+            },
+            {
+              "active": true,
+              "primary": false,
+              "verified": true,
+              "email": "nikhilmanapure@uniket.store"
+            }
+          ],
+          "phoneNumbers": [
+            {
+              "active": true,
+              "primary": true,
+              "verified": true,
+              "countryCode": 91,
+              "phone": "9890425946"
+            }
+          ],
+          "firstName": "Nikhil",
+          "lastName": "Manapure",
+          "username": "nikhilmanapure_gofynd_com_29298",
+          "createdAt": "2020-03-24T10:55:29.298Z",
+          "updatedAt": "2020-05-12T07:46:41.816Z",
+          "uid": "5567",
+          "__v": 2
+        },
+        "tags": [
+          "asdf444"
+        ],
+        "context": {
+          "application_id": "000000000000000000000001",
+          "company_id": "1"
+        },
+        "created_on": {
+          "user_agent": "Fynd Platform/0.0.1 (com.fynd.platform; build:3; iOS 14.2.0) Alamofire/5.0.2",
+          "platform": "web",
+          "meta": {
+            "browser": {
+              "name": "Fynd Platform",
+              "version": "0.0.1"
+            }
+          }
+        },
+        "source": "sales_channel",
+        "content": {
+          "title": "asdf444 Response",
+          "description": "",
+          "attachments": []
+        },
+        "response_id": "602d2652ce284dee3c8d5c96",
+        "category": {
+          "form": {
+            "login_required": false,
+            "should_notify": true,
+            "inputs": [
+              {
+                "type": "text",
+                "showRegexInput": false,
+                "enum": [],
+                "display": "asdf",
+                "key": "asdf"
+              },
+              {
+                "type": "mobile",
+                "showRegexInput": false,
+                "enum": [],
+                "display": "mob num",
+                "regex": "[0-9]{10}$",
+                "key": "mob-num"
+              }
+            ],
+            "available_assignees": [
+              "5e79e721768c6bf54b783146"
+            ],
+            "_id": "60124e4a4d2bc363625e1bf4",
+            "title": "asdf444",
+            "description": "adf",
+            "slug": "asdf444",
+            "application_id": "000000000000000000000001",
+            "created_on": {
+              "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
+              "platform": "web",
+              "meta": {
+                "browser": {
+                  "name": "Chrome",
+                  "version": "88.0.4324.96"
+                },
+                "os": {
+                  "name": "macOS",
+                  "version": "10.15.7",
+                  "versionName": "Catalina"
+                },
+                "platform": {
+                  "type": "desktop",
+                  "vendor": "Apple"
+                },
+                "engine": {
+                  "name": "Blink"
+                }
+              }
+            },
+            "created_by": "5e79e721768c6bf54b783146",
+            "createdAt": "2021-01-28T05:40:26.271Z",
+            "updatedAt": "2021-02-18T16:02:32.086Z",
+            "__v": 0,
+            "poll_for_assignment": {
+              "duration": 20,
+              "message": "We are looking for executive to connect you",
+              "success_message": "Executive found",
+              "failure_message": "All our executives are busy at the moment, We have accepted your request and someone will connect with you soon!"
+            }
+          },
+          "key": "asdf444",
+          "display": "asdf444"
+        },
+        "ticket_id": "472",
+        "createdAt": "2021-02-17T14:21:06.774Z",
+        "updatedAt": "2021-02-17T14:21:06.774Z",
+        "__v": 0,
+        "id": "602d2652ce284d0b008d5c97"
+      }
+    ],
+    "total": 472,
+    "limit": 10,
+    "page": 1,
+    "pages": 48,
+    "filters": {
+      "statuses": [
+        {
+          "display": "Pending",
+          "color": "#eae22b",
+          "key": "pending"
+        },
+        {
+          "display": "In Progress",
+          "color": "#ffa951",
+          "key": "in_progress"
+        },
+        {
+          "display": "Resolved",
+          "color": "#20c3a6",
+          "key": "resolved"
+        },
+        {
+          "display": "Closed",
+          "color": "#41434c",
+          "key": "closed"
+        }
+      ],
+      "priorities": [
+        {
+          "display": "Low",
+          "color": "#fed766",
+          "key": "low"
+        },
+        {
+          "display": "Medium",
+          "color": "#f37736",
+          "key": "medium"
+        },
+        {
+          "display": "High",
+          "color": "#fe4a49",
+          "key": "high"
+        }
+      ],
+      "assignees": [],
+      "categories": [
+        {
+          "form": {
+            "login_required": false,
+            "should_notify": false,
+            "inputs": [
+              {
+                "type": "email",
+                "showRegexInput": false,
+                "enum": [],
+                "regex": "\\S+@\\S+\\.\\S+",
+                "display": "email",
+                "required": true,
+                "key": "email"
+              }
+            ],
+            "available_assignees": [],
+            "_id": "602e900a2042255c03cadaf0",
+            "title": "service-test-satyen",
+            "description": "testing form from service",
+            "slug": "service-test-satyen",
+            "header_image": "https://hdn-1.addsale.com/x0/support-ticket/files/free/original/KZL86aN5l-service-test-satyen.jpeg",
+            "application_id": "000000000000000000000001",
+            "created_on": {
+              "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
+              "platform": "web",
+              "meta": {
+                "browser": {
+                  "name": "Chrome",
+                  "version": "88.0.4324.150"
+                },
+                "os": {
+                  "name": "macOS",
+                  "version": "11.2.0"
+                },
+                "platform": {
+                  "type": "desktop",
+                  "vendor": "Apple"
+                },
+                "engine": {
+                  "name": "Blink"
+                }
+              }
+            },
+            "created_by": "5f8147abbd1a0a870f61f1a6",
+            "createdAt": "2021-02-18T16:04:26.495Z",
+            "updatedAt": "2021-02-18T16:04:26.495Z",
+            "__v": 0
+          },
+          "key": "service-test-satyen",
+          "display": "service-test-satyen"
+        }
+      ]
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
 
 
 #### createTicket
@@ -1282,6 +1719,489 @@ With items
 
 
 #### getTicket
+Retreives ticket details of a company level ticket with ticket ID
+
+```golang
+
+data, err := Lead.GetTicket(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned | 
+
+
+| ID | string | Tiket ID of the ticket to be fetched | 
+
+
+
+Retreives ticket details of a company level ticket
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `Ticket`
+
+
+*Examples:*
+
+
+Default
+```json
+{
+  "value": {
+    "context": {
+      "company_id": "1"
+    },
+    "content": {
+      "title": "SOme title Response",
+      "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
+      "attachments": []
+    },
+    "status": {
+      "display": "In Progress",
+      "color": "#ffa951",
+      "key": "in_progress"
+    },
+    "priority": {
+      "display": "Medium",
+      "color": "#f37736",
+      "key": "medium"
+    },
+    "assigned_to": {
+      "agent_id": "5d1363adf599d850df93175e",
+      "gender": "male",
+      "accountType": "user",
+      "active": true,
+      "profilePicUrl": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2136700473091190&height=400&width=400&ext=1554542761&hash=AeS6cuWIdjDdJJ-b",
+      "hasOldPasswordHash": false,
+      "_id": "5d1363adf599d850df93175e",
+      "phoneNumbers": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "countryCode": 91,
+          "phone": "9890425946"
+        }
+      ],
+      "firstName": "Nikhil",
+      "lastName": "Manapure",
+      "emails": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "email": "nikhilmshchs@gmail.com"
+        }
+      ],
+      "username": "nikhilmshchs_gmail_com_38425_20500281",
+      "createdAt": "2019-01-01T17:22:38.528Z",
+      "updatedAt": "2021-01-22T10:02:42.258Z",
+      "uid": "20500281",
+      "__v": 56
+    },
+    "tags": [
+      "some-title"
+    ],
+    "_id": "6012f38557751ee8fc162cf7",
+    "created_on": {
+      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
+      "platform": "web",
+      "meta": {
+        "browser": {
+          "name": "Chrome",
+          "version": "88.0.4324.96"
+        },
+        "os": {
+          "name": "macOS",
+          "version": "10.15.7",
+          "versionName": "Catalina"
+        },
+        "platform": {
+          "type": "desktop",
+          "vendor": "Apple"
+        },
+        "engine": {
+          "name": "Blink"
+        }
+      }
+    },
+    "source": "sales_channel",
+    "created_by": {
+      "id": "5d1363adf599d850df93175e",
+      "user": {
+        "gender": "male",
+        "accountType": "user",
+        "active": true,
+        "profilePicUrl": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2136700473091190&height=400&width=400&ext=1554542761&hash=AeS6cuWIdjDdJJ-b",
+        "hasOldPasswordHash": false,
+        "_id": "5d1363adf599d850df93175e",
+        "phoneNumbers": [
+          {
+            "active": true,
+            "primary": true,
+            "verified": true,
+            "countryCode": 91,
+            "phone": "9890425946"
+          }
+        ],
+        "firstName": "Nikhil",
+        "lastName": "Manapure",
+        "emails": [
+          {
+            "active": true,
+            "primary": true,
+            "verified": true,
+            "email": "nikhilmshchs@gmail.com"
+          }
+        ],
+        "username": "nikhilmshchs_gmail_com_38425_20500281",
+        "createdAt": "2019-01-01T17:22:38.528Z",
+        "updatedAt": "2021-01-22T10:02:42.258Z",
+        "uid": "20500281",
+        "__v": 56
+      }
+    },
+    "response_id": "6012f38457751e0fb8162cf6",
+    "category": {
+      "form": {
+        "login_required": false,
+        "should_notify": false,
+        "inputs": [
+          {
+            "required": false,
+            "type": "text",
+            "enum": [],
+            "display": "Single lineeee",
+            "key": "single-lineeee",
+            "showRegexInput": false
+          },
+          {
+            "required": false,
+            "type": "email",
+            "enum": [],
+            "display": "Email",
+            "regex": "\\S+@\\S+\\.\\S+",
+            "key": "email",
+            "showRegexInput": true
+          },
+          {
+            "required": false,
+            "type": "text",
+            "enum": [],
+            "display": "dfsdf",
+            "key": "dfsdf",
+            "showRegexInput": false
+          }
+        ],
+        "available_assignees": [
+          "5b9b98150df588546aaea6d2",
+          "5c45d78395d7504f76c2cb37"
+        ],
+        "_id": "5fd72db3dc250f8decfc61b2",
+        "title": "SOme title",
+        "description": "SOme big description",
+        "slug": "some-title",
+        "application_id": "000000000000000000000003",
+        "created_on": {
+          "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
+          "platform": "web",
+          "meta": {
+            "browser": {
+              "name": "Chrome",
+              "version": "87.0.4280.88"
+            },
+            "os": {
+              "name": "macOS",
+              "version": "10.15.6",
+              "versionName": "Catalina"
+            },
+            "platform": {
+              "type": "desktop",
+              "vendor": "Apple"
+            },
+            "engine": {
+              "name": "Blink"
+            }
+          }
+        },
+        "created_by": "5d1363adf599d850df93175e",
+        "createdAt": "2020-12-14T09:17:39.953Z",
+        "updatedAt": "2021-01-28T18:48:07.717Z",
+        "__v": 0
+      },
+      "key": "some-title",
+      "display": "SOme title"
+    },
+    "ticket_id": "43",
+    "createdAt": "2021-01-28T17:25:25.013Z",
+    "updatedAt": "2021-01-28T17:25:33.396Z",
+    "__v": 0,
+    "video_room_id": "6012f38557751ee8fc162cf7"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### editTicket
+Edits ticket details of a company level ticket
+
+```golang
+
+data, err := Lead.EditTicket(CompanyID, ID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for ticket | 
+
+
+| ID | string | Ticket ID of ticket to be edited | 
+
+
+| body |  EditTicketPayload | "Request body" 
+
+Edits ticket details of a company level ticket such as status, priority, category, tags, attachments, assigne & ticket content changes
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `Ticket`
+
+
+*Examples:*
+
+
+Default
+```json
+{
+  "value": {
+    "context": {
+      "company_id": "1"
+    },
+    "content": {
+      "title": "SOme title Response",
+      "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
+      "attachments": []
+    },
+    "status": {
+      "display": "In Progress",
+      "color": "#ffa951",
+      "key": "in_progress"
+    },
+    "priority": {
+      "display": "Medium",
+      "color": "#f37736",
+      "key": "medium"
+    },
+    "assigned_to": {
+      "agent_id": "5d1363adf599d850df93175e",
+      "gender": "male",
+      "accountType": "user",
+      "active": true,
+      "profilePicUrl": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2136700473091190&height=400&width=400&ext=1554542761&hash=AeS6cuWIdjDdJJ-b",
+      "hasOldPasswordHash": false,
+      "_id": "5d1363adf599d850df93175e",
+      "phoneNumbers": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "countryCode": 91,
+          "phone": "9890425946"
+        }
+      ],
+      "firstName": "Nikhil",
+      "lastName": "Manapure",
+      "emails": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "email": "nikhilmshchs@gmail.com"
+        }
+      ],
+      "username": "nikhilmshchs_gmail_com_38425_20500281",
+      "createdAt": "2019-01-01T17:22:38.528Z",
+      "updatedAt": "2021-01-22T10:02:42.258Z",
+      "uid": "20500281",
+      "__v": 56
+    },
+    "tags": [
+      "some-title"
+    ],
+    "_id": "6012f38557751ee8fc162cf7",
+    "created_on": {
+      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
+      "platform": "web",
+      "meta": {
+        "browser": {
+          "name": "Chrome",
+          "version": "88.0.4324.96"
+        },
+        "os": {
+          "name": "macOS",
+          "version": "10.15.7",
+          "versionName": "Catalina"
+        },
+        "platform": {
+          "type": "desktop",
+          "vendor": "Apple"
+        },
+        "engine": {
+          "name": "Blink"
+        }
+      }
+    },
+    "source": "sales_channel",
+    "created_by": {
+      "id": "5d1363adf599d850df93175e",
+      "user": {
+        "gender": "male",
+        "accountType": "user",
+        "active": true,
+        "profilePicUrl": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2136700473091190&height=400&width=400&ext=1554542761&hash=AeS6cuWIdjDdJJ-b",
+        "hasOldPasswordHash": false,
+        "_id": "5d1363adf599d850df93175e",
+        "phoneNumbers": [
+          {
+            "active": true,
+            "primary": true,
+            "verified": true,
+            "countryCode": 91,
+            "phone": "9890425946"
+          }
+        ],
+        "firstName": "Nikhil",
+        "lastName": "Manapure",
+        "emails": [
+          {
+            "active": true,
+            "primary": true,
+            "verified": true,
+            "email": "nikhilmshchs@gmail.com"
+          }
+        ],
+        "username": "nikhilmshchs_gmail_com_38425_20500281",
+        "createdAt": "2019-01-01T17:22:38.528Z",
+        "updatedAt": "2021-01-22T10:02:42.258Z",
+        "uid": "20500281",
+        "__v": 56
+      }
+    },
+    "response_id": "6012f38457751e0fb8162cf6",
+    "category": {
+      "form": {
+        "login_required": false,
+        "should_notify": false,
+        "inputs": [
+          {
+            "required": false,
+            "type": "text",
+            "enum": [],
+            "display": "Single lineeee",
+            "key": "single-lineeee",
+            "showRegexInput": false
+          },
+          {
+            "required": false,
+            "type": "email",
+            "enum": [],
+            "display": "Email",
+            "regex": "\\S+@\\S+\\.\\S+",
+            "key": "email",
+            "showRegexInput": true
+          },
+          {
+            "required": false,
+            "type": "text",
+            "enum": [],
+            "display": "dfsdf",
+            "key": "dfsdf",
+            "showRegexInput": false
+          }
+        ],
+        "available_assignees": [
+          "5b9b98150df588546aaea6d2",
+          "5c45d78395d7504f76c2cb37"
+        ],
+        "_id": "5fd72db3dc250f8decfc61b2",
+        "title": "SOme title",
+        "description": "SOme big description",
+        "slug": "some-title",
+        "application_id": "000000000000000000000003",
+        "created_on": {
+          "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
+          "platform": "web",
+          "meta": {
+            "browser": {
+              "name": "Chrome",
+              "version": "87.0.4280.88"
+            },
+            "os": {
+              "name": "macOS",
+              "version": "10.15.6",
+              "versionName": "Catalina"
+            },
+            "platform": {
+              "type": "desktop",
+              "vendor": "Apple"
+            },
+            "engine": {
+              "name": "Blink"
+            }
+          }
+        },
+        "created_by": "5d1363adf599d850df93175e",
+        "createdAt": "2020-12-14T09:17:39.953Z",
+        "updatedAt": "2021-01-28T18:48:07.717Z",
+        "__v": 0
+      },
+      "key": "some-title",
+      "display": "SOme title"
+    },
+    "ticket_id": "43",
+    "createdAt": "2021-01-28T17:25:25.013Z",
+    "updatedAt": "2021-01-28T17:25:33.396Z",
+    "__v": 0,
+    "video_room_id": "6012f38557751ee8fc162cf7"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getTicket
 Retreives ticket details of a application level ticket
 
 ```golang
@@ -1757,6 +2677,281 @@ Default
     "updatedAt": "2021-01-28T17:25:33.396Z",
     "__v": 0,
     "video_room_id": "6012f38557751ee8fc162cf7"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createHistory
+Create history for specific company level ticket
+
+```golang
+
+data, err := Lead.CreateHistory(CompanyID, ID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for ticket | 
+
+
+| ID | string | Ticket ID for which history is created | 
+
+
+| body |  TicketHistoryPayload | "Request body" 
+
+Create history for specific company level ticket, this history is seen on ticket detail page, this can be comment, log or rating.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `TicketHistory`
+
+
+*Examples:*
+
+
+Default
+```json
+{
+  "value": {
+    "_id": "601a9d52c26687d086c499ef",
+    "ticket_id": "43",
+    "type": "comment",
+    "value": {
+      "text": "d",
+      "media": []
+    },
+    "created_on": {
+      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
+      "platform": "web",
+      "meta": {
+        "browser": {
+          "name": "Chrome",
+          "version": "88.0.4324.96"
+        },
+        "os": {
+          "name": "macOS",
+          "version": "10.15.7",
+          "versionName": "Catalina"
+        },
+        "platform": {
+          "type": "desktop",
+          "vendor": "Apple"
+        },
+        "engine": {
+          "name": "Blink"
+        }
+      }
+    },
+    "created_by": "5d1363adf599d850df93175e",
+    "createdAt": "2021-02-03T12:55:46.808Z",
+    "updatedAt": "2021-02-03T12:55:46.808Z",
+    "__v": 0
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getTicketHistory
+Gets history list for specific company level ticket
+
+```golang
+
+data, err := Lead.GetTicketHistory(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for ticket | 
+
+
+| ID | string | Ticket ID for which history is to be fetched | 
+
+
+
+Gets history list for specific company level ticket, this history is seen on ticket detail page, this can be comment, log or rating.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `TicketHistoryList`
+
+
+*Examples:*
+
+
+Default
+```json
+{
+  "value": {
+    "docs": [
+      {
+        "_id": "602e5384204225eed5cadae7",
+        "ticket_id": "41",
+        "type": "comment",
+        "value": {
+          "text": "hello service",
+          "media": []
+        },
+        "created_on": {
+          "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
+          "platform": "web",
+          "meta": {
+            "browser": {
+              "name": "Chrome",
+              "version": "88.0.4324.150"
+            },
+            "os": {
+              "name": "macOS",
+              "version": "11.2.0"
+            },
+            "platform": {
+              "type": "desktop",
+              "vendor": "Apple"
+            },
+            "engine": {
+              "name": "Blink"
+            }
+          }
+        },
+        "created_by": {
+          "gender": "male",
+          "accountType": "user",
+          "active": true,
+          "profilePicUrl": "https://hdn-1.fynd.com/company/884/applications/000000000000000000000001/theme/pictures/free/original/default-profile_nxhzui.png",
+          "hasOldPasswordHash": false,
+          "_id": "5f8147abbd1a0a870f61f1a6",
+          "phoneNumbers": [
+            {
+              "active": true,
+              "primary": true,
+              "verified": true,
+              "phone": "8412805281",
+              "countryCode": 91
+            }
+          ],
+          "firstName": "Satyen",
+          "lastName": "Maurya",
+          "emails": [
+            {
+              "active": true,
+              "primary": true,
+              "verified": true,
+              "email": "satyenmaurya95@gmail.com"
+            }
+          ],
+          "username": "satyenmaurya95_gmail_com_11118",
+          "createdAt": "2020-10-10T05:33:31.119Z",
+          "updatedAt": "2020-10-10T05:33:31.119Z",
+          "uid": "5678",
+          "__v": 0
+        },
+        "createdAt": "2021-02-18T11:46:12.522Z",
+        "updatedAt": "2021-02-18T11:46:12.522Z",
+        "__v": 0,
+        "id": "602e5384204225eed5cadae7"
+      },
+      {
+        "_id": "60372aa78a046d4d79c46e15",
+        "ticket_id": "41",
+        "type": "diff",
+        "value": {
+          "status": [
+            "pending",
+            "in_progress"
+          ]
+        },
+        "created_by": {
+          "gender": "male",
+          "accountType": "user",
+          "active": true,
+          "profilePicUrl": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
+          "hasOldPasswordHash": false,
+          "_id": "5e79e721768c6bf54b783146",
+          "emails": [
+            {
+              "active": true,
+              "primary": true,
+              "verified": true,
+              "email": "nikhilmshchs@gmail.com"
+            },
+            {
+              "active": true,
+              "primary": false,
+              "verified": true,
+              "email": "nikhilmanapure@gofynd.com"
+            },
+            {
+              "active": true,
+              "primary": false,
+              "verified": true,
+              "email": "nikhilmanapure@fynd.com"
+            },
+            {
+              "active": true,
+              "primary": false,
+              "verified": true,
+              "email": "nikhilmanapure@uniket.store"
+            }
+          ],
+          "phoneNumbers": [
+            {
+              "active": true,
+              "primary": true,
+              "verified": true,
+              "countryCode": 91,
+              "phone": "9890425946"
+            }
+          ],
+          "firstName": "Nikhil",
+          "lastName": "Manapure",
+          "username": "nikhilmanapure_gofynd_com_29298",
+          "createdAt": "2020-03-24T10:55:29.298Z",
+          "updatedAt": "2020-05-12T07:46:41.816Z",
+          "uid": "5567",
+          "__v": 2
+        },
+        "createdAt": "2021-02-25T04:42:15.225Z",
+        "updatedAt": "2021-02-25T04:42:15.225Z",
+        "__v": 0,
+        "id": "60372aa78a046d4d79c46e15"
+      }
+    ],
+    "total": 2,
+    "limit": 100,
+    "page": 1,
+    "pages": 1
   }
 }
 ```
@@ -2696,6 +3891,59 @@ Get Token to join a specific Video Room using it's unqiue name
 
 ```golang
 
+data, err := Lead.GetTokenForVideoRoom(CompanyID, UniqueName);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id for video room | 
+
+
+| UniqueName | string | Unique name of video room | 
+
+
+
+Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetTokenForVideoRoomResponse`
+
+
+*Examples:*
+
+
+Default
+```json
+{
+  "value": {
+    "access_token": "your_token_to_the_room"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getTokenForVideoRoom
+Get Token to join a specific Video Room using it's unqiue name
+
+```golang
+
 data, err := Lead.GetTokenForVideoRoom(CompanyID, ApplicationID, UniqueName);
 ```
 
@@ -2732,6 +3980,59 @@ Default
 {
   "value": {
     "access_token": "your_token_to_the_room"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getVideoParticipants
+Get participants of a specific Video Room using it's unique name
+
+```golang
+
+data, err := Lead.GetVideoParticipants(CompanyID, UniqueName);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id for video room | 
+
+
+| UniqueName | string | Unique name of Video Room | 
+
+
+
+Get participants of a specific Video Room using it's unique name, this can be used to check if people are already there in the room and also to show their names.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetParticipantsInsideVideoRoomResponse`
+
+
+*Examples:*
+
+
+Default
+```json
+{
+  "value": {
+    "participants": []
   }
 }
 ```
@@ -50632,6 +51933,50 @@ Get Order Details for company based on Company Id and Order Id
 
 ```golang
 
+data, err := Order.GetOrderDetails(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `OrderID`, `Next`, `Previous`
+
+
+Get Orders
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `OrderDetails`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOrderDetails
+Get Order Details for company based on Company Id and Order Id
+
+```golang
+
 data, err := Order.GetOrderDetails(CompanyID, ApplicationID, xQuery);
 ```
 
@@ -51315,6 +52660,49 @@ Schema: `GetClickToCallResponse`
 ## Catalog
 
 
+#### deleteSearchKeywords
+Delete a Search Keywords
+
+```golang
+
+data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateSearchKeywords
 Update Search Keyword
 
@@ -51402,12 +52790,12 @@ Schema: `GetSearchWordsDetailResponse`
 ---
 
 
-#### deleteSearchKeywords
-Delete a Search Keywords
+#### createCustomKeyword
+Add a Custom Search Keywords
 
 ```golang
 
-data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
+data, err := Catalog.CreateCustomKeyword(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -51419,20 +52807,18 @@ data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+| body |  CreateSearchKeyword | "Request body" 
 
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+Create a Custom Search Keywords. See `CreateSearchKeywordSchema` for the list of attributes needed to create a mapping and /collections/query-options for the available options to create a rule. On successful request, returns a paginated list of collections specified in `CreateSearchKeywordSchema`
 
 *Success Response:*
 
 
 
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+Get keyword object with id that is added. See example below or refer `GetSearchWordsDataSchema` for details
 
 
-Schema: `DeleteResponse`
+Schema: `GetSearchWordsData`
 
 
 
@@ -51485,12 +52871,12 @@ Schema: `GetSearchWordsResponse`
 ---
 
 
-#### createCustomKeyword
-Add a Custom Search Keywords
+#### deleteAutocompleteKeyword
+Delete a Autocomplete Keywords
 
 ```golang
 
-data, err := Catalog.CreateCustomKeyword(CompanyID, ApplicationID, body);
+data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -51502,18 +52888,20 @@ data, err := Catalog.CreateCustomKeyword(CompanyID, ApplicationID, body);
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| body |  CreateSearchKeyword | "Request body" 
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
 
-Create a Custom Search Keywords. See `CreateSearchKeywordSchema` for the list of attributes needed to create a mapping and /collections/query-options for the available options to create a rule. On successful request, returns a paginated list of collections specified in `CreateSearchKeywordSchema`
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
 
 *Success Response:*
 
 
 
-Get keyword object with id that is added. See example below or refer `GetSearchWordsDataSchema` for details
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
 
 
-Schema: `GetSearchWordsData`
+Schema: `DeleteResponse`
 
 
 
@@ -51613,12 +53001,12 @@ Schema: `GetAutocompleteWordsResponse`
 ---
 
 
-#### deleteAutocompleteKeyword
-Delete a Autocomplete Keywords
+#### createCustomAutocompleteRule
+Add a Custom Autocomplete Keywords
 
 ```golang
 
-data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
+data, err := Catalog.CreateCustomAutocompleteRule(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -51630,20 +53018,18 @@ data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+| body |  CreateAutocompleteKeyword | "Request body" 
 
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+Create a Custom Autocomplete Keywords. See `CreateAutocompleteKeywordSchema` for the list of attributes needed to create a mapping and /collections/query-options for the available options to create a rule. On successful request, returns a paginated list of collections specified in `CreateAutocompleteKeywordSchema`
 
 *Success Response:*
 
 
 
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+List of all the collections including the one you added. See example below or refer `CreateAutocompleteWordsResponseSchema` for details
 
 
-Schema: `DeleteResponse`
+Schema: `CreateAutocompleteWordsResponse`
 
 
 
@@ -51696,12 +53082,12 @@ Schema: `GetAutocompleteWordsResponse`
 ---
 
 
-#### createCustomAutocompleteRule
-Add a Custom Autocomplete Keywords
+#### createProductBundle
+Create Product Bundle
 
 ```golang
 
-data, err := Catalog.CreateCustomAutocompleteRule(CompanyID, ApplicationID, body);
+data, err := Catalog.CreateProductBundle(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -51710,21 +53096,18 @@ data, err := Catalog.CreateCustomAutocompleteRule(CompanyID, ApplicationID, body
 | CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
 
 
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+| body |  ProductBundleRequest | "Request body" 
 
-
-| body |  CreateAutocompleteKeyword | "Request body" 
-
-Create a Custom Autocomplete Keywords. See `CreateAutocompleteKeywordSchema` for the list of attributes needed to create a mapping and /collections/query-options for the available options to create a rule. On successful request, returns a paginated list of collections specified in `CreateAutocompleteKeywordSchema`
+Create Product Bundle. See `ProductBundleRequest` for the request body parameter need to create a product bundle. On successful request, returns in `ProductBundleRequest` with id
 
 *Success Response:*
 
 
 
-List of all the collections including the one you added. See example below or refer `CreateAutocompleteWordsResponseSchema` for details
+Get bundle with id that is added. See example below or refer `GetProductBundleCreateResponse` for details
 
 
-Schema: `CreateAutocompleteWordsResponse`
+Schema: `GetProductBundleCreateResponse`
 
 
 
@@ -51765,44 +53148,6 @@ List of bundle configured for a company. See example below or refer `GetProductB
 
 
 Schema: `GetProductBundleListingResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createProductBundle
-Create Product Bundle
-
-```golang
-
-data, err := Catalog.CreateProductBundle(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| body |  ProductBundleRequest | "Request body" 
-
-Create Product Bundle. See `ProductBundleRequest` for the request body parameter need to create a product bundle. On successful request, returns in `ProductBundleRequest` with id
-
-*Success Response:*
-
-
-
-Get bundle with id that is added. See example below or refer `GetProductBundleCreateResponse` for details
-
-
-Schema: `GetProductBundleCreateResponse`
 
 
 
@@ -51896,6 +53241,44 @@ Schema: `GetProductBundleResponse`
 ---
 
 
+#### createSizeGuide
+Create a size guide.
+
+```golang
+
+data, err := Catalog.CreateSizeGuide(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company inside which the size guide is to be created. | 
+
+
+| body |  ValidateSizeGuide | "Request body" 
+
+This API allows to create a size guide associated to a brand.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getSizeGuides
 Get list of size guides
 
@@ -51932,44 +53315,6 @@ Size guide object. See example below or refer `ListSizeGuide` for details
 
 
 Schema: `ListSizeGuide`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createSizeGuide
-Create a size guide.
-
-```golang
-
-data, err := Catalog.CreateSizeGuide(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company inside which the size guide is to be created. | 
-
-
-| body |  ValidateSizeGuide | "Request body" 
-
-This API allows to create a size guide associated to a brand.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
 
 
 
@@ -52147,6 +53492,47 @@ Schema: `GetCatalogConfigurationMetaData`
 ---
 
 
+#### createConfigurationProductListing
+Add configuration for products & listings
+
+```golang
+
+data, err := Catalog.CreateConfigurationProductListing(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  AppConfiguration | "Request body" 
+
+Add configuration for products & listing.
+
+*Success Response:*
+
+
+
+success flag will tell whether the operation was successful.
+
+
+Schema: `GetAppCatalogConfiguration`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getConfigurations
 Get configured details for catalog
 
@@ -52187,12 +53573,12 @@ Schema: `GetAppCatalogConfiguration`
 ---
 
 
-#### createConfigurationProductListing
-Add configuration for products & listings
+#### createConfigurationByType
+Add configuration for categories and brands
 
 ```golang
 
-data, err := Catalog.CreateConfigurationProductListing(CompanyID, ApplicationID, body);
+data, err := Catalog.CreateConfigurationByType(CompanyID, ApplicationID, Type, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -52204,9 +53590,12 @@ data, err := Catalog.CreateConfigurationProductListing(CompanyID, ApplicationID,
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
+| Type | string | type can be brands, categories etc. | 
+
+
 | body |  AppConfiguration | "Request body" 
 
-Add configuration for products & listing.
+Add configuration for categories & brands.
 
 *Success Response:*
 
@@ -52271,50 +53660,6 @@ Schema: `GetAppCatalogEntityConfiguration`
 ---
 
 
-#### createConfigurationByType
-Add configuration for categories and brands
-
-```golang
-
-data, err := Catalog.CreateConfigurationByType(CompanyID, ApplicationID, Type, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| Type | string | type can be brands, categories etc. | 
-
-
-| body |  AppConfiguration | "Request body" 
-
-Add configuration for categories & brands.
-
-*Success Response:*
-
-
-
-success flag will tell whether the operation was successful.
-
-
-Schema: `GetAppCatalogConfiguration`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getQueryFilters
 Get query filters to configure a collection
 
@@ -52343,46 +53688,6 @@ The attached items of an collection. See example below or refer `GetCollectionQu
 
 
 Schema: `GetCollectionQueryOptionResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAllCollections
-List all the collections
-
-```golang
-
-data, err := Catalog.GetAllCollections(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-
-A Collection allows you to organize your products into hierarchical groups. For example, a dress might be in the category _Clothing_, the individual product might also be in the collection _Summer_. On successful request, returns all the collections as specified in `CollectionListingSchema`
-
-*Success Response:*
-
-
-
-List of collections. See example below or refer `GetCollectionListingResponse` for details
-
-
-Schema: `GetCollectionListingResponse`
 
 
 
@@ -52436,6 +53741,46 @@ Schema: `CollectionCreateResponse`
 ---
 
 
+#### getAllCollections
+List all the collections
+
+```golang
+
+data, err := Catalog.GetAllCollections(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+
+A Collection allows you to organize your products into hierarchical groups. For example, a dress might be in the category _Clothing_, the individual product might also be in the collection _Summer_. On successful request, returns all the collections as specified in `CollectionListingSchema`
+
+*Success Response:*
+
+
+
+List of collections. See example below or refer `GetCollectionListingResponse` for details
+
+
+Schema: `GetCollectionListingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getCollectionDetail
 Get a particular collection
 
@@ -52467,6 +53812,49 @@ The Collection object. See example below or refer `CollectionDetailResponse` for
 
 
 Schema: `CollectionDetailResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteCollection
+Delete a Collection
+
+```golang
+
+data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier of a collection. | 
+
+
+
+Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -52523,12 +53911,12 @@ Schema: `UpdateCollection`
 ---
 
 
-#### deleteCollection
-Delete a Collection
+#### addCollectionItems
+Add items to a collection
 
 ```golang
 
-data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
+data, err := Catalog.AddCollectionItems(CompanyID, ApplicationID, ID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -52543,17 +53931,18 @@ data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
 | ID | string | A `id` is a unique identifier of a collection. | 
 
 
+| body |  CollectionItemRequest | "Request body" 
 
-Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
+Adds items to a collection specified by its `id`. See `CollectionItemRequest` for the list of attributes needed to add items to an collection.
 
 *Success Response:*
 
 
 
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+Status object. Tells whether the operation was successful.
 
 
-Schema: `DeleteResponse`
+Schema: `UpdatedResponse`
 
 
 
@@ -52604,50 +53993,6 @@ The attached items of an collection. See example below or refer `GetCollectionIt
 
 
 Schema: `GetCollectionItemsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### addCollectionItems
-Add items to a collection
-
-```golang
-
-data, err := Catalog.AddCollectionItems(CompanyID, ApplicationID, ID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier of a collection. | 
-
-
-| body |  CollectionItemRequest | "Request body" 
-
-Adds items to a collection specified by its `id`. See `CollectionItemRequest` for the list of attributes needed to add items to an collection.
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful.
-
-
-Schema: `UpdatedResponse`
 
 
 
@@ -53471,6 +54816,44 @@ Schema: `ProductConfigurationDownloads`
 ---
 
 
+#### createCategories
+Create product categories
+
+```golang
+
+data, err := Catalog.CreateCategories(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| body |  CategoryRequestBody | "Request body" 
+
+This API lets user create product categories
+
+*Success Response:*
+
+
+
+Category Meta. See example below or refer `CategoryCreateResponse` for details
+
+
+Schema: `CategoryCreateResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### listCategories
 Get product categories list
 
@@ -53507,44 +54890,6 @@ Category Meta. See example below or refer `CategoryResponse` for details
 
 
 Schema: `CategoryResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createCategories
-Create product categories
-
-```golang
-
-data, err := Catalog.CreateCategories(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| body |  CategoryRequestBody | "Request body" 
-
-This API lets user create product categories
-
-*Success Response:*
-
-
-
-Category Meta. See example below or refer `CategoryCreateResponse` for details
-
-
-Schema: `CategoryCreateResponse`
 
 
 
@@ -53638,6 +54983,44 @@ Schema: `SingleCategoryResponse`
 ---
 
 
+#### createProduct
+Create a product.
+
+```golang
+
+data, err := Catalog.CreateProduct(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+
+
+| body |  ProductCreateUpdate | "Request body" 
+
+This API allows to create product.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getProducts
 Get product list
 
@@ -53694,23 +55077,25 @@ Schema: `ProductListingResponse`
 ---
 
 
-#### createProduct
-Create a product.
+#### deleteProduct
+Delete a product.
 
 ```golang
 
-data, err := Catalog.CreateProduct(CompanyID, body);
+data, err := Catalog.DeleteProduct(CompanyID, ItemID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
 
 
-| body |  ProductCreateUpdate | "Request body" 
+| ItemID | float64 | Id of the product to be updated. | 
 
-This API allows to create product.
+
+
+This API allows to delete product.
 
 *Success Response:*
 
@@ -53818,46 +55203,6 @@ Schema: `Product`
 ---
 
 
-#### deleteProduct
-Delete a product.
-
-```golang
-
-data, err := Catalog.DeleteProduct(CompanyID, ItemID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
-
-
-| ItemID | float64 | Id of the product to be updated. | 
-
-
-
-This API allows to delete product.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getProductValidation
 Validate product/size data
 
@@ -53942,6 +55287,44 @@ Schema: `ProductListingResponse`
 ---
 
 
+#### updateProductAssetsInBulk
+Create a Bulk asset upload Job.
+
+```golang
+
+data, err := Catalog.UpdateProductAssetsInBulk(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+
+
+| body |  BulkJob | "Request body" 
+
+This API helps to create a bulk asset upload job.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getProductBulkUploadHistory
 Get a list of all bulk product upload jobs.
 
@@ -53972,44 +55355,6 @@ List of bulk product upload jobs. See `BulkRequestGetSchema` for details
 
 
 Schema: `ProductBulkRequestList`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateProductAssetsInBulk
-Create a Bulk asset upload Job.
-
-```golang
-
-data, err := Catalog.UpdateProductAssetsInBulk(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
-
-
-| body |  BulkJob | "Request body" 
-
-This API helps to create a bulk asset upload job.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
 
 
 
@@ -54140,6 +55485,44 @@ Schema: `ProductTagsViewResponse`
 ---
 
 
+#### createProductAssetsInBulk
+Create a Bulk asset upload Job.
+
+```golang
+
+data, err := Catalog.CreateProductAssetsInBulk(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+
+
+| body |  ProductBulkAssets | "Request body" 
+
+This API helps to create a bulk asset upload job.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getProductAssetsInBulk
 Get a list of all bulk asset jobs.
 
@@ -54170,44 +55553,6 @@ List of bulk asset jobs List. See `BulkUtil.modify_batch_response` for details
 
 
 Schema: `BulkAssetResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createProductAssetsInBulk
-Create a Bulk asset upload Job.
-
-```golang
-
-data, err := Catalog.CreateProductAssetsInBulk(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
-
-
-| body |  ProductBulkAssets | "Request body" 
-
-This API helps to create a bulk asset upload job.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
 
 
 
@@ -54263,6 +55608,50 @@ Schema: `ProductSizeDeleteResponse`
 ---
 
 
+#### addInventory
+Add Inventory for particular size and store.
+
+```golang
+
+data, err := Catalog.AddInventory(CompanyID, ItemID, Size, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+
+
+| ItemID | float64 | Item code of the product of which size is to be get. | 
+
+
+| Size | string | Size in which inventory is to be added. | 
+
+
+| body |  InventoryRequest | "Request body" 
+
+This API allows add Inventory for particular size and store.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getInventoryBySize
 Get Inventory for company
 
@@ -54303,50 +55692,6 @@ returns a list of all inventory grouped by size and store
 
 
 Schema: `InventoryResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### addInventory
-Add Inventory for particular size and store.
-
-```golang
-
-data, err := Catalog.AddInventory(CompanyID, ItemID, Size, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to product that is to be viewed. | 
-
-
-| ItemID | float64 | Item code of the product of which size is to be get. | 
-
-
-| Size | string | Size in which inventory is to be added. | 
-
-
-| body |  InventoryRequest | "Request body" 
-
-This API allows add Inventory for particular size and store.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
 
 
 
@@ -54512,6 +55857,44 @@ Schema: `InventoryDelete`
 ---
 
 
+#### createBulkInventoryJob
+Create a Bulk Inventory upload Job.
+
+```golang
+
+data, err := Catalog.CreateBulkInventoryJob(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id in which Inventory to be uploaded. | 
+
+
+| body |  BulkJob | "Request body" 
+
+This API helps to create a bulk Inventory upload job.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `CommonResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getInventoryBulkUploadHistory
 Get a list of all bulk Inventory upload jobs.
 
@@ -54542,44 +55925,6 @@ List of bulk Inventory upload jobs. See `BulkInventoryGetSchema` for details
 
 
 Schema: `BulkInventoryGet`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createBulkInventoryJob
-Create a Bulk Inventory upload Job.
-
-```golang
-
-data, err := Catalog.CreateBulkInventoryJob(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id in which Inventory to be uploaded. | 
-
-
-| body |  BulkJob | "Request body" 
-
-This API helps to create a bulk Inventory upload job.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `CommonResponse`
 
 
 
@@ -54673,43 +56018,6 @@ Schema: `SuccessResponse`
 ---
 
 
-#### getInventoryExport
-Get Inventory export history.
-
-```golang
-
-data, err := Catalog.GetInventoryExport(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
-
-
-
-This API helps to get Inventory export history.
-
-*Success Response:*
-
-
-
-Returns a list of inventory export jobs
-
-
-Schema: `InventoryExportJob`
-
-
-
-
-
-
-
-
-
----
-
-
 #### createInventoryExportJob
 Create a Inventory export Job.
 
@@ -54736,6 +56044,43 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getInventoryExport
+Get Inventory export history.
+
+```golang
+
+data, err := Catalog.GetInventoryExport(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+
+
+
+This API helps to get Inventory export history.
+
+*Success Response:*
+
+
+
+Returns a list of inventory export jobs
+
+
+Schema: `InventoryExportJob`
 
 
 
@@ -54788,6 +56133,44 @@ Schema: `InventoryConfig`
 ---
 
 
+#### createHsnCode
+Create Hsn Code.
+
+```golang
+
+data, err := Catalog.CreateHsnCode(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| body |  HsnUpsert | "Request body" 
+
+Create Hsn Code.
+
+*Success Response:*
+
+
+
+See example below for details
+
+
+Schema: `HsnCode`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getAllHsnCodes
 Hsn Code List.
 
@@ -54820,44 +56203,6 @@ List of all HSN Codes. See example below or refer `HsnCodesListingResponseSchema
 
 
 Schema: `HsnCodesListingResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createHsnCode
-Create Hsn Code.
-
-```golang
-
-data, err := Catalog.CreateHsnCode(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| body |  HsnUpsert | "Request body" 
-
-Create Hsn Code.
-
-*Success Response:*
-
-
-
-See example below for details
-
-
-Schema: `HsnCode`
 
 
 
@@ -55378,6 +56723,43 @@ Schema: `LocationListSerializer`
 ## CompanyProfile
 
 
+#### cbsOnboardGet
+Get company profile
+
+```golang
+
+data, err := CompanyProfile.CbsOnboardGet(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+
+This API allows to view the company profile of the seller account.
+
+*Success Response:*
+
+
+
+Company profile object. See example below or refer `GetCompanyProfileSerializerResponse` for details
+
+
+Schema: `GetCompanyProfileSerializerResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateCompany
 Edit company profile
 
@@ -55404,43 +56786,6 @@ Returns a success message
 
 
 Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### cbsOnboardGet
-Get company profile
-
-```golang
-
-data, err := CompanyProfile.CbsOnboardGet(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-
-This API allows to view the company profile of the seller account.
-
-*Success Response:*
-
-
-
-Company profile object. See example below or refer `GetCompanyProfileSerializerResponse` for details
-
-
-Schema: `GetCompanyProfileSerializerResponse`
 
 
 
@@ -55490,46 +56835,6 @@ Schema: `MetricsSerializer`
 ---
 
 
-#### getBrand
-Get a single brand.
-
-```golang
-
-data, err := CompanyProfile.GetBrand(CompanyID, BrandID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to brand that is to be viewed. | 
-
-
-| BrandID | string | Id of the brand to be viewed. | 
-
-
-
-This API helps to get data associated to a particular brand.
-
-*Success Response:*
-
-
-
-Brand object. See example below or refer `GetBrandResponseSerializer` for details
-
-
-Schema: `GetBrandResponseSerializer`
-
-
-
-
-
-
-
-
-
----
-
-
 #### editBrand
 Edit a brand.
 
@@ -55559,6 +56864,46 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getBrand
+Get a single brand.
+
+```golang
+
+data, err := CompanyProfile.GetBrand(CompanyID, BrandID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to brand that is to be viewed. | 
+
+
+| BrandID | string | Id of the brand to be viewed. | 
+
+
+
+This API helps to get data associated to a particular brand.
+
+*Success Response:*
+
+
+
+Brand object. See example below or refer `GetBrandResponseSerializer` for details
+
+
+Schema: `GetBrandResponseSerializer`
 
 
 
@@ -55777,46 +57122,6 @@ Schema: `SuccessResponse`
 ---
 
 
-#### getLocationDetail
-Get details of a specific location.
-
-```golang
-
-data, err := CompanyProfile.GetLocationDetail(CompanyID, LocationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company inside which the location lies. | 
-
-
-| LocationID | string | Id of the location which you want to view. | 
-
-
-
-This API helps to get data associated to a specific location.
-
-*Success Response:*
-
-
-
-Brand object. See example below or refer `GetLocationSerializer` for details
-
-
-Schema: `GetLocationSerializer`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateLocation
 Edit a location asscoiated to a company.
 
@@ -55846,6 +57151,46 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getLocationDetail
+Get details of a specific location.
+
+```golang
+
+data, err := CompanyProfile.GetLocationDetail(CompanyID, LocationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company inside which the location lies. | 
+
+
+| LocationID | string | Id of the location which you want to view. | 
+
+
+
+This API helps to get data associated to a specific location.
+
+*Success Response:*
+
+
+
+Brand object. See example below or refer `GetLocationSerializer` for details
+
+
+Schema: `GetLocationSerializer`
 
 
 
@@ -56256,6 +57601,49 @@ Success
 
 
 Schema: `BulkResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### browse
+Browse Files
+
+```golang
+
+data, err := FileStorage.Browse(Namespace, CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| Namespace | string | bucket name | 
+
+
+| CompanyID | float64 | company_id | 
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`
+
+
+Browse Files
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `BrowseResponse`
 
 
 
