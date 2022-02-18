@@ -29,8 +29,6 @@
   * Methods
     * [getProductDetailBySlug](#getproductdetailbyslug)
     * [getProductSizesBySlug](#getproductsizesbyslug)
-    * [getProductPriceBySlug](#getproductpricebyslug)
-    * [getProductSellersBySlug](#getproductsellersbyslug)
     * [getProductComparisonBySlugs](#getproductcomparisonbyslugs)
     * [getSimilarComparisonProductBySlug](#getsimilarcomparisonproductbyslug)
     * [getComparedFrequentlyProductBySlug](#getcomparedfrequentlyproductbyslug)
@@ -50,15 +48,16 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [followById](#followbyid)
     * [unfollowById](#unfollowbyid)
+    * [followById](#followbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
     * [getInStockLocations](#getinstocklocations)
     * [getLocationDetailsById](#getlocationdetailsbyid)
-    * [getProductPriceBySlugV2](#getproductpricebyslugv2)
-    * [getProductSellersBySlugV2](#getproductsellersbyslugv2)
+    * [getProductBundlesBySlug](#getproductbundlesbyslug)
+    * [getProductPriceBySlug](#getproductpricebyslug)
+    * [getProductSellersBySlug](#getproductsellersbyslug)
     
 
 * [Cart](#Cart)
@@ -91,6 +90,7 @@
 
 * [Common](#Common)
   * Methods
+    * [searchApplication](#searchapplication)
     * [getLocations](#getlocations)
     
 
@@ -155,7 +155,6 @@
     * [getAnnouncements](#getannouncements)
     * [getBlog](#getblog)
     * [getBlogs](#getblogs)
-    * [getDataLoaders](#getdataloaders)
     * [getFaqs](#getfaqs)
     * [getFaqCategories](#getfaqcategories)
     * [getFaqBySlug](#getfaqbyslug)
@@ -411,104 +410,6 @@ Success. Returns a ProductSize object. Check the example shown below or refer `P
 
 
 Schema: `ProductSizes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getProductPriceBySlug
-Get the price of a product size at a PIN Code
-
-```golang
-
- data, err :=  Catalog.GetProductPriceBySlug(Slug, Size, Pincode, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| Slug | string | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ | 
-
-
-| Size | string | A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes | 
-
-
-| Pincode | string | The PIN Code of the area near which the selling locations should be searched, e.g. 400059 | 
-
-
-
-| xQuery | struct | Includes properties such as `StoreID`
-
-
-
-Prices may vary for different sizes of a product. Use this API to retrieve the price of a product size at all the selling locations near to a PIN Code.
-
-*Success Response:*
-
-
-
-Success. Returns a ProductSizePrice object. Check the example shown below or refer `ProductSizePriceResponse` for more details.
-
-
-Schema: `ProductSizePriceResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getProductSellersBySlug
-Get the sellers of a product size at a PIN Code
-
-```golang
-
- data, err :=  Catalog.GetProductSellersBySlug(Slug, Size, Pincode, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| Slug | string | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ | 
-
-
-| Size | string | A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes | 
-
-
-| Pincode | string | The 6-digit PIN Code of the area near which the selling locations should be searched, e.g. 400059 | 
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `Strategy`, `PageNo`, `PageSize`
-
-
-
-A product of a particular size may be sold by multiple sellers. Use this API to fetch the sellers having the stock of a particular size at a given PIN Code.
-
-*Success Response:*
-
-
-
-Success. Returns a ProductSizeSeller object. Check the example shown below or refer `ProductSizeSellersResponse` for more details.
-
-
-Schema: `ProductSizeSellersResponse`
 
 
 
@@ -1297,12 +1198,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1316,7 +1217,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1338,12 +1239,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1357,7 +1258,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1596,12 +1497,52 @@ Schema: `StoreDetails`
 ---
 
 
-#### getProductPriceBySlugV2
+#### getProductBundlesBySlug
+Get product bundles
+
+```golang
+
+ data, err :=  Catalog.GetProductBundlesBySlug(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+| xQuery | struct | Includes properties such as `Slug`, `ID`
+
+
+
+Use this API to retrieve products bundles to the one specified by its slug.
+
+*Success Response:*
+
+
+
+Success. Returns a group of products bundle.
+
+
+Schema: `ProductBundle`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProductPriceBySlug
 Get the price of a product size at a PIN Code
 
 ```golang
 
- data, err :=  Catalog.GetProductPriceBySlugV2(Slug, Size, xQuery);
+ data, err :=  Catalog.GetProductPriceBySlug(Slug, Size, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -1642,12 +1583,12 @@ Schema: `ProductSizePriceResponseV2`
 ---
 
 
-#### getProductSellersBySlugV2
+#### getProductSellersBySlug
 Get the sellers of a product size at a PIN Code
 
 ```golang
 
- data, err :=  Catalog.GetProductSellersBySlugV2(Slug, Size, xQuery);
+ data, err :=  Catalog.GetProductSellersBySlug(Slug, Size, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -5065,6 +5006,47 @@ Cart Merged/Replaced
 
 
 ## Common
+
+
+#### searchApplication
+Search Application
+
+```golang
+
+ data, err :=  Common.SearchApplication(Authorization, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| Authorization | string |  | 
+
+
+
+| xQuery | struct | Includes properties such as `Query`
+
+
+
+Search Application.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `ApplicationResponse`
+
+
+
+
+
+
+
+
+
+---
 
 
 #### getLocations
@@ -13792,41 +13774,6 @@ default
   }
 }
 ```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getDataLoaders
-Get the data loaders associated with an application
-
-```golang
-
- data, err :=  Content.GetDataLoaders();
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-Use this API to get all selected data loaders of the application in the form of tags.
-
-*Success Response:*
-
-
-
-Success. Returns a JSON object containing all the data loaders injected in the application. Check the example shown below or refer `DataLoaderSchema` for more details.
-
-
-Schema: `DataLoaderSchema`
 
 
 
