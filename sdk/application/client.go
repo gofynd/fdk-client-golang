@@ -36,6 +36,8 @@ type Client struct {
 	
 		Order  *Order
 	
+		Rewards  *Rewards
+	
 		Feedback  *Feedback
 	
 		PosCart  *PosCart
@@ -73,6 +75,8 @@ func NewAppClient(config *AppConfig) *Client {
 				Payment:  NewPayment(config),
 			
 				Order:  NewOrder(config),
+			
+				Rewards:  NewRewards(config),
 			
 				Feedback:  NewFeedback(config),
 			
@@ -2490,6 +2494,271 @@ func NewAppClient(config *AppConfig) *Client {
     }
           
     
+    
+    
+  
+    
+    
+    //CatalogGetProductBundlesBySlugXQuery holds query params
+    type CatalogGetProductBundlesBySlugXQuery struct { 
+        Slug string  `url:"slug,omitempty"` 
+        ID string  `url:"id,omitempty"`  
+    }
+    
+    // GetProductBundlesBySlug Get product bundles
+    func (ca *Catalog)  GetProductBundlesBySlug(xQuery CatalogGetProductBundlesBySlugXQuery) (ProductBundle, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getProductBundlesBySlugResponse ProductBundle
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            "/service/application/catalog/v1.0/product-grouping/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ProductBundle{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductBundlesBySlugResponse)
+        if err != nil {
+            return ProductBundle{}, common.NewFDKError(err.Error())
+        }
+         return getProductBundlesBySlugResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //CatalogGetProductPriceBySlugV2XQuery holds query params
+    type CatalogGetProductPriceBySlugV2XQuery struct { 
+        StoreID float64  `url:"store_id,omitempty"` 
+        Pincode string  `url:"pincode,omitempty"`  
+    }
+    
+    // GetProductPriceBySlugV2 Get the price of a product size at a PIN Code
+    func (ca *Catalog)  GetProductPriceBySlugV2(Slug string, Size string, xQuery CatalogGetProductPriceBySlugV2XQuery) (ProductSizePriceResponseV2, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getProductPriceBySlugV2Response ProductSizePriceResponseV2
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/application/catalog/v2.0/products/%s/sizes/%s/price/",Slug,Size),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ProductSizePriceResponseV2{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductPriceBySlugV2Response)
+        if err != nil {
+            return ProductSizePriceResponseV2{}, common.NewFDKError(err.Error())
+        }
+         return getProductPriceBySlugV2Response, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //CatalogGetProductSellersBySlugV2XQuery holds query params
+    type CatalogGetProductSellersBySlugV2XQuery struct { 
+        Pincode string  `url:"pincode,omitempty"` 
+        Strategy string  `url:"strategy,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetProductSellersBySlugV2 Get the sellers of a product size at a PIN Code
+    func (ca *Catalog)  GetProductSellersBySlugV2(Slug string, Size string, xQuery CatalogGetProductSellersBySlugV2XQuery) (ProductSizeSellersResponseV2, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getProductSellersBySlugV2Response ProductSizeSellersResponseV2
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/application/catalog/v2.0/products/%s/sizes/%s/sellers/",Slug,Size),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ProductSizeSellersResponseV2{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductSellersBySlugV2Response)
+        if err != nil {
+            return ProductSizeSellersResponseV2{}, common.NewFDKError(err.Error())
+        }
+         return getProductSellersBySlugV2Response, nil
+        
+    }
+          
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetProductSellersBySlugV2Paginator Get the sellers of a product size at a PIN Code  
+            func (ca *Catalog)  GetProductSellersBySlugV2Paginator(Slug string  , Size string  ,  xQuery CatalogGetProductSellersBySlugV2XQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := ca.GetProductSellersBySlugV2(Slug, Size, xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
+    
 
     // Cart ...
     type Cart struct {
@@ -4136,6 +4405,123 @@ func NewAppClient(config *AppConfig) *Client {
             return SharedCartResponse{}, common.NewFDKError(err.Error())
         }
          return updateCartWithSharedItemsResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //CartGetPromotionOffersXQuery holds query params
+    type CartGetPromotionOffersXQuery struct { 
+        Slug string  `url:"slug,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetPromotionOffers Fetch available promotions
+    func (ca *Cart)  GetPromotionOffers(xQuery CartGetPromotionOffersXQuery) (PromotionOffersResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getPromotionOffersResponse PromotionOffersResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            "/service/application/cart/v1.0/available-promotions",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PromotionOffersResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPromotionOffersResponse)
+        if err != nil {
+            return PromotionOffersResponse{}, common.NewFDKError(err.Error())
+        }
+         return getPromotionOffersResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //CartGetLadderOffersXQuery holds query params
+    type CartGetLadderOffersXQuery struct { 
+        Slug string  `url:"slug,omitempty"` 
+        PromotionID string  `url:"promotion_id,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetLadderOffers Fetch ladder price promotion
+    func (ca *Cart)  GetLadderOffers(xQuery CartGetLadderOffersXQuery) (LadderPriceOffers, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getLadderOffersResponse LadderPriceOffers
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/application/cart/v1.0/available-ladder-prices",),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return LadderPriceOffers{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getLadderOffersResponse)
+        if err != nil {
+            return LadderPriceOffers{}, common.NewFDKError(err.Error())
+        }
+         return getLadderOffersResponse, nil
         
     }
           
@@ -8312,7 +8698,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetApplicationQRCode Create application QR Code
+    // GetApplicationQRCode Create QR Code of an app
     func (sh *Share)  GetApplicationQRCode() (QRCodeResp, error){
         var (
             rawRequest  *RawRequest
@@ -8357,7 +8743,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetProductQRCodeBySlug Create product QR Code
+    // GetProductQRCodeBySlug Create QR Code of a product
     func (sh *Share)  GetProductQRCodeBySlug(Slug string) (QRCodeResp, error){
         var (
             rawRequest  *RawRequest
@@ -8404,7 +8790,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetCollectionQRCodeBySlug Create collection QR Code
+    // GetCollectionQRCodeBySlug Create QR Code of a collection
     func (sh *Share)  GetCollectionQRCodeBySlug(Slug string) (QRCodeResp, error){
         var (
             rawRequest  *RawRequest
@@ -8456,7 +8842,7 @@ func NewAppClient(config *AppConfig) *Client {
         URL string  `url:"url,omitempty"`  
     }
     
-    // GetUrlQRCode Create url QR Code
+    // GetUrlQRCode Create QR Code of a URL
     func (sh *Share)  GetUrlQRCode(xQuery ShareGetUrlQRCodeXQuery) (QRCodeResp, error){
         var (
             rawRequest  *RawRequest
@@ -8505,7 +8891,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // CreateShortLink Create short link
+    // CreateShortLink Create a short link
     func (sh *Share)  CreateShortLink(body  ShortLinkReq) (ShortLinkRes, error){
         var (
             rawRequest  *RawRequest
@@ -10158,6 +10544,12 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
+            
+        
+            
+        
 
         
 
@@ -10469,6 +10861,51 @@ func NewAppClient(config *AppConfig) *Client {
             return RupifiBannerResponse{}, common.NewFDKError(err.Error())
         }
          return getRupifiBannerDetailsResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetEpaylaterBannerDetails Get Epaylater Enabled
+    func (pa *Payment)  GetEpaylaterBannerDetails() (EpaylaterBannerResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getEpaylaterBannerDetailsResponse EpaylaterBannerResponse
+	    )
+
+        
+
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            "/service/application/payment/v1.0/epaylater/banner",
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return EpaylaterBannerResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getEpaylaterBannerDetailsResponse)
+        if err != nil {
+            return EpaylaterBannerResponse{}, common.NewFDKError(err.Error())
+        }
+         return getEpaylaterBannerDetailsResponse, nil
         
     }
           
@@ -11064,6 +11501,238 @@ func NewAppClient(config *AppConfig) *Client {
     }
           
     
+    
+    
+  
+    
+    
+    //PaymentCustomerCreditSummaryXQuery holds query params
+    type PaymentCustomerCreditSummaryXQuery struct { 
+        Aggregator string  `url:"aggregator,omitempty"`  
+    }
+    
+    // CustomerCreditSummary API to fetch the customer credit summary
+    func (pa *Payment)  CustomerCreditSummary(xQuery PaymentCustomerCreditSummaryXQuery) (CustomerCreditSummaryResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             CustomerCreditSummaryResponse CustomerCreditSummaryResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            "/service/application/payment/v1.0/payment/credit-summary/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CustomerCreditSummaryResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &CustomerCreditSummaryResponse)
+        if err != nil {
+            return CustomerCreditSummaryResponse{}, common.NewFDKError(err.Error())
+        }
+         return CustomerCreditSummaryResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //PaymentRedirectToAggregatorXQuery holds query params
+    type PaymentRedirectToAggregatorXQuery struct { 
+        Aggregator string  `url:"aggregator,omitempty"`  
+    }
+    
+    // RedirectToAggregator API to get the redirect url to redirect the user to aggregator's page
+    func (pa *Payment)  RedirectToAggregator(xQuery PaymentRedirectToAggregatorXQuery) (RedirectToAggregatorResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             RedirectToAggregatorResponse RedirectToAggregatorResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            "/service/application/payment/v1.0/payment/redirect-to-aggregator/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return RedirectToAggregatorResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &RedirectToAggregatorResponse)
+        if err != nil {
+            return RedirectToAggregatorResponse{}, common.NewFDKError(err.Error())
+        }
+         return RedirectToAggregatorResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //PaymentCheckCreditXQuery holds query params
+    type PaymentCheckCreditXQuery struct { 
+        Aggregator string  `url:"aggregator,omitempty"`  
+    }
+    
+    // CheckCredit API to fetch the customer credit summary
+    func (pa *Payment)  CheckCredit(xQuery PaymentCheckCreditXQuery) (CheckCreditResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             CheckCreditResponse CheckCreditResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            "/service/application/payment/v1.0/check-credits/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CheckCreditResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &CheckCreditResponse)
+        if err != nil {
+            return CheckCreditResponse{}, common.NewFDKError(err.Error())
+        }
+         return CheckCreditResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // CustomerOnboard API to fetch the customer credit summary
+    func (pa *Payment)  CustomerOnboard(body  CustomerOnboardingRequest) (CustomerOnboardingResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             CustomerOnboardResponse CustomerOnboardingResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return CustomerOnboardingResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return CustomerOnboardingResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            "/service/application/payment/v1.0/credit-onboard/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CustomerOnboardingResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &CustomerOnboardResponse)
+        if err != nil {
+            return CustomerOnboardingResponse{}, common.NewFDKError(err.Error())
+        }
+         return CustomerOnboardResponse, nil
+        
+    }
+          
+    
 
     // Order ...
     type Order struct {
@@ -11599,6 +12268,438 @@ func NewAppClient(config *AppConfig) *Client {
             return ResponseVerifyOTPShipment{}, common.NewFDKError(err.Error())
         }
          return verifyOtpShipmentCustomerResponse, nil
+        
+    }
+          
+    
+
+    // Rewards ...
+    type Rewards struct {
+        config *AppConfig
+    }
+    // NewRewards ...
+    func NewRewards(config *AppConfig) *Rewards {
+        return &Rewards{config}
+    }
+    
+    
+    
+  
+    
+    
+    // GetPointsOnProduct Get the eligibility of reward points on a product
+    func (re *Rewards)  GetPointsOnProduct(body  CatalogueOrderRequest) (CatalogueOrderResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getPointsOnProductResponse CatalogueOrderResponse
+	    )
+
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return CatalogueOrderResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return CatalogueOrderResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            re.config,
+            "post",
+            "/service/application/rewards/v1.0/catalogue/offer/order/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CatalogueOrderResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPointsOnProductResponse)
+        if err != nil {
+            return CatalogueOrderResponse{}, common.NewFDKError(err.Error())
+        }
+         return getPointsOnProductResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetOfferByName Get offer by name
+    func (re *Rewards)  GetOfferByName(Name string) (Offer, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getOfferByNameResponse Offer
+	    )
+
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            re.config,
+            "get",
+            fmt.Sprintf("/service/application/rewards/v1.0/offers/%s/",Name),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return Offer{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getOfferByNameResponse)
+        if err != nil {
+            return Offer{}, common.NewFDKError(err.Error())
+        }
+         return getOfferByNameResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetOrderDiscount Calculates the discount on order-amount
+    func (re *Rewards)  GetOrderDiscount(body  OrderDiscountRequest) (OrderDiscountResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getOrderDiscountResponse OrderDiscountResponse
+	    )
+
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return OrderDiscountResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return OrderDiscountResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            re.config,
+            "post",
+            "/service/application/rewards/v1.0/user/offers/order-discount/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return OrderDiscountResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getOrderDiscountResponse)
+        if err != nil {
+            return OrderDiscountResponse{}, common.NewFDKError(err.Error())
+        }
+         return getOrderDiscountResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetUserPoints Get reward points available with a user
+    func (re *Rewards)  GetUserPoints() (PointsResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getUserPointsResponse PointsResponse
+	    )
+
+        
+
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            re.config,
+            "get",
+            "/service/application/rewards/v1.0/user/points/",
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PointsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getUserPointsResponse)
+        if err != nil {
+            return PointsResponse{}, common.NewFDKError(err.Error())
+        }
+         return getUserPointsResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //RewardsGetUserPointsHistoryXQuery holds query params
+    type RewardsGetUserPointsHistoryXQuery struct { 
+        PageID string  `url:"page_id,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetUserPointsHistory Get all transactions of reward points
+    func (re *Rewards)  GetUserPointsHistory(xQuery RewardsGetUserPointsHistoryXQuery) (PointsHistoryResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getUserPointsHistoryResponse PointsHistoryResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            re.config,
+            "get",
+            "/service/application/rewards/v1.0/user/points/history/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PointsHistoryResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getUserPointsHistoryResponse)
+        if err != nil {
+            return PointsHistoryResponse{}, common.NewFDKError(err.Error())
+        }
+         return getUserPointsHistoryResponse, nil
+        
+    }
+          
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetUserPointsHistoryPaginator Get all transactions of reward points  
+            func (re *Rewards)  GetUserPointsHistoryPaginator( xQuery RewardsGetUserPointsHistoryXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("cursor")
+                 
+                 
+                 
+                 xQuery.PageID = paginator.NextID
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := re.GetUserPointsHistory(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
+    
+    
+    
+  
+    
+    
+    // GetUserReferralDetails Get referral details of a user
+    func (re *Rewards)  GetUserReferralDetails() (ReferralDetailsResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getUserReferralDetailsResponse ReferralDetailsResponse
+	    )
+
+        
+
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            re.config,
+            "get",
+            "/service/application/rewards/v1.0/user/referral/",
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ReferralDetailsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getUserReferralDetailsResponse)
+        if err != nil {
+            return ReferralDetailsResponse{}, common.NewFDKError(err.Error())
+        }
+         return getUserReferralDetailsResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // RedeemReferralCode Redeems a referral code and credits reward points to users
+    func (re *Rewards)  RedeemReferralCode(body  RedeemReferralCodeRequest) (RedeemReferralCodeResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             redeemReferralCodeResponse RedeemReferralCodeResponse
+	    )
+
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return RedeemReferralCodeResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return RedeemReferralCodeResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            re.config,
+            "post",
+            "/service/application/rewards/v1.0/user/referral/redeem/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return RedeemReferralCodeResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &redeemReferralCodeResponse)
+        if err != nil {
+            return RedeemReferralCodeResponse{}, common.NewFDKError(err.Error())
+        }
+         return redeemReferralCodeResponse, nil
         
     }
           
