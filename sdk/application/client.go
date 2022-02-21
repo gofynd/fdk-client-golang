@@ -1710,55 +1710,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1799,6 +1750,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -4213,6 +4213,66 @@ func NewAppClient(config *AppConfig) *Client {
     func NewCommon(config *AppConfig) *Common {
         return &Common{config}
     }
+    
+    
+    
+  
+    
+    
+    //CommonSearchApplicationXQuery holds query params
+    type CommonSearchApplicationXQuery struct { 
+        Query string  `url:"query,omitempty"`  
+    }
+    
+    // SearchApplication Search Application
+    func (co *Common)  SearchApplication(Authorization string, xQuery CommonSearchApplicationXQuery) (ApplicationResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             searchApplicationResponse ApplicationResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+        
+        //Adding extra headers
+        var xHeaders = make(map[string]string) 
+        
+         
+         xHeaders["authorization"] =  Authorization
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            "/service/common/configuration/v1.0/application/search-application",
+            xHeaders,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &searchApplicationResponse)
+        if err != nil {
+            return ApplicationResponse{}, common.NewFDKError(err.Error())
+        }
+         return searchApplicationResponse, nil
+        
+    }
+          
     
     
     
@@ -7290,6 +7350,51 @@ func NewAppClient(config *AppConfig) *Client {
                 return paginator
             }
        
+    
+    
+    
+  
+    
+    
+    // GetDataLoaders Get the data loaders associated with an application
+    func (co *Content)  GetDataLoaders() (DataLoaderSchema, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getDataLoadersResponse DataLoaderSchema
+	    )
+
+        
+
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            "/service/application/content/v1.0/data-loader",
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DataLoaderSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getDataLoadersResponse)
+        if err != nil {
+            return DataLoaderSchema{}, common.NewFDKError(err.Error())
+        }
+         return getDataLoadersResponse, nil
+        
+    }
+          
     
     
     
