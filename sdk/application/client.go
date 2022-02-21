@@ -4336,6 +4336,66 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //CommonSearchApplicationXQuery holds query params
+    type CommonSearchApplicationXQuery struct { 
+        Query string  `url:"query,omitempty"`  
+    }
+    
+    // SearchApplication Search Application
+    func (co *Common)  SearchApplication(Authorization string, xQuery CommonSearchApplicationXQuery) (ApplicationResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             searchApplicationResponse ApplicationResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+        
+        //Adding extra headers
+        var xHeaders = make(map[string]string) 
+        
+         
+         xHeaders["authorization"] =  Authorization
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            "/service/common/configuration/v1.0/application/search-application",
+            xHeaders,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &searchApplicationResponse)
+        if err != nil {
+            return ApplicationResponse{}, common.NewFDKError(err.Error())
+        }
+         return searchApplicationResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     //CommonGetLocationsXQuery holds query params
     type CommonGetLocationsXQuery struct { 
         LocationType string  `url:"location_type,omitempty"` 

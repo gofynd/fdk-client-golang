@@ -92,6 +92,7 @@
 
 * [Common](#Common)
   * Methods
+    * [searchApplication](#searchapplication)
     * [getLocations](#getlocations)
     
 
@@ -5115,6 +5116,47 @@ Schema: `LadderPriceOffers`
 
 
 ## Common
+
+
+#### searchApplication
+Search Application
+
+```golang
+
+ data, err :=  Common.SearchApplication(Authorization, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| Authorization | string |  | 
+
+
+
+| xQuery | struct | Includes properties such as `Query`
+
+
+
+Search Application.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `ApplicationResponse`
+
+
+
+
+
+
+
+
+
+---
 
 
 #### getLocations
