@@ -1397,55 +1397,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UnfollowById Unfollow an entity (product/brand/collection)
-    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             unfollowByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &unfollowByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return unfollowByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // FollowById Follow an entity (product/brand/collection)
     func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1486,6 +1437,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return followByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UnfollowById Unfollow an entity (product/brand/collection)
+    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             unfollowByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &unfollowByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return unfollowByIdResponse, nil
         
     }
           
@@ -11390,7 +11390,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-             CustomerCreditSummaryResponse CustomerCreditSummaryResponse
+             customerCreditSummaryResponse CustomerCreditSummaryResponse
 	    )
 
         
@@ -11419,11 +11419,11 @@ func NewAppClient(config *AppConfig) *Client {
             return CustomerCreditSummaryResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &CustomerCreditSummaryResponse)
+        err = json.Unmarshal(response, &customerCreditSummaryResponse)
         if err != nil {
             return CustomerCreditSummaryResponse{}, common.NewFDKError(err.Error())
         }
-         return CustomerCreditSummaryResponse, nil
+         return customerCreditSummaryResponse, nil
         
     }
           
@@ -11444,7 +11444,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-             RedirectToAggregatorResponse RedirectToAggregatorResponse
+             redirectToAggregatorResponse RedirectToAggregatorResponse
 	    )
 
         
@@ -11473,11 +11473,11 @@ func NewAppClient(config *AppConfig) *Client {
             return RedirectToAggregatorResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &RedirectToAggregatorResponse)
+        err = json.Unmarshal(response, &redirectToAggregatorResponse)
         if err != nil {
             return RedirectToAggregatorResponse{}, common.NewFDKError(err.Error())
         }
-         return RedirectToAggregatorResponse, nil
+         return redirectToAggregatorResponse, nil
         
     }
           
@@ -11498,7 +11498,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-             CheckCreditResponse CheckCreditResponse
+             checkCreditResponse CheckCreditResponse
 	    )
 
         
@@ -11527,11 +11527,11 @@ func NewAppClient(config *AppConfig) *Client {
             return CheckCreditResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &CheckCreditResponse)
+        err = json.Unmarshal(response, &checkCreditResponse)
         if err != nil {
             return CheckCreditResponse{}, common.NewFDKError(err.Error())
         }
-         return CheckCreditResponse, nil
+         return checkCreditResponse, nil
         
     }
           
@@ -11547,7 +11547,7 @@ func NewAppClient(config *AppConfig) *Client {
             rawRequest  *RawRequest
             response    []byte
             err         error
-             CustomerOnboardResponse CustomerOnboardingResponse
+             customerOnboardResponse CustomerOnboardingResponse
 	    )
 
         
@@ -11597,11 +11597,11 @@ func NewAppClient(config *AppConfig) *Client {
             return CustomerOnboardingResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &CustomerOnboardResponse)
+        err = json.Unmarshal(response, &customerOnboardResponse)
         if err != nil {
             return CustomerOnboardingResponse{}, common.NewFDKError(err.Error())
         }
-         return CustomerOnboardResponse, nil
+         return customerOnboardResponse, nil
         
     }
           
