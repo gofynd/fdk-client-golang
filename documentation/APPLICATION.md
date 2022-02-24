@@ -7558,7 +7558,7 @@ Applied Theme
       "list": [
         {
           "name": "default",
-          "global": {
+          "global_config": {
             "static": {
               "props": {
                 "colors": {
@@ -9741,7 +9741,7 @@ Preview Theme
       "list": [
         {
           "name": "default",
-          "global": {
+          "global_config": {
             "static": {
               "props": {
                 "colors": {
