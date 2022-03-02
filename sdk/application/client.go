@@ -1286,319 +1286,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    //CatalogGetCollectionsXQuery holds query params
-    type CatalogGetCollectionsXQuery struct { 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"` 
-        Tag []string  `url:"tag,omitempty"`  
-    }
-    
-    // GetCollections List all the collections
-    func (ca *Catalog)  GetCollections(xQuery CatalogGetCollectionsXQuery) (GetCollectionListingResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getCollectionsResponse GetCollectionListingResponse
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-                
-            
-        
-
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            "/service/application/catalog/v1.0/collections/",
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetCollectionListingResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getCollectionsResponse)
-        if err != nil {
-            return GetCollectionListingResponse{}, common.NewFDKError(err.Error())
-        }
-         return getCollectionsResponse, nil
-        
-    }
-          
-            
-            
-            
-            
-                
-                    
-                    
-                    
-                    
-                
-                    
-                    
-                    
-                        
-                    
-                    
-                
-                    
-                    
-                    
-                        
-                    
-                    
-                
-            
-            // GetCollectionsPaginator List all the collections  
-            func (ca *Catalog)  GetCollectionsPaginator( xQuery CatalogGetCollectionsXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                 
-                 
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := ca.GetCollections(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-       
-    
-    
-    
-  
-    
-    
-    //CatalogGetCollectionItemsBySlugXQuery holds query params
-    type CatalogGetCollectionItemsBySlugXQuery struct { 
-        F string  `url:"f,omitempty"` 
-        Filters bool  `url:"filters,omitempty"` 
-        SortOn string  `url:"sort_on,omitempty"` 
-        PageID string  `url:"page_id,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
-    }
-    
-    // GetCollectionItemsBySlug Get the items in a collection
-    func (ca *Catalog)  GetCollectionItemsBySlug(Slug string, xQuery CatalogGetCollectionItemsBySlugXQuery) (ProductListingResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getCollectionItemsBySlugResponse ProductListingResponse
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/application/catalog/v1.0/collections/%s/items/",Slug),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ProductListingResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getCollectionItemsBySlugResponse)
-        if err != nil {
-            return ProductListingResponse{}, common.NewFDKError(err.Error())
-        }
-         return getCollectionItemsBySlugResponse, nil
-        
-    }
-          
-            
-            
-            
-            
-                
-                    
-                    
-                    
-                    
-                        
-                    
-                    
-                
-                    
-                    
-                    
-                        
-                    
-                    
-                
-                    
-                    
-                    
-                        
-                    
-                    
-                
-                    
-                    
-                    
-                        
-                    
-                    
-                
-                    
-                    
-                    
-                    
-                        
-                    
-                
-                    
-                    
-                    
-                        
-                    
-                    
-                
-            
-            // GetCollectionItemsBySlugPaginator Get the items in a collection  
-            func (ca *Catalog)  GetCollectionItemsBySlugPaginator(Slug string  ,  xQuery CatalogGetCollectionItemsBySlugXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("cursor")
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 xQuery.PageID = paginator.NextID
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := ca.GetCollectionItemsBySlug(Slug, xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-       
-    
-    
-    
-  
-    
-    
-    // GetCollectionDetailBySlug Get a particular collection
-    func (ca *Catalog)  GetCollectionDetailBySlug(Slug string) (CollectionDetailResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getCollectionDetailBySlugResponse CollectionDetailResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/application/catalog/v1.0/collections/%s/",Slug),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return CollectionDetailResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getCollectionDetailBySlugResponse)
-        if err != nil {
-            return CollectionDetailResponse{}, common.NewFDKError(err.Error())
-        }
-         return getCollectionDetailBySlugResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     //CatalogGetFollowedListingXQuery holds query params
     type CatalogGetFollowedListingXQuery struct { 
         PageID string  `url:"page_id,omitempty"` 
@@ -2296,63 +1983,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    //CatalogGetProductBundlesBySlugXQuery holds query params
-    type CatalogGetProductBundlesBySlugXQuery struct { 
-        Slug string  `url:"slug,omitempty"` 
-        ID string  `url:"id,omitempty"`  
-    }
-    
-    // GetProductBundlesBySlug Get product bundles
-    func (ca *Catalog)  GetProductBundlesBySlug(xQuery CatalogGetProductBundlesBySlugXQuery) (ProductBundle, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getProductBundlesBySlugResponse ProductBundle
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-        
-
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            "/service/application/catalog/v1.0/product-grouping/",
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ProductBundle{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProductBundlesBySlugResponse)
-        if err != nil {
-            return ProductBundle{}, common.NewFDKError(err.Error())
-        }
-         return getProductBundlesBySlugResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     //CatalogGetProductPriceBySlugXQuery holds query params
     type CatalogGetProductPriceBySlugXQuery struct { 
         StoreID float64  `url:"store_id,omitempty"` 
@@ -2555,6 +2185,376 @@ func NewAppClient(config *AppConfig) *Client {
                 return paginator
             }
        
+    
+    
+    
+  
+    
+    
+    //CatalogGetCollectionsXQuery holds query params
+    type CatalogGetCollectionsXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        Tag []string  `url:"tag,omitempty"`  
+    }
+    
+    // GetCollections List all the collections
+    func (ca *Catalog)  GetCollections(xQuery CatalogGetCollectionsXQuery) (GetCollectionListingResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getCollectionsResponse GetCollectionListingResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            "/service/application/catalog/v2.0/collections/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetCollectionListingResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getCollectionsResponse)
+        if err != nil {
+            return GetCollectionListingResponse{}, common.NewFDKError(err.Error())
+        }
+         return getCollectionsResponse, nil
+        
+    }
+          
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetCollectionsPaginator List all the collections  
+            func (ca *Catalog)  GetCollectionsPaginator( xQuery CatalogGetCollectionsXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                 
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := ca.GetCollections(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
+    
+    
+    
+  
+    
+    
+    //CatalogGetCollectionItemsBySlugXQuery holds query params
+    type CatalogGetCollectionItemsBySlugXQuery struct { 
+        F string  `url:"f,omitempty"` 
+        Filters bool  `url:"filters,omitempty"` 
+        SortOn string  `url:"sort_on,omitempty"` 
+        PageID string  `url:"page_id,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetCollectionItemsBySlug Get the items in a collection
+    func (ca *Catalog)  GetCollectionItemsBySlug(Slug string, xQuery CatalogGetCollectionItemsBySlugXQuery) (ProductListingResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getCollectionItemsBySlugResponse ProductListingResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/application/catalog/v2.0/collections/%s/items/",Slug),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ProductListingResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getCollectionItemsBySlugResponse)
+        if err != nil {
+            return ProductListingResponse{}, common.NewFDKError(err.Error())
+        }
+         return getCollectionItemsBySlugResponse, nil
+        
+    }
+          
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetCollectionItemsBySlugPaginator Get the items in a collection  
+            func (ca *Catalog)  GetCollectionItemsBySlugPaginator(Slug string  ,  xQuery CatalogGetCollectionItemsBySlugXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("cursor")
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 xQuery.PageID = paginator.NextID
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := ca.GetCollectionItemsBySlug(Slug, xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
+    
+    
+    
+  
+    
+    
+    // GetCollectionDetailBySlug Get a particular collection
+    func (ca *Catalog)  GetCollectionDetailBySlug(Slug string) (CollectionDetailResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getCollectionDetailBySlugResponse CollectionDetailResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/application/catalog/v2.0/collections/%s/",Slug),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CollectionDetailResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getCollectionDetailBySlugResponse)
+        if err != nil {
+            return CollectionDetailResponse{}, common.NewFDKError(err.Error())
+        }
+         return getCollectionDetailBySlugResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //CatalogGetProductBundlesBySlugXQuery holds query params
+    type CatalogGetProductBundlesBySlugXQuery struct { 
+        Slug string  `url:"slug,omitempty"` 
+        ID string  `url:"id,omitempty"`  
+    }
+    
+    // GetProductBundlesBySlug Get product bundles
+    func (ca *Catalog)  GetProductBundlesBySlug(xQuery CatalogGetProductBundlesBySlugXQuery) (ProductBundle, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getProductBundlesBySlugResponse ProductBundle
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            "/service/application/catalog/v1.0/product-grouping/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ProductBundle{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductBundlesBySlugResponse)
+        if err != nil {
+            return ProductBundle{}, common.NewFDKError(err.Error())
+        }
+         return getProductBundlesBySlugResponse, nil
+        
+    }
+          
     
 
     // Cart ...
@@ -9883,6 +9883,72 @@ func NewAppClient(config *AppConfig) *Client {
             return SuccessMessageResponse{}, common.NewFDKError(err.Error())
         }
          return removeOrderingStoreCookieResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //ConfigurationGetAppStaffListXQuery holds query params
+    type ConfigurationGetAppStaffListXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        OrderIncent bool  `url:"order_incent,omitempty"` 
+        OrderingStore float64  `url:"ordering_store,omitempty"` 
+        User string  `url:"user,omitempty"`  
+    }
+    
+    // GetAppStaffList Get a list of staff.
+    func (co *Configuration)  GetAppStaffList(xQuery ConfigurationGetAppStaffListXQuery) (AppStaffListResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getAppStaffListResponse AppStaffListResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            "/service/application/configuration/v1.0/staff/list",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return AppStaffListResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAppStaffListResponse)
+        if err != nil {
+            return AppStaffListResponse{}, common.NewFDKError(err.Error())
+        }
+         return getAppStaffListResponse, nil
         
     }
           

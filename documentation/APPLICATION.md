@@ -44,9 +44,6 @@
     * [getHomeProducts](#gethomeproducts)
     * [getDepartments](#getdepartments)
     * [getSearchResults](#getsearchresults)
-    * [getCollections](#getcollections)
-    * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
-    * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
     * [followById](#followbyid)
     * [unfollowById](#unfollowbyid)
@@ -55,9 +52,12 @@
     * [getStores](#getstores)
     * [getInStockLocations](#getinstocklocations)
     * [getLocationDetailsById](#getlocationdetailsbyid)
-    * [getProductBundlesBySlug](#getproductbundlesbyslug)
     * [getProductPriceBySlug](#getproductpricebyslug)
     * [getProductSellersBySlug](#getproductsellersbyslug)
+    * [getCollections](#getcollections)
+    * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
+    * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
+    * [getProductBundlesBySlug](#getproductbundlesbyslug)
     
 
 * [Cart](#Cart)
@@ -216,6 +216,7 @@
     * [getLanguages](#getlanguages)
     * [getOrderingStoreCookie](#getorderingstorecookie)
     * [removeOrderingStoreCookie](#removeorderingstorecookie)
+    * [getAppStaffList](#getappstafflist)
     * [getAppStaffs](#getappstaffs)
     
 
@@ -1034,135 +1035,6 @@ Schema: `AutoCompleteResponse`
 ---
 
 
-#### getCollections
-List all the collections
-
-```golang
-
- data, err :=  Catalog.GetCollections(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Tag`
-
-
-
-Collections are a great way to organize your products and can improve the ability for customers to find items quickly and efficiently.
-
-*Success Response:*
-
-
-
-Success. Returns a list of collections. Check the example shown below or refer `GetCollectionListingResponse` for more details.
-
-
-Schema: `GetCollectionListingResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getCollectionItemsBySlug
-Get the items in a collection
-
-```golang
-
- data, err :=  Catalog.GetCollectionItemsBySlug(Slug, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| Slug | string | A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/. | 
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `F`, `Filters`, `SortOn`, `PageID`, `PageSize`
-
-
-
-Get items in a collection specified by its `slug`.
-
-*Success Response:*
-
-
-
-Success. Returns a list items in a given collection. Check the example shown below or refer `ProductListingResponse` for more details.
-
-
-Schema: `ProductListingResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getCollectionDetailBySlug
-Get a particular collection
-
-```golang
-
- data, err :=  Catalog.GetCollectionDetailBySlug(Slug);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| Slug | string | A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/. | 
-
-
-
-
-Get the details of a collection by its `slug`.
-
-*Success Response:*
-
-
-
-Success. Returns a Collection object. Check the example shown below or refer `CollectionDetailResponse` for more details.
-
-
-Schema: `CollectionDetailResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getFollowedListing
 Get a list of followed Products, Brands, Collections
 
@@ -1505,46 +1377,6 @@ Schema: `StoreDetails`
 ---
 
 
-#### getProductBundlesBySlug
-Get product bundles
-
-```golang
-
- data, err :=  Catalog.GetProductBundlesBySlug(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-| xQuery | struct | Includes properties such as `Slug`, `ID`
-
-
-
-Use this API to retrieve products bundles to the one specified by its slug.
-
-*Success Response:*
-
-
-
-Success. Returns a group of products bundle.
-
-
-Schema: `ProductBundle`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getProductPriceBySlug
 Get the price of a product size at a PIN Code
 
@@ -1629,6 +1461,175 @@ Success. Returns a ProductSizeSeller object. Check the example shown below or re
 
 
 Schema: `ProductSizeSellersResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCollections
+List all the collections
+
+```golang
+
+ data, err :=  Catalog.GetCollections(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Tag`
+
+
+
+Collections are a great way to organize your products and can improve the ability for customers to find items quickly and efficiently.
+
+*Success Response:*
+
+
+
+Success. Returns a list of collections. Check the example shown below or refer `GetCollectionListingResponse` for more details.
+
+
+Schema: `GetCollectionListingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCollectionItemsBySlug
+Get the items in a collection
+
+```golang
+
+ data, err :=  Catalog.GetCollectionItemsBySlug(Slug, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| Slug | string | A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/. | 
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `F`, `Filters`, `SortOn`, `PageID`, `PageSize`
+
+
+
+Get items in a collection specified by its `slug`.
+
+*Success Response:*
+
+
+
+Success. Returns a list items in a given collection. Check the example shown below or refer `ProductListingResponse` for more details.
+
+
+Schema: `ProductListingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCollectionDetailBySlug
+Get a particular collection
+
+```golang
+
+ data, err :=  Catalog.GetCollectionDetailBySlug(Slug);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| Slug | string | A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/. | 
+
+
+
+
+Get the details of a collection by its `slug`.
+
+*Success Response:*
+
+
+
+Success. Returns a Collection object. Check the example shown below or refer `CollectionDetailResponse` for more details.
+
+
+Schema: `CollectionDetailResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProductBundlesBySlug
+Get product bundles
+
+```golang
+
+ data, err :=  Catalog.GetProductBundlesBySlug(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+| xQuery | struct | Includes properties such as `Slug`, `ID`
+
+
+
+Use this API to retrieve products bundles to the one specified by its slug.
+
+*Success Response:*
+
+
+
+Success. Returns a group of products bundle.
+
+
+Schema: `ProductBundle`
 
 
 
@@ -5139,7 +5140,7 @@ Search Application
 
 
 
-Search Application.
+Provide application name or domain url
 
 *Success Response:*
 
@@ -16231,6 +16232,52 @@ Success
 
 
 Schema: `SuccessMessageResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAppStaffList
+Get a list of staff.
+
+```golang
+
+ data, err :=  Configuration.GetAppStaffList(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `OrderIncent`, `OrderingStore`, `User`
+
+
+
+Use this API to get a list of staff including the names, employee code, incentive status, assigned ordering stores, and title of each staff added to the application.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `AppStaffListResponse` for more details.
+
+
+Schema: `AppStaffListResponse`
 
 
 
