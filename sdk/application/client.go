@@ -8939,7 +8939,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // SignUrls Explain here
-    func (fi *FileStorage)  SignUrls(CompanyID float64, body  SignUrlRequest) (SignUrlResponse, error){
+    func (fi *FileStorage)  SignUrls(body  SignUrlRequest) (SignUrlResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -8955,8 +8955,6 @@ func NewAppClient(config *AppConfig) *Client {
 
         
 
-        
-        
         
     
          
@@ -8979,7 +8977,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fi.config,
             "post",
-            fmt.Sprintf("/service/application/assets/v1.0/company/undefined/sign-urls/",CompanyID),
+            "/service/application/assets/v1.0/sign-urls/",
             nil,
             nil,
             reqBody)

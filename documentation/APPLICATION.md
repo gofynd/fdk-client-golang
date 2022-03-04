@@ -5027,7 +5027,7 @@ Search Application
 
 
 
-Search Application.
+Provide application name or domain url
 
 *Success Response:*
 
@@ -15554,14 +15554,11 @@ Explain here
 
 ```golang
 
- data, err :=  FileStorage.SignUrls(CompanyID, body);
+ data, err :=  FileStorage.SignUrls(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
-
-| CompanyID | float64 | company_id | 
-
 
 | body |  SignUrlRequest | "Request body" 
 

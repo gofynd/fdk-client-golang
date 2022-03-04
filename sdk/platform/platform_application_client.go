@@ -9205,6 +9205,132 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // SendCommunicationSynchronously Send email or sms synchronously
+     func (co *PlatformAppCommunication)  SendCommunicationSynchronously(body  EngineRequest) (EngineResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            sendCommunicationSynchronouslyResponse EngineResponse
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return EngineResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return EngineResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "post",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/engine/send-instant",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return EngineResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &sendCommunicationSynchronouslyResponse)
+        if err != nil {
+            return EngineResponse{}, common.NewFDKError(err.Error())
+        }
+        return sendCommunicationSynchronouslyResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // SendCommunicationAsynchronously Send email or sms asynchronously
+     func (co *PlatformAppCommunication)  SendCommunicationAsynchronously(body  EngineRequest) (EngineResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            sendCommunicationAsynchronouslyResponse EngineResponse
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return EngineResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return EngineResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "post",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/engine/send-async",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return EngineResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &sendCommunicationAsynchronouslyResponse)
+        if err != nil {
+            return EngineResponse{}, common.NewFDKError(err.Error())
+        }
+        return sendCommunicationAsynchronouslyResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     //PlatformAppGetEventSubscriptionsXQuery holds query params
     type PlatformAppGetEventSubscriptionsXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
@@ -11691,6 +11817,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // GetSearchKeywords Get a Search Keywords Details
+     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getSearchKeywordsResponse GetSearchWordsDetailResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetSearchWordsDetailResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getSearchKeywordsResponse)
+        if err != nil {
+            return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
+        }
+        return getSearchKeywordsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // UpdateSearchKeywords Update Search Keyword
      func (ca *PlatformAppCatalog)  UpdateSearchKeywords(ID string, body  CreateSearchKeyword) (GetSearchWordsData, error) {
         var (
@@ -11752,54 +11926,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetSearchWordsData{}, common.NewFDKError(err.Error())
         }
         return updateSearchKeywordsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetSearchKeywords Get a Search Keywords Details
-     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getSearchKeywordsResponse GetSearchWordsDetailResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetSearchWordsDetailResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getSearchKeywordsResponse)
-        if err != nil {
-            return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
-        }
-        return getSearchKeywordsResponse, nil
         
     }
            
@@ -11973,6 +12099,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
+     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAutocompleteKeywordDetailResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // UpdateAutocompleteKeyword Create & Update Autocomplete Keyword
      func (ca *PlatformAppCatalog)  UpdateAutocompleteKeyword(ID string, body  CreateAutocompleteKeyword) (GetAutocompleteWordsResponse, error) {
         var (
@@ -12034,54 +12208,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
         }
         return updateAutocompleteKeywordResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
-     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAutocompleteKeywordDetailResponse, nil
         
     }
            
@@ -12217,6 +12343,69 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+    
+    
+    
+  
+
+    
+    // UpdateAppProduct Update a single custom meta.
+     func (ca *PlatformAppCatalog)  UpdateAppProduct(ItemID string, body  ApplicationItemMeta) (SuccessResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateAppProductResponse SuccessResponse
+	    )
+
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return SuccessResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "patch",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product/%s/",ca.CompanyID, ca.ApplicationID, ItemID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return SuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateAppProductResponse)
+        if err != nil {
+            return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return updateAppProductResponse, nil
+        
+    }
+           
+       
     
     
     
