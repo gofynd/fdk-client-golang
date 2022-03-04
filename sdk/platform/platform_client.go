@@ -29,7 +29,11 @@ type PlatformClient struct {
 	
 		FileStorage  *PlatformFileStorage
 	
+		Inventory  *PlatformInventory
+	
 		Configuration  *PlatformConfiguration
+	
+		Analytics  *PlatformAnalytics
 	
 		Discount  *PlatformDiscount
 	
@@ -61,7 +65,11 @@ func NewPlatformClient(config *PlatformConfig) *PlatformClient {
 			
 				FileStorage:  NewPlatformFileStorage(config),
 			
+				Inventory:  NewPlatformInventory(config),
+			
 				Configuration:  NewPlatformConfiguration(config),
+			
+				Analytics:  NewPlatformAnalytics(config),
 			
 				Discount:  NewPlatformDiscount(config),
 			
@@ -7637,56 +7645,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // CbsOnboardGet Get company profile
-     func (co *PlatformCompanyProfile)  CbsOnboardGet() (GetCompanyProfileSerializerResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            cbsOnboardGetResponse GetCompanyProfileSerializerResponse
-	    )
-
-        
-
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            co.Config,
-            "get",
-            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s",co.CompanyID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return GetCompanyProfileSerializerResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &cbsOnboardGetResponse)
-        if err != nil {
-             return GetCompanyProfileSerializerResponse{}, common.NewFDKError(err.Error())
-        }
-        return cbsOnboardGetResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
     // UpdateCompany Edit company profile
      func (co *PlatformCompanyProfile)  UpdateCompany(body  UpdateCompany) (SuccessResponse, error){
         
@@ -7776,6 +7734,56 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
+    // CbsOnboardGet Get company profile
+     func (co *PlatformCompanyProfile)  CbsOnboardGet() (GetCompanyProfileSerializerResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            cbsOnboardGetResponse GetCompanyProfileSerializerResponse
+	    )
+
+        
+
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.Config,
+            "get",
+            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s",co.CompanyID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetCompanyProfileSerializerResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &cbsOnboardGetResponse)
+        if err != nil {
+             return GetCompanyProfileSerializerResponse{}, common.NewFDKError(err.Error())
+        }
+        return cbsOnboardGetResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
     // GetCompanyMetrics Get company metrics
      func (co *PlatformCompanyProfile)  GetCompanyMetrics() (MetricsSerializer, error){
         
@@ -7813,58 +7821,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return MetricsSerializer{}, common.NewFDKError(err.Error())
         }
         return getCompanyMetricsResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // GetBrand Get a single brand.
-     func (co *PlatformCompanyProfile)  GetBrand(BrandID string) (GetBrandResponseSerializer, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getBrandResponse GetBrandResponseSerializer
-	    )
-
-        
-
-        
-
-        
-        
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            co.Config,
-            "get",
-            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/brand/%s",co.CompanyID, BrandID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return GetBrandResponseSerializer{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getBrandResponse)
-        if err != nil {
-             return GetBrandResponseSerializer{}, common.NewFDKError(err.Error())
-        }
-        return getBrandResponse, nil
         
     }
          
@@ -7963,6 +7919,58 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
+    // GetBrand Get a single brand.
+     func (co *PlatformCompanyProfile)  GetBrand(BrandID string) (GetBrandResponseSerializer, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getBrandResponse GetBrandResponseSerializer
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.Config,
+            "get",
+            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/brand/%s",co.CompanyID, BrandID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetBrandResponseSerializer{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getBrandResponse)
+        if err != nil {
+             return GetBrandResponseSerializer{}, common.NewFDKError(err.Error())
+        }
+        return getBrandResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
     // CreateBrand Create a Brand.
      func (co *PlatformCompanyProfile)  CreateBrand(body  CreateUpdateBrandRequestSerializer) (SuccessResponse, error){
         
@@ -8033,6 +8041,75 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return SuccessResponse{}, common.NewFDKError(err.Error())
         }
         return createBrandResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // CreateCompanyBrandMapping Create a company brand mapping.
+     func (co *PlatformCompanyProfile)  CreateCompanyBrandMapping(body  CompanyBrandPostRequestSerializer) (SuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            createCompanyBrandMappingResponse SuccessResponse
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            co.Config,
+            "post",
+            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/company-brand",co.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createCompanyBrandMappingResponse)
+        if err != nil {
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return createCompanyBrandMappingResponse, nil
         
     }
          
@@ -8169,16 +8246,44 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // CreateCompanyBrandMapping Create a company brand mapping.
-     func (co *PlatformCompanyProfile)  CreateCompanyBrandMapping(body  CompanyBrandPostRequestSerializer) (SuccessResponse, error){
+    // CreateLocation Create a location asscoiated to a company.
+     func (co *PlatformCompanyProfile)  CreateLocation(body  LocationSerializer) (SuccessResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            createCompanyBrandMappingResponse SuccessResponse
+            createLocationResponse SuccessResponse
 	    )
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -8211,7 +8316,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         rawRequest = NewRequest(
             co.Config,
             "post",
-            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/company-brand",co.CompanyID),
+            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/location",co.CompanyID),
             nil,
             nil,
             reqBody)
@@ -8220,11 +8325,11 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return SuccessResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &createCompanyBrandMappingResponse)
+        err = json.Unmarshal(response, &createLocationResponse)
         if err != nil {
              return SuccessResponse{}, common.NewFDKError(err.Error())
         }
-        return createCompanyBrandMappingResponse, nil
+        return createLocationResponse, nil
         
     }
          
@@ -8387,155 +8492,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // CreateLocation Create a location asscoiated to a company.
-     func (co *PlatformCompanyProfile)  CreateLocation(body  LocationSerializer) (SuccessResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            createLocationResponse SuccessResponse
-	    )
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            co.Config,
-            "post",
-            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/location",co.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &createLocationResponse)
-        if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return createLocationResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // GetLocationDetail Get details of a specific location.
-     func (co *PlatformCompanyProfile)  GetLocationDetail(LocationID string) (GetLocationSerializer, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getLocationDetailResponse GetLocationSerializer
-	    )
-
-        
-
-        
-
-        
-        
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            co.Config,
-            "get",
-            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/location/%s",co.CompanyID, LocationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return GetLocationSerializer{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getLocationDetailResponse)
-        if err != nil {
-             return GetLocationSerializer{}, common.NewFDKError(err.Error())
-        }
-        return getLocationDetailResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
     // UpdateLocation Edit a location asscoiated to a company.
      func (co *PlatformCompanyProfile)  UpdateLocation(LocationID string, body  LocationSerializer) (SuccessResponse, error){
         
@@ -8622,6 +8578,58 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return SuccessResponse{}, common.NewFDKError(err.Error())
         }
         return updateLocationResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetLocationDetail Get details of a specific location.
+     func (co *PlatformCompanyProfile)  GetLocationDetail(LocationID string) (GetLocationSerializer, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getLocationDetailResponse GetLocationSerializer
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.Config,
+            "get",
+            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/location/%s",co.CompanyID, LocationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetLocationSerializer{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getLocationDetailResponse)
+        if err != nil {
+             return GetLocationSerializer{}, common.NewFDKError(err.Error())
+        }
+        return getLocationDetailResponse, nil
         
     }
          
@@ -9171,6 +9179,643 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 	    }
         
         return response, nil
+        
+    }
+         
+        
+       
+    
+
+
+	
+   // PlatformInventory holds PlatformInventory object properties
+    type PlatformInventory struct {
+        Config *PlatformConfig
+        CompanyID string
+    }
+    // NewPlatformInventory returns new PlatformInventory instance
+    func NewPlatformInventory(config *PlatformConfig) *PlatformInventory {
+        return &PlatformInventory{Config: config, CompanyID: config.CompanyID}
+    }
+    
+    
+   
+  
+    
+    
+    //PlatformGetJobsByCompanyXQuery holds query params
+    type PlatformGetJobsByCompanyXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // GetJobsByCompany Get Job Configs For A Company
+     func (in *PlatformInventory)  GetJobsByCompany(xQuery PlatformGetJobsByCompanyXQuery) (ResponseEnvelopeListJobConfigRawDTO, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getJobsByCompanyResponse ResponseEnvelopeListJobConfigRawDTO
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            in.Config,
+            "get",
+            fmt.Sprintf("/service/platform/inventory/v1.0/company/%s/jobs",in.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ResponseEnvelopeListJobConfigRawDTO{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getJobsByCompanyResponse)
+        if err != nil {
+             return ResponseEnvelopeListJobConfigRawDTO{}, common.NewFDKError(err.Error())
+        }
+        return getJobsByCompanyResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // UpdateJob Updates An Existing Job Config
+     func (in *PlatformInventory)  UpdateJob(body  JobConfigDTO) (ResponseEnvelopeString, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateJobResponse ResponseEnvelopeString
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return ResponseEnvelopeString{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return ResponseEnvelopeString{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            in.Config,
+            "put",
+            fmt.Sprintf("/service/platform/inventory/v1.0/company/%s/jobs",in.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ResponseEnvelopeString{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateJobResponse)
+        if err != nil {
+             return ResponseEnvelopeString{}, common.NewFDKError(err.Error())
+        }
+        return updateJobResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // CreateJob Creates A New Job Config
+     func (in *PlatformInventory)  CreateJob(body  JobConfigDTO) (ResponseEnvelopeString, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            createJobResponse ResponseEnvelopeString
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return ResponseEnvelopeString{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return ResponseEnvelopeString{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            in.Config,
+            "post",
+            fmt.Sprintf("/service/platform/inventory/v1.0/company/%s/jobs",in.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ResponseEnvelopeString{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createJobResponse)
+        if err != nil {
+             return ResponseEnvelopeString{}, common.NewFDKError(err.Error())
+        }
+        return createJobResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetJobSteps Get Job Code Steps
+     func (in *PlatformInventory)  GetJobSteps(JobID float64) (ResponseEnvelopeListJobStepsDTO, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getJobStepsResponse ResponseEnvelopeListJobStepsDTO
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            in.Config,
+            "get",
+            fmt.Sprintf("/service/platform/inventory/v1.0/company/%s/jobs/steps/undefined",in.CompanyID, JobID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ResponseEnvelopeListJobStepsDTO{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getJobStepsResponse)
+        if err != nil {
+             return ResponseEnvelopeListJobStepsDTO{}, common.NewFDKError(err.Error())
+        }
+        return getJobStepsResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetJobByCompanyAndIntegrationXQuery holds query params
+    type PlatformGetJobByCompanyAndIntegrationXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // GetJobByCompanyAndIntegration Get Job Configs By Company And Integration
+     func (in *PlatformInventory)  GetJobByCompanyAndIntegration(IntegrationID string, xQuery PlatformGetJobByCompanyAndIntegrationXQuery) (ResponseEnvelopeListJobConfigDTO, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getJobByCompanyAndIntegrationResponse ResponseEnvelopeListJobConfigDTO
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            in.Config,
+            "get",
+            fmt.Sprintf("/service/platform/inventory/v1.0/company/%s/jobs/integration/%s",in.CompanyID, IntegrationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ResponseEnvelopeListJobConfigDTO{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getJobByCompanyAndIntegrationResponse)
+        if err != nil {
+             return ResponseEnvelopeListJobConfigDTO{}, common.NewFDKError(err.Error())
+        }
+        return getJobByCompanyAndIntegrationResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // Disable Disable Job Config
+     func (in *PlatformInventory)  Disable(IntegrationID string) (ResponseEnvelopeString, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            disableResponse ResponseEnvelopeString
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            in.Config,
+            "get",
+            fmt.Sprintf("/service/platform/inventory/v1.0/company/%s/jobs/disable/integration/%s",in.CompanyID, IntegrationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ResponseEnvelopeString{}, err
+	    }
+        
+        err = json.Unmarshal(response, &disableResponse)
+        if err != nil {
+             return ResponseEnvelopeString{}, common.NewFDKError(err.Error())
+        }
+        return disableResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetJobConfigDefaults Get Job Configs Defaults
+     func (in *PlatformInventory)  GetJobConfigDefaults() (ResponseEnvelopeJobConfigDTO, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getJobConfigDefaultsResponse ResponseEnvelopeJobConfigDTO
+	    )
+
+        
+
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            in.Config,
+            "get",
+            fmt.Sprintf("/service/platform/inventory/v1.0/company/%s/jobs/defaults",in.CompanyID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ResponseEnvelopeJobConfigDTO{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getJobConfigDefaultsResponse)
+        if err != nil {
+             return ResponseEnvelopeJobConfigDTO{}, common.NewFDKError(err.Error())
+        }
+        return getJobConfigDefaultsResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetJobByCode Get Job Config By Code
+     func (in *PlatformInventory)  GetJobByCode(Code string) (ResponseEnvelopeJobConfigDTO, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getJobByCodeResponse ResponseEnvelopeJobConfigDTO
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            in.Config,
+            "get",
+            fmt.Sprintf("/service/platform/inventory/v1.0/company/%s/jobs/code/%s",in.CompanyID, Code),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ResponseEnvelopeJobConfigDTO{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getJobByCodeResponse)
+        if err != nil {
+             return ResponseEnvelopeJobConfigDTO{}, common.NewFDKError(err.Error())
+        }
+        return getJobByCodeResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetJobCodeMetricsXQuery holds query params
+    type PlatformGetJobCodeMetricsXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        Status string  `url:"status,omitempty"` 
+        Date string  `url:"date,omitempty"`  
+    }
+    
+
+
+    // GetJobCodeMetrics Get Job Metrics
+     func (in *PlatformInventory)  GetJobCodeMetrics(Code string, xQuery PlatformGetJobCodeMetricsXQuery) (ResponseEnvelopeJobMetricsDto, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getJobCodeMetricsResponse ResponseEnvelopeJobMetricsDto
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            in.Config,
+            "get",
+            fmt.Sprintf("/service/platform/inventory/v1.0/company/%s/jobs/code/%s/metrics",in.CompanyID, Code),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ResponseEnvelopeJobMetricsDto{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getJobCodeMetricsResponse)
+        if err != nil {
+             return ResponseEnvelopeJobMetricsDto{}, common.NewFDKError(err.Error())
+        }
+        return getJobCodeMetricsResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetJobCodesByCompanyAndIntegrationXQuery holds query params
+    type PlatformGetJobCodesByCompanyAndIntegrationXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // GetJobCodesByCompanyAndIntegration Get Job Codes By Company And Integration
+     func (in *PlatformInventory)  GetJobCodesByCompanyAndIntegration(IntegrationID string, xQuery PlatformGetJobCodesByCompanyAndIntegrationXQuery) (ResponseEnvelopeListJobConfigListDTO, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getJobCodesByCompanyAndIntegrationResponse ResponseEnvelopeListJobConfigListDTO
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            in.Config,
+            "get",
+            fmt.Sprintf("/service/platform/inventory/v1.0/company/%s/jobs/code/integration/%s",in.CompanyID, IntegrationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ResponseEnvelopeListJobConfigListDTO{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getJobCodesByCompanyAndIntegrationResponse)
+        if err != nil {
+             return ResponseEnvelopeListJobConfigListDTO{}, common.NewFDKError(err.Error())
+        }
+        return getJobCodesByCompanyAndIntegrationResponse, nil
         
     }
          
@@ -10724,6 +11369,442 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
     }
          
+        
+       
+    
+
+
+	
+   // PlatformAnalytics holds PlatformAnalytics object properties
+    type PlatformAnalytics struct {
+        Config *PlatformConfig
+        CompanyID string
+    }
+    // NewPlatformAnalytics returns new PlatformAnalytics instance
+    func NewPlatformAnalytics(config *PlatformConfig) *PlatformAnalytics {
+        return &PlatformAnalytics{Config: config, CompanyID: config.CompanyID}
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
+  
+    
+    
+
+
+    // CreateExportJob Create data export job in required format
+     func (an *PlatformAnalytics)  CreateExportJob(ExportType string, body  ExportJobReq) (ExportJobRes, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            createExportJobResponse ExportJobRes
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return ExportJobRes{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return ExportJobRes{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            an.Config,
+            "post",
+            fmt.Sprintf("/service/platform/analytics/v1.0/company/%s/export/%s",an.CompanyID, ExportType),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ExportJobRes{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createExportJobResponse)
+        if err != nil {
+             return ExportJobRes{}, common.NewFDKError(err.Error())
+        }
+        return createExportJobResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetExportJobStatus Get data export job status
+     func (an *PlatformAnalytics)  GetExportJobStatus(ExportType string, JobID string) (ExportJobStatusRes, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getExportJobStatusResponse ExportJobStatusRes
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            an.Config,
+            "get",
+            fmt.Sprintf("/service/platform/analytics/v1.0/company/%s/export/%s/job/%s",an.CompanyID, ExportType, JobID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ExportJobStatusRes{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getExportJobStatusResponse)
+        if err != nil {
+             return ExportJobStatusRes{}, common.NewFDKError(err.Error())
+        }
+        return getExportJobStatusResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetLogsListXQuery holds query params
+    type PlatformGetLogsListXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // GetLogsList Get logs list
+     func (an *PlatformAnalytics)  GetLogsList(LogType string, xQuery PlatformGetLogsListXQuery, body  GetLogsListReq) (GetLogsListRes, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getLogsListResponse GetLogsListRes
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return GetLogsListRes{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return GetLogsListRes{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            an.Config,
+            "post",
+            fmt.Sprintf("/service/platform/analytics/v1.0/company/%s/logs/%s",an.CompanyID, LogType),
+            nil,
+            xQuery,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetLogsListRes{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getLogsListResponse)
+        if err != nil {
+             return GetLogsListRes{}, common.NewFDKError(err.Error())
+        }
+        return getLogsListResponse, nil
+        
+    }
+         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            
+            // GetLogsListPaginator Get logs list  
+            func (an *PlatformAnalytics)  GetLogsListPaginator(LogType string  , 
+              xQuery PlatformGetLogsListXQuery  , body  GetLogsListReq) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := an.GetLogsList(LogType, xQuery, body)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformSearchLogsXQuery holds query params
+    type PlatformSearchLogsXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // SearchLogs Search logs
+     func (an *PlatformAnalytics)  SearchLogs(LogType string, xQuery PlatformSearchLogsXQuery, body  SearchLogReq) (SearchLogRes, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            searchLogsResponse SearchLogRes
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return SearchLogRes{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return SearchLogRes{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            an.Config,
+            "post",
+            fmt.Sprintf("/service/platform/analytics/v1.0/company/%s/logs/%s/search",an.CompanyID, LogType),
+            nil,
+            xQuery,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SearchLogRes{}, err
+	    }
+        
+        err = json.Unmarshal(response, &searchLogsResponse)
+        if err != nil {
+             return SearchLogRes{}, common.NewFDKError(err.Error())
+        }
+        return searchLogsResponse, nil
+        
+    }
+         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            
+            // SearchLogsPaginator Search logs  
+            func (an *PlatformAnalytics)  SearchLogsPaginator(LogType string  , 
+              xQuery PlatformSearchLogsXQuery  , body  SearchLogReq) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := an.SearchLogs(LogType, xQuery, body)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
         
        
     

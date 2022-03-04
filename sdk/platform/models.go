@@ -10295,12 +10295,12 @@ package platform
     
 
     
-    // BusinessCountryInfo used by CompanyProfile
-    type BusinessCountryInfo struct {
+    // ContactDetails used by CompanyProfile
+    type ContactDetails struct {
 
         
-            Country string  `json:"country"`
-            CountryCode string  `json:"country_code"`
+            Emails []string  `json:"emails"`
+            Phone []SellerPhoneNumber  `json:"phone"`
          
     }
     
@@ -10320,12 +10320,50 @@ package platform
          
     }
     
-    // ContactDetails used by CompanyProfile
-    type ContactDetails struct {
+    // CreateUpdateAddressSerializer used by CompanyProfile
+    type CreateUpdateAddressSerializer struct {
 
         
-            Phone []SellerPhoneNumber  `json:"phone"`
-            Emails []string  `json:"emails"`
+            AddressType string  `json:"address_type"`
+            State string  `json:"state"`
+            Address1 string  `json:"address1"`
+            CountryCode string  `json:"country_code"`
+            City string  `json:"city"`
+            Address2 string  `json:"address2"`
+            Longitude float64  `json:"longitude"`
+            Landmark string  `json:"landmark"`
+            Country string  `json:"country"`
+            Latitude float64  `json:"latitude"`
+            Pincode float64  `json:"pincode"`
+         
+    }
+    
+    // UpdateCompany used by CompanyProfile
+    type UpdateCompany struct {
+
+        
+            RejectReason string  `json:"reject_reason"`
+            ContactDetails ContactDetails  `json:"contact_details"`
+            BusinessDetails BusinessDetails  `json:"business_details"`
+            FranchiseEnabled bool  `json:"franchise_enabled"`
+            BusinessInfo string  `json:"business_info"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
+            Warnings map[string]interface{}  `json:"warnings"`
+            Addresses []CreateUpdateAddressSerializer  `json:"addresses"`
+            NotificationEmails []string  `json:"notification_emails"`
+            CompanyType string  `json:"company_type"`
+            Name string  `json:"name"`
+            Documents []Document  `json:"documents"`
+            BusinessType string  `json:"business_type"`
+         
+    }
+    
+    // BusinessCountryInfo used by CompanyProfile
+    type BusinessCountryInfo struct {
+
+        
+            CountryCode string  `json:"country_code"`
+            Country string  `json:"country"`
          
     }
     
@@ -10334,64 +10372,26 @@ package platform
 
         
             Addresses []GetAddressSerializer  `json:"addresses"`
-            Stage string  `json:"stage"`
-            BusinessType string  `json:"business_type"`
-            Documents []Document  `json:"documents"`
-            ModifiedOn string  `json:"modified_on"`
-            BusinessInfo string  `json:"business_info"`
-            BusinessCountryInfo BusinessCountryInfo  `json:"business_country_info"`
+            Warnings map[string]interface{}  `json:"warnings"`
             ModifiedBy UserSerializer  `json:"modified_by"`
-            BusinessDetails BusinessDetails  `json:"business_details"`
-            ContactDetails ContactDetails  `json:"contact_details"`
-            Mode string  `json:"mode"`
-            UID float64  `json:"uid"`
-            CreatedBy UserSerializer  `json:"created_by"`
-            FranchiseEnabled bool  `json:"franchise_enabled"`
-            NotificationEmails []string  `json:"notification_emails"`
-            CreatedOn string  `json:"created_on"`
+            CompanyType string  `json:"company_type"`
             Name string  `json:"name"`
             VerifiedOn string  `json:"verified_on"`
-            Warnings map[string]interface{}  `json:"warnings"`
-            CompanyType string  `json:"company_type"`
-            VerifiedBy UserSerializer  `json:"verified_by"`
-         
-    }
-    
-    // CreateUpdateAddressSerializer used by CompanyProfile
-    type CreateUpdateAddressSerializer struct {
-
-        
-            Landmark string  `json:"landmark"`
-            Address1 string  `json:"address1"`
-            Pincode float64  `json:"pincode"`
-            CountryCode string  `json:"country_code"`
-            AddressType string  `json:"address_type"`
-            Latitude float64  `json:"latitude"`
-            City string  `json:"city"`
-            Address2 string  `json:"address2"`
-            State string  `json:"state"`
-            Longitude float64  `json:"longitude"`
-            Country string  `json:"country"`
-         
-    }
-    
-    // UpdateCompany used by CompanyProfile
-    type UpdateCompany struct {
-
-        
-            BusinessType string  `json:"business_type"`
-            RejectReason string  `json:"reject_reason"`
             BusinessDetails BusinessDetails  `json:"business_details"`
-            Documents []Document  `json:"documents"`
+            CreatedBy UserSerializer  `json:"created_by"`
             FranchiseEnabled bool  `json:"franchise_enabled"`
-            Addresses []CreateUpdateAddressSerializer  `json:"addresses"`
-            NotificationEmails []string  `json:"notification_emails"`
-            BusinessInfo string  `json:"business_info"`
-            Warnings map[string]interface{}  `json:"warnings"`
             ContactDetails ContactDetails  `json:"contact_details"`
-            CustomJson map[string]interface{}  `json:"_custom_json"`
-            Name string  `json:"name"`
-            CompanyType string  `json:"company_type"`
+            BusinessInfo string  `json:"business_info"`
+            ModifiedOn string  `json:"modified_on"`
+            VerifiedBy UserSerializer  `json:"verified_by"`
+            NotificationEmails []string  `json:"notification_emails"`
+            UID float64  `json:"uid"`
+            CreatedOn string  `json:"created_on"`
+            BusinessCountryInfo BusinessCountryInfo  `json:"business_country_info"`
+            Mode string  `json:"mode"`
+            Documents []Document  `json:"documents"`
+            BusinessType string  `json:"business_type"`
+            Stage string  `json:"stage"`
          
     }
     
@@ -10408,13 +10408,13 @@ package platform
     type MetricsSerializer struct {
 
         
-            Store DocumentsObj  `json:"store"`
-            Brand DocumentsObj  `json:"brand"`
             CompanyDocuments DocumentsObj  `json:"company_documents"`
-            Stage string  `json:"stage"`
-            Product DocumentsObj  `json:"product"`
-            UID float64  `json:"uid"`
             StoreDocuments DocumentsObj  `json:"store_documents"`
+            Product DocumentsObj  `json:"product"`
+            Store DocumentsObj  `json:"store"`
+            UID float64  `json:"uid"`
+            Brand DocumentsObj  `json:"brand"`
+            Stage string  `json:"stage"`
          
     }
     
@@ -10427,74 +10427,46 @@ package platform
          
     }
     
-    // GetBrandResponseSerializer used by CompanyProfile
-    type GetBrandResponseSerializer struct {
-
-        
-            Synonyms []string  `json:"synonyms"`
-            Stage string  `json:"stage"`
-            CustomJson map[string]interface{}  `json:"_custom_json"`
-            ModifiedOn string  `json:"modified_on"`
-            ModifiedBy UserSerializer1  `json:"modified_by"`
-            RejectReason string  `json:"reject_reason"`
-            Description string  `json:"description"`
-            LocaleLanguage map[string]interface{}  `json:"_locale_language"`
-            Mode string  `json:"mode"`
-            UID float64  `json:"uid"`
-            SlugKey string  `json:"slug_key"`
-            Banner BrandBannerSerializer  `json:"banner"`
-            CreatedBy UserSerializer1  `json:"created_by"`
-            CreatedOn string  `json:"created_on"`
-            Name string  `json:"name"`
-            Logo string  `json:"logo"`
-            VerifiedOn string  `json:"verified_on"`
-            Warnings map[string]interface{}  `json:"warnings"`
-            VerifiedBy UserSerializer1  `json:"verified_by"`
-         
-    }
-    
     // CreateUpdateBrandRequestSerializer used by CompanyProfile
     type CreateUpdateBrandRequestSerializer struct {
 
         
-            Banner BrandBannerSerializer  `json:"banner"`
-            Synonyms []string  `json:"synonyms"`
-            CustomJson map[string]interface{}  `json:"_custom_json"`
-            Description string  `json:"description"`
             BrandTier string  `json:"brand_tier"`
-            LocaleLanguage map[string]interface{}  `json:"_locale_language"`
+            Description string  `json:"description"`
             CompanyID float64  `json:"company_id"`
-            Logo string  `json:"logo"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
+            Synonyms []string  `json:"synonyms"`
             UID float64  `json:"uid"`
+            LocaleLanguage map[string]interface{}  `json:"_locale_language"`
+            Banner BrandBannerSerializer  `json:"banner"`
+            Logo string  `json:"logo"`
             Name string  `json:"name"`
          
     }
     
-    // CompanyBrandSerializer used by CompanyProfile
-    type CompanyBrandSerializer struct {
+    // GetBrandResponseSerializer used by CompanyProfile
+    type GetBrandResponseSerializer struct {
 
         
+            Description string  `json:"description"`
+            Synonyms []string  `json:"synonyms"`
+            Warnings map[string]interface{}  `json:"warnings"`
+            LocaleLanguage map[string]interface{}  `json:"_locale_language"`
+            ModifiedBy UserSerializer1  `json:"modified_by"`
+            Name string  `json:"name"`
             VerifiedOn string  `json:"verified_on"`
             RejectReason string  `json:"reject_reason"`
-            ModifiedOn string  `json:"modified_on"`
-            Warnings map[string]interface{}  `json:"warnings"`
-            Brand GetBrandResponseSerializer  `json:"brand"`
-            Company GetCompanySerializer  `json:"company"`
-            CreatedOn string  `json:"created_on"`
-            Stage string  `json:"stage"`
-            UID float64  `json:"uid"`
-            ModifiedBy UserSerializer1  `json:"modified_by"`
+            SlugKey string  `json:"slug_key"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
             CreatedBy UserSerializer1  `json:"created_by"`
+            Banner BrandBannerSerializer  `json:"banner"`
+            ModifiedOn string  `json:"modified_on"`
             VerifiedBy UserSerializer1  `json:"verified_by"`
-         
-    }
-    
-    // CompanyBrandListSerializer used by CompanyProfile
-    type CompanyBrandListSerializer struct {
-
-        
-            Items []CompanyBrandSerializer  `json:"items"`
-            Page Page  `json:"page"`
+            UID float64  `json:"uid"`
+            CreatedOn string  `json:"created_on"`
+            Mode string  `json:"mode"`
+            Logo string  `json:"logo"`
+            Stage string  `json:"stage"`
          
     }
     
@@ -10508,21 +10480,49 @@ package platform
          
     }
     
+    // CompanyBrandSerializer used by CompanyProfile
+    type CompanyBrandSerializer struct {
+
+        
+            RejectReason string  `json:"reject_reason"`
+            ModifiedOn string  `json:"modified_on"`
+            Warnings map[string]interface{}  `json:"warnings"`
+            VerifiedBy UserSerializer1  `json:"verified_by"`
+            CreatedBy UserSerializer1  `json:"created_by"`
+            UID float64  `json:"uid"`
+            CreatedOn string  `json:"created_on"`
+            ModifiedBy UserSerializer1  `json:"modified_by"`
+            Brand GetBrandResponseSerializer  `json:"brand"`
+            Company GetCompanySerializer  `json:"company"`
+            VerifiedOn string  `json:"verified_on"`
+            Stage string  `json:"stage"`
+         
+    }
+    
+    // CompanyBrandListSerializer used by CompanyProfile
+    type CompanyBrandListSerializer struct {
+
+        
+            Page Page  `json:"page"`
+            Items []CompanyBrandSerializer  `json:"items"`
+         
+    }
+    
     // GetAddressSerializer1 used by CompanyProfile
     type GetAddressSerializer1 struct {
 
         
-            Landmark string  `json:"landmark"`
-            Address1 string  `json:"address1"`
-            Pincode float64  `json:"pincode"`
             AddressType string  `json:"address_type"`
+            State string  `json:"state"`
+            Address1 string  `json:"address1"`
             CountryCode string  `json:"country_code"`
-            Latitude float64  `json:"latitude"`
             City string  `json:"city"`
             Address2 string  `json:"address2"`
-            State string  `json:"state"`
             Longitude float64  `json:"longitude"`
+            Landmark string  `json:"landmark"`
             Country string  `json:"country"`
+            Latitude float64  `json:"latitude"`
+            Pincode float64  `json:"pincode"`
          
     }
     
@@ -10530,23 +10530,23 @@ package platform
     type LocationSerializer struct {
 
         
-            Documents []Document  `json:"documents"`
-            CustomJson map[string]interface{}  `json:"_custom_json"`
-            StoreType string  `json:"store_type"`
-            NotificationEmails []string  `json:"notification_emails"`
-            Warnings map[string]interface{}  `json:"warnings"`
-            GstCredentials InvoiceDetailsSerializer  `json:"gst_credentials"`
-            Company float64  `json:"company"`
-            UID float64  `json:"uid"`
-            Manager LocationManagerSerializer  `json:"manager"`
             Timing []LocationDayWiseSerializer  `json:"timing"`
-            Stage string  `json:"stage"`
-            Code string  `json:"code"`
-            DisplayName string  `json:"display_name"`
-            ProductReturnConfig ProductReturnConfigSerializer  `json:"product_return_config"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
             Address GetAddressSerializer1  `json:"address"`
-            Name string  `json:"name"`
+            Warnings map[string]interface{}  `json:"warnings"`
+            NotificationEmails []string  `json:"notification_emails"`
+            GstCredentials InvoiceDetailsSerializer  `json:"gst_credentials"`
+            UID float64  `json:"uid"`
+            StoreType string  `json:"store_type"`
+            DisplayName string  `json:"display_name"`
+            Manager LocationManagerSerializer  `json:"manager"`
+            Company float64  `json:"company"`
             ContactNumbers []SellerPhoneNumber  `json:"contact_numbers"`
+            Name string  `json:"name"`
+            Documents []Document  `json:"documents"`
+            ProductReturnConfig ProductReturnConfigSerializer  `json:"product_return_config"`
+            Code string  `json:"code"`
+            Stage string  `json:"stage"`
          
     }
     
@@ -10883,6 +10883,729 @@ package platform
 
         
             Message string  `json:"message"`
+         
+    }
+    
+
+    
+    // DataTresholdDTO used by Inventory
+    type DataTresholdDTO struct {
+
+        
+            MinPrice float64  `json:"min_price"`
+            SafeStock float64  `json:"safe_stock"`
+            PeriodThreshold float64  `json:"period_threshold"`
+            PeriodThresholdType string  `json:"period_threshold_type"`
+            PeriodTypeList []GenericDTO  `json:"period_type_list"`
+         
+    }
+    
+    // GenericDTO used by Inventory
+    type GenericDTO struct {
+
+        
+            Text string  `json:"text"`
+            Value map[string]interface{}  `json:"value"`
+         
+    }
+    
+    // JobConfigDTO used by Inventory
+    type JobConfigDTO struct {
+
+        
+            Integration string  `json:"integration"`
+            IntegrationData map[string]map[string]interface{}  `json:"integration_data"`
+            CompanyName string  `json:"company_name"`
+            CompanyID float64  `json:"company_id"`
+            TaskDetails TaskDTO  `json:"task_details"`
+            ThresholdDetails DataTresholdDTO  `json:"threshold_details"`
+            JobCode string  `json:"job_code"`
+            Alias string  `json:"alias"`
+         
+    }
+    
+    // TaskDTO used by Inventory
+    type TaskDTO struct {
+
+        
+            Type float64  `json:"type"`
+            GroupList []GenericDTO  `json:"group_list"`
+         
+    }
+    
+    // ResponseEnvelopeString used by Inventory
+    type ResponseEnvelopeString struct {
+
+        
+            Timestamp string  `json:"timestamp"`
+            Status float64  `json:"status"`
+            Error string  `json:"error"`
+            Exception string  `json:"exception"`
+            Message string  `json:"message"`
+            TotalTimeTakenInMillis float64  `json:"total_time_taken_in_millis"`
+            HttpStatus string  `json:"http_status"`
+            Items string  `json:"items"`
+            Payload string  `json:"payload"`
+            TraceID string  `json:"trace_id"`
+            Page Page  `json:"page"`
+         
+    }
+    
+    // AWSS3config used by Inventory
+    type AWSS3config struct {
+
+        
+            Bucket string  `json:"bucket"`
+            Region string  `json:"region"`
+            Dir string  `json:"dir"`
+            AccessKey string  `json:"access_key"`
+            SecretKey string  `json:"secret_key"`
+            LocalFilePath string  `json:"local_file_path"`
+            ArchivePath string  `json:"archive_path"`
+            Archive bool  `json:"archive"`
+            Delete bool  `json:"delete"`
+            Unzip bool  `json:"unzip"`
+            ZipFormat string  `json:"zip_format"`
+            FileRegex string  `json:"file_regex"`
+            ArchiveConfig ArchiveConfig  `json:"archive_config"`
+         
+    }
+    
+    // ArchiveConfig used by Inventory
+    type ArchiveConfig struct {
+
+        
+            Delete bool  `json:"delete"`
+            Archive bool  `json:"archive"`
+            ArchiveDir string  `json:"archive_dir"`
+         
+    }
+    
+    // Audit used by Inventory
+    type Audit struct {
+
+        
+            CreatedBy string  `json:"created_by"`
+            ModifiedBy string  `json:"modified_by"`
+            CreatedOn string  `json:"created_on"`
+            ModifiedOn string  `json:"modified_on"`
+         
+    }
+    
+    // CatalogMasterConfig used by Inventory
+    type CatalogMasterConfig struct {
+
+        
+            SourceSlug string  `json:"source_slug"`
+         
+    }
+    
+    // CompanyConfig used by Inventory
+    type CompanyConfig struct {
+
+        
+            CompanyID float64  `json:"company_id"`
+            ExcludeSteps []float64  `json:"exclude_steps"`
+            HiddenClosetKeys []string  `json:"hidden_closet_keys"`
+            OpenTags map[string]map[string]interface{}  `json:"open_tags"`
+            TaxIdentifiers []string  `json:"tax_identifiers"`
+            DeleteQuantityThreshold float64  `json:"delete_quantity_threshold"`
+         
+    }
+    
+    // DBConfig used by Inventory
+    type DBConfig struct {
+
+        
+            Vendor string  `json:"vendor"`
+            Host string  `json:"host"`
+            Port float64  `json:"port"`
+            Username string  `json:"username"`
+            Password string  `json:"password"`
+            Dbname string  `json:"dbname"`
+            Query string  `json:"query"`
+            Procedure bool  `json:"procedure"`
+            DriverClass string  `json:"driver_class"`
+            JdbcURL string  `json:"jdbc_url"`
+            OptionalProperties map[string]string  `json:"optional_properties"`
+         
+    }
+    
+    // DBConnectionProfile used by Inventory
+    type DBConnectionProfile struct {
+
+        
+            Inventory string  `json:"inventory"`
+         
+    }
+    
+    // DBParamConfig used by Inventory
+    type DBParamConfig struct {
+
+        
+            Params map[string]map[string]interface{}  `json:"params"`
+         
+    }
+    
+    // DefaultHeadersDTO used by Inventory
+    type DefaultHeadersDTO struct {
+
+        
+            Store PropBeanDTO  `json:"store"`
+            IntfArticleID PropBeanDTO  `json:"intf_article_id"`
+            PriceEffective PropBeanDTO  `json:"price_effective"`
+            Quantity PropBeanDTO  `json:"quantity"`
+         
+    }
+    
+    // DocMappingConfig used by Inventory
+    type DocMappingConfig struct {
+
+        
+            Properties map[string]map[string]interface{}  `json:"properties"`
+            JunkDataThresholdCount float64  `json:"junk_data_threshold_count"`
+            PropBeanConfigs []PropBeanConfig  `json:"prop_bean_configs"`
+            UnwindField string  `json:"unwind_field"`
+            DefaultHeaders DefaultHeadersDTO  `json:"default_headers"`
+         
+    }
+    
+    // EmailConfig used by Inventory
+    type EmailConfig struct {
+
+        
+            Recepient string  `json:"recepient"`
+            Host string  `json:"host"`
+            Username string  `json:"username"`
+            Password string  `json:"password"`
+            Unzip bool  `json:"unzip"`
+            ReadFromContent bool  `json:"read_from_content"`
+            FilterBasedOnRecepients bool  `json:"filter_based_on_recepients"`
+            Pcol string  `json:"pcol"`
+            SubjectLineRegex string  `json:"subject_line_regex"`
+            SenderAddress string  `json:"sender_address"`
+            LocalDir string  `json:"local_dir"`
+            FolderNameHierarchies []string  `json:"folder_name_hierarchies"`
+            AttachmentRegex string  `json:"attachment_regex"`
+            BodyContentRegex string  `json:"body_content_regex"`
+            PasswordProtected bool  `json:"password_protected"`
+            ZipFormat string  `json:"zip_format"`
+            AttachmentMandate bool  `json:"attachment_mandate"`
+            FilterFilesAfterExtraction bool  `json:"filter_files_after_extraction"`
+            ArchiveConfig ArchiveConfig  `json:"archive_config"`
+            ReadAllUnreadMails bool  `json:"read_all_unread_mails"`
+            ContentType string  `json:"content_type"`
+            DownloadableLink bool  `json:"downloadable_link"`
+            Properties map[string]string  `json:"properties"`
+         
+    }
+    
+    // FTPConfig used by Inventory
+    type FTPConfig struct {
+
+        
+            Host string  `json:"host"`
+            Port float64  `json:"port"`
+            Username string  `json:"username"`
+            Password string  `json:"password"`
+            Unzip bool  `json:"unzip"`
+            Retries float64  `json:"retries"`
+            Interval float64  `json:"interval"`
+            LocalDir string  `json:"local_dir"`
+            RemoteDir string  `json:"remote_dir"`
+            ZipFileRegex string  `json:"zip_file_regex"`
+            ArchiveConfig ArchiveConfig  `json:"archive_config"`
+            FileRegex string  `json:"file_regex"`
+            ZipFormat string  `json:"zip_format"`
+            ReadAllFiles bool  `json:"read_all_files"`
+         
+    }
+    
+    // FileConfig used by Inventory
+    type FileConfig struct {
+
+        
+            Delimiter string  `json:"delimiter"`
+            Charset string  `json:"charset"`
+            Properties map[string]map[string]interface{}  `json:"properties"`
+            FileHasHeader bool  `json:"file_has_header"`
+            HeaderIndex float64  `json:"header_index"`
+            HeaderArray []string  `json:"header_array"`
+            DataStartIndex float64  `json:"data_start_index"`
+            PropBeanConfigs []PropBeanConfig  `json:"prop_bean_configs"`
+            JunkDataThresholdCount float64  `json:"junk_data_threshold_count"`
+            FileType string  `json:"file_type"`
+            LineValidityCheck bool  `json:"line_validity_check"`
+            SheetNames []string  `json:"sheet_names"`
+            ReadAllSheets bool  `json:"read_all_sheets"`
+            QuoteChar string  `json:"quote_char"`
+            EscapeChar string  `json:"escape_char"`
+            DefaultHeaders DefaultHeadersDTO  `json:"default_headers"`
+         
+    }
+    
+    // GoogleSpreadSheetConfig used by Inventory
+    type GoogleSpreadSheetConfig struct {
+
+        
+            Range string  `json:"range"`
+            SheetID string  `json:"sheet_id"`
+            ClientSecretLocation string  `json:"client_secret_location"`
+            CredStorageDirectory string  `json:"cred_storage_directory"`
+            LocalDir string  `json:"local_dir"`
+            ArchiveConfig ArchiveConfig  `json:"archive_config"`
+         
+    }
+    
+    // HttpConfig used by Inventory
+    type HttpConfig struct {
+
+        
+            Hosturl string  `json:"hosturl"`
+            Username string  `json:"username"`
+            Password string  `json:"password"`
+            RequestParams map[string]string  `json:"request_params"`
+            HttpMethod string  `json:"http_method"`
+            RequestPayload string  `json:"request_payload"`
+            LocalPath string  `json:"local_path"`
+            ArchiveConfig ArchiveConfig  `json:"archive_config"`
+         
+    }
+    
+    // JobConfig used by Inventory
+    type JobConfig struct {
+
+        
+            ID float64  `json:"_id"`
+            JobCode string  `json:"job_code"`
+            TaskType string  `json:"task_type"`
+            SyncDelay float64  `json:"sync_delay"`
+            CronExpression string  `json:"cron_expression"`
+            StoreFilter StoreFilter  `json:"store_filter"`
+            ProcessConfig ProcessConfig  `json:"process_config"`
+            StoreConfig []StoreConfig  `json:"store_config"`
+            Properties map[string]string  `json:"properties"`
+            ImmediateFirstRun bool  `json:"immediate_first_run"`
+            Disable bool  `json:"disable"`
+            DependentJobCodes []string  `json:"dependent_job_codes"`
+            CompanyConfig []CompanyConfig  `json:"company_config"`
+            CompanyIds []float64  `json:"company_ids"`
+            TaxIdentifiers []string  `json:"tax_identifiers"`
+            Priority string  `json:"priority"`
+            PeriodThreshold float64  `json:"period_threshold"`
+            PeriodThresholdType string  `json:"period_threshold_type"`
+            DbConnectionProfile DBConnectionProfile  `json:"db_connection_profile"`
+            Params map[string]map[string]interface{}  `json:"params"`
+            OpenTags map[string]map[string]interface{}  `json:"open_tags"`
+            DeleteQuantityThreshold float64  `json:"delete_quantity_threshold"`
+            CatalogMasterConfig CatalogMasterConfig  `json:"catalog_master_config"`
+            AggregatorTypes []string  `json:"aggregator_types"`
+            IntegrationType string  `json:"integration_type"`
+            MinPrice float64  `json:"min_price"`
+            Audit Audit  `json:"audit"`
+            Version float64  `json:"version"`
+            Alias string  `json:"alias"`
+         
+    }
+    
+    // JobConfigRawDTO used by Inventory
+    type JobConfigRawDTO struct {
+
+        
+            Integration string  `json:"integration"`
+            CompanyName string  `json:"company_name"`
+            CompanyID float64  `json:"company_id"`
+            Data JobConfig  `json:"data"`
+         
+    }
+    
+    // JsonDocConfig used by Inventory
+    type JsonDocConfig struct {
+
+        
+            PropBeanConfigs []PropBeanConfig  `json:"prop_bean_configs"`
+         
+    }
+    
+    // LocalFileConfig used by Inventory
+    type LocalFileConfig struct {
+
+        
+            Retries float64  `json:"retries"`
+            Interval float64  `json:"interval"`
+            LocalDir string  `json:"local_dir"`
+            WorkingDir string  `json:"working_dir"`
+            Unzip bool  `json:"unzip"`
+            ZipFileRegex string  `json:"zip_file_regex"`
+            FileRegex string  `json:"file_regex"`
+            ZipFormat string  `json:"zip_format"`
+            ArchiveConfig ArchiveConfig  `json:"archive_config"`
+            ReadAllFiles bool  `json:"read_all_files"`
+         
+    }
+    
+    // MongoDocConfig used by Inventory
+    type MongoDocConfig struct {
+
+        
+            CollectionName string  `json:"collection_name"`
+            FindQuery map[string]map[string]interface{}  `json:"find_query"`
+            ProjectionQuery map[string]map[string]interface{}  `json:"projection_query"`
+            PropBeanConfigs []PropBeanConfig  `json:"prop_bean_configs"`
+            AggregatePipeline []map[string]map[string]interface{}  `json:"aggregate_pipeline"`
+            SkipSave bool  `json:"skip_save"`
+         
+    }
+    
+    // OAuthConfig used by Inventory
+    type OAuthConfig struct {
+
+        
+            Limit float64  `json:"limit"`
+            Pages float64  `json:"pages"`
+            Interval float64  `json:"interval"`
+            ConsumerKey string  `json:"consumer_key"`
+            ConsumerSecret string  `json:"consumer_secret"`
+            Token string  `json:"token"`
+            TokenSecret string  `json:"token_secret"`
+            RestURL string  `json:"rest_url"`
+            RestBaseURL string  `json:"rest_base_url"`
+            FunctionName string  `json:"function_name"`
+         
+    }
+    
+    // ProcessConfig used by Inventory
+    type ProcessConfig struct {
+
+        
+            DbConfig DBConfig  `json:"db_config"`
+            DbParamConfig DBParamConfig  `json:"db_param_config"`
+            SftpConfig SFTPConfig  `json:"sftp_config"`
+            AwsS3Config AWSS3config  `json:"aws_s3_config"`
+            MongoDocConfig MongoDocConfig  `json:"mongo_doc_config"`
+            FtpConfig FTPConfig  `json:"ftp_config"`
+            EmailConfig EmailConfig  `json:"email_config"`
+            FileConfig FileConfig  `json:"file_config"`
+            JsonDocConfig JsonDocConfig  `json:"json_doc_config"`
+            DocMappingConfig DocMappingConfig  `json:"doc_mapping_config"`
+            TaskStepConfig TaskStepConfig  `json:"task_step_config"`
+            HttpConfig HttpConfig  `json:"http_config"`
+            LocalFileConfig LocalFileConfig  `json:"local_file_config"`
+            OauthConfig OAuthConfig  `json:"oauth_config"`
+            GoogleSpreadsheetConfig GoogleSpreadSheetConfig  `json:"google_spreadsheet_config"`
+         
+    }
+    
+    // PropBeanConfig used by Inventory
+    type PropBeanConfig struct {
+
+        
+            Required bool  `json:"required"`
+            Mapping map[string]PropBeanConfig  `json:"mapping"`
+            Optional bool  `json:"optional"`
+            Send Send  `json:"send"`
+            Validations []map[string]map[string]interface{}  `json:"validations"`
+            Values []string  `json:"values"`
+            Include bool  `json:"include"`
+            SourceField string  `json:"source_field"`
+            SourceFields []string  `json:"source_fields"`
+            DestinationField string  `json:"destination_field"`
+            DataType string  `json:"data_type"`
+            DefaultValue map[string]interface{}  `json:"default_value"`
+            ConstValue map[string]interface{}  `json:"const_value"`
+            ConcatStr string  `json:"concat_str"`
+            FunctionName string  `json:"function_name"`
+            TransformerName string  `json:"transformer_name"`
+            AllParamFunctionName string  `json:"all_param_function_name"`
+            SubSeparator string  `json:"sub_separator"`
+            IndexField string  `json:"index_field"`
+            IgnoreIfNotExists bool  `json:"ignore_if_not_exists"`
+            IdentifierType string  `json:"identifier_type"`
+            ProjectionQuery map[string]map[string]interface{}  `json:"projection_query"`
+            EnrichFromMaster bool  `json:"enrich_from_master"`
+         
+    }
+    
+    // PropBeanDTO used by Inventory
+    type PropBeanDTO struct {
+
+        
+            Required bool  `json:"required"`
+            Optional bool  `json:"optional"`
+            Include bool  `json:"include"`
+            SourceField string  `json:"source_field"`
+            SourceFields []string  `json:"source_fields"`
+            DestinationField string  `json:"destination_field"`
+            DataType string  `json:"data_type"`
+            DefaultValue map[string]interface{}  `json:"default_value"`
+            ConstValue map[string]interface{}  `json:"const_value"`
+            ConcatStr string  `json:"concat_str"`
+            FunctionName string  `json:"function_name"`
+            TransformerName string  `json:"transformer_name"`
+            AllParamFunctionName string  `json:"all_param_function_name"`
+            SubSeparator string  `json:"sub_separator"`
+            IndexField string  `json:"index_field"`
+            IgnoreIfNotExists bool  `json:"ignore_if_not_exists"`
+            IdentifierType string  `json:"identifier_type"`
+            ProjectionQuery map[string]map[string]interface{}  `json:"projection_query"`
+            EnrichFromMaster bool  `json:"enrich_from_master"`
+         
+    }
+    
+    // ResponseEnvelopeListJobConfigRawDTO used by Inventory
+    type ResponseEnvelopeListJobConfigRawDTO struct {
+
+        
+            Timestamp string  `json:"timestamp"`
+            Status float64  `json:"status"`
+            Error string  `json:"error"`
+            Exception string  `json:"exception"`
+            Message string  `json:"message"`
+            TotalTimeTakenInMillis float64  `json:"total_time_taken_in_millis"`
+            HttpStatus string  `json:"http_status"`
+            Items []JobConfigRawDTO  `json:"items"`
+            Payload []JobConfigRawDTO  `json:"payload"`
+            TraceID string  `json:"trace_id"`
+            Page Page  `json:"page"`
+         
+    }
+    
+    // SFTPConfig used by Inventory
+    type SFTPConfig struct {
+
+        
+            Host string  `json:"host"`
+            Port float64  `json:"port"`
+            Username string  `json:"username"`
+            Password string  `json:"password"`
+            Unzip bool  `json:"unzip"`
+            Retries float64  `json:"retries"`
+            Interval float64  `json:"interval"`
+            PrivateKeyPath string  `json:"private_key_path"`
+            StrictHostKeyChecking bool  `json:"strict_host_key_checking"`
+            LocalDir string  `json:"local_dir"`
+            RemoteDir string  `json:"remote_dir"`
+            PasswordProtected bool  `json:"password_protected"`
+            ZipFileRegex string  `json:"zip_file_regex"`
+            FileRegex string  `json:"file_regex"`
+            ZipFormat string  `json:"zip_format"`
+            ArchiveConfig ArchiveConfig  `json:"archive_config"`
+            ReadAllFiles bool  `json:"read_all_files"`
+         
+    }
+    
+    // Send used by Inventory
+    type Send struct {
+
+        
+            Raw bool  `json:"raw"`
+            Processed bool  `json:"processed"`
+         
+    }
+    
+    // StoreConfig used by Inventory
+    type StoreConfig struct {
+
+        
+            JobCode string  `json:"job_code"`
+            Storeid string  `json:"storeid"`
+            StoreAlias string  `json:"store_alias"`
+            StoreFileRegex string  `json:"store_file_regex"`
+            StoreFileName string  `json:"store_file_name"`
+            ProcessConfig ProcessConfig  `json:"process_config"`
+            Properties map[string]string  `json:"properties"`
+         
+    }
+    
+    // StoreFilter used by Inventory
+    type StoreFilter struct {
+
+        
+            IncludeTags []string  `json:"include_tags"`
+            ExcludeTags []string  `json:"exclude_tags"`
+            Query map[string]map[string]interface{}  `json:"query"`
+         
+    }
+    
+    // TaskConfig used by Inventory
+    type TaskConfig struct {
+
+        
+            Name string  `json:"name"`
+            TaskConfigID float64  `json:"task_config_id"`
+            TaskParams []TaskParam  `json:"task_params"`
+         
+    }
+    
+    // TaskParam used by Inventory
+    type TaskParam struct {
+
+        
+            Name string  `json:"name"`
+            Value map[string]interface{}  `json:"value"`
+         
+    }
+    
+    // TaskStepConfig used by Inventory
+    type TaskStepConfig struct {
+
+        
+            TaskConfigs []TaskConfig  `json:"task_configs"`
+            TaskConfigIds []float64  `json:"task_config_ids"`
+            TaskConfigGroupIds []float64  `json:"task_config_group_ids"`
+         
+    }
+    
+    // JobStepsDTO used by Inventory
+    type JobStepsDTO struct {
+
+        
+            StepName string  `json:"step_name"`
+            Type string  `json:"type"`
+            StepExecutionTime float64  `json:"step_execution_time"`
+            StartCount float64  `json:"start_count"`
+            EndCount float64  `json:"end_count"`
+            DeletedCount float64  `json:"deleted_count"`
+            ProcessedStartTime string  `json:"processed_start_time"`
+            ProcessedAt string  `json:"processed_at"`
+         
+    }
+    
+    // ResponseEnvelopeListJobStepsDTO used by Inventory
+    type ResponseEnvelopeListJobStepsDTO struct {
+
+        
+            Timestamp string  `json:"timestamp"`
+            Status float64  `json:"status"`
+            Error string  `json:"error"`
+            Exception string  `json:"exception"`
+            Message string  `json:"message"`
+            TotalTimeTakenInMillis float64  `json:"total_time_taken_in_millis"`
+            HttpStatus string  `json:"http_status"`
+            Items []JobStepsDTO  `json:"items"`
+            Payload []JobStepsDTO  `json:"payload"`
+            TraceID string  `json:"trace_id"`
+            Page Page  `json:"page"`
+         
+    }
+    
+    // ResponseEnvelopeListJobConfigDTO used by Inventory
+    type ResponseEnvelopeListJobConfigDTO struct {
+
+        
+            Timestamp string  `json:"timestamp"`
+            Status float64  `json:"status"`
+            Error string  `json:"error"`
+            Exception string  `json:"exception"`
+            Message string  `json:"message"`
+            TotalTimeTakenInMillis float64  `json:"total_time_taken_in_millis"`
+            HttpStatus string  `json:"http_status"`
+            Items []JobConfigDTO  `json:"items"`
+            Payload []JobConfigDTO  `json:"payload"`
+            TraceID string  `json:"trace_id"`
+            Page Page  `json:"page"`
+         
+    }
+    
+    // ResponseEnvelopeJobConfigDTO used by Inventory
+    type ResponseEnvelopeJobConfigDTO struct {
+
+        
+            Timestamp string  `json:"timestamp"`
+            Status float64  `json:"status"`
+            Error string  `json:"error"`
+            Exception string  `json:"exception"`
+            Message string  `json:"message"`
+            TotalTimeTakenInMillis float64  `json:"total_time_taken_in_millis"`
+            HttpStatus string  `json:"http_status"`
+            Items JobConfigDTO  `json:"items"`
+            Payload JobConfigDTO  `json:"payload"`
+            TraceID string  `json:"trace_id"`
+            Page Page  `json:"page"`
+         
+    }
+    
+    // JobHistoryDto used by Inventory
+    type JobHistoryDto struct {
+
+        
+            TotalAddedCount float64  `json:"total_added_count"`
+            TotalUpdatedCount float64  `json:"total_updated_count"`
+            TotalSuppressedCount float64  `json:"total_suppressed_count"`
+            TotalInitialCount float64  `json:"total_initial_count"`
+            JobID float64  `json:"job_id"`
+            Status string  `json:"status"`
+            JobCode string  `json:"job_code"`
+            ProcessedOn string  `json:"processed_on"`
+            Filename []string  `json:"filename"`
+            ErrorType string  `json:"error_type"`
+            Message string  `json:"message"`
+         
+    }
+    
+    // JobMetricsDto used by Inventory
+    type JobMetricsDto struct {
+
+        
+            JobCode string  `json:"job_code"`
+            IsRunMoreThanUsual string  `json:"is_run_more_than_usual"`
+            JobHistory []JobHistoryDto  `json:"job_history"`
+            TotalSuccessCount float64  `json:"total_success_count"`
+            TotalFailureCount float64  `json:"total_failure_count"`
+            TotalWarningCount float64  `json:"total_warning_count"`
+            TotalSuppressedCount float64  `json:"total_suppressed_count"`
+            TotalJobRuns float64  `json:"total_job_runs"`
+         
+    }
+    
+    // ResponseEnvelopeJobMetricsDto used by Inventory
+    type ResponseEnvelopeJobMetricsDto struct {
+
+        
+            Timestamp string  `json:"timestamp"`
+            Status float64  `json:"status"`
+            Error string  `json:"error"`
+            Exception string  `json:"exception"`
+            Message string  `json:"message"`
+            TotalTimeTakenInMillis float64  `json:"total_time_taken_in_millis"`
+            HttpStatus string  `json:"http_status"`
+            Items JobMetricsDto  `json:"items"`
+            Payload JobMetricsDto  `json:"payload"`
+            TraceID string  `json:"trace_id"`
+            Page Page  `json:"page"`
+         
+    }
+    
+    // JobConfigListDTO used by Inventory
+    type JobConfigListDTO struct {
+
+        
+            Code string  `json:"code"`
+            Alias string  `json:"alias"`
+            ModifiedBy string  `json:"modified_by"`
+            CreatedBy string  `json:"created_by"`
+            ModifiedOn string  `json:"modified_on"`
+            CreatedOn string  `json:"created_on"`
+            Active bool  `json:"active"`
+            Type string  `json:"type"`
+         
+    }
+    
+    // ResponseEnvelopeListJobConfigListDTO used by Inventory
+    type ResponseEnvelopeListJobConfigListDTO struct {
+
+        
+            Timestamp string  `json:"timestamp"`
+            Status float64  `json:"status"`
+            Error string  `json:"error"`
+            Exception string  `json:"exception"`
+            Message string  `json:"message"`
+            TotalTimeTakenInMillis float64  `json:"total_time_taken_in_millis"`
+            HttpStatus string  `json:"http_status"`
+            Items []JobConfigListDTO  `json:"items"`
+            Payload []JobConfigListDTO  `json:"payload"`
+            TraceID string  `json:"trace_id"`
+            Page Page  `json:"page"`
          
     }
     
@@ -13876,6 +14599,392 @@ package platform
             Message string  `json:"message"`
             OrderID string  `json:"order_id"`
             OrderRefID string  `json:"order_ref_id"`
+         
+    }
+    
+
+    
+    // AppUser used by Rewards
+    type AppUser struct {
+
+        
+            ID string  `json:"_id"`
+            Active bool  `json:"active"`
+            ApplicationID string  `json:"application_id"`
+            BlockReason string  `json:"block_reason"`
+            UpdatedAt string  `json:"updated_at"`
+            UpdatedBy string  `json:"updated_by"`
+            UserID string  `json:"user_id"`
+         
+    }
+    
+    // E used by Rewards
+    type E struct {
+
+        
+            Code map[string]interface{}  `json:"code"`
+            Exception string  `json:"exception"`
+            Info string  `json:"info"`
+            Message string  `json:"message"`
+            RequestID string  `json:"request_id"`
+            StackTrace string  `json:"stack_trace"`
+            Status float64  `json:"status"`
+         
+    }
+    
+    // Giveaway used by Rewards
+    type Giveaway struct {
+
+        
+            ID string  `json:"_id"`
+            Schedule Schedule  `json:"_schedule"`
+            Active bool  `json:"active"`
+            ApplicationID string  `json:"application_id"`
+            Audience RewardsAudience  `json:"audience"`
+            BannerImage Asset  `json:"banner_image"`
+            CreatedAt string  `json:"created_at"`
+            Description string  `json:"description"`
+            Name string  `json:"name"`
+            Rule RewardsRule  `json:"rule"`
+            Title string  `json:"title"`
+            UpdatedAt string  `json:"updated_at"`
+         
+    }
+    
+    // GiveawayResponse used by Rewards
+    type GiveawayResponse struct {
+
+        
+            Items []Giveaway  `json:"items"`
+            Page Page  `json:"page"`
+         
+    }
+    
+    // HistoryPretty used by Rewards
+    type HistoryPretty struct {
+
+        
+            ID string  `json:"_id"`
+            ApplicationID string  `json:"application_id"`
+            Claimed bool  `json:"claimed"`
+            CreatedAt string  `json:"created_at"`
+            ExpiresOn string  `json:"expires_on"`
+            Points float64  `json:"points"`
+            RemainingPoints float64  `json:"remaining_points"`
+            Text1 string  `json:"text_1"`
+            Text2 string  `json:"text_2"`
+            Text3 string  `json:"text_3"`
+            TxnName string  `json:"txn_name"`
+            UpdatedAt string  `json:"updated_at"`
+            UserID string  `json:"user_id"`
+         
+    }
+    
+    // HistoryRes used by Rewards
+    type HistoryRes struct {
+
+        
+            Items []HistoryPretty  `json:"items"`
+            Page Page  `json:"page"`
+            Points float64  `json:"points"`
+         
+    }
+    
+    // Offer used by Rewards
+    type Offer struct {
+
+        
+            Schedule Schedule  `json:"_schedule"`
+            Active bool  `json:"active"`
+            ApplicationID string  `json:"application_id"`
+            BannerImage Asset  `json:"banner_image"`
+            CreatedAt string  `json:"created_at"`
+            Name string  `json:"name"`
+            Rule map[string]interface{}  `json:"rule"`
+            Share ShareMessages  `json:"share"`
+            SubText string  `json:"sub_text"`
+            Text string  `json:"text"`
+            Type string  `json:"type"`
+            UpdatedAt string  `json:"updated_at"`
+            UpdatedBy string  `json:"updated_by"`
+            URL string  `json:"url"`
+         
+    }
+    
+    // Points used by Rewards
+    type Points struct {
+
+        
+            Available float64  `json:"available"`
+         
+    }
+    
+    // Referral used by Rewards
+    type Referral struct {
+
+        
+            Code string  `json:"code"`
+         
+    }
+    
+    // RewardUser used by Rewards
+    type RewardUser struct {
+
+        
+            ID string  `json:"_id"`
+            Active bool  `json:"active"`
+            CreatedAt string  `json:"created_at"`
+            Referral Referral  `json:"referral"`
+            UID float64  `json:"uid"`
+            UpdatedAt string  `json:"updated_at"`
+            UserBlockReason string  `json:"user_block_reason"`
+            UserID string  `json:"user_id"`
+         
+    }
+    
+    // RewardsAudience used by Rewards
+    type RewardsAudience struct {
+
+        
+            HeaderUserID string  `json:"header_user_id"`
+            ID string  `json:"id"`
+         
+    }
+    
+    // RewardsRule used by Rewards
+    type RewardsRule struct {
+
+        
+            Amount float64  `json:"amount"`
+         
+    }
+    
+    // ShareMessages used by Rewards
+    type ShareMessages struct {
+
+        
+            Email string  `json:"email"`
+            Facebook string  `json:"facebook"`
+            Fallback string  `json:"fallback"`
+            Message string  `json:"message"`
+            Messenger string  `json:"messenger"`
+            Sms string  `json:"sms"`
+            Text string  `json:"text"`
+            Twitter string  `json:"twitter"`
+            Whatsapp string  `json:"whatsapp"`
+         
+    }
+    
+    // UserRes used by Rewards
+    type UserRes struct {
+
+        
+            Points Points  `json:"points"`
+            User RewardUser  `json:"user"`
+         
+    }
+    
+
+    
+    // StatGroup used by Analytics
+    type StatGroup struct {
+
+        
+            Key string  `json:"key"`
+            URL string  `json:"url"`
+            Title string  `json:"title"`
+         
+    }
+    
+    // StatsGroups used by Analytics
+    type StatsGroups struct {
+
+        
+            Groups []StatGroup  `json:"groups"`
+         
+    }
+    
+    // StatsGroupComponent used by Analytics
+    type StatsGroupComponent struct {
+
+        
+            Key string  `json:"key"`
+            URL string  `json:"url"`
+            Title string  `json:"title"`
+            Type string  `json:"type"`
+            Filters map[string]interface{}  `json:"filters"`
+         
+    }
+    
+    // StatsGroupComponents used by Analytics
+    type StatsGroupComponents struct {
+
+        
+            Title string  `json:"title"`
+            Components []StatsGroupComponent  `json:"components"`
+         
+    }
+    
+    // StatsRes used by Analytics
+    type StatsRes struct {
+
+        
+            Key string  `json:"key"`
+            Title string  `json:"title"`
+            Type string  `json:"type"`
+            Data map[string]interface{}  `json:"data"`
+         
+    }
+    
+    // ReceivedAt used by Analytics
+    type ReceivedAt struct {
+
+        
+            Value string  `json:"value"`
+         
+    }
+    
+    // AbandonCartsDetail used by Analytics
+    type AbandonCartsDetail struct {
+
+        
+            PropertiesCartID string  `json:"properties_cart_id"`
+            ContextTraitsFirstName string  `json:"context_traits_first_name"`
+            ContextTraitsLastName string  `json:"context_traits_last_name"`
+            ContextTraitsPhoneNumber string  `json:"context_traits_phone_number"`
+            ContextTraitsEmail string  `json:"context_traits_email"`
+            ContextAppApplicationID string  `json:"context_app_application_id"`
+            PropertiesBreakupValuesRawTotal string  `json:"properties_breakup_values_raw_total"`
+            ReceivedAt ReceivedAt  `json:"received_at"`
+         
+    }
+    
+    // AbandonCartsList used by Analytics
+    type AbandonCartsList struct {
+
+        
+            Items []AbandonCartsDetail  `json:"items"`
+            CartTotal string  `json:"cart_total"`
+            Page Page  `json:"page"`
+         
+    }
+    
+    // AbandonCartDetail used by Analytics
+    type AbandonCartDetail struct {
+
+        
+            ID string  `json:"_id"`
+            UserID string  `json:"user_id"`
+            CartValue string  `json:"cart_value"`
+            Articles []map[string]interface{}  `json:"articles"`
+            Breakup map[string]interface{}  `json:"breakup"`
+            Address map[string]interface{}  `json:"address"`
+         
+    }
+    
+    // ExportJobReq used by Analytics
+    type ExportJobReq struct {
+
+        
+            MarketplaceName string  `json:"marketplace_name"`
+            StartTime string  `json:"start_time"`
+            EndTime string  `json:"end_time"`
+            EventType string  `json:"event_type"`
+            TraceID string  `json:"trace_id"`
+         
+    }
+    
+    // ExportJobRes used by Analytics
+    type ExportJobRes struct {
+
+        
+            Status string  `json:"status"`
+            JobID string  `json:"job_id"`
+         
+    }
+    
+    // ExportJobStatusRes used by Analytics
+    type ExportJobStatusRes struct {
+
+        
+            Status string  `json:"status"`
+            JobID string  `json:"job_id"`
+            DownloadURL string  `json:"download_url"`
+         
+    }
+    
+    // GetLogsListReq used by Analytics
+    type GetLogsListReq struct {
+
+        
+            MarketplaceName string  `json:"marketplace_name"`
+            StartDate string  `json:"start_date"`
+            CompanyID string  `json:"company_id"`
+            EndDate string  `json:"end_date"`
+         
+    }
+    
+    // MkpLogsResp used by Analytics
+    type MkpLogsResp struct {
+
+        
+            StartTimeIso string  `json:"start_time_iso"`
+            EndTimeIso string  `json:"end_time_iso"`
+            EventType string  `json:"event_type"`
+            TraceID string  `json:"trace_id"`
+            Count string  `json:"count"`
+            Status string  `json:"status"`
+         
+    }
+    
+    // GetLogsListRes used by Analytics
+    type GetLogsListRes struct {
+
+        
+            Items []MkpLogsResp  `json:"items"`
+            Page Page  `json:"page"`
+         
+    }
+    
+    // SearchLogReq used by Analytics
+    type SearchLogReq struct {
+
+        
+            MarketplaceName string  `json:"marketplace_name"`
+            StartDate string  `json:"start_date"`
+            CompanyID string  `json:"company_id"`
+            EndDate string  `json:"end_date"`
+            Identifier string  `json:"identifier"`
+            IdentifierValue string  `json:"identifier_value"`
+         
+    }
+    
+    // LogInfo used by Analytics
+    type LogInfo struct {
+
+        
+            ID string  `json:"_id"`
+            Status string  `json:"status"`
+            EventType string  `json:"event_type"`
+            MarketplaceName string  `json:"marketplace_name"`
+            Event string  `json:"event"`
+            TraceID string  `json:"trace_id"`
+            CompanyID float64  `json:"company_id"`
+            BrandID float64  `json:"brand_id"`
+            StoreCode string  `json:"store_code"`
+            StoreID float64  `json:"store_id"`
+            ItemID float64  `json:"item_id"`
+            ArticleID string  `json:"article_id"`
+            SellerIdentifier string  `json:"seller_identifier"`
+         
+    }
+    
+    // SearchLogRes used by Analytics
+    type SearchLogRes struct {
+
+        
+            Items []LogInfo  `json:"items"`
+            Page Page  `json:"page"`
          
     }
     
