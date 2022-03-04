@@ -15,11 +15,8 @@
 * [CompanyProfile](#CompanyProfile) - Company Profile API's allows you to access list of products, prices, seller details, similar features, variants and many more useful features.  
 * [FileStorage](#FileStorage) - File Storage 
 * [Share](#Share) - Short link and QR Code 
-* [Inventory](#Inventory) -  
 * [Configuration](#Configuration) - Application configuration apis 
 * [Cart](#Cart) - Cart APIs 
-* [Rewards](#Rewards) - Rewards 
-* [Analytics](#Analytics) - Perceptor analytics 
 * [Discount](#Discount) - Discount 
 * [Partner](#Partner) - Partner configuration apis 
 * [Webhook](#Webhook) - Webhook dispatcher with retry and one event to many subscriber vice versa 
@@ -292,13 +289,13 @@
 
 * [Catalog](#Catalog)
   * Methods
-    * [getSearchKeywords](#getsearchkeywords)
     * [deleteSearchKeywords](#deletesearchkeywords)
+    * [getSearchKeywords](#getsearchkeywords)
     * [updateSearchKeywords](#updatesearchkeywords)
     * [createCustomKeyword](#createcustomkeyword)
     * [getAllSearchKeyword](#getallsearchkeyword)
-    * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
+    * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [updateAutocompleteKeyword](#updateautocompletekeyword)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [getAutocompleteConfig](#getautocompleteconfig)
@@ -350,8 +347,8 @@
     * [updateCategory](#updatecategory)
     * [createProduct](#createproduct)
     * [getProducts](#getproducts)
-    * [getProduct](#getproduct)
     * [deleteProduct](#deleteproduct)
+    * [getProduct](#getproduct)
     * [editProduct](#editproduct)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
@@ -395,15 +392,15 @@
     * [cbsOnboardGet](#cbsonboardget)
     * [updateCompany](#updatecompany)
     * [getCompanyMetrics](#getcompanymetrics)
-    * [getBrand](#getbrand)
     * [editBrand](#editbrand)
+    * [getBrand](#getbrand)
     * [createBrand](#createbrand)
     * [getBrands](#getbrands)
     * [createCompanyBrandMapping](#createcompanybrandmapping)
     * [getLocations](#getlocations)
     * [createLocation](#createlocation)
-    * [getLocationDetail](#getlocationdetail)
     * [updateLocation](#updatelocation)
+    * [getLocationDetail](#getlocationdetail)
     * [createLocationBulk](#createlocationbulk)
     
 
@@ -427,20 +424,6 @@
     * [getShortLinks](#getshortlinks)
     * [getShortLinkByHash](#getshortlinkbyhash)
     * [updateShortLinkById](#updateshortlinkbyid)
-    
-
-* [Inventory](#Inventory)
-  * Methods
-    * [getJobsByCompany](#getjobsbycompany)
-    * [updateJob](#updatejob)
-    * [createJob](#createjob)
-    * [getJobSteps](#getjobsteps)
-    * [getJobByCompanyAndIntegration](#getjobbycompanyandintegration)
-    * [disable](#disable)
-    * [getJobConfigDefaults](#getjobconfigdefaults)
-    * [getJobByCode](#getjobbycode)
-    * [getJobCodeMetrics](#getjobcodemetrics)
-    * [getJobCodesByCompanyAndIntegration](#getjobcodesbycompanyandintegration)
     
 
 * [Configuration](#Configuration)
@@ -508,36 +491,6 @@
     * [fetchAndvalidateCartItems](#fetchandvalidatecartitems)
     * [checkCartServiceability](#checkcartserviceability)
     * [checkoutCart](#checkoutcart)
-    
-
-* [Rewards](#Rewards)
-  * Methods
-    * [getGiveaways](#getgiveaways)
-    * [createGiveaway](#creategiveaway)
-    * [getGiveawayByID](#getgiveawaybyid)
-    * [updateGiveaway](#updategiveaway)
-    * [getOffers](#getoffers)
-    * [getOfferByName](#getofferbyname)
-    * [updateOfferByName](#updateofferbyname)
-    * [getUserAvailablePoints](#getuseravailablepoints)
-    * [updateUserStatus](#updateuserstatus)
-    * [getUserPointsHistory](#getuserpointshistory)
-    
-
-* [Analytics](#Analytics)
-  * Methods
-    * [getStatiscticsGroups](#getstatiscticsgroups)
-    * [getStatiscticsGroupComponents](#getstatiscticsgroupcomponents)
-    * [getComponentStatsCSV](#getcomponentstatscsv)
-    * [getComponentStatsPDF](#getcomponentstatspdf)
-    * [getComponentStats](#getcomponentstats)
-    * [getAbandonCartList](#getabandoncartlist)
-    * [getAbandonCartsCSV](#getabandoncartscsv)
-    * [getAbandonCartDetail](#getabandoncartdetail)
-    * [createExportJob](#createexportjob)
-    * [getExportJobStatus](#getexportjobstatus)
-    * [getLogsList](#getlogslist)
-    * [searchLogs](#searchlogs)
     
 
 * [Discount](#Discount)
@@ -52675,49 +52628,6 @@ Schema: `GetClickToCallResponse`
 ## Catalog
 
 
-#### getSearchKeywords
-Get a Search Keywords Details
-
-```golang
-
-data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
-
-*Success Response:*
-
-
-
-The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
-
-
-Schema: `GetSearchWordsDetailResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### deleteSearchKeywords
 Delete a Search Keywords
 
@@ -52749,6 +52659,49 @@ Status object. Tells whether the operation was successful. See example below or 
 
 
 Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSearchKeywords
+Get a Search Keywords Details
+
+```golang
+
+data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
+
+*Success Response:*
+
+
+
+The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
+
+
+Schema: `GetSearchWordsDetailResponse`
 
 
 
@@ -52886,49 +52839,6 @@ Schema: `GetSearchWordsResponse`
 ---
 
 
-#### getAutocompleteKeywordDetail
-Get a Autocomplete Keywords Details
-
-```golang
-
-data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
-
-*Success Response:*
-
-
-
-The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
-
-
-Schema: `GetAutocompleteWordsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### deleteAutocompleteKeyword
 Delete a Autocomplete Keywords
 
@@ -52960,6 +52870,49 @@ Status object. Tells whether the operation was successful. See example below or 
 
 
 Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAutocompleteKeywordDetail
+Get a Autocomplete Keywords Details
+
+```golang
+
+data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
+
+*Success Response:*
+
+
+
+The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
+
+
+Schema: `GetAutocompleteWordsResponse`
 
 
 
@@ -55092,6 +55045,46 @@ Schema: `ProductListingResponse`
 ---
 
 
+#### deleteProduct
+Delete a product.
+
+```golang
+
+data, err := Catalog.DeleteProduct(CompanyID, ItemID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
+
+
+| ItemID | float64 | Id of the product to be updated. | 
+
+
+
+This API allows to delete product.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getProduct
 Get a single product.
 
@@ -55125,46 +55118,6 @@ Product object. See example below or refer `product.utils.format_product_respons
 
 
 Schema: `Product`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteProduct
-Delete a product.
-
-```golang
-
-data, err := Catalog.DeleteProduct(CompanyID, ItemID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
-
-
-| ItemID | float64 | Id of the product to be updated. | 
-
-
-
-This API allows to delete product.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
 
 
 
@@ -56850,46 +56803,6 @@ Schema: `MetricsSerializer`
 ---
 
 
-#### getBrand
-Get a single brand.
-
-```golang
-
-data, err := CompanyProfile.GetBrand(CompanyID, BrandID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to brand that is to be viewed. | 
-
-
-| BrandID | string | Id of the brand to be viewed. | 
-
-
-
-This API helps to get data associated to a particular brand.
-
-*Success Response:*
-
-
-
-Brand object. See example below or refer `GetBrandResponseSerializer` for details
-
-
-Schema: `GetBrandResponseSerializer`
-
-
-
-
-
-
-
-
-
----
-
-
 #### editBrand
 Edit a brand.
 
@@ -56919,6 +56832,46 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getBrand
+Get a single brand.
+
+```golang
+
+data, err := CompanyProfile.GetBrand(CompanyID, BrandID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to brand that is to be viewed. | 
+
+
+| BrandID | string | Id of the brand to be viewed. | 
+
+
+
+This API helps to get data associated to a particular brand.
+
+*Success Response:*
+
+
+
+Brand object. See example below or refer `GetBrandResponseSerializer` for details
+
+
+Schema: `GetBrandResponseSerializer`
 
 
 
@@ -57137,46 +57090,6 @@ Schema: `SuccessResponse`
 ---
 
 
-#### getLocationDetail
-Get details of a specific location.
-
-```golang
-
-data, err := CompanyProfile.GetLocationDetail(CompanyID, LocationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company inside which the location lies. | 
-
-
-| LocationID | string | Id of the location which you want to view. | 
-
-
-
-This API helps to get data associated to a specific location.
-
-*Success Response:*
-
-
-
-Brand object. See example below or refer `GetLocationSerializer` for details
-
-
-Schema: `GetLocationSerializer`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateLocation
 Edit a location asscoiated to a company.
 
@@ -57206,6 +57119,46 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getLocationDetail
+Get details of a specific location.
+
+```golang
+
+data, err := CompanyProfile.GetLocationDetail(CompanyID, LocationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company inside which the location lies. | 
+
+
+| LocationID | string | Id of the location which you want to view. | 
+
+
+
+This API helps to get data associated to a specific location.
+
+*Success Response:*
+
+
+
+Brand object. See example below or refer `GetLocationSerializer` for details
+
+
+Schema: `GetLocationSerializer`
 
 
 
@@ -57931,427 +57884,6 @@ Success
 
 
 Schema: `ShortLinkRes`
-
-
-
-
-
-
-
-
-
----
-
-
-
----
-
-
-## Inventory
-
-
-#### getJobsByCompany
-Get Job Configs For A Company
-
-```golang
-
-data, err := Inventory.GetJobsByCompany(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-
-REST Endpoint that returns all job configs for a company
-
-*Success Response:*
-
-
-
-Successful operation
-
-
-Schema: `ResponseEnvelopeListJobConfigRawDTO`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateJob
-Updates An Existing Job Config
-
-```golang
-
-data, err := Inventory.UpdateJob(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| body |  JobConfigDTO | "Request body" 
-
-REST Endpoint that updates a job config
-
-*Success Response:*
-
-
-
-Job Config Updated Successfully
-
-
-Schema: `ResponseEnvelopeString`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createJob
-Creates A New Job Config
-
-```golang
-
-data, err := Inventory.CreateJob(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| body |  JobConfigDTO | "Request body" 
-
-REST Endpoint that creates a new job config
-
-*Success Response:*
-
-
-
-Job Config Created Successfully
-
-
-Schema: `ResponseEnvelopeString`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getJobSteps
-Get Job Code Steps
-
-```golang
-
-data, err := Inventory.GetJobSteps(CompanyID, JobID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| JobID | float64 | Job Id | 
-
-
-
-REST Endpoint that returns Inventory Job Steps
-
-*Success Response:*
-
-
-
-Successful operation
-
-
-Schema: `ResponseEnvelopeListJobStepsDTO`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getJobByCompanyAndIntegration
-Get Job Configs By Company And Integration
-
-```golang
-
-data, err := Inventory.GetJobByCompanyAndIntegration(CompanyID, IntegrationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| IntegrationID | string | Integration Id | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-
-REST Endpoint that returns all job configs by company And integration
-
-*Success Response:*
-
-
-
-Successful operation
-
-
-Schema: `ResponseEnvelopeListJobConfigDTO`
-
-
-
-
-
-
-
-
-
----
-
-
-#### disable
-Disable Job Config
-
-```golang
-
-data, err := Inventory.Disable(CompanyID, IntegrationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| IntegrationID | string | IntegrationId | 
-
-
-
-REST Endpoint that disables Inventory Job Config
-
-*Success Response:*
-
-
-
-Successful operation
-
-
-Schema: `ResponseEnvelopeString`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getJobConfigDefaults
-Get Job Configs Defaults
-
-```golang
-
-data, err := Inventory.GetJobConfigDefaults(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-
-REST Endpoint that returns default fields job configs by company And integration
-
-*Success Response:*
-
-
-
-Successful operation
-
-
-Schema: `ResponseEnvelopeJobConfigDTO`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getJobByCode
-Get Job Config By Code
-
-```golang
-
-data, err := Inventory.GetJobByCode(CompanyID, Code);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| Code | string | Job Code | 
-
-
-
-REST Endpoint that returns job config by code
-
-*Success Response:*
-
-
-
-Successful operation
-
-
-Schema: `ResponseEnvelopeJobConfigDTO`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getJobCodeMetrics
-Get Job Metrics
-
-```golang
-
-data, err := Inventory.GetJobCodeMetrics(CompanyID, Code, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| Code | string | Code | 
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Status`, `Date`
-
-
-REST Endpoint that returns Inventory Run History For A Job Code
-
-*Success Response:*
-
-
-
-Successful operation
-
-
-Schema: `ResponseEnvelopeJobMetricsDto`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getJobCodesByCompanyAndIntegration
-Get Job Codes By Company And Integration
-
-```golang
-
-data, err := Inventory.GetJobCodesByCompanyAndIntegration(CompanyID, IntegrationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| IntegrationID | string | Integration Id | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-
-REST Endpoint that returns all job codes by company And integration
-
-*Success Response:*
-
-
-
-Successful operation
-
-
-Schema: `ResponseEnvelopeListJobConfigListDTO`
 
 
 
@@ -61608,989 +61140,6 @@ Checkout cart and create Fynd order id
 
 
 Schema: `OpenApiCheckoutResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-
----
-
-
-## Rewards
-
-
-#### getGiveaways
-List of giveaways of the current application.
-
-```golang
-
-data, err := Rewards.GetGiveaways(CompanyID, ApplicationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageID`, `PageSize`
-
-
-List of giveaways of the current application.
-
-*Success Response:*
-
-
-
-ok
-
-
-Schema: `GiveawayResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createGiveaway
-Adds a new giveaway.
-
-```golang
-
-data, err := Rewards.CreateGiveaway(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-| body |  Giveaway | "Request body" 
-
-Adds a new giveaway.
-
-*Success Response:*
-
-
-
-ok
-
-
-Schema: `Giveaway`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getGiveawayByID
-Get giveaway by ID.
-
-```golang
-
-data, err := Rewards.GetGiveawayByID(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-| ID | string | Giveaway ID | 
-
-
-
-Get giveaway by ID.
-
-*Success Response:*
-
-
-
-ok
-
-
-Schema: `Giveaway`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateGiveaway
-Updates the giveaway by it's ID.
-
-```golang
-
-data, err := Rewards.UpdateGiveaway(CompanyID, ApplicationID, ID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-| ID | string | Giveaway ID | 
-
-
-| body |  Giveaway | "Request body" 
-
-Updates the giveaway by it's ID.
-
-*Success Response:*
-
-
-
-ok
-
-
-Schema: `Giveaway`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getOffers
-List of offer of the current application.
-
-```golang
-
-data, err := Rewards.GetOffers(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-
-List of offer of the current application.
-
-*Success Response:*
-
-
-
-ok
-
-
-Schema: `Array<Offer>`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getOfferByName
-Get offer by name.
-
-```golang
-
-data, err := Rewards.GetOfferByName(CompanyID, ApplicationID, Cookie, Name);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-| Cookie | string | User's session cookie. This cookie is set in browser cookie when logged-in to fynd's authentication system i.e. `Grimlock` or by using grimlock-backend SDK for backend implementation. | 
-
-
-| Name | string | Offer name | 
-
-
-
-Get offer by name.
-
-*Success Response:*
-
-
-
-ok
-
-
-Schema: `Offer`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateOfferByName
-Updates the offer by name.
-
-```golang
-
-data, err := Rewards.UpdateOfferByName(CompanyID, ApplicationID, Name, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-| Name | string | Offer name | 
-
-
-| body |  Offer | "Request body" 
-
-Updates the offer by name.
-
-*Success Response:*
-
-
-
-ok
-
-
-Schema: `Offer`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getUserAvailablePoints
-User's reward details.
-
-```golang
-
-data, err := Rewards.GetUserAvailablePoints(CompanyID, ApplicationID, UserID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-| UserID | string | user id | 
-
-
-
-User's reward details.
-
-*Success Response:*
-
-
-
-ok
-
-
-Schema: `UserRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateUserStatus
-Update User status
-
-```golang
-
-data, err := Rewards.UpdateUserStatus(CompanyID, ApplicationID, UserID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-| UserID | string | user id | 
-
-
-| body |  AppUser | "Request body" 
-
-Update user status, active/archive
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `AppUser`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getUserPointsHistory
-Get list of points transactions.
-
-```golang
-
-data, err := Rewards.GetUserPointsHistory(CompanyID, ApplicationID, UserID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-| UserID | string | user id | 
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageID`, `PageLimit`, `PageSize`
-
-
-Get list of points transactions.
-The list of points history is paginated.
-
-*Success Response:*
-
-
-
-ok
-
-
-Schema: `HistoryRes`
-
-
-
-
-
-
-
-
-
----
-
-
-
----
-
-
-## Analytics
-
-
-#### getStatiscticsGroups
-Get statistics groups
-
-```golang
-
-data, err := Analytics.GetStatiscticsGroups(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-
-Get statistics groups
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `StatsGroups`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getStatiscticsGroupComponents
-Get statistics group components
-
-```golang
-
-data, err := Analytics.GetStatiscticsGroupComponents(CompanyID, ApplicationID, GroupName);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| GroupName | string | Group name | 
-
-
-
-Get statistics group components
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `StatsGroupComponents`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getComponentStatsCSV
-Get component statistics csv
-
-```golang
-
-data, err := Analytics.GetComponentStatsCSV(CompanyID, ApplicationID, ComponentName);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| ComponentName | string | Component name | 
-
-
-
-Get component statistics csv
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `string`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getComponentStatsPDF
-Get component statistics pdf
-
-```golang
-
-data, err := Analytics.GetComponentStatsPDF(CompanyID, ApplicationID, ComponentName);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| ComponentName | string | Component name | 
-
-
-
-Get component statistics pdf
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `string`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getComponentStats
-Get component statistics
-
-```golang
-
-data, err := Analytics.GetComponentStats(CompanyID, ApplicationID, ComponentName);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| ComponentName | string | Component name | 
-
-
-
-Get component statistics
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `StatsRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAbandonCartList
-Get abandon carts list
-
-```golang
-
-data, err := Analytics.GetAbandonCartList(CompanyID, ApplicationID, FromDate, ToDate, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| FromDate | string | From date | 
-
-
-| ToDate | string | To date | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-
-Get abandon carts list
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `AbandonCartsList`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAbandonCartsCSV
-Get abandon carts csv
-
-```golang
-
-data, err := Analytics.GetAbandonCartsCSV(CompanyID, ApplicationID, FromDate, ToDate);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| FromDate | string | From date | 
-
-
-| ToDate | string | To date | 
-
-
-
-Get abandon carts csv
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `string`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAbandonCartDetail
-Get abandon carts details
-
-```golang
-
-data, err := Analytics.GetAbandonCartDetail(CompanyID, ApplicationID, CartID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| CartID | string | Cart Id | 
-
-
-
-Get abandon cart details
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `AbandonCartDetail`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createExportJob
-Create data export job in required format
-
-```golang
-
-data, err := Analytics.CreateExportJob(CompanyID, ExportType, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ExportType | string | Export type / format | 
-
-
-| body |  ExportJobReq | "Request body" 
-
-Create data export job in required format
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `ExportJobRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getExportJobStatus
-Get data export job status
-
-```golang
-
-data, err := Analytics.GetExportJobStatus(CompanyID, ExportType, JobID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ExportType | string | Export type / format | 
-
-
-| JobID | string | Export job id | 
-
-
-
-Get data export job status
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `ExportJobStatusRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getLogsList
-Get logs list
-
-```golang
-
-data, err := Analytics.GetLogsList(CompanyID, LogType, xQuery, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| LogType | string | Log type | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-| body |  GetLogsListReq | "Request body" 
-
-Get logs list
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `GetLogsListRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### searchLogs
-Search logs
-
-```golang
-
-data, err := Analytics.SearchLogs(CompanyID, LogType, xQuery, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-
-
-
-
-| LogType | string | Log type | 
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-| body |  SearchLogReq | "Request body" 
-
-Search logs
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `SearchLogRes`
 
 
 
