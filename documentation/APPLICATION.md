@@ -45,8 +45,8 @@
     * [getDepartments](#getdepartments)
     * [getSearchResults](#getsearchresults)
     * [getFollowedListing](#getfollowedlisting)
-    * [followById](#followbyid)
     * [unfollowById](#unfollowbyid)
+    * [followById](#followbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -1078,12 +1078,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1097,7 +1097,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1119,12 +1119,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1138,7 +1138,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1825,13 +1825,13 @@ Product has been added to your cart
       "items": [
         {
           "key": "751083_10",
+          "parent_item_identifiers": {
+            "identifier": "ZASFF",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS"
+          },
           "article": {
             "type": "article",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS",
-            "product_group_tags": [
-              "test"
-            ],
             "uid": "612_9_SE61201_19100302_10",
             "size": "10",
             "seller": {
@@ -2282,13 +2282,13 @@ Sorry, item is out of stock
         {
           "bulk_offer": {},
           "discount": "67% OFF",
+          "parent_item_identifiers": {
+            "identifier": "ZASFF",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS"
+          },
           "article": {
             "type": "article",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS",
-            "product_group_tags": [
-              "test"
-            ],
             "uid": "604_902_SSTC60401_636BLUE_1",
             "size": "1",
             "seller": {
@@ -2510,13 +2510,13 @@ Nothing updated
         {
           "bulk_offer": {},
           "discount": "67% OFF",
+          "parent_item_identifiers": {
+            "identifier": "ZASFF",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS"
+          },
           "article": {
             "type": "article",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS",
-            "product_group_tags": [
-              "test"
-            ],
             "uid": "604_902_SSTC60401_636BLUE_1",
             "size": "1",
             "seller": {
@@ -2743,13 +2743,13 @@ Item updated in the cart
               }
             }
           },
+          "parent_item_identifiers": {
+            "identifier": "ZASFF",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS"
+          },
           "article": {
             "type": "article",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS",
-            "product_group_tags": [
-              "test"
-            ],
             "uid": "507_9_96099_35656851_7",
             "size": "7",
             "seller": {
@@ -19279,13 +19279,13 @@ Product has been added to your cart
       "items": [
         {
           "key": "751083_10",
+          "parent_item_identifiers": {
+            "identifier": "ZASFF",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS"
+          },
           "article": {
             "type": "article",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS",
-            "product_group_tags": [
-              "test"
-            ],
             "uid": "612_9_SE61201_19100302_10",
             "size": "10",
             "seller": {
@@ -19736,13 +19736,13 @@ Sorry, item is out of stock
         {
           "bulk_offer": {},
           "discount": "67% OFF",
+          "parent_item_identifiers": {
+            "identifier": "ZASFF",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS"
+          },
           "article": {
             "type": "article",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS",
-            "product_group_tags": [
-              "test"
-            ],
             "uid": "604_902_SSTC60401_636BLUE_1",
             "size": "1",
             "seller": {
@@ -19964,13 +19964,13 @@ Nothing updated
         {
           "bulk_offer": {},
           "discount": "67% OFF",
+          "parent_item_identifiers": {
+            "identifier": "ZASFF",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS"
+          },
           "article": {
             "type": "article",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS",
-            "product_group_tags": [
-              "test"
-            ],
             "uid": "604_902_SSTC60401_636BLUE_1",
             "size": "1",
             "seller": {
@@ -20197,13 +20197,13 @@ Item updated in the cart
               }
             }
           },
+          "parent_item_identifiers": {
+            "identifier": "ZASFF",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS"
+          },
           "article": {
             "type": "article",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS",
-            "product_group_tags": [
-              "test"
-            ],
             "uid": "507_9_96099_35656851_7",
             "size": "7",
             "seller": {
