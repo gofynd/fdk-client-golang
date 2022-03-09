@@ -9787,6 +9787,81 @@ func NewAppClient(config *AppConfig) *Client {
         
     }
           
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetAppStaffListPaginator Get a list of staff.  
+            func (co *Configuration)  GetAppStaffListPaginator( xQuery ConfigurationGetAppStaffListXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                 
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := co.GetAppStaffList(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
     
     
     

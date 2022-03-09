@@ -6416,16 +6416,16 @@ package application
     type AggregatorConfigDetail struct {
 
         
+            API string  `json:"api"`
             MerchantID string  `json:"merchant_id"`
             Sdk bool  `json:"sdk"`
             UserID string  `json:"user_id"`
-            Pin string  `json:"pin"`
-            ConfigType string  `json:"config_type"`
-            Key string  `json:"key"`
-            API string  `json:"api"`
-            VerifyAPI string  `json:"verify_api"`
-            Secret string  `json:"secret"`
             MerchantKey string  `json:"merchant_key"`
+            Key string  `json:"key"`
+            Secret string  `json:"secret"`
+            ConfigType string  `json:"config_type"`
+            VerifyAPI string  `json:"verify_api"`
+            Pin string  `json:"pin"`
          
     }
     
@@ -6433,16 +6433,16 @@ package application
     type AggregatorsConfigDetailResponse struct {
 
         
-            Simpl AggregatorConfigDetail  `json:"simpl"`
-            Success bool  `json:"success"`
-            Mswipe AggregatorConfigDetail  `json:"mswipe"`
-            Ccavenue AggregatorConfigDetail  `json:"ccavenue"`
-            Juspay AggregatorConfigDetail  `json:"juspay"`
-            Payumoney AggregatorConfigDetail  `json:"payumoney"`
-            Rupifi AggregatorConfigDetail  `json:"rupifi"`
-            Env string  `json:"env"`
             Razorpay AggregatorConfigDetail  `json:"razorpay"`
+            Simpl AggregatorConfigDetail  `json:"simpl"`
+            Rupifi AggregatorConfigDetail  `json:"rupifi"`
+            Mswipe AggregatorConfigDetail  `json:"mswipe"`
+            Env string  `json:"env"`
+            Ccavenue AggregatorConfigDetail  `json:"ccavenue"`
             Stripe AggregatorConfigDetail  `json:"stripe"`
+            Success bool  `json:"success"`
+            Payumoney AggregatorConfigDetail  `json:"payumoney"`
+            Juspay AggregatorConfigDetail  `json:"juspay"`
          
     }
     
@@ -6450,8 +6450,8 @@ package application
     type ErrorCodeAndDescription struct {
 
         
-            Code string  `json:"code"`
             Description string  `json:"description"`
+            Code string  `json:"code"`
          
     }
     
@@ -6468,9 +6468,9 @@ package application
     type AttachCardRequest struct {
 
         
-            Refresh bool  `json:"refresh"`
-            NameOnCard string  `json:"name_on_card"`
             Nickname string  `json:"nickname"`
+            NameOnCard string  `json:"name_on_card"`
+            Refresh bool  `json:"refresh"`
             CardID string  `json:"card_id"`
          
     }
@@ -6479,9 +6479,9 @@ package application
     type AttachCardsResponse struct {
 
         
-            Data map[string]interface{}  `json:"data"`
-            Success bool  `json:"success"`
             Message string  `json:"message"`
+            Success bool  `json:"success"`
+            Data map[string]interface{}  `json:"data"`
          
     }
     
@@ -6499,9 +6499,9 @@ package application
     type ActiveCardPaymentGatewayResponse struct {
 
         
-            Success bool  `json:"success"`
-            Message string  `json:"message"`
             Cards CardPaymentGateway  `json:"cards"`
+            Message string  `json:"message"`
+            Success bool  `json:"success"`
          
     }
     
@@ -6509,22 +6509,22 @@ package application
     type Card struct {
 
         
-            Nickname string  `json:"nickname"`
-            CardReference string  `json:"card_reference"`
-            CardIsin string  `json:"card_isin"`
-            CardToken string  `json:"card_token"`
-            CardIssuer string  `json:"card_issuer"`
-            CardName string  `json:"card_name"`
-            CardBrandImage string  `json:"card_brand_image"`
-            ExpYear float64  `json:"exp_year"`
-            CardType string  `json:"card_type"`
             CardFingerprint string  `json:"card_fingerprint"`
-            AggregatorName string  `json:"aggregator_name"`
-            Expired bool  `json:"expired"`
-            ExpMonth float64  `json:"exp_month"`
-            CardBrand string  `json:"card_brand"`
-            CardNumber string  `json:"card_number"`
             CardID string  `json:"card_id"`
+            ExpMonth float64  `json:"exp_month"`
+            CardType string  `json:"card_type"`
+            CardName string  `json:"card_name"`
+            CardReference string  `json:"card_reference"`
+            CardBrandImage string  `json:"card_brand_image"`
+            Expired bool  `json:"expired"`
+            CardBrand string  `json:"card_brand"`
+            CardIssuer string  `json:"card_issuer"`
+            Nickname string  `json:"nickname"`
+            CardNumber string  `json:"card_number"`
+            ExpYear float64  `json:"exp_year"`
+            AggregatorName string  `json:"aggregator_name"`
+            CardToken string  `json:"card_token"`
+            CardIsin string  `json:"card_isin"`
          
     }
     
@@ -6532,9 +6532,9 @@ package application
     type ListCardsResponse struct {
 
         
-            Data []Card  `json:"data"`
-            Success bool  `json:"success"`
             Message string  `json:"message"`
+            Success bool  `json:"success"`
+            Data []Card  `json:"data"`
          
     }
     
@@ -6550,8 +6550,8 @@ package application
     type DeleteCardsResponse struct {
 
         
-            Success bool  `json:"success"`
             Message string  `json:"message"`
+            Success bool  `json:"success"`
          
     }
     
@@ -6560,10 +6560,10 @@ package application
 
         
             PhoneNumber string  `json:"phone_number"`
+            TransactionAmountInPaise float64  `json:"transaction_amount_in_paise"`
+            Aggregator string  `json:"aggregator"`
             MerchantParams map[string]interface{}  `json:"merchant_params"`
             Payload string  `json:"payload"`
-            Aggregator string  `json:"aggregator"`
-            TransactionAmountInPaise float64  `json:"transaction_amount_in_paise"`
          
     }
     
@@ -6571,9 +6571,9 @@ package application
     type ValidateCustomerResponse struct {
 
         
-            Data map[string]interface{}  `json:"data"`
-            Success bool  `json:"success"`
             Message string  `json:"message"`
+            Success bool  `json:"success"`
+            Data map[string]interface{}  `json:"data"`
          
     }
     
@@ -6581,11 +6581,11 @@ package application
     type ChargeCustomerRequest struct {
 
         
-            OrderID string  `json:"order_id"`
             Amount float64  `json:"amount"`
-            Verified bool  `json:"verified"`
             TransactionToken string  `json:"transaction_token"`
             Aggregator string  `json:"aggregator"`
+            Verified bool  `json:"verified"`
+            OrderID string  `json:"order_id"`
          
     }
     
@@ -6593,13 +6593,13 @@ package application
     type ChargeCustomerResponse struct {
 
         
+            CartID string  `json:"cart_id"`
+            DeliveryAddressID string  `json:"delivery_address_id"`
+            Aggregator string  `json:"aggregator"`
+            Success bool  `json:"success"`
             OrderID string  `json:"order_id"`
             Message string  `json:"message"`
-            Success bool  `json:"success"`
             Status string  `json:"status"`
-            DeliveryAddressID string  `json:"delivery_address_id"`
-            CartID string  `json:"cart_id"`
-            Aggregator string  `json:"aggregator"`
          
     }
     
@@ -6607,18 +6607,18 @@ package application
     type PaymentInitializationRequest struct {
 
         
-            Vpa string  `json:"vpa"`
-            OrderID string  `json:"order_id"`
-            Aggregator string  `json:"aggregator"`
-            Currency string  `json:"currency"`
-            Contact string  `json:"contact"`
-            Timeout float64  `json:"timeout"`
-            RazorpayPaymentID string  `json:"razorpay_payment_id"`
             Email string  `json:"email"`
-            Method string  `json:"method"`
             Amount float64  `json:"amount"`
             MerchantOrderID string  `json:"merchant_order_id"`
+            RazorpayPaymentID string  `json:"razorpay_payment_id"`
+            Timeout float64  `json:"timeout"`
+            Aggregator string  `json:"aggregator"`
+            Currency string  `json:"currency"`
+            Vpa string  `json:"vpa"`
+            OrderID string  `json:"order_id"`
+            Method string  `json:"method"`
             CustomerID string  `json:"customer_id"`
+            Contact string  `json:"contact"`
          
     }
     
@@ -6626,22 +6626,22 @@ package application
     type PaymentInitializationResponse struct {
 
         
-            Vpa string  `json:"vpa"`
-            VirtualID string  `json:"virtual_id"`
-            Amount float64  `json:"amount"`
-            BqrImage string  `json:"bqr_image"`
-            Currency string  `json:"currency"`
-            PollingURL string  `json:"polling_url"`
-            Success bool  `json:"success"`
-            Timeout float64  `json:"timeout"`
-            Status string  `json:"status"`
-            RazorpayPaymentID string  `json:"razorpay_payment_id"`
-            AggregatorOrderID string  `json:"aggregator_order_id"`
-            Method string  `json:"method"`
-            Aggregator string  `json:"aggregator"`
-            MerchantOrderID string  `json:"merchant_order_id"`
             UpiPollURL string  `json:"upi_poll_url"`
+            Amount float64  `json:"amount"`
+            AggregatorOrderID string  `json:"aggregator_order_id"`
+            MerchantOrderID string  `json:"merchant_order_id"`
+            VirtualID string  `json:"virtual_id"`
+            RazorpayPaymentID string  `json:"razorpay_payment_id"`
+            Timeout float64  `json:"timeout"`
+            BqrImage string  `json:"bqr_image"`
+            Aggregator string  `json:"aggregator"`
+            Currency string  `json:"currency"`
+            Success bool  `json:"success"`
+            Vpa string  `json:"vpa"`
+            PollingURL string  `json:"polling_url"`
+            Method string  `json:"method"`
             CustomerID string  `json:"customer_id"`
+            Status string  `json:"status"`
          
     }
     
@@ -6649,17 +6649,17 @@ package application
     type PaymentStatusUpdateRequest struct {
 
         
+            Email string  `json:"email"`
+            Amount float64  `json:"amount"`
+            Contact string  `json:"contact"`
+            MerchantOrderID string  `json:"merchant_order_id"`
+            Aggregator string  `json:"aggregator"`
+            Currency string  `json:"currency"`
             Vpa string  `json:"vpa"`
             OrderID string  `json:"order_id"`
-            Amount float64  `json:"amount"`
-            Currency string  `json:"currency"`
-            Contact string  `json:"contact"`
-            Status string  `json:"status"`
-            Email string  `json:"email"`
             Method string  `json:"method"`
-            Aggregator string  `json:"aggregator"`
-            MerchantOrderID string  `json:"merchant_order_id"`
             CustomerID string  `json:"customer_id"`
+            Status string  `json:"status"`
          
     }
     
@@ -6668,8 +6668,8 @@ package application
 
         
             Retry bool  `json:"retry"`
-            Status string  `json:"status"`
             AggregatorName string  `json:"aggregator_name"`
+            Status string  `json:"status"`
          
     }
     
@@ -6677,10 +6677,10 @@ package application
     type AggregatorRoute struct {
 
         
-            Data map[string]interface{}  `json:"data"`
-            APILink string  `json:"api_link"`
             PaymentFlowData string  `json:"payment_flow_data"`
+            Data map[string]interface{}  `json:"data"`
             PaymentFlow string  `json:"payment_flow"`
+            APILink string  `json:"api_link"`
          
     }
     
@@ -6688,37 +6688,17 @@ package application
     type PaymentFlow struct {
 
         
-            Simpl AggregatorRoute  `json:"simpl"`
-            UpiRazorpay AggregatorRoute  `json:"upi_razorpay"`
-            Payubiz AggregatorRoute  `json:"payubiz"`
-            Mswipe AggregatorRoute  `json:"mswipe"`
-            Ccavenue AggregatorRoute  `json:"ccavenue"`
-            Juspay AggregatorRoute  `json:"juspay"`
-            Fynd AggregatorRoute  `json:"fynd"`
-            Rupifi AggregatorRoute  `json:"rupifi"`
             Razorpay AggregatorRoute  `json:"razorpay"`
-            Stripe AggregatorRoute  `json:"stripe"`
+            Simpl AggregatorRoute  `json:"simpl"`
+            Rupifi AggregatorRoute  `json:"rupifi"`
+            Mswipe AggregatorRoute  `json:"mswipe"`
+            Fynd AggregatorRoute  `json:"fynd"`
+            Ccavenue AggregatorRoute  `json:"ccavenue"`
+            Payubiz AggregatorRoute  `json:"payubiz"`
             BqrRazorpay AggregatorRoute  `json:"bqr_razorpay"`
-         
-    }
-    
-    // PaymentModeLogo ...
-    type PaymentModeLogo struct {
-
-        
-            Small string  `json:"small"`
-            Large string  `json:"large"`
-         
-    }
-    
-    // IntentApp ...
-    type IntentApp struct {
-
-        
-            Logos PaymentModeLogo  `json:"logos"`
-            PackageName string  `json:"package_name"`
-            Code string  `json:"code"`
-            DisplayName string  `json:"display_name"`
+            Stripe AggregatorRoute  `json:"stripe"`
+            UpiRazorpay AggregatorRoute  `json:"upi_razorpay"`
+            Juspay AggregatorRoute  `json:"juspay"`
          
     }
     
@@ -6731,39 +6711,59 @@ package application
          
     }
     
+    // PaymentModeLogo ...
+    type PaymentModeLogo struct {
+
+        
+            Large string  `json:"large"`
+            Small string  `json:"small"`
+         
+    }
+    
+    // IntentApp ...
+    type IntentApp struct {
+
+        
+            DisplayName string  `json:"display_name"`
+            PackageName string  `json:"package_name"`
+            Code string  `json:"code"`
+            Logos PaymentModeLogo  `json:"logos"`
+         
+    }
+    
     // PaymentModeList ...
     type PaymentModeList struct {
 
         
-            CardToken string  `json:"card_token"`
+            Name string  `json:"name"`
+            CardID string  `json:"card_id"`
+            CardReference string  `json:"card_reference"`
+            Expired bool  `json:"expired"`
+            Code string  `json:"code"`
+            AggregatorName string  `json:"aggregator_name"`
+            MerchantCode string  `json:"merchant_code"`
+            CardType string  `json:"card_type"`
+            RetryCount float64  `json:"retry_count"`
+            Nickname string  `json:"nickname"`
+            ExpYear float64  `json:"exp_year"`
+            DisplayName string  `json:"display_name"`
+            IntentAppErrorDictList []IntentAppErrorList  `json:"intent_app_error_dict_list"`
+            CardBrand string  `json:"card_brand"`
+            IntentAppErrorList []string  `json:"intent_app_error_list"`
             DisplayPriority float64  `json:"display_priority"`
+            LogoURL PaymentModeLogo  `json:"logo_url"`
+            CardIsin string  `json:"card_isin"`
+            FyndVpa string  `json:"fynd_vpa"`
+            CardFingerprint string  `json:"card_fingerprint"`
+            IntentFlow bool  `json:"intent_flow"`
             ExpMonth float64  `json:"exp_month"`
             CardBrandImage string  `json:"card_brand_image"`
-            MerchantCode string  `json:"merchant_code"`
-            Nickname string  `json:"nickname"`
             CardName string  `json:"card_name"`
-            IntentApp []IntentApp  `json:"intent_app"`
-            LogoURL PaymentModeLogo  `json:"logo_url"`
             Timeout float64  `json:"timeout"`
-            CardType string  `json:"card_type"`
-            AggregatorName string  `json:"aggregator_name"`
-            IntentAppErrorList []string  `json:"intent_app_error_list"`
-            FyndVpa string  `json:"fynd_vpa"`
-            Code string  `json:"code"`
-            IntentAppErrorDictList []IntentAppErrorList  `json:"intent_app_error_dict_list"`
-            RetryCount float64  `json:"retry_count"`
-            CardFingerprint string  `json:"card_fingerprint"`
-            CardReference string  `json:"card_reference"`
-            CardIsin string  `json:"card_isin"`
             CardIssuer string  `json:"card_issuer"`
-            Name string  `json:"name"`
-            ExpYear float64  `json:"exp_year"`
-            IntentFlow bool  `json:"intent_flow"`
-            Expired bool  `json:"expired"`
-            CardBrand string  `json:"card_brand"`
-            DisplayName string  `json:"display_name"`
             CardNumber string  `json:"card_number"`
-            CardID string  `json:"card_id"`
+            IntentApp []IntentApp  `json:"intent_app"`
+            CardToken string  `json:"card_token"`
          
     }
     
@@ -6772,12 +6772,12 @@ package application
 
         
             Name string  `json:"name"`
+            List []PaymentModeList  `json:"list"`
             AnonymousEnable bool  `json:"anonymous_enable"`
             DisplayPriority float64  `json:"display_priority"`
-            List []PaymentModeList  `json:"list"`
-            AggregatorName string  `json:"aggregator_name"`
-            DisplayName string  `json:"display_name"`
             AddCardEnabled bool  `json:"add_card_enabled"`
+            DisplayName string  `json:"display_name"`
+            AggregatorName string  `json:"aggregator_name"`
          
     }
     
@@ -6821,10 +6821,10 @@ package application
     type TransferItemsDetails struct {
 
         
-            ID float64  `json:"id"`
-            Name string  `json:"name"`
             LogoLarge string  `json:"logo_large"`
+            Name string  `json:"name"`
             LogoSmall string  `json:"logo_small"`
+            ID float64  `json:"id"`
             DisplayName string  `json:"display_name"`
          
     }
@@ -6833,8 +6833,8 @@ package application
     type TransferModeDetails struct {
 
         
-            DisplayName string  `json:"display_name"`
             Items []TransferItemsDetails  `json:"items"`
+            DisplayName string  `json:"display_name"`
          
     }
     
@@ -6850,8 +6850,8 @@ package application
     type UpdateRefundTransferModeRequest struct {
 
         
-            TransferMode string  `json:"transfer_mode"`
             Enable bool  `json:"enable"`
+            TransferMode string  `json:"transfer_mode"`
          
     }
     
@@ -6867,25 +6867,25 @@ package application
     type OrderBeneficiaryDetails struct {
 
         
-            ModifiedOn string  `json:"modified_on"`
-            AccountNo string  `json:"account_no"`
+            DelightsUserName string  `json:"delights_user_name"`
+            BeneficiaryID string  `json:"beneficiary_id"`
+            Address string  `json:"address"`
+            TransferMode string  `json:"transfer_mode"`
+            Title string  `json:"title"`
+            IfscCode string  `json:"ifsc_code"`
             BankName string  `json:"bank_name"`
             BranchName bool  `json:"branch_name"`
-            Subtitle string  `json:"subtitle"`
+            DisplayName string  `json:"display_name"`
             AccountHolder string  `json:"account_holder"`
-            ID float64  `json:"id"`
-            IsActive bool  `json:"is_active"`
+            ModifiedOn string  `json:"modified_on"`
+            Subtitle string  `json:"subtitle"`
             CreatedOn string  `json:"created_on"`
             Email string  `json:"email"`
             Comment bool  `json:"comment"`
-            BeneficiaryID string  `json:"beneficiary_id"`
-            TransferMode string  `json:"transfer_mode"`
-            Address string  `json:"address"`
-            Title string  `json:"title"`
-            DelightsUserName string  `json:"delights_user_name"`
+            IsActive bool  `json:"is_active"`
+            AccountNo string  `json:"account_no"`
+            ID float64  `json:"id"`
             Mobile bool  `json:"mobile"`
-            IfscCode string  `json:"ifsc_code"`
-            DisplayName string  `json:"display_name"`
          
     }
     
@@ -6902,9 +6902,9 @@ package application
     type NotFoundResourceError struct {
 
         
-            Success bool  `json:"success"`
-            Code string  `json:"code"`
             Description string  `json:"description"`
+            Code string  `json:"code"`
+            Success bool  `json:"success"`
          
     }
     
@@ -6912,9 +6912,9 @@ package application
     type IfscCodeResponse struct {
 
         
-            BranchName string  `json:"branch_name"`
-            Success bool  `json:"success"`
             BankName string  `json:"bank_name"`
+            Success bool  `json:"success"`
+            BranchName string  `json:"branch_name"`
          
     }
     
@@ -6922,9 +6922,9 @@ package application
     type ErrorCodeDescription struct {
 
         
-            Success bool  `json:"success"`
-            Code string  `json:"code"`
             Description string  `json:"description"`
+            Code string  `json:"code"`
+            Success bool  `json:"success"`
          
     }
     
@@ -6932,9 +6932,9 @@ package application
     type AddBeneficiaryViaOtpVerificationRequest struct {
 
         
-            HashKey string  `json:"hash_key"`
             RequestID string  `json:"request_id"`
             Otp string  `json:"otp"`
+            HashKey string  `json:"hash_key"`
          
     }
     
@@ -6942,8 +6942,8 @@ package application
     type AddBeneficiaryViaOtpVerificationResponse struct {
 
         
-            Success bool  `json:"success"`
             Message string  `json:"message"`
+            Success bool  `json:"success"`
          
     }
     
@@ -6951,9 +6951,9 @@ package application
     type WrongOtpError struct {
 
         
+            Description string  `json:"description"`
             IsVerifiedFlag bool  `json:"is_verified_flag"`
             Success string  `json:"success"`
-            Description string  `json:"description"`
          
     }
     
@@ -6961,17 +6961,17 @@ package application
     type BeneficiaryModeDetails struct {
 
         
-            Vpa string  `json:"vpa"`
-            AccountNo string  `json:"account_no"`
+            Email string  `json:"email"`
+            IfscCode string  `json:"ifsc_code"`
+            Comment string  `json:"comment"`
+            AccountHolder string  `json:"account_holder"`
             BankName string  `json:"bank_name"`
-            Mobile string  `json:"mobile"`
+            AccountNo string  `json:"account_no"`
+            Wallet string  `json:"wallet"`
+            Vpa string  `json:"vpa"`
             BranchName string  `json:"branch_name"`
             Address string  `json:"address"`
-            Email string  `json:"email"`
-            Wallet string  `json:"wallet"`
-            AccountHolder string  `json:"account_holder"`
-            Comment string  `json:"comment"`
-            IfscCode string  `json:"ifsc_code"`
+            Mobile string  `json:"mobile"`
          
     }
     
@@ -6979,13 +6979,13 @@ package application
     type AddBeneficiaryDetailsRequest struct {
 
         
-            OrderID string  `json:"order_id"`
+            Details BeneficiaryModeDetails  `json:"details"`
+            Otp string  `json:"otp"`
             Delights bool  `json:"delights"`
             ShipmentID string  `json:"shipment_id"`
             TransferMode string  `json:"transfer_mode"`
-            Details BeneficiaryModeDetails  `json:"details"`
+            OrderID string  `json:"order_id"`
             RequestID string  `json:"request_id"`
-            Otp string  `json:"otp"`
          
     }
     
@@ -6994,9 +6994,9 @@ package application
 
         
             IsVerifiedFlag bool  `json:"is_verified_flag"`
-            Data map[string]interface{}  `json:"data"`
-            Success bool  `json:"success"`
             Message string  `json:"message"`
+            Success bool  `json:"success"`
+            Data map[string]interface{}  `json:"data"`
          
     }
     
@@ -7004,11 +7004,11 @@ package application
     type BankDetailsForOTP struct {
 
         
-            AccountNo string  `json:"account_no"`
-            BankName string  `json:"bank_name"`
-            BranchName string  `json:"branch_name"`
-            AccountHolder string  `json:"account_holder"`
             IfscCode string  `json:"ifsc_code"`
+            AccountHolder string  `json:"account_holder"`
+            BankName string  `json:"bank_name"`
+            AccountNo string  `json:"account_no"`
+            BranchName string  `json:"branch_name"`
          
     }
     
@@ -7035,8 +7035,8 @@ package application
 
         
             IsVerifiedFlag string  `json:"is_verified_flag"`
-            Success bool  `json:"success"`
             RequestID string  `json:"request_id"`
+            Success bool  `json:"success"`
          
     }
     
@@ -7053,8 +7053,8 @@ package application
     type SetDefaultBeneficiaryResponse struct {
 
         
-            IsBeneficiarySet bool  `json:"is_beneficiary_set"`
             Success bool  `json:"success"`
+            IsBeneficiarySet bool  `json:"is_beneficiary_set"`
          
     }
     
