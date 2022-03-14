@@ -4558,6 +4558,14 @@ package application
          
     }
     
+    // DataLoadersSchema ...
+    type DataLoadersSchema struct {
+
+        
+            Items []DataLoaderSchema  `json:"items"`
+         
+    }
+    
     // TagDeleteSuccessResponse ...
     type TagDeleteSuccessResponse struct {
 
