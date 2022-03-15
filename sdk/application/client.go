@@ -2576,7 +2576,8 @@ func NewAppClient(config *AppConfig) *Client {
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
-        AssignCardID float64  `url:"assign_card_id,omitempty"`  
+        AssignCardID float64  `url:"assign_card_id,omitempty"` 
+        AreaCode string  `url:"area_code,omitempty"`  
     }
     
     // GetCart Fetch all items added to the cart
@@ -2591,6 +2592,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -2687,7 +2690,8 @@ func NewAppClient(config *AppConfig) *Client {
     //CartAddItemsXQuery holds query params
     type CartAddItemsXQuery struct { 
         I bool  `url:"i,omitempty"` 
-        B bool  `url:"b,omitempty"`  
+        B bool  `url:"b,omitempty"` 
+        AreaCode string  `url:"area_code,omitempty"`  
     }
     
     // AddItems Add items to cart
@@ -2704,6 +2708,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -2760,7 +2766,8 @@ func NewAppClient(config *AppConfig) *Client {
     type CartUpdateCartXQuery struct { 
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
-        B bool  `url:"b,omitempty"`  
+        B bool  `url:"b,omitempty"` 
+        AreaCode string  `url:"area_code,omitempty"`  
     }
     
     // UpdateCart Update items in the cart
@@ -2779,6 +2786,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -14942,7 +14951,8 @@ func NewAppClient(config *AppConfig) *Client {
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
-        AssignCardID float64  `url:"assign_card_id,omitempty"`  
+        AssignCardID float64  `url:"assign_card_id,omitempty"` 
+        AreaCode string  `url:"area_code,omitempty"`  
     }
     
     // GetCart Fetch all items added to the cart
@@ -14957,6 +14967,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -15053,7 +15065,8 @@ func NewAppClient(config *AppConfig) *Client {
     //PosCartAddItemsXQuery holds query params
     type PosCartAddItemsXQuery struct { 
         I bool  `url:"i,omitempty"` 
-        B bool  `url:"b,omitempty"`  
+        B bool  `url:"b,omitempty"` 
+        AreaCode string  `url:"area_code,omitempty"`  
     }
     
     // AddItems Add items to cart
@@ -15068,6 +15081,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -15124,7 +15139,8 @@ func NewAppClient(config *AppConfig) *Client {
     type PosCartUpdateCartXQuery struct { 
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
-        B bool  `url:"b,omitempty"`  
+        B bool  `url:"b,omitempty"` 
+        AreaCode string  `url:"area_code,omitempty"`  
     }
     
     // UpdateCart Update items in the cart
@@ -15139,6 +15155,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
