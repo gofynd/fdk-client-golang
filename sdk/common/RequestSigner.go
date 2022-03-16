@@ -1,6 +1,7 @@
 package common
 
 import (
+	"bytes"
 	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/hex"
@@ -9,17 +10,21 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/url"
 	"regexp"
 	"sort"
 	"strings"
 	"time"
 )
 
+//RequestSigner holds request signer object
 type RequestSigner struct {
 	UpdatedReq        *http.Request
 	RequestedDateTime string
+	SignQuery         bool
 }
 
+//HEADERS_TO_IGNORE contains headers to be ignored while signing request
 var HEADERS_TO_IGNORE = []string{
 	"authorization",
 	"connection",
@@ -30,19 +35,24 @@ var HEADERS_TO_IGNORE = []string{
 	"range",
 }
 
+//HEADERS_TO_INCLUDE contains headers to be included while signing request
 var HEADERS_TO_INCLUDE = []string{"host", "x-fp-.*"}
 
-func NewRequestSigner(req *http.Request) *RequestSigner {
+//NewRequestSigner return the request signer instance
+func NewRequestSigner(req *http.Request, signQuery bool) *RequestSigner {
 	return &RequestSigner{
 		UpdatedReq:        req,
 		RequestedDateTime: "",
+		SignQuery:         signQuery,
 	}
 }
 
+//GetUpdatedRequest return the updated HTTP request
 func (r *RequestSigner) GetUpdatedRequest() *http.Request {
 	return r.UpdatedReq
 }
 
+//GetRequestedDateTime reuse and returns the date time created
 func (r *RequestSigner) GetRequestedDateTime() string {
 	if r.RequestedDateTime != "" {
 		return r.RequestedDateTime
@@ -50,6 +60,7 @@ func (r *RequestSigner) GetRequestedDateTime() string {
 	return strings.Replace(strings.Replace(time.Now().UTC().Format(time.RFC3339), "-", "", -1), ":", "", -1)
 }
 
+//Sign performs request signing operation
 func (r *RequestSigner) Sign() error {
 	var (
 		signature            string
@@ -64,7 +75,15 @@ func (r *RequestSigner) Sign() error {
 	)
 
 	r.UpdatedReq.Header["host"] = []string{r.UpdatedReq.Host}
-	r.UpdatedReq.Header["x-fp-date"] = []string{r.GetRequestedDateTime()}
+
+	//Checking if request to be signed in query param or header
+	if r.SignQuery {
+		params := r.UpdatedReq.URL.Query()
+		params["x-fp-date"] = []string{r.GetRequestedDateTime()}
+		r.UpdatedReq.URL.RawQuery = params.Encode()
+	} else {
+		r.UpdatedReq.Header["x-fp-date"] = []string{r.GetRequestedDateTime()}
+	}
 
 	//generate signedHeaders
 	for key := range r.UpdatedReq.Header {
@@ -76,6 +95,7 @@ func (r *RequestSigner) Sign() error {
 	}
 	signedHeaders = strings.TrimSuffix(signedHeaders, ";")
 	signedHeaders = sortHeaders(signedHeaders, ";")
+
 	//generate canonical headers
 	for key, val := range r.UpdatedReq.Header {
 		if !contains(HEADERS_TO_IGNORE, strings.ToLower(key), false) {
@@ -94,6 +114,14 @@ func (r *RequestSigner) Sign() error {
 		sort.SliceStable(splittedQueryParams, func(i, j int) bool {
 			return splittedQueryParams[i] < splittedQueryParams[j]
 		})
+		//Converting query params to non-encoded string
+		for i := 0; i < len(splittedQueryParams); i++ {
+			val, err := url.QueryUnescape(splittedQueryParams[i])
+			if err != nil {
+				return errors.New("Cannot decode query param : " + err.Error())
+			}
+			splittedQueryParams[i] = val
+		}
 		canonicalQueryString = strings.Join(splittedQueryParams, "&")
 	}
 
@@ -106,6 +134,10 @@ func (r *RequestSigner) Sign() error {
 		log.Println("Failed to read request body. Cannot sign the request")
 		return errors.New("Cannot sign the request. Failed to read request body")
 	}
+
+	// Restore the request body to its original state
+	r.UpdatedReq.Body = ioutil.NopCloser(bytes.NewBuffer(reqBody))
+
 	reqBodyHashed = hash(reqBody)
 	if reqBodyHashed == "" {
 		log.Println("Cannot sign the request. Empty request body hash")
@@ -139,7 +171,13 @@ func (r *RequestSigner) Sign() error {
 	}
 	sha := hex.EncodeToString(h.Sum(nil))
 	signature = fmt.Sprintf("v1:%s", sha)
-	r.UpdatedReq.Header["x-fp-signature"] = []string{signature}
+	if r.SignQuery {
+		params := r.UpdatedReq.URL.Query()
+		params["x-fp-signature"] = []string{signature}
+		r.UpdatedReq.URL.RawQuery = params.Encode()
+	} else {
+		r.UpdatedReq.Header["x-fp-signature"] = []string{signature}
+	}
 	return nil
 }
 
