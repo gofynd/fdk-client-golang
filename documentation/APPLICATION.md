@@ -44,20 +44,20 @@
     * [getHomeProducts](#gethomeproducts)
     * [getDepartments](#getdepartments)
     * [getSearchResults](#getsearchresults)
+    * [getCollections](#getcollections)
+    * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
+    * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [unfollowById](#unfollowbyid)
     * [followById](#followbyid)
+    * [unfollowById](#unfollowbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
     * [getInStockLocations](#getinstocklocations)
     * [getLocationDetailsById](#getlocationdetailsbyid)
+    * [getProductBundlesBySlug](#getproductbundlesbyslug)
     * [getProductPriceBySlug](#getproductpricebyslug)
     * [getProductSellersBySlug](#getproductsellersbyslug)
-    * [getCollections](#getcollections)
-    * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
-    * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
-    * [getProductBundlesBySlug](#getproductbundlesbyslug)
     
 
 * [Cart](#Cart)
@@ -1035,6 +1035,135 @@ Schema: `AutoCompleteResponse`
 ---
 
 
+#### getCollections
+List all the collections
+
+```golang
+
+ data, err :=  Catalog.GetCollections(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Tag`
+
+
+
+Collections are a great way to organize your products and can improve the ability for customers to find items quickly and efficiently.
+
+*Success Response:*
+
+
+
+Success. Returns a list of collections. Check the example shown below or refer `GetCollectionListingResponse` for more details.
+
+
+Schema: `GetCollectionListingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCollectionItemsBySlug
+Get the items in a collection
+
+```golang
+
+ data, err :=  Catalog.GetCollectionItemsBySlug(Slug, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| Slug | string | A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/. | 
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `F`, `Filters`, `SortOn`, `PageID`, `PageSize`
+
+
+
+Get items in a collection specified by its `slug`.
+
+*Success Response:*
+
+
+
+Success. Returns a list items in a given collection. Check the example shown below or refer `ProductListingResponse` for more details.
+
+
+Schema: `ProductListingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCollectionDetailBySlug
+Get a particular collection
+
+```golang
+
+ data, err :=  Catalog.GetCollectionDetailBySlug(Slug);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| Slug | string | A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/. | 
+
+
+
+
+Get the details of a collection by its `slug`.
+
+*Success Response:*
+
+
+
+Success. Returns a Collection object. Check the example shown below or refer `CollectionDetailResponse` for more details.
+
+
+Schema: `CollectionDetailResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getFollowedListing
 Get a list of followed Products, Brands, Collections
 
@@ -1078,12 +1207,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1097,7 +1226,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1119,12 +1248,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1138,7 +1267,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1377,6 +1506,46 @@ Schema: `StoreDetails`
 ---
 
 
+#### getProductBundlesBySlug
+Get product bundles
+
+```golang
+
+ data, err :=  Catalog.GetProductBundlesBySlug(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+| xQuery | struct | Includes properties such as `Slug`, `ID`
+
+
+
+Use this API to retrieve products bundles to the one specified by its slug.
+
+*Success Response:*
+
+
+
+Success. Returns a group of products bundle.
+
+
+Schema: `ProductBundle`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getProductPriceBySlug
 Get the price of a product size at a PIN Code
 
@@ -1407,10 +1576,10 @@ Prices may vary for different sizes of a product. Use this API to retrieve the p
 
 
 
-Success. Returns a ProductSizePrice object. Check the example shown below or refer `ProductSizePriceResponse` for more details.
+Success. Returns a ProductSizePriceV2 object. Check the example shown below or refer `ProductSizePriceResponseV2` for more details.
 
 
-Schema: `ProductSizePriceResponse`
+Schema: `ProductSizePriceResponseV2`
 
 
 
@@ -1457,179 +1626,10 @@ A product of a particular size may be sold by multiple sellers. Use this API to 
 
 
 
-Success. Returns a ProductSizeSeller object. Check the example shown below or refer `ProductSizeSellersResponse` for more details.
+Success. Returns a ProductSizeSellerV2 object. Check the example shown below or refer `ProductSizeSellersResponseV2` for more details.
 
 
-Schema: `ProductSizeSellersResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getCollections
-List all the collections
-
-```golang
-
- data, err :=  Catalog.GetCollections(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Tag`
-
-
-
-Collections are a great way to organize your products and can improve the ability for customers to find items quickly and efficiently.
-
-*Success Response:*
-
-
-
-Success. Returns a list of collections. Check the example shown below or refer `GetCollectionListingResponse` for more details.
-
-
-Schema: `GetCollectionListingResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getCollectionItemsBySlug
-Get the items in a collection
-
-```golang
-
- data, err :=  Catalog.GetCollectionItemsBySlug(Slug, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| Slug | string | A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/. | 
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `F`, `Filters`, `SortOn`, `PageID`, `PageSize`
-
-
-
-Get items in a collection specified by its `slug`.
-
-*Success Response:*
-
-
-
-Success. Returns a list items in a given collection. Check the example shown below or refer `ProductListingResponse` for more details.
-
-
-Schema: `ProductListingResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getCollectionDetailBySlug
-Get a particular collection
-
-```golang
-
- data, err :=  Catalog.GetCollectionDetailBySlug(Slug);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| Slug | string | A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/. | 
-
-
-
-
-Get the details of a collection by its `slug`.
-
-*Success Response:*
-
-
-
-Success. Returns a Collection object. Check the example shown below or refer `CollectionDetailResponse` for more details.
-
-
-Schema: `CollectionDetailResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getProductBundlesBySlug
-Get product bundles
-
-```golang
-
- data, err :=  Catalog.GetProductBundlesBySlug(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-| xQuery | struct | Includes properties such as `Slug`, `ID`
-
-
-
-Use this API to retrieve products bundles to the one specified by its slug.
-
-*Success Response:*
-
-
-
-Success. Returns a group of products bundle.
-
-
-Schema: `ProductBundle`
+Schema: `ProductSizeSellersResponseV2`
 
 
 
@@ -11823,8 +11823,7 @@ Success
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -11960,8 +11959,7 @@ Success
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12094,8 +12092,7 @@ Success
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12452,8 +12449,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12593,8 +12589,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12690,8 +12685,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12864,8 +12858,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12966,8 +12959,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13076,8 +13068,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13174,8 +13165,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13276,8 +13266,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13378,8 +13367,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13486,8 +13474,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13584,8 +13571,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
