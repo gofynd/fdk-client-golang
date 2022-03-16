@@ -13847,10 +13847,10 @@ Use this API to get all selected data loaders of the application in the form of 
 
 
 
-Success. Returns a JSON object containing all the data loaders injected in the application. Check the example shown below or refer `DataLoadersSchema` for more details.
+Success. Returns a JSON object containing all the data loaders injected in the application. Check the example shown below or refer `DataLoaderSchema` for more details.
 
 
-Schema: `DataLoadersSchema`
+Schema: `DataLoaderSchema`
 
 
 

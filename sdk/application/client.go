@@ -7426,12 +7426,12 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // GetDataLoaders Get the data loaders associated with an application
-    func (co *Content)  GetDataLoaders() (DataLoadersSchema, error){
+    func (co *Content)  GetDataLoaders() (DataLoaderSchema, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getDataLoadersResponse DataLoadersSchema
+             getDataLoadersResponse DataLoaderSchema
 	    )
 
         
@@ -7453,12 +7453,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return DataLoadersSchema{}, err
+            return DataLoaderSchema{}, err
 	    }
         
         err = json.Unmarshal(response, &getDataLoadersResponse)
         if err != nil {
-            return DataLoadersSchema{}, common.NewFDKError(err.Error())
+            return DataLoaderSchema{}, common.NewFDKError(err.Error())
         }
          return getDataLoadersResponse, nil
         
