@@ -4725,12 +4725,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
     
     // GetDataLoaders Get all the data loaders in an application
-     func (co *PlatformAppContent)  GetDataLoaders() ([]DataLoaderResponseSchema, error) {
+     func (co *PlatformAppContent)  GetDataLoaders() (DataLoadersSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getDataLoadersResponse []DataLoaderResponseSchema
+            getDataLoadersResponse DataLoadersSchema
 	    )
 
         
@@ -4752,12 +4752,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return []DataLoaderResponseSchema{}, err
+            return DataLoadersSchema{}, err
 	    }
         
         err = json.Unmarshal(response, &getDataLoadersResponse)
         if err != nil {
-            return []DataLoaderResponseSchema{}, common.NewFDKError(err.Error())
+            return DataLoadersSchema{}, common.NewFDKError(err.Error())
         }
         return getDataLoadersResponse, nil
         
@@ -4894,12 +4894,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
     
     // GetDataLoadersByService Get all the data loaders in an application by service name
-     func (co *PlatformAppContent)  GetDataLoadersByService(ServiceName string) ([]DataLoaderResponseSchema, error) {
+     func (co *PlatformAppContent)  GetDataLoadersByService(ServiceName string) (DataLoadersSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getDataLoadersByServiceResponse []DataLoaderResponseSchema
+            getDataLoadersByServiceResponse DataLoadersSchema
 	    )
 
         
@@ -4923,12 +4923,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return []DataLoaderResponseSchema{}, err
+            return DataLoadersSchema{}, err
 	    }
         
         err = json.Unmarshal(response, &getDataLoadersByServiceResponse)
         if err != nil {
-            return []DataLoaderResponseSchema{}, common.NewFDKError(err.Error())
+            return DataLoadersSchema{}, common.NewFDKError(err.Error())
         }
         return getDataLoadersByServiceResponse, nil
         

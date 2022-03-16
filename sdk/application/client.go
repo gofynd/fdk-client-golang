@@ -2576,8 +2576,7 @@ func NewAppClient(config *AppConfig) *Client {
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
-        AssignCardID float64  `url:"assign_card_id,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"`  
+        AssignCardID float64  `url:"assign_card_id,omitempty"`  
     }
     
     // GetCart Fetch all items added to the cart
@@ -2592,8 +2591,6 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
-            
-                
             
                 
             
@@ -2690,8 +2687,7 @@ func NewAppClient(config *AppConfig) *Client {
     //CartAddItemsXQuery holds query params
     type CartAddItemsXQuery struct { 
         I bool  `url:"i,omitempty"` 
-        B bool  `url:"b,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"`  
+        B bool  `url:"b,omitempty"`  
     }
     
     // AddItems Add items to cart
@@ -2708,8 +2704,6 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
-            
-                
             
                 
             
@@ -2766,8 +2760,7 @@ func NewAppClient(config *AppConfig) *Client {
     type CartUpdateCartXQuery struct { 
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
-        B bool  `url:"b,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"`  
+        B bool  `url:"b,omitempty"`  
     }
     
     // UpdateCart Update items in the cart
@@ -2786,8 +2779,6 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
-            
-                
             
                 
             
@@ -7426,12 +7417,12 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // GetDataLoaders Get the data loaders associated with an application
-    func (co *Content)  GetDataLoaders() (DataLoaderSchema, error){
+    func (co *Content)  GetDataLoaders() (DataLoadersSchema, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getDataLoadersResponse DataLoaderSchema
+             getDataLoadersResponse DataLoadersSchema
 	    )
 
         
@@ -7453,12 +7444,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return DataLoaderSchema{}, err
+            return DataLoadersSchema{}, err
 	    }
         
         err = json.Unmarshal(response, &getDataLoadersResponse)
         if err != nil {
-            return DataLoaderSchema{}, common.NewFDKError(err.Error())
+            return DataLoadersSchema{}, common.NewFDKError(err.Error())
         }
          return getDataLoadersResponse, nil
         
@@ -14951,8 +14942,7 @@ func NewAppClient(config *AppConfig) *Client {
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
-        AssignCardID float64  `url:"assign_card_id,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"`  
+        AssignCardID float64  `url:"assign_card_id,omitempty"`  
     }
     
     // GetCart Fetch all items added to the cart
@@ -14967,8 +14957,6 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
-            
-                
             
                 
             
@@ -15065,8 +15053,7 @@ func NewAppClient(config *AppConfig) *Client {
     //PosCartAddItemsXQuery holds query params
     type PosCartAddItemsXQuery struct { 
         I bool  `url:"i,omitempty"` 
-        B bool  `url:"b,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"`  
+        B bool  `url:"b,omitempty"`  
     }
     
     // AddItems Add items to cart
@@ -15081,8 +15068,6 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
-            
-                
             
                 
             
@@ -15139,8 +15124,7 @@ func NewAppClient(config *AppConfig) *Client {
     type PosCartUpdateCartXQuery struct { 
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
-        B bool  `url:"b,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"`  
+        B bool  `url:"b,omitempty"`  
     }
     
     // UpdateCart Update items in the cart
@@ -15155,8 +15139,6 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
-            
-                
             
                 
             

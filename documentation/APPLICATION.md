@@ -1665,9 +1665,7 @@ Fetch all items added to the cart
 
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`
 
 
 
@@ -1739,9 +1737,7 @@ Add items to cart
 
 
 
-
-
-| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`
+| xQuery | struct | Includes properties such as `I`, `B`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -2417,9 +2413,7 @@ Update items in the cart
 
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AreaCode`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`
 
 | body |  UpdateCartRequest | "Request body" 
 
@@ -13847,10 +13841,10 @@ Use this API to get all selected data loaders of the application in the form of 
 
 
 
-Success. Returns a JSON object containing all the data loaders injected in the application. Check the example shown below or refer `DataLoaderSchema` for more details.
+Success. Returns a JSON object containing all the data loaders injected in the application. Check the example shown below or refer `DataLoadersSchema` for more details.
 
 
-Schema: `DataLoaderSchema`
+Schema: `DataLoadersSchema`
 
 
 
@@ -19003,9 +18997,7 @@ Fetch all items added to the cart
 
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`
 
 
 
@@ -19077,9 +19069,7 @@ Add items to cart
 
 
 
-
-
-| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`
+| xQuery | struct | Includes properties such as `I`, `B`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -19755,9 +19745,7 @@ Update items in the cart
 
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AreaCode`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`
 
 | body |  UpdateCartRequest | "Request body" 
 

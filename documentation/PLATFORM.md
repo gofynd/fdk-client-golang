@@ -41150,7 +41150,7 @@ Use this to get all data loaders of an application
 Success. Refer `DataLoaderResponseSchema` for more details.
 
 
-Schema: `Array<DataLoaderResponseSchema>`
+Schema: `DataLoadersSchema`
 
 
 
@@ -41280,7 +41280,7 @@ Use this to get all data loaders of an application by service name
 Success. Refer `DataLoaderResponseSchema` for more details.
 
 
-Schema: `Array<DataLoaderResponseSchema>`
+Schema: `DataLoadersSchema`
 
 
 
