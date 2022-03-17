@@ -10731,6 +10731,68 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // ResendOrCancelPayment API to resend and cancel a payment link which was already generated.
+    func (pa *Payment)  ResendOrCancelPayment(body  ResendOrCancelPaymentRequest) (ResendOrCancelPaymentResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             resendOrCancelPaymentResponse ResendOrCancelPaymentResponse
+	    )
+
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return ResendOrCancelPaymentResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return ResendOrCancelPaymentResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            "/service/application/payment/v1.0/payment/resend_or_cancel",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ResendOrCancelPaymentResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &resendOrCancelPaymentResponse)
+        if err != nil {
+            return ResendOrCancelPaymentResponse{}, common.NewFDKError(err.Error())
+        }
+         return resendOrCancelPaymentResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // GetActiveRefundTransferModes Lists the mode of refund
     func (pa *Payment)  GetActiveRefundTransferModes() (TransferModeResponse, error){
         var (

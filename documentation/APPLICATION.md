@@ -233,6 +233,7 @@
     * [getPosPaymentModeRoutes](#getpospaymentmoderoutes)
     * [getRupifiBannerDetails](#getrupifibannerdetails)
     * [getEpaylaterBannerDetails](#getepaylaterbannerdetails)
+    * [resendOrCancelPayment](#resendorcancelpayment)
     * [getActiveRefundTransferModes](#getactiverefundtransfermodes)
     * [enableOrDisableRefundTransferMode](#enableordisablerefundtransfermode)
     * [getUserBeneficiariesDetail](#getuserbeneficiariesdetail)
@@ -16709,6 +16710,72 @@ Success. Return Epaylater Offer detail. Check the example shown below or refer `
 
 
 Schema: `EpaylaterBannerResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### resendOrCancelPayment
+API to resend and cancel a payment link which was already generated.
+
+```golang
+
+ data, err :=  Payment.ResendOrCancelPayment(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  ResendOrCancelPaymentRequest | "Request body" 
+
+
+Use this API to perform resend or cancel a payment link based on request payload.
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `ResendOrCancelPaymentResponse` for more details.
+
+
+Schema: `ResendOrCancelPaymentResponse`
+
+
+*Examples:*
+
+
+request_type is cancel
+```json
+{
+  "value": {
+    "success": true,
+    "data": {
+      "message": "Payment link Cancelled.",
+      "status": true
+    }
+  }
+}
+```
+
+request_type is resend
+```json
+{
+  "value": {
+    "success": true,
+    "data": {
+      "message": "Notification triggered.",
+      "status": true
+    }
+  }
+}
+```
 
 
 
