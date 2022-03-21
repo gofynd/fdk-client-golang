@@ -5023,7 +5023,9 @@ Fetch available promotions
 
 
 
-| xQuery | struct | Includes properties such as `Slug`, `PageSize`
+
+
+| xQuery | struct | Includes properties such as `Slug`, `PageSize`, `PromotionGroup`
 
 
 
