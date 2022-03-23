@@ -39854,7 +39854,7 @@ Schema: `CreateUserSessionResponseSchema`
 
 
 #### getActiveSessions
-Get a list of all sections for a user
+Get a list of all session for a user
 
 ```golang
 
@@ -39874,7 +39874,7 @@ data, err := User.GetActiveSessions(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `ID`
 
 
-Use this API to retrieve a list of customers who have registered in the application.
+Use this API to retrieve a list of session of customers who have registered in the application.
 
 *Success Response:*
 
@@ -39913,7 +39913,7 @@ Success
 
 
 #### deleteActiveSessions
-Get a list of all sections for a user
+Delete a list of all session for a user
 
 ```golang
 
@@ -39933,16 +39933,16 @@ data, err := User.DeleteActiveSessions(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `ID`
 
 
-Use this API to retrieve a list of customers who have registered in the application.
+Use this API to Delete a list of session of customers who have registered in the application.
 
 *Success Response:*
 
 
 
-Success. Refer `SessionListResponseSchema` for more details.
+Success. Refer `SessionDeleteResponseSchema` for more details.
 
 
-Schema: `SessionListResponseSchema`
+Schema: `SessionDeleteResponseSchema`
 
 
 *Examples:*

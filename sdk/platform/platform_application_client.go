@@ -3574,7 +3574,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         ID string  `url:"id,omitempty"`  
     }
     
-    // GetActiveSessions Get a list of all sections for a user
+    // GetActiveSessions Get a list of all session for a user
      func (us *PlatformAppUser)  GetActiveSessions(xQuery PlatformAppGetActiveSessionsXQuery) (SessionListResponseSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -3629,13 +3629,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         ID string  `url:"id,omitempty"`  
     }
     
-    // DeleteActiveSessions Get a list of all sections for a user
-     func (us *PlatformAppUser)  DeleteActiveSessions(xQuery PlatformAppDeleteActiveSessionsXQuery) (SessionListResponseSchema, error) {
+    // DeleteActiveSessions Delete a list of all session for a user
+     func (us *PlatformAppUser)  DeleteActiveSessions(xQuery PlatformAppDeleteActiveSessionsXQuery) (SessionDeleteResponseSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            deleteActiveSessionsResponse SessionListResponseSchema
+            deleteActiveSessionsResponse SessionDeleteResponseSchema
 	    )
 
         
@@ -3661,12 +3661,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return SessionListResponseSchema{}, err
+            return SessionDeleteResponseSchema{}, err
 	    }
         
         err = json.Unmarshal(response, &deleteActiveSessionsResponse)
         if err != nil {
-            return SessionListResponseSchema{}, common.NewFDKError(err.Error())
+            return SessionDeleteResponseSchema{}, common.NewFDKError(err.Error())
         }
         return deleteActiveSessionsResponse, nil
         
