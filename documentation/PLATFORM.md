@@ -397,8 +397,8 @@
 
 * [CompanyProfile](#CompanyProfile)
   * Methods
-    * [cbsOnboardGet](#cbsonboardget)
     * [updateCompany](#updatecompany)
+    * [cbsOnboardGet](#cbsonboardget)
     * [getCompanyMetrics](#getcompanymetrics)
     * [editBrand](#editbrand)
     * [getBrand](#getbrand)
@@ -581,9 +581,9 @@
     * [getEntityRegionView](#getentityregionview)
     * [getListView](#getlistview)
     * [getCompanyStoreView](#getcompanystoreview)
-    * [upsertZoneControllerView](#upsertzonecontrollerview)
-    * [updateZoneControllerView](#updatezonecontrollerview)
     * [getZoneDataView](#getzonedataview)
+    * [updateZoneControllerView](#updatezonecontrollerview)
+    * [upsertZoneControllerView](#upsertzonecontrollerview)
     * [upsertZoneControllerView](#upsertzonecontrollerview)
     
 
@@ -57004,43 +57004,6 @@ Schema: `LocationListSerializer`
 ## CompanyProfile
 
 
-#### cbsOnboardGet
-Get company profile
-
-```golang
-
-data, err := CompanyProfile.CbsOnboardGet(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-
-This API allows to view the company profile of the seller account.
-
-*Success Response:*
-
-
-
-Company profile object. See example below or refer `GetCompanyProfileSerializerResponse` for details
-
-
-Schema: `GetCompanyProfileSerializerResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateCompany
 Edit company profile
 
@@ -57067,6 +57030,43 @@ Returns a success message
 
 
 Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### cbsOnboardGet
+Get company profile
+
+```golang
+
+data, err := CompanyProfile.CbsOnboardGet(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+
+This API allows to view the company profile of the seller account.
+
+*Success Response:*
+
+
+
+Company profile object. See example below or refer `GetCompanyProfileSerializerResponse` for details
+
+
+Schema: `GetCompanyProfileSerializerResponse`
 
 
 
@@ -63798,35 +63798,34 @@ Schema: `CompanyStoreView_Response`
 ---
 
 
-#### upsertZoneControllerView
-Insertion of zone in database.
+#### getZoneDataView
+Zone Data View of application.
 
 ```golang
 
-data, err := Serviceability.UpsertZoneControllerView(ZoneID, CompanyID, body);
+data, err := Serviceability.GetZoneDataView(CompanyID, ZoneID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
-
-
 | CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
 
 
-| body |  ZoneRequest | "Request body" 
+| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
 
-This API returns response of insertation of zone in mongo database.<br>Correction- `zone_id` in the path must be removed.<br> path is `/service/platform/logistics-internal/v1.0/company/{company_id}/zone/`
+
+
+This API returns Zone Data View of the application.
 
 *Success Response:*
 
 
 
-Response status_code
+Get Application Zone Data
 
 
-Schema: `ZoneResponse`
+Schema: `GetSingleZoneDataViewResponse`
 
 
 
@@ -63880,34 +63879,35 @@ Schema: `ZoneSuccessResponse`
 ---
 
 
-#### getZoneDataView
-Zone Data View of application.
+#### upsertZoneControllerView
+Insertion of zone in database.
 
 ```golang
 
-data, err := Serviceability.GetZoneDataView(CompanyID, ZoneID);
+data, err := Serviceability.UpsertZoneControllerView(ZoneID, CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
 | ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
 
 
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
 
-This API returns Zone Data View of the application.
+
+| body |  ZoneRequest | "Request body" 
+
+This API returns response of insertation of zone in mongo database.<br>Correction- `zone_id` in the path must be removed.<br> path is `/service/platform/logistics-internal/v1.0/company/{company_id}/zone/`
 
 *Success Response:*
 
 
 
-Get Application Zone Data
+Response status_code
 
 
-Schema: `GetSingleZoneDataViewResponse`
+Schema: `ZoneResponse`
 
 
 

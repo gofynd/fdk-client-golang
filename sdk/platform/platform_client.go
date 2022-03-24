@@ -7907,56 +7907,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // CbsOnboardGet Get company profile
-     func (co *PlatformCompanyProfile)  CbsOnboardGet() (GetCompanyProfileSerializerResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            cbsOnboardGetResponse GetCompanyProfileSerializerResponse
-	    )
-
-        
-
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            co.Config,
-            "get",
-            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s",co.CompanyID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return GetCompanyProfileSerializerResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &cbsOnboardGetResponse)
-        if err != nil {
-             return GetCompanyProfileSerializerResponse{}, common.NewFDKError(err.Error())
-        }
-        return cbsOnboardGetResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
     // UpdateCompany Edit company profile
      func (co *PlatformCompanyProfile)  UpdateCompany(body  UpdateCompany) (SuccessResponse, error){
         
@@ -8033,6 +7983,56 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return SuccessResponse{}, common.NewFDKError(err.Error())
         }
         return updateCompanyResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // CbsOnboardGet Get company profile
+     func (co *PlatformCompanyProfile)  CbsOnboardGet() (GetCompanyProfileSerializerResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            cbsOnboardGetResponse GetCompanyProfileSerializerResponse
+	    )
+
+        
+
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.Config,
+            "get",
+            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s",co.CompanyID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetCompanyProfileSerializerResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &cbsOnboardGetResponse)
+        if err != nil {
+             return GetCompanyProfileSerializerResponse{}, common.NewFDKError(err.Error())
+        }
+        return cbsOnboardGetResponse, nil
         
     }
          
@@ -13392,22 +13392,16 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // UpsertZoneControllerView Insertion of zone in database.
-     func (se *PlatformServiceability)  UpsertZoneControllerView(ZoneID string, body  ZoneRequest) (ZoneResponse, error){
+    // GetZoneDataView Zone Data View of application.
+     func (se *PlatformServiceability)  GetZoneDataView(ZoneID string) (GetSingleZoneDataViewResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            upsertZoneControllerViewResponse ZoneResponse
+            getZoneDataViewResponse GetSingleZoneDataViewResponse
 	    )
 
-        
-        
-        
-        
-        
-        
         
 
         
@@ -13419,37 +13413,24 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
          
         
         
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return ZoneResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return ZoneResponse{}, common.NewFDKError(err.Error())
-        }
-        
         //API call
         rawRequest = NewRequest(
             se.Config,
-            "post",
-            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/zone/%s",ZoneID, se.CompanyID),
+            "get",
+            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/zone/%s",se.CompanyID, ZoneID),
             nil,
             nil,
-            reqBody)
+            nil)
         response, err = rawRequest.Execute()
         if err != nil {
-             return ZoneResponse{}, err
+             return GetSingleZoneDataViewResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &upsertZoneControllerViewResponse)
+        err = json.Unmarshal(response, &getZoneDataViewResponse)
         if err != nil {
-             return ZoneResponse{}, common.NewFDKError(err.Error())
+             return GetSingleZoneDataViewResponse{}, common.NewFDKError(err.Error())
         }
-        return upsertZoneControllerViewResponse, nil
+        return getZoneDataViewResponse, nil
         
     }
          
@@ -13534,16 +13515,22 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetZoneDataView Zone Data View of application.
-     func (se *PlatformServiceability)  GetZoneDataView(ZoneID string) (GetSingleZoneDataViewResponse, error){
+    // UpsertZoneControllerView Insertion of zone in database.
+     func (se *PlatformServiceability)  UpsertZoneControllerView(ZoneID string, body  ZoneRequest) (ZoneResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getZoneDataViewResponse GetSingleZoneDataViewResponse
+            upsertZoneControllerViewResponse ZoneResponse
 	    )
 
+        
+        
+        
+        
+        
+        
         
 
         
@@ -13555,24 +13542,37 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
          
         
         
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return ZoneResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return ZoneResponse{}, common.NewFDKError(err.Error())
+        }
+        
         //API call
         rawRequest = NewRequest(
             se.Config,
-            "get",
-            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/zone/%s",se.CompanyID, ZoneID),
+            "post",
+            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/zone/%s",ZoneID, se.CompanyID),
             nil,
             nil,
-            nil)
+            reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-             return GetSingleZoneDataViewResponse{}, err
+             return ZoneResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getZoneDataViewResponse)
+        err = json.Unmarshal(response, &upsertZoneControllerViewResponse)
         if err != nil {
-             return GetSingleZoneDataViewResponse{}, common.NewFDKError(err.Error())
+             return ZoneResponse{}, common.NewFDKError(err.Error())
         }
-        return getZoneDataViewResponse, nil
+        return upsertZoneControllerViewResponse, nil
         
     }
          
