@@ -291,24 +291,24 @@
 
 * [Catalog](#Catalog)
   * Methods
-    * [deleteSearchKeywords](#deletesearchkeywords)
-    * [getSearchKeywords](#getsearchkeywords)
     * [updateSearchKeywords](#updatesearchkeywords)
+    * [getSearchKeywords](#getsearchkeywords)
+    * [deleteSearchKeywords](#deletesearchkeywords)
     * [createCustomKeyword](#createcustomkeyword)
     * [getAllSearchKeyword](#getallsearchkeyword)
-    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
-    * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [updateAutocompleteKeyword](#updateautocompletekeyword)
+    * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
+    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createProductBundle](#createproductbundle)
     * [getProductBundle](#getproductbundle)
-    * [getProductBundleDetail](#getproductbundledetail)
     * [updateProductBundle](#updateproductbundle)
+    * [getProductBundleDetail](#getproductbundledetail)
     * [createSizeGuide](#createsizeguide)
     * [getSizeGuides](#getsizeguides)
-    * [getSizeGuide](#getsizeguide)
     * [updateSizeGuide](#updatesizeguide)
+    * [getSizeGuide](#getsizeguide)
     * [updateAppProduct](#updateappproduct)
     * [getCatalogConfiguration](#getcatalogconfiguration)
     * [createConfigurationProductListing](#createconfigurationproductlisting)
@@ -319,8 +319,8 @@
     * [createCollection](#createcollection)
     * [getAllCollections](#getallcollections)
     * [getCollectionDetail](#getcollectiondetail)
-    * [deleteCollection](#deletecollection)
     * [updateCollection](#updatecollection)
+    * [deleteCollection](#deletecollection)
     * [addCollectionItems](#addcollectionitems)
     * [getCollectionItems](#getcollectionitems)
     * [getCatalogInsights](#getcataloginsights)
@@ -345,13 +345,13 @@
     * [listTemplateBrandTypeValues](#listtemplatebrandtypevalues)
     * [createCategories](#createcategories)
     * [listCategories](#listcategories)
-    * [getCategoryData](#getcategorydata)
     * [updateCategory](#updatecategory)
+    * [getCategoryData](#getcategorydata)
     * [createProduct](#createproduct)
     * [getProducts](#getproducts)
-    * [deleteProduct](#deleteproduct)
-    * [getProduct](#getproduct)
     * [editProduct](#editproduct)
+    * [getProduct](#getproduct)
+    * [deleteProduct](#deleteproduct)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
     * [updateProductAssetsInBulk](#updateproductassetsinbulk)
@@ -376,8 +376,8 @@
     * [exportInventoryConfig](#exportinventoryconfig)
     * [createHsnCode](#createhsncode)
     * [getAllHsnCodes](#getallhsncodes)
-    * [getHsnCode](#gethsncode)
     * [updateHsnCode](#updatehsncode)
+    * [getHsnCode](#gethsncode)
     * [bulkHsnCode](#bulkhsncode)
     * [getApplicationBrands](#getapplicationbrands)
     * [getDepartments](#getdepartments)
@@ -397,10 +397,10 @@
     * [editBrand](#editbrand)
     * [getBrand](#getbrand)
     * [createBrand](#createbrand)
-    * [createCompanyBrandMapping](#createcompanybrandmapping)
     * [getBrands](#getbrands)
-    * [createLocation](#createlocation)
+    * [createCompanyBrandMapping](#createcompanybrandmapping)
     * [getLocations](#getlocations)
+    * [createLocation](#createlocation)
     * [updateLocation](#updatelocation)
     * [getLocationDetail](#getlocationdetail)
     * [createLocationBulk](#createlocationbulk)
@@ -8978,7 +8978,6 @@ Success
           }
         ],
         "styles": {},
-        "constants": {},
         "settings": {},
         "created_at": "2020-12-22T05:11:16.027Z",
         "updated_at": "2021-02-24T14:03:52.974Z"
@@ -11173,8 +11172,6 @@ Success
       }
     ],
     "styles": {},
-    "constants": {},
-    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -13359,8 +13356,6 @@ Success
       }
     ],
     "styles": {},
-    "constants": {},
-    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -15605,8 +15600,6 @@ Success
       }
     ],
     "styles": {},
-    "constants": {},
-    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -17552,7 +17545,6 @@ Success
           }
         ],
         "styles": {},
-        "constants": {},
         "settings": {},
         "created_at": "2020-12-22T05:11:16.027Z",
         "updated_at": "2021-02-24T14:03:52.974Z"
@@ -19747,8 +19739,6 @@ Success
       }
     ],
     "styles": {},
-    "constants": {},
-    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -21932,8 +21922,6 @@ Success
       }
     ],
     "styles": {},
-    "constants": {},
-    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -24193,8 +24181,6 @@ Success
       }
     ],
     "styles": {},
-    "constants": {},
-    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -26382,8 +26368,6 @@ Success
       }
     ],
     "styles": {},
-    "constants": {},
-    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -28570,8 +28554,6 @@ Success
       }
     ],
     "styles": {},
-    "constants": {},
-    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -30758,8 +30740,6 @@ Success
       }
     ],
     "styles": {},
-    "constants": {},
-    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -32946,8 +32926,6 @@ Success
       }
     ],
     "styles": {},
-    "constants": {},
-    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -35134,8 +35112,6 @@ Success
       }
     ],
     "styles": {},
-    "constants": {},
-    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -37322,8 +37298,6 @@ Success
       }
     ],
     "styles": {},
-    "constants": {},
-    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -39510,8 +39484,6 @@ Success
       }
     ],
     "styles": {},
-    "constants": {},
-    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -52663,12 +52635,12 @@ Schema: `GetClickToCallResponse`
 ## Catalog
 
 
-#### deleteSearchKeywords
-Delete a Search Keywords
+#### updateSearchKeywords
+Update Search Keyword
 
 ```golang
 
-data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
+data, err := Catalog.UpdateSearchKeywords(CompanyID, ApplicationID, ID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -52683,17 +52655,18 @@ data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
 | ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
 
 
+| body |  CreateSearchKeyword | "Request body" 
 
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+Update Search Keyword by its id. On successful request, returns the updated collection
 
 *Success Response:*
 
 
 
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+The Collection object. See example below or refer `GetSearchWordsDataSchema` for details.
 
 
-Schema: `DeleteResponse`
+Schema: `GetSearchWordsData`
 
 
 
@@ -52749,12 +52722,12 @@ Schema: `GetSearchWordsDetailResponse`
 ---
 
 
-#### updateSearchKeywords
-Update Search Keyword
+#### deleteSearchKeywords
+Delete a Search Keywords
 
 ```golang
 
-data, err := Catalog.UpdateSearchKeywords(CompanyID, ApplicationID, ID, body);
+data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -52769,18 +52742,17 @@ data, err := Catalog.UpdateSearchKeywords(CompanyID, ApplicationID, ID, body);
 | ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
 
 
-| body |  CreateSearchKeyword | "Request body" 
 
-Update Search Keyword by its id. On successful request, returns the updated collection
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
 
 *Success Response:*
 
 
 
-The Collection object. See example below or refer `GetSearchWordsDataSchema` for details.
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
 
 
-Schema: `GetSearchWordsData`
+Schema: `DeleteResponse`
 
 
 
@@ -52874,12 +52846,12 @@ Schema: `GetSearchWordsResponse`
 ---
 
 
-#### deleteAutocompleteKeyword
-Delete a Autocomplete Keywords
+#### updateAutocompleteKeyword
+Create & Update Autocomplete Keyword
 
 ```golang
 
-data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
+data, err := Catalog.UpdateAutocompleteKeyword(CompanyID, ApplicationID, ID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -52894,17 +52866,18 @@ data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
 | ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
 
 
+| body |  CreateAutocompleteKeyword | "Request body" 
 
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+Update a mapping by it's id. On successful request, returns the updated Keyword mapping
 
 *Success Response:*
 
 
 
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+The Mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details.
 
 
-Schema: `DeleteResponse`
+Schema: `GetAutocompleteWordsResponse`
 
 
 
@@ -52960,12 +52933,12 @@ Schema: `GetAutocompleteWordsResponse`
 ---
 
 
-#### updateAutocompleteKeyword
-Create & Update Autocomplete Keyword
+#### deleteAutocompleteKeyword
+Delete a Autocomplete Keywords
 
 ```golang
 
-data, err := Catalog.UpdateAutocompleteKeyword(CompanyID, ApplicationID, ID, body);
+data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -52980,18 +52953,17 @@ data, err := Catalog.UpdateAutocompleteKeyword(CompanyID, ApplicationID, ID, bod
 | ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
 
 
-| body |  CreateAutocompleteKeyword | "Request body" 
 
-Update a mapping by it's id. On successful request, returns the updated Keyword mapping
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
 
 *Success Response:*
 
 
 
-The Mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details.
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
 
 
-Schema: `GetAutocompleteWordsResponse`
+Schema: `DeleteResponse`
 
 
 
@@ -53165,46 +53137,6 @@ Schema: `GetProductBundleListingResponse`
 ---
 
 
-#### getProductBundleDetail
-Get a particular Product Bundle details
-
-```golang
-
-data, err := Catalog.GetProductBundleDetail(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
-
-*Success Response:*
-
-
-
-The Collection object. See example below or refer `GetProductBundleResponse` for details
-
-
-Schema: `GetProductBundleResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateProductBundle
 Update a Product Bundle
 
@@ -53234,6 +53166,46 @@ The Collection object. See example below or refer `GetProductBundleCreateRespons
 
 
 Schema: `GetProductBundleCreateResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProductBundleDetail
+Get a particular Product Bundle details
+
+```golang
+
+data, err := Catalog.GetProductBundleDetail(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
+
+*Success Response:*
+
+
+
+The Collection object. See example below or refer `GetProductBundleResponse` for details
+
+
+Schema: `GetProductBundleResponse`
 
 
 
@@ -53332,46 +53304,6 @@ Schema: `ListSizeGuide`
 ---
 
 
-#### getSizeGuide
-Get a single size guide.
-
-```golang
-
-data, err := Catalog.GetSizeGuide(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to size guide. | 
-
-
-| ID | string | Id of the size guide to be viewed. | 
-
-
-
-This API helps to get data associated to a size guide.
-
-*Success Response:*
-
-
-
-Brand object. See example below or refer `SizeGuideResponseSchema` for details
-
-
-Schema: `SizeGuideResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateSizeGuide
 Edit a size guide.
 
@@ -53401,6 +53333,46 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSizeGuide
+Get a single size guide.
+
+```golang
+
+data, err := Catalog.GetSizeGuide(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to size guide. | 
+
+
+| ID | string | Id of the size guide to be viewed. | 
+
+
+
+This API helps to get data associated to a size guide.
+
+*Success Response:*
+
+
+
+Brand object. See example below or refer `SizeGuideResponseSchema` for details
+
+
+Schema: `SizeGuideResponse`
 
 
 
@@ -53751,7 +53723,7 @@ List all the collections
 
 ```golang
 
-data, err := Catalog.GetAllCollections(CompanyID, ApplicationID);
+data, err := Catalog.GetAllCollections(CompanyID, ApplicationID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -53762,6 +53734,17 @@ data, err := Catalog.GetAllCollections(CompanyID, ApplicationID);
 
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Q`, `Tags`, `IsActive`, `PageNo`, `PageSize`
 
 
 A Collection allows you to organize your products into hierarchical groups. For example, a dress might be in the category _Clothing_, the individual product might also be in the collection _Summer_. On successful request, returns all the collections as specified in `CollectionListingSchema`
@@ -53829,49 +53812,6 @@ Schema: `CollectionDetailResponse`
 ---
 
 
-#### deleteCollection
-Delete a Collection
-
-```golang
-
-data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier of a collection. | 
-
-
-
-Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateCollection
 Update a collection
 
@@ -53904,6 +53844,49 @@ The Collection object. See example below or refer `UpdateCollectionSchema` for d
 
 
 Schema: `UpdateCollection`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteCollection
+Delete a Collection
+
+```golang
+
+data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier of a collection. | 
+
+
+
+Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -54907,46 +54890,6 @@ Schema: `CategoryResponse`
 ---
 
 
-#### getCategoryData
-Get product category by uid
-
-```golang
-
-data, err := Catalog.GetCategoryData(CompanyID, UID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| UID | string | Category unique id | 
-
-
-
-This API gets meta associated to product categories.
-
-*Success Response:*
-
-
-
-Get Data for one category. See example below or refer `CategoryResponse` for details
-
-
-Schema: `SingleCategoryResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateCategory
 Update product categories
 
@@ -54976,6 +54919,46 @@ Category Meta. See example below or refer `CategoryUpdateResponse` for details
 
 
 Schema: `CategoryUpdateResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCategoryData
+Get product category by uid
+
+```golang
+
+data, err := Catalog.GetCategoryData(CompanyID, UID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| UID | string | Category unique id | 
+
+
+
+This API gets meta associated to product categories.
+
+*Success Response:*
+
+
+
+Get Data for one category. See example below or refer `CategoryResponse` for details
+
+
+Schema: `SingleCategoryResponse`
 
 
 
@@ -55082,25 +55065,26 @@ Schema: `ProductListingResponse`
 ---
 
 
-#### deleteProduct
-Delete a product.
+#### editProduct
+Edit a product.
 
 ```golang
 
-data, err := Catalog.DeleteProduct(CompanyID, ItemID);
+data, err := Catalog.EditProduct(CompanyID, ItemID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
 
 
 | ItemID | float64 | Id of the product to be updated. | 
 
 
+| body |  ProductCreateUpdate | "Request body" 
 
-This API allows to delete product.
+This API allows to edit product.
 
 *Success Response:*
 
@@ -55167,26 +55151,25 @@ Schema: `Product`
 ---
 
 
-#### editProduct
-Edit a product.
+#### deleteProduct
+Delete a product.
 
 ```golang
 
-data, err := Catalog.EditProduct(CompanyID, ItemID, body);
+data, err := Catalog.DeleteProduct(CompanyID, ItemID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
 
 
 | ItemID | float64 | Id of the product to be updated. | 
 
 
-| body |  ProductCreateUpdate | "Request body" 
 
-This API allows to edit product.
+This API allows to delete product.
 
 *Success Response:*
 
@@ -56220,46 +56203,6 @@ Schema: `HsnCodesListingResponse`
 ---
 
 
-#### getHsnCode
-Fetch Hsn Code.
-
-```golang
-
-data, err := Catalog.GetHsnCode(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ID | string | Unique id | 
-
-
-
-Fetch Hsn Code.
-
-*Success Response:*
-
-
-
-See example below details
-
-
-Schema: `HsnCode`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateHsnCode
 Update Hsn Code.
 
@@ -56286,6 +56229,46 @@ Update Hsn Code.
 
 
 See example below for details
+
+
+Schema: `HsnCode`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getHsnCode
+Fetch Hsn Code.
+
+```golang
+
+data, err := Catalog.GetHsnCode(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ID | string | Unique id | 
+
+
+
+Fetch Hsn Code.
+
+*Success Response:*
+
+
+
+See example below details
 
 
 Schema: `HsnCode`
@@ -56959,44 +56942,6 @@ Schema: `SuccessResponse`
 ---
 
 
-#### createCompanyBrandMapping
-Create a company brand mapping.
-
-```golang
-
-data, err := CompanyProfile.CreateCompanyBrandMapping(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company inside which the brand is to be mapped. | 
-
-
-| body |  CompanyBrandPostRequestSerializer | "Request body" 
-
-This API allows to create a company brand mapping, for a already existing brand in the system.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getBrands
 Get brands associated to a company
 
@@ -57041,23 +56986,23 @@ Schema: `CompanyBrandListSerializer`
 ---
 
 
-#### createLocation
-Create a location asscoiated to a company.
+#### createCompanyBrandMapping
+Create a company brand mapping.
 
 ```golang
 
-data, err := CompanyProfile.CreateLocation(CompanyID, body);
+data, err := CompanyProfile.CreateCompanyBrandMapping(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Id of the company inside which the location is to be created. | 
+| CompanyID | string | Id of the company inside which the brand is to be mapped. | 
 
 
-| body |  LocationSerializer | "Request body" 
+| body |  CompanyBrandPostRequestSerializer | "Request body" 
 
-This API allows to create a location associated to a company.
+This API allows to create a company brand mapping, for a already existing brand in the system.
 
 *Success Response:*
 
@@ -57115,6 +57060,44 @@ Company profile object. See example below or refer `LocationListSerializer` for 
 
 
 Schema: `LocationListSerializer`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createLocation
+Create a location asscoiated to a company.
+
+```golang
+
+data, err := CompanyProfile.CreateLocation(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company inside which the location is to be created. | 
+
+
+| body |  LocationSerializer | "Request body" 
+
+This API allows to create a location associated to a company.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
