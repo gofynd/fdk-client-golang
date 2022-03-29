@@ -205,209 +205,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    //CatalogGetProductPriceBySlugXQuery holds query params
-    type CatalogGetProductPriceBySlugXQuery struct { 
-        StoreID float64  `url:"store_id,omitempty"`  
-    }
-    
-    // GetProductPriceBySlug Get the price of a product size at a PIN Code
-    func (ca *Catalog)  GetProductPriceBySlug(Slug string, Size string, Pincode string, xQuery CatalogGetProductPriceBySlugXQuery) (ProductSizePriceResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getProductPriceBySlugResponse ProductSizePriceResponse
-	    )
-
-        
-
-        
-            
-                
-            
-        
-
-        
-        
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/application/catalog/v1.0/products/%s/sizes/%s/pincode/%s/price/",Slug,Size,Pincode),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ProductSizePriceResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProductPriceBySlugResponse)
-        if err != nil {
-            return ProductSizePriceResponse{}, common.NewFDKError(err.Error())
-        }
-         return getProductPriceBySlugResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    //CatalogGetProductSellersBySlugXQuery holds query params
-    type CatalogGetProductSellersBySlugXQuery struct { 
-        Strategy string  `url:"strategy,omitempty"` 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
-    }
-    
-    // GetProductSellersBySlug Get the sellers of a product size at a PIN Code
-    func (ca *Catalog)  GetProductSellersBySlug(Slug string, Size string, Pincode string, xQuery CatalogGetProductSellersBySlugXQuery) (ProductSizeSellersResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getProductSellersBySlugResponse ProductSizeSellersResponse
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-                
-            
-        
-
-        
-        
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/application/catalog/v1.0/products/%s/sizes/%s/pincode/%s/sellers/",Slug,Size,Pincode),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ProductSizeSellersResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProductSellersBySlugResponse)
-        if err != nil {
-            return ProductSizeSellersResponse{}, common.NewFDKError(err.Error())
-        }
-         return getProductSellersBySlugResponse, nil
-        
-    }
-          
-            
-            
-            
-            
-                
-                    
-                    
-                    
-                    
-                        
-                    
-                    
-                
-                    
-                    
-                    
-                    
-                        
-                    
-                    
-                
-                    
-                    
-                    
-                    
-                        
-                    
-                    
-                
-                    
-                    
-                    
-                        
-                    
-                    
-                
-                    
-                    
-                    
-                    
-                
-                    
-                    
-                    
-                        
-                    
-                    
-                
-            
-            // GetProductSellersBySlugPaginator Get the sellers of a product size at a PIN Code  
-            func (ca *Catalog)  GetProductSellersBySlugPaginator(Slug string  , Size string  , Pincode string  ,  xQuery CatalogGetProductSellersBySlugXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                 
-                 
-                 
-                 
-                 
-                 
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := ca.GetProductSellersBySlug(Slug, Size, Pincode, xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-       
-    
-    
-    
-  
-    
-    
     //CatalogGetProductComparisonBySlugsXQuery holds query params
     type CatalogGetProductComparisonBySlugsXQuery struct { 
         Slug []string  `url:"slug,omitempty"`  
@@ -2278,6 +2075,487 @@ func NewAppClient(config *AppConfig) *Client {
             }
        
     
+    
+    
+  
+    
+    
+    //CatalogGetInStockLocationsXQuery holds query params
+    type CatalogGetInStockLocationsXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        Q string  `url:"q,omitempty"` 
+        City string  `url:"city,omitempty"` 
+        Range float64  `url:"range,omitempty"` 
+        Latitude float64  `url:"latitude,omitempty"` 
+        Longitude float64  `url:"longitude,omitempty"`  
+    }
+    
+    // GetInStockLocations Get store meta information.
+    func (ca *Catalog)  GetInStockLocations(xQuery CatalogGetInStockLocationsXQuery) (ApplicationStoreListing, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getInStockLocationsResponse ApplicationStoreListing
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            "/service/application/catalog/v1.0/in-stock/locations/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationStoreListing{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getInStockLocationsResponse)
+        if err != nil {
+            return ApplicationStoreListing{}, common.NewFDKError(err.Error())
+        }
+         return getInStockLocationsResponse, nil
+        
+    }
+          
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetInStockLocationsPaginator Get store meta information.  
+            func (ca *Catalog)  GetInStockLocationsPaginator( xQuery CatalogGetInStockLocationsXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                 
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := ca.GetInStockLocations(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
+    
+    
+    
+  
+    
+    
+    // GetLocationDetailsById Get store meta information.
+    func (ca *Catalog)  GetLocationDetailsById(LocationID float64) (StoreDetails, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getLocationDetailsByIdResponse StoreDetails
+	    )
+
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/application/catalog/v1.0/locations/undefined/",LocationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return StoreDetails{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getLocationDetailsByIdResponse)
+        if err != nil {
+            return StoreDetails{}, common.NewFDKError(err.Error())
+        }
+         return getLocationDetailsByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //CatalogGetProductBundlesBySlugXQuery holds query params
+    type CatalogGetProductBundlesBySlugXQuery struct { 
+        Slug string  `url:"slug,omitempty"` 
+        ID string  `url:"id,omitempty"`  
+    }
+    
+    // GetProductBundlesBySlug Get product bundles
+    func (ca *Catalog)  GetProductBundlesBySlug(xQuery CatalogGetProductBundlesBySlugXQuery) (ProductBundle, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getProductBundlesBySlugResponse ProductBundle
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            "/service/application/catalog/v1.0/product-grouping/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ProductBundle{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductBundlesBySlugResponse)
+        if err != nil {
+            return ProductBundle{}, common.NewFDKError(err.Error())
+        }
+         return getProductBundlesBySlugResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //CatalogGetProductPriceBySlugXQuery holds query params
+    type CatalogGetProductPriceBySlugXQuery struct { 
+        StoreID float64  `url:"store_id,omitempty"` 
+        Pincode string  `url:"pincode,omitempty"`  
+    }
+    
+    // GetProductPriceBySlug Get the price of a product size at a PIN Code
+    func (ca *Catalog)  GetProductPriceBySlug(Slug string, Size string, xQuery CatalogGetProductPriceBySlugXQuery) (ProductSizePriceResponseV2, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getProductPriceBySlugResponse ProductSizePriceResponseV2
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/application/catalog/v2.0/products/%s/sizes/%s/price/",Slug,Size),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ProductSizePriceResponseV2{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductPriceBySlugResponse)
+        if err != nil {
+            return ProductSizePriceResponseV2{}, common.NewFDKError(err.Error())
+        }
+         return getProductPriceBySlugResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //CatalogGetProductSellersBySlugXQuery holds query params
+    type CatalogGetProductSellersBySlugXQuery struct { 
+        Pincode string  `url:"pincode,omitempty"` 
+        Strategy string  `url:"strategy,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetProductSellersBySlug Get the sellers of a product size at a PIN Code
+    func (ca *Catalog)  GetProductSellersBySlug(Slug string, Size string, xQuery CatalogGetProductSellersBySlugXQuery) (ProductSizeSellersResponseV2, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getProductSellersBySlugResponse ProductSizeSellersResponseV2
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/application/catalog/v2.0/products/%s/sizes/%s/sellers/",Slug,Size),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ProductSizeSellersResponseV2{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductSellersBySlugResponse)
+        if err != nil {
+            return ProductSizeSellersResponseV2{}, common.NewFDKError(err.Error())
+        }
+         return getProductSellersBySlugResponse, nil
+        
+    }
+          
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetProductSellersBySlugPaginator Get the sellers of a product size at a PIN Code  
+            func (ca *Catalog)  GetProductSellersBySlugPaginator(Slug string  , Size string  ,  xQuery CatalogGetProductSellersBySlugXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := ca.GetProductSellersBySlug(Slug, Size, xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
+    
 
     // Cart ...
     type Cart struct {
@@ -3650,8 +3928,6 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
-            
-        
 
         
 
@@ -3784,8 +4060,6 @@ func NewAppClient(config *AppConfig) *Client {
              getCartShareLinkResponse GetShareCartLinkResponse
 	    )
 
-        
-            
         
             
         
@@ -3945,6 +4219,66 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //CommonSearchApplicationXQuery holds query params
+    type CommonSearchApplicationXQuery struct { 
+        Query string  `url:"query,omitempty"`  
+    }
+    
+    // SearchApplication Search Application
+    func (co *Common)  SearchApplication(Authorization string, xQuery CommonSearchApplicationXQuery) (ApplicationResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             searchApplicationResponse ApplicationResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+        
+        //Adding extra headers
+        var xHeaders = make(map[string]string) 
+        
+         
+         xHeaders["authorization"] =  Authorization
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            "/service/common/configuration/v1.0/application/search-application",
+            xHeaders,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &searchApplicationResponse)
+        if err != nil {
+            return ApplicationResponse{}, common.NewFDKError(err.Error())
+        }
+         return searchApplicationResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     //CommonGetLocationsXQuery holds query params
     type CommonGetLocationsXQuery struct { 
         LocationType string  `url:"location_type,omitempty"` 
@@ -4072,6 +4406,13 @@ func NewAppClient(config *AppConfig) *Client {
             
         
             
+                //enum validation inside request body
+                err = body.Type.IsValid()
+                if err != nil {
+                
+                    return TicketHistory{}, common.NewFDKError(err.Error())
+                }
+            
         
 
         
@@ -4137,6 +4478,13 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+                //enum validation inside request body
+                err = body.Priority.IsValid()
+                if err != nil {
+                
+                    return Ticket{}, common.NewFDKError(err.Error())
+                }
             
         
             
@@ -4887,6 +5235,79 @@ func NewAppClient(config *AppConfig) *Client {
             return AuthSuccess{}, common.NewFDKError(err.Error())
         }
          return loginWithGoogleIOSResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //UserLoginWithAppleIOSXQuery holds query params
+    type UserLoginWithAppleIOSXQuery struct { 
+        Platform string  `url:"platform,omitempty"`  
+    }
+    
+    // LoginWithAppleIOS Login or Register using Apple on iOS
+    func (us *User)  LoginWithAppleIOS(xQuery UserLoginWithAppleIOSXQuery, body  OAuthRequestAppleSchema) (AuthSuccess, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             loginWithAppleIOSResponse AuthSuccess
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return AuthSuccess{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return AuthSuccess{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "post",
+            "/service/application/user/authentication/v1.0/login/apple-ios",
+            nil,
+            xQuery,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return AuthSuccess{}, err
+	    }
+        
+        err = json.Unmarshal(response, &loginWithAppleIOSResponse)
+        if err != nil {
+            return AuthSuccess{}, common.NewFDKError(err.Error())
+        }
+         return loginWithAppleIOSResponse, nil
         
     }
           
@@ -6935,6 +7356,51 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // GetDataLoaders Get the data loaders associated with an application
+    func (co *Content)  GetDataLoaders() (DataLoadersSchema, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getDataLoadersResponse DataLoadersSchema
+	    )
+
+        
+
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            "/service/application/content/v1.0/data-loader",
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DataLoadersSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getDataLoadersResponse)
+        if err != nil {
+            return DataLoadersSchema{}, common.NewFDKError(err.Error())
+        }
+         return getDataLoadersResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // GetFaqs Get a list of FAQs
     func (co *Content)  GetFaqs() (FaqResponseSchema, error){
         var (
@@ -7355,161 +7821,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    //ContentGetPageXQuery holds query params
-    type ContentGetPageXQuery struct { 
-        RootID string  `url:"root_id,omitempty"`  
-    }
-    
-    // GetPage Get a page
-    func (co *Content)  GetPage(Slug string, xQuery ContentGetPageXQuery) (PageSchema, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getPageResponse PageSchema
-	    )
-
-        
-
-        
-            
-                
-            
-        
-
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            co.config,
-            "get",
-            fmt.Sprintf("/service/application/content/v1.0/pages/%s",Slug),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return PageSchema{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getPageResponse)
-        if err != nil {
-            return PageSchema{}, common.NewFDKError(err.Error())
-        }
-         return getPageResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    //ContentGetPagesXQuery holds query params
-    type ContentGetPagesXQuery struct { 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
-    }
-    
-    // GetPages Get all pages
-    func (co *Content)  GetPages(xQuery ContentGetPagesXQuery) (PageGetResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getPagesResponse PageGetResponse
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-        
-
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            co.config,
-            "get",
-            "/service/application/content/v1.0/pages/",
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return PageGetResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getPagesResponse)
-        if err != nil {
-            return PageGetResponse{}, common.NewFDKError(err.Error())
-        }
-         return getPagesResponse, nil
-        
-    }
-          
-            
-            
-            
-            
-                
-                    
-                    
-                    
-                    
-                
-                    
-                    
-                    
-                        
-                    
-                    
-                
-            
-            // GetPagesPaginator Get all pages  
-            func (co *Content)  GetPagesPaginator( xQuery ContentGetPagesXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                 
-                 
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetPages(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-       
-    
-    
-    
-  
-    
-    
     // GetSEOConfiguration Get the SEO of an application
     func (co *Content)  GetSEOConfiguration() (SeoComponent, error){
         var (
@@ -7785,6 +8096,161 @@ func NewAppClient(config *AppConfig) *Client {
         
     }
           
+    
+    
+    
+  
+    
+    
+    //ContentGetPageXQuery holds query params
+    type ContentGetPageXQuery struct { 
+        RootID string  `url:"root_id,omitempty"`  
+    }
+    
+    // GetPage Get a page
+    func (co *Content)  GetPage(Slug string, xQuery ContentGetPageXQuery) (PageSchema, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getPageResponse PageSchema
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/application/content/v2.0/pages/%s",Slug),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PageSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPageResponse)
+        if err != nil {
+            return PageSchema{}, common.NewFDKError(err.Error())
+        }
+         return getPageResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //ContentGetPagesXQuery holds query params
+    type ContentGetPagesXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetPages Get all pages
+    func (co *Content)  GetPages(xQuery ContentGetPagesXQuery) (PageGetResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getPagesResponse PageGetResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            "/service/application/content/v2.0/pages/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PageGetResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPagesResponse)
+        if err != nil {
+            return PageGetResponse{}, common.NewFDKError(err.Error())
+        }
+         return getPagesResponse, nil
+        
+    }
+          
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetPagesPaginator Get all pages  
+            func (co *Content)  GetPagesPaginator( xQuery ContentGetPagesXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                 
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := co.GetPages(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
     
 
     // Communication ...
@@ -8512,6 +8978,68 @@ func NewAppClient(config *AppConfig) *Client {
     }
           
     
+    
+    
+  
+    
+    
+    // SignUrls Explain here
+    func (fi *FileStorage)  SignUrls(body  SignUrlRequest) (SignUrlResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             signUrlsResponse SignUrlResponse
+	    )
+
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return SignUrlResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return SignUrlResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.config,
+            "post",
+            "/service/application/assets/v1.0/sign-urls/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return SignUrlResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &signUrlsResponse)
+        if err != nil {
+            return SignUrlResponse{}, common.NewFDKError(err.Error())
+        }
+         return signUrlsResponse, nil
+        
+    }
+          
+    
 
     // Configuration ...
     type Configuration struct {
@@ -8820,6 +9348,53 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // GetStoreDetailById Get ordering store details
+    func (co *Configuration)  GetStoreDetailById(StoreID float64) (OrderingStore, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getStoreDetailByIdResponse OrderingStore
+	    )
+
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/application/configuration/v1.0/ordering-store/stores/undefined",StoreID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return OrderingStore{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getStoreDetailByIdResponse)
+        if err != nil {
+            return OrderingStore{}, common.NewFDKError(err.Error())
+        }
+         return getStoreDetailByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // GetFeatures Get features of application
     func (co *Configuration)  GetFeatures() (AppFeatureResponse, error){
         var (
@@ -8910,7 +9485,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetCurrencies Get currencies enabled in the application
+    // GetCurrencies Get all currencies list
     func (co *Configuration)  GetCurrencies() (CurrenciesResponse, error){
         var (
             rawRequest  *RawRequest
@@ -8993,6 +9568,51 @@ func NewAppClient(config *AppConfig) *Client {
             return Currency{}, common.NewFDKError(err.Error())
         }
          return getCurrencyByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetAppCurrencies Get currencies enabled in the application
+    func (co *Configuration)  GetAppCurrencies() (AppCurrencyResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getAppCurrenciesResponse AppCurrencyResponse
+	    )
+
+        
+
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            "/service/application/configuration/v1.0/currency",
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return AppCurrencyResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAppCurrenciesResponse)
+        if err != nil {
+            return AppCurrencyResponse{}, common.NewFDKError(err.Error())
+        }
+         return getAppCurrenciesResponse, nil
         
     }
           
@@ -9661,6 +10281,12 @@ func NewAppClient(config *AppConfig) *Client {
              initialisePaymentResponse PaymentInitializationResponse
 	    )
 
+        
+            
+        
+            
+        
+            
         
             
         
@@ -10405,6 +11031,68 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // AddRefundBankAccountUsingOTP Save bank details for cancelled/returned order
+    func (pa *Payment)  AddRefundBankAccountUsingOTP(body  AddBeneficiaryDetailsOTPRequest) (RefundAccountResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             addRefundBankAccountUsingOTPResponse RefundAccountResponse
+	    )
+
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return RefundAccountResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return RefundAccountResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            "/service/application/payment/v1.0/refund/account/otp",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return RefundAccountResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &addRefundBankAccountUsingOTPResponse)
+        if err != nil {
+            return RefundAccountResponse{}, common.NewFDKError(err.Error())
+        }
+         return addRefundBankAccountUsingOTPResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // VerifyOtpAndAddBeneficiaryForWallet Send OTP on adding a wallet beneficiary
     func (pa *Payment)  VerifyOtpAndAddBeneficiaryForWallet(body  WalletOtpRequest) (WalletOtpResponse, error){
         var (
@@ -10895,6 +11583,170 @@ func NewAppClient(config *AppConfig) *Client {
             return PosOrderById{}, common.NewFDKError(err.Error())
         }
          return getPosOrderByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetCustomerDetailsByShipmentId Get Customer Details by Shipment Id
+    func (or *Order)  GetCustomerDetailsByShipmentId(OrderID string, ShipmentID string) (CustomerDetailsByShipmentId, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getCustomerDetailsByShipmentIdResponse CustomerDetailsByShipmentId
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/application/order/v1.0/orders/%s/shipments/%s/customer-details",OrderID,ShipmentID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CustomerDetailsByShipmentId{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getCustomerDetailsByShipmentIdResponse)
+        if err != nil {
+            return CustomerDetailsByShipmentId{}, common.NewFDKError(err.Error())
+        }
+         return getCustomerDetailsByShipmentIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // SendOtpToShipmentCustomer Send and Resend Otp code to Order-Shipment customer
+    func (or *Order)  SendOtpToShipmentCustomer(OrderID string, ShipmentID string) (sendOTPApplicationResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             sendOtpToShipmentCustomerResponse sendOTPApplicationResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "post",
+            fmt.Sprintf("/service/application/order/v1.0/orders/%s/shipments/%s/otp/send/",OrderID,ShipmentID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return sendOTPApplicationResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &sendOtpToShipmentCustomerResponse)
+        if err != nil {
+            return sendOTPApplicationResponse{}, common.NewFDKError(err.Error())
+        }
+         return sendOtpToShipmentCustomerResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // VerifyOtpShipmentCustomer Verify Otp code
+    func (or *Order)  VerifyOtpShipmentCustomer(OrderID string, ShipmentID string, body  ReqBodyVerifyOTPShipment) (ResponseVerifyOTPShipment, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             verifyOtpShipmentCustomerResponse ResponseVerifyOTPShipment
+	    )
+
+        
+            
+        
+            
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return ResponseVerifyOTPShipment{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return ResponseVerifyOTPShipment{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "post",
+            fmt.Sprintf("/service/application/order/v1.0/orders/%s/shipments/%s/otp/verify",OrderID,ShipmentID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ResponseVerifyOTPShipment{}, err
+	    }
+        
+        err = json.Unmarshal(response, &verifyOtpShipmentCustomerResponse)
+        if err != nil {
+            return ResponseVerifyOTPShipment{}, common.NewFDKError(err.Error())
+        }
+         return verifyOtpShipmentCustomerResponse, nil
         
     }
           
@@ -15059,8 +15911,6 @@ func NewAppClient(config *AppConfig) *Client {
              checkoutCartResponse CartCheckoutResponse
 	    )
 
-        
-            
         
             
         
