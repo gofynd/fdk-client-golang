@@ -214,6 +214,7 @@
     * [getLanguages](#getlanguages)
     * [getOrderingStoreCookie](#getorderingstorecookie)
     * [removeOrderingStoreCookie](#removeorderingstorecookie)
+    * [getAppStaffList](#getappstafflist)
     * [getAppStaffs](#getappstaffs)
     
 
@@ -16120,6 +16121,52 @@ Success
 
 
 Schema: `SuccessMessageResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAppStaffList
+Get a list of staff.
+
+```golang
+
+ data, err :=  Configuration.GetAppStaffList(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `OrderIncent`, `OrderingStore`, `User`
+
+
+
+Use this API to get a list of staff including the names, employee code, incentive status, assigned ordering stores, and title of each staff added to the application.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `AppStaffListResponse` for more details.
+
+
+Schema: `AppStaffListResponse`
 
 
 
