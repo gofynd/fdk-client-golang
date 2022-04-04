@@ -92,6 +92,7 @@
 
 * [Common](#Common)
   * Methods
+    * [searchApplication](#searchapplication)
     * [getLocations](#getlocations)
     
 
@@ -215,6 +216,7 @@
     * [getLanguages](#getlanguages)
     * [getOrderingStoreCookie](#getorderingstorecookie)
     * [removeOrderingStoreCookie](#removeorderingstorecookie)
+    * [getAppStaffList](#getappstafflist)
     * [getAppStaffs](#getappstaffs)
     
 
@@ -5106,6 +5108,47 @@ Schema: `LadderPriceOffers`
 
 
 ## Common
+
+
+#### searchApplication
+Search Application
+
+```golang
+
+ data, err :=  Common.SearchApplication(Authorization, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| Authorization | string |  | 
+
+
+
+| xQuery | struct | Includes properties such as `Query`
+
+
+
+Provide application name or domain url
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `ApplicationResponse`
+
+
+
+
+
+
+
+
+
+---
 
 
 #### getLocations
@@ -16176,6 +16219,52 @@ Schema: `SuccessMessageResponse`
 ---
 
 
+#### getAppStaffList
+Get a list of staff.
+
+```golang
+
+ data, err :=  Configuration.GetAppStaffList(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `OrderIncent`, `OrderingStore`, `User`
+
+
+
+Use this API to get a list of staff including the names, employee code, incentive status, assigned ordering stores, and title of each staff added to the application.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `AppStaffListResponse` for more details.
+
+
+Schema: `AppStaffListResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getAppStaffs
 Get a list of staff.
 
@@ -16714,10 +16803,42 @@ Get Epaylater Enabled if user is tentatively approved by epaylater
 
 
 
-Success. Return Epaylater Offer detail. Check the example shown below or refer `EpaylaterBannerResponseSchema` for more details.
+Success. Return Epaylater Offer detail. Check the example shown below or refer `EpaylaterBannerResponseSchema` for more details. if `display=True`, then show banner otherwise do not show.
 
 
 Schema: `EpaylaterBannerResponse`
+
+
+*Examples:*
+
+
+User is registered successfully
+```json
+{
+  "value": {
+    "success": true,
+    "data": {
+      "display": false,
+      "message": "User is Active",
+      "status": "ACTIVE"
+    }
+  }
+}
+```
+
+User is not registered or KYC not done or approval pending
+```json
+{
+  "value": {
+    "success": true,
+    "data": {
+      "display": true,
+      "message": "User is not registered",
+      "status": "NOT REGISTERED"
+    }
+  }
+}
+```
 
 
 

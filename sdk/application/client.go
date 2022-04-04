@@ -4351,6 +4351,66 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //CommonSearchApplicationXQuery holds query params
+    type CommonSearchApplicationXQuery struct { 
+        Query string  `url:"query,omitempty"`  
+    }
+    
+    // SearchApplication Search Application
+    func (co *Common)  SearchApplication(Authorization string, xQuery CommonSearchApplicationXQuery) (ApplicationResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             searchApplicationResponse ApplicationResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+        
+        //Adding extra headers
+        var xHeaders = make(map[string]string) 
+        
+         
+         xHeaders["authorization"] =  Authorization
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            "/service/common/configuration/v1.0/application/search-application",
+            xHeaders,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &searchApplicationResponse)
+        if err != nil {
+            return ApplicationResponse{}, common.NewFDKError(err.Error())
+        }
+         return searchApplicationResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     //CommonGetLocationsXQuery holds query params
     type CommonGetLocationsXQuery struct { 
         LocationType string  `url:"location_type,omitempty"` 
@@ -9838,6 +9898,147 @@ func NewAppClient(config *AppConfig) *Client {
         
     }
           
+    
+    
+    
+  
+    
+    
+    //ConfigurationGetAppStaffListXQuery holds query params
+    type ConfigurationGetAppStaffListXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        OrderIncent bool  `url:"order_incent,omitempty"` 
+        OrderingStore float64  `url:"ordering_store,omitempty"` 
+        User string  `url:"user,omitempty"`  
+    }
+    
+    // GetAppStaffList Get a list of staff.
+    func (co *Configuration)  GetAppStaffList(xQuery ConfigurationGetAppStaffListXQuery) (AppStaffListResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getAppStaffListResponse AppStaffListResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            "/service/application/configuration/v1.0/staff/list",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return AppStaffListResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAppStaffListResponse)
+        if err != nil {
+            return AppStaffListResponse{}, common.NewFDKError(err.Error())
+        }
+         return getAppStaffListResponse, nil
+        
+    }
+          
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetAppStaffListPaginator Get a list of staff.  
+            func (co *Configuration)  GetAppStaffListPaginator( xQuery ConfigurationGetAppStaffListXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                 
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := co.GetAppStaffList(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
     
     
     
