@@ -10156,68 +10156,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    //PlatformGetJobConfigByIntegrationTypeXQuery holds query params
-    type PlatformGetJobConfigByIntegrationTypeXQuery struct { 
-        IntegrationType string  `url:"integration_type,omitempty"` 
-        Disable bool  `url:"disable,omitempty"`  
-    }
-    
-
-
-    // GetJobConfigByIntegrationType Get Job Configs By Integration Type
-     func (in *PlatformInventory)  GetJobConfigByIntegrationType(xQuery PlatformGetJobConfigByIntegrationTypeXQuery) (ResponseEnvelopeListJobConfigDTO, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getJobConfigByIntegrationTypeResponse ResponseEnvelopeListJobConfigDTO
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            in.Config,
-            "get",
-            fmt.Sprintf("/service/platform/inventory/v1.0/company/%s/job/config",in.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return ResponseEnvelopeListJobConfigDTO{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getJobConfigByIntegrationTypeResponse)
-        if err != nil {
-             return ResponseEnvelopeListJobConfigDTO{}, common.NewFDKError(err.Error())
-        }
-        return getJobConfigByIntegrationTypeResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
     //PlatformGetJobCodesMetricsXQuery holds query params
     type PlatformGetJobCodesMetricsXQuery struct { 
         DailyJob bool  `url:"daily_job,omitempty"` 

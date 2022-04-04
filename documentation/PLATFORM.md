@@ -440,7 +440,6 @@
     * [getJobByCode](#getjobbycode)
     * [getJobCodeMetrics](#getjobcodemetrics)
     * [getJobCodesByCompanyAndIntegration](#getjobcodesbycompanyandintegration)
-    * [getJobConfigByIntegrationType](#getjobconfigbyintegrationtype)
     * [getJobCodesMetrics](#getjobcodesmetrics)
     * [saveJobCodesMetrics](#savejobcodesmetrics)
     
@@ -58328,48 +58327,6 @@ Successful operation
 
 
 Schema: `ResponseEnvelopeListJobConfigListDTO`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getJobConfigByIntegrationType
-Get Job Configs By Integration Type
-
-```golang
-
-data, err := Inventory.GetJobConfigByIntegrationType(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `IntegrationType`, `Disable`
-
-
-REST Endpoint that returns all job Configs by Integration Type
-
-*Success Response:*
-
-
-
-Successful operation
-
-
-Schema: `ResponseEnvelopeListJobConfigDTO`
 
 
 
