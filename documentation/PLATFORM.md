@@ -440,8 +440,6 @@
     * [getJobByCode](#getjobbycode)
     * [getJobCodeMetrics](#getjobcodemetrics)
     * [getJobCodesByCompanyAndIntegration](#getjobcodesbycompanyandintegration)
-    * [getJobCodesMetrics](#getjobcodesmetrics)
-    * [saveJobCodesMetrics](#savejobcodesmetrics)
     
 
 * [Configuration](#Configuration)
@@ -58327,86 +58325,6 @@ Successful operation
 
 
 Schema: `ResponseEnvelopeListJobConfigListDTO`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getJobCodesMetrics
-Find all the JobCodes from Metrics Collection based on the field Values
-
-```golang
-
-data, err := Inventory.GetJobCodesMetrics(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `DailyJob`, `JobCode`
-
-
-Endpoint to return all JobCodes present in Metrics Collection
-
-*Success Response:*
-
-
-
-Successful operation
-
-
-Schema: `ResponseEnvelopeObject`
-
-
-
-
-
-
-
-
-
----
-
-
-#### saveJobCodesMetrics
-Save JobCode Metrics
-
-```golang
-
-data, err := Inventory.SaveJobCodesMetrics(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| body |  EmailJobMetrics | "Request body" 
-
-Endpoint to save JobCode Metrics
-
-*Success Response:*
-
-
-
-JobCode Metrics entry Created Successfully
-
-
-Schema: `ResponseEnvelopeEmailJobMetrics`
 
 
 
