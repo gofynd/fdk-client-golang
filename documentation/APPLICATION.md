@@ -264,6 +264,7 @@
     * [getCustomerDetailsByShipmentId](#getcustomerdetailsbyshipmentid)
     * [sendOtpToShipmentCustomer](#sendotptoshipmentcustomer)
     * [verifyOtpShipmentCustomer](#verifyotpshipmentcustomer)
+    * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
     
 
 * [Rewards](#Rewards)
@@ -17828,6 +17829,44 @@ Success, the code is valid and returns a session token
 
 
 Schema: `ResponseVerifyOTPShipment`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getInvoiceByShipmentId
+Get Invoice URL
+
+```golang
+
+ data, err :=  Order.GetInvoiceByShipmentId(ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+
+
+Use this API to get a generated Invoice URL for viewing or download.
+
+*Success Response:*
+
+
+
+Success, the code is valid and returns a SignedUrl
+
+
+Schema: `ResponseGetInvoiceShipment`
 
 
 
