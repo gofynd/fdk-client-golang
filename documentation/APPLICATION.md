@@ -157,6 +157,7 @@
     * [getAnnouncements](#getannouncements)
     * [getBlog](#getblog)
     * [getBlogs](#getblogs)
+    * [getDataLoaders](#getdataloaders)
     * [getFaqs](#getfaqs)
     * [getFaqCategories](#getfaqcategories)
     * [getFaqBySlug](#getfaqbyslug)
@@ -13870,6 +13871,41 @@ default
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDataLoaders
+Get the data loaders associated with an application
+
+```golang
+
+ data, err :=  Content.GetDataLoaders();
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+Use this API to get all selected data loaders of the application in the form of tags.
+
+*Success Response:*
+
+
+
+Success. Returns a JSON object containing all the data loaders injected in the application. Check the example shown below or refer `DataLoadersSchema` for more details.
+
+
+Schema: `DataLoadersSchema`
 
 
 

@@ -4213,7 +4213,7 @@ func NewAppClient(config *AppConfig) *Client {
     type CartGetPromotionOffersXQuery struct { 
         Slug string  `url:"slug,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
-        PromotionGroup float64  `url:"promotion_group,omitempty"`  
+        PromotionGroup string  `url:"promotion_group,omitempty"`  
     }
     
     // GetPromotionOffers Fetch available promotions
@@ -7473,6 +7473,51 @@ func NewAppClient(config *AppConfig) *Client {
                 return paginator
             }
        
+    
+    
+    
+  
+    
+    
+    // GetDataLoaders Get the data loaders associated with an application
+    func (co *Content)  GetDataLoaders() (DataLoadersSchema, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getDataLoadersResponse DataLoadersSchema
+	    )
+
+        
+
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            "/service/application/content/v1.0/data-loader",
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DataLoadersSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getDataLoadersResponse)
+        if err != nil {
+            return DataLoadersSchema{}, common.NewFDKError(err.Error())
+        }
+         return getDataLoadersResponse, nil
+        
+    }
+          
     
     
     
