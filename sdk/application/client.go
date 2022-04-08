@@ -1710,55 +1710,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UnfollowById Unfollow an entity (product/brand/collection)
-    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             unfollowByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &unfollowByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return unfollowByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // FollowById Follow an entity (product/brand/collection)
     func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1799,6 +1750,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return followByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UnfollowById Unfollow an entity (product/brand/collection)
+    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             unfollowByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &unfollowByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return unfollowByIdResponse, nil
         
     }
           
@@ -12901,7 +12901,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fe.config,
             "post",
-            "/service/application/feedback/v1.0/abuse",
+            "/service/application/feedback/v1.0/abuse/",
             nil,
             nil,
             reqBody)
@@ -12973,7 +12973,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fe.config,
             "put",
-            "/service/application/feedback/v1.0/abuse",
+            "/service/application/feedback/v1.0/abuse/",
             nil,
             nil,
             reqBody)
@@ -13165,7 +13165,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fe.config,
             "get",
-            "/service/application/feedback/v1.0/attributes",
+            "/service/application/feedback/v1.0/attributes/",
             nil,
             xQuery,
             nil)
@@ -13271,7 +13271,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fe.config,
             "post",
-            "/service/application/feedback/v1.0/attributes",
+            "/service/application/feedback/v1.0/attributes/",
             nil,
             nil,
             reqBody)
@@ -13448,7 +13448,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fe.config,
             "post",
-            "/service/application/feedback/v1.0/comment",
+            "/service/application/feedback/v1.0/comment/",
             nil,
             nil,
             reqBody)
@@ -13514,7 +13514,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fe.config,
             "put",
-            "/service/application/feedback/v1.0/comment",
+            "/service/application/feedback/v1.0/comment/",
             nil,
             nil,
             reqBody)
@@ -13739,8 +13739,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //FeedbackDeleteMediaXQuery holds query params
+    type FeedbackDeleteMediaXQuery struct { 
+        Ids []string  `url:"ids,omitempty"`  
+    }
+    
     // DeleteMedia Delete Media
-    func (fe *Feedback)  DeleteMedia() (UpdateResponse, error){
+    func (fe *Feedback)  DeleteMedia(xQuery FeedbackDeleteMediaXQuery) (UpdateResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -13750,6 +13755,10 @@ func NewAppClient(config *AppConfig) *Client {
 
         
 
+        
+            
+                
+            
         
 
         
@@ -13761,9 +13770,9 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fe.config,
             "delete",
-            "/service/application/feedback/v1.0/media/",
+            fmt.Sprintf("/service/application/feedback/v1.0/media/",),
             nil,
-            nil,
+            xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
