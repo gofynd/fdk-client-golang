@@ -5259,12 +5259,12 @@ package platform
     type PaymentGatewayConfigResponse struct {
 
         
+            Success bool  `json:"success"`
+            ExcludedFields []string  `json:"excluded_fields"`
             AppID string  `json:"app_id"`
             DisplayFields []string  `json:"display_fields"`
             Created bool  `json:"created"`
-            Success bool  `json:"success"`
             Aggregators []map[string]interface{}  `json:"aggregators"`
-            ExcludedFields []string  `json:"excluded_fields"`
          
     }
     
@@ -5273,8 +5273,8 @@ package platform
 
         
             Success bool  `json:"success"`
-            Description string  `json:"description"`
             Code string  `json:"code"`
+            Description string  `json:"description"`
          
     }
     
@@ -5282,11 +5282,11 @@ package platform
     type PaymentGatewayConfig struct {
 
         
-            Key string  `json:"key"`
-            ConfigType string  `json:"config_type"`
             Secret string  `json:"secret"`
-            MerchantSalt string  `json:"merchant_salt"`
+            Key string  `json:"key"`
             IsActive bool  `json:"is_active"`
+            MerchantSalt string  `json:"merchant_salt"`
+            ConfigType string  `json:"config_type"`
          
     }
     
@@ -5313,8 +5313,8 @@ package platform
     type ErrorCodeAndDescription struct {
 
         
-            Description string  `json:"description"`
             Code string  `json:"code"`
+            Description string  `json:"description"`
          
     }
     
@@ -5327,12 +5327,21 @@ package platform
          
     }
     
+    // IntentAppErrorList used by Payment
+    type IntentAppErrorList struct {
+
+        
+            Code string  `json:"code"`
+            PackageName string  `json:"package_name"`
+         
+    }
+    
     // PaymentModeLogo used by Payment
     type PaymentModeLogo struct {
 
         
-            Large string  `json:"large"`
             Small string  `json:"small"`
+            Large string  `json:"large"`
          
     }
     
@@ -5340,19 +5349,10 @@ package platform
     type IntentApp struct {
 
         
-            DisplayName string  `json:"display_name"`
-            PackageName string  `json:"package_name"`
             Code string  `json:"code"`
             Logos PaymentModeLogo  `json:"logos"`
-         
-    }
-    
-    // IntentAppErrorList used by Payment
-    type IntentAppErrorList struct {
-
-        
+            DisplayName string  `json:"display_name"`
             PackageName string  `json:"package_name"`
-            Code string  `json:"code"`
          
     }
     
@@ -5360,35 +5360,35 @@ package platform
     type PaymentModeList struct {
 
         
-            CardIsin string  `json:"card_isin"`
-            RetryCount float64  `json:"retry_count"`
-            ExpYear float64  `json:"exp_year"`
-            CardBrand string  `json:"card_brand"`
-            FyndVpa string  `json:"fynd_vpa"`
-            Nickname string  `json:"nickname"`
-            CardIssuer string  `json:"card_issuer"`
-            CardType string  `json:"card_type"`
-            Timeout float64  `json:"timeout"`
-            AggregatorName string  `json:"aggregator_name"`
-            CardReference string  `json:"card_reference"`
-            CardID string  `json:"card_id"`
-            DisplayPriority float64  `json:"display_priority"`
-            LogoURL PaymentModeLogo  `json:"logo_url"`
-            CardToken string  `json:"card_token"`
-            DisplayName string  `json:"display_name"`
-            MerchantCode string  `json:"merchant_code"`
-            Expired bool  `json:"expired"`
-            IntentApp []IntentApp  `json:"intent_app"`
-            CardFingerprint string  `json:"card_fingerprint"`
-            CardName string  `json:"card_name"`
-            IntentAppErrorDictList []IntentAppErrorList  `json:"intent_app_error_dict_list"`
-            CardBrandImage string  `json:"card_brand_image"`
-            CardNumber string  `json:"card_number"`
-            ExpMonth float64  `json:"exp_month"`
-            Code string  `json:"code"`
-            Name string  `json:"name"`
             IntentFlow bool  `json:"intent_flow"`
+            AggregatorName string  `json:"aggregator_name"`
+            CardIsin string  `json:"card_isin"`
+            IntentAppErrorDictList []IntentAppErrorList  `json:"intent_app_error_dict_list"`
+            FyndVpa string  `json:"fynd_vpa"`
+            Name string  `json:"name"`
+            Nickname string  `json:"nickname"`
+            IntentApp []IntentApp  `json:"intent_app"`
+            CardNumber string  `json:"card_number"`
+            MerchantCode string  `json:"merchant_code"`
+            CardFingerprint string  `json:"card_fingerprint"`
+            CardBrandImage string  `json:"card_brand_image"`
+            DisplayPriority float64  `json:"display_priority"`
+            CardIssuer string  `json:"card_issuer"`
+            Expired bool  `json:"expired"`
+            CardToken string  `json:"card_token"`
+            CardName string  `json:"card_name"`
+            RetryCount float64  `json:"retry_count"`
+            CardReference string  `json:"card_reference"`
+            ExpYear float64  `json:"exp_year"`
+            Code string  `json:"code"`
             IntentAppErrorList []string  `json:"intent_app_error_list"`
+            Timeout float64  `json:"timeout"`
+            DisplayName string  `json:"display_name"`
+            CardID string  `json:"card_id"`
+            CardType string  `json:"card_type"`
+            CardBrand string  `json:"card_brand"`
+            LogoURL PaymentModeLogo  `json:"logo_url"`
+            ExpMonth float64  `json:"exp_month"`
          
     }
     
@@ -5396,15 +5396,15 @@ package platform
     type RootPaymentMode struct {
 
         
-            LogoURL PaymentModeLogo  `json:"logo_url"`
-            Name string  `json:"name"`
-            DisplayName string  `json:"display_name"`
             AggregatorName string  `json:"aggregator_name"`
             List []PaymentModeList  `json:"list"`
+            LogoURL PaymentModeLogo  `json:"logo_url"`
             AddCardEnabled bool  `json:"add_card_enabled"`
             Logo string  `json:"logo"`
             DisplayPriority float64  `json:"display_priority"`
             AnonymousEnable bool  `json:"anonymous_enable"`
+            Name string  `json:"name"`
+            DisplayName string  `json:"display_name"`
          
     }
     
@@ -5429,13 +5429,13 @@ package platform
     type PayoutsResponse struct {
 
         
-            MoreAttributes map[string]interface{}  `json:"more_attributes"`
+            Customers map[string]interface{}  `json:"customers"`
             PayoutsAggregators []map[string]interface{}  `json:"payouts_aggregators"`
-            TransferType string  `json:"transfer_type"`
-            IsDefault bool  `json:"is_default"`
             UniqueTransferNo map[string]interface{}  `json:"unique_transfer_no"`
             IsActive bool  `json:"is_active"`
-            Customers map[string]interface{}  `json:"customers"`
+            TransferType string  `json:"transfer_type"`
+            MoreAttributes map[string]interface{}  `json:"more_attributes"`
+            IsDefault bool  `json:"is_default"`
          
     }
     
@@ -5443,16 +5443,16 @@ package platform
     type PayoutBankDetails struct {
 
         
-            Pincode float64  `json:"pincode"`
-            AccountType string  `json:"account_type"`
-            AccountNo string  `json:"account_no"`
-            AccountHolder string  `json:"account_holder"`
-            State string  `json:"state"`
-            Country string  `json:"country"`
-            City string  `json:"city"`
-            BranchName string  `json:"branch_name"`
             IfscCode string  `json:"ifsc_code"`
+            City string  `json:"city"`
+            AccountNo string  `json:"account_no"`
+            BranchName string  `json:"branch_name"`
+            Country string  `json:"country"`
+            State string  `json:"state"`
             BankName string  `json:"bank_name"`
+            Pincode float64  `json:"pincode"`
+            AccountHolder string  `json:"account_holder"`
+            AccountType string  `json:"account_type"`
          
     }
     
@@ -5461,10 +5461,10 @@ package platform
 
         
             Aggregator string  `json:"aggregator"`
-            TransferType string  `json:"transfer_type"`
-            IsActive bool  `json:"is_active"`
-            Users map[string]interface{}  `json:"users"`
             BankDetails PayoutBankDetails  `json:"bank_details"`
+            Users map[string]interface{}  `json:"users"`
+            IsActive bool  `json:"is_active"`
+            TransferType string  `json:"transfer_type"`
             UniqueExternalID string  `json:"unique_external_id"`
          
     }
@@ -5473,16 +5473,16 @@ package platform
     type PayoutResponse struct {
 
         
-            Users map[string]interface{}  `json:"users"`
-            Aggregator string  `json:"aggregator"`
-            TransferType string  `json:"transfer_type"`
-            UniqueTransferNo string  `json:"unique_transfer_no"`
-            Payouts map[string]interface{}  `json:"payouts"`
-            IsActive bool  `json:"is_active"`
-            PaymentStatus string  `json:"payment_status"`
-            Created bool  `json:"created"`
             Success bool  `json:"success"`
+            Payouts map[string]interface{}  `json:"payouts"`
+            Aggregator string  `json:"aggregator"`
             BankDetails map[string]interface{}  `json:"bank_details"`
+            Created bool  `json:"created"`
+            PaymentStatus string  `json:"payment_status"`
+            UniqueTransferNo string  `json:"unique_transfer_no"`
+            Users map[string]interface{}  `json:"users"`
+            IsActive bool  `json:"is_active"`
+            TransferType string  `json:"transfer_type"`
          
     }
     
@@ -5500,9 +5500,9 @@ package platform
     type UpdatePayoutRequest struct {
 
         
+            IsDefault bool  `json:"is_default"`
             UniqueExternalID string  `json:"unique_external_id"`
             IsActive bool  `json:"is_active"`
-            IsDefault bool  `json:"is_default"`
          
     }
     
@@ -5562,17 +5562,17 @@ package platform
     type BeneficiaryModeDetails struct {
 
         
-            Email string  `json:"email"`
-            Address string  `json:"address"`
+            IfscCode string  `json:"ifsc_code"`
+            Vpa string  `json:"vpa"`
             AccountNo string  `json:"account_no"`
-            Wallet string  `json:"wallet"`
-            AccountHolder string  `json:"account_holder"`
             Comment string  `json:"comment"`
+            Email string  `json:"email"`
             Mobile string  `json:"mobile"`
             BranchName string  `json:"branch_name"`
+            Wallet string  `json:"wallet"`
             BankName string  `json:"bank_name"`
-            Vpa string  `json:"vpa"`
-            IfscCode string  `json:"ifsc_code"`
+            Address string  `json:"address"`
+            AccountHolder string  `json:"account_holder"`
          
     }
     
@@ -5580,13 +5580,13 @@ package platform
     type AddBeneficiaryDetailsRequest struct {
 
         
-            Otp string  `json:"otp"`
-            OrderID string  `json:"order_id"`
-            Details BeneficiaryModeDetails  `json:"details"`
-            TransferMode string  `json:"transfer_mode"`
-            RequestID string  `json:"request_id"`
-            Delights bool  `json:"delights"`
             ShipmentID string  `json:"shipment_id"`
+            OrderID string  `json:"order_id"`
+            Delights bool  `json:"delights"`
+            TransferMode string  `json:"transfer_mode"`
+            Otp string  `json:"otp"`
+            RequestID string  `json:"request_id"`
+            Details BeneficiaryModeDetails  `json:"details"`
          
     }
     
@@ -5596,8 +5596,8 @@ package platform
         
             Success bool  `json:"success"`
             IsVerifiedFlag bool  `json:"is_verified_flag"`
-            Data map[string]interface{}  `json:"data"`
             Message string  `json:"message"`
+            Data map[string]interface{}  `json:"data"`
          
     }
     
@@ -5606,8 +5606,8 @@ package platform
 
         
             Success bool  `json:"success"`
-            Description string  `json:"description"`
             Code string  `json:"code"`
+            Description string  `json:"description"`
          
     }
     
@@ -5625,25 +5625,25 @@ package platform
     type OrderBeneficiaryDetails struct {
 
         
-            Address string  `json:"address"`
-            AccountHolder string  `json:"account_holder"`
-            Comment bool  `json:"comment"`
-            Mobile bool  `json:"mobile"`
-            BankName string  `json:"bank_name"`
-            Email string  `json:"email"`
             AccountNo string  `json:"account_no"`
-            ModifiedOn string  `json:"modified_on"`
-            CreatedOn string  `json:"created_on"`
-            BeneficiaryID string  `json:"beneficiary_id"`
-            DisplayName string  `json:"display_name"`
-            Title string  `json:"title"`
-            BranchName bool  `json:"branch_name"`
-            IfscCode string  `json:"ifsc_code"`
             DelightsUserName string  `json:"delights_user_name"`
+            Address string  `json:"address"`
+            Title string  `json:"title"`
+            CreatedOn string  `json:"created_on"`
+            Comment bool  `json:"comment"`
             ID float64  `json:"id"`
-            TransferMode string  `json:"transfer_mode"`
             IsActive bool  `json:"is_active"`
             Subtitle string  `json:"subtitle"`
+            ModifiedOn string  `json:"modified_on"`
+            BranchName bool  `json:"branch_name"`
+            BankName string  `json:"bank_name"`
+            AccountHolder string  `json:"account_holder"`
+            DisplayName string  `json:"display_name"`
+            Email string  `json:"email"`
+            Mobile bool  `json:"mobile"`
+            TransferMode string  `json:"transfer_mode"`
+            IfscCode string  `json:"ifsc_code"`
+            BeneficiaryID string  `json:"beneficiary_id"`
          
     }
     
@@ -5660,10 +5660,10 @@ package platform
     type PaymentConfirmationMode struct {
 
         
-            Name string  `json:"name"`
-            Amount float64  `json:"amount"`
-            Mode string  `json:"mode"`
             Meta map[string]interface{}  `json:"meta"`
+            Name string  `json:"name"`
+            Mode string  `json:"mode"`
+            Amount float64  `json:"amount"`
          
     }
     
@@ -5671,8 +5671,8 @@ package platform
     type PaymentConfirmationRequest struct {
 
         
-            OrderID string  `json:"order_id"`
             PaymentMethods []PaymentConfirmationMode  `json:"payment_methods"`
+            OrderID string  `json:"order_id"`
          
     }
     
@@ -15333,23 +15333,23 @@ package platform
     
 
     
-    // ApplicationServiceabilityConfig used by Serviceability
-    type ApplicationServiceabilityConfig struct {
-
-        
-            ChannelID string  `json:"channel_id"`
-            ServiceabilityType string  `json:"serviceability_type"`
-            ChannelType string  `json:"channel_type"`
-         
-    }
-    
     // ServiceabilityrErrorResponse used by Serviceability
     type ServiceabilityrErrorResponse struct {
 
         
-            Type string  `json:"type"`
-            Message string  `json:"message"`
             Value string  `json:"value"`
+            Message string  `json:"message"`
+            Type string  `json:"type"`
+         
+    }
+    
+    // ApplicationServiceabilityConfig used by Serviceability
+    type ApplicationServiceabilityConfig struct {
+
+        
+            ChannelType string  `json:"channel_type"`
+            ServiceabilityType string  `json:"serviceability_type"`
+            ChannelID string  `json:"channel_id"`
          
     }
     
@@ -15357,9 +15357,9 @@ package platform
     type ApplicationServiceabilityConfigResponse struct {
 
         
-            Success bool  `json:"success"`
-            Data ApplicationServiceabilityConfig  `json:"data"`
             Error ServiceabilityrErrorResponse  `json:"error"`
+            Data ApplicationServiceabilityConfig  `json:"data"`
+            Success bool  `json:"success"`
          
     }
     
@@ -15367,8 +15367,18 @@ package platform
     type EntityRegionView_Request struct {
 
         
-            SubType []string  `json:"sub_type"`
             ParentID []string  `json:"parent_id"`
+            SubType []string  `json:"sub_type"`
+         
+    }
+    
+    // EntityRegionView_Error used by Serviceability
+    type EntityRegionView_Error struct {
+
+        
+            Value string  `json:"value"`
+            Message string  `json:"message"`
+            Type string  `json:"type"`
          
     }
     
@@ -15377,8 +15387,8 @@ package platform
 
         
             SubType string  `json:"sub_type"`
-            Name string  `json:"name"`
             UID string  `json:"uid"`
+            Name string  `json:"name"`
          
     }
     
@@ -15386,21 +15396,11 @@ package platform
     type EntityRegionView_page struct {
 
         
+            Type string  `json:"type"`
+            HasNext bool  `json:"has_next"`
+            Size float64  `json:"size"`
             ItemTotal float64  `json:"item_total"`
             Current float64  `json:"current"`
-            Type string  `json:"type"`
-            Size float64  `json:"size"`
-            HasNext bool  `json:"has_next"`
-         
-    }
-    
-    // EntityRegionView_Error used by Serviceability
-    type EntityRegionView_Error struct {
-
-        
-            Type string  `json:"type"`
-            Message string  `json:"message"`
-            Value string  `json:"value"`
          
     }
     
@@ -15408,19 +15408,10 @@ package platform
     type EntityRegionView_Response struct {
 
         
-            Success bool  `json:"success"`
+            Error EntityRegionView_Error  `json:"error"`
             Data []EntityRegionView_Items  `json:"data"`
             Page EntityRegionView_page  `json:"page"`
-            Error EntityRegionView_Error  `json:"error"`
-         
-    }
-    
-    // ListViewProduct used by Serviceability
-    type ListViewProduct struct {
-
-        
-            Type string  `json:"type"`
-            Count float64  `json:"count"`
+            Success bool  `json:"success"`
          
     }
     
@@ -15428,8 +15419,17 @@ package platform
     type ListViewChannels struct {
 
         
-            ChannelID string  `json:"channel_id"`
             ChannelType string  `json:"channel_type"`
+            ChannelID string  `json:"channel_id"`
+         
+    }
+    
+    // ListViewProduct used by Serviceability
+    type ListViewProduct struct {
+
+        
+            Count float64  `json:"count"`
+            Type string  `json:"type"`
          
     }
     
@@ -15437,15 +15437,15 @@ package platform
     type ListViewItems struct {
 
         
-            IsActive bool  `json:"is_active"`
-            Product ListViewProduct  `json:"product"`
-            CompanyID float64  `json:"company_id"`
-            Slug string  `json:"slug"`
+            ZoneID string  `json:"zone_id"`
+            StoresCount float64  `json:"stores_count"`
             Channels ListViewChannels  `json:"channels"`
             PincodesCount float64  `json:"pincodes_count"`
-            ZoneID string  `json:"zone_id"`
+            Slug string  `json:"slug"`
+            Product ListViewProduct  `json:"product"`
+            CompanyID float64  `json:"company_id"`
+            IsActive bool  `json:"is_active"`
             Name string  `json:"name"`
-            StoresCount float64  `json:"stores_count"`
          
     }
     
@@ -15453,11 +15453,11 @@ package platform
     type ZoneDataItem struct {
 
         
-            ItemTotal float64  `json:"item_total"`
-            Current float64  `json:"current"`
-            Type string  `json:"type"`
-            Size float64  `json:"size"`
             HasNext bool  `json:"has_next"`
+            Size float64  `json:"size"`
+            ItemTotal float64  `json:"item_total"`
+            Type string  `json:"type"`
+            Current float64  `json:"current"`
          
     }
     
@@ -15465,8 +15465,8 @@ package platform
     type ListViewSummary struct {
 
         
-            TotalActiveZones float64  `json:"total_active_zones"`
             TotalPincodesServed float64  `json:"total_pincodes_served"`
+            TotalActiveZones float64  `json:"total_active_zones"`
             TotalZones float64  `json:"total_zones"`
          
     }
@@ -15485,11 +15485,11 @@ package platform
     type CompanyStoreView_PageItems struct {
 
         
+            Type string  `json:"type"`
+            HasNext bool  `json:"has_next"`
+            Size float64  `json:"size"`
             ItemTotal float64  `json:"item_total"`
             Current float64  `json:"current"`
-            Type string  `json:"type"`
-            Size float64  `json:"size"`
-            HasNext bool  `json:"has_next"`
          
     }
     
@@ -15502,12 +15502,13 @@ package platform
          
     }
     
-    // ZoneProductTypes used by Serviceability
-    type ZoneProductTypes struct {
+    // ZoneMappingType used by Serviceability
+    type ZoneMappingType struct {
 
         
-            Type string  `json:"type"`
-            Tags []string  `json:"tags"`
+            Country string  `json:"country"`
+            Pincode []string  `json:"pincode"`
+            State []string  `json:"state"`
          
     }
     
@@ -15515,18 +15516,17 @@ package platform
     type GetZoneDataViewChannels struct {
 
         
-            ChannelID string  `json:"channel_id"`
             ChannelType string  `json:"channel_type"`
+            ChannelID string  `json:"channel_id"`
          
     }
     
-    // ZoneMappingType used by Serviceability
-    type ZoneMappingType struct {
+    // ZoneProductTypes used by Serviceability
+    type ZoneProductTypes struct {
 
         
-            Pincode []string  `json:"pincode"`
-            State []string  `json:"state"`
-            Country string  `json:"country"`
+            Tags []string  `json:"tags"`
+            Type string  `json:"type"`
          
     }
     
@@ -15534,16 +15534,16 @@ package platform
     type UpdateZoneData struct {
 
         
-            IsActive bool  `json:"is_active"`
-            Product ZoneProductTypes  `json:"product"`
-            StoreIds []float64  `json:"store_ids"`
-            CompanyID float64  `json:"company_id"`
-            Slug string  `json:"slug"`
-            RegionType string  `json:"region_type"`
-            Channels []GetZoneDataViewChannels  `json:"channels"`
             ZoneID string  `json:"zone_id"`
-            Name string  `json:"name"`
             Mapping []ZoneMappingType  `json:"mapping"`
+            Channels []GetZoneDataViewChannels  `json:"channels"`
+            RegionType string  `json:"region_type"`
+            StoreIds []float64  `json:"store_ids"`
+            Slug string  `json:"slug"`
+            Product ZoneProductTypes  `json:"product"`
+            CompanyID float64  `json:"company_id"`
+            IsActive bool  `json:"is_active"`
+            Name string  `json:"name"`
          
     }
     
@@ -15551,8 +15551,8 @@ package platform
     type ZoneUpdateRequest struct {
 
         
-            Data UpdateZoneData  `json:"data"`
             Identifier string  `json:"identifier"`
+            Data UpdateZoneData  `json:"data"`
          
     }
     
@@ -15560,8 +15560,8 @@ package platform
     type ZoneSuccessResponse struct {
 
         
-            Success bool  `json:"success"`
             StatusCode float64  `json:"status_code"`
+            Success bool  `json:"success"`
          
     }
     
@@ -15569,18 +15569,18 @@ package platform
     type GetZoneDataViewItems struct {
 
         
-            IsActive bool  `json:"is_active"`
-            Product ZoneProductTypes  `json:"product"`
-            StoreIds []float64  `json:"store_ids"`
-            CompanyID float64  `json:"company_id"`
-            Slug string  `json:"slug"`
-            RegionType string  `json:"region_type"`
-            Channels []GetZoneDataViewChannels  `json:"channels"`
-            PincodesCount float64  `json:"pincodes_count"`
             ZoneID string  `json:"zone_id"`
             StoresCount float64  `json:"stores_count"`
-            Name string  `json:"name"`
             Mapping []ZoneMappingType  `json:"mapping"`
+            Channels []GetZoneDataViewChannels  `json:"channels"`
+            RegionType string  `json:"region_type"`
+            StoreIds []float64  `json:"store_ids"`
+            PincodesCount float64  `json:"pincodes_count"`
+            Slug string  `json:"slug"`
+            Product ZoneProductTypes  `json:"product"`
+            CompanyID float64  `json:"company_id"`
+            IsActive bool  `json:"is_active"`
+            Name string  `json:"name"`
          
     }
     
@@ -15596,15 +15596,15 @@ package platform
     type CreateZoneData struct {
 
         
-            IsActive bool  `json:"is_active"`
-            Product ZoneProductTypes  `json:"product"`
-            StoreIds []float64  `json:"store_ids"`
-            CompanyID float64  `json:"company_id"`
-            Slug string  `json:"slug"`
-            RegionType string  `json:"region_type"`
-            Channels []GetZoneDataViewChannels  `json:"channels"`
-            Name string  `json:"name"`
             Mapping []ZoneMappingType  `json:"mapping"`
+            RegionType string  `json:"region_type"`
+            StoreIds []float64  `json:"store_ids"`
+            Slug string  `json:"slug"`
+            Product ZoneProductTypes  `json:"product"`
+            CompanyID float64  `json:"company_id"`
+            Channels []GetZoneDataViewChannels  `json:"channels"`
+            IsActive bool  `json:"is_active"`
+            Name string  `json:"name"`
          
     }
     
@@ -15612,8 +15612,8 @@ package platform
     type ZoneRequest struct {
 
         
-            Data CreateZoneData  `json:"data"`
             Identifier string  `json:"identifier"`
+            Data CreateZoneData  `json:"data"`
          
     }
     
@@ -15621,9 +15621,9 @@ package platform
     type ZoneResponse struct {
 
         
-            Success bool  `json:"success"`
-            ZoneID string  `json:"zone_id"`
             StatusCode float64  `json:"status_code"`
+            ZoneID string  `json:"zone_id"`
+            Success bool  `json:"success"`
          
     }
     
