@@ -39,6 +39,8 @@ type PlatformClient struct {
 	
 		Webhook  *PlatformWebhook
 	
+		AuditTrail  *PlatformAuditTrail
+	
 	ApplicationClient *ApplicationClient //ApplicationClient embedded
 }
 
@@ -74,6 +76,8 @@ func NewPlatformClient(config *PlatformConfig) *PlatformClient {
 				Discount:  NewPlatformDiscount(config),
 			
 				Webhook:  NewPlatformWebhook(config),
+			
+				AuditTrail:  NewPlatformAuditTrail(config),
 			
 			ApplicationClient: &ApplicationClient{},
 		}
@@ -13255,6 +13259,197 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return EventConfigResponse{}, common.NewFDKError(err.Error())
         }
         return fetchAllEventConfigurationsResponse, nil
+        
+    }
+         
+        
+       
+    
+
+
+	
+   // PlatformAuditTrail holds PlatformAuditTrail object properties
+    type PlatformAuditTrail struct {
+        Config *PlatformConfig
+        CompanyID string
+    }
+    // NewPlatformAuditTrail returns new PlatformAuditTrail instance
+    func NewPlatformAuditTrail(config *PlatformConfig) *PlatformAuditTrail {
+        return &PlatformAuditTrail{Config: config, CompanyID: config.CompanyID}
+    }
+    
+    
+   
+  
+    
+    
+    //PlatformGetAuditLogsXQuery holds query params
+    type PlatformGetAuditLogsXQuery struct { 
+        Qs string  `url:"qs,omitempty"`  
+    }
+    
+
+
+    // GetAuditLogs Get paginated audit logs
+     func (au *PlatformAuditTrail)  GetAuditLogs(xQuery PlatformGetAuditLogsXQuery) (LogSchemaResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAuditLogsResponse LogSchemaResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            au.Config,
+            "get",
+            fmt.Sprintf("/service/platform/audit-trail/v1.0/company/%s/logs/",au.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return LogSchemaResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAuditLogsResponse)
+        if err != nil {
+             return LogSchemaResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAuditLogsResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // CreateAuditLog Create logs for auditing later on
+     func (au *PlatformAuditTrail)  CreateAuditLog(body  RequestBodyAuditLog) (CreateLogResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            createAuditLogResponse CreateLogResponse
+	    )
+
+        
+        
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return CreateLogResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return CreateLogResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            au.Config,
+            "post",
+            fmt.Sprintf("/service/platform/audit-trail/v1.0/company/%s/logs/",au.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return CreateLogResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createAuditLogResponse)
+        if err != nil {
+             return CreateLogResponse{}, common.NewFDKError(err.Error())
+        }
+        return createAuditLogResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetAuditLog Get audit log
+     func (au *PlatformAuditTrail)  GetAuditLog(ID string) (LogSchemaResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAuditLogResponse LogSchemaResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            au.Config,
+            "get",
+            fmt.Sprintf("/service/platform/audit-trail/v1.0/company/%s/logs/%s",au.CompanyID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return LogSchemaResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAuditLogResponse)
+        if err != nil {
+             return LogSchemaResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAuditLogResponse, nil
         
     }
          

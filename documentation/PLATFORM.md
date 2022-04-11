@@ -23,6 +23,7 @@
 * [Discount](#Discount) - Discount 
 * [Partner](#Partner) - Partner configuration apis 
 * [Webhook](#Webhook) - Webhook dispatcher with retry and one event to many subscriber vice versa 
+* [AuditTrail](#AuditTrail) -  
 
 ----
 ----
@@ -573,6 +574,13 @@
     * [getSubscribersByExtensionId](#getsubscribersbyextensionid)
     * [getSubscriberById](#getsubscriberbyid)
     * [fetchAllEventConfigurations](#fetchalleventconfigurations)
+    
+
+* [AuditTrail](#AuditTrail)
+  * Methods
+    * [getAuditLogs](#getauditlogs)
+    * [createAuditLog](#createauditlog)
+    * [getAuditLog](#getauditlog)
     
 
 
@@ -63658,6 +63666,243 @@ Success
 
 
 Schema: `EventConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+
+---
+
+
+## AuditTrail
+
+
+#### getAuditLogs
+Get paginated audit logs
+
+```golang
+
+data, err := AuditTrail.GetAuditLogs(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Compnay Id | 
+
+
+
+| xQuery | struct | Includes properties such as `Qs`
+
+
+Get audit logs
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `LogSchemaResponse`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "docs": [
+      {
+        "entity": {
+          "type": "sales-channel-configuration",
+          "id": "5dcbf6065862c28d81beb025",
+          "action": "update"
+        },
+        "modifier": {
+          "as_administrator": true,
+          "user_id": "5d8391fa7f6b58553d02eb63",
+          "user_details": {
+            "firstName": "Hitesh",
+            "email": "hiteshjha@gofynd.com"
+          }
+        },
+        "device_info": {
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
+        },
+        "location": {
+          "IP": "103.226.87.213"
+        },
+        "_id": "602a1366a7486d63f1e915b2",
+        "company": 61,
+        "application": "5d63686df2a4f7806b76bb32",
+        "sessions": "",
+        "date": "2021-02-15T06:23:32.098Z",
+        "logs": {
+          "modified_by": "5d8391fa7f6b58553d02eb63"
+        },
+        "created_at": "2021-02-15T06:23:34.497Z",
+        "modified_at": "2021-02-15T06:23:34.497Z",
+        "meta": {
+          "browser": "Linux - Chrome",
+          "device": ""
+        }
+      }
+    ]
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createAuditLog
+Create logs for auditing later on
+
+```golang
+
+data, err := AuditTrail.CreateAuditLog(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+| body |  RequestBodyAuditLog | "Request body" 
+
+Create a Audit log
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `CreateLogResponse`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "message": "Audit log recorded successfully !",
+    "internal_message": "Audit log queued"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAuditLog
+Get audit log
+
+```golang
+
+data, err := AuditTrail.GetAuditLog(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Compnay Id | 
+
+
+| ID | string | log uuid | 
+
+
+
+Get audit logs by logs uuid
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `LogSchemaResponse`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "docs": [
+      {
+        "entity": {
+          "type": "sales-channel-configuration",
+          "id": "5dcbf6065862c28d81beb025",
+          "action": "update"
+        },
+        "modifier": {
+          "as_administrator": true,
+          "user_id": "5d8391fa7f6b58553d02eb63",
+          "user_details": {
+            "firstName": "Hitesh",
+            "email": "hiteshjha@gofynd.com"
+          }
+        },
+        "device_info": {
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
+        },
+        "location": {
+          "IP": "103.226.87.213"
+        },
+        "_id": "602a1366a7486d63f1e915b2",
+        "company": 61,
+        "application": "5d63686df2a4f7806b76bb32",
+        "sessions": "",
+        "date": "2021-02-15T06:23:32.098Z",
+        "logs": {
+          "modified_by": "5d8391fa7f6b58553d02eb63"
+        },
+        "created_at": "2021-02-15T06:23:34.497Z",
+        "modified_at": "2021-02-15T06:23:34.497Z",
+        "meta": {
+          "browser": "Linux - Chrome",
+          "device": ""
+        }
+      }
+    ]
+  }
+}
+```
 
 
 
