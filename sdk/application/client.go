@@ -4214,7 +4214,8 @@ func NewAppClient(config *AppConfig) *Client {
     //CartGetPromotionOffersXQuery holds query params
     type CartGetPromotionOffersXQuery struct { 
         Slug string  `url:"slug,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
+        PageSize float64  `url:"page_size,omitempty"` 
+        PromotionGroup string  `url:"promotion_group,omitempty"`  
     }
     
     // GetPromotionOffers Fetch available promotions
@@ -4229,6 +4230,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -4271,6 +4274,7 @@ func NewAppClient(config *AppConfig) *Client {
     //CartGetLadderOffersXQuery holds query params
     type CartGetLadderOffersXQuery struct { 
         Slug string  `url:"slug,omitempty"` 
+        StoreID string  `url:"store_id,omitempty"` 
         PromotionID string  `url:"promotion_id,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"`  
     }
@@ -4287,6 +4291,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
