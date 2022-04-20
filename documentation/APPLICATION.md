@@ -234,6 +234,7 @@
     * [getPaymentModeRoutes](#getpaymentmoderoutes)
     * [getPosPaymentModeRoutes](#getpospaymentmoderoutes)
     * [getRupifiBannerDetails](#getrupifibannerdetails)
+    * [getEpaylaterBannerDetails](#getepaylaterbannerdetails)
     * [getActiveRefundTransferModes](#getactiverefundtransfermodes)
     * [enableOrDisableRefundTransferMode](#enableordisablerefundtransfermode)
     * [getUserBeneficiariesDetail](#getuserbeneficiariesdetail)
@@ -244,6 +245,10 @@
     * [addRefundBankAccountUsingOTP](#addrefundbankaccountusingotp)
     * [verifyOtpAndAddBeneficiaryForWallet](#verifyotpandaddbeneficiaryforwallet)
     * [updateDefaultBeneficiary](#updatedefaultbeneficiary)
+    * [customerCreditSummary](#customercreditsummary)
+    * [redirectToAggregator](#redirecttoaggregator)
+    * [checkCredit](#checkcredit)
+    * [customerOnboard](#customeronboard)
     
 
 * [Order](#Order)
@@ -16788,6 +16793,41 @@ Schema: `RupifiBannerResponse`
 ---
 
 
+#### getEpaylaterBannerDetails
+Get Epaylater Enabled
+
+```golang
+
+ data, err :=  Payment.GetEpaylaterBannerDetails();
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+Get Epaylater Enabled if user is tentatively approved by epaylater
+
+*Success Response:*
+
+
+
+Success. Return Epaylater Offer detail. Check the example shown below or refer `EpaylaterBannerResponseSchema` for more details.
+
+
+Schema: `EpaylaterBannerResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getActiveRefundTransferModes
 Lists the mode of refund
 
@@ -17141,6 +17181,156 @@ Success. Check the example shown below or refer `SetDefaultBeneficiaryResponse` 
 
 
 Schema: `SetDefaultBeneficiaryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### customerCreditSummary
+API to fetch the customer credit summary
+
+```golang
+
+ data, err :=  Payment.CustomerCreditSummary(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Aggregator`
+
+
+
+Use this API to fetch the customer credit summary.
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `CustomerCreditSummaryResponseSchema` for more details.
+
+
+Schema: `CustomerCreditSummaryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### redirectToAggregator
+API to get the redirect url to redirect the user to aggregator's page
+
+```golang
+
+ data, err :=  Payment.RedirectToAggregator(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Source`
+
+
+
+Use this API to get the redirect url to redirect the user to aggregator's page
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `RedirectToAggregatorResponseSchema` for more details.
+
+
+Schema: `RedirectToAggregatorResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### checkCredit
+API to fetch the customer credit summary
+
+```golang
+
+ data, err :=  Payment.CheckCredit(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Aggregator`
+
+
+
+Use this API to fetch the customer credit summary.
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `CheckCreditResponseSchema` for more details.
+
+
+Schema: `CheckCreditResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### customerOnboard
+API to fetch the customer credit summary
+
+```golang
+
+ data, err :=  Payment.CustomerOnboard(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  CustomerOnboardingRequest | "Request body" 
+
+
+Use this API to fetch the customer credit summary.
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `CustomerOnboardingResponseSchema` for more details.
+
+
+Schema: `CustomerOnboardingResponse`
 
 
 
