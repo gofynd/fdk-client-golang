@@ -3437,6 +3437,67 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // ArchiveUser archive user
+     func (us *PlatformAppUser)  ArchiveUser(body  ArchiveUserRequestSchema) (ArchiveUserSuccess, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            archiveUserResponse ArchiveUserSuccess
+	    )
+
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return ArchiveUserSuccess{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return ArchiveUserSuccess{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "post",
+            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/customers/archive",us.CompanyID, us.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ArchiveUserSuccess{}, err
+	    }
+        
+        err = json.Unmarshal(response, &archiveUserResponse)
+        if err != nil {
+            return ArchiveUserSuccess{}, common.NewFDKError(err.Error())
+        }
+        return archiveUserResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // UpdateUser Update user
      func (us *PlatformAppUser)  UpdateUser(UserID string, body  UpdateUserRequestSchema) (CreateUserResponseSchema, error) {
         var (

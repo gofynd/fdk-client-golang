@@ -11774,9 +11774,6 @@ Success
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -11910,9 +11907,6 @@ Success
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12043,9 +12037,6 @@ Success
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12400,9 +12391,6 @@ default
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12540,9 +12528,6 @@ default
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12636,9 +12621,6 @@ default
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12809,9 +12791,6 @@ default
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12910,9 +12889,6 @@ default
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13019,9 +12995,6 @@ default
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13116,9 +13089,6 @@ default
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13217,9 +13187,6 @@ default
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13318,9 +13285,6 @@ default
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13425,9 +13389,6 @@ default
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13522,9 +13483,6 @@ default
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,

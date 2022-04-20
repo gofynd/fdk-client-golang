@@ -111,6 +111,7 @@
     * [searchUsers](#searchusers)
     * [createUser](#createuser)
     * [blockOrUnblockUsers](#blockorunblockusers)
+    * [archiveUser](#archiveuser)
     * [updateUser](#updateuser)
     * [createUserSession](#createusersession)
     * [getActiveSessions](#getactivesessions)
@@ -39602,9 +39603,6 @@ Success
       {
         "_id": "000000000000000023106198",
         "gender": "male",
-        "roles": [
-          "Ark-Qnatemplate-FullAccess"
-        ],
         "active": true,
         "emails": [
           {
@@ -39775,6 +39773,47 @@ Success
 
 
 Schema: `BlockUserSuccess`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### archiveUser
+archive user
+
+```golang
+
+data, err := User.ArchiveUser(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID | 
+
+
+| ApplicationID | string | Application ID | 
+
+
+| body |  ArchiveUserRequestSchema | "Request body" 
+
+archive user
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `ArchiveUserSuccess`
 
 
 
