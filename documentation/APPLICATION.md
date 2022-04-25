@@ -9015,8 +9015,6 @@ Applied Theme
       }
     ],
     "styles": {},
-    "constants": {},
-    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -11198,8 +11196,6 @@ Preview Theme
       }
     ],
     "styles": {},
-    "constants": {},
-    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
