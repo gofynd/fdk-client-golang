@@ -45,6 +45,8 @@ type ApplicationClient struct {
 	 
 		Partner  *PlatformAppPartner
 	 
+		Serviceability  *PlatformAppServiceability
+	 
 }
 
 // NewApplicationClient provides platform-application client
@@ -85,6 +87,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 				Analytics:  NewPlatformAppAnalytics(config, appID),
 			 
 				Partner:  NewPlatformAppPartner(config, appID),
+			 
+				Serviceability:  NewPlatformAppServiceability(config, appID),
 			 
 		}
 }
@@ -14599,6 +14603,79 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    //PlatformAppGetAppZoneProductsXQuery holds query params
+    type PlatformAppGetAppZoneProductsXQuery struct { 
+        BrandIds []float64  `url:"brand_ids,omitempty"` 
+        CategoryIds []float64  `url:"category_ids,omitempty"` 
+        DepartmentIds []float64  `url:"department_ids,omitempty"` 
+        Tags []string  `url:"tags,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        Q string  `url:"q,omitempty"`  
+    }
+    
+    // GetAppZoneProducts Get zonewise application products
+     func (ca *PlatformAppCatalog)  GetAppZoneProducts(xQuery PlatformAppGetAppZoneProductsXQuery) (ProductListingResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAppZoneProductsResponse ProductListingResponse
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/zone-raw-products/",ca.CompanyID, ca.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ProductListingResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAppZoneProductsResponse)
+        if err != nil {
+            return ProductListingResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAppZoneProductsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     //PlatformAppGetAppLocationsXQuery holds query params
     type PlatformAppGetAppLocationsXQuery struct { 
         StoreType string  `url:"store_type,omitempty"` 
@@ -19993,6 +20070,141 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return RemoveProxyResponse{}, common.NewFDKError(err.Error())
         }
         return removeProxyPathResponse, nil
+        
+    }
+           
+       
+    
+
+ 
+	 
+   // PlatformAppServiceability holds PlatformAppServiceability object properties
+    type PlatformAppServiceability struct {
+        config *PlatformConfig
+        CompanyID string
+        ApplicationID string
+    }
+    // NewPlatformAppServiceability returns new PlatformAppServiceability instance
+    func NewPlatformAppServiceability(config *PlatformConfig, appID string) *PlatformAppServiceability {
+        return &PlatformAppServiceability{config, config.CompanyID, appID}
+    }
+    
+    
+    
+  
+
+    
+    // GetApplicationServiceability Zone configuration of application.
+     func (se *PlatformAppServiceability)  GetApplicationServiceability() (ApplicationServiceabilityConfigResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getApplicationServiceabilityResponse ApplicationServiceabilityConfigResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/application/%s/serviceability",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationServiceabilityConfigResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getApplicationServiceabilityResponse)
+        if err != nil {
+            return ApplicationServiceabilityConfigResponse{}, common.NewFDKError(err.Error())
+        }
+        return getApplicationServiceabilityResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+    
+    // GetZoneFromPincode GET zone from the Pincode.
+     func (se *PlatformAppServiceability)  GetZoneFromPincode(body  GetZoneFromPincodeViewRequest) (GetZoneFromPincodeViewResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getZoneFromPincodeResponse GetZoneFromPincodeViewResponse
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/application/%s/zones",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetZoneFromPincodeViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getZoneFromPincodeResponse)
+        if err != nil {
+            return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return getZoneFromPincodeResponse, nil
         
     }
            
