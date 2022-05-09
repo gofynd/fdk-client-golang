@@ -86,6 +86,8 @@
     * [getCartShareLink](#getcartsharelink)
     * [getCartSharedItems](#getcartshareditems)
     * [updateCartWithSharedItems](#updatecartwithshareditems)
+    * [getPromotionOffers](#getpromotionoffers)
+    * [getLadderOffers](#getladderoffers)
     
 
 * [Common](#Common)
@@ -4991,6 +4993,92 @@ Cart Merged/Replaced
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPromotionOffers
+Fetch available promotions
+
+```golang
+
+ data, err :=  Cart.GetPromotionOffers(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Slug`, `PageSize`, `PromotionGroup`
+
+
+
+Use this API to get top 5 offers available for current product
+
+*Success Response:*
+
+
+
+Success. Returns a array containing the available offers (if exists) on product via promotions. Refer `PromotionOffersResponse` for more details.
+
+
+Schema: `PromotionOffersResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getLadderOffers
+Fetch ladder price promotion
+
+```golang
+
+ data, err :=  Cart.GetLadderOffers(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Slug`, `StoreID`, `PromotionID`, `PageSize`
+
+
+
+Use this API to get applicable ladder price promotion for current product
+
+*Success Response:*
+
+
+
+Success. Returns a object containing the applicable ladder price offers (if exists) on product. Refer `PromotionOffersResponse` for more details.
+
+
+Schema: `LadderPriceOffers`
 
 
 

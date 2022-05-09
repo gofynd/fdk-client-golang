@@ -4204,6 +4204,129 @@ func NewAppClient(config *AppConfig) *Client {
     }
           
     
+    
+    
+  
+    
+    
+    //CartGetPromotionOffersXQuery holds query params
+    type CartGetPromotionOffersXQuery struct { 
+        Slug string  `url:"slug,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        PromotionGroup string  `url:"promotion_group,omitempty"`  
+    }
+    
+    // GetPromotionOffers Fetch available promotions
+    func (ca *Cart)  GetPromotionOffers(xQuery CartGetPromotionOffersXQuery) (PromotionOffersResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getPromotionOffersResponse PromotionOffersResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            "/service/application/cart/v1.0/available-promotions",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PromotionOffersResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPromotionOffersResponse)
+        if err != nil {
+            return PromotionOffersResponse{}, common.NewFDKError(err.Error())
+        }
+         return getPromotionOffersResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //CartGetLadderOffersXQuery holds query params
+    type CartGetLadderOffersXQuery struct { 
+        Slug string  `url:"slug,omitempty"` 
+        StoreID string  `url:"store_id,omitempty"` 
+        PromotionID string  `url:"promotion_id,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetLadderOffers Fetch ladder price promotion
+    func (ca *Cart)  GetLadderOffers(xQuery CartGetLadderOffersXQuery) (LadderPriceOffers, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getLadderOffersResponse LadderPriceOffers
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/application/cart/v1.0/available-ladder-prices",),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return LadderPriceOffers{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getLadderOffersResponse)
+        if err != nil {
+            return LadderPriceOffers{}, common.NewFDKError(err.Error())
+        }
+         return getLadderOffersResponse, nil
+        
+    }
+          
+    
 
     // Common ...
     type Common struct {
