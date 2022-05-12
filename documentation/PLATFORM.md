@@ -401,10 +401,10 @@
     * [getBrand](#getbrand)
     * [editBrand](#editbrand)
     * [createBrand](#createbrand)
-    * [createCompanyBrandMapping](#createcompanybrandmapping)
     * [getBrands](#getbrands)
-    * [createLocation](#createlocation)
+    * [createCompanyBrandMapping](#createcompanybrandmapping)
     * [getLocations](#getlocations)
+    * [createLocation](#createlocation)
     * [getLocationDetail](#getlocationdetail)
     * [updateLocation](#updatelocation)
     * [createLocationBulk](#createlocationbulk)
@@ -573,6 +573,7 @@
     * [getAuditLogs](#getauditlogs)
     * [createAuditLog](#createauditlog)
     * [getAuditLog](#getauditlog)
+    * [getEntityTypes](#getentitytypes)
     
 
 
@@ -57083,44 +57084,6 @@ Schema: `SuccessResponse`
 ---
 
 
-#### createCompanyBrandMapping
-Create a company brand mapping.
-
-```golang
-
-data, err := CompanyProfile.CreateCompanyBrandMapping(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company inside which the brand is to be mapped. | 
-
-
-| body |  CompanyBrandPostRequestSerializer | "Request body" 
-
-This API allows to create a company brand mapping, for a already existing brand in the system.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getBrands
 Get brands associated to a company
 
@@ -57165,23 +57128,23 @@ Schema: `CompanyBrandListSerializer`
 ---
 
 
-#### createLocation
-Create a location asscoiated to a company.
+#### createCompanyBrandMapping
+Create a company brand mapping.
 
 ```golang
 
-data, err := CompanyProfile.CreateLocation(CompanyID, body);
+data, err := CompanyProfile.CreateCompanyBrandMapping(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Id of the company inside which the location is to be created. | 
+| CompanyID | string | Id of the company inside which the brand is to be mapped. | 
 
 
-| body |  LocationSerializer | "Request body" 
+| body |  CompanyBrandPostRequestSerializer | "Request body" 
 
-This API allows to create a location associated to a company.
+This API allows to create a company brand mapping, for a already existing brand in the system.
 
 *Success Response:*
 
@@ -57239,6 +57202,44 @@ Company profile object. See example below or refer `LocationListSerializer` for 
 
 
 Schema: `LocationListSerializer`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createLocation
+Create a location asscoiated to a company.
+
+```golang
+
+data, err := CompanyProfile.CreateLocation(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company inside which the location is to be created. | 
+
+
+| body |  LocationSerializer | "Request body" 
+
+This API allows to create a location associated to a company.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
@@ -63406,6 +63407,65 @@ default
           "browser": "Linux - Chrome",
           "device": ""
         }
+      }
+    ]
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getEntityTypes
+Get entity types
+
+```golang
+
+data, err := AuditTrail.GetEntityTypes(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+
+Get entity types
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `EntityTypesResponse`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "items": [
+      {
+        "entity_value:\"sales-channel\"": null,
+        "display_name": "Sales Channel"
+      },
+      {
+        "entity_value:\"shipment-update\"": null,
+        "display_name": "Shipment Update"
       }
     ]
   }
