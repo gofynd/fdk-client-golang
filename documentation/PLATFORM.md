@@ -109,8 +109,12 @@
     * [getCustomers](#getcustomers)
     * [searchUsers](#searchusers)
     * [createUser](#createuser)
+    * [blockOrUnblockUsers](#blockorunblockusers)
+    * [archiveUser](#archiveuser)
     * [updateUser](#updateuser)
     * [createUserSession](#createusersession)
+    * [getActiveSessions](#getactivesessions)
+    * [deleteActiveSessions](#deleteactivesessions)
     * [getPlatformConfig](#getplatformconfig)
     * [updatePlatformConfig](#updateplatformconfig)
     
@@ -276,7 +280,6 @@
     * [getOrdersByCompanyId](#getordersbycompanyid)
     * [getOrderLanesCountByCompanyId](#getorderlanescountbycompanyid)
     * [getOrderDetails](#getorderdetails)
-    * [getOrderDetails](#getorderdetails)
     * [getPicklistOrdersByCompanyId](#getpicklistordersbycompanyid)
     * [trackShipmentPlatform](#trackshipmentplatform)
     * [trackOrder](#trackorder)
@@ -295,24 +298,24 @@
 
 * [Catalog](#Catalog)
   * Methods
-    * [getSearchKeywords](#getsearchkeywords)
     * [updateSearchKeywords](#updatesearchkeywords)
+    * [getSearchKeywords](#getsearchkeywords)
     * [deleteSearchKeywords](#deletesearchkeywords)
     * [getAllSearchKeyword](#getallsearchkeyword)
     * [createCustomKeyword](#createcustomkeyword)
-    * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [updateAutocompleteKeyword](#updateautocompletekeyword)
+    * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [getProductBundle](#getproductbundle)
     * [createProductBundle](#createproductbundle)
-    * [getProductBundleDetail](#getproductbundledetail)
     * [updateProductBundle](#updateproductbundle)
+    * [getProductBundleDetail](#getproductbundledetail)
     * [getSizeGuides](#getsizeguides)
     * [createSizeGuide](#createsizeguide)
-    * [getSizeGuide](#getsizeguide)
     * [updateSizeGuide](#updatesizeguide)
+    * [getSizeGuide](#getsizeguide)
     * [updateAppProduct](#updateappproduct)
     * [getCatalogConfiguration](#getcatalogconfiguration)
     * [getConfigurations](#getconfigurations)
@@ -349,19 +352,19 @@
     * [listTemplateBrandTypeValues](#listtemplatebrandtypevalues)
     * [listCategories](#listcategories)
     * [createCategories](#createcategories)
-    * [getCategoryData](#getcategorydata)
     * [updateCategory](#updatecategory)
+    * [getCategoryData](#getcategorydata)
     * [getProducts](#getproducts)
     * [createProduct](#createproduct)
-    * [getProduct](#getproduct)
     * [editProduct](#editproduct)
+    * [getProduct](#getproduct)
     * [deleteProduct](#deleteproduct)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
     * [getProductBulkUploadHistory](#getproductbulkuploadhistory)
-    * [createBulkProductUploadJob](#createbulkproductuploadjob)
-    * [createProductsInBulk](#createproductsinbulk)
+    * [updateProductAssetsInBulk](#updateproductassetsinbulk)
     * [deleteProductBulkJob](#deleteproductbulkjob)
+    * [createProductsInBulk](#createproductsinbulk)
     * [getProductTags](#getproducttags)
     * [getProductAssetsInBulk](#getproductassetsinbulk)
     * [createProductAssetsInBulk](#createproductassetsinbulk)
@@ -373,15 +376,15 @@
     * [deleteInventory](#deleteinventory)
     * [getInventoryBulkUploadHistory](#getinventorybulkuploadhistory)
     * [createBulkInventoryJob](#createbulkinventoryjob)
-    * [createBulkInventory](#createbulkinventory)
     * [deleteBulkInventoryJob](#deletebulkinventoryjob)
+    * [createBulkInventory](#createbulkinventory)
     * [getInventoryExport](#getinventoryexport)
     * [createInventoryExportJob](#createinventoryexportjob)
     * [exportInventoryConfig](#exportinventoryconfig)
     * [getAllHsnCodes](#getallhsncodes)
     * [createHsnCode](#createhsncode)
-    * [getHsnCode](#gethsncode)
     * [updateHsnCode](#updatehsncode)
+    * [getHsnCode](#gethsncode)
     * [bulkHsnCode](#bulkhsncode)
     * [getApplicationBrands](#getapplicationbrands)
     * [getDepartments](#getdepartments)
@@ -389,7 +392,6 @@
     * [getAppicationProducts](#getappicationproducts)
     * [getProductDetailBySlug](#getproductdetailbyslug)
     * [getAppProducts](#getappproducts)
-    * [getOptimalLocations](#getoptimallocations)
     * [getAppLocations](#getapplocations)
     
 
@@ -503,6 +505,11 @@
     * [getCouponById](#getcouponbyid)
     * [updateCoupon](#updatecoupon)
     * [updateCouponPartially](#updatecouponpartially)
+    * [getPromotions](#getpromotions)
+    * [createPromotion](#createpromotion)
+    * [getPromotionById](#getpromotionbyid)
+    * [updatePromotion](#updatepromotion)
+    * [updatePromotionPartially](#updatepromotionpartially)
     * [fetchAndvalidateCartItems](#fetchandvalidatecartitems)
     * [checkCartServiceability](#checkcartserviceability)
     * [checkoutCart](#checkoutcart)
@@ -8978,6 +8985,7 @@ Success
           }
         ],
         "styles": {},
+        "constants": {},
         "settings": {},
         "created_at": "2020-12-22T05:11:16.027Z",
         "updated_at": "2021-02-24T14:03:52.974Z"
@@ -11172,6 +11180,8 @@ Success
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -13356,6 +13366,8 @@ Success
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -15600,6 +15612,8 @@ Success
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -17545,6 +17559,7 @@ Success
           }
         ],
         "styles": {},
+        "constants": {},
         "settings": {},
         "created_at": "2020-12-22T05:11:16.027Z",
         "updated_at": "2021-02-24T14:03:52.974Z"
@@ -19739,6 +19754,8 @@ Success
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -21922,6 +21939,8 @@ Success
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -24181,6 +24200,8 @@ Success
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -26368,6 +26389,8 @@ Success
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -28554,6 +28577,8 @@ Success
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -30740,6 +30765,8 @@ Success
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -32926,6 +32953,8 @@ Success
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -35112,6 +35141,8 @@ Success
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -37298,6 +37329,8 @@ Success
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -39484,6 +39517,8 @@ Success
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -39556,11 +39591,7 @@ Success
       {
         "_id": "000000000000000023106198",
         "gender": "male",
-        "roles": [
-          "Ark-Qnatemplate-FullAccess"
-        ],
         "active": true,
-        "uid": "23106198",
         "emails": [
           {
             "active": true,
@@ -39572,7 +39603,7 @@ Success
         "username": "raaz_crzy_gmail_com_63747_23106198",
         "__v": 7,
         "debug": {
-          "source": "grimlock",
+          "source": "deadlock",
           "platform": "000000000000000000000003"
         },
         "dob": "1995-07-23T00:00:00.000Z",
@@ -39701,6 +39732,88 @@ Schema: `CreateUserResponseSchema`
 ---
 
 
+#### blockOrUnblockUsers
+Block/Unblock user
+
+```golang
+
+data, err := User.BlockOrUnblockUsers(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID | 
+
+
+| ApplicationID | string | Application ID | 
+
+
+| body |  BlockUserRequestSchema | "Request body" 
+
+Block/Unblock user
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `BlockUserSuccess`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### archiveUser
+archive user
+
+```golang
+
+data, err := User.ArchiveUser(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID | 
+
+
+| ApplicationID | string | Application ID | 
+
+
+| body |  ArchiveUserRequestSchema | "Request body" 
+
+archive user
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `ArchiveUserSuccess`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateUser
 Update user
 
@@ -39774,6 +39887,124 @@ Create user session
 
 
 Schema: `CreateUserSessionResponseSchema`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getActiveSessions
+Get a list of all session for a user
+
+```golang
+
+data, err := User.GetActiveSessions(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
+
+
+
+| xQuery | struct | Includes properties such as `ID`
+
+
+Use this API to retrieve a list of session of customers who have registered in the application.
+
+*Success Response:*
+
+
+
+Success. Refer `SessionListResponseSchema` for more details.
+
+
+Schema: `SessionListResponseSchema`
+
+
+*Examples:*
+
+
+Success
+```json
+{
+  "value": {
+    "items": [
+      "sess:123",
+      "sess:456"
+    ]
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteActiveSessions
+Delete a list of all session for a user
+
+```golang
+
+data, err := User.DeleteActiveSessions(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
+
+
+
+| xQuery | struct | Includes properties such as `ID`
+
+
+Use this API to Delete a list of session of customers who have registered in the application.
+
+*Success Response:*
+
+
+
+Success. Refer `SessionDeleteResponseSchema` for more details.
+
+
+Schema: `SessionDeleteResponseSchema`
+
+
+*Examples:*
+
+
+Success
+```json
+{
+  "value": {
+    "items": [
+      "sess:123",
+      "sess:456"
+    ]
+  }
+}
+```
 
 
 
@@ -52089,53 +52320,6 @@ Schema: `OrderDetails`
 ---
 
 
-#### getOrderDetails
-Get Order Details for company based on Company Id and Order Id
-
-```golang
-
-data, err := Order.GetOrderDetails(CompanyID, ApplicationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `OrderID`, `Next`, `Previous`
-
-
-Get Orders
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `OrderDetails`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getPicklistOrdersByCompanyId
 Get Orders for company based on Company Id
 
@@ -52777,49 +52961,6 @@ Schema: `GetClickToCallResponse`
 ## Catalog
 
 
-#### getSearchKeywords
-Get a Search Keywords Details
-
-```golang
-
-data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
-
-*Success Response:*
-
-
-
-The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
-
-
-Schema: `GetSearchWordsDetailResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateSearchKeywords
 Update Search Keyword
 
@@ -52852,6 +52993,49 @@ The Collection object. See example below or refer `GetSearchWordsDataSchema` for
 
 
 Schema: `GetSearchWordsData`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSearchKeywords
+Get a Search Keywords Details
+
+```golang
+
+data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
+
+*Success Response:*
+
+
+
+The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
+
+
+Schema: `GetSearchWordsDetailResponse`
 
 
 
@@ -52988,49 +53172,6 @@ Schema: `GetSearchWordsData`
 ---
 
 
-#### getAutocompleteKeywordDetail
-Get a Autocomplete Keywords Details
-
-```golang
-
-data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
-
-*Success Response:*
-
-
-
-The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
-
-
-Schema: `GetAutocompleteWordsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateAutocompleteKeyword
 Create & Update Autocomplete Keyword
 
@@ -53060,6 +53201,49 @@ Update a mapping by it's id. On successful request, returns the updated Keyword 
 
 
 The Mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details.
+
+
+Schema: `GetAutocompleteWordsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAutocompleteKeywordDetail
+Get a Autocomplete Keywords Details
+
+```golang
+
+data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
+
+*Success Response:*
+
+
+
+The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
 
 
 Schema: `GetAutocompleteWordsResponse`
@@ -53279,46 +53463,6 @@ Schema: `GetProductBundleCreateResponse`
 ---
 
 
-#### getProductBundleDetail
-Get a particular Product Bundle details
-
-```golang
-
-data, err := Catalog.GetProductBundleDetail(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
-
-*Success Response:*
-
-
-
-The Collection object. See example below or refer `GetProductBundleResponse` for details
-
-
-Schema: `GetProductBundleResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateProductBundle
 Update a Product Bundle
 
@@ -53348,6 +53492,46 @@ The Collection object. See example below or refer `GetProductBundleCreateRespons
 
 
 Schema: `GetProductBundleCreateResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProductBundleDetail
+Get a particular Product Bundle details
+
+```golang
+
+data, err := Catalog.GetProductBundleDetail(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
+
+*Success Response:*
+
+
+
+The Collection object. See example below or refer `GetProductBundleResponse` for details
+
+
+Schema: `GetProductBundleResponse`
 
 
 
@@ -53446,46 +53630,6 @@ Schema: `SuccessResponse`
 ---
 
 
-#### getSizeGuide
-Get a single size guide.
-
-```golang
-
-data, err := Catalog.GetSizeGuide(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to size guide. | 
-
-
-| ID | string | Id of the size guide to be viewed. | 
-
-
-
-This API helps to get data associated to a size guide.
-
-*Success Response:*
-
-
-
-Brand object. See example below or refer `SizeGuideResponseSchema` for details
-
-
-Schema: `SizeGuideResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateSizeGuide
 Edit a size guide.
 
@@ -53515,6 +53659,46 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSizeGuide
+Get a single size guide.
+
+```golang
+
+data, err := Catalog.GetSizeGuide(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to size guide. | 
+
+
+| ID | string | Id of the size guide to be viewed. | 
+
+
+
+This API helps to get data associated to a size guide.
+
+*Success Response:*
+
+
+
+Brand object. See example below or refer `SizeGuideResponseSchema` for details
+
+
+Schema: `SizeGuideResponse`
 
 
 
@@ -55032,46 +55216,6 @@ Schema: `CategoryCreateResponse`
 ---
 
 
-#### getCategoryData
-Get product category by uid
-
-```golang
-
-data, err := Catalog.GetCategoryData(CompanyID, UID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| UID | string | Category unique id | 
-
-
-
-This API gets meta associated to product categories.
-
-*Success Response:*
-
-
-
-Get Data for one category. See example below or refer `CategoryResponse` for details
-
-
-Schema: `SingleCategoryResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateCategory
 Update product categories
 
@@ -55101,6 +55245,46 @@ Category Meta. See example below or refer `CategoryUpdateResponse` for details
 
 
 Schema: `CategoryUpdateResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCategoryData
+Get product category by uid
+
+```golang
+
+data, err := Catalog.GetCategoryData(CompanyID, UID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| UID | string | Category unique id | 
+
+
+
+This API gets meta associated to product categories.
+
+*Success Response:*
+
+
+
+Get Data for one category. See example below or refer `CategoryResponse` for details
+
+
+Schema: `SingleCategoryResponse`
 
 
 
@@ -55207,6 +55391,47 @@ Schema: `SuccessResponse`
 ---
 
 
+#### editProduct
+Edit a product.
+
+```golang
+
+data, err := Catalog.EditProduct(CompanyID, ItemID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+
+
+| ItemID | float64 | Id of the product to be updated. | 
+
+
+| body |  ProductCreateUpdate | "Request body" 
+
+This API allows to edit product.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getProduct
 Get a single product.
 
@@ -55240,47 +55465,6 @@ Product object. See example below or refer `product.utils.format_product_respons
 
 
 Schema: `Product`
-
-
-
-
-
-
-
-
-
----
-
-
-#### editProduct
-Edit a product.
-
-```golang
-
-data, err := Catalog.EditProduct(CompanyID, ItemID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to product that is to be viewed. | 
-
-
-| ItemID | float64 | Id of the product to be updated. | 
-
-
-| body |  ProductCreateUpdate | "Request body" 
-
-This API allows to edit product.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
 
 
 
@@ -55459,12 +55643,12 @@ Schema: `ProductBulkRequestList`
 ---
 
 
-#### createBulkProductUploadJob
-Create a Bulk product to upload job.
+#### updateProductAssetsInBulk
+Create a Bulk asset upload Job.
 
 ```golang
 
-data, err := Catalog.CreateBulkProductUploadJob(CompanyID, body);
+data, err := Catalog.UpdateProductAssetsInBulk(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -55475,48 +55659,7 @@ data, err := Catalog.CreateBulkProductUploadJob(CompanyID, body);
 
 | body |  BulkJob | "Request body" 
 
-This API helps to create a bulk products upload job.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `BulkResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createProductsInBulk
-Create products in bulk associated with given batch Id.
-
-```golang
-
-data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
-
-
-| BatchID | string | Batch Id in which assets to be uploaded. | 
-
-
-| body |  BulkProductRequest | "Request body" 
-
-This API helps to create products in bulk push to kafka for approval/creation.
+This API helps to create a bulk asset upload job.
 
 *Success Response:*
 
@@ -55557,6 +55700,47 @@ data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
 
 
 This API allows to delete bulk product job associated with company.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createProductsInBulk
+Create products in bulk associated with given batch Id.
+
+```golang
+
+data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+
+
+| BatchID | string | Batch Id in which assets to be uploaded. | 
+
+
+| body |  BulkProductRequest | "Request body" 
+
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -55777,7 +55961,7 @@ This API allows get Inventory data for particular company grouped by size and st
 returns a list of all inventory grouped by size and store
 
 
-Schema: `InventoryResponsePaginated`
+Schema: `InventoryResponse`
 
 
 
@@ -55873,7 +56057,7 @@ This API allows get Inventory data for particular company grouped by size and st
 returns a list of all inventory grouped by size and store
 
 
-Schema: `InventoryResponsePaginated`
+Schema: `InventoryResponse`
 
 
 
@@ -55928,7 +56112,7 @@ This API allows get Inventory data for particular company grouped by size and st
 returns a list of all inventory grouped by size and store
 
 
-Schema: `InventoryResponsePaginated`
+Schema: `InventoryResponse`
 
 
 
@@ -55974,7 +56158,7 @@ This API allows to delete inventory of a particular product for particular compa
 Returns a success response
 
 
-Schema: `SuccessResponse`
+Schema: `InventoryDelete`
 
 
 
@@ -56054,7 +56238,47 @@ This API helps to create a bulk Inventory upload job.
 Returns a success response
 
 
-Schema: `BulkResponse`
+Schema: `CommonResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteBulkInventoryJob
+Delete Bulk Inventory job.
+
+```golang
+
+data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
+
+
+| BatchID | string | Batch Id of the bulk delete job. | 
+
+
+
+This API allows to delete bulk Inventory job associated with company.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
@@ -56087,46 +56311,6 @@ data, err := Catalog.CreateBulkInventory(CompanyID, BatchID, body);
 | body |  InventoryBulkRequest | "Request body" 
 
 This API helps to create products in bulk push to kafka for approval/creation.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteBulkInventoryJob
-Delete Bulk Inventory job.
-
-```golang
-
-data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
-
-
-| BatchID | string | Batch Id of the bulk delete job. | 
-
-
-
-This API allows to delete bulk Inventory job associated with company.
 
 *Success Response:*
 
@@ -56210,7 +56394,7 @@ This API helps to create a Inventory export job.
 Returns a success response
 
 
-Schema: `InventoryExportResponse`
+Schema: `SuccessResponse`
 
 
 
@@ -56345,46 +56529,6 @@ Schema: `HsnCode`
 ---
 
 
-#### getHsnCode
-Fetch Hsn Code.
-
-```golang
-
-data, err := Catalog.GetHsnCode(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ID | string | Unique id | 
-
-
-
-Fetch Hsn Code.
-
-*Success Response:*
-
-
-
-See example below details
-
-
-Schema: `HsnCode`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateHsnCode
 Update Hsn Code.
 
@@ -56411,6 +56555,46 @@ Update Hsn Code.
 
 
 See example below for details
+
+
+Schema: `HsnCode`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getHsnCode
+Fetch Hsn Code.
+
+```golang
+
+data, err := Catalog.GetHsnCode(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ID | string | Unique id | 
+
+
+
+Fetch Hsn Code.
+
+*Success Response:*
+
+
+
+See example below details
 
 
 Schema: `HsnCode`
@@ -56743,44 +56927,6 @@ The Product object. See example below or refer `ApplicationProductListingRespons
 
 
 Schema: `ProductListingResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getOptimalLocations
-Location Reassignment
-
-```golang
-
-data, err := Catalog.GetOptimalLocations(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company inside which the location is to be created. | 
-
-
-| body |  AssignStore | "Request body" 
-
-
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `StoreAssignResponse`
 
 
 
@@ -60766,6 +60912,307 @@ Coupon schedule updated successfully
   "value": {
     "success": true,
     "message": "Coupon schedule updated"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPromotions
+Get promotion list
+
+```golang
+
+data, err := Cart.GetPromotions(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current Application _id | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`, `IsActive`, `PromoGroup`, `PromotionType`, `FpPanel`, `PromotionID`
+
+
+Get promotion list with pagination
+
+*Success Response:*
+
+
+
+Promotion List for sent page_size and page_no
+
+
+Schema: `PromotionsResponse`
+
+
+*Examples:*
+
+
+Promotion list for sent filter and page size
+```json
+{
+  "value": {
+    "items": [
+      {
+        "_id": "61dc8dc9adf45b2273a70a6e",
+        "promo_group": "product",
+        "date_meta": {
+          "modified_on": "2022-01-11T05:47:11.503000+00:00",
+          "created_on": "2022-01-10T19:49:29.917000+00:00"
+        },
+        "display_meta": {
+          "name": "Test BOGO promo"
+        },
+        "author": {
+          "created_by": "5",
+          "modified_by": "5"
+        },
+        "_schedule": {
+          "start": "2022-01-10T18:45:36.311000+00:00",
+          "end": null,
+          "published": true,
+          "next_schedule": [
+            {
+              "start": "2022-01-10T18:45:36.311000+00:00",
+              "end": null
+            }
+          ],
+          "cron": "",
+          "duration": 0
+        }
+      }
+    ],
+    "page": {
+      "has_next": true,
+      "size": 10,
+      "current": 1,
+      "item_total": 30
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createPromotion
+Create new promotion
+
+```golang
+
+data, err := Cart.CreatePromotion(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current Application _id | 
+
+
+| body |  PromotionAdd | "Request body" 
+
+Create new promotion
+
+*Success Response:*
+
+
+
+Promotion Created successfully
+
+
+Schema: `PromotionAdd`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPromotionById
+Get with single promotion details or promotion list
+
+```golang
+
+data, err := Cart.GetPromotionById(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current Application _id | 
+
+
+| ID | string |  | 
+
+
+
+Get single promotion details with `id` in path param
+
+*Success Response:*
+
+
+
+Promotion object for sent `id`
+
+
+Schema: `PromotionUpdate`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updatePromotion
+Update existing promotion configuration
+
+```golang
+
+data, err := Cart.UpdatePromotion(CompanyID, ApplicationID, ID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current Application _id | 
+
+
+| ID | string |  | 
+
+
+| body |  PromotionUpdate | "Request body" 
+
+Update promotion with id sent in `id`
+
+*Success Response:*
+
+
+
+Promotion updated successfully
+
+
+Schema: `PromotionUpdate`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updatePromotionPartially
+Update promotion publish state and schedule
+
+```golang
+
+data, err := Cart.UpdatePromotionPartially(CompanyID, ApplicationID, ID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current Application _id | 
+
+
+| ID | string |  | 
+
+
+| body |  PromotionPartialUpdate | "Request body" 
+
+Update publish/unpublish and change schedule for promotion
+
+*Success Response:*
+
+
+
+Promotion updated successfully
+
+
+Schema: `SuccessMessage`
+
+
+*Examples:*
+
+
+Publish or Unpublish promotion
+```json
+{
+  "value": {
+    "success": true,
+    "message": "Promotion Updated"
+  }
+}
+```
+
+Promotion schedule updated successfully
+```json
+{
+  "value": {
+    "success": true,
+    "message": "Promotion schedule updated"
   }
 }
 ```

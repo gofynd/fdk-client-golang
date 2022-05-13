@@ -48,8 +48,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [unfollowById](#unfollowbyid)
     * [followById](#followbyid)
+    * [unfollowById](#unfollowbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -86,6 +86,8 @@
     * [getCartShareLink](#getcartsharelink)
     * [getCartSharedItems](#getcartshareditems)
     * [updateCartWithSharedItems](#updatecartwithshareditems)
+    * [getPromotionOffers](#getpromotionoffers)
+    * [getLadderOffers](#getladderoffers)
     
 
 * [Common](#Common)
@@ -232,6 +234,8 @@
     * [getPaymentModeRoutes](#getpaymentmoderoutes)
     * [getPosPaymentModeRoutes](#getpospaymentmoderoutes)
     * [getRupifiBannerDetails](#getrupifibannerdetails)
+    * [getEpaylaterBannerDetails](#getepaylaterbannerdetails)
+    * [resendOrCancelPayment](#resendorcancelpayment)
     * [getActiveRefundTransferModes](#getactiverefundtransfermodes)
     * [enableOrDisableRefundTransferMode](#enableordisablerefundtransfermode)
     * [getUserBeneficiariesDetail](#getuserbeneficiariesdetail)
@@ -242,6 +246,10 @@
     * [addRefundBankAccountUsingOTP](#addrefundbankaccountusingotp)
     * [verifyOtpAndAddBeneficiaryForWallet](#verifyotpandaddbeneficiaryforwallet)
     * [updateDefaultBeneficiary](#updatedefaultbeneficiary)
+    * [customerCreditSummary](#customercreditsummary)
+    * [redirectToAggregator](#redirecttoaggregator)
+    * [checkCredit](#checkcredit)
+    * [customerOnboard](#customeronboard)
     
 
 * [Order](#Order)
@@ -256,6 +264,7 @@
     * [getCustomerDetailsByShipmentId](#getcustomerdetailsbyshipmentid)
     * [sendOtpToShipmentCustomer](#sendotptoshipmentcustomer)
     * [verifyOtpShipmentCustomer](#verifyotpshipmentcustomer)
+    * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
     
 
 * [Rewards](#Rewards)
@@ -333,6 +342,7 @@
 * [Logistic](#Logistic)
   * Methods
     * [getTatProduct](#gettatproduct)
+    * [getPincodeZones](#getpincodezones)
     * [getPincodeCity](#getpincodecity)
     
 
@@ -1200,12 +1210,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1219,7 +1229,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1241,12 +1251,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1260,7 +1270,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1660,7 +1670,9 @@ Fetch all items added to the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`
 
 
 
@@ -1732,7 +1744,9 @@ Add items to cart
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`
+
+
+| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -2408,7 +2422,9 @@ Update items in the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AreaCode`
 
 | body |  UpdateCartRequest | "Request body" 
 
@@ -4991,6 +5007,92 @@ Cart Merged/Replaced
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPromotionOffers
+Fetch available promotions
+
+```golang
+
+ data, err :=  Cart.GetPromotionOffers(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Slug`, `PageSize`, `PromotionGroup`
+
+
+
+Use this API to get top 5 offers available for current product
+
+*Success Response:*
+
+
+
+Success. Returns a array containing the available offers (if exists) on product via promotions. Refer `PromotionOffersResponse` for more details.
+
+
+Schema: `PromotionOffersResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getLadderOffers
+Fetch ladder price promotion
+
+```golang
+
+ data, err :=  Cart.GetLadderOffers(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Slug`, `StoreID`, `PromotionID`, `PageSize`
+
+
+
+Use this API to get applicable ladder price promotion for current product
+
+*Success Response:*
+
+
+
+Success. Returns a object containing the applicable ladder price offers (if exists) on product. Refer `PromotionOffersResponse` for more details.
+
+
+Schema: `LadderPriceOffers`
 
 
 
@@ -9015,6 +9117,8 @@ Applied Theme
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -11196,6 +11300,8 @@ Preview Theme
       }
     ],
     "styles": {},
+    "constants": {},
+    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -11663,14 +11769,11 @@ Success
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -11708,8 +11811,7 @@ Success
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -11800,14 +11902,11 @@ Success
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -11845,8 +11944,7 @@ Success
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -11934,14 +12032,11 @@ Success
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -11979,8 +12074,7 @@ Success
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12292,14 +12386,11 @@ default
     "verify_mobile_link": true,
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12337,8 +12428,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12433,14 +12523,11 @@ default
     "verify_mobile_link": true,
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12478,8 +12565,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12530,14 +12616,11 @@ default
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12575,8 +12658,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12704,14 +12786,11 @@ default
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12749,8 +12828,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12806,14 +12884,11 @@ default
     "verify_mobile_link": true,
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12851,8 +12926,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12916,14 +12990,11 @@ default
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12961,8 +13032,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13014,14 +13084,11 @@ default
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13059,8 +13126,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13116,14 +13182,11 @@ default
     "verify_mobile_link": true,
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13161,8 +13224,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13218,14 +13280,11 @@ default
     "verify_email_link": true,
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13263,8 +13322,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13326,14 +13384,11 @@ default
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13371,8 +13426,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13424,14 +13478,11 @@ default
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13469,8 +13520,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -16694,6 +16744,139 @@ Schema: `RupifiBannerResponse`
 ---
 
 
+#### getEpaylaterBannerDetails
+Get Epaylater Enabled
+
+```golang
+
+ data, err :=  Payment.GetEpaylaterBannerDetails();
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+Get Epaylater Enabled if user is tentatively approved by epaylater
+
+*Success Response:*
+
+
+
+Success. Return Epaylater Offer detail. Check the example shown below or refer `EpaylaterBannerResponseSchema` for more details. if `display=True`, then show banner otherwise do not show.
+
+
+Schema: `EpaylaterBannerResponse`
+
+
+*Examples:*
+
+
+User is registered successfully
+```json
+{
+  "value": {
+    "success": true,
+    "data": {
+      "display": false,
+      "message": "User is Active",
+      "status": "ACTIVE"
+    }
+  }
+}
+```
+
+User is not registered or KYC not done or approval pending
+```json
+{
+  "value": {
+    "success": true,
+    "data": {
+      "display": true,
+      "message": "User is not registered",
+      "status": "NOT REGISTERED"
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### resendOrCancelPayment
+API to resend and cancel a payment link which was already generated.
+
+```golang
+
+ data, err :=  Payment.ResendOrCancelPayment(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  ResendOrCancelPaymentRequest | "Request body" 
+
+
+Use this API to perform resend or cancel a payment link based on request payload.
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `ResendOrCancelPaymentResponse` for more details.
+
+
+Schema: `ResendOrCancelPaymentResponse`
+
+
+*Examples:*
+
+
+request_type is cancel
+```json
+{
+  "value": {
+    "success": true,
+    "data": {
+      "message": "Payment link Cancelled.",
+      "status": true
+    }
+  }
+}
+```
+
+request_type is resend
+```json
+{
+  "value": {
+    "success": true,
+    "data": {
+      "message": "Notification triggered.",
+      "status": true
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getActiveRefundTransferModes
 Lists the mode of refund
 
@@ -17047,6 +17230,158 @@ Success. Check the example shown below or refer `SetDefaultBeneficiaryResponse` 
 
 
 Schema: `SetDefaultBeneficiaryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### customerCreditSummary
+API to fetch the customer credit summary
+
+```golang
+
+ data, err :=  Payment.CustomerCreditSummary(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Aggregator`
+
+
+
+Use this API to fetch the customer credit summary.
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `CustomerCreditSummaryResponseSchema` for more details.
+
+
+Schema: `CustomerCreditSummaryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### redirectToAggregator
+API to get the redirect url to redirect the user to aggregator's page
+
+```golang
+
+ data, err :=  Payment.RedirectToAggregator(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+| xQuery | struct | Includes properties such as `Source`, `Aggregator`
+
+
+
+Use this API to get the redirect url to redirect the user to aggregator's page
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `RedirectToAggregatorResponseSchema` for more details.
+
+
+Schema: `RedirectToAggregatorResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### checkCredit
+API to fetch the customer credit summary
+
+```golang
+
+ data, err :=  Payment.CheckCredit(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Aggregator`
+
+
+
+Use this API to fetch the customer credit summary.
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `CheckCreditResponseSchema` for more details.
+
+
+Schema: `CheckCreditResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### customerOnboard
+API to fetch the customer credit summary
+
+```golang
+
+ data, err :=  Payment.CustomerOnboard(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  CustomerOnboardingRequest | "Request body" 
+
+
+Use this API to fetch the customer credit summary.
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `CustomerOnboardingResponseSchema` for more details.
+
+
+Schema: `CustomerOnboardingResponse`
 
 
 
@@ -17453,6 +17788,44 @@ Success, the code is valid and returns a session token
 
 
 Schema: `ResponseVerifyOTPShipment`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getInvoiceByShipmentId
+Get Invoice URL
+
+```golang
+
+ data, err :=  Order.GetInvoiceByShipmentId(ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+
+
+Use this API to get a generated Invoice URL for viewing or download.
+
+*Success Response:*
+
+
+
+Success, the code is valid and returns a SignedUrl
+
+
+Schema: `ResponseGetInvoiceShipment`
 
 
 
@@ -18821,7 +19194,9 @@ Fetch all items added to the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`
 
 
 
@@ -18893,7 +19268,9 @@ Add items to cart
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`
+
+
+| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -19569,7 +19946,9 @@ Update items in the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AreaCode`
 
 | body |  UpdateCartRequest | "Request body" 
 
@@ -22970,6 +23349,42 @@ Success. Check the example shown below or refer `GetTatProductResponse` for more
 
 
 Schema: `GetTatProductResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPincodeZones
+Get Pincode Zones
+
+```golang
+
+ data, err :=  Logistic.GetPincodeZones(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  GetPincodeZonesReqBody | "Request body" 
+
+
+Get to know the zones of a specefic pincode
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `GetTatProductResponse` for more details.
+
+
+Schema: `GetPincodeZonesResponse`
 
 
 
