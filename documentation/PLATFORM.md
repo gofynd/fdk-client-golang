@@ -311,12 +311,12 @@
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createProductBundle](#createproductbundle)
     * [getProductBundle](#getproductbundle)
-    * [getProductBundleDetail](#getproductbundledetail)
     * [updateProductBundle](#updateproductbundle)
+    * [getProductBundleDetail](#getproductbundledetail)
     * [createSizeGuide](#createsizeguide)
     * [getSizeGuides](#getsizeguides)
-    * [getSizeGuide](#getsizeguide)
     * [updateSizeGuide](#updatesizeguide)
+    * [getSizeGuide](#getsizeguide)
     * [updateAppProduct](#updateappproduct)
     * [getCatalogConfiguration](#getcatalogconfiguration)
     * [createConfigurationProductListing](#createconfigurationproductlisting)
@@ -353,8 +353,8 @@
     * [listTemplateBrandTypeValues](#listtemplatebrandtypevalues)
     * [createCategories](#createcategories)
     * [listCategories](#listcategories)
-    * [getCategoryData](#getcategorydata)
     * [updateCategory](#updatecategory)
+    * [getCategoryData](#getcategorydata)
     * [createProduct](#createproduct)
     * [getProducts](#getproducts)
     * [editProduct](#editproduct)
@@ -384,8 +384,8 @@
     * [exportInventoryConfig](#exportinventoryconfig)
     * [createHsnCode](#createhsncode)
     * [getAllHsnCodes](#getallhsncodes)
-    * [getHsnCode](#gethsncode)
     * [updateHsnCode](#updatehsncode)
+    * [getHsnCode](#gethsncode)
     * [bulkHsnCode](#bulkhsncode)
     * [getApplicationBrandListing](#getapplicationbrandlisting)
     * [updateAppBrand](#updateappbrand)
@@ -401,18 +401,18 @@
 
 * [CompanyProfile](#CompanyProfile)
   * Methods
-    * [cbsOnboardGet](#cbsonboardget)
     * [updateCompany](#updatecompany)
+    * [cbsOnboardGet](#cbsonboardget)
     * [getCompanyMetrics](#getcompanymetrics)
-    * [getBrand](#getbrand)
     * [editBrand](#editbrand)
+    * [getBrand](#getbrand)
     * [createBrand](#createbrand)
     * [createCompanyBrandMapping](#createcompanybrandmapping)
     * [getBrands](#getbrands)
     * [createLocation](#createlocation)
     * [getLocations](#getlocations)
-    * [getLocationDetail](#getlocationdetail)
     * [updateLocation](#updatelocation)
+    * [getLocationDetail](#getlocationdetail)
     * [createLocationBulk](#createlocationbulk)
     
 
@@ -585,8 +585,8 @@
     * [getEntityRegionView](#getentityregionview)
     * [getListView](#getlistview)
     * [getCompanyStoreView](#getcompanystoreview)
-    * [updateZoneControllerView](#updatezonecontrollerview)
     * [getZoneDataView](#getzonedataview)
+    * [updateZoneControllerView](#updatezonecontrollerview)
     * [upsertZoneControllerView](#upsertzonecontrollerview)
     * [getZoneFromPincode](#getzonefrompincode)
     
@@ -53478,46 +53478,6 @@ Schema: `GetProductBundleListingResponse`
 ---
 
 
-#### getProductBundleDetail
-Get a particular Product Bundle details
-
-```golang
-
-data, err := Catalog.GetProductBundleDetail(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
-
-*Success Response:*
-
-
-
-The Collection object. See example below or refer `GetProductBundleResponse` for details
-
-
-Schema: `GetProductBundleResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateProductBundle
 Update a Product Bundle
 
@@ -53547,6 +53507,46 @@ The Collection object. See example below or refer `GetProductBundleCreateRespons
 
 
 Schema: `GetProductBundleCreateResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProductBundleDetail
+Get a particular Product Bundle details
+
+```golang
+
+data, err := Catalog.GetProductBundleDetail(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
+
+*Success Response:*
+
+
+
+The Collection object. See example below or refer `GetProductBundleResponse` for details
+
+
+Schema: `GetProductBundleResponse`
 
 
 
@@ -53645,46 +53645,6 @@ Schema: `ListSizeGuide`
 ---
 
 
-#### getSizeGuide
-Get a single size guide.
-
-```golang
-
-data, err := Catalog.GetSizeGuide(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to size guide. | 
-
-
-| ID | string | Id of the size guide to be viewed. | 
-
-
-
-This API helps to get data associated to a size guide.
-
-*Success Response:*
-
-
-
-Brand object. See example below or refer `SizeGuideResponseSchema` for details
-
-
-Schema: `SizeGuideResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateSizeGuide
 Edit a size guide.
 
@@ -53714,6 +53674,46 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSizeGuide
+Get a single size guide.
+
+```golang
+
+data, err := Catalog.GetSizeGuide(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to size guide. | 
+
+
+| ID | string | Id of the size guide to be viewed. | 
+
+
+
+This API helps to get data associated to a size guide.
+
+*Success Response:*
+
+
+
+Brand object. See example below or refer `SizeGuideResponseSchema` for details
+
+
+Schema: `SizeGuideResponse`
 
 
 
@@ -55231,46 +55231,6 @@ Schema: `CategoryResponse`
 ---
 
 
-#### getCategoryData
-Get product category by uid
-
-```golang
-
-data, err := Catalog.GetCategoryData(CompanyID, UID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| UID | string | Category unique id | 
-
-
-
-This API gets meta associated to product categories.
-
-*Success Response:*
-
-
-
-Get Data for one category. See example below or refer `CategoryResponse` for details
-
-
-Schema: `SingleCategoryResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateCategory
 Update product categories
 
@@ -55300,6 +55260,46 @@ Category Meta. See example below or refer `CategoryUpdateResponse` for details
 
 
 Schema: `CategoryUpdateResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCategoryData
+Get product category by uid
+
+```golang
+
+data, err := Catalog.GetCategoryData(CompanyID, UID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| UID | string | Category unique id | 
+
+
+
+This API gets meta associated to product categories.
+
+*Success Response:*
+
+
+
+Get Data for one category. See example below or refer `CategoryResponse` for details
+
+
+Schema: `SingleCategoryResponse`
 
 
 
@@ -56544,46 +56544,6 @@ Schema: `HsnCodesListingResponse`
 ---
 
 
-#### getHsnCode
-Fetch Hsn Code.
-
-```golang
-
-data, err := Catalog.GetHsnCode(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ID | string | Unique id | 
-
-
-
-Fetch Hsn Code.
-
-*Success Response:*
-
-
-
-See example below details
-
-
-Schema: `HsnCode`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateHsnCode
 Update Hsn Code.
 
@@ -56610,6 +56570,46 @@ Update Hsn Code.
 
 
 See example below for details
+
+
+Schema: `HsnCode`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getHsnCode
+Fetch Hsn Code.
+
+```golang
+
+data, err := Catalog.GetHsnCode(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ID | string | Unique id | 
+
+
+
+Fetch Hsn Code.
+
+*Success Response:*
+
+
+
+See example below details
 
 
 Schema: `HsnCode`
@@ -57160,43 +57160,6 @@ Schema: `LocationListSerializer`
 ## CompanyProfile
 
 
-#### cbsOnboardGet
-Get company profile
-
-```golang
-
-data, err := CompanyProfile.CbsOnboardGet(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-
-This API allows to view the company profile of the seller account.
-
-*Success Response:*
-
-
-
-Company profile object. See example below or refer `GetCompanyProfileSerializerResponse` for details
-
-
-Schema: `GetCompanyProfileSerializerResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateCompany
 Edit company profile
 
@@ -57223,6 +57186,43 @@ Returns a success message
 
 
 Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### cbsOnboardGet
+Get company profile
+
+```golang
+
+data, err := CompanyProfile.CbsOnboardGet(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+
+This API allows to view the company profile of the seller account.
+
+*Success Response:*
+
+
+
+Company profile object. See example below or refer `GetCompanyProfileSerializerResponse` for details
+
+
+Schema: `GetCompanyProfileSerializerResponse`
 
 
 
@@ -57272,46 +57272,6 @@ Schema: `MetricsSerializer`
 ---
 
 
-#### getBrand
-Get a single brand.
-
-```golang
-
-data, err := CompanyProfile.GetBrand(CompanyID, BrandID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to brand that is to be viewed. | 
-
-
-| BrandID | string | Id of the brand to be viewed. | 
-
-
-
-This API helps to get data associated to a particular brand.
-
-*Success Response:*
-
-
-
-Brand object. See example below or refer `GetBrandResponseSerializer` for details
-
-
-Schema: `GetBrandResponseSerializer`
-
-
-
-
-
-
-
-
-
----
-
-
 #### editBrand
 Edit a brand.
 
@@ -57341,6 +57301,46 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getBrand
+Get a single brand.
+
+```golang
+
+data, err := CompanyProfile.GetBrand(CompanyID, BrandID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to brand that is to be viewed. | 
+
+
+| BrandID | string | Id of the brand to be viewed. | 
+
+
+
+This API helps to get data associated to a particular brand.
+
+*Success Response:*
+
+
+
+Brand object. See example below or refer `GetBrandResponseSerializer` for details
+
+
+Schema: `GetBrandResponseSerializer`
 
 
 
@@ -57559,46 +57559,6 @@ Schema: `LocationListSerializer`
 ---
 
 
-#### getLocationDetail
-Get details of a specific location.
-
-```golang
-
-data, err := CompanyProfile.GetLocationDetail(CompanyID, LocationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company inside which the location lies. | 
-
-
-| LocationID | string | Id of the location which you want to view. | 
-
-
-
-This API helps to get data associated to a specific location.
-
-*Success Response:*
-
-
-
-Brand object. See example below or refer `GetLocationSerializer` for details
-
-
-Schema: `GetLocationSerializer`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateLocation
 Edit a location asscoiated to a company.
 
@@ -57628,6 +57588,46 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getLocationDetail
+Get details of a specific location.
+
+```golang
+
+data, err := CompanyProfile.GetLocationDetail(CompanyID, LocationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company inside which the location lies. | 
+
+
+| LocationID | string | Id of the location which you want to view. | 
+
+
+
+This API helps to get data associated to a specific location.
+
+*Success Response:*
+
+
+
+Brand object. See example below or refer `GetLocationSerializer` for details
+
+
+Schema: `GetLocationSerializer`
 
 
 
@@ -63965,6 +63965,46 @@ Schema: `CompanyStoreView_Response`
 ---
 
 
+#### getZoneDataView
+Zone Data View of application.
+
+```golang
+
+data, err := Serviceability.GetZoneDataView(CompanyID, ZoneID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
+
+
+
+This API returns Zone Data View of the application.
+
+*Success Response:*
+
+
+
+Get Application Zone Data
+
+
+Schema: `GetSingleZoneDataViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateZoneControllerView
 Updation of zone collections in database.
 
@@ -63994,46 +64034,6 @@ Response status_code
 
 
 Schema: `ZoneSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getZoneDataView
-Zone Data View of application.
-
-```golang
-
-data, err := Serviceability.GetZoneDataView(CompanyID, ZoneID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
-
-
-
-This API returns Zone Data View of the application.
-
-*Success Response:*
-
-
-
-Get Application Zone Data
-
-
-Schema: `GetSingleZoneDataViewResponse`
 
 
 
