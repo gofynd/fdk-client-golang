@@ -8169,13 +8169,13 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
 
     // UpdateCompany Edit company profile
-     func (co *PlatformCompanyProfile)  UpdateCompany(body  UpdateCompany) (SuccessResponse, error){
+     func (co *PlatformCompanyProfile)  UpdateCompany(body  UpdateCompany) (SuccessResponseProfile, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            updateCompanyResponse SuccessResponse
+            updateCompanyResponse SuccessResponseProfile
 	    )
 
         
@@ -8218,12 +8218,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
              
-             return SuccessResponse{}, common.NewFDKError(err.Error())
+             return SuccessResponseProfile{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
                
-             return SuccessResponse{}, common.NewFDKError(err.Error())
+             return SuccessResponseProfile{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -8236,12 +8236,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-             return SuccessResponse{}, err
+             return SuccessResponseProfile{}, err
 	    }
         
         err = json.Unmarshal(response, &updateCompanyResponse)
         if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
+             return SuccessResponseProfile{}, common.NewFDKError(err.Error())
         }
         return updateCompanyResponse, nil
         
@@ -8360,13 +8360,13 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
 
     // EditBrand Edit a brand.
-     func (co *PlatformCompanyProfile)  EditBrand(BrandID string, body  CreateUpdateBrandRequestSerializer) (SuccessResponse, error){
+     func (co *PlatformCompanyProfile)  EditBrand(BrandID string, body  CreateUpdateBrandRequestSerializer) (SuccessResponseProfile, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            editBrandResponse SuccessResponse
+            editBrandResponse SuccessResponseProfile
 	    )
 
         
@@ -8405,12 +8405,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
              
-             return SuccessResponse{}, common.NewFDKError(err.Error())
+             return SuccessResponseProfile{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
                
-             return SuccessResponse{}, common.NewFDKError(err.Error())
+             return SuccessResponseProfile{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -8423,12 +8423,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-             return SuccessResponse{}, err
+             return SuccessResponseProfile{}, err
 	    }
         
         err = json.Unmarshal(response, &editBrandResponse)
         if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
+             return SuccessResponseProfile{}, common.NewFDKError(err.Error())
         }
         return editBrandResponse, nil
         
@@ -8445,13 +8445,13 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
 
     // CreateBrand Create a Brand.
-     func (co *PlatformCompanyProfile)  CreateBrand(body  CreateUpdateBrandRequestSerializer) (SuccessResponse, error){
+     func (co *PlatformCompanyProfile)  CreateBrand(body  CreateUpdateBrandRequestSerializer) (SuccessResponseProfile, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            createBrandResponse SuccessResponse
+            createBrandResponse SuccessResponseProfile
 	    )
 
         
@@ -8488,12 +8488,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
              
-             return SuccessResponse{}, common.NewFDKError(err.Error())
+             return SuccessResponseProfile{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
                
-             return SuccessResponse{}, common.NewFDKError(err.Error())
+             return SuccessResponseProfile{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -8506,12 +8506,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-             return SuccessResponse{}, err
+             return SuccessResponseProfile{}, err
 	    }
         
         err = json.Unmarshal(response, &createBrandResponse)
         if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
+             return SuccessResponseProfile{}, common.NewFDKError(err.Error())
         }
         return createBrandResponse, nil
         
@@ -8651,13 +8651,13 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
 
     // CreateCompanyBrandMapping Create a company brand mapping.
-     func (co *PlatformCompanyProfile)  CreateCompanyBrandMapping(body  CompanyBrandPostRequestSerializer) (SuccessResponse, error){
+     func (co *PlatformCompanyProfile)  CreateCompanyBrandMapping(body  CompanyBrandPostRequestSerializer) (SuccessResponseProfile, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            createCompanyBrandMappingResponse SuccessResponse
+            createCompanyBrandMappingResponse SuccessResponseProfile
 	    )
 
         
@@ -8680,12 +8680,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
              
-             return SuccessResponse{}, common.NewFDKError(err.Error())
+             return SuccessResponseProfile{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
                
-             return SuccessResponse{}, common.NewFDKError(err.Error())
+             return SuccessResponseProfile{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -8698,12 +8698,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-             return SuccessResponse{}, err
+             return SuccessResponseProfile{}, err
 	    }
         
         err = json.Unmarshal(response, &createCompanyBrandMappingResponse)
         if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
+             return SuccessResponseProfile{}, common.NewFDKError(err.Error())
         }
         return createCompanyBrandMappingResponse, nil
         
@@ -8869,13 +8869,13 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
 
     // CreateLocation Create a location associated to a company.
-     func (co *PlatformCompanyProfile)  CreateLocation(body  LocationSerializer) (SuccessResponse, error){
+     func (co *PlatformCompanyProfile)  CreateLocation(body  LocationSerializer) (SuccessResponseProfile, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            createLocationResponse SuccessResponse
+            createLocationResponse SuccessResponseProfile
 	    )
 
         
@@ -8926,12 +8926,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
              
-             return SuccessResponse{}, common.NewFDKError(err.Error())
+             return SuccessResponseProfile{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
                
-             return SuccessResponse{}, common.NewFDKError(err.Error())
+             return SuccessResponseProfile{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -8944,12 +8944,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-             return SuccessResponse{}, err
+             return SuccessResponseProfile{}, err
 	    }
         
         err = json.Unmarshal(response, &createLocationResponse)
         if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
+             return SuccessResponseProfile{}, common.NewFDKError(err.Error())
         }
         return createLocationResponse, nil
         
@@ -9018,13 +9018,13 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
 
     // UpdateLocation Edit a location asscoiated to a company.
-     func (co *PlatformCompanyProfile)  UpdateLocation(LocationID string, body  LocationSerializer) (SuccessResponse, error){
+     func (co *PlatformCompanyProfile)  UpdateLocation(LocationID string, body  LocationSerializer) (SuccessResponseProfile, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            updateLocationResponse SuccessResponse
+            updateLocationResponse SuccessResponseProfile
 	    )
 
         
@@ -9077,12 +9077,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
              
-             return SuccessResponse{}, common.NewFDKError(err.Error())
+             return SuccessResponseProfile{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
                
-             return SuccessResponse{}, common.NewFDKError(err.Error())
+             return SuccessResponseProfile{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -9095,12 +9095,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-             return SuccessResponse{}, err
+             return SuccessResponseProfile{}, err
 	    }
         
         err = json.Unmarshal(response, &updateLocationResponse)
         if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
+             return SuccessResponseProfile{}, common.NewFDKError(err.Error())
         }
         return updateLocationResponse, nil
         
@@ -9117,13 +9117,13 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
 
     // CreateLocationBulk Create a location asscoiated to a company in bulk.
-     func (co *PlatformCompanyProfile)  CreateLocationBulk(body  BulkLocationSerializer) (SuccessResponse, error){
+     func (co *PlatformCompanyProfile)  CreateLocationBulk(body  BulkLocationSerializer) (SuccessResponseProfile, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            createLocationBulkResponse SuccessResponse
+            createLocationBulkResponse SuccessResponseProfile
 	    )
 
         
@@ -9142,12 +9142,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
              
-             return SuccessResponse{}, common.NewFDKError(err.Error())
+             return SuccessResponseProfile{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
                
-             return SuccessResponse{}, common.NewFDKError(err.Error())
+             return SuccessResponseProfile{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -9160,12 +9160,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-             return SuccessResponse{}, err
+             return SuccessResponseProfile{}, err
 	    }
         
         err = json.Unmarshal(response, &createLocationBulkResponse)
         if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
+             return SuccessResponseProfile{}, common.NewFDKError(err.Error())
         }
         return createLocationBulkResponse, nil
         

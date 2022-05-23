@@ -57222,7 +57222,7 @@ This API allows to edit the company profile of the seller account.
 Returns a success message
 
 
-Schema: `SuccessResponse`
+Schema: `SuccessResponseProfile`
 
 
 
@@ -57340,7 +57340,7 @@ This API allows to edit meta of a brand.
 Returns a success response
 
 
-Schema: `SuccessResponse`
+Schema: `SuccessResponseProfile`
 
 
 
@@ -57378,7 +57378,7 @@ This API allows to create a brand associated to a company.
 Returns a success response
 
 
-Schema: `SuccessResponse`
+Schema: `SuccessResponseProfile`
 
 
 
@@ -57460,7 +57460,7 @@ This API allows to create a company brand mapping, for a already existing brand 
 Returns a success response
 
 
-Schema: `SuccessResponse`
+Schema: `SuccessResponseProfile`
 
 
 
@@ -57546,7 +57546,7 @@ This API allows to edit a location associated to a company.
 Returns a success response
 
 
-Schema: `SuccessResponse`
+Schema: `SuccessResponseProfile`
 
 
 
@@ -57627,7 +57627,7 @@ This API allows to edit a location associated to a company.
 Returns a success response
 
 
-Schema: `SuccessResponse`
+Schema: `SuccessResponseProfile`
 
 
 
@@ -57665,7 +57665,7 @@ This API allows to create a location associated to a company.
 Returns a success response
 
 
-Schema: `SuccessResponse`
+Schema: `SuccessResponseProfile`
 
 
 
