@@ -48,8 +48,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [followById](#followbyid)
     * [unfollowById](#unfollowbyid)
+    * [followById](#followbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -1216,12 +1216,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1235,7 +1235,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1257,12 +1257,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1276,7 +1276,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1676,7 +1676,11 @@ Fetch all items added to the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`
+
+
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`, `BuyNow`
 
 
 
@@ -1748,7 +1752,11 @@ Add items to cart
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`
+
+
+
+
+| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`, `BuyNow`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -2211,6 +2219,7 @@ Product has been added to your cart
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
+      "buy_now": false,
       "cart_id": 7927,
       "uid": "7927",
       "gstin": null,
@@ -2394,6 +2403,7 @@ Sorry, item is out of stock
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
+      "buy_now": false,
       "cart_id": 54,
       "uid": "54",
       "gstin": null,
@@ -2434,7 +2444,11 @@ Update items in the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`
+
+
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AreaCode`, `BuyNow`
 
 | body |  UpdateCartRequest | "Request body" 
 
@@ -2622,6 +2636,7 @@ Nothing updated
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
+      "buy_now": false,
       "cart_id": 54,
       "uid": "54",
       "gstin": null,
@@ -2802,6 +2817,7 @@ Item updated in the cart
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
+      "buy_now": false,
       "cart_id": 12426,
       "uid": "12426",
       "gstin": null,
@@ -19476,7 +19492,11 @@ Fetch all items added to the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`
+
+
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`, `BuyNow`
 
 
 
@@ -19548,7 +19568,11 @@ Add items to cart
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`
+
+
+
+
+| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`, `BuyNow`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -20011,6 +20035,7 @@ Product has been added to your cart
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
+      "buy_now": false,
       "cart_id": 7927,
       "uid": "7927",
       "gstin": null,
@@ -20194,6 +20219,7 @@ Sorry, item is out of stock
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
+      "buy_now": false,
       "cart_id": 54,
       "uid": "54",
       "gstin": null,
@@ -20234,7 +20260,11 @@ Update items in the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`
+
+
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AreaCode`, `BuyNow`
 
 | body |  UpdateCartRequest | "Request body" 
 
@@ -20422,6 +20452,7 @@ Nothing updated
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
+      "buy_now": false,
       "cart_id": 54,
       "uid": "54",
       "gstin": null,
@@ -20602,6 +20633,7 @@ Item updated in the cart
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
+      "buy_now": false,
       "cart_id": 12426,
       "uid": "12426",
       "gstin": null,
