@@ -2861,7 +2861,9 @@ Count items in the cart
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 
 
@@ -2899,7 +2901,9 @@ Fetch Coupon
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 
 
@@ -2943,7 +2947,9 @@ Apply Coupon
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `P`, `ID`
+
+
+| xQuery | struct | Includes properties such as `I`, `B`, `P`, `ID`, `BuyNow`
 
 | body |  ApplyCouponRequest | "Request body" 
 
@@ -2982,7 +2988,9 @@ Remove Coupon Applied
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 
 
@@ -3139,7 +3147,9 @@ Apply reward points at cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `BuyNow`
 
 | body |  RewardPointRequest | "Request body" 
 
@@ -3186,7 +3196,9 @@ Fetch address
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+
+
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -3271,7 +3283,9 @@ Fetch a single address by its ID
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+
+
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -3390,7 +3404,9 @@ Select an address from available addresses
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `I`, `B`
+
+
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `I`, `B`
 
 | body |  SelectCartAddressRequest | "Request body" 
 
@@ -3429,7 +3445,9 @@ Update cart payment
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 | body |  UpdateCartPaymentRequest | "Request body" 
 
@@ -3478,7 +3496,9 @@ Verify the coupon eligibility against the payment mode
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
 
 
 
@@ -3522,7 +3542,9 @@ Get delivery date and options before checkout
 
 
 
-| xQuery | struct | Includes properties such as `P`, `ID`, `AddressID`, `AreaCode`
+
+
+| xQuery | struct | Includes properties such as `P`, `ID`, `BuyNow`, `AddressID`, `AreaCode`
 
 
 
@@ -3546,6 +3568,7 @@ Shipment Generated
 {
   "value": {
     "items": [],
+    "buy_now": false,
     "cart_id": 7501,
     "uid": "7501",
     "success": true,
@@ -3932,6 +3955,7 @@ Shipment Generation Failed
 {
   "value": {
     "items": [],
+    "buy_now": false,
     "cart_id": 7501,
     "uid": "7501",
     "success": true,
@@ -4613,7 +4637,9 @@ Update the cart meta
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 | body |  CartMetaRequest | "Request body" 
 
@@ -20679,7 +20705,9 @@ Count items in the cart
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 
 
@@ -20717,7 +20745,9 @@ Fetch Coupon
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 
 
@@ -20761,7 +20791,9 @@ Apply Coupon
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `P`, `ID`
+
+
+| xQuery | struct | Includes properties such as `I`, `B`, `P`, `ID`, `BuyNow`
 
 | body |  ApplyCouponRequest | "Request body" 
 
@@ -20800,7 +20832,9 @@ Remove Coupon Applied
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 
 
@@ -20957,7 +20991,9 @@ Apply reward points at cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `BuyNow`
 
 | body |  RewardPointRequest | "Request body" 
 
@@ -21004,7 +21040,9 @@ Fetch address
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+
+
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -21089,7 +21127,9 @@ Fetch a single address by its ID
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+
+
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -21208,7 +21248,9 @@ Select an address from available addresses
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `I`, `B`
+
+
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `I`, `B`
 
 | body |  SelectCartAddressRequest | "Request body" 
 
@@ -21247,7 +21289,9 @@ Update cart payment
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 | body |  UpdateCartPaymentRequest | "Request body" 
 
@@ -21296,7 +21340,9 @@ Verify the coupon eligibility against the payment mode
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
 
 
 
@@ -23128,7 +23174,9 @@ Update the cart meta
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 | body |  CartMetaRequest | "Request body" 
 
