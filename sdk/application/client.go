@@ -11888,8 +11888,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PaymentGetPaymentModeRoutesPaymentLinkXQuery holds query params
     type PaymentGetPaymentModeRoutesPaymentLinkXQuery struct { 
-        PaymentLinkID string  `url:"payment_link_id,omitempty"` 
-        Refresh bool  `url:"refresh,omitempty"`  
+        PaymentLinkID string  `url:"payment_link_id,omitempty"`  
     }
     
     // GetPaymentModeRoutesPaymentLink Get applicable payment options for payment link
@@ -11904,8 +11903,6 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
-            
-                
             
                 
             
@@ -11988,6 +11985,74 @@ func NewAppClient(config *AppConfig) *Client {
             return PollingPaymentLinkResponse{}, common.NewFDKError(err.Error())
         }
          return pollingPaymentLinkResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // CreateOrderHandlerPaymentLink Create Order user
+    func (pa *Payment)  CreateOrderHandlerPaymentLink(body  CreateOrderUserRequest) (CreateOrderUserResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             createOrderHandlerPaymentLinkResponse CreateOrderUserResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return CreateOrderUserResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return CreateOrderUserResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            "/service/application/payment/v1.0/create-order/link/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CreateOrderUserResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createOrderHandlerPaymentLinkResponse)
+        if err != nil {
+            return CreateOrderUserResponse{}, common.NewFDKError(err.Error())
+        }
+         return createOrderHandlerPaymentLinkResponse, nil
         
     }
           

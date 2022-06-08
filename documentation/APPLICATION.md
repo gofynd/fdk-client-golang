@@ -252,6 +252,7 @@
     * [cancelPaymentLink](#cancelpaymentlink)
     * [getPaymentModeRoutesPaymentLink](#getpaymentmoderoutespaymentlink)
     * [pollingPaymentLink](#pollingpaymentlink)
+    * [createOrderHandlerPaymentLink](#createorderhandlerpaymentlink)
     * [customerCreditSummary](#customercreditsummary)
     * [redirectToAggregator](#redirecttoaggregator)
     * [checkCredit](#checkcredit)
@@ -17502,9 +17503,7 @@ Get applicable payment options for payment link
 | --------- | ----  | --- |
 
 
-
-
-| xQuery | struct | Includes properties such as `PaymentLinkID`, `Refresh`
+| xQuery | struct | Includes properties such as `PaymentLinkID`
 
 
 
@@ -17556,6 +17555,42 @@ Success. Check the example shown below
 
 
 Schema: `PollingPaymentLinkResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createOrderHandlerPaymentLink
+Create Order user
+
+```golang
+
+ data, err :=  Payment.CreateOrderHandlerPaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  CreateOrderUserRequest | "Request body" 
+
+
+Use this API to create a order and payment on aggregator side
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `CreateOrderUserResponse`
 
 
 
