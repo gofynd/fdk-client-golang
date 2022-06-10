@@ -1710,55 +1710,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UnfollowById Unfollow an entity (product/brand/collection)
-    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             unfollowByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &unfollowByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return unfollowByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // FollowById Follow an entity (product/brand/collection)
     func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1799,6 +1750,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return followByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UnfollowById Unfollow an entity (product/brand/collection)
+    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             unfollowByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &unfollowByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return unfollowByIdResponse, nil
         
     }
           
@@ -11767,12 +11767,12 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // ResendPaymentLink Resend payment link
-    func (pa *Payment)  ResendPaymentLink(body  CancelOrResendPaymentLinkRequest) (CancelOrResendPaymentLinkResponse, error){
+    func (pa *Payment)  ResendPaymentLink(body  CancelOrResendPaymentLinkRequest) (ResendPaymentLinkResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             resendPaymentLinkResponse CancelOrResendPaymentLinkResponse
+             resendPaymentLinkResponse ResendPaymentLinkResponse
 	    )
 
         
@@ -11791,12 +11791,12 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return CancelOrResendPaymentLinkResponse{}, common.NewFDKError(err.Error())
+             return ResendPaymentLinkResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return CancelOrResendPaymentLinkResponse{}, common.NewFDKError(err.Error())
+             return ResendPaymentLinkResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -11809,12 +11809,12 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return CancelOrResendPaymentLinkResponse{}, err
+            return ResendPaymentLinkResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &resendPaymentLinkResponse)
         if err != nil {
-            return CancelOrResendPaymentLinkResponse{}, common.NewFDKError(err.Error())
+            return ResendPaymentLinkResponse{}, common.NewFDKError(err.Error())
         }
          return resendPaymentLinkResponse, nil
         
@@ -11827,12 +11827,12 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // CancelPaymentLink Cancel payment link
-    func (pa *Payment)  CancelPaymentLink(body  CancelOrResendPaymentLinkRequest) (CancelOrResendPaymentLinkResponse, error){
+    func (pa *Payment)  CancelPaymentLink(body  CancelOrResendPaymentLinkRequest) (CancelPaymentLinkResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             cancelPaymentLinkResponse CancelOrResendPaymentLinkResponse
+             cancelPaymentLinkResponse CancelPaymentLinkResponse
 	    )
 
         
@@ -11851,12 +11851,12 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return CancelOrResendPaymentLinkResponse{}, common.NewFDKError(err.Error())
+             return CancelPaymentLinkResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return CancelOrResendPaymentLinkResponse{}, common.NewFDKError(err.Error())
+             return CancelPaymentLinkResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -11869,12 +11869,12 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return CancelOrResendPaymentLinkResponse{}, err
+            return CancelPaymentLinkResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &cancelPaymentLinkResponse)
         if err != nil {
-            return CancelOrResendPaymentLinkResponse{}, common.NewFDKError(err.Error())
+            return CancelPaymentLinkResponse{}, common.NewFDKError(err.Error())
         }
          return cancelPaymentLinkResponse, nil
         
