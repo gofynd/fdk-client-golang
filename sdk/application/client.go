@@ -2576,7 +2576,8 @@ func NewAppClient(config *AppConfig) *Client {
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
-        AssignCardID float64  `url:"assign_card_id,omitempty"`  
+        AssignCardID float64  `url:"assign_card_id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // GetCart Fetch all items added to the cart
@@ -2591,6 +2592,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -2687,7 +2690,8 @@ func NewAppClient(config *AppConfig) *Client {
     //CartAddItemsXQuery holds query params
     type CartAddItemsXQuery struct { 
         I bool  `url:"i,omitempty"` 
-        B bool  `url:"b,omitempty"`  
+        B bool  `url:"b,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // AddItems Add items to cart
@@ -2704,6 +2708,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -2760,7 +2766,8 @@ func NewAppClient(config *AppConfig) *Client {
     type CartUpdateCartXQuery struct { 
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
-        B bool  `url:"b,omitempty"`  
+        B bool  `url:"b,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // UpdateCart Update items in the cart
@@ -2779,6 +2786,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -2835,7 +2844,8 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartGetItemCountXQuery holds query params
     type CartGetItemCountXQuery struct { 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // GetItemCount Count items in the cart
@@ -2850,6 +2860,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -2889,7 +2901,8 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartGetCouponsXQuery holds query params
     type CartGetCouponsXQuery struct { 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // GetCoupons Fetch Coupon
@@ -2904,6 +2917,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -2946,7 +2961,8 @@ func NewAppClient(config *AppConfig) *Client {
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
         P bool  `url:"p,omitempty"` 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // ApplyCoupon Apply Coupon
@@ -2963,6 +2979,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -3021,7 +3039,8 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartRemoveCouponXQuery holds query params
     type CartRemoveCouponXQuery struct { 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // RemoveCoupon Remove Coupon Applied
@@ -3036,6 +3055,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -3140,7 +3161,8 @@ func NewAppClient(config *AppConfig) *Client {
     type CartApplyRewardPointsXQuery struct { 
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
-        B bool  `url:"b,omitempty"`  
+        B bool  `url:"b,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // ApplyRewardPoints Apply reward points at cart
@@ -3157,6 +3179,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -3214,6 +3238,7 @@ func NewAppClient(config *AppConfig) *Client {
     //CartGetAddressesXQuery holds query params
     type CartGetAddressesXQuery struct { 
         CartID string  `url:"cart_id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"` 
         MobileNo string  `url:"mobile_no,omitempty"` 
         CheckoutMode string  `url:"checkout_mode,omitempty"` 
         Tags string  `url:"tags,omitempty"` 
@@ -3232,6 +3257,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -3382,6 +3409,7 @@ func NewAppClient(config *AppConfig) *Client {
     //CartGetAddressByIdXQuery holds query params
     type CartGetAddressByIdXQuery struct { 
         CartID string  `url:"cart_id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"` 
         MobileNo string  `url:"mobile_no,omitempty"` 
         CheckoutMode string  `url:"checkout_mode,omitempty"` 
         Tags string  `url:"tags,omitempty"` 
@@ -3400,6 +3428,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -3601,6 +3631,7 @@ func NewAppClient(config *AppConfig) *Client {
     //CartSelectAddressXQuery holds query params
     type CartSelectAddressXQuery struct { 
         CartID string  `url:"cart_id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"`  
     }
@@ -3623,6 +3654,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -3679,7 +3712,8 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartSelectPaymentModeXQuery holds query params
     type CartSelectPaymentModeXQuery struct { 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // SelectPaymentMode Update cart payment
@@ -3706,6 +3740,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -3759,6 +3795,7 @@ func NewAppClient(config *AppConfig) *Client {
     //CartValidateCouponForPaymentXQuery holds query params
     type CartValidateCouponForPaymentXQuery struct { 
         ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"` 
         AddressID string  `url:"address_id,omitempty"` 
         PaymentMode string  `url:"payment_mode,omitempty"` 
         PaymentIdentifier string  `url:"payment_identifier,omitempty"` 
@@ -3778,6 +3815,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -3829,6 +3868,7 @@ func NewAppClient(config *AppConfig) *Client {
     type CartGetShipmentsXQuery struct { 
         P bool  `url:"p,omitempty"` 
         ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"` 
         AddressID string  `url:"address_id,omitempty"` 
         AreaCode string  `url:"area_code,omitempty"`  
     }
@@ -3845,6 +3885,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -3978,7 +4020,8 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartUpdateCartMetaXQuery holds query params
     type CartUpdateCartMetaXQuery struct { 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // UpdateCartMeta Update the cart meta
@@ -4001,6 +4044,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -14924,7 +14969,8 @@ func NewAppClient(config *AppConfig) *Client {
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
-        AssignCardID float64  `url:"assign_card_id,omitempty"`  
+        AssignCardID float64  `url:"assign_card_id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // GetCart Fetch all items added to the cart
@@ -14939,6 +14985,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -15035,7 +15083,8 @@ func NewAppClient(config *AppConfig) *Client {
     //PosCartAddItemsXQuery holds query params
     type PosCartAddItemsXQuery struct { 
         I bool  `url:"i,omitempty"` 
-        B bool  `url:"b,omitempty"`  
+        B bool  `url:"b,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // AddItems Add items to cart
@@ -15050,6 +15099,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -15106,7 +15157,8 @@ func NewAppClient(config *AppConfig) *Client {
     type PosCartUpdateCartXQuery struct { 
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
-        B bool  `url:"b,omitempty"`  
+        B bool  `url:"b,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // UpdateCart Update items in the cart
@@ -15121,6 +15173,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -15177,7 +15231,8 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartGetItemCountXQuery holds query params
     type PosCartGetItemCountXQuery struct { 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // GetItemCount Count items in the cart
@@ -15192,6 +15247,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -15231,7 +15288,8 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartGetCouponsXQuery holds query params
     type PosCartGetCouponsXQuery struct { 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // GetCoupons Fetch Coupon
@@ -15246,6 +15304,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -15288,7 +15348,8 @@ func NewAppClient(config *AppConfig) *Client {
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
         P bool  `url:"p,omitempty"` 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // ApplyCoupon Apply Coupon
@@ -15303,6 +15364,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -15361,7 +15424,8 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartRemoveCouponXQuery holds query params
     type PosCartRemoveCouponXQuery struct { 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // RemoveCoupon Remove Coupon Applied
@@ -15376,6 +15440,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -15480,7 +15546,8 @@ func NewAppClient(config *AppConfig) *Client {
     type PosCartApplyRewardPointsXQuery struct { 
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
-        B bool  `url:"b,omitempty"`  
+        B bool  `url:"b,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // ApplyRewardPoints Apply reward points at cart
@@ -15495,6 +15562,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -15552,6 +15621,7 @@ func NewAppClient(config *AppConfig) *Client {
     //PosCartGetAddressesXQuery holds query params
     type PosCartGetAddressesXQuery struct { 
         CartID string  `url:"cart_id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"` 
         MobileNo string  `url:"mobile_no,omitempty"` 
         CheckoutMode string  `url:"checkout_mode,omitempty"` 
         Tags string  `url:"tags,omitempty"` 
@@ -15570,6 +15640,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -15676,6 +15748,7 @@ func NewAppClient(config *AppConfig) *Client {
     //PosCartGetAddressByIdXQuery holds query params
     type PosCartGetAddressByIdXQuery struct { 
         CartID string  `url:"cart_id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"` 
         MobileNo string  `url:"mobile_no,omitempty"` 
         CheckoutMode string  `url:"checkout_mode,omitempty"` 
         Tags string  `url:"tags,omitempty"` 
@@ -15694,6 +15767,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -15851,6 +15926,7 @@ func NewAppClient(config *AppConfig) *Client {
     //PosCartSelectAddressXQuery holds query params
     type PosCartSelectAddressXQuery struct { 
         CartID string  `url:"cart_id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"`  
     }
@@ -15867,6 +15943,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -15923,7 +16001,8 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartSelectPaymentModeXQuery holds query params
     type PosCartSelectPaymentModeXQuery struct { 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // SelectPaymentMode Update cart payment
@@ -15938,6 +16017,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -15991,6 +16072,7 @@ func NewAppClient(config *AppConfig) *Client {
     //PosCartValidateCouponForPaymentXQuery holds query params
     type PosCartValidateCouponForPaymentXQuery struct { 
         ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"` 
         AddressID string  `url:"address_id,omitempty"` 
         PaymentMode string  `url:"payment_mode,omitempty"` 
         PaymentIdentifier string  `url:"payment_identifier,omitempty"` 
@@ -16010,6 +16092,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -16317,7 +16401,8 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartUpdateCartMetaXQuery holds query params
     type PosCartUpdateCartMetaXQuery struct { 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // UpdateCartMeta Update the cart meta
@@ -16332,6 +16417,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
