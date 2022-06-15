@@ -12062,6 +12062,168 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // InitialisePaymentPaymentLink Initialize a payment (server-to-server) for UPI and BharatQR
+    func (pa *Payment)  InitialisePaymentPaymentLink(body  PaymentInitializationRequest) (PaymentInitializationResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             initialisePaymentPaymentLinkResponse PaymentInitializationResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return PaymentInitializationResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return PaymentInitializationResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            "/service/application/payment/v1.0/payment/request/link/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PaymentInitializationResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &initialisePaymentPaymentLinkResponse)
+        if err != nil {
+            return PaymentInitializationResponse{}, common.NewFDKError(err.Error())
+        }
+         return initialisePaymentPaymentLinkResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // CheckAndUpdatePaymentStatusPaymentLink Performs continuous polling to check status of payment on the server
+    func (pa *Payment)  CheckAndUpdatePaymentStatusPaymentLink(body  PaymentStatusUpdateRequest) (PaymentStatusUpdateResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             checkAndUpdatePaymentStatusPaymentLinkResponse PaymentStatusUpdateResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return PaymentStatusUpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return PaymentStatusUpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            "/service/application/payment/v1.0/payment/confirm/polling/link/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PaymentStatusUpdateResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &checkAndUpdatePaymentStatusPaymentLinkResponse)
+        if err != nil {
+            return PaymentStatusUpdateResponse{}, common.NewFDKError(err.Error())
+        }
+         return checkAndUpdatePaymentStatusPaymentLinkResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     //PaymentCustomerCreditSummaryXQuery holds query params
     type PaymentCustomerCreditSummaryXQuery struct { 
         Aggregator string  `url:"aggregator,omitempty"`  

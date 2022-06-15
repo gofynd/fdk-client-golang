@@ -253,6 +253,8 @@
     * [getPaymentModeRoutesPaymentLink](#getpaymentmoderoutespaymentlink)
     * [pollingPaymentLink](#pollingpaymentlink)
     * [createOrderHandlerPaymentLink](#createorderhandlerpaymentlink)
+    * [initialisePaymentPaymentLink](#initialisepaymentpaymentlink)
+    * [checkAndUpdatePaymentStatusPaymentLink](#checkandupdatepaymentstatuspaymentlink)
     * [customerCreditSummary](#customercreditsummary)
     * [redirectToAggregator](#redirecttoaggregator)
     * [checkCredit](#checkcredit)
@@ -17591,6 +17593,78 @@ Success. Check the example shown below
 
 
 Schema: `CreateOrderUserResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### initialisePaymentPaymentLink
+Initialize a payment (server-to-server) for UPI and BharatQR
+
+```golang
+
+ data, err :=  Payment.InitialisePaymentPaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  PaymentInitializationRequest | "Request body" 
+
+
+Use this API to inititate payment using UPI, BharatQR, wherein the UPI requests are send to the app and QR code is displayed on the screen.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `PaymentInitializationResponse` for more details.
+
+
+Schema: `PaymentInitializationResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### checkAndUpdatePaymentStatusPaymentLink
+Performs continuous polling to check status of payment on the server
+
+```golang
+
+ data, err :=  Payment.CheckAndUpdatePaymentStatusPaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  PaymentStatusUpdateRequest | "Request body" 
+
+
+Use this API to perform continuous polling at intervals to check the status of payment until timeout.
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `PaymentStatusUpdateResponse` for more details.
+
+
+Schema: `PaymentStatusUpdateResponse`
 
 
 
