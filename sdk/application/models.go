@@ -3325,6 +3325,8 @@ package application
 
         
             UserID string  `json:"user_id"`
+            Reason string  `json:"reason"`
+            ReasonID string  `json:"reason_id"`
          
     }
     
