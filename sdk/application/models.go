@@ -8119,6 +8119,7 @@ package application
             BeneficiaryDetails bool  `json:"beneficiary_details"`
             CanReturn bool  `json:"can_return"`
             CanBreak map[string]interface{}  `json:"can_break"`
+            ShowDownloadInvoice bool  `json:"show_download_invoice"`
             Prices Prices  `json:"prices"`
             NeedHelpURL string  `json:"need_help_url"`
             ShipmentID string  `json:"shipment_id"`
