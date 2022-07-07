@@ -616,10 +616,8 @@
 
 * [Orders](#Orders)
   * Methods
-    * [getShipmentDetails](#getshipmentdetails)
-    * [getLaneConfig](#getlaneconfig)
     * [getOrderShipmentDetails](#getordershipmentdetails)
-    * [getShipmentList](#getshipmentlist)
+    * [getShipmentDetails](#getshipmentdetails)
     * [getShipmentToManifest](#getshipmenttomanifest)
     
 
@@ -65246,12 +65244,12 @@ default
 ## Orders
 
 
-#### getShipmentDetails
+#### getOrderShipmentDetails
 
 
 ```golang
 
-data, err := Orders.GetShipmentDetails(CompanyID, ShipmentID);
+data, err := Orders.GetOrderShipmentDetails(CompanyID, ShipmentID);
 ```
 
 | Argument  |  Type  | Description |
@@ -65286,56 +65284,12 @@ Schema: `ShipmentDetailsResponse`
 ---
 
 
-#### getLaneConfig
+#### getShipmentDetails
 
 
 ```golang
 
-data, err := Orders.GetLaneConfig(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `SuperLane`, `FromDate`, `ToDate`
-
-
-
-
-*Success Response:*
-
-
-
-Response containing count of shipments of the given status
-
-
-Schema: `LaneConfigResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getOrderShipmentDetails
-
-
-```golang
-
-data, err := Orders.GetOrderShipmentDetails(CompanyID, xQuery);
+data, err := Orders.GetShipmentDetails(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -65358,54 +65312,6 @@ We are processing the report!
 
 
 Schema: `ShipmentDetailsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getShipmentList
-
-
-```golang
-
-data, err := Orders.GetShipmentList(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `SearchID`, `FromDate`, `ToDate`
-
-
-
-
-*Success Response:*
-
-
-
-We are processing the report!
-
-
-Schema: `ShipmentInternalPlatformViewResponse`
 
 
 
