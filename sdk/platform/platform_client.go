@@ -14331,14 +14331,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetOrderShipmentDetails 
-     func (or *PlatformOrders)  GetOrderShipmentDetails(ShipmentID string) (ShipmentDetailsResponse, error){
+    // GetShipmentDetails 
+     func (or *PlatformOrders)  GetShipmentDetails(ShipmentID string) (ShipmentDetailsResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getOrderShipmentDetailsResponse ShipmentDetailsResponse
+            getShipmentDetailsResponse ShipmentDetailsResponse
 	    )
 
         
@@ -14356,7 +14356,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         rawRequest = NewRequest(
             or.Config,
             "get",
-            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/shipments-details/%s",or.CompanyID, ShipmentID),
+            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/shipment-details/%s",or.CompanyID, ShipmentID),
             nil,
             nil,
             nil)
@@ -14365,11 +14365,11 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return ShipmentDetailsResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getOrderShipmentDetailsResponse)
+        err = json.Unmarshal(response, &getShipmentDetailsResponse)
         if err != nil {
              return ShipmentDetailsResponse{}, common.NewFDKError(err.Error())
         }
-        return getOrderShipmentDetailsResponse, nil
+        return getShipmentDetailsResponse, nil
         
     }
          
@@ -14381,21 +14381,89 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    //PlatformGetShipmentDetailsXQuery holds query params
-    type PlatformGetShipmentDetailsXQuery struct { 
-        OrderID string  `url:"order_id,omitempty"`  
+    //PlatformGetLaneConfigXQuery holds query params
+    type PlatformGetLaneConfigXQuery struct { 
+        SuperLane string  `url:"super_lane,omitempty"` 
+        GroupEntity string  `url:"group_entity,omitempty"` 
+        FromDate string  `url:"from_date,omitempty"` 
+        ToDate string  `url:"to_date,omitempty"`  
     }
     
 
 
-    // GetShipmentDetails 
-     func (or *PlatformOrders)  GetShipmentDetails(xQuery PlatformGetShipmentDetailsXQuery) (ShipmentDetailsResponse, error){
+    // GetLaneConfig 
+     func (or *PlatformOrders)  GetLaneConfig(xQuery PlatformGetLaneConfigXQuery) (LaneConfigResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getShipmentDetailsResponse ShipmentDetailsResponse
+            getLaneConfigResponse LaneConfigResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "get",
+            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/lane-config/",or.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return LaneConfigResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getLaneConfigResponse)
+        if err != nil {
+             return LaneConfigResponse{}, common.NewFDKError(err.Error())
+        }
+        return getLaneConfigResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetOrderShipmentDetailsXQuery holds query params
+    type PlatformGetOrderShipmentDetailsXQuery struct { 
+        OrderID string  `url:"order_id,omitempty"`  
+    }
+    
+
+
+    // GetOrderShipmentDetails 
+     func (or *PlatformOrders)  GetOrderShipmentDetails(xQuery PlatformGetOrderShipmentDetailsXQuery) (ShipmentDetailsResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getOrderShipmentDetailsResponse ShipmentDetailsResponse
 	    )
 
         
@@ -14424,11 +14492,100 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return ShipmentDetailsResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getShipmentDetailsResponse)
+        err = json.Unmarshal(response, &getOrderShipmentDetailsResponse)
         if err != nil {
              return ShipmentDetailsResponse{}, common.NewFDKError(err.Error())
         }
-        return getShipmentDetailsResponse, nil
+        return getOrderShipmentDetailsResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetShipmentListXQuery holds query params
+    type PlatformGetShipmentListXQuery struct { 
+        Lane string  `url:"lane,omitempty"` 
+        SearchType string  `url:"search_type,omitempty"` 
+        SearchID string  `url:"search_id,omitempty"` 
+        FromDate string  `url:"from_date,omitempty"` 
+        ToDate string  `url:"to_date,omitempty"` 
+        DpIds string  `url:"dp_ids,omitempty"` 
+        OrderingCompanyID string  `url:"ordering_company_id,omitempty"` 
+        Stores string  `url:"stores,omitempty"` 
+        SalesChannel string  `url:"sales_channel,omitempty"` 
+        RequestByExt string  `url:"request_by_ext,omitempty"` 
+        IsPrioritySort bool  `url:"is_priority_sort,omitempty"`  
+    }
+    
+
+
+    // GetShipmentList 
+     func (or *PlatformOrders)  GetShipmentList(xQuery PlatformGetShipmentListXQuery) (ShipmentInternalPlatformViewResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getShipmentListResponse ShipmentInternalPlatformViewResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "get",
+            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/shipments-listing",or.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ShipmentInternalPlatformViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getShipmentListResponse)
+        if err != nil {
+             return ShipmentInternalPlatformViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return getShipmentListResponse, nil
         
     }
          
@@ -14494,6 +14651,89 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return ManifestShipmentResponse{}, common.NewFDKError(err.Error())
         }
         return getShipmentToManifestResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetOrdersXQuery holds query params
+    type PlatformGetOrdersXQuery struct { 
+        Lane string  `url:"lane,omitempty"` 
+        SearchType string  `url:"search_type,omitempty"` 
+        SearchValue string  `url:"search_value,omitempty"` 
+        FromDate string  `url:"from_date,omitempty"` 
+        ToDate string  `url:"to_date,omitempty"` 
+        DpIds string  `url:"dp_ids,omitempty"` 
+        Stores string  `url:"stores,omitempty"` 
+        SalesChannel string  `url:"sales_channel,omitempty"` 
+        IsPrioritySort bool  `url:"is_priority_sort,omitempty"`  
+    }
+    
+
+
+    // GetOrders 
+     func (or *PlatformOrders)  GetOrders(xQuery PlatformGetOrdersXQuery) (OrderListingResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getOrdersResponse OrderListingResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "get",
+            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/orders-listing",or.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return OrderListingResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getOrdersResponse)
+        if err != nil {
+             return OrderListingResponse{}, common.NewFDKError(err.Error())
+        }
+        return getOrdersResponse, nil
         
     }
          

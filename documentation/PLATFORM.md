@@ -616,9 +616,12 @@
 
 * [Orders](#Orders)
   * Methods
-    * [getOrderShipmentDetails](#getordershipmentdetails)
     * [getShipmentDetails](#getshipmentdetails)
+    * [getLaneConfig](#getlaneconfig)
+    * [getOrderShipmentDetails](#getordershipmentdetails)
+    * [getShipmentList](#getshipmentlist)
     * [getShipmentToManifest](#getshipmenttomanifest)
+    * [getOrders](#getorders)
     
 
 
@@ -65244,12 +65247,12 @@ default
 ## Orders
 
 
-#### getOrderShipmentDetails
+#### getShipmentDetails
 
 
 ```golang
 
-data, err := Orders.GetOrderShipmentDetails(CompanyID, ShipmentID);
+data, err := Orders.GetShipmentDetails(CompanyID, ShipmentID);
 ```
 
 | Argument  |  Type  | Description |
@@ -65284,12 +65287,58 @@ Schema: `ShipmentDetailsResponse`
 ---
 
 
-#### getShipmentDetails
+#### getLaneConfig
 
 
 ```golang
 
-data, err := Orders.GetShipmentDetails(CompanyID, xQuery);
+data, err := Orders.GetLaneConfig(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `SuperLane`, `GroupEntity`, `FromDate`, `ToDate`
+
+
+
+
+*Success Response:*
+
+
+
+Response containing count of shipments of the given status
+
+
+Schema: `LaneConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOrderShipmentDetails
+
+
+```golang
+
+data, err := Orders.GetOrderShipmentDetails(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -65312,6 +65361,66 @@ We are processing the report!
 
 
 Schema: `ShipmentDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentList
+
+
+```golang
+
+data, err := Orders.GetShipmentList(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `SearchID`, `FromDate`, `ToDate`, `DpIds`, `OrderingCompanyID`, `Stores`, `SalesChannel`, `RequestByExt`, `IsPrioritySort`
+
+
+
+
+*Success Response:*
+
+
+
+We are processing the report!
+
+
+Schema: `ShipmentInternalPlatformViewResponse`
 
 
 
@@ -65356,6 +65465,62 @@ We are processing the report!
 
 
 Schema: `ManifestShipmentResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOrders
+
+
+```golang
+
+data, err := Orders.GetOrders(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `SearchValue`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannel`, `IsPrioritySort`
+
+
+
+
+*Success Response:*
+
+
+
+We are processing the report!
+
+
+Schema: `OrderListingResponse`
 
 
 
