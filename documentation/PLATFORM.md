@@ -25,6 +25,7 @@
 * [Webhook](#Webhook) - Webhook dispatcher with retry and one event to many subscriber vice versa 
 * [AuditTrail](#AuditTrail) -  
 * [Orders](#Orders) - Handles all platform order and shipment api(s) 
+* [OrderManage](#OrderManage) - Update Status all platform shipment api(s) 
 
 ----
 ----
@@ -282,6 +283,7 @@
     * [shipmentBagsCanBreak](#shipmentbagscanbreak)
     * [getOrdersByCompanyId](#getordersbycompanyid)
     * [getOrderLanesCountByCompanyId](#getorderlanescountbycompanyid)
+    * [getOrderDetails](#getorderdetails)
     * [getOrderDetails](#getorderdetails)
     * [getPicklistOrdersByCompanyId](#getpicklistordersbycompanyid)
     * [trackShipmentPlatform](#trackshipmentplatform)
@@ -623,6 +625,12 @@
     * [getShipmentToManifest](#getshipmenttomanifest)
     * [getOrders](#getorders)
     * [getfilters](#getfilters)
+    
+
+* [OrderManage](#OrderManage)
+  * Methods
+    * [statusInternalUpdate](#statusinternalupdate)
+    * [getShipmentHistory](#getshipmenthistory)
     
 
 
@@ -52421,6 +52429,53 @@ Schema: `OrderDetails`
 ---
 
 
+#### getOrderDetails
+Get Order Details for company based on Company Id and Order Id
+
+```golang
+
+data, err := Order.GetOrderDetails(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+| ApplicationID | string | Application Id | 
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `OrderID`, `Next`, `Previous`
+
+
+Get Orders
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `OrderDetails`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getPicklistOrdersByCompanyId
 Get Orders for company based on Company Id
 
@@ -65277,7 +65332,7 @@ data, err := Orders.GetShipmentDetails(CompanyID, ShipmentID);
 We are processing the report!
 
 
-Schema: `ShipmentDetailsResponse`
+Schema: `ShipmentInfoResponse`
 
 
 
@@ -65574,6 +65629,91 @@ List of filters
 
 
 Schema: `FiltersResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+
+---
+
+
+## OrderManage
+
+
+#### statusInternalUpdate
+
+
+```golang
+
+data, err := OrderManage.StatusInternalUpdate(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  PlatformShipmentStatusInternal | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+We are processing the report!
+
+
+Schema: `ResponseDetail`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentHistory
+
+
+```golang
+
+data, err := OrderManage.GetShipmentHistory(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+| xQuery | struct | Includes properties such as `BagID`
+
+
+
+
+*Success Response:*
+
+
+
+It shows the journey of the shipment!
+
+
+Schema: `ShipmentHistoryResponse`
 
 
 
