@@ -2312,6 +2312,7 @@ package platform
             DesktopImage string  `json:"desktop_image"`
             DeleteAccountDay float64  `json:"delete_account_day"`
             DeleteAccountReasons []DeleteAccountReasons  `json:"delete_account_reasons"`
+            DeleteAccountConsent map[string]interface{}  `json:"delete_account_consent"`
          
     }
     
@@ -2433,6 +2434,14 @@ package platform
             ReasonText string  `json:"reason_text"`
             ReasonID string  `json:"reason_id"`
             ShowTextArea bool  `json:"show_text_area"`
+         
+    }
+    
+    // DeleteAccountConsent used by User
+    type DeleteAccountConsent struct {
+
+        
+            ConsentText string  `json:"consent_text"`
          
     }
     
