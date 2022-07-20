@@ -48,8 +48,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [followById](#followbyid)
     * [unfollowById](#unfollowbyid)
+    * [followById](#followbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -1210,12 +1210,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1229,7 +1229,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1251,12 +1251,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1270,7 +1270,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1670,7 +1670,9 @@ Fetch all items added to the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `BuyNow`
 
 
 
@@ -1742,7 +1744,9 @@ Add items to cart
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`
+
+
+| xQuery | struct | Includes properties such as `I`, `B`, `BuyNow`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -1828,6 +1832,11 @@ Product has been added to your cart
       "items": [
         {
           "key": "751083_10",
+          "parent_item_identifiers": {
+            "identifier": "ZASFF",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS"
+          },
           "article": {
             "type": "article",
             "uid": "612_9_SE61201_19100302_10",
@@ -2200,6 +2209,7 @@ Product has been added to your cart
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
+      "buy_now": false,
       "cart_id": 7927,
       "uid": "7927",
       "gstin": null,
@@ -2280,6 +2290,11 @@ Sorry, item is out of stock
         {
           "bulk_offer": {},
           "discount": "67% OFF",
+          "parent_item_identifiers": {
+            "identifier": "ZASFF",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS"
+          },
           "article": {
             "type": "article",
             "uid": "604_902_SSTC60401_636BLUE_1",
@@ -2378,6 +2393,7 @@ Sorry, item is out of stock
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
+      "buy_now": false,
       "cart_id": 54,
       "uid": "54",
       "gstin": null,
@@ -2418,7 +2434,9 @@ Update items in the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `BuyNow`
 
 | body |  UpdateCartRequest | "Request body" 
 
@@ -2503,6 +2521,11 @@ Nothing updated
         {
           "bulk_offer": {},
           "discount": "67% OFF",
+          "parent_item_identifiers": {
+            "identifier": "ZASFF",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS"
+          },
           "article": {
             "type": "article",
             "uid": "604_902_SSTC60401_636BLUE_1",
@@ -2601,6 +2624,7 @@ Nothing updated
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
+      "buy_now": false,
       "cart_id": 54,
       "uid": "54",
       "gstin": null,
@@ -2731,6 +2755,11 @@ Item updated in the cart
               }
             }
           },
+          "parent_item_identifiers": {
+            "identifier": "ZASFF",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS"
+          },
           "article": {
             "type": "article",
             "uid": "507_9_96099_35656851_7",
@@ -2776,6 +2805,7 @@ Item updated in the cart
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
+      "buy_now": false,
       "cart_id": 12426,
       "uid": "12426",
       "gstin": null,
@@ -2819,7 +2849,9 @@ Count items in the cart
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 
 
@@ -2857,7 +2889,9 @@ Fetch Coupon
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 
 
@@ -2901,7 +2935,9 @@ Apply Coupon
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `P`, `ID`
+
+
+| xQuery | struct | Includes properties such as `I`, `B`, `P`, `ID`, `BuyNow`
 
 | body |  ApplyCouponRequest | "Request body" 
 
@@ -2940,7 +2976,9 @@ Remove Coupon Applied
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 
 
@@ -3097,7 +3135,9 @@ Apply reward points at cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `BuyNow`
 
 | body |  RewardPointRequest | "Request body" 
 
@@ -3144,7 +3184,9 @@ Fetch address
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+
+
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -3229,7 +3271,9 @@ Fetch a single address by its ID
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+
+
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -3348,7 +3392,9 @@ Select an address from available addresses
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `I`, `B`
+
+
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `I`, `B`
 
 | body |  SelectCartAddressRequest | "Request body" 
 
@@ -3387,7 +3433,9 @@ Update cart payment
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 | body |  UpdateCartPaymentRequest | "Request body" 
 
@@ -3436,7 +3484,9 @@ Verify the coupon eligibility against the payment mode
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
 
 
 
@@ -3480,7 +3530,9 @@ Get delivery date and options before checkout
 
 
 
-| xQuery | struct | Includes properties such as `P`, `ID`, `AddressID`, `AreaCode`
+
+
+| xQuery | struct | Includes properties such as `P`, `ID`, `BuyNow`, `AddressID`, `AreaCode`
 
 
 
@@ -3504,6 +3556,7 @@ Shipment Generated
 {
   "value": {
     "items": [],
+    "buy_now": false,
     "cart_id": 7501,
     "uid": "7501",
     "success": true,
@@ -3890,6 +3943,7 @@ Shipment Generation Failed
 {
   "value": {
     "items": [],
+    "buy_now": false,
     "cart_id": 7501,
     "uid": "7501",
     "success": true,
@@ -4151,11 +4205,14 @@ Checkout all items in the cart
 
 ```golang
 
- data, err :=  Cart.CheckoutCart(body);
+ data, err :=  Cart.CheckoutCart(xQuery, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `BuyNow`
 
 | body |  CartCheckoutDetailRequest | "Request body" 
 
@@ -4571,7 +4628,9 @@ Update the cart meta
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 | body |  CartMetaRequest | "Request body" 
 
@@ -19240,7 +19299,9 @@ Fetch all items added to the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `BuyNow`
 
 
 
@@ -19312,7 +19373,9 @@ Add items to cart
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`
+
+
+| xQuery | struct | Includes properties such as `I`, `B`, `BuyNow`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -19398,6 +19461,11 @@ Product has been added to your cart
       "items": [
         {
           "key": "751083_10",
+          "parent_item_identifiers": {
+            "identifier": "ZASFF",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS"
+          },
           "article": {
             "type": "article",
             "uid": "612_9_SE61201_19100302_10",
@@ -19770,6 +19838,7 @@ Product has been added to your cart
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
+      "buy_now": false,
       "cart_id": 7927,
       "uid": "7927",
       "gstin": null,
@@ -19850,6 +19919,11 @@ Sorry, item is out of stock
         {
           "bulk_offer": {},
           "discount": "67% OFF",
+          "parent_item_identifiers": {
+            "identifier": "ZASFF",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS"
+          },
           "article": {
             "type": "article",
             "uid": "604_902_SSTC60401_636BLUE_1",
@@ -19948,6 +20022,7 @@ Sorry, item is out of stock
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
+      "buy_now": false,
       "cart_id": 54,
       "uid": "54",
       "gstin": null,
@@ -19988,7 +20063,9 @@ Update items in the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `BuyNow`
 
 | body |  UpdateCartRequest | "Request body" 
 
@@ -20073,6 +20150,11 @@ Nothing updated
         {
           "bulk_offer": {},
           "discount": "67% OFF",
+          "parent_item_identifiers": {
+            "identifier": "ZASFF",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS"
+          },
           "article": {
             "type": "article",
             "uid": "604_902_SSTC60401_636BLUE_1",
@@ -20171,6 +20253,7 @@ Nothing updated
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
+      "buy_now": false,
       "cart_id": 54,
       "uid": "54",
       "gstin": null,
@@ -20301,6 +20384,11 @@ Item updated in the cart
               }
             }
           },
+          "parent_item_identifiers": {
+            "identifier": "ZASFF",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS"
+          },
           "article": {
             "type": "article",
             "uid": "507_9_96099_35656851_7",
@@ -20346,6 +20434,7 @@ Item updated in the cart
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
+      "buy_now": false,
       "cart_id": 12426,
       "uid": "12426",
       "gstin": null,
@@ -20389,7 +20478,9 @@ Count items in the cart
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 
 
@@ -20427,7 +20518,9 @@ Fetch Coupon
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 
 
@@ -20471,7 +20564,9 @@ Apply Coupon
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `P`, `ID`
+
+
+| xQuery | struct | Includes properties such as `I`, `B`, `P`, `ID`, `BuyNow`
 
 | body |  ApplyCouponRequest | "Request body" 
 
@@ -20510,7 +20605,9 @@ Remove Coupon Applied
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 
 
@@ -20667,7 +20764,9 @@ Apply reward points at cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `BuyNow`
 
 | body |  RewardPointRequest | "Request body" 
 
@@ -20714,7 +20813,9 @@ Fetch address
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+
+
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -20799,7 +20900,9 @@ Fetch a single address by its ID
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+
+
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -20918,7 +21021,9 @@ Select an address from available addresses
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `I`, `B`
+
+
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `I`, `B`
 
 | body |  SelectCartAddressRequest | "Request body" 
 
@@ -20957,7 +21062,9 @@ Update cart payment
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 | body |  UpdateCartPaymentRequest | "Request body" 
 
@@ -21006,7 +21113,9 @@ Verify the coupon eligibility against the payment mode
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
 
 
 
@@ -22838,7 +22947,9 @@ Update the cart meta
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 | body |  CartMetaRequest | "Request body" 
 
