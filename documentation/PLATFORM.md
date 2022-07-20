@@ -297,13 +297,13 @@
 
 * [Catalog](#Catalog)
   * Methods
-    * [getSearchKeywords](#getsearchkeywords)
     * [deleteSearchKeywords](#deletesearchkeywords)
+    * [getSearchKeywords](#getsearchkeywords)
     * [updateSearchKeywords](#updatesearchkeywords)
     * [getAllSearchKeyword](#getallsearchkeyword)
     * [createCustomKeyword](#createcustomkeyword)
-    * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
+    * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [updateAutocompleteKeyword](#updateautocompletekeyword)
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
@@ -366,15 +366,16 @@
     * [updateCategory](#updatecategory)
     * [getProducts](#getproducts)
     * [createProduct](#createproduct)
-    * [getProduct](#getproduct)
+    * [getProductAttributes](#getproductattributes)
     * [deleteProduct](#deleteproduct)
+    * [getProduct](#getproduct)
     * [editProduct](#editproduct)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
     * [getProductBulkUploadHistory](#getproductbulkuploadhistory)
     * [createBulkProductUploadJob](#createbulkproductuploadjob)
-    * [createProductsInBulk](#createproductsinbulk)
     * [deleteProductBulkJob](#deleteproductbulkjob)
+    * [createProductsInBulk](#createproductsinbulk)
     * [getProductTags](#getproducttags)
     * [getProductAssetsInBulk](#getproductassetsinbulk)
     * [createProductAssetsInBulk](#createproductassetsinbulk)
@@ -386,13 +387,13 @@
     * [deleteInventory](#deleteinventory)
     * [getInventoryBulkUploadHistory](#getinventorybulkuploadhistory)
     * [createBulkInventoryJob](#createbulkinventoryjob)
-    * [createBulkInventory](#createbulkinventory)
     * [deleteBulkInventoryJob](#deletebulkinventoryjob)
+    * [createBulkInventory](#createbulkinventory)
     * [getInventoryExport](#getinventoryexport)
     * [createInventoryExportJob](#createinventoryexportjob)
     * [exportInventoryConfig](#exportinventoryconfig)
-    * [updateRealtimeInventory](#updaterealtimeinventory)
     * [deleteRealtimeInventory](#deleterealtimeinventory)
+    * [updateRealtimeInventory](#updaterealtimeinventory)
     * [updateInventories](#updateinventories)
     * [getAllHsnCodes](#getallhsncodes)
     * [createHsnCode](#createhsncode)
@@ -407,7 +408,6 @@
     * [getAppicationProducts](#getappicationproducts)
     * [getProductDetailBySlug](#getproductdetailbyslug)
     * [getAppProducts](#getappproducts)
-    * [getOptimalLocations](#getoptimallocations)
     * [getAppLocations](#getapplocations)
     
 
@@ -531,6 +531,7 @@
     * [fetchAndvalidateCartItems](#fetchandvalidatecartitems)
     * [checkCartServiceability](#checkcartserviceability)
     * [checkoutCart](#checkoutcart)
+    * [getAbandonedCart](#getabandonedcart)
     
 
 * [Rewards](#Rewards)
@@ -52894,49 +52895,6 @@ Schema: `GetClickToCallResponse`
 ## Catalog
 
 
-#### getSearchKeywords
-Get a Search Keywords Details
-
-```golang
-
-data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
-
-*Success Response:*
-
-
-
-The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
-
-
-Schema: `GetSearchWordsDetailResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### deleteSearchKeywords
 Delete a Search Keywords
 
@@ -52968,6 +52926,49 @@ Status object. Tells whether the operation was successful. See example below or 
 
 
 Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSearchKeywords
+Get a Search Keywords Details
+
+```golang
+
+data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
+
+*Success Response:*
+
+
+
+The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
+
+
+Schema: `GetSearchWordsDetailResponse`
 
 
 
@@ -53105,49 +53106,6 @@ Schema: `GetSearchWordsData`
 ---
 
 
-#### getAutocompleteKeywordDetail
-Get a Autocomplete Keywords Details
-
-```golang
-
-data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
-
-*Success Response:*
-
-
-
-The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
-
-
-Schema: `GetAutocompleteWordsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### deleteAutocompleteKeyword
 Delete a Autocomplete Keywords
 
@@ -53179,6 +53137,49 @@ Status object. Tells whether the operation was successful. See example below or 
 
 
 Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAutocompleteKeywordDetail
+Get a Autocomplete Keywords Details
+
+```golang
+
+data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
+
+*Success Response:*
+
+
+
+The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
+
+
+Schema: `GetAutocompleteWordsResponse`
 
 
 
@@ -54468,7 +54469,9 @@ data, err := Catalog.GetAllCollections(CompanyID, ApplicationID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `Q`, `Type`, `Tags`, `IsActive`, `PageNo`, `PageSize`
+
+
+| xQuery | struct | Includes properties such as `Q`, `ScheduleStatus`, `Type`, `Tags`, `IsActive`, `PageNo`, `PageSize`
 
 
 A Collection allows you to organize your products into hierarchical groups. For example, a dress might be in the category _Clothing_, the individual product might also be in the collection _Summer_. On successful request, returns all the collections as specified in `CollectionListingSchema`
@@ -55830,39 +55833,36 @@ Schema: `SuccessResponse`
 ---
 
 
-#### getProduct
-Get a single product.
+#### getProductAttributes
+Get list of all the attributes by their l3_categories
 
 ```golang
 
-data, err := Catalog.GetProduct(CompanyID, ItemID, xQuery);
+data, err := Catalog.GetProductAttributes(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-
-
-| CompanyID | float64 | Company Id of the product. | 
-
-
-| ItemID | float64 | Item Id of the product. | 
+| CompanyID | float64 | company for which you want to view the genders | 
 
 
 
-| xQuery | struct | Includes properties such as `ItemCode`, `BrandUID`
 
 
-This API helps to get data associated to a particular product.
+| xQuery | struct | Includes properties such as `Category`, `Filter`
+
+
+This API allows to list all the attributes by their l3_categories.
 
 *Success Response:*
 
 
 
-Product object. See example below or refer `product.utils.format_product_response` for details
+Size guide object. See example below or refer `ProductAttributesResponseSchema` for details
 
 
-Schema: `Product`
+Schema: `ProductAttributesResponse`
 
 
 
@@ -55903,6 +55903,51 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProduct
+Get a single product.
+
+```golang
+
+data, err := Catalog.GetProduct(CompanyID, ItemID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+| CompanyID | float64 | Company Id of the product. | 
+
+
+| ItemID | float64 | Item Id of the product. | 
+
+
+
+| xQuery | struct | Includes properties such as `ItemCode`, `BrandUID`
+
+
+This API helps to get data associated to a particular product.
+
+*Success Response:*
+
+
+
+Product object. See example below or refer `product.utils.format_product_response` for details
+
+
+Schema: `Product`
 
 
 
@@ -56120,26 +56165,25 @@ Schema: `BulkResponse`
 ---
 
 
-#### createProductsInBulk
-Create products in bulk associated with given batch Id.
+#### deleteProductBulkJob
+Delete Bulk product job.
 
 ```golang
 
-data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
+data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
 
 
-| BatchID | string | Batch Id in which assets to be uploaded. | 
+| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
 
 
-| body |  BulkProductRequest | "Request body" 
 
-This API helps to create products in bulk push to kafka for approval/creation.
+This API allows to delete bulk product job associated with company.
 
 *Success Response:*
 
@@ -56161,25 +56205,26 @@ Schema: `SuccessResponse`
 ---
 
 
-#### deleteProductBulkJob
-Delete Bulk product job.
+#### createProductsInBulk
+Create products in bulk associated with given batch Id.
 
 ```golang
 
-data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
+data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
 
 
-| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
+| BatchID | string | Batch Id in which assets to be uploaded. | 
 
 
+| body |  BulkProductRequest | "Request body" 
 
-This API allows to delete bulk product job associated with company.
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -56690,26 +56735,25 @@ Schema: `BulkResponse`
 ---
 
 
-#### createBulkInventory
-Create products in bulk associated with given batch Id.
+#### deleteBulkInventoryJob
+Delete Bulk Inventory job.
 
 ```golang
 
-data, err := Catalog.CreateBulkInventory(CompanyID, BatchID, body);
+data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which Inventory is to be uploaded. | 
+| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
 
 
-| BatchID | string | Batch Id of the bulk create job. | 
+| BatchID | string | Batch Id of the bulk delete job. | 
 
 
-| body |  InventoryBulkRequest | "Request body" 
 
-This API helps to create products in bulk push to kafka for approval/creation.
+This API allows to delete bulk Inventory job associated with company.
 
 *Success Response:*
 
@@ -56731,25 +56775,26 @@ Schema: `SuccessResponse`
 ---
 
 
-#### deleteBulkInventoryJob
-Delete Bulk Inventory job.
+#### createBulkInventory
+Create products in bulk associated with given batch Id.
 
 ```golang
 
-data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
+data, err := Catalog.CreateBulkInventory(CompanyID, BatchID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
+| CompanyID | float64 | Company Id in which Inventory is to be uploaded. | 
 
 
-| BatchID | string | Batch Id of the bulk delete job. | 
+| BatchID | string | Batch Id of the bulk create job. | 
 
 
+| body |  InventoryBulkRequest | "Request body" 
 
-This API allows to delete bulk Inventory job associated with company.
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -56886,12 +56931,12 @@ Schema: `InventoryConfig`
 ---
 
 
-#### updateRealtimeInventory
+#### deleteRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -56930,12 +56975,12 @@ Schema: `InventoryUpdateResponse`
 ---
 
 
-#### deleteRealtimeInventory
+#### updateRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -57467,7 +57512,9 @@ data, err := Catalog.GetAppicationProducts(CompanyID, ApplicationID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `Q`, `F`, `Filters`, `SortOn`, `PageID`, `PageSize`, `PageNo`, `PageType`, `ItemIds`
+
+
+| xQuery | struct | Includes properties such as `Q`, `F`, `C`, `Filters`, `SortOn`, `PageID`, `PageSize`, `PageNo`, `PageType`, `ItemIds`
 
 
 List all the products associated with a brand, collection or category in a requested sort order. The API additionally supports arbitrary search queries that may refer the name of any product, brand, category or collection. If successful, returns a paginated list of products specified in `ApplicationProductListingResponse`
@@ -57578,44 +57625,6 @@ The Product object. See example below or refer `ApplicationProductListingRespons
 
 
 Schema: `ProductListingResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getOptimalLocations
-Location Reassignment
-
-```golang
-
-data, err := Catalog.GetOptimalLocations(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company inside which the location is to be created. | 
-
-
-| body |  AssignStore | "Request body" 
-
-
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `StoreAssignResponse`
 
 
 
@@ -62636,6 +62645,222 @@ Checkout cart and create Fynd order id
 
 
 Schema: `OpenApiCheckoutResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAbandonedCart
+Get with abandoned cart list
+
+```golang
+
+data, err := Cart.GetAbandonedCart(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current Application _id | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `AnonymousCart`, `LastID`
+
+
+Get abandoned cart list with pagination
+
+*Success Response:*
+
+
+
+Abandoned Cart List for sent page_size and page_no
+
+
+Schema: `AbandonedCartResponse`
+
+
+*Examples:*
+
+
+Abandoned Cart list for sent filter and page size
+```json
+{
+  "value": {
+    "message": "Cart fetched successfully !!",
+    "success": true,
+    "result": [
+      {
+        "_id": "62bbe2c4b79692d559ac1f16",
+        "uid": 19986,
+        "user_id": "600693a01faf8695d70a15df",
+        "is_default": true,
+        "app_id": "5d64e3500bcad8693a821c0d",
+        "articles": [
+          {
+            "service_item_meta": {
+              "product_group_tags": null,
+              "products": null
+            },
+            "parent_item_identifiers": {
+              "identifier": null,
+              "parent_item_size": null,
+              "parent_item_id": null
+            },
+            "item_id": 7500426,
+            "item_size": "SET1",
+            "article_id": "5f37d9b71cb7c10001b90ee2",
+            "quantity": 2,
+            "price_marked": 1000,
+            "price_effective": 1,
+            "currency_code": "INR",
+            "store_id": 10183,
+            "company_id": 61,
+            "article_assignment": {
+              "level": "multi-companies",
+              "strategy": "optimal"
+            },
+            "brand_uid": 85,
+            "l3_categories": [
+              466
+            ],
+            "discount": 99.9,
+            "coupon": {
+              "amount": 0,
+              "currency_code": "INR",
+              "article_count": 0
+            },
+            "referral_credits": {
+              "amount": 0,
+              "currency_code": "FC"
+            },
+            "cashback": {
+              "amount": 0,
+              "currency_code": "FC"
+            },
+            "bulk_coupon": {
+              "margin": 0,
+              "discount": 0,
+              "code": null
+            },
+            "promotion": [
+              {
+                "promo_id": "62bbf355beda57df173122fa",
+                "amount": 1,
+                "article_quantity": 2,
+                "mrp_promotion": false,
+                "promotion_type": "amount",
+                "discount_rules": [
+                  {
+                    "type": "amount",
+                    "value": 125
+                  }
+                ]
+              }
+            ],
+            "identifiers": {
+              "identifier": "pEF2t4GGTKaieox5rsRibw"
+            },
+            "meta": {},
+            "extra_meta": {},
+            "payment_methods": []
+          }
+        ],
+        "cart_value": 1,
+        "discount": 0,
+        "delivery_charges": {
+          "amount": 1,
+          "currency_code": "INR"
+        },
+        "coupon": {
+          "amount": 0,
+          "currency_code": "INR",
+          "code": null,
+          "type": "cart",
+          "uid": null,
+          "id": null
+        },
+        "promotion": {
+          "amount": 2,
+          "currency_code": "INR",
+          "mode": "promotion",
+          "promotions": [
+            {
+              "id": "62bbf355beda57df173122fa",
+              "mrp_promo": false,
+              "promo_group": "product"
+            }
+          ]
+        },
+        "fynd_credits": {
+          "amount": 0,
+          "currency_code": "FC",
+          "auto_applied": true
+        },
+        "cod_charges": {
+          "amount": 0,
+          "currency_code": "INR"
+        },
+        "cashback": {
+          "amount": 0,
+          "currency_code": "FC",
+          "uid": null
+        },
+        "payments": {},
+        "is_archive": false,
+        "created_on": "2022-06-28 14:25:15.578000",
+        "last_modified": "2022-06-29 13:52:03.313000",
+        "expire_at": "2023-06-24 13:52:03.313000",
+        "fc_index_map": [
+          0,
+          0
+        ],
+        "checkout_mode": "self",
+        "meta": {
+          "shipping_address_id": "62b161cb3ad0eed3e48ec6a9",
+          "billing_address_id": "62b161cb3ad0eed3e48ec6a9"
+        },
+        "comment": "",
+        "bulk_coupon_discount": 0,
+        "pick_up_customer_details": {},
+        "is_active": true,
+        "shipments": [],
+        "payment_methods": [],
+        "buy_now": false
+      }
+    ],
+    "page": {
+      "type": "number",
+      "has_next": false,
+      "item_total": 28,
+      "size": 20,
+      "page": 2,
+      "current": 2,
+      "last_id": "62d4ff76d6aec8db897de407"
+    }
+  }
+}
+```
 
 
 
