@@ -6088,58 +6088,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // DeleteProduct Delete a product.
-     func (ca *PlatformCatalog)  DeleteProduct(ItemID float64) (SuccessResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteProductResponse SuccessResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteProductResponse)
-        if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteProductResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
     // EditProduct Edit a product.
      func (ca *PlatformCatalog)  EditProduct(ItemID float64, body  ProductCreateUpdate) (SuccessResponse, error){
         
@@ -6272,6 +6220,58 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return SuccessResponse{}, common.NewFDKError(err.Error())
         }
         return editProductResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // DeleteProduct Delete a product.
+     func (ca *PlatformCatalog)  DeleteProduct(ItemID float64) (SuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteProductResponse SuccessResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteProductResponse)
+        if err != nil {
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteProductResponse, nil
         
     }
          
@@ -14346,16 +14346,10 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    //PlatformGetShipmentDetailsXQuery holds query params
-    type PlatformGetShipmentDetailsXQuery struct { 
-        OrderingCompanyID string  `url:"ordering_company_id,omitempty"` 
-        RequestByExt string  `url:"request_by_ext,omitempty"`  
-    }
-    
 
 
     // GetShipmentDetails 
-     func (or *PlatformOrders)  GetShipmentDetails(ShipmentID string, xQuery PlatformGetShipmentDetailsXQuery) (ShipmentInfoResponse, error){
+     func (or *PlatformOrders)  GetShipmentDetails(ShipmentID string) (ShipmentInfoResponse, error){
         
         var (
             rawRequest  *RawRequest
@@ -14366,12 +14360,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
         
 
-        
-            
-                
-            
-                
-            
         
 
         
@@ -14387,7 +14375,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             "get",
             fmt.Sprintf("/service/platform/orders/v1.0/company/%s/shipment-details/%s",or.CompanyID, ShipmentID),
             nil,
-            xQuery,
+            nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -14415,12 +14403,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         SuperLane string  `url:"super_lane,omitempty"` 
         GroupEntity string  `url:"group_entity,omitempty"` 
         FromDate string  `url:"from_date,omitempty"` 
-        ToDate string  `url:"to_date,omitempty"` 
-        DpIds string  `url:"dp_ids,omitempty"` 
-        Stores string  `url:"stores,omitempty"` 
-        SalesChannel string  `url:"sales_channel,omitempty"` 
-        PaymentMode string  `url:"payment_mode,omitempty"` 
-        BagStatus string  `url:"bag_status,omitempty"`  
+        ToDate string  `url:"to_date,omitempty"`  
     }
     
 
@@ -14438,16 +14421,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
 
         
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
             
                 
             
@@ -14804,68 +14777,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    //PlatformGetMetricCountXQuery holds query params
-    type PlatformGetMetricCountXQuery struct { 
-        FromDate string  `url:"from_date,omitempty"` 
-        ToDate string  `url:"to_date,omitempty"`  
-    }
-    
-
-
-    // GetMetricCount 
-     func (or *PlatformOrders)  GetMetricCount(xQuery PlatformGetMetricCountXQuery) (MetricCountResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getMetricCountResponse MetricCountResponse
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "get",
-            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/shipment/metrics-count",or.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return MetricCountResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getMetricCountResponse)
-        if err != nil {
-             return MetricCountResponse{}, common.NewFDKError(err.Error())
-        }
-        return getMetricCountResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
     //PlatformGetfiltersXQuery holds query params
     type PlatformGetfiltersXQuery struct { 
         View string  `url:"view,omitempty"`  
@@ -14919,8 +14830,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
          
         
        
-    
-    
     
 
 
