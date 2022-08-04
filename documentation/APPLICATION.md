@@ -133,7 +133,6 @@
     * [verifyMobile](#verifymobile)
     * [hasPassword](#haspassword)
     * [updatePassword](#updatepassword)
-    * [archiveUser](#archiveuser)
     * [logout](#logout)
     * [sendOTPOnMobile](#sendotponmobile)
     * [verifyMobileOTP](#verifymobileotp)
@@ -12326,42 +12325,6 @@ Success. Returns a success message. Refer `VerifyEmailSuccess` for more details.
 
 
 Schema: `VerifyEmailSuccess`
-
-
-
-
-
-
-
-
-
----
-
-
-#### archiveUser
-verify otp and archive user
-
-```golang
-
- data, err :=  User.ArchiveUser(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  ArchiveApplicationUserRequestSchema | "Request body" 
-
-
-verify otp and archive user
-
-*Success Response:*
-
-
-
-Success. Returns a success message. Refer `ArchiveUserSuccess` for more details.
-
-
-Schema: `ArchiveUserSuccess`
 
 
 

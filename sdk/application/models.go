@@ -3308,28 +3308,6 @@ package application
          
     }
     
-    // ArchiveApplicationUserRequestSchema ...
-    type ArchiveApplicationUserRequestSchema struct {
-
-        
-            UserID string  `json:"user_id"`
-            Reason string  `json:"reason"`
-            ReasonID string  `json:"reason_id"`
-            RequestID string  `json:"request_id"`
-            Otp string  `json:"otp"`
-         
-    }
-    
-    // UnArchiveUserRequestSchema ...
-    type UnArchiveUserRequestSchema struct {
-
-        
-            UserID string  `json:"user_id"`
-            Reason string  `json:"reason"`
-            ReasonID string  `json:"reason_id"`
-         
-    }
-    
     // EditEmailRequestSchema ...
     type EditEmailRequestSchema struct {
 
@@ -3677,14 +3655,6 @@ package application
          
     }
     
-    // UnArchiveUserSuccess ...
-    type UnArchiveUserSuccess struct {
-
-        
-            Success bool  `json:"success"`
-         
-    }
-    
     // OtpSuccess ...
     type OtpSuccess struct {
 
@@ -3987,10 +3957,6 @@ package application
             Register bool  `json:"register"`
             MobileImage string  `json:"mobile_image"`
             DesktopImage string  `json:"desktop_image"`
-            SupportEmail string  `json:"support_email"`
-            DeleteAccountDay float64  `json:"delete_account_day"`
-            DeleteAccountReasons []DeleteAccountReasons  `json:"delete_account_reasons"`
-            DeleteAccountConsent map[string]interface{}  `json:"delete_account_consent"`
          
     }
     
@@ -4102,24 +4068,6 @@ package application
             Facebook Facebook  `json:"facebook"`
             AccountKit Accountkit  `json:"account_kit"`
             Google Google  `json:"google"`
-         
-    }
-    
-    // DeleteAccountReasons ...
-    type DeleteAccountReasons struct {
-
-        
-            ReasonText string  `json:"reason_text"`
-            ReasonID string  `json:"reason_id"`
-            ShowTextArea bool  `json:"show_text_area"`
-         
-    }
-    
-    // DeleteAccountConsent ...
-    type DeleteAccountConsent struct {
-
-        
-            ConsentText string  `json:"consent_text"`
          
     }
     
