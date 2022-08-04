@@ -38,6 +38,8 @@ type Client struct {
 	
 		Rewards  *Rewards
 	
+		Feedback  *Feedback
+	
 		PosCart  *PosCart
 	
 		Logistic  *Logistic
@@ -75,6 +77,8 @@ func NewAppClient(config *AppConfig) *Client {
 				Order:  NewOrder(config),
 			
 				Rewards:  NewRewards(config),
+			
+				Feedback:  NewFeedback(config),
 			
 				PosCart:  NewPosCart(config),
 			
@@ -13547,6 +13551,2414 @@ func NewAppClient(config *AppConfig) *Client {
             return RedeemReferralCodeResponse{}, common.NewFDKError(err.Error())
         }
          return redeemReferralCodeResponse, nil
+        
+    }
+          
+    
+
+    // Feedback ...
+    type Feedback struct {
+        config *AppConfig
+    }
+    // NewFeedback ...
+    func NewFeedback(config *AppConfig) *Feedback {
+        return &Feedback{config}
+    }
+    
+    
+    
+  
+    
+    
+    // CreateAbuseReport Post a new abuse request
+    func (fe *Feedback)  CreateAbuseReport(body  ReportAbuseRequest) (InsertResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             createAbuseReportResponse InsertResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return InsertResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return InsertResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "post",
+            "/service/application/feedback/v1.0/abuse/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return InsertResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createAbuseReportResponse)
+        if err != nil {
+            return InsertResponse{}, common.NewFDKError(err.Error())
+        }
+         return createAbuseReportResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UpdateAbuseReport Update abuse details
+    func (fe *Feedback)  UpdateAbuseReport(body  UpdateAbuseStatusRequest) (UpdateResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             updateAbuseReportResponse UpdateResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "put",
+            "/service/application/feedback/v1.0/abuse/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return UpdateResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateAbuseReportResponse)
+        if err != nil {
+            return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+         return updateAbuseReportResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //FeedbackGetAbuseReportsXQuery holds query params
+    type FeedbackGetAbuseReportsXQuery struct { 
+        ID string  `url:"id,omitempty"` 
+        PageID string  `url:"page_id,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetAbuseReports Get a list of abuse data
+    func (fe *Feedback)  GetAbuseReports(EntityID string, EntityType string, xQuery FeedbackGetAbuseReportsXQuery) (ReportAbuseGetResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getAbuseReportsResponse ReportAbuseGetResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "get",
+            fmt.Sprintf("/service/application/feedback/v1.0/abuse/entity/%s/entity-id/%s",EntityID,EntityType),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ReportAbuseGetResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAbuseReportsResponse)
+        if err != nil {
+            return ReportAbuseGetResponse{}, common.NewFDKError(err.Error())
+        }
+         return getAbuseReportsResponse, nil
+        
+    }
+          
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetAbuseReportsPaginator Get a list of abuse data  
+            func (fe *Feedback)  GetAbuseReportsPaginator(EntityID string  , EntityType string  ,  xQuery FeedbackGetAbuseReportsXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("cursor")
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 xQuery.PageID = paginator.NextID
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := fe.GetAbuseReports(EntityID, EntityType, xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
+    
+    
+    
+  
+    
+    
+    //FeedbackGetAttributesXQuery holds query params
+    type FeedbackGetAttributesXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetAttributes Get a list of attribute data
+    func (fe *Feedback)  GetAttributes(xQuery FeedbackGetAttributesXQuery) (AttributeResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getAttributesResponse AttributeResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "get",
+            "/service/application/feedback/v1.0/attributes/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return AttributeResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAttributesResponse)
+        if err != nil {
+            return AttributeResponse{}, common.NewFDKError(err.Error())
+        }
+         return getAttributesResponse, nil
+        
+    }
+          
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetAttributesPaginator Get a list of attribute data  
+            func (fe *Feedback)  GetAttributesPaginator( xQuery FeedbackGetAttributesXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                 
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := fe.GetAttributes(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
+    
+    
+    
+  
+    
+    
+    // CreateAttribute Add a new attribute request
+    func (fe *Feedback)  CreateAttribute(body  SaveAttributeRequest) (InsertResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             createAttributeResponse InsertResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return InsertResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return InsertResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "post",
+            "/service/application/feedback/v1.0/attributes/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return InsertResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createAttributeResponse)
+        if err != nil {
+            return InsertResponse{}, common.NewFDKError(err.Error())
+        }
+         return createAttributeResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetAttribute Get data of a single attribute
+    func (fe *Feedback)  GetAttribute(Slug string) (Attribute, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getAttributeResponse Attribute
+	    )
+
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "get",
+            fmt.Sprintf("/service/application/feedback/v1.0/attributes/%s",Slug),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return Attribute{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAttributeResponse)
+        if err != nil {
+            return Attribute{}, common.NewFDKError(err.Error())
+        }
+         return getAttributeResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UpdateAttribute Update details of an attribute 
+    func (fe *Feedback)  UpdateAttribute(Slug string, body  UpdateAttributeRequest) (UpdateResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             updateAttributeResponse UpdateResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "put",
+            fmt.Sprintf("/service/application/feedback/v1.0/attributes/%s",Slug),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return UpdateResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateAttributeResponse)
+        if err != nil {
+            return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+         return updateAttributeResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // CreateComment Post a new comment
+    func (fe *Feedback)  CreateComment(body  CommentRequest) (InsertResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             createCommentResponse InsertResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return InsertResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return InsertResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "post",
+            "/service/application/feedback/v1.0/comment/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return InsertResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createCommentResponse)
+        if err != nil {
+            return InsertResponse{}, common.NewFDKError(err.Error())
+        }
+         return createCommentResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UpdateComment Update the status of a comment
+    func (fe *Feedback)  UpdateComment(body  UpdateCommentRequest) (UpdateResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             updateCommentResponse UpdateResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "put",
+            "/service/application/feedback/v1.0/comment/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return UpdateResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateCommentResponse)
+        if err != nil {
+            return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+         return updateCommentResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //FeedbackGetCommentsXQuery holds query params
+    type FeedbackGetCommentsXQuery struct { 
+        ID string  `url:"id,omitempty"` 
+        EntityID string  `url:"entity_id,omitempty"` 
+        UserID string  `url:"user_id,omitempty"` 
+        PageID string  `url:"page_id,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetComments Get a list of comments
+    func (fe *Feedback)  GetComments(EntityType string, xQuery FeedbackGetCommentsXQuery) (CommentGetResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getCommentsResponse CommentGetResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "get",
+            fmt.Sprintf("/service/application/feedback/v1.0/comment/entity/%s",EntityType),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CommentGetResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getCommentsResponse)
+        if err != nil {
+            return CommentGetResponse{}, common.NewFDKError(err.Error())
+        }
+         return getCommentsResponse, nil
+        
+    }
+          
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetCommentsPaginator Get a list of comments  
+            func (fe *Feedback)  GetCommentsPaginator(EntityType string  ,  xQuery FeedbackGetCommentsXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("cursor")
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 xQuery.PageID = paginator.NextID
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := fe.GetComments(EntityType, xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
+    
+    
+    
+  
+    
+    
+    // CheckEligibility Checks eligibility to rate and review, and shows the cloud media configuration
+    func (fe *Feedback)  CheckEligibility(EntityType string, EntityID string) (CheckEligibilityResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             checkEligibilityResponse CheckEligibilityResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "get",
+            fmt.Sprintf("/service/application/feedback/v1.0/config/entity/%s/entity-id/%s",EntityType,EntityID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CheckEligibilityResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &checkEligibilityResponse)
+        if err != nil {
+            return CheckEligibilityResponse{}, common.NewFDKError(err.Error())
+        }
+         return checkEligibilityResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //FeedbackDeleteMediaXQuery holds query params
+    type FeedbackDeleteMediaXQuery struct { 
+        Ids []string  `url:"ids,omitempty"`  
+    }
+    
+    // DeleteMedia Delete Media
+    func (fe *Feedback)  DeleteMedia(xQuery FeedbackDeleteMediaXQuery) (UpdateResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             deleteMediaResponse UpdateResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "delete",
+            fmt.Sprintf("/service/application/feedback/v1.0/media/",),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return UpdateResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteMediaResponse)
+        if err != nil {
+            return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+         return deleteMediaResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // CreateMedia Add Media
+    func (fe *Feedback)  CreateMedia(body  AddMediaListRequest) (InsertResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             createMediaResponse InsertResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return InsertResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return InsertResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "post",
+            "/service/application/feedback/v1.0/media/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return InsertResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createMediaResponse)
+        if err != nil {
+            return InsertResponse{}, common.NewFDKError(err.Error())
+        }
+         return createMediaResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UpdateMedia Update Media
+    func (fe *Feedback)  UpdateMedia(body  UpdateMediaListRequest) (UpdateResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             updateMediaResponse UpdateResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "put",
+            "/service/application/feedback/v1.0/media/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return UpdateResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateMediaResponse)
+        if err != nil {
+            return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+         return updateMediaResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //FeedbackGetMediasXQuery holds query params
+    type FeedbackGetMediasXQuery struct { 
+        ID string  `url:"id,omitempty"` 
+        Type string  `url:"type,omitempty"` 
+        PageID string  `url:"page_id,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetMedias Get Media
+    func (fe *Feedback)  GetMedias(EntityType string, EntityID string, xQuery FeedbackGetMediasXQuery) (MediaGetResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getMediasResponse MediaGetResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "get",
+            fmt.Sprintf("/service/application/feedback/v1.0/media/entity/%s/entity-id/%s",EntityType,EntityID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return MediaGetResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getMediasResponse)
+        if err != nil {
+            return MediaGetResponse{}, common.NewFDKError(err.Error())
+        }
+         return getMediasResponse, nil
+        
+    }
+          
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetMediasPaginator Get Media  
+            func (fe *Feedback)  GetMediasPaginator(EntityType string  , EntityID string  ,  xQuery FeedbackGetMediasXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("cursor")
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 xQuery.PageID = paginator.NextID
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := fe.GetMedias(EntityType, EntityID, xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
+    
+    
+    
+  
+    
+    
+    //FeedbackGetReviewSummariesXQuery holds query params
+    type FeedbackGetReviewSummariesXQuery struct { 
+        ID string  `url:"id,omitempty"` 
+        PageID string  `url:"page_id,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetReviewSummaries Get a review summary
+    func (fe *Feedback)  GetReviewSummaries(EntityType string, EntityID string, xQuery FeedbackGetReviewSummariesXQuery) (ReviewMetricGetResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getReviewSummariesResponse ReviewMetricGetResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "get",
+            fmt.Sprintf("/service/application/feedback/v1.0/rating/summary/entity/%s/entity-id/%s",EntityType,EntityID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ReviewMetricGetResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getReviewSummariesResponse)
+        if err != nil {
+            return ReviewMetricGetResponse{}, common.NewFDKError(err.Error())
+        }
+         return getReviewSummariesResponse, nil
+        
+    }
+          
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetReviewSummariesPaginator Get a review summary  
+            func (fe *Feedback)  GetReviewSummariesPaginator(EntityType string  , EntityID string  ,  xQuery FeedbackGetReviewSummariesXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("cursor")
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 xQuery.PageID = paginator.NextID
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := fe.GetReviewSummaries(EntityType, EntityID, xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
+    
+    
+    
+  
+    
+    
+    // CreateReview Add customer reviews
+    func (fe *Feedback)  CreateReview(body  UpdateReviewRequest) (UpdateResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             createReviewResponse UpdateResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "post",
+            "/service/application/feedback/v1.0/review/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return UpdateResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createReviewResponse)
+        if err != nil {
+            return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+         return createReviewResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UpdateReview Update customer reviews
+    func (fe *Feedback)  UpdateReview(body  UpdateReviewRequest) (UpdateResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             updateReviewResponse UpdateResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "put",
+            "/service/application/feedback/v1.0/review/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return UpdateResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateReviewResponse)
+        if err != nil {
+            return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+         return updateReviewResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //FeedbackGetReviewsXQuery holds query params
+    type FeedbackGetReviewsXQuery struct { 
+        ID string  `url:"id,omitempty"` 
+        UserID string  `url:"user_id,omitempty"` 
+        Media string  `url:"media,omitempty"` 
+        Rating []float64  `url:"rating,omitempty"` 
+        AttributeRating []string  `url:"attribute_rating,omitempty"` 
+        Facets bool  `url:"facets,omitempty"` 
+        Sort string  `url:"sort,omitempty"` 
+        Active bool  `url:"active,omitempty"` 
+        Approve bool  `url:"approve,omitempty"` 
+        PageID string  `url:"page_id,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetReviews Get list of customer reviews
+    func (fe *Feedback)  GetReviews(EntityType string, EntityID string, xQuery FeedbackGetReviewsXQuery) (ReviewGetResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getReviewsResponse ReviewGetResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "get",
+            fmt.Sprintf("/service/application/feedback/v1.0/review/entity/%s/entity-id/%s",EntityType,EntityID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ReviewGetResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getReviewsResponse)
+        if err != nil {
+            return ReviewGetResponse{}, common.NewFDKError(err.Error())
+        }
+         return getReviewsResponse, nil
+        
+    }
+          
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetReviewsPaginator Get list of customer reviews  
+            func (fe *Feedback)  GetReviewsPaginator(EntityType string  , EntityID string  ,  xQuery FeedbackGetReviewsXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("cursor")
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 xQuery.PageID = paginator.NextID
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := fe.GetReviews(EntityType, EntityID, xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
+    
+    
+    
+  
+    
+    
+    //FeedbackGetTemplatesXQuery holds query params
+    type FeedbackGetTemplatesXQuery struct { 
+        TemplateID string  `url:"template_id,omitempty"` 
+        EntityID string  `url:"entity_id,omitempty"` 
+        EntityType string  `url:"entity_type,omitempty"`  
+    }
+    
+    // GetTemplates Get the feedback templates for a product or l3
+    func (fe *Feedback)  GetTemplates(xQuery FeedbackGetTemplatesXQuery) (TemplateGetResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getTemplatesResponse TemplateGetResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "get",
+            "/service/application/feedback/v1.0/template/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return TemplateGetResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getTemplatesResponse)
+        if err != nil {
+            return TemplateGetResponse{}, common.NewFDKError(err.Error())
+        }
+         return getTemplatesResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // CreateQuestion Create a new question
+    func (fe *Feedback)  CreateQuestion(body  CreateQNARequest) (InsertResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             createQuestionResponse InsertResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return InsertResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return InsertResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "post",
+            "/service/application/feedback/v1.0/template/qna/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return InsertResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createQuestionResponse)
+        if err != nil {
+            return InsertResponse{}, common.NewFDKError(err.Error())
+        }
+         return createQuestionResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UpdateQuestion Update a question
+    func (fe *Feedback)  UpdateQuestion(body  UpdateQNARequest) (UpdateResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             updateQuestionResponse UpdateResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "put",
+            "/service/application/feedback/v1.0/template/qna/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return UpdateResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateQuestionResponse)
+        if err != nil {
+            return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+         return updateQuestionResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //FeedbackGetQuestionAndAnswersXQuery holds query params
+    type FeedbackGetQuestionAndAnswersXQuery struct { 
+        ID string  `url:"id,omitempty"` 
+        UserID string  `url:"user_id,omitempty"` 
+        ShowAnswer bool  `url:"show_answer,omitempty"` 
+        PageID string  `url:"page_id,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetQuestionAndAnswers Get a list of QnA
+    func (fe *Feedback)  GetQuestionAndAnswers(EntityType string, EntityID string, xQuery FeedbackGetQuestionAndAnswersXQuery) (QNAGetResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getQuestionAndAnswersResponse QNAGetResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "get",
+            fmt.Sprintf("/service/application/feedback/v1.0/template/qna/entity/%s/entity-id/%s",EntityType,EntityID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return QNAGetResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getQuestionAndAnswersResponse)
+        if err != nil {
+            return QNAGetResponse{}, common.NewFDKError(err.Error())
+        }
+         return getQuestionAndAnswersResponse, nil
+        
+    }
+          
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetQuestionAndAnswersPaginator Get a list of QnA  
+            func (fe *Feedback)  GetQuestionAndAnswersPaginator(EntityType string  , EntityID string  ,  xQuery FeedbackGetQuestionAndAnswersXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("cursor")
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 xQuery.PageID = paginator.NextID
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := fe.GetQuestionAndAnswers(EntityType, EntityID, xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
+    
+    
+    
+  
+    
+    
+    //FeedbackGetVotesXQuery holds query params
+    type FeedbackGetVotesXQuery struct { 
+        ID string  `url:"id,omitempty"` 
+        RefType string  `url:"ref_type,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetVotes Get a list of votes
+    func (fe *Feedback)  GetVotes(xQuery FeedbackGetVotesXQuery) (VoteResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getVotesResponse VoteResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "get",
+            "/service/application/feedback/v1.0/vote/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return VoteResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getVotesResponse)
+        if err != nil {
+            return VoteResponse{}, common.NewFDKError(err.Error())
+        }
+         return getVotesResponse, nil
+        
+    }
+          
+            
+            
+            
+            
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                    
+                    
+                
+            
+            // GetVotesPaginator Get a list of votes  
+            func (fe *Feedback)  GetVotesPaginator( xQuery FeedbackGetVotesXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := fe.GetVotes(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+       
+    
+    
+    
+  
+    
+    
+    // CreateVote Create a new vote
+    func (fe *Feedback)  CreateVote(body  VoteRequest) (InsertResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             createVoteResponse InsertResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return InsertResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return InsertResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "post",
+            "/service/application/feedback/v1.0/vote/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return InsertResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createVoteResponse)
+        if err != nil {
+            return InsertResponse{}, common.NewFDKError(err.Error())
+        }
+         return createVoteResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UpdateVote Update a vote
+    func (fe *Feedback)  UpdateVote(body  UpdateVoteRequest) (UpdateResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             updateVoteResponse UpdateResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "put",
+            "/service/application/feedback/v1.0/vote/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return UpdateResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateVoteResponse)
+        if err != nil {
+            return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+         return updateVoteResponse, nil
         
     }
           
