@@ -1710,55 +1710,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1799,6 +1750,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -2296,6 +2296,63 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //CatalogGetProductBundlesBySlugXQuery holds query params
+    type CatalogGetProductBundlesBySlugXQuery struct { 
+        Slug string  `url:"slug,omitempty"` 
+        ID string  `url:"id,omitempty"`  
+    }
+    
+    // GetProductBundlesBySlug Get product bundles
+    func (ca *Catalog)  GetProductBundlesBySlug(xQuery CatalogGetProductBundlesBySlugXQuery) (ProductBundle, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getProductBundlesBySlugResponse ProductBundle
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            "/service/application/catalog/v1.0/product-grouping/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ProductBundle{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductBundlesBySlugResponse)
+        if err != nil {
+            return ProductBundle{}, common.NewFDKError(err.Error())
+        }
+         return getProductBundlesBySlugResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     //CatalogGetProductPriceBySlugXQuery holds query params
     type CatalogGetProductPriceBySlugXQuery struct { 
         StoreID float64  `url:"store_id,omitempty"` 
@@ -2498,63 +2555,6 @@ func NewAppClient(config *AppConfig) *Client {
                 return paginator
             }
        
-    
-    
-    
-  
-    
-    
-    //CatalogGetProductBundlesBySlugXQuery holds query params
-    type CatalogGetProductBundlesBySlugXQuery struct { 
-        Slug string  `url:"slug,omitempty"` 
-        ID string  `url:"id,omitempty"`  
-    }
-    
-    // GetProductBundlesBySlug Get product bundles
-    func (ca *Catalog)  GetProductBundlesBySlug(xQuery CatalogGetProductBundlesBySlugXQuery) (ProductBundle, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getProductBundlesBySlugResponse ProductBundle
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-        
-
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            "/service/application/catalog/v1.0/product-grouping/",
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ProductBundle{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProductBundlesBySlugResponse)
-        if err != nil {
-            return ProductBundle{}, common.NewFDKError(err.Error())
-        }
-         return getProductBundlesBySlugResponse, nil
-        
-    }
-          
     
 
     // Cart ...
@@ -11764,6 +11764,8 @@ func NewAppClient(config *AppConfig) *Client {
              customerOnboardResponse CustomerOnboardingResponse
 	    )
 
+        
+            
         
             
         

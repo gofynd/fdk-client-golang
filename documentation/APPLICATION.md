@@ -48,16 +48,16 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [followById](#followbyid)
     * [unfollowById](#unfollowbyid)
+    * [followById](#followbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
     * [getInStockLocations](#getinstocklocations)
     * [getLocationDetailsById](#getlocationdetailsbyid)
+    * [getProductBundlesBySlug](#getproductbundlesbyslug)
     * [getProductPriceBySlug](#getproductpricebyslug)
     * [getProductSellersBySlug](#getproductsellersbyslug)
-    * [getProductBundlesBySlug](#getproductbundlesbyslug)
     
 
 * [Cart](#Cart)
@@ -1208,12 +1208,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1227,7 +1227,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1249,12 +1249,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1268,7 +1268,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1507,6 +1507,46 @@ Schema: `StoreDetails`
 ---
 
 
+#### getProductBundlesBySlug
+Get product bundles
+
+```golang
+
+ data, err :=  Catalog.GetProductBundlesBySlug(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+| xQuery | struct | Includes properties such as `Slug`, `ID`
+
+
+
+Use this API to retrieve products bundles to the one specified by its slug.
+
+*Success Response:*
+
+
+
+Success. Returns a group of products bundle.
+
+
+Schema: `ProductBundle`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getProductPriceBySlug
 Get the price of a product size at a PIN Code
 
@@ -1591,46 +1631,6 @@ Success. Returns a ProductSizeSellerV2 object. Check the example shown below or 
 
 
 Schema: `ProductSizeSellersResponseV2`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getProductBundlesBySlug
-Get product bundles
-
-```golang
-
- data, err :=  Catalog.GetProductBundlesBySlug(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-| xQuery | struct | Includes properties such as `Slug`, `ID`
-
-
-
-Use this API to retrieve products bundles to the one specified by its slug.
-
-*Success Response:*
-
-
-
-Success. Returns a group of products bundle.
-
-
-Schema: `ProductBundle`
 
 
 
@@ -9129,8 +9129,6 @@ Applied Theme
       }
     ],
     "styles": {},
-    "constants": {},
-    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -11312,8 +11310,6 @@ Preview Theme
       }
     ],
     "styles": {},
-    "constants": {},
-    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
