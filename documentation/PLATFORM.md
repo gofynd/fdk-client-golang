@@ -285,7 +285,7 @@
     * [getOrdersByCompanyId](#getordersbycompanyid)
     * [getOrderLanesCountByCompanyId](#getorderlanescountbycompanyid)
     * [getOrderDetails](#getorderdetails)
-    * [getOrderDetails](#getorderdetails)
+    * [getOrderDetails1](#getorderdetails1)
     * [getPicklistOrdersByCompanyId](#getpicklistordersbycompanyid)
     * [trackShipmentPlatform](#trackshipmentplatform)
     * [trackOrder](#trackorder)
@@ -300,6 +300,7 @@
     * [getPing](#getping)
     * [voiceCallback](#voicecallback)
     * [voiceClickToCall](#voiceclicktocall)
+    * [createOrder](#createorder)
     
 
 * [Catalog](#Catalog)
@@ -52538,12 +52539,12 @@ Schema: `OrderDetails`
 ---
 
 
-#### getOrderDetails
+#### getOrderDetails1
 Get Order Details for company based on Company Id and Order Id
 
 ```golang
 
-data, err := Order.GetOrderDetails(CompanyID, ApplicationID, xQuery);
+data, err := Order.GetOrderDetails1(CompanyID, ApplicationID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -53207,6 +53208,44 @@ Success
 
 
 Schema: `GetClickToCallResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createOrder
+
+
+```golang
+
+data, err := Order.CreateOrder(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  CreateOrderPayload | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Successfully created an order!
+
+
+Schema: `CreateOrderResponse`
 
 
 

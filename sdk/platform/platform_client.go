@@ -3797,6 +3797,75 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
        
     
+    
+   
+  
+    
+    
+
+
+    // CreateOrder 
+     func (or *PlatformOrder)  CreateOrder(body  CreateOrderPayload) (CreateOrderResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            createOrderResponse CreateOrderResponse
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return CreateOrderResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return CreateOrderResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "post",
+            fmt.Sprintf("/service/platform/order/v1.0/company/%s/create-order",or.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return CreateOrderResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createOrderResponse)
+        if err != nil {
+             return CreateOrderResponse{}, common.NewFDKError(err.Error())
+        }
+        return createOrderResponse, nil
+        
+    }
+         
+        
+       
+    
 
 
 	

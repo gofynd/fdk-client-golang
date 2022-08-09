@@ -11983,20 +11983,20 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    //PlatformAppGetOrderDetailsXQuery holds query params
-    type PlatformAppGetOrderDetailsXQuery struct { 
+    //PlatformAppGetOrderDetails1XQuery holds query params
+    type PlatformAppGetOrderDetails1XQuery struct { 
         OrderID string  `url:"order_id,omitempty"` 
         Next string  `url:"next,omitempty"` 
         Previous string  `url:"previous,omitempty"`  
     }
     
-    // GetOrderDetails Get Order Details for company based on Company Id and Order Id
-     func (or *PlatformAppOrder)  GetOrderDetails(xQuery PlatformAppGetOrderDetailsXQuery) (OrderDetails, error) {
+    // GetOrderDetails1 Get Order Details for company based on Company Id and Order Id
+     func (or *PlatformAppOrder)  GetOrderDetails1(xQuery PlatformAppGetOrderDetails1XQuery) (OrderDetails, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getOrderDetailsResponse OrderDetails
+            getOrderDetails1Response OrderDetails
 	    )
 
         
@@ -12029,11 +12029,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return OrderDetails{}, err
 	    }
         
-        err = json.Unmarshal(response, &getOrderDetailsResponse)
+        err = json.Unmarshal(response, &getOrderDetails1Response)
         if err != nil {
             return OrderDetails{}, common.NewFDKError(err.Error())
         }
-        return getOrderDetailsResponse, nil
+        return getOrderDetails1Response, nil
         
     }
            
@@ -12492,6 +12492,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
            
        
+    
+    
     
     
     
