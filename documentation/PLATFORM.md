@@ -102,6 +102,7 @@
     * [unpublishTheme](#unpublishtheme)
     * [archiveTheme](#archivetheme)
     * [unarchiveTheme](#unarchivetheme)
+    * [getThemeLastModified](#getthemelastmodified)
     
 
 * [User](#User)
@@ -317,6 +318,17 @@
     * [getSizeGuide](#getsizeguide)
     * [updateSizeGuide](#updatesizeguide)
     * [updateAppProduct](#updateappproduct)
+    * [getConfigurationMetadata](#getconfigurationmetadata)
+    * [createGroupConfiguration](#creategroupconfiguration)
+    * [getGroupConfigurations](#getgroupconfigurations)
+    * [updateGroupConfiguration](#updategroupconfiguration)
+    * [deleteGroupConfiguration](#deletegroupconfiguration)
+    * [createListingConfiguration](#createlistingconfiguration)
+    * [getListingConfigurations](#getlistingconfigurations)
+    * [updateListingConfiguration](#updatelistingconfiguration)
+    * [deleteListingConfiguration](#deletelistingconfiguration)
+    * [updateAllowSingle](#updateallowsingle)
+    * [updateDefaultSort](#updatedefaultsort)
     * [getCatalogConfiguration](#getcatalogconfiguration)
     * [createConfigurationProductListing](#createconfigurationproductlisting)
     * [getConfigurations](#getconfigurations)
@@ -356,6 +368,7 @@
     * [updateCategory](#updatecategory)
     * [createProduct](#createproduct)
     * [getProducts](#getproducts)
+    * [getProductAttributes](#getproductattributes)
     * [getProduct](#getproduct)
     * [editProduct](#editproduct)
     * [deleteProduct](#deleteproduct)
@@ -381,11 +394,16 @@
     * [createInventoryExportJob](#createinventoryexportjob)
     * [getInventoryExport](#getinventoryexport)
     * [exportInventoryConfig](#exportinventoryconfig)
+    * [updateRealtimeInventory](#updaterealtimeinventory)
+    * [deleteRealtimeInventory](#deleterealtimeinventory)
+    * [updateInventories](#updateinventories)
     * [createHsnCode](#createhsncode)
     * [getAllHsnCodes](#getallhsncodes)
     * [getHsnCode](#gethsncode)
     * [updateHsnCode](#updatehsncode)
     * [bulkHsnCode](#bulkhsncode)
+    * [getAllProductHsnCodes](#getallproducthsncodes)
+    * [getSingleProductHSNCode](#getsingleproducthsncode)
     * [getApplicationBrands](#getapplicationbrands)
     * [getDepartments](#getdepartments)
     * [getCategories](#getcategories)
@@ -436,6 +454,8 @@
 
 * [Inventory](#Inventory)
   * Methods
+    * [getConfigByCompany](#getconfigbycompany)
+    * [suppressStores](#suppressstores)
     * [getJobsByCompany](#getjobsbycompany)
     * [updateJob](#updatejob)
     * [createJob](#createjob)
@@ -39508,6 +39528,43 @@ Success
 ---
 
 
+#### getThemeLastModified
+Fetch last modified timestamp
+
+```golang
+
+data, err := Theme.GetThemeLastModified(CompanyID, ApplicationID, ThemeID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
+
+
+| ThemeID | string | ID allotted to the theme. | 
+
+
+
+Use this API to fetch Last-Modified timestamp in header metadata.
+
+*Success Response:*
+
+
+
+Success. Recieves last modified timestamp in the header.
+
+
+
+
+
+
+---
+
+
 
 ---
 
@@ -53727,6 +53784,510 @@ Schema: `SuccessResponse`
 ---
 
 
+#### getConfigurationMetadata
+Get configuration metadata details for catalog for admin panel
+
+```golang
+
+data, err := Catalog.GetConfigurationMetadata(CompanyID, ApplicationID, ConfigType, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is an identifier that defines a specific type of configuration. | 
+
+
+
+| xQuery | struct | Includes properties such as `TemplateSlug`
+
+
+Get the configuraion metadata details for catalog.
+
+*Success Response:*
+
+
+
+configuration details for catalog. See example below or refer `GetConfigMetadataResponseSchema` for details
+
+
+Schema: `GetConfigMetadataResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createGroupConfiguration
+Create configuration for Group config types.
+
+```golang
+
+data, err := Catalog.CreateGroupConfiguration(CompanyID, ApplicationID, ConfigType, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
+
+
+| body |  AppConfigurationDetail | "Request body" 
+
+Create configuration for Group config types.
+
+*Success Response:*
+
+
+
+success flag will tell whether the operation was successful.
+
+
+Schema: `AppConfigurationDetail`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getGroupConfigurations
+Get the details of the application configured configurations of group config types.
+
+```golang
+
+data, err := Catalog.GetGroupConfigurations(CompanyID, ApplicationID, ConfigType, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is an identifier that defines a specific type of configuration. | 
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Search`, `TemplateSlug`
+
+
+Get the details of the application configured configurations of group config types.
+
+*Success Response:*
+
+
+
+configuration details for catalog. See example below or refer `GetConfigResponseSchema` for details
+
+
+Schema: `GetConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateGroupConfiguration
+Update the group configurations for the application.
+
+```golang
+
+data, err := Catalog.UpdateGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
+
+
+| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
+
+
+| body |  AppConfigurationDetail | "Request body" 
+
+Update the group configurations for the application.
+
+*Success Response:*
+
+
+
+success flag will tell whether the operation was successful.
+
+
+Schema: `AppConfigurationDetail`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteGroupConfiguration
+Delete configuration of the product config type of the application.
+
+```golang
+
+data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
+
+
+| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration of the product config type of the application.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createListingConfiguration
+Add configuration for listings
+
+```golang
+
+data, err := Catalog.CreateListingConfiguration(CompanyID, ApplicationID, ConfigType, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
+
+
+| body |  AppConfigurationsSort | "Request body" 
+
+Add configuration for listing.
+
+*Success Response:*
+
+
+
+success flag will tell whether the operation was successful.
+
+
+Schema: `AppConfigurationsSort`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getListingConfigurations
+Get the details of the application configured configurations of listing config types.
+
+```golang
+
+data, err := Catalog.GetListingConfigurations(CompanyID, ApplicationID, ConfigType, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is an identifier that defines a specific type of configuration. | 
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Search`
+
+
+Get the details of the application configured configurations of listing config types.
+
+*Success Response:*
+
+
+
+configuration details for catalog. See example below or refer `GetConfigResponseSchema` for details
+
+
+Schema: `GetConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateListingConfiguration
+Update configuration for listings
+
+```golang
+
+data, err := Catalog.UpdateListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
+
+
+| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
+
+
+| body |  AppConfigurationsSort | "Request body" 
+
+Update configuration for listing.
+
+*Success Response:*
+
+
+
+success flag will tell whether the operation was successful.
+
+
+Schema: `AppConfigurationsSort`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteListingConfiguration
+Delete configuration for listings
+
+```golang
+
+data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
+
+
+| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration for listing.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateAllowSingle
+Update allow single flag for filters of the application.
+
+```golang
+
+data, err := Catalog.UpdateAllowSingle(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  AllowSingleRequest | "Request body" 
+
+Update allow single flag for filters of the application.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateDefaultSort
+Update the default sort key configuration for the application.
+
+```golang
+
+data, err := Catalog.UpdateDefaultSort(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  DefaultKeyRequest | "Request body" 
+
+Update the default sort key configuration for the application.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getCatalogConfiguration
 Get configuration meta  details for catalog for admin panel
 
@@ -54042,7 +54603,9 @@ data, err := Catalog.GetAllCollections(CompanyID, ApplicationID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `Q`, `Tags`, `IsActive`, `PageNo`, `PageSize`
+
+
+| xQuery | struct | Includes properties such as `Q`, `Type`, `Tags`, `IsActive`, `PageNo`, `PageSize`
 
 
 A Collection allows you to organize your products into hierarchical groups. For example, a dress might be in the category _Clothing_, the individual product might also be in the collection _Summer_. On successful request, returns all the collections as specified in `CollectionListingSchema`
@@ -55363,6 +55926,48 @@ Schema: `ProductListingResponse`
 ---
 
 
+#### getProductAttributes
+Get list of all the attributes by their l3_categories
+
+```golang
+
+data, err := Catalog.GetProductAttributes(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | company for which you want to view the genders | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Category`, `Filter`
+
+
+This API allows to list all the attributes by their l3_categories.
+
+*Success Response:*
+
+
+
+Size guide object. See example below or refer `ProductAttributesResponseSchema` for details
+
+
+Schema: `ProductAttributesResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getProduct
 Get a single product.
 
@@ -56029,7 +56634,7 @@ This API allows get Inventory data for particular company grouped by size and st
 returns a list of all inventory grouped by size and store
 
 
-Schema: `InventoryResponsePaginated`
+Schema: `InventorySellerIdentifierResponsePaginated`
 
 
 
@@ -56084,7 +56689,7 @@ This API allows get Inventory data for particular company grouped by size and st
 returns a list of all inventory grouped by size and store
 
 
-Schema: `InventoryResponsePaginated`
+Schema: `InventorySellerIdentifierResponsePaginated`
 
 
 
@@ -56419,6 +57024,132 @@ Schema: `InventoryConfig`
 ---
 
 
+#### updateRealtimeInventory
+Add Inventory for particular size and store.
+
+```golang
+
+data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+
+
+| ItemID | float64 | Item code of the product of which size is to be get. | 
+
+
+| SellerIdentifier | string | Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get. | 
+
+
+| body |  InventoryRequestSchemaV2 | "Request body" 
+
+This API allows add Inventory for particular size and store.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `InventoryUpdateResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteRealtimeInventory
+Add Inventory for particular size and store.
+
+```golang
+
+data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+
+
+| ItemID | float64 | Item code of the product of which size is to be get. | 
+
+
+| SellerIdentifier | string | Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get. | 
+
+
+| body |  InventoryRequestSchemaV2 | "Request body" 
+
+This API allows add Inventory for particular size and store.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `InventoryUpdateResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateInventories
+Add Inventory for particular size and store.
+
+```golang
+
+data, err := Catalog.UpdateInventories(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+
+
+| body |  InventoryRequestSchemaV2 | "Request body" 
+
+This API allows add Inventory for particular size and store.
+
+*Success Response:*
+
+
+
+Returns a success or partial success response
+
+
+Schema: `InventoryUpdateResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### createHsnCode
 Create Hsn Code.
 
@@ -56608,6 +57339,92 @@ See example below for details
 
 
 Schema: `BulkHsnResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAllProductHsnCodes
+Hsn Code List.
+
+```golang
+
+data, err := Catalog.GetAllProductHsnCodes(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+
+
+
+
+
+| CompanyID | float64 | Company Id for which HSN codes needs to be fetched | 
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`, `Type`
+
+
+Hsn Code List.
+
+*Success Response:*
+
+
+
+List of all HSN Codes. See example below or refer `HsnCodesListingResponseSchema` for details
+
+
+Schema: `HsnCodesListingResponseSchemaV2`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSingleProductHSNCode
+Hsn Code List.
+
+```golang
+
+data, err := Catalog.GetSingleProductHSNCode(ReportingHsn, CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ReportingHsn | string | reporting_hsn | 
+
+
+| CompanyID | float64 | Company Id for which HSN codes needs to be fetched | 
+
+
+
+Hsn Code List.
+
+*Success Response:*
+
+
+
+Get specific HSN details. See example below or refer `HsnCodesListingResponseSchema` for details
+
+
+Schema: `HSNDataInsertV2`
 
 
 
@@ -58181,6 +58998,81 @@ Schema: `ShortLinkRes`
 
 
 ## Inventory
+
+
+#### getConfigByCompany
+Get Slingshot Configuration Of  A Company
+
+```golang
+
+data, err := Inventory.GetConfigByCompany(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+
+REST Endpoint that returns all configuration detail of a company
+
+*Success Response:*
+
+
+
+Successful operation
+
+
+Schema: `ResponseEnvelopeListSlingshotConfigurationDetail`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### suppressStores
+Get Slingshot Configuration Of  A Company
+
+```golang
+
+data, err := Inventory.SuppressStores(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company id | 
+
+
+| body |  SuppressStorePayload | "Request body" 
+
+REST Endpoint that returns all configuration detail of a company
+
+*Success Response:*
+
+
+
+Successful operation
+
+
+Schema: `ResponseEnvelopeKafkaResponse`
+
+
+
+
+
+
+
+
+
+---
 
 
 #### getJobsByCompany

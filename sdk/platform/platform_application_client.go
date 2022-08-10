@@ -3152,6 +3152,50 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
            
        
     
+    
+    
+  
+
+    
+    // GetThemeLastModified Fetch last modified timestamp
+     func (th *PlatformAppTheme)  GetThemeLastModified(ThemeID string) (interface{}, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            th.config,
+            "head",
+            fmt.Sprintf("/service/platform/theme/v1.0/company/%s/application/%s/%s/polling",th.CompanyID, th.ApplicationID, ThemeID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return []byte{}, err
+	    }
+        
+        return response, nil
+        
+    }
+           
+       
+    
 
  
 	 
@@ -3173,7 +3217,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     //PlatformAppGetCustomersXQuery holds query params
     type PlatformAppGetCustomersXQuery struct { 
-        Q string  `url:"q,omitempty"` 
+        Q map[string]interface{}  `url:"q,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
         PageNo float64  `url:"page_no,omitempty"`  
     }
@@ -3234,7 +3278,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     //PlatformAppSearchUsersXQuery holds query params
     type PlatformAppSearchUsersXQuery struct { 
-        Q map[string]interface{}  `url:"q,omitempty"`  
+        Q string  `url:"q,omitempty"`  
     }
     
     // SearchUsers Search an existing user.
@@ -12965,6 +13009,730 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    //PlatformAppGetConfigurationMetadataXQuery holds query params
+    type PlatformAppGetConfigurationMetadataXQuery struct { 
+        TemplateSlug string  `url:"template_slug,omitempty"`  
+    }
+    
+    // GetConfigurationMetadata Get configuration metadata details for catalog for admin panel
+     func (ca *PlatformAppCatalog)  GetConfigurationMetadata(ConfigType string, xQuery PlatformAppGetConfigurationMetadataXQuery) (GetConfigMetadataResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getConfigurationMetadataResponse GetConfigMetadataResponse
+	    )
+
+        
+
+         
+            
+                
+            
+        
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/%s/metadata/",ca.CompanyID, ca.ApplicationID, ConfigType),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetConfigMetadataResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getConfigurationMetadataResponse)
+        if err != nil {
+            return GetConfigMetadataResponse{}, common.NewFDKError(err.Error())
+        }
+        return getConfigurationMetadataResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // CreateGroupConfiguration Create configuration for Group config types.
+     func (ca *PlatformAppCatalog)  CreateGroupConfiguration(ConfigType string, body  AppConfigurationDetail) (AppConfigurationDetail, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            createGroupConfigurationResponse AppConfigurationDetail
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return AppConfigurationDetail{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return AppConfigurationDetail{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/%s/groups",ca.CompanyID, ca.ApplicationID, ConfigType),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return AppConfigurationDetail{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createGroupConfigurationResponse)
+        if err != nil {
+            return AppConfigurationDetail{}, common.NewFDKError(err.Error())
+        }
+        return createGroupConfigurationResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppGetGroupConfigurationsXQuery holds query params
+    type PlatformAppGetGroupConfigurationsXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        Search string  `url:"search,omitempty"` 
+        TemplateSlug string  `url:"template_slug,omitempty"`  
+    }
+    
+    // GetGroupConfigurations Get the details of the application configured configurations of group config types.
+     func (ca *PlatformAppCatalog)  GetGroupConfigurations(ConfigType string, xQuery PlatformAppGetGroupConfigurationsXQuery) (GetConfigResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getGroupConfigurationsResponse GetConfigResponse
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/%s/groups",ca.CompanyID, ca.ApplicationID, ConfigType),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetConfigResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getGroupConfigurationsResponse)
+        if err != nil {
+            return GetConfigResponse{}, common.NewFDKError(err.Error())
+        }
+        return getGroupConfigurationsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdateGroupConfiguration Update the group configurations for the application.
+     func (ca *PlatformAppCatalog)  UpdateGroupConfiguration(ConfigType string, GroupSlug string, body  AppConfigurationDetail) (AppConfigurationDetail, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateGroupConfigurationResponse AppConfigurationDetail
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return AppConfigurationDetail{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return AppConfigurationDetail{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "put",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/%s/groups/%s",ca.CompanyID, ca.ApplicationID, ConfigType, GroupSlug),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return AppConfigurationDetail{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateGroupConfigurationResponse)
+        if err != nil {
+            return AppConfigurationDetail{}, common.NewFDKError(err.Error())
+        }
+        return updateGroupConfigurationResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteGroupConfiguration Delete configuration of the product config type of the application.
+     func (ca *PlatformAppCatalog)  DeleteGroupConfiguration(ConfigType string, GroupSlug string) (ConfigSuccessResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteGroupConfigurationResponse ConfigSuccessResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/%s/groups/%s",ca.CompanyID, ca.ApplicationID, ConfigType, GroupSlug),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ConfigSuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteGroupConfigurationResponse)
+        if err != nil {
+            return ConfigSuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteGroupConfigurationResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // CreateListingConfiguration Add configuration for listings
+     func (ca *PlatformAppCatalog)  CreateListingConfiguration(ConfigType string, body  AppConfigurationsSort) (AppConfigurationsSort, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            createListingConfigurationResponse AppConfigurationsSort
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return AppConfigurationsSort{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return AppConfigurationsSort{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/%s/",ca.CompanyID, ca.ApplicationID, ConfigType),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return AppConfigurationsSort{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createListingConfigurationResponse)
+        if err != nil {
+            return AppConfigurationsSort{}, common.NewFDKError(err.Error())
+        }
+        return createListingConfigurationResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppGetListingConfigurationsXQuery holds query params
+    type PlatformAppGetListingConfigurationsXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        Search string  `url:"search,omitempty"`  
+    }
+    
+    // GetListingConfigurations Get the details of the application configured configurations of listing config types.
+     func (ca *PlatformAppCatalog)  GetListingConfigurations(ConfigType string, xQuery PlatformAppGetListingConfigurationsXQuery) (GetConfigResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getListingConfigurationsResponse GetConfigResponse
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/%s/",ca.CompanyID, ca.ApplicationID, ConfigType),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetConfigResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getListingConfigurationsResponse)
+        if err != nil {
+            return GetConfigResponse{}, common.NewFDKError(err.Error())
+        }
+        return getListingConfigurationsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdateListingConfiguration Update configuration for listings
+     func (ca *PlatformAppCatalog)  UpdateListingConfiguration(ConfigType string, ConfigID string, body  AppConfigurationsSort) (AppConfigurationsSort, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateListingConfigurationResponse AppConfigurationsSort
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return AppConfigurationsSort{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return AppConfigurationsSort{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "put",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/%s/item/%s/",ca.CompanyID, ca.ApplicationID, ConfigType, ConfigID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return AppConfigurationsSort{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateListingConfigurationResponse)
+        if err != nil {
+            return AppConfigurationsSort{}, common.NewFDKError(err.Error())
+        }
+        return updateListingConfigurationResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteListingConfiguration Delete configuration for listings
+     func (ca *PlatformAppCatalog)  DeleteListingConfiguration(ConfigType string, ConfigID string) (ConfigSuccessResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteListingConfigurationResponse ConfigSuccessResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/%s/item/%s/",ca.CompanyID, ca.ApplicationID, ConfigType, ConfigID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ConfigSuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteListingConfigurationResponse)
+        if err != nil {
+            return ConfigSuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteListingConfigurationResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdateAllowSingle Update allow single flag for filters of the application.
+     func (ca *PlatformAppCatalog)  UpdateAllowSingle(body  AllowSingleRequest) (ConfigSuccessResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateAllowSingleResponse ConfigSuccessResponse
+	    )
+
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return ConfigSuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return ConfigSuccessResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/filter/allow_single",ca.CompanyID, ca.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ConfigSuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateAllowSingleResponse)
+        if err != nil {
+            return ConfigSuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return updateAllowSingleResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdateDefaultSort Update the default sort key configuration for the application.
+     func (ca *PlatformAppCatalog)  UpdateDefaultSort(body  DefaultKeyRequest) (ConfigSuccessResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateDefaultSortResponse ConfigSuccessResponse
+	    )
+
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return ConfigSuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return ConfigSuccessResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/sort/default_key",ca.CompanyID, ca.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ConfigSuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateDefaultSortResponse)
+        if err != nil {
+            return ConfigSuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return updateDefaultSortResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // GetCatalogConfiguration Get configuration meta  details for catalog for admin panel
      func (ca *PlatformAppCatalog)  GetCatalogConfiguration() (GetCatalogConfigurationMetaData, error) {
         var (
@@ -13401,6 +14169,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     //PlatformAppGetAllCollectionsXQuery holds query params
     type PlatformAppGetAllCollectionsXQuery struct { 
         Q string  `url:"q,omitempty"` 
+        Type string  `url:"type,omitempty"` 
         Tags []string  `url:"tags,omitempty"` 
         IsActive bool  `url:"is_active,omitempty"` 
         PageNo float64  `url:"page_no,omitempty"` 
@@ -13419,6 +14188,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
 
          
+            
+                
             
                 
             
@@ -13926,6 +14697,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+    
+    
   
 
     
@@ -13938,12 +14711,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetDiscountedInventoryBySizeIdentifier Get Inventory for company
-     func (ca *PlatformAppCatalog)  GetDiscountedInventoryBySizeIdentifier(ItemID float64, SizeIdentifier string, xQuery PlatformAppGetDiscountedInventoryBySizeIdentifierXQuery) (InventoryResponsePaginated, error) {
+     func (ca *PlatformAppCatalog)  GetDiscountedInventoryBySizeIdentifier(ItemID float64, SizeIdentifier string, xQuery PlatformAppGetDiscountedInventoryBySizeIdentifierXQuery) (InventorySellerIdentifierResponsePaginated, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getDiscountedInventoryBySizeIdentifierResponse InventoryResponsePaginated
+            getDiscountedInventoryBySizeIdentifierResponse InventorySellerIdentifierResponsePaginated
 	    )
 
         
@@ -13979,18 +14752,28 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return InventoryResponsePaginated{}, err
+            return InventorySellerIdentifierResponsePaginated{}, err
 	    }
         
         err = json.Unmarshal(response, &getDiscountedInventoryBySizeIdentifierResponse)
         if err != nil {
-            return InventoryResponsePaginated{}, common.NewFDKError(err.Error())
+            return InventorySellerIdentifierResponsePaginated{}, common.NewFDKError(err.Error())
         }
         return getDiscountedInventoryBySizeIdentifierResponse, nil
         
     }
            
        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
