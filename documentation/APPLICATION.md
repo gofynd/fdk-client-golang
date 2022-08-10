@@ -125,6 +125,7 @@
     * [loginWithOTP](#loginwithotp)
     * [loginWithEmailAndPassword](#loginwithemailandpassword)
     * [sendResetPasswordEmail](#sendresetpasswordemail)
+    * [sendResetPasswordMobile](#sendresetpasswordmobile)
     * [forgotPassword](#forgotpassword)
     * [sendResetToken](#sendresettoken)
     * [loginWithToken](#loginwithtoken)
@@ -9117,8 +9118,6 @@ Applied Theme
       }
     ],
     "styles": {},
-    "constants": {},
-    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -11300,8 +11299,6 @@ Preview Theme
       }
     ],
     "styles": {},
-    "constants": {},
-    "settings": {},
     "created_at": "2020-12-22T05:09:04.720Z",
     "updated_at": "2021-01-24T11:22:41.376Z"
   }
@@ -11846,6 +11843,45 @@ Reset Password
 
 
 Use this API to reset a password using the link sent on email.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ResetPasswordSuccess` for more details.
+
+
+Schema: `ResetPasswordSuccess`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### sendResetPasswordMobile
+Reset Password
+
+```golang
+
+ data, err :=  User.SendResetPasswordMobile(xQuery, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Platform`
+
+| body |  SendResetPasswordMobileRequestSchema | "Request body" 
+
+
+Use this API to reset a password using the link sent on mobile.
 
 *Success Response:*
 
