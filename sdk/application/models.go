@@ -2769,6 +2769,7 @@ package application
     type SupportGeneralConfig struct {
 
         
+            ID string  `json:"_id"`
             SupportEmail CommunicationDetails  `json:"support_email"`
             SupportPhone CommunicationDetails  `json:"support_phone"`
             SupportFaq CommunicationDetails  `json:"support_faq"`
