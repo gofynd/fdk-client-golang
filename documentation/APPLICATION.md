@@ -15,7 +15,6 @@
 * [Payment](#Payment) - Collect payment through many payment gateway i.e Stripe, Razorpay, Juspay etc.into Fynd or Self account 
 * [Order](#Order) - Handles Platform websites OMS 
 * [Rewards](#Rewards) - Earn and redeem reward points 
-* [Feedback](#Feedback) - User Reviews and Rating System 
 * [PosCart](#PosCart) - Cart APIs 
 * [Logistic](#Logistic) - Handles Platform websites OMS 
 
@@ -48,8 +47,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [unfollowById](#unfollowbyid)
     * [followById](#followbyid)
+    * [unfollowById](#unfollowbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -246,15 +245,6 @@
     * [addRefundBankAccountUsingOTP](#addrefundbankaccountusingotp)
     * [verifyOtpAndAddBeneficiaryForWallet](#verifyotpandaddbeneficiaryforwallet)
     * [updateDefaultBeneficiary](#updatedefaultbeneficiary)
-    * [getPaymentLink](#getpaymentlink)
-    * [createPaymentLink](#createpaymentlink)
-    * [resendPaymentLink](#resendpaymentlink)
-    * [cancelPaymentLink](#cancelpaymentlink)
-    * [getPaymentModeRoutesPaymentLink](#getpaymentmoderoutespaymentlink)
-    * [pollingPaymentLink](#pollingpaymentlink)
-    * [createOrderHandlerPaymentLink](#createorderhandlerpaymentlink)
-    * [initialisePaymentPaymentLink](#initialisepaymentpaymentlink)
-    * [checkAndUpdatePaymentStatusPaymentLink](#checkandupdatepaymentstatuspaymentlink)
     * [customerCreditSummary](#customercreditsummary)
     * [redirectToAggregator](#redirecttoaggregator)
     * [checkCredit](#checkcredit)
@@ -274,6 +264,7 @@
     * [sendOtpToShipmentCustomer](#sendotptoshipmentcustomer)
     * [verifyOtpShipmentCustomer](#verifyotpshipmentcustomer)
     * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
+    * [getCreditNoteByShipmentId](#getcreditnotebyshipmentid)
     
 
 * [Rewards](#Rewards)
@@ -285,36 +276,6 @@
     * [getUserPointsHistory](#getuserpointshistory)
     * [getUserReferralDetails](#getuserreferraldetails)
     * [redeemReferralCode](#redeemreferralcode)
-    
-
-* [Feedback](#Feedback)
-  * Methods
-    * [createAbuseReport](#createabusereport)
-    * [updateAbuseReport](#updateabusereport)
-    * [getAbuseReports](#getabusereports)
-    * [getAttributes](#getattributes)
-    * [createAttribute](#createattribute)
-    * [getAttribute](#getattribute)
-    * [updateAttribute](#updateattribute)
-    * [createComment](#createcomment)
-    * [updateComment](#updatecomment)
-    * [getComments](#getcomments)
-    * [checkEligibility](#checkeligibility)
-    * [deleteMedia](#deletemedia)
-    * [createMedia](#createmedia)
-    * [updateMedia](#updatemedia)
-    * [getMedias](#getmedias)
-    * [getReviewSummaries](#getreviewsummaries)
-    * [createReview](#createreview)
-    * [updateReview](#updatereview)
-    * [getReviews](#getreviews)
-    * [getTemplates](#gettemplates)
-    * [createQuestion](#createquestion)
-    * [updateQuestion](#updatequestion)
-    * [getQuestionAndAnswers](#getquestionandanswers)
-    * [getVotes](#getvotes)
-    * [createVote](#createvote)
-    * [updateVote](#updatevote)
     
 
 * [PosCart](#PosCart)
@@ -1219,12 +1180,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1238,7 +1199,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1260,12 +1221,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1279,7 +1240,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1578,7 +1539,9 @@ Get the price of a product size at a PIN Code
 
 
 
-| xQuery | struct | Includes properties such as `StoreID`, `Pincode`
+
+
+| xQuery | struct | Includes properties such as `StoreID`, `Pincode`, `Depth`
 
 
 
@@ -1628,7 +1591,9 @@ Get the sellers of a product size at a PIN Code
 
 
 
-| xQuery | struct | Includes properties such as `Pincode`, `Strategy`, `PageNo`, `PageSize`
+
+
+| xQuery | struct | Includes properties such as `Pincode`, `Strategy`, `PageNo`, `PageSize`, `Depth`
 
 
 
@@ -1681,7 +1646,7 @@ Fetch all items added to the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`
 
 
 
@@ -1755,7 +1720,7 @@ Add items to cart
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `BuyNow`
+| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -1841,11 +1806,6 @@ Product has been added to your cart
       "items": [
         {
           "key": "751083_10",
-          "parent_item_identifiers": {
-            "identifier": "ZASFF",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS"
-          },
           "article": {
             "type": "article",
             "uid": "612_9_SE61201_19100302_10",
@@ -2218,7 +2178,6 @@ Product has been added to your cart
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
-      "buy_now": false,
       "cart_id": 7927,
       "uid": "7927",
       "gstin": null,
@@ -2299,11 +2258,6 @@ Sorry, item is out of stock
         {
           "bulk_offer": {},
           "discount": "67% OFF",
-          "parent_item_identifiers": {
-            "identifier": "ZASFF",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS"
-          },
           "article": {
             "type": "article",
             "uid": "604_902_SSTC60401_636BLUE_1",
@@ -2402,7 +2356,6 @@ Sorry, item is out of stock
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
-      "buy_now": false,
       "cart_id": 54,
       "uid": "54",
       "gstin": null,
@@ -2445,7 +2398,7 @@ Update items in the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AreaCode`
 
 | body |  UpdateCartRequest | "Request body" 
 
@@ -2530,11 +2483,6 @@ Nothing updated
         {
           "bulk_offer": {},
           "discount": "67% OFF",
-          "parent_item_identifiers": {
-            "identifier": "ZASFF",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS"
-          },
           "article": {
             "type": "article",
             "uid": "604_902_SSTC60401_636BLUE_1",
@@ -2633,7 +2581,6 @@ Nothing updated
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
-      "buy_now": false,
       "cart_id": 54,
       "uid": "54",
       "gstin": null,
@@ -2764,11 +2711,6 @@ Item updated in the cart
               }
             }
           },
-          "parent_item_identifiers": {
-            "identifier": "ZASFF",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS"
-          },
           "article": {
             "type": "article",
             "uid": "507_9_96099_35656851_7",
@@ -2814,7 +2756,6 @@ Item updated in the cart
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
-      "buy_now": false,
       "cart_id": 12426,
       "uid": "12426",
       "gstin": null,
@@ -2858,9 +2799,7 @@ Count items in the cart
 | --------- | ----  | --- |
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`
 
 
 
@@ -2898,9 +2837,7 @@ Fetch Coupon
 | --------- | ----  | --- |
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`
 
 
 
@@ -2944,9 +2881,7 @@ Apply Coupon
 
 
 
-
-
-| xQuery | struct | Includes properties such as `I`, `B`, `P`, `ID`, `BuyNow`
+| xQuery | struct | Includes properties such as `I`, `B`, `P`, `ID`
 
 | body |  ApplyCouponRequest | "Request body" 
 
@@ -2985,9 +2920,7 @@ Remove Coupon Applied
 | --------- | ----  | --- |
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`
 
 
 
@@ -3144,9 +3077,7 @@ Apply reward points at cart
 
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`
 
 | body |  RewardPointRequest | "Request body" 
 
@@ -3193,9 +3124,7 @@ Fetch address
 
 
 
-
-
-| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -3280,9 +3209,7 @@ Fetch a single address by its ID
 
 
 
-
-
-| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -3401,9 +3328,7 @@ Select an address from available addresses
 
 
 
-
-
-| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `I`, `B`
+| xQuery | struct | Includes properties such as `CartID`, `I`, `B`
 
 | body |  SelectCartAddressRequest | "Request body" 
 
@@ -3442,9 +3367,7 @@ Update cart payment
 | --------- | ----  | --- |
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`
 
 | body |  UpdateCartPaymentRequest | "Request body" 
 
@@ -3493,9 +3416,7 @@ Verify the coupon eligibility against the payment mode
 
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
+| xQuery | struct | Includes properties such as `ID`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
 
 
 
@@ -3539,9 +3460,7 @@ Get delivery date and options before checkout
 
 
 
-
-
-| xQuery | struct | Includes properties such as `P`, `ID`, `BuyNow`, `AddressID`, `AreaCode`
+| xQuery | struct | Includes properties such as `P`, `ID`, `AddressID`, `AreaCode`
 
 
 
@@ -3565,7 +3484,6 @@ Shipment Generated
 {
   "value": {
     "items": [],
-    "buy_now": false,
     "cart_id": 7501,
     "uid": "7501",
     "success": true,
@@ -3952,7 +3870,6 @@ Shipment Generation Failed
 {
   "value": {
     "items": [],
-    "buy_now": false,
     "cart_id": 7501,
     "uid": "7501",
     "success": true,
@@ -4214,14 +4131,11 @@ Checkout all items in the cart
 
 ```golang
 
- data, err :=  Cart.CheckoutCart(xQuery, body);
+ data, err :=  Cart.CheckoutCart(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
-
-
-| xQuery | struct | Includes properties such as `BuyNow`
 
 | body |  CartCheckoutDetailRequest | "Request body" 
 
@@ -4637,9 +4551,7 @@ Update the cart meta
 | --------- | ----  | --- |
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`
 
 | body |  CartMetaRequest | "Request body" 
 
@@ -11827,14 +11739,11 @@ Success
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -11872,8 +11781,7 @@ Success
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -11964,14 +11872,11 @@ Success
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12009,8 +11914,7 @@ Success
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12098,14 +12002,11 @@ Success
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12143,8 +12044,7 @@ Success
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12456,14 +12356,11 @@ default
     "verify_mobile_link": true,
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12501,8 +12398,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12597,14 +12493,11 @@ default
     "verify_mobile_link": true,
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12642,8 +12535,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12694,14 +12586,11 @@ default
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12739,8 +12628,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12868,14 +12756,11 @@ default
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12913,8 +12798,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12970,14 +12854,11 @@ default
     "verify_mobile_link": true,
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13015,8 +12896,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13080,14 +12960,11 @@ default
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13125,8 +13002,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13178,14 +13054,11 @@ default
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13223,8 +13096,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13280,14 +13152,11 @@ default
     "verify_mobile_link": true,
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13325,8 +13194,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13382,14 +13250,11 @@ default
     "verify_email_link": true,
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13427,8 +13292,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13490,14 +13354,11 @@ default
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13535,8 +13396,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13588,14 +13448,11 @@ default
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13633,8 +13490,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -17356,336 +17212,6 @@ Schema: `SetDefaultBeneficiaryResponse`
 ---
 
 
-#### getPaymentLink
-Get payment link
-
-```golang
-
- data, err :=  Payment.GetPaymentLink(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-| xQuery | struct | Includes properties such as `PaymentLinkID`
-
-
-
-Use this API to get a payment link
-
-*Success Response:*
-
-
-
-Success. Check the example shown below
-
-
-Schema: `GetPaymentLinkResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createPaymentLink
-Create payment link
-
-```golang
-
- data, err :=  Payment.CreatePaymentLink(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  CreatePaymentLinkRequest | "Request body" 
-
-
-Use this API to create a payment link for the customer
-
-*Success Response:*
-
-
-
-Success. Check the example shown below
-
-
-Schema: `CreatePaymentLinkResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### resendPaymentLink
-Resend payment link
-
-```golang
-
- data, err :=  Payment.ResendPaymentLink(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  CancelOrResendPaymentLinkRequest | "Request body" 
-
-
-Use this API to resend a payment link for the customer
-
-*Success Response:*
-
-
-
-Success. Check the example shown below
-
-
-Schema: `ResendPaymentLinkResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### cancelPaymentLink
-Cancel payment link
-
-```golang
-
- data, err :=  Payment.CancelPaymentLink(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  CancelOrResendPaymentLinkRequest | "Request body" 
-
-
-Use this API to cancel a payment link for the customer
-
-*Success Response:*
-
-
-
-Success. Check the example shown below
-
-
-Schema: `CancelPaymentLinkResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPaymentModeRoutesPaymentLink
-Get applicable payment options for payment link
-
-```golang
-
- data, err :=  Payment.GetPaymentModeRoutesPaymentLink(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-| xQuery | struct | Includes properties such as `PaymentLinkID`
-
-
-
-Use this API to get all valid payment options for doing a payment through payment link
-
-*Success Response:*
-
-
-
-Success. Returns all available options for payment. Check the example shown below or refer `PaymentModeRouteResponse` for more details.
-
-
-Schema: `PaymentModeRouteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### pollingPaymentLink
-Used for polling if payment successful or not
-
-```golang
-
- data, err :=  Payment.PollingPaymentLink(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-| xQuery | struct | Includes properties such as `PaymentLinkID`
-
-
-
-Use this API to poll if payment through payment was successful or not
-
-*Success Response:*
-
-
-
-Success. Check the example shown below
-
-
-Schema: `PollingPaymentLinkResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createOrderHandlerPaymentLink
-Create Order user
-
-```golang
-
- data, err :=  Payment.CreateOrderHandlerPaymentLink(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  CreateOrderUserRequest | "Request body" 
-
-
-Use this API to create a order and payment on aggregator side
-
-*Success Response:*
-
-
-
-Success. Check the example shown below
-
-
-Schema: `CreateOrderUserResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### initialisePaymentPaymentLink
-Initialize a payment (server-to-server) for UPI and BharatQR
-
-```golang
-
- data, err :=  Payment.InitialisePaymentPaymentLink(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  PaymentInitializationRequest | "Request body" 
-
-
-Use this API to inititate payment using UPI, BharatQR, wherein the UPI requests are send to the app and QR code is displayed on the screen.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `PaymentInitializationResponse` for more details.
-
-
-Schema: `PaymentInitializationResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### checkAndUpdatePaymentStatusPaymentLink
-Performs continuous polling to check status of payment on the server
-
-```golang
-
- data, err :=  Payment.CheckAndUpdatePaymentStatusPaymentLink(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  PaymentStatusUpdateRequest | "Request body" 
-
-
-Use this API to perform continuous polling at intervals to check the status of payment until timeout.
-
-*Success Response:*
-
-
-
-Success. Returns the status of payment. Check the example shown below or refer `PaymentStatusUpdateResponse` for more details.
-
-
-Schema: `PaymentStatusUpdateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### customerCreditSummary
 API to fetch the customer credit summary
 
@@ -17972,7 +17498,7 @@ Get reasons behind full or partial cancellation of a shipment
 
 ```golang
 
- data, err :=  Order.GetShipmentReasons(ShipmentID);
+ data, err :=  Order.GetShipmentReasons(ShipmentID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -17980,6 +17506,9 @@ Get reasons behind full or partial cancellation of a shipment
 
 | ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
+
+
+| xQuery | struct | Includes properties such as `BagID`
 
 
 
@@ -18282,6 +17811,44 @@ Schema: `ResponseGetInvoiceShipment`
 ---
 
 
+#### getCreditNoteByShipmentId
+Get Credit Note URL
+
+```golang
+
+ data, err :=  Order.GetCreditNoteByShipmentId(ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+
+
+Use this API to get a generated Credit Note URL for viewing or download.
+
+*Success Response:*
+
+
+
+Success, the code is valid and returns a SignedUrl
+
+
+Schema: `ResponseGetCreditNoteShipment`
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ---
 
@@ -18549,1074 +18116,6 @@ Schema: `RedeemReferralCodeResponse`
 ---
 
 
-## Feedback
-
-
-#### createAbuseReport
-Post a new abuse request
-
-```golang
-
- data, err :=  Feedback.CreateAbuseReport(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  ReportAbuseRequest | "Request body" 
-
-
-Use this API to report a specific entity (question/review/comment) for abuse.
-
-*Success Response:*
-
-
-
-Success. Returns an abuse ID.
-
-
-Schema: `InsertResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateAbuseReport
-Update abuse details
-
-```golang
-
- data, err :=  Feedback.UpdateAbuseReport(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  UpdateAbuseStatusRequest | "Request body" 
-
-
-Use this API to update the abuse details, i.e. status and description.
-
-*Success Response:*
-
-
-
-Success.
-
-
-Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAbuseReports
-Get a list of abuse data
-
-```golang
-
- data, err :=  Feedback.GetAbuseReports(EntityID, EntityType, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| EntityID | string | ID of the eligible entity as specified in the entity type (question ID/review ID/comment ID). | 
-
-
-| EntityType | string | Type of entity, e.g. question, review or comment. | 
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `ID`, `PageID`, `PageSize`
-
-
-
-Use this API to retrieve a list of abuse data from entity type and entity ID.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `ReportAbuseGetResponse` for more details.
-
-
-Schema: `ReportAbuseGetResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAttributes
-Get a list of attribute data
-
-```golang
-
- data, err :=  Feedback.GetAttributes(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-
-
-Use this API to retrieve a list of all attribute data, e.g. quality, material, product fitting, packaging, etc.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `AttributeResponse` for more details.
-
-
-Schema: `AttributeResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createAttribute
-Add a new attribute request
-
-```golang
-
- data, err :=  Feedback.CreateAttribute(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  SaveAttributeRequest | "Request body" 
-
-
-Use this API to add a new attribute (e.g. product quality/material/value for money) with its name, slug and description.
-
-*Success Response:*
-
-
-
-Success. Returns an attribute ID.
-
-
-Schema: `InsertResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAttribute
-Get data of a single attribute
-
-```golang
-
- data, err :=  Feedback.GetAttribute(Slug);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| Slug | string | A short, human-readable, URL-friendly identifier of an attribute. You can get slug value from the endpoint 'service/application/feedback/v1.0/attributes'. | 
-
-
-
-
-Use this API to retrieve a single attribute data from a given slug.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `Attribute` for more details.
-
-
-Schema: `Attribute`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateAttribute
-Update details of an attribute 
-
-```golang
-
- data, err :=  Feedback.UpdateAttribute(Slug, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| Slug | string | A short, human-readable, URL-friendly identifier of an attribute. You can get slug value from the endpoint 'service/application/feedback/v1.0/attributes'. | 
-
-
-| body |  UpdateAttributeRequest | "Request body" 
-
-
-Use this API update the attribute's name and description.
-
-*Success Response:*
-
-
-
-Success.
-
-
-Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createComment
-Post a new comment
-
-```golang
-
- data, err :=  Feedback.CreateComment(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  CommentRequest | "Request body" 
-
-
-Use this API to add a new comment for a specific entity.
-
-*Success Response:*
-
-
-
-Success. Returns a comment ID.
-
-
-Schema: `InsertResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateComment
-Update the status of a comment
-
-```golang
-
- data, err :=  Feedback.UpdateComment(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  UpdateCommentRequest | "Request body" 
-
-
-Use this API to update the comment status (active or approve) along with new comment if any.
-
-*Success Response:*
-
-
-
-Success.
-
-
-Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getComments
-Get a list of comments
-
-```golang
-
- data, err :=  Feedback.GetComments(EntityType, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| EntityType | string | Type of entity, e.g. question, review or comment. | 
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `ID`, `EntityID`, `UserID`, `PageID`, `PageSize`
-
-
-
-Use this API to retrieve a list of comments for a specific entity type, e.g. products.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `CommentGetResponse` for more details.
-
-
-Schema: `CommentGetResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### checkEligibility
-Checks eligibility to rate and review, and shows the cloud media configuration
-
-```golang
-
- data, err :=  Feedback.CheckEligibility(EntityType, EntityID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| EntityType | string | Type of entity, e.g. question, rate, review, answer, or comment. | 
-
-
-| EntityID | string | ID of the eligible entity as specified in the entity type. | 
-
-
-
-
-Use this API to check whether an entity is eligible to be rated and reviewed. Moreover, it shows the cloud media configuration too.
-
-*Success Response:*
-
-
-
-Success. Returns a Product object. Check the example shown below or refer `CheckEligibilityResponse` for more details.
-
-
-Schema: `CheckEligibilityResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteMedia
-Delete Media
-
-```golang
-
- data, err :=  Feedback.DeleteMedia(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-| xQuery | struct | Includes properties such as `Ids`
-
-
-
-Use this API to delete media for an entity ID.
-
-*Success Response:*
-
-
-
-Success.
-
-
-Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createMedia
-Add Media
-
-```golang
-
- data, err :=  Feedback.CreateMedia(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  AddMediaListRequest | "Request body" 
-
-
-Use this API to add media to an entity, e.g. review.
-
-*Success Response:*
-
-
-
-Success. Returns media IDs.
-
-
-Schema: `InsertResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateMedia
-Update Media
-
-```golang
-
- data, err :=  Feedback.UpdateMedia(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  UpdateMediaListRequest | "Request body" 
-
-
-Use this API to update media (archive/approve) for an entity.
-
-*Success Response:*
-
-
-
-Success.
-
-
-Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getMedias
-Get Media
-
-```golang
-
- data, err :=  Feedback.GetMedias(EntityType, EntityID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| EntityType | string | Type of entity, e.g. question or product. | 
-
-
-| EntityID | string | ID of the eligible entity as specified in the entity type(question ID/product ID). | 
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `ID`, `Type`, `PageID`, `PageSize`
-
-
-
-Use this API to retrieve all media from an entity.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `MediaGetResponse` for more details.
-
-
-Schema: `MediaGetResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getReviewSummaries
-Get a review summary
-
-```golang
-
- data, err :=  Feedback.GetReviewSummaries(EntityType, EntityID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| EntityType | string | Type of entity, e.g. product, delivery, seller, order placed, order delivered, application, or template. | 
-
-
-| EntityID | string | ID of the eligible entity as specified in the entity type. | 
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `ID`, `PageID`, `PageSize`
-
-
-
-Review summary gives ratings and attribute metrics of a review per entity. Use this API to retrieve the following response data: review count, rating average. 'review metrics'/'attribute rating metrics' which contains name, type, average and count.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `ReviewMetricGetResponse` for more details.
-
-
-Schema: `ReviewMetricGetResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createReview
-Add customer reviews
-
-```golang
-
- data, err :=  Feedback.CreateReview(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  UpdateReviewRequest | "Request body" 
-
-
-Use this API to add customer reviews for a specific entity along with the following data: attributes rating, entity rating, title, description, media resources and template ID.
-
-*Success Response:*
-
-
-
-Success. Returns a review ID.
-
-
-Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateReview
-Update customer reviews
-
-```golang
-
- data, err :=  Feedback.UpdateReview(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  UpdateReviewRequest | "Request body" 
-
-
-Use this API to update customer reviews for a specific entity along with following data: attributes rating, entity rating, title, description, media resources and template ID.
-
-*Success Response:*
-
-
-
-Success.
-
-
-Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getReviews
-Get list of customer reviews
-
-```golang
-
- data, err :=  Feedback.GetReviews(EntityType, EntityID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| EntityType | string | Type of entity, e.g. product, delivery, seller, l3, order placed, order delivered, application, or template. | 
-
-
-| EntityID | string | ID of the eligible entity as specified in the entity type. | 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `ID`, `UserID`, `Media`, `Rating`, `AttributeRating`, `Facets`, `Sort`, `Active`, `Approve`, `PageID`, `PageSize`
-
-
-
-Use this API to retrieve a list of customer reviews based on entity and filters provided.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `ReviewGetResponse` for more details.
-
-
-Schema: `ReviewGetResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getTemplates
-Get the feedback templates for a product or l3
-
-```golang
-
- data, err :=  Feedback.GetTemplates(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `TemplateID`, `EntityID`, `EntityType`
-
-
-
-Use this API to retrieve the details of the following feedback template. order, delivered, application, seller, order, placed, product
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `TemplateGetResponse` for more details.
-
-
-Schema: `TemplateGetResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createQuestion
-Create a new question
-
-```golang
-
- data, err :=  Feedback.CreateQuestion(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  CreateQNARequest | "Request body" 
-
-
-Use this API to create a new question with following data- tags, text, type, choices for MCQ type questions, maximum length of answer.
-
-*Success Response:*
-
-
-
-Success. Returns a qna ID.
-
-
-Schema: `InsertResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateQuestion
-Update a question
-
-```golang
-
- data, err :=  Feedback.UpdateQuestion(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  UpdateQNARequest | "Request body" 
-
-
-Use this API to update the status of a question, its tags and its choices.
-
-*Success Response:*
-
-
-
-Success.
-
-
-Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getQuestionAndAnswers
-Get a list of QnA
-
-```golang
-
- data, err :=  Feedback.GetQuestionAndAnswers(EntityType, EntityID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| EntityType | string | Type of entity, e.g. product, l3, etc. | 
-
-
-| EntityID | string | ID of the eligible entity as specified in the entity type. | 
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `ID`, `UserID`, `ShowAnswer`, `PageID`, `PageSize`
-
-
-
-Use this API to retrieve a list of questions and answers for a given entity.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `QNAGetResponse` for more details.
-
-
-Schema: `QNAGetResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getVotes
-Get a list of votes
-
-```golang
-
- data, err :=  Feedback.GetVotes(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `ID`, `RefType`, `PageNo`, `PageSize`
-
-
-
-Use this API to retrieve a list of votes of a current logged in user. Votes can be filtered using `ref_type`, i.e. review | comment.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `VoteResponse` for more details.
-
-
-Schema: `VoteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createVote
-Create a new vote
-
-```golang
-
- data, err :=  Feedback.CreateVote(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  VoteRequest | "Request body" 
-
-
-Use this API to create a new vote, where the action could be an upvote or a downvote. This is useful when you want to give a vote (say upvote) to a review (ref_type) of a product (entity_type).
-
-*Success Response:*
-
-
-
-Success. Returns a vote ID.
-
-
-Schema: `InsertResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateVote
-Update a vote
-
-```golang
-
- data, err :=  Feedback.UpdateVote(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  UpdateVoteRequest | "Request body" 
-
-
-Use this API to update a vote with a new action, i.e. either an upvote or a downvote.
-
-*Success Response:*
-
-
-
-Success.
-
-
-Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-
----
-
-
 ## PosCart
 
 
@@ -19640,7 +18139,7 @@ Fetch all items added to the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`
 
 
 
@@ -19714,7 +18213,7 @@ Add items to cart
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `BuyNow`
+| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -19800,11 +18299,6 @@ Product has been added to your cart
       "items": [
         {
           "key": "751083_10",
-          "parent_item_identifiers": {
-            "identifier": "ZASFF",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS"
-          },
           "article": {
             "type": "article",
             "uid": "612_9_SE61201_19100302_10",
@@ -20177,7 +18671,6 @@ Product has been added to your cart
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
-      "buy_now": false,
       "cart_id": 7927,
       "uid": "7927",
       "gstin": null,
@@ -20258,11 +18751,6 @@ Sorry, item is out of stock
         {
           "bulk_offer": {},
           "discount": "67% OFF",
-          "parent_item_identifiers": {
-            "identifier": "ZASFF",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS"
-          },
           "article": {
             "type": "article",
             "uid": "604_902_SSTC60401_636BLUE_1",
@@ -20361,7 +18849,6 @@ Sorry, item is out of stock
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
-      "buy_now": false,
       "cart_id": 54,
       "uid": "54",
       "gstin": null,
@@ -20404,7 +18891,7 @@ Update items in the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AreaCode`
 
 | body |  UpdateCartRequest | "Request body" 
 
@@ -20489,11 +18976,6 @@ Nothing updated
         {
           "bulk_offer": {},
           "discount": "67% OFF",
-          "parent_item_identifiers": {
-            "identifier": "ZASFF",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS"
-          },
           "article": {
             "type": "article",
             "uid": "604_902_SSTC60401_636BLUE_1",
@@ -20592,7 +19074,6 @@ Nothing updated
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
-      "buy_now": false,
       "cart_id": 54,
       "uid": "54",
       "gstin": null,
@@ -20723,11 +19204,6 @@ Item updated in the cart
               }
             }
           },
-          "parent_item_identifiers": {
-            "identifier": "ZASFF",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS"
-          },
           "article": {
             "type": "article",
             "uid": "507_9_96099_35656851_7",
@@ -20773,7 +19249,6 @@ Item updated in the cart
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
-      "buy_now": false,
       "cart_id": 12426,
       "uid": "12426",
       "gstin": null,
@@ -20817,9 +19292,7 @@ Count items in the cart
 | --------- | ----  | --- |
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`
 
 
 
@@ -20857,9 +19330,7 @@ Fetch Coupon
 | --------- | ----  | --- |
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`
 
 
 
@@ -20903,9 +19374,7 @@ Apply Coupon
 
 
 
-
-
-| xQuery | struct | Includes properties such as `I`, `B`, `P`, `ID`, `BuyNow`
+| xQuery | struct | Includes properties such as `I`, `B`, `P`, `ID`
 
 | body |  ApplyCouponRequest | "Request body" 
 
@@ -20944,9 +19413,7 @@ Remove Coupon Applied
 | --------- | ----  | --- |
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`
 
 
 
@@ -21103,9 +19570,7 @@ Apply reward points at cart
 
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`
 
 | body |  RewardPointRequest | "Request body" 
 
@@ -21152,9 +19617,7 @@ Fetch address
 
 
 
-
-
-| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -21239,9 +19702,7 @@ Fetch a single address by its ID
 
 
 
-
-
-| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -21360,9 +19821,7 @@ Select an address from available addresses
 
 
 
-
-
-| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `I`, `B`
+| xQuery | struct | Includes properties such as `CartID`, `I`, `B`
 
 | body |  SelectCartAddressRequest | "Request body" 
 
@@ -21401,9 +19860,7 @@ Update cart payment
 | --------- | ----  | --- |
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`
 
 | body |  UpdateCartPaymentRequest | "Request body" 
 
@@ -21452,9 +19909,7 @@ Verify the coupon eligibility against the payment mode
 
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
+| xQuery | struct | Includes properties such as `ID`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
 
 
 
@@ -23286,9 +21741,7 @@ Update the cart meta
 | --------- | ----  | --- |
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`
 
 | body |  CartMetaRequest | "Request body" 
 
