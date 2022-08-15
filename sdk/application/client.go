@@ -5711,6 +5711,79 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //UserSendResetPasswordMobileXQuery holds query params
+    type UserSendResetPasswordMobileXQuery struct { 
+        Platform string  `url:"platform,omitempty"`  
+    }
+    
+    // SendResetPasswordMobile Reset Password
+    func (us *User)  SendResetPasswordMobile(xQuery UserSendResetPasswordMobileXQuery, body  SendResetPasswordMobileRequestSchema) (ResetPasswordSuccess, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             sendResetPasswordMobileResponse ResetPasswordSuccess
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return ResetPasswordSuccess{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return ResetPasswordSuccess{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "post",
+            "/service/application/user/authentication/v1.0/login/password/mobile/reset",
+            nil,
+            xQuery,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ResetPasswordSuccess{}, err
+	    }
+        
+        err = json.Unmarshal(response, &sendResetPasswordMobileResponse)
+        if err != nil {
+            return ResetPasswordSuccess{}, common.NewFDKError(err.Error())
+        }
+         return sendResetPasswordMobileResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // ForgotPassword Forgot Password
     func (us *User)  ForgotPassword(body  ForgotPasswordRequestSchema) (LoginSuccess, error){
         var (
