@@ -3323,28 +3323,6 @@ package application
          
     }
     
-    // ArchiveApplicationUserRequestSchema ...
-    type ArchiveApplicationUserRequestSchema struct {
-
-        
-            UserID string  `json:"user_id"`
-            Reason string  `json:"reason"`
-            ReasonID string  `json:"reason_id"`
-            RequestID string  `json:"request_id"`
-            Otp string  `json:"otp"`
-         
-    }
-    
-    // UnArchiveUserRequestSchema ...
-    type UnArchiveUserRequestSchema struct {
-
-        
-            UserID string  `json:"user_id"`
-            Reason string  `json:"reason"`
-            ReasonID string  `json:"reason_id"`
-         
-    }
-    
     // EditEmailRequestSchema ...
     type EditEmailRequestSchema struct {
 
@@ -3500,16 +3478,6 @@ package application
 
         
             Email string  `json:"email"`
-            CaptchaCode string  `json:"captcha_code"`
-         
-    }
-    
-    // SendResetPasswordMobileRequestSchema ...
-    type SendResetPasswordMobileRequestSchema struct {
-
-        
-            CountryCode string  `json:"country_code"`
-            Mobile string  `json:"mobile"`
             CaptchaCode string  `json:"captcha_code"`
          
     }
@@ -3696,14 +3664,6 @@ package application
     
     // ArchiveUserSuccess ...
     type ArchiveUserSuccess struct {
-
-        
-            Success bool  `json:"success"`
-         
-    }
-    
-    // UnArchiveUserSuccess ...
-    type UnArchiveUserSuccess struct {
 
         
             Success bool  `json:"success"`
@@ -4012,10 +3972,6 @@ package application
             Register bool  `json:"register"`
             MobileImage string  `json:"mobile_image"`
             DesktopImage string  `json:"desktop_image"`
-            SupportEmail string  `json:"support_email"`
-            DeleteAccountDay float64  `json:"delete_account_day"`
-            DeleteAccountReasons []DeleteAccountReasons  `json:"delete_account_reasons"`
-            DeleteAccountConsent map[string]interface{}  `json:"delete_account_consent"`
          
     }
     
@@ -4127,24 +4083,6 @@ package application
             Facebook Facebook  `json:"facebook"`
             AccountKit Accountkit  `json:"account_kit"`
             Google Google  `json:"google"`
-         
-    }
-    
-    // DeleteAccountReasons ...
-    type DeleteAccountReasons struct {
-
-        
-            ReasonText string  `json:"reason_text"`
-            ReasonID string  `json:"reason_id"`
-            ShowTextArea bool  `json:"show_text_area"`
-         
-    }
-    
-    // DeleteAccountConsent ...
-    type DeleteAccountConsent struct {
-
-        
-            ConsentText string  `json:"consent_text"`
          
     }
     
@@ -4614,7 +4552,7 @@ package application
             Active bool  `json:"active"`
             Display string  `json:"display"`
             SortOrder float64  `json:"sort_order"`
-            SubNavigation []NavigationReference  `json:"sub_navigation"`
+            SubNavigation []interface{}  `json:"sub_navigation"`
          
     }
     
@@ -4783,6 +4721,14 @@ package application
             RequestID string  `json:"request_id"`
             StackTrace string  `json:"stack_trace"`
             Meta map[string]interface{}  `json:"meta"`
+         
+    }
+    
+    // APIError ...
+    type APIError struct {
+
+        
+            Message string  `json:"message"`
          
     }
     

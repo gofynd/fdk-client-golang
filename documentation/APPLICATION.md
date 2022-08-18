@@ -125,7 +125,6 @@
     * [loginWithOTP](#loginwithotp)
     * [loginWithEmailAndPassword](#loginwithemailandpassword)
     * [sendResetPasswordEmail](#sendresetpasswordemail)
-    * [sendResetPasswordMobile](#sendresetpasswordmobile)
     * [forgotPassword](#forgotpassword)
     * [sendResetToken](#sendresettoken)
     * [loginWithToken](#loginwithtoken)
@@ -134,7 +133,6 @@
     * [verifyMobile](#verifymobile)
     * [hasPassword](#haspassword)
     * [updatePassword](#updatepassword)
-    * [archiveUser](#archiveuser)
     * [logout](#logout)
     * [sendOTPOnMobile](#sendotponmobile)
     * [verifyMobileOTP](#verifymobileotp)
@@ -11933,45 +11931,6 @@ Schema: `ResetPasswordSuccess`
 ---
 
 
-#### sendResetPasswordMobile
-Reset Password
-
-```golang
-
- data, err :=  User.SendResetPasswordMobile(xQuery, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-| xQuery | struct | Includes properties such as `Platform`
-
-| body |  SendResetPasswordMobileRequestSchema | "Request body" 
-
-
-Use this API to reset a password using the link sent on mobile.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `ResetPasswordSuccess` for more details.
-
-
-Schema: `ResetPasswordSuccess`
-
-
-
-
-
-
-
-
-
----
-
-
 #### forgotPassword
 Forgot Password
 
@@ -12366,42 +12325,6 @@ Success. Returns a success message. Refer `VerifyEmailSuccess` for more details.
 
 
 Schema: `VerifyEmailSuccess`
-
-
-
-
-
-
-
-
-
----
-
-
-#### archiveUser
-verify otp and archive user
-
-```golang
-
- data, err :=  User.ArchiveUser(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  ArchiveApplicationUserRequestSchema | "Request body" 
-
-
-verify otp and archive user
-
-*Success Response:*
-
-
-
-Success. Returns a success message. Refer `ArchiveUserSuccess` for more details.
-
-
-Schema: `ArchiveUserSuccess`
 
 
 
