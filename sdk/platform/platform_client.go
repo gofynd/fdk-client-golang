@@ -4156,6 +4156,393 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
        
     
+    
+   
+  
+    
+    
+    //PlatformGetShipmentDetailsByIdXQuery holds query params
+    type PlatformGetShipmentDetailsByIdXQuery struct { 
+        ShipmentID string  `url:"shipment_id,omitempty"`  
+    }
+    
+
+
+    // GetShipmentDetailsById 
+     func (or *PlatformOrder)  GetShipmentDetailsById(xQuery PlatformGetShipmentDetailsByIdXQuery) (ShipmentDetailsPlatformResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getShipmentDetailsByIdResponse ShipmentDetailsPlatformResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "get",
+            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/shipment-details",or.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ShipmentDetailsPlatformResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getShipmentDetailsByIdResponse)
+        if err != nil {
+             return ShipmentDetailsPlatformResponse{}, common.NewFDKError(err.Error())
+        }
+        return getShipmentDetailsByIdResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetShipmentsByShipmentIdsXQuery holds query params
+    type PlatformGetShipmentsByShipmentIdsXQuery struct { 
+        ShipmentIds string  `url:"shipment_ids,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // GetShipmentsByShipmentIds 
+     func (or *PlatformOrder)  GetShipmentsByShipmentIds(xQuery PlatformGetShipmentsByShipmentIdsXQuery) (BulkShipmentDetailsPlatformResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getShipmentsByShipmentIdsResponse BulkShipmentDetailsPlatformResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "get",
+            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/shipments",or.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return BulkShipmentDetailsPlatformResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getShipmentsByShipmentIdsResponse)
+        if err != nil {
+             return BulkShipmentDetailsPlatformResponse{}, common.NewFDKError(err.Error())
+        }
+        return getShipmentsByShipmentIdsResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetOrderByIdXQuery holds query params
+    type PlatformGetOrderByIdXQuery struct { 
+        FyndOrderID string  `url:"fynd_order_id,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // GetOrderById 
+     func (or *PlatformOrder)  GetOrderById(xQuery PlatformGetOrderByIdXQuery) (OrderDetailsPlatformResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getOrderByIdResponse OrderDetailsPlatformResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "get",
+            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/order-details",or.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return OrderDetailsPlatformResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getOrderByIdResponse)
+        if err != nil {
+             return OrderDetailsPlatformResponse{}, common.NewFDKError(err.Error())
+        }
+        return getOrderByIdResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetShipmentByAffiliateBagIdXQuery holds query params
+    type PlatformGetShipmentByAffiliateBagIdXQuery struct { 
+        AffiliateBagID string  `url:"affiliate_bag_id,omitempty"` 
+        AffiliateID string  `url:"affiliate_id,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // GetShipmentByAffiliateBagId 
+     func (or *PlatformOrder)  GetShipmentByAffiliateBagId(xQuery PlatformGetShipmentByAffiliateBagIdXQuery) (ShipmentDetailsByAffiliateBagIdResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getShipmentByAffiliateBagIdResponse ShipmentDetailsByAffiliateBagIdResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "get",
+            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/shipment-details-by-affiliate-bag-id",or.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ShipmentDetailsByAffiliateBagIdResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getShipmentByAffiliateBagIdResponse)
+        if err != nil {
+             return ShipmentDetailsByAffiliateBagIdResponse{}, common.NewFDKError(err.Error())
+        }
+        return getShipmentByAffiliateBagIdResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetShipmentByAffiliateShipmentIdXQuery holds query params
+    type PlatformGetShipmentByAffiliateShipmentIdXQuery struct { 
+        AffiliateShipmentID string  `url:"affiliate_shipment_id,omitempty"` 
+        AffiliateID string  `url:"affiliate_id,omitempty"`  
+    }
+    
+
+
+    // GetShipmentByAffiliateShipmentId 
+     func (or *PlatformOrder)  GetShipmentByAffiliateShipmentId(xQuery PlatformGetShipmentByAffiliateShipmentIdXQuery) (ShipmentDetailsPlatformResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getShipmentByAffiliateShipmentIdResponse ShipmentDetailsPlatformResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "get",
+            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/shipment-details-by-affiliate-shipment-id",or.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ShipmentDetailsPlatformResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getShipmentByAffiliateShipmentIdResponse)
+        if err != nil {
+             return ShipmentDetailsPlatformResponse{}, common.NewFDKError(err.Error())
+        }
+        return getShipmentByAffiliateShipmentIdResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetShipmentsByAffiliateOrderIdXQuery holds query params
+    type PlatformGetShipmentsByAffiliateOrderIdXQuery struct { 
+        AffiliateID string  `url:"affiliate_id,omitempty"` 
+        AffiliateOrderID string  `url:"affiliate_order_id,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // GetShipmentsByAffiliateOrderId 
+     func (or *PlatformOrder)  GetShipmentsByAffiliateOrderId(xQuery PlatformGetShipmentsByAffiliateOrderIdXQuery) (BulkShipmentDetailsPlatformResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getShipmentsByAffiliateOrderIdResponse BulkShipmentDetailsPlatformResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "get",
+            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/shipment-details-by-affiliate-order-id",or.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return BulkShipmentDetailsPlatformResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getShipmentsByAffiliateOrderIdResponse)
+        if err != nil {
+             return BulkShipmentDetailsPlatformResponse{}, common.NewFDKError(err.Error())
+        }
+        return getShipmentsByAffiliateOrderIdResponse, nil
+        
+    }
+         
+        
+       
+    
 
 
 	

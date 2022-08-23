@@ -3,6 +3,7 @@
 
 * [Common](#Common) - Application configuration apis 
 * [Lead](#Lead) - Handles communication between Administrator <-> Staff and Staff <-> Users 
+* [Feedback](#Feedback) - User Reviews and Rating System 
 * [Theme](#Theme) - Responsible for themes 
 * [User](#User) - Authentication Service 
 * [Content](#Content) - Content System 
@@ -62,6 +63,19 @@
     * [openVideoRoom](#openvideoroom)
     * [closeVideoRoom](#closevideoroom)
     * [getGeneralConfig](#getgeneralconfig)
+    
+
+* [Feedback](#Feedback)
+  * Methods
+    * [getAttributes](#getattributes)
+    * [getCustomerReviews](#getcustomerreviews)
+    * [updateApprove](#updateapprove)
+    * [getHistory](#gethistory)
+    * [getApplicationTemplates](#getapplicationtemplates)
+    * [createTemplate](#createtemplate)
+    * [getTemplateById](#gettemplatebyid)
+    * [updateTemplate](#updatetemplate)
+    * [updateTemplateStatus](#updatetemplatestatus)
     
 
 * [Theme](#Theme)
@@ -290,6 +304,12 @@
     * [reassignLocation](#reassignlocation)
     * [updateShipmentLock](#updateshipmentlock)
     * [updateShipmentStatus](#updateshipmentstatus)
+    * [getShipmentDetailsById](#getshipmentdetailsbyid)
+    * [getShipmentsByShipmentIds](#getshipmentsbyshipmentids)
+    * [getOrderById](#getorderbyid)
+    * [getShipmentByAffiliateBagId](#getshipmentbyaffiliatebagid)
+    * [getShipmentByAffiliateShipmentId](#getshipmentbyaffiliateshipmentid)
+    * [getShipmentsByAffiliateOrderId](#getshipmentsbyaffiliateorderid)
     
 
 * [Catalog](#Catalog)
@@ -4327,6 +4347,436 @@ Default
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+---
+
+
+
+---
+
+
+## Feedback
+
+
+#### getAttributes
+Get list of attribute data
+
+```golang
+
+data, err := Feedback.GetAttributes(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
+
+
+Provides a list of all attribute data.
+
+*Success Response:*
+
+
+
+ok
+
+
+Schema: `FeedbackAttributes`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCustomerReviews
+Get list of customer reviews [admin]
+
+```golang
+
+data, err := Feedback.GetCustomerReviews(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `ID`, `EntityID`, `EntityType`, `UserID`, `Media`, `Rating`, `AttributeRating`, `Facets`, `Sort`, `Next`, `Start`, `Limit`, `Count`, `PageID`, `PageSize`
+
+
+The endpoint provides a list of customer reviews based on entity and provided filters
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetReviewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateApprove
+update approve details
+
+```golang
+
+data, err := Feedback.UpdateApprove(CompanyID, ApplicationID, ReviewID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| ReviewID | string | review id | 
+
+
+| body |  ApproveRequest | "Request body" 
+
+The is used to update approve details like status and description text
+
+*Success Response:*
+
+
+
+ok
+
+
+Schema: `UpdateResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getHistory
+get history details
+
+```golang
+
+data, err := Feedback.GetHistory(CompanyID, ApplicationID, ReviewID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| ReviewID | string | review id | 
+
+
+
+The is used to get the history details like status and description text
+
+*Success Response:*
+
+
+
+ok
+
+
+Schema: `Array<ActivityDump>`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getApplicationTemplates
+Get list of templates
+
+```golang
+
+data, err := Feedback.GetApplicationTemplates(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageID`, `PageSize`
+
+
+Get all templates of application
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `TemplateGetResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createTemplate
+Create a new template
+
+```golang
+
+data, err := Feedback.CreateTemplate(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| body |  TemplateRequestList | "Request body" 
+
+Create a new template for review with following data:
+- Enable media, rating and review
+- Rating - active/inactive/selected rate choices, attributes, text on rate, comment for each rate, type
+- Review - header, title, description, image and video meta, enable votes
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `InsertResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getTemplateById
+Get a template by ID
+
+```golang
+
+data, err := Feedback.GetTemplateById(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| ID | string | template id | 
+
+
+
+Get the template for product or l3 type by ID
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `Template`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateTemplate
+Update a template's status
+
+```golang
+
+data, err := Feedback.UpdateTemplate(CompanyID, ApplicationID, ID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| ID | string | template id | 
+
+
+| body |  UpdateTemplateRequest | "Request body" 
+
+Update existing template status, active/archive
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `UpdateResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateTemplateStatus
+Update a template's status
+
+```golang
+
+data, err := Feedback.UpdateTemplateStatus(CompanyID, ApplicationID, ID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| ID | string | template id | 
+
+
+| body |  UpdateTemplateStatusRequest | "Request body" 
+
+Update existing template status, active/archive
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `UpdateResponse`
 
 
 
@@ -52916,6 +53366,268 @@ Successfully updated entities !
 
 
 Schema: `UpdateShipmentStatusResponse1`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentDetailsById
+
+
+```golang
+
+data, err := Order.GetShipmentDetailsById(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+| xQuery | struct | Includes properties such as `ShipmentID`
+
+
+
+
+*Success Response:*
+
+
+
+Successfully retrived shipment details!
+
+
+Schema: `ShipmentDetailsPlatformResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentsByShipmentIds
+
+
+```golang
+
+data, err := Order.GetShipmentsByShipmentIds(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `ShipmentIds`, `PageNo`, `PageSize`
+
+
+
+
+*Success Response:*
+
+
+
+Successfully retrived all the given shipments details!
+
+
+Schema: `BulkShipmentDetailsPlatformResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOrderById
+
+
+```golang
+
+data, err := Order.GetOrderById(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `FyndOrderID`, `PageNo`, `PageSize`
+
+
+
+
+*Success Response:*
+
+
+
+Successfully retrieved shipment details!
+
+
+Schema: `OrderDetailsPlatformResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentByAffiliateBagId
+
+
+```golang
+
+data, err := Order.GetShipmentByAffiliateBagId(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `AffiliateBagID`, `AffiliateID`, `PageNo`, `PageSize`
+
+
+
+
+*Success Response:*
+
+
+
+Successfully retrieved shipment details!
+
+
+Schema: `ShipmentDetailsByAffiliateBagIdResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentByAffiliateShipmentId
+
+
+```golang
+
+data, err := Order.GetShipmentByAffiliateShipmentId(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `AffiliateShipmentID`, `AffiliateID`
+
+
+
+
+*Success Response:*
+
+
+
+Successfully retrieved shipment details!
+
+
+Schema: `ShipmentDetailsPlatformResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentsByAffiliateOrderId
+
+
+```golang
+
+data, err := Order.GetShipmentsByAffiliateOrderId(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `AffiliateID`, `AffiliateOrderID`, `PageNo`, `PageSize`
+
+
+
+
+*Success Response:*
+
+
+
+Successfully retrieved all the given shipments details!
+
+
+Schema: `BulkShipmentDetailsPlatformResponse`
 
 
 
