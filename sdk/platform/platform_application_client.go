@@ -2348,7 +2348,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     //PlatformAppGetCustomersXQuery holds query params
     type PlatformAppGetCustomersXQuery struct { 
-        Q map[string]interface{}  `url:"q,omitempty"` 
+        Q string  `url:"q,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
         PageNo float64  `url:"page_no,omitempty"`  
     }
@@ -2409,7 +2409,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     //PlatformAppSearchUsersXQuery holds query params
     type PlatformAppSearchUsersXQuery struct { 
-        Q string  `url:"q,omitempty"`  
+        Q map[string]interface{}  `url:"q,omitempty"`  
     }
     
     // SearchUsers Search an existing user.
@@ -3027,8 +3027,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             updatePlatformConfigResponse PlatformSchema
 	    )
 
-        
-            
         
             
         
