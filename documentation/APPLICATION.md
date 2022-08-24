@@ -245,15 +245,6 @@
     * [addRefundBankAccountUsingOTP](#addrefundbankaccountusingotp)
     * [verifyOtpAndAddBeneficiaryForWallet](#verifyotpandaddbeneficiaryforwallet)
     * [updateDefaultBeneficiary](#updatedefaultbeneficiary)
-    * [getPaymentLink](#getpaymentlink)
-    * [createPaymentLink](#createpaymentlink)
-    * [resendPaymentLink](#resendpaymentlink)
-    * [cancelPaymentLink](#cancelpaymentlink)
-    * [getPaymentModeRoutesPaymentLink](#getpaymentmoderoutespaymentlink)
-    * [pollingPaymentLink](#pollingpaymentlink)
-    * [createOrderHandlerPaymentLink](#createorderhandlerpaymentlink)
-    * [initialisePaymentPaymentLink](#initialisepaymentpaymentlink)
-    * [checkAndUpdatePaymentStatusPaymentLink](#checkandupdatepaymentstatuspaymentlink)
     * [customerCreditSummary](#customercreditsummary)
     * [redirectToAggregator](#redirecttoaggregator)
     * [checkCredit](#checkcredit)
@@ -273,6 +264,7 @@
     * [sendOtpToShipmentCustomer](#sendotptoshipmentcustomer)
     * [verifyOtpShipmentCustomer](#verifyotpshipmentcustomer)
     * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
+    * [getCreditNoteByShipmentId](#getcreditnotebyshipmentid)
     
 
 * [Rewards](#Rewards)
@@ -1650,7 +1642,7 @@ Fetch all items added to the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`
 
 
 
@@ -1724,7 +1716,7 @@ Add items to cart
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `BuyNow`
+| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -1810,11 +1802,6 @@ Product has been added to your cart
       "items": [
         {
           "key": "751083_10",
-          "parent_item_identifiers": {
-            "identifier": "ZASFF",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS"
-          },
           "article": {
             "type": "article",
             "uid": "612_9_SE61201_19100302_10",
@@ -2187,7 +2174,6 @@ Product has been added to your cart
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
-      "buy_now": false,
       "cart_id": 7927,
       "uid": "7927",
       "gstin": null,
@@ -2268,11 +2254,6 @@ Sorry, item is out of stock
         {
           "bulk_offer": {},
           "discount": "67% OFF",
-          "parent_item_identifiers": {
-            "identifier": "ZASFF",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS"
-          },
           "article": {
             "type": "article",
             "uid": "604_902_SSTC60401_636BLUE_1",
@@ -2371,7 +2352,6 @@ Sorry, item is out of stock
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
-      "buy_now": false,
       "cart_id": 54,
       "uid": "54",
       "gstin": null,
@@ -2414,7 +2394,7 @@ Update items in the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AreaCode`
 
 | body |  UpdateCartRequest | "Request body" 
 
@@ -2499,11 +2479,6 @@ Nothing updated
         {
           "bulk_offer": {},
           "discount": "67% OFF",
-          "parent_item_identifiers": {
-            "identifier": "ZASFF",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS"
-          },
           "article": {
             "type": "article",
             "uid": "604_902_SSTC60401_636BLUE_1",
@@ -2602,7 +2577,6 @@ Nothing updated
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
-      "buy_now": false,
       "cart_id": 54,
       "uid": "54",
       "gstin": null,
@@ -2733,11 +2707,6 @@ Item updated in the cart
               }
             }
           },
-          "parent_item_identifiers": {
-            "identifier": "ZASFF",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS"
-          },
           "article": {
             "type": "article",
             "uid": "507_9_96099_35656851_7",
@@ -2783,7 +2752,6 @@ Item updated in the cart
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
-      "buy_now": false,
       "cart_id": 12426,
       "uid": "12426",
       "gstin": null,
@@ -2827,9 +2795,7 @@ Count items in the cart
 | --------- | ----  | --- |
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`
 
 
 
@@ -2867,9 +2833,7 @@ Fetch Coupon
 | --------- | ----  | --- |
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`
 
 
 
@@ -2913,9 +2877,7 @@ Apply Coupon
 
 
 
-
-
-| xQuery | struct | Includes properties such as `I`, `B`, `P`, `ID`, `BuyNow`
+| xQuery | struct | Includes properties such as `I`, `B`, `P`, `ID`
 
 | body |  ApplyCouponRequest | "Request body" 
 
@@ -2954,9 +2916,7 @@ Remove Coupon Applied
 | --------- | ----  | --- |
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`
 
 
 
@@ -3113,9 +3073,7 @@ Apply reward points at cart
 
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`
 
 | body |  RewardPointRequest | "Request body" 
 
@@ -3162,9 +3120,7 @@ Fetch address
 
 
 
-
-
-| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -3249,9 +3205,7 @@ Fetch a single address by its ID
 
 
 
-
-
-| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -3370,9 +3324,7 @@ Select an address from available addresses
 
 
 
-
-
-| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `I`, `B`
+| xQuery | struct | Includes properties such as `CartID`, `I`, `B`
 
 | body |  SelectCartAddressRequest | "Request body" 
 
@@ -3411,9 +3363,7 @@ Update cart payment
 | --------- | ----  | --- |
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`
 
 | body |  UpdateCartPaymentRequest | "Request body" 
 
@@ -3462,9 +3412,7 @@ Verify the coupon eligibility against the payment mode
 
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
+| xQuery | struct | Includes properties such as `ID`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
 
 
 
@@ -3508,9 +3456,7 @@ Get delivery date and options before checkout
 
 
 
-
-
-| xQuery | struct | Includes properties such as `P`, `ID`, `BuyNow`, `AddressID`, `AreaCode`
+| xQuery | struct | Includes properties such as `P`, `ID`, `AddressID`, `AreaCode`
 
 
 
@@ -3534,7 +3480,6 @@ Shipment Generated
 {
   "value": {
     "items": [],
-    "buy_now": false,
     "cart_id": 7501,
     "uid": "7501",
     "success": true,
@@ -3921,7 +3866,6 @@ Shipment Generation Failed
 {
   "value": {
     "items": [],
-    "buy_now": false,
     "cart_id": 7501,
     "uid": "7501",
     "success": true,
@@ -4183,14 +4127,11 @@ Checkout all items in the cart
 
 ```golang
 
- data, err :=  Cart.CheckoutCart(xQuery, body);
+ data, err :=  Cart.CheckoutCart(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
-
-
-| xQuery | struct | Includes properties such as `BuyNow`
 
 | body |  CartCheckoutDetailRequest | "Request body" 
 
@@ -4606,9 +4547,7 @@ Update the cart meta
 | --------- | ----  | --- |
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`
 
 | body |  CartMetaRequest | "Request body" 
 
@@ -11796,14 +11735,11 @@ Success
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -11841,8 +11777,7 @@ Success
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -11933,14 +11868,11 @@ Success
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -11978,8 +11910,7 @@ Success
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12067,14 +11998,11 @@ Success
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12112,8 +12040,7 @@ Success
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12425,14 +12352,11 @@ default
     "verify_mobile_link": true,
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12470,8 +12394,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12566,14 +12489,11 @@ default
     "verify_mobile_link": true,
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12611,8 +12531,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12663,14 +12582,11 @@ default
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12708,8 +12624,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12837,14 +12752,11 @@ default
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12882,8 +12794,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12939,14 +12850,11 @@ default
     "verify_mobile_link": true,
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12984,8 +12892,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13049,14 +12956,11 @@ default
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13094,8 +12998,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13147,14 +13050,11 @@ default
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13192,8 +13092,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13249,14 +13148,11 @@ default
     "verify_mobile_link": true,
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13294,8 +13190,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13351,14 +13246,11 @@ default
     "verify_email_link": true,
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13396,8 +13288,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13459,14 +13350,11 @@ default
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13504,8 +13392,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13557,14 +13444,11 @@ default
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13602,8 +13486,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -17325,336 +17208,6 @@ Schema: `SetDefaultBeneficiaryResponse`
 ---
 
 
-#### getPaymentLink
-Get payment link
-
-```golang
-
- data, err :=  Payment.GetPaymentLink(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-| xQuery | struct | Includes properties such as `PaymentLinkID`
-
-
-
-Use this API to get a payment link
-
-*Success Response:*
-
-
-
-Success. Check the example shown below
-
-
-Schema: `GetPaymentLinkResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createPaymentLink
-Create payment link
-
-```golang
-
- data, err :=  Payment.CreatePaymentLink(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  CreatePaymentLinkRequest | "Request body" 
-
-
-Use this API to create a payment link for the customer
-
-*Success Response:*
-
-
-
-Success. Check the example shown below
-
-
-Schema: `CreatePaymentLinkResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### resendPaymentLink
-Resend payment link
-
-```golang
-
- data, err :=  Payment.ResendPaymentLink(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  CancelOrResendPaymentLinkRequest | "Request body" 
-
-
-Use this API to resend a payment link for the customer
-
-*Success Response:*
-
-
-
-Success. Check the example shown below
-
-
-Schema: `ResendPaymentLinkResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### cancelPaymentLink
-Cancel payment link
-
-```golang
-
- data, err :=  Payment.CancelPaymentLink(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  CancelOrResendPaymentLinkRequest | "Request body" 
-
-
-Use this API to cancel a payment link for the customer
-
-*Success Response:*
-
-
-
-Success. Check the example shown below
-
-
-Schema: `CancelPaymentLinkResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPaymentModeRoutesPaymentLink
-Get applicable payment options for payment link
-
-```golang
-
- data, err :=  Payment.GetPaymentModeRoutesPaymentLink(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-| xQuery | struct | Includes properties such as `PaymentLinkID`
-
-
-
-Use this API to get all valid payment options for doing a payment through payment link
-
-*Success Response:*
-
-
-
-Success. Returns all available options for payment. Check the example shown below or refer `PaymentModeRouteResponse` for more details.
-
-
-Schema: `PaymentModeRouteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### pollingPaymentLink
-Used for polling if payment successful or not
-
-```golang
-
- data, err :=  Payment.PollingPaymentLink(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-| xQuery | struct | Includes properties such as `PaymentLinkID`
-
-
-
-Use this API to poll if payment through payment was successful or not
-
-*Success Response:*
-
-
-
-Success. Check the example shown below
-
-
-Schema: `PollingPaymentLinkResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createOrderHandlerPaymentLink
-Create Order user
-
-```golang
-
- data, err :=  Payment.CreateOrderHandlerPaymentLink(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  CreateOrderUserRequest | "Request body" 
-
-
-Use this API to create a order and payment on aggregator side
-
-*Success Response:*
-
-
-
-Success. Check the example shown below
-
-
-Schema: `CreateOrderUserResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### initialisePaymentPaymentLink
-Initialize a payment (server-to-server) for UPI and BharatQR
-
-```golang
-
- data, err :=  Payment.InitialisePaymentPaymentLink(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  PaymentInitializationRequest | "Request body" 
-
-
-Use this API to inititate payment using UPI, BharatQR, wherein the UPI requests are send to the app and QR code is displayed on the screen.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `PaymentInitializationResponse` for more details.
-
-
-Schema: `PaymentInitializationResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### checkAndUpdatePaymentStatusPaymentLink
-Performs continuous polling to check status of payment on the server
-
-```golang
-
- data, err :=  Payment.CheckAndUpdatePaymentStatusPaymentLink(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  PaymentStatusUpdateRequest | "Request body" 
-
-
-Use this API to perform continuous polling at intervals to check the status of payment until timeout.
-
-*Success Response:*
-
-
-
-Success. Returns the status of payment. Check the example shown below or refer `PaymentStatusUpdateResponse` for more details.
-
-
-Schema: `PaymentStatusUpdateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### customerCreditSummary
 API to fetch the customer credit summary
 
@@ -17941,7 +17494,7 @@ Get reasons behind full or partial cancellation of a shipment
 
 ```golang
 
- data, err :=  Order.GetShipmentReasons(ShipmentID);
+ data, err :=  Order.GetShipmentReasons(ShipmentID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -17949,6 +17502,9 @@ Get reasons behind full or partial cancellation of a shipment
 
 | ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
+
+
+| xQuery | struct | Includes properties such as `BagID`
 
 
 
@@ -18251,6 +17807,44 @@ Schema: `ResponseGetInvoiceShipment`
 ---
 
 
+#### getCreditNoteByShipmentId
+Get Credit Note URL
+
+```golang
+
+ data, err :=  Order.GetCreditNoteByShipmentId(ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+
+
+Use this API to get a generated Credit Note URL for viewing or download.
+
+*Success Response:*
+
+
+
+Success, the code is valid and returns a SignedUrl
+
+
+Schema: `ResponseGetCreditNoteShipment`
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ---
 
@@ -18541,7 +18135,7 @@ Fetch all items added to the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`
 
 
 
@@ -18615,7 +18209,7 @@ Add items to cart
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `BuyNow`
+| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -18701,11 +18295,6 @@ Product has been added to your cart
       "items": [
         {
           "key": "751083_10",
-          "parent_item_identifiers": {
-            "identifier": "ZASFF",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS"
-          },
           "article": {
             "type": "article",
             "uid": "612_9_SE61201_19100302_10",
@@ -19078,7 +18667,6 @@ Product has been added to your cart
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
-      "buy_now": false,
       "cart_id": 7927,
       "uid": "7927",
       "gstin": null,
@@ -19159,11 +18747,6 @@ Sorry, item is out of stock
         {
           "bulk_offer": {},
           "discount": "67% OFF",
-          "parent_item_identifiers": {
-            "identifier": "ZASFF",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS"
-          },
           "article": {
             "type": "article",
             "uid": "604_902_SSTC60401_636BLUE_1",
@@ -19262,7 +18845,6 @@ Sorry, item is out of stock
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
-      "buy_now": false,
       "cart_id": 54,
       "uid": "54",
       "gstin": null,
@@ -19305,7 +18887,7 @@ Update items in the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AreaCode`
 
 | body |  UpdateCartRequest | "Request body" 
 
@@ -19390,11 +18972,6 @@ Nothing updated
         {
           "bulk_offer": {},
           "discount": "67% OFF",
-          "parent_item_identifiers": {
-            "identifier": "ZASFF",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS"
-          },
           "article": {
             "type": "article",
             "uid": "604_902_SSTC60401_636BLUE_1",
@@ -19493,7 +19070,6 @@ Nothing updated
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
-      "buy_now": false,
       "cart_id": 54,
       "uid": "54",
       "gstin": null,
@@ -19624,11 +19200,6 @@ Item updated in the cart
               }
             }
           },
-          "parent_item_identifiers": {
-            "identifier": "ZASFF",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS"
-          },
           "article": {
             "type": "article",
             "uid": "507_9_96099_35656851_7",
@@ -19674,7 +19245,6 @@ Item updated in the cart
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
-      "buy_now": false,
       "cart_id": 12426,
       "uid": "12426",
       "gstin": null,
@@ -19718,9 +19288,7 @@ Count items in the cart
 | --------- | ----  | --- |
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`
 
 
 
@@ -19758,9 +19326,7 @@ Fetch Coupon
 | --------- | ----  | --- |
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`
 
 
 
@@ -19804,9 +19370,7 @@ Apply Coupon
 
 
 
-
-
-| xQuery | struct | Includes properties such as `I`, `B`, `P`, `ID`, `BuyNow`
+| xQuery | struct | Includes properties such as `I`, `B`, `P`, `ID`
 
 | body |  ApplyCouponRequest | "Request body" 
 
@@ -19845,9 +19409,7 @@ Remove Coupon Applied
 | --------- | ----  | --- |
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`
 
 
 
@@ -20004,9 +19566,7 @@ Apply reward points at cart
 
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`
 
 | body |  RewardPointRequest | "Request body" 
 
@@ -20053,9 +19613,7 @@ Fetch address
 
 
 
-
-
-| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -20140,9 +19698,7 @@ Fetch a single address by its ID
 
 
 
-
-
-| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -20261,9 +19817,7 @@ Select an address from available addresses
 
 
 
-
-
-| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `I`, `B`
+| xQuery | struct | Includes properties such as `CartID`, `I`, `B`
 
 | body |  SelectCartAddressRequest | "Request body" 
 
@@ -20302,9 +19856,7 @@ Update cart payment
 | --------- | ----  | --- |
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`
 
 | body |  UpdateCartPaymentRequest | "Request body" 
 
@@ -20353,9 +19905,7 @@ Verify the coupon eligibility against the payment mode
 
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
+| xQuery | struct | Includes properties such as `ID`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
 
 
 
@@ -22187,9 +21737,7 @@ Update the cart meta
 | --------- | ----  | --- |
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`
 
 | body |  CartMetaRequest | "Request body" 
 
