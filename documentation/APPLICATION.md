@@ -11827,14 +11827,11 @@ Success
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -11872,8 +11869,7 @@ Success
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -11964,14 +11960,11 @@ Success
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12009,8 +12002,7 @@ Success
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12098,14 +12090,11 @@ Success
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12143,8 +12132,7 @@ Success
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12456,14 +12444,11 @@ default
     "verify_mobile_link": true,
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12501,8 +12486,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12597,14 +12581,11 @@ default
     "verify_mobile_link": true,
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12642,8 +12623,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12694,14 +12674,11 @@ default
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12739,8 +12716,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12868,14 +12844,11 @@ default
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -12913,8 +12886,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -12970,14 +12942,11 @@ default
     "verify_mobile_link": true,
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13015,8 +12984,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13080,14 +13048,11 @@ default
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13125,8 +13090,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13178,14 +13142,11 @@ default
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13223,8 +13184,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13280,14 +13240,11 @@ default
     "verify_mobile_link": true,
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13325,8 +13282,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13382,14 +13338,11 @@ default
     "verify_email_link": true,
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13427,8 +13380,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13490,14 +13442,11 @@ default
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13535,8 +13484,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
@@ -13588,14 +13536,11 @@ default
   "value": {
     "user": {
       "debug": {
-        "source": "grimlock",
+        "source": "deadlock",
         "platform": "000000000000000000000001"
       },
       "gender": "male",
       "account_type": "user",
-      "roles": [
-        "Test-Role"
-      ],
       "active": true,
       "profile_pic_url": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
       "has_old_password_hash": false,
@@ -13633,8 +13578,7 @@ default
         }
       ],
       "created_at": "2020-03-11T09:28:41.982Z",
-      "updated_at": "2021-02-04T10:10:44.981Z",
-      "uid": "61"
+      "updated_at": "2021-02-04T10:10:44.981Z"
     }
   }
 }
