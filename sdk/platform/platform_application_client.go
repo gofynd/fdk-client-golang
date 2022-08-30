@@ -6089,6 +6089,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
             
         
+            
+        
 
          
 
@@ -18481,7 +18483,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // AddDomain Add new domain to application
+    // AddDomain Add new domain to current sales channel.
      func (co *PlatformAppConfiguration)  AddDomain(body  DomainAddRequest) (Domain, error) {
         var (
             rawRequest  *RawRequest
@@ -18542,7 +18544,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // RemoveDomainById Remove attached domain
+    // RemoveDomainById Remove attached domain with current sales channel.
      func (co *PlatformAppConfiguration)  RemoveDomainById(ID string) (SuccessMessageResponse, error) {
         var (
             rawRequest  *RawRequest
@@ -18590,7 +18592,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // ChangeDomainType Change domain type
+    // ChangeDomainType Change domain type for the current sales channel
      func (co *PlatformAppConfiguration)  ChangeDomainType(body  UpdateDomainTypeRequest) (DomainsResponse, error) {
         var (
             rawRequest  *RawRequest

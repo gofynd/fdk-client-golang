@@ -393,8 +393,8 @@
     * [getProductSize](#getproductsize)
     * [getProductBulkUploadHistory](#getproductbulkuploadhistory)
     * [createBulkProductUploadJob](#createbulkproductuploadjob)
-    * [deleteProductBulkJob](#deleteproductbulkjob)
     * [createProductsInBulk](#createproductsinbulk)
+    * [deleteProductBulkJob](#deleteproductbulkjob)
     * [getProductTags](#getproducttags)
     * [getProductAssetsInBulk](#getproductassetsinbulk)
     * [createProductAssetsInBulk](#createproductassetsinbulk)
@@ -406,13 +406,13 @@
     * [deleteInventory](#deleteinventory)
     * [getInventoryBulkUploadHistory](#getinventorybulkuploadhistory)
     * [createBulkInventoryJob](#createbulkinventoryjob)
-    * [deleteBulkInventoryJob](#deletebulkinventoryjob)
     * [createBulkInventory](#createbulkinventory)
+    * [deleteBulkInventoryJob](#deletebulkinventoryjob)
     * [getInventoryExport](#getinventoryexport)
     * [createInventoryExportJob](#createinventoryexportjob)
     * [exportInventoryConfig](#exportinventoryconfig)
-    * [deleteRealtimeInventory](#deleterealtimeinventory)
     * [updateRealtimeInventory](#updaterealtimeinventory)
+    * [deleteRealtimeInventory](#deleterealtimeinventory)
     * [updateInventories](#updateinventories)
     * [getAllHsnCodes](#getallhsncodes)
     * [createHsnCode](#createhsncode)
@@ -42356,7 +42356,7 @@ Success
 ```json
 {
   "value": {
-    "tnc": "TERMS AND CONDITIONS FOR RECURRING PAYMENTS ON FYND PLATFORM\n\nUpdated On: July 11, 2020\n\nWhen you purchase (“**Services**”) from Fynd Platform (“**Fynd Platform**”, “**We**” or “**Us**”), you have the option to make payments on a recurring basis (“**Recurring Payments**”) on the (“**Terms and Conditions**”) below for your monthly usage charges towards the services provided to you under the account you operate with Fynd Platform (“**Account**”). We may, at our sole discretion, refuse Recurring Payments to anyone without notice for any reason at any time. \n\n\n1. **Recurring Payments** - You are not required to make Recurring Payments, and you may cancel Recurring Payments for your Account at your discretion. We will make Recurring Payments available to you only if you have designated an eligible payment method for your Account that is current, valid and otherwise acceptable to us. Such a method is hereinafter referred to as \"Payment Method\". We reserve the right to decide the payment methods eligible for Recurring Payments and we will automatically charge your Payment Method. You are solely responsible for the accuracy of the information you provide us regarding your Payment Method. We may limit the amount that you can pay using Recurring Payments every month.\n\n2. **Enabling Recurring Payments**- You agree that Recurring Payments will be enabled automatically for your Account if you chose an eligible Payment Method. Once Recurring Payments have been enabled for your Account, you authorize us to use your Payment Method to pay for your monthly invoices automatically until you cancel Recurring Payments for your Account. In Addition, once Recurring Payments has been enabled, you authorize us to charge the fees for the Services, unless you cancel or disable Recurring Payment, by means specified by us and applicable at such time, in which case you will be required to take action and pay for the Services.\n\n3. **Verification and Authentication**- Before Recurring Payments are enabled for your Fynd Platform Account, verification and authentication of your Payment Method will be performed. Once the verification and authentication are successful, you will be registered for Recurring Payments. This verification and authentication may also be repeated if (a) there are changes to your Account or Payment Method; (b) you cancel or disable Recurring Payments; (c) one of your Recurring Payments is declined for any reason whatsoever, including without limitation, expiry of your card.\n\n4. **Third Party Payment Processors** - You agree, understand and acknowledge that Fynd Platform may engage third party payment processors or gateway service providers to process Recurring Payments. Therefore, you may be required to agree to the terms and conditions of the third party payment processors or gateway service providers as communicated to you from time to time.\n\n5. **Cancelling Recurring Payments** - You have the right to cancel Recurring Payments for your Fynd Platform Account by contacting our customer support.\n\n6. **Notifications** - You authorize us to communicate with you by email regarding Recurring Payments. You acknowledge that we may also communicate with you through our affiliates that provide Services to you.\n\n7. **Disclaimer of Liability** - You agree that we will not be liable for any losses or damages suffered by you because of your use of Recurring Payments for your Fynd Platform Account, including any fraud in connection with any payment using your Payment Method. You realize that neither Fynd Platform nor Shopsense Retail Technologies Pvt. Ltd. which fully owns and controls the Fynd Platform, will be held responsible for any damages, whether partial or full.\n\n\n8. **Agreement Changes** - We may in our discretion change these Terms and Conditions at any time. If any change is found to be invalid, void, or for any reason unenforceable, that change is severable and does not affect the validity and enforceability of any other changes or the remainder of these Terms and Conditions.\n\nYOUR CONTINUED USE OF RECURRING PAYMENTS FOR YOUR FYND PLATFORM ACCOUNT AFTER WE CHANGE THESE TERMS AND CONDITIONS CONSTITUTES YOUR ACCEPTANCE OF THESE CHANGES.",
+    "tnc": "**Terms and Conditions test**",
     "policy": "**Privacy policy test**",
     "shipping": "**Shipping term and conditions**",
     "returns": "**Terms & conditions for returns **",
@@ -56104,7 +56104,11 @@ data, err := Catalog.ListProductTemplate(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `Department`
+
+
+
+
+| xQuery | struct | Includes properties such as `Department`, `PageNo`, `PageSize`
 
 
 Allows you to list all product templates, also can filter by department
@@ -56996,25 +57000,26 @@ Schema: `BulkResponse`
 ---
 
 
-#### deleteProductBulkJob
-Delete Bulk product job.
+#### createProductsInBulk
+Create products in bulk associated with given batch Id.
 
 ```golang
 
-data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
+data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
 
 
-| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
+| BatchID | string | Batch Id in which assets to be uploaded. | 
 
 
+| body |  BulkProductRequest | "Request body" 
 
-This API allows to delete bulk product job associated with company.
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -57036,26 +57041,25 @@ Schema: `SuccessResponse`
 ---
 
 
-#### createProductsInBulk
-Create products in bulk associated with given batch Id.
+#### deleteProductBulkJob
+Delete Bulk product job.
 
 ```golang
 
-data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
+data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
 
 
-| BatchID | string | Batch Id in which assets to be uploaded. | 
+| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
 
 
-| body |  BulkProductRequest | "Request body" 
 
-This API helps to create products in bulk push to kafka for approval/creation.
+This API allows to delete bulk product job associated with company.
 
 *Success Response:*
 
@@ -57566,25 +57570,26 @@ Schema: `BulkResponse`
 ---
 
 
-#### deleteBulkInventoryJob
-Delete Bulk Inventory job.
+#### createBulkInventory
+Create products in bulk associated with given batch Id.
 
 ```golang
 
-data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
+data, err := Catalog.CreateBulkInventory(CompanyID, BatchID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
+| CompanyID | float64 | Company Id in which Inventory is to be uploaded. | 
 
 
-| BatchID | string | Batch Id of the bulk delete job. | 
+| BatchID | string | Batch Id of the bulk create job. | 
 
 
+| body |  InventoryBulkRequest | "Request body" 
 
-This API allows to delete bulk Inventory job associated with company.
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -57606,26 +57611,25 @@ Schema: `SuccessResponse`
 ---
 
 
-#### createBulkInventory
-Create products in bulk associated with given batch Id.
+#### deleteBulkInventoryJob
+Delete Bulk Inventory job.
 
 ```golang
 
-data, err := Catalog.CreateBulkInventory(CompanyID, BatchID, body);
+data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which Inventory is to be uploaded. | 
+| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
 
 
-| BatchID | string | Batch Id of the bulk create job. | 
+| BatchID | string | Batch Id of the bulk delete job. | 
 
 
-| body |  InventoryBulkRequest | "Request body" 
 
-This API helps to create products in bulk push to kafka for approval/creation.
+This API allows to delete bulk Inventory job associated with company.
 
 *Success Response:*
 
@@ -57762,12 +57766,12 @@ Schema: `InventoryConfig`
 ---
 
 
-#### deleteRealtimeInventory
+#### updateRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -57806,12 +57810,12 @@ Schema: `InventoryUpdateResponse`
 ---
 
 
-#### updateRealtimeInventory
+#### deleteRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -61389,7 +61393,7 @@ Schema: `DomainsResponse`
 
 
 #### addDomain
-Add new domain to application
+Add new domain to current sales channel.
 
 ```golang
 
@@ -61407,7 +61411,7 @@ data, err := Configuration.AddDomain(CompanyID, ApplicationID, body);
 
 | body |  DomainAddRequest | "Request body" 
 
-Add new domain to application.
+Add a new domain to current sales channel.
 
 *Success Response:*
 
@@ -61430,7 +61434,7 @@ Schema: `Domain`
 
 
 #### removeDomainById
-Remove attached domain
+Remove attached domain with current sales channel.
 
 ```golang
 
@@ -61446,11 +61450,11 @@ data, err := Configuration.RemoveDomainById(CompanyID, ApplicationID, ID);
 | ApplicationID | string | Current application id | 
 
 
-| ID | string | Domain _id | 
+| ID | string | The unique identifier of the domain | 
 
 
 
-Remove attached domain.
+Remove attached domain with current sales channel. It will disable user's access to website, shared links and other associated features to this domain.
 
 *Success Response:*
 
@@ -61473,7 +61477,7 @@ Schema: `SuccessMessageResponse`
 
 
 #### changeDomainType
-Change domain type
+Change domain type for the current sales channel
 
 ```golang
 
@@ -61491,7 +61495,7 @@ data, err := Configuration.ChangeDomainType(CompanyID, ApplicationID, body);
 
 | body |  UpdateDomainTypeRequest | "Request body" 
 
-Change a domain to Primary or Shortlink domain
+Change a domain to Primary or Shortlink domain for the current sales channel
 
 *Success Response:*
 
@@ -65394,7 +65398,7 @@ Schema: `SubscriberResponse`
 
 
 #### fetchAllEventConfigurations
-
+Get All Webhook Events
 
 ```golang
 
