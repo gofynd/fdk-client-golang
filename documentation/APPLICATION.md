@@ -87,6 +87,7 @@
     * [updateCartWithSharedItems](#updatecartwithshareditems)
     * [getPromotionOffers](#getpromotionoffers)
     * [getLadderOffers](#getladderoffers)
+    * [overrideCart](#overridecart)
     
 
 * [Common](#Common)
@@ -5063,6 +5064,42 @@ Success. Returns a object containing the applicable ladder price offers (if exis
 
 
 Schema: `LadderPriceOffers`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### overrideCart
+Create Fynd order with overriding cart details
+
+```golang
+
+ data, err :=  Cart.OverrideCart(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  OverrideCheckoutReq | "Request body" 
+
+
+Generate Fynd order while overriding cart details sent with provided `cart_items`
+
+*Success Response:*
+
+
+
+Checkout cart and create Fynd order id
+
+
+Schema: `OverrideCheckoutResponse`
 
 
 

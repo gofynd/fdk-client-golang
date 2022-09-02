@@ -4332,6 +4332,86 @@ func NewAppClient(config *AppConfig) *Client {
     }
           
     
+    
+    
+  
+    
+    
+    // OverrideCart Create Fynd order with overriding cart details
+    func (ca *Cart)  OverrideCart(body  OverrideCheckoutReq) (OverrideCheckoutResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             overrideCartResponse OverrideCheckoutResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return OverrideCheckoutResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return OverrideCheckoutResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            "/service/application/cart/v1.0/checkout/over-ride",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return OverrideCheckoutResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &overrideCartResponse)
+        if err != nil {
+            return OverrideCheckoutResponse{}, common.NewFDKError(err.Error())
+        }
+         return overrideCartResponse, nil
+        
+    }
+          
+    
 
     // Common ...
     type Common struct {
