@@ -12481,6 +12481,53 @@ func NewAppClient(config *AppConfig) *Client {
     }
           
     
+    
+    
+  
+    
+    
+    // GetCreditNoteByShipmentId Get Credit Note URL
+    func (or *Order)  GetCreditNoteByShipmentId(ShipmentID string) (ResponseGetCreditNoteShipment, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getCreditNoteByShipmentIdResponse ResponseGetCreditNoteShipment
+	    )
+
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/credit-note/",ShipmentID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ResponseGetCreditNoteShipment{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getCreditNoteByShipmentIdResponse)
+        if err != nil {
+            return ResponseGetCreditNoteShipment{}, common.NewFDKError(err.Error())
+        }
+         return getCreditNoteByShipmentIdResponse, nil
+        
+    }
+          
+    
 
     // Rewards ...
     type Rewards struct {
