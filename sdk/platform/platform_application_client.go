@@ -14604,6 +14604,79 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+  
+
+    
+    //PlatformAppGetAppInventoryXQuery holds query params
+    type PlatformAppGetAppInventoryXQuery struct { 
+        ItemIds []float64  `url:"item_ids,omitempty"` 
+        StoreIds []float64  `url:"store_ids,omitempty"` 
+        BrandIds []float64  `url:"brand_ids,omitempty"` 
+        SellerIdentifiers []string  `url:"seller_identifiers,omitempty"` 
+        Timestamp string  `url:"timestamp,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        PageID string  `url:"page_id,omitempty"`  
+    }
+    
+    // GetAppInventory Get the stock of a product
+     func (ca *PlatformAppCatalog)  GetAppInventory(xQuery PlatformAppGetAppInventoryXQuery) (InventoryStockResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAppInventoryResponse InventoryStockResponse
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/inventory/",ca.CompanyID, ca.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return InventoryStockResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAppInventoryResponse)
+        if err != nil {
+            return InventoryStockResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAppInventoryResponse, nil
+        
+    }
+           
+       
+    
+    
+    
     
     
   
