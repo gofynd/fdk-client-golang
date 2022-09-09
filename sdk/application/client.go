@@ -1706,55 +1706,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UnfollowById Unfollow an entity (product/brand/collection)
-    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             unfollowByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &unfollowByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return unfollowByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // FollowById Follow an entity (product/brand/collection)
     func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1795,6 +1746,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return followByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UnfollowById Unfollow an entity (product/brand/collection)
+    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             unfollowByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &unfollowByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return unfollowByIdResponse, nil
         
     }
           
@@ -2829,6 +2829,60 @@ func NewAppClient(config *AppConfig) *Client {
             return UpdateCartDetailResponse{}, common.NewFDKError(err.Error())
         }
          return updateCartResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //CartDeleteCartXQuery holds query params
+    type CartDeleteCartXQuery struct { 
+        ID float64  `url:"id,omitempty"`  
+    }
+    
+    // DeleteCart Delete cart once user made successful checkout
+    func (ca *Cart)  DeleteCart(xQuery CartDeleteCartXQuery) (DeleteCartDetailResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             deleteCartResponse DeleteCartDetailResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "put",
+            "/service/application/cart/v1.0/cart_archive",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DeleteCartDetailResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteCartResponse)
+        if err != nil {
+            return DeleteCartDetailResponse{}, common.NewFDKError(err.Error())
+        }
+         return deleteCartResponse, nil
         
     }
           
@@ -3940,6 +3994,8 @@ func NewAppClient(config *AppConfig) *Client {
              checkoutCartResponse CartCheckoutResponse
 	    )
 
+        
+            
         
             
         
@@ -11638,590 +11694,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    //PaymentGetPaymentLinkXQuery holds query params
-    type PaymentGetPaymentLinkXQuery struct { 
-        PaymentLinkID string  `url:"payment_link_id,omitempty"`  
-    }
-    
-    // GetPaymentLink Get payment link
-    func (pa *Payment)  GetPaymentLink(xQuery PaymentGetPaymentLinkXQuery) (GetPaymentLinkResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getPaymentLinkResponse GetPaymentLinkResponse
-	    )
-
-        
-
-        
-            
-                
-            
-        
-
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "get",
-            "/service/application/payment/v1.0/create-payment-link/",
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetPaymentLinkResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getPaymentLinkResponse)
-        if err != nil {
-            return GetPaymentLinkResponse{}, common.NewFDKError(err.Error())
-        }
-         return getPaymentLinkResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // CreatePaymentLink Create payment link
-    func (pa *Payment)  CreatePaymentLink(body  CreatePaymentLinkRequest) (CreatePaymentLinkResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             createPaymentLinkResponse CreatePaymentLinkResponse
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-        
-
-        
-    
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return CreatePaymentLinkResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return CreatePaymentLinkResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "post",
-            "/service/application/payment/v1.0/create-payment-link/",
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return CreatePaymentLinkResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &createPaymentLinkResponse)
-        if err != nil {
-            return CreatePaymentLinkResponse{}, common.NewFDKError(err.Error())
-        }
-         return createPaymentLinkResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // ResendPaymentLink Resend payment link
-    func (pa *Payment)  ResendPaymentLink(body  CancelOrResendPaymentLinkRequest) (ResendPaymentLinkResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             resendPaymentLinkResponse ResendPaymentLinkResponse
-	    )
-
-        
-            
-        
-
-        
-
-        
-    
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return ResendPaymentLinkResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return ResendPaymentLinkResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "post",
-            "/service/application/payment/v1.0/resend-payment-link/",
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ResendPaymentLinkResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &resendPaymentLinkResponse)
-        if err != nil {
-            return ResendPaymentLinkResponse{}, common.NewFDKError(err.Error())
-        }
-         return resendPaymentLinkResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // CancelPaymentLink Cancel payment link
-    func (pa *Payment)  CancelPaymentLink(body  CancelOrResendPaymentLinkRequest) (CancelPaymentLinkResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             cancelPaymentLinkResponse CancelPaymentLinkResponse
-	    )
-
-        
-            
-        
-
-        
-
-        
-    
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return CancelPaymentLinkResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return CancelPaymentLinkResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "post",
-            "/service/application/payment/v1.0/cancel-payment-link/",
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return CancelPaymentLinkResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &cancelPaymentLinkResponse)
-        if err != nil {
-            return CancelPaymentLinkResponse{}, common.NewFDKError(err.Error())
-        }
-         return cancelPaymentLinkResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    //PaymentGetPaymentModeRoutesPaymentLinkXQuery holds query params
-    type PaymentGetPaymentModeRoutesPaymentLinkXQuery struct { 
-        PaymentLinkID string  `url:"payment_link_id,omitempty"`  
-    }
-    
-    // GetPaymentModeRoutesPaymentLink Get applicable payment options for payment link
-    func (pa *Payment)  GetPaymentModeRoutesPaymentLink(xQuery PaymentGetPaymentModeRoutesPaymentLinkXQuery) (PaymentModeRouteResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getPaymentModeRoutesPaymentLinkResponse PaymentModeRouteResponse
-	    )
-
-        
-
-        
-            
-                
-            
-        
-
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "get",
-            fmt.Sprintf("/service/application/payment/v1.0/payment/options/link/",),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return PaymentModeRouteResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getPaymentModeRoutesPaymentLinkResponse)
-        if err != nil {
-            return PaymentModeRouteResponse{}, common.NewFDKError(err.Error())
-        }
-         return getPaymentModeRoutesPaymentLinkResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    //PaymentPollingPaymentLinkXQuery holds query params
-    type PaymentPollingPaymentLinkXQuery struct { 
-        PaymentLinkID string  `url:"payment_link_id,omitempty"`  
-    }
-    
-    // PollingPaymentLink Used for polling if payment successful or not
-    func (pa *Payment)  PollingPaymentLink(xQuery PaymentPollingPaymentLinkXQuery) (PollingPaymentLinkResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             pollingPaymentLinkResponse PollingPaymentLinkResponse
-	    )
-
-        
-
-        
-            
-                
-            
-        
-
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "get",
-            "/service/application/payment/v1.0/polling-payment-link/",
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return PollingPaymentLinkResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &pollingPaymentLinkResponse)
-        if err != nil {
-            return PollingPaymentLinkResponse{}, common.NewFDKError(err.Error())
-        }
-         return pollingPaymentLinkResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // CreateOrderHandlerPaymentLink Create Order user
-    func (pa *Payment)  CreateOrderHandlerPaymentLink(body  CreateOrderUserRequest) (CreateOrderUserResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             createOrderHandlerPaymentLinkResponse CreateOrderUserResponse
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-        
-
-        
-    
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return CreateOrderUserResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return CreateOrderUserResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "post",
-            "/service/application/payment/v1.0/create-order/link/",
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return CreateOrderUserResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &createOrderHandlerPaymentLinkResponse)
-        if err != nil {
-            return CreateOrderUserResponse{}, common.NewFDKError(err.Error())
-        }
-         return createOrderHandlerPaymentLinkResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // InitialisePaymentPaymentLink Initialize a payment (server-to-server) for UPI and BharatQR
-    func (pa *Payment)  InitialisePaymentPaymentLink(body  PaymentInitializationRequest) (PaymentInitializationResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             initialisePaymentPaymentLinkResponse PaymentInitializationResponse
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-        
-
-        
-    
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return PaymentInitializationResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return PaymentInitializationResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "post",
-            "/service/application/payment/v1.0/payment/request/link/",
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return PaymentInitializationResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &initialisePaymentPaymentLinkResponse)
-        if err != nil {
-            return PaymentInitializationResponse{}, common.NewFDKError(err.Error())
-        }
-         return initialisePaymentPaymentLinkResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // CheckAndUpdatePaymentStatusPaymentLink Performs continuous polling to check status of payment on the server
-    func (pa *Payment)  CheckAndUpdatePaymentStatusPaymentLink(body  PaymentStatusUpdateRequest) (PaymentStatusUpdateResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             checkAndUpdatePaymentStatusPaymentLinkResponse PaymentStatusUpdateResponse
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-        
-
-        
-    
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return PaymentStatusUpdateResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return PaymentStatusUpdateResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "post",
-            "/service/application/payment/v1.0/payment/confirm/polling/link/",
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return PaymentStatusUpdateResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &checkAndUpdatePaymentStatusPaymentLinkResponse)
-        if err != nil {
-            return PaymentStatusUpdateResponse{}, common.NewFDKError(err.Error())
-        }
-         return checkAndUpdatePaymentStatusPaymentLinkResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     //PaymentCustomerCreditSummaryXQuery holds query params
     type PaymentCustomerCreditSummaryXQuery struct { 
         Aggregator string  `url:"aggregator,omitempty"`  
@@ -12396,6 +11868,8 @@ func NewAppClient(config *AppConfig) *Client {
              customerOnboardResponse CustomerOnboardingResponse
 	    )
 
+        
+            
         
             
         
@@ -14831,6 +14305,8 @@ func NewAppClient(config *AppConfig) *Client {
              checkoutCartResponse CartCheckoutResponse
 	    )
 
+        
+            
         
             
         
