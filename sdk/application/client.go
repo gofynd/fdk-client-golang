@@ -4668,6 +4668,8 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
 
         
 
@@ -6183,6 +6185,74 @@ func NewAppClient(config *AppConfig) *Client {
             return VerifyEmailSuccess{}, common.NewFDKError(err.Error())
         }
          return updatePasswordResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // ArchiveUser verify otp and archive user
+    func (us *User)  ArchiveUser(body  ArchiveApplicationUserRequestSchema) (ArchiveUserSuccess, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             archiveUserResponse ArchiveUserSuccess
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return ArchiveUserSuccess{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return ArchiveUserSuccess{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "post",
+            "/service/application/user/authentication/v1.0/archive",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ArchiveUserSuccess{}, err
+	    }
+        
+        err = json.Unmarshal(response, &archiveUserResponse)
+        if err != nil {
+            return ArchiveUserSuccess{}, common.NewFDKError(err.Error())
+        }
+         return archiveUserResponse, nil
         
     }
           
