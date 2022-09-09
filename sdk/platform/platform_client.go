@@ -41,6 +41,8 @@ type PlatformClient struct {
 	
 		AuditTrail  *PlatformAuditTrail
 	
+		OrderManage  *PlatformOrderManage
+	
 	ApplicationClient *ApplicationClient //ApplicationClient embedded
 }
 
@@ -78,6 +80,8 @@ func NewPlatformClient(config *PlatformConfig) *PlatformClient {
 				Webhook:  NewPlatformWebhook(config),
 			
 				AuditTrail:  NewPlatformAuditTrail(config),
+			
+				OrderManage:  NewPlatformOrderManage(config),
 			
 			ApplicationClient: &ApplicationClient{},
 		}
@@ -14038,6 +14042,212 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return EntityTypesResponse{}, common.NewFDKError(err.Error())
         }
         return getEntityTypesResponse, nil
+        
+    }
+         
+        
+       
+    
+
+
+	
+   // PlatformOrderManage holds PlatformOrderManage object properties
+    type PlatformOrderManage struct {
+        Config *PlatformConfig
+        CompanyID string
+    }
+    // NewPlatformOrderManage returns new PlatformOrderManage instance
+    func NewPlatformOrderManage(config *PlatformConfig) *PlatformOrderManage {
+        return &PlatformOrderManage{Config: config, CompanyID: config.CompanyID}
+    }
+    
+    
+   
+  
+    
+    
+
+
+    // StatusInternalUpdate 
+     func (or *PlatformOrderManage)  StatusInternalUpdate(body  PlatformShipmentStatusInternal) (ResponseDetail, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            statusInternalUpdateResponse ResponseDetail
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return ResponseDetail{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return ResponseDetail{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "post",
+            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/shipment/status-internal",or.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ResponseDetail{}, err
+	    }
+        
+        err = json.Unmarshal(response, &statusInternalUpdateResponse)
+        if err != nil {
+             return ResponseDetail{}, common.NewFDKError(err.Error())
+        }
+        return statusInternalUpdateResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetShipmentHistoryXQuery holds query params
+    type PlatformGetShipmentHistoryXQuery struct { 
+        BagID float64  `url:"bag_id,omitempty"`  
+    }
+    
+
+
+    // GetShipmentHistory 
+     func (or *PlatformOrderManage)  GetShipmentHistory(xQuery PlatformGetShipmentHistoryXQuery) (ShipmentHistoryResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getShipmentHistoryResponse ShipmentHistoryResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "get",
+            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/shipment/history",or.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ShipmentHistoryResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getShipmentHistoryResponse)
+        if err != nil {
+             return ShipmentHistoryResponse{}, common.NewFDKError(err.Error())
+        }
+        return getShipmentHistoryResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // OrderUpdate 
+     func (or *PlatformOrderManage)  OrderUpdate(body  PlatformOrderUpdate) (ResponseDetail, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            orderUpdateResponse ResponseDetail
+	    )
+
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return ResponseDetail{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return ResponseDetail{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "put",
+            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/order/validation",or.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ResponseDetail{}, err
+	    }
+        
+        err = json.Unmarshal(response, &orderUpdateResponse)
+        if err != nil {
+             return ResponseDetail{}, common.NewFDKError(err.Error())
+        }
+        return orderUpdateResponse, nil
         
     }
          

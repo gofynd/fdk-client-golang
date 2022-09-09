@@ -23,6 +23,7 @@
 * [Partner](#Partner) - Partner configuration apis 
 * [Webhook](#Webhook) - Webhook dispatcher with retry and one event to many subscriber vice versa 
 * [AuditTrail](#AuditTrail) -  
+* [OrderManage](#OrderManage) - Update Status all platform shipment api(s) 
 
 ----
 ----
@@ -595,6 +596,13 @@
     * [createAuditLog](#createauditlog)
     * [getAuditLog](#getauditlog)
     * [getEntityTypes](#getentitytypes)
+    
+
+* [OrderManage](#OrderManage)
+  * Methods
+    * [statusInternalUpdate](#statusinternalupdate)
+    * [getShipmentHistory](#getshipmenthistory)
+    * [orderUpdate](#orderupdate)
     
 
 
@@ -64712,6 +64720,129 @@ default
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+---
+
+
+
+---
+
+
+## OrderManage
+
+
+#### statusInternalUpdate
+
+
+```golang
+
+data, err := OrderManage.StatusInternalUpdate(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  PlatformShipmentStatusInternal | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+We are processing the report!
+
+
+Schema: `ResponseDetail`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentHistory
+
+
+```golang
+
+data, err := OrderManage.GetShipmentHistory(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+| xQuery | struct | Includes properties such as `BagID`
+
+
+
+
+*Success Response:*
+
+
+
+It shows the journey of the shipment!
+
+
+Schema: `ShipmentHistoryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### orderUpdate
+
+
+```golang
+
+data, err := OrderManage.OrderUpdate(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  PlatformOrderUpdate | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+We are processing the order!
+
+
+Schema: `ResponseDetail`
 
 
 
