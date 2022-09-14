@@ -61471,7 +61471,7 @@ data, err := Configuration.GetOrderingStoresByFilter(CompanyID, ApplicationID, x
 
 | body |  FilterOrderingStoreRequest | "Request body" 
 
-Get ordering store by filter
+Get ordering store from all stores by filter
 
 *Success Response:*
 
