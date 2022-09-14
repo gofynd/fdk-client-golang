@@ -14685,13 +14685,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetPincodeView Get Pincode API
-    func (lo *Logistic)  GetPincodeView(Pincode string, XApplicationID string) (PincodeApiResponse, error){
+    // GetPincodeCity Get Pincode API
+    func (lo *Logistic)  GetPincodeCity(Pincode string, XApplicationID string) (PincodeApiResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getPincodeViewResponse PincodeApiResponse
+             getPincodeCityResponse PincodeApiResponse
 	    )
 
         
@@ -14724,11 +14724,11 @@ func NewAppClient(config *AppConfig) *Client {
             return PincodeApiResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getPincodeViewResponse)
+        err = json.Unmarshal(response, &getPincodeCityResponse)
         if err != nil {
             return PincodeApiResponse{}, common.NewFDKError(err.Error())
         }
-         return getPincodeViewResponse, nil
+         return getPincodeCityResponse, nil
         
     }
           
@@ -14738,13 +14738,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetTATView Get TAT API
-    func (lo *Logistic)  GetTATView(XApplicationID string, body  TATViewRequest) (TATViewResponse, error){
+    // GetTatProduct Get TAT API
+    func (lo *Logistic)  GetTatProduct(XApplicationID string, body  TATViewRequest) (TATViewResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getTATViewResponse TATViewResponse
+             getTatProductResponse TATViewResponse
 	    )
 
         
@@ -14800,11 +14800,11 @@ func NewAppClient(config *AppConfig) *Client {
             return TATViewResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getTATViewResponse)
+        err = json.Unmarshal(response, &getTatProductResponse)
         if err != nil {
             return TATViewResponse{}, common.NewFDKError(err.Error())
         }
-         return getTATViewResponse, nil
+         return getTatProductResponse, nil
         
     }
           

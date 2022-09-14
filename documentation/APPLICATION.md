@@ -311,8 +311,8 @@
 
 * [Logistic](#Logistic)
   * Methods
-    * [getPincodeView](#getpincodeview)
-    * [getTATView](#gettatview)
+    * [getPincodeCity](#getpincodecity)
+    * [getTatProduct](#gettatproduct)
     
 
 
@@ -22269,12 +22269,12 @@ Cart Merged/Replaced
 ## Logistic
 
 
-#### getPincodeView
+#### getPincodeCity
 Get Pincode API
 
 ```golang
 
- data, err :=  Logistic.GetPincodeView(Pincode, XApplicationID);
+ data, err :=  Logistic.GetPincodeCity(Pincode, XApplicationID);
 ```
 
 | Argument  |  Type  | Description |
@@ -22394,12 +22394,12 @@ Pincode not found
 ---
 
 
-#### getTATView
+#### getTatProduct
 Get TAT API
 
 ```golang
 
- data, err :=  Logistic.GetTATView(XApplicationID, body);
+ data, err :=  Logistic.GetTatProduct(XApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
