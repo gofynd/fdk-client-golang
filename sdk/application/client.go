@@ -4639,6 +4639,8 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
 
         
 
@@ -6154,74 +6156,6 @@ func NewAppClient(config *AppConfig) *Client {
             return VerifyEmailSuccess{}, common.NewFDKError(err.Error())
         }
          return updatePasswordResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // ArchiveUser verify otp and archive user
-    func (us *User)  ArchiveUser(body  ArchiveApplicationUserRequestSchema) (ArchiveUserSuccess, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             archiveUserResponse ArchiveUserSuccess
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-        
-
-        
-    
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return ArchiveUserSuccess{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return ArchiveUserSuccess{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            us.config,
-            "post",
-            "/service/application/user/authentication/v1.0/archive",
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ArchiveUserSuccess{}, err
-	    }
-        
-        err = json.Unmarshal(response, &archiveUserResponse)
-        if err != nil {
-            return ArchiveUserSuccess{}, common.NewFDKError(err.Error())
-        }
-         return archiveUserResponse, nil
         
     }
           
@@ -14751,149 +14685,29 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetTatProduct Get TAT of a product
-    func (lo *Logistic)  GetTatProduct(body  GetTatProductReqBody) (GetTatProductResponse, error){
+    // GetPincodeView Get Pincode API
+    func (lo *Logistic)  GetPincodeView(Pincode string, XApplicationID string) (PincodeApiResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getTatProductResponse GetTatProductResponse
+             getPincodeViewResponse PincodeApiResponse
 	    )
 
         
-            
-        
-            
-        
-            
-        
 
         
 
+        
+        
         
     
+        
+        //Adding extra headers
+        var xHeaders = make(map[string]string) 
+        
          
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return GetTatProductResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return GetTatProductResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            lo.config,
-            "post",
-            "/service/application/logistics/v1.0",
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetTatProductResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getTatProductResponse)
-        if err != nil {
-            return GetTatProductResponse{}, common.NewFDKError(err.Error())
-        }
-         return getTatProductResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // GetPincodeZones Get Pincode Zones
-    func (lo *Logistic)  GetPincodeZones(body  GetPincodeZonesReqBody) (GetPincodeZonesResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getPincodeZonesResponse GetPincodeZonesResponse
-	    )
-
-        
-            
-        
-            
-        
-
-        
-
-        
-    
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return GetPincodeZonesResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return GetPincodeZonesResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            lo.config,
-            "post",
-            "/service/application/logistics/v1.0/pincode/zones",
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetPincodeZonesResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getPincodeZonesResponse)
-        if err != nil {
-            return GetPincodeZonesResponse{}, common.NewFDKError(err.Error())
-        }
-         return getPincodeZonesResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // GetPincodeCity Get city from PIN Code
-    func (lo *Logistic)  GetPincodeCity(Pincode string) (GetPincodeCityResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getPincodeCityResponse GetPincodeCityResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-    
+         xHeaders["x-application-id"] =  XApplicationID
          
         
         
@@ -14902,19 +14716,95 @@ func NewAppClient(config *AppConfig) *Client {
             lo.config,
             "get",
             fmt.Sprintf("/service/application/logistics/v1.0/pincode/%s",Pincode),
-            nil,
+            xHeaders,
             nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return GetPincodeCityResponse{}, err
+            return PincodeApiResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getPincodeCityResponse)
+        err = json.Unmarshal(response, &getPincodeViewResponse)
         if err != nil {
-            return GetPincodeCityResponse{}, common.NewFDKError(err.Error())
+            return PincodeApiResponse{}, common.NewFDKError(err.Error())
         }
-         return getPincodeCityResponse, nil
+         return getPincodeViewResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetTATView Get TAT API
+    func (lo *Logistic)  GetTATView(XApplicationID string, body  TATViewRequest) (TATViewResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getTATViewResponse TATViewResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+        
+        //Adding extra headers
+        var xHeaders = make(map[string]string) 
+        
+         
+         xHeaders["x-application-id"] =  XApplicationID
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return TATViewResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return TATViewResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.config,
+            "post",
+            "/service/application/logistics/v1.0/",
+            xHeaders,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return TATViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getTATViewResponse)
+        if err != nil {
+            return TATViewResponse{}, common.NewFDKError(err.Error())
+        }
+         return getTATViewResponse, nil
         
     }
           
