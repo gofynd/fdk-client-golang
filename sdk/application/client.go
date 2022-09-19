@@ -1706,55 +1706,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UnfollowById Unfollow an entity (product/brand/collection)
-    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             unfollowByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &unfollowByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return unfollowByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // FollowById Follow an entity (product/brand/collection)
     func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1795,6 +1746,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return followByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UnfollowById Unfollow an entity (product/brand/collection)
+    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             unfollowByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &unfollowByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return unfollowByIdResponse, nil
         
     }
           
@@ -6156,6 +6156,74 @@ func NewAppClient(config *AppConfig) *Client {
             return VerifyEmailSuccess{}, common.NewFDKError(err.Error())
         }
          return updatePasswordResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // DeleteUser verify otp and delete user
+    func (us *User)  DeleteUser(body  DeleteApplicationUserRequestSchema) (DeleteUserSuccess, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             deleteUserResponse DeleteUserSuccess
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return DeleteUserSuccess{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return DeleteUserSuccess{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "post",
+            "/service/application/user/authentication/v1.0/delete",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DeleteUserSuccess{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteUserResponse)
+        if err != nil {
+            return DeleteUserSuccess{}, common.NewFDKError(err.Error())
+        }
+         return deleteUserResponse, nil
         
     }
           
@@ -14686,7 +14754,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // GetPincodeCity Get Pincode API
-    func (lo *Logistic)  GetPincodeCity(Pincode string, XApplicationID string) (PincodeApiResponse, error){
+    func (lo *Logistic)  GetPincodeCity(Pincode string) (PincodeApiResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -14702,12 +14770,6 @@ func NewAppClient(config *AppConfig) *Client {
         
         
     
-        
-        //Adding extra headers
-        var xHeaders = make(map[string]string) 
-        
-         
-         xHeaders["x-application-id"] =  XApplicationID
          
         
         
@@ -14716,7 +14778,7 @@ func NewAppClient(config *AppConfig) *Client {
             lo.config,
             "get",
             fmt.Sprintf("/service/application/logistics/v1.0/pincode/%s",Pincode),
-            xHeaders,
+            nil,
             nil,
             nil)
         response, err = rawRequest.Execute()
@@ -14739,7 +14801,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // GetTatProduct Get TAT API
-    func (lo *Logistic)  GetTatProduct(XApplicationID string, body  TATViewRequest) (TATViewResponse, error){
+    func (lo *Logistic)  GetTatProduct(body  TATViewRequest) (TATViewResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -14765,12 +14827,6 @@ func NewAppClient(config *AppConfig) *Client {
 
         
     
-        
-        //Adding extra headers
-        var xHeaders = make(map[string]string) 
-        
-         
-         xHeaders["x-application-id"] =  XApplicationID
          
         
         
@@ -14792,7 +14848,7 @@ func NewAppClient(config *AppConfig) *Client {
             lo.config,
             "post",
             "/service/application/logistics/v1.0/",
-            xHeaders,
+            nil,
             nil,
             reqBody)
         response, err = rawRequest.Execute()
@@ -14805,6 +14861,68 @@ func NewAppClient(config *AppConfig) *Client {
             return TATViewResponse{}, common.NewFDKError(err.Error())
         }
          return getTatProductResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetPincodeZones GET zone from the Pincode.
+    func (lo *Logistic)  GetPincodeZones(body  GetZoneFromPincodeViewRequest) (GetZoneFromPincodeViewResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getPincodeZonesResponse GetZoneFromPincodeViewResponse
+	    )
+
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.config,
+            "post",
+            "/service/application/logistics/v1.0/pincode/zones",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetZoneFromPincodeViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPincodeZonesResponse)
+        if err != nil {
+            return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
+        }
+         return getPincodeZonesResponse, nil
         
     }
           

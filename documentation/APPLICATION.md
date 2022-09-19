@@ -16,7 +16,7 @@
 * [Order](#Order) - Handles Platform websites OMS 
 * [Rewards](#Rewards) - Earn and redeem reward points 
 * [PosCart](#PosCart) - Cart APIs 
-* [Logistic](#Logistic) - Open API Documentation for opex-logistics domain 
+* [Logistic](#Logistic) - Logistics Promise Engine API's allows you to configure zone, pincode, TAT, logistics and many more useful features.  
 
 ----
 ----
@@ -47,8 +47,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [unfollowById](#unfollowbyid)
     * [followById](#followbyid)
+    * [unfollowById](#unfollowbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -132,6 +132,7 @@
     * [verifyMobile](#verifymobile)
     * [hasPassword](#haspassword)
     * [updatePassword](#updatepassword)
+    * [deleteUser](#deleteuser)
     * [logout](#logout)
     * [sendOTPOnMobile](#sendotponmobile)
     * [verifyMobileOTP](#verifymobileotp)
@@ -313,6 +314,7 @@
   * Methods
     * [getPincodeCity](#getpincodecity)
     * [getTatProduct](#gettatproduct)
+    * [getPincodeZones](#getpincodezones)
     
 
 
@@ -1179,12 +1181,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1198,7 +1200,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1220,12 +1222,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1239,7 +1241,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -12244,6 +12246,42 @@ Schema: `VerifyEmailSuccess`
 ---
 
 
+#### deleteUser
+verify otp and delete user
+
+```golang
+
+ data, err :=  User.DeleteUser(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  DeleteApplicationUserRequestSchema | "Request body" 
+
+
+verify otp and delete user
+
+*Success Response:*
+
+
+
+Success. Returns a success message. Refer `DeleteUserSuccess` for more details.
+
+
+Schema: `DeleteUserSuccess`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### logout
 Logs out currently logged in user
 
@@ -22274,16 +22312,13 @@ Get Pincode API
 
 ```golang
 
- data, err :=  Logistic.GetPincodeCity(Pincode, XApplicationID);
+ data, err :=  Logistic.GetPincodeCity(Pincode);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
 | Pincode | string | A `pincode` contains a specific address of a location. | 
-
-
-| XApplicationID | string | Application id is neccessary for app authorizations & retrieving config of application | 
 
 
 
@@ -22399,14 +22434,11 @@ Get TAT API
 
 ```golang
 
- data, err :=  Logistic.GetTatProduct(XApplicationID, body);
+ data, err :=  Logistic.GetTatProduct(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
-
-| XApplicationID | string | Application id is neccessary for app authorizations & retrieving config of application | 
-
 
 | body |  TATViewRequest | "Request body" 
 
@@ -22528,6 +22560,42 @@ Pincode not found
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPincodeZones
+GET zone from the Pincode.
+
+```golang
+
+ data, err :=  Logistic.GetPincodeZones(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  GetZoneFromPincodeViewRequest | "Request body" 
+
+
+This API returns zone from the Pincode View.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `GetZoneFromPincodeViewResponse`
 
 
 
