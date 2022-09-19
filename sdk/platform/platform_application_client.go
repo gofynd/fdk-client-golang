@@ -3532,13 +3532,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UnArchiveUser unarchive user who archived from application and have not elapsed the platform configured archive days
-     func (us *PlatformAppUser)  UnArchiveUser(body  UnArchiveUserRequestSchema) (UnArchiveUserSuccess, error) {
+    // UnDeleteUser undelete user who deleted from application and have not elapsed the platform configured delete days
+     func (us *PlatformAppUser)  UnDeleteUser(body  UnDeleteUserRequestSchema) (UnDeleteUserSuccess, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            unArchiveUserResponse UnArchiveUserSuccess
+            unDeleteUserResponse UnDeleteUserSuccess
 	    )
 
         
@@ -3561,32 +3561,32 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
             
-             return UnArchiveUserSuccess{}, common.NewFDKError(err.Error())
+             return UnDeleteUserSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
             
-             return UnArchiveUserSuccess{}, common.NewFDKError(err.Error())       
+             return UnDeleteUserSuccess{}, common.NewFDKError(err.Error())       
         }
         
         //API call
         rawRequest = NewRequest(
             us.config,
             "put",
-            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/customers/unarchive",us.CompanyID, us.ApplicationID),
+            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/customers/undelete",us.CompanyID, us.ApplicationID),
             nil,
             nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return UnArchiveUserSuccess{}, err
+            return UnDeleteUserSuccess{}, err
 	    }
         
-        err = json.Unmarshal(response, &unArchiveUserResponse)
+        err = json.Unmarshal(response, &unDeleteUserResponse)
         if err != nil {
-            return UnArchiveUserSuccess{}, common.NewFDKError(err.Error())
+            return UnDeleteUserSuccess{}, common.NewFDKError(err.Error())
         }
-        return unArchiveUserResponse, nil
+        return unDeleteUserResponse, nil
         
     }
            
@@ -11657,25 +11657,73 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // AddBeneficiaryDetails Save bank details for cancelled/returned order
-     func (pa *PlatformAppPayment)  AddBeneficiaryDetails(body  AddBeneficiaryDetailsRequest) (RefundAccountResponse, error) {
+    //PlatformAppGetBankAccountDetailsOpenAPIXQuery holds query params
+    type PlatformAppGetBankAccountDetailsOpenAPIXQuery struct { 
+        OrderID string  `url:"order_id,omitempty"` 
+        RequestHash string  `url:"request_hash,omitempty"`  
+    }
+    
+    // GetBankAccountDetailsOpenAPI Get bank details
+     func (pa *PlatformAppPayment)  GetBankAccountDetailsOpenAPI(xQuery PlatformAppGetBankAccountDetailsOpenAPIXQuery) (RefundAccountResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            addBeneficiaryDetailsResponse RefundAccountResponse
+            getBankAccountDetailsOpenAPIResponse RefundAccountResponse
 	    )
 
         
+
+         
+            
+                
+            
+                
             
         
-            
+
         
-            
         
-            
+         
         
-            
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/refund/account",pa.CompanyID, pa.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return RefundAccountResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getBankAccountDetailsOpenAPIResponse)
+        if err != nil {
+            return RefundAccountResponse{}, common.NewFDKError(err.Error())
+        }
+        return getBankAccountDetailsOpenAPIResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // AddRefundBankAccountUsingOTP Save bank details for cancelled/returned order
+     func (pa *PlatformAppPayment)  AddRefundBankAccountUsingOTP(body  AddBeneficiaryDetailsOTPRequest) (RefundAccountResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            addRefundBankAccountUsingOTPResponse RefundAccountResponse
+	    )
+
         
             
         
@@ -11715,11 +11763,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return RefundAccountResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &addBeneficiaryDetailsResponse)
+        err = json.Unmarshal(response, &addRefundBankAccountUsingOTPResponse)
         if err != nil {
             return RefundAccountResponse{}, common.NewFDKError(err.Error())
         }
-        return addBeneficiaryDetailsResponse, nil
+        return addRefundBankAccountUsingOTPResponse, nil
         
     }
            
@@ -12544,54 +12592,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteSearchKeywords Delete a Search Keywords
-     func (ca *PlatformAppCatalog)  DeleteSearchKeywords(ID string) (DeleteResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteSearchKeywordsResponse DeleteResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return DeleteResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteSearchKeywordsResponse)
-        if err != nil {
-            return DeleteResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteSearchKeywordsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // GetSearchKeywords Get a Search Keywords Details
      func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
         var (
@@ -12630,6 +12630,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
         }
         return getSearchKeywordsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteSearchKeywords Delete a Search Keywords
+     func (ca *PlatformAppCatalog)  DeleteSearchKeywords(ID string) (DeleteResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteSearchKeywordsResponse DeleteResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DeleteResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteSearchKeywordsResponse)
+        if err != nil {
+            return DeleteResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteSearchKeywordsResponse, nil
         
     }
            
@@ -12826,54 +12874,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteAutocompleteKeyword Delete a Autocomplete Keywords
-     func (ca *PlatformAppCatalog)  DeleteAutocompleteKeyword(ID string) (DeleteResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteAutocompleteKeywordResponse DeleteResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return DeleteResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteAutocompleteKeywordResponse)
-        if err != nil {
-            return DeleteResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteAutocompleteKeywordResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
      func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
         var (
@@ -12912,6 +12912,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
         }
         return getAutocompleteKeywordDetailResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteAutocompleteKeyword Delete a Autocomplete Keywords
+     func (ca *PlatformAppCatalog)  DeleteAutocompleteKeyword(ID string) (DeleteResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteAutocompleteKeywordResponse DeleteResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DeleteResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteAutocompleteKeywordResponse)
+        if err != nil {
+            return DeleteResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteAutocompleteKeywordResponse, nil
         
     }
            

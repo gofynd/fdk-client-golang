@@ -125,6 +125,7 @@
     * [loginWithOTP](#loginwithotp)
     * [loginWithEmailAndPassword](#loginwithemailandpassword)
     * [sendResetPasswordEmail](#sendresetpasswordemail)
+    * [sendResetPasswordMobile](#sendresetpasswordmobile)
     * [forgotPassword](#forgotpassword)
     * [sendResetToken](#sendresettoken)
     * [loginWithToken](#loginwithtoken)
@@ -133,7 +134,7 @@
     * [verifyMobile](#verifymobile)
     * [hasPassword](#haspassword)
     * [updatePassword](#updatepassword)
-    * [archiveUser](#archiveuser)
+    * [deleteUser](#deleteuser)
     * [logout](#logout)
     * [sendOTPOnMobile](#sendotponmobile)
     * [verifyMobileOTP](#verifymobileotp)
@@ -11926,6 +11927,45 @@ Schema: `ResetPasswordSuccess`
 ---
 
 
+#### sendResetPasswordMobile
+Reset Password
+
+```golang
+
+ data, err :=  User.SendResetPasswordMobile(xQuery, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Platform`
+
+| body |  SendResetPasswordMobileRequestSchema | "Request body" 
+
+
+Use this API to reset a password using the link sent on mobile.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ResetPasswordSuccess` for more details.
+
+
+Schema: `ResetPasswordSuccess`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### forgotPassword
 Forgot Password
 
@@ -12332,30 +12372,30 @@ Schema: `VerifyEmailSuccess`
 ---
 
 
-#### archiveUser
-verify otp and archive user
+#### deleteUser
+verify otp and delete user
 
 ```golang
 
- data, err :=  User.ArchiveUser(body);
+ data, err :=  User.DeleteUser(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  ArchiveApplicationUserRequestSchema | "Request body" 
+| body |  DeleteApplicationUserRequestSchema | "Request body" 
 
 
-verify otp and archive user
+verify otp and delete user
 
 *Success Response:*
 
 
 
-Success. Returns a success message. Refer `ArchiveUserSuccess` for more details.
+Success. Returns a success message. Refer `DeleteUserSuccess` for more details.
 
 
-Schema: `ArchiveUserSuccess`
+Schema: `DeleteUserSuccess`
 
 
 
@@ -17278,11 +17318,17 @@ Save bank details for cancelled/returned order
 
 ```golang
 
- data, err :=  Payment.AddRefundBankAccountUsingOTP(body);
+ data, err :=  Payment.AddRefundBankAccountUsingOTP(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| ApplicationID | string | Application id | 
+
 
 | body |  AddBeneficiaryDetailsOTPRequest | "Request body" 
 
@@ -17293,7 +17339,7 @@ Use this API to save bank details for returned/cancelled order to refund amount 
 
 
 
-Success. Shows whether the beneficiary details were saved to a returned/cancelled order or not.
+Success
 
 
 Schema: `RefundAccountResponse`

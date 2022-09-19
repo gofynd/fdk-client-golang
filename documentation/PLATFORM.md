@@ -113,7 +113,7 @@
     * [createUser](#createuser)
     * [blockOrUnblockUsers](#blockorunblockusers)
     * [archiveUser](#archiveuser)
-    * [unArchiveUser](#unarchiveuser)
+    * [unDeleteUser](#undeleteuser)
     * [updateUser](#updateuser)
     * [createUserSession](#createusersession)
     * [getActiveSessions](#getactivesessions)
@@ -265,7 +265,8 @@
     * [deleteSubscriptionPaymentMethod](#deletesubscriptionpaymentmethod)
     * [getSubscriptionConfig](#getsubscriptionconfig)
     * [saveSubscriptionSetupIntent](#savesubscriptionsetupintent)
-    * [addBeneficiaryDetails](#addbeneficiarydetails)
+    * [getBankAccountDetailsOpenAPI](#getbankaccountdetailsopenapi)
+    * [addRefundBankAccountUsingOTP](#addrefundbankaccountusingotp)
     * [verifyIfscCode](#verifyifsccode)
     * [getUserOrderBeneficiaries](#getuserorderbeneficiaries)
     * [getUserBeneficiaries](#getuserbeneficiaries)
@@ -302,13 +303,13 @@
 * [Catalog](#Catalog)
   * Methods
     * [updateSearchKeywords](#updatesearchkeywords)
-    * [deleteSearchKeywords](#deletesearchkeywords)
     * [getSearchKeywords](#getsearchkeywords)
+    * [deleteSearchKeywords](#deletesearchkeywords)
     * [createCustomKeyword](#createcustomkeyword)
     * [getAllSearchKeyword](#getallsearchkeyword)
     * [updateAutocompleteKeyword](#updateautocompletekeyword)
-    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
+    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createProductBundle](#createproductbundle)
@@ -374,8 +375,8 @@
     * [getProducts](#getproducts)
     * [getProductAttributes](#getproductattributes)
     * [editProduct](#editproduct)
-    * [deleteProduct](#deleteproduct)
     * [getProduct](#getproduct)
+    * [deleteProduct](#deleteproduct)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
     * [createBulkProductUploadJob](#createbulkproductuploadjob)
@@ -39907,12 +39908,12 @@ Schema: `ArchiveUserSuccess`
 ---
 
 
-#### unArchiveUser
-unarchive user who archived from application and have not elapsed the platform configured archive days
+#### unDeleteUser
+undelete user who deleted from application and have not elapsed the platform configured delete days
 
 ```golang
 
-data, err := User.UnArchiveUser(CompanyID, ApplicationID, body);
+data, err := User.UnDeleteUser(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -39924,9 +39925,9 @@ data, err := User.UnArchiveUser(CompanyID, ApplicationID, body);
 | ApplicationID | string | Application ID | 
 
 
-| body |  UnArchiveUserRequestSchema | "Request body" 
+| body |  UnDeleteUserRequestSchema | "Request body" 
 
-unarchive user who archived from application and have not elapsed the platform configured archive days
+undelete user who deleted from application and have not elapsed the platform configured delete days
 
 *Success Response:*
 
@@ -39935,7 +39936,7 @@ unarchive user who archived from application and have not elapsed the platform c
 Success
 
 
-Schema: `UnArchiveUserSuccess`
+Schema: `UnDeleteUserSuccess`
 
 
 
@@ -51831,12 +51832,57 @@ Schema: `SaveSubscriptionSetupIntentResponse`
 ---
 
 
-#### addBeneficiaryDetails
+#### getBankAccountDetailsOpenAPI
+Get bank details
+
+```golang
+
+data, err := Payment.GetBankAccountDetailsOpenAPI(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+
+| CompanyID | float64 | Company Id | 
+
+
+| ApplicationID | string | Application id | 
+
+| xQuery | struct | Includes properties such as `OrderID`, `RequestHash`
+
+
+Use this API to get saved bank details for returned/cancelled order using order id.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `RefundAccountResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### addRefundBankAccountUsingOTP
 Save bank details for cancelled/returned order
 
 ```golang
 
-data, err := Payment.AddBeneficiaryDetails(CompanyID, ApplicationID, body);
+data, err := Payment.AddRefundBankAccountUsingOTP(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -51848,7 +51894,7 @@ data, err := Payment.AddBeneficiaryDetails(CompanyID, ApplicationID, body);
 | ApplicationID | string | Application id | 
 
 
-| body |  AddBeneficiaryDetailsRequest | "Request body" 
+| body |  AddBeneficiaryDetailsOTPRequest | "Request body" 
 
 Use this API to save bank details for returned/cancelled order to refund amount in his account.
 
@@ -53152,49 +53198,6 @@ Schema: `GetSearchWordsData`
 ---
 
 
-#### deleteSearchKeywords
-Delete a Search Keywords
-
-```golang
-
-data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getSearchKeywords
 Get a Search Keywords Details
 
@@ -53226,6 +53229,49 @@ The Collection object. See example below or refer `GetSearchWordsDetailResponseS
 
 
 Schema: `GetSearchWordsDetailResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteSearchKeywords
+Delete a Search Keywords
+
+```golang
+
+data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -53363,49 +53409,6 @@ Schema: `GetAutocompleteWordsResponse`
 ---
 
 
-#### deleteAutocompleteKeyword
-Delete a Autocomplete Keywords
-
-```golang
-
-data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getAutocompleteKeywordDetail
 Get a Autocomplete Keywords Details
 
@@ -53437,6 +53440,49 @@ The mapping object. See example below or refer `GetAutocompleteWordsResponseSche
 
 
 Schema: `GetAutocompleteWordsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteAutocompleteKeyword
+Delete a Autocomplete Keywords
+
+```golang
+
+data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -56208,46 +56254,6 @@ Schema: `SuccessResponse`
 ---
 
 
-#### deleteProduct
-Delete a product.
-
-```golang
-
-data, err := Catalog.DeleteProduct(CompanyID, ItemID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
-
-
-| ItemID | float64 | Id of the product to be updated. | 
-
-
-
-This API allows to delete product.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getProduct
 Get a single product.
 
@@ -56281,6 +56287,46 @@ Product object. See example below or refer `product.utils.format_product_respons
 
 
 Schema: `Product`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteProduct
+Delete a product.
+
+```golang
+
+data, err := Catalog.DeleteProduct(CompanyID, ItemID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
+
+
+| ItemID | float64 | Id of the product to be updated. | 
+
+
+
+This API allows to delete product.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
