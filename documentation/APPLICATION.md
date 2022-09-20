@@ -314,7 +314,6 @@
   * Methods
     * [getPincodeCity](#getpincodecity)
     * [getTatProduct](#gettatproduct)
-    * [getPincodeZones](#getpincodezones)
     
 
 
@@ -22560,42 +22559,6 @@ Pincode not found
   }
 }
 ```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPincodeZones
-GET zone from the Pincode.
-
-```golang
-
- data, err :=  Logistic.GetPincodeZones(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  GetZoneFromPincodeViewRequest | "Request body" 
-
-
-This API returns zone from the Pincode View.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `GetZoneFromPincodeViewResponse`
 
 
 

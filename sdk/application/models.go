@@ -8487,8 +8487,8 @@ package application
 
         
             Message string  `json:"message"`
-            Value string  `json:"value"`
             Type string  `json:"type"`
+            Value string  `json:"value"`
          
     }
     
@@ -8496,8 +8496,8 @@ package application
     type PincodeMetaResponse struct {
 
         
-            Zone string  `json:"zone"`
             InternalZoneID float64  `json:"internal_zone_id"`
+            Zone string  `json:"zone"`
          
     }
     
@@ -8506,9 +8506,9 @@ package application
 
         
             UID string  `json:"uid"`
-            SubType string  `json:"sub_type"`
             Name string  `json:"name"`
             DisplayName string  `json:"display_name"`
+            SubType string  `json:"sub_type"`
          
     }
     
@@ -8517,12 +8517,12 @@ package application
 
         
             SubType string  `json:"sub_type"`
+            Meta PincodeMetaResponse  `json:"meta"`
             Name string  `json:"name"`
             UID string  `json:"uid"`
-            Meta PincodeMetaResponse  `json:"meta"`
-            DisplayName string  `json:"display_name"`
-            Error PincodeErrorSchemaResponse  `json:"error"`
             Parents []PincodeParentsResponse  `json:"parents"`
+            Error PincodeErrorSchemaResponse  `json:"error"`
+            DisplayName string  `json:"display_name"`
          
     }
     
@@ -8530,8 +8530,8 @@ package application
     type PincodeApiResponse struct {
 
         
-            Success bool  `json:"success"`
             Error PincodeErrorSchemaResponse  `json:"error"`
+            Success bool  `json:"success"`
             Data []PincodeDataResponse  `json:"data"`
          
     }
@@ -8550,8 +8550,8 @@ package application
 
         
             ManufacturingTimeUnit string  `json:"manufacturing_time_unit"`
-            Category TATCategoryRequest  `json:"category"`
             ManufacturingTime float64  `json:"manufacturing_time"`
+            Category TATCategoryRequest  `json:"category"`
          
     }
     
@@ -8559,8 +8559,8 @@ package application
     type TATLocationDetailsRequest struct {
 
         
-            Articles []TATArticlesRequest  `json:"articles"`
             FromPincode string  `json:"from_pincode"`
+            Articles []TATArticlesRequest  `json:"articles"`
             FulfillmentID float64  `json:"fulfillment_id"`
          
     }
@@ -8569,12 +8569,12 @@ package application
     type TATViewRequest struct {
 
         
-            ToPincode string  `json:"to_pincode"`
-            LocationDetails []TATLocationDetailsRequest  `json:"location_details"`
             Action string  `json:"action"`
+            LocationDetails []TATLocationDetailsRequest  `json:"location_details"`
+            Identifier string  `json:"identifier"`
             Source string  `json:"source"`
             Journey string  `json:"journey"`
-            Identifier string  `json:"identifier"`
+            ToPincode string  `json:"to_pincode"`
          
     }
     
@@ -8610,8 +8610,8 @@ package application
 
         
             Message string  `json:"message"`
-            Value string  `json:"value"`
             Type string  `json:"type"`
+            Value string  `json:"value"`
          
     }
     
@@ -8619,13 +8619,13 @@ package application
     type TATArticlesResponse struct {
 
         
-            ManufacturingTimeUnit string  `json:"manufacturing_time_unit"`
-            Category TATCategoryRequest  `json:"category"`
-            ManufacturingTimeSeconds string  `json:"_manufacturing_time_seconds"`
             Promise TATPromiseResponse  `json:"promise"`
+            ManufacturingTime float64  `json:"manufacturing_time"`
+            ManufacturingTimeSeconds string  `json:"_manufacturing_time_seconds"`
+            Category TATCategoryRequest  `json:"category"`
             IsCodAvailable bool  `json:"is_cod_available"`
             Error TATErrorSchemaResponse  `json:"error"`
-            ManufacturingTime float64  `json:"manufacturing_time"`
+            ManufacturingTimeUnit string  `json:"manufacturing_time_unit"`
          
     }
     
@@ -8633,8 +8633,8 @@ package application
     type TATLocationDetailsResponse struct {
 
         
-            Articles []TATArticlesResponse  `json:"articles"`
             FromPincode string  `json:"from_pincode"`
+            Articles []TATArticlesResponse  `json:"articles"`
             FulfillmentID float64  `json:"fulfillment_id"`
          
     }
@@ -8643,37 +8643,19 @@ package application
     type TATViewResponse struct {
 
         
-            ToPincode string  `json:"to_pincode"`
-            RequestUUID string  `json:"request_uuid"`
+            Action string  `json:"action"`
+            ToCity string  `json:"to_city"`
             PaymentMode string  `json:"payment_mode"`
             LocationDetails []TATLocationDetailsResponse  `json:"location_details"`
-            Success bool  `json:"success"`
-            Action string  `json:"action"`
+            Identifier string  `json:"identifier"`
             Source string  `json:"source"`
             Journey string  `json:"journey"`
-            StormbreakerUUID string  `json:"stormbreaker_uuid"`
+            RequestUUID string  `json:"request_uuid"`
             IsCodAvailable bool  `json:"is_cod_available"`
             Error TATErrorSchemaResponse  `json:"error"`
-            Identifier string  `json:"identifier"`
-            ToCity string  `json:"to_city"`
-         
-    }
-    
-    // GetZoneFromPincodeViewRequest ...
-    type GetZoneFromPincodeViewRequest struct {
-
-        
-            Country string  `json:"country"`
-            Pincode string  `json:"pincode"`
-         
-    }
-    
-    // GetZoneFromPincodeViewResponse ...
-    type GetZoneFromPincodeViewResponse struct {
-
-        
-            Zones []string  `json:"zones"`
-            ServiceabilityType string  `json:"serviceability_type"`
+            StormbreakerUUID string  `json:"stormbreaker_uuid"`
+            ToPincode string  `json:"to_pincode"`
+            Success bool  `json:"success"`
          
     }
     
