@@ -1540,7 +1540,9 @@ Get the price of a product size at a PIN Code
 
 
 
-| xQuery | struct | Includes properties such as `StoreID`, `Pincode`
+
+
+| xQuery | struct | Includes properties such as `StoreID`, `Pincode`, `Moq`
 
 
 
