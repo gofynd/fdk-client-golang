@@ -16627,7 +16627,7 @@ Schema: `ValidateCustomerResponse`
 *Examples:*
 
 
-User is allowed to make payment
+success is True i.e user is allowed
 ```json
 {
   "value": {
@@ -16641,13 +16641,12 @@ User is allowed to make payment
         "first_transaction": false
       },
       "aggregator": "Simpl"
-    },
-    "error": {}
+    }
   }
 }
 ```
 
-User is not allowed to make payment
+success is False i.e user not allowed
 ```json
 {
   "value": {
@@ -16661,8 +16660,7 @@ User is not allowed to make payment
         "first_transaction": false
       },
       "aggregator": "Simpl"
-    },
-    "data": {}
+    }
   }
 }
 ```
@@ -17324,10 +17322,10 @@ Save bank details for cancelled/returned order
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id | 
+| CompanyID | float64 |  | 
 
 
-| ApplicationID | string | Application id | 
+| ApplicationID | string |  | 
 
 
 | body |  AddBeneficiaryDetailsOTPRequest | "Request body" 
