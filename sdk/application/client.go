@@ -5713,6 +5713,79 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //UserSendResetPasswordMobileXQuery holds query params
+    type UserSendResetPasswordMobileXQuery struct { 
+        Platform string  `url:"platform,omitempty"`  
+    }
+    
+    // SendResetPasswordMobile Reset Password
+    func (us *User)  SendResetPasswordMobile(xQuery UserSendResetPasswordMobileXQuery, body  SendResetPasswordMobileRequestSchema) (ResetPasswordSuccess, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             sendResetPasswordMobileResponse ResetPasswordSuccess
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return ResetPasswordSuccess{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return ResetPasswordSuccess{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "post",
+            "/service/application/user/authentication/v1.0/login/password/mobile/reset",
+            nil,
+            xQuery,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ResetPasswordSuccess{}, err
+	    }
+        
+        err = json.Unmarshal(response, &sendResetPasswordMobileResponse)
+        if err != nil {
+            return ResetPasswordSuccess{}, common.NewFDKError(err.Error())
+        }
+         return sendResetPasswordMobileResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // ForgotPassword Forgot Password
     func (us *User)  ForgotPassword(body  ForgotPasswordRequestSchema) (LoginSuccess, error){
         var (
@@ -6203,6 +6276,74 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // DeleteUser verify otp and delete user
+    func (us *User)  DeleteUser(body  DeleteApplicationUserRequestSchema) (DeleteUserSuccess, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             deleteUserResponse DeleteUserSuccess
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return DeleteUserSuccess{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return DeleteUserSuccess{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "post",
+            "/service/application/user/authentication/v1.0/delete",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DeleteUserSuccess{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteUserResponse)
+        if err != nil {
+            return DeleteUserSuccess{}, common.NewFDKError(err.Error())
+        }
+         return deleteUserResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // Logout Logs out currently logged in user
     func (us *User)  Logout() (LogoutSuccess, error){
         var (
@@ -6633,6 +6774,60 @@ func NewAppClient(config *AppConfig) *Client {
             return SessionListSuccess{}, common.NewFDKError(err.Error())
         }
          return getListOfActiveSessionsResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //UserGetPlatformConfigXQuery holds query params
+    type UserGetPlatformConfigXQuery struct { 
+        Name string  `url:"name,omitempty"`  
+    }
+    
+    // GetPlatformConfig Get platform configurations
+    func (us *User)  GetPlatformConfig(xQuery UserGetPlatformConfigXQuery) (PlatformSchema, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getPlatformConfigResponse PlatformSchema
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "get",
+            "/service/application/user/platform/v1.0/config",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PlatformSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPlatformConfigResponse)
+        if err != nil {
+            return PlatformSchema{}, common.NewFDKError(err.Error())
+        }
+         return getPlatformConfigResponse, nil
         
     }
           
