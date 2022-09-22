@@ -4165,7 +4165,9 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
     //PlatformGetReasonCodesXQuery holds query params
     type PlatformGetReasonCodesXQuery struct { 
-        Category string  `url:"category,omitempty"`  
+        Category string  `url:"category,omitempty"` 
+        PageSize string  `url:"page_size,omitempty"` 
+        PageNo string  `url:"page_no,omitempty"`  
     }
     
 
@@ -4183,6 +4185,10 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
 
         
+            
+                
+            
+                
             
                 
             

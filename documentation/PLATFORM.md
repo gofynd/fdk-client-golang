@@ -53582,7 +53582,11 @@ data, err := Order.GetReasonCodes(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `Category`
+
+
+
+
+| xQuery | struct | Includes properties such as `Category`, `PageSize`, `PageNo`
 
 
 
