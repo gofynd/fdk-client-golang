@@ -2163,6 +2163,7 @@ package platform
 
         
             Message string  `json:"message"`
+            IsDeleted bool  `json:"is_deleted"`
          
     }
     
@@ -4924,7 +4925,7 @@ package platform
 
         
             Key string  `json:"key"`
-            Value string  `json:"value"`
+            Value interface{}  `json:"value"`
          
     }
     

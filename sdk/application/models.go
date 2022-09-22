@@ -3882,6 +3882,7 @@ package application
 
         
             Message string  `json:"message"`
+            IsDeleted bool  `json:"is_deleted"`
          
     }
     
@@ -5435,8 +5436,8 @@ package application
          
     }
     
-    // BadRequestErr ...
-    type BadRequestErr struct {
+    // BadRequestSchema ...
+    type BadRequestSchema struct {
 
         
             Status string  `json:"status"`
