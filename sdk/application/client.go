@@ -6783,60 +6783,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    //UserGetPlatformConfigXQuery holds query params
-    type UserGetPlatformConfigXQuery struct { 
-        Name string  `url:"name,omitempty"`  
-    }
-    
-    // GetPlatformConfig Get platform configurations
-    func (us *User)  GetPlatformConfig(xQuery UserGetPlatformConfigXQuery) (PlatformSchema, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getPlatformConfigResponse PlatformSchema
-	    )
-
-        
-
-        
-            
-                
-            
-        
-
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            us.config,
-            "get",
-            "/service/application/user/platform/v1.0/config",
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return PlatformSchema{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getPlatformConfigResponse)
-        if err != nil {
-            return PlatformSchema{}, common.NewFDKError(err.Error())
-        }
-         return getPlatformConfigResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     //UserUpdateProfileXQuery holds query params
     type UserUpdateProfileXQuery struct { 
         Platform string  `url:"platform,omitempty"`  
