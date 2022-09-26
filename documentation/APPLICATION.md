@@ -142,6 +142,7 @@
     * [verifyEmailOTP](#verifyemailotp)
     * [getLoggedInUser](#getloggedinuser)
     * [getListOfActiveSessions](#getlistofactivesessions)
+    * [getPlatformConfig](#getplatformconfig)
     * [updateProfile](#updateprofile)
     * [addMobileNumber](#addmobilenumber)
     * [deleteMobileNumber](#deletemobilenumber)
@@ -12838,6 +12839,44 @@ Success. Returns a JSON object containing an array of sessions. Refer `SessionLi
 
 
 Schema: `SessionListSuccess`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPlatformConfig
+Get platform configurations
+
+```golang
+
+ data, err :=  User.GetPlatformConfig(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Name`
+
+
+
+Use this API to get all the platform configurations such as mobile image, desktop image, social logins, and all other text.
+
+*Success Response:*
+
+
+
+Success. Returns a JSON object containing the all the platform configurations. Refer `PlatformSchema` for more details.
+
+
+Schema: `PlatformSchema`
 
 
 
