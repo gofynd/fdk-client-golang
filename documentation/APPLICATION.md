@@ -17316,17 +17316,11 @@ Save bank details for cancelled/returned order
 
 ```golang
 
- data, err :=  Payment.AddRefundBankAccountUsingOTP(CompanyID, ApplicationID, body);
+ data, err :=  Payment.AddRefundBankAccountUsingOTP(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| ApplicationID | string |  | 
-
 
 | body |  AddBeneficiaryDetailsOTPRequest | "Request body" 
 
@@ -17337,7 +17331,7 @@ Use this API to save bank details for returned/cancelled order to refund amount 
 
 
 
-Success
+Success. Shows whether the beneficiary details were saved to a returned/cancelled order or not.
 
 
 Schema: `RefundAccountResponse`
