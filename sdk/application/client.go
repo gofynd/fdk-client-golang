@@ -11528,7 +11528,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // AddRefundBankAccountUsingOTP Save bank details for cancelled/returned order
-    func (pa *Payment)  AddRefundBankAccountUsingOTP(CompanyID float64, ApplicationID string, body  AddBeneficiaryDetailsOTPRequest) (RefundAccountResponse, error){
+    func (pa *Payment)  AddRefundBankAccountUsingOTP(body  AddBeneficiaryDetailsOTPRequest) (RefundAccountResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -11544,10 +11544,6 @@ func NewAppClient(config *AppConfig) *Client {
 
         
 
-        
-        
-        
-        
         
     
          
@@ -11570,7 +11566,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             pa.config,
             "post",
-            fmt.Sprintf("/service/application/payment/v1.0/refund/account/otp",CompanyID,ApplicationID),
+            "/service/application/payment/v1.0/refund/account/otp",
             nil,
             nil,
             reqBody)
