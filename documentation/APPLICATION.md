@@ -14,7 +14,7 @@
 * [Configuration](#Configuration) - Application configuration apis 
 * [Payment](#Payment) - Collect payment through many payment gateway i.e Stripe, Razorpay, Juspay etc.into Fynd or Self account 
 * [Order](#Order) - Handles Platform websites OMS 
-* [Feedback](#Feedback) - User Reviews and Rating System 
+* [Rewards](#Rewards) - Earn and redeem reward points 
 * [PosCart](#PosCart) - Cart APIs 
 * [Logistic](#Logistic) - Handles Platform websites OMS 
 
@@ -277,34 +277,15 @@
     * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
     
 
-* [Feedback](#Feedback)
+* [Rewards](#Rewards)
   * Methods
-    * [createAbuseReport](#createabusereport)
-    * [updateAbuseReport](#updateabusereport)
-    * [getAbuseReports](#getabusereports)
-    * [getAttributes](#getattributes)
-    * [createAttribute](#createattribute)
-    * [getAttribute](#getattribute)
-    * [updateAttribute](#updateattribute)
-    * [createComment](#createcomment)
-    * [updateComment](#updatecomment)
-    * [getComments](#getcomments)
-    * [checkEligibility](#checkeligibility)
-    * [deleteMedia](#deletemedia)
-    * [createMedia](#createmedia)
-    * [updateMedia](#updatemedia)
-    * [getMedias](#getmedias)
-    * [getReviewSummaries](#getreviewsummaries)
-    * [createReview](#createreview)
-    * [updateReview](#updatereview)
-    * [getReviews](#getreviews)
-    * [getTemplates](#gettemplates)
-    * [createQuestion](#createquestion)
-    * [updateQuestion](#updatequestion)
-    * [getQuestionAndAnswers](#getquestionandanswers)
-    * [getVotes](#getvotes)
-    * [createVote](#createvote)
-    * [updateVote](#updatevote)
+    * [getPointsOnProduct](#getpointsonproduct)
+    * [getOfferByName](#getofferbyname)
+    * [getOrderDiscount](#getorderdiscount)
+    * [getUserPoints](#getuserpoints)
+    * [getUserPointsHistory](#getuserpointshistory)
+    * [getUserReferralDetails](#getuserreferraldetails)
+    * [redeemReferralCode](#redeemreferralcode)
     
 
 * [PosCart](#PosCart)
@@ -18345,33 +18326,33 @@ Schema: `ResponseGetInvoiceShipment`
 ---
 
 
-## Feedback
+## Rewards
 
 
-#### createAbuseReport
-Post a new abuse request
+#### getPointsOnProduct
+Get the eligibility of reward points on a product
 
 ```golang
 
- data, err :=  Feedback.CreateAbuseReport(body);
+ data, err :=  Rewards.GetPointsOnProduct(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  ReportAbuseRequest | "Request body" 
+| body |  CatalogueOrderRequest | "Request body" 
 
 
-Use this API to report a specific entity (question/review/comment) for abuse.
+Use this API to evaluate the amount of reward points that could be earned on any catalogue product.
 
 *Success Response:*
 
 
 
-Success. Returns an abuse ID.
+Success. Check example below or refer `CatalogueOrderRequest` for more details.
 
 
-Schema: `InsertResponse`
+Schema: `CatalogueOrderResponse`
 
 
 
@@ -18384,30 +18365,32 @@ Schema: `InsertResponse`
 ---
 
 
-#### updateAbuseReport
-Update abuse details
+#### getOfferByName
+Get offer by name
 
 ```golang
 
- data, err :=  Feedback.UpdateAbuseReport(body);
+ data, err :=  Rewards.GetOfferByName(Name);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  UpdateAbuseStatusRequest | "Request body" 
+| Name | string | The name given to the offer. | 
 
 
-Use this API to update the abuse details, i.e. status and description.
+
+
+Use this API to get the offer details and configuration by entering the name of the offer.
 
 *Success Response:*
 
 
 
-Success.
+Success. Check example below or refer `Offer` for more details.
 
 
-Schema: `UpdateResponse`
+Schema: `Offer`
 
 
 
@@ -18420,42 +18403,30 @@ Schema: `UpdateResponse`
 ---
 
 
-#### getAbuseReports
-Get a list of abuse data
+#### getOrderDiscount
+Calculates the discount on order-amount
 
 ```golang
 
- data, err :=  Feedback.GetAbuseReports(EntityID, EntityType, xQuery);
+ data, err :=  Rewards.GetOrderDiscount(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| EntityID | string | ID of the eligible entity as specified in the entity type (question ID/review ID/comment ID). | 
+| body |  OrderDiscountRequest | "Request body" 
 
 
-| EntityType | string | Type of entity, e.g. question, review or comment. | 
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `ID`, `PageID`, `PageSize`
-
-
-
-Use this API to retrieve a list of abuse data from entity type and entity ID.
+Use this API to calculate the discount on order-amount based on all the amount range configured in order_discount.
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `ReportAbuseGetResponse` for more details.
+Success. Check example below or refer `OrderDiscountResponse` for more details.
 
 
-Schema: `ReportAbuseGetResponse`
+Schema: `OrderDiscountResponse`
 
 
 
@@ -18468,12 +18439,12 @@ Schema: `ReportAbuseGetResponse`
 ---
 
 
-#### getAttributes
-Get a list of attribute data
+#### getUserPoints
+Get reward points available with a user
 
 ```golang
 
- data, err :=  Feedback.GetAttributes(xQuery);
+ data, err :=  Rewards.GetUserPoints();
 ```
 
 | Argument  |  Type  | Description |
@@ -18481,21 +18452,16 @@ Get a list of attribute data
 
 
 
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-
-
-Use this API to retrieve a list of all attribute data, e.g. quality, material, product fitting, packaging, etc.
+Use this API to retrieve total available points of a user for current application
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `AttributeResponse` for more details.
+Success. Check example below or refer `PointsResponse` for more details.
 
 
-Schema: `AttributeResponse`
+Schema: `PointsResponse`
 
 
 
@@ -18508,30 +18474,34 @@ Schema: `AttributeResponse`
 ---
 
 
-#### createAttribute
-Add a new attribute request
+#### getUserPointsHistory
+Get all transactions of reward points
 
 ```golang
 
- data, err :=  Feedback.CreateAttribute(body);
+ data, err :=  Rewards.GetUserPointsHistory(xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  SaveAttributeRequest | "Request body" 
 
 
-Use this API to add a new attribute (e.g. product quality/material/value for money) with its name, slug and description.
+
+| xQuery | struct | Includes properties such as `PageID`, `PageSize`
+
+
+
+Use this API to get a list of points transactions. The list of points history is paginated.
 
 *Success Response:*
 
 
 
-Success. Returns an attribute ID.
+Success. Check example below or refer `PointsHistoryResponse` for more details.
 
 
-Schema: `InsertResponse`
+Schema: `PointsHistoryResponse`
 
 
 
@@ -18544,32 +18514,29 @@ Schema: `InsertResponse`
 ---
 
 
-#### getAttribute
-Get data of a single attribute
+#### getUserReferralDetails
+Get referral details of a user
 
 ```golang
 
- data, err :=  Feedback.GetAttribute(Slug);
+ data, err :=  Rewards.GetUserReferralDetails();
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Slug | string | A short, human-readable, URL-friendly identifier of an attribute. You can get slug value from the endpoint 'service/application/feedback/v1.0/attributes'. | 
 
 
-
-
-Use this API to retrieve a single attribute data from a given slug.
+Use this API to retrieve the referral details a user has configured in the application.
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `Attribute` for more details.
+Success. Check example below or refer `ReferralDetailsResponse` for more details.
 
 
-Schema: `Attribute`
+Schema: `ReferralDetailsResponse`
 
 
 
@@ -18582,821 +18549,30 @@ Schema: `Attribute`
 ---
 
 
-#### updateAttribute
-Update details of an attribute 
+#### redeemReferralCode
+Redeems a referral code and credits reward points to users
 
 ```golang
 
- data, err :=  Feedback.UpdateAttribute(Slug, body);
+ data, err :=  Rewards.RedeemReferralCode(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Slug | string | A short, human-readable, URL-friendly identifier of an attribute. You can get slug value from the endpoint 'service/application/feedback/v1.0/attributes'. | 
+| body |  RedeemReferralCodeRequest | "Request body" 
 
 
-| body |  UpdateAttributeRequest | "Request body" 
-
-
-Use this API update the attribute's name and description.
+Use this API to enter a referral code following which, the configured points would be credited to a user's reward points account.
 
 *Success Response:*
 
 
 
-Success.
+Success. Check example below or refer `RedeemReferralCodeResponse` for more details.
 
 
-Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createComment
-Post a new comment
-
-```golang
-
- data, err :=  Feedback.CreateComment(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  CommentRequest | "Request body" 
-
-
-Use this API to add a new comment for a specific entity.
-
-*Success Response:*
-
-
-
-Success. Returns a comment ID.
-
-
-Schema: `InsertResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateComment
-Update the status of a comment
-
-```golang
-
- data, err :=  Feedback.UpdateComment(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  UpdateCommentRequest | "Request body" 
-
-
-Use this API to update the comment status (active or approve) along with new comment if any.
-
-*Success Response:*
-
-
-
-Success.
-
-
-Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getComments
-Get a list of comments
-
-```golang
-
- data, err :=  Feedback.GetComments(EntityType, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| EntityType | string | Type of entity, e.g. question, review or comment. | 
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `ID`, `EntityID`, `UserID`, `PageID`, `PageSize`
-
-
-
-Use this API to retrieve a list of comments for a specific entity type, e.g. products.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `CommentGetResponse` for more details.
-
-
-Schema: `CommentGetResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### checkEligibility
-Checks eligibility to rate and review, and shows the cloud media configuration
-
-```golang
-
- data, err :=  Feedback.CheckEligibility(EntityType, EntityID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| EntityType | string | Type of entity, e.g. question, rate, review, answer, or comment. | 
-
-
-| EntityID | string | ID of the eligible entity as specified in the entity type. | 
-
-
-
-
-Use this API to check whether an entity is eligible to be rated and reviewed. Moreover, it shows the cloud media configuration too.
-
-*Success Response:*
-
-
-
-Success. Returns a Product object. Check the example shown below or refer `CheckEligibilityResponse` for more details.
-
-
-Schema: `CheckEligibilityResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteMedia
-Delete Media
-
-```golang
-
- data, err :=  Feedback.DeleteMedia(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-| xQuery | struct | Includes properties such as `Ids`
-
-
-
-Use this API to delete media for an entity ID.
-
-*Success Response:*
-
-
-
-Success.
-
-
-Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createMedia
-Add Media
-
-```golang
-
- data, err :=  Feedback.CreateMedia(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  AddMediaListRequest | "Request body" 
-
-
-Use this API to add media to an entity, e.g. review.
-
-*Success Response:*
-
-
-
-Success. Returns media IDs.
-
-
-Schema: `InsertResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateMedia
-Update Media
-
-```golang
-
- data, err :=  Feedback.UpdateMedia(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  UpdateMediaListRequest | "Request body" 
-
-
-Use this API to update media (archive/approve) for an entity.
-
-*Success Response:*
-
-
-
-Success.
-
-
-Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getMedias
-Get Media
-
-```golang
-
- data, err :=  Feedback.GetMedias(EntityType, EntityID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| EntityType | string | Type of entity, e.g. question or product. | 
-
-
-| EntityID | string | ID of the eligible entity as specified in the entity type(question ID/product ID). | 
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `ID`, `Type`, `PageID`, `PageSize`
-
-
-
-Use this API to retrieve all media from an entity.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `MediaGetResponse` for more details.
-
-
-Schema: `MediaGetResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getReviewSummaries
-Get a review summary
-
-```golang
-
- data, err :=  Feedback.GetReviewSummaries(EntityType, EntityID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| EntityType | string | Type of entity, e.g. product, delivery, seller, order placed, order delivered, application, or template. | 
-
-
-| EntityID | string | ID of the eligible entity as specified in the entity type. | 
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `ID`, `PageID`, `PageSize`
-
-
-
-Review summary gives ratings and attribute metrics of a review per entity. Use this API to retrieve the following response data: review count, rating average. 'review metrics'/'attribute rating metrics' which contains name, type, average and count.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `ReviewMetricGetResponse` for more details.
-
-
-Schema: `ReviewMetricGetResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createReview
-Add customer reviews
-
-```golang
-
- data, err :=  Feedback.CreateReview(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  UpdateReviewRequest | "Request body" 
-
-
-Use this API to add customer reviews for a specific entity along with the following data: attributes rating, entity rating, title, description, media resources and template ID.
-
-*Success Response:*
-
-
-
-Success. Returns a review ID.
-
-
-Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateReview
-Update customer reviews
-
-```golang
-
- data, err :=  Feedback.UpdateReview(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  UpdateReviewRequest | "Request body" 
-
-
-Use this API to update customer reviews for a specific entity along with following data: attributes rating, entity rating, title, description, media resources and template ID.
-
-*Success Response:*
-
-
-
-Success.
-
-
-Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getReviews
-Get list of customer reviews
-
-```golang
-
- data, err :=  Feedback.GetReviews(EntityType, EntityID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| EntityType | string | Type of entity, e.g. product, delivery, seller, l3, order placed, order delivered, application, or template. | 
-
-
-| EntityID | string | ID of the eligible entity as specified in the entity type. | 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `ID`, `UserID`, `Media`, `Rating`, `AttributeRating`, `Facets`, `Sort`, `Active`, `Approve`, `PageID`, `PageSize`
-
-
-
-Use this API to retrieve a list of customer reviews based on entity and filters provided.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `ReviewGetResponse` for more details.
-
-
-Schema: `ReviewGetResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getTemplates
-Get the feedback templates for a product or l3
-
-```golang
-
- data, err :=  Feedback.GetTemplates(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `TemplateID`, `EntityID`, `EntityType`
-
-
-
-Use this API to retrieve the details of the following feedback template. order, delivered, application, seller, order, placed, product
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `TemplateGetResponse` for more details.
-
-
-Schema: `TemplateGetResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createQuestion
-Create a new question
-
-```golang
-
- data, err :=  Feedback.CreateQuestion(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  CreateQNARequest | "Request body" 
-
-
-Use this API to create a new question with following data- tags, text, type, choices for MCQ type questions, maximum length of answer.
-
-*Success Response:*
-
-
-
-Success. Returns a qna ID.
-
-
-Schema: `InsertResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateQuestion
-Update a question
-
-```golang
-
- data, err :=  Feedback.UpdateQuestion(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  UpdateQNARequest | "Request body" 
-
-
-Use this API to update the status of a question, its tags and its choices.
-
-*Success Response:*
-
-
-
-Success.
-
-
-Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getQuestionAndAnswers
-Get a list of QnA
-
-```golang
-
- data, err :=  Feedback.GetQuestionAndAnswers(EntityType, EntityID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| EntityType | string | Type of entity, e.g. product, l3, etc. | 
-
-
-| EntityID | string | ID of the eligible entity as specified in the entity type. | 
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `ID`, `UserID`, `ShowAnswer`, `PageID`, `PageSize`
-
-
-
-Use this API to retrieve a list of questions and answers for a given entity.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `QNAGetResponse` for more details.
-
-
-Schema: `QNAGetResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getVotes
-Get a list of votes
-
-```golang
-
- data, err :=  Feedback.GetVotes(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `ID`, `RefType`, `PageNo`, `PageSize`
-
-
-
-Use this API to retrieve a list of votes of a current logged in user. Votes can be filtered using `ref_type`, i.e. review | comment.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `VoteResponse` for more details.
-
-
-Schema: `VoteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createVote
-Create a new vote
-
-```golang
-
- data, err :=  Feedback.CreateVote(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  VoteRequest | "Request body" 
-
-
-Use this API to create a new vote, where the action could be an upvote or a downvote. This is useful when you want to give a vote (say upvote) to a review (ref_type) of a product (entity_type).
-
-*Success Response:*
-
-
-
-Success. Returns a vote ID.
-
-
-Schema: `InsertResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateVote
-Update a vote
-
-```golang
-
- data, err :=  Feedback.UpdateVote(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  UpdateVoteRequest | "Request body" 
-
-
-Use this API to update a vote with a new action, i.e. either an upvote or a downvote.
-
-*Success Response:*
-
-
-
-Success.
-
-
-Schema: `UpdateResponse`
+Schema: `RedeemReferralCodeResponse`
 
 
 
