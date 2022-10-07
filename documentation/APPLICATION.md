@@ -250,6 +250,8 @@
     * [redirectToAggregator](#redirecttoaggregator)
     * [checkCredit](#checkcredit)
     * [customerOnboard](#customeronboard)
+    * [outstandingOrderDetails](#outstandingorderdetails)
+    * [paidOrderDetails](#paidorderdetails)
     
 
 * [Order](#Order)
@@ -17392,6 +17394,82 @@ Success. Returns the status of payment. Check the example shown below or refer `
 
 
 Schema: `CustomerOnboardingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### outstandingOrderDetails
+API to fetch the outstanding order details
+
+```golang
+
+ data, err :=  Payment.OutstandingOrderDetails(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `MerchantUserID`
+
+
+
+Use this API to fetch the outstanding order details.
+
+*Success Response:*
+
+
+
+Success. Returns the status of API. Check the example shown below or refer `PaidOrderDetailsResponseSchema` for more details.
+
+
+Schema: `OutstandingOrderDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### paidOrderDetails
+API to fetch the paid order details
+
+```golang
+
+ data, err :=  Payment.PaidOrderDetails(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `MerchantUserID`
+
+
+
+Use this API to fetch the paid order details.
+
+*Success Response:*
+
+
+
+Success. Returns the status of API. Check the example shown below or refer `PaidOrderDetailsResponseSchema` for more details.
+
+
+Schema: `PaidOrderDetailsResponse`
 
 
 
