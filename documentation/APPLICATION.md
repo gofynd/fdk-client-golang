@@ -17418,7 +17418,7 @@ API to fetch the outstanding order details
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `MerchantUserID`
+| xQuery | struct | Includes properties such as `Aggregator`
 
 
 
@@ -17456,7 +17456,7 @@ API to fetch the paid order details
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `MerchantUserID`
+| xQuery | struct | Includes properties such as `Aggregator`
 
 
 

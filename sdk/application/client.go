@@ -11913,7 +11913,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PaymentOutstandingOrderDetailsXQuery holds query params
     type PaymentOutstandingOrderDetailsXQuery struct { 
-        MerchantUserID string  `url:"merchant_user_id,omitempty"`  
+        Aggregator string  `url:"aggregator,omitempty"`  
     }
     
     // OutstandingOrderDetails API to fetch the outstanding order details
@@ -11967,7 +11967,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PaymentPaidOrderDetailsXQuery holds query params
     type PaymentPaidOrderDetailsXQuery struct { 
-        MerchantUserID string  `url:"merchant_user_id,omitempty"`  
+        Aggregator string  `url:"aggregator,omitempty"`  
     }
     
     // PaidOrderDetails API to fetch the paid order details

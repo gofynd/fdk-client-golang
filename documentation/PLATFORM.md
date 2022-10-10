@@ -224,6 +224,8 @@
     * [getJobLogs](#getjoblogs)
     * [getCommunicationLogs](#getcommunicationlogs)
     * [getSystemNotifications](#getsystemnotifications)
+    * [sendOtp](#sendotp)
+    * [verfiyOtp](#verfiyotp)
     * [getSmsProviders](#getsmsproviders)
     * [createSmsProvider](#createsmsprovider)
     * [getSmsProviderById](#getsmsproviderbyid)
@@ -50047,6 +50049,131 @@ default
       "item_total": 1,
       "has_next": false
     }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### sendOtp
+Send OTP using email and sms
+
+```golang
+
+data, err := Communication.SendOtp(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| body |  SendOtpCommsReq | "Request body" 
+
+Send OTP Comms via email and sms
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `SendOtpCommsRes`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "sms": {
+      "success": true,
+      "request_id": "c8d1bd63d56a2d368aae9dbd4e7d8326",
+      "message": "OTP sent",
+      "mobile": "9096686804",
+      "country_code": "91",
+      "resend_timer": 30
+    },
+    "email": {
+      "success": true,
+      "request_id": "1cc79c911923971580d903039ea9ee05",
+      "message": "OTP sent",
+      "to": "parvezshaikh@gofynd.com",
+      "resend_timer": 30
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### verfiyOtp
+Verify OTP sent via email and sms
+
+```golang
+
+data, err := Communication.VerfiyOtp(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| body |  VerifyOtpCommsReq | "Request body" 
+
+Verify OTP sent via email and sms
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `VerifyOtpCommsSuccessRes`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "success": true,
+    "mobile": "9096686804",
+    "country_code": "91",
+    "message": "OTP verified"
   }
 }
 ```

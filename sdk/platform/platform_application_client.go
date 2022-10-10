@@ -9674,6 +9674,134 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // SendOtp Send OTP using email and sms
+     func (co *PlatformAppCommunication)  SendOtp(body  SendOtpCommsReq) (SendOtpCommsRes, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            sendOtpResponse SendOtpCommsRes
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return SendOtpCommsRes{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return SendOtpCommsRes{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "post",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/otp/send-otp-comms",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return SendOtpCommsRes{}, err
+	    }
+        
+        err = json.Unmarshal(response, &sendOtpResponse)
+        if err != nil {
+            return SendOtpCommsRes{}, common.NewFDKError(err.Error())
+        }
+        return sendOtpResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // VerfiyOtp Verify OTP sent via email and sms
+     func (co *PlatformAppCommunication)  VerfiyOtp(body  VerifyOtpCommsReq) (VerifyOtpCommsSuccessRes, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            verfiyOtpResponse VerifyOtpCommsSuccessRes
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return VerifyOtpCommsSuccessRes{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return VerifyOtpCommsSuccessRes{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "post",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/otp/verify-otp-comms",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return VerifyOtpCommsSuccessRes{}, err
+	    }
+        
+        err = json.Unmarshal(response, &verfiyOtpResponse)
+        if err != nil {
+            return VerifyOtpCommsSuccessRes{}, common.NewFDKError(err.Error())
+        }
+        return verfiyOtpResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     //PlatformAppGetSmsProvidersXQuery holds query params
     type PlatformAppGetSmsProvidersXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
