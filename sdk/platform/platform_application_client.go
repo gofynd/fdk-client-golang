@@ -11115,73 +11115,27 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    //PlatformAppGetUserCODlimitRoutesXQuery holds query params
-    type PlatformAppGetUserCODlimitRoutesXQuery struct { 
-        MerchantUserID string  `url:"merchant_user_id,omitempty"` 
-        MobileNo string  `url:"mobile_no,omitempty"`  
-    }
-    
-    // GetUserCODlimitRoutes Get COD limit for user
-     func (pa *PlatformAppPayment)  GetUserCODlimitRoutes(xQuery PlatformAppGetUserCODlimitRoutesXQuery) (GetUserCODLimitResponse, error) {
+    // RepaymentDetails API to register repayment details
+     func (pa *PlatformAppPayment)  RepaymentDetails(body  RepaymentRequestDetails) (RepaymentResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getUserCODlimitRoutesResponse GetUserCODLimitResponse
+            repaymentDetailsResponse RepaymentResponse
 	    )
 
         
-
-         
-            
-                
-            
-                
             
         
-
+            
         
+            
         
-         
+            
         
+            
         
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "get",
-            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/user-cod",pa.CompanyID, pa.ApplicationID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetUserCODLimitResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getUserCODlimitRoutesResponse)
-        if err != nil {
-            return GetUserCODLimitResponse{}, common.NewFDKError(err.Error())
-        }
-        return getUserCODlimitRoutesResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // SetUserCODlimitRoutes Set COD option for user for payment
-     func (pa *PlatformAppPayment)  SetUserCODlimitRoutes(body  SetCODForUserRequest) (SetCODOptionResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            setUserCODlimitRoutesResponse SetCODOptionResponse
-	    )
-
+            
         
             
         
@@ -11202,32 +11156,101 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
             
-             return SetCODOptionResponse{}, common.NewFDKError(err.Error())
+             return RepaymentResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
             
-             return SetCODOptionResponse{}, common.NewFDKError(err.Error())       
+             return RepaymentResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
         rawRequest = NewRequest(
             pa.config,
-            "put",
-            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/user-cod",pa.CompanyID, pa.ApplicationID),
+            "post",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/repayment-details",pa.CompanyID, pa.ApplicationID),
             nil,
             nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return SetCODOptionResponse{}, err
+            return RepaymentResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &setUserCODlimitRoutesResponse)
+        err = json.Unmarshal(response, &repaymentDetailsResponse)
         if err != nil {
-            return SetCODOptionResponse{}, common.NewFDKError(err.Error())
+            return RepaymentResponse{}, common.NewFDKError(err.Error())
         }
-        return setUserCODlimitRoutesResponse, nil
+        return repaymentDetailsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // MerchantOnBoarding API to push Ajiodhan merchant data to Gringotts system
+     func (pa *PlatformAppPayment)  MerchantOnBoarding(body  MerchantOnBoardingRequest) (MerchantOnBoardingResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            merchantOnBoardingResponse MerchantOnBoardingResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return MerchantOnBoardingResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return MerchantOnBoardingResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/merchant-onboarding",pa.CompanyID, pa.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return MerchantOnBoardingResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &merchantOnBoardingResponse)
+        if err != nil {
+            return MerchantOnBoardingResponse{}, common.NewFDKError(err.Error())
+        }
+        return merchantOnBoardingResponse, nil
         
     }
            

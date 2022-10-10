@@ -258,8 +258,8 @@
     * [getUserOrderBeneficiaries](#getuserorderbeneficiaries)
     * [getUserBeneficiaries](#getuserbeneficiaries)
     * [confirmPayment](#confirmpayment)
-    * [getUserCODlimitRoutes](#getusercodlimitroutes)
-    * [setUserCODlimitRoutes](#setusercodlimitroutes)
+    * [repaymentDetails](#repaymentdetails)
+    * [merchantOnBoarding](#merchantonboarding)
     
 
 * [Order](#Order)
@@ -51674,12 +51674,12 @@ Schema: `PaymentConfirmationResponse`
 ---
 
 
-#### getUserCODlimitRoutes
-Get COD limit for user
+#### repaymentDetails
+API to register repayment details
 
 ```golang
 
-data, err := Payment.GetUserCODlimitRoutes(CompanyID, ApplicationID, xQuery);
+data, err := Payment.RepaymentDetails(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -51691,22 +51691,18 @@ data, err := Payment.GetUserCODlimitRoutes(CompanyID, ApplicationID, xQuery);
 | ApplicationID | string | Application id | 
 
 
+| body |  RepaymentRequestDetails | "Request body" 
 
-
-
-| xQuery | struct | Includes properties such as `MerchantUserID`, `MobileNo`
-
-
-Use this API to get user cod limit and reamining limit for the payment
+Use this API to register any repayment record in the db and notify the aggrgator
 
 *Success Response:*
 
 
 
-Success. Returns user cod limit , remaining limit and usage of user for COD. Check the example shown below or refer `GetUserCODLimitResponseSchema` for more details.
+Success. Returns the status of API. Check the example shown below or refer `RepaymentResponseSchema` for more details.
 
 
-Schema: `GetUserCODLimitResponse`
+Schema: `RepaymentResponse`
 
 
 
@@ -51719,35 +51715,35 @@ Schema: `GetUserCODLimitResponse`
 ---
 
 
-#### setUserCODlimitRoutes
-Set COD option for user for payment
+#### merchantOnBoarding
+API to push Ajiodhan merchant data to Gringotts system
 
 ```golang
 
-data, err := Payment.SetUserCODlimitRoutes(CompanyID, ApplicationID, body);
+data, err := Payment.MerchantOnBoarding(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company ID | 
+| CompanyID | float64 | Company Id | 
 
 
 | ApplicationID | string | Application id | 
 
 
-| body |  SetCODForUserRequest | "Request body" 
+| body |  MerchantOnBoardingRequest | "Request body" 
 
-Use this API to set cod option as true or false for the payment
+Use this API to push Ajiodhan merchant data to Gringotts system
 
 *Success Response:*
 
 
 
-Success. Returns true/false for user cod option for payment. Check the example shown below or refer `GetUserCODLimitResponseSchema` for more details.
+Success. Returns the status of API. Check the example shown below or refer `RepaymentResponseSchema` for more details.
 
 
-Schema: `SetCODOptionResponse`
+Schema: `MerchantOnBoardingResponse`
 
 
 
