@@ -1652,9 +1652,7 @@ Fetch all items added to the cart
 
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `BuyNow`
 
 
 
@@ -1728,9 +1726,7 @@ Add items to cart
 
 
 
-
-
-| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`, `BuyNow`
+| xQuery | struct | Includes properties such as `I`, `B`, `BuyNow`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -2420,9 +2416,7 @@ Update items in the cart
 
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AreaCode`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `BuyNow`
 
 | body |  UpdateCartRequest | "Request body" 
 
@@ -18612,9 +18606,7 @@ Fetch all items added to the cart
 
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `BuyNow`
 
 
 
@@ -18688,9 +18680,7 @@ Add items to cart
 
 
 
-
-
-| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`, `BuyNow`
+| xQuery | struct | Includes properties such as `I`, `B`, `BuyNow`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -19380,9 +19370,7 @@ Update items in the cart
 
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AreaCode`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `BuyNow`
 
 | body |  UpdateCartRequest | "Request body" 
 
