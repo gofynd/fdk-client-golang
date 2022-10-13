@@ -8697,53 +8697,19 @@ package application
     
 
     
-    // GetPincodeCityResponse ...
-    type GetPincodeCityResponse struct {
-
-        
-            RequestUUID string  `json:"request_uuid"`
-            StormbreakerUUID string  `json:"stormbreaker_uuid"`
-            Success bool  `json:"success"`
-            Data []LogisticPincodeData  `json:"data"`
-         
-    }
-    
-    // LogisticPincodeData ...
-    type LogisticPincodeData struct {
-
-        
-            Meta LogisticMeta  `json:"meta"`
-            Parents []LogisticParents  `json:"parents"`
-            SubType string  `json:"sub_type"`
-            Name string  `json:"name"`
-            Error LogisticError  `json:"error"`
-            UID string  `json:"uid"`
-            DisplayName string  `json:"display_name"`
-         
-    }
-    
-    // LogisticMeta ...
-    type LogisticMeta struct {
-
-        
-            Zone string  `json:"zone"`
-            Deliverables []interface{}  `json:"deliverables"`
-         
-    }
-    
-    // LogisticParents ...
-    type LogisticParents struct {
+    // PincodeParentsResponse ...
+    type PincodeParentsResponse struct {
 
         
             SubType string  `json:"sub_type"`
-            Name string  `json:"name"`
-            DisplayName string  `json:"display_name"`
             UID string  `json:"uid"`
+            DisplayName string  `json:"display_name"`
+            Name string  `json:"name"`
          
     }
     
-    // LogisticError ...
-    type LogisticError struct {
+    // PincodeErrorSchemaResponse ...
+    type PincodeErrorSchemaResponse struct {
 
         
             Type string  `json:"type"`
@@ -8752,103 +8718,41 @@ package application
          
     }
     
-    // GetPincodeZonesReqBody ...
-    type GetPincodeZonesReqBody struct {
+    // PincodeMetaResponse ...
+    type PincodeMetaResponse struct {
 
         
-            Country string  `json:"country"`
-            Pincode string  `json:"pincode"`
+            InternalZoneID float64  `json:"internal_zone_id"`
+            Zone string  `json:"zone"`
          
     }
     
-    // GetPincodeZonesResponse ...
-    type GetPincodeZonesResponse struct {
+    // PincodeDataResponse ...
+    type PincodeDataResponse struct {
 
         
-            Zones []interface{}  `json:"zones"`
-            ServiceabilityType string  `json:"serviceability_type"`
+            UID string  `json:"uid"`
+            Name string  `json:"name"`
+            SubType string  `json:"sub_type"`
+            DisplayName string  `json:"display_name"`
+            Parents []PincodeParentsResponse  `json:"parents"`
+            Error PincodeErrorSchemaResponse  `json:"error"`
+            Meta PincodeMetaResponse  `json:"meta"`
          
     }
     
-    // GetTatProductReqBody ...
-    type GetTatProductReqBody struct {
+    // PincodeApiResponse ...
+    type PincodeApiResponse struct {
 
         
-            LocationDetails []LocationDetailsReq  `json:"location_details"`
-            ToPincode string  `json:"to_pincode"`
-            Action string  `json:"action"`
-         
-    }
-    
-    // LocationDetailsReq ...
-    type LocationDetailsReq struct {
-
-        
-            FromPincode string  `json:"from_pincode"`
-            Articles []TatReqProductArticles  `json:"articles"`
-            FulfillmentID float64  `json:"fulfillment_id"`
-         
-    }
-    
-    // TatReqProductArticles ...
-    type TatReqProductArticles struct {
-
-        
-            ManufacturingTime float64  `json:"manufacturing_time"`
-            ManufacturingTimeUnit string  `json:"manufacturing_time_unit"`
-            Category LogisticRequestCategory  `json:"category"`
-         
-    }
-    
-    // LogisticRequestCategory ...
-    type LogisticRequestCategory struct {
-
-        
-            ID float64  `json:"id"`
-            Level string  `json:"level"`
-         
-    }
-    
-    // GetTatProductResponse ...
-    type GetTatProductResponse struct {
-
-        
-            LocationDetails []LocationDetails  `json:"location_details"`
-            RequestUUID string  `json:"request_uuid"`
-            Error map[string]interface{}  `json:"error"`
-            ToCity string  `json:"to_city"`
-            Source string  `json:"source"`
-            ToPincode string  `json:"to_pincode"`
-            Action string  `json:"action"`
-            StormbreakerUUID string  `json:"stormbreaker_uuid"`
             Success bool  `json:"success"`
-            Identifier string  `json:"identifier"`
-            Journey string  `json:"journey"`
+            Data []PincodeDataResponse  `json:"data"`
+            Error PincodeErrorSchemaResponse  `json:"error"`
          
     }
     
-    // LocationDetails ...
-    type LocationDetails struct {
-
-        
-            FromPincode string  `json:"from_pincode"`
-            Articles []TatProductArticles  `json:"articles"`
-            FulfillmentID float64  `json:"fulfillment_id"`
-         
-    }
-    
-    // TatProductArticles ...
-    type TatProductArticles struct {
-
-        
-            Error map[string]interface{}  `json:"error"`
-            Category LogisticResponseCategory  `json:"category"`
-            Promise LogisticPromise  `json:"promise"`
-         
-    }
-    
-    // LogisticResponseCategory ...
-    type LogisticResponseCategory struct {
+    // TATCategoryRequest ...
+    type TATCategoryRequest struct {
 
         
             ID float64  `json:"id"`
@@ -8856,17 +8760,50 @@ package application
          
     }
     
-    // LogisticPromise ...
-    type LogisticPromise struct {
+    // TATArticlesRequest ...
+    type TATArticlesRequest struct {
 
         
-            Timestamp LogisticTimestamp  `json:"timestamp"`
-            Formatted Formatted  `json:"formatted"`
+            ManufacturingTimeUnit string  `json:"manufacturing_time_unit"`
+            ManufacturingTime float64  `json:"manufacturing_time"`
+            Category TATCategoryRequest  `json:"category"`
          
     }
     
-    // LogisticTimestamp ...
-    type LogisticTimestamp struct {
+    // TATLocationDetailsRequest ...
+    type TATLocationDetailsRequest struct {
+
+        
+            Articles []TATArticlesRequest  `json:"articles"`
+            FromPincode string  `json:"from_pincode"`
+            FulfillmentID float64  `json:"fulfillment_id"`
+         
+    }
+    
+    // TATViewRequest ...
+    type TATViewRequest struct {
+
+        
+            Journey string  `json:"journey"`
+            Action string  `json:"action"`
+            Source string  `json:"source"`
+            Identifier string  `json:"identifier"`
+            LocationDetails []TATLocationDetailsRequest  `json:"location_details"`
+            ToPincode string  `json:"to_pincode"`
+         
+    }
+    
+    // TATFormattedResponse ...
+    type TATFormattedResponse struct {
+
+        
+            Min string  `json:"min"`
+            Max string  `json:"max"`
+         
+    }
+    
+    // TATTimestampResponse ...
+    type TATTimestampResponse struct {
 
         
             Min float64  `json:"min"`
@@ -8874,12 +8811,84 @@ package application
          
     }
     
-    // Formatted ...
-    type Formatted struct {
+    // TATPromiseResponse ...
+    type TATPromiseResponse struct {
 
         
-            Min string  `json:"min"`
-            Max string  `json:"max"`
+            Formatted TATFormattedResponse  `json:"formatted"`
+            Timestamp TATTimestampResponse  `json:"timestamp"`
+         
+    }
+    
+    // TATErrorSchemaResponse ...
+    type TATErrorSchemaResponse struct {
+
+        
+            Type string  `json:"type"`
+            Value string  `json:"value"`
+            Message string  `json:"message"`
+         
+    }
+    
+    // TATArticlesResponse ...
+    type TATArticlesResponse struct {
+
+        
+            ManufacturingTimeSeconds float64  `json:"_manufacturing_time_seconds"`
+            Promise TATPromiseResponse  `json:"promise"`
+            IsCodAvailable bool  `json:"is_cod_available"`
+            ManufacturingTime float64  `json:"manufacturing_time"`
+            Error TATErrorSchemaResponse  `json:"error"`
+            ManufacturingTimeUnit string  `json:"manufacturing_time_unit"`
+            Category TATCategoryRequest  `json:"category"`
+         
+    }
+    
+    // TATLocationDetailsResponse ...
+    type TATLocationDetailsResponse struct {
+
+        
+            Articles []TATArticlesResponse  `json:"articles"`
+            FromPincode string  `json:"from_pincode"`
+            FulfillmentID float64  `json:"fulfillment_id"`
+         
+    }
+    
+    // TATViewResponse ...
+    type TATViewResponse struct {
+
+        
+            Success bool  `json:"success"`
+            Journey string  `json:"journey"`
+            RequestUUID string  `json:"request_uuid"`
+            Action string  `json:"action"`
+            Source string  `json:"source"`
+            PaymentMode string  `json:"payment_mode"`
+            Identifier string  `json:"identifier"`
+            IsCodAvailable bool  `json:"is_cod_available"`
+            LocationDetails []TATLocationDetailsResponse  `json:"location_details"`
+            Error TATErrorSchemaResponse  `json:"error"`
+            StormbreakerUUID string  `json:"stormbreaker_uuid"`
+            ToCity string  `json:"to_city"`
+            ToPincode string  `json:"to_pincode"`
+         
+    }
+    
+    // GetZoneFromPincodeViewRequest ...
+    type GetZoneFromPincodeViewRequest struct {
+
+        
+            Country string  `json:"country"`
+            Pincode string  `json:"pincode"`
+         
+    }
+    
+    // GetZoneFromPincodeViewResponse ...
+    type GetZoneFromPincodeViewResponse struct {
+
+        
+            Zones []string  `json:"zones"`
+            ServiceabilityType string  `json:"serviceability_type"`
          
     }
     

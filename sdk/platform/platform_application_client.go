@@ -15620,7 +15620,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         SellerIdentifiers []string  `url:"seller_identifiers,omitempty"` 
         Timestamp string  `url:"timestamp,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
-        PageID string  `url:"page_id,omitempty"`  
+        PageID string  `url:"page_id,omitempty"` 
+        IsExtension bool  `url:"is_extension,omitempty"`  
     }
     
     // GetAppInventory Get the stock of a product
@@ -15635,6 +15636,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
 
          
+            
+                
             
                 
             
