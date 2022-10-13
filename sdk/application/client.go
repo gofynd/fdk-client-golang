@@ -12085,7 +12085,7 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // GetShipmentReasons Get reasons behind full or partial cancellation of a shipment
-    func (or *Order)  GetShipmentReasons(ShipmentID float64, xQuery OrderGetShipmentReasonsXQuery) (ShipmentReasonsResponse, error){
+    func (or *Order)  GetShipmentReasons(ShipmentID string, xQuery OrderGetShipmentReasonsXQuery) (ShipmentReasonsResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -12112,7 +12112,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/undefined/reasons",ShipmentID),
+            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s/reasons",ShipmentID),
             nil,
             xQuery,
             nil)
