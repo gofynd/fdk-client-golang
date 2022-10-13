@@ -120,6 +120,10 @@
     * [deleteActiveSessions](#deleteactivesessions)
     * [getPlatformConfig](#getplatformconfig)
     * [updatePlatformConfig](#updateplatformconfig)
+    * [createUserGroup](#createusergroup)
+    * [getUserGroups](#getusergroups)
+    * [updateUserGroup](#updateusergroup)
+    * [getUserGroupById](#getusergroupbyid)
     
 
 * [Content](#Content)
@@ -40236,6 +40240,183 @@ Schema: `PlatformSchema`
 ---
 
 
+#### createUserGroup
+Create an User Group
+
+```golang
+
+data, err := User.CreateUserGroup(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
+
+
+| body |  CreateUserGroupSchema | "Request body" 
+
+Use this API to create new user Group
+
+*Success Response:*
+
+
+
+Success. returns created User Group. `UserGroupResponseSchema` for more details.
+
+
+Schema: `UserGroupResponseSchema`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getUserGroups
+Get User Groups mathcing criteria
+
+```golang
+
+data, err := User.GetUserGroups(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Name`, `Status`
+
+
+Use this API to get User Groups mathing criteria passed in query
+
+*Success Response:*
+
+
+
+Success. User Group details. `UserGroupListResponseSchema` for more details.
+
+
+Schema: `UserGroupListResponseSchema`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateUserGroup
+Update an User Group
+
+```golang
+
+data, err := User.UpdateUserGroup(CompanyID, ApplicationID, GroupID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
+
+
+| GroupID | string | Numeric ID allotted to a User Group | 
+
+
+| body |  UpdateUserGroupSchema | "Request body" 
+
+Use this API to update an existing user Group
+
+*Success Response:*
+
+
+
+Success. returns updated User Group. `UserGroupResponseSchema` for more details.
+
+
+Schema: `UserGroupResponseSchema`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getUserGroupById
+Get an User Group by Id
+
+```golang
+
+data, err := User.GetUserGroupById(CompanyID, ApplicationID, GroupID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
+
+
+| GroupID | string | Numeric ID allotted to a User Group | 
+
+
+
+Use this API to get details of an existing user Group
+
+*Success Response:*
+
+
+
+Success. User Group details. `UserGroupResponseSchema` for more details.
+
+
+Schema: `UserGroupResponseSchema`
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ---
 
@@ -60096,7 +60277,7 @@ Schema: `ResponseEnvelopeListJobConfigListDTO`
 
 
 #### getBuildConfig
-Get latest build config
+Get configuration of latest mobile build
 
 ```golang
 
@@ -60112,11 +60293,11 @@ data, err := Configuration.GetBuildConfig(CompanyID, ApplicationID, PlatformType
 | ApplicationID | string | Current application id | 
 
 
-| PlatformType | string | Current platform name | 
+| PlatformType | string | The device platform for which the mobile app was built, e.g. android, ios. | 
 
 
 
-Get latest build config
+Fetch latest build configuration, such as app name, landing page image, splash image used in a mobile build.
 
 *Success Response:*
 
@@ -60226,7 +60407,7 @@ Schema: `BuildVersionHistory`
 
 
 #### getAppFeatures
-Get features of application
+Get features of sales channel
 
 ```golang
 
@@ -60243,7 +60424,7 @@ data, err := Configuration.GetAppFeatures(CompanyID, ApplicationID);
 
 
 
-Get features of application
+It gives the features of sales channel. Moreover, get the details about product details, landing page, registration page, home page, listing page, reward points and many more properties.
 
 *Success Response:*
 
@@ -60266,7 +60447,7 @@ Schema: `AppFeatureResponse`
 
 
 #### updateAppFeatures
-Update features of application
+Update features of sale channel
 
 ```golang
 
@@ -60284,7 +60465,7 @@ data, err := Configuration.UpdateAppFeatures(CompanyID, ApplicationID, body);
 
 | body |  AppFeatureRequest | "Request body" 
 
-Update features of application
+It saves or Updates the features of sales channel.
 
 *Success Response:*
 
@@ -60307,7 +60488,7 @@ Schema: `AppFeature`
 
 
 #### getAppBasicDetails
-Get basic application details
+Get basic sales channel details
 
 ```golang
 
@@ -60324,7 +60505,7 @@ data, err := Configuration.GetAppBasicDetails(CompanyID, ApplicationID);
 
 
 
-Get basic application details like name
+Get basic sales channel details like name, description, logo, domain ,company id and other related information.
 
 *Success Response:*
 
@@ -60347,7 +60528,7 @@ Schema: `ApplicationDetail`
 
 
 #### updateAppBasicDetails
-Add or update application's basic details
+Add or update sales channel basic details
 
 ```golang
 
@@ -60365,7 +60546,7 @@ data, err := Configuration.UpdateAppBasicDetails(CompanyID, ApplicationID, body)
 
 | body |  ApplicationDetail | "Request body" 
 
-Add or update application's basic details
+Add or update sales channel basic details like name, description, logo, domain ,company id and other information.
 
 *Success Response:*
 
@@ -60388,7 +60569,7 @@ Schema: `ApplicationDetail`
 
 
 #### getAppContactInfo
-Get application information
+Get sales channel current information
 
 ```golang
 
@@ -60405,7 +60586,7 @@ data, err := Configuration.GetAppContactInfo(CompanyID, ApplicationID);
 
 
 
-Get Application Current Information. This includes information about social links, address and contact information of company/seller/brand of the application.
+Get sales channel Current Information. This includes information about social links, address and contact information of company/seller/brand of the application.
 
 *Success Response:*
 
@@ -60428,7 +60609,7 @@ Schema: `ApplicationInformation`
 
 
 #### updateAppContactInfo
-Get application information
+Save or update sales channel current information
 
 ```golang
 
@@ -60446,7 +60627,7 @@ data, err := Configuration.UpdateAppContactInfo(CompanyID, ApplicationID, body);
 
 | body |  ApplicationInformation | "Request body" 
 
-Save Application Current Information. This includes information about social links, address and contact information of an application.
+Save or update the sales channel current information. This includes information about social links, address and contact information of an application.
 
 *Success Response:*
 
@@ -60469,7 +60650,7 @@ Schema: `ApplicationInformation`
 
 
 #### getAppApiTokens
-Get social tokens
+Get social tokens for the sales channel
 
 ```golang
 
@@ -60486,7 +60667,7 @@ data, err := Configuration.GetAppApiTokens(CompanyID, ApplicationID);
 
 
 
-Get social tokens.
+Get social tokens for the sales channel.
 
 *Success Response:*
 
@@ -60509,7 +60690,7 @@ Schema: `TokenResponse`
 
 
 #### updateAppApiTokens
-Add social tokens
+Add social tokens for the sales channel
 
 ```golang
 
@@ -60527,7 +60708,7 @@ data, err := Configuration.UpdateAppApiTokens(CompanyID, ApplicationID, body);
 
 | body |  TokenResponse | "Request body" 
 
-Add social tokens.
+Add social tokens for the sales channel.
 
 *Success Response:*
 
@@ -60550,7 +60731,7 @@ Schema: `TokenResponse`
 
 
 #### getAppCompanies
-Application inventory enabled companies
+Get sales channel inventory enabled companies
 
 ```golang
 
@@ -60574,7 +60755,7 @@ data, err := Configuration.GetAppCompanies(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `UID`, `PageNo`, `PageSize`
 
 
-Application inventory enabled companies.
+Get sales channel inventory enabled companies. Company has information about company name, uid and company type.
 
 *Success Response:*
 
@@ -60597,7 +60778,7 @@ Schema: `CompaniesResponse`
 
 
 #### getAppStores
-Application inventory enabled stores
+sales channel inventory enabled stores
 
 ```golang
 
@@ -60619,7 +60800,7 @@ data, err := Configuration.GetAppStores(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`
 
 
-Application inventory enabled stores.
+Get sales channel inventory enabled stores. Inventory enabled store has information about uid, name, display name, store type, store code and company id.
 
 *Success Response:*
 
@@ -60764,7 +60945,7 @@ Schema: `ApplicationInventory`
 
 
 #### getAppCurrencyConfig
-Get application enabled currency list
+Get current channel enabled currency list
 
 ```golang
 
@@ -60781,7 +60962,7 @@ data, err := Configuration.GetAppCurrencyConfig(CompanyID, ApplicationID);
 
 
 
-Get application enabled currency list
+It gives all enabled currency list for the current sales channel.
 
 *Success Response:*
 
@@ -60804,7 +60985,7 @@ Schema: `AppSupportedCurrency`
 
 
 #### updateAppCurrencyConfig
-Add initial application supported currency
+Update initial sales channel supported currency
 
 ```golang
 
@@ -60822,7 +61003,7 @@ data, err := Configuration.UpdateAppCurrencyConfig(CompanyID, ApplicationID, bod
 
 | body |  AppSupportedCurrency | "Request body" 
 
-Add initial application supported currency for various features and data. Default INR will be enabled.
+Update sales channel supported currency for various features and data. Default INR will be enabled.
 
 *Success Response:*
 
