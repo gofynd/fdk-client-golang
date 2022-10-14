@@ -16831,11 +16831,11 @@ package platform
     type ShipmentBody struct {
 
         
-            DataUpdate map[string]interface{}  `json:"data_update"`
             Bags []float64  `json:"bags"`
+            Reason []float64  `json:"reason"`
             Products []ProductDetail  `json:"products"`
             StoreInvoiceID string  `json:"store_invoice_id"`
-            Reason []float64  `json:"reason"`
+            DataUpdate map[string]interface{}  `json:"data_update"`
          
     }
     
@@ -16851,9 +16851,9 @@ package platform
     type Statuses struct {
 
         
-            Shipments ShipmentDetail  `json:"shipments"`
             ExcludeBagsNextState string  `json:"exclude_bags_next_state"`
             Status string  `json:"status"`
+            Shipments ShipmentDetail  `json:"shipments"`
          
     }
     
@@ -16861,8 +16861,8 @@ package platform
     type PlatformShipmentStatusInternal struct {
 
         
-            Task bool  `json:"task"`
             Statuses Statuses  `json:"statuses"`
+            Task bool  `json:"task"`
             ForceTransition bool  `json:"force_transition"`
          
     }
@@ -16889,14 +16889,14 @@ package platform
 
         
             Message string  `json:"message"`
-            Createdat string  `json:"createdat"`
-            L3Detail string  `json:"l3_detail"`
-            L2Detail string  `json:"l2_detail"`
             L1Detail string  `json:"l1_detail"`
+            Createdat string  `json:"createdat"`
             User string  `json:"user"`
-            TicketURL string  `json:"ticket_url"`
-            Type string  `json:"type"`
+            L2Detail string  `json:"l2_detail"`
             TicketID string  `json:"ticket_id"`
+            L3Detail string  `json:"l3_detail"`
+            Type string  `json:"type"`
+            TicketURL string  `json:"ticket_url"`
          
     }
     
