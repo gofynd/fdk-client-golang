@@ -7888,9 +7888,9 @@ package application
     type ShipmentBody struct {
 
         
+            StoreInvoiceID string  `json:"store_invoice_id"`
             Products []ProductDetail  `json:"products"`
             DataUpdate map[string]interface{}  `json:"data_update"`
-            StoreInvoiceID string  `json:"store_invoice_id"`
             Bags []float64  `json:"bags"`
             Reason []float64  `json:"reason"`
          
@@ -7918,9 +7918,9 @@ package application
     type ShipmentStatusUpdateBody struct {
 
         
-            Statuses []Statuses1  `json:"statuses"`
             Task bool  `json:"task"`
             ForceTransition bool  `json:"force_transition"`
+            Statuses []Statuses1  `json:"statuses"`
          
     }
     
@@ -7928,8 +7928,8 @@ package application
     type ShipmentStatusUpdate struct {
 
         
-            Success bool  `json:"success"`
             Message []map[string]interface{}  `json:"message"`
+            Success bool  `json:"success"`
          
     }
     

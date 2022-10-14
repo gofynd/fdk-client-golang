@@ -16831,11 +16831,11 @@ package platform
     type ShipmentBody struct {
 
         
+            DataUpdate map[string]interface{}  `json:"data_update"`
+            StoreInvoiceID string  `json:"store_invoice_id"`
+            Products []ProductDetail  `json:"products"`
             Bags []float64  `json:"bags"`
             Reason []float64  `json:"reason"`
-            Products []ProductDetail  `json:"products"`
-            StoreInvoiceID string  `json:"store_invoice_id"`
-            DataUpdate map[string]interface{}  `json:"data_update"`
          
     }
     
@@ -16851,9 +16851,9 @@ package platform
     type Statuses struct {
 
         
+            Shipments ShipmentDetail  `json:"shipments"`
             ExcludeBagsNextState string  `json:"exclude_bags_next_state"`
             Status string  `json:"status"`
-            Shipments ShipmentDetail  `json:"shipments"`
          
     }
     
@@ -16888,15 +16888,15 @@ package platform
     type HistoryDict struct {
 
         
-            Message string  `json:"message"`
-            L1Detail string  `json:"l1_detail"`
-            Createdat string  `json:"createdat"`
-            User string  `json:"user"`
-            L2Detail string  `json:"l2_detail"`
-            TicketID string  `json:"ticket_id"`
-            L3Detail string  `json:"l3_detail"`
-            Type string  `json:"type"`
             TicketURL string  `json:"ticket_url"`
+            TicketID string  `json:"ticket_id"`
+            User string  `json:"user"`
+            L1Detail string  `json:"l1_detail"`
+            L3Detail string  `json:"l3_detail"`
+            L2Detail string  `json:"l2_detail"`
+            Message string  `json:"message"`
+            Type string  `json:"type"`
+            Createdat string  `json:"createdat"`
          
     }
     
