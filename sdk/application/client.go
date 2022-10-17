@@ -1706,55 +1706,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1795,6 +1746,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -5653,6 +5653,79 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //UserSendResetPasswordMobileXQuery holds query params
+    type UserSendResetPasswordMobileXQuery struct { 
+        Platform string  `url:"platform,omitempty"`  
+    }
+    
+    // SendResetPasswordMobile Reset Password
+    func (us *User)  SendResetPasswordMobile(xQuery UserSendResetPasswordMobileXQuery, body  SendResetPasswordMobileRequestSchema) (ResetPasswordSuccess, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             sendResetPasswordMobileResponse ResetPasswordSuccess
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return ResetPasswordSuccess{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return ResetPasswordSuccess{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "post",
+            "/service/application/user/authentication/v1.0/login/password/mobile/reset",
+            nil,
+            xQuery,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ResetPasswordSuccess{}, err
+	    }
+        
+        err = json.Unmarshal(response, &sendResetPasswordMobileResponse)
+        if err != nil {
+            return ResetPasswordSuccess{}, common.NewFDKError(err.Error())
+        }
+         return sendResetPasswordMobileResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // ForgotPassword Forgot Password
     func (us *User)  ForgotPassword(body  ForgotPasswordRequestSchema) (LoginSuccess, error){
         var (
@@ -6143,13 +6216,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // ArchiveUser verify otp and archive user
-    func (us *User)  ArchiveUser(body  ArchiveApplicationUserRequestSchema) (ArchiveUserSuccess, error){
+    // DeleteUser verify otp and delete user
+    func (us *User)  DeleteUser(body  DeleteApplicationUserRequestSchema) (DeleteUserSuccess, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             archiveUserResponse ArchiveUserSuccess
+             deleteUserResponse DeleteUserSuccess
 	    )
 
         
@@ -6176,32 +6249,32 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return ArchiveUserSuccess{}, common.NewFDKError(err.Error())
+             return DeleteUserSuccess{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return ArchiveUserSuccess{}, common.NewFDKError(err.Error())
+             return DeleteUserSuccess{}, common.NewFDKError(err.Error())
         }
         
         //API call
         rawRequest = NewRequest(
             us.config,
             "post",
-            "/service/application/user/authentication/v1.0/archive",
+            "/service/application/user/authentication/v1.0/delete",
             nil,
             nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ArchiveUserSuccess{}, err
+            return DeleteUserSuccess{}, err
 	    }
         
-        err = json.Unmarshal(response, &archiveUserResponse)
+        err = json.Unmarshal(response, &deleteUserResponse)
         if err != nil {
-            return ArchiveUserSuccess{}, common.NewFDKError(err.Error())
+            return DeleteUserSuccess{}, common.NewFDKError(err.Error())
         }
-         return archiveUserResponse, nil
+         return deleteUserResponse, nil
         
     }
           
