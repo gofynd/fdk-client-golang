@@ -59409,7 +59409,7 @@ Schema: `CompleteResponse`
 
 
 #### getSignUrls
-Explain here
+Gives signed urls to access private files
 
 ```golang
 
@@ -60334,12 +60334,12 @@ data, err := Configuration.UpdateBuildConfig(CompanyID, ApplicationID, PlatformT
 | ApplicationID | string | Current application id | 
 
 
-| PlatformType | string | Current platform name | 
+| PlatformType | string | The device current platform name for which the app was built, e.g. android, ios. | 
 
 
 | body |  MobileAppConfigRequest | "Request body" 
 
-Update build config for next build
+It Updates the build configuration for next build. It updates the details such as app name, landing page image, splash image used in a mobile build.
 
 *Success Response:*
 
@@ -60378,11 +60378,17 @@ data, err := Configuration.GetPreviousVersions(CompanyID, ApplicationID, Platfor
 | ApplicationID | string | Current application id | 
 
 
-| PlatformType | string | Current platform name | 
+| PlatformType | string | The device current platform name for which the app was built, e.g. android, ios. | 
 
 
 
-Get previous build versions
+It gives previous build versions info. It contains the details about platform type, build status, version name, and version code in previous build versions.
+Builed status - It shows application build status. Build status can be pending or cancelled or failed or success.
+    * pending
+    * cancelled
+    * failed
+    * success
+
 
 *Success Response:*
 

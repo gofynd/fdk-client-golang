@@ -9865,7 +9865,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetSignUrls Explain here
+    // GetSignUrls Gives signed urls to access private files
      func (fi *PlatformFileStorage)  GetSignUrls(body  SignUrlRequest) (SignUrlResponse, error){
         
         var (

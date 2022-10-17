@@ -9371,7 +9371,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetApplication Get current application details
+    // GetApplication Get current sales channel details
     func (co *Configuration)  GetApplication() (Application, error){
         var (
             rawRequest  *RawRequest
@@ -9416,7 +9416,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetOwnerInfo Get application, owner and seller information
+    // GetOwnerInfo Get sales channel, owner and seller information
     func (co *Configuration)  GetOwnerInfo() (ApplicationAboutResponse, error){
         var (
             rawRequest  *RawRequest
@@ -9558,7 +9558,7 @@ func NewAppClient(config *AppConfig) *Client {
         Q string  `url:"q,omitempty"`  
     }
     
-    // GetOrderingStores Get deployment stores
+    // GetOrderingStores Get all deployment stores
     func (co *Configuration)  GetOrderingStores(xQuery ConfigurationGetOrderingStoresXQuery) (OrderingStores, error){
         var (
             rawRequest  *RawRequest
@@ -9630,7 +9630,7 @@ func NewAppClient(config *AppConfig) *Client {
                     
                 
             
-            // GetOrderingStoresPaginator Get deployment stores  
+            // GetOrderingStoresPaginator Get all deployment stores  
             func (co *Configuration)  GetOrderingStoresPaginator( xQuery ConfigurationGetOrderingStoresXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
                  
