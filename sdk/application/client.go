@@ -6263,6 +6263,74 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // DeleteUser verify otp and delete user
+    func (us *User)  DeleteUser(body  DeleteApplicationUserRequestSchema) (DeleteUserSuccess, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             deleteUserResponse DeleteUserSuccess
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return DeleteUserSuccess{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return DeleteUserSuccess{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "post",
+            "/service/application/user/authentication/v1.0/delete",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DeleteUserSuccess{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteUserResponse)
+        if err != nil {
+            return DeleteUserSuccess{}, common.NewFDKError(err.Error())
+        }
+         return deleteUserResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // Logout Logs out currently logged in user
     func (us *User)  Logout() (LogoutSuccess, error){
         var (

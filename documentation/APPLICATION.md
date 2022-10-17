@@ -133,6 +133,7 @@
     * [verifyMobile](#verifymobile)
     * [hasPassword](#haspassword)
     * [updatePassword](#updatepassword)
+    * [deleteUser](#deleteuser)
     * [logout](#logout)
     * [sendOTPOnMobile](#sendotponmobile)
     * [verifyMobileOTP](#verifymobileotp)
@@ -12340,6 +12341,42 @@ Schema: `VerifyEmailSuccess`
 ---
 
 
+#### deleteUser
+verify otp and delete user
+
+```golang
+
+ data, err :=  User.DeleteUser(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  DeleteApplicationUserRequestSchema | "Request body" 
+
+
+verify otp and delete user
+
+*Success Response:*
+
+
+
+Success. Returns a success message. Refer `DeleteUserSuccess` for more details.
+
+
+Schema: `DeleteUserSuccess`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### logout
 Logs out currently logged in user
 
@@ -16554,49 +16591,6 @@ Success. Check the example shown below or refer `ValidateCustomerResponse` for m
 
 
 Schema: `ValidateCustomerResponse`
-
-
-*Examples:*
-
-
-success is True i.e user is allowed
-```json
-{
-  "value": {
-    "success": true,
-    "message": "data fetched",
-    "data": {
-      "api_version": 2,
-      "data": {
-        "approved": true,
-        "button_text": "Buy Now, Pay Later",
-        "first_transaction": false
-      },
-      "aggregator": "Simpl"
-    }
-  }
-}
-```
-
-success is True i.e user not allowed
-```json
-{
-  "value": {
-    "success": false,
-    "message": "data fetched",
-    "error": {
-      "api_version": 2,
-      "data": {
-        "approved": false,
-        "button_text": "Buy Now, Pay Later",
-        "first_transaction": false
-      },
-      "aggregator": "Simpl"
-    },
-    "data": {}
-  }
-}
-```
 
 
 
