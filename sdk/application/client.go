@@ -2352,7 +2352,8 @@ func NewAppClient(config *AppConfig) *Client {
     //CatalogGetProductPriceBySlugXQuery holds query params
     type CatalogGetProductPriceBySlugXQuery struct { 
         StoreID float64  `url:"store_id,omitempty"` 
-        Pincode string  `url:"pincode,omitempty"`  
+        Pincode string  `url:"pincode,omitempty"` 
+        Moq float64  `url:"moq,omitempty"`  
     }
     
     // GetProductPriceBySlug Get the price of a product size at a PIN Code
@@ -2367,6 +2368,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -11840,6 +11843,8 @@ func NewAppClient(config *AppConfig) *Client {
              customerOnboardResponse CustomerOnboardingResponse
 	    )
 
+        
+            
         
             
         
