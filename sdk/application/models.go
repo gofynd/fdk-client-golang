@@ -4967,7 +4967,7 @@ package application
     type GetFaqSchema struct {
 
         
-            Faqs []map[string]interface{}  `json:"faqs"`
+            Faqs []FaqSchema  `json:"faqs"`
          
     }
     
