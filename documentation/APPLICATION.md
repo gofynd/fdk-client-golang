@@ -4134,14 +4134,11 @@ Checkout all items in the cart
 
 ```golang
 
- data, err :=  Cart.CheckoutCart(xQuery, body);
+ data, err :=  Cart.CheckoutCart(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
-
-
-| xQuery | struct | Includes properties such as `ID`
 
 | body |  CartCheckoutDetailRequest | "Request body" 
 
