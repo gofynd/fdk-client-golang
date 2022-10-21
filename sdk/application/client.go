@@ -3901,8 +3901,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //CartCheckoutCartXQuery holds query params
+    type CartCheckoutCartXQuery struct { 
+        ID string  `url:"id,omitempty"`  
+    }
+    
     // CheckoutCart Checkout all items in the cart
-    func (ca *Cart)  CheckoutCart(body  CartCheckoutDetailRequest) (CartCheckoutResponse, error){
+    func (ca *Cart)  CheckoutCart(xQuery CartCheckoutCartXQuery, body  CartCheckoutDetailRequest) (CartCheckoutResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -3945,6 +3950,10 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
+            
+        
 
         
     
@@ -3970,7 +3979,7 @@ func NewAppClient(config *AppConfig) *Client {
             "post",
             "/service/application/cart/v1.0/checkout",
             nil,
-            nil,
+            xQuery,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
