@@ -349,6 +349,55 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // GetProductSimilarByIdentifier Get similar products
+    func (ca *Catalog)  GetProductSimilarByIdentifier(Slug string, SimilarType string) (SimilarProductByTypeResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getProductSimilarByIdentifierResponse SimilarProductByTypeResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/application/catalog/v1.0/products/%s/similar/%s/",Slug,SimilarType),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return SimilarProductByTypeResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductSimilarByIdentifierResponse)
+        if err != nil {
+            return SimilarProductByTypeResponse{}, common.NewFDKError(err.Error())
+        }
+         return getProductSimilarByIdentifierResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // GetProductVariantsBySlug Get variant of a particular product
     func (ca *Catalog)  GetProductVariantsBySlug(Slug string) (ProductVariantsResponse, error){
         var (
