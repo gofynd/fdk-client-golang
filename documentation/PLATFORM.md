@@ -3,7 +3,6 @@
 
 * [Common](#Common) - Application configuration apis 
 * [Lead](#Lead) - Handles communication between Administrator <-> Staff and Staff <-> Users 
-* [Rewards](#Rewards) - Rewards 
 * [Theme](#Theme) - Responsible for themes 
 * [User](#User) - Authentication Service 
 * [Content](#Content) - Content System 
@@ -18,6 +17,7 @@
 * [Inventory](#Inventory) -  
 * [Configuration](#Configuration) - Application configuration apis 
 * [Cart](#Cart) - Cart APIs 
+* [Rewards](#Rewards) - Rewards 
 * [Analytics](#Analytics) - Perceptor analytics 
 * [Discount](#Discount) - Discount 
 * [Partner](#Partner) - Partner configuration apis 
@@ -62,20 +62,6 @@
     * [openVideoRoom](#openvideoroom)
     * [closeVideoRoom](#closevideoroom)
     * [getGeneralConfig](#getgeneralconfig)
-    
-
-* [Rewards](#Rewards)
-  * Methods
-    * [getGiveaways](#getgiveaways)
-    * [createGiveaway](#creategiveaway)
-    * [getGiveawayByID](#getgiveawaybyid)
-    * [updateGiveaway](#updategiveaway)
-    * [getOffers](#getoffers)
-    * [getOfferByName](#getofferbyname)
-    * [updateOfferByName](#updateofferbyname)
-    * [getUserAvailablePoints](#getuseravailablepoints)
-    * [updateUserStatus](#updateuserstatus)
-    * [getUserPointsHistory](#getuserpointshistory)
     
 
 * [Theme](#Theme)
@@ -550,6 +536,20 @@
     * [getAbandonedCart](#getabandonedcart)
     * [addItems](#additems)
     * [updateCart](#updatecart)
+    
+
+* [Rewards](#Rewards)
+  * Methods
+    * [getGiveaways](#getgiveaways)
+    * [createGiveaway](#creategiveaway)
+    * [getGiveawayByID](#getgiveawaybyid)
+    * [updateGiveaway](#updategiveaway)
+    * [getOffers](#getoffers)
+    * [getOfferByName](#getofferbyname)
+    * [updateOfferByName](#updateofferbyname)
+    * [getUserAvailablePoints](#getuseravailablepoints)
+    * [updateUserStatus](#updateuserstatus)
+    * [getUserPointsHistory](#getuserpointshistory)
     
 
 * [Analytics](#Analytics)
@@ -4329,454 +4329,6 @@ Default
   }
 }
 ```
-
-
-
-
-
-
-
-
-
----
-
-
-
----
-
-
-## Rewards
-
-
-#### getGiveaways
-List of giveaways of the current application.
-
-```golang
-
-data, err := Rewards.GetGiveaways(CompanyID, ApplicationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageID`, `PageSize`
-
-
-List of giveaways of the current application.
-
-*Success Response:*
-
-
-
-ok
-
-
-Schema: `GiveawayResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createGiveaway
-Adds a new giveaway.
-
-```golang
-
-data, err := Rewards.CreateGiveaway(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-| body |  Giveaway | "Request body" 
-
-Adds a new giveaway.
-
-*Success Response:*
-
-
-
-ok
-
-
-Schema: `Giveaway`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getGiveawayByID
-Get giveaway by ID.
-
-```golang
-
-data, err := Rewards.GetGiveawayByID(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-| ID | string | Giveaway ID | 
-
-
-
-Get giveaway by ID.
-
-*Success Response:*
-
-
-
-ok
-
-
-Schema: `Giveaway`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateGiveaway
-Updates the giveaway by it's ID.
-
-```golang
-
-data, err := Rewards.UpdateGiveaway(CompanyID, ApplicationID, ID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-| ID | string | Giveaway ID | 
-
-
-| body |  Giveaway | "Request body" 
-
-Updates the giveaway by it's ID.
-
-*Success Response:*
-
-
-
-ok
-
-
-Schema: `Giveaway`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getOffers
-List of offer of the current application.
-
-```golang
-
-data, err := Rewards.GetOffers(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-
-List of offer of the current application.
-
-*Success Response:*
-
-
-
-ok
-
-
-Schema: `Array<Offer>`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getOfferByName
-Get offer by name.
-
-```golang
-
-data, err := Rewards.GetOfferByName(CompanyID, ApplicationID, Cookie, Name);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-| Cookie | string | User's session cookie. This cookie is set in browser cookie when logged-in to fynd's authentication system i.e. `Grimlock` or by using grimlock-backend SDK for backend implementation. | 
-
-
-| Name | string | Offer name | 
-
-
-
-Get offer by name.
-
-*Success Response:*
-
-
-
-ok
-
-
-Schema: `Offer`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateOfferByName
-Updates the offer by name.
-
-```golang
-
-data, err := Rewards.UpdateOfferByName(CompanyID, ApplicationID, Name, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-| Name | string | Offer name | 
-
-
-| body |  Offer | "Request body" 
-
-Updates the offer by name.
-
-*Success Response:*
-
-
-
-ok
-
-
-Schema: `Offer`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getUserAvailablePoints
-User's reward details.
-
-```golang
-
-data, err := Rewards.GetUserAvailablePoints(CompanyID, ApplicationID, UserID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-| UserID | string | user id | 
-
-
-
-User's reward details.
-
-*Success Response:*
-
-
-
-ok
-
-
-Schema: `UserRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateUserStatus
-Update User status
-
-```golang
-
-data, err := Rewards.UpdateUserStatus(CompanyID, ApplicationID, UserID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-| UserID | string | user id | 
-
-
-| body |  AppUser | "Request body" 
-
-Update user status, active/archive
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `AppUser`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getUserPointsHistory
-Get list of points transactions.
-
-```golang
-
-data, err := Rewards.GetUserPointsHistory(CompanyID, ApplicationID, UserID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-| UserID | string | user id | 
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageID`, `PageLimit`, `PageSize`
-
-
-Get list of points transactions.
-The list of points history is paginated.
-
-*Success Response:*
-
-
-
-ok
-
-
-Schema: `HistoryRes`
 
 
 
@@ -64948,6 +64500,454 @@ Item updated in the cart
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+---
+
+
+
+---
+
+
+## Rewards
+
+
+#### getGiveaways
+List of giveaways of the current application.
+
+```golang
+
+data, err := Rewards.GetGiveaways(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageID`, `PageSize`
+
+
+List of giveaways of the current application.
+
+*Success Response:*
+
+
+
+ok
+
+
+Schema: `GiveawayResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createGiveaway
+Adds a new giveaway.
+
+```golang
+
+data, err := Rewards.CreateGiveaway(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| body |  Giveaway | "Request body" 
+
+Adds a new giveaway.
+
+*Success Response:*
+
+
+
+ok
+
+
+Schema: `Giveaway`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getGiveawayByID
+Get giveaway by ID.
+
+```golang
+
+data, err := Rewards.GetGiveawayByID(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| ID | string | Giveaway ID | 
+
+
+
+Get giveaway by ID.
+
+*Success Response:*
+
+
+
+ok
+
+
+Schema: `Giveaway`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateGiveaway
+Updates the giveaway by it's ID.
+
+```golang
+
+data, err := Rewards.UpdateGiveaway(CompanyID, ApplicationID, ID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| ID | string | Giveaway ID | 
+
+
+| body |  Giveaway | "Request body" 
+
+Updates the giveaway by it's ID.
+
+*Success Response:*
+
+
+
+ok
+
+
+Schema: `Giveaway`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOffers
+List of offer of the current application.
+
+```golang
+
+data, err := Rewards.GetOffers(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+
+List of offer of the current application.
+
+*Success Response:*
+
+
+
+ok
+
+
+Schema: `Array<Offer>`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOfferByName
+Get offer by name.
+
+```golang
+
+data, err := Rewards.GetOfferByName(CompanyID, ApplicationID, Cookie, Name);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| Cookie | string | User's session cookie. This cookie is set in browser cookie when logged-in to fynd's authentication system i.e. `Grimlock` or by using grimlock-backend SDK for backend implementation. | 
+
+
+| Name | string | Offer name | 
+
+
+
+Get offer by name.
+
+*Success Response:*
+
+
+
+ok
+
+
+Schema: `Offer`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateOfferByName
+Updates the offer by name.
+
+```golang
+
+data, err := Rewards.UpdateOfferByName(CompanyID, ApplicationID, Name, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| Name | string | Offer name | 
+
+
+| body |  Offer | "Request body" 
+
+Updates the offer by name.
+
+*Success Response:*
+
+
+
+ok
+
+
+Schema: `Offer`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getUserAvailablePoints
+User's reward details.
+
+```golang
+
+data, err := Rewards.GetUserAvailablePoints(CompanyID, ApplicationID, UserID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| UserID | string | user id | 
+
+
+
+User's reward details.
+
+*Success Response:*
+
+
+
+ok
+
+
+Schema: `UserRes`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateUserStatus
+Update User status
+
+```golang
+
+data, err := Rewards.UpdateUserStatus(CompanyID, ApplicationID, UserID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| UserID | string | user id | 
+
+
+| body |  AppUser | "Request body" 
+
+Update user status, active/archive
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `AppUser`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getUserPointsHistory
+Get list of points transactions.
+
+```golang
+
+data, err := Rewards.GetUserPointsHistory(CompanyID, ApplicationID, UserID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| UserID | string | user id | 
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageID`, `PageLimit`, `PageSize`
+
+
+Get list of points transactions.
+The list of points history is paginated.
+
+*Success Response:*
+
+
+
+ok
+
+
+Schema: `HistoryRes`
 
 
 

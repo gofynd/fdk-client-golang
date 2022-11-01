@@ -651,209 +651,6 @@ package platform
     
 
     
-    // AppUser used by Rewards
-    type AppUser struct {
-
-        
-            ID string  `json:"_id"`
-            Active bool  `json:"active"`
-            ApplicationID string  `json:"application_id"`
-            BlockReason string  `json:"block_reason"`
-            UpdatedAt string  `json:"updated_at"`
-            UpdatedBy string  `json:"updated_by"`
-            UserID string  `json:"user_id"`
-         
-    }
-    
-    // Asset used by Rewards
-    type Asset struct {
-
-        
-            AspectRatio string  `json:"aspect_ratio"`
-            ID string  `json:"id"`
-            SecureURL string  `json:"secure_url"`
-         
-    }
-    
-    // E used by Rewards
-    type E struct {
-
-        
-            Code map[string]interface{}  `json:"code"`
-            Exception string  `json:"exception"`
-            Info string  `json:"info"`
-            Message string  `json:"message"`
-            RequestID string  `json:"request_id"`
-            StackTrace string  `json:"stack_trace"`
-            Status float64  `json:"status"`
-         
-    }
-    
-    // Giveaway used by Rewards
-    type Giveaway struct {
-
-        
-            ID string  `json:"_id"`
-            Schedule Schedule  `json:"_schedule"`
-            Active bool  `json:"active"`
-            ApplicationID string  `json:"application_id"`
-            Audience RewardsAudience  `json:"audience"`
-            BannerImage Asset  `json:"banner_image"`
-            CreatedAt string  `json:"created_at"`
-            Description string  `json:"description"`
-            Name string  `json:"name"`
-            Rule RewardsRule  `json:"rule"`
-            Title string  `json:"title"`
-            UpdatedAt string  `json:"updated_at"`
-         
-    }
-    
-    // GiveawayResponse used by Rewards
-    type GiveawayResponse struct {
-
-        
-            Items []Giveaway  `json:"items"`
-            Page Page  `json:"page"`
-         
-    }
-    
-    // HistoryPretty used by Rewards
-    type HistoryPretty struct {
-
-        
-            ID string  `json:"_id"`
-            ApplicationID string  `json:"application_id"`
-            Claimed bool  `json:"claimed"`
-            CreatedAt string  `json:"created_at"`
-            ExpiresOn string  `json:"expires_on"`
-            Points float64  `json:"points"`
-            RemainingPoints float64  `json:"remaining_points"`
-            Text1 string  `json:"text_1"`
-            Text2 string  `json:"text_2"`
-            Text3 string  `json:"text_3"`
-            TxnName string  `json:"txn_name"`
-            UpdatedAt string  `json:"updated_at"`
-            UserID string  `json:"user_id"`
-         
-    }
-    
-    // HistoryRes used by Rewards
-    type HistoryRes struct {
-
-        
-            Items []HistoryPretty  `json:"items"`
-            Page Page  `json:"page"`
-            Points float64  `json:"points"`
-         
-    }
-    
-    // Offer used by Rewards
-    type Offer struct {
-
-        
-            Schedule Schedule  `json:"_schedule"`
-            Active bool  `json:"active"`
-            ApplicationID string  `json:"application_id"`
-            BannerImage Asset  `json:"banner_image"`
-            CreatedAt string  `json:"created_at"`
-            Name string  `json:"name"`
-            Rule map[string]interface{}  `json:"rule"`
-            Share ShareMessages  `json:"share"`
-            SubText string  `json:"sub_text"`
-            Text string  `json:"text"`
-            Type string  `json:"type"`
-            UpdatedAt string  `json:"updated_at"`
-            UpdatedBy string  `json:"updated_by"`
-            URL string  `json:"url"`
-         
-    }
-    
-    // Points used by Rewards
-    type Points struct {
-
-        
-            Available float64  `json:"available"`
-         
-    }
-    
-    // Referral used by Rewards
-    type Referral struct {
-
-        
-            Code string  `json:"code"`
-         
-    }
-    
-    // RewardUser used by Rewards
-    type RewardUser struct {
-
-        
-            ID string  `json:"_id"`
-            Active bool  `json:"active"`
-            CreatedAt string  `json:"created_at"`
-            Referral Referral  `json:"referral"`
-            UID float64  `json:"uid"`
-            UpdatedAt string  `json:"updated_at"`
-            UserBlockReason string  `json:"user_block_reason"`
-            UserID string  `json:"user_id"`
-         
-    }
-    
-    // RewardsAudience used by Rewards
-    type RewardsAudience struct {
-
-        
-            HeaderUserID string  `json:"header_user_id"`
-            ID string  `json:"id"`
-         
-    }
-    
-    // RewardsRule used by Rewards
-    type RewardsRule struct {
-
-        
-            Amount float64  `json:"amount"`
-         
-    }
-    
-    // Schedule used by Rewards
-    type Schedule struct {
-
-        
-            Cron string  `json:"cron"`
-            Duration float64  `json:"duration"`
-            End string  `json:"end"`
-            Start string  `json:"start"`
-         
-    }
-    
-    // ShareMessages used by Rewards
-    type ShareMessages struct {
-
-        
-            Email string  `json:"email"`
-            Facebook string  `json:"facebook"`
-            Fallback string  `json:"fallback"`
-            Message string  `json:"message"`
-            Messenger string  `json:"messenger"`
-            Sms string  `json:"sms"`
-            Text string  `json:"text"`
-            Twitter string  `json:"twitter"`
-            Whatsapp string  `json:"whatsapp"`
-         
-    }
-    
-    // UserRes used by Rewards
-    type UserRes struct {
-
-        
-            Points Points  `json:"points"`
-            User RewardUser  `json:"user"`
-         
-    }
-    
-
-    
     // AvailablePageSchema used by Theme
     type AvailablePageSchema struct {
 
@@ -2489,6 +2286,16 @@ package platform
         
             Type string  `json:"type"`
             Value string  `json:"value"`
+         
+    }
+    
+    // Asset used by Content
+    type Asset struct {
+
+        
+            AspectRatio string  `json:"aspect_ratio"`
+            ID string  `json:"id"`
+            SecureURL string  `json:"secure_url"`
          
     }
     
@@ -12165,7 +11972,6 @@ package platform
 
         
             Required bool  `json:"required"`
-            Mapping map[string]PropBeanConfig  `json:"mapping"`
             Optional bool  `json:"optional"`
             Send Send  `json:"send"`
             Validations []map[string]map[string]interface{}  `json:"validations"`
@@ -15504,6 +15310,199 @@ package platform
             Cart CartDetailResponse  `json:"cart"`
             Success bool  `json:"success"`
             Message string  `json:"message"`
+         
+    }
+    
+
+    
+    // AppUser used by Rewards
+    type AppUser struct {
+
+        
+            ID string  `json:"_id"`
+            Active bool  `json:"active"`
+            ApplicationID string  `json:"application_id"`
+            BlockReason string  `json:"block_reason"`
+            UpdatedAt string  `json:"updated_at"`
+            UpdatedBy string  `json:"updated_by"`
+            UserID string  `json:"user_id"`
+         
+    }
+    
+    // E used by Rewards
+    type E struct {
+
+        
+            Code map[string]interface{}  `json:"code"`
+            Exception string  `json:"exception"`
+            Info string  `json:"info"`
+            Message string  `json:"message"`
+            RequestID string  `json:"request_id"`
+            StackTrace string  `json:"stack_trace"`
+            Status float64  `json:"status"`
+         
+    }
+    
+    // Giveaway used by Rewards
+    type Giveaway struct {
+
+        
+            ID string  `json:"_id"`
+            Schedule Schedule  `json:"_schedule"`
+            Active bool  `json:"active"`
+            ApplicationID string  `json:"application_id"`
+            Audience RewardsAudience  `json:"audience"`
+            BannerImage Asset  `json:"banner_image"`
+            CreatedAt string  `json:"created_at"`
+            Description string  `json:"description"`
+            Name string  `json:"name"`
+            Rule RewardsRule  `json:"rule"`
+            Title string  `json:"title"`
+            UpdatedAt string  `json:"updated_at"`
+         
+    }
+    
+    // GiveawayResponse used by Rewards
+    type GiveawayResponse struct {
+
+        
+            Items []Giveaway  `json:"items"`
+            Page Page  `json:"page"`
+         
+    }
+    
+    // HistoryPretty used by Rewards
+    type HistoryPretty struct {
+
+        
+            ID string  `json:"_id"`
+            ApplicationID string  `json:"application_id"`
+            Claimed bool  `json:"claimed"`
+            CreatedAt string  `json:"created_at"`
+            ExpiresOn string  `json:"expires_on"`
+            Points float64  `json:"points"`
+            RemainingPoints float64  `json:"remaining_points"`
+            Text1 string  `json:"text_1"`
+            Text2 string  `json:"text_2"`
+            Text3 string  `json:"text_3"`
+            TxnName string  `json:"txn_name"`
+            UpdatedAt string  `json:"updated_at"`
+            UserID string  `json:"user_id"`
+         
+    }
+    
+    // HistoryRes used by Rewards
+    type HistoryRes struct {
+
+        
+            Items []HistoryPretty  `json:"items"`
+            Page Page  `json:"page"`
+            Points float64  `json:"points"`
+         
+    }
+    
+    // Offer used by Rewards
+    type Offer struct {
+
+        
+            Schedule Schedule  `json:"_schedule"`
+            Active bool  `json:"active"`
+            ApplicationID string  `json:"application_id"`
+            BannerImage Asset  `json:"banner_image"`
+            CreatedAt string  `json:"created_at"`
+            Name string  `json:"name"`
+            Rule map[string]interface{}  `json:"rule"`
+            Share ShareMessages  `json:"share"`
+            SubText string  `json:"sub_text"`
+            Text string  `json:"text"`
+            Type string  `json:"type"`
+            UpdatedAt string  `json:"updated_at"`
+            UpdatedBy string  `json:"updated_by"`
+            URL string  `json:"url"`
+         
+    }
+    
+    // Points used by Rewards
+    type Points struct {
+
+        
+            Available float64  `json:"available"`
+         
+    }
+    
+    // Referral used by Rewards
+    type Referral struct {
+
+        
+            Code string  `json:"code"`
+         
+    }
+    
+    // RewardUser used by Rewards
+    type RewardUser struct {
+
+        
+            ID string  `json:"_id"`
+            Active bool  `json:"active"`
+            CreatedAt string  `json:"created_at"`
+            Referral Referral  `json:"referral"`
+            UID float64  `json:"uid"`
+            UpdatedAt string  `json:"updated_at"`
+            UserBlockReason string  `json:"user_block_reason"`
+            UserID string  `json:"user_id"`
+         
+    }
+    
+    // RewardsAudience used by Rewards
+    type RewardsAudience struct {
+
+        
+            HeaderUserID string  `json:"header_user_id"`
+            ID string  `json:"id"`
+         
+    }
+    
+    // RewardsRule used by Rewards
+    type RewardsRule struct {
+
+        
+            Amount float64  `json:"amount"`
+         
+    }
+    
+    // Schedule used by Rewards
+    type Schedule struct {
+
+        
+            Cron string  `json:"cron"`
+            Duration float64  `json:"duration"`
+            End string  `json:"end"`
+            Start string  `json:"start"`
+         
+    }
+    
+    // ShareMessages used by Rewards
+    type ShareMessages struct {
+
+        
+            Email string  `json:"email"`
+            Facebook string  `json:"facebook"`
+            Fallback string  `json:"fallback"`
+            Message string  `json:"message"`
+            Messenger string  `json:"messenger"`
+            Sms string  `json:"sms"`
+            Text string  `json:"text"`
+            Twitter string  `json:"twitter"`
+            Whatsapp string  `json:"whatsapp"`
+         
+    }
+    
+    // UserRes used by Rewards
+    type UserRes struct {
+
+        
+            Points Points  `json:"points"`
+            User RewardUser  `json:"user"`
          
     }
     
