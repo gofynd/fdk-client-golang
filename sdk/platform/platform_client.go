@@ -2015,6 +2015,10 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
     
     
+    
+    
+    
+    
 
 
 	
@@ -9634,7 +9638,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetSignUrls Explain here
+    // GetSignUrls Gives signed urls to access private files
      func (fi *PlatformFileStorage)  GetSignUrls(body  SignUrlRequest) (SignUrlResponse, error){
         
         var (
@@ -9707,13 +9711,13 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
 
     // CopyFiles Copy Files
-     func (fi *PlatformFileStorage)  CopyFiles(xQuery PlatformCopyFilesXQuery, body  BulkRequest) (BulkResponse, error){
+     func (fi *PlatformFileStorage)  CopyFiles(xQuery PlatformCopyFilesXQuery, body  BulkRequest) (BulkUploadResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            copyFilesResponse BulkResponse
+            copyFilesResponse BulkUploadResponse
 	    )
 
         
@@ -9740,12 +9744,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
              
-             return BulkResponse{}, common.NewFDKError(err.Error())
+             return BulkUploadResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
                
-             return BulkResponse{}, common.NewFDKError(err.Error())
+             return BulkUploadResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -9758,12 +9762,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-             return BulkResponse{}, err
+             return BulkUploadResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &copyFilesResponse)
         if err != nil {
-             return BulkResponse{}, common.NewFDKError(err.Error())
+             return BulkUploadResponse{}, common.NewFDKError(err.Error())
         }
         return copyFilesResponse, nil
         

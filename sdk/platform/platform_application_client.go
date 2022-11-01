@@ -2653,6 +2653,71 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // UnDeleteUser undelete user who deleted from application and have not elapsed the platform configured delete days
+     func (us *PlatformAppUser)  UnDeleteUser(body  UnDeleteUserRequestSchema) (UnDeleteUserSuccess, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            unDeleteUserResponse UnDeleteUserSuccess
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return UnDeleteUserSuccess{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return UnDeleteUserSuccess{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "put",
+            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/customers/undelete",us.CompanyID, us.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return UnDeleteUserSuccess{}, err
+	    }
+        
+        err = json.Unmarshal(response, &unDeleteUserResponse)
+        if err != nil {
+            return UnDeleteUserSuccess{}, common.NewFDKError(err.Error())
+        }
+        return unDeleteUserResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // UpdateUser Update user
      func (us *PlatformAppUser)  UpdateUser(UserID string, body  UpdateUserRequestSchema) (CreateUserResponseSchema, error) {
         var (
@@ -2954,6 +3019,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             updatePlatformConfigResponse PlatformSchema
 	    )
 
+        
+            
+        
+            
+        
+            
         
             
         
@@ -9676,6 +9747,134 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // SendOtp Send OTP using email and sms
+     func (co *PlatformAppCommunication)  SendOtp(body  SendOtpCommsReq) (SendOtpCommsRes, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            sendOtpResponse SendOtpCommsRes
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return SendOtpCommsRes{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return SendOtpCommsRes{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "post",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/otp/send-otp-comms",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return SendOtpCommsRes{}, err
+	    }
+        
+        err = json.Unmarshal(response, &sendOtpResponse)
+        if err != nil {
+            return SendOtpCommsRes{}, common.NewFDKError(err.Error())
+        }
+        return sendOtpResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // VerfiyOtp Verify OTP sent via email and sms
+     func (co *PlatformAppCommunication)  VerfiyOtp(body  VerifyOtpCommsReq) (VerifyOtpCommsSuccessRes, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            verfiyOtpResponse VerifyOtpCommsSuccessRes
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return VerifyOtpCommsSuccessRes{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return VerifyOtpCommsSuccessRes{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "post",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/otp/verify-otp-comms",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return VerifyOtpCommsSuccessRes{}, err
+	    }
+        
+        err = json.Unmarshal(response, &verfiyOtpResponse)
+        if err != nil {
+            return VerifyOtpCommsSuccessRes{}, common.NewFDKError(err.Error())
+        }
+        return verfiyOtpResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     //PlatformAppGetSmsProvidersXQuery holds query params
     type PlatformAppGetSmsProvidersXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
@@ -15453,12 +15652,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // AppCopyFiles Copy Files
-     func (fi *PlatformAppFileStorage)  AppCopyFiles(xQuery PlatformAppAppCopyFilesXQuery, body  BulkRequest) (BulkResponse, error) {
+     func (fi *PlatformAppFileStorage)  AppCopyFiles(xQuery PlatformAppAppCopyFilesXQuery, body  BulkRequest) (BulkUploadResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            appCopyFilesResponse BulkResponse
+            appCopyFilesResponse BulkUploadResponse
 	    )
 
         
@@ -15485,12 +15684,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
             
-             return BulkResponse{}, common.NewFDKError(err.Error())
+             return BulkUploadResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
             
-             return BulkResponse{}, common.NewFDKError(err.Error())       
+             return BulkUploadResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -15503,12 +15702,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return BulkResponse{}, err
+            return BulkUploadResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &appCopyFilesResponse)
         if err != nil {
-            return BulkResponse{}, common.NewFDKError(err.Error())
+            return BulkUploadResponse{}, common.NewFDKError(err.Error())
         }
         return appCopyFilesResponse, nil
         
