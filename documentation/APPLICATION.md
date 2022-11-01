@@ -31,7 +31,6 @@
     * [getProductComparisonBySlugs](#getproductcomparisonbyslugs)
     * [getSimilarComparisonProductBySlug](#getsimilarcomparisonproductbyslug)
     * [getComparedFrequentlyProductBySlug](#getcomparedfrequentlyproductbyslug)
-    * [getProductSimilarByIdentifier](#getproductsimilarbyidentifier)
     * [getProductVariantsBySlug](#getproductvariantsbyslug)
     * [getProductStockByIds](#getproductstockbyids)
     * [getProductStockForTimeByIds](#getproductstockfortimebyids)
@@ -47,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [followById](#followbyid)
     * [unfollowById](#unfollowbyid)
+    * [followById](#followbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -516,47 +515,6 @@ Success. Returns an array of objects containing the attributes for comparision. 
 
 
 Schema: `ProductFrequentlyComparedSimilarResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getProductSimilarByIdentifier
-Get similar products
-
-```golang
-
- data, err :=  Catalog.GetProductSimilarByIdentifier(Slug, SimilarType);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| Slug | string | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ | 
-
-
-| SimilarType | string | Similarity criteria such as basic, visual, price, seller, category and spec. Visual - Products having similar patterns, Price - Products in similar price range, Seller - Products sold by the same seller, Category - Products belonging to the same category, e.g. sports shoes, Spec - Products having similar specifications, e.g. phones with same memory. | 
-
-
-
-
-Use this API to retrieve products similar to the one specified by its slug. You can search not only similar looking products, but also those that are sold by same seller, or those that belong to the same category, price, specifications, etc.
-
-*Success Response:*
-
-
-
-Success. Returns a group of similar products based on type. Check the example shown below or refer `SimilarProductByTypeResponse` for more details.
-
-
-Schema: `SimilarProductByTypeResponse`
 
 
 
@@ -1190,12 +1148,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1209,7 +1167,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1231,12 +1189,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1250,7 +1208,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
