@@ -12041,7 +12041,8 @@ func NewAppClient(config *AppConfig) *Client {
         PageSize float64  `url:"page_size,omitempty"` 
         FromDate string  `url:"from_date,omitempty"` 
         ToDate string  `url:"to_date,omitempty"` 
-        Status float64  `url:"status,omitempty"`  
+        Status string  `url:"status,omitempty"` 
+        CustomMeta string  `url:"custom_meta,omitempty"`  
     }
     
     // GetOrders Get all orders
@@ -12056,6 +12057,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
