@@ -11828,6 +11828,114 @@ func NewAppClient(config *AppConfig) *Client {
     }
           
     
+    
+    
+  
+    
+    
+    //PaymentOutstandingOrderDetailsXQuery holds query params
+    type PaymentOutstandingOrderDetailsXQuery struct { 
+        Aggregator string  `url:"aggregator,omitempty"`  
+    }
+    
+    // OutstandingOrderDetails API to fetch the outstanding order details
+    func (pa *Payment)  OutstandingOrderDetails(xQuery PaymentOutstandingOrderDetailsXQuery) (OutstandingOrderDetailsResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             outstandingOrderDetailsResponse OutstandingOrderDetailsResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            "/service/application/payment/v1.0/payment/outstanding-orders/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return OutstandingOrderDetailsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &outstandingOrderDetailsResponse)
+        if err != nil {
+            return OutstandingOrderDetailsResponse{}, common.NewFDKError(err.Error())
+        }
+         return outstandingOrderDetailsResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //PaymentPaidOrderDetailsXQuery holds query params
+    type PaymentPaidOrderDetailsXQuery struct { 
+        Aggregator string  `url:"aggregator,omitempty"`  
+    }
+    
+    // PaidOrderDetails API to fetch the paid order details
+    func (pa *Payment)  PaidOrderDetails(xQuery PaymentPaidOrderDetailsXQuery) (PaidOrderDetailsResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             paidOrderDetailsResponse PaidOrderDetailsResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            "/service/application/payment/v1.0/payment/paid-orders/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PaidOrderDetailsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &paidOrderDetailsResponse)
+        if err != nil {
+            return PaidOrderDetailsResponse{}, common.NewFDKError(err.Error())
+        }
+         return paidOrderDetailsResponse, nil
+        
+    }
+          
+    
 
     // Order ...
     type Order struct {
@@ -11849,7 +11957,8 @@ func NewAppClient(config *AppConfig) *Client {
         PageSize float64  `url:"page_size,omitempty"` 
         FromDate string  `url:"from_date,omitempty"` 
         ToDate string  `url:"to_date,omitempty"` 
-        Status float64  `url:"status,omitempty"`  
+        Status string  `url:"status,omitempty"` 
+        CustomMeta string  `url:"custom_meta,omitempty"`  
     }
     
     // GetOrders Get all orders
@@ -11864,6 +11973,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
