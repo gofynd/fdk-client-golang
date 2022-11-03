@@ -2838,6 +2838,60 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //CartDeleteCartXQuery holds query params
+    type CartDeleteCartXQuery struct { 
+        ID float64  `url:"id,omitempty"`  
+    }
+    
+    // DeleteCart Delete cart once user made successful checkout
+    func (ca *Cart)  DeleteCart(xQuery CartDeleteCartXQuery) (DeleteCartDetailResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             deleteCartResponse DeleteCartDetailResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "put",
+            "/service/application/cart/v1.0/cart_archive",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DeleteCartDetailResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteCartResponse)
+        if err != nil {
+            return DeleteCartDetailResponse{}, common.NewFDKError(err.Error())
+        }
+         return deleteCartResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     //CartGetItemCountXQuery holds query params
     type CartGetItemCountXQuery struct { 
         ID string  `url:"id,omitempty"`  

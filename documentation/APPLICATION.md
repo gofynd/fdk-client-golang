@@ -65,6 +65,7 @@
     * [getCartLastModified](#getcartlastmodified)
     * [addItems](#additems)
     * [updateCart](#updatecart)
+    * [deleteCart](#deletecart)
     * [getItemCount](#getitemcount)
     * [getCoupons](#getcoupons)
     * [applyCoupon](#applycoupon)
@@ -2773,6 +2774,44 @@ Item updated in the cart
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteCart
+Delete cart once user made successful checkout
+
+```golang
+
+ data, err :=  Cart.DeleteCart(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `ID`
+
+
+
+Use this API to delete the cart.
+
+*Success Response:*
+
+
+
+Success. Returns whether the cart has been deleted or not.
+
+
+Schema: `DeleteCartDetailResponse`
 
 
 
