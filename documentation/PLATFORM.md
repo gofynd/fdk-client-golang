@@ -22,7 +22,7 @@
 * [Discount](#Discount) - Discount 
 * [Partner](#Partner) - Partner configuration apis 
 * [Webhook](#Webhook) - Webhook dispatcher with retry and one event to many subscriber vice versa 
-* [AuditTrail](#AuditTrail) -  
+* [AuditTrail](#AuditTrail) - Audit Logging Service that logs the crucial updates on the Platform 
 
 ----
 ----
@@ -61,6 +61,7 @@
     * [getVideoParticipants](#getvideoparticipants)
     * [openVideoRoom](#openvideoroom)
     * [closeVideoRoom](#closevideoroom)
+    * [getGeneralConfig](#getgeneralconfig)
     
 
 * [Theme](#Theme)
@@ -269,6 +270,7 @@
     * [getOrdersByCompanyId](#getordersbycompanyid)
     * [getOrderLanesCountByCompanyId](#getorderlanescountbycompanyid)
     * [getOrderDetails](#getorderdetails)
+    * [getOrderDetails](#getorderdetails)
     * [getPicklistOrdersByCompanyId](#getpicklistordersbycompanyid)
     * [trackShipmentPlatform](#trackshipmentplatform)
     * [trackOrder](#trackorder)
@@ -280,20 +282,17 @@
     * [getShipmentAddress](#getshipmentaddress)
     * [updateShipmentAddress](#updateshipmentaddress)
     * [getOrdersByApplicationId](#getordersbyapplicationid)
-    * [getPing](#getping)
-    * [voiceCallback](#voicecallback)
-    * [voiceClickToCall](#voiceclicktocall)
     
 
 * [Catalog](#Catalog)
   * Methods
-    * [getSearchKeywords](#getsearchkeywords)
     * [deleteSearchKeywords](#deletesearchkeywords)
+    * [getSearchKeywords](#getsearchkeywords)
     * [updateSearchKeywords](#updatesearchkeywords)
     * [getAllSearchKeyword](#getallsearchkeyword)
     * [createCustomKeyword](#createcustomkeyword)
-    * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
+    * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [updateAutocompleteKeyword](#updateautocompletekeyword)
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
@@ -305,6 +304,7 @@
     * [createSizeGuide](#createsizeguide)
     * [getSizeGuide](#getsizeguide)
     * [updateSizeGuide](#updatesizeguide)
+    * [getAppProduct](#getappproduct)
     * [updateAppProduct](#updateappproduct)
     * [getConfigurationMetadata](#getconfigurationmetadata)
     * [getGroupConfigurations](#getgroupconfigurations)
@@ -359,15 +359,15 @@
     * [getProducts](#getproducts)
     * [createProduct](#createproduct)
     * [getProductAttributes](#getproductattributes)
-    * [getProduct](#getproduct)
     * [deleteProduct](#deleteproduct)
+    * [getProduct](#getproduct)
     * [editProduct](#editproduct)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
     * [getProductBulkUploadHistory](#getproductbulkuploadhistory)
     * [createBulkProductUploadJob](#createbulkproductuploadjob)
-    * [createProductsInBulk](#createproductsinbulk)
     * [deleteProductBulkJob](#deleteproductbulkjob)
+    * [createProductsInBulk](#createproductsinbulk)
     * [getProductTags](#getproducttags)
     * [getProductAssetsInBulk](#getproductassetsinbulk)
     * [createProductAssetsInBulk](#createproductassetsinbulk)
@@ -379,13 +379,13 @@
     * [deleteInventory](#deleteinventory)
     * [getInventoryBulkUploadHistory](#getinventorybulkuploadhistory)
     * [createBulkInventoryJob](#createbulkinventoryjob)
-    * [createBulkInventory](#createbulkinventory)
     * [deleteBulkInventoryJob](#deletebulkinventoryjob)
+    * [createBulkInventory](#createbulkinventory)
     * [getInventoryExport](#getinventoryexport)
     * [createInventoryExportJob](#createinventoryexportjob)
     * [exportInventoryConfig](#exportinventoryconfig)
-    * [updateRealtimeInventory](#updaterealtimeinventory)
     * [deleteRealtimeInventory](#deleterealtimeinventory)
+    * [updateRealtimeInventory](#updaterealtimeinventory)
     * [updateInventories](#updateinventories)
     * [getAllHsnCodes](#getallhsncodes)
     * [createHsnCode](#createhsncode)
@@ -4251,6 +4251,56 @@ data, err := Lead.CloseVideoRoom(CompanyID, ApplicationID, UniqueName);
 
 
 Close the video room and force all participants to leave.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `CloseVideoRoomResponse`
+
+
+*Examples:*
+
+
+Default
+```json
+{
+  "value": {
+    "success": true
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getGeneralConfig
+Get general support configuration.
+
+```golang
+
+data, err := Lead.GetGeneralConfig(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID of the application | 
+
+
+
+Get general support configuration.
 
 *Success Response:*
 
@@ -51913,9 +51963,7 @@ data, err := Order.GetOrdersByCompanyId(CompanyID, xQuery);
 
 
 
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `IsPrioritySort`, `LockStatus`, `UserID`, `Q`, `Stage`, `SalesChannels`, `OrderID`, `Stores`, `DeploymentStores`, `Status`, `Dp`, `ShortenUrls`, `FilterType`
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `IsPrioritySort`, `LockStatus`, `UserID`, `Q`, `Stage`, `SalesChannels`, `OrderID`, `Stores`, `DeploymentStores`, `Status`, `Dp`, `FilterType`
 
 
 Get Orders
@@ -51975,9 +52023,7 @@ data, err := Order.GetOrderLanesCountByCompanyId(CompanyID, xQuery);
 
 
 
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `Q`, `Stage`, `SalesChannels`, `OrderID`, `Stores`, `Status`, `ShortenUrls`, `FilterType`
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `Q`, `Stage`, `SalesChannels`, `OrderID`, `Stores`, `Status`, `FilterType`
 
 
 Get Orders Seperate Lane Count
@@ -52046,6 +52092,53 @@ Schema: `OrderDetails`
 ---
 
 
+#### getOrderDetails
+Get Order Details for company based on Company Id and Order Id
+
+```golang
+
+data, err := Order.GetOrderDetails(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+| ApplicationID | string | Application Id | 
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `OrderID`, `Next`, `Previous`
+
+
+Get Orders
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `OrderDetails`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getPicklistOrdersByCompanyId
 Get Orders for company based on Company Id
 
@@ -52081,9 +52174,7 @@ data, err := Order.GetPicklistOrdersByCompanyId(CompanyID, xQuery);
 
 
 
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `Q`, `Stage`, `SalesChannels`, `OrderID`, `Stores`, `Status`, `ShortenUrls`, `FilterType`
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `Q`, `Stage`, `SalesChannels`, `OrderID`, `Stores`, `Status`, `FilterType`
 
 
 Get Orders
@@ -52566,170 +52657,11 @@ Schema: `OrderListing`
 ---
 
 
-#### getPing
-Get Ping
-
-```golang
-
-data, err := Order.GetPing(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-
-Get Ping
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `GetPingResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### voiceCallback
-Get Voice Callback
-
-```golang
-
-data, err := Order.VoiceCallback(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-
-Voice Callback
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `GetVoiceCallbackResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### voiceClickToCall
-Get Voice Click to Call
-
-```golang
-
-data, err := Order.VoiceClickToCall(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `Caller`, `Receiver`
-
-
-Voice Click to Call
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `GetClickToCallResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 
 ---
 
 
 ## Catalog
-
-
-#### getSearchKeywords
-Get a Search Keywords Details
-
-```golang
-
-data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
-
-*Success Response:*
-
-
-
-The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
-
-
-Schema: `GetSearchWordsDetailResponse`
-
-
-
-
-
-
-
-
-
----
 
 
 #### deleteSearchKeywords
@@ -52763,6 +52695,49 @@ Status object. Tells whether the operation was successful. See example below or 
 
 
 Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSearchKeywords
+Get a Search Keywords Details
+
+```golang
+
+data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
+
+*Success Response:*
+
+
+
+The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
+
+
+Schema: `GetSearchWordsDetailResponse`
 
 
 
@@ -52900,49 +52875,6 @@ Schema: `GetSearchWordsData`
 ---
 
 
-#### getAutocompleteKeywordDetail
-Get a Autocomplete Keywords Details
-
-```golang
-
-data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
-
-*Success Response:*
-
-
-
-The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
-
-
-Schema: `GetAutocompleteWordsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### deleteAutocompleteKeyword
 Delete a Autocomplete Keywords
 
@@ -52974,6 +52906,49 @@ Status object. Tells whether the operation was successful. See example below or 
 
 
 Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAutocompleteKeywordDetail
+Get a Autocomplete Keywords Details
+
+```golang
+
+data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
+
+*Success Response:*
+
+
+
+The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
+
+
+Schema: `GetAutocompleteWordsResponse`
 
 
 
@@ -53427,6 +53402,52 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAppProduct
+Get company application product data.
+
+```golang
+
+data, err := Catalog.GetAppProduct(CompanyID, ApplicationID, ItemID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ItemID | string | product id for a particular product. | 
+
+
+
+| xQuery | struct | Includes properties such as `SliceAttr`
+
+
+Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
+
+*Success Response:*
+
+
+
+The Company Applicaton Product Data(MOQ/SEO).
+
+
+Schema: `ApplicationItemResponse`
 
 
 
@@ -55748,6 +55769,46 @@ Schema: `ProductAttributesResponse`
 ---
 
 
+#### deleteProduct
+Delete a product.
+
+```golang
+
+data, err := Catalog.DeleteProduct(CompanyID, ItemID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
+
+
+| ItemID | float64 | Id of the product to be updated. | 
+
+
+
+This API allows to delete product.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getProduct
 Get a single product.
 
@@ -55781,46 +55842,6 @@ Product object. See example below or refer `product.utils.format_product_respons
 
 
 Schema: `Product`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteProduct
-Delete a product.
-
-```golang
-
-data, err := Catalog.DeleteProduct(CompanyID, ItemID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
-
-
-| ItemID | float64 | Id of the product to be updated. | 
-
-
-
-This API allows to delete product.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
 
 
 
@@ -56038,26 +56059,25 @@ Schema: `BulkResponse`
 ---
 
 
-#### createProductsInBulk
-Create products in bulk associated with given batch Id.
+#### deleteProductBulkJob
+Delete Bulk product job.
 
 ```golang
 
-data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
+data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
 
 
-| BatchID | string | Batch Id in which assets to be uploaded. | 
+| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
 
 
-| body |  BulkProductRequest | "Request body" 
 
-This API helps to create products in bulk push to kafka for approval/creation.
+This API allows to delete bulk product job associated with company.
 
 *Success Response:*
 
@@ -56079,25 +56099,26 @@ Schema: `SuccessResponse`
 ---
 
 
-#### deleteProductBulkJob
-Delete Bulk product job.
+#### createProductsInBulk
+Create products in bulk associated with given batch Id.
 
 ```golang
 
-data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
+data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
 
 
-| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
+| BatchID | string | Batch Id in which assets to be uploaded. | 
 
 
+| body |  BulkProductRequest | "Request body" 
 
-This API allows to delete bulk product job associated with company.
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -56608,26 +56629,25 @@ Schema: `BulkResponse`
 ---
 
 
-#### createBulkInventory
-Create products in bulk associated with given batch Id.
+#### deleteBulkInventoryJob
+Delete Bulk Inventory job.
 
 ```golang
 
-data, err := Catalog.CreateBulkInventory(CompanyID, BatchID, body);
+data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which Inventory is to be uploaded. | 
+| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
 
 
-| BatchID | string | Batch Id of the bulk create job. | 
+| BatchID | string | Batch Id of the bulk delete job. | 
 
 
-| body |  InventoryBulkRequest | "Request body" 
 
-This API helps to create products in bulk push to kafka for approval/creation.
+This API allows to delete bulk Inventory job associated with company.
 
 *Success Response:*
 
@@ -56649,25 +56669,26 @@ Schema: `SuccessResponse`
 ---
 
 
-#### deleteBulkInventoryJob
-Delete Bulk Inventory job.
+#### createBulkInventory
+Create products in bulk associated with given batch Id.
 
 ```golang
 
-data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
+data, err := Catalog.CreateBulkInventory(CompanyID, BatchID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
+| CompanyID | float64 | Company Id in which Inventory is to be uploaded. | 
 
 
-| BatchID | string | Batch Id of the bulk delete job. | 
+| BatchID | string | Batch Id of the bulk create job. | 
 
 
+| body |  InventoryBulkRequest | "Request body" 
 
-This API allows to delete bulk Inventory job associated with company.
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -56804,12 +56825,12 @@ Schema: `InventoryConfig`
 ---
 
 
-#### updateRealtimeInventory
+#### deleteRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -56848,12 +56869,12 @@ Schema: `InventoryUpdateResponse`
 ---
 
 
-#### deleteRealtimeInventory
+#### updateRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -58659,7 +58680,7 @@ Schema: `CompleteResponse`
 
 
 #### getSignUrls
-Explain here
+Gives signed urls to access private files
 
 ```golang
 
@@ -58724,7 +58745,7 @@ Copy Files
 Success
 
 
-Schema: `BulkResponse`
+Schema: `BulkUploadResponse`
 
 
 
@@ -58768,7 +58789,7 @@ Copy Files
 Success
 
 
-Schema: `BulkResponse`
+Schema: `BulkUploadResponse`
 
 
 
@@ -64629,7 +64650,7 @@ data, err := AuditTrail.GetAuditLogs(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `Qs`
 
 
-Get audit logs
+Get a paginated set of logs that can be filtered using the available set of parameters and get the relevant group of logs
 
 *Success Response:*
 
@@ -64651,38 +64672,25 @@ default
     "docs": [
       {
         "entity": {
-          "type": "sales-channel-configuration",
-          "id": "5dcbf6065862c28d81beb025",
+          "type": "update-shipment-status",
+          "id": "16660872182851894278",
           "action": "update"
         },
         "modifier": {
+          "user_id": "a8d7a69b4cd980acc5d2455c",
           "as_administrator": true,
-          "user_id": "5d8391fa7f6b58553d02eb63",
           "user_details": {
-            "firstName": "Hitesh",
-            "email": "hiteshjha@gofynd.com"
+            "first_name": "Paul",
+            "last_name": "Lobo",
+            "full_name": "Paul Lobo",
+            "email": "paullobo@gofynd.com"
           }
         },
-        "device_info": {
-          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
-        },
-        "location": {
-          "IP": "103.226.87.213"
-        },
-        "_id": "602a1366a7486d63f1e915b2",
-        "company": 61,
-        "application": "5d63686df2a4f7806b76bb32",
-        "sessions": "",
-        "date": "2021-02-15T06:23:32.098Z",
-        "logs": {
-          "modified_by": "5d8391fa7f6b58553d02eb63"
-        },
-        "created_at": "2021-02-15T06:23:34.497Z",
-        "modified_at": "2021-02-15T06:23:34.497Z",
-        "meta": {
-          "browser": "Linux - Chrome",
-          "device": ""
-        }
+        "_id": "634eef735e84e7e1b09aa07c",
+        "application": null,
+        "date": "2022-10-18T18:24:51.329Z",
+        "created_at": "2022-10-18T18:24:51.400Z",
+        "modified_at": "2022-10-18T18:24:51.400Z"
       }
     ]
   }
@@ -64716,7 +64724,7 @@ data, err := AuditTrail.CreateAuditLog(CompanyID, body);
 
 | body |  RequestBodyAuditLog | "Request body" 
 
-Create a Audit log
+Create a log instance that stores all the relevant info to be logged
 
 *Success Response:*
 
@@ -64770,7 +64778,7 @@ data, err := AuditTrail.GetAuditLog(CompanyID, ID);
 
 
 
-Get audit logs by logs uuid
+Get detailed log information by their id
 
 *Success Response:*
 
@@ -64789,43 +64797,75 @@ default
 ```json
 {
   "value": {
-    "docs": [
-      {
-        "entity": {
-          "type": "sales-channel-configuration",
-          "id": "5dcbf6065862c28d81beb025",
-          "action": "update"
-        },
-        "modifier": {
-          "as_administrator": true,
-          "user_id": "5d8391fa7f6b58553d02eb63",
-          "user_details": {
-            "firstName": "Hitesh",
-            "email": "hiteshjha@gofynd.com"
+    "entity": {
+      "type": "update-shipment-status",
+      "id": "16660872182851894278",
+      "action": "update"
+    },
+    "modifier": {
+      "user_id": "a8d7a69b4cd980acc5d2455c",
+      "as_administrator": true,
+      "user_details": {
+        "first_name": "Paul",
+        "last_name": "Lobo",
+        "full_name": "Paul Lobo",
+        "email": "paullobo@gofynd.com"
+      }
+    },
+    "device_info": {
+      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36"
+    },
+    "location": {
+      "IP": "103.173.241.155"
+    },
+    "_id": "634eef735e84e7e1b09aa07c",
+    "company": 1,
+    "application": null,
+    "sessions": "",
+    "date": "2022-10-18T18:24:51.329Z",
+    "logs": {
+      "request": {
+        "status_update": {
+          "bags": [
+            403501,
+            403502,
+            403503
+          ],
+          "status": "bag_confirmed"
+        }
+      },
+      "response": {
+        "shipments": {
+          "16660872182851894278": {
+            "status": true,
+            "error": "",
+            "message": [
+              "Requested change is being performed"
+            ]
           }
         },
-        "device_info": {
-          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
-        },
-        "location": {
-          "IP": "103.226.87.213"
-        },
-        "_id": "602a1366a7486d63f1e915b2",
-        "company": 61,
-        "application": "5d63686df2a4f7806b76bb32",
-        "sessions": "",
-        "date": "2021-02-15T06:23:32.098Z",
-        "logs": {
-          "modified_by": "5d8391fa7f6b58553d02eb63"
-        },
-        "created_at": "2021-02-15T06:23:34.497Z",
-        "modified_at": "2021-02-15T06:23:34.497Z",
-        "meta": {
-          "browser": "Linux - Chrome",
-          "device": ""
-        }
+        "error_shipments": []
       }
-    ]
+    },
+    "created_at": "2022-10-18T18:24:51.400Z",
+    "modified_at": "2022-10-18T18:24:51.400Z",
+    "meta": {
+      "browser": {
+        "name": "Chrome",
+        "version": "106.0.0.0",
+        "major": "106"
+      },
+      "device": {},
+      "cpu": {},
+      "os": {
+        "name": "Mac OS",
+        "version": "10.15.7"
+      },
+      "engine": {
+        "name": "Blink",
+        "version": "106.0.0.0"
+      }
+    }
   }
 }
 ```
@@ -64856,7 +64896,7 @@ data, err := AuditTrail.GetEntityTypes(CompanyID);
 
 
 
-Get entity types
+Get a consolidated list of entity types from all the logs stored on the db, which further helps to filter the logs better
 
 *Success Response:*
 
