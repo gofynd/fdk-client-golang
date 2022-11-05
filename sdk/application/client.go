@@ -349,55 +349,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetProductSimilarByIdentifier Get similar products
-    func (ca *Catalog)  GetProductSimilarByIdentifier(Slug string, SimilarType string) (SimilarProductByTypeResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getProductSimilarByIdentifierResponse SimilarProductByTypeResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/application/catalog/v1.0/products/%s/similar/%s/",Slug,SimilarType),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return SimilarProductByTypeResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProductSimilarByIdentifierResponse)
-        if err != nil {
-            return SimilarProductByTypeResponse{}, common.NewFDKError(err.Error())
-        }
-         return getProductSimilarByIdentifierResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // GetProductVariantsBySlug Get variant of a particular product
     func (ca *Catalog)  GetProductVariantsBySlug(Slug string) (ProductVariantsResponse, error){
         var (
@@ -11143,6 +11094,68 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // RenderHTML Convert base64 string to HTML form
+    func (pa *Payment)  RenderHTML(body  renderHTMLRequest) (renderHTMLResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             renderHTMLResponse renderHTMLResponse
+	    )
+
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return renderHTMLResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return renderHTMLResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            "/service/application/payment/v1.0/payment/html/render/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return renderHTMLResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &renderHTMLResponse)
+        if err != nil {
+            return renderHTMLResponse{}, common.NewFDKError(err.Error())
+        }
+         return renderHTMLResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // GetActiveRefundTransferModes Lists the mode of refund
     func (pa *Payment)  GetActiveRefundTransferModes() (TransferModeResponse, error){
         var (
@@ -11987,7 +12000,8 @@ func NewAppClient(config *AppConfig) *Client {
         PageSize float64  `url:"page_size,omitempty"` 
         FromDate string  `url:"from_date,omitempty"` 
         ToDate string  `url:"to_date,omitempty"` 
-        Status float64  `url:"status,omitempty"`  
+        Status float64  `url:"status,omitempty"` 
+        CustomMeta string  `url:"custom_meta,omitempty"`  
     }
     
     // GetOrders Get all orders
@@ -12002,6 +12016,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
