@@ -11608,7 +11608,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // AddRefundBankAccountUsingOTP Save bank details for cancelled/returned order
-    func (pa *Payment)  AddRefundBankAccountUsingOTP(body  AddBeneficiaryDetailsOTPRequest) (RefundAccountResponse, error){
+    func (pa *Payment)  AddRefundBankAccountUsingOTP(CompanyID float64, ApplicationID string, body  AddBeneficiaryDetailsOTPRequest) (RefundAccountResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -11624,6 +11624,10 @@ func NewAppClient(config *AppConfig) *Client {
 
         
 
+        
+        
+        
+        
         
     
          
@@ -11646,7 +11650,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             pa.config,
             "post",
-            "/service/application/payment/v1.0/refund/account/otp",
+            fmt.Sprintf("/service/application/payment/v1.0/refund/account/otp",CompanyID,ApplicationID),
             nil,
             nil,
             reqBody)
@@ -12822,6 +12826,55 @@ func NewAppClient(config *AppConfig) *Client {
             return ShipmentReasons{}, common.NewFDKError(err.Error())
         }
          return getShipmentReasonsResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetShipmentBagReasons Get reasons at l1,l2 and l3 for cancellation and return based on department
+    func (or *Order)  GetShipmentBagReasons(ShipmentID string, BagID string) (ShipmentBagReasons, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getShipmentBagReasonsResponse ShipmentBagReasons
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/bags/%s/reasons/",ShipmentID,BagID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ShipmentBagReasons{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getShipmentBagReasonsResponse)
+        if err != nil {
+            return ShipmentBagReasons{}, common.NewFDKError(err.Error())
+        }
+         return getShipmentBagReasonsResponse, nil
         
     }
           

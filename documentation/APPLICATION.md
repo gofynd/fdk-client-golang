@@ -268,6 +268,7 @@
     * [getOrderById](#getorderbyid)
     * [getShipmentById](#getshipmentbyid)
     * [getShipmentReasons](#getshipmentreasons)
+    * [getShipmentBagReasons](#getshipmentbagreasons)
     * [updateShipmentStatus](#updateshipmentstatus)
     * [trackShipment](#trackshipment)
     * [getPosOrderById](#getposorderbyid)
@@ -17295,11 +17296,17 @@ Save bank details for cancelled/returned order
 
 ```golang
 
- data, err :=  Payment.AddRefundBankAccountUsingOTP(body);
+ data, err :=  Payment.AddRefundBankAccountUsingOTP(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| ApplicationID | string | Application id | 
+
 
 | body |  AddBeneficiaryDetailsOTPRequest | "Request body" 
 
@@ -17310,7 +17317,7 @@ Use this API to save bank details for returned/cancelled order to refund amount 
 
 
 
-Success. Shows whether the beneficiary details were saved to a returned/cancelled order or not.
+Success
 
 
 Schema: `RefundAccountResponse`
@@ -18035,6 +18042,47 @@ Success. Check the example shown below or refer `ShipmentReasons` for more detai
 
 
 Schema: `ShipmentReasons`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentBagReasons
+Get reasons at l1,l2 and l3 for cancellation and return based on department
+
+```golang
+
+ data, err :=  Order.GetShipmentBagReasons(ShipmentID, BagID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| BagID | string | ID of the bag. | 
+
+
+
+
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ShipmentBagReasons` for more details.
+
+
+Schema: `ShipmentBagReasons`
 
 
 
