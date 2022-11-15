@@ -11075,7 +11075,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // RenderHTML Convert base64 string to HTML form
-    func (pa *Payment)  RenderHTML(body  renderHTMLRequest) (interface{}, error){
+    func (pa *Payment)  RenderHTML(body  renderHTMLRequest) ([]byte, error){
         var (
             rawRequest  *RawRequest
             response    []byte
