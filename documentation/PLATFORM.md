@@ -62,6 +62,7 @@
     * [getVideoParticipants](#getvideoparticipants)
     * [openVideoRoom](#openvideoroom)
     * [closeVideoRoom](#closevideoroom)
+    * [getGeneralConfig](#getgeneralconfig)
     
 
 * [Feedback](#Feedback)
@@ -4268,6 +4269,56 @@ data, err := Lead.CloseVideoRoom(CompanyID, ApplicationID, UniqueName);
 
 
 Close the video room and force all participants to leave.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `CloseVideoRoomResponse`
+
+
+*Examples:*
+
+
+Default
+```json
+{
+  "value": {
+    "success": true
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getGeneralConfig
+Get general support configuration.
+
+```golang
+
+data, err := Lead.GetGeneralConfig(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID of the application | 
+
+
+
+Get general support configuration.
 
 *Success Response:*
 
@@ -59229,7 +59280,7 @@ Schema: `CompleteResponse`
 
 
 #### getSignUrls
-Explain here
+Gives signed urls to access private files
 
 ```golang
 
@@ -59294,7 +59345,7 @@ Copy Files
 Success
 
 
-Schema: `BulkResponse`
+Schema: `BulkUploadResponse`
 
 
 
@@ -59338,7 +59389,7 @@ Copy Files
 Success
 
 
-Schema: `BulkResponse`
+Schema: `BulkUploadResponse`
 
 
 

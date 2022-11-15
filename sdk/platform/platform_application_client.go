@@ -922,6 +922,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
            
        
     
+    
+    
 
  
 	 
@@ -16518,12 +16520,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // AppCopyFiles Copy Files
-     func (fi *PlatformAppFileStorage)  AppCopyFiles(xQuery PlatformAppAppCopyFilesXQuery, body  BulkRequest) (BulkResponse, error) {
+     func (fi *PlatformAppFileStorage)  AppCopyFiles(xQuery PlatformAppAppCopyFilesXQuery, body  BulkRequest) (BulkUploadResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            appCopyFilesResponse BulkResponse
+            appCopyFilesResponse BulkUploadResponse
 	    )
 
         
@@ -16550,12 +16552,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
             
-             return BulkResponse{}, common.NewFDKError(err.Error())
+             return BulkUploadResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
             
-             return BulkResponse{}, common.NewFDKError(err.Error())       
+             return BulkUploadResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -16568,12 +16570,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return BulkResponse{}, err
+            return BulkUploadResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &appCopyFilesResponse)
         if err != nil {
-            return BulkResponse{}, common.NewFDKError(err.Error())
+            return BulkUploadResponse{}, common.NewFDKError(err.Error())
         }
         return appCopyFilesResponse, nil
         
