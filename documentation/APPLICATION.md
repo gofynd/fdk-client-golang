@@ -31,6 +31,7 @@
     * [getProductComparisonBySlugs](#getproductcomparisonbyslugs)
     * [getSimilarComparisonProductBySlug](#getsimilarcomparisonproductbyslug)
     * [getComparedFrequentlyProductBySlug](#getcomparedfrequentlyproductbyslug)
+    * [getProductSimilarByIdentifier](#getproductsimilarbyidentifier)
     * [getProductVariantsBySlug](#getproductvariantsbyslug)
     * [getProductStockByIds](#getproductstockbyids)
     * [getProductStockForTimeByIds](#getproductstockfortimebyids)
@@ -259,6 +260,7 @@
     * [getOrderById](#getorderbyid)
     * [getShipmentById](#getshipmentbyid)
     * [getShipmentReasons](#getshipmentreasons)
+    * [getShipmentBagReasons](#getshipmentbagreasons)
     * [updateShipmentStatus](#updateshipmentstatus)
     * [trackShipment](#trackshipment)
     * [getPosOrderById](#getposorderbyid)
@@ -508,6 +510,47 @@ Success. Returns an array of objects containing the attributes for comparision. 
 
 
 Schema: `ProductFrequentlyComparedSimilarResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProductSimilarByIdentifier
+Get similar products
+
+```golang
+
+ data, err :=  Catalog.GetProductSimilarByIdentifier(Slug, SimilarType);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| Slug | string | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ | 
+
+
+| SimilarType | string | Similarity criteria such as basic, visual, price, seller, category and spec. Visual - Products having similar patterns, Price - Products in similar price range, Seller - Products sold by the same seller, Category - Products belonging to the same category, e.g. sports shoes, Spec - Products having similar specifications, e.g. phones with same memory. | 
+
+
+
+
+Use this API to retrieve products similar to the one specified by its slug. You can search not only similar looking products, but also those that are sold by same seller, or those that belong to the same category, price, specifications, etc.
+
+*Success Response:*
+
+
+
+Success. Returns a group of similar products based on type. Check the example shown below or refer `SimilarProductByTypeResponse` for more details.
+
+
+Schema: `SimilarProductByTypeResponse`
 
 
 
@@ -17589,6 +17632,47 @@ Success. Check the example shown below or refer `ShipmentReasons` for more detai
 
 
 Schema: `ShipmentReasons`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentBagReasons
+Get reasons at l1,l2 and l3 for cancellation and return based on department
+
+```golang
+
+ data, err :=  Order.GetShipmentBagReasons(ShipmentID, BagID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| BagID | string | ID of the bag. | 
+
+
+
+
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ShipmentBagReasons` for more details.
+
+
+Schema: `ShipmentBagReasons`
 
 
 

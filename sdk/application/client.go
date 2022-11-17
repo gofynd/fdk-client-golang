@@ -349,6 +349,55 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // GetProductSimilarByIdentifier Get similar products
+    func (ca *Catalog)  GetProductSimilarByIdentifier(Slug string, SimilarType string) (SimilarProductByTypeResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getProductSimilarByIdentifierResponse SimilarProductByTypeResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/application/catalog/v1.0/products/%s/similar/%s/",Slug,SimilarType),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return SimilarProductByTypeResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductSimilarByIdentifierResponse)
+        if err != nil {
+            return SimilarProductByTypeResponse{}, common.NewFDKError(err.Error())
+        }
+         return getProductSimilarByIdentifierResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // GetProductVariantsBySlug Get variant of a particular product
     func (ca *Catalog)  GetProductVariantsBySlug(Slug string) (ProductVariantsResponse, error){
         var (
@@ -11095,12 +11144,12 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // RenderHTML Convert base64 string to HTML form
-    func (pa *Payment)  RenderHTML(body  renderHTMLRequest) (renderHTMLResponse, error){
+    func (pa *Payment)  RenderHTML(body  renderHTMLRequest) ([]byte, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             renderHTMLResponse renderHTMLResponse
+             
 	    )
 
         
@@ -11121,12 +11170,12 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return renderHTMLResponse{}, common.NewFDKError(err.Error())
+             return []byte{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return renderHTMLResponse{}, common.NewFDKError(err.Error())
+             return []byte{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -11139,14 +11188,10 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return renderHTMLResponse{}, err
+            return []byte{}, err
 	    }
         
-        err = json.Unmarshal(response, &renderHTMLResponse)
-        if err != nil {
-            return renderHTMLResponse{}, common.NewFDKError(err.Error())
-        }
-         return renderHTMLResponse, nil
+        return response, nil
         
     }
           
@@ -12195,6 +12240,55 @@ func NewAppClient(config *AppConfig) *Client {
             return ShipmentReasons{}, common.NewFDKError(err.Error())
         }
          return getShipmentReasonsResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetShipmentBagReasons Get reasons at l1,l2 and l3 for cancellation and return based on department
+    func (or *Order)  GetShipmentBagReasons(ShipmentID string, BagID string) (ShipmentBagReasons, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getShipmentBagReasonsResponse ShipmentBagReasons
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/bags/%s/reasons/",ShipmentID,BagID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ShipmentBagReasons{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getShipmentBagReasonsResponse)
+        if err != nil {
+            return ShipmentBagReasons{}, common.NewFDKError(err.Error())
+        }
+         return getShipmentBagReasonsResponse, nil
         
     }
           
