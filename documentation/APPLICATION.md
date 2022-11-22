@@ -263,6 +263,7 @@
     * [sendOtpToShipmentCustomer](#sendotptoshipmentcustomer)
     * [verifyOtpShipmentCustomer](#verifyotpshipmentcustomer)
     * [getPlatformShipmentReasons](#getplatformshipmentreasons)
+    * [updateShipmentStatus](#updateshipmentstatus)
     
 
 * [Rewards](#Rewards)
@@ -17746,6 +17747,45 @@ Success. Check the example shown below or refer `ShipmentReasons` for more detai
 
 
 Schema: `ShipmentReasonsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateShipmentStatus
+
+
+```golang
+
+ data, err :=  Order.UpdateShipmentStatus(ShipmentID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string |  | 
+
+
+| body |  StatusUpdateInternalRequest | "Request body" 
+
+
+updateShipmentStatus
+
+*Success Response:*
+
+
+
+Successfully updateShipmentStatus!
+
+
+Schema: `StatusUpdateInternalResponse`
 
 
 
