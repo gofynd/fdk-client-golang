@@ -275,6 +275,15 @@
     * [sendOtpToShipmentCustomer](#sendotptoshipmentcustomer)
     * [verifyOtpShipmentCustomer](#verifyotpshipmentcustomer)
     * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
+    * [getOrders1](#getorders1)
+    * [getOrderById1](#getorderbyid1)
+    * [getPosOrderById1](#getposorderbyid1)
+    * [getShipmentById1](#getshipmentbyid1)
+    * [trackShipment1](#trackshipment1)
+    * [getCustomerDetailsByShipmentId1](#getcustomerdetailsbyshipmentid1)
+    * [sendOtpToShipmentCustomer1](#sendotptoshipmentcustomer1)
+    * [verifyOtpShipmentCustomer1](#verifyotpshipmentcustomer1)
+    * [getShipmentBagReasons1](#getshipmentbagreasons1)
     
 
 * [Rewards](#Rewards)
@@ -1611,9 +1620,7 @@ Fetch all items added to the cart
 
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `BuyNow`
 
 
 
@@ -1687,9 +1694,7 @@ Add items to cart
 
 
 
-
-
-| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`, `BuyNow`
+| xQuery | struct | Includes properties such as `I`, `B`, `BuyNow`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -2379,9 +2384,7 @@ Update items in the cart
 
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AreaCode`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `BuyNow`
 
 | body |  UpdateCartRequest | "Request body" 
 
@@ -17252,17 +17255,11 @@ Save bank details for cancelled/returned order
 
 ```golang
 
- data, err :=  Payment.AddRefundBankAccountUsingOTP(CompanyID, ApplicationID, body);
+ data, err :=  Payment.AddRefundBankAccountUsingOTP(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application id | 
-
 
 | body |  AddBeneficiaryDetailsOTPRequest | "Request body" 
 
@@ -17273,7 +17270,7 @@ Use this API to save bank details for returned/cancelled order to refund amount 
 
 
 
-Success
+Success. Shows whether the beneficiary details were saved to a returned/cancelled order or not.
 
 
 Schema: `RefundAccountResponse`
@@ -18328,6 +18325,369 @@ Schema: `ResponseGetInvoiceShipment`
 ---
 
 
+#### getOrders1
+Get all orders
+
+```golang
+
+ data, err :=  Order.GetOrders1(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Status`, `PageNo`, `PageSize`, `FromDate`, `ToDate`
+
+
+
+Use this API to retrieve all the orders.
+
+*Success Response:*
+
+
+
+Success. Returns all the orders. Check the example shown below or refer `OrderList` for more details.
+
+
+Schema: `OrderList1`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOrderById1
+Get details of an order
+
+```golang
+
+ data, err :=  Order.GetOrderById1(OrderID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| OrderID | string | A unique number used for identifying and tracking your orders. | 
+
+
+
+
+Use this API to retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `OrderById` for more details.
+
+
+Schema: `OrderList1`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPosOrderById1
+Get POS Order
+
+```golang
+
+ data, err :=  Order.GetPosOrderById1(OrderID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| OrderID | string | A unique number used for identifying and tracking your orders. | 
+
+
+
+
+Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `PosOrderById` for more details.
+
+
+Schema: `OrderList1`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentById1
+Get details of a shipment
+
+```golang
+
+ data, err :=  Order.GetShipmentById1(ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+
+
+Use this API to retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ShipmentById` for more details.
+
+
+Schema: `ShipmentById1`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### trackShipment1
+Track shipment
+
+```golang
+
+ data, err :=  Order.TrackShipment1(ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+
+
+Track Shipment by shipment id, for application based on application Id
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ShipmentTrack` for more details.
+
+
+Schema: `TrackShipmentResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCustomerDetailsByShipmentId1
+Get Customer Details by Shipment Id
+
+```golang
+
+ data, err :=  Order.GetCustomerDetailsByShipmentId1(OrderID, ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| OrderID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| ShipmentID | string | A unique number used for identifying and tracking your orders. | 
+
+
+
+
+Use this API to retrieve customer details such as mobileno using Shipment ID.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `CustomerDetailsByShipmentId` for more details.
+
+
+Schema: `CustomerDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### sendOtpToShipmentCustomer1
+Send and Resend Otp code to Order-Shipment customer
+
+```golang
+
+ data, err :=  Order.SendOtpToShipmentCustomer1(OrderID, ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| OrderID | string | A unique number used for identifying and tracking your orders. | 
+
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+
+
+Use this API to send OTP to the customer of the mapped Shipment.
+
+*Success Response:*
+
+
+
+Success to acknowledge the service was notified
+
+
+Schema: `SendOtpToCustomerResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### verifyOtpShipmentCustomer1
+Verify Otp code
+
+```golang
+
+ data, err :=  Order.VerifyOtpShipmentCustomer1(OrderID, ShipmentID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| OrderID | string | A unique number used for identifying and tracking your orders. | 
+
+
+| ShipmentID | float64 | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| body |  VerifyOtp | "Request body" 
+
+
+Use this API to verify OTP and create a session token with custom payload.
+
+*Success Response:*
+
+
+
+Success, the code is valid and returns a session token
+
+
+Schema: `VerifyOtpResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentBagReasons1
+Get reasons behind full or partial cancellation of a shipment
+
+```golang
+
+ data, err :=  Order.GetShipmentBagReasons1(ShipmentID, BagID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| BagID | float64 | ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+
+
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ShipmentReasons` for more details.
+
+
+Schema: `ShipmentReasonsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ---
 
@@ -18618,9 +18978,7 @@ Fetch all items added to the cart
 
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `BuyNow`
 
 
 
@@ -18694,9 +19052,7 @@ Add items to cart
 
 
 
-
-
-| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`, `BuyNow`
+| xQuery | struct | Includes properties such as `I`, `B`, `BuyNow`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -19386,9 +19742,7 @@ Update items in the cart
 
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AreaCode`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `BuyNow`
 
 | body |  UpdateCartRequest | "Request body" 
 
