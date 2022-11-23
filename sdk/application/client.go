@@ -13549,7 +13549,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // VerifyOtpShipmentCustomer1 Verify Otp code
-    func (or *Order)  VerifyOtpShipmentCustomer1(OrderID string, ShipmentID float64, body  VerifyOtp) (VerifyOtpResponse, error){
+    func (or *Order)  VerifyOtpShipmentCustomer1(OrderID string, ShipmentID string, body  VerifyOtp) (VerifyOtpResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -13591,7 +13591,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "post",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/%s/shipments/undefined/otp/verify/",OrderID,ShipmentID),
+            fmt.Sprintf("/service/application/orders/v1.0/orders/%s/shipments/%s/otp/verify/",OrderID,ShipmentID),
             nil,
             nil,
             reqBody)

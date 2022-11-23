@@ -18619,7 +18619,7 @@ Verify Otp code
 | OrderID | string | A unique number used for identifying and tracking your orders. | 
 
 
-| ShipmentID | float64 | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
 | body |  VerifyOtp | "Request body" 
