@@ -4685,12 +4685,12 @@ package application
             Active bool  `json:"active"`
             Display string  `json:"display"`
             SortOrder float64  `json:"sort_order"`
-            SubNavigation []_NavigationReference  `json:"sub_navigation"`
+            SubNavigation []SubNavigationReference  `json:"sub_navigation"`
          
     }
     
-    // _NavigationReference ...
-    type _NavigationReference struct {
+    // SubNavigationReference ...
+    type SubNavigationReference struct {
 
         
             Acl []string  `json:"acl"`
