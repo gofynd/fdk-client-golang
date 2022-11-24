@@ -12456,6 +12456,118 @@ func NewAppClient(config *AppConfig) *Client {
     }
           
     
+    
+    
+  
+    
+    
+    //OrderGetInvoiceByShipmentIdXQuery holds query params
+    type OrderGetInvoiceByShipmentIdXQuery struct { 
+        Parameters invoiceParameter  `url:"parameters,omitempty"`  
+    }
+    
+    // GetInvoiceByShipmentId Get Presigned URL to download Invoice
+    func (or *Order)  GetInvoiceByShipmentId(ShipmentID string, xQuery OrderGetInvoiceByShipmentIdXQuery) (getInvoiceByShipmentId200Response, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getInvoiceByShipmentIdResponse getInvoiceByShipmentId200Response
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/application/document/v1.0/orders/shipments/%s/invoice",ShipmentID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return getInvoiceByShipmentId200Response{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getInvoiceByShipmentIdResponse)
+        if err != nil {
+            return getInvoiceByShipmentId200Response{}, common.NewFDKError(err.Error())
+        }
+         return getInvoiceByShipmentIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //OrderGetCreditNoteByShipmentIdXQuery holds query params
+    type OrderGetCreditNoteByShipmentIdXQuery struct { 
+        Parameters creditNoteParameter  `url:"parameters,omitempty"`  
+    }
+    
+    // GetCreditNoteByShipmentId Get Presigned URL to download Invoice
+    func (or *Order)  GetCreditNoteByShipmentId(ShipmentID string, xQuery OrderGetCreditNoteByShipmentIdXQuery) (getInvoiceByShipmentId200Response, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getCreditNoteByShipmentIdResponse getInvoiceByShipmentId200Response
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/application/document/v1.0/orders/shipments/%s/credit-note",ShipmentID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return getInvoiceByShipmentId200Response{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getCreditNoteByShipmentIdResponse)
+        if err != nil {
+            return getInvoiceByShipmentId200Response{}, common.NewFDKError(err.Error())
+        }
+         return getCreditNoteByShipmentIdResponse, nil
+        
+    }
+          
+    
 
     // Rewards ...
     type Rewards struct {

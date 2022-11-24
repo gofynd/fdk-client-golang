@@ -264,6 +264,8 @@
     * [verifyOtpShipmentCustomer](#verifyotpshipmentcustomer)
     * [getShipmentBagReasons](#getshipmentbagreasons)
     * [updateShipmentStatus](#updateshipmentstatus)
+    * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
+    * [getCreditNoteByShipmentId](#getcreditnotebyshipmentid)
     
 
 * [Rewards](#Rewards)
@@ -17789,6 +17791,88 @@ Successfully updateShipmentStatus!
 
 
 Schema: `StatusUpdateInternalResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getInvoiceByShipmentId
+Get Presigned URL to download Invoice
+
+```golang
+
+ data, err :=  Order.GetInvoiceByShipmentId(ShipmentID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | Shiment ID | 
+
+
+
+| xQuery | struct | Includes properties such as `Parameters`
+
+
+
+Use this API to generate Presigned URLs for downloading Invoice
+
+*Success Response:*
+
+
+
+Success Response, Presigned URL of Invoice
+
+
+Schema: `getInvoiceByShipmentId200Response`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCreditNoteByShipmentId
+Get Presigned URL to download Invoice
+
+```golang
+
+ data, err :=  Order.GetCreditNoteByShipmentId(ShipmentID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | Shiment ID | 
+
+
+
+| xQuery | struct | Includes properties such as `Parameters`
+
+
+
+Use this API to generate Presigned URLs for downloading Invoice
+
+*Success Response:*
+
+
+
+Success Response, Presigned URL of Invoice
+
+
+Schema: `getInvoiceByShipmentId200Response`
 
 
 
