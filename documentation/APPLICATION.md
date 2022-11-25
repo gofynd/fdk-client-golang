@@ -46,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [followById](#followbyid)
     * [unfollowById](#unfollowbyid)
+    * [followById](#followbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -1158,12 +1158,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1177,7 +1177,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1199,12 +1199,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1218,7 +1218,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -18345,7 +18345,9 @@ Get all orders
 
 
 
-| xQuery | struct | Includes properties such as `Status`, `PageNo`, `PageSize`, `FromDate`, `ToDate`
+
+
+| xQuery | struct | Includes properties such as `Status`, `PageNo`, `PageSize`, `FromDate`, `ToDate`, `CustomMeta`
 
 
 
@@ -18396,7 +18398,7 @@ Use this API to retrieve order details such as tracking details, shipment, store
 Success. Check the example shown below or refer `OrderById` for more details.
 
 
-Schema: `OrderList1`
+Schema: `OrderById1`
 
 
 
@@ -18510,7 +18512,7 @@ Track Shipment by shipment id, for application based on application Id
 Success. Check the example shown below or refer `ShipmentTrack` for more details.
 
 
-Schema: `TrackShipmentResponse`
+Schema: `ShipmentTrack1`
 
 
 
@@ -18661,7 +18663,7 @@ Get reasons behind full or partial cancellation of a shipment
 | ShipmentID | string | ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
-| BagID | float64 | ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+| BagID | string | ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
 
@@ -18672,10 +18674,10 @@ Use this API to retrieve the issues that led to the cancellation of bags within 
 
 
 
-Success. Check the example shown below or refer `ShipmentReasons` for more details.
+Success. Check the example shown below or refer `ShipmentBagReasons` for more details.
 
 
-Schema: `ShipmentReasonsResponse`
+Schema: `ShipmentBagReasons1`
 
 
 

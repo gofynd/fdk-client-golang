@@ -1657,55 +1657,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1746,6 +1697,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -13202,7 +13202,8 @@ func NewAppClient(config *AppConfig) *Client {
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
         FromDate string  `url:"from_date,omitempty"` 
-        ToDate string  `url:"to_date,omitempty"`  
+        ToDate string  `url:"to_date,omitempty"` 
+        CustomMeta string  `url:"custom_meta,omitempty"`  
     }
     
     // GetOrders1 Get all orders
@@ -13217,6 +13218,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -13263,12 +13266,12 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // GetOrderById1 Get details of an order
-    func (or *Order)  GetOrderById1(OrderID string) (OrderList1, error){
+    func (or *Order)  GetOrderById1(OrderID string) (OrderById1, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getOrderById1Response OrderList1
+             getOrderById1Response OrderById1
 	    )
 
         
@@ -13292,12 +13295,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return OrderList1{}, err
+            return OrderById1{}, err
 	    }
         
         err = json.Unmarshal(response, &getOrderById1Response)
         if err != nil {
-            return OrderList1{}, common.NewFDKError(err.Error())
+            return OrderById1{}, common.NewFDKError(err.Error())
         }
          return getOrderById1Response, nil
         
@@ -13404,12 +13407,12 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // TrackShipment1 Track shipment
-    func (or *Order)  TrackShipment1(ShipmentID string) (TrackShipmentResponse, error){
+    func (or *Order)  TrackShipment1(ShipmentID string) (ShipmentTrack1, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             trackShipment1Response TrackShipmentResponse
+             trackShipment1Response ShipmentTrack1
 	    )
 
         
@@ -13433,12 +13436,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return TrackShipmentResponse{}, err
+            return ShipmentTrack1{}, err
 	    }
         
         err = json.Unmarshal(response, &trackShipment1Response)
         if err != nil {
-            return TrackShipmentResponse{}, common.NewFDKError(err.Error())
+            return ShipmentTrack1{}, common.NewFDKError(err.Error())
         }
          return trackShipment1Response, nil
         
@@ -13615,12 +13618,12 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // GetShipmentBagReasons1 Get reasons behind full or partial cancellation of a shipment
-    func (or *Order)  GetShipmentBagReasons1(ShipmentID string, BagID float64) (ShipmentReasonsResponse, error){
+    func (or *Order)  GetShipmentBagReasons1(ShipmentID string, BagID string) (ShipmentBagReasons1, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getShipmentBagReasons1Response ShipmentReasonsResponse
+             getShipmentBagReasons1Response ShipmentBagReasons1
 	    )
 
         
@@ -13640,18 +13643,18 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s/bags/undefined/reasons",ShipmentID,BagID),
+            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s/bags/%s/reasons",ShipmentID,BagID),
             nil,
             nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ShipmentReasonsResponse{}, err
+            return ShipmentBagReasons1{}, err
 	    }
         
         err = json.Unmarshal(response, &getShipmentBagReasons1Response)
         if err != nil {
-            return ShipmentReasonsResponse{}, common.NewFDKError(err.Error())
+            return ShipmentBagReasons1{}, common.NewFDKError(err.Error())
         }
          return getShipmentBagReasons1Response, nil
         
