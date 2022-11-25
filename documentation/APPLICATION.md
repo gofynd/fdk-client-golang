@@ -17834,7 +17834,7 @@ Use this API to generate Presigned URLs for downloading Invoice
 Success Response, Presigned URL of Invoice
 
 
-Schema: `getInvoiceByShipmentId200Response`
+Schema: `ResponseGetInvoiceShipment`
 
 
 
@@ -17875,7 +17875,7 @@ Use this API to generate Presigned URLs for downloading Invoice
 Success Response, Presigned URL of Invoice
 
 
-Schema: `getInvoiceByShipmentId200Response`
+Schema: `ResponseGetInvoiceShipment`
 
 
 

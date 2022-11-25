@@ -12480,12 +12480,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // GetInvoiceByShipmentId Get Presigned URL to download Invoice
-    func (or *Order)  GetInvoiceByShipmentId(ShipmentID string, xQuery OrderGetInvoiceByShipmentIdXQuery) (getInvoiceByShipmentId200Response, error){
+    func (or *Order)  GetInvoiceByShipmentId(ShipmentID string, xQuery OrderGetInvoiceByShipmentIdXQuery) (ResponseGetInvoiceShipment, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getInvoiceByShipmentIdResponse getInvoiceByShipmentId200Response
+             getInvoiceByShipmentIdResponse ResponseGetInvoiceShipment
 	    )
 
         
@@ -12513,12 +12513,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return getInvoiceByShipmentId200Response{}, err
+            return ResponseGetInvoiceShipment{}, err
 	    }
         
         err = json.Unmarshal(response, &getInvoiceByShipmentIdResponse)
         if err != nil {
-            return getInvoiceByShipmentId200Response{}, common.NewFDKError(err.Error())
+            return ResponseGetInvoiceShipment{}, common.NewFDKError(err.Error())
         }
          return getInvoiceByShipmentIdResponse, nil
         
@@ -12536,12 +12536,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // GetCreditNoteByShipmentId Get Presigned URL to download Invoice
-    func (or *Order)  GetCreditNoteByShipmentId(ShipmentID string, xQuery OrderGetCreditNoteByShipmentIdXQuery) (getInvoiceByShipmentId200Response, error){
+    func (or *Order)  GetCreditNoteByShipmentId(ShipmentID string, xQuery OrderGetCreditNoteByShipmentIdXQuery) (ResponseGetInvoiceShipment, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getCreditNoteByShipmentIdResponse getInvoiceByShipmentId200Response
+             getCreditNoteByShipmentIdResponse ResponseGetInvoiceShipment
 	    )
 
         
@@ -12569,12 +12569,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return getInvoiceByShipmentId200Response{}, err
+            return ResponseGetInvoiceShipment{}, err
 	    }
         
         err = json.Unmarshal(response, &getCreditNoteByShipmentIdResponse)
         if err != nil {
-            return getInvoiceByShipmentId200Response{}, common.NewFDKError(err.Error())
+            return ResponseGetInvoiceShipment{}, common.NewFDKError(err.Error())
         }
          return getCreditNoteByShipmentIdResponse, nil
         
