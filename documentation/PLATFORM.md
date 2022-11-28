@@ -61,6 +61,7 @@
     * [getVideoParticipants](#getvideoparticipants)
     * [openVideoRoom](#openvideoroom)
     * [closeVideoRoom](#closevideoroom)
+    * [getGeneralConfig](#getgeneralconfig)
     
 
 * [Theme](#Theme)
@@ -123,7 +124,6 @@
     * [getDataLoaders](#getdataloaders)
     * [deleteDataLoader](#deletedataloader)
     * [editDataLoader](#editdataloader)
-    * [getDataLoadersByService](#getdataloadersbyservice)
     * [selectDataLoader](#selectdataloader)
     * [resetDataLoader](#resetdataloader)
     * [getFaqCategories](#getfaqcategories)
@@ -223,6 +223,8 @@
     * [getJobLogs](#getjoblogs)
     * [getCommunicationLogs](#getcommunicationlogs)
     * [getSystemNotifications](#getsystemnotifications)
+    * [sendOtp](#sendotp)
+    * [verfiyOtp](#verfiyotp)
     * [getSmsProviders](#getsmsproviders)
     * [createSmsProvider](#createsmsprovider)
     * [getSmsProviderById](#getsmsproviderbyid)
@@ -255,6 +257,8 @@
     * [getUserOrderBeneficiaries](#getuserorderbeneficiaries)
     * [getUserBeneficiaries](#getuserbeneficiaries)
     * [confirmPayment](#confirmpayment)
+    * [getUserCODlimitRoutes](#getusercodlimitroutes)
+    * [setUserCODlimitRoutes](#setusercodlimitroutes)
     
 
 * [Order](#Order)
@@ -283,13 +287,13 @@
 * [Catalog](#Catalog)
   * Methods
     * [getSearchKeywords](#getsearchkeywords)
-    * [deleteSearchKeywords](#deletesearchkeywords)
     * [updateSearchKeywords](#updatesearchkeywords)
+    * [deleteSearchKeywords](#deletesearchkeywords)
     * [getAllSearchKeyword](#getallsearchkeyword)
     * [createCustomKeyword](#createcustomkeyword)
     * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
-    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [updateAutocompleteKeyword](#updateautocompletekeyword)
+    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [getProductBundle](#getproductbundle)
@@ -304,12 +308,12 @@
     * [getConfigurationMetadata](#getconfigurationmetadata)
     * [getGroupConfigurations](#getgroupconfigurations)
     * [createGroupConfiguration](#creategroupconfiguration)
-    * [deleteGroupConfiguration](#deletegroupconfiguration)
     * [updateGroupConfiguration](#updategroupconfiguration)
+    * [deleteGroupConfiguration](#deletegroupconfiguration)
     * [getListingConfigurations](#getlistingconfigurations)
     * [createListingConfiguration](#createlistingconfiguration)
-    * [deleteListingConfiguration](#deletelistingconfiguration)
     * [updateListingConfiguration](#updatelistingconfiguration)
+    * [deleteListingConfiguration](#deletelistingconfiguration)
     * [updateAllowSingle](#updateallowsingle)
     * [updateDefaultSort](#updatedefaultsort)
     * [getCatalogConfiguration](#getcatalogconfiguration)
@@ -321,8 +325,8 @@
     * [getAllCollections](#getallcollections)
     * [createCollection](#createcollection)
     * [getCollectionDetail](#getcollectiondetail)
-    * [deleteCollection](#deletecollection)
     * [updateCollection](#updatecollection)
+    * [deleteCollection](#deletecollection)
     * [getCollectionItems](#getcollectionitems)
     * [addCollectionItems](#addcollectionitems)
     * [getCatalogInsights](#getcataloginsights)
@@ -355,8 +359,8 @@
     * [createProduct](#createproduct)
     * [getProductAttributes](#getproductattributes)
     * [getProduct](#getproduct)
-    * [deleteProduct](#deleteproduct)
     * [editProduct](#editproduct)
+    * [deleteProduct](#deleteproduct)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
     * [getProductBulkUploadHistory](#getproductbulkuploadhistory)
@@ -4245,6 +4249,56 @@ data, err := Lead.CloseVideoRoom(CompanyID, ApplicationID, UniqueName);
 
 
 Close the video room and force all participants to leave.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `CloseVideoRoomResponse`
+
+
+*Examples:*
+
+
+Default
+```json
+{
+  "value": {
+    "success": true
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getGeneralConfig
+Get general support configuration.
+
+```golang
+
+data, err := Lead.GetGeneralConfig(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID of the application | 
+
+
+
+Get general support configuration.
 
 *Success Response:*
 
@@ -40927,49 +40981,6 @@ Schema: `DataLoaderResponseSchema`
 ---
 
 
-#### getDataLoadersByService
-Get all the data loaders in an application by service name
-
-```golang
-
-data, err := Content.GetDataLoadersByService(CompanyID, ApplicationID, ServiceName);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
-
-
-| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
-
-
-| ServiceName | string | Service name of the data loader. | 
-
-
-
-Use this to get all data loaders of an application by service name
-
-*Success Response:*
-
-
-
-Success. Refer `DataLoaderResponseSchema` for more details.
-
-
-Schema: `DataLoadersSchema`
-
-
-
-
-
-
-
-
-
----
-
-
 #### selectDataLoader
 Select a data loader by id
 
@@ -41848,7 +41859,7 @@ Success
 ```json
 {
   "value": {
-    "tnc": "TERMS AND CONDITIONS FOR RECURRING PAYMENTS ON FYND PLATFORM\n\nUpdated On: July 11, 2020\n\nWhen you purchase (“**Services**”) from Fynd Platform (“**Fynd Platform**”, “**We**” or “**Us**”), you have the option to make payments on a recurring basis (“**Recurring Payments**”) on the (“**Terms and Conditions**”) below for your monthly usage charges towards the services provided to you under the account you operate with Fynd Platform (“**Account**”). We may, at our sole discretion, refuse Recurring Payments to anyone without notice for any reason at any time. \n\n\n1. **Recurring Payments** - You are not required to make Recurring Payments, and you may cancel Recurring Payments for your Account at your discretion. We will make Recurring Payments available to you only if you have designated an eligible payment method for your Account that is current, valid and otherwise acceptable to us. Such a method is hereinafter referred to as \"Payment Method\". We reserve the right to decide the payment methods eligible for Recurring Payments and we will automatically charge your Payment Method. You are solely responsible for the accuracy of the information you provide us regarding your Payment Method. We may limit the amount that you can pay using Recurring Payments every month.\n\n2. **Enabling Recurring Payments**- You agree that Recurring Payments will be enabled automatically for your Account if you chose an eligible Payment Method. Once Recurring Payments have been enabled for your Account, you authorize us to use your Payment Method to pay for your monthly invoices automatically until you cancel Recurring Payments for your Account. In Addition, once Recurring Payments has been enabled, you authorize us to charge the fees for the Services, unless you cancel or disable Recurring Payment, by means specified by us and applicable at such time, in which case you will be required to take action and pay for the Services.\n\n3. **Verification and Authentication**- Before Recurring Payments are enabled for your Fynd Platform Account, verification and authentication of your Payment Method will be performed. Once the verification and authentication are successful, you will be registered for Recurring Payments. This verification and authentication may also be repeated if (a) there are changes to your Account or Payment Method; (b) you cancel or disable Recurring Payments; (c) one of your Recurring Payments is declined for any reason whatsoever, including without limitation, expiry of your card.\n\n4. **Third Party Payment Processors** - You agree, understand and acknowledge that Fynd Platform may engage third party payment processors or gateway service providers to process Recurring Payments. Therefore, you may be required to agree to the terms and conditions of the third party payment processors or gateway service providers as communicated to you from time to time.\n\n5. **Cancelling Recurring Payments** - You have the right to cancel Recurring Payments for your Fynd Platform Account by contacting our customer support.\n\n6. **Notifications** - You authorize us to communicate with you by email regarding Recurring Payments. You acknowledge that we may also communicate with you through our affiliates that provide Services to you.\n\n7. **Disclaimer of Liability** - You agree that we will not be liable for any losses or damages suffered by you because of your use of Recurring Payments for your Fynd Platform Account, including any fraud in connection with any payment using your Payment Method. You realize that neither Fynd Platform nor Shopsense Retail Technologies Pvt. Ltd. which fully owns and controls the Fynd Platform, will be held responsible for any damages, whether partial or full.\n\n\n8. **Agreement Changes** - We may in our discretion change these Terms and Conditions at any time. If any change is found to be invalid, void, or for any reason unenforceable, that change is severable and does not affect the validity and enforceability of any other changes or the remainder of these Terms and Conditions.\n\nYOUR CONTINUED USE OF RECURRING PAYMENTS FOR YOUR FYND PLATFORM ACCOUNT AFTER WE CHANGE THESE TERMS AND CONDITIONS CONSTITUTES YOUR ACCEPTANCE OF THESE CHANGES.",
+    "tnc": "**Terms and Conditions test**",
     "policy": "**Privacy policy test**",
     "shipping": "**Shipping term and conditions**",
     "returns": "**Terms & conditions for returns **",
@@ -50048,6 +50059,131 @@ default
 ---
 
 
+#### sendOtp
+Send OTP using email and sms
+
+```golang
+
+data, err := Communication.SendOtp(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| body |  SendOtpCommsReq | "Request body" 
+
+Send OTP Comms via email and sms
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `SendOtpCommsRes`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "sms": {
+      "success": true,
+      "request_id": "c8d1bd63d56a2d368aae9dbd4e7d8326",
+      "message": "OTP sent",
+      "mobile": "9096686804",
+      "country_code": "91",
+      "resend_timer": 30
+    },
+    "email": {
+      "success": true,
+      "request_id": "1cc79c911923971580d903039ea9ee05",
+      "message": "OTP sent",
+      "to": "parvezshaikh@gofynd.com",
+      "resend_timer": 30
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### verfiyOtp
+Verify OTP sent via email and sms
+
+```golang
+
+data, err := Communication.VerfiyOtp(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| body |  VerifyOtpCommsReq | "Request body" 
+
+Verify OTP sent via email and sms
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `VerifyOtpCommsSuccessRes`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "success": true,
+    "mobile": "9096686804",
+    "country_code": "91",
+    "message": "OTP verified"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getSmsProviders
 Get sms providers
 
@@ -51533,6 +51669,92 @@ Schema: `PaymentConfirmationResponse`
 ---
 
 
+#### getUserCODlimitRoutes
+Get COD limit for user
+
+```golang
+
+data, err := Payment.GetUserCODlimitRoutes(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `MerchantUserID`, `MobileNo`
+
+
+Use this API to get user cod limit and reamining limit for the payment
+
+*Success Response:*
+
+
+
+Success. Returns user cod limit , remaining limit and usage of user for COD. Check the example shown below or refer `GetUserCODLimitResponseSchema` for more details.
+
+
+Schema: `GetUserCODLimitResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### setUserCODlimitRoutes
+Set COD option for user for payment
+
+```golang
+
+data, err := Payment.SetUserCODlimitRoutes(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company ID | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| body |  SetCODForUserRequest | "Request body" 
+
+Use this API to set cod option as true or false for the payment
+
+*Success Response:*
+
+
+
+Success. Returns true/false for user cod option for payment. Check the example shown below or refer `GetUserCODLimitResponseSchema` for more details.
+
+
+Schema: `SetCODOptionResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ---
 
@@ -52467,49 +52689,6 @@ Schema: `GetSearchWordsDetailResponse`
 ---
 
 
-#### deleteSearchKeywords
-Delete a Search Keywords
-
-```golang
-
-data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateSearchKeywords
 Update Search Keyword
 
@@ -52542,6 +52721,49 @@ The Collection object. See example below or refer `GetSearchWordsDataSchema` for
 
 
 Schema: `GetSearchWordsData`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteSearchKeywords
+Delete a Search Keywords
+
+```golang
+
+data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -52678,49 +52900,6 @@ Schema: `GetAutocompleteWordsResponse`
 ---
 
 
-#### deleteAutocompleteKeyword
-Delete a Autocomplete Keywords
-
-```golang
-
-data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateAutocompleteKeyword
 Create & Update Autocomplete Keyword
 
@@ -52753,6 +52932,49 @@ The Mapping object. See example below or refer `GetAutocompleteWordsResponseSche
 
 
 Schema: `GetAutocompleteWordsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteAutocompleteKeyword
+Delete a Autocomplete Keywords
+
+```golang
+
+data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -53360,52 +53582,6 @@ Schema: `AppConfigurationDetail`
 ---
 
 
-#### deleteGroupConfiguration
-Delete configuration of the product config type of the application.
-
-```golang
-
-data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
-
-
-| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
-
-
-
-Delete configuration of the product config type of the application.
-
-*Success Response:*
-
-
-
-success message will tell whether the operation was successful.
-
-
-Schema: `ConfigSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateGroupConfiguration
 Update the group configurations for the application.
 
@@ -53441,6 +53617,52 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationDetail`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteGroupConfiguration
+Delete configuration of the product config type of the application.
+
+```golang
+
+data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
+
+
+| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration of the product config type of the application.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
 
 
 
@@ -53547,52 +53769,6 @@ Schema: `AppConfigurationsSort`
 ---
 
 
-#### deleteListingConfiguration
-Delete configuration for listings
-
-```golang
-
-data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
-
-
-| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
-
-
-
-Delete configuration for listing.
-
-*Success Response:*
-
-
-
-success message will tell whether the operation was successful.
-
-
-Schema: `ConfigSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateListingConfiguration
 Update configuration for listings
 
@@ -53628,6 +53804,52 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationsSort`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteListingConfiguration
+Delete configuration for listings
+
+```golang
+
+data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
+
+
+| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration for listing.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
 
 
 
@@ -54109,49 +54331,6 @@ Schema: `CollectionDetailResponse`
 ---
 
 
-#### deleteCollection
-Delete a Collection
-
-```golang
-
-data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier of a collection. | 
-
-
-
-Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateCollection
 Update a collection
 
@@ -54184,6 +54363,49 @@ The Collection object. See example below or refer `UpdateCollectionSchema` for d
 
 
 Schema: `UpdateCollection`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteCollection
+Delete a Collection
+
+```golang
+
+data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier of a collection. | 
+
+
+
+Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -55528,25 +55750,26 @@ Schema: `Product`
 ---
 
 
-#### deleteProduct
-Delete a product.
+#### editProduct
+Edit a product.
 
 ```golang
 
-data, err := Catalog.DeleteProduct(CompanyID, ItemID);
+data, err := Catalog.EditProduct(CompanyID, ItemID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
 
 
 | ItemID | float64 | Id of the product to be updated. | 
 
 
+| body |  ProductCreateUpdate | "Request body" 
 
-This API allows to delete product.
+This API allows to edit product.
 
 *Success Response:*
 
@@ -55568,26 +55791,25 @@ Schema: `SuccessResponse`
 ---
 
 
-#### editProduct
-Edit a product.
+#### deleteProduct
+Delete a product.
 
 ```golang
 
-data, err := Catalog.EditProduct(CompanyID, ItemID, body);
+data, err := Catalog.DeleteProduct(CompanyID, ItemID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
 
 
 | ItemID | float64 | Id of the product to be updated. | 
 
 
-| body |  ProductCreateUpdate | "Request body" 
 
-This API allows to edit product.
+This API allows to delete product.
 
 *Success Response:*
 
@@ -58354,7 +58576,7 @@ Schema: `CompleteResponse`
 
 
 #### getSignUrls
-Explain here
+Gives signed urls to access private files
 
 ```golang
 
@@ -58419,7 +58641,7 @@ Copy Files
 Success
 
 
-Schema: `BulkResponse`
+Schema: `BulkUploadResponse`
 
 
 
@@ -58463,7 +58685,7 @@ Copy Files
 Success
 
 
-Schema: `BulkResponse`
+Schema: `BulkUploadResponse`
 
 
 

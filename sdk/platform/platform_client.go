@@ -471,6 +471,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
         
         
+        
+        
 
         
 
@@ -1032,6 +1034,56 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
     
     
+    
+    
+   
+  
+    
+    
+
+
+    // GetGeneralConfig Get general support configuration.
+     func (le *PlatformLead)  GetGeneralConfig() (CloseVideoRoomResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getGeneralConfigResponse CloseVideoRoomResponse
+	    )
+
+        
+
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            le.Config,
+            "get",
+            fmt.Sprintf("/service/platform/lead/v1.0/company/%s/general-config",le.CompanyID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return CloseVideoRoomResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getGeneralConfigResponse)
+        if err != nil {
+             return CloseVideoRoomResponse{}, common.NewFDKError(err.Error())
+        }
+        return getGeneralConfigResponse, nil
+        
+    }
+         
+        
+       
     
 
 
@@ -1961,6 +2013,10 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
     
     
+    
+    
+    
+    
 
 
 	
@@ -2612,6 +2668,10 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
          
         
        
+    
+    
+    
+    
     
     
     
@@ -5967,58 +6027,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // DeleteProduct Delete a product.
-     func (ca *PlatformCatalog)  DeleteProduct(ItemID float64) (SuccessResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteProductResponse SuccessResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteProductResponse)
-        if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteProductResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
     // EditProduct Edit a product.
      func (ca *PlatformCatalog)  EditProduct(ItemID float64, body  ProductCreateUpdate) (SuccessResponse, error){
         
@@ -6147,6 +6155,58 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return SuccessResponse{}, common.NewFDKError(err.Error())
         }
         return editProductResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // DeleteProduct Delete a product.
+     func (ca *PlatformCatalog)  DeleteProduct(ItemID float64) (SuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteProductResponse SuccessResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteProductResponse)
+        if err != nil {
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteProductResponse, nil
         
     }
          
@@ -9503,7 +9563,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetSignUrls Explain here
+    // GetSignUrls Gives signed urls to access private files
      func (fi *PlatformFileStorage)  GetSignUrls(body  SignUrlRequest) (SignUrlResponse, error){
         
         var (
@@ -9576,13 +9636,13 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
 
     // CopyFiles Copy Files
-     func (fi *PlatformFileStorage)  CopyFiles(xQuery PlatformCopyFilesXQuery, body  BulkRequest) (BulkResponse, error){
+     func (fi *PlatformFileStorage)  CopyFiles(xQuery PlatformCopyFilesXQuery, body  BulkRequest) (BulkUploadResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            copyFilesResponse BulkResponse
+            copyFilesResponse BulkUploadResponse
 	    )
 
         
@@ -9609,12 +9669,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
              
-             return BulkResponse{}, common.NewFDKError(err.Error())
+             return BulkUploadResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
                
-             return BulkResponse{}, common.NewFDKError(err.Error())
+             return BulkUploadResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -9627,12 +9687,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-             return BulkResponse{}, err
+             return BulkUploadResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &copyFilesResponse)
         if err != nil {
-             return BulkResponse{}, common.NewFDKError(err.Error())
+             return BulkUploadResponse{}, common.NewFDKError(err.Error())
         }
         return copyFilesResponse, nil
         
