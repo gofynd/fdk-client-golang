@@ -250,6 +250,8 @@
     * [redirectToAggregator](#redirecttoaggregator)
     * [checkCredit](#checkcredit)
     * [customerOnboard](#customeronboard)
+    * [outstandingOrderDetails](#outstandingorderdetails)
+    * [paidOrderDetails](#paidorderdetails)
     
 
 * [Order](#Order)
@@ -258,6 +260,7 @@
     * [getOrderById](#getorderbyid)
     * [getShipmentById](#getshipmentbyid)
     * [getShipmentReasons](#getshipmentreasons)
+    * [getShipmentBagReasons](#getshipmentbagreasons)
     * [updateShipmentStatus](#updateshipmentstatus)
     * [trackShipment](#trackshipment)
     * [getPosOrderById](#getposorderbyid)
@@ -17402,6 +17405,82 @@ Schema: `CustomerOnboardingResponse`
 ---
 
 
+#### outstandingOrderDetails
+API to fetch the outstanding order details
+
+```golang
+
+ data, err :=  Payment.OutstandingOrderDetails(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Aggregator`
+
+
+
+Use this API to fetch the outstanding order details.
+
+*Success Response:*
+
+
+
+Success. Returns the status of API. Check the example shown below or refer `PaidOrderDetailsResponseSchema` for more details.
+
+
+Schema: `OutstandingOrderDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### paidOrderDetails
+API to fetch the paid order details
+
+```golang
+
+ data, err :=  Payment.PaidOrderDetails(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Aggregator`
+
+
+
+Use this API to fetch the paid order details.
+
+*Success Response:*
+
+
+
+Success. Returns the status of API. Check the example shown below or refer `PaidOrderDetailsResponseSchema` for more details.
+
+
+Schema: `PaidOrderDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ---
 
@@ -17429,7 +17508,9 @@ Get all orders
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `Status`
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `Status`, `CustomMeta`
 
 
 
@@ -17557,6 +17638,47 @@ Success. Check the example shown below or refer `ShipmentReasons` for more detai
 
 
 Schema: `ShipmentReasons`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentBagReasons
+Get reasons at l1,l2 and l3 for cancellation and return based on department
+
+```golang
+
+ data, err :=  Order.GetShipmentBagReasons(ShipmentID, BagID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| BagID | string | ID of the bag. | 
+
+
+
+
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ShipmentBagReasons` for more details.
+
+
+Schema: `ShipmentBagReasons`
 
 
 
