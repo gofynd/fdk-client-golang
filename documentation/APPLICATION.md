@@ -279,11 +279,13 @@
     * [getOrderById1](#getorderbyid1)
     * [getPosOrderById1](#getposorderbyid1)
     * [getShipmentById1](#getshipmentbyid1)
+    * [getInvoiceByShipmentId1](#getinvoicebyshipmentid1)
     * [trackShipment1](#trackshipment1)
     * [getCustomerDetailsByShipmentId1](#getcustomerdetailsbyshipmentid1)
     * [sendOtpToShipmentCustomer1](#sendotptoshipmentcustomer1)
     * [verifyOtpShipmentCustomer1](#verifyotpshipmentcustomer1)
     * [getShipmentBagReasons1](#getshipmentbagreasons1)
+    * [getShipmentReasons1](#getshipmentreasons1)
     
 
 * [Rewards](#Rewards)
@@ -18487,6 +18489,44 @@ Schema: `ShipmentById1`
 ---
 
 
+#### getInvoiceByShipmentId1
+Get Invoice of a shipment
+
+```golang
+
+ data, err :=  Order.GetInvoiceByShipmentId1(ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the shipment. | 
+
+
+
+
+Use this API to retrieve shipment invoice.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ShipmentById` for more details.
+
+
+Schema: `ResponseGetInvoiceShipment1`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### trackShipment1
 Track shipment
 
@@ -18678,6 +18718,44 @@ Success. Check the example shown below or refer `ShipmentBagReasons` for more de
 
 
 Schema: `ShipmentBagReasons1`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentReasons1
+Get reasons behind full or partial cancellation of a shipment
+
+```golang
+
+ data, err :=  Order.GetShipmentReasons1(ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+
+
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ShipmentBagReasons` for more details.
+
+
+Schema: `ShipmentReasons1`
 
 
 

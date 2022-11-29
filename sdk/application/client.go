@@ -13406,6 +13406,53 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // GetInvoiceByShipmentId1 Get Invoice of a shipment
+    func (or *Order)  GetInvoiceByShipmentId1(ShipmentID string) (ResponseGetInvoiceShipment1, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getInvoiceByShipmentId1Response ResponseGetInvoiceShipment1
+	    )
+
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s/invoice",ShipmentID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ResponseGetInvoiceShipment1{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getInvoiceByShipmentId1Response)
+        if err != nil {
+            return ResponseGetInvoiceShipment1{}, common.NewFDKError(err.Error())
+        }
+         return getInvoiceByShipmentId1Response, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // TrackShipment1 Track shipment
     func (or *Order)  TrackShipment1(ShipmentID string) (ShipmentTrack1, error){
         var (
@@ -13657,6 +13704,53 @@ func NewAppClient(config *AppConfig) *Client {
             return ShipmentBagReasons1{}, common.NewFDKError(err.Error())
         }
          return getShipmentBagReasons1Response, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetShipmentReasons1 Get reasons behind full or partial cancellation of a shipment
+    func (or *Order)  GetShipmentReasons1(ShipmentID string) (ShipmentReasons1, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getShipmentReasons1Response ShipmentReasons1
+	    )
+
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s/reasons",ShipmentID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ShipmentReasons1{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getShipmentReasons1Response)
+        if err != nil {
+            return ShipmentReasons1{}, common.NewFDKError(err.Error())
+        }
+         return getShipmentReasons1Response, nil
         
     }
           
