@@ -1681,7 +1681,9 @@ Add items to cart
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`
+
+
+| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`, `ID`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -18385,7 +18387,9 @@ Add items to cart
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`
+
+
+| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`, `ID`
 
 | body |  AddCartRequest | "Request body" 
 

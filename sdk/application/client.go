@@ -2641,7 +2641,8 @@ func NewAppClient(config *AppConfig) *Client {
     type CartAddItemsXQuery struct { 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"`  
+        AreaCode string  `url:"area_code,omitempty"` 
+        ID string  `url:"id,omitempty"`  
     }
     
     // AddItems Add items to cart
@@ -2656,8 +2657,12 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
 
         
+            
+                
             
                 
             
@@ -3856,6 +3861,10 @@ func NewAppClient(config *AppConfig) *Client {
              checkoutCartResponse CartCheckoutResponse
 	    )
 
+        
+            
+        
+            
         
             
         
@@ -13284,7 +13293,8 @@ func NewAppClient(config *AppConfig) *Client {
     type PosCartAddItemsXQuery struct { 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"`  
+        AreaCode string  `url:"area_code,omitempty"` 
+        ID string  `url:"id,omitempty"`  
     }
     
     // AddItems Add items to cart
@@ -13299,6 +13309,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -14478,6 +14490,10 @@ func NewAppClient(config *AppConfig) *Client {
              checkoutCartResponse CartCheckoutResponse
 	    )
 
+        
+            
+        
+            
         
             
         
