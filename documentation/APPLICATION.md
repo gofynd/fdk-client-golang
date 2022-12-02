@@ -258,6 +258,7 @@
     * [getOrderById](#getorderbyid)
     * [getPosOrderById](#getposorderbyid)
     * [getShipmentById](#getshipmentbyid)
+    * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
     * [trackShipment](#trackshipment)
     * [getCustomerDetailsByShipmentId](#getcustomerdetailsbyshipmentid)
     * [sendOtpToShipmentCustomer](#sendotptoshipmentcustomer)
@@ -265,7 +266,7 @@
     * [getShipmentBagReasons](#getshipmentbagreasons)
     * [getShipmentReasons](#getshipmentreasons)
     * [updateShipmentStatus](#updateshipmentstatus)
-    * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
+    * [getInvoiceByShipmentId1](#getinvoicebyshipmentid1)
     * [getCreditNoteByShipmentId](#getcreditnotebyshipmentid)
     
 
@@ -17564,6 +17565,44 @@ Schema: `ShipmentById`
 ---
 
 
+#### getInvoiceByShipmentId
+Get Invoice of a shipment
+
+```golang
+
+ data, err :=  Order.GetInvoiceByShipmentId(ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the shipment. | 
+
+
+
+
+Use this API to retrieve shipment invoice.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ShipmentById` for more details.
+
+
+Schema: `ResponseGetInvoiceShipment`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### trackShipment
 Track shipment
 
@@ -17831,7 +17870,7 @@ updateShipmentStatus
 Successfully updateShipmentStatus!
 
 
-Schema: `ShipmentStatusUpdate`
+Schema: `ShipmentApplicationStatusResponse`
 
 
 
@@ -17844,12 +17883,12 @@ Schema: `ShipmentStatusUpdate`
 ---
 
 
-#### getInvoiceByShipmentId
+#### getInvoiceByShipmentId1
 Get Presigned URL to download Invoice
 
 ```golang
 
- data, err :=  Order.GetInvoiceByShipmentId(ShipmentID, xQuery);
+ data, err :=  Order.GetInvoiceByShipmentId1(ShipmentID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -17872,7 +17911,7 @@ Use this API to generate Presigned URLs for downloading Invoice
 Success Response, Presigned URL of Invoice
 
 
-Schema: `ResponseGetInvoiceShipment`
+Schema: `ResponseGetInvoiceShipment1`
 
 
 
@@ -17913,7 +17952,7 @@ Use this API to generate Presigned URLs for downloading Invoice
 Success Response, Presigned URL of Invoice
 
 
-Schema: `ResponseGetInvoiceShipment`
+Schema: `ResponseGetInvoiceShipment1`
 
 
 
