@@ -46,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [unfollowById](#unfollowbyid)
     * [followById](#followbyid)
+    * [unfollowById](#unfollowbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -279,7 +279,7 @@
     * [getOrderById1](#getorderbyid1)
     * [getPosOrderById1](#getposorderbyid1)
     * [getShipmentById1](#getshipmentbyid1)
-    * [getInvoiceByShipmentId1](#getinvoicebyshipmentid1)
+    * [getInvoiceByShipmentIds](#getinvoicebyshipmentids)
     * [trackShipment1](#trackshipment1)
     * [getCustomerDetailsByShipmentId1](#getcustomerdetailsbyshipmentid1)
     * [sendOtpToShipmentCustomer1](#sendotptoshipmentcustomer1)
@@ -1160,12 +1160,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1179,7 +1179,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1201,12 +1201,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1220,7 +1220,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -18489,12 +18489,12 @@ Schema: `ShipmentById1`
 ---
 
 
-#### getInvoiceByShipmentId1
+#### getInvoiceByShipmentIds
 Get Invoice of a shipment
 
 ```golang
 
- data, err :=  Order.GetInvoiceByShipmentId1(ShipmentID);
+ data, err :=  Order.GetInvoiceByShipmentIds(ShipmentID);
 ```
 
 | Argument  |  Type  | Description |
