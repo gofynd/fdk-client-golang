@@ -3947,6 +3947,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
             
         
+            
+        
 
          
 
@@ -6840,15 +6842,19 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdatePathRedirectionRules Save path based redirection rules
-     func (co *PlatformAppContent)  UpdatePathRedirectionRules(body  PathMappingSchema) (PathMappingSchema, error) {
+    // AddPathRedirectionRules Save path based redirection rules
+     func (co *PlatformAppContent)  AddPathRedirectionRules(body  PathMappingSchema) (PathMappingSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            updatePathRedirectionRulesResponse PathMappingSchema
+            addPathRedirectionRulesResponse PathMappingSchema
 	    )
 
+        
+            
+        
+            
         
             
         
@@ -6894,6 +6900,187 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return PathMappingSchema{}, err
 	    }
         
+        err = json.Unmarshal(response, &addPathRedirectionRulesResponse)
+        if err != nil {
+            return PathMappingSchema{}, common.NewFDKError(err.Error())
+        }
+        return addPathRedirectionRulesResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppGetPathRedirectionRulesXQuery holds query params
+    type PlatformAppGetPathRedirectionRulesXQuery struct { 
+        PageSize float64  `url:"page_size,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"`  
+    }
+    
+    // GetPathRedirectionRules Get path based redirection rules
+     func (co *PlatformAppContent)  GetPathRedirectionRules(xQuery PlatformAppGetPathRedirectionRulesXQuery) (PathMappingSchema, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getPathRedirectionRulesResponse PathMappingSchema
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/platform/content/v1.0/company/%s/application/%s/path-mappings",co.CompanyID, co.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PathMappingSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPathRedirectionRulesResponse)
+        if err != nil {
+            return PathMappingSchema{}, common.NewFDKError(err.Error())
+        }
+        return getPathRedirectionRulesResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetPathRedirectionRule Get path based redirection rule
+     func (co *PlatformAppContent)  GetPathRedirectionRule(PathID string) (PathMappingSchema, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getPathRedirectionRuleResponse PathMappingSchema
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/platform/content/v1.0/company/%s/application/%s/path-mappings/%s",co.CompanyID, co.ApplicationID, PathID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PathMappingSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPathRedirectionRuleResponse)
+        if err != nil {
+            return PathMappingSchema{}, common.NewFDKError(err.Error())
+        }
+        return getPathRedirectionRuleResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdatePathRedirectionRules Update path based redirection rules
+     func (co *PlatformAppContent)  UpdatePathRedirectionRules(PathID string, body  PathMappingSchema) (PathMappingSchema, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updatePathRedirectionRulesResponse PathMappingSchema
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PathMappingSchema{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PathMappingSchema{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "put",
+            fmt.Sprintf("/service/platform/content/v1.0/company/%s/application/%s/path-mappings/%s",co.CompanyID, co.ApplicationID, PathID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PathMappingSchema{}, err
+	    }
+        
         err = json.Unmarshal(response, &updatePathRedirectionRulesResponse)
         if err != nil {
             return PathMappingSchema{}, common.NewFDKError(err.Error())
@@ -6909,13 +7096,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetPathRedirectionRules Get path based redirection rules
-     func (co *PlatformAppContent)  GetPathRedirectionRules() (PathMappingSchema, error) {
+    // DeletePathRedirectionRules Delete path based redirection rules
+     func (co *PlatformAppContent)  DeletePathRedirectionRules(PathID string) (map[string]interface{}, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getPathRedirectionRulesResponse PathMappingSchema
+            deletePathRedirectionRulesResponse map[string]interface{}
 	    )
 
         
@@ -6924,27 +7111,29 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
         
         
+        
+        
          
         
         
         //API call
         rawRequest = NewRequest(
             co.config,
-            "get",
-            fmt.Sprintf("/service/platform/content/v1.0/company/%s/application/%s/path-mappings",co.CompanyID, co.ApplicationID),
+            "delete",
+            fmt.Sprintf("/service/platform/content/v1.0/company/%s/application/%s/path-mappings/%s",co.CompanyID, co.ApplicationID, PathID),
             nil,
             nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return PathMappingSchema{}, err
+            return map[string]interface{}{}, err
 	    }
         
-        err = json.Unmarshal(response, &getPathRedirectionRulesResponse)
+        err = json.Unmarshal(response, &deletePathRedirectionRulesResponse)
         if err != nil {
-            return PathMappingSchema{}, common.NewFDKError(err.Error())
+            return map[string]interface{}{}, common.NewFDKError(err.Error())
         }
-        return getPathRedirectionRulesResponse, nil
+        return deletePathRedirectionRulesResponse, nil
         
     }
            
@@ -10580,6 +10769,134 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // SendOtp Send OTP using email and sms
+     func (co *PlatformAppCommunication)  SendOtp(body  SendOtpCommsReq) (SendOtpCommsRes, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            sendOtpResponse SendOtpCommsRes
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return SendOtpCommsRes{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return SendOtpCommsRes{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "post",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/otp/send-otp-comms",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return SendOtpCommsRes{}, err
+	    }
+        
+        err = json.Unmarshal(response, &sendOtpResponse)
+        if err != nil {
+            return SendOtpCommsRes{}, common.NewFDKError(err.Error())
+        }
+        return sendOtpResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // VerfiyOtp Verify OTP sent via email and sms
+     func (co *PlatformAppCommunication)  VerfiyOtp(body  VerifyOtpCommsReq) (VerifyOtpCommsSuccessRes, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            verfiyOtpResponse VerifyOtpCommsSuccessRes
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return VerifyOtpCommsSuccessRes{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return VerifyOtpCommsSuccessRes{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "post",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/otp/verify-otp-comms",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return VerifyOtpCommsSuccessRes{}, err
+	    }
+        
+        err = json.Unmarshal(response, &verfiyOtpResponse)
+        if err != nil {
+            return VerifyOtpCommsSuccessRes{}, common.NewFDKError(err.Error())
+        }
+        return verfiyOtpResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     //PlatformAppGetSmsProvidersXQuery holds query params
     type PlatformAppGetSmsProvidersXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
@@ -12500,54 +12817,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetSearchKeywords Get a Search Keywords Details
-     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getSearchKeywordsResponse GetSearchWordsDetailResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetSearchWordsDetailResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getSearchKeywordsResponse)
-        if err != nil {
-            return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
-        }
-        return getSearchKeywordsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // UpdateSearchKeywords Update Search Keyword
      func (ca *PlatformAppCatalog)  UpdateSearchKeywords(ID string, body  CreateSearchKeyword) (GetSearchWordsData, error) {
         var (
@@ -12657,6 +12926,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return DeleteResponse{}, common.NewFDKError(err.Error())
         }
         return deleteSearchKeywordsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetSearchKeywords Get a Search Keywords Details
+     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getSearchKeywordsResponse GetSearchWordsDetailResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetSearchWordsDetailResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getSearchKeywordsResponse)
+        if err != nil {
+            return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
+        }
+        return getSearchKeywordsResponse, nil
         
     }
            
@@ -12782,54 +13099,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
-     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAutocompleteKeywordDetailResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // UpdateAutocompleteKeyword Create & Update Autocomplete Keyword
      func (ca *PlatformAppCatalog)  UpdateAutocompleteKeyword(ID string, body  CreateAutocompleteKeyword) (GetAutocompleteWordsResponse, error) {
         var (
@@ -12939,6 +13208,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return DeleteResponse{}, common.NewFDKError(err.Error())
         }
         return deleteAutocompleteKeywordResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
+     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAutocompleteKeywordDetailResponse, nil
         
     }
            
@@ -20325,6 +20642,67 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
                 return paginator
             }
         
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppGetAbandonedCartDetailsXQuery holds query params
+    type PlatformAppGetAbandonedCartDetailsXQuery struct { 
+        ID string  `url:"id,omitempty"` 
+        I bool  `url:"i,omitempty"` 
+        B bool  `url:"b,omitempty"`  
+    }
+    
+    // GetAbandonedCartDetails Fetch all items added to the cart
+     func (ca *PlatformAppCart)  GetAbandonedCartDetails(xQuery PlatformAppGetAbandonedCartDetailsXQuery) (CartDetailResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAbandonedCartDetailsResponse CartDetailResponse
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/abandoned/cart/detail",ca.CompanyID, ca.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CartDetailResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAbandonedCartDetailsResponse)
+        if err != nil {
+            return CartDetailResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAbandonedCartDetailsResponse, nil
+        
+    }
+           
        
     
     

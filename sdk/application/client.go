@@ -1657,55 +1657,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1746,6 +1697,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -2303,8 +2303,7 @@ func NewAppClient(config *AppConfig) *Client {
     //CatalogGetProductPriceBySlugXQuery holds query params
     type CatalogGetProductPriceBySlugXQuery struct { 
         StoreID float64  `url:"store_id,omitempty"` 
-        Pincode string  `url:"pincode,omitempty"` 
-        Moq float64  `url:"moq,omitempty"`  
+        Pincode string  `url:"pincode,omitempty"`  
     }
     
     // GetProductPriceBySlug Get the price of a product size at a PIN Code
@@ -2319,8 +2318,6 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
-            
-                
             
                 
             
@@ -2527,7 +2524,6 @@ func NewAppClient(config *AppConfig) *Client {
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
         AssignCardID float64  `url:"assign_card_id,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
@@ -2543,8 +2539,6 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
-            
-                
             
                 
             
@@ -2644,7 +2638,6 @@ func NewAppClient(config *AppConfig) *Client {
     type CartAddItemsXQuery struct { 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
@@ -2662,8 +2655,6 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
-            
-                
             
                 
             
@@ -2723,7 +2714,6 @@ func NewAppClient(config *AppConfig) *Client {
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
@@ -2743,8 +2733,6 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
-            
-                
             
                 
             
@@ -12788,6 +12776,55 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // GetShipmentBagReasons Get reasons at l1,l2 and l3 for cancellation and return based on department
+    func (or *Order)  GetShipmentBagReasons(ShipmentID string, BagID string) (ShipmentBagReasons, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getShipmentBagReasonsResponse ShipmentBagReasons
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/bags/%s/reasons/",ShipmentID,BagID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ShipmentBagReasons{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getShipmentBagReasonsResponse)
+        if err != nil {
+            return ShipmentBagReasons{}, common.NewFDKError(err.Error())
+        }
+         return getShipmentBagReasonsResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // UpdateShipmentStatus Update the shipment status
     func (or *Order)  UpdateShipmentStatus(ShipmentID string, body  ShipmentStatusUpdateBody) (ShipmentStatusUpdate, error){
         var (
@@ -13607,7 +13644,6 @@ func NewAppClient(config *AppConfig) *Client {
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
         AssignCardID float64  `url:"assign_card_id,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
@@ -13623,8 +13659,6 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
-            
-                
             
                 
             
@@ -13724,7 +13758,6 @@ func NewAppClient(config *AppConfig) *Client {
     type PosCartAddItemsXQuery struct { 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
@@ -13740,8 +13773,6 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
-            
-                
             
                 
             
@@ -13801,7 +13832,6 @@ func NewAppClient(config *AppConfig) *Client {
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
@@ -13817,8 +13847,6 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
-            
-                
             
                 
             
