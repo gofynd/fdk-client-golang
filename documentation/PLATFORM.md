@@ -23,6 +23,7 @@
 * [Partner](#Partner) - Partner configuration apis 
 * [Webhook](#Webhook) - Webhook dispatcher with retry and one event to many subscriber vice versa 
 * [AuditTrail](#AuditTrail) -  
+* [DocumentEngine](#DocumentEngine) - Handles financial pdf generation of Fulfilment 
 
 ----
 ----
@@ -224,6 +225,8 @@
     * [getJobLogs](#getjoblogs)
     * [getCommunicationLogs](#getcommunicationlogs)
     * [getSystemNotifications](#getsystemnotifications)
+    * [sendOtp](#sendotp)
+    * [verfiyOtp](#verfiyotp)
     * [getSmsProviders](#getsmsproviders)
     * [createSmsProvider](#createsmsprovider)
     * [getSmsProviderById](#getsmsproviderbyid)
@@ -284,13 +287,13 @@
 * [Catalog](#Catalog)
   * Methods
     * [updateSearchKeywords](#updatesearchkeywords)
-    * [getSearchKeywords](#getsearchkeywords)
     * [deleteSearchKeywords](#deletesearchkeywords)
+    * [getSearchKeywords](#getsearchkeywords)
     * [createCustomKeyword](#createcustomkeyword)
     * [getAllSearchKeyword](#getallsearchkeyword)
     * [updateAutocompleteKeyword](#updateautocompletekeyword)
-    * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
+    * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createProductBundle](#createproductbundle)
@@ -356,8 +359,8 @@
     * [getProducts](#getproducts)
     * [getProductAttributes](#getproductattributes)
     * [editProduct](#editproduct)
-    * [getProduct](#getproduct)
     * [deleteProduct](#deleteproduct)
+    * [getProduct](#getproduct)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
     * [createBulkProductUploadJob](#createbulkproductuploadjob)
@@ -397,6 +400,7 @@
     * [getProductDetailBySlug](#getproductdetailbyslug)
     * [getAppProducts](#getappproducts)
     * [getAppInventory](#getappinventory)
+    * [getOptimalLocations](#getoptimallocations)
     * [getAppLocations](#getapplocations)
     * [getApplicationBrandListing](#getapplicationbrandlisting)
     * [updateAppBrand](#updateappbrand)
@@ -594,6 +598,19 @@
     * [createAuditLog](#createauditlog)
     * [getAuditLog](#getauditlog)
     * [getEntityTypes](#getentitytypes)
+    
+
+* [DocumentEngine](#DocumentEngine)
+  * Methods
+    * [generateBulkPackageLabel](#generatebulkpackagelabel)
+    * [generateBulkBoxLabel](#generatebulkboxlabel)
+    * [generateBulkShipmentLabel](#generatebulkshipmentlabel)
+    * [generateNoc](#generatenoc)
+    * [getLabelStatus](#getlabelstatus)
+    * [getNocStatus](#getnocstatus)
+    * [getPresignedURL](#getpresignedurl)
+    * [getLabelPresignedURL](#getlabelpresignedurl)
+    * [getNocPresignedURL](#getnocpresignedurl)
     
 
 
@@ -50100,6 +50117,131 @@ default
 ---
 
 
+#### sendOtp
+Send OTP using email and sms
+
+```golang
+
+data, err := Communication.SendOtp(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| body |  SendOtpCommsReq | "Request body" 
+
+Send OTP Comms via email and sms
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `SendOtpCommsRes`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "sms": {
+      "success": true,
+      "request_id": "c8d1bd63d56a2d368aae9dbd4e7d8326",
+      "message": "OTP sent",
+      "mobile": "9096686804",
+      "country_code": "91",
+      "resend_timer": 30
+    },
+    "email": {
+      "success": true,
+      "request_id": "1cc79c911923971580d903039ea9ee05",
+      "message": "OTP sent",
+      "to": "parvezshaikh@gofynd.com",
+      "resend_timer": 30
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### verfiyOtp
+Verify OTP sent via email and sms
+
+```golang
+
+data, err := Communication.VerfiyOtp(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| body |  VerifyOtpCommsReq | "Request body" 
+
+Verify OTP sent via email and sms
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `VerifyOtpCommsSuccessRes`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "success": true,
+    "mobile": "9096686804",
+    "country_code": "91",
+    "message": "OTP verified"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getSmsProviders
 Get sms providers
 
@@ -52520,49 +52662,6 @@ Schema: `GetSearchWordsData`
 ---
 
 
-#### getSearchKeywords
-Get a Search Keywords Details
-
-```golang
-
-data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
-
-*Success Response:*
-
-
-
-The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
-
-
-Schema: `GetSearchWordsDetailResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### deleteSearchKeywords
 Delete a Search Keywords
 
@@ -52594,6 +52693,49 @@ Status object. Tells whether the operation was successful. See example below or 
 
 
 Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSearchKeywords
+Get a Search Keywords Details
+
+```golang
+
+data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
+
+*Success Response:*
+
+
+
+The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
+
+
+Schema: `GetSearchWordsDetailResponse`
 
 
 
@@ -52731,49 +52873,6 @@ Schema: `GetAutocompleteWordsResponse`
 ---
 
 
-#### getAutocompleteKeywordDetail
-Get a Autocomplete Keywords Details
-
-```golang
-
-data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
-
-*Success Response:*
-
-
-
-The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
-
-
-Schema: `GetAutocompleteWordsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### deleteAutocompleteKeyword
 Delete a Autocomplete Keywords
 
@@ -52805,6 +52904,49 @@ Status object. Tells whether the operation was successful. See example below or 
 
 
 Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAutocompleteKeywordDetail
+Get a Autocomplete Keywords Details
+
+```golang
+
+data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
+
+*Success Response:*
+
+
+
+The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
+
+
+Schema: `GetAutocompleteWordsResponse`
 
 
 
@@ -55576,6 +55718,46 @@ Schema: `SuccessResponse`
 ---
 
 
+#### deleteProduct
+Delete a product.
+
+```golang
+
+data, err := Catalog.DeleteProduct(CompanyID, ItemID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
+
+
+| ItemID | float64 | Id of the product to be updated. | 
+
+
+
+This API allows to delete product.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getProduct
 Get a single product.
 
@@ -55609,46 +55791,6 @@ Product object. See example below or refer `product.utils.format_product_respons
 
 
 Schema: `Product`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteProduct
-Delete a product.
-
-```golang
-
-data, err := Catalog.DeleteProduct(CompanyID, ItemID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
-
-
-| ItemID | float64 | Id of the product to be updated. | 
-
-
-
-This API allows to delete product.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
 
 
 
@@ -57352,6 +57494,44 @@ Schema: `InventoryStockResponse`
 ---
 
 
+#### getOptimalLocations
+Location Reassignment
+
+```golang
+
+data, err := Catalog.GetOptimalLocations(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company inside which the location is to be created. | 
+
+
+| body |  AssignStore | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `StoreAssignResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getAppLocations
 Get list of locations
 
@@ -58406,7 +58586,7 @@ Schema: `CompleteResponse`
 
 
 #### getSignUrls
-Explain here
+Gives signed urls to access private files
 
 ```golang
 
@@ -64670,6 +64850,405 @@ default
         "display_name": "Shipment Update"
       }
     ]
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+
+---
+
+
+## DocumentEngine
+
+
+#### generateBulkPackageLabel
+Generate Labels for Packages
+
+```golang
+
+data, err := DocumentEngine.GenerateBulkPackageLabel(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company ID | 
+
+
+| body |  GenerateBulkPackageLabel | "Request body" 
+
+Use this API to generate label for Packages
+
+*Success Response:*
+
+
+
+Sucsess Response, Labels will be generated
+
+
+Schema: `SuccessResponseGenerateBulk`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### generateBulkBoxLabel
+Generate Labels for Boxes which will go inside package
+
+```golang
+
+data, err := DocumentEngine.GenerateBulkBoxLabel(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company ID | 
+
+
+| body |  GenerateBulkBoxLabel | "Request body" 
+
+Use this API to generate label for Boxes
+
+*Success Response:*
+
+
+
+Sucsess Response, Labels will be generated
+
+
+Schema: `SuccessResponseGenerateBulk`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### generateBulkShipmentLabel
+Generate Labels for Shipments which contains packaged
+
+```golang
+
+data, err := DocumentEngine.GenerateBulkShipmentLabel(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company ID | 
+
+
+| body |  GenerateBulkShipmentLabel | "Request body" 
+
+Use this API to generate label for Shipments
+
+*Success Response:*
+
+
+
+Sucsess Response, Labels will be generated
+
+
+Schema: `SuccessResponseGenerateBulk`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### generateNoc
+Generate NOC for Seller having access to a fullfillment center
+
+```golang
+
+data, err := DocumentEngine.GenerateNoc(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company ID | 
+
+
+| body |  GenerateNoc | "Request body" 
+
+Use this API to generate NOC for Seller
+
+*Success Response:*
+
+
+
+Sucsess Response, NOC Pdf will be generated
+
+
+Schema: `SuccessResponseGenerateBulk`
+
+
+*Examples:*
+
+
+success response
+```json
+{
+  "value": {
+    "status": true
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getLabelStatus
+Get Staus of Label generations
+
+```golang
+
+data, err := DocumentEngine.GetLabelStatus(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company ID | 
+
+
+
+| xQuery | struct | Includes properties such as `UID`
+
+
+Use this API to fetch status of PDF generation of Labels
+
+*Success Response:*
+
+
+
+Sucess Response, Status Of Label generation
+
+
+Schema: `StatusSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getNocStatus
+Get Staus of NOC generation
+
+```golang
+
+data, err := DocumentEngine.GetNocStatus(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company ID | 
+
+
+
+| xQuery | struct | Includes properties such as `UID`
+
+
+Use this API to fetch status of PDF generation of NOC
+
+*Success Response:*
+
+
+
+Sucess Response, Status Of NOC Pdf generation
+
+
+Schema: `StatusSuccessResponse`
+
+
+*Examples:*
+
+
+success response
+```json
+{
+  "value": {
+    "success": true,
+    "status": "created"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPresignedURL
+Get Presigned URL to download PDFs
+
+```golang
+
+data, err := DocumentEngine.GetPresignedURL(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company ID | 
+
+
+| body |  InvoiceLabelPresignedRequestBody | "Request body" 
+
+Use this API to generate Presigned URLs for downloading PDFs
+
+*Success Response:*
+
+
+
+Sucess Response, Presigned URL of PDFs
+
+
+Schema: `SignedSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getLabelPresignedURL
+Get Presigned URL to download labels
+
+```golang
+
+data, err := DocumentEngine.GetLabelPresignedURL(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company ID | 
+
+
+
+| xQuery | struct | Includes properties such as `UID`
+
+
+Use this API to generate Presigned URLs for downloading labels
+
+*Success Response:*
+
+
+
+Sucess Response, Presigned URL of Labels
+
+
+Schema: `SignedSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getNocPresignedURL
+Get Presigned URL to download NOC Pdf
+
+```golang
+
+data, err := DocumentEngine.GetNocPresignedURL(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company ID | 
+
+
+
+| xQuery | struct | Includes properties such as `UID`
+
+
+Use this API to generate Presigned URL for downloading NOC Pdf
+
+*Success Response:*
+
+
+
+Sucess Response, Presigned URL of NOC Pdf
+
+
+Schema: `SignedSuccessResponse`
+
+
+*Examples:*
+
+
+success response
+```json
+{
+  "value": {
+    "uid": "l27h38uy",
+    "expires_in": 300,
+    "url": "presigned-url"
   }
 }
 ```
