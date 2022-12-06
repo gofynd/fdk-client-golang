@@ -267,7 +267,7 @@
     * [getOrderById](#getorderbyid)
     * [getPosOrderById](#getposorderbyid)
     * [getShipmentById](#getshipmentbyid)
-    * [getInvoiceByShipmentIds](#getinvoicebyshipmentids)
+    * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
     * [trackShipment](#trackshipment)
     * [getCustomerDetailsByShipmentId](#getcustomerdetailsbyshipmentid)
     * [sendOtpToShipmentCustomer](#sendotptoshipmentcustomer)
@@ -18002,12 +18002,12 @@ Schema: `ShipmentById`
 ---
 
 
-#### getInvoiceByShipmentIds
+#### getInvoiceByShipmentId
 Get Invoice of a shipment
 
 ```golang
 
- data, err :=  Order.GetInvoiceByShipmentIds(ShipmentID);
+ data, err :=  Order.GetInvoiceByShipmentId(ShipmentID);
 ```
 
 | Argument  |  Type  | Description |

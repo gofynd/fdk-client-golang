@@ -12779,13 +12779,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetInvoiceByShipmentIds Get Invoice of a shipment
-    func (or *Order)  GetInvoiceByShipmentIds(ShipmentID string) (ResponseGetInvoiceShipment, error){
+    // GetInvoiceByShipmentId Get Invoice of a shipment
+    func (or *Order)  GetInvoiceByShipmentId(ShipmentID string) (ResponseGetInvoiceShipment, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getInvoiceByShipmentIdsResponse ResponseGetInvoiceShipment
+             getInvoiceByShipmentIdResponse ResponseGetInvoiceShipment
 	    )
 
         
@@ -12812,11 +12812,11 @@ func NewAppClient(config *AppConfig) *Client {
             return ResponseGetInvoiceShipment{}, err
 	    }
         
-        err = json.Unmarshal(response, &getInvoiceByShipmentIdsResponse)
+        err = json.Unmarshal(response, &getInvoiceByShipmentIdResponse)
         if err != nil {
             return ResponseGetInvoiceShipment{}, common.NewFDKError(err.Error())
         }
-         return getInvoiceByShipmentIdsResponse, nil
+         return getInvoiceByShipmentIdResponse, nil
         
     }
           
