@@ -2574,7 +2574,7 @@ func NewAppClient(config *AppConfig) *Client {
         B bool  `url:"b,omitempty"` 
         AssignCardID float64  `url:"assign_card_id,omitempty"` 
         AreaCode string  `url:"area_code,omitempty"` 
-        EmptyCart string  `url:"empty_cart,omitempty"`  
+        EmptyCart bool  `url:"empty_cart,omitempty"`  
     }
     
     // GetCart Fetch all items added to the cart
@@ -13144,7 +13144,7 @@ func NewAppClient(config *AppConfig) *Client {
         B bool  `url:"b,omitempty"` 
         AssignCardID float64  `url:"assign_card_id,omitempty"` 
         AreaCode string  `url:"area_code,omitempty"` 
-        EmptyCart string  `url:"empty_cart,omitempty"`  
+        EmptyCart bool  `url:"empty_cart,omitempty"`  
     }
     
     // GetCart Fetch all items added to the cart
