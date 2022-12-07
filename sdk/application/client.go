@@ -11943,7 +11943,8 @@ func NewAppClient(config *AppConfig) *Client {
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
         FromDate string  `url:"from_date,omitempty"` 
-        ToDate string  `url:"to_date,omitempty"`  
+        ToDate string  `url:"to_date,omitempty"` 
+        CustomMeta string  `url:"custom_meta,omitempty"`  
     }
     
     // GetOrders Get all orders
@@ -11958,6 +11959,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -12004,12 +12007,12 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // GetOrderById Get details of an order
-    func (or *Order)  GetOrderById(OrderID string) (OrderList, error){
+    func (or *Order)  GetOrderById(OrderID string) (OrderById, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getOrderByIdResponse OrderList
+             getOrderByIdResponse OrderById
 	    )
 
         
@@ -12033,12 +12036,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return OrderList{}, err
+            return OrderById{}, err
 	    }
         
         err = json.Unmarshal(response, &getOrderByIdResponse)
         if err != nil {
-            return OrderList{}, common.NewFDKError(err.Error())
+            return OrderById{}, common.NewFDKError(err.Error())
         }
          return getOrderByIdResponse, nil
         
@@ -12144,13 +12147,60 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // TrackShipment Track shipment
-    func (or *Order)  TrackShipment(ShipmentID string) (TrackShipmentResponse, error){
+    // GetInvoiceByShipmentId Get Invoice of a shipment
+    func (or *Order)  GetInvoiceByShipmentId(ShipmentID string) (ResponseGetInvoiceShipment, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             trackShipmentResponse TrackShipmentResponse
+             getInvoiceByShipmentIdResponse ResponseGetInvoiceShipment
+	    )
+
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s/invoice",ShipmentID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ResponseGetInvoiceShipment{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getInvoiceByShipmentIdResponse)
+        if err != nil {
+            return ResponseGetInvoiceShipment{}, common.NewFDKError(err.Error())
+        }
+         return getInvoiceByShipmentIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // TrackShipment Track shipment
+    func (or *Order)  TrackShipment(ShipmentID string) (ShipmentTrack, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             trackShipmentResponse ShipmentTrack
 	    )
 
         
@@ -12174,12 +12224,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return TrackShipmentResponse{}, err
+            return ShipmentTrack{}, err
 	    }
         
         err = json.Unmarshal(response, &trackShipmentResponse)
         if err != nil {
-            return TrackShipmentResponse{}, common.NewFDKError(err.Error())
+            return ShipmentTrack{}, common.NewFDKError(err.Error())
         }
          return trackShipmentResponse, nil
         
@@ -12356,12 +12406,12 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // GetShipmentBagReasons Get reasons behind full or partial cancellation of a shipment
-    func (or *Order)  GetShipmentBagReasons(ShipmentID string, BagID float64) (ShipmentReasonsResponse, error){
+    func (or *Order)  GetShipmentBagReasons(ShipmentID string, BagID string) (ShipmentBagReasons, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getShipmentBagReasonsResponse ShipmentReasonsResponse
+             getShipmentBagReasonsResponse ShipmentBagReasons
 	    )
 
         
@@ -12381,18 +12431,18 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s/bags/undefined/reasons",ShipmentID,BagID),
+            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s/bags/%s/reasons",ShipmentID,BagID),
             nil,
             nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ShipmentReasonsResponse{}, err
+            return ShipmentBagReasons{}, err
 	    }
         
         err = json.Unmarshal(response, &getShipmentBagReasonsResponse)
         if err != nil {
-            return ShipmentReasonsResponse{}, common.NewFDKError(err.Error())
+            return ShipmentBagReasons{}, common.NewFDKError(err.Error())
         }
          return getShipmentBagReasonsResponse, nil
         
@@ -12404,8 +12454,55 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // GetShipmentReasons Get reasons behind full or partial cancellation of a shipment
+    func (or *Order)  GetShipmentReasons(ShipmentID string) (ShipmentReasons, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getShipmentReasonsResponse ShipmentReasons
+	    )
+
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s/reasons",ShipmentID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ShipmentReasons{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getShipmentReasonsResponse)
+        if err != nil {
+            return ShipmentReasons{}, common.NewFDKError(err.Error())
+        }
+         return getShipmentReasonsResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // UpdateShipmentStatus 
-    func (or *Order)  UpdateShipmentStatus(ShipmentID string, body  ShipmentStatusUpdateBody) (ShipmentApplicationStatusResponse, error){
+    func (or *Order)  UpdateShipmentStatus(ShipmentID string, body  StatusUpdateInternalRequest) (ShipmentApplicationStatusResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -12413,6 +12510,14 @@ func NewAppClient(config *AppConfig) *Client {
              updateShipmentStatusResponse ShipmentApplicationStatusResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
         
             
         
@@ -12466,18 +12571,123 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    //OrderGetInvoiceByShipmentIdXQuery holds query params
-    type OrderGetInvoiceByShipmentIdXQuery struct { 
-        Parameters invoiceParameter  `url:"parameters,omitempty"`  
-    }
-    
-    // GetInvoiceByShipmentId Get Presigned URL to download Invoice
-    func (or *Order)  GetInvoiceByShipmentId(ShipmentID string, xQuery OrderGetInvoiceByShipmentIdXQuery) (ResponseGetInvoiceShipment, error){
+    // GetChannelConfig 
+    func (or *Order)  GetChannelConfig() (CreateOrderConfigData, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getInvoiceByShipmentIdResponse ResponseGetInvoiceShipment
+             getChannelConfigResponse CreateOrderConfigData
+	    )
+
+        
+
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            "/service/application/order-manage/v1.0/orders/co-config",
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CreateOrderConfigData{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getChannelConfigResponse)
+        if err != nil {
+            return CreateOrderConfigData{}, common.NewFDKError(err.Error())
+        }
+         return getChannelConfigResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // CreateChannelConfig 
+    func (or *Order)  CreateChannelConfig(body  CreateOrderConfigData) (CreateOrderConfigDataResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             createChannelConfigResponse CreateOrderConfigDataResponse
+	    )
+
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return CreateOrderConfigDataResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return CreateOrderConfigDataResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "post",
+            "/service/application/order-manage/v1.0/orders/co-config",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CreateOrderConfigDataResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createChannelConfigResponse)
+        if err != nil {
+            return CreateOrderConfigDataResponse{}, common.NewFDKError(err.Error())
+        }
+         return createChannelConfigResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //OrderGetInvoiceByShipmentId1XQuery holds query params
+    type OrderGetInvoiceByShipmentId1XQuery struct { 
+        Parameters invoiceParameter  `url:"parameters,omitempty"`  
+    }
+    
+    // GetInvoiceByShipmentId1 Get Presigned URL to download Invoice
+    func (or *Order)  GetInvoiceByShipmentId1(ShipmentID string, xQuery OrderGetInvoiceByShipmentId1XQuery) (ResponseGetInvoiceShipment1, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getInvoiceByShipmentId1Response ResponseGetInvoiceShipment1
 	    )
 
         
@@ -12505,14 +12715,14 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ResponseGetInvoiceShipment{}, err
+            return ResponseGetInvoiceShipment1{}, err
 	    }
         
-        err = json.Unmarshal(response, &getInvoiceByShipmentIdResponse)
+        err = json.Unmarshal(response, &getInvoiceByShipmentId1Response)
         if err != nil {
-            return ResponseGetInvoiceShipment{}, common.NewFDKError(err.Error())
+            return ResponseGetInvoiceShipment1{}, common.NewFDKError(err.Error())
         }
-         return getInvoiceByShipmentIdResponse, nil
+         return getInvoiceByShipmentId1Response, nil
         
     }
           
@@ -12528,12 +12738,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // GetCreditNoteByShipmentId Get Presigned URL to download Invoice
-    func (or *Order)  GetCreditNoteByShipmentId(ShipmentID string, xQuery OrderGetCreditNoteByShipmentIdXQuery) (ResponseGetInvoiceShipment, error){
+    func (or *Order)  GetCreditNoteByShipmentId(ShipmentID string, xQuery OrderGetCreditNoteByShipmentIdXQuery) (ResponseGetInvoiceShipment1, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getCreditNoteByShipmentIdResponse ResponseGetInvoiceShipment
+             getCreditNoteByShipmentIdResponse ResponseGetInvoiceShipment1
 	    )
 
         
@@ -12561,12 +12771,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ResponseGetInvoiceShipment{}, err
+            return ResponseGetInvoiceShipment1{}, err
 	    }
         
         err = json.Unmarshal(response, &getCreditNoteByShipmentIdResponse)
         if err != nil {
-            return ResponseGetInvoiceShipment{}, common.NewFDKError(err.Error())
+            return ResponseGetInvoiceShipment1{}, common.NewFDKError(err.Error())
         }
          return getCreditNoteByShipmentIdResponse, nil
         

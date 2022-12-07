@@ -258,13 +258,17 @@
     * [getOrderById](#getorderbyid)
     * [getPosOrderById](#getposorderbyid)
     * [getShipmentById](#getshipmentbyid)
+    * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
     * [trackShipment](#trackshipment)
     * [getCustomerDetailsByShipmentId](#getcustomerdetailsbyshipmentid)
     * [sendOtpToShipmentCustomer](#sendotptoshipmentcustomer)
     * [verifyOtpShipmentCustomer](#verifyotpshipmentcustomer)
     * [getShipmentBagReasons](#getshipmentbagreasons)
+    * [getShipmentReasons](#getshipmentreasons)
     * [updateShipmentStatus](#updateshipmentstatus)
-    * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
+    * [getChannelConfig](#getchannelconfig)
+    * [createChannelConfig](#createchannelconfig)
+    * [getInvoiceByShipmentId1](#getinvoicebyshipmentid1)
     * [getCreditNoteByShipmentId](#getcreditnotebyshipmentid)
     
 
@@ -17424,7 +17428,9 @@ Get all orders
 
 
 
-| xQuery | struct | Includes properties such as `Status`, `PageNo`, `PageSize`, `FromDate`, `ToDate`
+
+
+| xQuery | struct | Includes properties such as `Status`, `PageNo`, `PageSize`, `FromDate`, `ToDate`, `CustomMeta`
 
 
 
@@ -17475,7 +17481,7 @@ Use this API to retrieve order details such as tracking details, shipment, store
 Success. Check the example shown below or refer `OrderById` for more details.
 
 
-Schema: `OrderList`
+Schema: `OrderById`
 
 
 
@@ -17564,6 +17570,44 @@ Schema: `ShipmentById`
 ---
 
 
+#### getInvoiceByShipmentId
+Get Invoice of a shipment
+
+```golang
+
+ data, err :=  Order.GetInvoiceByShipmentId(ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the shipment. | 
+
+
+
+
+Use this API to retrieve shipment invoice.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ShipmentById` for more details.
+
+
+Schema: `ResponseGetInvoiceShipment`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### trackShipment
 Track shipment
 
@@ -17589,7 +17633,7 @@ Track Shipment by shipment id, for application based on application Id
 Success. Check the example shown below or refer `ShipmentTrack` for more details.
 
 
-Schema: `TrackShipmentResponse`
+Schema: `ShipmentTrack`
 
 
 
@@ -17740,7 +17784,7 @@ Get reasons behind full or partial cancellation of a shipment
 | ShipmentID | string | ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
-| BagID | float64 | ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+| BagID | string | ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
 
@@ -17751,10 +17795,48 @@ Use this API to retrieve the issues that led to the cancellation of bags within 
 
 
 
-Success. Check the example shown below or refer `ShipmentReasons` for more details.
+Success. Check the example shown below or refer `ShipmentBagReasons` for more details.
 
 
-Schema: `ShipmentReasonsResponse`
+Schema: `ShipmentBagReasons`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentReasons
+Get reasons behind full or partial cancellation of a shipment
+
+```golang
+
+ data, err :=  Order.GetShipmentReasons(ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+
+
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ShipmentBagReasons` for more details.
+
+
+Schema: `ShipmentReasons`
 
 
 
@@ -17781,7 +17863,7 @@ Schema: `ShipmentReasonsResponse`
 | ShipmentID | string |  | 
 
 
-| body |  ShipmentStatusUpdateBody | "Request body" 
+| body |  StatusUpdateInternalRequest | "Request body" 
 
 
 updateShipmentStatus
@@ -17806,12 +17888,83 @@ Schema: `ShipmentApplicationStatusResponse`
 ---
 
 
-#### getInvoiceByShipmentId
+#### getChannelConfig
+
+
+```golang
+
+ data, err :=  Order.GetChannelConfig();
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+getChannelConfig
+
+*Success Response:*
+
+
+
+Successfully created the config data
+
+
+Schema: `CreateOrderConfigData`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createChannelConfig
+
+
+```golang
+
+ data, err :=  Order.CreateChannelConfig(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  CreateOrderConfigData | "Request body" 
+
+
+createChannelConfig
+
+*Success Response:*
+
+
+
+Successfully updateShipmentStatus!
+
+
+Schema: `CreateOrderConfigDataResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getInvoiceByShipmentId1
 Get Presigned URL to download Invoice
 
 ```golang
 
- data, err :=  Order.GetInvoiceByShipmentId(ShipmentID, xQuery);
+ data, err :=  Order.GetInvoiceByShipmentId1(ShipmentID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -17834,7 +17987,7 @@ Use this API to generate Presigned URLs for downloading Invoice
 Success Response, Presigned URL of Invoice
 
 
-Schema: `ResponseGetInvoiceShipment`
+Schema: `ResponseGetInvoiceShipment1`
 
 
 
@@ -17875,7 +18028,7 @@ Use this API to generate Presigned URLs for downloading Invoice
 Success Response, Presigned URL of Invoice
 
 
-Schema: `ResponseGetInvoiceShipment`
+Schema: `ResponseGetInvoiceShipment1`
 
 
 
