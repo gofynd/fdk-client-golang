@@ -275,8 +275,8 @@
     * [getShipmentBagReasons](#getshipmentbagreasons)
     * [getShipmentReasons](#getshipmentreasons)
     * [updateShipmentStatus](#updateshipmentstatus)
-    * [createChannelConfig](#createchannelconfig)
     * [getChannelConfig](#getchannelconfig)
+    * [createChannelConfig](#createchannelconfig)
     
 
 * [Rewards](#Rewards)
@@ -18295,7 +18295,7 @@ Schema: `ShipmentReasons`
 | ShipmentID | string |  | 
 
 
-| body |  ShipmentStatusUpdateBody | "Request body" 
+| body |  StatusUpdateInternalRequest | "Request body" 
 
 
 updateShipmentStatus
@@ -18308,6 +18308,41 @@ Successfully updateShipmentStatus!
 
 
 Schema: `ShipmentApplicationStatusResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getChannelConfig
+
+
+```golang
+
+ data, err :=  Order.GetChannelConfig();
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+getChannelConfig
+
+*Success Response:*
+
+
+
+Successfully created the config data
+
+
+Schema: `CreateOrderConfigData`
 
 
 
@@ -18344,41 +18379,6 @@ Successfully updateShipmentStatus!
 
 
 Schema: `CreateOrderConfigDataResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getChannelConfig
-
-
-```golang
-
- data, err :=  Order.GetChannelConfig();
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-getChannelConfig
-
-*Success Response:*
-
-
-
-Successfully created the config data
-
-
-Schema: `CreateOrderConfigData`
 
 
 

@@ -13134,7 +13134,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // UpdateShipmentStatus 
-    func (or *Order)  UpdateShipmentStatus(ShipmentID string, body  ShipmentStatusUpdateBody) (ShipmentApplicationStatusResponse, error){
+    func (or *Order)  UpdateShipmentStatus(ShipmentID string, body  StatusUpdateInternalRequest) (ShipmentApplicationStatusResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -13203,6 +13203,51 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // GetChannelConfig 
+    func (or *Order)  GetChannelConfig() (CreateOrderConfigData, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getChannelConfigResponse CreateOrderConfigData
+	    )
+
+        
+
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            "/service/application/order-manage/v1.0/orders/co-config",
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CreateOrderConfigData{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getChannelConfigResponse)
+        if err != nil {
+            return CreateOrderConfigData{}, common.NewFDKError(err.Error())
+        }
+         return getChannelConfigResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // CreateChannelConfig 
     func (or *Order)  CreateChannelConfig(body  CreateOrderConfigData) (CreateOrderConfigDataResponse, error){
         var (
@@ -13254,51 +13299,6 @@ func NewAppClient(config *AppConfig) *Client {
             return CreateOrderConfigDataResponse{}, common.NewFDKError(err.Error())
         }
          return createChannelConfigResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // GetChannelConfig 
-    func (or *Order)  GetChannelConfig() (CreateOrderConfigData, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getChannelConfigResponse CreateOrderConfigData
-	    )
-
-        
-
-        
-
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.config,
-            "get",
-            "/service/application/order-manage/v1.0/orders/co-config",
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return CreateOrderConfigData{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getChannelConfigResponse)
-        if err != nil {
-            return CreateOrderConfigData{}, common.NewFDKError(err.Error())
-        }
-         return getChannelConfigResponse, nil
         
     }
           
