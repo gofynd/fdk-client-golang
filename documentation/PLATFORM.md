@@ -22,7 +22,7 @@
 * [Discount](#Discount) - Discount 
 * [Partner](#Partner) - Partner configuration apis 
 * [Webhook](#Webhook) - Webhook dispatcher with retry and one event to many subscriber vice versa 
-* [AuditTrail](#AuditTrail) -  
+* [AuditTrail](#AuditTrail) - Audit Logging Service that logs the crucial updates on the Platform 
 * [OrderManage](#OrderManage) - Update Status all platform shipment api(s) 
 * [DocumentEngine](#DocumentEngine) - Handles financial pdf generation of Fulfilment 
 * [Orders](#Orders) - Handles all platform order and shipment api(s) 
@@ -128,7 +128,6 @@
     * [getDataLoaders](#getdataloaders)
     * [deleteDataLoader](#deletedataloader)
     * [editDataLoader](#editdataloader)
-    * [getDataLoadersByService](#getdataloadersbyservice)
     * [selectDataLoader](#selectdataloader)
     * [resetDataLoader](#resetdataloader)
     * [getFaqCategories](#getfaqcategories)
@@ -311,12 +310,12 @@
     * [getConfigurationMetadata](#getconfigurationmetadata)
     * [createGroupConfiguration](#creategroupconfiguration)
     * [getGroupConfigurations](#getgroupconfigurations)
-    * [deleteGroupConfiguration](#deletegroupconfiguration)
     * [updateGroupConfiguration](#updategroupconfiguration)
+    * [deleteGroupConfiguration](#deletegroupconfiguration)
     * [createListingConfiguration](#createlistingconfiguration)
     * [getListingConfigurations](#getlistingconfigurations)
-    * [deleteListingConfiguration](#deletelistingconfiguration)
     * [updateListingConfiguration](#updatelistingconfiguration)
+    * [deleteListingConfiguration](#deletelistingconfiguration)
     * [updateAllowSingle](#updateallowsingle)
     * [updateDefaultSort](#updatedefaultsort)
     * [getCatalogConfiguration](#getcatalogconfiguration)
@@ -328,8 +327,8 @@
     * [createCollection](#createcollection)
     * [getAllCollections](#getallcollections)
     * [getCollectionDetail](#getcollectiondetail)
-    * [deleteCollection](#deletecollection)
     * [updateCollection](#updatecollection)
+    * [deleteCollection](#deletecollection)
     * [addCollectionItems](#addcollectionitems)
     * [getCollectionItems](#getcollectionitems)
     * [getCatalogInsights](#getcataloginsights)
@@ -368,8 +367,8 @@
     * [getProductSize](#getproductsize)
     * [createBulkProductUploadJob](#createbulkproductuploadjob)
     * [getProductBulkUploadHistory](#getproductbulkuploadhistory)
-    * [deleteProductBulkJob](#deleteproductbulkjob)
     * [createProductsInBulk](#createproductsinbulk)
+    * [deleteProductBulkJob](#deleteproductbulkjob)
     * [getProductTags](#getproducttags)
     * [createProductAssetsInBulk](#createproductassetsinbulk)
     * [getProductAssetsInBulk](#getproductassetsinbulk)
@@ -381,13 +380,13 @@
     * [deleteInventory](#deleteinventory)
     * [createBulkInventoryJob](#createbulkinventoryjob)
     * [getInventoryBulkUploadHistory](#getinventorybulkuploadhistory)
-    * [deleteBulkInventoryJob](#deletebulkinventoryjob)
     * [createBulkInventory](#createbulkinventory)
+    * [deleteBulkInventoryJob](#deletebulkinventoryjob)
     * [createInventoryExportJob](#createinventoryexportjob)
     * [getInventoryExport](#getinventoryexport)
     * [exportInventoryConfig](#exportinventoryconfig)
-    * [deleteRealtimeInventory](#deleterealtimeinventory)
     * [updateRealtimeInventory](#updaterealtimeinventory)
+    * [deleteRealtimeInventory](#deleterealtimeinventory)
     * [updateInventories](#updateinventories)
     * [createHsnCode](#createhsncode)
     * [getAllHsnCodes](#getallhsncodes)
@@ -41063,49 +41062,6 @@ Schema: `DataLoaderResponseSchema`
 ---
 
 
-#### getDataLoadersByService
-Get all the data loaders in an application by service name
-
-```golang
-
-data, err := Content.GetDataLoadersByService(CompanyID, ApplicationID, ServiceName);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
-
-
-| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
-
-
-| ServiceName | string | Service name of the data loader. | 
-
-
-
-Use this to get all data loaders of an application by service name
-
-*Success Response:*
-
-
-
-Success. Refer `DataLoaderResponseSchema` for more details.
-
-
-Schema: `DataLoadersSchema`
-
-
-
-
-
-
-
-
-
----
-
-
 #### selectDataLoader
 Select a data loader by id
 
@@ -41984,7 +41940,7 @@ Success
 ```json
 {
   "value": {
-    "tnc": "TERMS AND CONDITIONS FOR RECURRING PAYMENTS ON FYND PLATFORM\n\nUpdated On: July 11, 2020\n\nWhen you purchase (“**Services**”) from Fynd Platform (“**Fynd Platform**”, “**We**” or “**Us**”), you have the option to make payments on a recurring basis (“**Recurring Payments**”) on the (“**Terms and Conditions**”) below for your monthly usage charges towards the services provided to you under the account you operate with Fynd Platform (“**Account**”). We may, at our sole discretion, refuse Recurring Payments to anyone without notice for any reason at any time. \n\n\n1. **Recurring Payments** - You are not required to make Recurring Payments, and you may cancel Recurring Payments for your Account at your discretion. We will make Recurring Payments available to you only if you have designated an eligible payment method for your Account that is current, valid and otherwise acceptable to us. Such a method is hereinafter referred to as \"Payment Method\". We reserve the right to decide the payment methods eligible for Recurring Payments and we will automatically charge your Payment Method. You are solely responsible for the accuracy of the information you provide us regarding your Payment Method. We may limit the amount that you can pay using Recurring Payments every month.\n\n2. **Enabling Recurring Payments**- You agree that Recurring Payments will be enabled automatically for your Account if you chose an eligible Payment Method. Once Recurring Payments have been enabled for your Account, you authorize us to use your Payment Method to pay for your monthly invoices automatically until you cancel Recurring Payments for your Account. In Addition, once Recurring Payments has been enabled, you authorize us to charge the fees for the Services, unless you cancel or disable Recurring Payment, by means specified by us and applicable at such time, in which case you will be required to take action and pay for the Services.\n\n3. **Verification and Authentication**- Before Recurring Payments are enabled for your Fynd Platform Account, verification and authentication of your Payment Method will be performed. Once the verification and authentication are successful, you will be registered for Recurring Payments. This verification and authentication may also be repeated if (a) there are changes to your Account or Payment Method; (b) you cancel or disable Recurring Payments; (c) one of your Recurring Payments is declined for any reason whatsoever, including without limitation, expiry of your card.\n\n4. **Third Party Payment Processors** - You agree, understand and acknowledge that Fynd Platform may engage third party payment processors or gateway service providers to process Recurring Payments. Therefore, you may be required to agree to the terms and conditions of the third party payment processors or gateway service providers as communicated to you from time to time.\n\n5. **Cancelling Recurring Payments** - You have the right to cancel Recurring Payments for your Fynd Platform Account by contacting our customer support.\n\n6. **Notifications** - You authorize us to communicate with you by email regarding Recurring Payments. You acknowledge that we may also communicate with you through our affiliates that provide Services to you.\n\n7. **Disclaimer of Liability** - You agree that we will not be liable for any losses or damages suffered by you because of your use of Recurring Payments for your Fynd Platform Account, including any fraud in connection with any payment using your Payment Method. You realize that neither Fynd Platform nor Shopsense Retail Technologies Pvt. Ltd. which fully owns and controls the Fynd Platform, will be held responsible for any damages, whether partial or full.\n\n\n8. **Agreement Changes** - We may in our discretion change these Terms and Conditions at any time. If any change is found to be invalid, void, or for any reason unenforceable, that change is severable and does not affect the validity and enforceability of any other changes or the remainder of these Terms and Conditions.\n\nYOUR CONTINUED USE OF RECURRING PAYMENTS FOR YOUR FYND PLATFORM ACCOUNT AFTER WE CHANGE THESE TERMS AND CONDITIONS CONSTITUTES YOUR ACCEPTANCE OF THESE CHANGES.",
+    "tnc": "**Terms and Conditions test**",
     "policy": "**Privacy policy test**",
     "shipping": "**Shipping term and conditions**",
     "returns": "**Terms & conditions for returns **",
@@ -52040,9 +51996,7 @@ data, err := Order.GetOrdersByCompanyId(CompanyID, xQuery);
 
 
 
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `IsPrioritySort`, `LockStatus`, `UserID`, `Q`, `Stage`, `SalesChannels`, `OrderID`, `Stores`, `DeploymentStores`, `Status`, `Dp`, `ShortenUrls`, `FilterType`
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `IsPrioritySort`, `LockStatus`, `UserID`, `Q`, `Stage`, `SalesChannels`, `OrderID`, `Stores`, `DeploymentStores`, `Status`, `Dp`, `FilterType`
 
 
 Get Orders
@@ -52193,9 +52147,7 @@ data, err := Order.GetPicklistOrdersByCompanyId(CompanyID, xQuery);
 
 
 
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `Q`, `Stage`, `SalesChannels`, `OrderID`, `Stores`, `Status`, `ShortenUrls`, `FilterType`
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `Q`, `Stage`, `SalesChannels`, `OrderID`, `Stores`, `Status`, `FilterType`
 
 
 Get Orders
@@ -53621,52 +53573,6 @@ Schema: `GetConfigResponse`
 ---
 
 
-#### deleteGroupConfiguration
-Delete configuration of the product config type of the application.
-
-```golang
-
-data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
-
-
-| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
-
-
-
-Delete configuration of the product config type of the application.
-
-*Success Response:*
-
-
-
-success message will tell whether the operation was successful.
-
-
-Schema: `ConfigSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateGroupConfiguration
 Update the group configurations for the application.
 
@@ -53702,6 +53608,52 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationDetail`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteGroupConfiguration
+Delete configuration of the product config type of the application.
+
+```golang
+
+data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
+
+
+| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration of the product config type of the application.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
 
 
 
@@ -53808,52 +53760,6 @@ Schema: `GetConfigResponse`
 ---
 
 
-#### deleteListingConfiguration
-Delete configuration for listings
-
-```golang
-
-data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
-
-
-| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
-
-
-
-Delete configuration for listing.
-
-*Success Response:*
-
-
-
-success message will tell whether the operation was successful.
-
-
-Schema: `ConfigSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateListingConfiguration
 Update configuration for listings
 
@@ -53889,6 +53795,52 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationsSort`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteListingConfiguration
+Delete configuration for listings
+
+```golang
+
+data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
+
+
+| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration for listing.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
 
 
 
@@ -54370,49 +54322,6 @@ Schema: `CollectionDetailResponse`
 ---
 
 
-#### deleteCollection
-Delete a Collection
-
-```golang
-
-data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier of a collection. | 
-
-
-
-Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateCollection
 Update a collection
 
@@ -54445,6 +54354,49 @@ The Collection object. See example below or refer `UpdateCollectionSchema` for d
 
 
 Schema: `UpdateCollection`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteCollection
+Delete a Collection
+
+```golang
+
+data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier of a collection. | 
+
+
+
+Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -56034,25 +55986,26 @@ Schema: `ProductBulkRequestList`
 ---
 
 
-#### deleteProductBulkJob
-Delete Bulk product job.
+#### createProductsInBulk
+Create products in bulk associated with given batch Id.
 
 ```golang
 
-data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
+data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
 
 
-| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
+| BatchID | string | Batch Id in which assets to be uploaded. | 
 
 
+| body |  BulkProductRequest | "Request body" 
 
-This API allows to delete bulk product job associated with company.
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -56074,26 +56027,25 @@ Schema: `SuccessResponse`
 ---
 
 
-#### createProductsInBulk
-Create products in bulk associated with given batch Id.
+#### deleteProductBulkJob
+Delete Bulk product job.
 
 ```golang
 
-data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
+data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
 
 
-| BatchID | string | Batch Id in which assets to be uploaded. | 
+| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
 
 
-| body |  BulkProductRequest | "Request body" 
 
-This API helps to create products in bulk push to kafka for approval/creation.
+This API allows to delete bulk product job associated with company.
 
 *Success Response:*
 
@@ -56604,25 +56556,26 @@ Schema: `BulkInventoryGet`
 ---
 
 
-#### deleteBulkInventoryJob
-Delete Bulk Inventory job.
+#### createBulkInventory
+Create products in bulk associated with given batch Id.
 
 ```golang
 
-data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
+data, err := Catalog.CreateBulkInventory(CompanyID, BatchID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
+| CompanyID | float64 | Company Id in which Inventory is to be uploaded. | 
 
 
-| BatchID | string | Batch Id of the bulk delete job. | 
+| BatchID | string | Batch Id of the bulk create job. | 
 
 
+| body |  InventoryBulkRequest | "Request body" 
 
-This API allows to delete bulk Inventory job associated with company.
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -56644,26 +56597,25 @@ Schema: `SuccessResponse`
 ---
 
 
-#### createBulkInventory
-Create products in bulk associated with given batch Id.
+#### deleteBulkInventoryJob
+Delete Bulk Inventory job.
 
 ```golang
 
-data, err := Catalog.CreateBulkInventory(CompanyID, BatchID, body);
+data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which Inventory is to be uploaded. | 
+| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
 
 
-| BatchID | string | Batch Id of the bulk create job. | 
+| BatchID | string | Batch Id of the bulk delete job. | 
 
 
-| body |  InventoryBulkRequest | "Request body" 
 
-This API helps to create products in bulk push to kafka for approval/creation.
+This API allows to delete bulk Inventory job associated with company.
 
 *Success Response:*
 
@@ -56800,12 +56752,12 @@ Schema: `InventoryConfig`
 ---
 
 
-#### deleteRealtimeInventory
+#### updateRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -56844,12 +56796,12 @@ Schema: `InventoryUpdateResponse`
 ---
 
 
-#### updateRealtimeInventory
+#### deleteRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -58221,7 +58173,9 @@ data, err := CompanyProfile.GetLocations(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `StoreType`, `Q`, `Stage`, `PageNo`, `PageSize`
+
+
+| xQuery | struct | Includes properties such as `StoreType`, `Q`, `Stage`, `PageNo`, `PageSize`, `LocationIds`
 
 
 This API allows to view all the locations associated to a company.
@@ -64600,7 +64554,7 @@ Schema: `SubscriberResponse`
 
 
 #### fetchAllEventConfigurations
-Get All Webhook Events
+
 
 ```golang
 
@@ -64661,7 +64615,7 @@ data, err := AuditTrail.GetAuditLogs(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `Qs`
 
 
-Get audit logs
+Get a paginated set of logs that can be filtered using the available set of parameters and get the relevant group of logs
 
 *Success Response:*
 
@@ -64683,38 +64637,25 @@ default
     "docs": [
       {
         "entity": {
-          "type": "sales-channel-configuration",
-          "id": "5dcbf6065862c28d81beb025",
+          "type": "update-shipment-status",
+          "id": "16660872182851894278",
           "action": "update"
         },
         "modifier": {
+          "user_id": "a8d7a69b4cd980acc5d2455c",
           "as_administrator": true,
-          "user_id": "5d8391fa7f6b58553d02eb63",
           "user_details": {
-            "firstName": "Hitesh",
-            "email": "hiteshjha@gofynd.com"
+            "first_name": "Paul",
+            "last_name": "Lobo",
+            "full_name": "Paul Lobo",
+            "email": "paullobo@gofynd.com"
           }
         },
-        "device_info": {
-          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
-        },
-        "location": {
-          "IP": "103.226.87.213"
-        },
-        "_id": "602a1366a7486d63f1e915b2",
-        "company": 61,
-        "application": "5d63686df2a4f7806b76bb32",
-        "sessions": "",
-        "date": "2021-02-15T06:23:32.098Z",
-        "logs": {
-          "modified_by": "5d8391fa7f6b58553d02eb63"
-        },
-        "created_at": "2021-02-15T06:23:34.497Z",
-        "modified_at": "2021-02-15T06:23:34.497Z",
-        "meta": {
-          "browser": "Linux - Chrome",
-          "device": ""
-        }
+        "_id": "634eef735e84e7e1b09aa07c",
+        "application": null,
+        "date": "2022-10-18T18:24:51.329Z",
+        "created_at": "2022-10-18T18:24:51.400Z",
+        "modified_at": "2022-10-18T18:24:51.400Z"
       }
     ]
   }
@@ -64748,7 +64689,7 @@ data, err := AuditTrail.CreateAuditLog(CompanyID, body);
 
 | body |  RequestBodyAuditLog | "Request body" 
 
-Create a Audit log
+Create a log instance that stores all the relevant info to be logged
 
 *Success Response:*
 
@@ -64802,7 +64743,7 @@ data, err := AuditTrail.GetAuditLog(CompanyID, ID);
 
 
 
-Get audit logs by logs uuid
+Get detailed log information by their id
 
 *Success Response:*
 
@@ -64821,43 +64762,75 @@ default
 ```json
 {
   "value": {
-    "docs": [
-      {
-        "entity": {
-          "type": "sales-channel-configuration",
-          "id": "5dcbf6065862c28d81beb025",
-          "action": "update"
-        },
-        "modifier": {
-          "as_administrator": true,
-          "user_id": "5d8391fa7f6b58553d02eb63",
-          "user_details": {
-            "firstName": "Hitesh",
-            "email": "hiteshjha@gofynd.com"
+    "entity": {
+      "type": "update-shipment-status",
+      "id": "16660872182851894278",
+      "action": "update"
+    },
+    "modifier": {
+      "user_id": "a8d7a69b4cd980acc5d2455c",
+      "as_administrator": true,
+      "user_details": {
+        "first_name": "Paul",
+        "last_name": "Lobo",
+        "full_name": "Paul Lobo",
+        "email": "paullobo@gofynd.com"
+      }
+    },
+    "device_info": {
+      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36"
+    },
+    "location": {
+      "IP": "103.173.241.155"
+    },
+    "_id": "634eef735e84e7e1b09aa07c",
+    "company": 1,
+    "application": null,
+    "sessions": "",
+    "date": "2022-10-18T18:24:51.329Z",
+    "logs": {
+      "request": {
+        "status_update": {
+          "bags": [
+            403501,
+            403502,
+            403503
+          ],
+          "status": "bag_confirmed"
+        }
+      },
+      "response": {
+        "shipments": {
+          "16660872182851894278": {
+            "status": true,
+            "error": "",
+            "message": [
+              "Requested change is being performed"
+            ]
           }
         },
-        "device_info": {
-          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
-        },
-        "location": {
-          "IP": "103.226.87.213"
-        },
-        "_id": "602a1366a7486d63f1e915b2",
-        "company": 61,
-        "application": "5d63686df2a4f7806b76bb32",
-        "sessions": "",
-        "date": "2021-02-15T06:23:32.098Z",
-        "logs": {
-          "modified_by": "5d8391fa7f6b58553d02eb63"
-        },
-        "created_at": "2021-02-15T06:23:34.497Z",
-        "modified_at": "2021-02-15T06:23:34.497Z",
-        "meta": {
-          "browser": "Linux - Chrome",
-          "device": ""
-        }
+        "error_shipments": []
       }
-    ]
+    },
+    "created_at": "2022-10-18T18:24:51.400Z",
+    "modified_at": "2022-10-18T18:24:51.400Z",
+    "meta": {
+      "browser": {
+        "name": "Chrome",
+        "version": "106.0.0.0",
+        "major": "106"
+      },
+      "device": {},
+      "cpu": {},
+      "os": {
+        "name": "Mac OS",
+        "version": "10.15.7"
+      },
+      "engine": {
+        "name": "Blink",
+        "version": "106.0.0.0"
+      }
+    }
   }
 }
 ```
@@ -64888,7 +64861,7 @@ data, err := AuditTrail.GetEntityTypes(CompanyID);
 
 
 
-Get entity types
+Get a consolidated list of entity types from all the logs stored on the db, which further helps to filter the logs better
 
 *Success Response:*
 
