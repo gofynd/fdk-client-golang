@@ -275,8 +275,8 @@
     * [getShipmentBagReasons](#getshipmentbagreasons)
     * [getShipmentReasons](#getshipmentreasons)
     * [updateShipmentStatus](#updateshipmentstatus)
-    * [createOrderConfig](#createorderconfig)
-    * [getCreateOrderConfig](#getcreateorderconfig)
+    * [createChannelConfig](#createchannelconfig)
+    * [getChannelConfig](#getchannelconfig)
     
 
 * [Rewards](#Rewards)
@@ -18320,12 +18320,12 @@ Schema: `ShipmentApplicationStatusResponse`
 ---
 
 
-#### createOrderConfig
+#### createChannelConfig
 
 
 ```golang
 
- data, err :=  Order.CreateOrderConfig(body);
+ data, err :=  Order.CreateChannelConfig(body);
 ```
 
 | Argument  |  Type  | Description |
@@ -18334,7 +18334,7 @@ Schema: `ShipmentApplicationStatusResponse`
 | body |  CreateOrderConfigData | "Request body" 
 
 
-createOrderConfig
+createChannelConfig
 
 *Success Response:*
 
@@ -18356,12 +18356,12 @@ Schema: `CreateOrderConfigDataResponse`
 ---
 
 
-#### getCreateOrderConfig
+#### getChannelConfig
 
 
 ```golang
 
- data, err :=  Order.GetCreateOrderConfig();
+ data, err :=  Order.GetChannelConfig();
 ```
 
 | Argument  |  Type  | Description |
@@ -18369,7 +18369,7 @@ Schema: `CreateOrderConfigDataResponse`
 
 
 
-getCreateOrderConfig
+getChannelConfig
 
 *Success Response:*
 

@@ -13203,13 +13203,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // CreateOrderConfig 
-    func (or *Order)  CreateOrderConfig(body  CreateOrderConfigData) (CreateOrderConfigDataResponse, error){
+    // CreateChannelConfig 
+    func (or *Order)  CreateChannelConfig(body  CreateOrderConfigData) (CreateOrderConfigDataResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             createOrderConfigResponse CreateOrderConfigDataResponse
+             createChannelConfigResponse CreateOrderConfigDataResponse
 	    )
 
         
@@ -13249,11 +13249,11 @@ func NewAppClient(config *AppConfig) *Client {
             return CreateOrderConfigDataResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &createOrderConfigResponse)
+        err = json.Unmarshal(response, &createChannelConfigResponse)
         if err != nil {
             return CreateOrderConfigDataResponse{}, common.NewFDKError(err.Error())
         }
-         return createOrderConfigResponse, nil
+         return createChannelConfigResponse, nil
         
     }
           
@@ -13263,13 +13263,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetCreateOrderConfig 
-    func (or *Order)  GetCreateOrderConfig() (CreateOrderConfigData, error){
+    // GetChannelConfig 
+    func (or *Order)  GetChannelConfig() (CreateOrderConfigData, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getCreateOrderConfigResponse CreateOrderConfigData
+             getChannelConfigResponse CreateOrderConfigData
 	    )
 
         
@@ -13294,11 +13294,11 @@ func NewAppClient(config *AppConfig) *Client {
             return CreateOrderConfigData{}, err
 	    }
         
-        err = json.Unmarshal(response, &getCreateOrderConfigResponse)
+        err = json.Unmarshal(response, &getChannelConfigResponse)
         if err != nil {
             return CreateOrderConfigData{}, common.NewFDKError(err.Error())
         }
-         return getCreateOrderConfigResponse, nil
+         return getChannelConfigResponse, nil
         
     }
           
