@@ -1657,55 +1657,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UnfollowById Unfollow an entity (product/brand/collection)
-    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             unfollowByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &unfollowByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return unfollowByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // FollowById Follow an entity (product/brand/collection)
     func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1746,6 +1697,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return followByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UnfollowById Unfollow an entity (product/brand/collection)
+    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             unfollowByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &unfollowByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return unfollowByIdResponse, nil
         
     }
           
@@ -12502,7 +12502,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // UpdateShipmentStatus 
-    func (or *Order)  UpdateShipmentStatus(ShipmentID string, body  StatusUpdateInternalRequest) (ShipmentApplicationStatusResponse, error){
+    func (or *Order)  UpdateShipmentStatus(ShipmentID string, body  UpdateShipmentStatusRequest) (ShipmentApplicationStatusResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -12562,111 +12562,6 @@ func NewAppClient(config *AppConfig) *Client {
             return ShipmentApplicationStatusResponse{}, common.NewFDKError(err.Error())
         }
          return updateShipmentStatusResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // GetChannelConfig 
-    func (or *Order)  GetChannelConfig() (CreateOrderConfigData, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getChannelConfigResponse CreateOrderConfigData
-	    )
-
-        
-
-        
-
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.config,
-            "get",
-            "/service/application/order-manage/v1.0/orders/co-config",
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return CreateOrderConfigData{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getChannelConfigResponse)
-        if err != nil {
-            return CreateOrderConfigData{}, common.NewFDKError(err.Error())
-        }
-         return getChannelConfigResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // CreateChannelConfig 
-    func (or *Order)  CreateChannelConfig(body  CreateOrderConfigData) (CreateOrderConfigDataResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             createChannelConfigResponse CreateOrderConfigDataResponse
-	    )
-
-        
-            
-        
-
-        
-
-        
-    
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return CreateOrderConfigDataResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return CreateOrderConfigDataResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            or.config,
-            "post",
-            "/service/application/order-manage/v1.0/orders/co-config",
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return CreateOrderConfigDataResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &createChannelConfigResponse)
-        if err != nil {
-            return CreateOrderConfigDataResponse{}, common.NewFDKError(err.Error())
-        }
-         return createChannelConfigResponse, nil
         
     }
           

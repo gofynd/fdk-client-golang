@@ -46,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [unfollowById](#unfollowbyid)
     * [followById](#followbyid)
+    * [unfollowById](#unfollowbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -266,8 +266,6 @@
     * [getShipmentBagReasons](#getshipmentbagreasons)
     * [getShipmentReasons](#getshipmentreasons)
     * [updateShipmentStatus](#updateshipmentstatus)
-    * [getChannelConfig](#getchannelconfig)
-    * [createChannelConfig](#createchannelconfig)
     * [getInvoiceByShipmentId1](#getinvoicebyshipmentid1)
     * [getCreditNoteByShipmentId](#getcreditnotebyshipmentid)
     
@@ -1144,12 +1142,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1163,7 +1161,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1185,12 +1183,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1204,7 +1202,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -17863,7 +17861,7 @@ Schema: `ShipmentReasons`
 | ShipmentID | string |  | 
 
 
-| body |  StatusUpdateInternalRequest | "Request body" 
+| body |  UpdateShipmentStatusRequest | "Request body" 
 
 
 updateShipmentStatus
@@ -17876,77 +17874,6 @@ Successfully updateShipmentStatus!
 
 
 Schema: `ShipmentApplicationStatusResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getChannelConfig
-
-
-```golang
-
- data, err :=  Order.GetChannelConfig();
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-getChannelConfig
-
-*Success Response:*
-
-
-
-Successfully created the config data
-
-
-Schema: `CreateOrderConfigData`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createChannelConfig
-
-
-```golang
-
- data, err :=  Order.CreateChannelConfig(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  CreateOrderConfigData | "Request body" 
-
-
-createChannelConfig
-
-*Success Response:*
-
-
-
-Successfully updateShipmentStatus!
-
-
-Schema: `CreateOrderConfigDataResponse`
 
 
 
