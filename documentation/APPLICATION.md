@@ -46,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [followById](#followbyid)
     * [unfollowById](#unfollowbyid)
+    * [followById](#followbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -275,6 +275,18 @@
     * [getShipmentBagReasons](#getshipmentbagreasons)
     * [getShipmentReasons](#getshipmentreasons)
     * [updateShipmentStatus](#updateshipmentstatus)
+    * [getOrders1](#getorders1)
+    * [getOrderById1](#getorderbyid1)
+    * [getShipmentById1](#getshipmentbyid1)
+    * [getShipmentReasons1](#getshipmentreasons1)
+    * [getShipmentBagReasons1](#getshipmentbagreasons1)
+    * [updateShipmentStatus1](#updateshipmentstatus1)
+    * [trackShipment1](#trackshipment1)
+    * [getPosOrderById1](#getposorderbyid1)
+    * [getCustomerDetailsByShipmentId1](#getcustomerdetailsbyshipmentid1)
+    * [sendOtpToShipmentCustomer1](#sendotptoshipmentcustomer1)
+    * [verifyOtpShipmentCustomer1](#verifyotpshipmentcustomer1)
+    * [getInvoiceByShipmentId1](#getinvoicebyshipmentid1)
     
 
 * [Rewards](#Rewards)
@@ -1149,12 +1161,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1168,7 +1180,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1190,12 +1202,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1209,7 +1221,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1611,7 +1623,9 @@ Fetch all items added to the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `BuyNow`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`, `BuyNow`
 
 
 
@@ -1685,7 +1699,9 @@ Add items to cart
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `BuyNow`
+
+
+| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`, `BuyNow`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -2375,7 +2391,9 @@ Update items in the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `BuyNow`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AreaCode`, `BuyNow`
 
 | body |  UpdateCartRequest | "Request body" 
 
@@ -2390,380 +2408,6 @@ Success. Updates and returns a cart object as shown below. Refer `UpdateCartDeta
 
 
 Schema: `UpdateCartDetailResponse`
-
-
-*Examples:*
-
-
-Nothing updated
-```json
-{
-  "value": {
-    "cart": {
-      "breakup_values": {
-        "raw": {
-          "cod_charge": 0,
-          "convenience_fee": 0,
-          "coupon": 0,
-          "delivery_charge": 0,
-          "discount": -202000,
-          "fynd_cash": 0,
-          "gst_charges": 4804.71,
-          "mrp_total": 302899,
-          "subtotal": 100899,
-          "total": 100899,
-          "vog": 96094.29,
-          "you_saved": 0
-        },
-        "coupon": {
-          "type": "cash",
-          "code": "",
-          "uid": null,
-          "value": 0,
-          "is_applied": false,
-          "message": "Sorry! Invalid Coupon"
-        },
-        "display": [
-          {
-            "display": "MRP Total",
-            "key": "mrp_total",
-            "value": 302899,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Discount",
-            "key": "discount",
-            "value": -202000,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Subtotal",
-            "key": "subtotal",
-            "value": 100899,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Total",
-            "key": "total",
-            "value": 100899,
-            "currency_code": "INR"
-          }
-        ],
-        "loyalty_points": {
-          "total": 0,
-          "applicable": 0,
-          "is_applied": false,
-          "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
-        }
-      },
-      "items": [
-        {
-          "bulk_offer": {},
-          "discount": "67% OFF",
-          "parent_item_identifiers": {
-            "identifier": "ZASFF",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS"
-          },
-          "article": {
-            "type": "article",
-            "uid": "604_902_SSTC60401_636BLUE_1",
-            "size": "1",
-            "seller": {
-              "uid": 604,
-              "name": "SHRI SHANTINATH TRADING COMPANY"
-            },
-            "store": {
-              "uid": 4579,
-              "name": "Gandhi Nagar"
-            },
-            "quantity": 108,
-            "price": {
-              "base": {
-                "marked": 2999,
-                "effective": 999,
-                "currency_code": "INR"
-              },
-              "converted": {
-                "marked": 2999,
-                "effective": 999,
-                "currency_code": "INR"
-              }
-            }
-          },
-          "coupon_message": "",
-          "key": "707569_1",
-          "availability": {
-            "sizes": [
-              "1",
-              "8",
-              "7",
-              "2",
-              "9",
-              "5",
-              "3",
-              "6"
-            ],
-            "other_store_quantity": 7,
-            "out_of_stock": false,
-            "deliverable": true,
-            "is_valid": true
-          },
-          "product": {
-            "type": "product",
-            "uid": 707569,
-            "name": "Blue and Gold Printed Ethnic Set",
-            "slug": "aj-dezines-blue-and-gold-printed-ethnic-set-707569-bff01a",
-            "brand": {
-              "uid": 902,
-              "name": ""
-            },
-            "categories": [
-              {
-                "uid": 525,
-                "name": ""
-              }
-            ],
-            "images": [
-              {
-                "aspect_ratio": "16:25",
-                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/902_636BLUE/1_1540301094877.jpg",
-                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/902_636BLUE/1_1540301094877.jpg"
-              }
-            ],
-            "action": {
-              "type": "product",
-              "url": "https://api.addsale.com/v1/products/aj-dezines-blue-and-gold-printed-ethnic-set-707569-bff01a/",
-              "query": {
-                "product_slug": [
-                  "aj-dezines-blue-and-gold-printed-ethnic-set-707569-bff01a"
-                ]
-              }
-            }
-          },
-          "price": {
-            "base": {
-              "add_on": 100899,
-              "marked": 302899,
-              "effective": 100899,
-              "selling": 100899,
-              "currency_code": "INR"
-            },
-            "converted": {
-              "add_on": 100899,
-              "marked": 302899,
-              "effective": 100899,
-              "selling": 100899,
-              "currency_code": "INR"
-            }
-          },
-          "message": "",
-          "quantity": 101
-        }
-      ],
-      "delivery_charge_info": "",
-      "coupon_text": "View all offers",
-      "buy_now": false,
-      "cart_id": 54,
-      "uid": "54",
-      "gstin": null,
-      "checkout_mode": "self",
-      "restrict_checkout": false,
-      "is_valid": true,
-      "last_modified": "Tue, 03 Sep 2019 10:19:20 GMT"
-    },
-    "result": {
-      "707569_90": {
-        "success": true,
-        "message": "Nothing updated"
-      }
-    },
-    "message": "Nothing updated",
-    "success": true
-  }
-}
-```
-
-Item updated in the cart
-```json
-{
-  "value": {
-    "cart": {
-      "breakup_values": {
-        "coupon": {
-          "type": "cash",
-          "code": "",
-          "uid": null,
-          "value": 0,
-          "is_applied": false,
-          "message": "Sorry! Invalid Coupon"
-        },
-        "loyalty_points": {
-          "total": 0,
-          "applicable": 0,
-          "is_applied": false,
-          "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
-        },
-        "raw": {
-          "cod_charge": 0,
-          "convenience_fee": 0,
-          "coupon": 0,
-          "delivery_charge": 0,
-          "discount": 0,
-          "fynd_cash": 0,
-          "gst_charges": 838.83,
-          "mrp_total": 5499,
-          "subtotal": 5499,
-          "total": 5499,
-          "vog": 4660.17,
-          "you_saved": 0
-        },
-        "display": [
-          {
-            "display": "MRP Total",
-            "key": "mrp_total",
-            "value": 5499,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Subtotal",
-            "key": "subtotal",
-            "value": 5499,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Total",
-            "key": "total",
-            "value": 5499,
-            "currency_code": "INR"
-          }
-        ]
-      },
-      "items": [
-        {
-          "key": "437414_7",
-          "message": "",
-          "bulk_offer": {},
-          "price": {
-            "base": {
-              "add_on": 5499,
-              "marked": 5499,
-              "effective": 5499,
-              "selling": 5499,
-              "currency_code": "INR"
-            },
-            "converted": {
-              "add_on": 5499,
-              "marked": 5499,
-              "effective": 5499,
-              "selling": 5499,
-              "currency_code": "INR"
-            }
-          },
-          "quantity": 1,
-          "discount": "",
-          "product": {
-            "type": "product",
-            "uid": 437414,
-            "name": "Suede Classic",
-            "slug": "puma-suede-classic-437414-6e6bbf",
-            "brand": {
-              "uid": 9,
-              "name": "Puma"
-            },
-            "categories": [
-              {
-                "uid": 165,
-                "name": "Outdoor Sports Shoes"
-              }
-            ],
-            "images": [
-              {
-                "aspect_ratio": "16:25",
-                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/9_35656851/1_1511171811830.jpg",
-                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/9_35656851/1_1511171811830.jpg"
-              }
-            ],
-            "action": {
-              "type": "product",
-              "url": "https://api.addsale.com/platform/content/v1/products/puma-suede-classic-437414-6e6bbf/",
-              "query": {
-                "product_slug": [
-                  "puma-suede-classic-437414-6e6bbf"
-                ]
-              }
-            }
-          },
-          "parent_item_identifiers": {
-            "identifier": "ZASFF",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS"
-          },
-          "article": {
-            "type": "article",
-            "uid": "507_9_96099_35656851_7",
-            "size": "7",
-            "seller": {
-              "uid": 507,
-              "name": "PUMA SPORTS INDIA PVT LTD"
-            },
-            "store": {
-              "uid": 3632,
-              "name": "Colaba Causway"
-            },
-            "quantity": 5,
-            "price": {
-              "base": {
-                "marked": 5499,
-                "effective": 5499,
-                "currency_code": "INR"
-              },
-              "converted": {
-                "marked": 5499,
-                "effective": 5499,
-                "currency_code": "INR"
-              }
-            }
-          },
-          "coupon_message": "",
-          "availability": {
-            "sizes": [
-              "10",
-              "11",
-              "6",
-              "9",
-              "7",
-              "8"
-            ],
-            "other_store_quantity": 22,
-            "out_of_stock": false,
-            "deliverable": true,
-            "is_valid": true
-          }
-        }
-      ],
-      "delivery_charge_info": "",
-      "coupon_text": "View all offers",
-      "buy_now": false,
-      "cart_id": 12426,
-      "uid": "12426",
-      "gstin": null,
-      "checkout_mode": "self",
-      "last_modified": "Thu, 22 Aug 2019 04:51:42 GMT",
-      "restrict_checkout": false,
-      "is_valid": true
-    },
-    "result": {
-      "437414_7": {
-        "success": true,
-        "message": "Item updated in the bag"
-      }
-    },
-    "message": "Item updated in the bag",
-    "success": true
-  }
-}
-```
 
 
 
@@ -18318,6 +17962,484 @@ Schema: `ShipmentApplicationStatusResponse`
 ---
 
 
+#### getOrders1
+Get all orders
+
+```golang
+
+ data, err :=  Order.GetOrders1(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `Status`
+
+
+
+Use this API to retrieve all the orders.
+
+*Success Response:*
+
+
+
+Success. Returns all the orders. Check the example shown below or refer `OrderList` for more details.
+
+
+Schema: `OrderList1`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOrderById1
+Get details of an order
+
+```golang
+
+ data, err :=  Order.GetOrderById1(OrderID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| OrderID | string | A unique number used for identifying and tracking your orders. | 
+
+
+
+
+Use this API to retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `OrderById` for more details.
+
+
+Schema: `OrderById1`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentById1
+Get details of a shipment
+
+```golang
+
+ data, err :=  Order.GetShipmentById1(ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+
+
+Use this API to retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ShipmentById` for more details.
+
+
+Schema: `ShipmentById1`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentReasons1
+Get reasons behind full or partial cancellation of a shipment
+
+```golang
+
+ data, err :=  Order.GetShipmentReasons1(ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+
+
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ShipmentReasons` for more details.
+
+
+Schema: `ShipmentReasons1`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentBagReasons1
+Get reasons at l1,l2 and l3 for cancellation and return based on department
+
+```golang
+
+ data, err :=  Order.GetShipmentBagReasons1(ShipmentID, BagID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| BagID | string | ID of the bag. | 
+
+
+
+
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ShipmentBagReasons` for more details.
+
+
+Schema: `ShipmentBagReasons1`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateShipmentStatus1
+Update the shipment status
+
+```golang
+
+ data, err :=  Order.UpdateShipmentStatus1(ShipmentID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| body |  ShipmentStatusUpdateBody | "Request body" 
+
+
+Use this API to update the status of a shipment using its shipment ID.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ShipmentStatusUpdateBody` for more details.
+
+
+Schema: `ShipmentStatusUpdate`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### trackShipment1
+Track shipment
+
+```golang
+
+ data, err :=  Order.TrackShipment1(ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+
+
+Use this API to track a shipment using its shipment ID.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ShipmentTrack` for more details.
+
+
+Schema: `ShipmentTrack1`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPosOrderById1
+Get POS Order
+
+```golang
+
+ data, err :=  Order.GetPosOrderById1(OrderID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| OrderID | string | A unique number used for identifying and tracking your orders. | 
+
+
+
+
+Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `PosOrderById` for more details.
+
+
+Schema: `PosOrderById`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCustomerDetailsByShipmentId1
+Get Customer Details by Shipment Id
+
+```golang
+
+ data, err :=  Order.GetCustomerDetailsByShipmentId1(OrderID, ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| OrderID | string | A unique number used for identifying and tracking your orders. | 
+
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+
+
+Use this API to retrieve customer details such as mobileno using Shipment ID.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `CustomerDetailsByShipmentId` for more details.
+
+
+Schema: `CustomerDetailsByShipmentId`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### sendOtpToShipmentCustomer1
+Send and Resend Otp code to Order-Shipment customer
+
+```golang
+
+ data, err :=  Order.SendOtpToShipmentCustomer1(OrderID, ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| OrderID | string | A unique number used for identifying and tracking your orders. | 
+
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+
+
+Use this API to send OTP to the customer of the mapped Shipment.
+
+*Success Response:*
+
+
+
+Success to acknowledge the service was notified
+
+
+Schema: `sendOTPApplicationResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### verifyOtpShipmentCustomer1
+Verify Otp code
+
+```golang
+
+ data, err :=  Order.VerifyOtpShipmentCustomer1(OrderID, ShipmentID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| OrderID | string | A unique number used for identifying and tracking your orders. | 
+
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| body |  ReqBodyVerifyOTPShipment | "Request body" 
+
+
+Use this API to verify OTP and create a session token with custom payload.
+
+*Success Response:*
+
+
+
+Success, the code is valid and returns a session token
+
+
+Schema: `ResponseVerifyOTPShipment`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getInvoiceByShipmentId1
+Get Invoice URL
+
+```golang
+
+ data, err :=  Order.GetInvoiceByShipmentId1(ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+
+
+Use this API to get a generated Invoice URL for viewing or download.
+
+*Success Response:*
+
+
+
+Success, the code is valid and returns a SignedUrl
+
+
+Schema: `ResponseGetInvoiceShipment1`
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ---
 
@@ -18608,7 +18730,9 @@ Fetch all items added to the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `BuyNow`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`, `BuyNow`
 
 
 
@@ -18682,7 +18806,9 @@ Add items to cart
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `BuyNow`
+
+
+| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`, `BuyNow`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -19372,7 +19498,9 @@ Update items in the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `BuyNow`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AreaCode`, `BuyNow`
 
 | body |  UpdateCartRequest | "Request body" 
 
@@ -19387,380 +19515,6 @@ Success. Updates and returns a cart object as shown below. Refer `UpdateCartDeta
 
 
 Schema: `UpdateCartDetailResponse`
-
-
-*Examples:*
-
-
-Nothing updated
-```json
-{
-  "value": {
-    "cart": {
-      "breakup_values": {
-        "raw": {
-          "cod_charge": 0,
-          "convenience_fee": 0,
-          "coupon": 0,
-          "delivery_charge": 0,
-          "discount": -202000,
-          "fynd_cash": 0,
-          "gst_charges": 4804.71,
-          "mrp_total": 302899,
-          "subtotal": 100899,
-          "total": 100899,
-          "vog": 96094.29,
-          "you_saved": 0
-        },
-        "coupon": {
-          "type": "cash",
-          "code": "",
-          "uid": null,
-          "value": 0,
-          "is_applied": false,
-          "message": "Sorry! Invalid Coupon"
-        },
-        "display": [
-          {
-            "display": "MRP Total",
-            "key": "mrp_total",
-            "value": 302899,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Discount",
-            "key": "discount",
-            "value": -202000,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Subtotal",
-            "key": "subtotal",
-            "value": 100899,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Total",
-            "key": "total",
-            "value": 100899,
-            "currency_code": "INR"
-          }
-        ],
-        "loyalty_points": {
-          "total": 0,
-          "applicable": 0,
-          "is_applied": false,
-          "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
-        }
-      },
-      "items": [
-        {
-          "bulk_offer": {},
-          "discount": "67% OFF",
-          "parent_item_identifiers": {
-            "identifier": "ZASFF",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS"
-          },
-          "article": {
-            "type": "article",
-            "uid": "604_902_SSTC60401_636BLUE_1",
-            "size": "1",
-            "seller": {
-              "uid": 604,
-              "name": "SHRI SHANTINATH TRADING COMPANY"
-            },
-            "store": {
-              "uid": 4579,
-              "name": "Gandhi Nagar"
-            },
-            "quantity": 108,
-            "price": {
-              "base": {
-                "marked": 2999,
-                "effective": 999,
-                "currency_code": "INR"
-              },
-              "converted": {
-                "marked": 2999,
-                "effective": 999,
-                "currency_code": "INR"
-              }
-            }
-          },
-          "coupon_message": "",
-          "key": "707569_1",
-          "availability": {
-            "sizes": [
-              "1",
-              "8",
-              "7",
-              "2",
-              "9",
-              "5",
-              "3",
-              "6"
-            ],
-            "other_store_quantity": 7,
-            "out_of_stock": false,
-            "deliverable": true,
-            "is_valid": true
-          },
-          "product": {
-            "type": "product",
-            "uid": 707569,
-            "name": "Blue and Gold Printed Ethnic Set",
-            "slug": "aj-dezines-blue-and-gold-printed-ethnic-set-707569-bff01a",
-            "brand": {
-              "uid": 902,
-              "name": ""
-            },
-            "categories": [
-              {
-                "uid": 525,
-                "name": ""
-              }
-            ],
-            "images": [
-              {
-                "aspect_ratio": "16:25",
-                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/902_636BLUE/1_1540301094877.jpg",
-                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/902_636BLUE/1_1540301094877.jpg"
-              }
-            ],
-            "action": {
-              "type": "product",
-              "url": "https://api.addsale.com/v1/products/aj-dezines-blue-and-gold-printed-ethnic-set-707569-bff01a/",
-              "query": {
-                "product_slug": [
-                  "aj-dezines-blue-and-gold-printed-ethnic-set-707569-bff01a"
-                ]
-              }
-            }
-          },
-          "price": {
-            "base": {
-              "add_on": 100899,
-              "marked": 302899,
-              "effective": 100899,
-              "selling": 100899,
-              "currency_code": "INR"
-            },
-            "converted": {
-              "add_on": 100899,
-              "marked": 302899,
-              "effective": 100899,
-              "selling": 100899,
-              "currency_code": "INR"
-            }
-          },
-          "message": "",
-          "quantity": 101
-        }
-      ],
-      "delivery_charge_info": "",
-      "coupon_text": "View all offers",
-      "buy_now": false,
-      "cart_id": 54,
-      "uid": "54",
-      "gstin": null,
-      "checkout_mode": "self",
-      "restrict_checkout": false,
-      "is_valid": true,
-      "last_modified": "Tue, 03 Sep 2019 10:19:20 GMT"
-    },
-    "result": {
-      "707569_90": {
-        "success": true,
-        "message": "Nothing updated"
-      }
-    },
-    "message": "Nothing updated",
-    "success": true
-  }
-}
-```
-
-Item updated in the cart
-```json
-{
-  "value": {
-    "cart": {
-      "breakup_values": {
-        "coupon": {
-          "type": "cash",
-          "code": "",
-          "uid": null,
-          "value": 0,
-          "is_applied": false,
-          "message": "Sorry! Invalid Coupon"
-        },
-        "loyalty_points": {
-          "total": 0,
-          "applicable": 0,
-          "is_applied": false,
-          "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
-        },
-        "raw": {
-          "cod_charge": 0,
-          "convenience_fee": 0,
-          "coupon": 0,
-          "delivery_charge": 0,
-          "discount": 0,
-          "fynd_cash": 0,
-          "gst_charges": 838.83,
-          "mrp_total": 5499,
-          "subtotal": 5499,
-          "total": 5499,
-          "vog": 4660.17,
-          "you_saved": 0
-        },
-        "display": [
-          {
-            "display": "MRP Total",
-            "key": "mrp_total",
-            "value": 5499,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Subtotal",
-            "key": "subtotal",
-            "value": 5499,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Total",
-            "key": "total",
-            "value": 5499,
-            "currency_code": "INR"
-          }
-        ]
-      },
-      "items": [
-        {
-          "key": "437414_7",
-          "message": "",
-          "bulk_offer": {},
-          "price": {
-            "base": {
-              "add_on": 5499,
-              "marked": 5499,
-              "effective": 5499,
-              "selling": 5499,
-              "currency_code": "INR"
-            },
-            "converted": {
-              "add_on": 5499,
-              "marked": 5499,
-              "effective": 5499,
-              "selling": 5499,
-              "currency_code": "INR"
-            }
-          },
-          "quantity": 1,
-          "discount": "",
-          "product": {
-            "type": "product",
-            "uid": 437414,
-            "name": "Suede Classic",
-            "slug": "puma-suede-classic-437414-6e6bbf",
-            "brand": {
-              "uid": 9,
-              "name": "Puma"
-            },
-            "categories": [
-              {
-                "uid": 165,
-                "name": "Outdoor Sports Shoes"
-              }
-            ],
-            "images": [
-              {
-                "aspect_ratio": "16:25",
-                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/9_35656851/1_1511171811830.jpg",
-                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/9_35656851/1_1511171811830.jpg"
-              }
-            ],
-            "action": {
-              "type": "product",
-              "url": "https://api.addsale.com/platform/content/v1/products/puma-suede-classic-437414-6e6bbf/",
-              "query": {
-                "product_slug": [
-                  "puma-suede-classic-437414-6e6bbf"
-                ]
-              }
-            }
-          },
-          "parent_item_identifiers": {
-            "identifier": "ZASFF",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS"
-          },
-          "article": {
-            "type": "article",
-            "uid": "507_9_96099_35656851_7",
-            "size": "7",
-            "seller": {
-              "uid": 507,
-              "name": "PUMA SPORTS INDIA PVT LTD"
-            },
-            "store": {
-              "uid": 3632,
-              "name": "Colaba Causway"
-            },
-            "quantity": 5,
-            "price": {
-              "base": {
-                "marked": 5499,
-                "effective": 5499,
-                "currency_code": "INR"
-              },
-              "converted": {
-                "marked": 5499,
-                "effective": 5499,
-                "currency_code": "INR"
-              }
-            }
-          },
-          "coupon_message": "",
-          "availability": {
-            "sizes": [
-              "10",
-              "11",
-              "6",
-              "9",
-              "7",
-              "8"
-            ],
-            "other_store_quantity": 22,
-            "out_of_stock": false,
-            "deliverable": true,
-            "is_valid": true
-          }
-        }
-      ],
-      "delivery_charge_info": "",
-      "coupon_text": "View all offers",
-      "buy_now": false,
-      "cart_id": 12426,
-      "uid": "12426",
-      "gstin": null,
-      "checkout_mode": "self",
-      "last_modified": "Thu, 22 Aug 2019 04:51:42 GMT",
-      "restrict_checkout": false,
-      "is_valid": true
-    },
-    "result": {
-      "437414_7": {
-        "success": true,
-        "message": "Item updated in the bag"
-      }
-    },
-    "message": "Item updated in the bag",
-    "success": true
-  }
-}
-```
 
 
 
