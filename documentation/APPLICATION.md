@@ -1613,7 +1613,9 @@ Fetch all items added to the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `BuyNow`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`, `BuyNow`
 
 
 
@@ -1687,7 +1689,9 @@ Add items to cart
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `BuyNow`
+
+
+| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`, `BuyNow`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -2377,7 +2381,9 @@ Update items in the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `BuyNow`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AreaCode`, `BuyNow`
 
 | body |  UpdateCartRequest | "Request body" 
 
@@ -16567,7 +16573,7 @@ success is True i.e user is allowed
       "api_version": 2,
       "data": {
         "approved": true,
-        "button_text": "Buy Now",
+        "button_text": "Buy Now, Pay Later",
         "first_transaction": false
       },
       "aggregator": "Simpl"
@@ -16576,7 +16582,7 @@ success is True i.e user is allowed
 }
 ```
 
-success is False i.e user not allowed
+success is True i.e user not allowed
 ```json
 {
   "value": {
@@ -16586,11 +16592,12 @@ success is False i.e user not allowed
       "api_version": 2,
       "data": {
         "approved": false,
-        "button_text": "Buy Now",
+        "button_text": "Buy Now, Pay Later",
         "first_transaction": false
       },
       "aggregator": "Simpl"
-    }
+    },
+    "data": {}
   }
 }
 ```
@@ -18606,7 +18613,9 @@ Fetch all items added to the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `BuyNow`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`, `BuyNow`
 
 
 
@@ -18680,7 +18689,9 @@ Add items to cart
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `BuyNow`
+
+
+| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`, `BuyNow`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -19370,7 +19381,9 @@ Update items in the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `BuyNow`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AreaCode`, `BuyNow`
 
 | body |  UpdateCartRequest | "Request body" 
 
