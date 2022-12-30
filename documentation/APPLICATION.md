@@ -46,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [unfollowById](#unfollowbyid)
     * [followById](#followbyid)
+    * [unfollowById](#unfollowbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -236,6 +236,8 @@
     * [getRupifiBannerDetails](#getrupifibannerdetails)
     * [getEpaylaterBannerDetails](#getepaylaterbannerdetails)
     * [resendOrCancelPayment](#resendorcancelpayment)
+    * [renderHTML](#renderhtml)
+    * [validateVPA](#validatevpa)
     * [getActiveRefundTransferModes](#getactiverefundtransfermodes)
     * [enableOrDisableRefundTransferMode](#enableordisablerefundtransfermode)
     * [getUserBeneficiariesDetail](#getuserbeneficiariesdetail)
@@ -246,6 +248,15 @@
     * [addRefundBankAccountUsingOTP](#addrefundbankaccountusingotp)
     * [verifyOtpAndAddBeneficiaryForWallet](#verifyotpandaddbeneficiaryforwallet)
     * [updateDefaultBeneficiary](#updatedefaultbeneficiary)
+    * [getPaymentLink](#getpaymentlink)
+    * [createPaymentLink](#createpaymentlink)
+    * [resendPaymentLink](#resendpaymentlink)
+    * [cancelPaymentLink](#cancelpaymentlink)
+    * [getPaymentModeRoutesPaymentLink](#getpaymentmoderoutespaymentlink)
+    * [pollingPaymentLink](#pollingpaymentlink)
+    * [createOrderHandlerPaymentLink](#createorderhandlerpaymentlink)
+    * [initialisePaymentPaymentLink](#initialisepaymentpaymentlink)
+    * [checkAndUpdatePaymentStatusPaymentLink](#checkandupdatepaymentstatuspaymentlink)
     * [customerCreditSummary](#customercreditsummary)
     * [redirectToAggregator](#redirecttoaggregator)
     * [checkCredit](#checkcredit)
@@ -1140,12 +1151,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1159,7 +1170,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1181,12 +1192,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1200,7 +1211,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -16939,6 +16950,78 @@ request_type is resend
 ---
 
 
+#### renderHTML
+Convert base64 string to HTML form
+
+```golang
+
+ data, err :=  Payment.RenderHTML(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  renderHTMLRequest | "Request body" 
+
+
+Use this API to decode base64 html form to plain HTML string.
+
+*Success Response:*
+
+
+
+Success and return HTML decoded text
+
+
+Schema: `renderHTMLResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### validateVPA
+API to Validate UPI ID
+
+```golang
+
+ data, err :=  Payment.ValidateVPA(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  ValidateVPARequest | "Request body" 
+
+
+API to Validate UPI ID
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `ValidateVPAResponseSchema` for more details.
+
+
+Schema: `ValidateVPAResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getActiveRefundTransferModes
 Lists the mode of refund
 
@@ -17292,6 +17375,336 @@ Success. Check the example shown below or refer `SetDefaultBeneficiaryResponse` 
 
 
 Schema: `SetDefaultBeneficiaryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPaymentLink
+Get payment link
+
+```golang
+
+ data, err :=  Payment.GetPaymentLink(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `PaymentLinkID`
+
+
+
+Use this API to get a payment link
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `GetPaymentLinkResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createPaymentLink
+Create payment link
+
+```golang
+
+ data, err :=  Payment.CreatePaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  CreatePaymentLinkRequest | "Request body" 
+
+
+Use this API to create a payment link for the customer
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `CreatePaymentLinkResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### resendPaymentLink
+Resend payment link
+
+```golang
+
+ data, err :=  Payment.ResendPaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  CancelOrResendPaymentLinkRequest | "Request body" 
+
+
+Use this API to resend a payment link for the customer
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `ResendPaymentLinkResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### cancelPaymentLink
+Cancel payment link
+
+```golang
+
+ data, err :=  Payment.CancelPaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  CancelOrResendPaymentLinkRequest | "Request body" 
+
+
+Use this API to cancel a payment link for the customer
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `CancelPaymentLinkResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPaymentModeRoutesPaymentLink
+Get applicable payment options for payment link
+
+```golang
+
+ data, err :=  Payment.GetPaymentModeRoutesPaymentLink(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `PaymentLinkID`
+
+
+
+Use this API to get all valid payment options for doing a payment through payment link
+
+*Success Response:*
+
+
+
+Success. Returns all available options for payment. Check the example shown below or refer `PaymentModeRouteResponse` for more details.
+
+
+Schema: `PaymentModeRouteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### pollingPaymentLink
+Used for polling if payment successful or not
+
+```golang
+
+ data, err :=  Payment.PollingPaymentLink(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `PaymentLinkID`
+
+
+
+Use this API to poll if payment through payment was successful or not
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `PollingPaymentLinkResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createOrderHandlerPaymentLink
+Create Order user
+
+```golang
+
+ data, err :=  Payment.CreateOrderHandlerPaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  CreateOrderUserRequest | "Request body" 
+
+
+Use this API to create a order and payment on aggregator side
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `CreateOrderUserResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### initialisePaymentPaymentLink
+Initialize a payment (server-to-server) for UPI and BharatQR
+
+```golang
+
+ data, err :=  Payment.InitialisePaymentPaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  PaymentInitializationRequest | "Request body" 
+
+
+Use this API to inititate payment using UPI, BharatQR, wherein the UPI requests are send to the app and QR code is displayed on the screen.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `PaymentInitializationResponse` for more details.
+
+
+Schema: `PaymentInitializationResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### checkAndUpdatePaymentStatusPaymentLink
+Performs continuous polling to check status of payment on the server
+
+```golang
+
+ data, err :=  Payment.CheckAndUpdatePaymentStatusPaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  PaymentStatusUpdateRequest | "Request body" 
+
+
+Use this API to perform continuous polling at intervals to check the status of payment until timeout.
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `PaymentStatusUpdateResponse` for more details.
+
+
+Schema: `PaymentStatusUpdateResponse`
 
 
 
