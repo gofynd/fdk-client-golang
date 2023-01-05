@@ -325,13 +325,13 @@
 * [Catalog](#Catalog)
   * Methods
     * [getSearchKeywords](#getsearchkeywords)
-    * [updateSearchKeywords](#updatesearchkeywords)
     * [deleteSearchKeywords](#deletesearchkeywords)
+    * [updateSearchKeywords](#updatesearchkeywords)
     * [getAllSearchKeyword](#getallsearchkeyword)
     * [createCustomKeyword](#createcustomkeyword)
     * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
-    * [updateAutocompleteKeyword](#updateautocompletekeyword)
     * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
+    * [updateAutocompleteKeyword](#updateautocompletekeyword)
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [getProductBundle](#getproductbundle)
@@ -347,12 +347,12 @@
     * [getConfigurationMetadata](#getconfigurationmetadata)
     * [getGroupConfigurations](#getgroupconfigurations)
     * [createGroupConfiguration](#creategroupconfiguration)
-    * [updateGroupConfiguration](#updategroupconfiguration)
     * [deleteGroupConfiguration](#deletegroupconfiguration)
+    * [updateGroupConfiguration](#updategroupconfiguration)
     * [getListingConfigurations](#getlistingconfigurations)
     * [createListingConfiguration](#createlistingconfiguration)
-    * [updateListingConfiguration](#updatelistingconfiguration)
     * [deleteListingConfiguration](#deletelistingconfiguration)
+    * [updateListingConfiguration](#updatelistingconfiguration)
     * [updateAllowSingle](#updateallowsingle)
     * [updateDefaultSort](#updatedefaultsort)
     * [getCatalogConfiguration](#getcatalogconfiguration)
@@ -364,8 +364,8 @@
     * [getAllCollections](#getallcollections)
     * [createCollection](#createcollection)
     * [getCollectionDetail](#getcollectiondetail)
-    * [updateCollection](#updatecollection)
     * [deleteCollection](#deletecollection)
+    * [updateCollection](#updatecollection)
     * [getCollectionItems](#getcollectionitems)
     * [addCollectionItems](#addcollectionitems)
     * [getCatalogInsights](#getcataloginsights)
@@ -399,8 +399,8 @@
     * [getProductAttributes](#getproductattributes)
     * [getProduct](#getproduct)
     * [patchProduct](#patchproduct)
-    * [editProduct](#editproduct)
     * [deleteProduct](#deleteproduct)
+    * [editProduct](#editproduct)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
     * [getProductBulkUploadHistory](#getproductbulkuploadhistory)
@@ -418,6 +418,7 @@
     * [deleteInventory](#deleteinventory)
     * [getInventoryBulkUploadHistory](#getinventorybulkuploadhistory)
     * [createBulkInventoryJob](#createbulkinventoryjob)
+    * [getInventories](#getinventories)
     * [createBulkInventory](#createbulkinventory)
     * [deleteBulkInventoryJob](#deletebulkinventoryjob)
     * [getInventoryExport](#getinventoryexport)
@@ -567,19 +568,26 @@
     * [getPromotionById](#getpromotionbyid)
     * [updatePromotion](#updatepromotion)
     * [updatePromotionPartially](#updatepromotionpartially)
-    * [getPromosCouponConfig](#getpromoscouponconfig)
     * [fetchAndvalidateCartItems](#fetchandvalidatecartitems)
     * [checkCartServiceability](#checkcartserviceability)
     * [checkoutCart](#checkoutcart)
     * [getAbandonedCart](#getabandonedcart)
-    * [getAbandonedCartDetails](#getabandonedcartdetails)
     * [addItems](#additems)
     * [updateCart](#updatecart)
     
 
 * [Rewards](#Rewards)
   * Methods
+    * [showGiveaways](#showgiveaways)
+    * [saveGiveAway](#savegiveaway)
+    * [getGiveawayById](#getgiveawaybyid)
+    * [updateGiveAway](#updategiveaway)
+    * [getGiveawayAudienceStatus](#getgiveawayaudiencestatus)
+    * [showOffers](#showoffers)
     * [getOfferByName](#getofferbyname)
+    * [updateOfferByName](#updateofferbyname)
+    * [updateUserStatus](#updateuserstatus)
+    * [user](#user)
     
 
 * [Analytics](#Analytics)
@@ -54396,6 +54404,49 @@ Schema: `GetSearchWordsDetailResponse`
 ---
 
 
+#### deleteSearchKeywords
+Delete a Search Keywords
+
+```golang
+
+data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateSearchKeywords
 Update Search Keyword
 
@@ -54428,49 +54479,6 @@ The Collection object. See example below or refer `GetSearchWordsDataSchema` for
 
 
 Schema: `GetSearchWordsData`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteSearchKeywords
-Delete a Search Keywords
-
-```golang
-
-data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
 
 
 
@@ -54607,6 +54615,49 @@ Schema: `GetAutocompleteWordsResponse`
 ---
 
 
+#### deleteAutocompleteKeyword
+Delete a Autocomplete Keywords
+
+```golang
+
+data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateAutocompleteKeyword
 Create & Update Autocomplete Keyword
 
@@ -54639,49 +54690,6 @@ The Mapping object. See example below or refer `GetAutocompleteWordsResponseSche
 
 
 Schema: `GetAutocompleteWordsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteAutocompleteKeyword
-Delete a Autocomplete Keywords
-
-```golang
-
-data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
 
 
 
@@ -55332,6 +55340,52 @@ Schema: `AppConfigurationDetail`
 ---
 
 
+#### deleteGroupConfiguration
+Delete configuration of the product config type of the application.
+
+```golang
+
+data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
+
+
+| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration of the product config type of the application.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateGroupConfiguration
 Update the group configurations for the application.
 
@@ -55367,52 +55421,6 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationDetail`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteGroupConfiguration
-Delete configuration of the product config type of the application.
-
-```golang
-
-data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
-
-
-| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
-
-
-
-Delete configuration of the product config type of the application.
-
-*Success Response:*
-
-
-
-success message will tell whether the operation was successful.
-
-
-Schema: `ConfigSuccessResponse`
 
 
 
@@ -55519,6 +55527,52 @@ Schema: `AppConfigurationsSort`
 ---
 
 
+#### deleteListingConfiguration
+Delete configuration for listings
+
+```golang
+
+data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
+
+
+| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration for listing.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateListingConfiguration
 Update configuration for listings
 
@@ -55554,52 +55608,6 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationsSort`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteListingConfiguration
-Delete configuration for listings
-
-```golang
-
-data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
-
-
-| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
-
-
-
-Delete configuration for listing.
-
-*Success Response:*
-
-
-
-success message will tell whether the operation was successful.
-
-
-Schema: `ConfigSuccessResponse`
 
 
 
@@ -56081,6 +56089,49 @@ Schema: `CollectionDetailResponse`
 ---
 
 
+#### deleteCollection
+Delete a Collection
+
+```golang
+
+data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier of a collection. | 
+
+
+
+Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateCollection
 Update a collection
 
@@ -56113,49 +56164,6 @@ The Collection object. See example below or refer `UpdateCollectionSchema` for d
 
 
 Schema: `UpdateCollection`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteCollection
-Delete a Collection
-
-```golang
-
-data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier of a collection. | 
-
-
-
-Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
 
 
 
@@ -57545,26 +57553,25 @@ Schema: `SuccessResponse`
 ---
 
 
-#### editProduct
-Edit a product.
+#### deleteProduct
+Delete a product.
 
 ```golang
 
-data, err := Catalog.EditProduct(CompanyID, ItemID, body);
+data, err := Catalog.DeleteProduct(CompanyID, ItemID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
 
 
 | ItemID | float64 | Id of the product to be updated. | 
 
 
-| body |  ProductCreateUpdate | "Request body" 
 
-This API allows to edit product.
+This API allows to delete product.
 
 *Success Response:*
 
@@ -57586,25 +57593,26 @@ Schema: `SuccessResponse`
 ---
 
 
-#### deleteProduct
-Delete a product.
+#### editProduct
+Edit a product.
 
 ```golang
 
-data, err := Catalog.DeleteProduct(CompanyID, ItemID);
+data, err := Catalog.EditProduct(CompanyID, ItemID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
 
 
 | ItemID | float64 | Id of the product to be updated. | 
 
 
+| body |  ProductCreateUpdate | "Request body" 
 
-This API allows to delete product.
+This API allows to edit product.
 
 *Success Response:*
 
@@ -58348,6 +58356,58 @@ Returns a success response
 
 
 Schema: `BulkResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getInventories
+Get Inventory for company
+
+```golang
+
+data, err := Catalog.GetInventories(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `ItemID`, `Size`, `PageNo`, `PageSize`, `Q`, `Sellable`, `SizeIdentifier`
+
+
+This API allows get Inventories data for particular company. - Inventory
+
+*Success Response:*
+
+
+
+returns a list of all inventory grouped by size and store
+
+
+Schema: `InventoryResponsePaginated`
 
 
 
@@ -63739,7 +63799,7 @@ data, err := Cart.GetPromotions(CompanyID, ApplicationID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`, `Status`, `PromoGroup`, `PromotionType`, `FpPanel`, `PromotionID`
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`, `IsActive`, `PromoGroup`, `PromotionType`, `FpPanel`, `PromotionID`
 
 
 Get promotion list with pagination
@@ -63996,46 +64056,6 @@ Promotion schedule updated successfully
   }
 }
 ```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPromosCouponConfig
-Fetch all promos that are set as active
-
-```golang
-
-data, err := Cart.GetPromosCouponConfig(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Current company id | 
-
-
-| ApplicationID | string | Current Application _id | 
-
-
-
-Use this API to get list of all the active promos/coupons.
-
-*Success Response:*
-
-
-
-Success. Returns a list of all the curently active coupons/promos
-
-
-Schema: `ActivePromosResponse`
 
 
 
@@ -64908,53 +64928,6 @@ Abandoned Cart list for sent filter and page size
   }
 }
 ```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAbandonedCartDetails
-Fetch all items added to the cart
-
-```golang
-
-data, err := Cart.GetAbandonedCartDetails(CompanyID, ApplicationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Current company id | 
-
-
-| ApplicationID | string | Current Application _id | 
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`
-
-
-Use this API to get details of all the items added to a cart.
-
-*Success Response:*
-
-
-
-Success. Returns a Cart object. Check the example shown below or refer `CartDetailResponse` for more details.
-
-
-Schema: `CartDetailResponse`
 
 
 
@@ -66222,6 +66195,262 @@ Item updated in the cart
 ## Rewards
 
 
+#### showGiveaways
+List of giveaways of the current application.
+
+```golang
+
+data, err := Rewards.ShowGiveaways(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageID`, `PageSize`
+
+
+List of giveaways of the current application.
+
+*Success Response:*
+
+
+
+ok
+
+
+Schema: `GiveawayResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### saveGiveAway
+List of giveaways of the current application.
+
+```golang
+
+data, err := Rewards.SaveGiveAway(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| body |  Giveaway | "Request body" 
+
+Adds a new giveaway.
+
+*Success Response:*
+
+
+
+ok
+
+
+Schema: `Giveaway`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getGiveawayById
+Get giveaway by ID.
+
+```golang
+
+data, err := Rewards.GetGiveawayById(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| ID | string | Giveaway ID | 
+
+
+
+Get giveaway by ID.
+
+*Success Response:*
+
+
+
+ok
+
+
+Schema: `Giveaway`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateGiveAway
+Updates the giveaway by it's ID.
+
+```golang
+
+data, err := Rewards.UpdateGiveAway(CompanyID, ApplicationID, ID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| ID | string | Giveaway ID | 
+
+
+| body |  Giveaway | "Request body" 
+
+Updates the giveaway by it's ID.
+
+*Success Response:*
+
+
+
+ok
+
+
+Schema: `Giveaway`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getGiveawayAudienceStatus
+Get the Giveaway audience status
+
+```golang
+
+data, err := Rewards.GetGiveawayAudienceStatus(AudienceID, CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| AudienceID | string | audience id | 
+
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+
+Get giveaway audience status
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GiveawayAudience`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### showOffers
+List of offers of the current application.
+
+```golang
+
+data, err := Rewards.ShowOffers(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+
+List of offers of the current application.
+
+*Success Response:*
+
+
+
+ok
+
+
+Schema: `Array<Offer>`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getOfferByName
 Get offer by name
 
@@ -66256,6 +66485,137 @@ Success. Check example below or refer `Offer` for more details.
 
 
 Schema: `Offer`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateOfferByName
+Update offer by name
+
+```golang
+
+data, err := Rewards.UpdateOfferByName(Name, CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| Name | string | The name given to the offer. | 
+
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| body |  Offer | "Request body" 
+
+Use this API to update the offer details
+
+*Success Response:*
+
+
+
+Success. Check example below or refer `Offer` for more details.
+
+
+Schema: `Offer`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateUserStatus
+Update user status
+
+```golang
+
+data, err := Rewards.UpdateUserStatus(UserID, CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| UserID | string | user id | 
+
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| body |  AppUser | "Request body" 
+
+Use this API to update the user status active/archive
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `AppUser`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### user
+Get user reward details
+
+```golang
+
+data, err := Rewards.User(UserID, CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| UserID | string | user id | 
+
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+
+Use this API to get the user reward details
+
+*Success Response:*
+
+
+
+Success. Check example below or refer `UserRes` for more details.
+
+
+Schema: `UserRes`
 
 
 
