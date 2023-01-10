@@ -3934,6 +3934,8 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
 
         
             
@@ -13147,6 +13149,70 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // UpdateShipmentExternal 
+    func (or *Order)  UpdateShipmentExternal(ShipmentID float64, body  UpdateShipmentExternalRequest) (UpdateShipmentResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             updateShipmentExternalResponse UpdateShipmentResponse
+	    )
+
+        
+            
+        
+            
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return UpdateShipmentResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return UpdateShipmentResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "put",
+            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/undefined/status",ShipmentID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return UpdateShipmentResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateShipmentExternalResponse)
+        if err != nil {
+            return UpdateShipmentResponse{}, common.NewFDKError(err.Error())
+        }
+         return updateShipmentExternalResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // UpdateShipmentStatus 
     func (or *Order)  UpdateShipmentStatus(ShipmentID string, body  UpdateShipmentStatusRequest) (ShipmentApplicationStatusResponse, error){
         var (
@@ -13219,25 +13285,28 @@ func NewAppClient(config *AppConfig) *Client {
     
     //OrderGetOrders1XQuery holds query params
     type OrderGetOrders1XQuery struct { 
+        Status float64  `url:"status,omitempty"` 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
         FromDate string  `url:"from_date,omitempty"` 
         ToDate string  `url:"to_date,omitempty"` 
-        Status float64  `url:"status,omitempty"`  
+        CustomMeta string  `url:"custom_meta,omitempty"`  
     }
     
     // GetOrders1 Get all orders
-    func (or *Order)  GetOrders1(xQuery OrderGetOrders1XQuery) (OrderList1, error){
+    func (or *Order)  GetOrders1(xQuery OrderGetOrders1XQuery) (OrderList, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getOrders1Response OrderList1
+             getOrders1Response OrderList
 	    )
 
         
 
         
+            
+                
             
                 
             
@@ -13266,12 +13335,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return OrderList1{}, err
+            return OrderList{}, err
 	    }
         
         err = json.Unmarshal(response, &getOrders1Response)
         if err != nil {
-            return OrderList1{}, common.NewFDKError(err.Error())
+            return OrderList{}, common.NewFDKError(err.Error())
         }
          return getOrders1Response, nil
         
@@ -13284,12 +13353,12 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // GetOrderById1 Get details of an order
-    func (or *Order)  GetOrderById1(OrderID string) (OrderById1, error){
+    func (or *Order)  GetOrderById1(OrderID string) (OrderById, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getOrderById1Response OrderById1
+             getOrderById1Response OrderById
 	    )
 
         
@@ -13313,12 +13382,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return OrderById1{}, err
+            return OrderById{}, err
 	    }
         
         err = json.Unmarshal(response, &getOrderById1Response)
         if err != nil {
-            return OrderById1{}, common.NewFDKError(err.Error())
+            return OrderById{}, common.NewFDKError(err.Error())
         }
          return getOrderById1Response, nil
         
@@ -13330,269 +13399,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetShipmentById1 Get details of a shipment
-    func (or *Order)  GetShipmentById1(ShipmentID string) (ShipmentById1, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getShipmentById1Response ShipmentById1
-	    )
-
-        
-
-        
-
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.config,
-            "get",
-            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s",ShipmentID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ShipmentById1{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getShipmentById1Response)
-        if err != nil {
-            return ShipmentById1{}, common.NewFDKError(err.Error())
-        }
-         return getShipmentById1Response, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // GetShipmentReasons1 Get reasons behind full or partial cancellation of a shipment
-    func (or *Order)  GetShipmentReasons1(ShipmentID string) (ShipmentReasons1, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getShipmentReasons1Response ShipmentReasons1
-	    )
-
-        
-
-        
-
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.config,
-            "get",
-            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/reasons",ShipmentID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ShipmentReasons1{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getShipmentReasons1Response)
-        if err != nil {
-            return ShipmentReasons1{}, common.NewFDKError(err.Error())
-        }
-         return getShipmentReasons1Response, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // GetShipmentBagReasons1 Get reasons at l1,l2 and l3 for cancellation and return based on department
-    func (or *Order)  GetShipmentBagReasons1(ShipmentID string, BagID string) (ShipmentBagReasons1, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getShipmentBagReasons1Response ShipmentBagReasons1
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.config,
-            "get",
-            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/bags/%s/reasons/",ShipmentID,BagID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ShipmentBagReasons1{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getShipmentBagReasons1Response)
-        if err != nil {
-            return ShipmentBagReasons1{}, common.NewFDKError(err.Error())
-        }
-         return getShipmentBagReasons1Response, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // UpdateShipmentStatus1 Update the shipment status
-    func (or *Order)  UpdateShipmentStatus1(ShipmentID string, body  ShipmentStatusUpdateBody) (ShipmentStatusUpdate, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             updateShipmentStatus1Response ShipmentStatusUpdate
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-
-        
-
-        
-        
-        
-    
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return ShipmentStatusUpdate{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return ShipmentStatusUpdate{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            or.config,
-            "put",
-            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/status",ShipmentID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ShipmentStatusUpdate{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateShipmentStatus1Response)
-        if err != nil {
-            return ShipmentStatusUpdate{}, common.NewFDKError(err.Error())
-        }
-         return updateShipmentStatus1Response, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // TrackShipment1 Track shipment
-    func (or *Order)  TrackShipment1(ShipmentID string) (ShipmentTrack1, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             trackShipment1Response ShipmentTrack1
-	    )
-
-        
-
-        
-
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.config,
-            "get",
-            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/track",ShipmentID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ShipmentTrack1{}, err
-	    }
-        
-        err = json.Unmarshal(response, &trackShipment1Response)
-        if err != nil {
-            return ShipmentTrack1{}, common.NewFDKError(err.Error())
-        }
-         return trackShipment1Response, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // GetPosOrderById1 Get POS Order
-    func (or *Order)  GetPosOrderById1(OrderID string) (PosOrderById, error){
+    func (or *Order)  GetPosOrderById1(OrderID string) (OrderList, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getPosOrderById1Response PosOrderById
+             getPosOrderById1Response OrderList
 	    )
 
         
@@ -13616,12 +13429,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return PosOrderById{}, err
+            return OrderList{}, err
 	    }
         
         err = json.Unmarshal(response, &getPosOrderById1Response)
         if err != nil {
-            return PosOrderById{}, common.NewFDKError(err.Error())
+            return OrderList{}, common.NewFDKError(err.Error())
         }
          return getPosOrderById1Response, nil
         
@@ -13633,13 +13446,154 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetCustomerDetailsByShipmentId1 Get Customer Details by Shipment Id
-    func (or *Order)  GetCustomerDetailsByShipmentId1(OrderID string, ShipmentID string) (CustomerDetailsByShipmentId, error){
+    // GetShipmentById1 Get details of a shipment
+    func (or *Order)  GetShipmentById1(ShipmentID string) (ShipmentById, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getCustomerDetailsByShipmentId1Response CustomerDetailsByShipmentId
+             getShipmentById1Response ShipmentById
+	    )
+
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s",ShipmentID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ShipmentById{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getShipmentById1Response)
+        if err != nil {
+            return ShipmentById{}, common.NewFDKError(err.Error())
+        }
+         return getShipmentById1Response, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetInvoiceByShipmentId1 Get Invoice of a shipment
+    func (or *Order)  GetInvoiceByShipmentId1(ShipmentID string) (ResponseGetInvoiceShipment, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getInvoiceByShipmentId1Response ResponseGetInvoiceShipment
+	    )
+
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/invoice",ShipmentID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ResponseGetInvoiceShipment{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getInvoiceByShipmentId1Response)
+        if err != nil {
+            return ResponseGetInvoiceShipment{}, common.NewFDKError(err.Error())
+        }
+         return getInvoiceByShipmentId1Response, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // TrackShipment1 Track shipment
+    func (or *Order)  TrackShipment1(ShipmentID string) (ShipmentTrack, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             trackShipment1Response ShipmentTrack
+	    )
+
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/track",ShipmentID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ShipmentTrack{}, err
+	    }
+        
+        err = json.Unmarshal(response, &trackShipment1Response)
+        if err != nil {
+            return ShipmentTrack{}, common.NewFDKError(err.Error())
+        }
+         return trackShipment1Response, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetCustomerDetailsByShipmentId1 Get Customer Details by Shipment Id
+    func (or *Order)  GetCustomerDetailsByShipmentId1(OrderID string, ShipmentID string) (CustomerDetailsResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getCustomerDetailsByShipmentId1Response CustomerDetailsResponse
 	    )
 
         
@@ -13665,12 +13619,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return CustomerDetailsByShipmentId{}, err
+            return CustomerDetailsResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &getCustomerDetailsByShipmentId1Response)
         if err != nil {
-            return CustomerDetailsByShipmentId{}, common.NewFDKError(err.Error())
+            return CustomerDetailsResponse{}, common.NewFDKError(err.Error())
         }
          return getCustomerDetailsByShipmentId1Response, nil
         
@@ -13683,12 +13637,12 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // SendOtpToShipmentCustomer1 Send and Resend Otp code to Order-Shipment customer
-    func (or *Order)  SendOtpToShipmentCustomer1(OrderID string, ShipmentID string) (sendOTPApplicationResponse, error){
+    func (or *Order)  SendOtpToShipmentCustomer1(OrderID string, ShipmentID string) (SendOtpToCustomerResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             sendOtpToShipmentCustomer1Response sendOTPApplicationResponse
+             sendOtpToShipmentCustomer1Response SendOtpToCustomerResponse
 	    )
 
         
@@ -13714,12 +13668,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return sendOTPApplicationResponse{}, err
+            return SendOtpToCustomerResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &sendOtpToShipmentCustomer1Response)
         if err != nil {
-            return sendOTPApplicationResponse{}, common.NewFDKError(err.Error())
+            return SendOtpToCustomerResponse{}, common.NewFDKError(err.Error())
         }
          return sendOtpToShipmentCustomer1Response, nil
         
@@ -13732,12 +13686,12 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // VerifyOtpShipmentCustomer1 Verify Otp code
-    func (or *Order)  VerifyOtpShipmentCustomer1(OrderID string, ShipmentID string, body  ReqBodyVerifyOTPShipment) (ResponseVerifyOTPShipment, error){
+    func (or *Order)  VerifyOtpShipmentCustomer1(OrderID string, ShipmentID string, body  VerifyOtp) (VerifyOtpResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             verifyOtpShipmentCustomer1Response ResponseVerifyOTPShipment
+             verifyOtpShipmentCustomer1Response VerifyOtpResponse
 	    )
 
         
@@ -13762,30 +13716,30 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return ResponseVerifyOTPShipment{}, common.NewFDKError(err.Error())
+             return VerifyOtpResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return ResponseVerifyOTPShipment{}, common.NewFDKError(err.Error())
+             return VerifyOtpResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
         rawRequest = NewRequest(
             or.config,
             "post",
-            fmt.Sprintf("/service/application/order/v1.0/orders/%s/shipments/%s/otp/verify",OrderID,ShipmentID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/%s/shipments/%s/otp/verify/",OrderID,ShipmentID),
             nil,
             nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ResponseVerifyOTPShipment{}, err
+            return VerifyOtpResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &verifyOtpShipmentCustomer1Response)
         if err != nil {
-            return ResponseVerifyOTPShipment{}, common.NewFDKError(err.Error())
+            return VerifyOtpResponse{}, common.NewFDKError(err.Error())
         }
          return verifyOtpShipmentCustomer1Response, nil
         
@@ -13797,13 +13751,62 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetInvoiceByShipmentId1 Get Invoice URL
-    func (or *Order)  GetInvoiceByShipmentId1(ShipmentID string) (ResponseGetInvoiceShipment1, error){
+    // GetShipmentBagReasons1 Get reasons behind full or partial cancellation of a shipment
+    func (or *Order)  GetShipmentBagReasons1(ShipmentID string, BagID string) (ShipmentBagReasons, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getInvoiceByShipmentId1Response ResponseGetInvoiceShipment1
+             getShipmentBagReasons1Response ShipmentBagReasons
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/bags/%s/reasons",ShipmentID,BagID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ShipmentBagReasons{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getShipmentBagReasons1Response)
+        if err != nil {
+            return ShipmentBagReasons{}, common.NewFDKError(err.Error())
+        }
+         return getShipmentBagReasons1Response, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetShipmentReasons1 Get reasons behind full or partial cancellation of a shipment
+    func (or *Order)  GetShipmentReasons1(ShipmentID string) (ShipmentReasons, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getShipmentReasons1Response ShipmentReasons
 	    )
 
         
@@ -13821,20 +13824,84 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/invoice",ShipmentID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/reasons",ShipmentID),
             nil,
             nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ResponseGetInvoiceShipment1{}, err
+            return ShipmentReasons{}, err
 	    }
         
-        err = json.Unmarshal(response, &getInvoiceByShipmentId1Response)
+        err = json.Unmarshal(response, &getShipmentReasons1Response)
         if err != nil {
-            return ResponseGetInvoiceShipment1{}, common.NewFDKError(err.Error())
+            return ShipmentReasons{}, common.NewFDKError(err.Error())
         }
-         return getInvoiceByShipmentId1Response, nil
+         return getShipmentReasons1Response, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UpdateShipmentExternal1 
+    func (or *Order)  UpdateShipmentExternal1(ShipmentID float64, body  UpdateShipmentExternalRequest) (UpdateShipmentResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             updateShipmentExternal1Response UpdateShipmentResponse
+	    )
+
+        
+            
+        
+            
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return UpdateShipmentResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return UpdateShipmentResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "put",
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/undefined/status",ShipmentID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return UpdateShipmentResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateShipmentExternal1Response)
+        if err != nil {
+            return UpdateShipmentResponse{}, common.NewFDKError(err.Error())
+        }
+         return updateShipmentExternal1Response, nil
         
     }
           
@@ -15639,6 +15706,8 @@ func NewAppClient(config *AppConfig) *Client {
              checkoutCartResponse CartCheckoutResponse
 	    )
 
+        
+            
         
             
         
