@@ -13,7 +13,7 @@
 * [FileStorage](#FileStorage) - File Storage 
 * [Configuration](#Configuration) - Application configuration apis 
 * [Payment](#Payment) - Collect payment through many payment gateway i.e Stripe, Razorpay, Juspay etc.into Fynd or Self account 
-* [Order](#Order) - Handles Platform websites OMS 
+* [Order](#Order) - Handles all Application order and shipment api(s) 
 * [Rewards](#Rewards) - Earn and redeem reward points 
 * [PosCart](#PosCart) - Cart APIs 
 * [Logistic](#Logistic) - Logistics Promise Engine APIs allows you to configure zone, pincode, TAT, logistics and many more useful features.  
@@ -46,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [unfollowById](#unfollowbyid)
     * [followById](#followbyid)
+    * [unfollowById](#unfollowbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -265,16 +265,16 @@
   * Methods
     * [getOrders](#getorders)
     * [getOrderById](#getorderbyid)
-    * [getShipmentById](#getshipmentbyid)
-    * [getShipmentReasons](#getshipmentreasons)
-    * [getShipmentBagReasons](#getshipmentbagreasons)
-    * [updateShipmentStatus](#updateshipmentstatus)
-    * [trackShipment](#trackshipment)
     * [getPosOrderById](#getposorderbyid)
+    * [getShipmentById](#getshipmentbyid)
+    * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
+    * [trackShipment](#trackshipment)
     * [getCustomerDetailsByShipmentId](#getcustomerdetailsbyshipmentid)
     * [sendOtpToShipmentCustomer](#sendotptoshipmentcustomer)
     * [verifyOtpShipmentCustomer](#verifyotpshipmentcustomer)
-    * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
+    * [getShipmentBagReasons](#getshipmentbagreasons)
+    * [getShipmentReasons](#getshipmentreasons)
+    * [updateShipmentExternal](#updateshipmentexternal)
     
 
 * [Rewards](#Rewards)
@@ -1149,12 +1149,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1168,7 +1168,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1190,12 +1190,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1209,7 +1209,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -4206,348 +4206,1044 @@ Successful checkout cod payment
   "value": {
     "success": true,
     "cart": {
-      "success": true,
-      "error_message": "Note: Your order delivery will be delayed by 7-10 Days",
-      "payment_options": {
-        "payment_option": [
+      "coupon": {
+        "coupon_code": "",
+        "coupon_type": "cart",
+        "is_applied": false,
+        "is_valid": false,
+        "message": "Sorry! Invalid coupon",
+        "coupon_id": null,
+        "discount": 0,
+        "cashback_amount": 0,
+        "cashback_message_primary": "",
+        "cashback_message_secondary": "",
+        "coupon_title": "",
+        "coupon_subtitle": "",
+        "coupon_description": "",
+        "minimum_cart_value": 0,
+        "maximum_discount_value": 0,
+        "coupon_value": 0
+      },
+      "breakup_values": {
+        "display": [
           {
-            "name": "COD",
-            "display_name": "Cash on Delivery",
-            "display_priority": 1,
-            "payment_mode_id": 11,
-            "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
-            "logo_url": {
-              "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
-              "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png"
-            },
-            "list": []
+            "display": "MRP Total",
+            "key": "mrp_total",
+            "original": 1099,
+            "attr": "mrp_total",
+            "value": 1099,
+            "currency_code": "INR",
+            "currency_symbol": "₹",
+            "message": []
           },
           {
-            "name": "CARD",
-            "display_priority": 2,
-            "payment_mode_id": 2,
-            "display_name": "Card",
-            "list": []
+            "display": "Subtotal",
+            "key": "subtotal",
+            "original": 1099,
+            "attr": "subtotal",
+            "value": 1099,
+            "currency_code": "INR",
+            "currency_symbol": "₹",
+            "message": []
           },
           {
-            "name": "NB",
-            "display_priority": 3,
-            "payment_mode_id": 3,
-            "display_name": "Net Banking",
-            "list": [
-              {
-                "aggregator_name": "Razorpay",
-                "bank_name": "ICICI Bank",
-                "bank_code": "ICIC",
-                "url": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
-                "logo_url": {
-                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
-                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png"
-                },
-                "merchant_code": "NB_ICICI",
-                "display_priority": 1
-              }
-            ]
+            "display": "Promotion",
+            "key": "promotion",
+            "original": -1000,
+            "attr": "promotion",
+            "value": -1000,
+            "currency_code": "INR",
+            "currency_symbol": "₹",
+            "message": []
           },
           {
-            "name": "WL",
-            "display_priority": 4,
-            "payment_mode_id": 4,
-            "display_name": "Wallet",
-            "list": [
-              {
-                "wallet_name": "Paytm",
-                "wallet_code": "paytm",
-                "wallet_id": 4,
-                "merchant_code": "PAYTM",
-                "logo_url": {
-                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_small.png",
-                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_large.png"
-                },
-                "aggregator_name": "Juspay",
-                "display_priority": 1
-              }
-            ]
-          },
-          {
-            "name": "UPI",
-            "display_priority": 9,
-            "payment_mode_id": 6,
-            "display_name": "UPI",
-            "list": [
-              {
-                "aggregator_name": "UPI_Razorpay",
-                "name": "UPI",
-                "display_name": "BHIM UPI",
-                "code": "UPI",
-                "logo_url": {
-                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_100x78.png",
-                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_150x100.png"
-                },
-                "merchant_code": "UPI",
-                "timeout": 240,
-                "retry_count": 0,
-                "fynd_vpa": "shopsense.rzp@hdfcbank",
-                "intent_flow": true,
-                "intent_app_error_list": [
-                  "com.csam.icici.bank.imobile",
-                  "in.org.npci.upiapp",
-                  "com.whatsapp"
-                ]
-              }
-            ]
-          },
-          {
-            "name": "PL",
-            "display_priority": 11,
-            "payment_mode_id": 1,
-            "display_name": "Pay Later",
-            "list": [
-              {
-                "aggregator_name": "Simpl",
-                "name": "Simpl",
-                "code": "simpl",
-                "merchant_code": "SIMPL",
-                "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
-                "logo_url": {
-                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
-                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png"
-                }
-              }
-            ]
+            "display": "Total",
+            "key": "total",
+            "original": 99,
+            "attr": "total",
+            "value": 99,
+            "currency_code": "INR",
+            "currency_symbol": "₹",
+            "message": []
           }
         ],
-        "payment_flows": {
-          "Simpl": {
-            "data": {
-              "gateway": {
-                "route": "simpl",
-                "entity": "sdk",
-                "is_customer_validation_required": true,
-                "cust_validation_url": "https://api.addsale.com/gringotts/api/v1/validate-customer/",
-                "sdk": {
-                  "config": {
-                    "redirect": false,
-                    "callback_url": null,
-                    "action_url": "https://api.addsale.com/avis/api/v1/payments/charge-gringotts-transaction/"
-                  },
-                  "data": {
-                    "user_phone": "8452996729",
-                    "user_email": "paymentsdummy@gofynd.com"
-                  }
-                },
-                "return_url": null
-              }
-            },
-            "api_link": "",
-            "payment_flow": "sdk"
-          },
-          "Juspay": {
-            "data": {},
-            "api_link": "https://sandbox.juspay.in/txns",
-            "payment_flow": "api"
-          },
-          "Razorpay": {
-            "data": {},
-            "api_link": "",
-            "payment_flow": "sdk"
-          },
-          "UPI_Razorpay": {
-            "data": {},
-            "api_link": "https://api.addsale.com/gringotts/api/v1/external/payment-initialisation/",
-            "payment_flow": "api"
-          },
-          "Fynd": {
-            "data": {},
-            "api_link": "",
-            "payment_flow": "api"
-          }
-        },
-        "default": {}
-      },
-      "user_type": "Store User",
-      "cod_charges": 0,
-      "order_id": "FY5D5E215CF287584CE6",
-      "cod_available": true,
-      "cod_message": "No additional COD charges applicable",
-      "delivery_charges": 0,
-      "delivery_charge_order_value": 0,
-      "delivery_slots": [
-        {
-          "date": "Sat, 24 Aug",
-          "delivery_slot": [
-            {
-              "delivery_slot_timing": "By 9:00 PM",
-              "default": true,
-              "delivery_slot_id": 1
-            }
-          ]
-        }
-      ],
-      "store_code": "",
-      "store_emps": [],
-      "breakup_values": {
-        "coupon": {
-          "type": "cash",
-          "code": "",
-          "uid": null,
-          "value": 0,
-          "is_applied": false,
-          "message": "Sorry! Invalid Coupon"
+        "raw": {
+          "sub_total": 1099,
+          "subtotal": 1099,
+          "coupon": 0,
+          "promotion": -1000,
+          "delivery_charge": 0,
+          "you_saved": 0,
+          "fynd_cash": 0,
+          "cod_charge": 0,
+          "total": 99,
+          "gst_charges": 4.71,
+          "vog": 94.29,
+          "convenience_fee": 0,
+          "mrp_total": 1099,
+          "discount": 0
         },
         "loyalty_points": {
           "total": 0,
           "applicable": 0,
           "is_applied": false,
-          "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
+          "description": "Your cashback, reward points, and refund amount get credited to Fynd Cash which can be redeemed while placing an order.",
+          "message": "No Fynd Cash Applied"
         },
-        "raw": {
-          "cod_charge": 0,
-          "convenience_fee": 0,
-          "coupon": 0,
-          "delivery_charge": 0,
-          "discount": 0,
-          "fynd_cash": 0,
-          "gst_charges": 214.18,
-          "mrp_total": 1999,
-          "subtotal": 1999,
-          "total": 1999,
-          "vog": 1784.82,
-          "you_saved": 0
-        },
-        "display": [
-          {
-            "display": "MRP Total",
-            "key": "mrp_total",
-            "value": 1999,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Subtotal",
-            "key": "subtotal",
-            "value": 1999,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Total",
-            "key": "total",
-            "value": 1999,
-            "currency_code": "INR"
-          }
-        ]
+        "coupon": {
+          "type": "cash",
+          "coupon_type": "cart",
+          "code": "",
+          "uid": null,
+          "value": 0,
+          "is_applied": false,
+          "message": "Sorry! Invalid coupon",
+          "title": "",
+          "sub_title": "",
+          "description": "",
+          "minimum_cart_value": 0,
+          "maximum_discount_value": 0,
+          "coupon_value": 0
+        }
       },
       "items": [
         {
-          "key": "820312_L",
-          "message": "",
           "bulk_offer": {},
-          "price": {
-            "base": {
-              "add_on": 1999,
-              "marked": 1999,
-              "effective": 1999,
-              "selling": 1999,
-              "currency_code": "INR"
+          "message": "",
+          "delivery_promise": {
+            "timestamp": {
+              "min": 1646257339,
+              "max": 1646689339
             },
-            "converted": {
-              "add_on": 1999,
-              "marked": 1999,
-              "effective": 1999,
-              "selling": 1999,
-              "currency_code": "INR"
+            "formatted": {
+              "min": "03 Mar, Thursday",
+              "max": "08 Mar, Tuesday"
             }
           },
-          "quantity": 1,
+          "key": "75251393_L",
+          "price": {
+            "base": {
+              "add_on": 1099,
+              "marked": 1099,
+              "effective": 1099,
+              "selling": 1099,
+              "currency_code": "INR",
+              "currency_symbol": "₹"
+            },
+            "converted": {
+              "add_on": 1099,
+              "marked": 1099,
+              "effective": 1099,
+              "selling": 1099,
+              "currency_code": "INR",
+              "currency_symbol": "₹"
+            }
+          },
           "discount": "",
+          "article": {
+            "type": "article",
+            "uid": "6388b1136e440e76ba0e5af2",
+            "size": "L",
+            "product_group_tags": null,
+            "seller": {
+              "uid": 37,
+              "name": "SPYKAR LIFESTYLES PRIVATE LIMITED"
+            },
+            "store": {
+              "uid": 10514,
+              "name": "SPYKAR KALHER BHIWANDI WAREHOUSE"
+            },
+            "quantity": 599,
+            "price": {
+              "base": {
+                "marked": 1099,
+                "effective": 1099,
+                "selling": 1099,
+                "currency_code": "INR",
+                "currency_symbol": "₹"
+              },
+              "converted": {
+                "marked": 1099,
+                "effective": 1099,
+                "selling": 1099,
+                "currency_code": "INR",
+                "currency_symbol": "INR"
+              }
+            },
+            "extra_meta": {}
+          },
           "product": {
             "type": "product",
-            "uid": 820312,
-            "name": "Navy Blue Melange Shorts",
-            "slug": "883-police-navy-blue-melange-shorts-820312-4943a8",
+            "uid": 75251393,
+            "name": "Spykar Brown Leather Belts",
+            "slug": "spykar-olive-leather-belts-jej4kndn5s",
             "brand": {
-              "uid": 610,
-              "name": "883 Police"
+              "uid": 56,
+              "name": "Spykar"
             },
             "categories": [
               {
-                "uid": 193,
-                "name": "Shorts"
+                "uid": 202,
+                "name": "Duffles"
               }
             ],
+            "attributes": {
+              "item_code": "SPYMBLCORE013Olive",
+              "color": "Olive",
+              "gender": [
+                "Men"
+              ],
+              "style": "SPY-MBL-CORE-013",
+              "occasion": "Casual",
+              "season": "Summer-2021",
+              "material": "Leather",
+              "primary_color": "Green",
+              "currency": "INR",
+              "media": [
+                {
+                  "type": "image",
+                  "url": "https://hdn-1.fynd.com/products/pictures/item/free/original/8907966514645/Zm-mKqN5b5-SPY-MBL-ON-S1714-OLIVE-04.jpg"
+                },
+                {
+                  "type": "image",
+                  "url": "https://hdn-1.fynd.com/products/pictures/item/free/original/8907966514645/vOmcjZkXxv-SPY-MBL-ON-S1714-OLIVE-02.jpg"
+                },
+                {
+                  "type": "image",
+                  "url": "https://hdn-1.fynd.com/products/pictures/item/free/original/8907966514645/aEB7WMysfs-SPY-MBL-ON-S1714-OLIVE-03.jpg"
+                },
+                {
+                  "type": "image",
+                  "url": "https://hdn-1.fynd.com/products/pictures/item/free/original/8907966514645/xP78kUZL6M-SPY-MBL-ON-S1714-OLIVE-01.jpg"
+                }
+              ],
+              "name": "Spykar Brown Leather Belts",
+              "brand_name": "Spykar",
+              "primary_color_hex": "2BD892"
+            },
             "images": [
               {
                 "aspect_ratio": "16:25",
-                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg",
-                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg"
+                "url": "https://hdn-1.fynd.com/products/pictures/item/free/original/8907966514645/Zm-mKqN5b5-SPY-MBL-ON-S1714-OLIVE-04.jpg",
+                "secure_url": "https://hdn-1.fynd.com/products/pictures/item/free/original/8907966514645/Zm-mKqN5b5-SPY-MBL-ON-S1714-OLIVE-04.jpg"
+              },
+              {
+                "aspect_ratio": "16:25",
+                "url": "https://hdn-1.fynd.com/products/pictures/item/free/original/8907966514645/vOmcjZkXxv-SPY-MBL-ON-S1714-OLIVE-02.jpg",
+                "secure_url": "https://hdn-1.fynd.com/products/pictures/item/free/original/8907966514645/vOmcjZkXxv-SPY-MBL-ON-S1714-OLIVE-02.jpg"
+              },
+              {
+                "aspect_ratio": "16:25",
+                "url": "https://hdn-1.fynd.com/products/pictures/item/free/original/8907966514645/aEB7WMysfs-SPY-MBL-ON-S1714-OLIVE-03.jpg",
+                "secure_url": "https://hdn-1.fynd.com/products/pictures/item/free/original/8907966514645/aEB7WMysfs-SPY-MBL-ON-S1714-OLIVE-03.jpg"
+              },
+              {
+                "aspect_ratio": "16:25",
+                "url": "https://hdn-1.fynd.com/products/pictures/item/free/original/8907966514645/xP78kUZL6M-SPY-MBL-ON-S1714-OLIVE-01.jpg",
+                "secure_url": "https://hdn-1.fynd.com/products/pictures/item/free/original/8907966514645/xP78kUZL6M-SPY-MBL-ON-S1714-OLIVE-01.jpg"
               }
             ],
             "action": {
               "type": "product",
-              "url": "https://api.addsale.com/platform/content/v1/products/883-police-navy-blue-melange-shorts-820312-4943a8/",
+              "url": "https://api.fyndx1.de/platform/content/v1/products/spykar-olive-leather-belts-jej4kndn5s/",
               "query": {
                 "product_slug": [
-                  "883-police-navy-blue-melange-shorts-820312-4943a8"
+                  "spykar-olive-leather-belts-jej4kndn5s"
                 ]
               }
-            }
-          },
-          "article": {
-            "type": "article",
-            "uid": "381_610_IGPL01_SPIRAL19ANAVY_L",
-            "size": "L",
-            "seller": {
-              "uid": 381,
-              "name": "INTERSOURCE GARMENTS PVT LTD"
             },
-            "store": {
-              "uid": 3009,
-              "name": "Kormangala"
-            },
-            "quantity": 2,
-            "price": {
-              "base": {
-                "marked": 1999,
-                "effective": 1999,
-                "currency_code": "INR"
-              },
-              "converted": {
-                "marked": 1999,
-                "effective": 1999,
-                "currency_code": "INR"
-              }
+            "item_code": "SPYMBLCORE013Olive",
+            "_custom_json": {},
+            "net_quantity": {
+              "unit": "cm",
+              "value": 109
             }
           },
           "coupon_message": "",
+          "parent_item_identifiers": {
+            "identifier": null,
+            "parent_item_size": null,
+            "parent_item_id": null
+          },
+          "promotions_applied": [
+            {
+              "promo_id": "6380a896012cc2dda62f6682",
+              "amount": 1000,
+              "article_quantity": 1,
+              "mrp_promotion": false,
+              "promotion_type": "percentage",
+              "buy_rules": [
+                {
+                  "item_criteria": {},
+                  "cart_conditions": {
+                    "cart_quantity": {
+                      "greater_than_equals": 1
+                    }
+                  }
+                }
+              ],
+              "discount_rules": [
+                {
+                  "item_criteria": {
+                    "buy_rules": [
+                      "rule#1"
+                    ]
+                  },
+                  "matched_buy_rules": [
+                    "rule#1"
+                  ],
+                  "offer": {
+                    "discount_percentage": 100,
+                    "max_discount_amount": 1000
+                  },
+                  "raw_offer": {
+                    "buy_condition": "( rule#1 )",
+                    "discount_type": "percentage",
+                    "item_criteria": {
+                      "buy_rules": [
+                        "rule#1"
+                      ]
+                    },
+                    "offer": {
+                      "discount_percentage": 100,
+                      "max_discount_amount": 1000
+                    }
+                  }
+                }
+              ],
+              "promotion_name": "sadad",
+              "promotion_group": "product",
+              "offer_text": "sadad"
+            }
+          ],
+          "quantity": 1,
+          "promo_meta": {},
+          "moq": {
+            "minimum": 1
+          },
+          "identifiers": {
+            "identifier": "axe4piIIR5Sk4EocrRNYeA"
+          },
+          "is_set": false,
+          "price_per_unit": {
+            "base": {
+              "marked": 1099,
+              "effective": 1099,
+              "selling_price": 1099,
+              "currency_code": "INR",
+              "currency_symbol": "₹"
+            },
+            "converted": {
+              "marked": 1099,
+              "effective": 1099,
+              "selling_price": 1099,
+              "currency_code": "INR",
+              "currency_symbol": "₹"
+            }
+          },
           "availability": {
             "sizes": [
-              "L",
-              "XL",
-              "XXL"
+              "L"
             ],
             "other_store_quantity": 1,
             "out_of_stock": false,
             "deliverable": true,
-            "is_valid": true
+            "is_valid": true,
+            "available_sizes": [
+              {
+                "is_available": true,
+                "display": "L",
+                "value": "L"
+              }
+            ]
           }
         }
       ],
+      "free_gift_items": [],
       "delivery_charge_info": "",
+      "notification": {},
+      "message": "",
+      "delivery_promise": {
+        "timestamp": {
+          "min": 1646257339,
+          "max": 1646689339
+        },
+        "formatted": {
+          "min": "03 Mar, Thursday",
+          "max": "08 Mar, Tuesday"
+        }
+      },
+      "applied_promo_details": [
+        {
+          "application_id": "000000000000000000000001",
+          "apply_all_offers": false,
+          "apply_exclusive": null,
+          "buy_article_dict": {
+            "rule#1": {
+              "6388b1136e440e76ba0e5af2_0": {
+                "amount_paid": 0,
+                "applicable_credits": {
+                  "conversion_rate": 1,
+                  "currency_code": "INR",
+                  "currency_symbol": "₹",
+                  "floor_source_value": 0,
+                  "floor_value": 0,
+                  "source_currency_code": "FC",
+                  "source_currency_symbol": "",
+                  "source_value": 0,
+                  "value": 0
+                },
+                "article_assign_status": true,
+                "article_assignment": {
+                  "level": "multi-companies",
+                  "strategy": "optimal"
+                },
+                "article_error": {
+                  "type": null,
+                  "value": null,
+                  "message": null
+                },
+                "article_id": "6388b1136e440e76ba0e5af2",
+                "article_index": "0",
+                "article_meta": {
+                  "article_id": "6388b1136e440e76ba0e5af2",
+                  "bulk_margin": 0,
+                  "bulk_discount": {
+                    "conversion_rate": 1,
+                    "currency_code": "INR",
+                    "currency_symbol": "₹",
+                    "floor_source_value": 0,
+                    "floor_value": 0,
+                    "source_currency_code": "INR",
+                    "source_currency_symbol": "₹",
+                    "source_value": 0,
+                    "value": 0
+                  },
+                  "bulk_coupon_code": null,
+                  "country_of_origin": "India",
+                  "dimension": {
+                    "width": 2,
+                    "length": 4,
+                    "is_default": true,
+                    "height": 7,
+                    "unit": "cm"
+                  },
+                  "fragile": false,
+                  "manufacturer": {
+                    "name": "SPYKAR LIFESTYLES PRIVATE LIMITED",
+                    "is_default": true,
+                    "address": "LOTUS CORPORATE PARK, 19TH FLOOR, A WING, JAY COACH JUNCTION, OFF. WESTERN EXPRESS HIGHWAY, GOREGAON (EAST), MUMBAI- 400 063, None, MAHARASHTRA, MUMBAI"
+                  },
+                  "weight": {
+                    "shipping": 200,
+                    "is_default": true,
+                    "unit": "gram"
+                  },
+                  "raw_meta": {
+                    "fynd_identifier": "10514_8907966510647",
+                    "is_set_article": false,
+                    "set_quantity": 1
+                  },
+                  "is_set": false,
+                  "set": {},
+                  "identifier": {
+                    "ean": "8907966510647"
+                  },
+                  "hsn_code": null,
+                  "hsn_code_id": "625fbd91faeed8b3df6ec353",
+                  "raw_price": {
+                    "effective": {
+                      "conversion_rate": 1,
+                      "currency_code": "INR",
+                      "currency_symbol": "₹",
+                      "floor_source_value": 1099,
+                      "floor_value": 1099,
+                      "source_currency_code": "INR",
+                      "source_currency_symbol": "₹",
+                      "source_value": 1099,
+                      "value": 1099
+                    },
+                    "marked": {
+                      "conversion_rate": 1,
+                      "currency_code": "INR",
+                      "currency_symbol": "₹",
+                      "floor_source_value": 1099,
+                      "floor_value": 1099,
+                      "source_currency_code": "INR",
+                      "source_currency_symbol": "₹",
+                      "source_value": 1099,
+                      "value": 1099
+                    },
+                    "transfer": {
+                      "conversion_rate": 1,
+                      "currency_code": "INR",
+                      "currency_symbol": "₹",
+                      "floor_source_value": 0,
+                      "floor_value": 0,
+                      "source_currency_code": "INR",
+                      "source_currency_symbol": "₹",
+                      "source_value": 0,
+                      "value": 0
+                    }
+                  },
+                  "seller_identifier": "8907966510647",
+                  "_custom_json": {},
+                  "tags": [],
+                  "return_config": {
+                    "returnable": false,
+                    "time": 0,
+                    "unit": "days"
+                  }
+                },
+                "attributes": {
+                  "item_code": "SPYMBLCORE013Olive",
+                  "color": "Olive",
+                  "gender": [
+                    "Men"
+                  ],
+                  "style": "SPY-MBL-CORE-013",
+                  "occasion": "Casual",
+                  "season": "Summer-2021",
+                  "material": "Leather",
+                  "primary_color": "Green",
+                  "currency": "INR",
+                  "media": [
+                    {
+                      "type": "image",
+                      "url": "https://hdn-1.fynd.com/products/pictures/item/free/original/8907966514645/Zm-mKqN5b5-SPY-MBL-ON-S1714-OLIVE-04.jpg"
+                    },
+                    {
+                      "type": "image",
+                      "url": "https://hdn-1.fynd.com/products/pictures/item/free/original/8907966514645/vOmcjZkXxv-SPY-MBL-ON-S1714-OLIVE-02.jpg"
+                    },
+                    {
+                      "type": "image",
+                      "url": "https://hdn-1.fynd.com/products/pictures/item/free/original/8907966514645/aEB7WMysfs-SPY-MBL-ON-S1714-OLIVE-03.jpg"
+                    },
+                    {
+                      "type": "image",
+                      "url": "https://hdn-1.fynd.com/products/pictures/item/free/original/8907966514645/xP78kUZL6M-SPY-MBL-ON-S1714-OLIVE-01.jpg"
+                    }
+                  ],
+                  "name": "Spykar Brown Leather Belts",
+                  "brand_name": "Spykar",
+                  "primary_color_hex": "2BD892"
+                },
+                "avl_qty": 599,
+                "brand_id": 56,
+                "bulk_coupon_applied": false,
+                "bulk_coupon_code": null,
+                "bulk_discount": {
+                  "conversion_rate": 1,
+                  "currency_code": "INR",
+                  "currency_symbol": "₹",
+                  "floor_source_value": 0,
+                  "floor_value": 0,
+                  "source_currency_code": "INR",
+                  "source_currency_symbol": "₹",
+                  "source_value": 0,
+                  "value": 0
+                },
+                "bulk_margin": 0,
+                "cancellation_allowed": true,
+                "cashback": {
+                  "amount": {
+                    "conversion_rate": 1,
+                    "currency_code": "INR",
+                    "currency_symbol": "₹",
+                    "floor_source_value": 0,
+                    "floor_value": 0,
+                    "source_currency_code": "FC",
+                    "source_currency_symbol": "",
+                    "source_value": 0,
+                    "value": 0
+                  }
+                },
+                "category_id": [
+                  202
+                ],
+                "cod_charges": {
+                  "amount": {
+                    "conversion_rate": 1,
+                    "currency_code": "INR",
+                    "currency_symbol": "₹",
+                    "floor_source_value": 0,
+                    "floor_value": 0,
+                    "source_currency_code": "INR",
+                    "source_currency_symbol": "₹",
+                    "source_value": 0,
+                    "value": 0
+                  }
+                },
+                "company_id": 37,
+                "company_info": {
+                  "company_id": 37,
+                  "c_name": "SPYKAR LIFESTYLES PRIVATE LIMITED",
+                  "c_taxes": null
+                },
+                "company_taxes": null,
+                "coupon": {
+                  "amount": {
+                    "conversion_rate": 1,
+                    "currency_code": "INR",
+                    "currency_symbol": "₹",
+                    "floor_source_value": 0,
+                    "floor_value": 0,
+                    "source_currency_code": "INR",
+                    "source_currency_symbol": "₹",
+                    "source_value": 0,
+                    "value": 0
+                  },
+                  "article_count": 0,
+                  "cancellation_allowed": true,
+                  "return_allowed": true
+                },
+                "custom_meta": {},
+                "data": {},
+                "delivery_charges": {
+                  "amount": {
+                    "conversion_rate": 1,
+                    "currency_code": "INR",
+                    "currency_symbol": "₹",
+                    "floor_source_value": 0,
+                    "floor_value": 0,
+                    "source_currency_code": "INR",
+                    "source_currency_symbol": "₹",
+                    "source_value": 0,
+                    "value": 0
+                  }
+                },
+                "delivery_error_msg": "",
+                "delivery_promise": {
+                  "timestamp": {
+                    "min": 1646257339,
+                    "max": 1646689339
+                  },
+                  "formatted": {
+                    "min": "03 Mar, Thursday",
+                    "max": "08 Mar, Tuesday"
+                  }
+                },
+                "departments": [
+                  99
+                ],
+                "discount": 0,
+                "discount_applied": {},
+                "dt_currency": "INR",
+                "dt_currency_symbol": "₹",
+                "esp_modified": false,
+                "extra_meta": {},
+                "float_amount_paid": 0,
+                "free_gift_items_meta": {},
+                "group_id": "",
+                "gst_amount": 4.71,
+                "gst_tax_percentage": 5,
+                "hsn_code": null,
+                "hsn_code_id": "625fbd91faeed8b3df6ec353",
+                "identifiers": {
+                  "identifier": "axe4piIIR5Sk4EocrRNYeA"
+                },
+                "image_nature": "standard",
+                "include": true,
+                "is_valid": true,
+                "item_id": 75251393,
+                "item_size": "L",
+                "item_tags": [],
+                "last_update_at": 1673336897,
+                "meta": {},
+                "net_price": {
+                  "conversion_rate": 1,
+                  "currency_code": "INR",
+                  "currency_symbol": "₹",
+                  "floor_source_value": 99,
+                  "floor_value": 99,
+                  "source_currency_code": "INR",
+                  "source_currency_symbol": "₹",
+                  "source_value": 99,
+                  "value": 99
+                },
+                "old_price": {
+                  "conversion_rate": 1,
+                  "currency_code": "INR",
+                  "currency_symbol": "₹",
+                  "floor_source_value": 1099,
+                  "floor_value": 1099,
+                  "source_currency_code": "INR",
+                  "source_currency_symbol": "₹",
+                  "source_value": 1099,
+                  "value": 1099
+                },
+                "original_price_effective": {
+                  "conversion_rate": 1,
+                  "currency_code": "INR",
+                  "currency_symbol": "₹",
+                  "floor_source_value": 1099,
+                  "floor_value": 1099,
+                  "source_currency_code": "INR",
+                  "source_currency_symbol": "₹",
+                  "source_value": 1099,
+                  "value": 1099
+                },
+                "original_unit_price": {
+                  "conversion_rate": 1,
+                  "currency_code": "INR",
+                  "currency_symbol": "₹",
+                  "floor_source_value": 1099,
+                  "floor_value": 1099,
+                  "source_currency_code": "INR",
+                  "source_currency_symbol": "₹",
+                  "source_value": 1099,
+                  "value": 1099
+                },
+                "parent_item_identifiers": {
+                  "identifier": null,
+                  "parent_item_size": null,
+                  "parent_item_id": null
+                },
+                "pickup_stores": [],
+                "price": {
+                  "conversion_rate": 1,
+                  "currency_code": "INR",
+                  "currency_symbol": "₹",
+                  "floor_source_value": 1099,
+                  "floor_value": 1099,
+                  "source_currency_code": "INR",
+                  "source_currency_symbol": "₹",
+                  "source_value": 1099,
+                  "value": 1099
+                },
+                "price_effective": {
+                  "conversion_rate": 1,
+                  "currency_code": "INR",
+                  "currency_symbol": "₹",
+                  "floor_source_value": 1099,
+                  "floor_value": 1099,
+                  "source_currency_code": "INR",
+                  "source_currency_symbol": "₹",
+                  "source_value": 1099,
+                  "value": 1099
+                },
+                "price_marked": {
+                  "conversion_rate": 1,
+                  "currency_code": "INR",
+                  "currency_symbol": "₹",
+                  "floor_source_value": 1099,
+                  "floor_value": 1099,
+                  "source_currency_code": "INR",
+                  "source_currency_symbol": "₹",
+                  "source_value": 1099,
+                  "value": 1099
+                },
+                "promotions": {
+                  "amount": {
+                    "conversion_rate": 1,
+                    "currency_code": "INR",
+                    "currency_symbol": "₹",
+                    "floor_source_value": 0,
+                    "floor_value": 0,
+                    "source_currency_code": "INR",
+                    "source_currency_symbol": "₹",
+                    "source_value": 0,
+                    "value": 0
+                  },
+                  "applied": [
+                    {
+                      "amount": {
+                        "conversion_rate": 1,
+                        "currency_code": "INR",
+                        "currency_symbol": "₹",
+                        "floor_source_value": 1000,
+                        "floor_value": 1000,
+                        "source_currency_code": "INR",
+                        "source_currency_symbol": "₹",
+                        "source_value": 1000,
+                        "value": 1000
+                      },
+                      "applied_discounts": [
+                        {
+                          "type": "percentage",
+                          "value": 100
+                        }
+                      ],
+                      "applied_free_articles": [],
+                      "apply_exclusive": null,
+                      "article_quantity": 1,
+                      "buy_rules": [
+                        {
+                          "all_items": true,
+                          "cart_conditions": {
+                            "cart_quantity": {
+                              "greater_than_equals": 1
+                            }
+                          },
+                          "item_criteria": {},
+                          "mrp_promo": false,
+                          "slug": "rule#1"
+                        }
+                      ],
+                      "cancellation_allowed": true,
+                      "discount_rules": [
+                        {
+                          "all_items": null,
+                          "buy_condition": "( rule#1 )",
+                          "item_criteria": {
+                            "buy_rules": [
+                              "rule#1"
+                            ]
+                          },
+                          "matched_buy_rules": [
+                            "rule#1"
+                          ],
+                          "offer": {
+                            "discount_percentage": 100,
+                            "max_discount_amount": 1000
+                          },
+                          "raw_offer": {
+                            "buy_condition": "( rule#1 )",
+                            "discount_type": "percentage",
+                            "item_criteria": {
+                              "buy_rules": [
+                                "rule#1"
+                              ]
+                            },
+                            "offer": {
+                              "discount_percentage": 100,
+                              "max_discount_amount": 1000
+                            }
+                          },
+                          "type": "percentage"
+                        }
+                      ],
+                      "mrp_promo": false,
+                      "offer_text": "sadad",
+                      "payable_category": "seller",
+                      "promo_code": null,
+                      "promo_id": "6380a896012cc2dda62f6682",
+                      "promo_type": "percentage",
+                      "promotion_group": "product",
+                      "return_allowed": true
+                    }
+                  ],
+                  "apply_exclusive": null,
+                  "available": [],
+                  "cancellation_allowed": true,
+                  "exclusive_promo_applied": false,
+                  "mrp_promo_applied": false,
+                  "return_allowed": true
+                },
+                "quantity": 1,
+                "quantity_assign_status": false,
+                "referral_credits": {
+                  "amount": {
+                    "conversion_rate": 1,
+                    "currency_code": "INR",
+                    "currency_symbol": "₹",
+                    "floor_source_value": 0,
+                    "floor_value": 0,
+                    "source_currency_code": "FC",
+                    "source_currency_symbol": "",
+                    "source_value": 0,
+                    "value": 0
+                  }
+                },
+                "reload_data_only": true,
+                "return_allowed": false,
+                "sc_currency": "INR",
+                "sc_currency_symbol": "₹",
+                "selling_price": {
+                  "conversion_rate": 1,
+                  "currency_code": "INR",
+                  "currency_symbol": "₹",
+                  "floor_source_value": 1099,
+                  "floor_value": 1099,
+                  "source_currency_code": "INR",
+                  "source_currency_symbol": "₹",
+                  "source_value": 1099,
+                  "value": 1099
+                },
+                "service_item_meta": {
+                  "product_group_tags": null,
+                  "products": null
+                },
+                "size_level_total_qty": 1,
+                "sizes": [
+                  "M",
+                  "L",
+                  "XL",
+                  "2XL"
+                ],
+                "split_article_id": "6388b1136e440e76ba0e5af2_0",
+                "split_index": 0,
+                "store_id": 10514,
+                "store_info": {
+                  "store_id": 10514,
+                  "s_city": "THANE",
+                  "store_name": "SPYKAR KALHER BHIWANDI WAREHOUSE",
+                  "store_type": "warehouse",
+                  "store_pincode": 421302,
+                  "latitude": 19.0759837,
+                  "longitude": 72.8776559
+                },
+                "tags": [],
+                "total_gst_amount": 4.71,
+                "total_value_of_good": 94.29,
+                "transfer_price": {
+                  "conversion_rate": 1,
+                  "currency_code": "INR",
+                  "currency_symbol": "₹",
+                  "floor_source_value": 0,
+                  "floor_value": 0,
+                  "source_currency_code": "INR",
+                  "source_currency_symbol": "₹",
+                  "source_value": 0,
+                  "value": 0
+                },
+                "unit_price": {
+                  "conversion_rate": 1,
+                  "currency_code": "INR",
+                  "currency_symbol": "₹",
+                  "floor_source_value": 99,
+                  "floor_value": 99,
+                  "source_currency_code": "INR",
+                  "source_currency_symbol": "₹",
+                  "source_value": 99,
+                  "value": 99
+                },
+                "valid_inventory": true,
+                "value_of_good": 94.29
+              }
+            }
+          },
+          "buy_rules": [
+            {
+              "all_items": true,
+              "cart_conditions": {
+                "cart_quantity": {
+                  "greater_than_equals": 1
+                }
+              },
+              "item_criteria": {},
+              "mrp_promo": false,
+              "slug": "rule#1"
+            }
+          ],
+          "buy_rules_map": {
+            "rule#1": {
+              "cart_quantity": {
+                "greater_than_equals": 1
+              },
+              "all_items": true
+            }
+          },
+          "calculate_on": "esp",
+          "cancellation_allowed": true,
+          "code": null,
+          "discount": 1000,
+          "discount_rules": [
+            {
+              "all_items": null,
+              "buy_condition": "( rule#1 )",
+              "item_criteria": {
+                "buy_rules": [
+                  "rule#1"
+                ]
+              },
+              "matched_buy_rules": [
+                "rule#1"
+              ],
+              "offer": {
+                "discount_percentage": 100,
+                "max_discount_amount": 1000
+              },
+              "raw_offer": {
+                "buy_condition": "( rule#1 )",
+                "discount_type": "percentage",
+                "item_criteria": {
+                  "buy_rules": [
+                    "rule#1"
+                  ]
+                },
+                "offer": {
+                  "discount_percentage": 100,
+                  "max_discount_amount": 1000
+                }
+              },
+              "type": "percentage"
+            }
+          ],
+          "id": "6380a896012cc2dda62f6682",
+          "mrp_promo": false,
+          "offer_text": "sadad",
+          "payable_category": "seller",
+          "priority": 1,
+          "promo_group": "product",
+          "remaining_allowed_qty": null,
+          "restrictions": {
+            "user_registered": {
+              "end": null,
+              "start": null
+            },
+            "user_groups": [],
+            "user_id": [],
+            "anonymous_users": true,
+            "payments": [],
+            "platforms": [
+              "web",
+              "android",
+              "ios"
+            ],
+            "uses": {
+              "remaining": {
+                "total": 0,
+                "user": 0
+              },
+              "maximum": {
+                "total": 0,
+                "user": 0
+              }
+            },
+            "post_order": {
+              "cancellation_allowed": true,
+              "return_allowed": true
+            }
+          },
+          "return_allowed": true,
+          "stackable": true,
+          "type": "percentage",
+          "usage_meta": null
+        }
+      ],
       "coupon_text": "View all offers",
-      "cart_id": 7483,
-      "uid": "7483",
+      "cart_id": 433453,
+      "id": "63bd1860f46211103683ab18",
+      "uid": "433453",
+      "buy_now": false,
       "gstin": null,
+      "comment": "",
       "checkout_mode": "self",
-      "last_modified": "Thu, 22 Aug 2019 04:58:44 GMT",
+      "payment_selection_lock": {
+        "enabled": false,
+        "default_options": "",
+        "payment_identifier": ""
+      },
       "restrict_checkout": false,
-      "is_valid": true
+      "is_valid": true,
+      "success": true,
+      "currency": {
+        "code": "INR",
+        "symbol": "₹"
+      },
+      "last_modified": "Tue, 10 Jan 2023 07:49:33 GMT",
+      "order_id": "FY63BD188D0FD5688453"
     },
-    "callback_url": "https://api.addsale.com/gringotts/api/v1/external/payment-callback/",
-    "app_intercept_url": "http://uniket-testing.addsale.link/cart/order-status",
     "message": "",
     "data": {
-      "order_id": "FY5D5E215CF287584CE6"
+      "order_id": "FY63BD188D0FD5688453"
     },
-    "order_id": "FY5D5E215CF287584CE6"
+    "callback_url": "https://fynd.hostx1.de/cart/order-status",
+    "payment_confirm_url": "https://api.fyndx1.de/platform/payment/v2/external/payments/confirm/",
+    "order_id": "FY63BD188D0FD5688453",
+    "app_intercept_url": "https://fynd.hostx1.de/cart/order-status"
   }
 }
 ```
@@ -17865,7 +18561,9 @@ Get all orders
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `Status`
+
+
+| xQuery | struct | Includes properties such as `Status`, `PageNo`, `PageSize`, `FromDate`, `ToDate`, `CustomMeta`
 
 
 
@@ -17929,6 +18627,44 @@ Schema: `OrderById`
 ---
 
 
+#### getPosOrderById
+Get POS Order
+
+```golang
+
+ data, err :=  Order.GetPosOrderById(OrderID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| OrderID | string | A unique number used for identifying and tracking your orders. | 
+
+
+
+
+Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `PosOrderById` for more details.
+
+
+Schema: `OrderList`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getShipmentById
 Get details of a shipment
 
@@ -17967,112 +18703,32 @@ Schema: `ShipmentById`
 ---
 
 
-#### getShipmentReasons
-Get reasons behind full or partial cancellation of a shipment
+#### getInvoiceByShipmentId
+Get Invoice of a shipment
 
 ```golang
 
- data, err :=  Order.GetShipmentReasons(ShipmentID);
+ data, err :=  Order.GetInvoiceByShipmentId(ShipmentID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+| ShipmentID | string | ID of the shipment. | 
 
 
 
 
-Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `ShipmentReasons` for more details.
-
-
-Schema: `ShipmentReasons`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getShipmentBagReasons
-Get reasons at l1,l2 and l3 for cancellation and return based on department
-
-```golang
-
- data, err :=  Order.GetShipmentBagReasons(ShipmentID, BagID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
-
-
-| BagID | string | ID of the bag. | 
-
-
-
-
-Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+Use this API to retrieve shipment invoice.
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `ShipmentBagReasons` for more details.
+Success. Check the example shown below or refer `ShipmentById` for more details.
 
 
-Schema: `ShipmentBagReasons`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateShipmentStatus
-Update the shipment status
-
-```golang
-
- data, err :=  Order.UpdateShipmentStatus(ShipmentID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
-
-
-| body |  ShipmentStatusUpdateBody | "Request body" 
-
-
-Use this API to update the status of a shipment using its shipment ID.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `ShipmentStatusUpdateBody` for more details.
-
-
-Schema: `ShipmentStatusUpdate`
+Schema: `ResponseGetInvoiceShipment`
 
 
 
@@ -18101,7 +18757,7 @@ Track shipment
 
 
 
-Use this API to track a shipment using its shipment ID.
+Track Shipment by shipment id, for application based on application Id
 
 *Success Response:*
 
@@ -18111,44 +18767,6 @@ Success. Check the example shown below or refer `ShipmentTrack` for more details
 
 
 Schema: `ShipmentTrack`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPosOrderById
-Get POS Order
-
-```golang
-
- data, err :=  Order.GetPosOrderById(OrderID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| OrderID | string | A unique number used for identifying and tracking your orders. | 
-
-
-
-
-Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `PosOrderById` for more details.
-
-
-Schema: `PosOrderById`
 
 
 
@@ -18172,10 +18790,10 @@ Get Customer Details by Shipment Id
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| OrderID | string | A unique number used for identifying and tracking your orders. | 
+| OrderID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+| ShipmentID | string | A unique number used for identifying and tracking your orders. | 
 
 
 
@@ -18189,7 +18807,7 @@ Use this API to retrieve customer details such as mobileno using Shipment ID.
 Success. Check the example shown below or refer `CustomerDetailsByShipmentId` for more details.
 
 
-Schema: `CustomerDetailsByShipmentId`
+Schema: `CustomerDetailsResponse`
 
 
 
@@ -18230,7 +18848,7 @@ Use this API to send OTP to the customer of the mapped Shipment.
 Success to acknowledge the service was notified
 
 
-Schema: `sendOTPApplicationResponse`
+Schema: `SendOtpToCustomerResponse`
 
 
 
@@ -18260,7 +18878,7 @@ Verify Otp code
 | ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
-| body |  ReqBodyVerifyOTPShipment | "Request body" 
+| body |  VerifyOtp | "Request body" 
 
 
 Use this API to verify OTP and create a session token with custom payload.
@@ -18272,7 +18890,7 @@ Use this API to verify OTP and create a session token with custom payload.
 Success, the code is valid and returns a session token
 
 
-Schema: `ResponseVerifyOTPShipment`
+Schema: `VerifyOtpResponse`
 
 
 
@@ -18285,12 +18903,53 @@ Schema: `ResponseVerifyOTPShipment`
 ---
 
 
-#### getInvoiceByShipmentId
-Get Invoice URL
+#### getShipmentBagReasons
+Get reasons behind full or partial cancellation of a shipment
 
 ```golang
 
- data, err :=  Order.GetInvoiceByShipmentId(ShipmentID);
+ data, err :=  Order.GetShipmentBagReasons(ShipmentID, BagID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| BagID | string | ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+
+
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ShipmentBagReasons` for more details.
+
+
+Schema: `ShipmentBagReasons`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentReasons
+Get reasons behind full or partial cancellation of a shipment
+
+```golang
+
+ data, err :=  Order.GetShipmentReasons(ShipmentID);
 ```
 
 | Argument  |  Type  | Description |
@@ -18301,16 +18960,55 @@ Get Invoice URL
 
 
 
-Use this API to get a generated Invoice URL for viewing or download.
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
 
 *Success Response:*
 
 
 
-Success, the code is valid and returns a SignedUrl
+Success. Check the example shown below or refer `ShipmentBagReasons` for more details.
 
 
-Schema: `ResponseGetInvoiceShipment`
+Schema: `ShipmentReasons`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateShipmentExternal
+
+
+```golang
+
+ data, err :=  Order.UpdateShipmentExternal(ShipmentID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | float64 |  | 
+
+
+| body |  UpdateShipmentExternalRequest | "Request body" 
+
+
+
+
+*Success Response:*
+
+
+
+Successful shipment update
+
+
+Schema: `UpdateShipmentResponse`
 
 
 
