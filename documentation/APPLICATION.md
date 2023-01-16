@@ -274,8 +274,8 @@
     * [verifyOtpShipmentCustomer](#verifyotpshipmentcustomer)
     * [getShipmentBagReasons](#getshipmentbagreasons)
     * [getShipmentReasons](#getshipmentreasons)
-    * [updateShipmentExternal](#updateshipmentexternal)
     * [updateShipmentStatus](#updateshipmentstatus)
+    * [updateShipmentStatus1](#updateshipmentstatus1)
     * [getOrders1](#getorders1)
     * [getOrderById1](#getorderbyid1)
     * [getPosOrderById1](#getposorderbyid1)
@@ -287,7 +287,7 @@
     * [verifyOtpShipmentCustomer1](#verifyotpshipmentcustomer1)
     * [getShipmentBagReasons1](#getshipmentbagreasons1)
     * [getShipmentReasons1](#getshipmentreasons1)
-    * [updateShipmentExternal1](#updateshipmentexternal1)
+    * [updateShipmentStatus2](#updateshipmentstatus2)
     
 
 * [Rewards](#Rewards)
@@ -18997,12 +18997,12 @@ Schema: `ShipmentReasons`
 ---
 
 
-#### updateShipmentExternal
+#### updateShipmentStatus
 
 
 ```golang
 
- data, err :=  Order.UpdateShipmentExternal(ShipmentID, body);
+ data, err :=  Order.UpdateShipmentStatus(ShipmentID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -19011,7 +19011,7 @@ Schema: `ShipmentReasons`
 | ShipmentID | float64 |  | 
 
 
-| body |  UpdateShipmentExternalRequest | "Request body" 
+| body |  ShipmentStatusUpdateBody | "Request body" 
 
 
 
@@ -19023,7 +19023,7 @@ Schema: `ShipmentReasons`
 Successful shipment update
 
 
-Schema: `UpdateShipmentResponse`
+Schema: `ShipmentStatusUpdate`
 
 
 
@@ -19036,12 +19036,12 @@ Schema: `UpdateShipmentResponse`
 ---
 
 
-#### updateShipmentStatus
+#### updateShipmentStatus1
 
 
 ```golang
 
- data, err :=  Order.UpdateShipmentStatus(ShipmentID, body);
+ data, err :=  Order.UpdateShipmentStatus1(ShipmentID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -19516,12 +19516,12 @@ Schema: `ShipmentReasons`
 ---
 
 
-#### updateShipmentExternal1
+#### updateShipmentStatus2
 
 
 ```golang
 
- data, err :=  Order.UpdateShipmentExternal1(ShipmentID, body);
+ data, err :=  Order.UpdateShipmentStatus2(ShipmentID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -19530,7 +19530,7 @@ Schema: `ShipmentReasons`
 | ShipmentID | float64 |  | 
 
 
-| body |  UpdateShipmentExternalRequest | "Request body" 
+| body |  ShipmentStatusUpdateBody | "Request body" 
 
 
 
@@ -19542,7 +19542,7 @@ Schema: `ShipmentReasons`
 Successful shipment update
 
 
-Schema: `UpdateShipmentResponse`
+Schema: `ShipmentStatusUpdate`
 
 
 
