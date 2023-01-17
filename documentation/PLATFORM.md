@@ -154,11 +154,8 @@
     * [createPagePreview](#createpagepreview)
     * [updatePagePreview](#updatepagepreview)
     * [deletePage](#deletepage)
-    * [addPathRedirectionRules](#addpathredirectionrules)
-    * [getPathRedirectionRules](#getpathredirectionrules)
-    * [getPathRedirectionRule](#getpathredirectionrule)
     * [updatePathRedirectionRules](#updatepathredirectionrules)
-    * [deletePathRedirectionRules](#deletepathredirectionrules)
+    * [getPathRedirectionRules](#getpathredirectionrules)
     * [getSEOConfiguration](#getseoconfiguration)
     * [updateSEOConfiguration](#updateseoconfiguration)
     * [getSlideshows](#getslideshows)
@@ -256,14 +253,11 @@
     * [deleteSubscriptionPaymentMethod](#deletesubscriptionpaymentmethod)
     * [getSubscriptionConfig](#getsubscriptionconfig)
     * [saveSubscriptionSetupIntent](#savesubscriptionsetupintent)
-    * [getBankAccountDetailsOpenAPI](#getbankaccountdetailsopenapi)
-    * [addRefundBankAccountUsingOTP](#addrefundbankaccountusingotp)
+    * [addBeneficiaryDetails](#addbeneficiarydetails)
     * [verifyIfscCode](#verifyifsccode)
     * [getUserOrderBeneficiaries](#getuserorderbeneficiaries)
     * [getUserBeneficiaries](#getuserbeneficiaries)
     * [confirmPayment](#confirmpayment)
-    * [getUserCODlimitRoutes](#getusercodlimitroutes)
-    * [setUserCODlimitRoutes](#setusercodlimitroutes)
     
 
 * [Order](#Order)
@@ -276,7 +270,7 @@
     * [getOrdersByCompanyId](#getordersbycompanyid)
     * [getOrderLanesCountByCompanyId](#getorderlanescountbycompanyid)
     * [getOrderDetails](#getorderdetails)
-    * [getApplicationOrderDetails](#getapplicationorderdetails)
+    * [getOrderDetails](#getorderdetails)
     * [getPicklistOrdersByCompanyId](#getpicklistordersbycompanyid)
     * [trackShipmentPlatform](#trackshipmentplatform)
     * [trackOrder](#trackorder)
@@ -292,13 +286,13 @@
 
 * [Catalog](#Catalog)
   * Methods
-    * [updateSearchKeywords](#updatesearchkeywords)
     * [deleteSearchKeywords](#deletesearchkeywords)
+    * [updateSearchKeywords](#updatesearchkeywords)
     * [getSearchKeywords](#getsearchkeywords)
     * [createCustomKeyword](#createcustomkeyword)
     * [getAllSearchKeyword](#getallsearchkeyword)
-    * [updateAutocompleteKeyword](#updateautocompletekeyword)
     * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
+    * [updateAutocompleteKeyword](#updateautocompletekeyword)
     * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [getAutocompleteConfig](#getautocompleteconfig)
@@ -310,17 +304,17 @@
     * [getSizeGuides](#getsizeguides)
     * [updateSizeGuide](#updatesizeguide)
     * [getSizeGuide](#getsizeguide)
-    * [getAppProduct](#getappproduct)
     * [updateAppProduct](#updateappproduct)
+    * [getAppProduct](#getappproduct)
     * [getConfigurationMetadata](#getconfigurationmetadata)
     * [createGroupConfiguration](#creategroupconfiguration)
     * [getGroupConfigurations](#getgroupconfigurations)
-    * [updateGroupConfiguration](#updategroupconfiguration)
     * [deleteGroupConfiguration](#deletegroupconfiguration)
+    * [updateGroupConfiguration](#updategroupconfiguration)
     * [createListingConfiguration](#createlistingconfiguration)
     * [getListingConfigurations](#getlistingconfigurations)
-    * [updateListingConfiguration](#updatelistingconfiguration)
     * [deleteListingConfiguration](#deletelistingconfiguration)
+    * [updateListingConfiguration](#updatelistingconfiguration)
     * [updateAllowSingle](#updateallowsingle)
     * [updateDefaultSort](#updatedefaultsort)
     * [getCatalogConfiguration](#getcatalogconfiguration)
@@ -332,8 +326,8 @@
     * [createCollection](#createcollection)
     * [getAllCollections](#getallcollections)
     * [getCollectionDetail](#getcollectiondetail)
-    * [updateCollection](#updatecollection)
     * [deleteCollection](#deletecollection)
+    * [updateCollection](#updatecollection)
     * [addCollectionItems](#addcollectionitems)
     * [getCollectionItems](#getcollectionitems)
     * [getCatalogInsights](#getcataloginsights)
@@ -365,15 +359,15 @@
     * [createProduct](#createproduct)
     * [getProducts](#getproducts)
     * [getProductAttributes](#getproductattributes)
-    * [editProduct](#editproduct)
     * [deleteProduct](#deleteproduct)
+    * [editProduct](#editproduct)
     * [getProduct](#getproduct)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
     * [createBulkProductUploadJob](#createbulkproductuploadjob)
     * [getProductBulkUploadHistory](#getproductbulkuploadhistory)
-    * [createProductsInBulk](#createproductsinbulk)
     * [deleteProductBulkJob](#deleteproductbulkjob)
+    * [createProductsInBulk](#createproductsinbulk)
     * [getProductTags](#getproducttags)
     * [createProductAssetsInBulk](#createproductassetsinbulk)
     * [getProductAssetsInBulk](#getproductassetsinbulk)
@@ -385,13 +379,13 @@
     * [deleteInventory](#deleteinventory)
     * [createBulkInventoryJob](#createbulkinventoryjob)
     * [getInventoryBulkUploadHistory](#getinventorybulkuploadhistory)
-    * [createBulkInventory](#createbulkinventory)
     * [deleteBulkInventoryJob](#deletebulkinventoryjob)
+    * [createBulkInventory](#createbulkinventory)
     * [createInventoryExportJob](#createinventoryexportjob)
     * [getInventoryExport](#getinventoryexport)
     * [exportInventoryConfig](#exportinventoryconfig)
-    * [updateRealtimeInventory](#updaterealtimeinventory)
     * [deleteRealtimeInventory](#deleterealtimeinventory)
+    * [updateRealtimeInventory](#updaterealtimeinventory)
     * [updateInventories](#updateinventories)
     * [createHsnCode](#createhsncode)
     * [getAllHsnCodes](#getallhsncodes)
@@ -413,8 +407,6 @@
     * [updateAppBrand](#updateappbrand)
     * [getApplicationCategoryListing](#getapplicationcategorylisting)
     * [updateAppCategory](#updateappcategory)
-    * [getApplicationDepartmentListing](#getapplicationdepartmentlisting)
-    * [updateAppDepartment](#updateappdepartment)
     * [updateAppLocation](#updateapplocation)
     
 
@@ -433,7 +425,6 @@
     * [getLocationDetail](#getlocationdetail)
     * [updateLocation](#updatelocation)
     * [createLocationBulk](#createlocationbulk)
-    * [getOptimalLocations](#getoptimallocations)
     
 
 * [FileStorage](#FileStorage)
@@ -539,10 +530,6 @@
     * [fetchAndvalidateCartItems](#fetchandvalidatecartitems)
     * [checkCartServiceability](#checkcartserviceability)
     * [checkoutCart](#checkoutcart)
-    * [getAbandonedCart](#getabandonedcart)
-    * [getAbandonedCartDetails](#getabandonedcartdetails)
-    * [addItems](#additems)
-    * [updateCart](#updatecart)
     
 
 * [Rewards](#Rewards)
@@ -44412,12 +44399,12 @@ default
 ---
 
 
-#### addPathRedirectionRules
+#### updatePathRedirectionRules
 Save path based redirection rules
 
 ```golang
 
-data, err := Content.AddPathRedirectionRules(CompanyID, ApplicationID, body);
+data, err := Content.UpdatePathRedirectionRules(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -44431,7 +44418,7 @@ data, err := Content.AddPathRedirectionRules(CompanyID, ApplicationID, body);
 
 | body |  PathMappingSchema | "Request body" 
 
-Use this API to add redirection rules
+Use this API to add, update or delete path-based redirection rules
 
 *Success Response:*
 
@@ -44441,24 +44428,6 @@ Success. Refer `PathMappingSchema` for more details.
 
 
 Schema: `PathMappingSchema`
-
-
-*Examples:*
-
-
-Success
-```json
-{
-  "value": {
-    "_id": "615188e9db1e444cb0f40837",
-    "application": "000000000000000000000002",
-    "redirect_from": "/from",
-    "redirect_to": "/to",
-    "createdAt": "2021-09-27T09:03:37.053Z",
-    "updatedAt": "2021-09-27T09:09:25.587Z"
-  }
-}
-```
 
 
 
@@ -44476,7 +44445,7 @@ Get path based redirection rules
 
 ```golang
 
-data, err := Content.GetPathRedirectionRules(CompanyID, ApplicationID, xQuery);
+data, err := Content.GetPathRedirectionRules(CompanyID, ApplicationID);
 ```
 
 | Argument  |  Type  | Description |
@@ -44487,11 +44456,6 @@ data, err := Content.GetPathRedirectionRules(CompanyID, ApplicationID, xQuery);
 
 | ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
-
-
-
-
-| xQuery | struct | Includes properties such as `PageSize`, `PageNo`
 
 
 Use this API to get path based redirection rules.
@@ -44515,179 +44479,17 @@ Success
   "value": {
     "_id": "615188e9db1e444cb0f40837",
     "application": "000000000000000000000002",
-    "redirect_from": "/from",
-    "redirect_to": "/to",
+    "redirections": [
+      {
+        "redirect_from": "/from",
+        "redirect_to": "/to"
+      }
+    ],
     "createdAt": "2021-09-27T09:03:37.053Z",
     "updatedAt": "2021-09-27T09:09:25.587Z"
   }
 }
 ```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPathRedirectionRule
-Get path based redirection rule
-
-```golang
-
-data, err := Content.GetPathRedirectionRule(CompanyID, ApplicationID, PathID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
-
-
-| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
-
-
-| PathID | string | ID allotted to the path redirection rule. | 
-
-
-
-Use this API to get path based redirection rule.
-
-*Success Response:*
-
-
-
-Success. Refer `PathMappingSchema` for more details.
-
-
-Schema: `PathMappingSchema`
-
-
-*Examples:*
-
-
-Success
-```json
-{
-  "value": {
-    "_id": "615188e9db1e444cb0f40837",
-    "application": "000000000000000000000002",
-    "redirect_from": "/from",
-    "redirect_to": "/to",
-    "createdAt": "2021-09-27T09:03:37.053Z",
-    "updatedAt": "2021-09-27T09:09:25.587Z"
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### updatePathRedirectionRules
-Update path based redirection rules
-
-```golang
-
-data, err := Content.UpdatePathRedirectionRules(CompanyID, ApplicationID, PathID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
-
-
-| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
-
-
-| PathID | string | ID allotted to the path redirection rule. | 
-
-
-| body |  PathMappingSchema | "Request body" 
-
-Use this API to update redirection rules
-
-*Success Response:*
-
-
-
-Success. Refer `PathMappingSchema` for more details.
-
-
-Schema: `PathMappingSchema`
-
-
-*Examples:*
-
-
-Success
-```json
-{
-  "value": {
-    "_id": "615188e9db1e444cb0f40837",
-    "application": "000000000000000000000002",
-    "redirect_from": "/from",
-    "redirect_to": "/to",
-    "createdAt": "2021-09-27T09:03:37.053Z",
-    "updatedAt": "2021-09-27T09:09:25.587Z"
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### deletePathRedirectionRules
-Delete path based redirection rules
-
-```golang
-
-data, err := Content.DeletePathRedirectionRules(CompanyID, ApplicationID, PathID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
-
-
-| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
-
-
-| PathID | string | ID allotted to the path redirection rule. | 
-
-
-
-Use this API to delete redirection rules
-
-*Success Response:*
-
-
-
-Success.
-
-
-Schema: `Object`
 
 
 
@@ -51702,57 +51504,12 @@ Schema: `SaveSubscriptionSetupIntentResponse`
 ---
 
 
-#### getBankAccountDetailsOpenAPI
-Get bank details
-
-```golang
-
-data, err := Payment.GetBankAccountDetailsOpenAPI(CompanyID, ApplicationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application id | 
-
-| xQuery | struct | Includes properties such as `OrderID`, `RequestHash`
-
-
-Use this API to get saved bank details for returned/cancelled order using order id.
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `RefundAccountResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### addRefundBankAccountUsingOTP
+#### addBeneficiaryDetails
 Save bank details for cancelled/returned order
 
 ```golang
 
-data, err := Payment.AddRefundBankAccountUsingOTP(CompanyID, ApplicationID, body);
+data, err := Payment.AddBeneficiaryDetails(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -51764,7 +51521,7 @@ data, err := Payment.AddRefundBankAccountUsingOTP(CompanyID, ApplicationID, body
 | ApplicationID | string | Application id | 
 
 
-| body |  AddBeneficiaryDetailsOTPRequest | "Request body" 
+| body |  AddBeneficiaryDetailsRequest | "Request body" 
 
 Use this API to save bank details for returned/cancelled order to refund amount in his account.
 
@@ -51943,92 +51700,6 @@ Success. Returns the status of payment. Check the example shown below or refer `
 
 
 Schema: `PaymentConfirmationResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getUserCODlimitRoutes
-Get COD limit for user
-
-```golang
-
-data, err := Payment.GetUserCODlimitRoutes(CompanyID, ApplicationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `MerchantUserID`, `MobileNo`
-
-
-Use this API to get user cod limit and reamining limit for the payment
-
-*Success Response:*
-
-
-
-Success. Returns user cod limit , remaining limit and usage of user for COD. Check the example shown below or refer `GetUserCODLimitResponseSchema` for more details.
-
-
-Schema: `GetUserCODLimitResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### setUserCODlimitRoutes
-Set COD option for user for payment
-
-```golang
-
-data, err := Payment.SetUserCODlimitRoutes(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| body |  SetCODForUserRequest | "Request body" 
-
-Use this API to set cod option as true or false for the payment
-
-*Success Response:*
-
-
-
-Success. Returns true/false for user cod option for payment. Check the example shown below or refer `GetUserCODLimitResponseSchema` for more details.
-
-
-Schema: `SetCODOptionResponse`
 
 
 
@@ -52416,12 +52087,12 @@ Schema: `OrderDetails`
 ---
 
 
-#### getApplicationOrderDetails
+#### getOrderDetails
 Get Order Details for company based on Company Id and Order Id
 
 ```golang
 
-data, err := Order.GetApplicationOrderDetails(CompanyID, ApplicationID, xQuery);
+data, err := Order.GetOrderDetails(CompanyID, ApplicationID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -52986,6 +52657,49 @@ Schema: `OrderListing`
 ## Catalog
 
 
+#### deleteSearchKeywords
+Delete a Search Keywords
+
+```golang
+
+data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateSearchKeywords
 Update Search Keyword
 
@@ -53018,49 +52732,6 @@ The Collection object. See example below or refer `GetSearchWordsDataSchema` for
 
 
 Schema: `GetSearchWordsData`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteSearchKeywords
-Delete a Search Keywords
-
-```golang
-
-data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
 
 
 
@@ -53197,6 +52868,49 @@ Schema: `GetSearchWordsResponse`
 ---
 
 
+#### deleteAutocompleteKeyword
+Delete a Autocomplete Keywords
+
+```golang
+
+data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateAutocompleteKeyword
 Create & Update Autocomplete Keyword
 
@@ -53229,49 +52943,6 @@ The Mapping object. See example below or refer `GetAutocompleteWordsResponseSche
 
 
 Schema: `GetAutocompleteWordsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteAutocompleteKeyword
-Delete a Autocomplete Keywords
-
-```golang
-
-data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
 
 
 
@@ -53736,49 +53407,6 @@ Schema: `SizeGuideResponse`
 ---
 
 
-#### getAppProduct
-Get company application product data.
-
-```golang
-
-data, err := Catalog.GetAppProduct(CompanyID, ApplicationID, ItemID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ItemID | string | product id for a particular product. | 
-
-
-
-Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
-
-*Success Response:*
-
-
-
-The Company Applicaton Product Data(MOQ/SEO).
-
-
-Schema: `OwnerAppItemResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateAppProduct
 Update a single custom meta.
 
@@ -53811,6 +53439,52 @@ Returns a success response
 
 
 Schema: `SuccessResponse1`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAppProduct
+Get company application product data.
+
+```golang
+
+data, err := Catalog.GetAppProduct(CompanyID, ApplicationID, ItemID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ItemID | string | product id for a particular product. | 
+
+
+
+| xQuery | struct | Includes properties such as `SliceAttr`
+
+
+Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
+
+*Success Response:*
+
+
+
+The Company Applicaton Product Data(MOQ/SEO).
+
+
+Schema: `ApplicationItemResponse`
 
 
 
@@ -53965,6 +53639,52 @@ Schema: `GetConfigResponse`
 ---
 
 
+#### deleteGroupConfiguration
+Delete configuration of the product config type of the application.
+
+```golang
+
+data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
+
+
+| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration of the product config type of the application.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateGroupConfiguration
 Update the group configurations for the application.
 
@@ -54000,52 +53720,6 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationDetail`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteGroupConfiguration
-Delete configuration of the product config type of the application.
-
-```golang
-
-data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
-
-
-| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
-
-
-
-Delete configuration of the product config type of the application.
-
-*Success Response:*
-
-
-
-success message will tell whether the operation was successful.
-
-
-Schema: `ConfigSuccessResponse`
 
 
 
@@ -54152,6 +53826,52 @@ Schema: `GetConfigResponse`
 ---
 
 
+#### deleteListingConfiguration
+Delete configuration for listings
+
+```golang
+
+data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
+
+
+| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration for listing.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateListingConfiguration
 Update configuration for listings
 
@@ -54187,52 +53907,6 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationsSort`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteListingConfiguration
-Delete configuration for listings
-
-```golang
-
-data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
-
-
-| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
-
-
-
-Delete configuration for listing.
-
-*Success Response:*
-
-
-
-success message will tell whether the operation was successful.
-
-
-Schema: `ConfigSuccessResponse`
 
 
 
@@ -54714,6 +54388,49 @@ Schema: `CollectionDetailResponse`
 ---
 
 
+#### deleteCollection
+Delete a Collection
+
+```golang
+
+data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier of a collection. | 
+
+
+
+Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateCollection
 Update a collection
 
@@ -54746,49 +54463,6 @@ The Collection object. See example below or refer `UpdateCollectionSchema` for d
 
 
 Schema: `UpdateCollection`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteCollection
-Delete a Collection
-
-```golang
-
-data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier of a collection. | 
-
-
-
-Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
 
 
 
@@ -56088,26 +55762,25 @@ Schema: `ProductAttributesResponse`
 ---
 
 
-#### editProduct
-Edit a product.
+#### deleteProduct
+Delete a product.
 
 ```golang
 
-data, err := Catalog.EditProduct(CompanyID, ItemID, body);
+data, err := Catalog.DeleteProduct(CompanyID, ItemID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
 
 
 | ItemID | float64 | Id of the product to be updated. | 
 
 
-| body |  ProductCreateUpdate | "Request body" 
 
-This API allows to edit product.
+This API allows to delete product.
 
 *Success Response:*
 
@@ -56129,25 +55802,26 @@ Schema: `SuccessResponse`
 ---
 
 
-#### deleteProduct
-Delete a product.
+#### editProduct
+Edit a product.
 
 ```golang
 
-data, err := Catalog.DeleteProduct(CompanyID, ItemID);
+data, err := Catalog.EditProduct(CompanyID, ItemID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
 
 
 | ItemID | float64 | Id of the product to be updated. | 
 
 
+| body |  ProductCreateUpdate | "Request body" 
 
-This API allows to delete product.
+This API allows to edit product.
 
 *Success Response:*
 
@@ -56378,26 +56052,25 @@ Schema: `ProductBulkRequestList`
 ---
 
 
-#### createProductsInBulk
-Create products in bulk associated with given batch Id.
+#### deleteProductBulkJob
+Delete Bulk product job.
 
 ```golang
 
-data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
+data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
 
 
-| BatchID | string | Batch Id in which assets to be uploaded. | 
+| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
 
 
-| body |  BulkProductRequest | "Request body" 
 
-This API helps to create products in bulk push to kafka for approval/creation.
+This API allows to delete bulk product job associated with company.
 
 *Success Response:*
 
@@ -56419,25 +56092,26 @@ Schema: `SuccessResponse`
 ---
 
 
-#### deleteProductBulkJob
-Delete Bulk product job.
+#### createProductsInBulk
+Create products in bulk associated with given batch Id.
 
 ```golang
 
-data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
+data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
 
 
-| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
+| BatchID | string | Batch Id in which assets to be uploaded. | 
 
 
+| body |  BulkProductRequest | "Request body" 
 
-This API allows to delete bulk product job associated with company.
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -56948,26 +56622,25 @@ Schema: `BulkInventoryGet`
 ---
 
 
-#### createBulkInventory
-Create products in bulk associated with given batch Id.
+#### deleteBulkInventoryJob
+Delete Bulk Inventory job.
 
 ```golang
 
-data, err := Catalog.CreateBulkInventory(CompanyID, BatchID, body);
+data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which Inventory is to be uploaded. | 
+| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
 
 
-| BatchID | string | Batch Id of the bulk create job. | 
+| BatchID | string | Batch Id of the bulk delete job. | 
 
 
-| body |  InventoryBulkRequest | "Request body" 
 
-This API helps to create products in bulk push to kafka for approval/creation.
+This API allows to delete bulk Inventory job associated with company.
 
 *Success Response:*
 
@@ -56989,25 +56662,26 @@ Schema: `SuccessResponse`
 ---
 
 
-#### deleteBulkInventoryJob
-Delete Bulk Inventory job.
+#### createBulkInventory
+Create products in bulk associated with given batch Id.
 
 ```golang
 
-data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
+data, err := Catalog.CreateBulkInventory(CompanyID, BatchID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
+| CompanyID | float64 | Company Id in which Inventory is to be uploaded. | 
 
 
-| BatchID | string | Batch Id of the bulk delete job. | 
+| BatchID | string | Batch Id of the bulk create job. | 
 
 
+| body |  InventoryBulkRequest | "Request body" 
 
-This API allows to delete bulk Inventory job associated with company.
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -57144,12 +56818,12 @@ Schema: `InventoryConfig`
 ---
 
 
-#### updateRealtimeInventory
+#### deleteRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -57188,12 +56862,12 @@ Schema: `InventoryUpdateResponse`
 ---
 
 
-#### deleteRealtimeInventory
+#### updateRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -58109,9 +57783,7 @@ data, err := Catalog.GetApplicationCategoryListing(CompanyID, ApplicationID, xQu
 
 
 
-
-
-| xQuery | struct | Includes properties such as `DepartmentID`, `PageNo`, `PageSize`, `Q`
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`
 
 
 A brand is the name under which a product is being sold. Use this API to list all the brands. You can pass optionally filter the brands by the department. If successful, returns a paginated list of brands specified in `BrandListingResponse`
@@ -58157,97 +57829,6 @@ data, err := Catalog.UpdateAppCategory(CompanyID, ApplicationID, CategoryUID, bo
 
 
 | body |  ApplicationCategoryJson | "Request body" 
-
-This API helps to update data associated to a item custom meta.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse1`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getApplicationDepartmentListing
-List all the departments for the application
-
-```golang
-
-data, err := Catalog.GetApplicationDepartmentListing(CompanyID, ApplicationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`
-
-
-Departments are a way to categorise similar products. A product can lie in multiple departments. For example, a skirt can below to the 'Women's Fashion' Department while a handbag can lie in 'Women's Accessories' Department. Use this API to list all the application departments. If successful, returns the list of departments specified in `ApplicationDepartmentListingResponse`
-
-*Success Response:*
-
-
-
-List of Departments. See example below or refer `BrandListingResponse` for details
-
-
-Schema: `ApplicationDepartmentListingResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateAppDepartment
-Update a single custom json.
-
-```golang
-
-data, err := Catalog.UpdateAppDepartment(CompanyID, ApplicationID, DepartmentUID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to department custom json. | 
-
-
-| ApplicationID | string | application id for which the custom_json is associated. | 
-
-
-| DepartmentUID | string | department id for which the custom_json is associated. | 
-
-
-| body |  ApplicationDepartmentJson | "Request body" 
 
 This API helps to update data associated to a item custom meta.
 
@@ -58830,44 +58411,6 @@ Returns a success response
 
 
 Schema: `ProfileSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getOptimalLocations
-Location Reassignment
-
-```golang
-
-data, err := CompanyProfile.GetOptimalLocations(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company inside which the location is to be created. | 
-
-
-| body |  AssignStoreRequestValidator | "Request body" 
-
-
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `AssignStoreResponseSerializer`
 
 
 
@@ -63307,1520 +62850,6 @@ Checkout cart and create Fynd order id
 
 
 Schema: `OpenApiCheckoutResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAbandonedCart
-Get with abandoned cart list
-
-```golang
-
-data, err := Cart.GetAbandonedCart(CompanyID, ApplicationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Current company id | 
-
-
-| ApplicationID | string | Current Application _id | 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `AnonymousCart`, `LastID`, `SortOn`
-
-
-Get abandoned cart list with pagination
-
-*Success Response:*
-
-
-
-Abandoned Cart List for sent page_size and page_no
-
-
-Schema: `AbandonedCartResponse`
-
-
-*Examples:*
-
-
-Abandoned Cart list for sent filter and page size
-```json
-{
-  "value": {
-    "message": "Cart fetched successfully !!",
-    "success": true,
-    "result": {},
-    "items": [
-      {
-        "_id": "62bbe2c4b79692d559ac1f16",
-        "uid": 19986,
-        "user_id": "600693a01faf8695d70a15df",
-        "is_default": true,
-        "app_id": "5d64e3500bcad8693a821c0d",
-        "articles": [
-          {
-            "service_item_meta": {
-              "product_group_tags": null,
-              "products": null
-            },
-            "parent_item_identifiers": {
-              "identifier": null,
-              "parent_item_size": null,
-              "parent_item_id": null
-            },
-            "item_id": 7500426,
-            "item_size": "SET1",
-            "article_id": "5f37d9b71cb7c10001b90ee2",
-            "quantity": 2,
-            "price_marked": 1000,
-            "price_effective": 1,
-            "currency_code": "INR",
-            "store_id": 10183,
-            "company_id": 61,
-            "article_assignment": {
-              "level": "multi-companies",
-              "strategy": "optimal"
-            },
-            "brand_uid": 85,
-            "l3_categories": [
-              466
-            ],
-            "discount": 99.9,
-            "coupon": {
-              "amount": 0,
-              "currency_code": "INR",
-              "article_count": 0
-            },
-            "referral_credits": {
-              "amount": 0,
-              "currency_code": "FC"
-            },
-            "cashback": {
-              "amount": 0,
-              "currency_code": "FC"
-            },
-            "bulk_coupon": {
-              "margin": 0,
-              "discount": 0,
-              "code": null
-            },
-            "promotion": [
-              {
-                "promo_id": "62bbf355beda57df173122fa",
-                "amount": 1,
-                "article_quantity": 2,
-                "mrp_promotion": false,
-                "promotion_type": "amount",
-                "discount_rules": [
-                  {
-                    "type": "amount",
-                    "value": 125
-                  }
-                ]
-              }
-            ],
-            "identifiers": {
-              "identifier": "pEF2t4GGTKaieox5rsRibw"
-            },
-            "meta": {},
-            "extra_meta": {},
-            "payment_methods": []
-          }
-        ],
-        "cart_value": 1,
-        "discount": 0,
-        "delivery_charges": {
-          "amount": 1,
-          "currency_code": "INR"
-        },
-        "coupon": {
-          "amount": 0,
-          "currency_code": "INR",
-          "code": null,
-          "type": "cart",
-          "uid": null,
-          "id": null
-        },
-        "promotion": {
-          "amount": 2,
-          "currency_code": "INR",
-          "mode": "promotion",
-          "promotions": [
-            {
-              "id": "62bbf355beda57df173122fa",
-              "mrp_promo": false,
-              "promo_group": "product"
-            }
-          ]
-        },
-        "fynd_credits": {
-          "amount": 0,
-          "currency_code": "FC",
-          "auto_applied": true
-        },
-        "cod_charges": {
-          "amount": 0,
-          "currency_code": "INR"
-        },
-        "cashback": {
-          "amount": 0,
-          "currency_code": "FC",
-          "uid": null
-        },
-        "payments": {},
-        "is_archive": false,
-        "created_on": "2022-06-28 14:25:15.578000",
-        "last_modified": "2022-06-29 13:52:03.313000",
-        "expire_at": "2023-06-24 13:52:03.313000",
-        "fc_index_map": [
-          0,
-          0
-        ],
-        "checkout_mode": "self",
-        "meta": {
-          "shipping_address_id": "62b161cb3ad0eed3e48ec6a9",
-          "billing_address_id": "62b161cb3ad0eed3e48ec6a9"
-        },
-        "comment": "",
-        "bulk_coupon_discount": 0,
-        "pick_up_customer_details": {},
-        "is_active": true,
-        "shipments": [],
-        "payment_methods": [],
-        "buy_now": false
-      }
-    ],
-    "page": {
-      "type": "number",
-      "has_next": false,
-      "item_total": 28,
-      "size": 20,
-      "page": 2,
-      "current": 2,
-      "last_id": "62d4ff76d6aec8db897de407"
-    }
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAbandonedCartDetails
-Fetch all items added to the cart
-
-```golang
-
-data, err := Cart.GetAbandonedCartDetails(CompanyID, ApplicationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Current company id | 
-
-
-| ApplicationID | string | Current Application _id | 
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`
-
-
-Use this API to get details of all the items added to a cart.
-
-*Success Response:*
-
-
-
-Success. Returns a Cart object. Check the example shown below or refer `CartDetailResponse` for more details.
-
-
-Schema: `CartDetailResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### addItems
-Add items to abandoned cart
-
-```golang
-
-data, err := Cart.AddItems(CompanyID, ApplicationID, CartID, xQuery, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Current company id | 
-
-
-| ApplicationID | string | Current Application _id | 
-
-
-| CartID | string | Current Cart _id | 
-
-
-
-| xQuery | struct | Includes properties such as `B`
-
-| body |  AddCartRequest | "Request body" 
-
-Use this API to add items to the abandoned cart.
-
-*Success Response:*
-
-
-
-Success. Returns a cart object as shown below. Refer `AddCartDetailResponse` for more details.
-
-
-Schema: `AddCartDetailResponse`
-
-
-*Examples:*
-
-
-Product has been added to your cart
-```json
-{
-  "value": {
-    "message": "Product has been added to your cart",
-    "success": true,
-    "cart": {
-      "breakup_values": {
-        "display": [
-          {
-            "display": "MRP Total",
-            "key": "mrp_total",
-            "value": 17486,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Discount",
-            "key": "discount",
-            "value": -3540,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Subtotal",
-            "key": "subtotal",
-            "value": 13946,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Total",
-            "key": "total",
-            "value": 13946,
-            "currency_code": "INR"
-          }
-        ],
-        "raw": {
-          "cod_charge": 0,
-          "convenience_fee": 0,
-          "coupon": 0,
-          "delivery_charge": 0,
-          "discount": -3540,
-          "fynd_cash": 0,
-          "gst_charges": 1529.96,
-          "mrp_total": 17486,
-          "subtotal": 13946,
-          "total": 13946,
-          "vog": 12416.04,
-          "you_saved": 0
-        },
-        "loyalty_points": {
-          "total": 0,
-          "applicable": 0,
-          "is_applied": false,
-          "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
-        },
-        "coupon": {
-          "type": "cash",
-          "code": "",
-          "uid": null,
-          "value": 0,
-          "is_applied": false,
-          "message": "Sorry! Invalid Coupon"
-        }
-      },
-      "items": [
-        {
-          "key": "751083_10",
-          "parent_item_identifiers": {
-            "identifier": "ZASFF",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS"
-          },
-          "article": {
-            "type": "article",
-            "uid": "612_9_SE61201_19100302_10",
-            "size": "10",
-            "seller": {
-              "uid": 612,
-              "name": "SSR ENTERPRISE"
-            },
-            "store": {
-              "uid": 4431,
-              "name": "Motilal Nagar 1, Goregaon"
-            },
-            "quantity": 4,
-            "price": {
-              "base": {
-                "marked": 3999,
-                "effective": 2399,
-                "currency_code": "INR"
-              },
-              "converted": {
-                "marked": 3999,
-                "effective": 2399,
-                "currency_code": "INR"
-              }
-            }
-          },
-          "price": {
-            "base": {
-              "add_on": 4798,
-              "marked": 7998,
-              "effective": 4798,
-              "selling": 4798,
-              "currency_code": "INR"
-            },
-            "converted": {
-              "add_on": 4798,
-              "marked": 7998,
-              "effective": 4798,
-              "selling": 4798,
-              "currency_code": "INR"
-            }
-          },
-          "availability": {
-            "sizes": [
-              "10"
-            ],
-            "other_store_quantity": 2,
-            "out_of_stock": false,
-            "deliverable": true,
-            "is_valid": true
-          },
-          "product": {
-            "type": "product",
-            "uid": 751083,
-            "name": "Carson 2",
-            "slug": "puma-carson-2-751083-6ad98d",
-            "brand": {
-              "uid": 9,
-              "name": "Puma"
-            },
-            "categories": [
-              {
-                "uid": 165,
-                "name": "Outdoor Sports Shoes"
-              }
-            ],
-            "images": [
-              {
-                "aspect_ratio": "16:25",
-                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/9_19100302/1_1542807042296.jpg",
-                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/9_19100302/1_1542807042296.jpg"
-              }
-            ],
-            "action": {
-              "type": "product",
-              "url": "https://api.addsale.com/platform/content/v1/products/puma-carson-2-751083-6ad98d/",
-              "query": {
-                "product_slug": [
-                  "puma-carson-2-751083-6ad98d"
-                ]
-              }
-            }
-          },
-          "coupon_message": "",
-          "quantity": 2,
-          "message": "",
-          "bulk_offer": {},
-          "discount": "41% OFF"
-        },
-        {
-          "key": "246228_S",
-          "article": {
-            "type": "article",
-            "uid": "46_235_TM62_M11029ONDSXNS_S",
-            "size": "S",
-            "seller": {
-              "uid": 46,
-              "name": "RELIANCE BRANDS LIMITED"
-            },
-            "store": {
-              "uid": 4550,
-              "name": "VR Mall"
-            },
-            "quantity": 1,
-            "price": {
-              "base": {
-                "marked": 4490,
-                "effective": 4490,
-                "currency_code": "INR"
-              },
-              "converted": {
-                "marked": 4490,
-                "effective": 4490,
-                "currency_code": "INR"
-              }
-            }
-          },
-          "price": {
-            "base": {
-              "add_on": 4490,
-              "marked": 4490,
-              "effective": 4490,
-              "selling": 4490,
-              "currency_code": "INR"
-            },
-            "converted": {
-              "add_on": 4490,
-              "marked": 4490,
-              "effective": 4490,
-              "selling": 4490,
-              "currency_code": "INR"
-            }
-          },
-          "availability": {
-            "sizes": [
-              "L",
-              "M",
-              "S",
-              "XL",
-              "XXL"
-            ],
-            "other_store_quantity": 0,
-            "out_of_stock": false,
-            "deliverable": true,
-            "is_valid": true
-          },
-          "product": {
-            "type": "product",
-            "uid": 246228,
-            "name": "Blue Solid T-Shirt",
-            "slug": "superdry-blue-solid-t-shirt-2",
-            "brand": {
-              "uid": 235,
-              "name": "Superdry"
-            },
-            "categories": [
-              {
-                "uid": 192,
-                "name": "T-Shirts"
-              }
-            ],
-            "images": [
-              {
-                "aspect_ratio": "16:25",
-                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/235_M11029ONDSXNS/1.jpg",
-                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/235_M11029ONDSXNS/1.jpg"
-              }
-            ],
-            "action": {
-              "type": "product",
-              "url": "https://api.addsale.com/platform/content/v1/products/superdry-blue-solid-t-shirt-2/",
-              "query": {
-                "product_slug": [
-                  "superdry-blue-solid-t-shirt-2"
-                ]
-              }
-            }
-          },
-          "coupon_message": "",
-          "quantity": 1,
-          "message": "",
-          "bulk_offer": {},
-          "discount": ""
-        },
-        {
-          "key": "443175_S",
-          "article": {
-            "type": "article",
-            "uid": "162_207_1271_LJ03LBLUDN88_S",
-            "size": "S",
-            "seller": {
-              "uid": 162,
-              "name": "GO FASHION INDIA PRIVATE LIMITED"
-            },
-            "store": {
-              "uid": 5784,
-              "name": "Vega City mall"
-            },
-            "quantity": 3,
-            "price": {
-              "base": {
-                "marked": 1599,
-                "effective": 1599,
-                "currency_code": "INR"
-              },
-              "converted": {
-                "marked": 1599,
-                "effective": 1599,
-                "currency_code": "INR"
-              }
-            }
-          },
-          "price": {
-            "base": {
-              "add_on": 1599,
-              "marked": 1599,
-              "effective": 1599,
-              "selling": 1599,
-              "currency_code": "INR"
-            },
-            "converted": {
-              "add_on": 1599,
-              "marked": 1599,
-              "effective": 1599,
-              "selling": 1599,
-              "currency_code": "INR"
-            }
-          },
-          "availability": {
-            "sizes": [
-              "XL",
-              "M",
-              "L",
-              "S"
-            ],
-            "other_store_quantity": 8,
-            "out_of_stock": false,
-            "deliverable": true,
-            "is_valid": true
-          },
-          "product": {
-            "type": "product",
-            "uid": 443175,
-            "name": "Light Blue Denim Jeggings",
-            "slug": "go-colors-light-blue-denim-jeggings-443175-3c688c",
-            "brand": {
-              "uid": 207,
-              "name": "Go Colors"
-            },
-            "categories": [
-              {
-                "uid": 267,
-                "name": "Jeggings"
-              }
-            ],
-            "images": [
-              {
-                "aspect_ratio": "16:25",
-                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/207_LJ03LBLUDN88/1_1512382513548.jpg",
-                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/207_LJ03LBLUDN88/1_1512382513548.jpg"
-              }
-            ],
-            "action": {
-              "type": "product",
-              "url": "https://api.addsale.com/platform/content/v1/products/go-colors-light-blue-denim-jeggings-443175-3c688c/",
-              "query": {
-                "product_slug": [
-                  "go-colors-light-blue-denim-jeggings-443175-3c688c"
-                ]
-              }
-            }
-          },
-          "coupon_message": "",
-          "quantity": 1,
-          "message": "",
-          "bulk_offer": {},
-          "discount": ""
-        },
-        {
-          "key": "778937_OS",
-          "article": {
-            "type": "article",
-            "uid": "686_963_IC68601_PWUPC01977_OS",
-            "size": "OS",
-            "seller": {
-              "uid": 686,
-              "name": "INDUS CORPORATION"
-            },
-            "store": {
-              "uid": 5059,
-              "name": "Vidyaranyapura Main Road"
-            },
-            "quantity": 3,
-            "price": {
-              "base": {
-                "marked": 3399,
-                "effective": 3059,
-                "currency_code": "INR"
-              },
-              "converted": {
-                "marked": 3399,
-                "effective": 3059,
-                "currency_code": "INR"
-              }
-            }
-          },
-          "price": {
-            "base": {
-              "add_on": 3059,
-              "marked": 3399,
-              "effective": 3059,
-              "selling": 3059,
-              "currency_code": "INR"
-            },
-            "converted": {
-              "add_on": 3059,
-              "marked": 3399,
-              "effective": 3059,
-              "selling": 3059,
-              "currency_code": "INR"
-            }
-          },
-          "availability": {
-            "sizes": [
-              "OS"
-            ],
-            "other_store_quantity": 2,
-            "out_of_stock": false,
-            "deliverable": true,
-            "is_valid": true
-          },
-          "product": {
-            "type": "product",
-            "uid": 778937,
-            "name": "Colourful Carnival Bouncer",
-            "slug": "fisher-price-colourful-carnival-bouncer-778937-fafa1f",
-            "brand": {
-              "uid": 963,
-              "name": "Fisher-Price"
-            },
-            "categories": [
-              {
-                "uid": 576,
-                "name": "Cradles"
-              }
-            ],
-            "images": [
-              {
-                "aspect_ratio": "16:25",
-                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/963_PWUPC01977/1_1545308400588.jpg",
-                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/963_PWUPC01977/1_1545308400588.jpg"
-              }
-            ],
-            "action": {
-              "type": "product",
-              "url": "https://api.addsale.com/platform/content/v1/products/fisher-price-colourful-carnival-bouncer-778937-fafa1f/",
-              "query": {
-                "product_slug": [
-                  "fisher-price-colourful-carnival-bouncer-778937-fafa1f"
-                ]
-              }
-            }
-          },
-          "coupon_message": "",
-          "quantity": 1,
-          "message": "",
-          "bulk_offer": {},
-          "discount": "11% OFF"
-        }
-      ],
-      "delivery_charge_info": "",
-      "coupon_text": "View all offers",
-      "buy_now": false,
-      "cart_id": 7927,
-      "uid": "7927",
-      "gstin": null,
-      "checkout_mode": "self",
-      "last_modified": "Tue, 03 Sep 2019 06:00:43 GMT",
-      "restrict_checkout": false,
-      "is_valid": true
-    },
-    "result": {}
-  }
-}
-```
-
-Sorry, item is out of stock
-```json
-{
-  "value": {
-    "message": "Sorry, item is out of stock",
-    "success": false,
-    "cart": {
-      "breakup_values": {
-        "raw": {
-          "cod_charge": 0,
-          "convenience_fee": 0,
-          "coupon": 0,
-          "delivery_charge": 0,
-          "discount": -202000,
-          "fynd_cash": 0,
-          "gst_charges": 4804.71,
-          "mrp_total": 302899,
-          "subtotal": 100899,
-          "total": 100899,
-          "vog": 96094.29,
-          "you_saved": 0
-        },
-        "coupon": {
-          "type": "cash",
-          "code": "",
-          "uid": null,
-          "value": 0,
-          "is_applied": false,
-          "message": "Sorry! Invalid Coupon"
-        },
-        "display": [
-          {
-            "display": "MRP Total",
-            "key": "mrp_total",
-            "value": 302899,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Discount",
-            "key": "discount",
-            "value": -202000,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Subtotal",
-            "key": "subtotal",
-            "value": 100899,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Total",
-            "key": "total",
-            "value": 100899,
-            "currency_code": "INR"
-          }
-        ],
-        "loyalty_points": {
-          "total": 0,
-          "applicable": 0,
-          "is_applied": false,
-          "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
-        }
-      },
-      "items": [
-        {
-          "bulk_offer": {},
-          "discount": "67% OFF",
-          "parent_item_identifiers": {
-            "identifier": "ZASFF",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS"
-          },
-          "article": {
-            "type": "article",
-            "uid": "604_902_SSTC60401_636BLUE_1",
-            "size": "1",
-            "seller": {
-              "uid": 604,
-              "name": "SHRI SHANTINATH TRADING COMPANY"
-            },
-            "store": {
-              "uid": 4579,
-              "name": "Gandhi Nagar"
-            },
-            "quantity": 108,
-            "price": {
-              "base": {
-                "marked": 2999,
-                "effective": 999,
-                "currency_code": "INR"
-              },
-              "converted": {
-                "marked": 2999,
-                "effective": 999,
-                "currency_code": "INR"
-              }
-            }
-          },
-          "coupon_message": "",
-          "key": "707569_1",
-          "availability": {
-            "sizes": [
-              "1",
-              "8",
-              "7",
-              "2",
-              "9",
-              "5",
-              "3",
-              "6"
-            ],
-            "other_store_quantity": 7,
-            "out_of_stock": false,
-            "deliverable": true,
-            "is_valid": true
-          },
-          "product": {
-            "type": "product",
-            "uid": 707569,
-            "name": "Blue and Gold Printed Ethnic Set",
-            "slug": "aj-dezines-blue-and-gold-printed-ethnic-set-707569-bff01a",
-            "brand": {
-              "uid": 902,
-              "name": ""
-            },
-            "categories": [
-              {
-                "uid": 525,
-                "name": ""
-              }
-            ],
-            "images": [
-              {
-                "aspect_ratio": "16:25",
-                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/902_636BLUE/1_1540301094877.jpg",
-                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/902_636BLUE/1_1540301094877.jpg"
-              }
-            ],
-            "action": {
-              "type": "product",
-              "url": "https://api.addsale.com/v1/products/aj-dezines-blue-and-gold-printed-ethnic-set-707569-bff01a/",
-              "query": {
-                "product_slug": [
-                  "aj-dezines-blue-and-gold-printed-ethnic-set-707569-bff01a"
-                ]
-              }
-            }
-          },
-          "price": {
-            "base": {
-              "add_on": 100899,
-              "marked": 302899,
-              "effective": 100899,
-              "selling": 100899,
-              "currency_code": "INR"
-            },
-            "converted": {
-              "add_on": 100899,
-              "marked": 302899,
-              "effective": 100899,
-              "selling": 100899,
-              "currency_code": "INR"
-            }
-          },
-          "message": "",
-          "quantity": 101
-        }
-      ],
-      "delivery_charge_info": "",
-      "coupon_text": "View all offers",
-      "buy_now": false,
-      "cart_id": 54,
-      "uid": "54",
-      "gstin": null,
-      "checkout_mode": "self",
-      "restrict_checkout": false,
-      "is_valid": false,
-      "last_modified": "Tue, 03 Sep 2019 09:55:40 GMT"
-    },
-    "result": {}
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateCart
-Update items in the abandoned cart
-
-```golang
-
-data, err := Cart.UpdateCart(CompanyID, ApplicationID, CartID, xQuery, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Current company id | 
-
-
-| ApplicationID | string | Current Application _id | 
-
-
-| CartID | string | Current Cart _id | 
-
-
-
-| xQuery | struct | Includes properties such as `B`
-
-| body |  UpdateCartRequest | "Request body" 
-
-<p>Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/:slug/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/:identifier​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
-
-*Success Response:*
-
-
-
-Success. Updates and returns a cart object as shown below. Refer `UpdateCartDetailResponse` for more details.
-
-
-Schema: `UpdateCartDetailResponse`
-
-
-*Examples:*
-
-
-Nothing updated
-```json
-{
-  "value": {
-    "cart": {
-      "breakup_values": {
-        "raw": {
-          "cod_charge": 0,
-          "convenience_fee": 0,
-          "coupon": 0,
-          "delivery_charge": 0,
-          "discount": -202000,
-          "fynd_cash": 0,
-          "gst_charges": 4804.71,
-          "mrp_total": 302899,
-          "subtotal": 100899,
-          "total": 100899,
-          "vog": 96094.29,
-          "you_saved": 0
-        },
-        "coupon": {
-          "type": "cash",
-          "code": "",
-          "uid": null,
-          "value": 0,
-          "is_applied": false,
-          "message": "Sorry! Invalid Coupon"
-        },
-        "display": [
-          {
-            "display": "MRP Total",
-            "key": "mrp_total",
-            "value": 302899,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Discount",
-            "key": "discount",
-            "value": -202000,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Subtotal",
-            "key": "subtotal",
-            "value": 100899,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Total",
-            "key": "total",
-            "value": 100899,
-            "currency_code": "INR"
-          }
-        ],
-        "loyalty_points": {
-          "total": 0,
-          "applicable": 0,
-          "is_applied": false,
-          "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
-        }
-      },
-      "items": [
-        {
-          "bulk_offer": {},
-          "discount": "67% OFF",
-          "parent_item_identifiers": {
-            "identifier": "ZASFF",
-            "parent_item_id": 7501190,
-            "parent_item_size": "OS"
-          },
-          "article": {
-            "type": "article",
-            "uid": "604_902_SSTC60401_636BLUE_1",
-            "size": "1",
-            "seller": {
-              "uid": 604,
-              "name": "SHRI SHANTINATH TRADING COMPANY"
-            },
-            "store": {
-              "uid": 4579,
-              "name": "Gandhi Nagar"
-            },
-            "quantity": 108,
-            "price": {
-              "base": {
-                "marked": 2999,
-                "effective": 999,
-                "currency_code": "INR"
-              },
-              "converted": {
-                "marked": 2999,
-                "effective": 999,
-                "currency_code": "INR"
-              }
-            }
-          },
-          "coupon_message": "",
-          "key": "707569_1",
-          "availability": {
-            "sizes": [
-              "1",
-              "8",
-              "7",
-              "2",
-              "9",
-              "5",
-              "3",
-              "6"
-            ],
-            "other_store_quantity": 7,
-            "out_of_stock": false,
-            "deliverable": true,
-            "is_valid": true
-          },
-          "product": {
-            "type": "product",
-            "uid": 707569,
-            "name": "Blue and Gold Printed Ethnic Set",
-            "slug": "aj-dezines-blue-and-gold-printed-ethnic-set-707569-bff01a",
-            "brand": {
-              "uid": 902,
-              "name": ""
-            },
-            "categories": [
-              {
-                "uid": 525,
-                "name": ""
-              }
-            ],
-            "images": [
-              {
-                "aspect_ratio": "16:25",
-                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/902_636BLUE/1_1540301094877.jpg",
-                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/902_636BLUE/1_1540301094877.jpg"
-              }
-            ],
-            "action": {
-              "type": "product",
-              "url": "https://api.addsale.com/v1/products/aj-dezines-blue-and-gold-printed-ethnic-set-707569-bff01a/",
-              "query": {
-                "product_slug": [
-                  "aj-dezines-blue-and-gold-printed-ethnic-set-707569-bff01a"
-                ]
-              }
-            }
-          },
-          "price": {
-            "base": {
-              "add_on": 100899,
-              "marked": 302899,
-              "effective": 100899,
-              "selling": 100899,
-              "currency_code": "INR"
-            },
-            "converted": {
-              "add_on": 100899,
-              "marked": 302899,
-              "effective": 100899,
-              "selling": 100899,
-              "currency_code": "INR"
-            }
-          },
-          "message": "",
-          "quantity": 101
-        }
-      ],
-      "delivery_charge_info": "",
-      "coupon_text": "View all offers",
-      "buy_now": false,
-      "cart_id": 54,
-      "uid": "54",
-      "gstin": null,
-      "checkout_mode": "self",
-      "restrict_checkout": false,
-      "is_valid": true,
-      "last_modified": "Tue, 03 Sep 2019 10:19:20 GMT"
-    },
-    "result": {
-      "707569_90": {
-        "success": true,
-        "message": "Nothing updated"
-      }
-    },
-    "message": "Nothing updated",
-    "success": true
-  }
-}
-```
-
-Item updated in the cart
-```json
-{
-  "value": {
-    "cart": {
-      "breakup_values": {
-        "raw": {
-          "sub_total": 8000,
-          "subtotal": 8000,
-          "coupon": 0,
-          "promotion": -100,
-          "delivery_charge": 100,
-          "you_saved": 0,
-          "fynd_cash": 0,
-          "cod_charge": 0,
-          "total": 8000,
-          "gst_charges": 0,
-          "vog": 0,
-          "convenience_fee": 0,
-          "mrp_total": 20010,
-          "discount": -12010
-        },
-        "coupon": {
-          "type": "cash",
-          "code": "",
-          "uid": null,
-          "value": 0,
-          "is_applied": false,
-          "message": "Sorry! Invalid coupon"
-        },
-        "loyalty_points": {
-          "total": 0,
-          "applicable": 0,
-          "is_applied": false,
-          "description": "Your cashback, reward points, and refund amount get credited to Fynd Cash which can be redeemed while placing an order.",
-          "message": "Reward point not applicable with Coupon"
-        },
-        "display": [
-          {
-            "display": "MRP Total",
-            "key": "mrp_total",
-            "original": 20010,
-            "attr": "mrp_total",
-            "value": 20010,
-            "currency_code": "INR",
-            "currency_symbol": "₹",
-            "message": []
-          },
-          {
-            "display": "Discount",
-            "key": "discount",
-            "original": -12010,
-            "attr": "discount",
-            "value": -12010,
-            "currency_code": "INR",
-            "currency_symbol": "₹",
-            "message": []
-          },
-          {
-            "display": "Subtotal",
-            "key": "subtotal",
-            "original": 8000,
-            "attr": "subtotal",
-            "value": 8000,
-            "currency_code": "INR",
-            "currency_symbol": "₹",
-            "message": []
-          },
-          {
-            "display": "Promotion",
-            "key": "promotion",
-            "original": -100,
-            "attr": "promotion",
-            "value": -100,
-            "currency_code": "INR",
-            "currency_symbol": "₹",
-            "message": []
-          },
-          {
-            "display": "Delivery Charge",
-            "key": "delivery_charge",
-            "original": 100,
-            "attr": "delivery_charge",
-            "value": 100,
-            "currency_code": "INR",
-            "currency_symbol": "₹",
-            "message": [
-              "Delivery charges applicable ₹100.00 on order upto ₹10,000.00",
-              "Free delivery on order above ₹10,000.00"
-            ]
-          },
-          {
-            "display": "Total",
-            "key": "total",
-            "original": 8000,
-            "attr": "total",
-            "value": 8000,
-            "currency_code": "INR",
-            "currency_symbol": "₹",
-            "message": []
-          }
-        ]
-      },
-      "items": [
-        {
-          "parent_item_identifiers": {
-            "identifier": null,
-            "parent_item_size": null,
-            "parent_item_id": null
-          },
-          "article": {
-            "type": "article",
-            "uid": "618c1a6874b93908c98f6d18",
-            "size": "XL",
-            "product_group_tags": null,
-            "seller": {
-              "uid": 61,
-              "name": "FUCHSIA VINE DESIGNS PRIVATE LIMITED"
-            },
-            "store": {
-              "uid": 11491,
-              "name": "Store46"
-            },
-            "quantity": 200,
-            "price": {
-              "base": {
-                "marked": 2001,
-                "effective": 800,
-                "selling": 800,
-                "currency_code": "INR",
-                "currency_symbol": "₹"
-              },
-              "converted": {
-                "marked": 2001,
-                "effective": 800,
-                "selling": 800,
-                "currency_code": "INR",
-                "currency_symbol": "INR"
-              }
-            },
-            "extra_meta": {}
-          },
-          "product": {
-            "type": "product",
-            "uid": 75252592,
-            "name": "Nike Yellow Top",
-            "slug": "nike-black-top",
-            "brand": {
-              "uid": 18,
-              "name": "Nike"
-            },
-            "categories": [
-              {
-                "uid": 258,
-                "name": "Blouson Top"
-              }
-            ],
-            "attributes": {
-              "hsn_code": "62040000",
-              "short_description": "test description1",
-              "essential": "No",
-              "item_code": "1304678617",
-              "gender": "Women",
-              "currency": "INR",
-              "media": [
-                {
-                  "url": "https://hdn-1.addsale.com/addsale/products/pictures/item/free/original/oy168nSHP-Nike-Black-Top.jpeg",
-                  "type": "image"
-                }
-              ],
-              "marketer-address": "Tops Range",
-              "marketer-name": "Bandra(W), Link Road",
-              "brand_name": "Nike"
-            },
-            "images": [
-              {
-                "aspect_ratio": "16:25",
-                "url": "https://hdn-1.addsale.com/addsale/products/pictures/item/free/original/oy168nSHP-Nike-Black-Top.jpeg",
-                "secure_url": "https://hdn-1.addsale.com/addsale/products/pictures/item/free/original/oy168nSHP-Nike-Black-Top.jpeg"
-              }
-            ],
-            "action": {
-              "type": "product",
-              "url": "https://api.fyndx0.de/platform/content/v1/products/nike-black-top/",
-              "query": {
-                "product_slug": [
-                  "nike-black-top"
-                ]
-              }
-            },
-            "item_code": "1304678617",
-            "_custom_json": {}
-          },
-          "message": "",
-          "price_per_unit": {
-            "base": {
-              "marked": 2001,
-              "effective": 800,
-              "selling_price": 800,
-              "currency_code": "INR",
-              "currency_symbol": "₹"
-            },
-            "converted": {
-              "marked": 2001,
-              "effective": 800,
-              "selling_price": 800,
-              "currency_code": "INR",
-              "currency_symbol": "₹"
-            }
-          },
-          "promo_meta": {},
-          "bulk_offer": {},
-          "price": {
-            "base": {
-              "add_on": 8000,
-              "marked": 20010,
-              "effective": 8000,
-              "selling": 8000,
-              "currency_code": "INR",
-              "currency_symbol": "₹"
-            },
-            "converted": {
-              "add_on": 8000,
-              "marked": 20010,
-              "effective": 8000,
-              "selling": 8000,
-              "currency_code": "INR",
-              "currency_symbol": "₹"
-            }
-          },
-          "is_set": false,
-          "identifiers": {
-            "identifier": "SfOmcAtTR4ut4pI_eVU6FQ"
-          },
-          "discount": "60% OFF",
-          "moq": {},
-          "availability": {
-            "sizes": [
-              "S",
-              "XL",
-              "L"
-            ],
-            "other_store_quantity": 984,
-            "out_of_stock": false,
-            "deliverable": true,
-            "is_valid": true,
-            "available_sizes": [
-              {
-                "is_available": true,
-                "display": "S",
-                "value": "S"
-              },
-              {
-                "is_available": true,
-                "display": "XL",
-                "value": "XL"
-              },
-              {
-                "is_available": false,
-                "display": "CLL",
-                "value": "CLL"
-              },
-              {
-                "is_available": true,
-                "display": "L",
-                "value": "L"
-              },
-              {
-                "is_available": false,
-                "display": "XLL",
-                "value": "XLL"
-              },
-              {
-                "is_available": false,
-                "display": "XLLL",
-                "value": "XLLL"
-              }
-            ]
-          },
-          "quantity": 10,
-          "promotions_applied": [
-            {
-              "promo_id": "62da8b75e951ea5e67b1454b",
-              "amount": 10,
-              "article_quantity": 10,
-              "mrp_promotion": false,
-              "promotion_type": "shipping_price",
-              "offer_text": "Free shipping 22/07/2"
-            }
-          ],
-          "key": "75252592_XL",
-          "delivery_promise": null,
-          "coupon_message": ""
-        }
-      ],
-      "cart_id": 22251,
-      "id": "62d4ff76d6aec8db897de407",
-      "uid": "22251",
-      "buy_now": false,
-      "gstin": null,
-      "comment": "",
-      "checkout_mode": "self",
-      "restrict_checkout": false,
-      "is_valid": true,
-      "currency": {
-        "code": "INR",
-        "symbol": "₹"
-      },
-      "last_modified": "Mon, 01 Aug 2022 09:33:20 GMT"
-    },
-    "message": "Item updated in the bag",
-    "success": true
-  }
-}
-```
 
 
 
