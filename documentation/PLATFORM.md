@@ -9,7 +9,7 @@
 * [Billing](#Billing) - Handle platform subscription 
 * [Communication](#Communication) - Manages email, sms, push notifications sent to users 
 * [Payment](#Payment) - Collect payment through many payment gateway i.e Stripe, Razorpay, Juspay etc.into Fynd or Self account 
-* [Order](#Order) - Handles all platform order and shipment api(s) 
+* [Order](#Order) - Handles Platform websites OMS 
 * [Catalog](#Catalog) - Catalog - Platform Front API's' API's allows you to access list of products, prices, seller details, similar features, variants and many more useful features.  
 * [CompanyProfile](#CompanyProfile) -  
 * [FileStorage](#FileStorage) - File Storage 
@@ -23,7 +23,6 @@
 * [Partner](#Partner) - Partner configuration apis 
 * [Webhook](#Webhook) - Webhook dispatcher with retry and one event to many subscriber vice versa 
 * [AuditTrail](#AuditTrail) - Audit Logging Service that logs the crucial updates on the Platform 
-* [DocumentEngine](#DocumentEngine) - Handles financial pdf generation of Fulfilment 
 
 ----
 ----
@@ -267,64 +266,38 @@
 
 * [Order](#Order)
   * Methods
-    * [getShipments](#getshipments)
-    * [getShipmentById](#getshipmentbyid)
-    * [getOrderById](#getorderbyid)
-    * [getLaneConfig](#getlaneconfig)
-    * [getApplicationShipments](#getapplicationshipments)
-    * [getOrders](#getorders)
-    * [getMetricCount](#getmetriccount)
-    * [getAppOrderShipmentDetails](#getappordershipmentdetails)
-    * [trackPlatformShipment](#trackplatformshipment)
-    * [getfilters](#getfilters)
-    * [createShipmentReport](#createshipmentreport)
-    * [getReportsShipmentListing](#getreportsshipmentlisting)
-    * [upsertJioCode](#upsertjiocode)
-    * [getBulkInvoice](#getbulkinvoice)
-    * [getBulkInvoiceLabel](#getbulkinvoicelabel)
-    * [getBulkShipmentExcelFile](#getbulkshipmentexcelfile)
-    * [getBulkList](#getbulklist)
-    * [getManifestList](#getmanifestlist)
-    * [getManifestDetailsWithShipments](#getmanifestdetailswithshipments)
-    * [getBulkActionFailedReport](#getbulkactionfailedreport)
-    * [getShipmentReasons](#getshipmentreasons)
-    * [bulkActionProcessXlsxFile](#bulkactionprocessxlsxfile)
-    * [bulkActionDetails](#bulkactiondetails)
-    * [getBagById](#getbagbyid)
-    * [getBags](#getbags)
-    * [invalidateShipmentCache](#invalidateshipmentcache)
-    * [reassignLocation](#reassignlocation)
-    * [updateShipmentLock](#updateshipmentlock)
-    * [getAnnouncements](#getannouncements)
-    * [updateAddress](#updateaddress)
-    * [click2Call](#click2call)
-    * [updateShipmentStatus](#updateshipmentstatus)
-    * [processManifest](#processmanifest)
-    * [dispatchManifest](#dispatchmanifest)
-    * [getRoleBasedActions](#getrolebasedactions)
-    * [getShipmentHistory](#getshipmenthistory)
-    * [sendSmsNinja](#sendsmsninja)
-    * [platformManualAssignDPToShipment](#platformmanualassigndptoshipment)
-    * [updatePackagingDimensions](#updatepackagingdimensions)
-    * [createOrder](#createorder)
-    * [createChannelConfig](#createchannelconfig)
-    * [getChannelConfig](#getchannelconfig)
-    * [uploadConsent](#uploadconsent)
-    * [orderUpdate](#orderupdate)
-    * [checkOrderStatus](#checkorderstatus)
-    * [sendSmsNinjaPlatform](#sendsmsninjaplatform)
+    * [shipmentStatusUpdate](#shipmentstatusupdate)
+    * [activityStatus](#activitystatus)
+    * [storeProcessShipmentUpdate](#storeprocessshipmentupdate)
+    * [checkRefund](#checkrefund)
+    * [shipmentBagsCanBreak](#shipmentbagscanbreak)
+    * [getOrdersByCompanyId](#getordersbycompanyid)
+    * [getOrderLanesCountByCompanyId](#getorderlanescountbycompanyid)
+    * [getOrderDetails](#getorderdetails)
+    * [getOrderDetails](#getorderdetails)
+    * [getPicklistOrdersByCompanyId](#getpicklistordersbycompanyid)
+    * [trackShipmentPlatform](#trackshipmentplatform)
+    * [trackOrder](#trackorder)
+    * [failedOrders](#failedorders)
+    * [reprocessOrder](#reprocessorder)
+    * [updateShipment](#updateshipment)
+    * [getPlatformShipmentReasons](#getplatformshipmentreasons)
+    * [getShipmentTrackDetails](#getshipmenttrackdetails)
+    * [getShipmentAddress](#getshipmentaddress)
+    * [updateShipmentAddress](#updateshipmentaddress)
+    * [getOrdersByApplicationId](#getordersbyapplicationid)
     
 
 * [Catalog](#Catalog)
   * Methods
     * [getSearchKeywords](#getsearchkeywords)
-    * [deleteSearchKeywords](#deletesearchkeywords)
     * [updateSearchKeywords](#updatesearchkeywords)
+    * [deleteSearchKeywords](#deletesearchkeywords)
     * [getAllSearchKeyword](#getallsearchkeyword)
     * [createCustomKeyword](#createcustomkeyword)
     * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
-    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [updateAutocompleteKeyword](#updateautocompletekeyword)
+    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [getProductBundle](#getproductbundle)
@@ -340,12 +313,12 @@
     * [getConfigurationMetadata](#getconfigurationmetadata)
     * [getGroupConfigurations](#getgroupconfigurations)
     * [createGroupConfiguration](#creategroupconfiguration)
-    * [deleteGroupConfiguration](#deletegroupconfiguration)
     * [updateGroupConfiguration](#updategroupconfiguration)
+    * [deleteGroupConfiguration](#deletegroupconfiguration)
     * [getListingConfigurations](#getlistingconfigurations)
     * [createListingConfiguration](#createlistingconfiguration)
-    * [deleteListingConfiguration](#deletelistingconfiguration)
     * [updateListingConfiguration](#updatelistingconfiguration)
+    * [deleteListingConfiguration](#deletelistingconfiguration)
     * [updateAllowSingle](#updateallowsingle)
     * [updateDefaultSort](#updatedefaultsort)
     * [getCatalogConfiguration](#getcatalogconfiguration)
@@ -357,8 +330,8 @@
     * [getAllCollections](#getallcollections)
     * [createCollection](#createcollection)
     * [getCollectionDetail](#getcollectiondetail)
-    * [deleteCollection](#deletecollection)
     * [updateCollection](#updatecollection)
+    * [deleteCollection](#deletecollection)
     * [getCollectionItems](#getcollectionitems)
     * [addCollectionItems](#addcollectionitems)
     * [getCatalogInsights](#getcataloginsights)
@@ -391,14 +364,14 @@
     * [createProduct](#createproduct)
     * [getProductAttributes](#getproductattributes)
     * [getProduct](#getproduct)
-    * [deleteProduct](#deleteproduct)
     * [editProduct](#editproduct)
+    * [deleteProduct](#deleteproduct)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
     * [getProductBulkUploadHistory](#getproductbulkuploadhistory)
     * [createBulkProductUploadJob](#createbulkproductuploadjob)
-    * [deleteProductBulkJob](#deleteproductbulkjob)
     * [createProductsInBulk](#createproductsinbulk)
+    * [deleteProductBulkJob](#deleteproductbulkjob)
     * [getProductTags](#getproducttags)
     * [getProductAssetsInBulk](#getproductassetsinbulk)
     * [createProductAssetsInBulk](#createproductassetsinbulk)
@@ -410,13 +383,13 @@
     * [deleteInventory](#deleteinventory)
     * [getInventoryBulkUploadHistory](#getinventorybulkuploadhistory)
     * [createBulkInventoryJob](#createbulkinventoryjob)
-    * [deleteBulkInventoryJob](#deletebulkinventoryjob)
     * [createBulkInventory](#createbulkinventory)
+    * [deleteBulkInventoryJob](#deletebulkinventoryjob)
     * [getInventoryExport](#getinventoryexport)
     * [createInventoryExportJob](#createinventoryexportjob)
     * [exportInventoryConfig](#exportinventoryconfig)
-    * [deleteRealtimeInventory](#deleterealtimeinventory)
     * [updateRealtimeInventory](#updaterealtimeinventory)
+    * [deleteRealtimeInventory](#deleterealtimeinventory)
     * [updateInventories](#updateinventories)
     * [getAllHsnCodes](#getallhsncodes)
     * [createHsnCode](#createhsncode)
@@ -634,19 +607,6 @@
     * [createAuditLog](#createauditlog)
     * [getAuditLog](#getauditlog)
     * [getEntityTypes](#getentitytypes)
-    
-
-* [DocumentEngine](#DocumentEngine)
-  * Methods
-    * [generateBulkPackageLabel](#generatebulkpackagelabel)
-    * [generateBulkBoxLabel](#generatebulkboxlabel)
-    * [generateBulkShipmentLabel](#generatebulkshipmentlabel)
-    * [generateNoc](#generatenoc)
-    * [getLabelStatus](#getlabelstatus)
-    * [getNocStatus](#getnocstatus)
-    * [getPresignedURL](#getpresignedurl)
-    * [getLabelPresignedURL](#getlabelpresignedurl)
-    * [getNocPresignedURL](#getnocpresignedurl)
     
 
 
@@ -51998,70 +51958,32 @@ Schema: `PaymentConfirmationResponse`
 ## Order
 
 
-#### getShipments
-
+#### shipmentStatusUpdate
+Update status of Shipment
 
 ```golang
 
-data, err := Order.GetShipments(CompanyID, xQuery);
+data, err := Order.ShipmentStatusUpdate(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | string | Company Id | 
 
 
+| body |  UpdateShipmentStatusBody | "Request body" 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `SearchValue`, `SearchID`, `FromDate`, `ToDate`, `DpIds`, `OrderingCompanyID`, `Stores`, `SalesChannel`, `RequestByExt`, `PageNo`, `PageSize`, `IsPrioritySort`, `ExcludeLockedShipments`, `PaymentMethods`, `ChannelShipmentID`, `ChannelOrderID`, `CustomMeta`
-
-
-
+Update Shipment Status
 
 *Success Response:*
 
 
 
-We are processing the report!
+Success
 
 
-Schema: `ShipmentInternalPlatformViewResponse`
+Schema: `UpdateShipmentStatusResponse`
 
 
 
@@ -52074,40 +51996,34 @@ Schema: `ShipmentInternalPlatformViewResponse`
 ---
 
 
-#### getShipmentById
-
+#### activityStatus
+Get Activity Status
 
 ```golang
 
-data, err := Order.GetShipmentById(CompanyID, xQuery);
+data, err := Order.ActivityStatus(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | string | Company Id | 
 
 
 
+| xQuery | struct | Includes properties such as `BagID`
 
 
-
-
-
-
-| xQuery | struct | Includes properties such as `ChannelShipmentID`, `ShipmentID`, `OrderingCompanyID`, `RequestByExt`
-
-
-
+Get Activity Status
 
 *Success Response:*
 
 
 
-We are processing the report!
+Success
 
 
-Schema: `ShipmentInfoResponse`
+Schema: `GetActivityStatus`
 
 
 
@@ -52120,34 +52036,32 @@ Schema: `ShipmentInfoResponse`
 ---
 
 
-#### getOrderById
-
+#### storeProcessShipmentUpdate
+Update Store Process-Shipment
 
 ```golang
 
-data, err := Order.GetOrderById(CompanyID, xQuery);
+data, err := Order.StoreProcessShipmentUpdate(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | string | Company Id | 
 
 
+| body |  UpdateProcessShipmenstRequestBody | "Request body" 
 
-| xQuery | struct | Includes properties such as `OrderID`
-
-
-
+Update Store Process-Shipment
 
 *Success Response:*
 
 
 
-We are processing the report!
+Success
 
 
-Schema: `ShipmentDetailsResponse`
+Schema: `UpdateProcessShipmenstRequestResponse`
 
 
 
@@ -52160,50 +52074,34 @@ Schema: `ShipmentDetailsResponse`
 ---
 
 
-#### getLaneConfig
-
+#### checkRefund
+Check Refund is available or not
 
 ```golang
 
-data, err := Order.GetLaneConfig(CompanyID, xQuery);
+data, err := Order.CheckRefund(CompanyID, ShipmentID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | string | Company Id | 
+
+
+| ShipmentID | string | Shipment Id | 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `SuperLane`, `GroupEntity`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannel`, `PaymentMode`, `BagStatus`
-
-
-
+Check Refund is available or not
 
 *Success Response:*
 
 
 
-Response containing count of shipments of the given status
+Success
 
 
-Schema: `LaneConfigResponse`
+Schema: `Object`
 
 
 
@@ -52216,63 +52114,32 @@ Schema: `LaneConfigResponse`
 ---
 
 
-#### getApplicationShipments
-
+#### shipmentBagsCanBreak
+Decides if Shipment bags can break
 
 ```golang
 
-data, err := Order.GetApplicationShipments(CompanyID, ApplicationID, xQuery);
+data, err := Order.ShipmentBagsCanBreak(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | string | Company Id | 
 
 
-| ApplicationID | string |  | 
+| body |  CanBreakRequestBody | "Request body" 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `SearchID`, `FromDate`, `ToDate`, `DpIds`, `OrderingCompanyID`, `Stores`, `SalesChannel`, `RequestByExt`, `PageNo`, `PageSize`, `CustomerID`, `IsPrioritySort`
-
-
-
+Decides if Shipment bags can break
 
 *Success Response:*
 
 
 
-We are processing the report!
+Success
 
 
-Schema: `ShipmentInternalPlatformViewResponse`
+Schema: `CanBreakResponse`
 
 
 
@@ -52285,18 +52152,18 @@ Schema: `ShipmentInternalPlatformViewResponse`
 ---
 
 
-#### getOrders
-
+#### getOrdersByCompanyId
+Get Orders for company based on Company Id
 
 ```golang
 
-data, err := Order.GetOrders(CompanyID, xQuery);
+data, err := Order.GetOrdersByCompanyId(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | string | Company Id | 
 
 
 
@@ -52322,19 +52189,27 @@ data, err := Order.GetOrders(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `SearchValue`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannel`, `PageNo`, `PageSize`, `IsPrioritySort`, `CustomMeta`
 
 
 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `IsPrioritySort`, `LockStatus`, `UserID`, `Q`, `Stage`, `SalesChannels`, `OrderID`, `Stores`, `DeploymentStores`, `Status`, `Dp`, `FilterType`
+
+
+Get Orders
 
 *Success Response:*
 
 
 
-We are processing the report!
+Success
 
 
-Schema: `OrderListingResponse`
+Schema: `OrderListing`
 
 
 
@@ -52347,36 +52222,54 @@ Schema: `OrderListingResponse`
 ---
 
 
-#### getMetricCount
-
+#### getOrderLanesCountByCompanyId
+Get Order Lanes Count for company based on Company Id
 
 ```golang
 
-data, err := Order.GetMetricCount(CompanyID, xQuery);
+data, err := Order.GetOrderLanesCountByCompanyId(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | string | Company Id | 
 
 
 
 
 
-| xQuery | struct | Includes properties such as `FromDate`, `ToDate`
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `Q`, `Stage`, `SalesChannels`, `OrderID`, `Stores`, `Status`, `FilterType`
+
+
+Get Orders Seperate Lane Count
 
 *Success Response:*
 
 
 
-Response containing count of shipments of the given metrics
+Success
 
 
-Schema: `MetricCountResponse`
+Schema: `OrderLanesCount`
 
 
 
@@ -52389,37 +52282,38 @@ Schema: `MetricCountResponse`
 ---
 
 
-#### getAppOrderShipmentDetails
-
+#### getOrderDetails
+Get Order Details for company based on Company Id and Order Id
 
 ```golang
 
-data, err := Order.GetAppOrderShipmentDetails(CompanyID, ApplicationID, xQuery);
+data, err := Order.GetOrderDetails(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
-
-
-| ApplicationID | string |  | 
+| CompanyID | string | Company Id | 
 
 
 
-| xQuery | struct | Includes properties such as `OrderID`
 
 
 
+
+| xQuery | struct | Includes properties such as `OrderID`, `Next`, `Previous`
+
+
+Get Orders
 
 *Success Response:*
 
 
 
-We render shipment details.
+Success
 
 
-Schema: `ShipmentDetailsResponse`
+Schema: `OrderDetails`
 
 
 
@@ -52432,34 +52326,141 @@ Schema: `ShipmentDetailsResponse`
 ---
 
 
-#### trackPlatformShipment
-Track shipment
+#### getOrderDetails
+Get Order Details for company based on Company Id and Order Id
 
 ```golang
 
-data, err := Order.TrackPlatformShipment(CompanyID, ApplicationID, ShipmentID);
+data, err := Order.GetOrderDetails(CompanyID, ApplicationID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string |  | 
+| CompanyID | string | Company Id | 
 
 
-| ApplicationID | string |  | 
-
-
-| ShipmentID | string |  | 
+| ApplicationID | string | Application Id | 
 
 
 
+
+
+
+
+| xQuery | struct | Includes properties such as `OrderID`, `Next`, `Previous`
+
+
+Get Orders
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `OrderDetails`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPicklistOrdersByCompanyId
+Get Orders for company based on Company Id
+
+```golang
+
+data, err := Order.GetPicklistOrdersByCompanyId(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `Q`, `Stage`, `SalesChannels`, `OrderID`, `Stores`, `Status`, `FilterType`
+
+
+Get Orders
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `OrderPicklistListing`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### trackShipmentPlatform
 Track Shipment by shipment id, for application based on application Id
 
+```golang
+
+data, err := Order.TrackShipmentPlatform(CompanyID, ApplicationID, ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+| ApplicationID | string | Application Id | 
+
+
+| ShipmentID | string | Shipment Id | 
+
+
+
+Shipment Track
+
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `PlatformShipmentTrack` for more details.
+Success
 
 
 Schema: `PlatformShipmentTrack`
@@ -52475,36 +52476,37 @@ Schema: `PlatformShipmentTrack`
 ---
 
 
-#### getfilters
-
+#### trackOrder
+Track Order by order id, for application based on application Id
 
 ```golang
 
-data, err := Order.Getfilters(CompanyID, xQuery);
+data, err := Order.TrackOrder(CompanyID, ApplicationID, OrderID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | string | Company Id | 
+
+
+| ApplicationID | string | Application Id | 
+
+
+| OrderID | string | Order Id | 
 
 
 
-
-
-| xQuery | struct | Includes properties such as `View`, `GroupEntity`
-
-
-
+Order Track
 
 *Success Response:*
 
 
 
-List of filters
+Success
 
 
-Schema: `FiltersResponse`
+Schema: `PlatformOrderTrack`
 
 
 
@@ -52517,36 +52519,34 @@ Schema: `FiltersResponse`
 ---
 
 
-#### createShipmentReport
-
+#### failedOrders
+Get all failed orders application wise
 
 ```golang
 
-data, err := Order.CreateShipmentReport(CompanyID, xQuery);
+data, err := Order.FailedOrders(CompanyID, ApplicationID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | string | Company Id | 
+
+
+| ApplicationID | string | Application Id | 
 
 
 
-
-
-| xQuery | struct | Includes properties such as `FromDate`, `ToDate`
-
-
-
+Failed Orders
 
 *Success Response:*
 
 
 
-We have accepted report generation request.
+Success
 
 
-Schema: `Success`
+Schema: `FailedOrders`
 
 
 
@@ -52559,36 +52559,37 @@ Schema: `Success`
 ---
 
 
-#### getReportsShipmentListing
-
+#### reprocessOrder
+Reprocess order by order id
 
 ```golang
 
-data, err := Order.GetReportsShipmentListing(CompanyID, xQuery);
+data, err := Order.ReprocessOrder(CompanyID, ApplicationID, OrderID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | string | Company Id | 
+
+
+| ApplicationID | string | Application Id | 
+
+
+| OrderID | string | Order Id | 
 
 
 
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-
-
+Order Reprocess
 
 *Success Response:*
 
 
 
-We have are getting the info.
+Success
 
 
-Schema: `OmsReports`
+Schema: `UpdateOrderReprocessResponse`
 
 
 
@@ -52601,444 +52602,81 @@ Schema: `OmsReports`
 ---
 
 
-#### upsertJioCode
-
+#### updateShipment
+Use this API to update the shipment using its shipment ID.
 
 ```golang
 
-data, err := Order.UpsertJioCode(CompanyID, body);
+data, err := Order.UpdateShipment(CompanyID, ApplicationID, ShipmentID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | string | Company Id | 
 
 
-| body |  JioCodeUpsertPayload | "Request body" 
-
-
-
-*Success Response:*
-
-
-
-We are processing the report!
-
-
-Schema: `JioCodeUpsertResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getBulkInvoice
-
-
-```golang
-
-data, err := Order.GetBulkInvoice(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `BatchID`, `DocType`
-
-
-
-
-*Success Response:*
-
-
-
-We are processing the file!
-
-
-Schema: `BulkInvoicingResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getBulkInvoiceLabel
-
-
-```golang
-
-data, err := Order.GetBulkInvoiceLabel(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-| xQuery | struct | Includes properties such as `BatchID`
-
-
-
-
-*Success Response:*
-
-
-
-We are processing the file!
-
-
-Schema: `BulkInvoiceLabelResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getBulkShipmentExcelFile
-
-
-```golang
-
-data, err := Order.GetBulkShipmentExcelFile(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `SearchID`, `FromDate`, `ToDate`, `DpIds`, `OrderingCompanyID`, `Stores`, `SalesChannel`, `RequestByExt`, `PageNo`, `PageSize`, `CustomerID`, `IsPrioritySort`
-
-
-
-
-*Success Response:*
-
-
-
-We are processing the file!
-
-
-Schema: `FileResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getBulkList
-
-
-```golang
-
-data, err := Order.GetBulkList(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `SearchID`, `FromDate`, `ToDate`, `DpIds`, `OrderingCompanyID`, `Stores`, `SalesChannel`, `RequestByExt`, `PageNo`, `PageSize`, `CustomerID`, `IsPrioritySort`
-
-
-
-
-*Success Response:*
-
-
-
-We are processing the file!
-
-
-Schema: `BulkListingResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getManifestList
-
-
-```golang
-
-data, err := Order.GetManifestList(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `Status`, `StoreID`, `PageNo`, `PageSize`, `SearchValue`, `FromDate`, `ToDate`
-
-
-
-
-*Success Response:*
-
-
-
-We are processing the file!
-
-
-Schema: `GeneratedManifestResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getManifestDetailsWithShipments
-
-
-```golang
-
-data, err := Order.GetManifestDetailsWithShipments(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `ManifestID`, `FromDate`, `ToDate`, `StoreID`, `Page`, `PageSize`, `Lane`, `DpIds`, `SearchType`, `SearchValue`
-
-
-
-
-*Success Response:*
-
-
-
-We are processing the file!
-
-
-Schema: `ManifestDetailResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getBulkActionFailedReport
-
-
-```golang
-
-data, err := Order.GetBulkActionFailedReport(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string |  | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `BatchID`, `ReportType`
-
-
-
-
-*Success Response:*
-
-
-
-File Processed!
-
-
-Schema: `FileResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getShipmentReasons
-Get reasons behind full or partial cancellation of a shipment
-
-```golang
-
-data, err := Order.GetShipmentReasons(CompanyID, ShipmentID, BagID, State);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
+| ApplicationID | string | Application Id | 
 
 
 | ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
-| BagID | string | ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+| body |  ShipmentUpdateRequest | "Request body" 
+
+Update the shipment
+
+*Success Response:*
 
 
-| State | string | State for which reasons are required. | 
+
+Success. Check the example shown below or refer `ShipmentUpdateRequest` for more details.
+
+
+Schema: `ShipmentUpdateResponse`
 
 
 
+
+
+
+
+
+
+---
+
+
+#### getPlatformShipmentReasons
 Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
 
+```golang
+
+data, err := Order.GetPlatformShipmentReasons(CompanyID, ApplicationID, Action);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id | 
+
+
+| ApplicationID | string | Application Id | 
+
+
+| Action | string | Action | 
+
+
+
+Get reasons behind full or partial cancellation of a shipment
+
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `PlatformShipmentReasonsResponse` for more details.
+Success. Check the example shown below or refer `ShipmentReasonsResponse` for more details.
 
 
-Schema: `PlatformShipmentReasonsResponse`
+Schema: `ShipmentReasonsResponse`
 
 
 
@@ -53051,32 +52689,40 @@ Schema: `PlatformShipmentReasonsResponse`
 ---
 
 
-#### bulkActionProcessXlsxFile
-emits uuid to kafka topic.
+#### getShipmentTrackDetails
+Use this API to track a shipment using its shipment ID.
 
 ```golang
 
-data, err := Order.BulkActionProcessXlsxFile(CompanyID, body);
+data, err := Order.GetShipmentTrackDetails(CompanyID, ApplicationID, OrderID, ShipmentID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string |  | 
+| CompanyID | string | Company Id | 
 
 
-| body |  BulkActionPayload | "Request body" 
+| ApplicationID | string | Application Id | 
 
-Use this API to start processing Xlsx file.
+
+| OrderID | string | ID of the order. | 
+
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+
+Track shipment
 
 *Success Response:*
 
 
 
-Success to acknowledge the service was notified
+Success. Check the example shown below or refer `ShipmentTrackResponse` for more details.
 
 
-Schema: `BulkActionResponse`
+Schema: `ShipmentTrackResponse`
 
 
 
@@ -53089,34 +52735,37 @@ Schema: `BulkActionResponse`
 ---
 
 
-#### bulkActionDetails
-Returns failed, processing and successfully processed shipments.
+#### getShipmentAddress
+Use this API to get address of a shipment using its shipment ID and Address Category.
 
 ```golang
 
-data, err := Order.BulkActionDetails(CompanyID, BatchID);
+data, err := Order.GetShipmentAddress(CompanyID, ShipmentID, AddressCategory);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string |  | 
+| CompanyID | string | Company Id | 
 
 
-| BatchID | string |  | 
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| AddressCategory | string | Category of the address it falls into(billing or delivery). | 
 
 
 
-Returns failed, processing and successfully processed shipments along with their counts and failed reasons.
+Get Shipment Address
 
 *Success Response:*
 
 
 
-Success to acknowledge the service was notified
+Success. Check the example shown below or refer `GetShipmentAddressResponse` for more details.
 
 
-Schema: `BulkActionDetailsResponse`
+Schema: `GetShipmentAddressResponse`
 
 
 
@@ -53129,38 +52778,38 @@ Schema: `BulkActionDetailsResponse`
 ---
 
 
-#### getBagById
-
+#### updateShipmentAddress
+Use this API to update address of a shipment using its shipment ID and Address Category.
 
 ```golang
 
-data, err := Order.GetBagById(CompanyID, xQuery);
+data, err := Order.UpdateShipmentAddress(CompanyID, ShipmentID, AddressCategory, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | string | Company Id | 
 
 
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
+| AddressCategory | string | Category of the address it falls into(billing or delivery). | 
 
 
+| body |  UpdateShipmentAddressRequest | "Request body" 
 
-| xQuery | struct | Includes properties such as `BagID`, `ChannelBagID`, `ChannelID`
-
-
-
+Update Shipment Address
 
 *Success Response:*
 
 
 
-Successfully retrived shipment details!
+Success. Check the example shown below or refer `UpdateShipmentAddressResponse` for more details.
 
 
-Schema: `BagDetailsPlatformResponse`
+Schema: `UpdateShipmentAddressResponse`
 
 
 
@@ -53173,18 +52822,21 @@ Schema: `BagDetailsPlatformResponse`
 ---
 
 
-#### getBags
-
+#### getOrdersByApplicationId
+Get Orders for company based on Company Id
 
 ```golang
 
-data, err := Order.GetBags(CompanyID, xQuery);
+data, err := Order.GetOrdersByApplicationId(CompanyID, ApplicationID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | string | Company Id | 
+
+
+| ApplicationID | string | Application Id | 
 
 
 
@@ -53204,19 +52856,6 @@ data, err := Order.GetBags(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `BagIds`, `ShipmentIds`, `OrderIds`, `ChannelBagIds`, `ChannelShipmentIds`, `ChannelOrderIds`, `ChannelID`, `PageNo`, `PageSize`
-
-
-
-
-*Success Response:*
-
-
-
-Successfully retrived all the given shipments details!
-
-
-Schema: `GetBagsPlatformResponse`
 
 
 
@@ -53226,833 +52865,20 @@ Schema: `GetBagsPlatformResponse`
 
 
 
----
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `Q`, `Stage`, `SalesChannels`, `OrderID`, `Stores`, `Status`, `Dp`, `UserID`, `ShortenUrls`, `FilterType`
 
 
-#### invalidateShipmentCache
-
-
-```golang
-
-data, err := Order.InvalidateShipmentCache(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| body |  InvalidateShipmentCachePayload | "Request body" 
-
-Invalidate shipment Cache
+Get Orders at Application Level
 
 *Success Response:*
 
 
 
-Successfully updated shipment cache!
+Success
 
 
-Schema: `InvalidateShipmentCacheResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### reassignLocation
-
-
-```golang
-
-data, err := Order.ReassignLocation(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| body |  StoreReassign | "Request body" 
-
-Reassign Location
-
-*Success Response:*
-
-
-
-Successfully reassigned location!
-
-
-Schema: `StoreReassignResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateShipmentLock
-
-
-```golang
-
-data, err := Order.UpdateShipmentLock(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| body |  UpdateShipmentLockPayload | "Request body" 
-
-update shipment lock
-
-*Success Response:*
-
-
-
-Successfully updated shipment cache!
-
-
-Schema: `UpdateShipmentLockResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAnnouncements
-
-
-```golang
-
-data, err := Order.GetAnnouncements(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-| xQuery | struct | Includes properties such as `Date`
-
-
-
-
-*Success Response:*
-
-
-
-Announcements retrieved successfully
-
-
-Schema: `AnnouncementsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateAddress
-
-
-```golang
-
-data, err := Order.UpdateAddress(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-| CompanyID | float64 |  | 
-
-| xQuery | struct | Includes properties such as `ShipmentID`, `Name`, `Address`, `AddressType`, `Pincode`, `Phone`, `Email`, `Landmark`, `AddressCategory`, `City`, `State`, `Country`
-
-
-
-
-*Success Response:*
-
-
-
-Update Address will be processed!
-
-
-Schema: `BaseResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### click2Call
-
-
-```golang
-
-data, err := Order.Click2Call(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-
-
-
-
-
-
-
-| CompanyID | float64 |  | 
-
-| xQuery | struct | Includes properties such as `Caller`, `Receiver`, `BagID`, `CallingTo`, `CallerID`
-
-
-
-
-*Success Response:*
-
-
-
-Process call on request!
-
-
-Schema: `Click2CallResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateShipmentStatus
-
-
-```golang
-
-data, err := Order.UpdateShipmentStatus(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| body |  UpdateShipmentStatusRequest | "Request body" 
-
-Update shipment status
-
-*Success Response:*
-
-
-
-Successfully reassigned location!
-
-
-Schema: `UpdateShipmentStatusResponseBody`
-
-
-
-
-
-
-
-
-
----
-
-
-#### processManifest
-
-
-```golang
-
-data, err := Order.ProcessManifest(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| body |  CreateOrderPayload | "Request body" 
-
-
-
-*Success Response:*
-
-
-
-Manifest will be processed!
-
-
-Schema: `CreateOrderResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### dispatchManifest
-
-
-```golang
-
-data, err := Order.DispatchManifest(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| body |  DispatchManifest | "Request body" 
-
-
-
-*Success Response:*
-
-
-
-Shipment Dispatched mapped with manifest!
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getRoleBasedActions
-
-
-```golang
-
-data, err := Order.GetRoleBasedActions(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-
-
-*Success Response:*
-
-
-
-You will get an array of actions allowed for that particular user based on their role
-
-
-Schema: `GetActionsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getShipmentHistory
-
-
-```golang
-
-data, err := Order.GetShipmentHistory(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
-
-
-
-
-*Success Response:*
-
-
-
-It shows the journey of the shipment!
-
-
-Schema: `ShipmentHistoryResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### sendSmsNinja
-
-
-```golang
-
-data, err := Order.SendSmsNinja(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| body |  SendSmsPayload | "Request body" 
-
-
-
-*Success Response:*
-
-
-
-Sms Sent successfully
-
-
-Schema: `OrderStatusResult`
-
-
-
-
-
-
-
-
-
----
-
-
-#### platformManualAssignDPToShipment
-
-
-```golang
-
-data, err := Order.PlatformManualAssignDPToShipment(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| body |  ManualAssignDPToShipment | "Request body" 
-
-
-
-*Success Response:*
-
-
-
-DP Assigned for the given shipment Ids.
-
-
-Schema: `ManualAssignDPToShipmentResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updatePackagingDimensions
-
-
-```golang
-
-data, err := Order.UpdatePackagingDimensions(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| body |  CreateOrderPayload | "Request body" 
-
-
-
-*Success Response:*
-
-
-
-Manifest will be processed!
-
-
-Schema: `CreateOrderResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createOrder
-
-
-```golang
-
-data, err := Order.CreateOrder(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| body |  CreateOrderAPI | "Request body" 
-
-
-
-*Success Response:*
-
-
-
-Successfully created an order!
-
-
-Schema: `CreateOrderResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createChannelConfig
-
-
-```golang
-
-data, err := Order.CreateChannelConfig(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| body |  CreateChannelConfigData | "Request body" 
-
-createChannelConfig
-
-*Success Response:*
-
-
-
-Successfully updateShipmentStatus!
-
-
-Schema: `CreateChannelConfigResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getChannelConfig
-
-
-```golang
-
-data, err := Order.GetChannelConfig(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-getChannelConfig
-
-*Success Response:*
-
-
-
-Successfully created the config data
-
-
-Schema: `CreateChannelConfigData`
-
-
-
-
-
-
-
-
-
----
-
-
-#### uploadConsent
-
-
-```golang
-
-data, err := Order.UploadConsent(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| body |  UploadConsent | "Request body" 
-
-
-
-*Success Response:*
-
-
-
-Successful Manifest upload!
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### orderUpdate
-
-
-```golang
-
-data, err := Order.OrderUpdate(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| body |  PlatformOrderUpdate | "Request body" 
-
-
-
-*Success Response:*
-
-
-
-We are processing the order!
-
-
-Schema: `ResponseDetail`
-
-
-
-
-
-
-
-
-
----
-
-
-#### checkOrderStatus
-
-
-```golang
-
-data, err := Order.CheckOrderStatus(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| body |  OrderStatus | "Request body" 
-
-
-
-*Success Response:*
-
-
-
-Order Status retrieved successfully
-
-
-Schema: `OrderStatusResult`
-
-
-
-
-
-
-
-
-
----
-
-
-#### sendSmsNinjaPlatform
-
-
-```golang
-
-data, err := Order.SendSmsNinjaPlatform(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| body |  SendSmsPayload | "Request body" 
-
-
-
-*Success Response:*
-
-
-
-Sms Sent successfully
-
-
-Schema: `OrderStatusResult`
+Schema: `OrderListing`
 
 
 
@@ -54115,49 +52941,6 @@ Schema: `GetSearchWordsDetailResponse`
 ---
 
 
-#### deleteSearchKeywords
-Delete a Search Keywords
-
-```golang
-
-data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateSearchKeywords
 Update Search Keyword
 
@@ -54190,6 +52973,49 @@ The Collection object. See example below or refer `GetSearchWordsDataSchema` for
 
 
 Schema: `GetSearchWordsData`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteSearchKeywords
+Delete a Search Keywords
+
+```golang
+
+data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -54326,49 +53152,6 @@ Schema: `GetAutocompleteWordsResponse`
 ---
 
 
-#### deleteAutocompleteKeyword
-Delete a Autocomplete Keywords
-
-```golang
-
-data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateAutocompleteKeyword
 Create & Update Autocomplete Keyword
 
@@ -54401,6 +53184,49 @@ The Mapping object. See example below or refer `GetAutocompleteWordsResponseSche
 
 
 Schema: `GetAutocompleteWordsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteAutocompleteKeyword
+Delete a Autocomplete Keywords
+
+```golang
+
+data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -55054,52 +53880,6 @@ Schema: `AppConfigurationDetail`
 ---
 
 
-#### deleteGroupConfiguration
-Delete configuration of the product config type of the application.
-
-```golang
-
-data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
-
-
-| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
-
-
-
-Delete configuration of the product config type of the application.
-
-*Success Response:*
-
-
-
-success message will tell whether the operation was successful.
-
-
-Schema: `ConfigSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateGroupConfiguration
 Update the group configurations for the application.
 
@@ -55135,6 +53915,52 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationDetail`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteGroupConfiguration
+Delete configuration of the product config type of the application.
+
+```golang
+
+data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
+
+
+| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration of the product config type of the application.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
 
 
 
@@ -55241,52 +54067,6 @@ Schema: `AppConfigurationsSort`
 ---
 
 
-#### deleteListingConfiguration
-Delete configuration for listings
-
-```golang
-
-data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
-
-
-| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
-
-
-
-Delete configuration for listing.
-
-*Success Response:*
-
-
-
-success message will tell whether the operation was successful.
-
-
-Schema: `ConfigSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateListingConfiguration
 Update configuration for listings
 
@@ -55322,6 +54102,52 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationsSort`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteListingConfiguration
+Delete configuration for listings
+
+```golang
+
+data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
+
+
+| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration for listing.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
 
 
 
@@ -55803,49 +54629,6 @@ Schema: `CollectionDetailResponse`
 ---
 
 
-#### deleteCollection
-Delete a Collection
-
-```golang
-
-data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier of a collection. | 
-
-
-
-Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateCollection
 Update a collection
 
@@ -55878,6 +54661,49 @@ The Collection object. See example below or refer `UpdateCollectionSchema` for d
 
 
 Schema: `UpdateCollection`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteCollection
+Delete a Collection
+
+```golang
+
+data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier of a collection. | 
+
+
+
+Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -57222,25 +56048,26 @@ Schema: `Product`
 ---
 
 
-#### deleteProduct
-Delete a product.
+#### editProduct
+Edit a product.
 
 ```golang
 
-data, err := Catalog.DeleteProduct(CompanyID, ItemID);
+data, err := Catalog.EditProduct(CompanyID, ItemID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
 
 
 | ItemID | float64 | Id of the product to be updated. | 
 
 
+| body |  ProductCreateUpdate | "Request body" 
 
-This API allows to delete product.
+This API allows to edit product.
 
 *Success Response:*
 
@@ -57262,26 +56089,25 @@ Schema: `SuccessResponse`
 ---
 
 
-#### editProduct
-Edit a product.
+#### deleteProduct
+Delete a product.
 
 ```golang
 
-data, err := Catalog.EditProduct(CompanyID, ItemID, body);
+data, err := Catalog.DeleteProduct(CompanyID, ItemID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
 
 
 | ItemID | float64 | Id of the product to be updated. | 
 
 
-| body |  ProductCreateUpdate | "Request body" 
 
-This API allows to edit product.
+This API allows to delete product.
 
 *Success Response:*
 
@@ -57467,25 +56293,26 @@ Schema: `BulkResponse`
 ---
 
 
-#### deleteProductBulkJob
-Delete Bulk product job.
+#### createProductsInBulk
+Create products in bulk associated with given batch Id.
 
 ```golang
 
-data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
+data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
 
 
-| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
+| BatchID | string | Batch Id in which assets to be uploaded. | 
 
 
+| body |  BulkProductRequest | "Request body" 
 
-This API allows to delete bulk product job associated with company.
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -57507,26 +56334,25 @@ Schema: `SuccessResponse`
 ---
 
 
-#### createProductsInBulk
-Create products in bulk associated with given batch Id.
+#### deleteProductBulkJob
+Delete Bulk product job.
 
 ```golang
 
-data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
+data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
 
 
-| BatchID | string | Batch Id in which assets to be uploaded. | 
+| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
 
 
-| body |  BulkProductRequest | "Request body" 
 
-This API helps to create products in bulk push to kafka for approval/creation.
+This API allows to delete bulk product job associated with company.
 
 *Success Response:*
 
@@ -58037,25 +56863,26 @@ Schema: `BulkResponse`
 ---
 
 
-#### deleteBulkInventoryJob
-Delete Bulk Inventory job.
+#### createBulkInventory
+Create products in bulk associated with given batch Id.
 
 ```golang
 
-data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
+data, err := Catalog.CreateBulkInventory(CompanyID, BatchID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
+| CompanyID | float64 | Company Id in which Inventory is to be uploaded. | 
 
 
-| BatchID | string | Batch Id of the bulk delete job. | 
+| BatchID | string | Batch Id of the bulk create job. | 
 
 
+| body |  InventoryBulkRequest | "Request body" 
 
-This API allows to delete bulk Inventory job associated with company.
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -58077,26 +56904,25 @@ Schema: `SuccessResponse`
 ---
 
 
-#### createBulkInventory
-Create products in bulk associated with given batch Id.
+#### deleteBulkInventoryJob
+Delete Bulk Inventory job.
 
 ```golang
 
-data, err := Catalog.CreateBulkInventory(CompanyID, BatchID, body);
+data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which Inventory is to be uploaded. | 
+| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
 
 
-| BatchID | string | Batch Id of the bulk create job. | 
+| BatchID | string | Batch Id of the bulk delete job. | 
 
 
-| body |  InventoryBulkRequest | "Request body" 
 
-This API helps to create products in bulk push to kafka for approval/creation.
+This API allows to delete bulk Inventory job associated with company.
 
 *Success Response:*
 
@@ -58233,12 +57059,12 @@ Schema: `InventoryConfig`
 ---
 
 
-#### deleteRealtimeInventory
+#### updateRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -58277,12 +57103,12 @@ Schema: `InventoryUpdateResponse`
 ---
 
 
-#### updateRealtimeInventory
+#### deleteRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -67883,405 +66709,6 @@ default
         "display_name": "Shipment Update"
       }
     ]
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-
----
-
-
-## DocumentEngine
-
-
-#### generateBulkPackageLabel
-Generate Labels for Packages
-
-```golang
-
-data, err := DocumentEngine.GenerateBulkPackageLabel(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-| body |  GenerateBulkPackageLabel | "Request body" 
-
-Use this API to generate label for Packages
-
-*Success Response:*
-
-
-
-Sucsess Response, Labels will be generated
-
-
-Schema: `SuccessResponseGenerateBulk`
-
-
-
-
-
-
-
-
-
----
-
-
-#### generateBulkBoxLabel
-Generate Labels for Boxes which will go inside package
-
-```golang
-
-data, err := DocumentEngine.GenerateBulkBoxLabel(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-| body |  GenerateBulkBoxLabel | "Request body" 
-
-Use this API to generate label for Boxes
-
-*Success Response:*
-
-
-
-Sucsess Response, Labels will be generated
-
-
-Schema: `SuccessResponseGenerateBulk`
-
-
-
-
-
-
-
-
-
----
-
-
-#### generateBulkShipmentLabel
-Generate Labels for Shipments which contains packaged
-
-```golang
-
-data, err := DocumentEngine.GenerateBulkShipmentLabel(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-| body |  GenerateBulkShipmentLabel | "Request body" 
-
-Use this API to generate label for Shipments
-
-*Success Response:*
-
-
-
-Sucsess Response, Labels will be generated
-
-
-Schema: `SuccessResponseGenerateBulk`
-
-
-
-
-
-
-
-
-
----
-
-
-#### generateNoc
-Generate NOC for Seller having access to a fullfillment center
-
-```golang
-
-data, err := DocumentEngine.GenerateNoc(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-| body |  GenerateNoc | "Request body" 
-
-Use this API to generate NOC for Seller
-
-*Success Response:*
-
-
-
-Sucsess Response, NOC Pdf will be generated
-
-
-Schema: `SuccessResponseGenerateBulk`
-
-
-*Examples:*
-
-
-success response
-```json
-{
-  "value": {
-    "status": true
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getLabelStatus
-Get Staus of Label generations
-
-```golang
-
-data, err := DocumentEngine.GetLabelStatus(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-
-| xQuery | struct | Includes properties such as `UID`
-
-
-Use this API to fetch status of PDF generation of Labels
-
-*Success Response:*
-
-
-
-Sucess Response, Status Of Label generation
-
-
-Schema: `StatusSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getNocStatus
-Get Staus of NOC generation
-
-```golang
-
-data, err := DocumentEngine.GetNocStatus(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-
-| xQuery | struct | Includes properties such as `UID`
-
-
-Use this API to fetch status of PDF generation of NOC
-
-*Success Response:*
-
-
-
-Sucess Response, Status Of NOC Pdf generation
-
-
-Schema: `StatusSuccessResponse`
-
-
-*Examples:*
-
-
-success response
-```json
-{
-  "value": {
-    "success": true,
-    "status": "created"
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPresignedURL
-Get Presigned URL to download PDFs
-
-```golang
-
-data, err := DocumentEngine.GetPresignedURL(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-| body |  InvoiceLabelPresignedRequestBody | "Request body" 
-
-Use this API to generate Presigned URLs for downloading PDFs
-
-*Success Response:*
-
-
-
-Sucess Response, Presigned URL of PDFs
-
-
-Schema: `SignedSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getLabelPresignedURL
-Get Presigned URL to download labels
-
-```golang
-
-data, err := DocumentEngine.GetLabelPresignedURL(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-
-| xQuery | struct | Includes properties such as `UID`
-
-
-Use this API to generate Presigned URLs for downloading labels
-
-*Success Response:*
-
-
-
-Sucess Response, Presigned URL of Labels
-
-
-Schema: `SignedSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getNocPresignedURL
-Get Presigned URL to download NOC Pdf
-
-```golang
-
-data, err := DocumentEngine.GetNocPresignedURL(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-
-| xQuery | struct | Includes properties such as `UID`
-
-
-Use this API to generate Presigned URL for downloading NOC Pdf
-
-*Success Response:*
-
-
-
-Sucess Response, Presigned URL of NOC Pdf
-
-
-Schema: `SignedSuccessResponse`
-
-
-*Examples:*
-
-
-success response
-```json
-{
-  "value": {
-    "uid": "l27h38uy",
-    "expires_in": 300,
-    "url": "presigned-url"
   }
 }
 ```
