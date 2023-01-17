@@ -46,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [unfollowById](#unfollowbyid)
     * [followById](#followbyid)
+    * [unfollowById](#unfollowbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -238,6 +238,7 @@
     * [resendOrCancelPayment](#resendorcancelpayment)
     * [renderHTML](#renderhtml)
     * [validateVPA](#validatevpa)
+    * [cardDetails](#carddetails)
     * [getActiveRefundTransferModes](#getactiverefundtransfermodes)
     * [enableOrDisableRefundTransferMode](#enableordisablerefundtransfermode)
     * [getUserBeneficiariesDetail](#getuserbeneficiariesdetail)
@@ -1153,12 +1154,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1172,7 +1173,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1194,12 +1195,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1213,7 +1214,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -17012,6 +17013,42 @@ Success. Returns the status of payment. Check the example shown below or refer `
 
 
 Schema: `ValidateVPAResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### cardDetails
+API to get Card info from PG
+
+```golang
+
+ data, err :=  Payment.CardDetails(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  cardDetailsRequest | "Request body" 
+
+
+API to get Card info from PG
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `cardDetailsResponseSchema` for more details.
+
+
+Schema: `cardDetailsResponse`
 
 
 

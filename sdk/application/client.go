@@ -1657,55 +1657,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UnfollowById Unfollow an entity (product/brand/collection)
-    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             unfollowByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &unfollowByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return unfollowByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // FollowById Follow an entity (product/brand/collection)
     func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1746,6 +1697,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return followByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UnfollowById Unfollow an entity (product/brand/collection)
+    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             unfollowByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &unfollowByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return unfollowByIdResponse, nil
         
     }
           
@@ -11270,6 +11270,68 @@ func NewAppClient(config *AppConfig) *Client {
             return ValidateVPAResponse{}, common.NewFDKError(err.Error())
         }
          return validateVPAResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // CardDetails API to get Card info from PG
+    func (pa *Payment)  CardDetails(body  cardDetailsRequest) (cardDetailsResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             cardDetailsResponse cardDetailsResponse
+	    )
+
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return cardDetailsResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return cardDetailsResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            "/service/application/payment/v1.0/cards/info",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return cardDetailsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &cardDetailsResponse)
+        if err != nil {
+            return cardDetailsResponse{}, common.NewFDKError(err.Error())
+        }
+         return cardDetailsResponse, nil
         
     }
           
