@@ -2830,1426 +2830,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-
-
-    // InvalidateShipmentCache 
-     func (or *PlatformOrder)  InvalidateShipmentCache(body  InvalidateShipmentCachePayload) (InvalidateShipmentCacheResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            invalidateShipmentCacheResponse InvalidateShipmentCacheResponse
-	    )
-
-        
-        
-        
-
-        
-
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return InvalidateShipmentCacheResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return InvalidateShipmentCacheResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "put",
-            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/update-cache",or.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return InvalidateShipmentCacheResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &invalidateShipmentCacheResponse)
-        if err != nil {
-             return InvalidateShipmentCacheResponse{}, common.NewFDKError(err.Error())
-        }
-        return invalidateShipmentCacheResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // ReassignLocation 
-     func (or *PlatformOrder)  ReassignLocation(body  StoreReassign) (StoreReassignResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            reassignLocationResponse StoreReassignResponse
-	    )
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return StoreReassignResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return StoreReassignResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "post",
-            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/store/reassign-internal",or.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return StoreReassignResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &reassignLocationResponse)
-        if err != nil {
-             return StoreReassignResponse{}, common.NewFDKError(err.Error())
-        }
-        return reassignLocationResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // UpdateShipmentLock 
-     func (or *PlatformOrder)  UpdateShipmentLock(body  UpdateShipmentLockPayload) (UpdateShipmentLockResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateShipmentLockResponse UpdateShipmentLockResponse
-	    )
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return UpdateShipmentLockResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return UpdateShipmentLockResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "post",
-            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/entity/lock-manager",or.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return UpdateShipmentLockResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateShipmentLockResponse)
-        if err != nil {
-             return UpdateShipmentLockResponse{}, common.NewFDKError(err.Error())
-        }
-        return updateShipmentLockResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformGetAnnouncementsXQuery holds query params
-    type PlatformGetAnnouncementsXQuery struct { 
-        Date string  `url:"date,omitempty"`  
-    }
-    
-
-
-    // GetAnnouncements 
-     func (or *PlatformOrder)  GetAnnouncements(xQuery PlatformGetAnnouncementsXQuery) (AnnouncementsResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAnnouncementsResponse AnnouncementsResponse
-	    )
-
-        
-
-        
-            
-                
-            
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "get",
-            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/announcements",or.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return AnnouncementsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAnnouncementsResponse)
-        if err != nil {
-             return AnnouncementsResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAnnouncementsResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformUpdateAddressXQuery holds query params
-    type PlatformUpdateAddressXQuery struct { 
-        ShipmentID string  `url:"shipment_id,omitempty"` 
-        Name string  `url:"name,omitempty"` 
-        Address string  `url:"address,omitempty"` 
-        AddressType string  `url:"address_type,omitempty"` 
-        Pincode string  `url:"pincode,omitempty"` 
-        Phone string  `url:"phone,omitempty"` 
-        Email string  `url:"email,omitempty"` 
-        Landmark string  `url:"landmark,omitempty"` 
-        AddressCategory string  `url:"address_category,omitempty"` 
-        City string  `url:"city,omitempty"` 
-        State string  `url:"state,omitempty"` 
-        Country string  `url:"country,omitempty"`  
-    }
-    
-
-
-    // UpdateAddress 
-     func (or *PlatformOrder)  UpdateAddress(xQuery PlatformUpdateAddressXQuery) (BaseResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateAddressResponse BaseResponse
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "post",
-            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/delight/update-address",or.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return BaseResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateAddressResponse)
-        if err != nil {
-             return BaseResponse{}, common.NewFDKError(err.Error())
-        }
-        return updateAddressResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformClick2CallXQuery holds query params
-    type PlatformClick2CallXQuery struct { 
-        Caller string  `url:"caller,omitempty"` 
-        Receiver string  `url:"receiver,omitempty"` 
-        BagID string  `url:"bag_id,omitempty"` 
-        CallingTo string  `url:"calling_to,omitempty"` 
-        CallerID string  `url:"caller_id,omitempty"`  
-    }
-    
-
-
-    // Click2Call 
-     func (or *PlatformOrder)  Click2Call(xQuery PlatformClick2CallXQuery) (Click2CallResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            click2CallResponse Click2CallResponse
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "get",
-            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/ninja/click2call",or.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return Click2CallResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &click2CallResponse)
-        if err != nil {
-             return Click2CallResponse{}, common.NewFDKError(err.Error())
-        }
-        return click2CallResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // UpdateShipmentStatus 
-     func (or *PlatformOrder)  UpdateShipmentStatus(body  UpdateShipmentStatusRequest) (UpdateShipmentStatusResponseBody, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateShipmentStatusResponse UpdateShipmentStatusResponseBody
-	    )
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return UpdateShipmentStatusResponseBody{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return UpdateShipmentStatusResponseBody{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "put",
-            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/shipment/status-internal",or.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return UpdateShipmentStatusResponseBody{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateShipmentStatusResponse)
-        if err != nil {
-             return UpdateShipmentStatusResponseBody{}, common.NewFDKError(err.Error())
-        }
-        return updateShipmentStatusResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // ProcessManifest 
-     func (or *PlatformOrder)  ProcessManifest(body  CreateOrderPayload) (CreateOrderResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            processManifestResponse CreateOrderResponse
-	    )
-
-        
-        
-        
-        
-        
-        
-        
-
-        
-
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return CreateOrderResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return CreateOrderResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "post",
-            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/process-manifest",or.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return CreateOrderResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &processManifestResponse)
-        if err != nil {
-             return CreateOrderResponse{}, common.NewFDKError(err.Error())
-        }
-        return processManifestResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // DispatchManifest 
-     func (or *PlatformOrder)  DispatchManifest(body  DispatchManifest) (SuccessResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            dispatchManifestResponse SuccessResponse
-	    )
-
-        
-        
-        
-
-        
-
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "post",
-            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/manifest/dispatch",or.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &dispatchManifestResponse)
-        if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return dispatchManifestResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // GetRoleBasedActions 
-     func (or *PlatformOrder)  GetRoleBasedActions() (GetActionsResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getRoleBasedActionsResponse GetActionsResponse
-	    )
-
-        
-
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "get",
-            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/roles",or.CompanyID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return GetActionsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getRoleBasedActionsResponse)
-        if err != nil {
-             return GetActionsResponse{}, common.NewFDKError(err.Error())
-        }
-        return getRoleBasedActionsResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformGetShipmentHistoryXQuery holds query params
-    type PlatformGetShipmentHistoryXQuery struct { 
-        ShipmentID float64  `url:"shipment_id,omitempty"` 
-        BagID float64  `url:"bag_id,omitempty"`  
-    }
-    
-
-
-    // GetShipmentHistory 
-     func (or *PlatformOrder)  GetShipmentHistory(xQuery PlatformGetShipmentHistoryXQuery) (ShipmentHistoryResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getShipmentHistoryResponse ShipmentHistoryResponse
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "get",
-            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/shipment/history",or.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return ShipmentHistoryResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getShipmentHistoryResponse)
-        if err != nil {
-             return ShipmentHistoryResponse{}, common.NewFDKError(err.Error())
-        }
-        return getShipmentHistoryResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // SendSmsNinja 
-     func (or *PlatformOrder)  SendSmsNinja(body  SendSmsPayload) (OrderStatusResult, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            sendSmsNinjaResponse OrderStatusResult
-	    )
-
-        
-        
-        
-        
-        
-        
-        
-
-        
-
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return OrderStatusResult{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return OrderStatusResult{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "post",
-            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/ninja/send-sms",or.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return OrderStatusResult{}, err
-	    }
-        
-        err = json.Unmarshal(response, &sendSmsNinjaResponse)
-        if err != nil {
-             return OrderStatusResult{}, common.NewFDKError(err.Error())
-        }
-        return sendSmsNinjaResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // PlatformManualAssignDPToShipment 
-     func (or *PlatformOrder)  PlatformManualAssignDPToShipment(body  ManualAssignDPToShipment) (ManualAssignDPToShipmentResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            platformManualAssignDPToShipmentResponse ManualAssignDPToShipmentResponse
-	    )
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return ManualAssignDPToShipmentResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return ManualAssignDPToShipmentResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "post",
-            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/oms/manual-place-shipment",or.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return ManualAssignDPToShipmentResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &platformManualAssignDPToShipmentResponse)
-        if err != nil {
-             return ManualAssignDPToShipmentResponse{}, common.NewFDKError(err.Error())
-        }
-        return platformManualAssignDPToShipmentResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // UpdatePackagingDimensions 
-     func (or *PlatformOrder)  UpdatePackagingDimensions(body  CreateOrderPayload) (CreateOrderResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updatePackagingDimensionsResponse CreateOrderResponse
-	    )
-
-        
-        
-        
-        
-        
-        
-        
-
-        
-
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return CreateOrderResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return CreateOrderResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "post",
-            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/update-packaging-dimension",or.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return CreateOrderResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updatePackagingDimensionsResponse)
-        if err != nil {
-             return CreateOrderResponse{}, common.NewFDKError(err.Error())
-        }
-        return updatePackagingDimensionsResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // CreateOrder 
-     func (or *PlatformOrder)  CreateOrder(body  CreateOrderAPI) (CreateOrderResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            createOrderResponse CreateOrderResponse
-	    )
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return CreateOrderResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return CreateOrderResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "post",
-            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/create-order",or.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return CreateOrderResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &createOrderResponse)
-        if err != nil {
-             return CreateOrderResponse{}, common.NewFDKError(err.Error())
-        }
-        return createOrderResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // CreateChannelConfig 
-     func (or *PlatformOrder)  CreateChannelConfig(body  CreateChannelConfigData) (CreateChannelConfigResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            createChannelConfigResponse CreateChannelConfigResponse
-	    )
-
-        
-        
-        
-
-        
-
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return CreateChannelConfigResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return CreateChannelConfigResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "post",
-            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/order-config",or.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return CreateChannelConfigResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &createChannelConfigResponse)
-        if err != nil {
-             return CreateChannelConfigResponse{}, common.NewFDKError(err.Error())
-        }
-        return createChannelConfigResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // GetChannelConfig 
-     func (or *PlatformOrder)  GetChannelConfig() (CreateChannelConfigData, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getChannelConfigResponse CreateChannelConfigData
-	    )
-
-        
-
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "get",
-            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/order-config",or.CompanyID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return CreateChannelConfigData{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getChannelConfigResponse)
-        if err != nil {
-             return CreateChannelConfigData{}, common.NewFDKError(err.Error())
-        }
-        return getChannelConfigResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // UploadConsent 
-     func (or *PlatformOrder)  UploadConsent(body  UploadConsent) (SuccessResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            uploadConsentResponse SuccessResponse
-	    )
-
-        
-        
-        
-        
-        
-
-        
-
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "post",
-            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/manifest/uploadConsent",or.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &uploadConsentResponse)
-        if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return uploadConsentResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // OrderUpdate 
-     func (or *PlatformOrder)  OrderUpdate(body  PlatformOrderUpdate) (ResponseDetail, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            orderUpdateResponse ResponseDetail
-	    )
-
-        
-        
-        
-
-        
-
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return ResponseDetail{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return ResponseDetail{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "put",
-            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/order/validation",or.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return ResponseDetail{}, err
-	    }
-        
-        err = json.Unmarshal(response, &orderUpdateResponse)
-        if err != nil {
-             return ResponseDetail{}, common.NewFDKError(err.Error())
-        }
-        return orderUpdateResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // CheckOrderStatus 
-     func (or *PlatformOrder)  CheckOrderStatus(body  OrderStatus) (OrderStatusResult, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            checkOrderStatusResponse OrderStatusResult
-	    )
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return OrderStatusResult{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return OrderStatusResult{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "post",
-            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/debug/order_status",or.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return OrderStatusResult{}, err
-	    }
-        
-        err = json.Unmarshal(response, &checkOrderStatusResponse)
-        if err != nil {
-             return OrderStatusResult{}, common.NewFDKError(err.Error())
-        }
-        return checkOrderStatusResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // SendSmsNinjaPlatform 
-     func (or *PlatformOrder)  SendSmsNinjaPlatform() (OrderStatusResult, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            sendSmsNinjaPlatformResponse OrderStatusResult
-	    )
-
-        
-
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "get",
-            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/bag/state/transition",or.CompanyID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return OrderStatusResult{}, err
-	    }
-        
-        err = json.Unmarshal(response, &sendSmsNinjaPlatformResponse)
-        if err != nil {
-             return OrderStatusResult{}, common.NewFDKError(err.Error())
-        }
-        return sendSmsNinjaPlatformResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
     //PlatformGetShipmentsXQuery holds query params
     type PlatformGetShipmentsXQuery struct { 
         Lane string  `url:"lane,omitempty"` 
@@ -5750,65 +4330,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return GetBagsPlatformResponse{}, common.NewFDKError(err.Error())
         }
         return getBagsResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformGetShipmentTrackingXQuery holds query params
-    type PlatformGetShipmentTrackingXQuery struct { 
-        ShipmentID string  `url:"shipment_id,omitempty"`  
-    }
-    
-
-
-    // GetShipmentTracking 
-     func (or *PlatformOrder)  GetShipmentTracking(xQuery PlatformGetShipmentTrackingXQuery) (ShipmentTrackingResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getShipmentTrackingResponse ShipmentTrackingResponse
-	    )
-
-        
-
-        
-            
-                
-            
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "get",
-            fmt.Sprintf("/service/platform/dp/v1.0/company/%s/tracking",or.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return ShipmentTrackingResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getShipmentTrackingResponse)
-        if err != nil {
-             return ShipmentTrackingResponse{}, common.NewFDKError(err.Error())
-        }
-        return getShipmentTrackingResponse, nil
         
     }
          
@@ -7711,7 +6232,9 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
     //PlatformListTemplateBrandTypeValuesXQuery holds query params
     type PlatformListTemplateBrandTypeValuesXQuery struct { 
-        Filter string  `url:"filter,omitempty"`  
+        Filter string  `url:"filter,omitempty"` 
+        TemplateTag string  `url:"template_tag,omitempty"` 
+        ItemType string  `url:"item_type,omitempty"`  
     }
     
 
@@ -7729,6 +6252,10 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
 
         
+            
+                
+            
+                
             
                 
             
@@ -8149,7 +6676,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
 
     // CreateProduct Create a product.
-     func (ca *PlatformCatalog)  CreateProduct(body  ProductCreateUpdate) (SuccessResponse, error){
+     func (ca *PlatformCatalog)  CreateProduct(body  ProductCreateUpdateRequest) (SuccessResponse, error){
         
         var (
             rawRequest  *RawRequest
@@ -8289,6 +6816,217 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+
+
+    // CreateProductV2 Create a product.
+     func (ca *PlatformCatalog)  CreateProductV2(body  ProductCreateUpdateSchemaV2) (SuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            createProductV2Response SuccessResponse
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "post",
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/",ca.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createProductV2Response)
+        if err != nil {
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return createProductV2Response, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetVariantsOfProductsXQuery holds query params
+    type PlatformGetVariantsOfProductsXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // GetVariantsOfProducts Get product list
+     func (ca *PlatformCatalog)  GetVariantsOfProducts(ItemID float64, VariantType string, xQuery PlatformGetVariantsOfProductsXQuery) (ProductVariantsResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getVariantsOfProductsResponse ProductVariantsResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/undefined/variants/%s",ca.CompanyID, ItemID, VariantType),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ProductVariantsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getVariantsOfProductsResponse)
+        if err != nil {
+             return ProductVariantsResponse{}, common.NewFDKError(err.Error())
+        }
+        return getVariantsOfProductsResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
     //PlatformGetProductAttributesXQuery holds query params
     type PlatformGetProductAttributesXQuery struct { 
         Category string  `url:"category,omitempty"` 
@@ -8354,7 +7092,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
 
     // EditProduct Edit a product.
-     func (ca *PlatformCatalog)  EditProduct(ItemID float64, body  ProductCreateUpdate) (SuccessResponse, error){
+     func (ca *PlatformCatalog)  EditProduct(ItemID float64, body  ProductCreateUpdateRequest) (SuccessResponse, error){
         
         var (
             rawRequest  *RawRequest
@@ -8498,16 +7236,94 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // DeleteProduct Delete a product.
-     func (ca *PlatformCatalog)  DeleteProduct(ItemID float64) (SuccessResponse, error){
+    // PatchProduct Patch a product.
+     func (ca *PlatformCatalog)  PatchProduct(ItemID float64, body  ProductPatch) (SuccessResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            deleteProductResponse SuccessResponse
+            patchProductResponse SuccessResponse
 	    )
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
 
         
@@ -8519,24 +7335,37 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
          
         
         
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        
         //API call
         rawRequest = NewRequest(
             ca.Config,
-            "delete",
+            "patch",
             fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
             nil,
             nil,
-            nil)
+            reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
              return SuccessResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &deleteProductResponse)
+        err = json.Unmarshal(response, &patchProductResponse)
         if err != nil {
              return SuccessResponse{}, common.NewFDKError(err.Error())
         }
-        return deleteProductResponse, nil
+        return patchProductResponse, nil
         
     }
          
@@ -8601,6 +7430,321 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return Product{}, common.NewFDKError(err.Error())
         }
         return getProductResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // DeleteProduct Delete a product.
+     func (ca *PlatformCatalog)  DeleteProduct(ItemID float64) (SuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteProductResponse SuccessResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteProductResponse)
+        if err != nil {
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteProductResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // EditProductV2 Edit a product.
+     func (ca *PlatformCatalog)  EditProductV2(ItemID float64, body  ProductCreateUpdateSchemaV2) (SuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            editProductV2Response SuccessResponse
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "put",
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &editProductV2Response)
+        if err != nil {
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return editProductV2Response, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetProductV2XQuery holds query params
+    type PlatformGetProductV2XQuery struct { 
+        ItemCode string  `url:"item_code,omitempty"` 
+        BrandUID float64  `url:"brand_uid,omitempty"`  
+    }
+    
+
+
+    // GetProductV2 Get a single product.
+     func (ca *PlatformCatalog)  GetProductV2(ItemID float64, xQuery PlatformGetProductV2XQuery) (Product, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getProductV2Response Product
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return Product{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductV2Response)
+        if err != nil {
+             return Product{}, common.NewFDKError(err.Error())
+        }
+        return getProductV2Response, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // AllSizes All Sizes for a given Product
+     func (ca *PlatformCatalog)  AllSizes(ItemID float64) (ListALLSizes, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            allSizesResponse ListALLSizes
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/all_sizes",ca.CompanyID, ItemID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ListALLSizes{}, err
+	    }
+        
+        err = json.Unmarshal(response, &allSizesResponse)
+        if err != nil {
+             return ListALLSizes{}, common.NewFDKError(err.Error())
+        }
+        return allSizesResponse, nil
         
     }
          
@@ -8838,6 +7982,10 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
         
         
+        
+        
+        
+        
 
         
 
@@ -8877,58 +8025,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return BulkResponse{}, common.NewFDKError(err.Error())
         }
         return createBulkProductUploadJobResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // DeleteProductBulkJob Delete Bulk product job.
-     func (ca *PlatformCatalog)  DeleteProductBulkJob(BatchID float64) (SuccessResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteProductBulkJobResponse SuccessResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/bulk/undefined",ca.CompanyID, BatchID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteProductBulkJobResponse)
-        if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteProductBulkJobResponse, nil
         
     }
          
@@ -9002,6 +8098,58 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return SuccessResponse{}, common.NewFDKError(err.Error())
         }
         return createProductsInBulkResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // DeleteProductBulkJob Delete Bulk product job.
+     func (ca *PlatformCatalog)  DeleteProductBulkJob(BatchID float64) (SuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteProductBulkJobResponse SuccessResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/bulk/undefined",ca.CompanyID, BatchID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteProductBulkJobResponse)
+        if err != nil {
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteProductBulkJobResponse, nil
         
     }
          
@@ -9632,6 +8780,10 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
         
         
+        
+        
+        
+        
 
         
 
@@ -9682,24 +8834,49 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformGetInventoriesXQuery holds query params
+    type PlatformGetInventoriesXQuery struct { 
+        ItemID string  `url:"item_id,omitempty"` 
+        Size string  `url:"size,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        Q string  `url:"q,omitempty"` 
+        Sellable bool  `url:"sellable,omitempty"` 
+        SizeIdentifier string  `url:"size_identifier,omitempty"`  
+    }
+    
 
 
-    // DeleteBulkInventoryJob Delete Bulk Inventory job.
-     func (ca *PlatformCatalog)  DeleteBulkInventoryJob(BatchID string) (SuccessResponse, error){
+    // GetInventories Get Inventory for company
+     func (ca *PlatformCatalog)  GetInventories(xQuery PlatformGetInventoriesXQuery) (GetInventoriesResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            deleteBulkInventoryJobResponse SuccessResponse
+            getInventoriesResponse GetInventoriesResponse
 	    )
 
         
 
         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
 
-        
-        
         
 
          
@@ -9708,21 +8885,21 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         //API call
         rawRequest = NewRequest(
             ca.Config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/inventory/bulk/%s/",ca.CompanyID, BatchID),
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/inventories",ca.CompanyID),
             nil,
-            nil,
+            xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-             return SuccessResponse{}, err
+             return GetInventoriesResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &deleteBulkInventoryJobResponse)
+        err = json.Unmarshal(response, &getInventoriesResponse)
         if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
+             return GetInventoriesResponse{}, common.NewFDKError(err.Error())
         }
-        return deleteBulkInventoryJobResponse, nil
+        return getInventoriesResponse, nil
         
     }
          
@@ -9796,6 +8973,58 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return SuccessResponse{}, common.NewFDKError(err.Error())
         }
         return createBulkInventoryResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // DeleteBulkInventoryJob Delete Bulk Inventory job.
+     func (ca *PlatformCatalog)  DeleteBulkInventoryJob(BatchID string) (SuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteBulkInventoryJobResponse SuccessResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/inventory/bulk/%s/",ca.CompanyID, BatchID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteBulkInventoryJobResponse)
+        if err != nil {
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteBulkInventoryJobResponse, nil
         
     }
          
@@ -9987,79 +9216,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // DeleteRealtimeInventory Add Inventory for particular size and store.
-     func (ca *PlatformCatalog)  DeleteRealtimeInventory(ItemID float64, SellerIdentifier string, body  InventoryRequestSchemaV2) (InventoryUpdateResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteRealtimeInventoryResponse InventoryUpdateResponse
-	    )
-
-        
-        
-        
-        
-        
-        
-        
-
-        
-
-        
-        
-        
-        
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return InventoryUpdateResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return InventoryUpdateResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/inventory/%s/",ca.CompanyID, ItemID, SellerIdentifier),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return InventoryUpdateResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteRealtimeInventoryResponse)
-        if err != nil {
-             return InventoryUpdateResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteRealtimeInventoryResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
     // UpdateRealtimeInventory Add Inventory for particular size and store.
      func (ca *PlatformCatalog)  UpdateRealtimeInventory(ItemID float64, SellerIdentifier string, body  InventoryRequestSchemaV2) (InventoryUpdateResponse, error){
         
@@ -10120,6 +9276,79 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return InventoryUpdateResponse{}, common.NewFDKError(err.Error())
         }
         return updateRealtimeInventoryResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // DeleteRealtimeInventory Add Inventory for particular size and store.
+     func (ca *PlatformCatalog)  DeleteRealtimeInventory(ItemID float64, SellerIdentifier string, body  InventoryRequestSchemaV2) (InventoryUpdateResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteRealtimeInventoryResponse InventoryUpdateResponse
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return InventoryUpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return InventoryUpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/inventory/%s/",ca.CompanyID, ItemID, SellerIdentifier),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return InventoryUpdateResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteRealtimeInventoryResponse)
+        if err != nil {
+             return InventoryUpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteRealtimeInventoryResponse, nil
         
     }
          
@@ -10624,72 +9853,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetSingleProductHSNCode Hsn Code List.
-     func (ca *PlatformCatalog)  GetSingleProductHSNCode(ReportingHsn string, ) (HSNDataInsertV2, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getSingleProductHSNCodeResponse HSNDataInsertV2
-	    )
-
-        
-
-        
-
-        
-        
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/hsn/%s",ReportingHsn, ca.CompanyID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return HSNDataInsertV2{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getSingleProductHSNCodeResponse)
-        if err != nil {
-             return HSNDataInsertV2{}, common.NewFDKError(err.Error())
-        }
-        return getSingleProductHSNCodeResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-   
-  
-    
-    
-
-
     // GetOptimalLocations Location Reassignment
      func (ca *PlatformCatalog)  GetOptimalLocations(body  AssignStore) (StoreAssignResponse, error){
         
@@ -10759,6 +9922,72 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
          
         
        
+    
+    
+   
+  
+    
+    
+
+
+    // GetSingleProductHSNCode Hsn Code List.
+     func (ca *PlatformCatalog)  GetSingleProductHSNCode(ReportingHsn string, ) (HSNDataInsertV2, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getSingleProductHSNCodeResponse HSNDataInsertV2
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/hsn/%s",ReportingHsn, ca.CompanyID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return HSNDataInsertV2{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getSingleProductHSNCodeResponse)
+        if err != nil {
+             return HSNDataInsertV2{}, common.NewFDKError(err.Error())
+        }
+        return getSingleProductHSNCodeResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
