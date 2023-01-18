@@ -274,8 +274,8 @@
     * [verifyOtpShipmentCustomer](#verifyotpshipmentcustomer)
     * [getShipmentBagReasons](#getshipmentbagreasons)
     * [getShipmentReasons](#getshipmentreasons)
-    * [updateShipmentExternal](#updateshipmentexternal)
     * [updateShipmentStatus](#updateshipmentstatus)
+    * [updateShipmentStatus1](#updateshipmentstatus1)
     * [getInvoiceByShipmentId1](#getinvoicebyshipmentid1)
     * [getCreditNoteByShipmentId](#getcreditnotebyshipmentid)
     
@@ -18298,12 +18298,12 @@ Schema: `ShipmentReasons`
 ---
 
 
-#### updateShipmentExternal
+#### updateShipmentStatus
 
 
 ```golang
 
- data, err :=  Order.UpdateShipmentExternal(ShipmentID, body);
+ data, err :=  Order.UpdateShipmentStatus(ShipmentID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -18312,7 +18312,7 @@ Schema: `ShipmentReasons`
 | ShipmentID | float64 |  | 
 
 
-| body |  UpdateShipmentExternalRequest | "Request body" 
+| body |  ShipmentStatusUpdateBody | "Request body" 
 
 
 
@@ -18324,7 +18324,7 @@ Schema: `ShipmentReasons`
 Successful shipment update
 
 
-Schema: `UpdateShipmentResponse`
+Schema: `ShipmentStatusUpdate`
 
 
 
@@ -18337,12 +18337,12 @@ Schema: `UpdateShipmentResponse`
 ---
 
 
-#### updateShipmentStatus
+#### updateShipmentStatus1
 
 
 ```golang
 
- data, err :=  Order.UpdateShipmentStatus(ShipmentID, body);
+ data, err :=  Order.UpdateShipmentStatus1(ShipmentID, body);
 ```
 
 | Argument  |  Type  | Description |

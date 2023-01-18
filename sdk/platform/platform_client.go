@@ -2818,8 +2818,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
     //PlatformGetShipmentByIdXQuery holds query params
     type PlatformGetShipmentByIdXQuery struct { 
-        ChannelShipmentID string  `url:"channel_shipment_id,omitempty"` 
-        ShipmentID string  `url:"shipment_id,omitempty"` 
         OrderingCompanyID string  `url:"ordering_company_id,omitempty"` 
         RequestByExt string  `url:"request_by_ext,omitempty"`  
     }
@@ -2827,7 +2825,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
 
     // GetShipmentById 
-     func (or *PlatformOrder)  GetShipmentById(xQuery PlatformGetShipmentByIdXQuery) (ShipmentInfoResponse, error){
+     func (or *PlatformOrder)  GetShipmentById(ChannelShipmentID string, xQuery PlatformGetShipmentByIdXQuery) (ShipmentInfoResponse, error){
         
         var (
             rawRequest  *RawRequest
@@ -2844,12 +2842,10 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             
                 
             
-                
-            
-                
-            
         
 
+        
+        
         
 
          
@@ -2859,7 +2855,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         rawRequest = NewRequest(
             or.Config,
             "get",
-            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/shipment-details",or.CompanyID),
+            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/shipment-details/%s",or.CompanyID, ChannelShipmentID),
             nil,
             xQuery,
             nil)
@@ -5302,8 +5298,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
         
         
-        
-        
 
         
 
@@ -5675,7 +5669,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
 
     // SendSmsNinjaPlatform 
-     func (or *PlatformOrder)  SendSmsNinjaPlatform(body  SendSmsPayload) (OrderStatusResult, error){
+     func (or *PlatformOrder)  SendSmsNinjaPlatform() (OrderStatusResult, error){
         
         var (
             rawRequest  *RawRequest
@@ -5685,12 +5679,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 	    )
 
         
-        
-        
-        
-        
-        
-        
 
         
 
@@ -5699,19 +5687,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
          
         
         
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return OrderStatusResult{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return OrderStatusResult{}, common.NewFDKError(err.Error())
-        }
-        
         //API call
         rawRequest = NewRequest(
             or.Config,
@@ -5719,7 +5694,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/bag/state/transition",or.CompanyID),
             nil,
             nil,
-            reqBody)
+            nil)
         response, err = rawRequest.Execute()
         if err != nil {
              return OrderStatusResult{}, err
@@ -8075,6 +8050,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
         
         
+        
+        
 
         
 
@@ -8346,6 +8323,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             editProductResponse SuccessResponse
 	    )
 
+        
+        
         
         
         
@@ -10541,6 +10520,83 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
+    // GetOptimalLocations Location Reassignment
+     func (ca *PlatformCatalog)  GetOptimalLocations(body  AssignStore) (StoreAssignResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getOptimalLocationsResponse StoreAssignResponse
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return StoreAssignResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return StoreAssignResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "post",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/location/reassign/",ca.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return StoreAssignResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getOptimalLocationsResponse)
+        if err != nil {
+             return StoreAssignResponse{}, common.NewFDKError(err.Error())
+        }
+        return getOptimalLocationsResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
     // GetSingleProductHSNCode Hsn Code List.
      func (ca *PlatformCatalog)  GetSingleProductHSNCode(ReportingHsn string, ) (HSNDataInsertV2, error){
         
@@ -10585,6 +10641,10 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
          
         
        
+    
+    
+    
+    
     
     
     
@@ -11697,6 +11757,83 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return ProfileSuccessResponse{}, common.NewFDKError(err.Error())
         }
         return createLocationBulkResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetOptimalLocations Location Reassignment
+     func (co *PlatformCompanyProfile)  GetOptimalLocations(body  AssignStoreRequestValidator) (AssignStoreResponseSerializer, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getOptimalLocationsResponse AssignStoreResponseSerializer
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return AssignStoreResponseSerializer{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return AssignStoreResponseSerializer{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            co.Config,
+            "post",
+            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/location/reassign",co.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return AssignStoreResponseSerializer{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getOptimalLocationsResponse)
+        if err != nil {
+             return AssignStoreResponseSerializer{}, common.NewFDKError(err.Error())
+        }
+        return getOptimalLocationsResponse, nil
         
     }
          

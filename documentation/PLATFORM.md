@@ -424,6 +424,7 @@
     * [updateHsnCode](#updatehsncode)
     * [bulkHsnCode](#bulkhsncode)
     * [getAllProductHsnCodes](#getallproducthsncodes)
+    * [getOptimalLocations](#getoptimallocations)
     * [getSingleProductHSNCode](#getsingleproducthsncode)
     * [getApplicationBrands](#getapplicationbrands)
     * [getDepartments](#getdepartments)
@@ -437,6 +438,8 @@
     * [updateAppBrand](#updateappbrand)
     * [getApplicationCategoryListing](#getapplicationcategorylisting)
     * [updateAppCategory](#updateappcategory)
+    * [getApplicationDepartmentListing](#getapplicationdepartmentlisting)
+    * [updateAppDepartment](#updateappdepartment)
     * [updateAppLocation](#updateapplocation)
     
 
@@ -455,6 +458,7 @@
     * [getLocationDetail](#getlocationdetail)
     * [updateLocation](#updatelocation)
     * [createLocationBulk](#createlocationbulk)
+    * [getOptimalLocations](#getoptimallocations)
     
 
 * [FileStorage](#FileStorage)
@@ -51991,7 +51995,7 @@ Schema: `ShipmentInternalPlatformViewResponse`
 
 ```golang
 
-data, err := Order.GetShipmentById(CompanyID, xQuery);
+data, err := Order.GetShipmentById(CompanyID, ChannelShipmentID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -52000,14 +52004,13 @@ data, err := Order.GetShipmentById(CompanyID, xQuery);
 | CompanyID | float64 |  | 
 
 
+| ChannelShipmentID | string |  | 
 
 
 
 
 
-
-
-| xQuery | struct | Includes properties such as `ChannelShipmentID`, `ShipmentID`, `OrderingCompanyID`, `RequestByExt`
+| xQuery | struct | Includes properties such as `OrderingCompanyID`, `RequestByExt`
 
 
 
@@ -53944,7 +53947,7 @@ Schema: `OrderStatusResult`
 
 ```golang
 
-data, err := Order.SendSmsNinjaPlatform(CompanyID, body);
+data, err := Order.SendSmsNinjaPlatform(CompanyID);
 ```
 
 | Argument  |  Type  | Description |
@@ -53953,7 +53956,6 @@ data, err := Order.SendSmsNinjaPlatform(CompanyID, body);
 | CompanyID | float64 |  | 
 
 
-| body |  SendSmsPayload | "Request body" 
 
 
 
@@ -54764,7 +54766,7 @@ Products are the core resource of an application. If successful, returns a Compa
 The Company Applicaton Product Data(MOQ/SEO).
 
 
-Schema: `ApplicationItemResponse`
+Schema: `OwnerAppItemResponse`
 
 
 
@@ -58515,6 +58517,44 @@ Schema: `HsnCodesListingResponseSchemaV2`
 ---
 
 
+#### getOptimalLocations
+Location Reassignment
+
+```golang
+
+data, err := Catalog.GetOptimalLocations(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company inside which the location is to be created. | 
+
+
+| body |  AssignStore | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `StoreAssignResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getSingleProductHSNCode
 Hsn Code List.
 
@@ -59069,7 +59109,9 @@ data, err := Catalog.GetApplicationCategoryListing(CompanyID, ApplicationID, xQu
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`
+
+
+| xQuery | struct | Includes properties such as `DepartmentID`, `PageNo`, `PageSize`, `Q`
 
 
 A brand is the name under which a product is being sold. Use this API to list all the brands. You can pass optionally filter the brands by the department. If successful, returns a paginated list of brands specified in `BrandListingResponse`
@@ -59115,6 +59157,97 @@ data, err := Catalog.UpdateAppCategory(CompanyID, ApplicationID, CategoryUID, bo
 
 
 | body |  ApplicationCategoryJson | "Request body" 
+
+This API helps to update data associated to a item custom meta.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse1`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getApplicationDepartmentListing
+List all the departments for the application
+
+```golang
+
+data, err := Catalog.GetApplicationDepartmentListing(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`
+
+
+Departments are a way to categorise similar products. A product can lie in multiple departments. For example, a skirt can below to the 'Women's Fashion' Department while a handbag can lie in 'Women's Accessories' Department. Use this API to list all the application departments. If successful, returns the list of departments specified in `ApplicationDepartmentListingResponse`
+
+*Success Response:*
+
+
+
+List of Departments. See example below or refer `BrandListingResponse` for details
+
+
+Schema: `ApplicationDepartmentListingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateAppDepartment
+Update a single custom json.
+
+```golang
+
+data, err := Catalog.UpdateAppDepartment(CompanyID, ApplicationID, DepartmentUID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to department custom json. | 
+
+
+| ApplicationID | string | application id for which the custom_json is associated. | 
+
+
+| DepartmentUID | string | department id for which the custom_json is associated. | 
+
+
+| body |  ApplicationDepartmentJson | "Request body" 
 
 This API helps to update data associated to a item custom meta.
 
@@ -59697,6 +59830,44 @@ Returns a success response
 
 
 Schema: `ProfileSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOptimalLocations
+Location Reassignment
+
+```golang
+
+data, err := CompanyProfile.GetOptimalLocations(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company inside which the location is to be created. | 
+
+
+| body |  AssignStoreRequestValidator | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `AssignStoreResponseSerializer`
 
 
 

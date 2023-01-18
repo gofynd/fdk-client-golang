@@ -13145,13 +13145,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UpdateShipmentExternal 
-    func (or *Order)  UpdateShipmentExternal(ShipmentID float64, body  UpdateShipmentExternalRequest) (UpdateShipmentResponse, error){
+    // UpdateShipmentStatus 
+    func (or *Order)  UpdateShipmentStatus(ShipmentID float64, body  ShipmentStatusUpdateBody) (ShipmentStatusUpdate, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             updateShipmentExternalResponse UpdateShipmentResponse
+             updateShipmentStatusResponse ShipmentStatusUpdate
 	    )
 
         
@@ -13174,12 +13174,12 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return UpdateShipmentResponse{}, common.NewFDKError(err.Error())
+             return ShipmentStatusUpdate{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return UpdateShipmentResponse{}, common.NewFDKError(err.Error())
+             return ShipmentStatusUpdate{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -13192,14 +13192,14 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return UpdateShipmentResponse{}, err
+            return ShipmentStatusUpdate{}, err
 	    }
         
-        err = json.Unmarshal(response, &updateShipmentExternalResponse)
+        err = json.Unmarshal(response, &updateShipmentStatusResponse)
         if err != nil {
-            return UpdateShipmentResponse{}, common.NewFDKError(err.Error())
+            return ShipmentStatusUpdate{}, common.NewFDKError(err.Error())
         }
-         return updateShipmentExternalResponse, nil
+         return updateShipmentStatusResponse, nil
         
     }
           
@@ -13209,13 +13209,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UpdateShipmentStatus 
-    func (or *Order)  UpdateShipmentStatus(ShipmentID string, body  UpdateShipmentStatusRequest) (ShipmentApplicationStatusResponse, error){
+    // UpdateShipmentStatus1 
+    func (or *Order)  UpdateShipmentStatus1(ShipmentID string, body  UpdateShipmentStatusRequest) (ShipmentApplicationStatusResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             updateShipmentStatusResponse ShipmentApplicationStatusResponse
+             updateShipmentStatus1Response ShipmentApplicationStatusResponse
 	    )
 
         
@@ -13265,11 +13265,11 @@ func NewAppClient(config *AppConfig) *Client {
             return ShipmentApplicationStatusResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &updateShipmentStatusResponse)
+        err = json.Unmarshal(response, &updateShipmentStatus1Response)
         if err != nil {
             return ShipmentApplicationStatusResponse{}, common.NewFDKError(err.Error())
         }
-         return updateShipmentStatusResponse, nil
+         return updateShipmentStatus1Response, nil
         
     }
           
