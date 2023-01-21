@@ -155,6 +155,36 @@ import (
 
 
 
+    //TicketIntegrationDetails used by Lead
+    type TicketIntegrationDetails  string
+    
+    const (
+            
+            //DEFAULT defines constant for the `default` 
+            DEFAULT TicketIntegrationDetails = "default"
+            
+            
+            //FRESHDESK defines constant for the `freshdesk` 
+            FRESHDESK TicketIntegrationDetails = "freshdesk"
+            
+            
+            //KAPTURE defines constant for the `kapture` 
+            KAPTURE TicketIntegrationDetails = "kapture"
+            
+            
+       )
+
+    //IsValid return error if enum is invalid
+    func (ti TicketIntegrationDetails) IsValid() error {
+      switch ti {
+        case  DEFAULT, FRESHDESK, KAPTURE : 
+        return nil
+      }
+      return errors.New("Invalid TicketIntegrationDetails type")
+    }
+
+
+
 
 
 
@@ -335,17 +365,28 @@ import (
             LOGIN PageType = "login"
             
             
+            //REGISTER defines constant for the `register` 
+            REGISTER PageType = "register"
+            
+            
+            //SHIPPING-POLICY defines constant for the `shipping-policy` 
+            SHIPPING-POLICY PageType = "shipping-policy"
+            
+            
+            //RETURN-POLICY defines constant for the `return-policy` 
+            RETURN-POLICY PageType = "return-policy"
+            
+            
        )
 
     //IsValid return error if enum is invalid
     func (pa PageType) IsValid() error {
       switch pa {
-        case  ABOUT-US, ADDRESSES, BLOG, BRANDS, CARDS, CART, CATEGORIES, BRAND, CATEGORY, COLLECTION, COLLECTIONS, CONTACT-US, EXTERNAL, FAQ, FRESHCHAT, HOME, NOTIFICATION-SETTINGS, ORDERS, PAGE, POLICY, PRODUCT, PRODUCT-REVIEWS, ADD-PRODUCT-REVIEW, PRODUCT-REQUEST, PRODUCTS, PROFILE, PROFILE-BASIC, PROFILE-COMPANY, PROFILE-EMAILS, PROFILE-PHONES, RATE-US, REFER-EARN, SETTINGS, SHARED-CART, TNC, TRACK-ORDER, WISHLIST, SECTIONS, FORM, CART-DELIVERY, CART-PAYMENT, CART-REVIEW, LOGIN : 
+        case  ABOUT-US, ADDRESSES, BLOG, BRANDS, CARDS, CART, CATEGORIES, BRAND, CATEGORY, COLLECTION, COLLECTIONS, CONTACT-US, EXTERNAL, FAQ, FRESHCHAT, HOME, NOTIFICATION-SETTINGS, ORDERS, PAGE, POLICY, PRODUCT, PRODUCT-REVIEWS, ADD-PRODUCT-REVIEW, PRODUCT-REQUEST, PRODUCTS, PROFILE, PROFILE-BASIC, PROFILE-COMPANY, PROFILE-EMAILS, PROFILE-PHONES, RATE-US, REFER-EARN, SETTINGS, SHARED-CART, TNC, TRACK-ORDER, WISHLIST, SECTIONS, FORM, CART-DELIVERY, CART-PAYMENT, CART-REVIEW, LOGIN, REGISTER, SHIPPING-POLICY, RETURN-POLICY : 
         return nil
       }
       return errors.New("Invalid PageType type")
     }
-
 
 
 
