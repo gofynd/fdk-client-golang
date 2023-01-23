@@ -1657,55 +1657,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1746,6 +1697,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -15633,13 +15633,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // AssignStore GET zone from the Pincode.
-    func (lo *Logistic)  AssignStore(body  AssignStoreRequest) (AssignStoreResponse, error){
+    // UpsertZoneControllerView GET zone from the Pincode.
+    func (lo *Logistic)  UpsertZoneControllerView(CompanyID float64, ApplicationID string, body  AssignStoreRequest) (AssignStoreResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             assignStoreResponse AssignStoreResponse
+             upsertZoneControllerViewResponse AssignStoreResponse
 	    )
 
         
@@ -15665,6 +15665,10 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+        
+        
+        
+        
     
          
         
@@ -15686,7 +15690,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             lo.config,
             "post",
-            "/service/application/logistics/v1.0/assign_stores",
+            fmt.Sprintf("/service/application/logistics/v1.0/assign_stores",CompanyID,ApplicationID),
             nil,
             nil,
             reqBody)
@@ -15695,11 +15699,11 @@ func NewAppClient(config *AppConfig) *Client {
             return AssignStoreResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &assignStoreResponse)
+        err = json.Unmarshal(response, &upsertZoneControllerViewResponse)
         if err != nil {
             return AssignStoreResponse{}, common.NewFDKError(err.Error())
         }
-         return assignStoreResponse, nil
+         return upsertZoneControllerViewResponse, nil
         
     }
           
