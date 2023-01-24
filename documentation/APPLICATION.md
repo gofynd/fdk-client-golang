@@ -46,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [followById](#followbyid)
     * [unfollowById](#unfollowbyid)
+    * [followById](#followbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -279,12 +279,12 @@
 
 * [Rewards](#Rewards)
   * Methods
-    * [getPointsOnProduct](#getpointsonproduct)
     * [getOfferByName](#getofferbyname)
-    * [getOrderDiscount](#getorderdiscount)
-    * [getUserPoints](#getuserpoints)
-    * [getUserPointsHistory](#getuserpointshistory)
-    * [getUserReferralDetails](#getuserreferraldetails)
+    * [catalogueOrder](#catalogueorder)
+    * [getPointsHistory](#getpointshistory)
+    * [getPoints](#getpoints)
+    * [referral](#referral)
+    * [orderDiscount](#orderdiscount)
     * [redeemReferralCode](#redeemreferralcode)
     
 
@@ -1149,12 +1149,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1168,7 +1168,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1190,12 +1190,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1209,7 +1209,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -19028,42 +19028,6 @@ Schema: `ShipmentApplicationStatusResponse`
 ## Rewards
 
 
-#### getPointsOnProduct
-Get the eligibility of reward points on a product
-
-```golang
-
- data, err :=  Rewards.GetPointsOnProduct(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  CatalogueOrderRequest | "Request body" 
-
-
-Use this API to evaluate the amount of reward points that could be earned on any catalogue product.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `CatalogueOrderRequest` for more details.
-
-
-Schema: `CatalogueOrderResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getOfferByName
 Get offer by name
 
@@ -19102,30 +19066,30 @@ Schema: `Offer`
 ---
 
 
-#### getOrderDiscount
-Calculates the discount on order-amount
+#### catalogueOrder
+Get all transactions of reward points
 
 ```golang
 
- data, err :=  Rewards.GetOrderDiscount(body);
+ data, err :=  Rewards.CatalogueOrder(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  OrderDiscountRequest | "Request body" 
+| body |  CatalogueOrderRequest | "Request body" 
 
 
-Use this API to calculate the discount on order-amount based on all the amount range configured in order_discount.
+Use this API to evaluate the amount of reward points that could be earned on any catalogue product.
 
 *Success Response:*
 
 
 
-Success. Check example below or refer `OrderDiscountResponse` for more details.
+Success. Check example below or refer `CatalogueOrderResponse` for more details.
 
 
-Schema: `OrderDiscountResponse`
+Schema: `CatalogueOrderResponse`
 
 
 
@@ -19138,12 +19102,52 @@ Schema: `OrderDiscountResponse`
 ---
 
 
-#### getUserPoints
-Get reward points available with a user
+#### getPointsHistory
+Get all transactions of reward points
 
 ```golang
 
- data, err :=  Rewards.GetUserPoints();
+ data, err :=  Rewards.GetPointsHistory(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+| xQuery | struct | Includes properties such as `PageID`, `PageSize`
+
+
+
+Use this API to get a list of points transactions.
+
+*Success Response:*
+
+
+
+Success. Check example below or refer `PointsHistoryResponse` for more details.
+
+
+Schema: `PointsHistoryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPoints
+Get referral details of a user
+
+```golang
+
+ data, err :=  Rewards.GetPoints();
 ```
 
 | Argument  |  Type  | Description |
@@ -19173,52 +19177,12 @@ Schema: `PointsResponse`
 ---
 
 
-#### getUserPointsHistory
-Get all transactions of reward points
-
-```golang
-
- data, err :=  Rewards.GetUserPointsHistory(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-| xQuery | struct | Includes properties such as `PageID`, `PageSize`
-
-
-
-Use this API to get a list of points transactions. The list of points history is paginated.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `PointsHistoryResponse` for more details.
-
-
-Schema: `PointsHistoryResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getUserReferralDetails
+#### referral
 Get referral details of a user
 
 ```golang
 
- data, err :=  Rewards.GetUserReferralDetails();
+ data, err :=  Rewards.Referral();
 ```
 
 | Argument  |  Type  | Description |
@@ -19236,6 +19200,42 @@ Success. Check example below or refer `ReferralDetailsResponse` for more details
 
 
 Schema: `ReferralDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### orderDiscount
+Calculates the discount on order-amount
+
+```golang
+
+ data, err :=  Rewards.OrderDiscount(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  OrderDiscountRequest | "Request body" 
+
+
+Use this API to calculate the discount on order-amount based on all the amount range configured in order_discount.
+
+*Success Response:*
+
+
+
+Success. Check example below or refer `OrderDiscountResponse` for more details.
+
+
+Schema: `OrderDiscountResponse`
 
 
 
