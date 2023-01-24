@@ -1795,6 +1795,7 @@ Product has been added to your cart
           "article": {
             "type": "article",
             "is_gift": true,
+            "is_gift_visible": true,
             "gift_card": {
               "display_text": "",
               "price": 30,
@@ -2266,6 +2267,7 @@ Sorry, item is out of stock
           "article": {
             "type": "article",
             "is_gift": true,
+            "is_gift_visible": true,
             "gift_card": {
               "display_text": "",
               "price": 30,
@@ -2512,6 +2514,7 @@ Nothing updated
           "article": {
             "type": "article",
             "is_gift": true,
+            "is_gift_visible": true,
             "gift_card": {
               "display_text": "",
               "price": 30,
@@ -2759,6 +2762,7 @@ Item updated in the cart
           "article": {
             "type": "article",
             "is_gift": true,
+            "is_gift_visible": true,
             "gift_card": {
               "display_text": "",
               "price": 30,
@@ -18927,6 +18931,7 @@ Product has been added to your cart
           "article": {
             "type": "article",
             "is_gift": true,
+            "is_gift_visible": true,
             "gift_card": {
               "display_text": "",
               "price": 30,
@@ -19398,6 +19403,7 @@ Sorry, item is out of stock
           "article": {
             "type": "article",
             "is_gift": true,
+            "is_gift_visible": true,
             "gift_card": {
               "display_text": "",
               "price": 30,
@@ -19644,6 +19650,7 @@ Nothing updated
           "article": {
             "type": "article",
             "is_gift": true,
+            "is_gift_visible": true,
             "gift_card": {
               "display_text": "",
               "price": 30,
@@ -19891,6 +19898,7 @@ Item updated in the cart
           "article": {
             "type": "article",
             "is_gift": true,
+            "is_gift_visible": true,
             "gift_card": {
               "display_text": "",
               "price": 30,
