@@ -11282,7 +11282,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // CardDetails API to get Card info from PG
-    func (pa *Payment)  CardDetails(body  cardDetails) (cardDetailsResponse, error){
+    func (pa *Payment)  CardDetails(body  cardDetailsRequest) (cardDetailsResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte

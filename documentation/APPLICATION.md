@@ -17034,7 +17034,7 @@ API to get Card info from PG
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  cardDetails | "Request body" 
+| body |  cardDetailsRequest | "Request body" 
 
 
 API to get Card info from PG
