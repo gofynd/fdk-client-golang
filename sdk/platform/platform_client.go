@@ -2822,6 +2822,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
     //PlatformGetShipmentByIdXQuery holds query params
     type PlatformGetShipmentByIdXQuery struct { 
+        ChannelShipmentID string  `url:"channel_shipment_id,omitempty"` 
+        ShipmentID string  `url:"shipment_id,omitempty"` 
         OrderingCompanyID string  `url:"ordering_company_id,omitempty"` 
         RequestByExt string  `url:"request_by_ext,omitempty"`  
     }
@@ -2829,7 +2831,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
 
     // GetShipmentById 
-     func (or *PlatformOrder)  GetShipmentById(ChannelShipmentID string, xQuery PlatformGetShipmentByIdXQuery) (ShipmentInfoResponse, error){
+     func (or *PlatformOrder)  GetShipmentById(xQuery PlatformGetShipmentByIdXQuery) (ShipmentInfoResponse, error){
         
         var (
             rawRequest  *RawRequest
@@ -2846,10 +2848,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             
                 
             
+                
+            
+                
+            
         
 
-        
-        
         
 
          
@@ -2859,7 +2863,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         rawRequest = NewRequest(
             or.Config,
             "get",
-            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/shipment-details/%s",or.CompanyID, ChannelShipmentID),
+            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/shipment-details",or.CompanyID),
             nil,
             xQuery,
             nil)
