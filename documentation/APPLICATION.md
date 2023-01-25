@@ -238,6 +238,7 @@
     * [resendOrCancelPayment](#resendorcancelpayment)
     * [renderHTML](#renderhtml)
     * [validateVPA](#validatevpa)
+    * [cardDetails](#carddetails)
     * [getActiveRefundTransferModes](#getactiverefundtransfermodes)
     * [enableOrDisableRefundTransferMode](#enableordisablerefundtransfermode)
     * [getUserBeneficiariesDetail](#getuserbeneficiariesdetail)
@@ -281,12 +282,12 @@
 
 * [Rewards](#Rewards)
   * Methods
-    * [getPointsOnProduct](#getpointsonproduct)
     * [getOfferByName](#getofferbyname)
-    * [getOrderDiscount](#getorderdiscount)
-    * [getUserPoints](#getuserpoints)
-    * [getUserPointsHistory](#getuserpointshistory)
-    * [getUserReferralDetails](#getuserreferraldetails)
+    * [catalogueOrder](#catalogueorder)
+    * [getPointsHistory](#getpointshistory)
+    * [getPoints](#getpoints)
+    * [referral](#referral)
+    * [orderDiscount](#orderdiscount)
     * [redeemReferralCode](#redeemreferralcode)
     
 
@@ -17022,6 +17023,42 @@ Schema: `ValidateVPAResponse`
 ---
 
 
+#### cardDetails
+API to get Card info from PG
+
+```golang
+
+ data, err :=  Payment.CardDetails(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  cardDetails | "Request body" 
+
+
+API to get Card info from PG
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `cardDetailsResponseSchema` for more details.
+
+
+Schema: `cardDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getActiveRefundTransferModes
 Lists the mode of refund
 
@@ -18363,42 +18400,6 @@ Schema: `ShipmentApplicationStatusResponse`
 ## Rewards
 
 
-#### getPointsOnProduct
-Get the eligibility of reward points on a product
-
-```golang
-
- data, err :=  Rewards.GetPointsOnProduct(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  CatalogueOrderRequest | "Request body" 
-
-
-Use this API to evaluate the amount of reward points that could be earned on any catalogue product.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `CatalogueOrderRequest` for more details.
-
-
-Schema: `CatalogueOrderResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getOfferByName
 Get offer by name
 
@@ -18437,30 +18438,30 @@ Schema: `Offer`
 ---
 
 
-#### getOrderDiscount
-Calculates the discount on order-amount
+#### catalogueOrder
+Get all transactions of reward points
 
 ```golang
 
- data, err :=  Rewards.GetOrderDiscount(body);
+ data, err :=  Rewards.CatalogueOrder(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  OrderDiscountRequest | "Request body" 
+| body |  CatalogueOrderRequest | "Request body" 
 
 
-Use this API to calculate the discount on order-amount based on all the amount range configured in order_discount.
+Use this API to evaluate the amount of reward points that could be earned on any catalogue product.
 
 *Success Response:*
 
 
 
-Success. Check example below or refer `OrderDiscountResponse` for more details.
+Success. Check example below or refer `CatalogueOrderResponse` for more details.
 
 
-Schema: `OrderDiscountResponse`
+Schema: `CatalogueOrderResponse`
 
 
 
@@ -18473,12 +18474,52 @@ Schema: `OrderDiscountResponse`
 ---
 
 
-#### getUserPoints
-Get reward points available with a user
+#### getPointsHistory
+Get all transactions of reward points
 
 ```golang
 
- data, err :=  Rewards.GetUserPoints();
+ data, err :=  Rewards.GetPointsHistory(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+| xQuery | struct | Includes properties such as `PageID`, `PageSize`
+
+
+
+Use this API to get a list of points transactions.
+
+*Success Response:*
+
+
+
+Success. Check example below or refer `PointsHistoryResponse` for more details.
+
+
+Schema: `PointsHistoryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPoints
+Get referral details of a user
+
+```golang
+
+ data, err :=  Rewards.GetPoints();
 ```
 
 | Argument  |  Type  | Description |
@@ -18508,52 +18549,12 @@ Schema: `PointsResponse`
 ---
 
 
-#### getUserPointsHistory
-Get all transactions of reward points
-
-```golang
-
- data, err :=  Rewards.GetUserPointsHistory(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-| xQuery | struct | Includes properties such as `PageID`, `PageSize`
-
-
-
-Use this API to get a list of points transactions. The list of points history is paginated.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `PointsHistoryResponse` for more details.
-
-
-Schema: `PointsHistoryResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getUserReferralDetails
+#### referral
 Get referral details of a user
 
 ```golang
 
- data, err :=  Rewards.GetUserReferralDetails();
+ data, err :=  Rewards.Referral();
 ```
 
 | Argument  |  Type  | Description |
@@ -18571,6 +18572,42 @@ Success. Check example below or refer `ReferralDetailsResponse` for more details
 
 
 Schema: `ReferralDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### orderDiscount
+Calculates the discount on order-amount
+
+```golang
+
+ data, err :=  Rewards.OrderDiscount(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  OrderDiscountRequest | "Request body" 
+
+
+Use this API to calculate the discount on order-amount based on all the amount range configured in order_discount.
+
+*Success Response:*
+
+
+
+Success. Check example below or refer `OrderDiscountResponse` for more details.
+
+
+Schema: `OrderDiscountResponse`
 
 
 
