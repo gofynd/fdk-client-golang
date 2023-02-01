@@ -15521,8 +15521,6 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
-            
-        
 
         
 
@@ -15633,13 +15631,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UpsertZoneControllerView GET zone from the Pincode.
-    func (lo *Logistic)  UpsertZoneControllerView(CompanyID float64, ApplicationID string, body  AssignStoreRequest) (AssignStoreResponse, error){
+    // AssignLocations GET zone from the Pincode.
+    func (lo *Logistic)  AssignLocations(body  AssignStoreRequest) (AssignStoreResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             upsertZoneControllerViewResponse AssignStoreResponse
+             assignLocationsResponse AssignStoreResponse
 	    )
 
         
@@ -15665,10 +15663,6 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
-        
-        
-        
-        
     
          
         
@@ -15690,7 +15684,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             lo.config,
             "post",
-            fmt.Sprintf("/service/application/logistics/v1.0/assign_stores",CompanyID,ApplicationID),
+            "/service/application/logistics/v1.0/assign_stores",
             nil,
             nil,
             reqBody)
@@ -15699,11 +15693,11 @@ func NewAppClient(config *AppConfig) *Client {
             return AssignStoreResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &upsertZoneControllerViewResponse)
+        err = json.Unmarshal(response, &assignLocationsResponse)
         if err != nil {
             return AssignStoreResponse{}, common.NewFDKError(err.Error())
         }
-         return upsertZoneControllerViewResponse, nil
+         return assignLocationsResponse, nil
         
     }
           

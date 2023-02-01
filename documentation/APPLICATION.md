@@ -324,7 +324,7 @@
     * [getPincodeCity](#getpincodecity)
     * [getTatProduct](#gettatproduct)
     * [getPincodeZones](#getpincodezones)
-    * [upsertZoneControllerView](#upsertzonecontrollerview)
+    * [assignLocations](#assignlocations)
     
 
 
@@ -23795,22 +23795,16 @@ Schema: `GetZoneFromPincodeViewResponse`
 ---
 
 
-#### upsertZoneControllerView
+#### assignLocations
 GET zone from the Pincode.
 
 ```golang
 
- data, err :=  Logistic.UpsertZoneControllerView(CompanyID, ApplicationID, body);
+ data, err :=  Logistic.AssignLocations(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` contains a specific ID of a company. | 
-
-
-| ApplicationID | string | A `application_id` contains a unique ID. | 
-
 
 | body |  AssignStoreRequest | "Request body" 
 
