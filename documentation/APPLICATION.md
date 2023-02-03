@@ -3436,7 +3436,13 @@ Verify the coupon eligibility against the payment mode
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`, `Iin`, `Network`, `Type`
 
 
 
@@ -17028,13 +17034,18 @@ API to get Card info from PG
 
 ```golang
 
- data, err :=  Payment.CardDetails(body);
+ data, err :=  Payment.CardDetails(CardBin, xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  cardDetailsRequest | "Request body" 
+| CardBin | string | Card first 6 digit IIN(prefix) number. | 
+
+
+
+| xQuery | struct | Includes properties such as `Aggregator`
+
 
 
 API to get Card info from PG
@@ -20503,7 +20514,13 @@ Verify the coupon eligibility against the payment mode
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`, `Iin`, `Network`, `Type`
 
 
 

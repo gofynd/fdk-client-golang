@@ -3759,7 +3759,10 @@ func NewAppClient(config *AppConfig) *Client {
         PaymentMode string  `url:"payment_mode,omitempty"` 
         PaymentIdentifier string  `url:"payment_identifier,omitempty"` 
         AggregatorName string  `url:"aggregator_name,omitempty"` 
-        MerchantCode string  `url:"merchant_code,omitempty"`  
+        MerchantCode string  `url:"merchant_code,omitempty"` 
+        Iin string  `url:"iin,omitempty"` 
+        Network string  `url:"network,omitempty"` 
+        Type string  `url:"type,omitempty"`  
     }
     
     // ValidateCouponForPayment Verify the coupon eligibility against the payment mode
@@ -3774,6 +3777,12 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
+            
+                
+            
+                
             
                 
             
@@ -11281,8 +11290,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //PaymentCardDetailsXQuery holds query params
+    type PaymentCardDetailsXQuery struct { 
+        Aggregator string  `url:"aggregator,omitempty"`  
+    }
+    
     // CardDetails API to get Card info from PG
-    func (pa *Payment)  CardDetails(body  cardDetailsRequest) (cardDetailsResponse, error){
+    func (pa *Payment)  CardDetails(CardBin string, xQuery PaymentCardDetailsXQuery) (cardDetailsResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -11291,39 +11305,28 @@ func NewAppClient(config *AppConfig) *Client {
 	    )
 
         
-            
+
         
+            
+                
             
         
 
         
-
+        
         
     
          
         
         
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return cardDetailsResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return cardDetailsResponse{}, common.NewFDKError(err.Error())
-        }
-        
         //API call
         rawRequest = NewRequest(
             pa.config,
-            "post",
-            "/service/application/payment/v1.0/cards/info",
+            "get",
+            fmt.Sprintf("/service/application/payment/v1.0/cards/info",CardBin),
             nil,
-            nil,
-            reqBody)
+            xQuery,
+            nil)
         response, err = rawRequest.Execute()
         if err != nil {
             return cardDetailsResponse{}, err
@@ -14963,7 +14966,10 @@ func NewAppClient(config *AppConfig) *Client {
         PaymentMode string  `url:"payment_mode,omitempty"` 
         PaymentIdentifier string  `url:"payment_identifier,omitempty"` 
         AggregatorName string  `url:"aggregator_name,omitempty"` 
-        MerchantCode string  `url:"merchant_code,omitempty"`  
+        MerchantCode string  `url:"merchant_code,omitempty"` 
+        Iin string  `url:"iin,omitempty"` 
+        Network string  `url:"network,omitempty"` 
+        Type string  `url:"type,omitempty"`  
     }
     
     // ValidateCouponForPayment Verify the coupon eligibility against the payment mode
@@ -14978,6 +14984,12 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
+            
+                
+            
+                
             
                 
             
