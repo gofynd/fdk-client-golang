@@ -10736,6 +10736,8 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
 
         
 
@@ -10793,6 +10795,8 @@ func NewAppClient(config *AppConfig) *Client {
              checkAndUpdatePaymentStatusResponse PaymentStatusUpdateResponse
 	    )
 
+        
+            
         
             
         
@@ -11110,6 +11114,8 @@ func NewAppClient(config *AppConfig) *Client {
              resendOrCancelPaymentResponse ResendOrCancelPaymentResponse
 	    )
 
+        
+            
         
             
         
@@ -12210,6 +12216,8 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
 
         
 
@@ -12267,6 +12275,8 @@ func NewAppClient(config *AppConfig) *Client {
              checkAndUpdatePaymentStatusPaymentLinkResponse PaymentStatusUpdateResponse
 	    )
 
+        
+            
         
             
         
