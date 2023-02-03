@@ -13336,19 +13336,19 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    //RewardsGetPointsHistoryXQuery holds query params
-    type RewardsGetPointsHistoryXQuery struct { 
+    //RewardsGetUserPointsHistoryXQuery holds query params
+    type RewardsGetUserPointsHistoryXQuery struct { 
         PageID string  `url:"page_id,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // GetPointsHistory Get all transactions of reward points
-    func (re *Rewards)  GetPointsHistory(xQuery RewardsGetPointsHistoryXQuery) (PointsHistoryResponse, error){
+    // GetUserPointsHistory Get all transactions of reward points
+    func (re *Rewards)  GetUserPointsHistory(xQuery RewardsGetUserPointsHistoryXQuery) (PointsHistoryResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getPointsHistoryResponse PointsHistoryResponse
+             getUserPointsHistoryResponse PointsHistoryResponse
 	    )
 
         
@@ -13379,11 +13379,11 @@ func NewAppClient(config *AppConfig) *Client {
             return PointsHistoryResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getPointsHistoryResponse)
+        err = json.Unmarshal(response, &getUserPointsHistoryResponse)
         if err != nil {
             return PointsHistoryResponse{}, common.NewFDKError(err.Error())
         }
-         return getPointsHistoryResponse, nil
+         return getUserPointsHistoryResponse, nil
         
     }
           
@@ -13407,8 +13407,8 @@ func NewAppClient(config *AppConfig) *Client {
                     
                 
             
-            // GetPointsHistoryPaginator Get all transactions of reward points  
-            func (re *Rewards)  GetPointsHistoryPaginator( xQuery RewardsGetPointsHistoryXQuery ) *common.Paginator {
+            // GetUserPointsHistoryPaginator Get all transactions of reward points  
+            func (re *Rewards)  GetUserPointsHistoryPaginator( xQuery RewardsGetUserPointsHistoryXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("cursor")
                  
                  
@@ -13422,7 +13422,7 @@ func NewAppClient(config *AppConfig) *Client {
                  
                  
                 paginator.Next = func() (interface{}, error) {
-                    response, err := re.GetPointsHistory(xQuery)
+                    response, err := re.GetUserPointsHistory(xQuery)
                     if response.Page.HasNext {
                         paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
                     }

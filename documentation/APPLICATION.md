@@ -281,7 +281,7 @@
   * Methods
     * [getOfferByName](#getofferbyname)
     * [catalogueOrder](#catalogueorder)
-    * [getPointsHistory](#getpointshistory)
+    * [getUserPointsHistory](#getuserpointshistory)
     * [getUserPoints](#getuserpoints)
     * [getUserReferralDetails](#getuserreferraldetails)
     * [getOrderDiscount](#getorderdiscount)
@@ -19102,12 +19102,12 @@ Schema: `CatalogueOrderResponse`
 ---
 
 
-#### getPointsHistory
+#### getUserPointsHistory
 Get all transactions of reward points
 
 ```golang
 
- data, err :=  Rewards.GetPointsHistory(xQuery);
+ data, err :=  Rewards.GetUserPointsHistory(xQuery);
 ```
 
 | Argument  |  Type  | Description |
