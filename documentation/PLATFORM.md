@@ -155,8 +155,11 @@
     * [createPagePreview](#createpagepreview)
     * [updatePagePreview](#updatepagepreview)
     * [deletePage](#deletepage)
-    * [updatePathRedirectionRules](#updatepathredirectionrules)
+    * [addPathRedirectionRules](#addpathredirectionrules)
     * [getPathRedirectionRules](#getpathredirectionrules)
+    * [getPathRedirectionRule](#getpathredirectionrule)
+    * [updatePathRedirectionRules](#updatepathredirectionrules)
+    * [deletePathRedirectionRules](#deletepathredirectionrules)
     * [getSEOConfiguration](#getseoconfiguration)
     * [updateSEOConfiguration](#updateseoconfiguration)
     * [getSlideshows](#getslideshows)
@@ -302,14 +305,14 @@
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createProductBundle](#createproductbundle)
     * [getProductBundle](#getproductbundle)
-    * [updateProductBundle](#updateproductbundle)
     * [getProductBundleDetail](#getproductbundledetail)
+    * [updateProductBundle](#updateproductbundle)
     * [createSizeGuide](#createsizeguide)
     * [getSizeGuides](#getsizeguides)
-    * [updateSizeGuide](#updatesizeguide)
     * [getSizeGuide](#getsizeguide)
-    * [updateAppProduct](#updateappproduct)
+    * [updateSizeGuide](#updatesizeguide)
     * [getAppProduct](#getappproduct)
+    * [updateAppProduct](#updateappproduct)
     * [getConfigurationMetadata](#getconfigurationmetadata)
     * [createGroupConfiguration](#creategroupconfiguration)
     * [getGroupConfigurations](#getgroupconfigurations)
@@ -346,8 +349,8 @@
     * [listProductTemplateCategories](#listproducttemplatecategories)
     * [createDepartments](#createdepartments)
     * [listDepartmentsData](#listdepartmentsdata)
-    * [updateDepartment](#updatedepartment)
     * [getDepartmentData](#getdepartmentdata)
+    * [updateDepartment](#updatedepartment)
     * [listProductTemplate](#listproducttemplate)
     * [validateProductTemplate](#validateproducttemplate)
     * [downloadProductTemplateViews](#downloadproducttemplateviews)
@@ -358,8 +361,8 @@
     * [listTemplateBrandTypeValues](#listtemplatebrandtypevalues)
     * [createCategories](#createcategories)
     * [listCategories](#listcategories)
-    * [updateCategory](#updatecategory)
     * [getCategoryData](#getcategorydata)
+    * [updateCategory](#updatecategory)
     * [createProduct](#createproduct)
     * [getProducts](#getproducts)
     * [getProductAttributes](#getproductattributes)
@@ -393,8 +396,8 @@
     * [updateInventories](#updateinventories)
     * [createHsnCode](#createhsncode)
     * [getAllHsnCodes](#getallhsncodes)
-    * [updateHsnCode](#updatehsncode)
     * [getHsnCode](#gethsncode)
+    * [updateHsnCode](#updatehsncode)
     * [bulkHsnCode](#bulkhsncode)
     * [getAllProductHsnCodes](#getallproducthsncodes)
     * [getSingleProductHSNCode](#getsingleproducthsncode)
@@ -410,6 +413,8 @@
     * [updateAppBrand](#updateappbrand)
     * [getApplicationCategoryListing](#getapplicationcategorylisting)
     * [updateAppCategory](#updateappcategory)
+    * [getApplicationDepartmentListing](#getapplicationdepartmentlisting)
+    * [updateAppDepartment](#updateappdepartment)
     * [updateAppLocation](#updateapplocation)
     
 
@@ -428,6 +433,7 @@
     * [getLocationDetail](#getlocationdetail)
     * [updateLocation](#updatelocation)
     * [createLocationBulk](#createlocationbulk)
+    * [getOptimalLocations](#getoptimallocations)
     
 
 * [FileStorage](#FileStorage)
@@ -607,16 +613,16 @@
 
 * [Serviceability](#Serviceability)
   * Methods
-    * [getApplicationServiceability](#getapplicationserviceability)
     * [postApplicationServiceability](#postapplicationserviceability)
+    * [getApplicationServiceability](#getapplicationserviceability)
     * [getEntityRegionView](#getentityregionview)
     * [getListView](#getlistview)
     * [getCompanyStoreView](#getcompanystoreview)
     * [getZoneDataView](#getzonedataview)
     * [updateZoneControllerView](#updatezonecontrollerview)
     * [upsertZoneControllerView](#upsertzonecontrollerview)
-    * [getZonesFromApplicationIdView](#getzonesfromapplicationidview)
     * [getZoneFromPincodeView](#getzonefrompincodeview)
+    * [getZonesFromApplicationIdView](#getzonesfromapplicationidview)
     * [getZoneListView](#getzonelistview)
     
 
@@ -44419,12 +44425,12 @@ default
 ---
 
 
-#### updatePathRedirectionRules
+#### addPathRedirectionRules
 Save path based redirection rules
 
 ```golang
 
-data, err := Content.UpdatePathRedirectionRules(CompanyID, ApplicationID, body);
+data, err := Content.AddPathRedirectionRules(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -44438,7 +44444,7 @@ data, err := Content.UpdatePathRedirectionRules(CompanyID, ApplicationID, body);
 
 | body |  PathMappingSchema | "Request body" 
 
-Use this API to add, update or delete path-based redirection rules
+Use this API to add redirection rules
 
 *Success Response:*
 
@@ -44448,6 +44454,24 @@ Success. Refer `PathMappingSchema` for more details.
 
 
 Schema: `PathMappingSchema`
+
+
+*Examples:*
+
+
+Success
+```json
+{
+  "value": {
+    "_id": "615188e9db1e444cb0f40837",
+    "application": "000000000000000000000002",
+    "redirect_from": "/from",
+    "redirect_to": "/to",
+    "createdAt": "2021-09-27T09:03:37.053Z",
+    "updatedAt": "2021-09-27T09:09:25.587Z"
+  }
+}
+```
 
 
 
@@ -44465,7 +44489,7 @@ Get path based redirection rules
 
 ```golang
 
-data, err := Content.GetPathRedirectionRules(CompanyID, ApplicationID);
+data, err := Content.GetPathRedirectionRules(CompanyID, ApplicationID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -44476,6 +44500,11 @@ data, err := Content.GetPathRedirectionRules(CompanyID, ApplicationID);
 
 | ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
+
+
+
+
+| xQuery | struct | Includes properties such as `PageSize`, `PageNo`
 
 
 Use this API to get path based redirection rules.
@@ -44499,17 +44528,179 @@ Success
   "value": {
     "_id": "615188e9db1e444cb0f40837",
     "application": "000000000000000000000002",
-    "redirections": [
-      {
-        "redirect_from": "/from",
-        "redirect_to": "/to"
-      }
-    ],
+    "redirect_from": "/from",
+    "redirect_to": "/to",
     "createdAt": "2021-09-27T09:03:37.053Z",
     "updatedAt": "2021-09-27T09:09:25.587Z"
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPathRedirectionRule
+Get path based redirection rule
+
+```golang
+
+data, err := Content.GetPathRedirectionRule(CompanyID, ApplicationID, PathID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+
+
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
+
+
+| PathID | string | ID allotted to the path redirection rule. | 
+
+
+
+Use this API to get path based redirection rule.
+
+*Success Response:*
+
+
+
+Success. Refer `PathMappingSchema` for more details.
+
+
+Schema: `PathMappingSchema`
+
+
+*Examples:*
+
+
+Success
+```json
+{
+  "value": {
+    "_id": "615188e9db1e444cb0f40837",
+    "application": "000000000000000000000002",
+    "redirect_from": "/from",
+    "redirect_to": "/to",
+    "createdAt": "2021-09-27T09:03:37.053Z",
+    "updatedAt": "2021-09-27T09:09:25.587Z"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updatePathRedirectionRules
+Update path based redirection rules
+
+```golang
+
+data, err := Content.UpdatePathRedirectionRules(CompanyID, ApplicationID, PathID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+
+
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
+
+
+| PathID | string | ID allotted to the path redirection rule. | 
+
+
+| body |  PathMappingSchema | "Request body" 
+
+Use this API to update redirection rules
+
+*Success Response:*
+
+
+
+Success. Refer `PathMappingSchema` for more details.
+
+
+Schema: `PathMappingSchema`
+
+
+*Examples:*
+
+
+Success
+```json
+{
+  "value": {
+    "_id": "615188e9db1e444cb0f40837",
+    "application": "000000000000000000000002",
+    "redirect_from": "/from",
+    "redirect_to": "/to",
+    "createdAt": "2021-09-27T09:03:37.053Z",
+    "updatedAt": "2021-09-27T09:09:25.587Z"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deletePathRedirectionRules
+Delete path based redirection rules
+
+```golang
+
+data, err := Content.DeletePathRedirectionRules(CompanyID, ApplicationID, PathID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+
+
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
+
+
+| PathID | string | ID allotted to the path redirection rule. | 
+
+
+
+Use this API to delete redirection rules
+
+*Success Response:*
+
+
+
+Success.
+
+
+Schema: `Object`
 
 
 
@@ -53289,6 +53480,46 @@ Schema: `GetProductBundleListingResponse`
 ---
 
 
+#### getProductBundleDetail
+Get a particular Product Bundle details
+
+```golang
+
+data, err := Catalog.GetProductBundleDetail(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
+
+*Success Response:*
+
+
+
+The Collection object. See example below or refer `GetProductBundleResponse` for details
+
+
+Schema: `GetProductBundleResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateProductBundle
 Update a Product Bundle
 
@@ -53318,46 +53549,6 @@ The Collection object. See example below or refer `GetProductBundleCreateRespons
 
 
 Schema: `GetProductBundleCreateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getProductBundleDetail
-Get a particular Product Bundle details
-
-```golang
-
-data, err := Catalog.GetProductBundleDetail(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
-
-*Success Response:*
-
-
-
-The Collection object. See example below or refer `GetProductBundleResponse` for details
-
-
-Schema: `GetProductBundleResponse`
 
 
 
@@ -53456,6 +53647,46 @@ Schema: `ListSizeGuide`
 ---
 
 
+#### getSizeGuide
+Get a single size guide.
+
+```golang
+
+data, err := Catalog.GetSizeGuide(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to size guide. | 
+
+
+| ID | string | Id of the size guide to be viewed. | 
+
+
+
+This API helps to get data associated to a size guide.
+
+*Success Response:*
+
+
+
+Brand object. See example below or refer `SizeGuideResponseSchema` for details
+
+
+Schema: `SizeGuideResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateSizeGuide
 Edit a size guide.
 
@@ -53497,34 +53728,37 @@ Schema: `SuccessResponse`
 ---
 
 
-#### getSizeGuide
-Get a single size guide.
+#### getAppProduct
+Get company application product data.
 
 ```golang
 
-data, err := Catalog.GetSizeGuide(CompanyID, ID);
+data, err := Catalog.GetAppProduct(CompanyID, ApplicationID, ItemID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Id of the company associated to size guide. | 
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
 
 
-| ID | string | Id of the size guide to be viewed. | 
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ItemID | string | product id for a particular product. | 
 
 
 
-This API helps to get data associated to a size guide.
+Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
 
 *Success Response:*
 
 
 
-Brand object. See example below or refer `SizeGuideResponseSchema` for details
+The Company Applicaton Product Data(MOQ/SEO).
 
 
-Schema: `SizeGuideResponse`
+Schema: `OwnerAppItemResponse`
 
 
 
@@ -53569,52 +53803,6 @@ Returns a success response
 
 
 Schema: `SuccessResponse1`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAppProduct
-Get company application product data.
-
-```golang
-
-data, err := Catalog.GetAppProduct(CompanyID, ApplicationID, ItemID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ItemID | string | product id for a particular product. | 
-
-
-
-| xQuery | struct | Includes properties such as `SliceAttr`
-
-
-Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
-
-*Success Response:*
-
-
-
-The Company Applicaton Product Data(MOQ/SEO).
-
-
-Schema: `ApplicationItemResponse`
 
 
 
@@ -55194,6 +55382,46 @@ Schema: `DepartmentsResponse`
 ---
 
 
+#### getDepartmentData
+Get specific departments details by passing in unique id of the department.
+
+```golang
+
+data, err := Catalog.GetDepartmentData(CompanyID, UID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| UID | string | A `uid` is a unique identifier of a department. | 
+
+
+
+Allows you to get department data, by uid.
+
+*Success Response:*
+
+
+
+Departments Data. See example below or refer `DepartmentsResponse` for details
+
+
+Schema: `DepartmentsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateDepartment
 Update the department by their uid.
 
@@ -55223,46 +55451,6 @@ Success Response. See example below or refer `DepartmentCreateResponseSchema` fo
 
 
 Schema: `DepartmentModel`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getDepartmentData
-Get specific departments details by passing in unique id of the department.
-
-```golang
-
-data, err := Catalog.GetDepartmentData(CompanyID, UID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| UID | string | A `uid` is a unique identifier of a department. | 
-
-
-
-Allows you to get department data, by uid.
-
-*Success Response:*
-
-
-
-Departments Data. See example below or refer `DepartmentsResponse` for details
-
-
-Schema: `DepartmentsResponse`
 
 
 
@@ -55675,6 +55863,46 @@ Schema: `CategoryResponse`
 ---
 
 
+#### getCategoryData
+Get product category by uid
+
+```golang
+
+data, err := Catalog.GetCategoryData(CompanyID, UID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| UID | string | Category unique id | 
+
+
+
+This API gets meta associated to product categories.
+
+*Success Response:*
+
+
+
+Get Data for one category. See example below or refer `CategoryResponse` for details
+
+
+Schema: `SingleCategoryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateCategory
 Update product categories
 
@@ -55704,46 +55932,6 @@ Category Meta. See example below or refer `CategoryUpdateResponse` for details
 
 
 Schema: `CategoryUpdateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getCategoryData
-Get product category by uid
-
-```golang
-
-data, err := Catalog.GetCategoryData(CompanyID, UID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| UID | string | Category unique id | 
-
-
-
-This API gets meta associated to product categories.
-
-*Success Response:*
-
-
-
-Get Data for one category. See example below or refer `CategoryResponse` for details
-
-
-Schema: `SingleCategoryResponse`
 
 
 
@@ -57156,6 +57344,46 @@ Schema: `HsnCodesListingResponse`
 ---
 
 
+#### getHsnCode
+Fetch Hsn Code.
+
+```golang
+
+data, err := Catalog.GetHsnCode(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ID | string | Unique id | 
+
+
+
+Fetch Hsn Code.
+
+*Success Response:*
+
+
+
+See example below details
+
+
+Schema: `HsnCode`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateHsnCode
 Update Hsn Code.
 
@@ -57182,46 +57410,6 @@ Update Hsn Code.
 
 
 See example below for details
-
-
-Schema: `HsnCode`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getHsnCode
-Fetch Hsn Code.
-
-```golang
-
-data, err := Catalog.GetHsnCode(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ID | string | Unique id | 
-
-
-
-Fetch Hsn Code.
-
-*Success Response:*
-
-
-
-See example below details
 
 
 Schema: `HsnCode`
@@ -57875,7 +58063,9 @@ data, err := Catalog.GetApplicationCategoryListing(CompanyID, ApplicationID, xQu
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`
+
+
+| xQuery | struct | Includes properties such as `DepartmentID`, `PageNo`, `PageSize`, `Q`
 
 
 A brand is the name under which a product is being sold. Use this API to list all the brands. You can pass optionally filter the brands by the department. If successful, returns a paginated list of brands specified in `BrandListingResponse`
@@ -57921,6 +58111,97 @@ data, err := Catalog.UpdateAppCategory(CompanyID, ApplicationID, CategoryUID, bo
 
 
 | body |  ApplicationCategoryJson | "Request body" 
+
+This API helps to update data associated to a item custom meta.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse1`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getApplicationDepartmentListing
+List all the departments for the application
+
+```golang
+
+data, err := Catalog.GetApplicationDepartmentListing(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`
+
+
+Departments are a way to categorise similar products. A product can lie in multiple departments. For example, a skirt can below to the 'Women's Fashion' Department while a handbag can lie in 'Women's Accessories' Department. Use this API to list all the application departments. If successful, returns the list of departments specified in `ApplicationDepartmentListingResponse`
+
+*Success Response:*
+
+
+
+List of Departments. See example below or refer `BrandListingResponse` for details
+
+
+Schema: `ApplicationDepartmentListingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateAppDepartment
+Update a single custom json.
+
+```golang
+
+data, err := Catalog.UpdateAppDepartment(CompanyID, ApplicationID, DepartmentUID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to department custom json. | 
+
+
+| ApplicationID | string | application id for which the custom_json is associated. | 
+
+
+| DepartmentUID | string | department id for which the custom_json is associated. | 
+
+
+| body |  ApplicationDepartmentJson | "Request body" 
 
 This API helps to update data associated to a item custom meta.
 
@@ -58503,6 +58784,44 @@ Returns a success response
 
 
 Schema: `ProfileSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOptimalLocations
+Location Reassignment
+
+```golang
+
+data, err := CompanyProfile.GetOptimalLocations(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company inside which the location is to be created. | 
+
+
+| body |  AssignStoreRequestValidator | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `AssignStoreResponseSerializer`
 
 
 
@@ -65113,12 +65432,12 @@ default
 ## Serviceability
 
 
-#### getApplicationServiceability
+#### postApplicationServiceability
 Zone configuration of application.
 
 ```golang
 
-data, err := Serviceability.GetApplicationServiceability(CompanyID, ApplicationID);
+data, err := Serviceability.PostApplicationServiceability(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -65130,6 +65449,7 @@ data, err := Serviceability.GetApplicationServiceability(CompanyID, ApplicationI
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
+| body |  ApplicationServiceabilityConfig | "Request body" 
 
 This API returns serviceability config of the application.
 
@@ -65153,12 +65473,12 @@ Schema: `ApplicationServiceabilityConfigResponse`
 ---
 
 
-#### postApplicationServiceability
+#### getApplicationServiceability
 Zone configuration of application.
 
 ```golang
 
-data, err := Serviceability.PostApplicationServiceability(CompanyID, ApplicationID, body);
+data, err := Serviceability.GetApplicationServiceability(CompanyID, ApplicationID);
 ```
 
 | Argument  |  Type  | Description |
@@ -65170,7 +65490,6 @@ data, err := Serviceability.PostApplicationServiceability(CompanyID, Application
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| body |  ApplicationServiceabilityConfig | "Request body" 
 
 This API returns serviceability config of the application.
 
@@ -65442,6 +65761,47 @@ Schema: `ZoneResponse`
 ---
 
 
+#### getZoneFromPincodeView
+GET zone from the Pincode.
+
+```golang
+
+data, err := Serviceability.GetZoneFromPincodeView(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` contains a specific ID of a company. | 
+
+
+| ApplicationID | string | A `application_id` contains a unique ID. | 
+
+
+| body |  GetZoneFromPincodeViewRequest | "Request body" 
+
+This API returns zone from the Pincode View.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `GetZoneFromPincodeViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getZonesFromApplicationIdView
 GET zones from the application_id.
 
@@ -65479,47 +65839,6 @@ List of zones for the given application_id
 
 
 Schema: `GetZoneFromApplicationIdViewResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getZoneFromPincodeView
-GET zone from the Pincode.
-
-```golang
-
-data, err := Serviceability.GetZoneFromPincodeView(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` contains a specific ID of a company. | 
-
-
-| ApplicationID | string | A `application_id` contains a unique ID. | 
-
-
-| body |  GetZoneFromPincodeViewRequest | "Request body" 
-
-This API returns zone from the Pincode View.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `GetZoneFromPincodeViewResponse`
 
 
 

@@ -5965,15 +5965,19 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdatePathRedirectionRules Save path based redirection rules
-     func (co *PlatformAppContent)  UpdatePathRedirectionRules(body  PathMappingSchema) (PathMappingSchema, error) {
+    // AddPathRedirectionRules Save path based redirection rules
+     func (co *PlatformAppContent)  AddPathRedirectionRules(body  PathMappingSchema) (PathMappingSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            updatePathRedirectionRulesResponse PathMappingSchema
+            addPathRedirectionRulesResponse PathMappingSchema
 	    )
 
+        
+            
+        
+            
         
             
         
@@ -6019,6 +6023,187 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return PathMappingSchema{}, err
 	    }
         
+        err = json.Unmarshal(response, &addPathRedirectionRulesResponse)
+        if err != nil {
+            return PathMappingSchema{}, common.NewFDKError(err.Error())
+        }
+        return addPathRedirectionRulesResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppGetPathRedirectionRulesXQuery holds query params
+    type PlatformAppGetPathRedirectionRulesXQuery struct { 
+        PageSize float64  `url:"page_size,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"`  
+    }
+    
+    // GetPathRedirectionRules Get path based redirection rules
+     func (co *PlatformAppContent)  GetPathRedirectionRules(xQuery PlatformAppGetPathRedirectionRulesXQuery) (PathMappingSchema, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getPathRedirectionRulesResponse PathMappingSchema
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/platform/content/v1.0/company/%s/application/%s/path-mappings",co.CompanyID, co.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PathMappingSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPathRedirectionRulesResponse)
+        if err != nil {
+            return PathMappingSchema{}, common.NewFDKError(err.Error())
+        }
+        return getPathRedirectionRulesResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetPathRedirectionRule Get path based redirection rule
+     func (co *PlatformAppContent)  GetPathRedirectionRule(PathID string) (PathMappingSchema, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getPathRedirectionRuleResponse PathMappingSchema
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/platform/content/v1.0/company/%s/application/%s/path-mappings/%s",co.CompanyID, co.ApplicationID, PathID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PathMappingSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPathRedirectionRuleResponse)
+        if err != nil {
+            return PathMappingSchema{}, common.NewFDKError(err.Error())
+        }
+        return getPathRedirectionRuleResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdatePathRedirectionRules Update path based redirection rules
+     func (co *PlatformAppContent)  UpdatePathRedirectionRules(PathID string, body  PathMappingSchema) (PathMappingSchema, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updatePathRedirectionRulesResponse PathMappingSchema
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PathMappingSchema{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PathMappingSchema{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "put",
+            fmt.Sprintf("/service/platform/content/v1.0/company/%s/application/%s/path-mappings/%s",co.CompanyID, co.ApplicationID, PathID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PathMappingSchema{}, err
+	    }
+        
         err = json.Unmarshal(response, &updatePathRedirectionRulesResponse)
         if err != nil {
             return PathMappingSchema{}, common.NewFDKError(err.Error())
@@ -6034,13 +6219,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetPathRedirectionRules Get path based redirection rules
-     func (co *PlatformAppContent)  GetPathRedirectionRules() (PathMappingSchema, error) {
+    // DeletePathRedirectionRules Delete path based redirection rules
+     func (co *PlatformAppContent)  DeletePathRedirectionRules(PathID string) (map[string]interface{}, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getPathRedirectionRulesResponse PathMappingSchema
+            deletePathRedirectionRulesResponse map[string]interface{}
 	    )
 
         
@@ -6049,27 +6234,29 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
         
         
+        
+        
          
         
         
         //API call
         rawRequest = NewRequest(
             co.config,
-            "get",
-            fmt.Sprintf("/service/platform/content/v1.0/company/%s/application/%s/path-mappings",co.CompanyID, co.ApplicationID),
+            "delete",
+            fmt.Sprintf("/service/platform/content/v1.0/company/%s/application/%s/path-mappings/%s",co.CompanyID, co.ApplicationID, PathID),
             nil,
             nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return PathMappingSchema{}, err
+            return map[string]interface{}{}, err
 	    }
         
-        err = json.Unmarshal(response, &getPathRedirectionRulesResponse)
+        err = json.Unmarshal(response, &deletePathRedirectionRulesResponse)
         if err != nil {
-            return PathMappingSchema{}, common.NewFDKError(err.Error())
+            return map[string]interface{}{}, common.NewFDKError(err.Error())
         }
-        return getPathRedirectionRulesResponse, nil
+        return deletePathRedirectionRulesResponse, nil
         
     }
            
@@ -12547,6 +12734,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // GetAppProduct Get company application product data.
+     func (ca *PlatformAppCatalog)  GetAppProduct(ItemID string) (OwnerAppItemResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAppProductResponse OwnerAppItemResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product/%s/",ca.CompanyID, ca.ApplicationID, ItemID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return OwnerAppItemResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAppProductResponse)
+        if err != nil {
+            return OwnerAppItemResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAppProductResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // UpdateAppProduct Update a single custom meta.
      func (ca *PlatformAppCatalog)  UpdateAppProduct(ItemID string, body  ApplicationItemMeta) (SuccessResponse1, error) {
         var (
@@ -12622,63 +12857,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    //PlatformAppGetAppProductXQuery holds query params
-    type PlatformAppGetAppProductXQuery struct { 
-        SliceAttr string  `url:"slice_attr,omitempty"`  
-    }
-    
-    // GetAppProduct Get company application product data.
-     func (ca *PlatformAppCatalog)  GetAppProduct(ItemID string, xQuery PlatformAppGetAppProductXQuery) (ApplicationItemResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAppProductResponse ApplicationItemResponse
-	    )
-
-        
-
-         
-            
-                
-            
-        
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product/%s/",ca.CompanyID, ca.ApplicationID, ItemID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ApplicationItemResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAppProductResponse)
-        if err != nil {
-            return ApplicationItemResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAppProductResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     //PlatformAppGetConfigurationMetadataXQuery holds query params
     type PlatformAppGetConfigurationMetadataXQuery struct { 
         TemplateSlug string  `url:"template_slug,omitempty"`  
@@ -12712,7 +12890,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/%s/metadata/",ca.CompanyID, ca.ApplicationID, ConfigType),
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/application/%s/product-configuration/%s/metadata/",ca.CompanyID, ca.ApplicationID, ConfigType),
             nil,
             xQuery,
             nil)
@@ -12791,7 +12969,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             ca.config,
             "post",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/%s/groups",ca.CompanyID, ca.ApplicationID, ConfigType),
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/application/%s/product-configuration/%s/groups",ca.CompanyID, ca.ApplicationID, ConfigType),
             nil,
             nil,
             reqBody)
@@ -12857,7 +13035,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/%s/groups",ca.CompanyID, ca.ApplicationID, ConfigType),
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/application/%s/product-configuration/%s/groups",ca.CompanyID, ca.ApplicationID, ConfigType),
             nil,
             xQuery,
             nil)
@@ -12938,7 +13116,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             ca.config,
             "put",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/%s/groups/%s",ca.CompanyID, ca.ApplicationID, ConfigType, GroupSlug),
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/application/%s/product-configuration/%s/groups/%s",ca.CompanyID, ca.ApplicationID, ConfigType, GroupSlug),
             nil,
             nil,
             reqBody)
@@ -12988,7 +13166,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             ca.config,
             "delete",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/%s/groups/%s",ca.CompanyID, ca.ApplicationID, ConfigType, GroupSlug),
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/application/%s/product-configuration/%s/groups/%s",ca.CompanyID, ca.ApplicationID, ConfigType, GroupSlug),
             nil,
             nil,
             nil)
@@ -13065,7 +13243,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             ca.config,
             "post",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/%s/",ca.CompanyID, ca.ApplicationID, ConfigType),
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/application/%s/product-configuration/%s/",ca.CompanyID, ca.ApplicationID, ConfigType),
             nil,
             nil,
             reqBody)
@@ -13128,7 +13306,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/%s/",ca.CompanyID, ca.ApplicationID, ConfigType),
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/application/%s/product-configuration/%s/",ca.CompanyID, ca.ApplicationID, ConfigType),
             nil,
             xQuery,
             nil)
@@ -13207,7 +13385,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             ca.config,
             "put",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/%s/item/%s/",ca.CompanyID, ca.ApplicationID, ConfigType, ConfigID),
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/application/%s/product-configuration/%s/item/%s/",ca.CompanyID, ca.ApplicationID, ConfigType, ConfigID),
             nil,
             nil,
             reqBody)
@@ -13257,7 +13435,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             ca.config,
             "delete",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/%s/item/%s/",ca.CompanyID, ca.ApplicationID, ConfigType, ConfigID),
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/application/%s/product-configuration/%s/item/%s/",ca.CompanyID, ca.ApplicationID, ConfigType, ConfigID),
             nil,
             nil,
             nil)
@@ -13318,7 +13496,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             ca.config,
             "post",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/filter/allow_single",ca.CompanyID, ca.ApplicationID),
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/application/%s/product-configuration/filter/allow_single",ca.CompanyID, ca.ApplicationID),
             nil,
             nil,
             reqBody)
@@ -13379,7 +13557,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             ca.config,
             "post",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product-configuration/sort/default_key",ca.CompanyID, ca.ApplicationID),
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/application/%s/product-configuration/sort/default_key",ca.CompanyID, ca.ApplicationID),
             nil,
             nil,
             reqBody)
@@ -15511,6 +15689,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     //PlatformAppGetApplicationCategoryListingXQuery holds query params
     type PlatformAppGetApplicationCategoryListingXQuery struct { 
+        DepartmentID float64  `url:"department_id,omitempty"` 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
         Q string  `url:"q,omitempty"`  
@@ -15528,6 +15707,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
 
          
+            
+                
             
                 
             
@@ -15585,6 +15766,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
              
             
             
+             
+            
+            
+            
+            
+            
             
             
             
@@ -15600,6 +15787,10 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
                 paginator := common.NewPaginator("number")
                 
                 
+                 
+                 
+                 
+                 
                  xQuery.PageNo  = paginator.PageNo
                  
                  
@@ -15683,6 +15874,190 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return SuccessResponse1{}, common.NewFDKError(err.Error())
         }
         return updateAppCategoryResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppGetApplicationDepartmentListingXQuery holds query params
+    type PlatformAppGetApplicationDepartmentListingXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        Q string  `url:"q,omitempty"`  
+    }
+    
+    // GetApplicationDepartmentListing List all the departments for the application
+     func (ca *PlatformAppCatalog)  GetApplicationDepartmentListing(xQuery PlatformAppGetApplicationDepartmentListingXQuery) (ApplicationDepartmentListingResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getApplicationDepartmentListingResponse ApplicationDepartmentListingResponse
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/department",ca.CompanyID, ca.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationDepartmentListingResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getApplicationDepartmentListingResponse)
+        if err != nil {
+            return ApplicationDepartmentListingResponse{}, common.NewFDKError(err.Error())
+        }
+        return getApplicationDepartmentListingResponse, nil
+        
+    }
+           
+            
+            
+            
+            
+            
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            // GetApplicationDepartmentListingPaginator List all the departments for the application  
+            func (ca *PlatformAppCatalog)  GetApplicationDepartmentListingPaginator( xQuery PlatformAppGetApplicationDepartmentListingXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                
+                
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := ca.GetApplicationDepartmentListing(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+        
+       
+    
+    
+    
+  
+
+    
+    // UpdateAppDepartment Update a single custom json.
+     func (ca *PlatformAppCatalog)  UpdateAppDepartment(DepartmentUID string, body  ApplicationDepartmentJson) (SuccessResponse1, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateAppDepartmentResponse SuccessResponse1
+	    )
+
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return SuccessResponse1{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return SuccessResponse1{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "patch",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/department/%s",ca.CompanyID, ca.ApplicationID, DepartmentUID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return SuccessResponse1{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateAppDepartmentResponse)
+        if err != nil {
+            return SuccessResponse1{}, common.NewFDKError(err.Error())
+        }
+        return updateAppDepartmentResponse, nil
         
     }
            
@@ -21064,52 +21439,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetApplicationServiceability Zone configuration of application.
-     func (se *PlatformAppServiceability)  GetApplicationServiceability() (ApplicationServiceabilityConfigResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getApplicationServiceabilityResponse ApplicationServiceabilityConfigResponse
-	    )
-
-        
-
-         
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            se.config,
-            "get",
-            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/application/%s/serviceability",se.CompanyID, se.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ApplicationServiceabilityConfigResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getApplicationServiceabilityResponse)
-        if err != nil {
-            return ApplicationServiceabilityConfigResponse{}, common.NewFDKError(err.Error())
-        }
-        return getApplicationServiceabilityResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // PostApplicationServiceability Zone configuration of application.
      func (se *PlatformAppServiceability)  PostApplicationServiceability(body  ApplicationServiceabilityConfig) (ApplicationServiceabilityConfigResponse, error) {
         var (
@@ -21168,6 +21497,49 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+  
+
+    
+    // GetApplicationServiceability Zone configuration of application.
+     func (se *PlatformAppServiceability)  GetApplicationServiceability() (ApplicationServiceabilityConfigResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getApplicationServiceabilityResponse ApplicationServiceabilityConfigResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/application/%s/serviceability",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationServiceabilityConfigResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getApplicationServiceabilityResponse)
+        if err != nil {
+            return ApplicationServiceabilityConfigResponse{}, common.NewFDKError(err.Error())
+        }
+        return getApplicationServiceabilityResponse, nil
+        
+    }
+           
+       
     
     
     
@@ -21177,6 +21549,72 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+    
+    
+    
+    
+    
+    
+  
+
+    
+    // GetZoneFromPincodeView GET zone from the Pincode.
+     func (se *PlatformAppServiceability)  GetZoneFromPincodeView(body  GetZoneFromPincodeViewRequest) (GetZoneFromPincodeViewResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getZoneFromPincodeViewResponse GetZoneFromPincodeViewResponse
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/application/%s/zones",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetZoneFromPincodeViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getZoneFromPincodeViewResponse)
+        if err != nil {
+            return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return getZoneFromPincodeViewResponse, nil
+        
+    }
+           
+       
     
     
     
@@ -21237,69 +21675,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetZoneFromApplicationIdViewResponse{}, common.NewFDKError(err.Error())
         }
         return getZonesFromApplicationIdViewResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetZoneFromPincodeView GET zone from the Pincode.
-     func (se *PlatformAppServiceability)  GetZoneFromPincodeView(body  GetZoneFromPincodeViewRequest) (GetZoneFromPincodeViewResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getZoneFromPincodeViewResponse GetZoneFromPincodeViewResponse
-	    )
-
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            se.config,
-            "post",
-            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/application/%s/zones",se.CompanyID, se.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetZoneFromPincodeViewResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getZoneFromPincodeViewResponse)
-        if err != nil {
-            return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
-        }
-        return getZoneFromPincodeViewResponse, nil
         
     }
            
