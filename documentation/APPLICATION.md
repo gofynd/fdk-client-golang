@@ -327,7 +327,6 @@
     * [getTatProduct](#gettatproduct)
     * [getPincodeZones](#getpincodezones)
     * [assignLocations](#assignlocations)
-    * [getLocationDetails](#getlocationdetails)
     
 
 
@@ -23662,7 +23661,14 @@ Pincode data found
             "display_name": "Thane",
             "uid": "city:INDIA|MAHARASHTRA|MUMBAI"
           }
-        ]
+        ],
+        "lat_long": {
+          "type": "Point",
+          "coordinates": [
+            3.8858955,
+            7.2272335
+          ]
+        }
       }
     ],
     "request_uuid": "fce9f431215e71c9ee0e86e792ae1dce4",
@@ -23918,95 +23924,6 @@ Response status_code
 
 
 Schema: `AssignStoreResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getLocationDetails
-Get Location Details API
-
-```golang
-
- data, err :=  Logistic.GetLocationDetails(Pincode);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| Pincode | string | A `pincode` contains a specific address of a location. | 
-
-
-
-
-Get location data
-
-*Success Response:*
-
-
-
-Get location data
-
-
-Schema: `LocationApiResponse`
-
-
-*Examples:*
-
-
-Location data found
-```json
-{
-  "value": {
-    "data": {
-      "sub_type": "pincode",
-      "name": "110115",
-      "city": "DELHI",
-      "country": "INDIA",
-      "pincode": "110115",
-      "location": {
-        "longitude": "",
-        "latitude": ""
-      }
-    },
-    "error": {
-      "type": null,
-      "value": null,
-      "message": null
-    },
-    "success": true,
-    "request_uuid": null,
-    "stormbreaker_uuid": "064900a7-12a6-44a4-8a1e-9a5c3ca740ad"
-  }
-}
-```
-
-Pincode not found
-```json
-{
-  "value": {
-    "data": {
-      "sub_type": "pincode",
-      "name": "999999"
-    },
-    "error": {
-      "type": "DoesNotExist",
-      "value": "999999",
-      "message": "pincode 999999 does not exist"
-    },
-    "success": false,
-    "request_uuid": null,
-    "stormbreaker_uuid": "b7145d6b-609b-4058-bb97-ca3da259090b"
-  }
-}
-```
 
 
 

@@ -16992,10 +16992,19 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformGetCompanyStoreViewXQuery holds query params
+    type PlatformGetCompanyStoreViewXQuery struct { 
+        PageNumber float64  `url:"page_number,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        ZoneID string  `url:"zone_id,omitempty"` 
+        Enabled string  `url:"enabled,omitempty"` 
+        Q string  `url:"q,omitempty"`  
+    }
+    
 
 
     // GetCompanyStoreView Company Store View of application.
-     func (lo *PlatformLogistic)  GetCompanyStoreView() (CompanyStoreView_Response, error){
+     func (lo *PlatformLogistic)  GetCompanyStoreView(xQuery PlatformGetCompanyStoreViewXQuery) (CompanyStoreView_Response, error){
         
         var (
             rawRequest  *RawRequest
@@ -17006,6 +17015,18 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
         
 
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
         
 
         
@@ -17019,7 +17040,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             "get",
             fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/all-stores",lo.CompanyID),
             nil,
-            nil,
+            xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {

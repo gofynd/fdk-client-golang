@@ -68515,7 +68515,7 @@ Company Store View of application.
 
 ```golang
 
-data, err := Logistic.GetCompanyStoreView(CompanyID);
+data, err := Logistic.GetCompanyStoreView(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -68523,6 +68523,17 @@ data, err := Logistic.GetCompanyStoreView(CompanyID);
 
 | CompanyID | float64 | A `company_id` is a unique identifier for a particular company. | 
 
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNumber`, `PageSize`, `ZoneID`, `Enabled`, `Q`
 
 
 This API returns Company Store View of the application.
