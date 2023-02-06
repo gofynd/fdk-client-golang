@@ -46,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [unfollowById](#unfollowbyid)
     * [followById](#followbyid)
+    * [unfollowById](#unfollowbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -56,6 +56,8 @@
     * [getProductBundlesBySlug](#getproductbundlesbyslug)
     * [getProductPriceBySlug](#getproductpricebyslug)
     * [getProductSellersBySlug](#getproductsellersbyslug)
+    * [getProductPriceBySlugV3](#getproductpricebyslugv3)
+    * [getProductSellersBySlugV3](#getproductsellersbyslugv3)
     
 
 * [Cart](#Cart)
@@ -324,7 +326,8 @@
     * [getPincodeCity](#getpincodecity)
     * [getTatProduct](#gettatproduct)
     * [getPincodeZones](#getpincodezones)
-    * [upsertZoneControllerView](#upsertzonecontrollerview)
+    * [assignLocations](#assignlocations)
+    * [getLocationDetails](#getlocationdetails)
     
 
 
@@ -1150,12 +1153,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1169,7 +1172,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1191,12 +1194,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1210,7 +1213,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1509,9 +1512,7 @@ Get the price of a product size at a PIN Code
 
 
 
-
-
-| xQuery | struct | Includes properties such as `StoreID`, `Pincode`, `Moq`
+| xQuery | struct | Includes properties such as `StoreID`, `Pincode`
 
 
 
@@ -1575,6 +1576,104 @@ Success. Returns a ProductSizeSellerV2 object. Check the example shown below or 
 
 
 Schema: `ProductSizeSellersResponseV2`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProductPriceBySlugV3
+Get the price of a product size at a PIN Code
+
+```golang
+
+ data, err :=  Catalog.GetProductPriceBySlugV3(Slug, Size, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| Slug | string | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ | 
+
+
+| Size | string | A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes | 
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `StoreID`, `Pincode`, `Moq`
+
+
+
+Prices may vary for different sizes of a product. Use this API to retrieve the price of a product size at all the selling locations near to a PIN Code.
+
+*Success Response:*
+
+
+
+Success. Returns a ProductSizePriceV3 object. Check the example shown below or refer `ProductSizePriceResponseV3` for more details.
+
+
+Schema: `ProductSizePriceResponseV3`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProductSellersBySlugV3
+Get the sellers of a product size at a PIN Code
+
+```golang
+
+ data, err :=  Catalog.GetProductSellersBySlugV3(Slug, Size, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| Slug | string | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ | 
+
+
+| Size | string | A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes | 
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Pincode`, `Strategy`, `PageNo`, `PageSize`
+
+
+
+A product of a particular size may be sold by multiple sellers. Use this API to fetch the sellers having the stock of a particular size at a given PIN Code.
+
+*Success Response:*
+
+
+
+Success. Returns a ProductSizeSellersV3 object. Check the example shown below or refer `ProductSizeSellersResponseV3` for more details.
+
+
+Schema: `ProductSizeSellersResponseV3`
 
 
 
@@ -23795,22 +23894,16 @@ Schema: `GetZoneFromPincodeViewResponse`
 ---
 
 
-#### upsertZoneControllerView
+#### assignLocations
 GET zone from the Pincode.
 
 ```golang
 
- data, err :=  Logistic.UpsertZoneControllerView(CompanyID, ApplicationID, body);
+ data, err :=  Logistic.AssignLocations(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` contains a specific ID of a company. | 
-
-
-| ApplicationID | string | A `application_id` contains a unique ID. | 
-
 
 | body |  AssignStoreRequest | "Request body" 
 
@@ -23825,6 +23918,95 @@ Response status_code
 
 
 Schema: `AssignStoreResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getLocationDetails
+Get Location Details API
+
+```golang
+
+ data, err :=  Logistic.GetLocationDetails(Pincode);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| Pincode | string | A `pincode` contains a specific address of a location. | 
+
+
+
+
+Get location data
+
+*Success Response:*
+
+
+
+Get location data
+
+
+Schema: `LocationApiResponse`
+
+
+*Examples:*
+
+
+Location data found
+```json
+{
+  "value": {
+    "data": {
+      "sub_type": "pincode",
+      "name": "110115",
+      "city": "DELHI",
+      "country": "INDIA",
+      "pincode": "110115",
+      "location": {
+        "longitude": "",
+        "latitude": ""
+      }
+    },
+    "error": {
+      "type": null,
+      "value": null,
+      "message": null
+    },
+    "success": true,
+    "request_uuid": null,
+    "stormbreaker_uuid": "064900a7-12a6-44a4-8a1e-9a5c3ca740ad"
+  }
+}
+```
+
+Pincode not found
+```json
+{
+  "value": {
+    "data": {
+      "sub_type": "pincode",
+      "name": "999999"
+    },
+    "error": {
+      "type": "DoesNotExist",
+      "value": "999999",
+      "message": "pincode 999999 does not exist"
+    },
+    "success": false,
+    "request_uuid": null,
+    "stormbreaker_uuid": "b7145d6b-609b-4058-bb97-ca3da259090b"
+  }
+}
+```
 
 
 
