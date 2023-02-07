@@ -41,6 +41,8 @@ type PlatformClient struct {
 	
 		AuditTrail  *PlatformAuditTrail
 	
+		Logistic  *PlatformLogistic
+	
 	ApplicationClient *ApplicationClient //ApplicationClient embedded
 }
 
@@ -78,6 +80,8 @@ func NewPlatformClient(config *PlatformConfig) *PlatformClient {
 				Webhook:  NewPlatformWebhook(config),
 			
 				AuditTrail:  NewPlatformAuditTrail(config),
+			
+				Logistic:  NewPlatformLogistic(config),
 			
 			ApplicationClient: &ApplicationClient{},
 		}
@@ -16824,6 +16828,522 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return EntityTypesResponse{}, common.NewFDKError(err.Error())
         }
         return getEntityTypesResponse, nil
+        
+    }
+         
+        
+       
+    
+
+
+	
+   // PlatformLogistic holds PlatformLogistic object properties
+    type PlatformLogistic struct {
+        Config *PlatformConfig
+        CompanyID string
+    }
+    // NewPlatformLogistic returns new PlatformLogistic instance
+    func NewPlatformLogistic(config *PlatformConfig) *PlatformLogistic {
+        return &PlatformLogistic{Config: config, CompanyID: config.CompanyID}
+    }
+    
+    
+    
+    
+   
+  
+    
+    
+
+
+    // GetEntityRegionView Get country and state list
+     func (lo *PlatformLogistic)  GetEntityRegionView(body  EntityRegionView_Request) (EntityRegionView_Response, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getEntityRegionViewResponse EntityRegionView_Response
+	    )
+
+        
+        
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return EntityRegionView_Response{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return EntityRegionView_Response{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.Config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/regions",lo.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return EntityRegionView_Response{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getEntityRegionViewResponse)
+        if err != nil {
+             return EntityRegionView_Response{}, common.NewFDKError(err.Error())
+        }
+        return getEntityRegionViewResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetListViewXQuery holds query params
+    type PlatformGetListViewXQuery struct { 
+        PageNumber float64  `url:"page_number,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        Name string  `url:"name,omitempty"` 
+        IsActive bool  `url:"is_active,omitempty"` 
+        ChannelIds string  `url:"channel_ids,omitempty"`  
+    }
+    
+
+
+    // GetListView Zone List of application.
+     func (lo *PlatformLogistic)  GetListView(xQuery PlatformGetListViewXQuery) (ListViewResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getListViewResponse ListViewResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.Config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/zones",lo.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ListViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getListViewResponse)
+        if err != nil {
+             return ListViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return getListViewResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetCompanyStoreViewXQuery holds query params
+    type PlatformGetCompanyStoreViewXQuery struct { 
+        PageNumber float64  `url:"page_number,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        ZoneID string  `url:"zone_id,omitempty"` 
+        Enabled string  `url:"enabled,omitempty"` 
+        Q string  `url:"q,omitempty"`  
+    }
+    
+
+
+    // GetCompanyStoreView Company Store View of application.
+     func (lo *PlatformLogistic)  GetCompanyStoreView(xQuery PlatformGetCompanyStoreViewXQuery) (CompanyStoreView_Response, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getCompanyStoreViewResponse CompanyStoreView_Response
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.Config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/all-stores",lo.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return CompanyStoreView_Response{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getCompanyStoreViewResponse)
+        if err != nil {
+             return CompanyStoreView_Response{}, common.NewFDKError(err.Error())
+        }
+        return getCompanyStoreViewResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetZoneDataView Zone Data View of application.
+     func (lo *PlatformLogistic)  GetZoneDataView(ZoneID string) (GetSingleZoneDataViewResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getZoneDataViewResponse GetSingleZoneDataViewResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.Config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/zone/%s",lo.CompanyID, ZoneID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetSingleZoneDataViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getZoneDataViewResponse)
+        if err != nil {
+             return GetSingleZoneDataViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return getZoneDataViewResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // UpdateZoneControllerView Updation of zone collections in database.
+     func (lo *PlatformLogistic)  UpdateZoneControllerView(ZoneID string, body  ZoneUpdateRequest) (ZoneSuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateZoneControllerViewResponse ZoneSuccessResponse
+	    )
+
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return ZoneSuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return ZoneSuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.Config,
+            "put",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/zone/%s",ZoneID, lo.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ZoneSuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateZoneControllerViewResponse)
+        if err != nil {
+             return ZoneSuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return updateZoneControllerViewResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // InsertZoneControllerView Insertion of zone in database.
+     func (lo *PlatformLogistic)  InsertZoneControllerView(body  ZoneRequest) (ZoneResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            insertZoneControllerViewResponse ZoneResponse
+	    )
+
+        
+        
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return ZoneResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return ZoneResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.Config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/zone/",lo.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ZoneResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &insertZoneControllerViewResponse)
+        if err != nil {
+             return ZoneResponse{}, common.NewFDKError(err.Error())
+        }
+        return insertZoneControllerViewResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+    
+    
+   
+  
+    
+    
+
+
+    // GetStore GET stores data
+     func (lo *PlatformLogistic)  GetStore(StoreUID float64) (GetStoresViewResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getStoreResponse GetStoresViewResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.Config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/stores/undefined",lo.CompanyID, StoreUID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetStoresViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getStoreResponse)
+        if err != nil {
+             return GetStoresViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return getStoreResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetAllStores GET stores data
+     func (lo *PlatformLogistic)  GetAllStores() (GetStoresViewResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAllStoresResponse GetStoresViewResponse
+	    )
+
+        
+
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.Config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/logistics/stores",lo.CompanyID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetStoresViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAllStoresResponse)
+        if err != nil {
+             return GetStoresViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAllStoresResponse, nil
         
     }
          

@@ -403,7 +403,6 @@ import (
 
 
 
-
     //SubscriberStatus used by Webhook
     type SubscriberStatus  string
     
@@ -431,5 +430,6 @@ import (
       }
       return errors.New("Invalid SubscriberStatus type")
     }
+
 
 

@@ -41,7 +41,7 @@ type ApplicationClient struct {
 	 
 		Analytics  *PlatformAppAnalytics
 	 
-		Partner  *PlatformAppPartner
+		Logistic  *PlatformAppLogistic
 	 
 }
 
@@ -80,7 +80,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 			 
 				Analytics:  NewPlatformAppAnalytics(config, appID),
 			 
-				Partner:  NewPlatformAppPartner(config, appID),
+				Logistic:  NewPlatformAppLogistic(config, appID),
 			 
 		}
 }
@@ -20996,19 +20996,19 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    //PlatformAppGetPointsHistoryXQuery holds query params
-    type PlatformAppGetPointsHistoryXQuery struct { 
+    //PlatformAppGetUserPointsHistoryXQuery holds query params
+    type PlatformAppGetUserPointsHistoryXQuery struct { 
         PageID string  `url:"page_id,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // GetPointsHistory Get all transactions of reward points
-     func (re *PlatformAppRewards)  GetPointsHistory(UserID string, xQuery PlatformAppGetPointsHistoryXQuery) (HistoryRes, error) {
+    // GetUserPointsHistory Get all transactions of reward points
+     func (re *PlatformAppRewards)  GetUserPointsHistory(UserID string, xQuery PlatformAppGetUserPointsHistoryXQuery) (HistoryRes, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getPointsHistoryResponse HistoryRes
+            getUserPointsHistoryResponse HistoryRes
 	    )
 
         
@@ -21041,11 +21041,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return HistoryRes{}, err
 	    }
         
-        err = json.Unmarshal(response, &getPointsHistoryResponse)
+        err = json.Unmarshal(response, &getUserPointsHistoryResponse)
         if err != nil {
             return HistoryRes{}, common.NewFDKError(err.Error())
         }
-        return getPointsHistoryResponse, nil
+        return getUserPointsHistoryResponse, nil
         
     }
            
@@ -21079,8 +21079,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             
             
             
-            // GetPointsHistoryPaginator Get all transactions of reward points  
-            func (re *PlatformAppRewards)  GetPointsHistoryPaginator(UserID string ,  xQuery PlatformAppGetPointsHistoryXQuery ) *common.Paginator {
+            // GetUserPointsHistoryPaginator Get all transactions of reward points  
+            func (re *PlatformAppRewards)  GetUserPointsHistoryPaginator(UserID string ,  xQuery PlatformAppGetUserPointsHistoryXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("cursor")
                 
                 
@@ -21094,7 +21094,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
                  
                  
                 paginator.Next = func() (interface{}, error) {
-                    response, err := re.GetPointsHistory(UserID, xQuery)
+                    response, err := re.GetUserPointsHistory(UserID, xQuery)
                     if response.Page.HasNext {
                         paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
                     }
@@ -21574,15 +21574,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
  
 	 
-   // PlatformAppPartner holds PlatformAppPartner object properties
-    type PlatformAppPartner struct {
+   // PlatformAppLogistic holds PlatformAppLogistic object properties
+    type PlatformAppLogistic struct {
         config *PlatformConfig
         CompanyID string
         ApplicationID string
     }
-    // NewPlatformAppPartner returns new PlatformAppPartner instance
-    func NewPlatformAppPartner(config *PlatformConfig, appID string) *PlatformAppPartner {
-        return &PlatformAppPartner{config, config.CompanyID, appID}
+    // NewPlatformAppLogistic returns new PlatformAppLogistic instance
+    func NewPlatformAppLogistic(config *PlatformConfig, appID string) *PlatformAppLogistic {
+        return &PlatformAppLogistic{config, config.CompanyID, appID}
     }
     
     
@@ -21590,13 +21590,71 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // AddProxyPath Create proxy URL for the external URL
-     func (pa *PlatformAppPartner)  AddProxyPath(ExtensionID string, body  AddProxyReq) (AddProxyResponse, error) {
+    // GetApplicationServiceability Zone configuration of application.
+     func (lo *PlatformAppLogistic)  GetApplicationServiceability() (ApplicationServiceabilityConfigResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            addProxyPathResponse AddProxyResponse
+            getApplicationServiceabilityResponse ApplicationServiceabilityConfigResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/serviceability",lo.CompanyID, lo.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationServiceabilityConfigResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getApplicationServiceabilityResponse)
+        if err != nil {
+            return ApplicationServiceabilityConfigResponse{}, common.NewFDKError(err.Error())
+        }
+        return getApplicationServiceabilityResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+    
+    // UpsertZoneControllerView GET zone from the Pincode.
+     func (lo *PlatformAppLogistic)  UpsertZoneControllerView(body  GetZoneFromPincodeViewRequest) (GetZoneFromPincodeViewResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            upsertZoneControllerViewResponse GetZoneFromPincodeViewResponse
 	    )
 
         
@@ -21607,8 +21665,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
          
 
-        
-        
         
         
          
@@ -21619,32 +21675,32 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
             
-             return AddProxyResponse{}, common.NewFDKError(err.Error())
+             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
             
-             return AddProxyResponse{}, common.NewFDKError(err.Error())       
+             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
         rawRequest = NewRequest(
-            pa.config,
+            lo.config,
             "post",
-            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/application/%s/proxy/%s",pa.CompanyID, pa.ApplicationID, ExtensionID),
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/zones",lo.CompanyID, lo.ApplicationID),
             nil,
             nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return AddProxyResponse{}, err
+            return GetZoneFromPincodeViewResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &addProxyPathResponse)
+        err = json.Unmarshal(response, &upsertZoneControllerViewResponse)
         if err != nil {
-            return AddProxyResponse{}, common.NewFDKError(err.Error())
+            return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
         }
-        return addProxyPathResponse, nil
+        return upsertZoneControllerViewResponse, nil
         
     }
            
@@ -21652,53 +21708,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
-  
-
     
-    // RemoveProxyPath Remove proxy URL for the external URL
-     func (pa *PlatformAppPartner)  RemoveProxyPath(ExtensionID string, AttachedPath string) (RemoveProxyResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            removeProxyPathResponse RemoveProxyResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "delete",
-            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/application/%s/proxy/%s/%s",pa.CompanyID, pa.ApplicationID, ExtensionID, AttachedPath),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return RemoveProxyResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &removeProxyPathResponse)
-        if err != nil {
-            return RemoveProxyResponse{}, common.NewFDKError(err.Error())
-        }
-        return removeProxyPathResponse, nil
-        
-    }
-           
-       
     
 
  
