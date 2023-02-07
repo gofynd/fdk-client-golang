@@ -2841,7 +2841,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         DpIds string  `url:"dp_ids,omitempty"` 
         OrderingCompanyID string  `url:"ordering_company_id,omitempty"` 
         Stores string  `url:"stores,omitempty"` 
-        SalesChannel string  `url:"sales_channel,omitempty"` 
+        SalesChannels string  `url:"sales_channels,omitempty"` 
         RequestByExt string  `url:"request_by_ext,omitempty"` 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
@@ -3164,7 +3164,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         ToDate string  `url:"to_date,omitempty"` 
         DpIds string  `url:"dp_ids,omitempty"` 
         Stores string  `url:"stores,omitempty"` 
-        SalesChannel string  `url:"sales_channel,omitempty"` 
+        SalesChannels string  `url:"sales_channels,omitempty"` 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
         IsPrioritySort bool  `url:"is_priority_sort,omitempty"` 
@@ -3870,169 +3870,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return BulkListingResponse{}, common.NewFDKError(err.Error())
         }
         return getBulkListResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformGetManifestListXQuery holds query params
-    type PlatformGetManifestListXQuery struct { 
-        Status string  `url:"status,omitempty"` 
-        StoreID float64  `url:"store_id,omitempty"` 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"` 
-        SearchValue string  `url:"search_value,omitempty"` 
-        FromDate string  `url:"from_date,omitempty"` 
-        ToDate string  `url:"to_date,omitempty"`  
-    }
-    
-
-
-    // GetManifestList 
-     func (or *PlatformOrder)  GetManifestList(xQuery PlatformGetManifestListXQuery) (GeneratedManifestResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getManifestListResponse GeneratedManifestResponse
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "get",
-            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/generated-manifests",or.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return GeneratedManifestResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getManifestListResponse)
-        if err != nil {
-             return GeneratedManifestResponse{}, common.NewFDKError(err.Error())
-        }
-        return getManifestListResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformGetManifestDetailsWithShipmentsXQuery holds query params
-    type PlatformGetManifestDetailsWithShipmentsXQuery struct { 
-        ManifestID string  `url:"manifest_id,omitempty"` 
-        FromDate string  `url:"from_date,omitempty"` 
-        ToDate string  `url:"to_date,omitempty"` 
-        StoreID float64  `url:"store_id,omitempty"` 
-        Page float64  `url:"page,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"` 
-        Lane string  `url:"lane,omitempty"` 
-        DpIds float64  `url:"dp_ids,omitempty"` 
-        SearchType string  `url:"search_type,omitempty"` 
-        SearchValue string  `url:"search_value,omitempty"`  
-    }
-    
-
-
-    // GetManifestDetailsWithShipments 
-     func (or *PlatformOrder)  GetManifestDetailsWithShipments(xQuery PlatformGetManifestDetailsWithShipmentsXQuery) (ManifestDetailResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getManifestDetailsWithShipmentsResponse ManifestDetailResponse
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "get",
-            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/manifest-details",or.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return ManifestDetailResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getManifestDetailsWithShipmentsResponse)
-        if err != nil {
-             return ManifestDetailResponse{}, common.NewFDKError(err.Error())
-        }
-        return getManifestDetailsWithShipmentsResponse, nil
         
     }
          

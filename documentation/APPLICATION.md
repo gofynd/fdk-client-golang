@@ -236,6 +236,8 @@
     * [getRupifiBannerDetails](#getrupifibannerdetails)
     * [getEpaylaterBannerDetails](#getepaylaterbannerdetails)
     * [resendOrCancelPayment](#resendorcancelpayment)
+    * [renderHTML](#renderhtml)
+    * [validateVPA](#validatevpa)
     * [getActiveRefundTransferModes](#getactiverefundtransfermodes)
     * [enableOrDisableRefundTransferMode](#enableordisablerefundtransfermode)
     * [getUserBeneficiariesDetail](#getuserbeneficiariesdetail)
@@ -17675,6 +17677,78 @@ request_type is resend
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### renderHTML
+Convert base64 string to HTML form
+
+```golang
+
+ data, err :=  Payment.RenderHTML(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  renderHTMLRequest | "Request body" 
+
+
+Use this API to decode base64 html form to plain HTML string.
+
+*Success Response:*
+
+
+
+Success and return HTML decoded text
+
+
+Schema: `renderHTMLResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### validateVPA
+API to Validate UPI ID
+
+```golang
+
+ data, err :=  Payment.ValidateVPA(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  ValidateVPARequest | "Request body" 
+
+
+API to Validate UPI ID
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `ValidateVPAResponseSchema` for more details.
+
+
+Schema: `ValidateVPAResponse`
 
 
 
