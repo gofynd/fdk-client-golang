@@ -2303,21 +2303,24 @@ func NewAppClient(config *AppConfig) *Client {
     //CatalogGetProductPriceBySlugXQuery holds query params
     type CatalogGetProductPriceBySlugXQuery struct { 
         StoreID float64  `url:"store_id,omitempty"` 
-        Pincode string  `url:"pincode,omitempty"`  
+        Pincode string  `url:"pincode,omitempty"` 
+        Moq float64  `url:"moq,omitempty"`  
     }
     
     // GetProductPriceBySlug Get the price of a product size at a PIN Code
-    func (ca *Catalog)  GetProductPriceBySlug(Slug string, Size string, xQuery CatalogGetProductPriceBySlugXQuery) (ProductSizePriceResponseV2, error){
+    func (ca *Catalog)  GetProductPriceBySlug(Slug string, Size string, xQuery CatalogGetProductPriceBySlugXQuery) (ProductSizePriceResponseV3, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getProductPriceBySlugResponse ProductSizePriceResponseV2
+             getProductPriceBySlugResponse ProductSizePriceResponseV3
 	    )
 
         
 
         
+            
+                
             
                 
             
@@ -2338,18 +2341,18 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/application/catalog/v2.0/products/%s/sizes/%s/price/",Slug,Size),
+            fmt.Sprintf("/service/application/catalog/v3.0/products/%s/sizes/%s/price/",Slug,Size),
             nil,
             xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ProductSizePriceResponseV2{}, err
+            return ProductSizePriceResponseV3{}, err
 	    }
         
         err = json.Unmarshal(response, &getProductPriceBySlugResponse)
         if err != nil {
-            return ProductSizePriceResponseV2{}, common.NewFDKError(err.Error())
+            return ProductSizePriceResponseV3{}, common.NewFDKError(err.Error())
         }
          return getProductPriceBySlugResponse, nil
         
@@ -2370,12 +2373,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // GetProductSellersBySlug Get the sellers of a product size at a PIN Code
-    func (ca *Catalog)  GetProductSellersBySlug(Slug string, Size string, xQuery CatalogGetProductSellersBySlugXQuery) (ProductSizeSellersResponseV2, error){
+    func (ca *Catalog)  GetProductSellersBySlug(Slug string, Size string, xQuery CatalogGetProductSellersBySlugXQuery) (ProductSizeSellersResponseV3, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getProductSellersBySlugResponse ProductSizeSellersResponseV2
+             getProductSellersBySlugResponse ProductSizeSellersResponseV3
 	    )
 
         
@@ -2405,18 +2408,18 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/application/catalog/v2.0/products/%s/sizes/%s/sellers/",Slug,Size),
+            fmt.Sprintf("/service/application/catalog/v3.0/products/%s/sizes/%s/sellers/",Slug,Size),
             nil,
             xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ProductSizeSellersResponseV2{}, err
+            return ProductSizeSellersResponseV3{}, err
 	    }
         
         err = json.Unmarshal(response, &getProductSellersBySlugResponse)
         if err != nil {
-            return ProductSizeSellersResponseV2{}, common.NewFDKError(err.Error())
+            return ProductSizeSellersResponseV3{}, common.NewFDKError(err.Error())
         }
          return getProductSellersBySlugResponse, nil
         
@@ -2494,217 +2497,6 @@ func NewAppClient(config *AppConfig) *Client {
                  
                 paginator.Next = func() (interface{}, error) {
                     response, err := ca.GetProductSellersBySlug(Slug, Size, xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-       
-    
-    
-    
-  
-    
-    
-    //CatalogGetProductPriceBySlugV3XQuery holds query params
-    type CatalogGetProductPriceBySlugV3XQuery struct { 
-        StoreID float64  `url:"store_id,omitempty"` 
-        Pincode string  `url:"pincode,omitempty"` 
-        Moq float64  `url:"moq,omitempty"`  
-    }
-    
-    // GetProductPriceBySlugV3 Get the price of a product size at a PIN Code
-    func (ca *Catalog)  GetProductPriceBySlugV3(Slug string, Size string, xQuery CatalogGetProductPriceBySlugV3XQuery) (ProductSizePriceResponseV3, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getProductPriceBySlugV3Response ProductSizePriceResponseV3
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-                
-            
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/application/catalog/v3.0/products/%s/sizes/%s/price/",Slug,Size),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ProductSizePriceResponseV3{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProductPriceBySlugV3Response)
-        if err != nil {
-            return ProductSizePriceResponseV3{}, common.NewFDKError(err.Error())
-        }
-         return getProductPriceBySlugV3Response, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    //CatalogGetProductSellersBySlugV3XQuery holds query params
-    type CatalogGetProductSellersBySlugV3XQuery struct { 
-        Pincode string  `url:"pincode,omitempty"` 
-        Strategy string  `url:"strategy,omitempty"` 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
-    }
-    
-    // GetProductSellersBySlugV3 Get the sellers of a product size at a PIN Code
-    func (ca *Catalog)  GetProductSellersBySlugV3(Slug string, Size string, xQuery CatalogGetProductSellersBySlugV3XQuery) (ProductSizeSellersResponseV3, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getProductSellersBySlugV3Response ProductSizeSellersResponseV3
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/application/catalog/v3.0/products/%s/sizes/%s/sellers/",Slug,Size),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ProductSizeSellersResponseV3{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProductSellersBySlugV3Response)
-        if err != nil {
-            return ProductSizeSellersResponseV3{}, common.NewFDKError(err.Error())
-        }
-         return getProductSellersBySlugV3Response, nil
-        
-    }
-          
-            
-            
-            
-            
-                
-                    
-                    
-                    
-                    
-                        
-                    
-                    
-                
-                    
-                    
-                    
-                    
-                        
-                    
-                    
-                
-                    
-                    
-                    
-                        
-                    
-                    
-                
-                    
-                    
-                    
-                        
-                    
-                    
-                
-                    
-                    
-                    
-                    
-                
-                    
-                    
-                    
-                        
-                    
-                    
-                
-            
-            // GetProductSellersBySlugV3Paginator Get the sellers of a product size at a PIN Code  
-            func (ca *Catalog)  GetProductSellersBySlugV3Paginator(Slug string  , Size string  ,  xQuery CatalogGetProductSellersBySlugV3XQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := ca.GetProductSellersBySlugV3(Slug, Size, xQuery)
                     if response.Page.HasNext {
                         paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
                     }

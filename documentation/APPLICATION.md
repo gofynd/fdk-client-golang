@@ -56,8 +56,6 @@
     * [getProductBundlesBySlug](#getproductbundlesbyslug)
     * [getProductPriceBySlug](#getproductpricebyslug)
     * [getProductSellersBySlug](#getproductsellersbyslug)
-    * [getProductPriceBySlugV3](#getproductpricebyslugv3)
-    * [getProductSellersBySlugV3](#getproductsellersbyslugv3)
     
 
 * [Cart](#Cart)
@@ -1511,102 +1509,6 @@ Get the price of a product size at a PIN Code
 
 
 
-| xQuery | struct | Includes properties such as `StoreID`, `Pincode`
-
-
-
-Prices may vary for different sizes of a product. Use this API to retrieve the price of a product size at all the selling locations near to a PIN Code.
-
-*Success Response:*
-
-
-
-Success. Returns a ProductSizePriceV2 object. Check the example shown below or refer `ProductSizePriceResponseV2` for more details.
-
-
-Schema: `ProductSizePriceResponseV2`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getProductSellersBySlug
-Get the sellers of a product size at a PIN Code
-
-```golang
-
- data, err :=  Catalog.GetProductSellersBySlug(Slug, Size, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| Slug | string | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ | 
-
-
-| Size | string | A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes | 
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `Pincode`, `Strategy`, `PageNo`, `PageSize`
-
-
-
-A product of a particular size may be sold by multiple sellers. Use this API to fetch the sellers having the stock of a particular size at a given PIN Code.
-
-*Success Response:*
-
-
-
-Success. Returns a ProductSizeSellerV2 object. Check the example shown below or refer `ProductSizeSellersResponseV2` for more details.
-
-
-Schema: `ProductSizeSellersResponseV2`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getProductPriceBySlugV3
-Get the price of a product size at a PIN Code
-
-```golang
-
- data, err :=  Catalog.GetProductPriceBySlugV3(Slug, Size, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| Slug | string | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ | 
-
-
-| Size | string | A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes | 
-
-
-
-
-
 
 
 | xQuery | struct | Includes properties such as `StoreID`, `Pincode`, `Moq`
@@ -1635,12 +1537,12 @@ Schema: `ProductSizePriceResponseV3`
 ---
 
 
-#### getProductSellersBySlugV3
+#### getProductSellersBySlug
 Get the sellers of a product size at a PIN Code
 
 ```golang
 
- data, err :=  Catalog.GetProductSellersBySlugV3(Slug, Size, xQuery);
+ data, err :=  Catalog.GetProductSellersBySlug(Slug, Size, xQuery);
 ```
 
 | Argument  |  Type  | Description |
