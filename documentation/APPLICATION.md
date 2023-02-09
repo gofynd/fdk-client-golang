@@ -323,6 +323,7 @@
   * Methods
     * [getPincodeCity](#getpincodecity)
     * [getTatProduct](#gettatproduct)
+    * [getEntityList](#getentitylist)
     * [getPincodeZones](#getpincodezones)
     * [assignLocations](#assignlocations)
     
@@ -23499,7 +23500,7 @@ Get Pincode API
 
 ```golang
 
- data, err :=  Logistic.GetPincodeCity(Pincode);
+ data, err :=  Logistic.GetPincodeCity(Pincode, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -23507,6 +23508,9 @@ Get Pincode API
 
 | Pincode | string | A `pincode` contains a specific address of a location. | 
 
+
+
+| xQuery | struct | Includes properties such as `CountryCode`
 
 
 
@@ -23543,6 +23547,10 @@ Pincode data found
         "meta": {
           "zone": "West",
           "internal_zone_id": 4
+        },
+        "meta_code": {
+          "country_code": "IND",
+          "isd_code": "+91"
         },
         "parents": [
           {
@@ -23754,6 +23762,47 @@ Pincode not found
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getEntityList
+Get Entity List
+
+```golang
+
+ data, err :=  Logistic.GetEntityList(xQuery, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+| xQuery | struct | Includes properties such as `Page`, `Limit`
+
+| body |  EntityListRequest | "Request body" 
+
+
+Get Entity List
+
+*Success Response:*
+
+
+
+Get Entity List
+
+
+Schema: `EntityListResponse`
 
 
 
