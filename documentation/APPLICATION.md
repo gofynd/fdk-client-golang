@@ -325,7 +325,7 @@
   * Methods
     * [getPincodeCity](#getpincodecity)
     * [getTatProduct](#gettatproduct)
-    * [getEntityList](#getentitylist)
+    * [getAllCountries](#getallcountries)
     * [getPincodeZones](#getpincodezones)
     
 
@@ -23839,12 +23839,12 @@ Pincode not found
 ---
 
 
-#### getEntityList
-Get Entity List
+#### getAllCountries
+Get Country List
 
 ```golang
 
- data, err :=  Logistic.GetEntityList(xQuery, body);
+ data, err :=  Logistic.GetAllCountries();
 ```
 
 | Argument  |  Type  | Description |
@@ -23852,22 +23852,16 @@ Get Entity List
 
 
 
-
-| xQuery | struct | Includes properties such as `Page`, `Limit`
-
-| body |  EntityListRequest | "Request body" 
-
-
-Get Entity List
+Get all countries
 
 *Success Response:*
 
 
 
-Get Entity List
+Get Country List
 
 
-Schema: `EntityListResponse`
+Schema: `CountryListResponse`
 
 
 

@@ -15712,31 +15712,17 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    //LogisticGetEntityListXQuery holds query params
-    type LogisticGetEntityListXQuery struct { 
-        Page string  `url:"page,omitempty"` 
-        Limit string  `url:"limit,omitempty"`  
-    }
-    
-    // GetEntityList Get Entity List
-    func (lo *Logistic)  GetEntityList(xQuery LogisticGetEntityListXQuery, body  EntityListRequest) (EntityListResponse, error){
+    // GetAllCountries Get Country List
+    func (lo *Logistic)  GetAllCountries() (CountryListResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getEntityListResponse EntityListResponse
+             getAllCountriesResponse CountryListResponse
 	    )
 
         
-            
-        
 
-        
-            
-                
-            
-                
-            
         
 
         
@@ -15744,37 +15730,24 @@ func NewAppClient(config *AppConfig) *Client {
          
         
         
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return EntityListResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return EntityListResponse{}, common.NewFDKError(err.Error())
-        }
-        
         //API call
         rawRequest = NewRequest(
             lo.config,
-            "post",
-            "/service/application/logistics/v1.0/entity-list",
+            "get",
+            "/service/application/logistics/v1.0/country-list",
             nil,
-            xQuery,
-            reqBody)
+            nil,
+            nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return EntityListResponse{}, err
+            return CountryListResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getEntityListResponse)
+        err = json.Unmarshal(response, &getAllCountriesResponse)
         if err != nil {
-            return EntityListResponse{}, common.NewFDKError(err.Error())
+            return CountryListResponse{}, common.NewFDKError(err.Error())
         }
-         return getEntityListResponse, nil
+         return getAllCountriesResponse, nil
         
     }
           
