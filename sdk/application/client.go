@@ -15584,8 +15584,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //LogisticGetPincodeCityXQuery holds query params
+    type LogisticGetPincodeCityXQuery struct { 
+        CountryCode string  `url:"country_code,omitempty"`  
+    }
+    
     // GetPincodeCity Get Pincode API
-    func (lo *Logistic)  GetPincodeCity(Pincode string) (PincodeApiResponse, error){
+    func (lo *Logistic)  GetPincodeCity(Pincode string, xQuery LogisticGetPincodeCityXQuery) (PincodeApiResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -15595,6 +15600,10 @@ func NewAppClient(config *AppConfig) *Client {
 
         
 
+        
+            
+                
+            
         
 
         
@@ -15610,7 +15619,7 @@ func NewAppClient(config *AppConfig) *Client {
             "get",
             fmt.Sprintf("/service/application/logistics/v1.0/pincode/%s",Pincode),
             nil,
-            nil,
+            xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -15694,6 +15703,78 @@ func NewAppClient(config *AppConfig) *Client {
             return TATViewResponse{}, common.NewFDKError(err.Error())
         }
          return getTatProductResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //LogisticGetEntityListXQuery holds query params
+    type LogisticGetEntityListXQuery struct { 
+        Page string  `url:"page,omitempty"` 
+        Limit string  `url:"limit,omitempty"`  
+    }
+    
+    // GetEntityList Get Entity List
+    func (lo *Logistic)  GetEntityList(xQuery LogisticGetEntityListXQuery, body  EntityListRequest) (EntityListResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getEntityListResponse EntityListResponse
+	    )
+
+        
+            
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return EntityListResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return EntityListResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.config,
+            "post",
+            "/service/application/logistics/v1.0/entity-list",
+            nil,
+            xQuery,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return EntityListResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getEntityListResponse)
+        if err != nil {
+            return EntityListResponse{}, common.NewFDKError(err.Error())
+        }
+         return getEntityListResponse, nil
         
     }
           
