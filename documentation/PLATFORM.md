@@ -68295,7 +68295,7 @@ Schema: `CancelJobResponse`
 
 
 #### addProxyPath
-Add proxy path for external url
+Create proxy URL for the external URL
 
 ```golang
 
@@ -68311,18 +68311,18 @@ data, err := Partner.AddProxyPath(CompanyID, ApplicationID, ExtensionID, body);
 | ApplicationID | string | Current application id | 
 
 
-| ExtensionID | string | Extension id | 
+| ExtensionID | string | Extension id for which proxy URL will be generated | 
 
 
 | body |  AddProxyReq | "Request body" 
 
-Add proxy path for external url
+Use this API to generate proxy URL for the external URL
 
 *Success Response:*
 
 
 
-Success
+Proxy created successfully
 
 
 Schema: `AddProxyResponse`
@@ -68339,7 +68339,7 @@ Schema: `AddProxyResponse`
 
 
 #### removeProxyPath
-Remove proxy path for external url
+Remove proxy URL for the external URL
 
 ```golang
 
@@ -68355,14 +68355,14 @@ data, err := Partner.RemoveProxyPath(CompanyID, ApplicationID, ExtensionID, Atta
 | ApplicationID | string | Current application id | 
 
 
-| ExtensionID | string | Extension id | 
+| ExtensionID | string | Extension id for which proxy URL needs to be removed | 
 
 
 | AttachedPath | string | Attachaed path slug | 
 
 
 
-Remove proxy path for external url
+Use this API to remove the proxy URL which is already generated for the external URL
 
 *Success Response:*
 

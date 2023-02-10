@@ -22518,7 +22518,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // AddProxyPath Add proxy path for external url
+    // AddProxyPath Create proxy URL for the external URL
      func (pa *PlatformAppPartner)  AddProxyPath(ExtensionID string, body  AddProxyReq) (AddProxyResponse, error) {
         var (
             rawRequest  *RawRequest
@@ -22583,7 +22583,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // RemoveProxyPath Remove proxy path for external url
+    // RemoveProxyPath Remove proxy URL for the external URL
      func (pa *PlatformAppPartner)  RemoveProxyPath(ExtensionID string, AttachedPath string) (RemoveProxyResponse, error) {
         var (
             rawRequest  *RawRequest
