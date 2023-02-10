@@ -15886,7 +15886,7 @@ package platform
         
             Loc string  `json:"loc"`
             AddressLine []string  `json:"address_line"`
-            Phone InformationPhone  `json:"phone"`
+            Phone []InformationPhone  `json:"phone"`
             City string  `json:"city"`
             Country string  `json:"country"`
             Pincode float64  `json:"pincode"`
@@ -16051,6 +16051,7 @@ package platform
             Domain Domain  `json:"domain"`
             Domains []Domain  `json:"domains"`
             ID string  `json:"_id"`
+            Slug string  `json:"slug"`
          
     }
     
