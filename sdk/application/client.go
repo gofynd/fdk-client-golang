@@ -2527,7 +2527,6 @@ func NewAppClient(config *AppConfig) *Client {
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
         AssignCardID float64  `url:"assign_card_id,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
@@ -2543,8 +2542,6 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
-            
-                
             
                 
             
@@ -3201,7 +3198,8 @@ func NewAppClient(config *AppConfig) *Client {
         MobileNo string  `url:"mobile_no,omitempty"` 
         CheckoutMode string  `url:"checkout_mode,omitempty"` 
         Tags string  `url:"tags,omitempty"` 
-        IsDefault bool  `url:"is_default,omitempty"`  
+        IsDefault bool  `url:"is_default,omitempty"` 
+        UserID string  `url:"user_id,omitempty"`  
     }
     
     // GetAddresses Fetch address
@@ -3216,6 +3214,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -3544,8 +3544,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //CartRemoveAddressXQuery holds query params
+    type CartRemoveAddressXQuery struct { 
+        UserID string  `url:"user_id,omitempty"`  
+    }
+    
     // RemoveAddress Remove address associated with an account
-    func (ca *Cart)  RemoveAddress(ID string) (DeleteAddressResponse, error){
+    func (ca *Cart)  RemoveAddress(ID string, xQuery CartRemoveAddressXQuery) (DeleteAddressResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -3555,6 +3560,10 @@ func NewAppClient(config *AppConfig) *Client {
 
         
 
+        
+            
+                
+            
         
 
         
@@ -3570,7 +3579,7 @@ func NewAppClient(config *AppConfig) *Client {
             "delete",
             fmt.Sprintf("/service/application/cart/v1.0/address/%s",ID),
             nil,
-            nil,
+            xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -3596,7 +3605,8 @@ func NewAppClient(config *AppConfig) *Client {
         CartID string  `url:"cart_id,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"` 
         I bool  `url:"i,omitempty"` 
-        B bool  `url:"b,omitempty"`  
+        B bool  `url:"b,omitempty"` 
+        UserID string  `url:"user_id,omitempty"`  
     }
     
     // SelectAddress Select an address from available addresses
@@ -3617,6 +3627,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -13671,7 +13683,6 @@ func NewAppClient(config *AppConfig) *Client {
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
         AssignCardID float64  `url:"assign_card_id,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
@@ -13687,8 +13698,6 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
-            
-                
             
                 
             
@@ -14335,7 +14344,8 @@ func NewAppClient(config *AppConfig) *Client {
         MobileNo string  `url:"mobile_no,omitempty"` 
         CheckoutMode string  `url:"checkout_mode,omitempty"` 
         Tags string  `url:"tags,omitempty"` 
-        IsDefault bool  `url:"is_default,omitempty"`  
+        IsDefault bool  `url:"is_default,omitempty"` 
+        UserID string  `url:"user_id,omitempty"`  
     }
     
     // GetAddresses Fetch address
@@ -14350,6 +14360,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -14586,8 +14598,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //PosCartRemoveAddressXQuery holds query params
+    type PosCartRemoveAddressXQuery struct { 
+        UserID string  `url:"user_id,omitempty"`  
+    }
+    
     // RemoveAddress Remove address associated with an account
-    func (po *PosCart)  RemoveAddress(ID string) (DeleteAddressResponse, error){
+    func (po *PosCart)  RemoveAddress(ID string, xQuery PosCartRemoveAddressXQuery) (DeleteAddressResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -14597,6 +14614,10 @@ func NewAppClient(config *AppConfig) *Client {
 
         
 
+        
+            
+                
+            
         
 
         
@@ -14612,7 +14633,7 @@ func NewAppClient(config *AppConfig) *Client {
             "delete",
             fmt.Sprintf("/service/application/pos/cart/v1.0/address/%s",ID),
             nil,
-            nil,
+            xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -14638,7 +14659,8 @@ func NewAppClient(config *AppConfig) *Client {
         CartID string  `url:"cart_id,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"` 
         I bool  `url:"i,omitempty"` 
-        B bool  `url:"b,omitempty"`  
+        B bool  `url:"b,omitempty"` 
+        UserID string  `url:"user_id,omitempty"`  
     }
     
     // SelectAddress Select an address from available addresses
@@ -14653,6 +14675,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             

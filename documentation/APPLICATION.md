@@ -1615,9 +1615,7 @@ Fetch all items added to the cart
 
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `BuyNow`
 
 
 
@@ -3135,7 +3133,9 @@ Fetch address
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+
+
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`, `UserID`
 
 
 
@@ -3292,7 +3292,7 @@ Remove address associated with an account
 
 ```golang
 
- data, err :=  Cart.RemoveAddress(ID);
+ data, err :=  Cart.RemoveAddress(ID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -3300,6 +3300,9 @@ Remove address associated with an account
 
 | ID | string | ID allotted to the selected address | 
 
+
+
+| xQuery | struct | Includes properties such as `UserID`
 
 
 
@@ -3343,7 +3346,9 @@ Select an address from available addresses
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `I`, `B`
+
+
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `I`, `B`, `UserID`
 
 | body |  SelectCartAddressRequest | "Request body" 
 
@@ -19314,9 +19319,7 @@ Fetch all items added to the cart
 
 
 
-
-
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`, `BuyNow`
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `BuyNow`
 
 
 
@@ -20834,7 +20837,9 @@ Fetch address
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+
+
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`, `UserID`
 
 
 
@@ -20991,7 +20996,7 @@ Remove address associated with an account
 
 ```golang
 
- data, err :=  PosCart.RemoveAddress(ID);
+ data, err :=  PosCart.RemoveAddress(ID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -20999,6 +21004,9 @@ Remove address associated with an account
 
 | ID | string | ID allotted to the selected address | 
 
+
+
+| xQuery | struct | Includes properties such as `UserID`
 
 
 
@@ -21042,7 +21050,9 @@ Select an address from available addresses
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `I`, `B`
+
+
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `I`, `B`, `UserID`
 
 | body |  SelectCartAddressRequest | "Request body" 
 
