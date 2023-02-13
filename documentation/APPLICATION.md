@@ -13,7 +13,7 @@
 * [FileStorage](#FileStorage) - File Storage 
 * [Configuration](#Configuration) - Application configuration apis 
 * [Payment](#Payment) - Collect payment through many payment gateway i.e Stripe, Razorpay, Juspay etc.into Fynd or Self account 
-* [Order](#Order) - Handles Platform websites OMS 
+* [Order](#Order) - Handles all Application order and shipment api(s) 
 * [Rewards](#Rewards) - Earn and redeem reward points 
 * [PosCart](#PosCart) - Cart APIs 
 * [Logistic](#Logistic) - Handles Platform websites OMS 
@@ -46,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [followById](#followbyid)
     * [unfollowById](#unfollowbyid)
+    * [followById](#followbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -236,6 +236,8 @@
     * [getRupifiBannerDetails](#getrupifibannerdetails)
     * [getEpaylaterBannerDetails](#getepaylaterbannerdetails)
     * [resendOrCancelPayment](#resendorcancelpayment)
+    * [renderHTML](#renderhtml)
+    * [validateVPA](#validatevpa)
     * [getActiveRefundTransferModes](#getactiverefundtransfermodes)
     * [enableOrDisableRefundTransferMode](#enableordisablerefundtransfermode)
     * [getUserBeneficiariesDetail](#getuserbeneficiariesdetail)
@@ -265,27 +267,26 @@
   * Methods
     * [getOrders](#getorders)
     * [getOrderById](#getorderbyid)
-    * [getShipmentById](#getshipmentbyid)
-    * [getShipmentReasons](#getshipmentreasons)
-    * [getShipmentBagReasons](#getshipmentbagreasons)
-    * [updateShipmentStatus](#updateshipmentstatus)
-    * [trackShipment](#trackshipment)
     * [getPosOrderById](#getposorderbyid)
+    * [getShipmentById](#getshipmentbyid)
+    * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
+    * [trackShipment](#trackshipment)
     * [getCustomerDetailsByShipmentId](#getcustomerdetailsbyshipmentid)
     * [sendOtpToShipmentCustomer](#sendotptoshipmentcustomer)
     * [verifyOtpShipmentCustomer](#verifyotpshipmentcustomer)
-    * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
-    * [getCreditNoteByShipmentId](#getcreditnotebyshipmentid)
+    * [getShipmentBagReasons](#getshipmentbagreasons)
+    * [getShipmentReasons](#getshipmentreasons)
+    * [updateShipmentStatus](#updateshipmentstatus)
     
 
 * [Rewards](#Rewards)
   * Methods
-    * [getPointsOnProduct](#getpointsonproduct)
     * [getOfferByName](#getofferbyname)
-    * [getOrderDiscount](#getorderdiscount)
-    * [getUserPoints](#getuserpoints)
+    * [catalogueOrder](#catalogueorder)
     * [getUserPointsHistory](#getuserpointshistory)
+    * [getUserPoints](#getuserpoints)
     * [getUserReferralDetails](#getuserreferraldetails)
+    * [getOrderDiscount](#getorderdiscount)
     * [redeemReferralCode](#redeemreferralcode)
     
 
@@ -1150,12 +1151,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1169,7 +1170,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1191,12 +1192,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1210,7 +1211,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1722,6 +1723,12 @@ Product has been added to your cart
       "breakup_values": {
         "display": [
           {
+            "display": "Gift Card",
+            "key": "gift_card",
+            "value": 30,
+            "currency_code": "INR"
+          },
+          {
             "display": "MRP Total",
             "key": "mrp_total",
             "value": 17486,
@@ -1751,6 +1758,7 @@ Product has been added to your cart
           "convenience_fee": 0,
           "coupon": 0,
           "delivery_charge": 0,
+          "gift_card": 30,
           "discount": -3540,
           "fynd_cash": 0,
           "gst_charges": 1529.96,
@@ -1785,6 +1793,13 @@ Product has been added to your cart
           },
           "article": {
             "type": "article",
+            "is_gift": true,
+            "is_gift_visible": true,
+            "gift_card": {
+              "display_text": "",
+              "price": 30,
+              "gift_message": ""
+            },
             "uid": "612_9_SE61201_19100302_10",
             "size": "10",
             "seller": {
@@ -2180,6 +2195,7 @@ Sorry, item is out of stock
         "raw": {
           "cod_charge": 0,
           "convenience_fee": 0,
+          "gift_card": 0,
           "coupon": 0,
           "delivery_charge": 0,
           "discount": -202000,
@@ -2200,6 +2216,12 @@ Sorry, item is out of stock
           "message": "Sorry! Invalid Coupon"
         },
         "display": [
+          {
+            "display": "Gift Card",
+            "key": "gift_card",
+            "value": 0,
+            "currency_code": "INR"
+          },
           {
             "display": "MRP Total",
             "key": "mrp_total",
@@ -2243,6 +2265,13 @@ Sorry, item is out of stock
           },
           "article": {
             "type": "article",
+            "is_gift": true,
+            "is_gift_visible": true,
+            "gift_card": {
+              "display_text": "",
+              "price": 30,
+              "gift_message": ""
+            },
             "uid": "604_902_SSTC60401_636BLUE_1",
             "size": "1",
             "seller": {
@@ -2413,6 +2442,7 @@ Nothing updated
         "raw": {
           "cod_charge": 0,
           "convenience_fee": 0,
+          "gift_card": 30,
           "coupon": 0,
           "delivery_charge": 0,
           "discount": -202000,
@@ -2433,6 +2463,12 @@ Nothing updated
           "message": "Sorry! Invalid Coupon"
         },
         "display": [
+          {
+            "display": "Gift Card",
+            "key": "gift_card",
+            "value": 30,
+            "currency_code": "INR"
+          },
           {
             "display": "MRP Total",
             "key": "mrp_total",
@@ -2476,6 +2512,13 @@ Nothing updated
           },
           "article": {
             "type": "article",
+            "is_gift": true,
+            "is_gift_visible": true,
+            "gift_card": {
+              "display_text": "",
+              "price": 30,
+              "gift_message": ""
+            },
             "uid": "604_902_SSTC60401_636BLUE_1",
             "size": "1",
             "seller": {
@@ -2616,6 +2659,7 @@ Item updated in the cart
         "raw": {
           "cod_charge": 0,
           "convenience_fee": 0,
+          "gift_card": 0,
           "coupon": 0,
           "delivery_charge": 0,
           "discount": 0,
@@ -2628,6 +2672,12 @@ Item updated in the cart
           "you_saved": 0
         },
         "display": [
+          {
+            "display": "Gift Card",
+            "key": "gift_card",
+            "value": 30,
+            "currency_code": "INR"
+          },
           {
             "display": "MRP Total",
             "key": "mrp_total",
@@ -2710,6 +2760,13 @@ Item updated in the cart
           },
           "article": {
             "type": "article",
+            "is_gift": true,
+            "is_gift_visible": true,
+            "gift_card": {
+              "display_text": "",
+              "price": 30,
+              "gift_message": ""
+            },
             "uid": "507_9_96099_35656851_7",
             "size": "7",
             "seller": {
@@ -16949,6 +17006,78 @@ request_type is resend
 ---
 
 
+#### renderHTML
+Convert base64 string to HTML form
+
+```golang
+
+ data, err :=  Payment.RenderHTML(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  renderHTMLRequest | "Request body" 
+
+
+Use this API to decode base64 html form to plain HTML string.
+
+*Success Response:*
+
+
+
+Success and return HTML decoded text
+
+
+Schema: `renderHTMLResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### validateVPA
+API to Validate UPI ID
+
+```golang
+
+ data, err :=  Payment.ValidateVPA(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  ValidateVPARequest | "Request body" 
+
+
+API to Validate UPI ID
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `ValidateVPAResponseSchema` for more details.
+
+
+Schema: `ValidateVPAResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getActiveRefundTransferModes
 Lists the mode of refund
 
@@ -17825,7 +17954,7 @@ Get all orders
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `Status`, `CustomMeta`
+| xQuery | struct | Includes properties such as `Status`, `PageNo`, `PageSize`, `FromDate`, `ToDate`, `CustomMeta`
 
 
 
@@ -17889,6 +18018,44 @@ Schema: `OrderById`
 ---
 
 
+#### getPosOrderById
+Get POS Order
+
+```golang
+
+ data, err :=  Order.GetPosOrderById(OrderID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| OrderID | string | A unique number used for identifying and tracking your orders. | 
+
+
+
+
+Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `PosOrderById` for more details.
+
+
+Schema: `OrderList`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getShipmentById
 Get details of a shipment
 
@@ -17927,112 +18094,32 @@ Schema: `ShipmentById`
 ---
 
 
-#### getShipmentReasons
-Get reasons behind full or partial cancellation of a shipment
+#### getInvoiceByShipmentId
+Get Invoice of a shipment
 
 ```golang
 
- data, err :=  Order.GetShipmentReasons(ShipmentID);
+ data, err :=  Order.GetInvoiceByShipmentId(ShipmentID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+| ShipmentID | string | ID of the shipment. | 
 
 
 
 
-Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `ShipmentReasons` for more details.
-
-
-Schema: `ShipmentReasons`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getShipmentBagReasons
-Get reasons at l1,l2 and l3 for cancellation and return based on department
-
-```golang
-
- data, err :=  Order.GetShipmentBagReasons(ShipmentID, BagID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
-
-
-| BagID | string | ID of the bag. | 
-
-
-
-
-Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+Use this API to retrieve shipment invoice.
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `ShipmentBagReasons` for more details.
+Success. Check the example shown below or refer `ShipmentById` for more details.
 
 
-Schema: `ShipmentBagReasons`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateShipmentStatus
-Update the shipment status
-
-```golang
-
- data, err :=  Order.UpdateShipmentStatus(ShipmentID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
-
-
-| body |  ShipmentStatusUpdateBody | "Request body" 
-
-
-Use this API to update the status of a shipment using its shipment ID.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `ShipmentStatusUpdateBody` for more details.
-
-
-Schema: `ShipmentStatusUpdate`
+Schema: `ResponseGetInvoiceShipment`
 
 
 
@@ -18061,7 +18148,7 @@ Track shipment
 
 
 
-Use this API to track a shipment using its shipment ID.
+Track Shipment by shipment id, for application based on application Id
 
 *Success Response:*
 
@@ -18071,44 +18158,6 @@ Success. Check the example shown below or refer `ShipmentTrack` for more details
 
 
 Schema: `ShipmentTrack`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPosOrderById
-Get POS Order
-
-```golang
-
- data, err :=  Order.GetPosOrderById(OrderID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| OrderID | string | A unique number used for identifying and tracking your orders. | 
-
-
-
-
-Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `PosOrderById` for more details.
-
-
-Schema: `PosOrderById`
 
 
 
@@ -18132,10 +18181,10 @@ Get Customer Details by Shipment Id
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| OrderID | string | A unique number used for identifying and tracking your orders. | 
+| OrderID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+| ShipmentID | string | A unique number used for identifying and tracking your orders. | 
 
 
 
@@ -18149,7 +18198,7 @@ Use this API to retrieve customer details such as mobileno using Shipment ID.
 Success. Check the example shown below or refer `CustomerDetailsByShipmentId` for more details.
 
 
-Schema: `CustomerDetailsByShipmentId`
+Schema: `CustomerDetailsResponse`
 
 
 
@@ -18190,7 +18239,7 @@ Use this API to send OTP to the customer of the mapped Shipment.
 Success to acknowledge the service was notified
 
 
-Schema: `sendOTPApplicationResponse`
+Schema: `SendOtpToCustomerResponse`
 
 
 
@@ -18220,7 +18269,7 @@ Verify Otp code
 | ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
-| body |  ReqBodyVerifyOTPShipment | "Request body" 
+| body |  VerifyOtp | "Request body" 
 
 
 Use this API to verify OTP and create a session token with custom payload.
@@ -18232,7 +18281,7 @@ Use this API to verify OTP and create a session token with custom payload.
 Success, the code is valid and returns a session token
 
 
-Schema: `ResponseVerifyOTPShipment`
+Schema: `VerifyOtpResponse`
 
 
 
@@ -18245,32 +18294,35 @@ Schema: `ResponseVerifyOTPShipment`
 ---
 
 
-#### getInvoiceByShipmentId
-Get Invoice URL
+#### getShipmentBagReasons
+Get reasons behind full or partial cancellation of a shipment
 
 ```golang
 
- data, err :=  Order.GetInvoiceByShipmentId(ShipmentID);
+ data, err :=  Order.GetShipmentBagReasons(ShipmentID, BagID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+| ShipmentID | string | ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| BagID | string | ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
 
 
-Use this API to get a generated Invoice URL for viewing or download.
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
 
 *Success Response:*
 
 
 
-Success, the code is valid and returns a SignedUrl
+Success. Check the example shown below or refer `ShipmentBagReasons` for more details.
 
 
-Schema: `ResponseGetInvoiceShipment`
+Schema: `ShipmentBagReasons`
 
 
 
@@ -18283,12 +18335,12 @@ Schema: `ResponseGetInvoiceShipment`
 ---
 
 
-#### getCreditNoteByShipmentId
-Get Credit Note URL
+#### getShipmentReasons
+Get reasons behind full or partial cancellation of a shipment
 
 ```golang
 
- data, err :=  Order.GetCreditNoteByShipmentId(ShipmentID);
+ data, err :=  Order.GetShipmentReasons(ShipmentID);
 ```
 
 | Argument  |  Type  | Description |
@@ -18299,16 +18351,55 @@ Get Credit Note URL
 
 
 
-Use this API to get a generated Credit Note URL for viewing or download.
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
 
 *Success Response:*
 
 
 
-Success, the code is valid and returns a SignedUrl
+Success. Check the example shown below or refer `ShipmentBagReasons` for more details.
 
 
-Schema: `ResponseGetCreditNoteShipment`
+Schema: `ShipmentReasons`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateShipmentStatus
+Update the shipment status
+
+```golang
+
+ data, err :=  Order.UpdateShipmentStatus(ShipmentID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| body |  UpdateShipmentStatusRequest | "Request body" 
+
+
+Use this API to update the status of a shipment using its shipment ID.
+
+*Success Response:*
+
+
+
+Successfully updateShipmentStatus!
+
+
+Schema: `ShipmentApplicationStatusResponse`
 
 
 
@@ -18326,42 +18417,6 @@ Schema: `ResponseGetCreditNoteShipment`
 
 
 ## Rewards
-
-
-#### getPointsOnProduct
-Get the eligibility of reward points on a product
-
-```golang
-
- data, err :=  Rewards.GetPointsOnProduct(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  CatalogueOrderRequest | "Request body" 
-
-
-Use this API to evaluate the amount of reward points that could be earned on any catalogue product.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `CatalogueOrderRequest` for more details.
-
-
-Schema: `CatalogueOrderResponse`
-
-
-
-
-
-
-
-
-
----
 
 
 #### getOfferByName
@@ -18402,65 +18457,30 @@ Schema: `Offer`
 ---
 
 
-#### getOrderDiscount
-Calculates the discount on order-amount
+#### catalogueOrder
+Get all transactions of reward points
 
 ```golang
 
- data, err :=  Rewards.GetOrderDiscount(body);
+ data, err :=  Rewards.CatalogueOrder(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  OrderDiscountRequest | "Request body" 
+| body |  CatalogueOrderRequest | "Request body" 
 
 
-Use this API to calculate the discount on order-amount based on all the amount range configured in order_discount.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `OrderDiscountResponse` for more details.
-
-
-Schema: `OrderDiscountResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getUserPoints
-Get reward points available with a user
-
-```golang
-
- data, err :=  Rewards.GetUserPoints();
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-Use this API to retrieve total available points of a user for current application
+Use this API to evaluate the amount of reward points that could be earned on any catalogue product.
 
 *Success Response:*
 
 
 
-Success. Check example below or refer `PointsResponse` for more details.
+Success. Check example below or refer `CatalogueOrderResponse` for more details.
 
 
-Schema: `PointsResponse`
+Schema: `CatalogueOrderResponse`
 
 
 
@@ -18491,7 +18511,7 @@ Get all transactions of reward points
 
 
 
-Use this API to get a list of points transactions. The list of points history is paginated.
+Use this API to get a list of points transactions.
 
 *Success Response:*
 
@@ -18501,6 +18521,41 @@ Success. Check example below or refer `PointsHistoryResponse` for more details.
 
 
 Schema: `PointsHistoryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getUserPoints
+Get referral details of a user
+
+```golang
+
+ data, err :=  Rewards.GetUserPoints();
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+Use this API to retrieve total available points of a user for current application
+
+*Success Response:*
+
+
+
+Success. Check example below or refer `PointsResponse` for more details.
+
+
+Schema: `PointsResponse`
 
 
 
@@ -18536,6 +18591,42 @@ Success. Check example below or refer `ReferralDetailsResponse` for more details
 
 
 Schema: `ReferralDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOrderDiscount
+Calculates the discount on order-amount
+
+```golang
+
+ data, err :=  Rewards.GetOrderDiscount(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  OrderDiscountRequest | "Request body" 
+
+
+Use this API to calculate the discount on order-amount based on all the amount range configured in order_discount.
+
+*Success Response:*
+
+
+
+Success. Check example below or refer `OrderDiscountResponse` for more details.
+
+
+Schema: `OrderDiscountResponse`
 
 
 
@@ -18719,6 +18810,12 @@ Product has been added to your cart
       "breakup_values": {
         "display": [
           {
+            "display": "Gift Card",
+            "key": "gift_card",
+            "value": 30,
+            "currency_code": "INR"
+          },
+          {
             "display": "MRP Total",
             "key": "mrp_total",
             "value": 17486,
@@ -18748,6 +18845,7 @@ Product has been added to your cart
           "convenience_fee": 0,
           "coupon": 0,
           "delivery_charge": 0,
+          "gift_card": 30,
           "discount": -3540,
           "fynd_cash": 0,
           "gst_charges": 1529.96,
@@ -18782,6 +18880,13 @@ Product has been added to your cart
           },
           "article": {
             "type": "article",
+            "is_gift": true,
+            "is_gift_visible": true,
+            "gift_card": {
+              "display_text": "",
+              "price": 30,
+              "gift_message": ""
+            },
             "uid": "612_9_SE61201_19100302_10",
             "size": "10",
             "seller": {
@@ -19177,6 +19282,7 @@ Sorry, item is out of stock
         "raw": {
           "cod_charge": 0,
           "convenience_fee": 0,
+          "gift_card": 0,
           "coupon": 0,
           "delivery_charge": 0,
           "discount": -202000,
@@ -19197,6 +19303,12 @@ Sorry, item is out of stock
           "message": "Sorry! Invalid Coupon"
         },
         "display": [
+          {
+            "display": "Gift Card",
+            "key": "gift_card",
+            "value": 0,
+            "currency_code": "INR"
+          },
           {
             "display": "MRP Total",
             "key": "mrp_total",
@@ -19240,6 +19352,13 @@ Sorry, item is out of stock
           },
           "article": {
             "type": "article",
+            "is_gift": true,
+            "is_gift_visible": true,
+            "gift_card": {
+              "display_text": "",
+              "price": 30,
+              "gift_message": ""
+            },
             "uid": "604_902_SSTC60401_636BLUE_1",
             "size": "1",
             "seller": {
@@ -19410,6 +19529,7 @@ Nothing updated
         "raw": {
           "cod_charge": 0,
           "convenience_fee": 0,
+          "gift_card": 30,
           "coupon": 0,
           "delivery_charge": 0,
           "discount": -202000,
@@ -19430,6 +19550,12 @@ Nothing updated
           "message": "Sorry! Invalid Coupon"
         },
         "display": [
+          {
+            "display": "Gift Card",
+            "key": "gift_card",
+            "value": 30,
+            "currency_code": "INR"
+          },
           {
             "display": "MRP Total",
             "key": "mrp_total",
@@ -19473,6 +19599,13 @@ Nothing updated
           },
           "article": {
             "type": "article",
+            "is_gift": true,
+            "is_gift_visible": true,
+            "gift_card": {
+              "display_text": "",
+              "price": 30,
+              "gift_message": ""
+            },
             "uid": "604_902_SSTC60401_636BLUE_1",
             "size": "1",
             "seller": {
@@ -19613,6 +19746,7 @@ Item updated in the cart
         "raw": {
           "cod_charge": 0,
           "convenience_fee": 0,
+          "gift_card": 0,
           "coupon": 0,
           "delivery_charge": 0,
           "discount": 0,
@@ -19625,6 +19759,12 @@ Item updated in the cart
           "you_saved": 0
         },
         "display": [
+          {
+            "display": "Gift Card",
+            "key": "gift_card",
+            "value": 30,
+            "currency_code": "INR"
+          },
           {
             "display": "MRP Total",
             "key": "mrp_total",
@@ -19707,6 +19847,13 @@ Item updated in the cart
           },
           "article": {
             "type": "article",
+            "is_gift": true,
+            "is_gift_visible": true,
+            "gift_card": {
+              "display_text": "",
+              "price": 30,
+              "gift_message": ""
+            },
             "uid": "507_9_96099_35656851_7",
             "size": "7",
             "seller": {
