@@ -4185,7 +4185,8 @@ func NewAppClient(config *AppConfig) *Client {
     type CartGetPromotionOffersXQuery struct { 
         Slug string  `url:"slug,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
-        PromotionGroup string  `url:"promotion_group,omitempty"`  
+        PromotionGroup string  `url:"promotion_group,omitempty"` 
+        StoreID float64  `url:"store_id,omitempty"`  
     }
     
     // GetPromotionOffers Fetch available promotions
@@ -4200,6 +4201,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -5428,6 +5431,8 @@ func NewAppClient(config *AppConfig) *Client {
              loginWithOTPResponse SendOtpResponse
 	    )
 
+        
+            
         
             
         
