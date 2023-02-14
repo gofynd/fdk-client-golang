@@ -283,10 +283,10 @@
   * Methods
     * [getOfferByName](#getofferbyname)
     * [catalogueOrder](#catalogueorder)
-    * [getPointsHistory](#getpointshistory)
-    * [getPoints](#getpoints)
-    * [referral](#referral)
-    * [orderDiscount](#orderdiscount)
+    * [getUserPointsHistory](#getuserpointshistory)
+    * [getUserPoints](#getuserpoints)
+    * [getUserReferralDetails](#getuserreferraldetails)
+    * [getOrderDiscount](#getorderdiscount)
     * [redeemReferralCode](#redeemreferralcode)
     
 
@@ -18472,12 +18472,12 @@ Schema: `CatalogueOrderResponse`
 ---
 
 
-#### getPointsHistory
+#### getUserPointsHistory
 Get all transactions of reward points
 
 ```golang
 
- data, err :=  Rewards.GetPointsHistory(xQuery);
+ data, err :=  Rewards.GetUserPointsHistory(xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -18512,12 +18512,12 @@ Schema: `PointsHistoryResponse`
 ---
 
 
-#### getPoints
+#### getUserPoints
 Get referral details of a user
 
 ```golang
 
- data, err :=  Rewards.GetPoints();
+ data, err :=  Rewards.GetUserPoints();
 ```
 
 | Argument  |  Type  | Description |
@@ -18547,12 +18547,12 @@ Schema: `PointsResponse`
 ---
 
 
-#### referral
+#### getUserReferralDetails
 Get referral details of a user
 
 ```golang
 
- data, err :=  Rewards.Referral();
+ data, err :=  Rewards.GetUserReferralDetails();
 ```
 
 | Argument  |  Type  | Description |
@@ -18582,12 +18582,12 @@ Schema: `ReferralDetailsResponse`
 ---
 
 
-#### orderDiscount
+#### getOrderDiscount
 Calculates the discount on order-amount
 
 ```golang
 
- data, err :=  Rewards.OrderDiscount(body);
+ data, err :=  Rewards.GetOrderDiscount(body);
 ```
 
 | Argument  |  Type  | Description |
