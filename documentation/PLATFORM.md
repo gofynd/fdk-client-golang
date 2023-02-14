@@ -318,13 +318,13 @@
 * [Catalog](#Catalog)
   * Methods
     * [getSearchKeywords](#getsearchkeywords)
-    * [updateSearchKeywords](#updatesearchkeywords)
     * [deleteSearchKeywords](#deletesearchkeywords)
+    * [updateSearchKeywords](#updatesearchkeywords)
     * [getAllSearchKeyword](#getallsearchkeyword)
     * [createCustomKeyword](#createcustomkeyword)
     * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
-    * [updateAutocompleteKeyword](#updateautocompletekeyword)
     * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
+    * [updateAutocompleteKeyword](#updateautocompletekeyword)
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [getProductBundle](#getproductbundle)
@@ -340,12 +340,12 @@
     * [getConfigurationMetadata](#getconfigurationmetadata)
     * [getGroupConfigurations](#getgroupconfigurations)
     * [createGroupConfiguration](#creategroupconfiguration)
-    * [updateGroupConfiguration](#updategroupconfiguration)
     * [deleteGroupConfiguration](#deletegroupconfiguration)
+    * [updateGroupConfiguration](#updategroupconfiguration)
     * [getListingConfigurations](#getlistingconfigurations)
     * [createListingConfiguration](#createlistingconfiguration)
-    * [updateListingConfiguration](#updatelistingconfiguration)
     * [deleteListingConfiguration](#deletelistingconfiguration)
+    * [updateListingConfiguration](#updatelistingconfiguration)
     * [updateAllowSingle](#updateallowsingle)
     * [updateDefaultSort](#updatedefaultsort)
     * [getCatalogConfiguration](#getcatalogconfiguration)
@@ -357,8 +357,8 @@
     * [getAllCollections](#getallcollections)
     * [createCollection](#createcollection)
     * [getCollectionDetail](#getcollectiondetail)
-    * [updateCollection](#updatecollection)
     * [deleteCollection](#deletecollection)
+    * [updateCollection](#updatecollection)
     * [getCollectionItems](#getcollectionitems)
     * [addCollectionItems](#addcollectionitems)
     * [getCatalogInsights](#getcataloginsights)
@@ -392,9 +392,9 @@
     * [getVariantsOfProducts](#getvariantsofproducts)
     * [getProductAttributes](#getproductattributes)
     * [getProduct](#getproduct)
-    * [patchProduct](#patchproduct)
-    * [editProduct](#editproduct)
     * [deleteProduct](#deleteproduct)
+    * [editProduct](#editproduct)
+    * [patchProduct](#patchproduct)
     * [allSizes](#allsizes)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
@@ -572,6 +572,8 @@
     * [getAbandonedCartDetails](#getabandonedcartdetails)
     * [addItems](#additems)
     * [updateCart](#updatecart)
+    * [getCartList](#getcartlist)
+    * [updateCartUser](#updatecartuser)
     * [getCart](#getcart)
     * [getCartLastModified](#getcartlastmodified)
     * [addItems](#additems)
@@ -604,6 +606,8 @@
     * [updateUserStatus](#updateuserstatus)
     * [user](#user)
     * [getUserPointsHistory](#getuserpointshistory)
+    * [getAndroidPaths](#getandroidpaths)
+    * [updateAndroidPaths](#updateandroidpaths)
     
 
 * [Analytics](#Analytics)
@@ -661,8 +665,8 @@
     * [getEntityRegionView](#getentityregionview)
     * [getListView](#getlistview)
     * [getCompanyStoreView](#getcompanystoreview)
-    * [getZoneDataView](#getzonedataview)
     * [updateZoneControllerView](#updatezonecontrollerview)
+    * [getZoneDataView](#getzonedataview)
     * [insertZoneControllerView](#insertzonecontrollerview)
     * [upsertZoneControllerView](#upsertzonecontrollerview)
     * [getStore](#getstore)
@@ -54074,6 +54078,49 @@ Schema: `GetSearchWordsDetailResponse`
 ---
 
 
+#### deleteSearchKeywords
+Delete a Search Keywords
+
+```golang
+
+data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateSearchKeywords
 Update Search Keyword
 
@@ -54106,49 +54153,6 @@ The Collection object. See example below or refer `GetSearchWordsDataSchema` for
 
 
 Schema: `GetSearchWordsData`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteSearchKeywords
-Delete a Search Keywords
-
-```golang
-
-data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
 
 
 
@@ -54285,6 +54289,49 @@ Schema: `GetAutocompleteWordsResponse`
 ---
 
 
+#### deleteAutocompleteKeyword
+Delete a Autocomplete Keywords
+
+```golang
+
+data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateAutocompleteKeyword
 Create & Update Autocomplete Keyword
 
@@ -54317,49 +54364,6 @@ The Mapping object. See example below or refer `GetAutocompleteWordsResponseSche
 
 
 Schema: `GetAutocompleteWordsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteAutocompleteKeyword
-Delete a Autocomplete Keywords
-
-```golang
-
-data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
 
 
 
@@ -55010,6 +55014,52 @@ Schema: `AppConfigurationDetail`
 ---
 
 
+#### deleteGroupConfiguration
+Delete configuration of the product config type of the application.
+
+```golang
+
+data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
+
+
+| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration of the product config type of the application.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateGroupConfiguration
 Update the group configurations for the application.
 
@@ -55045,52 +55095,6 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationDetail`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteGroupConfiguration
-Delete configuration of the product config type of the application.
-
-```golang
-
-data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
-
-
-| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
-
-
-
-Delete configuration of the product config type of the application.
-
-*Success Response:*
-
-
-
-success message will tell whether the operation was successful.
-
-
-Schema: `ConfigSuccessResponse`
 
 
 
@@ -55197,6 +55201,52 @@ Schema: `AppConfigurationsSort`
 ---
 
 
+#### deleteListingConfiguration
+Delete configuration for listings
+
+```golang
+
+data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
+
+
+| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration for listing.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateListingConfiguration
 Update configuration for listings
 
@@ -55232,52 +55282,6 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationsSort`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteListingConfiguration
-Delete configuration for listings
-
-```golang
-
-data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
-
-
-| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
-
-
-
-Delete configuration for listing.
-
-*Success Response:*
-
-
-
-success message will tell whether the operation was successful.
-
-
-Schema: `ConfigSuccessResponse`
 
 
 
@@ -55759,6 +55763,49 @@ Schema: `CollectionDetailResponse`
 ---
 
 
+#### deleteCollection
+Delete a Collection
+
+```golang
+
+data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier of a collection. | 
+
+
+
+Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateCollection
 Update a collection
 
@@ -55791,49 +55838,6 @@ The Collection object. See example below or refer `UpdateCollectionSchema` for d
 
 
 Schema: `UpdateCollection`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteCollection
-Delete a Collection
-
-```golang
-
-data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier of a collection. | 
-
-
-
-Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
 
 
 
@@ -57071,7 +57075,7 @@ data, err := Catalog.CreateProduct(CompanyID, body);
 | CompanyID | string | Id of the company associated to product that is to be viewed. | 
 
 
-| body |  ProductCreateUpdateV2 | "Request body" 
+| body |  ProductCreateUpdateSchemaV2 | "Request body" 
 
 This API allows to create product.
 
@@ -57230,26 +57234,25 @@ Schema: `Product`
 ---
 
 
-#### patchProduct
-Patch a product.
+#### deleteProduct
+Delete a product.
 
 ```golang
 
-data, err := Catalog.PatchProduct(CompanyID, ItemID, body);
+data, err := Catalog.DeleteProduct(CompanyID, ItemID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
 
 
-| ItemID | float64 | Id of the product to be patch. | 
+| ItemID | float64 | Id of the product to be updated. | 
 
 
-| body |  ProductPatch | "Request body" 
 
-This API allows to patch product.
+This API allows to delete product.
 
 *Success Response:*
 
@@ -57312,25 +57315,26 @@ Schema: `SuccessResponse`
 ---
 
 
-#### deleteProduct
-Delete a product.
+#### patchProduct
+Patch a product.
 
 ```golang
 
-data, err := Catalog.DeleteProduct(CompanyID, ItemID);
+data, err := Catalog.PatchProduct(CompanyID, ItemID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
 
 
-| ItemID | float64 | Id of the product to be updated. | 
+| ItemID | float64 | Id of the product to be patch. | 
 
 
+| body |  ProductPatch | "Request body" 
 
-This API allows to delete product.
+This API allows to patch product.
 
 *Success Response:*
 
@@ -58311,7 +58315,7 @@ Get Inventory export history.
 
 ```golang
 
-data, err := Catalog.GetInventoryExport(CompanyID);
+data, err := Catalog.GetInventoryExport(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -58319,6 +58323,15 @@ data, err := Catalog.GetInventoryExport(CompanyID);
 
 | CompanyID | float64 | Company Id in which assets to be uploaded. | 
 
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Status`, `FromDate`, `ToDate`, `Q`
 
 
 This API helps to get Inventory export history.
@@ -66082,6 +66095,441 @@ Item updated in the cart
 ---
 
 
+#### getCartList
+Get cart list for store os user
+
+```golang
+
+data, err := Cart.GetCartList(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current Application _id | 
+
+
+
+Get all carts for the store os user which is created for customer
+
+*Success Response:*
+
+
+
+Platform user cart list
+
+
+Schema: `CartList`
+
+
+*Examples:*
+
+
+Cart list for pos platform
+```json
+{
+  "value": {
+    "data": [
+      {
+        "cart_id": "63e210d03437dfb6c731062a",
+        "user_id": "63693036ef136d40c32c0ac8"
+      },
+      {
+        "cart_id": "63e213d45e4206d94485935f",
+        "user_id": "63d0bfa35b92b61cf50cfe29"
+      }
+    ],
+    "success": true
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateCartUser
+Update user id for store os customer
+
+```golang
+
+data, err := Cart.UpdateCartUser(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current Application _id | 
+
+
+
+| xQuery | struct | Includes properties such as `ID`
+
+
+Update user id for store os customer after creating customer
+
+*Success Response:*
+
+
+
+
+
+
+Schema: `UserCartMappingResponse`
+
+
+*Examples:*
+
+
+Update and map cart user
+```json
+{
+  "value": {
+    "message": "User verified successfully",
+    "success": true,
+    "cart": {
+      "breakup_values": {
+        "display": [
+          {
+            "display": "MRP Total",
+            "key": "mrp_total",
+            "original": 5997,
+            "attr": "mrp_total",
+            "value": 5997,
+            "currency_code": "INR",
+            "currency_symbol": "₹",
+            "message": []
+          },
+          {
+            "display": "Subtotal",
+            "key": "subtotal",
+            "original": 5997,
+            "attr": "subtotal",
+            "value": 5997,
+            "currency_code": "INR",
+            "currency_symbol": "₹",
+            "message": []
+          },
+          {
+            "display": "Total",
+            "key": "total",
+            "original": 5997,
+            "attr": "total",
+            "value": 5997,
+            "currency_code": "INR",
+            "currency_symbol": "₹",
+            "message": []
+          }
+        ],
+        "loyalty_points": {
+          "total": 0,
+          "applicable": 0,
+          "is_applied": false,
+          "description": "Your cashback, reward points, and refund amount get credited to Fynd Cash which can be redeemed while placing an order.",
+          "message": "No Fynd Cash Applied"
+        },
+        "coupon": {
+          "type": "cash",
+          "code": "",
+          "uid": null,
+          "value": 0,
+          "is_applied": false,
+          "message": "Sorry! Invalid coupon"
+        },
+        "raw": {
+          "sub_total": 5997,
+          "subtotal": 5997,
+          "coupon": 0,
+          "promotion": 0,
+          "delivery_charge": 0,
+          "you_saved": 0,
+          "fynd_cash": 0,
+          "cod_charge": 0,
+          "total": 5997,
+          "gst_charges": 0,
+          "vog": 0,
+          "convenience_fee": 0,
+          "mrp_total": 5997,
+          "discount": 0
+        }
+      },
+      "items": [
+        {
+          "quantity": 3,
+          "discount": "",
+          "bulk_offer": {},
+          "is_set": false,
+          "key": "803158_M",
+          "price_per_unit": {
+            "base": {
+              "marked": 1999,
+              "effective": 1999,
+              "selling_price": 1999,
+              "currency_code": "INR",
+              "currency_symbol": "₹"
+            },
+            "converted": {
+              "marked": 1999,
+              "effective": 1999,
+              "selling_price": 1999,
+              "currency_code": "INR",
+              "currency_symbol": "₹"
+            }
+          },
+          "promotions_applied": [],
+          "message": "",
+          "identifiers": {
+            "identifier": "gIq0E94RSMueSdDRAk_Txg"
+          },
+          "delivery_promise": null,
+          "price": {
+            "base": {
+              "add_on": 5997,
+              "marked": 5997,
+              "effective": 5997,
+              "selling": 5997,
+              "currency_code": "INR",
+              "currency_symbol": "₹"
+            },
+            "converted": {
+              "add_on": 5997,
+              "marked": 5997,
+              "effective": 5997,
+              "selling": 5997,
+              "currency_code": "INR",
+              "currency_symbol": "₹"
+            }
+          },
+          "product": {
+            "type": "product",
+            "uid": 803158,
+            "name": "Pink Solid Casual Shirt",
+            "slug": "pink-solid-casual-shirt-vpvlt-00h3rv",
+            "brand": {
+              "uid": 44,
+              "name": ""
+            },
+            "categories": [
+              {
+                "uid": 133,
+                "name": "Casual Shirts"
+              }
+            ],
+            "attributes": {
+              "item_code": "NAPINPOINT@PRUNE",
+              "color": "Pink",
+              "gender": "Men",
+              "occasion": "Casual",
+              "season": "SS19",
+              "material": "100% Cotton",
+              "pattern": "Solid",
+              "product_fit": "Slim",
+              "sleeve_length": "Long",
+              "neck_type": "Classic Collar",
+              "care_instructions": "Machine Wash",
+              "primary_color": "Pink",
+              "primary-material": "Cotton",
+              "currency": "INR",
+              "media": [
+                {
+                  "url": "https://hdn-1.fynd.com/media/pictures/tagged_items/original/44_NAPINPOINT@PRUNE/1_1548161273342.jpg",
+                  "type": "image"
+                },
+                {
+                  "url": "https://hdn-1.fynd.com/media/pictures/tagged_items/original/44_NAPINPOINT@PRUNE/2_1548161273342.jpg",
+                  "type": "image"
+                },
+                {
+                  "url": "https://hdn-1.fynd.com/media/pictures/tagged_items/original/44_NAPINPOINT@PRUNE/3_1548161273342.jpg",
+                  "type": "image"
+                },
+                {
+                  "url": "https://hdn-1.fynd.com/media/pictures/tagged_items/original/44_NAPINPOINT@PRUNE/4_1548161273342.jpg",
+                  "type": "image"
+                },
+                {
+                  "url": "https://hdn-1.fynd.com/media/pictures/tagged_items/original/44_NAPINPOINT@PRUNE/5_1548161273342.jpg",
+                  "type": "image"
+                }
+              ],
+              "name": "Pink Solid Casual Shirt",
+              "brand_name": "celio",
+              "primary_color_hex": "FA7DC9"
+            },
+            "images": [
+              {
+                "aspect_ratio": "16:25",
+                "url": "https://hdn-1.fynd.com/media/pictures/tagged_items/original/44_NAPINPOINT@PRUNE/1_1548161273342.jpg",
+                "secure_url": "https://hdn-1.fynd.com/media/pictures/tagged_items/original/44_NAPINPOINT@PRUNE/1_1548161273342.jpg"
+              },
+              {
+                "aspect_ratio": "16:25",
+                "url": "https://hdn-1.fynd.com/media/pictures/tagged_items/original/44_NAPINPOINT@PRUNE/2_1548161273342.jpg",
+                "secure_url": "https://hdn-1.fynd.com/media/pictures/tagged_items/original/44_NAPINPOINT@PRUNE/2_1548161273342.jpg"
+              },
+              {
+                "aspect_ratio": "16:25",
+                "url": "https://hdn-1.fynd.com/media/pictures/tagged_items/original/44_NAPINPOINT@PRUNE/3_1548161273342.jpg",
+                "secure_url": "https://hdn-1.fynd.com/media/pictures/tagged_items/original/44_NAPINPOINT@PRUNE/3_1548161273342.jpg"
+              },
+              {
+                "aspect_ratio": "16:25",
+                "url": "https://hdn-1.fynd.com/media/pictures/tagged_items/original/44_NAPINPOINT@PRUNE/4_1548161273342.jpg",
+                "secure_url": "https://hdn-1.fynd.com/media/pictures/tagged_items/original/44_NAPINPOINT@PRUNE/4_1548161273342.jpg"
+              },
+              {
+                "aspect_ratio": "16:25",
+                "url": "https://hdn-1.fynd.com/media/pictures/tagged_items/original/44_NAPINPOINT@PRUNE/5_1548161273342.jpg",
+                "secure_url": "https://hdn-1.fynd.com/media/pictures/tagged_items/original/44_NAPINPOINT@PRUNE/5_1548161273342.jpg"
+              }
+            ],
+            "action": {
+              "type": "product",
+              "url": "https://api.fyndx1.de/platform/content/v1/products/pink-solid-casual-shirt-vpvlt-00h3rv/",
+              "query": {
+                "product_slug": [
+                  "pink-solid-casual-shirt-vpvlt-00h3rv"
+                ]
+              }
+            },
+            "item_code": "NAPINPOINT@PRUNE",
+            "_custom_json": {}
+          },
+          "coupon_message": "",
+          "parent_item_identifiers": {
+            "identifier": null,
+            "parent_item_size": null,
+            "parent_item_id": null
+          },
+          "availability": {
+            "sizes": [
+              "M",
+              "XL",
+              "XXL"
+            ],
+            "other_store_quantity": 0,
+            "out_of_stock": false,
+            "deliverable": true,
+            "is_valid": true,
+            "available_sizes": [
+              {
+                "is_available": true,
+                "display": "XL",
+                "value": "XL"
+              },
+              {
+                "is_available": true,
+                "display": "XXL",
+                "value": "XXL"
+              },
+              {
+                "is_available": true,
+                "display": "M",
+                "value": "M"
+              },
+              {
+                "is_available": false,
+                "display": "L",
+                "value": "L"
+              },
+              {
+                "is_available": false,
+                "display": "S",
+                "value": "S"
+              }
+            ]
+          },
+          "promo_meta": {},
+          "article": {
+            "type": "article",
+            "uid": "5e6344616272810001dd0269",
+            "size": "M",
+            "product_group_tags": null,
+            "seller": {
+              "uid": 743,
+              "name": "SUN LIFE STYLES"
+            },
+            "store": {
+              "uid": 9957,
+              "name": "JAYANAGAR, Karnataka"
+            },
+            "quantity": 3,
+            "price": {
+              "base": {
+                "marked": 1999,
+                "effective": 1999,
+                "selling": 1999,
+                "currency_code": "INR",
+                "currency_symbol": "₹"
+              },
+              "converted": {
+                "marked": 1999,
+                "effective": 1999,
+                "selling": 1999,
+                "currency_code": "INR",
+                "currency_symbol": "INR"
+              }
+            },
+            "extra_meta": {}
+          },
+          "moq": {}
+        }
+      ],
+      "cart_id": 436470,
+      "id": "63e210d03437dfb6c731062a",
+      "uid": "436470",
+      "buy_now": false,
+      "gstin": null,
+      "comment": "",
+      "checkout_mode": "self",
+      "restrict_checkout": false,
+      "is_valid": true,
+      "currency": {
+        "code": "INR",
+        "symbol": "₹"
+      },
+      "last_modified": "Tue, 07 Feb 2023 09:01:56 GMT"
+    },
+    "user": {
+      "uid": "63693036ef136d40c32c0ac8",
+      "_id": "63693036ef136d40c32c0ac8",
+      "first_name": "Neel",
+      "last_name": "Gajjar",
+      "email": "neelgajjar@gofynd.com",
+      "mobile": "7096263966",
+      "gender": "male",
+      "created_at": 1667838020,
+      "modified_on": 1668514790,
+      "external_id": null
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getCart
 Fetch all items added to the cart
 
@@ -70061,6 +70509,87 @@ Schema: `HistoryRes`
 ---
 
 
+#### getAndroidPaths
+Get all valid android paths
+
+```golang
+
+data, err := Rewards.GetAndroidPaths(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+
+Use this API to get a list of valid android paths required by the Rewards INIT API to validate a fradualent device.
+
+*Success Response:*
+
+
+
+Success. Refer `AndroidPathsRes` for more details.
+
+
+Schema: `AndroidPathsRes`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateAndroidPaths
+Updates the collection with given android paths.
+
+```golang
+
+data, err := Rewards.UpdateAndroidPaths(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| body |  AndroidPathReq | "Request body" 
+
+Updates the configuration or inserts new records.
+
+*Success Response:*
+
+
+
+ok
+
+
+Schema: `AndroidPathsRes`
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ---
 
@@ -71763,7 +72292,7 @@ Company Store View of application.
 
 ```golang
 
-data, err := Logistic.GetCompanyStoreView(CompanyID, xQuery);
+data, err := Logistic.GetCompanyStoreView(CompanyID);
 ```
 
 | Argument  |  Type  | Description |
@@ -71771,17 +72300,6 @@ data, err := Logistic.GetCompanyStoreView(CompanyID, xQuery);
 
 | CompanyID | float64 | A `company_id` is a unique identifier for a particular company. | 
 
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNumber`, `PageSize`, `ZoneID`, `Enabled`, `Q`
 
 
 This API returns Company Store View of the application.
@@ -71794,46 +72312,6 @@ Get Company Store View Data
 
 
 Schema: `CompanyStoreView_Response`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getZoneDataView
-Zone Data View of application.
-
-```golang
-
-data, err := Logistic.GetZoneDataView(CompanyID, ZoneID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
-
-
-
-This API returns Zone Data View of the application.
-
-*Success Response:*
-
-
-
-Get Application Zone Data
-
-
-Schema: `GetSingleZoneDataViewResponse`
 
 
 
@@ -71875,6 +72353,46 @@ Response status_code
 
 
 Schema: `ZoneSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getZoneDataView
+Zone Data View of application.
+
+```golang
+
+data, err := Logistic.GetZoneDataView(CompanyID, ZoneID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
+
+
+
+This API returns Zone Data View of the application.
+
+*Success Response:*
+
+
+
+Get Application Zone Data
+
+
+Schema: `GetSingleZoneDataViewResponse`
 
 
 
