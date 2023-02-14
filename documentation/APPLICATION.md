@@ -284,12 +284,12 @@
 
 * [Rewards](#Rewards)
   * Methods
-    * [getPointsOnProduct](#getpointsonproduct)
     * [getOfferByName](#getofferbyname)
-    * [getOrderDiscount](#getorderdiscount)
-    * [getUserPoints](#getuserpoints)
+    * [catalogueOrder](#catalogueorder)
     * [getUserPointsHistory](#getuserpointshistory)
+    * [getUserPoints](#getuserpoints)
     * [getUserReferralDetails](#getuserreferraldetails)
+    * [getOrderDiscount](#getorderdiscount)
     * [redeemReferralCode](#redeemreferralcode)
     
 
@@ -1796,12 +1796,12 @@ Product has been added to your cart
           },
           "article": {
             "type": "article",
-            "is_gift": true,
             "is_gift_visible": true,
             "gift_card": {
               "display_text": "",
               "price": 30,
-              "gift_message": ""
+              "gift_message": "",
+              "is_gift_applied": true
             },
             "uid": "612_9_SE61201_19100302_10",
             "size": "10",
@@ -2268,12 +2268,12 @@ Sorry, item is out of stock
           },
           "article": {
             "type": "article",
-            "is_gift": true,
             "is_gift_visible": true,
             "gift_card": {
               "display_text": "",
               "price": 30,
-              "gift_message": ""
+              "gift_message": "",
+              "is_gift_applied": true
             },
             "uid": "604_902_SSTC60401_636BLUE_1",
             "size": "1",
@@ -2515,12 +2515,12 @@ Nothing updated
           },
           "article": {
             "type": "article",
-            "is_gift": true,
             "is_gift_visible": true,
             "gift_card": {
               "display_text": "",
               "price": 30,
-              "gift_message": ""
+              "gift_message": "",
+              "is_gift_applied": true
             },
             "uid": "604_902_SSTC60401_636BLUE_1",
             "size": "1",
@@ -2763,12 +2763,12 @@ Item updated in the cart
           },
           "article": {
             "type": "article",
-            "is_gift": true,
             "is_gift_visible": true,
             "gift_card": {
               "display_text": "",
               "price": 30,
-              "gift_message": ""
+              "gift_message": "",
+              "is_gift_applied": true
             },
             "uid": "507_9_96099_35656851_7",
             "size": "7",
@@ -18543,42 +18543,6 @@ Schema: `ResponseGetInvoiceShipment1`
 ## Rewards
 
 
-#### getPointsOnProduct
-Get the eligibility of reward points on a product
-
-```golang
-
- data, err :=  Rewards.GetPointsOnProduct(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  CatalogueOrderRequest | "Request body" 
-
-
-Use this API to evaluate the amount of reward points that could be earned on any catalogue product.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `CatalogueOrderRequest` for more details.
-
-
-Schema: `CatalogueOrderResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getOfferByName
 Get offer by name
 
@@ -18617,65 +18581,30 @@ Schema: `Offer`
 ---
 
 
-#### getOrderDiscount
-Calculates the discount on order-amount
+#### catalogueOrder
+Get all transactions of reward points
 
 ```golang
 
- data, err :=  Rewards.GetOrderDiscount(body);
+ data, err :=  Rewards.CatalogueOrder(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  OrderDiscountRequest | "Request body" 
+| body |  CatalogueOrderRequest | "Request body" 
 
 
-Use this API to calculate the discount on order-amount based on all the amount range configured in order_discount.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `OrderDiscountResponse` for more details.
-
-
-Schema: `OrderDiscountResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getUserPoints
-Get reward points available with a user
-
-```golang
-
- data, err :=  Rewards.GetUserPoints();
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-Use this API to retrieve total available points of a user for current application
+Use this API to evaluate the amount of reward points that could be earned on any catalogue product.
 
 *Success Response:*
 
 
 
-Success. Check example below or refer `PointsResponse` for more details.
+Success. Check example below or refer `CatalogueOrderResponse` for more details.
 
 
-Schema: `PointsResponse`
+Schema: `CatalogueOrderResponse`
 
 
 
@@ -18706,7 +18635,7 @@ Get all transactions of reward points
 
 
 
-Use this API to get a list of points transactions. The list of points history is paginated.
+Use this API to get a list of points transactions.
 
 *Success Response:*
 
@@ -18716,6 +18645,41 @@ Success. Check example below or refer `PointsHistoryResponse` for more details.
 
 
 Schema: `PointsHistoryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getUserPoints
+Get referral details of a user
+
+```golang
+
+ data, err :=  Rewards.GetUserPoints();
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+Use this API to retrieve total available points of a user for current application
+
+*Success Response:*
+
+
+
+Success. Check example below or refer `PointsResponse` for more details.
+
+
+Schema: `PointsResponse`
 
 
 
@@ -18751,6 +18715,42 @@ Success. Check example below or refer `ReferralDetailsResponse` for more details
 
 
 Schema: `ReferralDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOrderDiscount
+Calculates the discount on order-amount
+
+```golang
+
+ data, err :=  Rewards.GetOrderDiscount(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  OrderDiscountRequest | "Request body" 
+
+
+Use this API to calculate the discount on order-amount based on all the amount range configured in order_discount.
+
+*Success Response:*
+
+
+
+Success. Check example below or refer `OrderDiscountResponse` for more details.
+
+
+Schema: `OrderDiscountResponse`
 
 
 
@@ -19004,12 +19004,12 @@ Product has been added to your cart
           },
           "article": {
             "type": "article",
-            "is_gift": true,
             "is_gift_visible": true,
             "gift_card": {
               "display_text": "",
               "price": 30,
-              "gift_message": ""
+              "gift_message": "",
+              "is_gift_applied": true
             },
             "uid": "612_9_SE61201_19100302_10",
             "size": "10",
@@ -19476,12 +19476,12 @@ Sorry, item is out of stock
           },
           "article": {
             "type": "article",
-            "is_gift": true,
             "is_gift_visible": true,
             "gift_card": {
               "display_text": "",
               "price": 30,
-              "gift_message": ""
+              "gift_message": "",
+              "is_gift_applied": true
             },
             "uid": "604_902_SSTC60401_636BLUE_1",
             "size": "1",
@@ -19723,12 +19723,12 @@ Nothing updated
           },
           "article": {
             "type": "article",
-            "is_gift": true,
             "is_gift_visible": true,
             "gift_card": {
               "display_text": "",
               "price": 30,
-              "gift_message": ""
+              "gift_message": "",
+              "is_gift_applied": true
             },
             "uid": "604_902_SSTC60401_636BLUE_1",
             "size": "1",
@@ -19971,12 +19971,12 @@ Item updated in the cart
           },
           "article": {
             "type": "article",
-            "is_gift": true,
             "is_gift_visible": true,
             "gift_card": {
               "display_text": "",
               "price": 30,
-              "gift_message": ""
+              "gift_message": "",
+              "is_gift_applied": true
             },
             "uid": "507_9_96099_35656851_7",
             "size": "7",
