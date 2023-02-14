@@ -23,8 +23,6 @@
 * [Partner](#Partner) - Partner configuration apis 
 * [Webhook](#Webhook) - Webhook dispatcher with retry and one event to many subscriber vice versa 
 * [AuditTrail](#AuditTrail) - Audit Logging Service that logs the crucial updates on the Platform 
-* [Serviceability](#Serviceability) - Logistics Configuration API's allows you to configure zone, application logistics and many more useful features.  
-* [DocumentEngine](#DocumentEngine) - Handles financial pdf generation of Fulfilment 
 
 ----
 ----
@@ -319,24 +317,24 @@
 
 * [Catalog](#Catalog)
   * Methods
-    * [getSearchKeywords](#getsearchkeywords)
     * [deleteSearchKeywords](#deletesearchkeywords)
     * [updateSearchKeywords](#updatesearchkeywords)
+    * [getSearchKeywords](#getsearchkeywords)
     * [createCustomKeyword](#createcustomkeyword)
     * [getAllSearchKeyword](#getallsearchkeyword)
-    * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [updateAutocompleteKeyword](#updateautocompletekeyword)
+    * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createProductBundle](#createproductbundle)
     * [getProductBundle](#getproductbundle)
-    * [getProductBundleDetail](#getproductbundledetail)
     * [updateProductBundle](#updateproductbundle)
+    * [getProductBundleDetail](#getproductbundledetail)
     * [createSizeGuide](#createsizeguide)
     * [getSizeGuides](#getsizeguides)
-    * [getSizeGuide](#getsizeguide)
     * [updateSizeGuide](#updatesizeguide)
+    * [getSizeGuide](#getsizeguide)
     * [getAppProduct](#getappproduct)
     * [updateAppProduct](#updateappproduct)
     * [getConfigurationMetadata](#getconfigurationmetadata)
@@ -375,8 +373,8 @@
     * [listProductTemplateCategories](#listproducttemplatecategories)
     * [createDepartments](#createdepartments)
     * [listDepartmentsData](#listdepartmentsdata)
-    * [getDepartmentData](#getdepartmentdata)
     * [updateDepartment](#updatedepartment)
+    * [getDepartmentData](#getdepartmentdata)
     * [listProductTemplate](#listproducttemplate)
     * [validateProductTemplate](#validateproducttemplate)
     * [downloadProductTemplateViews](#downloadproducttemplateviews)
@@ -387,15 +385,15 @@
     * [listTemplateBrandTypeValues](#listtemplatebrandtypevalues)
     * [createCategories](#createcategories)
     * [listCategories](#listcategories)
-    * [getCategoryData](#getcategorydata)
     * [updateCategory](#updatecategory)
+    * [getCategoryData](#getcategorydata)
     * [createProduct](#createproduct)
     * [getProducts](#getproducts)
     * [getVariantsOfProducts](#getvariantsofproducts)
     * [getProductAttributes](#getproductattributes)
-    * [getProduct](#getproduct)
     * [deleteProduct](#deleteproduct)
     * [editProduct](#editproduct)
+    * [getProduct](#getproduct)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
     * [createBulkProductUploadJob](#createbulkproductuploadjob)
@@ -424,8 +422,8 @@
     * [updateInventories](#updateinventories)
     * [createHsnCode](#createhsncode)
     * [getAllHsnCodes](#getallhsncodes)
-    * [getHsnCode](#gethsncode)
     * [updateHsnCode](#updatehsncode)
+    * [getHsnCode](#gethsncode)
     * [bulkHsnCode](#bulkhsncode)
     * [getAllProductHsnCodes](#getallproducthsncodes)
     * [getOptimalLocations](#getoptimallocations)
@@ -642,33 +640,6 @@
     * [createAuditLog](#createauditlog)
     * [getAuditLog](#getauditlog)
     * [getEntityTypes](#getentitytypes)
-    
-
-* [Serviceability](#Serviceability)
-  * Methods
-    * [getApplicationServiceability](#getapplicationserviceability)
-    * [getEntityRegionView](#getentityregionview)
-    * [getListView](#getlistview)
-    * [getCompanyStoreView](#getcompanystoreview)
-    * [updateZoneControllerView](#updatezonecontrollerview)
-    * [getZoneDataView](#getzonedataview)
-    * [insertZoneControllerView](#insertzonecontrollerview)
-    * [upsertZoneControllerView](#upsertzonecontrollerview)
-    * [getStore](#getstore)
-    * [getAllStores](#getallstores)
-    
-
-* [DocumentEngine](#DocumentEngine)
-  * Methods
-    * [generateBulkPackageLabel](#generatebulkpackagelabel)
-    * [generateBulkBoxLabel](#generatebulkboxlabel)
-    * [generateBulkShipmentLabel](#generatebulkshipmentlabel)
-    * [generateNoc](#generatenoc)
-    * [getLabelStatus](#getlabelstatus)
-    * [getNocStatus](#getnocstatus)
-    * [getPresignedURL](#getpresignedurl)
-    * [getLabelPresignedURL](#getlabelpresignedurl)
-    * [getNocPresignedURL](#getnocpresignedurl)
     
 
 
@@ -54078,49 +54049,6 @@ Schema: `OrderStatusResult`
 ## Catalog
 
 
-#### getSearchKeywords
-Get a Search Keywords Details
-
-```golang
-
-data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
-
-*Success Response:*
-
-
-
-The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
-
-
-Schema: `GetSearchWordsDetailResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### deleteSearchKeywords
 Delete a Search Keywords
 
@@ -54196,6 +54124,49 @@ The Collection object. See example below or refer `GetSearchWordsDataSchema` for
 
 
 Schema: `GetSearchWordsData`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSearchKeywords
+Get a Search Keywords Details
+
+```golang
+
+data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
+
+*Success Response:*
+
+
+
+The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
+
+
+Schema: `GetSearchWordsDetailResponse`
 
 
 
@@ -54289,49 +54260,6 @@ Schema: `GetSearchWordsResponse`
 ---
 
 
-#### getAutocompleteKeywordDetail
-Get a Autocomplete Keywords Details
-
-```golang
-
-data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
-
-*Success Response:*
-
-
-
-The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
-
-
-Schema: `GetAutocompleteWordsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### deleteAutocompleteKeyword
 Delete a Autocomplete Keywords
 
@@ -54404,6 +54332,49 @@ Update a mapping by it's id. On successful request, returns the updated Keyword 
 
 
 The Mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details.
+
+
+Schema: `GetAutocompleteWordsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAutocompleteKeywordDetail
+Get a Autocomplete Keywords Details
+
+```golang
+
+data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
+
+*Success Response:*
+
+
+
+The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
 
 
 Schema: `GetAutocompleteWordsResponse`
@@ -54580,46 +54551,6 @@ Schema: `GetProductBundleListingResponse`
 ---
 
 
-#### getProductBundleDetail
-Get a particular Product Bundle details
-
-```golang
-
-data, err := Catalog.GetProductBundleDetail(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
-
-*Success Response:*
-
-
-
-The Collection object. See example below or refer `GetProductBundleResponse` for details
-
-
-Schema: `GetProductBundleResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateProductBundle
 Update a Product Bundle
 
@@ -54649,6 +54580,46 @@ The Collection object. See example below or refer `GetProductBundleCreateRespons
 
 
 Schema: `GetProductBundleCreateResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProductBundleDetail
+Get a particular Product Bundle details
+
+```golang
+
+data, err := Catalog.GetProductBundleDetail(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
+
+*Success Response:*
+
+
+
+The Collection object. See example below or refer `GetProductBundleResponse` for details
+
+
+Schema: `GetProductBundleResponse`
 
 
 
@@ -54747,46 +54718,6 @@ Schema: `ListSizeGuide`
 ---
 
 
-#### getSizeGuide
-Get a single size guide.
-
-```golang
-
-data, err := Catalog.GetSizeGuide(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to size guide. | 
-
-
-| ID | string | Id of the size guide to be viewed. | 
-
-
-
-This API helps to get data associated to a size guide.
-
-*Success Response:*
-
-
-
-Brand object. See example below or refer `SizeGuideResponseSchema` for details
-
-
-Schema: `SizeGuideResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateSizeGuide
 Edit a size guide.
 
@@ -54816,6 +54747,46 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSizeGuide
+Get a single size guide.
+
+```golang
+
+data, err := Catalog.GetSizeGuide(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to size guide. | 
+
+
+| ID | string | Id of the size guide to be viewed. | 
+
+
+
+This API helps to get data associated to a size guide.
+
+*Success Response:*
+
+
+
+Brand object. See example below or refer `SizeGuideResponseSchema` for details
+
+
+Schema: `SizeGuideResponse`
 
 
 
@@ -56482,46 +56453,6 @@ Schema: `DepartmentsResponse`
 ---
 
 
-#### getDepartmentData
-Get specific departments details by passing in unique id of the department.
-
-```golang
-
-data, err := Catalog.GetDepartmentData(CompanyID, UID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| UID | string | A `uid` is a unique identifier of a department. | 
-
-
-
-Allows you to get department data, by uid.
-
-*Success Response:*
-
-
-
-Departments Data. See example below or refer `DepartmentsResponse` for details
-
-
-Schema: `DepartmentsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateDepartment
 Update the department by their uid.
 
@@ -56551,6 +56482,46 @@ Success Response. See example below or refer `DepartmentCreateResponseSchema` fo
 
 
 Schema: `DepartmentModel`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDepartmentData
+Get specific departments details by passing in unique id of the department.
+
+```golang
+
+data, err := Catalog.GetDepartmentData(CompanyID, UID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| UID | string | A `uid` is a unique identifier of a department. | 
+
+
+
+Allows you to get department data, by uid.
+
+*Success Response:*
+
+
+
+Departments Data. See example below or refer `DepartmentsResponse` for details
+
+
+Schema: `DepartmentsResponse`
 
 
 
@@ -56963,46 +56934,6 @@ Schema: `CategoryResponse`
 ---
 
 
-#### getCategoryData
-Get product category by uid
-
-```golang
-
-data, err := Catalog.GetCategoryData(CompanyID, UID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| UID | string | Category unique id | 
-
-
-
-This API gets meta associated to product categories.
-
-*Success Response:*
-
-
-
-Get Data for one category. See example below or refer `CategoryResponse` for details
-
-
-Schema: `SingleCategoryResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateCategory
 Update product categories
 
@@ -57032,6 +56963,46 @@ Category Meta. See example below or refer `CategoryUpdateResponse` for details
 
 
 Schema: `CategoryUpdateResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCategoryData
+Get product category by uid
+
+```golang
+
+data, err := Catalog.GetCategoryData(CompanyID, UID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| UID | string | Category unique id | 
+
+
+
+This API gets meta associated to product categories.
+
+*Success Response:*
+
+
+
+Get Data for one category. See example below or refer `CategoryResponse` for details
+
+
+Schema: `SingleCategoryResponse`
 
 
 
@@ -57228,51 +57199,6 @@ Schema: `ProductAttributesResponse`
 ---
 
 
-#### getProduct
-Get a single product.
-
-```golang
-
-data, err := Catalog.GetProduct(CompanyID, ItemID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-| CompanyID | float64 | Company Id of the product. | 
-
-
-| ItemID | float64 | Item Id of the product. | 
-
-
-
-| xQuery | struct | Includes properties such as `ItemCode`, `BrandUID`
-
-
-This API helps to get data associated to a particular product.
-
-*Success Response:*
-
-
-
-Product object. See example below or refer `product.utils.format_product_response` for details
-
-
-Schema: `Product`
-
-
-
-
-
-
-
-
-
----
-
-
 #### deleteProduct
 Delete a product.
 
@@ -57342,6 +57268,51 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProduct
+Get a single product.
+
+```golang
+
+data, err := Catalog.GetProduct(CompanyID, ItemID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+| CompanyID | float64 | Company Id of the product. | 
+
+
+| ItemID | float64 | Item Id of the product. | 
+
+
+
+| xQuery | struct | Includes properties such as `ItemCode`, `BrandUID`
+
+
+This API helps to get data associated to a particular product.
+
+*Success Response:*
+
+
+
+Product object. See example below or refer `product.utils.format_product_response` for details
+
+
+Schema: `Product`
 
 
 
@@ -58537,46 +58508,6 @@ Schema: `HsnCodesListingResponse`
 ---
 
 
-#### getHsnCode
-Fetch Hsn Code.
-
-```golang
-
-data, err := Catalog.GetHsnCode(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ID | string | Unique id | 
-
-
-
-Fetch Hsn Code.
-
-*Success Response:*
-
-
-
-See example below details
-
-
-Schema: `HsnCode`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateHsnCode
 Update Hsn Code.
 
@@ -58603,6 +58534,46 @@ Update Hsn Code.
 
 
 See example below for details
+
+
+Schema: `HsnCode`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getHsnCode
+Fetch Hsn Code.
+
+```golang
+
+data, err := Catalog.GetHsnCode(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ID | string | Unique id | 
+
+
+
+Fetch Hsn Code.
+
+*Success Response:*
+
+
+
+See example below details
 
 
 Schema: `HsnCode`
@@ -68145,1037 +68116,6 @@ default
         "display_name": "Shipment Update"
       }
     ]
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-
----
-
-
-## Serviceability
-
-
-#### getApplicationServiceability
-Zone configuration of application.
-
-```golang
-
-data, err := Serviceability.GetApplicationServiceability(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-
-This API returns serviceability config of the application.
-
-*Success Response:*
-
-
-
-Response Data
-
-
-Schema: `ApplicationServiceabilityConfigResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getEntityRegionView
-Get country and state list
-
-```golang
-
-data, err := Serviceability.GetEntityRegionView(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| body |  EntityRegionView_Request | "Request body" 
-
-This API returns response for Entity Region View.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `EntityRegionView_Response`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getListView
-Zone List of application.
-
-```golang
-
-data, err := Serviceability.GetListView(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNumber`, `PageSize`, `Name`, `IsActive`, `ChannelIds`
-
-
-This API returns Zone List View of the application.
-
-*Success Response:*
-
-
-
-Zone List of application in descending order of their last modified date.
-
-
-Schema: `ListViewResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getCompanyStoreView
-Company Store View of application.
-
-```golang
-
-data, err := Serviceability.GetCompanyStoreView(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular company. | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNumber`, `PageSize`
-
-
-This API returns Company Store View of the application.
-
-*Success Response:*
-
-
-
-Get Company Store View Data
-
-
-Schema: `CompanyStoreView_Response`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateZoneControllerView
-Updation of zone collections in database.
-
-```golang
-
-data, err := Serviceability.UpdateZoneControllerView(ZoneID, CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
-
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| body |  ZoneUpdateRequest | "Request body" 
-
-This API returns response of updation of zone in mongo database.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `ZoneSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getZoneDataView
-Zone Data View of application.
-
-```golang
-
-data, err := Serviceability.GetZoneDataView(CompanyID, ZoneID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
-
-
-
-This API returns Zone Data View of the application.
-
-*Success Response:*
-
-
-
-Get Application Zone Data
-
-
-Schema: `GetSingleZoneDataViewResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### insertZoneControllerView
-Insertion of zone in database.
-
-```golang
-
-data, err := Serviceability.InsertZoneControllerView(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| body |  ZoneRequest | "Request body" 
-
-This API returns response of insertion of zone in mongo database.<br>Correction- `zone_id` in the path must be removed.<br> path is `/service/platform/logistics-internal/v1.0/company/{company_id}/zone/`
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `ZoneResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### upsertZoneControllerView
-GET zone from the Pincode.
-
-```golang
-
-data, err := Serviceability.UpsertZoneControllerView(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` contains a specific ID of a company. | 
-
-
-| ApplicationID | string | A `application_id` contains a unique ID. | 
-
-
-| body |  GetZoneFromPincodeViewRequest | "Request body" 
-
-This API returns zone from the Pincode View.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `GetZoneFromPincodeViewResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getStore
-GET stores data
-
-```golang
-
-data, err := Serviceability.GetStore(CompanyID, StoreUID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| StoreUID | float64 | A `store_uid` contains a specific ID of a store. | 
-
-
-
-This API returns stores data.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `GetStoresViewResponse`
-
-
-*Examples:*
-
-
-items
-```json
-[
-  {
-    "uid": 2,
-    "_cls": "Store",
-    "address": {
-      "city": "MUMBAI",
-      "country": "INDIA",
-      "address2": "",
-      "address1": "POLARIS 2ND FLOOR, ANDHERI",
-      "landmark": "",
-      "state": "MAHARASHTRA",
-      "pincode": 400001,
-      "longitude": 72.8776559,
-      "latitude": 19.0759837
-    },
-    "code": "HS-a0c85",
-    "company_id": 2,
-    "contact_numbers": [
-      {
-        "country_code": 91,
-        "number": "9096686804"
-      }
-    ],
-    "created_by": {
-      "user_id": "605e8e86493f54a9ccaa47be",
-      "username": "parvezshaikh_gofynd_com_07710"
-    },
-    "created_on": "2021-08-07T06:21:25.293000",
-    "display_name": "Test",
-    "documents": [
-      {
-        "type": "gst",
-        "verified": true,
-        "value": "27AALCA0442L1ZM",
-        "legal_name": "SHOPSENSE RETAIL TECHNOLOGIES PRIVATE LIMITED"
-      }
-    ],
-    "gst_credentials": {
-      "e_waybill": {
-        "enabled": false
-      },
-      "e_invoice": {
-        "enabled": false
-      }
-    },
-    "integration_type": {
-      "order": "pulse",
-      "inventory": "pulse"
-    },
-    "logistics": {
-      "dp": {
-        "1": {
-          "fm_priority": 1,
-          "lm_priority": 1,
-          "rvp_priority": 1,
-          "payment_mode": "all",
-          "operations": [
-            "inter_city"
-          ],
-          "area_code": null,
-          "assign_dp_from_sb": true,
-          "transport_mode": "air",
-          "external_account_id": null,
-          "internal_account_id": "1"
-        },
-        "19": {
-          "fm_priority": 2,
-          "lm_priority": 2,
-          "rvp_priority": 2,
-          "payment_mode": "all",
-          "operations": "inter_city",
-          "area_code": null,
-          "assign_dp_from_sb": true,
-          "transport_mode": "air",
-          "external_account_id": null,
-          "internal_account_id": "19"
-        }
-      },
-      "override": false
-    },
-    "manager": {
-      "name": "Parvez Shaikh",
-      "mobile_no": {
-        "country_code": 91,
-        "number": "9096686804"
-      },
-      "email": "parvezshaikh@gofynd.com"
-    },
-    "modified_by": {
-      "user_id": "38ac93a8a5495305fc794e76",
-      "username": "919594495254_32111"
-    },
-    "modified_on": "2021-08-17T14:18:10.788000",
-    "name": "Test",
-    "notification_emails": [
-      "parvezshaikh@gofynd.com"
-    ],
-    "product_return_config": {
-      "on_same_store": true
-    },
-    "stage": "verified",
-    "store_type": "high_street",
-    "sub_type": "store",
-    "timing": [
-      {
-        "open": true,
-        "opening": {
-          "hour": 11,
-          "minute": 0
-        },
-        "closing": {
-          "hour": 21,
-          "minute": 30
-        },
-        "weekday": "monday"
-      },
-      {
-        "open": true,
-        "opening": {
-          "hour": 11,
-          "minute": 0
-        },
-        "closing": {
-          "hour": 21,
-          "minute": 30
-        },
-        "weekday": "tuesday"
-      },
-      {
-        "open": true,
-        "opening": {
-          "hour": 11,
-          "minute": 0
-        },
-        "closing": {
-          "hour": 21,
-          "minute": 30
-        },
-        "weekday": "wednesday"
-      },
-      {
-        "open": true,
-        "opening": {
-          "hour": 11,
-          "minute": 0
-        },
-        "closing": {
-          "hour": 21,
-          "minute": 30
-        },
-        "weekday": "thursday"
-      },
-      {
-        "open": true,
-        "opening": {
-          "hour": 11,
-          "minute": 0
-        },
-        "closing": {
-          "hour": 21,
-          "minute": 30
-        },
-        "weekday": "friday"
-      },
-      {
-        "open": true,
-        "opening": {
-          "hour": 11,
-          "minute": 0
-        },
-        "closing": {
-          "hour": 21,
-          "minute": 30
-        },
-        "weekday": "saturday"
-      },
-      {
-        "open": true,
-        "opening": {
-          "hour": 11,
-          "minute": 0
-        },
-        "closing": {
-          "hour": 21,
-          "minute": 30
-        },
-        "weekday": "sunday"
-      }
-    ],
-    "verified_by": {
-      "user_id": "0",
-      "username": "Silverbolt"
-    },
-    "verified_on": "2022-03-23T13:35:46.869000",
-    "warnings": {
-      "store_address": "Address: Address seems to be inappropriate this might affect the delivery."
-    },
-    "_custom_json": {},
-    "company": 2
-  }
-]
-```
-
-page
-```json
-{
-  "type": "number",
-  "size": 2,
-  "current": 1,
-  "has_next": true,
-  "item_total": 3276
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAllStores
-GET stores data
-
-```golang
-
-data, err := Serviceability.GetAllStores(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-
-This API returns stores data.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `GetStoresViewResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-
----
-
-
-## DocumentEngine
-
-
-#### generateBulkPackageLabel
-Generate Labels for Packages
-
-```golang
-
-data, err := DocumentEngine.GenerateBulkPackageLabel(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-| body |  GenerateBulkPackageLabel | "Request body" 
-
-Use this API to generate label for Packages
-
-*Success Response:*
-
-
-
-Sucsess Response, Labels will be generated
-
-
-Schema: `SuccessResponseGenerateBulk`
-
-
-
-
-
-
-
-
-
----
-
-
-#### generateBulkBoxLabel
-Generate Labels for Boxes which will go inside package
-
-```golang
-
-data, err := DocumentEngine.GenerateBulkBoxLabel(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-| body |  GenerateBulkBoxLabel | "Request body" 
-
-Use this API to generate label for Boxes
-
-*Success Response:*
-
-
-
-Sucsess Response, Labels will be generated
-
-
-Schema: `SuccessResponseGenerateBulk`
-
-
-
-
-
-
-
-
-
----
-
-
-#### generateBulkShipmentLabel
-Generate Labels for Shipments which contains packaged
-
-```golang
-
-data, err := DocumentEngine.GenerateBulkShipmentLabel(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-| body |  GenerateBulkShipmentLabel | "Request body" 
-
-Use this API to generate label for Shipments
-
-*Success Response:*
-
-
-
-Sucsess Response, Labels will be generated
-
-
-Schema: `SuccessResponseGenerateBulk`
-
-
-
-
-
-
-
-
-
----
-
-
-#### generateNoc
-Generate NOC for Seller having access to a fullfillment center
-
-```golang
-
-data, err := DocumentEngine.GenerateNoc(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-| body |  GenerateNoc | "Request body" 
-
-Use this API to generate NOC for Seller
-
-*Success Response:*
-
-
-
-Sucsess Response, NOC Pdf will be generated
-
-
-Schema: `SuccessResponseGenerateBulk`
-
-
-*Examples:*
-
-
-success response
-```json
-{
-  "value": {
-    "status": true
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getLabelStatus
-Get Staus of Label generations
-
-```golang
-
-data, err := DocumentEngine.GetLabelStatus(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-
-| xQuery | struct | Includes properties such as `UID`
-
-
-Use this API to fetch status of PDF generation of Labels
-
-*Success Response:*
-
-
-
-Sucess Response, Status Of Label generation
-
-
-Schema: `StatusSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getNocStatus
-Get Staus of NOC generation
-
-```golang
-
-data, err := DocumentEngine.GetNocStatus(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-
-| xQuery | struct | Includes properties such as `UID`
-
-
-Use this API to fetch status of PDF generation of NOC
-
-*Success Response:*
-
-
-
-Sucess Response, Status Of NOC Pdf generation
-
-
-Schema: `StatusSuccessResponse`
-
-
-*Examples:*
-
-
-success response
-```json
-{
-  "value": {
-    "success": true,
-    "status": "created"
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPresignedURL
-Get Presigned URL to download PDFs
-
-```golang
-
-data, err := DocumentEngine.GetPresignedURL(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-| body |  InvoiceLabelPresignedRequestBody | "Request body" 
-
-Use this API to generate Presigned URLs for downloading PDFs
-
-*Success Response:*
-
-
-
-Sucess Response, Presigned URL of PDFs
-
-
-Schema: `SignedSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getLabelPresignedURL
-Get Presigned URL to download labels
-
-```golang
-
-data, err := DocumentEngine.GetLabelPresignedURL(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-
-| xQuery | struct | Includes properties such as `UID`
-
-
-Use this API to generate Presigned URLs for downloading labels
-
-*Success Response:*
-
-
-
-Sucess Response, Presigned URL of Labels
-
-
-Schema: `SignedSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getNocPresignedURL
-Get Presigned URL to download NOC Pdf
-
-```golang
-
-data, err := DocumentEngine.GetNocPresignedURL(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-
-| xQuery | struct | Includes properties such as `UID`
-
-
-Use this API to generate Presigned URL for downloading NOC Pdf
-
-*Success Response:*
-
-
-
-Sucess Response, Presigned URL of NOC Pdf
-
-
-Schema: `SignedSuccessResponse`
-
-
-*Examples:*
-
-
-success response
-```json
-{
-  "value": {
-    "uid": "l27h38uy",
-    "expires_in": 300,
-    "url": "presigned-url"
   }
 }
 ```

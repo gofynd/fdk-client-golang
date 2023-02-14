@@ -277,9 +277,6 @@
     * [getShipmentBagReasons](#getshipmentbagreasons)
     * [getShipmentReasons](#getshipmentreasons)
     * [updateShipmentStatus](#updateshipmentstatus)
-    * [updateShipmentStatus1](#updateshipmentstatus1)
-    * [getInvoiceByShipmentId1](#getinvoicebyshipmentid1)
-    * [getCreditNoteByShipmentId](#getcreditnotebyshipmentid)
     
 
 * [Rewards](#Rewards)
@@ -18403,127 +18400,6 @@ Successfully updateShipmentStatus!
 
 
 Schema: `ShipmentApplicationStatusResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateShipmentStatus1
-
-
-```golang
-
- data, err :=  Order.UpdateShipmentStatus1(ShipmentID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ShipmentID | string |  | 
-
-
-| body |  UpdateShipmentStatusRequest | "Request body" 
-
-
-updateShipmentStatus
-
-*Success Response:*
-
-
-
-Successfully updateShipmentStatus!
-
-
-Schema: `ShipmentApplicationStatusResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getInvoiceByShipmentId1
-Get Presigned URL to download Invoice
-
-```golang
-
- data, err :=  Order.GetInvoiceByShipmentId1(ShipmentID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ShipmentID | string | Shiment ID | 
-
-
-
-| xQuery | struct | Includes properties such as `Parameters`
-
-
-
-Use this API to generate Presigned URLs for downloading Invoice
-
-*Success Response:*
-
-
-
-Success Response, Presigned URL of Invoice
-
-
-Schema: `ResponseGetInvoiceShipment1`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getCreditNoteByShipmentId
-Get Presigned URL to download Invoice
-
-```golang
-
- data, err :=  Order.GetCreditNoteByShipmentId(ShipmentID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ShipmentID | string | Shiment ID | 
-
-
-
-| xQuery | struct | Includes properties such as `Parameters`
-
-
-
-Use this API to generate Presigned URLs for downloading Invoice
-
-*Success Response:*
-
-
-
-Success Response, Presigned URL of Invoice
-
-
-Schema: `ResponseGetInvoiceShipment1`
 
 
 
