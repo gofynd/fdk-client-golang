@@ -1657,55 +1657,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1746,6 +1697,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -12647,7 +12647,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            "/service/application/orders/v1.0/orders",
+            "/service/application/order/v1.0/orders",
             nil,
             xQuery,
             nil)
@@ -12694,7 +12694,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/%s",OrderID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/%s",OrderID),
             nil,
             nil,
             nil)
@@ -12741,7 +12741,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/pos-order/%s",OrderID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/pos-order/%s",OrderID),
             nil,
             nil,
             nil)
@@ -12788,7 +12788,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s",ShipmentID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s",ShipmentID),
             nil,
             nil,
             nil)
@@ -12835,7 +12835,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s/invoice",ShipmentID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/invoice",ShipmentID),
             nil,
             nil,
             nil)
@@ -12882,7 +12882,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s/track",ShipmentID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/track",ShipmentID),
             nil,
             nil,
             nil)
@@ -12931,7 +12931,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/%s/shipments/%s/customer-details",OrderID,ShipmentID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/%s/shipments/%s/customer-details",OrderID,ShipmentID),
             nil,
             nil,
             nil)
@@ -12980,7 +12980,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "post",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/%s/shipments/%s/otp/send/",OrderID,ShipmentID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/%s/shipments/%s/otp/send/",OrderID,ShipmentID),
             nil,
             nil,
             nil)
@@ -13046,7 +13046,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "post",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/%s/shipments/%s/otp/verify/",OrderID,ShipmentID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/%s/shipments/%s/otp/verify/",OrderID,ShipmentID),
             nil,
             nil,
             reqBody)
@@ -13095,7 +13095,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s/bags/%s/reasons",ShipmentID,BagID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/bags/%s/reasons",ShipmentID,BagID),
             nil,
             nil,
             nil)
@@ -13142,7 +13142,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s/reasons",ShipmentID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/reasons",ShipmentID),
             nil,
             nil,
             nil)
@@ -13212,7 +13212,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "put",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s/status",ShipmentID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/status",ShipmentID),
             nil,
             nil,
             reqBody)

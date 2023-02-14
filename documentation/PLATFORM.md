@@ -3,6 +3,7 @@
 
 * [Common](#Common) - Application configuration apis 
 * [Lead](#Lead) - Handles communication between Administrator <-> Staff and Staff <-> Users 
+* [Feedback](#Feedback) - User Reviews and Rating System 
 * [Theme](#Theme) - Responsible for themes 
 * [User](#User) - Authentication Service 
 * [Content](#Content) - Content System 
@@ -20,9 +21,9 @@
 * [Rewards](#Rewards) - Earn and redeem reward points 
 * [Analytics](#Analytics) - Perceptor analytics 
 * [Discount](#Discount) - Discount 
+* [Partner](#Partner) - Partner configuration apis 
 * [Webhook](#Webhook) - Webhook dispatcher with retry and one event to many subscriber vice versa 
 * [AuditTrail](#AuditTrail) - Audit Logging Service that logs the crucial updates on the Platform 
-* [Logistic](#Logistic) - Logistics Configuration API's allows you to configure zone, application logistics and many more useful features.  
 
 ----
 ----
@@ -62,6 +63,19 @@
     * [openVideoRoom](#openvideoroom)
     * [closeVideoRoom](#closevideoroom)
     * [getGeneralConfig](#getgeneralconfig)
+    
+
+* [Feedback](#Feedback)
+  * Methods
+    * [getAttributes](#getattributes)
+    * [getCustomerReviews](#getcustomerreviews)
+    * [updateApprove](#updateapprove)
+    * [getHistory](#gethistory)
+    * [getApplicationTemplates](#getapplicationtemplates)
+    * [createTemplate](#createtemplate)
+    * [getTemplateById](#gettemplatebyid)
+    * [updateTemplate](#updatetemplate)
+    * [updateTemplateStatus](#updatetemplatestatus)
     
 
 * [Theme](#Theme)
@@ -641,6 +655,12 @@
     * [cancelDownloadJob](#canceldownloadjob)
     
 
+* [Partner](#Partner)
+  * Methods
+    * [addProxyPath](#addproxypath)
+    * [removeProxyPath](#removeproxypath)
+    
+
 * [Webhook](#Webhook)
   * Methods
     * [getSubscribersByCompany](#getsubscribersbycompany)
@@ -657,20 +677,6 @@
     * [createAuditLog](#createauditlog)
     * [getAuditLog](#getauditlog)
     * [getEntityTypes](#getentitytypes)
-    
-
-* [Logistic](#Logistic)
-  * Methods
-    * [getApplicationServiceability](#getapplicationserviceability)
-    * [getEntityRegionView](#getentityregionview)
-    * [getListView](#getlistview)
-    * [getCompanyStoreView](#getcompanystoreview)
-    * [updateZoneControllerView](#updatezonecontrollerview)
-    * [getZoneDataView](#getzonedataview)
-    * [insertZoneControllerView](#insertzonecontrollerview)
-    * [upsertZoneControllerView](#upsertzonecontrollerview)
-    * [getStore](#getstore)
-    * [getAllStores](#getallstores)
     
 
 
@@ -4396,6 +4402,436 @@ Default
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+---
+
+
+
+---
+
+
+## Feedback
+
+
+#### getAttributes
+Get list of attribute data
+
+```golang
+
+data, err := Feedback.GetAttributes(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
+
+
+Provides a list of all attribute data.
+
+*Success Response:*
+
+
+
+ok
+
+
+Schema: `FeedbackAttributes`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCustomerReviews
+Get list of customer reviews [admin]
+
+```golang
+
+data, err := Feedback.GetCustomerReviews(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `ID`, `EntityID`, `EntityType`, `UserID`, `Media`, `Rating`, `AttributeRating`, `Facets`, `Sort`, `Next`, `Start`, `Limit`, `Count`, `PageID`, `PageSize`
+
+
+The endpoint provides a list of customer reviews based on entity and provided filters
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetReviewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateApprove
+update approve details
+
+```golang
+
+data, err := Feedback.UpdateApprove(CompanyID, ApplicationID, ReviewID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| ReviewID | string | review id | 
+
+
+| body |  ApproveRequest | "Request body" 
+
+The is used to update approve details like status and description text
+
+*Success Response:*
+
+
+
+ok
+
+
+Schema: `UpdateResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getHistory
+get history details
+
+```golang
+
+data, err := Feedback.GetHistory(CompanyID, ApplicationID, ReviewID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| ReviewID | string | review id | 
+
+
+
+The is used to get the history details like status and description text
+
+*Success Response:*
+
+
+
+ok
+
+
+Schema: `Array<ActivityDump>`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getApplicationTemplates
+Get list of templates
+
+```golang
+
+data, err := Feedback.GetApplicationTemplates(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageID`, `PageSize`
+
+
+Get all templates of application
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `TemplateGetResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createTemplate
+Create a new template
+
+```golang
+
+data, err := Feedback.CreateTemplate(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| body |  TemplateRequestList | "Request body" 
+
+Create a new template for review with following data:
+- Enable media, rating and review
+- Rating - active/inactive/selected rate choices, attributes, text on rate, comment for each rate, type
+- Review - header, title, description, image and video meta, enable votes
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `InsertResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getTemplateById
+Get a template by ID
+
+```golang
+
+data, err := Feedback.GetTemplateById(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| ID | string | template id | 
+
+
+
+Get the template for product or l3 type by ID
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `Template`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateTemplate
+Update a template's status
+
+```golang
+
+data, err := Feedback.UpdateTemplate(CompanyID, ApplicationID, ID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| ID | string | template id | 
+
+
+| body |  UpdateTemplateRequest | "Request body" 
+
+Update existing template status, active/archive
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `UpdateResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateTemplateStatus
+Update a template's status
+
+```golang
+
+data, err := Feedback.UpdateTemplateStatus(CompanyID, ApplicationID, ID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| ID | string | template id | 
+
+
+| body |  UpdateTemplateStatusRequest | "Request body" 
+
+Update existing template status, active/archive
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `UpdateResponse`
 
 
 
@@ -71594,6 +72030,103 @@ Schema: `CancelJobResponse`
 ---
 
 
+## Partner
+
+
+#### addProxyPath
+Create proxy URL for the external URL
+
+```golang
+
+data, err := Partner.AddProxyPath(CompanyID, ApplicationID, ExtensionID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current application id | 
+
+
+| ExtensionID | string | Extension id for which proxy URL will be generated | 
+
+
+| body |  AddProxyReq | "Request body" 
+
+Use this API to generate proxy URL for the external URL
+
+*Success Response:*
+
+
+
+Proxy created successfully
+
+
+Schema: `AddProxyResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### removeProxyPath
+Remove proxy URL for the external URL
+
+```golang
+
+data, err := Partner.RemoveProxyPath(CompanyID, ApplicationID, ExtensionID, AttachedPath);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current application id | 
+
+
+| ExtensionID | string | Extension id for which proxy URL needs to be removed | 
+
+
+| AttachedPath | string | Attachaed path slug | 
+
+
+
+Use this API to remove the proxy URL which is already generated for the external URL
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `RemoveProxyResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+
+---
+
+
 ## Webhook
 
 
@@ -72142,633 +72675,6 @@ default
   }
 }
 ```
-
-
-
-
-
-
-
-
-
----
-
-
-
----
-
-
-## Logistic
-
-
-#### getApplicationServiceability
-Zone configuration of application.
-
-```golang
-
-data, err := Logistic.GetApplicationServiceability(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-
-This API returns serviceability config of the application.
-
-*Success Response:*
-
-
-
-Response Data
-
-
-Schema: `ApplicationServiceabilityConfigResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getEntityRegionView
-Get country and state list
-
-```golang
-
-data, err := Logistic.GetEntityRegionView(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| body |  EntityRegionView_Request | "Request body" 
-
-This API returns response for Entity Region View.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `EntityRegionView_Response`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getListView
-Zone List of application.
-
-```golang
-
-data, err := Logistic.GetListView(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNumber`, `PageSize`, `Name`, `IsActive`, `ChannelIds`
-
-
-This API returns Zone List View of the application.
-
-*Success Response:*
-
-
-
-Zone List of application in descending order of their last modified date.
-
-
-Schema: `ListViewResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getCompanyStoreView
-Company Store View of application.
-
-```golang
-
-data, err := Logistic.GetCompanyStoreView(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular company. | 
-
-
-
-This API returns Company Store View of the application.
-
-*Success Response:*
-
-
-
-Get Company Store View Data
-
-
-Schema: `CompanyStoreView_Response`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateZoneControllerView
-Updation of zone collections in database.
-
-```golang
-
-data, err := Logistic.UpdateZoneControllerView(ZoneID, CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
-
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| body |  ZoneUpdateRequest | "Request body" 
-
-This API returns response of updation of zone in mongo database.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `ZoneSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getZoneDataView
-Zone Data View of application.
-
-```golang
-
-data, err := Logistic.GetZoneDataView(CompanyID, ZoneID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
-
-
-
-This API returns Zone Data View of the application.
-
-*Success Response:*
-
-
-
-Get Application Zone Data
-
-
-Schema: `GetSingleZoneDataViewResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### insertZoneControllerView
-Insertion of zone in database.
-
-```golang
-
-data, err := Logistic.InsertZoneControllerView(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| body |  ZoneRequest | "Request body" 
-
-This API returns response of insertion of zone in mongo database.<br>Correction- `zone_id` in the path must be removed.<br> path is `/service/platform/logistics-internal/v1.0/company/{company_id}/zone/`
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `ZoneResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### upsertZoneControllerView
-GET zone from the Pincode.
-
-```golang
-
-data, err := Logistic.UpsertZoneControllerView(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` contains a specific ID of a company. | 
-
-
-| ApplicationID | string | A `application_id` contains a unique ID. | 
-
-
-| body |  GetZoneFromPincodeViewRequest | "Request body" 
-
-This API returns zone from the Pincode View.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `GetZoneFromPincodeViewResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getStore
-GET stores data
-
-```golang
-
-data, err := Logistic.GetStore(CompanyID, StoreUID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| StoreUID | float64 | A `store_uid` contains a specific ID of a store. | 
-
-
-
-This API returns stores data.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `GetStoresViewResponse`
-
-
-*Examples:*
-
-
-items
-```json
-[
-  {
-    "uid": 2,
-    "_cls": "Store",
-    "address": {
-      "city": "MUMBAI",
-      "country": "INDIA",
-      "address2": "",
-      "address1": "POLARIS 2ND FLOOR, ANDHERI",
-      "landmark": "",
-      "state": "MAHARASHTRA",
-      "pincode": 400001,
-      "longitude": 72.8776559,
-      "latitude": 19.0759837
-    },
-    "code": "HS-a0c85",
-    "company_id": 2,
-    "contact_numbers": [
-      {
-        "country_code": 91,
-        "number": "9096686804"
-      }
-    ],
-    "created_by": {
-      "user_id": "605e8e86493f54a9ccaa47be",
-      "username": "parvezshaikh_gofynd_com_07710"
-    },
-    "created_on": "2021-08-07T06:21:25.293000",
-    "display_name": "Test",
-    "documents": [
-      {
-        "type": "gst",
-        "verified": true,
-        "value": "27AALCA0442L1ZM",
-        "legal_name": "SHOPSENSE RETAIL TECHNOLOGIES PRIVATE LIMITED"
-      }
-    ],
-    "gst_credentials": {
-      "e_waybill": {
-        "enabled": false
-      },
-      "e_invoice": {
-        "enabled": false
-      }
-    },
-    "integration_type": {
-      "order": "pulse",
-      "inventory": "pulse"
-    },
-    "logistics": {
-      "dp": {
-        "1": {
-          "fm_priority": 1,
-          "lm_priority": 1,
-          "rvp_priority": 1,
-          "payment_mode": "all",
-          "operations": [
-            "inter_city"
-          ],
-          "area_code": null,
-          "assign_dp_from_sb": true,
-          "transport_mode": "air",
-          "external_account_id": null,
-          "internal_account_id": "1"
-        },
-        "19": {
-          "fm_priority": 2,
-          "lm_priority": 2,
-          "rvp_priority": 2,
-          "payment_mode": "all",
-          "operations": "inter_city",
-          "area_code": null,
-          "assign_dp_from_sb": true,
-          "transport_mode": "air",
-          "external_account_id": null,
-          "internal_account_id": "19"
-        }
-      },
-      "override": false
-    },
-    "manager": {
-      "name": "Parvez Shaikh",
-      "mobile_no": {
-        "country_code": 91,
-        "number": "9096686804"
-      },
-      "email": "parvezshaikh@gofynd.com"
-    },
-    "modified_by": {
-      "user_id": "38ac93a8a5495305fc794e76",
-      "username": "919594495254_32111"
-    },
-    "modified_on": "2021-08-17T14:18:10.788000",
-    "name": "Test",
-    "notification_emails": [
-      "parvezshaikh@gofynd.com"
-    ],
-    "product_return_config": {
-      "on_same_store": true
-    },
-    "stage": "verified",
-    "store_type": "high_street",
-    "sub_type": "store",
-    "timing": [
-      {
-        "open": true,
-        "opening": {
-          "hour": 11,
-          "minute": 0
-        },
-        "closing": {
-          "hour": 21,
-          "minute": 30
-        },
-        "weekday": "monday"
-      },
-      {
-        "open": true,
-        "opening": {
-          "hour": 11,
-          "minute": 0
-        },
-        "closing": {
-          "hour": 21,
-          "minute": 30
-        },
-        "weekday": "tuesday"
-      },
-      {
-        "open": true,
-        "opening": {
-          "hour": 11,
-          "minute": 0
-        },
-        "closing": {
-          "hour": 21,
-          "minute": 30
-        },
-        "weekday": "wednesday"
-      },
-      {
-        "open": true,
-        "opening": {
-          "hour": 11,
-          "minute": 0
-        },
-        "closing": {
-          "hour": 21,
-          "minute": 30
-        },
-        "weekday": "thursday"
-      },
-      {
-        "open": true,
-        "opening": {
-          "hour": 11,
-          "minute": 0
-        },
-        "closing": {
-          "hour": 21,
-          "minute": 30
-        },
-        "weekday": "friday"
-      },
-      {
-        "open": true,
-        "opening": {
-          "hour": 11,
-          "minute": 0
-        },
-        "closing": {
-          "hour": 21,
-          "minute": 30
-        },
-        "weekday": "saturday"
-      },
-      {
-        "open": true,
-        "opening": {
-          "hour": 11,
-          "minute": 0
-        },
-        "closing": {
-          "hour": 21,
-          "minute": 30
-        },
-        "weekday": "sunday"
-      }
-    ],
-    "verified_by": {
-      "user_id": "0",
-      "username": "Silverbolt"
-    },
-    "verified_on": "2022-03-23T13:35:46.869000",
-    "warnings": {
-      "store_address": "Address: Address seems to be inappropriate this might affect the delivery."
-    },
-    "_custom_json": {},
-    "company": 2
-  }
-]
-```
-
-page
-```json
-{
-  "type": "number",
-  "size": 2,
-  "current": 1,
-  "has_next": true,
-  "item_total": 3276
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAllStores
-GET stores data
-
-```golang
-
-data, err := Logistic.GetAllStores(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-
-This API returns stores data.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `GetStoresViewResponse`
 
 
 

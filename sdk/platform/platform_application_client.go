@@ -15,6 +15,8 @@ type ApplicationClient struct {
 	
 		Lead  *PlatformAppLead
 	 
+		Feedback  *PlatformAppFeedback
+	 
 		Theme  *PlatformAppTheme
 	 
 		User  *PlatformAppUser
@@ -41,7 +43,7 @@ type ApplicationClient struct {
 	 
 		Analytics  *PlatformAppAnalytics
 	 
-		Logistic  *PlatformAppLogistic
+		Partner  *PlatformAppPartner
 	 
 }
 
@@ -53,6 +55,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 			ApplicationID: appID,
 			
 				Lead:  NewPlatformAppLead(config, appID),
+			 
+				Feedback:  NewPlatformAppFeedback(config, appID),
 			 
 				Theme:  NewPlatformAppTheme(config, appID),
 			 
@@ -80,7 +84,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 			 
 				Analytics:  NewPlatformAppAnalytics(config, appID),
 			 
-				Logistic:  NewPlatformAppLogistic(config, appID),
+				Partner:  NewPlatformAppPartner(config, appID),
 			 
 		}
 }
@@ -919,6 +923,881 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
+
+ 
+	 
+   // PlatformAppFeedback holds PlatformAppFeedback object properties
+    type PlatformAppFeedback struct {
+        config *PlatformConfig
+        CompanyID string
+        ApplicationID string
+    }
+    // NewPlatformAppFeedback returns new PlatformAppFeedback instance
+    func NewPlatformAppFeedback(config *PlatformConfig, appID string) *PlatformAppFeedback {
+        return &PlatformAppFeedback{config, config.CompanyID, appID}
+    }
+    
+    
+    
+  
+
+    
+    //PlatformAppGetAttributesXQuery holds query params
+    type PlatformAppGetAttributesXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetAttributes Get list of attribute data
+     func (fe *PlatformAppFeedback)  GetAttributes(xQuery PlatformAppGetAttributesXQuery) (FeedbackAttributes, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAttributesResponse FeedbackAttributes
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "get",
+            fmt.Sprintf("/service/platform/feedback/v1.0/company/%s/application/%s/attributes/",fe.CompanyID, fe.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FeedbackAttributes{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAttributesResponse)
+        if err != nil {
+            return FeedbackAttributes{}, common.NewFDKError(err.Error())
+        }
+        return getAttributesResponse, nil
+        
+    }
+           
+            
+            
+            
+            
+            
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            // GetAttributesPaginator Get list of attribute data  
+            func (fe *PlatformAppFeedback)  GetAttributesPaginator( xQuery PlatformAppGetAttributesXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                
+                
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := fe.GetAttributes(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+        
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppGetCustomerReviewsXQuery holds query params
+    type PlatformAppGetCustomerReviewsXQuery struct { 
+        ID string  `url:"id,omitempty"` 
+        EntityID string  `url:"entity_id,omitempty"` 
+        EntityType string  `url:"entity_type,omitempty"` 
+        UserID string  `url:"user_id,omitempty"` 
+        Media string  `url:"media,omitempty"` 
+        Rating []float64  `url:"rating,omitempty"` 
+        AttributeRating []string  `url:"attribute_rating,omitempty"` 
+        Facets bool  `url:"facets,omitempty"` 
+        Sort string  `url:"sort,omitempty"` 
+        Next string  `url:"next,omitempty"` 
+        Start string  `url:"start,omitempty"` 
+        Limit string  `url:"limit,omitempty"` 
+        Count string  `url:"count,omitempty"` 
+        PageID string  `url:"page_id,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetCustomerReviews Get list of customer reviews [admin]
+     func (fe *PlatformAppFeedback)  GetCustomerReviews(xQuery PlatformAppGetCustomerReviewsXQuery) (GetReviewResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getCustomerReviewsResponse GetReviewResponse
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "get",
+            fmt.Sprintf("/service/platform/feedback/v1.0/company/%s/application/%s/reviews/",fe.CompanyID, fe.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetReviewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getCustomerReviewsResponse)
+        if err != nil {
+            return GetReviewResponse{}, common.NewFDKError(err.Error())
+        }
+        return getCustomerReviewsResponse, nil
+        
+    }
+           
+            
+            
+            
+            
+            
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            // GetCustomerReviewsPaginator Get list of customer reviews [admin]  
+            func (fe *PlatformAppFeedback)  GetCustomerReviewsPaginator( xQuery PlatformAppGetCustomerReviewsXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("cursor")
+                
+                
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 xQuery.PageID = paginator.NextID
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := fe.GetCustomerReviews(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+        
+       
+    
+    
+    
+  
+
+    
+    // UpdateApprove update approve details
+     func (fe *PlatformAppFeedback)  UpdateApprove(ReviewID string, body  ApproveRequest) (UpdateResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateApproveResponse UpdateResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return UpdateResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "put",
+            fmt.Sprintf("/service/platform/feedback/v1.0/company/%s/application/%s/reviews/%s/approve/",fe.CompanyID, fe.ApplicationID, ReviewID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return UpdateResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateApproveResponse)
+        if err != nil {
+            return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        return updateApproveResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetHistory get history details
+     func (fe *PlatformAppFeedback)  GetHistory(ReviewID string) ([]ActivityDump, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getHistoryResponse []ActivityDump
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "get",
+            fmt.Sprintf("/service/platform/feedback/v1.0/company/%s/application/%s/reviews/%s/history/",fe.CompanyID, fe.ApplicationID, ReviewID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return []ActivityDump{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getHistoryResponse)
+        if err != nil {
+            return []ActivityDump{}, common.NewFDKError(err.Error())
+        }
+        return getHistoryResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppGetApplicationTemplatesXQuery holds query params
+    type PlatformAppGetApplicationTemplatesXQuery struct { 
+        PageID string  `url:"page_id,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetApplicationTemplates Get list of templates
+     func (fe *PlatformAppFeedback)  GetApplicationTemplates(xQuery PlatformAppGetApplicationTemplatesXQuery) (TemplateGetResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getApplicationTemplatesResponse TemplateGetResponse
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "get",
+            fmt.Sprintf("/service/platform/feedback/v1.0/company/%s/application/%s/templates/",fe.CompanyID, fe.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return TemplateGetResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getApplicationTemplatesResponse)
+        if err != nil {
+            return TemplateGetResponse{}, common.NewFDKError(err.Error())
+        }
+        return getApplicationTemplatesResponse, nil
+        
+    }
+           
+            
+            
+            
+            
+            
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            // GetApplicationTemplatesPaginator Get list of templates  
+            func (fe *PlatformAppFeedback)  GetApplicationTemplatesPaginator( xQuery PlatformAppGetApplicationTemplatesXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("cursor")
+                
+                
+                 
+                 xQuery.PageID = paginator.NextID
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := fe.GetApplicationTemplates(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+        
+       
+    
+    
+    
+  
+
+    
+    // CreateTemplate Create a new template
+     func (fe *PlatformAppFeedback)  CreateTemplate(body  TemplateRequestList) (InsertResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            createTemplateResponse InsertResponse
+	    )
+
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return InsertResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return InsertResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "post",
+            fmt.Sprintf("/service/platform/feedback/v1.0/company/%s/application/%s/templates/",fe.CompanyID, fe.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return InsertResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createTemplateResponse)
+        if err != nil {
+            return InsertResponse{}, common.NewFDKError(err.Error())
+        }
+        return createTemplateResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetTemplateById Get a template by ID
+     func (fe *PlatformAppFeedback)  GetTemplateById(ID string) (Template, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getTemplateByIdResponse Template
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "get",
+            fmt.Sprintf("/service/platform/feedback/v1.0/company/%s/application/%s/templates/%s/",fe.CompanyID, fe.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return Template{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getTemplateByIdResponse)
+        if err != nil {
+            return Template{}, common.NewFDKError(err.Error())
+        }
+        return getTemplateByIdResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdateTemplate Update a template's status
+     func (fe *PlatformAppFeedback)  UpdateTemplate(ID string, body  UpdateTemplateRequest) (UpdateResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateTemplateResponse UpdateResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return UpdateResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "put",
+            fmt.Sprintf("/service/platform/feedback/v1.0/company/%s/application/%s/templates/%s/",fe.CompanyID, fe.ApplicationID, ID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return UpdateResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateTemplateResponse)
+        if err != nil {
+            return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        return updateTemplateResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdateTemplateStatus Update a template's status
+     func (fe *PlatformAppFeedback)  UpdateTemplateStatus(ID string, body  UpdateTemplateStatusRequest) (UpdateResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateTemplateStatusResponse UpdateResponse
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return UpdateResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fe.config,
+            "patch",
+            fmt.Sprintf("/service/platform/feedback/v1.0/company/%s/application/%s/templates/%s/status/",fe.CompanyID, fe.ApplicationID, ID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return UpdateResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateTemplateStatusResponse)
+        if err != nil {
+            return UpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        return updateTemplateStatusResponse, nil
+        
+    }
+           
+       
     
 
  
@@ -22726,15 +23605,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
  
 	 
-   // PlatformAppLogistic holds PlatformAppLogistic object properties
-    type PlatformAppLogistic struct {
+   // PlatformAppPartner holds PlatformAppPartner object properties
+    type PlatformAppPartner struct {
         config *PlatformConfig
         CompanyID string
         ApplicationID string
     }
-    // NewPlatformAppLogistic returns new PlatformAppLogistic instance
-    func NewPlatformAppLogistic(config *PlatformConfig, appID string) *PlatformAppLogistic {
-        return &PlatformAppLogistic{config, config.CompanyID, appID}
+    // NewPlatformAppPartner returns new PlatformAppPartner instance
+    func NewPlatformAppPartner(config *PlatformConfig, appID string) *PlatformAppPartner {
+        return &PlatformAppPartner{config, config.CompanyID, appID}
     }
     
     
@@ -22742,71 +23621,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetApplicationServiceability Zone configuration of application.
-     func (lo *PlatformAppLogistic)  GetApplicationServiceability() (ApplicationServiceabilityConfigResponse, error) {
+    // AddProxyPath Create proxy URL for the external URL
+     func (pa *PlatformAppPartner)  AddProxyPath(ExtensionID string, body  AddProxyReq) (AddProxyResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getApplicationServiceabilityResponse ApplicationServiceabilityConfigResponse
-	    )
-
-        
-
-         
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            lo.config,
-            "get",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/serviceability",lo.CompanyID, lo.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ApplicationServiceabilityConfigResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getApplicationServiceabilityResponse)
-        if err != nil {
-            return ApplicationServiceabilityConfigResponse{}, common.NewFDKError(err.Error())
-        }
-        return getApplicationServiceabilityResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-  
-
-    
-    // UpsertZoneControllerView GET zone from the Pincode.
-     func (lo *PlatformAppLogistic)  UpsertZoneControllerView(body  GetZoneFromPincodeViewRequest) (GetZoneFromPincodeViewResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            upsertZoneControllerViewResponse GetZoneFromPincodeViewResponse
+            addProxyPathResponse AddProxyResponse
 	    )
 
         
@@ -22817,6 +23638,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
          
 
+        
+        
         
         
          
@@ -22827,32 +23650,32 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
             
-             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
+             return AddProxyResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
             
-             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())       
+             return AddProxyResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
         rawRequest = NewRequest(
-            lo.config,
+            pa.config,
             "post",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/zones",lo.CompanyID, lo.ApplicationID),
+            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/application/%s/proxy/%s",pa.CompanyID, pa.ApplicationID, ExtensionID),
             nil,
             nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return GetZoneFromPincodeViewResponse{}, err
+            return AddProxyResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &upsertZoneControllerViewResponse)
+        err = json.Unmarshal(response, &addProxyPathResponse)
         if err != nil {
-            return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
+            return AddProxyResponse{}, common.NewFDKError(err.Error())
         }
-        return upsertZoneControllerViewResponse, nil
+        return addProxyPathResponse, nil
         
     }
            
@@ -22860,7 +23683,53 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+  
+
     
+    // RemoveProxyPath Remove proxy URL for the external URL
+     func (pa *PlatformAppPartner)  RemoveProxyPath(ExtensionID string, AttachedPath string) (RemoveProxyResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            removeProxyPathResponse RemoveProxyResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "delete",
+            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/application/%s/proxy/%s/%s",pa.CompanyID, pa.ApplicationID, ExtensionID, AttachedPath),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return RemoveProxyResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &removeProxyPathResponse)
+        if err != nil {
+            return RemoveProxyResponse{}, common.NewFDKError(err.Error())
+        }
+        return removeProxyPathResponse, nil
+        
+    }
+           
+       
     
 
  
