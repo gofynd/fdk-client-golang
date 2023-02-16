@@ -414,8 +414,8 @@
     * [getProductAttributes](#getproductattributes)
     * [deleteProduct](#deleteproduct)
     * [getProduct](#getproduct)
-    * [editProduct](#editproduct)
     * [patchProduct](#patchproduct)
+    * [editProduct](#editproduct)
     * [allSizes](#allsizes)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
@@ -57991,12 +57991,12 @@ Schema: `SingleProductResponse`
 ---
 
 
-#### editProduct
-Edit a product.
+#### patchProduct
+Patch a product.
 
 ```golang
 
-data, err := Catalog.EditProduct(CompanyID, ItemID, body);
+data, err := Catalog.PatchProduct(CompanyID, ItemID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -58005,12 +58005,12 @@ data, err := Catalog.EditProduct(CompanyID, ItemID, body);
 | CompanyID | string | Id of the company associated to product that is to be viewed. | 
 
 
-| ItemID | float64 | Id of the product to be updated. | 
+| ItemID | float64 | Id of the product to be patch. | 
 
 
-| body |  ProductCreateUpdateSchemaV2 | "Request body" 
+| body |  ProductCreateUpdate | "Request body" 
 
-This API allows to edit product.
+This API allows to patch product.
 
 *Success Response:*
 
@@ -58032,12 +58032,12 @@ Schema: `SuccessResponse`
 ---
 
 
-#### patchProduct
-Patch a product.
+#### editProduct
+Edit a product.
 
 ```golang
 
-data, err := Catalog.PatchProduct(CompanyID, ItemID, body);
+data, err := Catalog.EditProduct(CompanyID, ItemID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -58046,12 +58046,12 @@ data, err := Catalog.PatchProduct(CompanyID, ItemID, body);
 | CompanyID | string | Id of the company associated to product that is to be viewed. | 
 
 
-| ItemID | float64 | Id of the product to be patch. | 
+| ItemID | float64 | Id of the product to be updated. | 
 
 
-| body |  ProductCreateUpdate | "Request body" 
+| body |  ProductCreateUpdateSchemaV2 | "Request body" 
 
-This API allows to patch product.
+This API allows to edit product.
 
 *Success Response:*
 
