@@ -186,7 +186,6 @@ import (
 
 
 
-
     //PageType used by Content
     type PageType  string
     
@@ -408,7 +407,6 @@ import (
 
 
 
-
     //SubscriberStatus used by Webhook
     type SubscriberStatus  string
     
@@ -436,5 +434,6 @@ import (
       }
       return errors.New("Invalid SubscriberStatus type")
     }
+
 
 
