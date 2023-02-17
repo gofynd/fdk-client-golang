@@ -9026,6 +9026,7 @@ package application
             Share ShareMessages  `json:"share"`
             User ReferralDetailsUser  `json:"user"`
             ReferrerInfo string  `json:"referrer_info"`
+            TermsConditionsLink string  `json:"terms_conditions_link"`
          
     }
     
