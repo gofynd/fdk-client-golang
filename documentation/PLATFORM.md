@@ -301,14 +301,14 @@
     * [processManifest](#processmanifest)
     * [dispatchManifest](#dispatchmanifest)
     * [getRoleBasedActions](#getrolebasedactions)
-    * [getShipmentHistory](#getshipmenthistory)
     * [postShipmentHistory](#postshipmenthistory)
+    * [getShipmentHistory](#getshipmenthistory)
     * [sendSmsNinja](#sendsmsninja)
     * [platformManualAssignDPToShipment](#platformmanualassigndptoshipment)
     * [updatePackagingDimensions](#updatepackagingdimensions)
     * [createOrder](#createorder)
-    * [getChannelConfig](#getchannelconfig)
     * [createChannelConfig](#createchannelconfig)
+    * [getChannelConfig](#getchannelconfig)
     * [uploadConsent](#uploadconsent)
     * [orderUpdate](#orderupdate)
     * [checkOrderStatus](#checkorderstatus)
@@ -675,6 +675,10 @@
     * [upsertZoneControllerView](#upsertzonecontrollerview)
     * [getStore](#getstore)
     * [getAllStores](#getallstores)
+    * [updatePincodeMopView](#updatepincodemopview)
+    * [updatePincodeBulkView](#updatepincodebulkview)
+    * [updatePincodeCoDListing](#updatepincodecodlisting)
+    * [updatePincodeAuditHistory](#updatepincodeaudithistory)
     
 
 
@@ -53574,12 +53578,12 @@ Schema: `GetActionsResponse`
 ---
 
 
-#### getShipmentHistory
+#### postShipmentHistory
 
 
 ```golang
 
-data, err := Order.GetShipmentHistory(CompanyID, xQuery);
+data, err := Order.PostShipmentHistory(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -53588,11 +53592,7 @@ data, err := Order.GetShipmentHistory(CompanyID, xQuery);
 | CompanyID | float64 |  | 
 
 
-
-
-
-| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
-
+| body |  PostShipmentHistory | "Request body" 
 
 
 
@@ -53616,12 +53616,12 @@ Schema: `ShipmentHistoryResponse`
 ---
 
 
-#### postShipmentHistory
+#### getShipmentHistory
 
 
 ```golang
 
-data, err := Order.PostShipmentHistory(CompanyID, body);
+data, err := Order.GetShipmentHistory(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -53630,7 +53630,11 @@ data, err := Order.PostShipmentHistory(CompanyID, body);
 | CompanyID | float64 |  | 
 
 
-| body |  PostShipmentHistory | "Request body" 
+
+
+
+| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
+
 
 
 
@@ -53806,43 +53810,6 @@ Schema: `CreateOrderResponse`
 ---
 
 
-#### getChannelConfig
-
-
-```golang
-
-data, err := Order.GetChannelConfig(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-getChannelConfig
-
-*Success Response:*
-
-
-
-Successfully created the config data
-
-
-Schema: `CreateChannelConfigData`
-
-
-
-
-
-
-
-
-
----
-
-
 #### createChannelConfig
 
 
@@ -53869,6 +53836,43 @@ Successfully updateShipmentStatus!
 
 
 Schema: `CreateChannelConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getChannelConfig
+
+
+```golang
+
+data, err := Order.GetChannelConfig(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+getChannelConfig
+
+*Success Response:*
+
+
+
+Successfully created the config data
+
+
+Schema: `CreateChannelConfigData`
 
 
 
@@ -71871,7 +71875,7 @@ Company Store View of application.
 
 ```golang
 
-data, err := Logistic.GetCompanyStoreView(CompanyID, xQuery);
+data, err := Logistic.GetCompanyStoreView(CompanyID);
 ```
 
 | Argument  |  Type  | Description |
@@ -71879,17 +71883,6 @@ data, err := Logistic.GetCompanyStoreView(CompanyID, xQuery);
 
 | CompanyID | float64 | A `company_id` is a unique identifier for a particular company. | 
 
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNumber`, `PageSize`, `ZoneID`, `Enabled`, `Q`
 
 
 This API returns Company Store View of the application.
@@ -72011,7 +72004,7 @@ data, err := Logistic.InsertZoneControllerView(CompanyID, body);
 
 | body |  ZoneRequest | "Request body" 
 
-This API returns response of insertion of zone in mongo database.<br>Correction- `zone_id` in the path must be removed.<br> path is `/service/platform/logistics-internal/v1.0/company/{company_id}/zone/`
+This API returns response of insertion of zone in mongo database.<br>Correction- `zone_id` in the path must be removed.<br> path is `/service/platform/logistics-internal/v1.0/company/{}/zone/`
 
 *Success Response:*
 
@@ -72104,226 +72097,6 @@ Response status_code
 Schema: `GetStoresViewResponse`
 
 
-*Examples:*
-
-
-items
-```json
-[
-  {
-    "uid": 2,
-    "_cls": "Store",
-    "address": {
-      "city": "MUMBAI",
-      "country": "INDIA",
-      "address2": "",
-      "address1": "POLARIS 2ND FLOOR, ANDHERI",
-      "landmark": "",
-      "state": "MAHARASHTRA",
-      "pincode": 400001,
-      "longitude": 72.8776559,
-      "latitude": 19.0759837
-    },
-    "code": "HS-a0c85",
-    "company_id": 2,
-    "contact_numbers": [
-      {
-        "country_code": 91,
-        "number": "9096686804"
-      }
-    ],
-    "created_by": {
-      "user_id": "605e8e86493f54a9ccaa47be",
-      "username": "parvezshaikh_gofynd_com_07710"
-    },
-    "created_on": "2021-08-07T06:21:25.293000",
-    "display_name": "Test",
-    "documents": [
-      {
-        "type": "gst",
-        "verified": true,
-        "value": "27AALCA0442L1ZM",
-        "legal_name": "SHOPSENSE RETAIL TECHNOLOGIES PRIVATE LIMITED"
-      }
-    ],
-    "gst_credentials": {
-      "e_waybill": {
-        "enabled": false
-      },
-      "e_invoice": {
-        "enabled": false
-      }
-    },
-    "integration_type": {
-      "order": "pulse",
-      "inventory": "pulse"
-    },
-    "logistics": {
-      "dp": {
-        "1": {
-          "fm_priority": 1,
-          "lm_priority": 1,
-          "rvp_priority": 1,
-          "payment_mode": "all",
-          "operations": [
-            "inter_city"
-          ],
-          "area_code": null,
-          "assign_dp_from_sb": true,
-          "transport_mode": "air",
-          "external_account_id": null,
-          "internal_account_id": "1"
-        },
-        "19": {
-          "fm_priority": 2,
-          "lm_priority": 2,
-          "rvp_priority": 2,
-          "payment_mode": "all",
-          "operations": "inter_city",
-          "area_code": null,
-          "assign_dp_from_sb": true,
-          "transport_mode": "air",
-          "external_account_id": null,
-          "internal_account_id": "19"
-        }
-      },
-      "override": false
-    },
-    "manager": {
-      "name": "Parvez Shaikh",
-      "mobile_no": {
-        "country_code": 91,
-        "number": "9096686804"
-      },
-      "email": "parvezshaikh@gofynd.com"
-    },
-    "modified_by": {
-      "user_id": "38ac93a8a5495305fc794e76",
-      "username": "919594495254_32111"
-    },
-    "modified_on": "2021-08-17T14:18:10.788000",
-    "name": "Test",
-    "notification_emails": [
-      "parvezshaikh@gofynd.com"
-    ],
-    "product_return_config": {
-      "on_same_store": true
-    },
-    "stage": "verified",
-    "store_type": "high_street",
-    "sub_type": "store",
-    "timing": [
-      {
-        "open": true,
-        "opening": {
-          "hour": 11,
-          "minute": 0
-        },
-        "closing": {
-          "hour": 21,
-          "minute": 30
-        },
-        "weekday": "monday"
-      },
-      {
-        "open": true,
-        "opening": {
-          "hour": 11,
-          "minute": 0
-        },
-        "closing": {
-          "hour": 21,
-          "minute": 30
-        },
-        "weekday": "tuesday"
-      },
-      {
-        "open": true,
-        "opening": {
-          "hour": 11,
-          "minute": 0
-        },
-        "closing": {
-          "hour": 21,
-          "minute": 30
-        },
-        "weekday": "wednesday"
-      },
-      {
-        "open": true,
-        "opening": {
-          "hour": 11,
-          "minute": 0
-        },
-        "closing": {
-          "hour": 21,
-          "minute": 30
-        },
-        "weekday": "thursday"
-      },
-      {
-        "open": true,
-        "opening": {
-          "hour": 11,
-          "minute": 0
-        },
-        "closing": {
-          "hour": 21,
-          "minute": 30
-        },
-        "weekday": "friday"
-      },
-      {
-        "open": true,
-        "opening": {
-          "hour": 11,
-          "minute": 0
-        },
-        "closing": {
-          "hour": 21,
-          "minute": 30
-        },
-        "weekday": "saturday"
-      },
-      {
-        "open": true,
-        "opening": {
-          "hour": 11,
-          "minute": 0
-        },
-        "closing": {
-          "hour": 21,
-          "minute": 30
-        },
-        "weekday": "sunday"
-      }
-    ],
-    "verified_by": {
-      "user_id": "0",
-      "username": "Silverbolt"
-    },
-    "verified_on": "2022-03-23T13:35:46.869000",
-    "warnings": {
-      "store_address": "Address: Address seems to be inappropriate this might affect the delivery."
-    },
-    "_custom_json": {},
-    "company": 2
-  }
-]
-```
-
-page
-```json
-{
-  "type": "number",
-  "size": 2,
-  "current": 1,
-  "has_next": true,
-  "item_total": 3276
-}
-```
-
-
 
 
 
@@ -72359,6 +72132,170 @@ Response status_code
 
 
 Schema: `GetStoresViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updatePincodeMopView
+PincodeView update of MOP.
+
+```golang
+
+data, err := Logistic.UpdatePincodeMopView(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  PincodeMopData | "Request body" 
+
+This API updates Pincode method of payment.
+
+*Success Response:*
+
+
+
+Response Data
+
+
+Schema: `PincodeMOPresponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updatePincodeBulkView
+Bulk Update of pincode in the application.
+
+```golang
+
+data, err := Logistic.UpdatePincodeBulkView(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  PincodeMopBulkData | "Request body" 
+
+This API constructs bulk write operations to update the MOP data for each pincode in the payload.
+
+*Success Response:*
+
+
+
+Response Data
+
+
+Schema: `PincodeBulkViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updatePincodeCoDListing
+Pincode count view of application.
+
+```golang
+
+data, err := Logistic.UpdatePincodeCoDListing(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  PincodeCodStatusListingRequest | "Request body" 
+
+This API returns count of active pincode.
+
+*Success Response:*
+
+
+
+Response Data
+
+
+Schema: `PincodeCodStatusListingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updatePincodeAuditHistory
+Auditlog configuration of application.
+
+```golang
+
+data, err := Logistic.UpdatePincodeAuditHistory(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  PincodeMopUpdateAuditHistoryRequest | "Request body" 
+
+This API returns Audit logs of Pincode.
+
+*Success Response:*
+
+
+
+Response Data
+
+
+Schema: `PincodeMopUpdateAuditHistoryResponseData`
 
 
 

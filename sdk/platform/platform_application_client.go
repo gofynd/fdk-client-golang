@@ -23126,5 +23126,265 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+    
+    
+  
+
+    
+    // UpdatePincodeMopView PincodeView update of MOP.
+     func (lo *PlatformAppLogistic)  UpdatePincodeMopView(body  PincodeMopData) (PincodeMOPresponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updatePincodeMopViewResponse PincodeMOPresponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PincodeMOPresponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PincodeMOPresponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/pincode-mop-update",lo.CompanyID, lo.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PincodeMOPresponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updatePincodeMopViewResponse)
+        if err != nil {
+            return PincodeMOPresponse{}, common.NewFDKError(err.Error())
+        }
+        return updatePincodeMopViewResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdatePincodeBulkView Bulk Update of pincode in the application.
+     func (lo *PlatformAppLogistic)  UpdatePincodeBulkView(body  PincodeMopBulkData) (PincodeBulkViewResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updatePincodeBulkViewResponse PincodeBulkViewResponse
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PincodeBulkViewResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PincodeBulkViewResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/pincode-mop-bulk-update",lo.CompanyID, lo.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PincodeBulkViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updatePincodeBulkViewResponse)
+        if err != nil {
+            return PincodeBulkViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return updatePincodeBulkViewResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdatePincodeCoDListing Pincode count view of application.
+     func (lo *PlatformAppLogistic)  UpdatePincodeCoDListing(body  PincodeCodStatusListingRequest) (PincodeCodStatusListingResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updatePincodeCoDListingResponse PincodeCodStatusListingResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PincodeCodStatusListingResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PincodeCodStatusListingResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/pincode-mop-data",lo.CompanyID, lo.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PincodeCodStatusListingResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updatePincodeCoDListingResponse)
+        if err != nil {
+            return PincodeCodStatusListingResponse{}, common.NewFDKError(err.Error())
+        }
+        return updatePincodeCoDListingResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdatePincodeAuditHistory Auditlog configuration of application.
+     func (lo *PlatformAppLogistic)  UpdatePincodeAuditHistory(body  PincodeMopUpdateAuditHistoryRequest) (PincodeMopUpdateAuditHistoryResponseData, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updatePincodeAuditHistoryResponse PincodeMopUpdateAuditHistoryResponseData
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PincodeMopUpdateAuditHistoryResponseData{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PincodeMopUpdateAuditHistoryResponseData{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/history",lo.CompanyID, lo.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PincodeMopUpdateAuditHistoryResponseData{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updatePincodeAuditHistoryResponse)
+        if err != nil {
+            return PincodeMopUpdateAuditHistoryResponseData{}, common.NewFDKError(err.Error())
+        }
+        return updatePincodeAuditHistoryResponse, nil
+        
+    }
+           
+       
+    
 
  
