@@ -11683,102 +11683,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetSearchKeywords Get a Search Keywords Details
-     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getSearchKeywordsResponse GetSearchWordsDetailResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetSearchWordsDetailResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getSearchKeywordsResponse)
-        if err != nil {
-            return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
-        }
-        return getSearchKeywordsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // DeleteSearchKeywords Delete a Search Keywords
-     func (ca *PlatformAppCatalog)  DeleteSearchKeywords(ID string) (DeleteResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteSearchKeywordsResponse DeleteResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return DeleteResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteSearchKeywordsResponse)
-        if err != nil {
-            return DeleteResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteSearchKeywordsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // UpdateSearchKeywords Update Search Keyword
      func (ca *PlatformAppCatalog)  UpdateSearchKeywords(ID string, body  CreateSearchKeyword) (GetSearchWordsData, error) {
         var (
@@ -11840,6 +11744,102 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetSearchWordsData{}, common.NewFDKError(err.Error())
         }
         return updateSearchKeywordsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteSearchKeywords Delete a Search Keywords
+     func (ca *PlatformAppCatalog)  DeleteSearchKeywords(ID string) (DeleteResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteSearchKeywordsResponse DeleteResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DeleteResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteSearchKeywordsResponse)
+        if err != nil {
+            return DeleteResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteSearchKeywordsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetSearchKeywords Get a Search Keywords Details
+     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getSearchKeywordsResponse GetSearchWordsDetailResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetSearchWordsDetailResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getSearchKeywordsResponse)
+        if err != nil {
+            return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
+        }
+        return getSearchKeywordsResponse, nil
         
     }
            
@@ -11965,102 +11965,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
-     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAutocompleteKeywordDetailResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // DeleteAutocompleteKeyword Delete a Autocomplete Keywords
-     func (ca *PlatformAppCatalog)  DeleteAutocompleteKeyword(ID string) (DeleteResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteAutocompleteKeywordResponse DeleteResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return DeleteResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteAutocompleteKeywordResponse)
-        if err != nil {
-            return DeleteResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteAutocompleteKeywordResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // UpdateAutocompleteKeyword Create & Update Autocomplete Keyword
      func (ca *PlatformAppCatalog)  UpdateAutocompleteKeyword(ID string, body  CreateAutocompleteKeyword) (GetAutocompleteWordsResponse, error) {
         var (
@@ -12122,6 +12026,102 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
         }
         return updateAutocompleteKeywordResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteAutocompleteKeyword Delete a Autocomplete Keywords
+     func (ca *PlatformAppCatalog)  DeleteAutocompleteKeyword(ID string) (DeleteResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteAutocompleteKeywordResponse DeleteResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DeleteResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteAutocompleteKeywordResponse)
+        if err != nil {
+            return DeleteResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteAutocompleteKeywordResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
+     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAutocompleteKeywordDetailResponse, nil
         
     }
            
@@ -12263,54 +12263,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetAppProduct Get company application product data.
-     func (ca *PlatformAppCatalog)  GetAppProduct(ItemID string) (OwnerAppItemResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAppProductResponse OwnerAppItemResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product/%s/",ca.CompanyID, ca.ApplicationID, ItemID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return OwnerAppItemResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAppProductResponse)
-        if err != nil {
-            return OwnerAppItemResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAppProductResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // UpdateAppProduct Update a single custom meta.
      func (ca *PlatformAppCatalog)  UpdateAppProduct(ItemID string, body  ApplicationItemMeta) (SuccessResponse1, error) {
         var (
@@ -12376,6 +12328,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return SuccessResponse1{}, common.NewFDKError(err.Error())
         }
         return updateAppProductResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetAppProduct Get company application product data.
+     func (ca *PlatformAppCatalog)  GetAppProduct(ItemID string) (OwnerAppItemResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAppProductResponse OwnerAppItemResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product/%s/",ca.CompanyID, ca.ApplicationID, ItemID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return OwnerAppItemResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAppProductResponse)
+        if err != nil {
+            return OwnerAppItemResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAppProductResponse, nil
         
     }
            
@@ -12588,56 +12588,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteGroupConfiguration Delete configuration of the product config type of the application.
-     func (ca *PlatformAppCatalog)  DeleteGroupConfiguration(ConfigType string, GroupSlug string) (ConfigSuccessResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteGroupConfigurationResponse ConfigSuccessResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/application/%s/product-configuration/%s/groups/%s",ca.CompanyID, ca.ApplicationID, ConfigType, GroupSlug),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ConfigSuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteGroupConfigurationResponse)
-        if err != nil {
-            return ConfigSuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteGroupConfigurationResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // UpdateGroupConfiguration Update the group configurations for the application.
      func (ca *PlatformAppCatalog)  UpdateGroupConfiguration(ConfigType string, GroupSlug string, body  AppConfigurationDetail) (AppConfigurationDetail, error) {
         var (
@@ -12709,6 +12659,56 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return AppConfigurationDetail{}, common.NewFDKError(err.Error())
         }
         return updateGroupConfigurationResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteGroupConfiguration Delete configuration of the product config type of the application.
+     func (ca *PlatformAppCatalog)  DeleteGroupConfiguration(ConfigType string, GroupSlug string) (ConfigSuccessResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteGroupConfigurationResponse ConfigSuccessResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/application/%s/product-configuration/%s/groups/%s",ca.CompanyID, ca.ApplicationID, ConfigType, GroupSlug),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ConfigSuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteGroupConfigurationResponse)
+        if err != nil {
+            return ConfigSuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteGroupConfigurationResponse, nil
         
     }
            
@@ -12859,56 +12859,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteListingConfiguration Delete configuration for listings
-     func (ca *PlatformAppCatalog)  DeleteListingConfiguration(ConfigType string, ConfigID string) (ConfigSuccessResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteListingConfigurationResponse ConfigSuccessResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/application/%s/product-configuration/%s/item/%s/",ca.CompanyID, ca.ApplicationID, ConfigType, ConfigID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ConfigSuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteListingConfigurationResponse)
-        if err != nil {
-            return ConfigSuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteListingConfigurationResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // UpdateListingConfiguration Update configuration for listings
      func (ca *PlatformAppCatalog)  UpdateListingConfiguration(ConfigType string, ConfigID string, body  AppConfigurationsSort) (AppConfigurationsSort, error) {
         var (
@@ -12978,6 +12928,56 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return AppConfigurationsSort{}, common.NewFDKError(err.Error())
         }
         return updateListingConfigurationResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteListingConfiguration Delete configuration for listings
+     func (ca *PlatformAppCatalog)  DeleteListingConfiguration(ConfigType string, ConfigID string) (ConfigSuccessResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteListingConfigurationResponse ConfigSuccessResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/application/%s/product-configuration/%s/item/%s/",ca.CompanyID, ca.ApplicationID, ConfigType, ConfigID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ConfigSuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteListingConfigurationResponse)
+        if err != nil {
+            return ConfigSuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteListingConfigurationResponse, nil
         
     }
            
@@ -13686,54 +13686,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteCollection Delete a Collection
-     func (ca *PlatformAppCatalog)  DeleteCollection(ID string) (DeleteResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteCollectionResponse DeleteResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/collections/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return DeleteResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteCollectionResponse)
-        if err != nil {
-            return DeleteResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteCollectionResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // UpdateCollection Update a collection
      func (ca *PlatformAppCatalog)  UpdateCollection(ID string, body  UpdateCollection) (UpdateCollection, error) {
         var (
@@ -13831,6 +13783,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return UpdateCollection{}, common.NewFDKError(err.Error())
         }
         return updateCollectionResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteCollection Delete a Collection
+     func (ca *PlatformAppCatalog)  DeleteCollection(ID string) (DeleteResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteCollectionResponse DeleteResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/collections/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DeleteResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteCollectionResponse)
+        if err != nil {
+            return DeleteResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteCollectionResponse, nil
         
     }
            
@@ -19998,6 +19998,117 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // GetCartShareLink Generate token for sharing the cart
+     func (ca *PlatformAppCart)  GetCartShareLink(body  GetShareCartLinkRequest) (GetShareCartLinkResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getCartShareLinkResponse GetShareCartLinkResponse
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return GetShareCartLinkResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return GetShareCartLinkResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/share-cart",ca.CompanyID, ca.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetShareCartLinkResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getCartShareLinkResponse)
+        if err != nil {
+            return GetShareCartLinkResponse{}, common.NewFDKError(err.Error())
+        }
+        return getCartShareLinkResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetCartSharedItems Get details of a shared cart
+     func (ca *PlatformAppCart)  GetCartSharedItems(Token string) (SharedCartResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getCartSharedItemsResponse SharedCartResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/share-cart/%s",ca.CompanyID, ca.ApplicationID, Token),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return SharedCartResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getCartSharedItemsResponse)
+        if err != nil {
+            return SharedCartResponse{}, common.NewFDKError(err.Error())
+        }
+        return getCartSharedItemsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // GetCartList Get cart list for store os user
      func (ca *PlatformAppCart)  GetCartList() (CartList, error) {
         var (
@@ -20108,7 +20219,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
-    // GetCart Fetch all items added to the cart
+    // GetCart Fetch all items added to the customer cart using cart id
      func (ca *PlatformAppCart)  GetCart(xQuery PlatformAppGetCartXQuery) (CartDetailResponse, error) {
         var (
             rawRequest  *RawRequest
@@ -20166,62 +20277,10 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    //PlatformAppGetCartLastModifiedXQuery holds query params
-    type PlatformAppGetCartLastModifiedXQuery struct { 
-        ID string  `url:"id,omitempty"`  
-    }
-    
-    // GetCartLastModified Fetch last-modified timestamp
-     func (ca *PlatformAppCart)  GetCartLastModified(xQuery PlatformAppGetCartLastModifiedXQuery) (interface{}, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-	    )
-
-        
-
-         
-            
-                
-            
-        
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "head",
-            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/detail",ca.CompanyID, ca.ApplicationID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return []byte{}, err
-	    }
-        
-        return response, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     //PlatformAppAddItemsXQuery holds query params
     type PlatformAppAddItemsXQuery struct { 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
@@ -20239,8 +20298,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
 
          
-            
-                
             
                 
             
@@ -20301,11 +20358,10 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
-    // UpdateCart Update items in the cart
+    // UpdateCart Update items in the customer 's cart using cart id
      func (ca *PlatformAppCart)  UpdateCart(xQuery PlatformAppUpdateCartXQuery, body  UpdateCartRequest) (UpdateCartDetailResponse, error) {
         var (
             rawRequest  *RawRequest
@@ -20321,8 +20377,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
 
          
-            
-                
             
                 
             
@@ -20386,7 +20440,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
-    // GetItemCount Count items in the cart
+    // GetItemCount Count items in the customer's cart
      func (ca *PlatformAppCart)  GetItemCount(xQuery PlatformAppGetItemCountXQuery) (CartItemCountResponse, error) {
         var (
             rawRequest  *RawRequest
@@ -20428,6 +20482,146 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return CartItemCountResponse{}, common.NewFDKError(err.Error())
         }
         return getItemCountResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppGetCouponsXQuery holds query params
+    type PlatformAppGetCouponsXQuery struct { 
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
+    }
+    
+    // GetCoupons Fetch Coupon
+     func (ca *PlatformAppCart)  GetCoupons(xQuery PlatformAppGetCouponsXQuery) (GetCouponResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getCouponsResponse GetCouponResponse
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/platform-pos-coupon",ca.CompanyID, ca.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetCouponResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getCouponsResponse)
+        if err != nil {
+            return GetCouponResponse{}, common.NewFDKError(err.Error())
+        }
+        return getCouponsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppApplyCouponXQuery holds query params
+    type PlatformAppApplyCouponXQuery struct { 
+        I bool  `url:"i,omitempty"` 
+        B bool  `url:"b,omitempty"` 
+        P bool  `url:"p,omitempty"` 
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
+    }
+    
+    // ApplyCoupon Apply Coupon for platform pos user
+     func (ca *PlatformAppCart)  ApplyCoupon(xQuery PlatformAppApplyCouponXQuery, body  ApplyCouponRequest) (CartDetailResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            applyCouponResponse CartDetailResponse
+	    )
+
+        
+            
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return CartDetailResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return CartDetailResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/platform-pos-coupon",ca.CompanyID, ca.ApplicationID),
+            nil,
+            xQuery,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CartDetailResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &applyCouponResponse)
+        if err != nil {
+            return CartDetailResponse{}, common.NewFDKError(err.Error())
+        }
+        return applyCouponResponse, nil
         
     }
            
@@ -20512,7 +20706,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
     
     // AddAddress Add address to an account
-     func (ca *PlatformAppCart)  AddAddress(body  Address) (SaveAddressResponse, error) {
+     func (ca *PlatformAppCart)  AddAddress(body  PlatformAddress) (SaveAddressResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -20520,6 +20714,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             addAddressResponse SaveAddressResponse
 	    )
 
+        
+            
         
             
         
@@ -20623,7 +20819,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         MobileNo string  `url:"mobile_no,omitempty"` 
         CheckoutMode string  `url:"checkout_mode,omitempty"` 
         Tags string  `url:"tags,omitempty"` 
-        IsDefault bool  `url:"is_default,omitempty"`  
+        IsDefault bool  `url:"is_default,omitempty"` 
+        UserID string  `url:"user_id,omitempty"`  
     }
     
     // GetAddressById Fetch a single address by its ID
@@ -20638,6 +20835,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
 
          
+            
+                
             
                 
             
@@ -20689,7 +20888,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
     
     // UpdateAddress Update address added to an account
-     func (ca *PlatformAppCart)  UpdateAddress(ID string, body  Address) (UpdateAddressResponse, error) {
+     func (ca *PlatformAppCart)  UpdateAddress(ID string, body  PlatformAddress) (UpdateAddressResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -20697,6 +20896,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             updateAddressResponse UpdateAddressResponse
 	    )
 
+        
+            
         
             
         
@@ -20857,12 +21058,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         CartID string  `url:"cart_id,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"` 
         I bool  `url:"i,omitempty"` 
-        B bool  `url:"b,omitempty"` 
-        UserID string  `url:"user_id,omitempty"`  
+        B bool  `url:"b,omitempty"`  
     }
     
     // SelectAddress Select an address from available addresses
-     func (ca *PlatformAppCart)  SelectAddress(xQuery PlatformAppSelectAddressXQuery, body  SelectCartAddressRequest) (CartDetailResponse, error) {
+     func (ca *PlatformAppCart)  SelectAddress(xQuery PlatformAppSelectAddressXQuery, body  PlatformSelectCartAddressRequest) (CartDetailResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -20877,10 +21077,10 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
             
         
+            
+        
 
          
-            
-                
             
                 
             
@@ -20940,13 +21140,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     //PlatformAppGetShipmentsXQuery holds query params
     type PlatformAppGetShipmentsXQuery struct { 
-        PickAtStoreUID float64  `url:"pick_at_store_uid,omitempty"` 
-        OrderingStoreID float64  `url:"ordering_store_id,omitempty"` 
         P bool  `url:"p,omitempty"` 
         ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"` 
         AddressID string  `url:"address_id,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"` 
-        OrderType string  `url:"order_type,omitempty"`  
+        AreaCode string  `url:"area_code,omitempty"`  
     }
     
     // GetShipments Get delivery date and options before checkout
@@ -20961,10 +21159,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
 
          
-            
-                
-            
-                
             
                 
             
@@ -21011,35 +21205,32 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    //PlatformAppUpdateShipmentsXQuery holds query params
-    type PlatformAppUpdateShipmentsXQuery struct { 
-        I bool  `url:"i,omitempty"` 
-        P bool  `url:"p,omitempty"` 
+    //PlatformAppUpdateCartMetaXQuery holds query params
+    type PlatformAppUpdateCartMetaXQuery struct { 
         ID string  `url:"id,omitempty"` 
-        AddressID string  `url:"address_id,omitempty"` 
-        OrderType string  `url:"order_type,omitempty"`  
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
-    // UpdateShipments Update shipment delivery type and quantity before checkout
-     func (ca *PlatformAppCart)  UpdateShipments(xQuery PlatformAppUpdateShipmentsXQuery, body  UpdateCartShipmentRequest) (CartShipmentsResponse, error) {
+    // UpdateCartMeta Update the cart meta for platform pos user
+     func (ca *PlatformAppCart)  UpdateCartMeta(xQuery PlatformAppUpdateCartMetaXQuery, body  CartMetaRequest) (CartMetaResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            updateShipmentsResponse CartShipmentsResponse
+            updateCartMetaResponse CartMetaResponse
 	    )
 
         
             
         
+            
+        
+            
+        
+            
+        
 
          
-            
-                
-            
-                
-            
-                
             
                 
             
@@ -21057,32 +21248,32 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
             
-             return CartShipmentsResponse{}, common.NewFDKError(err.Error())
+             return CartMetaResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
             
-             return CartShipmentsResponse{}, common.NewFDKError(err.Error())       
+             return CartMetaResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
         rawRequest = NewRequest(
             ca.config,
             "put",
-            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/shipment",ca.CompanyID, ca.ApplicationID),
+            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/meta",ca.CompanyID, ca.ApplicationID),
             nil,
             xQuery,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return CartShipmentsResponse{}, err
+            return CartMetaResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &updateShipmentsResponse)
+        err = json.Unmarshal(response, &updateCartMetaResponse)
         if err != nil {
-            return CartShipmentsResponse{}, common.NewFDKError(err.Error())
+            return CartMetaResponse{}, common.NewFDKError(err.Error())
         }
-        return updateShipmentsResponse, nil
+        return updateCartMetaResponse, nil
         
     }
            
@@ -21095,11 +21286,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     //PlatformAppCheckoutCartXQuery holds query params
     type PlatformAppCheckoutCartXQuery struct { 
-        ID string  `url:"id,omitempty"`  
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // CheckoutCart Checkout all items in the cart
-     func (ca *PlatformAppCart)  CheckoutCart(xQuery PlatformAppCheckoutCartXQuery, body  CartPosCheckoutDetailRequest) (CartCheckoutResponse, error) {
+     func (ca *PlatformAppCart)  CheckoutCart(xQuery PlatformAppCheckoutCartXQuery, body  PlatformCartCheckoutDetailRequest) (CartCheckoutResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -21107,12 +21298,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             checkoutCartResponse CartCheckoutResponse
 	    )
 
-        
-            
-        
-            
-        
-            
         
             
         
@@ -21191,85 +21376,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return CartCheckoutResponse{}, common.NewFDKError(err.Error())
         }
         return checkoutCartResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    //PlatformAppUpdateCartMetaXQuery holds query params
-    type PlatformAppUpdateCartMetaXQuery struct { 
-        ID string  `url:"id,omitempty"` 
-        BuyNow bool  `url:"buy_now,omitempty"`  
-    }
-    
-    // UpdateCartMeta Update the cart meta
-     func (ca *PlatformAppCart)  UpdateCartMeta(xQuery PlatformAppUpdateCartMetaXQuery, body  CartMetaRequest) (CartMetaResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateCartMetaResponse CartMetaResponse
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-         
-            
-                
-            
-                
-            
-        
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return CartMetaResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return CartMetaResponse{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "put",
-            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/meta",ca.CompanyID, ca.ApplicationID),
-            nil,
-            xQuery,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return CartMetaResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateCartMetaResponse)
-        if err != nil {
-            return CartMetaResponse{}, common.NewFDKError(err.Error())
-        }
-        return updateCartMetaResponse, nil
         
     }
            
@@ -21383,6 +21489,162 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return StoreDetailsResponse{}, common.NewFDKError(err.Error())
         }
         return getStoreAddressByUidResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppSelectPaymentModeXQuery holds query params
+    type PlatformAppSelectPaymentModeXQuery struct { 
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
+    }
+    
+    // SelectPaymentMode Update cart payment
+     func (ca *PlatformAppCart)  SelectPaymentMode(xQuery PlatformAppSelectPaymentModeXQuery, body  UpdateCartPaymentRequest) (CartDetailResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            selectPaymentModeResponse CartDetailResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return CartDetailResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return CartDetailResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "put",
+            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/payment",ca.CompanyID, ca.ApplicationID),
+            nil,
+            xQuery,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CartDetailResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &selectPaymentModeResponse)
+        if err != nil {
+            return CartDetailResponse{}, common.NewFDKError(err.Error())
+        }
+        return selectPaymentModeResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppValidateCouponForPaymentXQuery holds query params
+    type PlatformAppValidateCouponForPaymentXQuery struct { 
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"` 
+        AddressID string  `url:"address_id,omitempty"` 
+        PaymentMode string  `url:"payment_mode,omitempty"` 
+        PaymentIdentifier string  `url:"payment_identifier,omitempty"` 
+        AggregatorName string  `url:"aggregator_name,omitempty"` 
+        MerchantCode string  `url:"merchant_code,omitempty"`  
+    }
+    
+    // ValidateCouponForPayment Verify the coupon eligibility against the payment mode
+     func (ca *PlatformAppCart)  ValidateCouponForPayment(xQuery PlatformAppValidateCouponForPaymentXQuery) (PaymentCouponValidate, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            validateCouponForPaymentResponse PaymentCouponValidate
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/payment/validate/",ca.CompanyID, ca.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PaymentCouponValidate{}, err
+	    }
+        
+        err = json.Unmarshal(response, &validateCouponForPaymentResponse)
+        if err != nil {
+            return PaymentCouponValidate{}, common.NewFDKError(err.Error())
+        }
+        return validateCouponForPaymentResponse, nil
         
     }
            
@@ -22155,13 +22417,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetAndroidPaths Get all valid android paths
-     func (re *PlatformAppRewards)  GetAndroidPaths() (ConfigurationRes, error) {
+    // GetRewardsConfiguration Get all valid android paths
+     func (re *PlatformAppRewards)  GetRewardsConfiguration() (ConfigurationRes, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getAndroidPathsResponse ConfigurationRes
+            getRewardsConfigurationResponse ConfigurationRes
 	    )
 
         
@@ -22186,11 +22448,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return ConfigurationRes{}, err
 	    }
         
-        err = json.Unmarshal(response, &getAndroidPathsResponse)
+        err = json.Unmarshal(response, &getRewardsConfigurationResponse)
         if err != nil {
             return ConfigurationRes{}, common.NewFDKError(err.Error())
         }
-        return getAndroidPathsResponse, nil
+        return getRewardsConfigurationResponse, nil
         
     }
            
@@ -22201,13 +22463,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateAndroidPaths Updates the collection with given android paths.
-     func (re *PlatformAppRewards)  UpdateAndroidPaths(body  ConfigurationRequest) (SetConfigurationRes, error) {
+    // SetRewardsConfiguration Updates the collection with given android paths.
+     func (re *PlatformAppRewards)  SetRewardsConfiguration(body  ConfigurationRequest) (SetConfigurationRes, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            updateAndroidPathsResponse SetConfigurationRes
+            setRewardsConfigurationResponse SetConfigurationRes
 	    )
 
         
@@ -22249,11 +22511,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return SetConfigurationRes{}, err
 	    }
         
-        err = json.Unmarshal(response, &updateAndroidPathsResponse)
+        err = json.Unmarshal(response, &setRewardsConfigurationResponse)
         if err != nil {
             return SetConfigurationRes{}, common.NewFDKError(err.Error())
         }
-        return updateAndroidPathsResponse, nil
+        return setRewardsConfigurationResponse, nil
         
     }
            

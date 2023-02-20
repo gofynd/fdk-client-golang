@@ -46,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [followById](#followbyid)
     * [unfollowById](#unfollowbyid)
+    * [followById](#followbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -1151,12 +1151,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1170,7 +1170,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1192,12 +1192,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1211,7 +1211,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -3133,9 +3133,7 @@ Fetch address
 
 
 
-
-
-| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`, `UserID`
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -3292,7 +3290,7 @@ Remove address associated with an account
 
 ```golang
 
- data, err :=  Cart.RemoveAddress(ID, xQuery);
+ data, err :=  Cart.RemoveAddress(ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -3300,9 +3298,6 @@ Remove address associated with an account
 
 | ID | string | ID allotted to the selected address | 
 
-
-
-| xQuery | struct | Includes properties such as `UserID`
 
 
 
@@ -3346,9 +3341,7 @@ Select an address from available addresses
 
 
 
-
-
-| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `I`, `B`, `UserID`
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `I`, `B`
 
 | body |  SelectCartAddressRequest | "Request body" 
 
@@ -20837,9 +20830,7 @@ Fetch address
 
 
 
-
-
-| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`, `UserID`
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -20996,7 +20987,7 @@ Remove address associated with an account
 
 ```golang
 
- data, err :=  PosCart.RemoveAddress(ID, xQuery);
+ data, err :=  PosCart.RemoveAddress(ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -21004,9 +20995,6 @@ Remove address associated with an account
 
 | ID | string | ID allotted to the selected address | 
 
-
-
-| xQuery | struct | Includes properties such as `UserID`
 
 
 
@@ -21050,9 +21038,7 @@ Select an address from available addresses
 
 
 
-
-
-| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `I`, `B`, `UserID`
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `I`, `B`
 
 | body |  SelectCartAddressRequest | "Request body" 
 
