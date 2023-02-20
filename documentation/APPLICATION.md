@@ -46,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [followById](#followbyid)
     * [unfollowById](#unfollowbyid)
+    * [followById](#followbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -286,10 +286,10 @@
   * Methods
     * [getOfferByName](#getofferbyname)
     * [catalogueOrder](#catalogueorder)
-    * [getPointsHistory](#getpointshistory)
-    * [getPoints](#getpoints)
-    * [referral](#referral)
-    * [orderDiscount](#orderdiscount)
+    * [getUserPointsHistory](#getuserpointshistory)
+    * [getUserPoints](#getuserpoints)
+    * [getUserReferralDetails](#getuserreferraldetails)
+    * [getOrderDiscount](#getorderdiscount)
     * [redeemReferralCode](#redeemreferralcode)
     
 
@@ -1154,12 +1154,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1173,7 +1173,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1195,12 +1195,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1214,7 +1214,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -3438,7 +3438,13 @@ Verify the coupon eligibility against the payment mode
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`, `Iin`, `Network`, `Type`
 
 
 
@@ -18563,12 +18569,12 @@ Schema: `CatalogueOrderResponse`
 ---
 
 
-#### getPointsHistory
+#### getUserPointsHistory
 Get all transactions of reward points
 
 ```golang
 
- data, err :=  Rewards.GetPointsHistory(xQuery);
+ data, err :=  Rewards.GetUserPointsHistory(xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -18603,12 +18609,12 @@ Schema: `PointsHistoryResponse`
 ---
 
 
-#### getPoints
+#### getUserPoints
 Get referral details of a user
 
 ```golang
 
- data, err :=  Rewards.GetPoints();
+ data, err :=  Rewards.GetUserPoints();
 ```
 
 | Argument  |  Type  | Description |
@@ -18638,12 +18644,12 @@ Schema: `PointsResponse`
 ---
 
 
-#### referral
+#### getUserReferralDetails
 Get referral details of a user
 
 ```golang
 
- data, err :=  Rewards.Referral();
+ data, err :=  Rewards.GetUserReferralDetails();
 ```
 
 | Argument  |  Type  | Description |
@@ -18673,12 +18679,12 @@ Schema: `ReferralDetailsResponse`
 ---
 
 
-#### orderDiscount
+#### getOrderDiscount
 Calculates the discount on order-amount
 
 ```golang
 
- data, err :=  Rewards.OrderDiscount(body);
+ data, err :=  Rewards.GetOrderDiscount(body);
 ```
 
 | Argument  |  Type  | Description |
@@ -20592,7 +20598,13 @@ Verify the coupon eligibility against the payment mode
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`, `Iin`, `Network`, `Type`
 
 
 
