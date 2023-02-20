@@ -21547,6 +21547,56 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // UpdateCartWithSharedItems Merge or replace existing cart
+     func (ca *PlatformAppCart)  UpdateCartWithSharedItems(Token string, Action string) (SharedCartResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateCartWithSharedItemsResponse SharedCartResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/share-cart/%s/%s",ca.CompanyID, ca.ApplicationID, Token, Action),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return SharedCartResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateCartWithSharedItemsResponse)
+        if err != nil {
+            return SharedCartResponse{}, common.NewFDKError(err.Error())
+        }
+        return updateCartWithSharedItemsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // GetCartList Get cart list for store os user
      func (ca *PlatformAppCart)  GetCartList() (CartList, error) {
         var (
@@ -22060,6 +22110,64 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return CartDetailResponse{}, common.NewFDKError(err.Error())
         }
         return applyCouponResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppRemoveCouponXQuery holds query params
+    type PlatformAppRemoveCouponXQuery struct { 
+        UID string  `url:"uid,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
+    }
+    
+    // RemoveCoupon Remove Applied Coupon for platform pos user
+     func (ca *PlatformAppCart)  RemoveCoupon(xQuery PlatformAppRemoveCouponXQuery) (CartDetailResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            removeCouponResponse CartDetailResponse
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/platform-pos-coupon",ca.CompanyID, ca.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CartDetailResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &removeCouponResponse)
+        if err != nil {
+            return CartDetailResponse{}, common.NewFDKError(err.Error())
+        }
+        return removeCouponResponse, nil
         
     }
            
@@ -22633,6 +22741,155 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return CartShipmentsResponse{}, common.NewFDKError(err.Error())
         }
         return getShipmentsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppGetShipmentDeliveryXQuery holds query params
+    type PlatformAppGetShipmentDeliveryXQuery struct { 
+        I bool  `url:"i,omitempty"` 
+        P bool  `url:"p,omitempty"` 
+        ID string  `url:"id,omitempty"` 
+        AddressID string  `url:"address_id,omitempty"` 
+        OrderType string  `url:"order_type,omitempty"`  
+    }
+    
+    // GetShipmentDelivery Get delivery date and options before checkout
+     func (ca *PlatformAppCart)  GetShipmentDelivery(xQuery PlatformAppGetShipmentDeliveryXQuery) (CartShipmentsResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getShipmentDeliveryResponse CartShipmentsResponse
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/shipments/delivery",ca.CompanyID, ca.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CartShipmentsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getShipmentDeliveryResponse)
+        if err != nil {
+            return CartShipmentsResponse{}, common.NewFDKError(err.Error())
+        }
+        return getShipmentDeliveryResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppUpdateShipmentsXQuery holds query params
+    type PlatformAppUpdateShipmentsXQuery struct { 
+        I bool  `url:"i,omitempty"` 
+        P bool  `url:"p,omitempty"` 
+        ID string  `url:"id,omitempty"` 
+        AddressID string  `url:"address_id,omitempty"` 
+        OrderType string  `url:"order_type,omitempty"`  
+    }
+    
+    // UpdateShipments Update shipment delivery type and quantity before checkout
+     func (ca *PlatformAppCart)  UpdateShipments(xQuery PlatformAppUpdateShipmentsXQuery, body  UpdateCartShipmentRequest) (CartShipmentsResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateShipmentsResponse CartShipmentsResponse
+	    )
+
+        
+            
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return CartShipmentsResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return CartShipmentsResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "put",
+            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/shipments/delivery",ca.CompanyID, ca.ApplicationID),
+            nil,
+            xQuery,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CartShipmentsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateShipmentsResponse)
+        if err != nil {
+            return CartShipmentsResponse{}, common.NewFDKError(err.Error())
+        }
+        return updateShipmentsResponse, nil
         
     }
            
