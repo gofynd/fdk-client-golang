@@ -8317,20 +8317,32 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformGetProductXQuery holds query params
+    type PlatformGetProductXQuery struct { 
+        BrandUID float64  `url:"brand_uid,omitempty"` 
+        ItemCode string  `url:"item_code,omitempty"`  
+    }
+    
 
 
-    // DeleteProduct Delete a product.
-     func (ca *PlatformCatalog)  DeleteProduct(ItemID float64) (SuccessResponse, error){
+    // GetProduct Get a single product.
+     func (ca *PlatformCatalog)  GetProduct(ItemID float64, xQuery PlatformGetProductXQuery) (SingleProductResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            deleteProductResponse SuccessResponse
+            getProductResponse SingleProductResponse
 	    )
 
         
 
+        
+            
+                
+            
+                
+            
         
 
         
@@ -8343,21 +8355,21 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         //API call
         rawRequest = NewRequest(
             ca.Config,
-            "delete",
+            "get",
             fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
             nil,
-            nil,
+            xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-             return SuccessResponse{}, err
+             return SingleProductResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &deleteProductResponse)
+        err = json.Unmarshal(response, &getProductResponse)
         if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
+             return SingleProductResponse{}, common.NewFDKError(err.Error())
         }
-        return deleteProductResponse, nil
+        return getProductResponse, nil
         
     }
          
@@ -8518,32 +8530,20 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    //PlatformGetProductXQuery holds query params
-    type PlatformGetProductXQuery struct { 
-        BrandUID float64  `url:"brand_uid,omitempty"` 
-        ItemCode string  `url:"item_code,omitempty"`  
-    }
-    
 
 
-    // GetProduct Get a single product.
-     func (ca *PlatformCatalog)  GetProduct(ItemID float64, xQuery PlatformGetProductXQuery) (SingleProductResponse, error){
+    // DeleteProduct Delete a product.
+     func (ca *PlatformCatalog)  DeleteProduct(ItemID float64) (SuccessResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getProductResponse SingleProductResponse
+            deleteProductResponse SuccessResponse
 	    )
 
         
 
-        
-            
-                
-            
-                
-            
         
 
         
@@ -8556,21 +8556,21 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         //API call
         rawRequest = NewRequest(
             ca.Config,
-            "get",
+            "delete",
             fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
             nil,
-            xQuery,
+            nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-             return SingleProductResponse{}, err
+             return SuccessResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getProductResponse)
+        err = json.Unmarshal(response, &deleteProductResponse)
         if err != nil {
-             return SingleProductResponse{}, common.NewFDKError(err.Error())
+             return SuccessResponse{}, common.NewFDKError(err.Error())
         }
-        return getProductResponse, nil
+        return deleteProductResponse, nil
         
     }
          

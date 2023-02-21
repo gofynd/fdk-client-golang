@@ -318,14 +318,14 @@
 
 * [Catalog](#Catalog)
   * Methods
-    * [deleteSearchKeywords](#deletesearchkeywords)
-    * [updateSearchKeywords](#updatesearchkeywords)
     * [getSearchKeywords](#getsearchkeywords)
+    * [updateSearchKeywords](#updatesearchkeywords)
+    * [deleteSearchKeywords](#deletesearchkeywords)
     * [createCustomKeyword](#createcustomkeyword)
     * [getAllSearchKeyword](#getallsearchkeyword)
-    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
-    * [updateAutocompleteKeyword](#updateautocompletekeyword)
     * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
+    * [updateAutocompleteKeyword](#updateautocompletekeyword)
+    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createProductBundle](#createproductbundle)
@@ -341,12 +341,12 @@
     * [getConfigurationMetadata](#getconfigurationmetadata)
     * [createGroupConfiguration](#creategroupconfiguration)
     * [getGroupConfigurations](#getgroupconfigurations)
-    * [deleteGroupConfiguration](#deletegroupconfiguration)
     * [updateGroupConfiguration](#updategroupconfiguration)
+    * [deleteGroupConfiguration](#deletegroupconfiguration)
     * [createListingConfiguration](#createlistingconfiguration)
     * [getListingConfigurations](#getlistingconfigurations)
-    * [deleteListingConfiguration](#deletelistingconfiguration)
     * [updateListingConfiguration](#updatelistingconfiguration)
+    * [deleteListingConfiguration](#deletelistingconfiguration)
     * [updateAllowSingle](#updateallowsingle)
     * [updateDefaultSort](#updatedefaultsort)
     * [getCatalogConfiguration](#getcatalogconfiguration)
@@ -358,8 +358,8 @@
     * [createCollection](#createcollection)
     * [getAllCollections](#getallcollections)
     * [getCollectionDetail](#getcollectiondetail)
-    * [deleteCollection](#deletecollection)
     * [updateCollection](#updatecollection)
+    * [deleteCollection](#deletecollection)
     * [addCollectionItems](#addcollectionitems)
     * [getCollectionItems](#getcollectionitems)
     * [getCatalogInsights](#getcataloginsights)
@@ -392,9 +392,9 @@
     * [getProducts](#getproducts)
     * [getVariantsOfProducts](#getvariantsofproducts)
     * [getProductAttributes](#getproductattributes)
-    * [deleteProduct](#deleteproduct)
-    * [editProduct](#editproduct)
     * [getProduct](#getproduct)
+    * [editProduct](#editproduct)
+    * [deleteProduct](#deleteproduct)
     * [allSizes](#allsizes)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
@@ -919,25 +919,25 @@ With items
               "active": true,
               "primary": true,
               "verified": true,
-              "email": "nikhilmshchs@gmail.com"
+              "email": "niktest@xyz.com"
             },
             {
               "active": true,
               "primary": false,
               "verified": true,
-              "email": "nikhilmanapure@gofynd.com"
+              "email": "xyz@xyz.com"
             },
             {
               "active": true,
               "primary": false,
               "verified": true,
-              "email": "nikhilmanapure@fynd.com"
+              "email": "xyz@xyz.com"
             },
             {
               "active": true,
               "primary": false,
               "verified": true,
-              "email": "nikhilmanapure@uniket.store"
+              "email": "xyz@xyz.com"
             }
           ],
           "phoneNumbers": [
@@ -946,12 +946,12 @@ With items
               "primary": true,
               "verified": true,
               "countryCode": 91,
-              "phone": "9890425946"
+              "phone": "9999999999"
             }
           ],
           "firstName": "Nikhil",
           "lastName": "Manapure",
-          "username": "nikhilmanapure_gofynd_com_29298",
+          "username": "xyz_xyz_com",
           "createdAt": "2020-03-24T10:55:29.298Z",
           "updatedAt": "2020-05-12T07:46:41.816Z",
           "uid": "5567",
@@ -1234,7 +1234,7 @@ Default
           "primary": true,
           "verified": true,
           "countryCode": 91,
-          "phone": "9890425946"
+          "phone": "9999999999"
         }
       ],
       "firstName": "Nikhil",
@@ -1244,10 +1244,10 @@ Default
           "active": true,
           "primary": true,
           "verified": true,
-          "email": "nikhilmshchs@gmail.com"
+          "email": "niktest@xyz.com"
         }
       ],
-      "username": "nikhilmshchs_gmail_com_38425_20500281",
+      "username": "niktest_xyz_com_38425_20500281",
       "createdAt": "2019-01-01T17:22:38.528Z",
       "updatedAt": "2021-01-22T10:02:42.258Z",
       "uid": "20500281",
@@ -1295,7 +1295,7 @@ Default
             "primary": true,
             "verified": true,
             "countryCode": 91,
-            "phone": "9890425946"
+            "phone": "9999999999"
           }
         ],
         "firstName": "Nikhil",
@@ -1305,10 +1305,10 @@ Default
             "active": true,
             "primary": true,
             "verified": true,
-            "email": "nikhilmshchs@gmail.com"
+            "email": "niktest@xyz.com"
           }
         ],
-        "username": "nikhilmshchs_gmail_com_38425_20500281",
+        "username": "niktest_xyz_com_38425_20500281",
         "createdAt": "2019-01-01T17:22:38.528Z",
         "updatedAt": "2021-01-22T10:02:42.258Z",
         "uid": "20500281",
@@ -1585,25 +1585,25 @@ With items
               "active": true,
               "primary": true,
               "verified": true,
-              "email": "nikhilmshchs@gmail.com"
+              "email": "niktest@xyz.com"
             },
             {
               "active": true,
               "primary": false,
               "verified": true,
-              "email": "nikhilmanapure@gofynd.com"
+              "email": "xyz@xyz.com"
             },
             {
               "active": true,
               "primary": false,
               "verified": true,
-              "email": "nikhilmanapure@fynd.com"
+              "email": "xyz@xyz.com"
             },
             {
               "active": true,
               "primary": false,
               "verified": true,
-              "email": "nikhilmanapure@uniket.store"
+              "email": "xyz@xyz.com"
             }
           ],
           "phoneNumbers": [
@@ -1612,12 +1612,12 @@ With items
               "primary": true,
               "verified": true,
               "countryCode": 91,
-              "phone": "9890425946"
+              "phone": "9999999999"
             }
           ],
           "firstName": "Nikhil",
           "lastName": "Manapure",
-          "username": "nikhilmanapure_gofynd_com_29298",
+          "username": "xyz_xyz_com",
           "createdAt": "2020-03-24T10:55:29.298Z",
           "updatedAt": "2020-05-12T07:46:41.816Z",
           "uid": "5567",
@@ -1902,7 +1902,7 @@ Default
           "primary": true,
           "verified": true,
           "countryCode": 91,
-          "phone": "9890425946"
+          "phone": "9999999999"
         }
       ],
       "firstName": "Nikhil",
@@ -1912,10 +1912,10 @@ Default
           "active": true,
           "primary": true,
           "verified": true,
-          "email": "nikhilmshchs@gmail.com"
+          "email": "niktest@xyz.com"
         }
       ],
-      "username": "nikhilmshchs_gmail_com_38425_20500281",
+      "username": "niktest_xyz_com_38425_20500281",
       "createdAt": "2019-01-01T17:22:38.528Z",
       "updatedAt": "2021-01-22T10:02:42.258Z",
       "uid": "20500281",
@@ -1963,7 +1963,7 @@ Default
             "primary": true,
             "verified": true,
             "countryCode": 91,
-            "phone": "9890425946"
+            "phone": "9999999999"
           }
         ],
         "firstName": "Nikhil",
@@ -1973,10 +1973,10 @@ Default
             "active": true,
             "primary": true,
             "verified": true,
-            "email": "nikhilmshchs@gmail.com"
+            "email": "niktest@xyz.com"
           }
         ],
-        "username": "nikhilmshchs_gmail_com_38425_20500281",
+        "username": "niktest_xyz_com_38425_20500281",
         "createdAt": "2019-01-01T17:22:38.528Z",
         "updatedAt": "2021-01-22T10:02:42.258Z",
         "uid": "20500281",
@@ -2144,7 +2144,7 @@ Default
           "primary": true,
           "verified": true,
           "countryCode": 91,
-          "phone": "9890425946"
+          "phone": "9999999999"
         }
       ],
       "firstName": "Nikhil",
@@ -2154,10 +2154,10 @@ Default
           "active": true,
           "primary": true,
           "verified": true,
-          "email": "nikhilmshchs@gmail.com"
+          "email": "niktest@xyz.com"
         }
       ],
-      "username": "nikhilmshchs_gmail_com_38425_20500281",
+      "username": "niktest_xyz_com_38425_20500281",
       "createdAt": "2019-01-01T17:22:38.528Z",
       "updatedAt": "2021-01-22T10:02:42.258Z",
       "uid": "20500281",
@@ -2205,7 +2205,7 @@ Default
             "primary": true,
             "verified": true,
             "countryCode": 91,
-            "phone": "9890425946"
+            "phone": "9999999999"
           }
         ],
         "firstName": "Nikhil",
@@ -2215,10 +2215,10 @@ Default
             "active": true,
             "primary": true,
             "verified": true,
-            "email": "nikhilmshchs@gmail.com"
+            "email": "niktest@xyz.com"
           }
         ],
-        "username": "nikhilmshchs_gmail_com_38425_20500281",
+        "username": "niktest_xyz_com_38425_20500281",
         "createdAt": "2019-01-01T17:22:38.528Z",
         "updatedAt": "2021-01-22T10:02:42.258Z",
         "uid": "20500281",
@@ -2389,7 +2389,7 @@ Default
           "primary": true,
           "verified": true,
           "countryCode": 91,
-          "phone": "9890425946"
+          "phone": "9999999999"
         }
       ],
       "firstName": "Nikhil",
@@ -2399,10 +2399,10 @@ Default
           "active": true,
           "primary": true,
           "verified": true,
-          "email": "nikhilmshchs@gmail.com"
+          "email": "niktest@xyz.com"
         }
       ],
-      "username": "nikhilmshchs_gmail_com_38425_20500281",
+      "username": "niktest_xyz_com_38425_20500281",
       "createdAt": "2019-01-01T17:22:38.528Z",
       "updatedAt": "2021-01-22T10:02:42.258Z",
       "uid": "20500281",
@@ -2450,7 +2450,7 @@ Default
             "primary": true,
             "verified": true,
             "countryCode": 91,
-            "phone": "9890425946"
+            "phone": "9999999999"
           }
         ],
         "firstName": "Nikhil",
@@ -2460,10 +2460,10 @@ Default
             "active": true,
             "primary": true,
             "verified": true,
-            "email": "nikhilmshchs@gmail.com"
+            "email": "niktest@xyz.com"
           }
         ],
-        "username": "nikhilmshchs_gmail_com_38425_20500281",
+        "username": "niktest_xyz_com_38425_20500281",
         "createdAt": "2019-01-01T17:22:38.528Z",
         "updatedAt": "2021-01-22T10:02:42.258Z",
         "uid": "20500281",
@@ -2635,7 +2635,7 @@ Default
           "primary": true,
           "verified": true,
           "countryCode": 91,
-          "phone": "9890425946"
+          "phone": "9999999999"
         }
       ],
       "firstName": "Nikhil",
@@ -2645,10 +2645,10 @@ Default
           "active": true,
           "primary": true,
           "verified": true,
-          "email": "nikhilmshchs@gmail.com"
+          "email": "niktest@xyz.com"
         }
       ],
-      "username": "nikhilmshchs_gmail_com_38425_20500281",
+      "username": "niktest_xyz_com_38425_20500281",
       "createdAt": "2019-01-01T17:22:38.528Z",
       "updatedAt": "2021-01-22T10:02:42.258Z",
       "uid": "20500281",
@@ -2696,7 +2696,7 @@ Default
             "primary": true,
             "verified": true,
             "countryCode": 91,
-            "phone": "9890425946"
+            "phone": "9999999999"
           }
         ],
         "firstName": "Nikhil",
@@ -2706,10 +2706,10 @@ Default
             "active": true,
             "primary": true,
             "verified": true,
-            "email": "nikhilmshchs@gmail.com"
+            "email": "niktest@xyz.com"
           }
         ],
-        "username": "nikhilmshchs_gmail_com_38425_20500281",
+        "username": "niktest_xyz_com_38425_20500281",
         "createdAt": "2019-01-01T17:22:38.528Z",
         "updatedAt": "2021-01-22T10:02:42.258Z",
         "uid": "20500281",
@@ -2972,7 +2972,7 @@ Default
               "active": true,
               "primary": true,
               "verified": true,
-              "phone": "8412805281",
+              "phone": "9999999999",
               "countryCode": 91
             }
           ],
@@ -2983,10 +2983,10 @@ Default
               "active": true,
               "primary": true,
               "verified": true,
-              "email": "satyenmaurya95@gmail.com"
+              "email": "sattest@xyz.com"
             }
           ],
-          "username": "satyenmaurya95_gmail_com_11118",
+          "username": "sat5_xyz_com_11118",
           "createdAt": "2020-10-10T05:33:31.119Z",
           "updatedAt": "2020-10-10T05:33:31.119Z",
           "uid": "5678",
@@ -3019,25 +3019,25 @@ Default
               "active": true,
               "primary": true,
               "verified": true,
-              "email": "nikhilmshchs@gmail.com"
+              "email": "niktest@xyz.com"
             },
             {
               "active": true,
               "primary": false,
               "verified": true,
-              "email": "nikhilmanapure@gofynd.com"
+              "email": "xyz@xyz.com"
             },
             {
               "active": true,
               "primary": false,
               "verified": true,
-              "email": "nikhilmanapure@fynd.com"
+              "email": "xyz@xyz.com"
             },
             {
               "active": true,
               "primary": false,
               "verified": true,
-              "email": "nikhilmanapure@uniket.store"
+              "email": "xyz@xyz.com"
             }
           ],
           "phoneNumbers": [
@@ -3046,12 +3046,12 @@ Default
               "primary": true,
               "verified": true,
               "countryCode": 91,
-              "phone": "9890425946"
+              "phone": "9999999999"
             }
           ],
           "firstName": "Nikhil",
           "lastName": "Manapure",
-          "username": "nikhilmanapure_gofynd_com_29298",
+          "username": "xyz_xyz_com",
           "createdAt": "2020-03-24T10:55:29.298Z",
           "updatedAt": "2020-05-12T07:46:41.816Z",
           "uid": "5567",
@@ -3394,7 +3394,7 @@ Default
               "active": true,
               "primary": true,
               "verified": true,
-              "phone": "8412805281",
+              "phone": "9999999999",
               "countryCode": 91
             }
           ],
@@ -3405,10 +3405,10 @@ Default
               "active": true,
               "primary": true,
               "verified": true,
-              "email": "satyenmaurya95@gmail.com"
+              "email": "sattest@xyz.com"
             }
           ],
-          "username": "satyenmaurya95_gmail_com_11118",
+          "username": "sat5_xyz_com_11118",
           "createdAt": "2020-10-10T05:33:31.119Z",
           "updatedAt": "2020-10-10T05:33:31.119Z",
           "uid": "5678",
@@ -3441,25 +3441,25 @@ Default
               "active": true,
               "primary": true,
               "verified": true,
-              "email": "nikhilmshchs@gmail.com"
+              "email": "niktest@xyz.com"
             },
             {
               "active": true,
               "primary": false,
               "verified": true,
-              "email": "nikhilmanapure@gofynd.com"
+              "email": "xyz@xyz.com"
             },
             {
               "active": true,
               "primary": false,
               "verified": true,
-              "email": "nikhilmanapure@fynd.com"
+              "email": "xyz@xyz.com"
             },
             {
               "active": true,
               "primary": false,
               "verified": true,
-              "email": "nikhilmanapure@uniket.store"
+              "email": "xyz@xyz.com"
             }
           ],
           "phoneNumbers": [
@@ -3468,12 +3468,12 @@ Default
               "primary": true,
               "verified": true,
               "countryCode": 91,
-              "phone": "9890425946"
+              "phone": "9999999999"
             }
           ],
           "firstName": "Nikhil",
           "lastName": "Manapure",
-          "username": "nikhilmanapure_gofynd_com_29298",
+          "username": "xyz_xyz_com",
           "createdAt": "2020-03-24T10:55:29.298Z",
           "updatedAt": "2020-05-12T07:46:41.816Z",
           "uid": "5567",
@@ -54152,12 +54152,12 @@ Schema: `OrderStatusResult`
 ## Catalog
 
 
-#### deleteSearchKeywords
-Delete a Search Keywords
+#### getSearchKeywords
+Get a Search Keywords Details
 
 ```golang
 
-data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
+data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -54169,20 +54169,20 @@ data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
 
 
 
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
 
 *Success Response:*
 
 
 
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
 
 
-Schema: `DeleteResponse`
+Schema: `GetSearchWordsDetailResponse`
 
 
 
@@ -54239,12 +54239,12 @@ Schema: `GetSearchWordsData`
 ---
 
 
-#### getSearchKeywords
-Get a Search Keywords Details
+#### deleteSearchKeywords
+Delete a Search Keywords
 
 ```golang
 
-data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
+data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -54256,20 +54256,20 @@ data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
 
 
 
-Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
 
 *Success Response:*
 
 
 
-The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
 
 
-Schema: `GetSearchWordsDetailResponse`
+Schema: `DeleteResponse`
 
 
 
@@ -54363,12 +54363,12 @@ Schema: `GetSearchWordsResponse`
 ---
 
 
-#### deleteAutocompleteKeyword
-Delete a Autocomplete Keywords
+#### getAutocompleteKeywordDetail
+Get a Autocomplete Keywords Details
 
 ```golang
 
-data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
+data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -54380,20 +54380,20 @@ data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
 
 
 
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
 
 *Success Response:*
 
 
 
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
 
 
-Schema: `DeleteResponse`
+Schema: `GetAutocompleteWordsResponse`
 
 
 
@@ -54450,12 +54450,12 @@ Schema: `GetAutocompleteWordsResponse`
 ---
 
 
-#### getAutocompleteKeywordDetail
-Get a Autocomplete Keywords Details
+#### deleteAutocompleteKeyword
+Delete a Autocomplete Keywords
 
 ```golang
 
-data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
+data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -54467,20 +54467,20 @@ data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
 
 
 
-Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
 
 *Success Response:*
 
 
 
-The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
 
 
-Schema: `GetAutocompleteWordsResponse`
+Schema: `DeleteResponse`
 
 
 
@@ -55131,52 +55131,6 @@ Schema: `GetConfigResponse`
 ---
 
 
-#### deleteGroupConfiguration
-Delete configuration of the product config type of the application.
-
-```golang
-
-data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
-
-
-| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
-
-
-
-Delete configuration of the product config type of the application.
-
-*Success Response:*
-
-
-
-success message will tell whether the operation was successful.
-
-
-Schema: `ConfigSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateGroupConfiguration
 Update the group configurations for the application.
 
@@ -55212,6 +55166,52 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationDetail`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteGroupConfiguration
+Delete configuration of the product config type of the application.
+
+```golang
+
+data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
+
+
+| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration of the product config type of the application.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
 
 
 
@@ -55318,52 +55318,6 @@ Schema: `GetConfigResponse`
 ---
 
 
-#### deleteListingConfiguration
-Delete configuration for listings
-
-```golang
-
-data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
-
-
-| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
-
-
-
-Delete configuration for listing.
-
-*Success Response:*
-
-
-
-success message will tell whether the operation was successful.
-
-
-Schema: `ConfigSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateListingConfiguration
 Update configuration for listings
 
@@ -55399,6 +55353,52 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationsSort`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteListingConfiguration
+Delete configuration for listings
+
+```golang
+
+data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
+
+
+| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration for listing.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
 
 
 
@@ -55880,49 +55880,6 @@ Schema: `CollectionDetailResponse`
 ---
 
 
-#### deleteCollection
-Delete a Collection
-
-```golang
-
-data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier of a collection. | 
-
-
-
-Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateCollection
 Update a collection
 
@@ -55955,6 +55912,49 @@ The Collection object. See example below or refer `UpdateCollectionSchema` for d
 
 
 Schema: `UpdateCollection`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteCollection
+Delete a Collection
+
+```golang
+
+data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier of a collection. | 
+
+
+
+Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -57302,34 +57302,39 @@ Schema: `ProductAttributesResponse`
 ---
 
 
-#### deleteProduct
-Delete a product.
+#### getProduct
+Get a single product.
 
 ```golang
 
-data, err := Catalog.DeleteProduct(CompanyID, ItemID);
+data, err := Catalog.GetProduct(CompanyID, ItemID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
+| CompanyID | float64 | Company Id of the product. | 
 
 
-| ItemID | float64 | Id of the product to be updated. | 
+| ItemID | float64 | Item Id of the product. | 
 
 
 
-This API allows to delete product.
+
+
+| xQuery | struct | Includes properties such as `BrandUID`, `ItemCode`
+
+
+This API helps to get data associated to a particular product.
 
 *Success Response:*
 
 
 
-Returns a success response
+Product object. See example below or refer `product.utils.format_product_response` for details
 
 
-Schema: `SuccessResponse`
+Schema: `SingleProductResponse`
 
 
 
@@ -57383,39 +57388,34 @@ Schema: `SuccessResponse`
 ---
 
 
-#### getProduct
-Get a single product.
+#### deleteProduct
+Delete a product.
 
 ```golang
 
-data, err := Catalog.GetProduct(CompanyID, ItemID, xQuery);
+data, err := Catalog.DeleteProduct(CompanyID, ItemID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id of the product. | 
+| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
 
 
-| ItemID | float64 | Item Id of the product. | 
-
-
+| ItemID | float64 | Id of the product to be updated. | 
 
 
 
-| xQuery | struct | Includes properties such as `BrandUID`, `ItemCode`
-
-
-This API helps to get data associated to a particular product.
+This API allows to delete product.
 
 *Success Response:*
 
 
 
-Product object. See example below or refer `product.utils.format_product_response` for details
+Returns a success response
 
 
-Schema: `SingleProductResponse`
+Schema: `SuccessResponse`
 
 
 
