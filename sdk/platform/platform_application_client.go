@@ -22854,12 +22854,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     //PlatformAppGetShipmentsXQuery holds query params
     type PlatformAppGetShipmentsXQuery struct { 
+        PickAtStoreUID float64  `url:"pick_at_store_uid,omitempty"` 
+        OrderingStoreID float64  `url:"ordering_store_id,omitempty"` 
         P bool  `url:"p,omitempty"` 
         ID string  `url:"id,omitempty"` 
-        BuyNow bool  `url:"buy_now,omitempty"` 
         AddressID string  `url:"address_id,omitempty"` 
         AreaCode string  `url:"area_code,omitempty"` 
-        OrderingStoreID float64  `url:"ordering_store_id,omitempty"` 
         OrderType string  `url:"order_type,omitempty"`  
     }
     
@@ -22915,73 +22915,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return CartShipmentsResponse{}, common.NewFDKError(err.Error())
         }
         return getShipmentsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    //PlatformAppGetShipmentDeliveryXQuery holds query params
-    type PlatformAppGetShipmentDeliveryXQuery struct { 
-        I bool  `url:"i,omitempty"` 
-        P bool  `url:"p,omitempty"` 
-        ID string  `url:"id,omitempty"` 
-        AddressID string  `url:"address_id,omitempty"` 
-        OrderType string  `url:"order_type,omitempty"`  
-    }
-    
-    // GetShipmentDelivery Get delivery date and options before checkout
-     func (ca *PlatformAppCart)  GetShipmentDelivery(xQuery PlatformAppGetShipmentDeliveryXQuery) (CartShipmentsResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getShipmentDeliveryResponse CartShipmentsResponse
-	    )
-
-        
-
-         
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/shipments/delivery",ca.CompanyID, ca.ApplicationID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return CartShipmentsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getShipmentDeliveryResponse)
-        if err != nil {
-            return CartShipmentsResponse{}, common.NewFDKError(err.Error())
-        }
-        return getShipmentDeliveryResponse, nil
         
     }
            
@@ -23050,7 +22983,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             ca.config,
             "put",
-            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/shipments/delivery",ca.CompanyID, ca.ApplicationID),
+            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/shipment",ca.CompanyID, ca.ApplicationID),
             nil,
             xQuery,
             reqBody)
