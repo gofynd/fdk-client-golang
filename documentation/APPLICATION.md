@@ -16350,14 +16350,11 @@ Get payment gateway keys
 
 ```golang
 
- data, err :=  Payment.GetAggregatorsConfig(XAPIToken, xQuery);
+ data, err :=  Payment.GetAggregatorsConfig(xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
-
-| XAPIToken | string | Used for basic authentication. | 
-
 
 
 | xQuery | struct | Includes properties such as `Refresh`

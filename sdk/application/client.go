@@ -10267,7 +10267,7 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // GetAggregatorsConfig Get payment gateway keys
-    func (pa *Payment)  GetAggregatorsConfig(XAPIToken string, xQuery PaymentGetAggregatorsConfigXQuery) (AggregatorsConfigDetailResponse, error){
+    func (pa *Payment)  GetAggregatorsConfig(xQuery PaymentGetAggregatorsConfigXQuery) (AggregatorsConfigDetailResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -10285,12 +10285,6 @@ func NewAppClient(config *AppConfig) *Client {
 
         
     
-        
-        //Adding extra headers
-        var xHeaders = make(map[string]string) 
-        
-         
-         xHeaders["x-api-token"] =  XAPIToken
          
         
         
@@ -10299,7 +10293,7 @@ func NewAppClient(config *AppConfig) *Client {
             pa.config,
             "get",
             "/service/application/payment/v1.0/config/aggregators/key",
-            xHeaders,
+            nil,
             xQuery,
             nil)
         response, err = rawRequest.Execute()
