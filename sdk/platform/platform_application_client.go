@@ -11664,6 +11664,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+    
+    
 
  
 	 
@@ -21252,7 +21254,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         ID string  `url:"id,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"` 
         AddressID string  `url:"address_id,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"`  
+        AreaCode string  `url:"area_code,omitempty"` 
+        OrderingStoreID float64  `url:"ordering_store_id,omitempty"` 
+        OrderType string  `url:"order_type,omitempty"`  
     }
     
     // GetShipments Get delivery date and options before checkout
@@ -21267,6 +21271,10 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
 
          
+            
+                
+            
+                
             
                 
             
