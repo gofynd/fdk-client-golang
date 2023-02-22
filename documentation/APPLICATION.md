@@ -16,7 +16,7 @@
 * [Order](#Order) - Handles Platform websites OMS 
 * [Rewards](#Rewards) - Earn and redeem reward points 
 * [PosCart](#PosCart) - Cart APIs 
-* [Logistic](#Logistic) - Handles Platform websites OMS 
+* [Logistic](#Logistic) - Logistics Promise Engine APIs allows you to configure zone, pincode, TAT, logistics and many more useful features.  
 
 ----
 ----
@@ -315,9 +315,9 @@
 
 * [Logistic](#Logistic)
   * Methods
-    * [getTatProduct](#gettatproduct)
-    * [getPincodeZones](#getpincodezones)
     * [getPincodeCity](#getpincodecity)
+    * [getTatProduct](#gettatproduct)
+    * [upsertZoneControllerView](#upsertzonecontrollerview)
     
 
 
@@ -22426,80 +22426,8 @@ Cart Merged/Replaced
 ## Logistic
 
 
-#### getTatProduct
-Get TAT of a product
-
-```golang
-
- data, err :=  Logistic.GetTatProduct(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  GetTatProductReqBody | "Request body" 
-
-
-Use this API to know the delivery turnaround time (TAT) by entering the product details along with the PIN Code of the location.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `GetTatProductResponse` for more details.
-
-
-Schema: `GetTatProductResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPincodeZones
-Get Pincode Zones
-
-```golang
-
- data, err :=  Logistic.GetPincodeZones(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  GetPincodeZonesReqBody | "Request body" 
-
-
-Get to know the zones of a specefic pincode
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `GetTatProductResponse` for more details.
-
-
-Schema: `GetPincodeZonesResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getPincodeCity
-Get city from PIN Code
+Get Pincode API
 
 ```golang
 
@@ -22509,21 +22437,284 @@ Get city from PIN Code
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Pincode | string | The PIN Code of the area, e.g. 400059 | 
+| Pincode | string | A `pincode` contains a specific address of a location. | 
 
 
 
 
-Use this API to retrieve a city by its PIN Code.
+Get pincode data
 
 *Success Response:*
 
 
 
-Success. Returns a JSON object containing the city name, state and country identified by its PIN Code. Check the example shown below or refer `GetPincodeCityResponse` for more details.
+Get pincode data
 
 
-Schema: `GetPincodeCityResponse`
+Schema: `PincodeApiResponse`
+
+
+*Examples:*
+
+
+Pincode data found
+```json
+{
+  "value": {
+    "data": [
+      {
+        "sub_type": "pincode",
+        "name": "421202",
+        "error": {
+          "type": null,
+          "value": null,
+          "message": null
+        },
+        "uid": "pincode:INDIA|MAHARASHTRA|MUMBAI|421202",
+        "display_name": "421202",
+        "meta": {
+          "zone": "West",
+          "internal_zone_id": 4
+        },
+        "parents": [
+          {
+            "sub_type": "country",
+            "name": "India",
+            "display_name": "India",
+            "uid": "country:INDIA"
+          },
+          {
+            "sub_type": "state",
+            "name": "Maharashtra",
+            "display_name": "Maharashtra",
+            "uid": "state:INDIA|MAHARASHTRA"
+          },
+          {
+            "sub_type": "city",
+            "name": "Thane",
+            "display_name": "Thane",
+            "uid": "city:INDIA|MAHARASHTRA|MUMBAI"
+          }
+        ]
+      }
+    ],
+    "request_uuid": "fce9f431215e71c9ee0e86e792ae1dce4",
+    "stormbreaker_uuid": "56cca764-9fab-41f4-adb8-6e9683532aa5",
+    "error": {
+      "type": null,
+      "value": null,
+      "message": null
+    },
+    "success": true
+  }
+}
+```
+
+Pincode not found
+```json
+{
+  "value": {
+    "data": [
+      {
+        "sub_type": "pincode",
+        "name": "999999",
+        "error": {
+          "type": "DoesNotExist",
+          "value": "999999",
+          "message": "pincode 999999 does not exist"
+        }
+      }
+    ],
+    "request_uuid": "fce9fb9215e71c9ee0e86e792ae1dce4",
+    "stormbreaker_uuid": "03b353ed-9dbd-4629-80b2-2be337859a20",
+    "error": {
+      "type": null,
+      "value": null,
+      "message": null
+    },
+    "success": false
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getTatProduct
+Get TAT API
+
+```golang
+
+ data, err :=  Logistic.GetTatProduct(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  TATViewRequest | "Request body" 
+
+
+Get TAT data
+
+*Success Response:*
+
+
+
+Get TAT  data
+
+
+Schema: `TATViewResponse`
+
+
+*Examples:*
+
+
+Pincode data found
+```json
+{
+  "value": {
+    "source": "FYND-APP",
+    "identifier": "PDP",
+    "journey": "forward",
+    "action": "get_tat",
+    "to_pincode": "143001",
+    "location_details": [
+      {
+        "fulfillment_id": 8,
+        "from_pincode": "560023",
+        "articles": [
+          {
+            "category": {
+              "level": "l3",
+              "id": 155
+            },
+            "manufacturing_time": 2,
+            "manufacturing_time_unit": "days",
+            "promise": {
+              "timestamp": {
+                "min": 1663564548,
+                "max": 1663650948
+              },
+              "formatted": {
+                "min": "19 Sep, Monday",
+                "max": "20 Sep, Tuesday"
+              }
+            },
+            "error": {
+              "type": null,
+              "value": null,
+              "message": null
+            },
+            "is_cod_available": true,
+            "_manufacturing_time_seconds": 172800
+          }
+        ]
+      }
+    ],
+    "request_uuid": "b4adf5508e34f17971817c3581e16310",
+    "stormbreaker_uuid": "4b8084d4-ea74-45af-8ddc-c38e29bf0cfb",
+    "error": {
+      "type": null,
+      "value": null,
+      "message": null
+    },
+    "to_city": "Amritsar",
+    "payment_mode": "prepaid",
+    "is_cod_available": true,
+    "success": true
+  }
+}
+```
+
+Pincode not found
+```json
+{
+  "value": {
+    "source": "FYND-APP",
+    "identifier": "PDP",
+    "journey": "forward",
+    "action": "get_tat",
+    "to_pincode": "99999",
+    "location_details": [
+      {
+        "fulfillment_id": 8,
+        "from_pincode": "560023",
+        "articles": [
+          {
+            "category": {
+              "level": "l3",
+              "id": 155
+            },
+            "manufacturing_time": 2,
+            "manufacturing_time_unit": "days",
+            "promise": null,
+            "error": {
+              "type": "ValueError",
+              "value": "99999",
+              "message": "We are not delivering to 99999"
+            }
+          }
+        ]
+      }
+    ],
+    "request_uuid": "4b99d15fddb2b9fc2d6ab99a1c933010",
+    "stormbreaker_uuid": "6a847909-1d59-43e7-9ae0-15f5de8fc7d7",
+    "error": {
+      "type": "ValueError",
+      "value": "99999",
+      "message": "All of the items in your cart are not deliverable to 99999"
+    },
+    "to_city": "",
+    "payment_mode": "prepaid",
+    "is_cod_available": true,
+    "success": false
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### upsertZoneControllerView
+GET zone from the Pincode.
+
+```golang
+
+ data, err :=  Logistic.UpsertZoneControllerView(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  GetZoneFromPincodeViewRequest | "Request body" 
+
+
+This API returns zone from the Pincode View.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `GetZoneFromPincodeViewResponse`
 
 
 
