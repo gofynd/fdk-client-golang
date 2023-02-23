@@ -620,17 +620,20 @@
 
 * [Serviceability](#Serviceability)
   * Methods
-    * [postApplicationServiceability](#postapplicationserviceability)
     * [getApplicationServiceability](#getapplicationserviceability)
     * [getEntityRegionView](#getentityregionview)
     * [getListView](#getlistview)
     * [getCompanyStoreView](#getcompanystoreview)
-    * [getZoneDataView](#getzonedataview)
     * [updateZoneControllerView](#updatezonecontrollerview)
+    * [getZoneDataView](#getzonedataview)
+    * [insertZoneControllerView](#insertzonecontrollerview)
     * [upsertZoneControllerView](#upsertzonecontrollerview)
-    * [getZoneFromPincodeView](#getzonefrompincodeview)
-    * [getZonesFromApplicationIdView](#getzonesfromapplicationidview)
-    * [getZoneListView](#getzonelistview)
+    * [getStore](#getstore)
+    * [getAllStores](#getallstores)
+    * [updatePincodeMopView](#updatepincodemopview)
+    * [updatePincodeBulkView](#updatepincodebulkview)
+    * [updatePincodeCoDListing](#updatepincodecodlisting)
+    * [updatePincodeAuditHistory](#updatepincodeaudithistory)
     
 
 
@@ -65765,47 +65768,6 @@ default
 ## Serviceability
 
 
-#### postApplicationServiceability
-Zone configuration of application.
-
-```golang
-
-data, err := Serviceability.PostApplicationServiceability(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| body |  ApplicationServiceabilityConfig | "Request body" 
-
-This API returns serviceability config of the application.
-
-*Success Response:*
-
-
-
-Response Data
-
-
-Schema: `ApplicationServiceabilityConfigResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getApplicationServiceability
 Zone configuration of application.
 
@@ -65860,7 +65822,7 @@ data, err := Serviceability.GetEntityRegionView(CompanyID, body);
 | CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
 
 
-| body |  EntityRegionViewRequest | "Request body" 
+| body |  EntityRegionView_Request | "Request body" 
 
 This API returns response for Entity Region View.
 
@@ -65871,7 +65833,7 @@ This API returns response for Entity Region View.
 Response status_code
 
 
-Schema: `EntityRegionViewResponse`
+Schema: `EntityRegionView_Response`
 
 
 
@@ -65907,13 +65869,7 @@ data, err := Serviceability.GetListView(CompanyID, xQuery);
 
 
 
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNumber`, `PageNo`, `PageSize`, `Name`, `IsActive`, `ChannelIds`, `Q`, `ZoneID`
+| xQuery | struct | Includes properties such as `PageNumber`, `PageSize`, `Name`, `IsActive`, `ChannelIds`
 
 
 This API returns Zone List View of the application.
@@ -65975,46 +65931,6 @@ Schema: `CompanyStoreView_Response`
 ---
 
 
-#### getZoneDataView
-Zone Data View of application.
-
-```golang
-
-data, err := Serviceability.GetZoneDataView(CompanyID, ZoneID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
-
-
-
-This API returns Zone Data View of the application.
-
-*Success Response:*
-
-
-
-Get Application Zone Data
-
-
-Schema: `GetSingleZoneDataViewResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateZoneControllerView
 Updation of zone collections in database.
 
@@ -66056,12 +65972,52 @@ Schema: `ZoneSuccessResponse`
 ---
 
 
-#### upsertZoneControllerView
+#### getZoneDataView
+Zone Data View of application.
+
+```golang
+
+data, err := Serviceability.GetZoneDataView(CompanyID, ZoneID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
+
+
+
+This API returns Zone Data View of the application.
+
+*Success Response:*
+
+
+
+Get Application Zone Data
+
+
+Schema: `GetSingleZoneDataViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### insertZoneControllerView
 Insertion of zone in database.
 
 ```golang
 
-data, err := Serviceability.UpsertZoneControllerView(CompanyID, body);
+data, err := Serviceability.InsertZoneControllerView(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -66072,7 +66028,7 @@ data, err := Serviceability.UpsertZoneControllerView(CompanyID, body);
 
 | body |  ZoneRequest | "Request body" 
 
-This API returns response of insertion of zone in mongo database.<br>Correction- `zone_id` in the path must be removed.<br> path is `/service/platform/logistics-internal/v1.0/company/{company_id}/zone/`
+This API returns response of insertion of zone in mongo database.<br>Correction- `zone_id` in the path must be removed.<br> path is `/service/platform/logistics-internal/v1.0/company/{}/zone/`
 
 *Success Response:*
 
@@ -66094,12 +66050,12 @@ Schema: `ZoneResponse`
 ---
 
 
-#### getZoneFromPincodeView
+#### upsertZoneControllerView
 GET zone from the Pincode.
 
 ```golang
 
-data, err := Serviceability.GetZoneFromPincodeView(CompanyID, ApplicationID, xQuery, body);
+data, err := Serviceability.UpsertZoneControllerView(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -66110,9 +66066,6 @@ data, err := Serviceability.GetZoneFromPincodeView(CompanyID, ApplicationID, xQu
 
 | ApplicationID | string | A `application_id` contains a unique ID. | 
 
-
-
-| xQuery | struct | Includes properties such as `Country`
 
 | body |  GetZoneFromPincodeViewRequest | "Request body" 
 
@@ -66138,43 +66091,34 @@ Schema: `GetZoneFromPincodeViewResponse`
 ---
 
 
-#### getZonesFromApplicationIdView
-GET zones from the application_id.
+#### getStore
+GET stores data
 
 ```golang
 
-data, err := Serviceability.GetZonesFromApplicationIdView(CompanyID, ApplicationID, xQuery);
+data, err := Serviceability.GetStore(CompanyID, StoreUID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | A `company_id` contains a specific ID of a company. | 
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
 
 
-| ApplicationID | string | A `application_id` contains a unique ID. | 
-
-
-
+| StoreUID | float64 | A `store_uid` contains a specific ID of a store. | 
 
 
 
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `ZoneID`, `Q`
-
-
-This API returns zones from the application_id View.
+This API returns stores data.
 
 *Success Response:*
 
 
 
-List of zones for the given application_id
+Response status_code
 
 
-Schema: `GetZoneFromApplicationIdViewResponse`
+Schema: `GetStoresViewResponse`
 
 
 
@@ -66187,12 +66131,12 @@ Schema: `GetZoneFromApplicationIdViewResponse`
 ---
 
 
-#### getZoneListView
-Zone List of application.
+#### getAllStores
+GET stores data
 
 ```golang
 
-data, err := Serviceability.GetZoneListView(CompanyID, xQuery);
+data, err := Serviceability.GetAllStores(CompanyID);
 ```
 
 | Argument  |  Type  | Description |
@@ -66202,33 +66146,180 @@ data, err := Serviceability.GetZoneListView(CompanyID, xQuery);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNumber`, `PageNo`, `PageSize`, `Name`, `IsActive`, `ChannelIds`, `Q`, `ZoneID`
-
-
-This API returns Zone List View of the application.
+This API returns stores data.
 
 *Success Response:*
 
 
 
-Zone List of application in descending order of their last modified date.
+Response status_code
 
 
-Schema: `ListViewResponse`
+Schema: `GetStoresViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updatePincodeMopView
+PincodeView update of MOP.
+
+```golang
+
+data, err := Serviceability.UpdatePincodeMopView(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  PincodeMopData | "Request body" 
+
+This API updates Pincode method of payment.
+
+*Success Response:*
+
+
+
+Response Data
+
+
+Schema: `PincodeMOPresponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updatePincodeBulkView
+Bulk Update of pincode in the application.
+
+```golang
+
+data, err := Serviceability.UpdatePincodeBulkView(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  PincodeMopBulkData | "Request body" 
+
+This API constructs bulk write operations to update the MOP data for each pincode in the payload.
+
+*Success Response:*
+
+
+
+Response Data
+
+
+Schema: `PincodeBulkViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updatePincodeCoDListing
+Pincode count view of application.
+
+```golang
+
+data, err := Serviceability.UpdatePincodeCoDListing(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  PincodeCodStatusListingRequest | "Request body" 
+
+This API returns count of active pincode.
+
+*Success Response:*
+
+
+
+Response Data
+
+
+Schema: `PincodeCodStatusListingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updatePincodeAuditHistory
+Auditlog configuration of application.
+
+```golang
+
+data, err := Serviceability.UpdatePincodeAuditHistory(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  PincodeMopUpdateAuditHistoryRequest | "Request body" 
+
+This API returns Audit logs of Pincode.
+
+*Success Response:*
+
+
+
+Response Data
+
+
+Schema: `PincodeMopUpdateAuditHistoryResponseData`
 
 
 

@@ -21694,67 +21694,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // PostApplicationServiceability Zone configuration of application.
-     func (se *PlatformAppServiceability)  PostApplicationServiceability(body  ApplicationServiceabilityConfig) (ApplicationServiceabilityConfigResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            postApplicationServiceabilityResponse ApplicationServiceabilityConfigResponse
-	    )
-
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return ApplicationServiceabilityConfigResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return ApplicationServiceabilityConfigResponse{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            se.config,
-            "post",
-            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/application/%s/serviceability",se.CompanyID, se.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ApplicationServiceabilityConfigResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &postApplicationServiceabilityResponse)
-        if err != nil {
-            return ApplicationServiceabilityConfigResponse{}, common.NewFDKError(err.Error())
-        }
-        return postApplicationServiceabilityResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // GetApplicationServiceability Zone configuration of application.
      func (se *PlatformAppServiceability)  GetApplicationServiceability() (ApplicationServiceabilityConfigResponse, error) {
         var (
@@ -21777,7 +21716,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             se.config,
             "get",
-            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/application/%s/serviceability",se.CompanyID, se.ApplicationID),
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/serviceability",se.CompanyID, se.ApplicationID),
             nil,
             nil,
             nil)
@@ -21813,18 +21752,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    //PlatformAppGetZoneFromPincodeViewXQuery holds query params
-    type PlatformAppGetZoneFromPincodeViewXQuery struct { 
-        Country string  `url:"country,omitempty"`  
-    }
-    
-    // GetZoneFromPincodeView GET zone from the Pincode.
-     func (se *PlatformAppServiceability)  GetZoneFromPincodeView(xQuery PlatformAppGetZoneFromPincodeViewXQuery, body  GetZoneFromPincodeViewRequest) (GetZoneFromPincodeViewResponse, error) {
+    // UpsertZoneControllerView GET zone from the Pincode.
+     func (se *PlatformAppServiceability)  UpsertZoneControllerView(body  GetZoneFromPincodeViewRequest) (GetZoneFromPincodeViewResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getZoneFromPincodeViewResponse GetZoneFromPincodeViewResponse
+            upsertZoneControllerViewResponse GetZoneFromPincodeViewResponse
 	    )
 
         
@@ -21834,10 +21768,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
 
          
-            
-                
-            
-        
 
         
         
@@ -21861,20 +21791,89 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             se.config,
             "post",
-            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/application/%s/zones",se.CompanyID, se.ApplicationID),
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/zones",se.CompanyID, se.ApplicationID),
             nil,
-            xQuery,
+            nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
             return GetZoneFromPincodeViewResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getZoneFromPincodeViewResponse)
+        err = json.Unmarshal(response, &upsertZoneControllerViewResponse)
         if err != nil {
             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
         }
-        return getZoneFromPincodeViewResponse, nil
+        return upsertZoneControllerViewResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+    
+    
+    
+    
+  
+
+    
+    // UpdatePincodeMopView PincodeView update of MOP.
+     func (se *PlatformAppServiceability)  UpdatePincodeMopView(body  PincodeMopData) (PincodeMOPresponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updatePincodeMopViewResponse PincodeMOPresponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PincodeMOPresponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PincodeMOPresponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/pincode-mop-update",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PincodeMOPresponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updatePincodeMopViewResponse)
+        if err != nil {
+            return PincodeMOPresponse{}, common.NewFDKError(err.Error())
+        }
+        return updatePincodeMopViewResponse, nil
         
     }
            
@@ -21885,66 +21884,195 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    //PlatformAppGetZonesFromApplicationIdViewXQuery holds query params
-    type PlatformAppGetZonesFromApplicationIdViewXQuery struct { 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"` 
-        ZoneID []string  `url:"zone_id,omitempty"` 
-        Q string  `url:"q,omitempty"`  
-    }
-    
-    // GetZonesFromApplicationIdView GET zones from the application_id.
-     func (se *PlatformAppServiceability)  GetZonesFromApplicationIdView(xQuery PlatformAppGetZonesFromApplicationIdViewXQuery) (GetZoneFromApplicationIdViewResponse, error) {
+    // UpdatePincodeBulkView Bulk Update of pincode in the application.
+     func (se *PlatformAppServiceability)  UpdatePincodeBulkView(body  PincodeMopBulkData) (PincodeBulkViewResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getZonesFromApplicationIdViewResponse GetZoneFromApplicationIdViewResponse
+            updatePincodeBulkViewResponse PincodeBulkViewResponse
 	    )
 
         
-
-         
-            
-                
-            
-                
-            
-                
-            
-                
             
         
+            
+        
+
+         
 
         
         
          
         
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PincodeBulkViewResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PincodeBulkViewResponse{}, common.NewFDKError(err.Error())       
+        }
         
         //API call
         rawRequest = NewRequest(
             se.config,
-            "get",
-            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/application/%s/zones",se.CompanyID, se.ApplicationID),
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/pincode-mop-bulk-update",se.CompanyID, se.ApplicationID),
             nil,
-            xQuery,
-            nil)
+            nil,
+            reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return GetZoneFromApplicationIdViewResponse{}, err
+            return PincodeBulkViewResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getZonesFromApplicationIdViewResponse)
+        err = json.Unmarshal(response, &updatePincodeBulkViewResponse)
         if err != nil {
-            return GetZoneFromApplicationIdViewResponse{}, common.NewFDKError(err.Error())
+            return PincodeBulkViewResponse{}, common.NewFDKError(err.Error())
         }
-        return getZonesFromApplicationIdViewResponse, nil
+        return updatePincodeBulkViewResponse, nil
         
     }
            
        
     
     
+    
+  
+
+    
+    // UpdatePincodeCoDListing Pincode count view of application.
+     func (se *PlatformAppServiceability)  UpdatePincodeCoDListing(body  PincodeCodStatusListingRequest) (PincodeCodStatusListingResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updatePincodeCoDListingResponse PincodeCodStatusListingResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PincodeCodStatusListingResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PincodeCodStatusListingResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/pincode-mop-data",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PincodeCodStatusListingResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updatePincodeCoDListingResponse)
+        if err != nil {
+            return PincodeCodStatusListingResponse{}, common.NewFDKError(err.Error())
+        }
+        return updatePincodeCoDListingResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdatePincodeAuditHistory Auditlog configuration of application.
+     func (se *PlatformAppServiceability)  UpdatePincodeAuditHistory(body  PincodeMopUpdateAuditHistoryRequest) (PincodeMopUpdateAuditHistoryResponseData, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updatePincodeAuditHistoryResponse PincodeMopUpdateAuditHistoryResponseData
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PincodeMopUpdateAuditHistoryResponseData{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PincodeMopUpdateAuditHistoryResponseData{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/history",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PincodeMopUpdateAuditHistoryResponseData{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updatePincodeAuditHistoryResponse)
+        if err != nil {
+            return PincodeMopUpdateAuditHistoryResponseData{}, common.NewFDKError(err.Error())
+        }
+        return updatePincodeAuditHistoryResponse, nil
+        
+    }
+           
+       
     
 
  

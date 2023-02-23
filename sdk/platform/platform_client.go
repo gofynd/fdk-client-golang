@@ -14439,8 +14439,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
     
     
-    
-    
    
   
     
@@ -14448,13 +14446,13 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
 
     // GetEntityRegionView Get country and state list
-     func (se *PlatformServiceability)  GetEntityRegionView(body  EntityRegionViewRequest) (EntityRegionViewResponse, error){
+     func (se *PlatformServiceability)  GetEntityRegionView(body  EntityRegionView_Request) (EntityRegionView_Response, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getEntityRegionViewResponse EntityRegionViewResponse
+            getEntityRegionViewResponse EntityRegionView_Response
 	    )
 
         
@@ -14475,30 +14473,30 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
              
-             return EntityRegionViewResponse{}, common.NewFDKError(err.Error())
+             return EntityRegionView_Response{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
                
-             return EntityRegionViewResponse{}, common.NewFDKError(err.Error())
+             return EntityRegionView_Response{}, common.NewFDKError(err.Error())
         }
         
         //API call
         rawRequest = NewRequest(
             se.Config,
             "post",
-            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/regions",se.CompanyID),
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/regions",se.CompanyID),
             nil,
             nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-             return EntityRegionViewResponse{}, err
+             return EntityRegionView_Response{}, err
 	    }
         
         err = json.Unmarshal(response, &getEntityRegionViewResponse)
         if err != nil {
-             return EntityRegionViewResponse{}, common.NewFDKError(err.Error())
+             return EntityRegionView_Response{}, common.NewFDKError(err.Error())
         }
         return getEntityRegionViewResponse, nil
         
@@ -14515,13 +14513,10 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     //PlatformGetListViewXQuery holds query params
     type PlatformGetListViewXQuery struct { 
         PageNumber float64  `url:"page_number,omitempty"` 
-        PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
         Name string  `url:"name,omitempty"` 
         IsActive bool  `url:"is_active,omitempty"` 
-        ChannelIds string  `url:"channel_ids,omitempty"` 
-        Q string  `url:"q,omitempty"` 
-        ZoneID []string  `url:"zone_id,omitempty"`  
+        ChannelIds string  `url:"channel_ids,omitempty"`  
     }
     
 
@@ -14550,12 +14545,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             
                 
             
-                
-            
-                
-            
-                
-            
         
 
         
@@ -14567,7 +14556,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         rawRequest = NewRequest(
             se.Config,
             "get",
-            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/zones",se.CompanyID),
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/zones",se.CompanyID),
             nil,
             xQuery,
             nil)
@@ -14617,7 +14606,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         rawRequest = NewRequest(
             se.Config,
             "get",
-            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/all-stores",se.CompanyID),
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/all-stores",se.CompanyID),
             nil,
             nil,
             nil)
@@ -14631,58 +14620,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return CompanyStoreView_Response{}, common.NewFDKError(err.Error())
         }
         return getCompanyStoreViewResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // GetZoneDataView Zone Data View of application.
-     func (se *PlatformServiceability)  GetZoneDataView(ZoneID string) (GetSingleZoneDataViewResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getZoneDataViewResponse GetSingleZoneDataViewResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            se.Config,
-            "get",
-            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/zone/%s",se.CompanyID, ZoneID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return GetSingleZoneDataViewResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getZoneDataViewResponse)
-        if err != nil {
-             return GetSingleZoneDataViewResponse{}, common.NewFDKError(err.Error())
-        }
-        return getZoneDataViewResponse, nil
         
     }
          
@@ -14738,7 +14675,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         rawRequest = NewRequest(
             se.Config,
             "put",
-            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/zone/%s",ZoneID, se.CompanyID),
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/zone/%s",ZoneID, se.CompanyID),
             nil,
             nil,
             reqBody)
@@ -14765,14 +14702,66 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // UpsertZoneControllerView Insertion of zone in database.
-     func (se *PlatformServiceability)  UpsertZoneControllerView(body  ZoneRequest) (ZoneResponse, error){
+    // GetZoneDataView Zone Data View of application.
+     func (se *PlatformServiceability)  GetZoneDataView(ZoneID string) (GetSingleZoneDataViewResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            upsertZoneControllerViewResponse ZoneResponse
+            getZoneDataViewResponse GetSingleZoneDataViewResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.Config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/zone/%s",se.CompanyID, ZoneID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetSingleZoneDataViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getZoneDataViewResponse)
+        if err != nil {
+             return GetSingleZoneDataViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return getZoneDataViewResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // InsertZoneControllerView Insertion of zone in database.
+     func (se *PlatformServiceability)  InsertZoneControllerView(body  ZoneRequest) (ZoneResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            insertZoneControllerViewResponse ZoneResponse
 	    )
 
         
@@ -14805,7 +14794,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         rawRequest = NewRequest(
             se.Config,
             "post",
-            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/zone",se.CompanyID),
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/zone/",se.CompanyID),
             nil,
             nil,
             reqBody)
@@ -14814,11 +14803,11 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return ZoneResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &upsertZoneControllerViewResponse)
+        err = json.Unmarshal(response, &insertZoneControllerViewResponse)
         if err != nil {
              return ZoneResponse{}, common.NewFDKError(err.Error())
         }
-        return upsertZoneControllerViewResponse, nil
+        return insertZoneControllerViewResponse, nil
         
     }
          
@@ -14828,56 +14817,76 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
     
     
+   
+  
+    
+    
+
+
+    // GetStore GET stores data
+     func (se *PlatformServiceability)  GetStore(StoreUID float64) (GetStoresViewResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getStoreResponse GetStoresViewResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.Config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/stores/undefined",se.CompanyID, StoreUID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetStoresViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getStoreResponse)
+        if err != nil {
+             return GetStoresViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return getStoreResponse, nil
+        
+    }
+         
+        
+       
     
     
    
   
     
     
-    //PlatformGetZoneListViewXQuery holds query params
-    type PlatformGetZoneListViewXQuery struct { 
-        PageNumber float64  `url:"page_number,omitempty"` 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"` 
-        Name string  `url:"name,omitempty"` 
-        IsActive bool  `url:"is_active,omitempty"` 
-        ChannelIds string  `url:"channel_ids,omitempty"` 
-        Q string  `url:"q,omitempty"` 
-        ZoneID []string  `url:"zone_id,omitempty"`  
-    }
-    
 
 
-    // GetZoneListView Zone List of application.
-     func (se *PlatformServiceability)  GetZoneListView(xQuery PlatformGetZoneListViewXQuery) (ListViewResponse, error){
+    // GetAllStores GET stores data
+     func (se *PlatformServiceability)  GetAllStores() (GetStoresViewResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getZoneListViewResponse ListViewResponse
+            getAllStoresResponse GetStoresViewResponse
 	    )
 
         
 
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
         
 
         
@@ -14889,25 +14898,33 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         rawRequest = NewRequest(
             se.Config,
             "get",
-            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/zones-list",se.CompanyID),
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/logistics/stores",se.CompanyID),
             nil,
-            xQuery,
+            nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-             return ListViewResponse{}, err
+             return GetStoresViewResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getZoneListViewResponse)
+        err = json.Unmarshal(response, &getAllStoresResponse)
         if err != nil {
-             return ListViewResponse{}, common.NewFDKError(err.Error())
+             return GetStoresViewResponse{}, common.NewFDKError(err.Error())
         }
-        return getZoneListViewResponse, nil
+        return getAllStoresResponse, nil
         
     }
          
         
        
+    
+    
+    
+    
+    
+    
+    
+    
     
 
 
