@@ -21573,6 +21573,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
             
         
+            
+        
 
          
             
@@ -21915,7 +21917,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // UpdateCartUser Update user id for store os customer
-     func (ca *PlatformAppCart)  UpdateCartUser(xQuery PlatformAppUpdateCartUserXQuery) (UserCartMappingResponse, error) {
+     func (ca *PlatformAppCart)  UpdateCartUser(xQuery PlatformAppUpdateCartUserXQuery, body  UpdateUserCartMapping) (UserCartMappingResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -21923,6 +21925,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             updateCartUserResponse UserCartMappingResponse
 	    )
 
+        
+            
         
 
          
@@ -21936,6 +21940,19 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
          
         
         
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return UserCartMappingResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return UserCartMappingResponse{}, common.NewFDKError(err.Error())       
+        }
+        
         //API call
         rawRequest = NewRequest(
             ca.config,
@@ -21943,7 +21960,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/update-user",ca.CompanyID, ca.ApplicationID),
             nil,
             xQuery,
-            nil)
+            reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
             return UserCartMappingResponse{}, err
@@ -22035,7 +22052,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     type PlatformAppAddItemsXQuery struct { 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
-        BuyNow bool  `url:"buy_now,omitempty"`  
+        BuyNow bool  `url:"buy_now,omitempty"` 
+        ID string  `url:"id,omitempty"`  
     }
     
     // AddItems Add items to cart
@@ -22050,8 +22068,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
             
         
+            
+        
 
          
+            
+                
             
                 
             
@@ -23112,7 +23134,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // UpdateCartMeta Update the cart meta for platform pos user
-     func (ca *PlatformAppCart)  UpdateCartMeta(xQuery PlatformAppUpdateCartMetaXQuery, body  CartMetaRequest) (CartMetaResponse, error) {
+     func (ca *PlatformAppCart)  UpdateCartMeta(xQuery PlatformAppUpdateCartMetaXQuery, body  PlatformCartMetaRequest) (CartMetaResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -23120,6 +23142,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             updateCartMetaResponse CartMetaResponse
 	    )
 
+        
+            
         
             
         

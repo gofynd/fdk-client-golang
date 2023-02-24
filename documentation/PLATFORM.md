@@ -328,14 +328,14 @@
     * [processManifest](#processmanifest)
     * [dispatchManifest](#dispatchmanifest)
     * [getRoleBasedActions](#getrolebasedactions)
-    * [getShipmentHistory](#getshipmenthistory)
     * [postShipmentHistory](#postshipmenthistory)
+    * [getShipmentHistory](#getshipmenthistory)
     * [sendSmsNinja](#sendsmsninja)
     * [platformManualAssignDPToShipment](#platformmanualassigndptoshipment)
     * [updatePackagingDimensions](#updatepackagingdimensions)
     * [createOrder](#createorder)
-    * [getChannelConfig](#getchannelconfig)
     * [createChannelConfig](#createchannelconfig)
+    * [getChannelConfig](#getchannelconfig)
     * [uploadConsent](#uploadconsent)
     * [orderUpdate](#orderupdate)
     * [checkOrderStatus](#checkorderstatus)
@@ -54628,12 +54628,12 @@ Schema: `GetActionsResponse`
 ---
 
 
-#### getShipmentHistory
+#### postShipmentHistory
 
 
 ```golang
 
-data, err := Order.GetShipmentHistory(CompanyID, xQuery);
+data, err := Order.PostShipmentHistory(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -54642,11 +54642,7 @@ data, err := Order.GetShipmentHistory(CompanyID, xQuery);
 | CompanyID | float64 |  | 
 
 
-
-
-
-| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
-
+| body |  PostShipmentHistory | "Request body" 
 
 
 
@@ -54670,12 +54666,12 @@ Schema: `ShipmentHistoryResponse`
 ---
 
 
-#### postShipmentHistory
+#### getShipmentHistory
 
 
 ```golang
 
-data, err := Order.PostShipmentHistory(CompanyID, body);
+data, err := Order.GetShipmentHistory(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -54684,7 +54680,11 @@ data, err := Order.PostShipmentHistory(CompanyID, body);
 | CompanyID | float64 |  | 
 
 
-| body |  PostShipmentHistory | "Request body" 
+
+
+
+| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
+
 
 
 
@@ -54860,43 +54860,6 @@ Schema: `CreateOrderResponse`
 ---
 
 
-#### getChannelConfig
-
-
-```golang
-
-data, err := Order.GetChannelConfig(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-getChannelConfig
-
-*Success Response:*
-
-
-
-Successfully created the config data
-
-
-Schema: `CreateChannelConfigData`
-
-
-
-
-
-
-
-
-
----
-
-
 #### createChannelConfig
 
 
@@ -54923,6 +54886,43 @@ Successfully updateShipmentStatus!
 
 
 Schema: `CreateChannelConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getChannelConfig
+
+
+```golang
+
+data, err := Order.GetChannelConfig(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+getChannelConfig
+
+*Success Response:*
+
+
+
+Successfully created the config data
+
+
+Schema: `CreateChannelConfigData`
 
 
 
@@ -67681,7 +67681,7 @@ Update user id for store os customer
 
 ```golang
 
-data, err := Cart.UpdateCartUser(CompanyID, ApplicationID, xQuery);
+data, err := Cart.UpdateCartUser(CompanyID, ApplicationID, xQuery, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -67696,6 +67696,7 @@ data, err := Cart.UpdateCartUser(CompanyID, ApplicationID, xQuery);
 
 | xQuery | struct | Includes properties such as `ID`
 
+| body |  UpdateUserCartMapping | "Request body" 
 
 Update user id for store os customer after creating customer
 
@@ -68121,7 +68122,9 @@ data, err := Cart.AddItems(CompanyID, ApplicationID, xQuery, body);
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `BuyNow`
+
+
+| xQuery | struct | Includes properties such as `I`, `B`, `BuyNow`, `ID`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -71107,7 +71110,7 @@ data, err := Cart.UpdateCartMeta(CompanyID, ApplicationID, xQuery, body);
 
 | xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
-| body |  CartMetaRequest | "Request body" 
+| body |  PlatformCartMetaRequest | "Request body" 
 
 Use this API to update cart meta like checkout_mode and gstin.
 
