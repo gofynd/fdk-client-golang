@@ -1657,55 +1657,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1746,6 +1697,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -3762,7 +3762,8 @@ func NewAppClient(config *AppConfig) *Client {
         MerchantCode string  `url:"merchant_code,omitempty"` 
         Iin string  `url:"iin,omitempty"` 
         Network string  `url:"network,omitempty"` 
-        Type string  `url:"type,omitempty"`  
+        Type string  `url:"type,omitempty"` 
+        CardID string  `url:"card_id,omitempty"`  
     }
     
     // ValidateCouponForPayment Verify the coupon eligibility against the payment mode
@@ -3777,6 +3778,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -11296,7 +11299,7 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // CardDetails API to get Card info from PG
-    func (pa *Payment)  CardDetails(CardBin string, xQuery PaymentCardDetailsXQuery) (cardDetailsResponse, error){
+    func (pa *Payment)  CardDetails(CardInfo string, xQuery PaymentCardDetailsXQuery) (cardDetailsResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -11323,7 +11326,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             pa.config,
             "get",
-            fmt.Sprintf("/service/application/payment/v1.0/cards/info/%s",CardBin),
+            fmt.Sprintf("/service/application/payment/v1.0/cards/info/%s",CardInfo),
             nil,
             xQuery,
             nil)
@@ -15081,7 +15084,8 @@ func NewAppClient(config *AppConfig) *Client {
         MerchantCode string  `url:"merchant_code,omitempty"` 
         Iin string  `url:"iin,omitempty"` 
         Network string  `url:"network,omitempty"` 
-        Type string  `url:"type,omitempty"`  
+        Type string  `url:"type,omitempty"` 
+        CardID string  `url:"card_id,omitempty"`  
     }
     
     // ValidateCouponForPayment Verify the coupon eligibility against the payment mode
@@ -15096,6 +15100,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
