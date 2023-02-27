@@ -21752,13 +21752,77 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpsertZoneControllerView GET zone from the Pincode.
-     func (se *PlatformAppServiceability)  UpsertZoneControllerView(body  GetZoneFromPincodeViewRequest) (GetZoneFromPincodeViewResponse, error) {
+    //PlatformAppGetZonesFromApplicationIdViewXQuery holds query params
+    type PlatformAppGetZonesFromApplicationIdViewXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        ZoneID []string  `url:"zone_id,omitempty"` 
+        Q string  `url:"q,omitempty"`  
+    }
+    
+    // GetZonesFromApplicationIdView GET zones from the application_id.
+     func (se *PlatformAppServiceability)  GetZonesFromApplicationIdView(xQuery PlatformAppGetZonesFromApplicationIdViewXQuery) (GetZoneFromApplicationIdViewResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            upsertZoneControllerViewResponse GetZoneFromPincodeViewResponse
+            getZonesFromApplicationIdViewResponse GetZoneFromApplicationIdViewResponse
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/zones",se.CompanyID, se.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetZoneFromApplicationIdViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getZonesFromApplicationIdViewResponse)
+        if err != nil {
+            return GetZoneFromApplicationIdViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return getZonesFromApplicationIdViewResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetZoneFromPincodeView GET zone from the Pincode.
+     func (se *PlatformAppServiceability)  GetZoneFromPincodeView(body  GetZoneFromPincodeViewRequest) (GetZoneFromPincodeViewResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getZoneFromPincodeViewResponse GetZoneFromPincodeViewResponse
 	    )
 
         
@@ -21800,11 +21864,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetZoneFromPincodeViewResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &upsertZoneControllerViewResponse)
+        err = json.Unmarshal(response, &getZoneFromPincodeViewResponse)
         if err != nil {
             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
         }
-        return upsertZoneControllerViewResponse, nil
+        return getZoneFromPincodeViewResponse, nil
         
     }
            
