@@ -8869,19 +8869,8 @@ package application
 
         
             Message string  `json:"message"`
-            Type string  `json:"type"`
             Value string  `json:"value"`
-         
-    }
-    
-    // PincodeParentsResponse ...
-    type PincodeParentsResponse struct {
-
-        
-            Name string  `json:"name"`
-            UID string  `json:"uid"`
-            SubType string  `json:"sub_type"`
-            DisplayName string  `json:"display_name"`
+            Type string  `json:"type"`
          
     }
     
@@ -8889,8 +8878,19 @@ package application
     type PincodeMetaResponse struct {
 
         
-            InternalZoneID float64  `json:"internal_zone_id"`
             Zone string  `json:"zone"`
+            InternalZoneID float64  `json:"internal_zone_id"`
+         
+    }
+    
+    // PincodeParentsResponse ...
+    type PincodeParentsResponse struct {
+
+        
+            DisplayName string  `json:"display_name"`
+            Name string  `json:"name"`
+            UID string  `json:"uid"`
+            SubType string  `json:"sub_type"`
          
     }
     
@@ -8898,13 +8898,13 @@ package application
     type PincodeDataResponse struct {
 
         
-            Name string  `json:"name"`
-            UID string  `json:"uid"`
-            SubType string  `json:"sub_type"`
-            Parents []PincodeParentsResponse  `json:"parents"`
             Error PincodeErrorSchemaResponse  `json:"error"`
-            DisplayName string  `json:"display_name"`
+            Name string  `json:"name"`
             Meta PincodeMetaResponse  `json:"meta"`
+            Parents []PincodeParentsResponse  `json:"parents"`
+            UID string  `json:"uid"`
+            DisplayName string  `json:"display_name"`
+            SubType string  `json:"sub_type"`
          
     }
     
@@ -8922,8 +8922,8 @@ package application
     type TATCategoryRequest struct {
 
         
-            Level string  `json:"level"`
             ID float64  `json:"id"`
+            Level string  `json:"level"`
          
     }
     
@@ -8931,9 +8931,9 @@ package application
     type TATArticlesRequest struct {
 
         
-            Category TATCategoryRequest  `json:"category"`
             ManufacturingTimeUnit string  `json:"manufacturing_time_unit"`
             ManufacturingTime float64  `json:"manufacturing_time"`
+            Category TATCategoryRequest  `json:"category"`
          
     }
     
@@ -8951,12 +8951,12 @@ package application
     type TATViewRequest struct {
 
         
-            Action string  `json:"action"`
-            Source string  `json:"source"`
-            LocationDetails []TATLocationDetailsRequest  `json:"location_details"`
-            Journey string  `json:"journey"`
             ToPincode string  `json:"to_pincode"`
             Identifier string  `json:"identifier"`
+            Action string  `json:"action"`
+            LocationDetails []TATLocationDetailsRequest  `json:"location_details"`
+            Source string  `json:"source"`
+            Journey string  `json:"journey"`
          
     }
     
@@ -8965,8 +8965,8 @@ package application
 
         
             Message string  `json:"message"`
-            Type string  `json:"type"`
             Value string  `json:"value"`
+            Type string  `json:"type"`
          
     }
     
@@ -8974,8 +8974,8 @@ package application
     type TATTimestampResponse struct {
 
         
-            Min float64  `json:"min"`
             Max float64  `json:"max"`
+            Min float64  `json:"min"`
          
     }
     
@@ -8983,8 +8983,8 @@ package application
     type TATFormattedResponse struct {
 
         
-            Min string  `json:"min"`
             Max string  `json:"max"`
+            Min string  `json:"min"`
          
     }
     
@@ -9001,13 +9001,13 @@ package application
     type TATArticlesResponse struct {
 
         
-            IsCodAvailable bool  `json:"is_cod_available"`
             Error TATErrorSchemaResponse  `json:"error"`
-            ManufacturingTimeSeconds float64  `json:"_manufacturing_time_seconds"`
-            Category TATCategoryRequest  `json:"category"`
-            ManufacturingTime float64  `json:"manufacturing_time"`
-            Promise TATPromiseResponse  `json:"promise"`
             ManufacturingTimeUnit string  `json:"manufacturing_time_unit"`
+            IsCodAvailable bool  `json:"is_cod_available"`
+            ManufacturingTimeSeconds float64  `json:"_manufacturing_time_seconds"`
+            Promise TATPromiseResponse  `json:"promise"`
+            ManufacturingTime float64  `json:"manufacturing_time"`
+            Category TATCategoryRequest  `json:"category"`
          
     }
     
@@ -9025,19 +9025,19 @@ package application
     type TATViewResponse struct {
 
         
-            Action string  `json:"action"`
-            StormbreakerUUID string  `json:"stormbreaker_uuid"`
-            PaymentMode string  `json:"payment_mode"`
-            Source string  `json:"source"`
-            LocationDetails []TATLocationDetailsResponse  `json:"location_details"`
-            Journey string  `json:"journey"`
             ToPincode string  `json:"to_pincode"`
-            Error TATErrorSchemaResponse  `json:"error"`
-            RequestUUID string  `json:"request_uuid"`
-            ToCity string  `json:"to_city"`
-            Success bool  `json:"success"`
             Identifier string  `json:"identifier"`
+            Error TATErrorSchemaResponse  `json:"error"`
             IsCodAvailable bool  `json:"is_cod_available"`
+            StormbreakerUUID string  `json:"stormbreaker_uuid"`
+            ToCity string  `json:"to_city"`
+            PaymentMode string  `json:"payment_mode"`
+            Action string  `json:"action"`
+            RequestUUID string  `json:"request_uuid"`
+            LocationDetails []TATLocationDetailsResponse  `json:"location_details"`
+            Source string  `json:"source"`
+            Journey string  `json:"journey"`
+            Success bool  `json:"success"`
          
     }
     

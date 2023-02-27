@@ -317,7 +317,7 @@
   * Methods
     * [getPincodeCity](#getpincodecity)
     * [getTatProduct](#gettatproduct)
-    * [upsertZoneControllerView](#upsertzonecontrollerview)
+    * [getPincodeZones](#getpincodezones)
     
 
 
@@ -22691,12 +22691,12 @@ Pincode not found
 ---
 
 
-#### upsertZoneControllerView
+#### getPincodeZones
 GET zone from the Pincode.
 
 ```golang
 
- data, err :=  Logistic.UpsertZoneControllerView(body);
+ data, err :=  Logistic.GetPincodeZones(body);
 ```
 
 | Argument  |  Type  | Description |

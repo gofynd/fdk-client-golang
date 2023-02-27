@@ -15053,13 +15053,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UpsertZoneControllerView GET zone from the Pincode.
-    func (lo *Logistic)  UpsertZoneControllerView(body  GetZoneFromPincodeViewRequest) (GetZoneFromPincodeViewResponse, error){
+    // GetPincodeZones GET zone from the Pincode.
+    func (lo *Logistic)  GetPincodeZones(body  GetZoneFromPincodeViewRequest) (GetZoneFromPincodeViewResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             upsertZoneControllerViewResponse GetZoneFromPincodeViewResponse
+             getPincodeZonesResponse GetZoneFromPincodeViewResponse
 	    )
 
         
@@ -15101,11 +15101,11 @@ func NewAppClient(config *AppConfig) *Client {
             return GetZoneFromPincodeViewResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &upsertZoneControllerViewResponse)
+        err = json.Unmarshal(response, &getPincodeZonesResponse)
         if err != nil {
             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
         }
-         return upsertZoneControllerViewResponse, nil
+         return getPincodeZonesResponse, nil
         
     }
           
