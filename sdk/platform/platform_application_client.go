@@ -12411,13 +12411,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // EdcAggregatorsList get some information about the store and edc device
-     func (pa *PlatformAppPayment)  EdcAggregatorsList() (EdcAggregatorListResponse, error) {
+    // EdcAggregatorsAndModelList get some information about the store and edc device
+     func (pa *PlatformAppPayment)  EdcAggregatorsAndModelList() (EdcAggregatorAndModelListResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            edcAggregatorsListResponse EdcAggregatorListResponse
+            edcAggregatorsAndModelListResponse EdcAggregatorAndModelListResponse
 	    )
 
         
@@ -12439,14 +12439,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return EdcAggregatorListResponse{}, err
+            return EdcAggregatorAndModelListResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &edcAggregatorsListResponse)
+        err = json.Unmarshal(response, &edcAggregatorsAndModelListResponse)
         if err != nil {
-            return EdcAggregatorListResponse{}, common.NewFDKError(err.Error())
+            return EdcAggregatorAndModelListResponse{}, common.NewFDKError(err.Error())
         }
-        return edcAggregatorsListResponse, nil
+        return edcAggregatorsAndModelListResponse, nil
         
     }
            
@@ -12580,6 +12580,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
             
         
+            
+        
 
          
 
@@ -12638,6 +12640,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             edcDeviceResponse EdcDeviceUpdateResponse
 	    )
 
+        
+            
         
             
         
@@ -21866,12 +21870,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
     
     // GetCartList Get cart list for store os user
-     func (ca *PlatformAppCart)  GetCartList() (CartList, error) {
+     func (ca *PlatformAppCart)  GetCartList() (MultiCartResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getCartListResponse CartList
+            getCartListResponse MultiCartResponse
 	    )
 
         
@@ -21893,12 +21897,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return CartList{}, err
+            return MultiCartResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &getCartListResponse)
         if err != nil {
-            return CartList{}, common.NewFDKError(err.Error())
+            return MultiCartResponse{}, common.NewFDKError(err.Error())
         }
         return getCartListResponse, nil
         
@@ -22200,6 +22204,61 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return UpdateCartDetailResponse{}, common.NewFDKError(err.Error())
         }
         return updateCartResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppDeleteCartXQuery holds query params
+    type PlatformAppDeleteCartXQuery struct { 
+        ID float64  `url:"id,omitempty"`  
+    }
+    
+    // DeleteCart Delete cart once user made successful checkout
+     func (ca *PlatformAppCart)  DeleteCart(xQuery PlatformAppDeleteCartXQuery) (DeleteCartDetailResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteCartResponse DeleteCartDetailResponse
+	    )
+
+        
+
+         
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "put",
+            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/cart_archive",ca.CompanyID, ca.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DeleteCartDetailResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteCartResponse)
+        if err != nil {
+            return DeleteCartDetailResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteCartResponse, nil
         
     }
            
@@ -23210,7 +23269,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     //PlatformAppCheckoutCartXQuery holds query params
     type PlatformAppCheckoutCartXQuery struct { 
-        BuyNow bool  `url:"buy_now,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // CheckoutCart Checkout all items in the cart
@@ -23222,6 +23281,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             checkoutCartResponse CartCheckoutResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
         
             
         

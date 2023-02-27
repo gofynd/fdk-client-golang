@@ -281,7 +281,7 @@
     * [updatePlatformPaymentConfig](#updateplatformpaymentconfig)
     * [getUserCODlimitRoutes](#getusercodlimitroutes)
     * [setUserCODlimitRoutes](#setusercodlimitroutes)
-    * [edcAggregatorsList](#edcaggregatorslist)
+    * [edcAggregatorsAndModelList](#edcaggregatorsandmodellist)
     * [edcDeviceStats](#edcdevicestats)
     * [edcDevice](#edcdevice)
     * [edcDevice](#edcdevice)
@@ -608,6 +608,7 @@
     * [getCart](#getcart)
     * [addItems](#additems)
     * [updateCart](#updatecart)
+    * [deleteCart](#deletecart)
     * [getItemCount](#getitemcount)
     * [getCoupons](#getcoupons)
     * [applyCoupon](#applycoupon)
@@ -52619,12 +52620,12 @@ Schema: `SetCODOptionResponse`
 ---
 
 
-#### edcAggregatorsList
+#### edcAggregatorsAndModelList
 get some information about the store and edc device
 
 ```golang
 
-data, err := Payment.EdcAggregatorsList(CompanyID, ApplicationID);
+data, err := Payment.EdcAggregatorsAndModelList(CompanyID, ApplicationID);
 ```
 
 | Argument  |  Type  | Description |
@@ -52643,10 +52644,10 @@ Use this API to get info of devices linked to a particular app.
 
 
 
-Success. Returns the list of devices linked to the application Check the example shown below or refer `EdcAggregatorListResponseSchema` for more details.
+Success. Returns the list of devices linked to the application Check the example shown below or refer `EdcAggregatorAndModelListResponseSchema` for more details.
 
 
-Schema: `EdcAggregatorListResponse`
+Schema: `EdcAggregatorAndModelListResponse`
 
 
 
@@ -55699,7 +55700,9 @@ data, err := Catalog.GetSizeGuides(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `Active`, `Q`, `Tag`, `PageNo`, `PageSize`
+
+
+| xQuery | struct | Includes properties such as `Active`, `Q`, `Tag`, `PageNo`, `PageSize`, `BrandID`
 
 
 This API allows to view all the size guides associated to the seller.
@@ -57434,7 +57437,9 @@ data, err := Catalog.ListDepartmentsData(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Name`, `Search`, `IsActive`
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Name`, `Search`, `IsActive`, `ItemType`
 
 
 Allows you to list all departments, also can search using name and filter active and incative departments, and item type.
@@ -57820,7 +57825,7 @@ Allows you to list all product templates export list details
 
 ```golang
 
-data, err := Catalog.ListProductTemplateExportDetails(CompanyID);
+data, err := Catalog.ListProductTemplateExportDetails(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -57828,6 +57833,15 @@ data, err := Catalog.ListProductTemplateExportDetails(CompanyID);
 
 | CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
 
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Status`, `FromDate`, `ToDate`, `Q`
 
 
 Can view details including trigger data, task id , etc.
@@ -57867,7 +57881,11 @@ data, err := Catalog.ListTemplateBrandTypeValues(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `Filter`
+
+
+
+
+| xQuery | struct | Includes properties such as `Filter`, `TemplateTag`, `ItemType`
 
 
 The filter type query parameter defines what type of data to return. The type of query returns the valid values for the same
@@ -59315,7 +59333,7 @@ Get Inventory export history.
 
 ```golang
 
-data, err := Catalog.GetInventoryExport(CompanyID);
+data, err := Catalog.GetInventoryExport(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -59323,6 +59341,15 @@ data, err := Catalog.GetInventoryExport(CompanyID);
 
 | CompanyID | float64 | Company Id in which assets to be uploaded. | 
 
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Status`, `FromDate`, `ToDate`, `Q`
 
 
 This API helps to get Inventory export history.
@@ -67634,7 +67661,7 @@ Get all carts for the store os user which is created for customer
 Platform user cart list
 
 
-Schema: `CartList`
+Schema: `MultiCartResponse`
 
 
 *Examples:*
@@ -69207,6 +69234,49 @@ Item updated in the cart
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteCart
+Delete cart once user made successful checkout
+
+```golang
+
+data, err := Cart.DeleteCart(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current Application _id | 
+
+
+
+| xQuery | struct | Includes properties such as `ID`
+
+
+Use this API to delete the cart.
+
+*Success Response:*
+
+
+
+Success. Returns whether the cart has been deleted or not.
+
+
+Schema: `DeleteCartDetailResponse`
 
 
 
@@ -71152,17 +71222,17 @@ data, err := Cart.CheckoutCart(CompanyID, ApplicationID, xQuery, body);
 
 
 
-| xQuery | struct | Includes properties such as `BuyNow`
+| xQuery | struct | Includes properties such as `ID`
 
 | body |  PlatformCartCheckoutDetailRequest | "Request body" 
 
-Use this API to checkout all items in the cart for payment and order generation. For COD, order will be directly generated, whereas for other checkout modes, user will be redirected to a payment gateway.
+Use this API to checkout all items in the cart for payment and order generation. For COD, order will be generated directly, whereas for other checkout modes, user will be redirected to a payment gateway.
 
 *Success Response:*
 
 
 
-Success. Returns the status of cart checkout. Refer `CartCheckoutResponseSchema` for more details.
+Success. Returns the status of cart checkout. Refer `CartCheckoutResponse` for more details.
 
 
 Schema: `CartCheckoutResponse`

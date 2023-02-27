@@ -6102,7 +6102,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         Q string  `url:"q,omitempty"` 
         Tag string  `url:"tag,omitempty"` 
         PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
+        PageSize float64  `url:"page_size,omitempty"` 
+        BrandID float64  `url:"brand_id,omitempty"`  
     }
     
 
@@ -6120,6 +6121,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
 
         
+            
+                
             
                 
             
@@ -6996,7 +6999,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         PageSize float64  `url:"page_size,omitempty"` 
         Name string  `url:"name,omitempty"` 
         Search string  `url:"search,omitempty"` 
-        IsActive bool  `url:"is_active,omitempty"`  
+        IsActive bool  `url:"is_active,omitempty"` 
+        ItemType string  `url:"item_type,omitempty"`  
     }
     
 
@@ -7014,6 +7018,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
 
         
+            
+                
             
                 
             
@@ -7608,10 +7614,18 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformListProductTemplateExportDetailsXQuery holds query params
+    type PlatformListProductTemplateExportDetailsXQuery struct { 
+        Status string  `url:"status,omitempty"` 
+        FromDate string  `url:"from_date,omitempty"` 
+        ToDate string  `url:"to_date,omitempty"` 
+        Q string  `url:"q,omitempty"`  
+    }
+    
 
 
     // ListProductTemplateExportDetails Allows you to list all product templates export list details
-     func (ca *PlatformCatalog)  ListProductTemplateExportDetails() (ProductDownloadsResponse, error){
+     func (ca *PlatformCatalog)  ListProductTemplateExportDetails(xQuery PlatformListProductTemplateExportDetailsXQuery) (ProductDownloadsResponse, error){
         
         var (
             rawRequest  *RawRequest
@@ -7622,6 +7636,16 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
         
 
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
         
 
         
@@ -7635,7 +7659,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             "get",
             fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/downloads/",ca.CompanyID),
             nil,
-            nil,
+            xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -7660,7 +7684,9 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
     //PlatformListTemplateBrandTypeValuesXQuery holds query params
     type PlatformListTemplateBrandTypeValuesXQuery struct { 
-        Filter string  `url:"filter,omitempty"`  
+        Filter string  `url:"filter,omitempty"` 
+        TemplateTag string  `url:"template_tag,omitempty"` 
+        ItemType string  `url:"item_type,omitempty"`  
     }
     
 
@@ -7678,6 +7704,10 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
 
         
+            
+                
+            
+                
             
                 
             
@@ -10139,10 +10169,18 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformGetInventoryExportXQuery holds query params
+    type PlatformGetInventoryExportXQuery struct { 
+        Status string  `url:"status,omitempty"` 
+        FromDate string  `url:"from_date,omitempty"` 
+        ToDate string  `url:"to_date,omitempty"` 
+        Q string  `url:"q,omitempty"`  
+    }
+    
 
 
     // GetInventoryExport Get Inventory export history.
-     func (ca *PlatformCatalog)  GetInventoryExport() (InventoryExportJob, error){
+     func (ca *PlatformCatalog)  GetInventoryExport(xQuery PlatformGetInventoryExportXQuery) (InventoryExportJob, error){
         
         var (
             rawRequest  *RawRequest
@@ -10153,6 +10191,16 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
         
 
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
         
 
         
@@ -10166,7 +10214,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             "get",
             fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/inventory/download/",ca.CompanyID),
             nil,
-            nil,
+            xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -10201,6 +10249,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             createInventoryExportJobResponse InventoryExportResponse
 	    )
 
+        
+        
         
         
         
