@@ -2805,7 +2805,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartDeleteCartXQuery holds query params
     type CartDeleteCartXQuery struct { 
-        ID float64  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // DeleteCart Delete cart once user made successful checkout

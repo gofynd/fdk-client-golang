@@ -22288,7 +22288,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     //PlatformAppDeleteCartXQuery holds query params
     type PlatformAppDeleteCartXQuery struct { 
-        ID float64  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // DeleteCart Delete cart once user made successful checkout
