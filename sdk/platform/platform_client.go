@@ -3159,6 +3159,10 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     type PlatformGetOrdersXQuery struct { 
         Lane string  `url:"lane,omitempty"` 
         SearchType string  `url:"search_type,omitempty"` 
+        BagStatus string  `url:"bag_status,omitempty"` 
+        TimeToDispatch string  `url:"time_to_dispatch,omitempty"` 
+        PaymentMethods string  `url:"payment_methods,omitempty"` 
+        Tags string  `url:"tags,omitempty"` 
         SearchValue string  `url:"search_value,omitempty"` 
         FromDate string  `url:"from_date,omitempty"` 
         ToDate string  `url:"to_date,omitempty"` 
@@ -3186,6 +3190,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
 
         
+            
+                
+            
+                
+            
+                
+            
+                
             
                 
             
@@ -5834,6 +5846,68 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformGetProductBundleXQuery holds query params
+    type PlatformGetProductBundleXQuery struct { 
+        Q string  `url:"q,omitempty"` 
+        Slug []string  `url:"slug,omitempty"`  
+    }
+    
+
+
+    // GetProductBundle List all Product Bundles
+     func (ca *PlatformCatalog)  GetProductBundle(xQuery PlatformGetProductBundleXQuery) (GetProductBundleListingResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getProductBundleResponse GetProductBundleListingResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/product-bundle/",ca.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetProductBundleListingResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductBundleResponse)
+        if err != nil {
+             return GetProductBundleListingResponse{}, common.NewFDKError(err.Error())
+        }
+        return getProductBundleResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
 
 
     // CreateProductBundle Create Product Bundle
@@ -5914,68 +5988,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return GetProductBundleCreateResponse{}, common.NewFDKError(err.Error())
         }
         return createProductBundleResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformGetProductBundleXQuery holds query params
-    type PlatformGetProductBundleXQuery struct { 
-        Q string  `url:"q,omitempty"` 
-        Slug []string  `url:"slug,omitempty"`  
-    }
-    
-
-
-    // GetProductBundle List all Product Bundles
-     func (ca *PlatformCatalog)  GetProductBundle(xQuery PlatformGetProductBundleXQuery) (GetProductBundleListingResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getProductBundleResponse GetProductBundleListingResponse
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/product-bundle/",ca.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return GetProductBundleListingResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProductBundleResponse)
-        if err != nil {
-             return GetProductBundleListingResponse{}, common.NewFDKError(err.Error())
-        }
-        return getProductBundleResponse, nil
         
     }
          
@@ -6128,6 +6140,77 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformGetSizeGuidesXQuery holds query params
+    type PlatformGetSizeGuidesXQuery struct { 
+        Active bool  `url:"active,omitempty"` 
+        Q string  `url:"q,omitempty"` 
+        Tag string  `url:"tag,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // GetSizeGuides Get list of size guides
+     func (ca *PlatformCatalog)  GetSizeGuides(xQuery PlatformGetSizeGuidesXQuery) (ListSizeGuide, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getSizeGuidesResponse ListSizeGuide
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/sizeguide",ca.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ListSizeGuide{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getSizeGuidesResponse)
+        if err != nil {
+             return ListSizeGuide{}, common.NewFDKError(err.Error())
+        }
+        return getSizeGuidesResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
 
 
     // CreateSizeGuide Create a size guide.
@@ -6210,77 +6293,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return SuccessResponse{}, common.NewFDKError(err.Error())
         }
         return createSizeGuideResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformGetSizeGuidesXQuery holds query params
-    type PlatformGetSizeGuidesXQuery struct { 
-        Active bool  `url:"active,omitempty"` 
-        Q string  `url:"q,omitempty"` 
-        Tag string  `url:"tag,omitempty"` 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
-    }
-    
-
-
-    // GetSizeGuides Get list of size guides
-     func (ca *PlatformCatalog)  GetSizeGuides(xQuery PlatformGetSizeGuidesXQuery) (ListSizeGuide, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getSizeGuidesResponse ListSizeGuide
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/sizeguide",ca.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return ListSizeGuide{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getSizeGuidesResponse)
-        if err != nil {
-             return ListSizeGuide{}, common.NewFDKError(err.Error())
-        }
-        return getSizeGuidesResponse, nil
         
     }
          
@@ -7022,6 +7034,77 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformListDepartmentsDataXQuery holds query params
+    type PlatformListDepartmentsDataXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        Name string  `url:"name,omitempty"` 
+        Search string  `url:"search,omitempty"` 
+        IsActive bool  `url:"is_active,omitempty"`  
+    }
+    
+
+
+    // ListDepartmentsData List all Departments.
+     func (ca *PlatformCatalog)  ListDepartmentsData(xQuery PlatformListDepartmentsDataXQuery) (DepartmentsResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            listDepartmentsDataResponse DepartmentsResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/departments/",ca.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return DepartmentsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &listDepartmentsDataResponse)
+        if err != nil {
+             return DepartmentsResponse{}, common.NewFDKError(err.Error())
+        }
+        return listDepartmentsDataResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
 
 
     // CreateDepartments Create the department.
@@ -7096,77 +7179,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return DepartmentCreateResponse{}, common.NewFDKError(err.Error())
         }
         return createDepartmentsResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformListDepartmentsDataXQuery holds query params
-    type PlatformListDepartmentsDataXQuery struct { 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"` 
-        Name string  `url:"name,omitempty"` 
-        Search string  `url:"search,omitempty"` 
-        IsActive bool  `url:"is_active,omitempty"`  
-    }
-    
-
-
-    // ListDepartmentsData List all Departments.
-     func (ca *PlatformCatalog)  ListDepartmentsData(xQuery PlatformListDepartmentsDataXQuery) (DepartmentsResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            listDepartmentsDataResponse DepartmentsResponse
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/departments/",ca.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return DepartmentsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &listDepartmentsDataResponse)
-        if err != nil {
-             return DepartmentsResponse{}, common.NewFDKError(err.Error())
-        }
-        return listDepartmentsDataResponse, nil
         
     }
          
@@ -7708,6 +7720,74 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformListAllProductTemplateExportDetailsXQuery holds query params
+    type PlatformListAllProductTemplateExportDetailsXQuery struct { 
+        Status string  `url:"status,omitempty"` 
+        FromDate string  `url:"from_date,omitempty"` 
+        ToDate string  `url:"to_date,omitempty"` 
+        Q string  `url:"q,omitempty"`  
+    }
+    
+
+
+    // ListAllProductTemplateExportDetails Allows you to list all product templates export list details
+     func (ca *PlatformCatalog)  ListAllProductTemplateExportDetails(xQuery PlatformListAllProductTemplateExportDetailsXQuery) (ProductDownloadsResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            listAllProductTemplateExportDetailsResponse ProductDownloadsResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/downloads/",ca.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ProductDownloadsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &listAllProductTemplateExportDetailsResponse)
+        if err != nil {
+             return ProductDownloadsResponse{}, common.NewFDKError(err.Error())
+        }
+        return listAllProductTemplateExportDetailsResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
     //PlatformListTemplateBrandTypeValuesXQuery holds query params
     type PlatformListTemplateBrandTypeValuesXQuery struct { 
         Filter string  `url:"filter,omitempty"` 
@@ -7762,6 +7842,77 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return ProductConfigurationDownloads{}, common.NewFDKError(err.Error())
         }
         return listTemplateBrandTypeValuesResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformListCategoriesXQuery holds query params
+    type PlatformListCategoriesXQuery struct { 
+        Level string  `url:"level,omitempty"` 
+        Department string  `url:"department,omitempty"` 
+        Q string  `url:"q,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // ListCategories Get product categories list
+     func (ca *PlatformCatalog)  ListCategories(xQuery PlatformListCategoriesXQuery) (CategoryResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            listCategoriesResponse CategoryResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/category/",ca.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return CategoryResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &listCategoriesResponse)
+        if err != nil {
+             return CategoryResponse{}, common.NewFDKError(err.Error())
+        }
+        return listCategoriesResponse, nil
         
     }
          
@@ -7847,77 +7998,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return CategoryCreateResponse{}, common.NewFDKError(err.Error())
         }
         return createCategoriesResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformListCategoriesXQuery holds query params
-    type PlatformListCategoriesXQuery struct { 
-        Level string  `url:"level,omitempty"` 
-        Department string  `url:"department,omitempty"` 
-        Q string  `url:"q,omitempty"` 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
-    }
-    
-
-
-    // ListCategories Get product categories list
-     func (ca *PlatformCatalog)  ListCategories(xQuery PlatformListCategoriesXQuery) (CategoryResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            listCategoriesResponse CategoryResponse
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/category/",ca.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return CategoryResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &listCategoriesResponse)
-        if err != nil {
-             return CategoryResponse{}, common.NewFDKError(err.Error())
-        }
-        return listCategoriesResponse, nil
         
     }
          
@@ -8068,6 +8148,89 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformGetProductsXQuery holds query params
+    type PlatformGetProductsXQuery struct { 
+        BrandIds []float64  `url:"brand_ids,omitempty"` 
+        CategoryIds []float64  `url:"category_ids,omitempty"` 
+        ItemIds []float64  `url:"item_ids,omitempty"` 
+        DepartmentIds []float64  `url:"department_ids,omitempty"` 
+        ItemCode []string  `url:"item_code,omitempty"` 
+        Q string  `url:"q,omitempty"` 
+        Tags []string  `url:"tags,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // GetProducts Get product list
+     func (ca *PlatformCatalog)  GetProducts(xQuery PlatformGetProductsXQuery) (ProductListingResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getProductsResponse ProductListingResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/",ca.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ProductListingResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductsResponse)
+        if err != nil {
+             return ProductListingResponse{}, common.NewFDKError(err.Error())
+        }
+        return getProductsResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
 
 
     // CreateProduct Create a product.
@@ -8204,89 +8367,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return SuccessResponse{}, common.NewFDKError(err.Error())
         }
         return createProductResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformGetProductsXQuery holds query params
-    type PlatformGetProductsXQuery struct { 
-        BrandIds []float64  `url:"brand_ids,omitempty"` 
-        CategoryIds []float64  `url:"category_ids,omitempty"` 
-        ItemIds []float64  `url:"item_ids,omitempty"` 
-        DepartmentIds []float64  `url:"department_ids,omitempty"` 
-        ItemCode []string  `url:"item_code,omitempty"` 
-        Q string  `url:"q,omitempty"` 
-        Tags []string  `url:"tags,omitempty"` 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
-    }
-    
-
-
-    // GetProducts Get product list
-     func (ca *PlatformCatalog)  GetProducts(xQuery PlatformGetProductsXQuery) (ProductListingResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getProductsResponse ProductListingResponse
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/",ca.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return ProductListingResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProductsResponse)
-        if err != nil {
-             return ProductListingResponse{}, common.NewFDKError(err.Error())
-        }
-        return getProductsResponse, nil
         
     }
          
@@ -8575,6 +8655,122 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformGetProductXQuery holds query params
+    type PlatformGetProductXQuery struct { 
+        BrandUID float64  `url:"brand_uid,omitempty"` 
+        ItemCode string  `url:"item_code,omitempty"`  
+    }
+    
+
+
+    // GetProduct Get a single product.
+     func (ca *PlatformCatalog)  GetProduct(ItemID float64, xQuery PlatformGetProductXQuery) (SingleProductResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getProductResponse SingleProductResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SingleProductResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductResponse)
+        if err != nil {
+             return SingleProductResponse{}, common.NewFDKError(err.Error())
+        }
+        return getProductResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // DeleteProduct Delete a product.
+     func (ca *PlatformCatalog)  DeleteProduct(ItemID float64) (SuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteProductResponse SuccessResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteProductResponse)
+        if err != nil {
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteProductResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
 
 
     // PatchProduct Patch a product.
@@ -8707,122 +8903,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return SuccessResponse{}, common.NewFDKError(err.Error())
         }
         return patchProductResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // DeleteProduct Delete a product.
-     func (ca *PlatformCatalog)  DeleteProduct(ItemID float64) (SuccessResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteProductResponse SuccessResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteProductResponse)
-        if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteProductResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformGetProductXQuery holds query params
-    type PlatformGetProductXQuery struct { 
-        BrandUID float64  `url:"brand_uid,omitempty"` 
-        ItemCode string  `url:"item_code,omitempty"`  
-    }
-    
-
-
-    // GetProduct Get a single product.
-     func (ca *PlatformCatalog)  GetProduct(ItemID float64, xQuery PlatformGetProductXQuery) (SingleProductResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getProductResponse SingleProductResponse
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-        
-
-        
-        
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SingleProductResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProductResponse)
-        if err != nil {
-             return SingleProductResponse{}, common.NewFDKError(err.Error())
-        }
-        return getProductResponse, nil
         
     }
          
@@ -9003,6 +9083,71 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformGetProductBulkUploadHistoryXQuery holds query params
+    type PlatformGetProductBulkUploadHistoryXQuery struct { 
+        Search string  `url:"search,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // GetProductBulkUploadHistory Get a list of all bulk product upload jobs.
+     func (ca *PlatformCatalog)  GetProductBulkUploadHistory(xQuery PlatformGetProductBulkUploadHistoryXQuery) (ProductBulkRequestList, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getProductBulkUploadHistoryResponse ProductBulkRequestList
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/bulk",ca.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ProductBulkRequestList{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductBulkUploadHistoryResponse)
+        if err != nil {
+             return ProductBulkRequestList{}, common.NewFDKError(err.Error())
+        }
+        return getProductBulkUploadHistoryResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
 
 
     // CreateBulkProductUploadJob Create a Bulk product to upload job.
@@ -9089,71 +9234,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return BulkResponse{}, common.NewFDKError(err.Error())
         }
         return createBulkProductUploadJobResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformGetProductBulkUploadHistoryXQuery holds query params
-    type PlatformGetProductBulkUploadHistoryXQuery struct { 
-        Search string  `url:"search,omitempty"` 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
-    }
-    
-
-
-    // GetProductBulkUploadHistory Get a list of all bulk product upload jobs.
-     func (ca *PlatformCatalog)  GetProductBulkUploadHistory(xQuery PlatformGetProductBulkUploadHistoryXQuery) (ProductBulkRequestList, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getProductBulkUploadHistoryResponse ProductBulkRequestList
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-                
-            
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/bulk",ca.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return ProductBulkRequestList{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProductBulkUploadHistoryResponse)
-        if err != nil {
-             return ProductBulkRequestList{}, common.NewFDKError(err.Error())
-        }
-        return getProductBulkUploadHistoryResponse, nil
         
     }
          
@@ -9276,6 +9356,58 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
+    // DeleteProductBulkJob Delete Bulk product job.
+     func (ca *PlatformCatalog)  DeleteProductBulkJob(BatchID float64) (SuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteProductBulkJobResponse SuccessResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/bulk/undefined",ca.CompanyID, BatchID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteProductBulkJobResponse)
+        if err != nil {
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteProductBulkJobResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
     // CreateProductsInBulk Create products in bulk associated with given batch Id.
      func (ca *PlatformCatalog)  CreateProductsInBulk(BatchID string, body  BulkProductRequest) (SuccessResponse, error){
         
@@ -9349,58 +9481,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // DeleteProductBulkJob Delete Bulk product job.
-     func (ca *PlatformCatalog)  DeleteProductBulkJob(BatchID float64) (SuccessResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteProductBulkJobResponse SuccessResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/bulk/undefined",ca.CompanyID, BatchID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteProductBulkJobResponse)
-        if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteProductBulkJobResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
     // GetProductTags Get a list of all tags associated with company.
      func (ca *PlatformCatalog)  GetProductTags() (ProductTagsViewResponse, error){
         
@@ -9438,6 +9518,68 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return ProductTagsViewResponse{}, common.NewFDKError(err.Error())
         }
         return getProductTagsResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetProductAssetsInBulkXQuery holds query params
+    type PlatformGetProductAssetsInBulkXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // GetProductAssetsInBulk Get a list of all bulk asset jobs.
+     func (ca *PlatformCatalog)  GetProductAssetsInBulk(xQuery PlatformGetProductAssetsInBulkXQuery) (BulkAssetResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getProductAssetsInBulkResponse BulkAssetResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/assets/bulk/",ca.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return BulkAssetResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductAssetsInBulkResponse)
+        if err != nil {
+             return BulkAssetResponse{}, common.NewFDKError(err.Error())
+        }
+        return getProductAssetsInBulkResponse, nil
         
     }
          
@@ -9518,68 +9660,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    //PlatformGetProductAssetsInBulkXQuery holds query params
-    type PlatformGetProductAssetsInBulkXQuery struct { 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
-    }
-    
-
-
-    // GetProductAssetsInBulk Get a list of all bulk asset jobs.
-     func (ca *PlatformCatalog)  GetProductAssetsInBulk(xQuery PlatformGetProductAssetsInBulkXQuery) (BulkAssetResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getProductAssetsInBulkResponse BulkAssetResponse
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/assets/bulk/",ca.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return BulkAssetResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProductAssetsInBulkResponse)
-        if err != nil {
-             return BulkAssetResponse{}, common.NewFDKError(err.Error())
-        }
-        return getProductAssetsInBulkResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
 
 
     // DeleteSize Delete a Size associated with product.
@@ -9623,6 +9703,78 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return ProductSizeDeleteResponse{}, common.NewFDKError(err.Error())
         }
         return deleteSizeResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetInventoryBySizeXQuery holds query params
+    type PlatformGetInventoryBySizeXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        Q string  `url:"q,omitempty"` 
+        Sellable bool  `url:"sellable,omitempty"`  
+    }
+    
+
+
+    // GetInventoryBySize Get Inventory for company
+     func (ca *PlatformCatalog)  GetInventoryBySize(ItemID string, Size string, xQuery PlatformGetInventoryBySizeXQuery) (InventoryResponsePaginated, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getInventoryBySizeResponse InventoryResponsePaginated
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/%s/sizes/%s",ca.CompanyID, ItemID, Size),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return InventoryResponsePaginated{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getInventoryBySizeResponse)
+        if err != nil {
+             return InventoryResponsePaginated{}, common.NewFDKError(err.Error())
+        }
+        return getInventoryBySizeResponse, nil
         
     }
          
@@ -9696,78 +9848,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return SuccessResponse{}, common.NewFDKError(err.Error())
         }
         return addInventoryResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformGetInventoryBySizeXQuery holds query params
-    type PlatformGetInventoryBySizeXQuery struct { 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"` 
-        Q string  `url:"q,omitempty"` 
-        Sellable bool  `url:"sellable,omitempty"`  
-    }
-    
-
-
-    // GetInventoryBySize Get Inventory for company
-     func (ca *PlatformCatalog)  GetInventoryBySize(ItemID string, Size string, xQuery PlatformGetInventoryBySizeXQuery) (InventoryResponsePaginated, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getInventoryBySizeResponse InventoryResponsePaginated
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-
-        
-        
-        
-        
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/products/%s/sizes/%s",ca.CompanyID, ItemID, Size),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return InventoryResponsePaginated{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getInventoryBySizeResponse)
-        if err != nil {
-             return InventoryResponsePaginated{}, common.NewFDKError(err.Error())
-        }
-        return getInventoryBySizeResponse, nil
         
     }
          
@@ -9909,6 +9989,68 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformGetInventoryBulkUploadHistoryXQuery holds query params
+    type PlatformGetInventoryBulkUploadHistoryXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // GetInventoryBulkUploadHistory Get a list of all bulk Inventory upload jobs.
+     func (ca *PlatformCatalog)  GetInventoryBulkUploadHistory(xQuery PlatformGetInventoryBulkUploadHistoryXQuery) (BulkInventoryGet, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getInventoryBulkUploadHistoryResponse BulkInventoryGet
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/inventory/bulk/",ca.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return BulkInventoryGet{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getInventoryBulkUploadHistoryResponse)
+        if err != nil {
+             return BulkInventoryGet{}, common.NewFDKError(err.Error())
+        }
+        return getInventoryBulkUploadHistoryResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
 
 
     // CreateBulkInventoryJob Create a Bulk Inventory upload Job.
@@ -10006,68 +10148,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    //PlatformGetInventoryBulkUploadHistoryXQuery holds query params
-    type PlatformGetInventoryBulkUploadHistoryXQuery struct { 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
-    }
-    
-
-
-    // GetInventoryBulkUploadHistory Get a list of all bulk Inventory upload jobs.
-     func (ca *PlatformCatalog)  GetInventoryBulkUploadHistory(xQuery PlatformGetInventoryBulkUploadHistoryXQuery) (BulkInventoryGet, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getInventoryBulkUploadHistoryResponse BulkInventoryGet
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/inventory/bulk/",ca.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return BulkInventoryGet{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getInventoryBulkUploadHistoryResponse)
-        if err != nil {
-             return BulkInventoryGet{}, common.NewFDKError(err.Error())
-        }
-        return getInventoryBulkUploadHistoryResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
     //PlatformGetInventoriesXQuery holds query params
     type PlatformGetInventoriesXQuery struct { 
         ItemID string  `url:"item_id,omitempty"` 
@@ -10137,6 +10217,58 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return GetInventoriesResponse{}, common.NewFDKError(err.Error())
         }
         return getInventoriesResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // DeleteBulkInventoryJob Delete Bulk Inventory job.
+     func (ca *PlatformCatalog)  DeleteBulkInventoryJob(BatchID string) (SuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteBulkInventoryJobResponse SuccessResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/inventory/bulk/%s/",ca.CompanyID, BatchID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteBulkInventoryJobResponse)
+        if err != nil {
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteBulkInventoryJobResponse, nil
         
     }
          
@@ -10221,129 +10353,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-
-
-    // DeleteBulkInventoryJob Delete Bulk Inventory job.
-     func (ca *PlatformCatalog)  DeleteBulkInventoryJob(BatchID string) (SuccessResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteBulkInventoryJobResponse SuccessResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/inventory/bulk/%s/",ca.CompanyID, BatchID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteBulkInventoryJobResponse)
-        if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteBulkInventoryJobResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // CreateInventoryExportJob Create a Inventory export Job.
-     func (ca *PlatformCatalog)  CreateInventoryExportJob(body  InventoryExportRequest) (InventoryExportResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            createInventoryExportJobResponse InventoryExportResponse
-	    )
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return InventoryExportResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return InventoryExportResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "post",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/inventory/download/",ca.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return InventoryExportResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &createInventoryExportJobResponse)
-        if err != nil {
-             return InventoryExportResponse{}, common.NewFDKError(err.Error())
-        }
-        return createInventoryExportJobResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
     //PlatformGetInventoryExportXQuery holds query params
     type PlatformGetInventoryExportXQuery struct { 
         Status string  `url:"status,omitempty"` 
@@ -10412,6 +10421,75 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+
+
+    // CreateInventoryExportJob Create a Inventory export Job.
+     func (ca *PlatformCatalog)  CreateInventoryExportJob(body  InventoryExportRequest) (InventoryExportResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            createInventoryExportJobResponse InventoryExportResponse
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return InventoryExportResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return InventoryExportResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "post",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/inventory/download/",ca.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return InventoryExportResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createInventoryExportJobResponse)
+        if err != nil {
+             return InventoryExportResponse{}, common.NewFDKError(err.Error())
+        }
+        return createInventoryExportJobResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
     //PlatformExportInventoryConfigXQuery holds query params
     type PlatformExportInventoryConfigXQuery struct { 
         FilterType string  `url:"filter_type,omitempty"`  
@@ -10460,79 +10538,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return InventoryConfig{}, common.NewFDKError(err.Error())
         }
         return exportInventoryConfigResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // UpdateRealtimeInventory Add Inventory for particular size and store.
-     func (ca *PlatformCatalog)  UpdateRealtimeInventory(ItemID float64, SellerIdentifier string, body  InventoryRequestSchemaV2) (SuccessResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateRealtimeInventoryResponse SuccessResponse
-	    )
-
-        
-        
-        
-        
-        
-        
-        
-
-        
-
-        
-        
-        
-        
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "post",
-            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/inventory/%s/",ca.CompanyID, ItemID, SellerIdentifier),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateRealtimeInventoryResponse)
-        if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return updateRealtimeInventoryResponse, nil
         
     }
          
@@ -10619,6 +10624,79 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
+    // UpdateRealtimeInventory Add Inventory for particular size and store.
+     func (ca *PlatformCatalog)  UpdateRealtimeInventory(ItemID float64, SellerIdentifier string, body  InventoryRequestSchemaV2) (SuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateRealtimeInventoryResponse SuccessResponse
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "post",
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/inventory/%s/",ca.CompanyID, ItemID, SellerIdentifier),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateRealtimeInventoryResponse)
+        if err != nil {
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return updateRealtimeInventoryResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
     // UpdateInventories Add Inventory for particular size and store.
      func (ca *PlatformCatalog)  UpdateInventories(body  InventoryRequestSchemaV2) (InventoryUpdateResponse, error){
         
@@ -10675,6 +10753,71 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return InventoryUpdateResponse{}, common.NewFDKError(err.Error())
         }
         return updateInventoriesResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetAllHsnCodesXQuery holds query params
+    type PlatformGetAllHsnCodesXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        Q string  `url:"q,omitempty"`  
+    }
+    
+
+
+    // GetAllHsnCodes Hsn Code List.
+     func (ca *PlatformCatalog)  GetAllHsnCodes(xQuery PlatformGetAllHsnCodesXQuery) (HsnCodesListingResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAllHsnCodesResponse HsnCodesListingResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/hsn/",ca.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return HsnCodesListingResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAllHsnCodesResponse)
+        if err != nil {
+             return HsnCodesListingResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAllHsnCodesResponse, nil
         
     }
          
@@ -10760,71 +10903,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return HsnCode{}, common.NewFDKError(err.Error())
         }
         return createHsnCodeResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformGetAllHsnCodesXQuery holds query params
-    type PlatformGetAllHsnCodesXQuery struct { 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"` 
-        Q string  `url:"q,omitempty"`  
-    }
-    
-
-
-    // GetAllHsnCodes Hsn Code List.
-     func (ca *PlatformCatalog)  GetAllHsnCodes(xQuery PlatformGetAllHsnCodesXQuery) (HsnCodesListingResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAllHsnCodesResponse HsnCodesListingResponse
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-                
-            
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/hsn/",ca.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return HsnCodesListingResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAllHsnCodesResponse)
-        if err != nil {
-             return HsnCodesListingResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAllHsnCodesResponse, nil
         
     }
          
