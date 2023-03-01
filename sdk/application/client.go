@@ -11299,12 +11299,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // CardDetails API to get Card info from PG
-    func (pa *Payment)  CardDetails(CardInfo string, xQuery PaymentCardDetailsXQuery) (cardDetailsResponse, error){
+    func (pa *Payment)  CardDetails(CardInfo string, xQuery PaymentCardDetailsXQuery) (CardDetailsResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             cardDetailsResponse cardDetailsResponse
+             cardDetailsResponse CardDetailsResponse
 	    )
 
         
@@ -11332,12 +11332,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return cardDetailsResponse{}, err
+            return CardDetailsResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &cardDetailsResponse)
         if err != nil {
-            return cardDetailsResponse{}, common.NewFDKError(err.Error())
+            return CardDetailsResponse{}, common.NewFDKError(err.Error())
         }
          return cardDetailsResponse, nil
         

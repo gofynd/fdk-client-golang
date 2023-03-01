@@ -17058,10 +17058,10 @@ API to get Card info from PG
 
 
 
-Success. Returns the status of payment. Check the example shown below or refer `cardDetailsResponseSchema` for more details.
+Success. Returns the status of payment. Check the example shown below or refer `CardDetailsResponseSchema` for more details.
 
 
-Schema: `cardDetailsResponse`
+Schema: `CardDetailsResponse`
 
 
 
