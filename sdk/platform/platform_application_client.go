@@ -21891,8 +21891,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    //PlatformAppUpdateCartWithSharedItemsXQuery holds query params
+    type PlatformAppUpdateCartWithSharedItemsXQuery struct { 
+        CartID string  `url:"cart_id,omitempty"`  
+    }
+    
     // UpdateCartWithSharedItems Merge or replace existing cart
-     func (ca *PlatformAppCart)  UpdateCartWithSharedItems(Token string, Action string) (SharedCartResponse, error) {
+     func (ca *PlatformAppCart)  UpdateCartWithSharedItems(Token string, Action string, xQuery PlatformAppUpdateCartWithSharedItemsXQuery) (SharedCartResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -21903,6 +21908,10 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
 
          
+            
+                
+            
+        
 
         
         
@@ -21919,7 +21928,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             "post",
             fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/share-cart/%s/%s",ca.CompanyID, ca.ApplicationID, Token, Action),
             nil,
-            nil,
+            xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
