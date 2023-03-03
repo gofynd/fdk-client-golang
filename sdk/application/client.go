@@ -1657,55 +1657,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UnfollowById Unfollow an entity (product/brand/collection)
-    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             unfollowByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &unfollowByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return unfollowByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // FollowById Follow an entity (product/brand/collection)
     func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1746,6 +1697,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return followByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UnfollowById Unfollow an entity (product/brand/collection)
+    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             unfollowByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &unfollowByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return unfollowByIdResponse, nil
         
     }
           
@@ -2802,7 +2802,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartDeleteCartXQuery holds query params
     type CartDeleteCartXQuery struct { 
-        ID float64  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // DeleteCart Delete cart once user made successful checkout
@@ -15656,13 +15656,8 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    //LogisticGetPincodeCityXQuery holds query params
-    type LogisticGetPincodeCityXQuery struct { 
-        CountryCode string  `url:"country_code,omitempty"`  
-    }
-    
     // GetPincodeCity Get Pincode API
-    func (lo *Logistic)  GetPincodeCity(Pincode string, xQuery LogisticGetPincodeCityXQuery) (PincodeApiResponse, error){
+    func (lo *Logistic)  GetPincodeCity(Pincode string) (PincodeApiResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -15672,10 +15667,6 @@ func NewAppClient(config *AppConfig) *Client {
 
         
 
-        
-            
-                
-            
         
 
         
@@ -15691,7 +15682,7 @@ func NewAppClient(config *AppConfig) *Client {
             "get",
             fmt.Sprintf("/service/application/logistics/v1.0/pincode/%s",Pincode),
             nil,
-            xQuery,
+            nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -15721,8 +15712,6 @@ func NewAppClient(config *AppConfig) *Client {
              getTatProductResponse TATViewResponse
 	    )
 
-        
-            
         
             
         
@@ -15775,78 +15764,6 @@ func NewAppClient(config *AppConfig) *Client {
             return TATViewResponse{}, common.NewFDKError(err.Error())
         }
          return getTatProductResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    //LogisticGetEntityListXQuery holds query params
-    type LogisticGetEntityListXQuery struct { 
-        Page string  `url:"page,omitempty"` 
-        Limit string  `url:"limit,omitempty"`  
-    }
-    
-    // GetEntityList Get Entity List
-    func (lo *Logistic)  GetEntityList(xQuery LogisticGetEntityListXQuery, body  EntityListRequest) (EntityListResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getEntityListResponse EntityListResponse
-	    )
-
-        
-            
-        
-
-        
-            
-                
-            
-                
-            
-        
-
-        
-    
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return EntityListResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return EntityListResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            lo.config,
-            "post",
-            "/service/application/logistics/v1.0/entity-list",
-            nil,
-            xQuery,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return EntityListResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getEntityListResponse)
-        if err != nil {
-            return EntityListResponse{}, common.NewFDKError(err.Error())
-        }
-         return getEntityListResponse, nil
         
     }
           
@@ -15909,82 +15826,6 @@ func NewAppClient(config *AppConfig) *Client {
             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
         }
          return getPincodeZonesResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // AssignLocations GET zone from the Pincode.
-    func (lo *Logistic)  AssignLocations(body  AssignStoreRequest) (AssignStoreResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             assignLocationsResponse AssignStoreResponse
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-        
-
-        
-    
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return AssignStoreResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return AssignStoreResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            lo.config,
-            "post",
-            "/service/application/logistics/v1.0/assign_stores",
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return AssignStoreResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &assignLocationsResponse)
-        if err != nil {
-            return AssignStoreResponse{}, common.NewFDKError(err.Error())
-        }
-         return assignLocationsResponse, nil
         
     }
           

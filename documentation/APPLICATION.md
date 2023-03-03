@@ -46,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [unfollowById](#unfollowbyid)
     * [followById](#followbyid)
+    * [unfollowById](#unfollowbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -324,9 +324,7 @@
   * Methods
     * [getPincodeCity](#getpincodecity)
     * [getTatProduct](#gettatproduct)
-    * [getEntityList](#getentitylist)
     * [getPincodeZones](#getpincodezones)
-    * [assignLocations](#assignlocations)
     
 
 
@@ -1152,12 +1150,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1171,7 +1169,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1193,12 +1191,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1212,7 +1210,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -23535,7 +23533,7 @@ Get Pincode API
 
 ```golang
 
- data, err :=  Logistic.GetPincodeCity(Pincode, xQuery);
+ data, err :=  Logistic.GetPincodeCity(Pincode);
 ```
 
 | Argument  |  Type  | Description |
@@ -23543,9 +23541,6 @@ Get Pincode API
 
 | Pincode | string | A `pincode` contains a specific address of a location. | 
 
-
-
-| xQuery | struct | Includes properties such as `CountryCode`
 
 
 
@@ -23583,10 +23578,6 @@ Pincode data found
           "zone": "West",
           "internal_zone_id": 4
         },
-        "meta_code": {
-          "country_code": "IND",
-          "isd_code": "+91"
-        },
         "parents": [
           {
             "sub_type": "country",
@@ -23606,14 +23597,7 @@ Pincode data found
             "display_name": "Thane",
             "uid": "city:INDIA|MAHARASHTRA|MUMBAI"
           }
-        ],
-        "lat_long": {
-          "type": "Point",
-          "coordinates": [
-            3.8858955,
-            7.2272335
-          ]
-        }
+        ]
       }
     ],
     "request_uuid": "fce9f431215e71c9ee0e86e792ae1dce4",
@@ -23809,47 +23793,6 @@ Pincode not found
 ---
 
 
-#### getEntityList
-Get Entity List
-
-```golang
-
- data, err :=  Logistic.GetEntityList(xQuery, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-| xQuery | struct | Includes properties such as `Page`, `Limit`
-
-| body |  EntityListRequest | "Request body" 
-
-
-Get Entity List
-
-*Success Response:*
-
-
-
-Get Entity List
-
-
-Schema: `EntityListResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getPincodeZones
 GET zone from the Pincode.
 
@@ -23874,42 +23817,6 @@ Response status_code
 
 
 Schema: `GetZoneFromPincodeViewResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### assignLocations
-GET zone from the Pincode.
-
-```golang
-
- data, err :=  Logistic.AssignLocations(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  AssignStoreRequest | "Request body" 
-
-
-This API returns zone from the Pincode View.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `AssignStoreResponse`
 
 
 
