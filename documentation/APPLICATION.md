@@ -13,7 +13,7 @@
 * [FileStorage](#FileStorage) - File Storage 
 * [Configuration](#Configuration) - Application configuration apis 
 * [Payment](#Payment) - Collect payment through many payment gateway i.e Stripe, Razorpay, Juspay etc.into Fynd or Self account 
-* [Order](#Order) - Handles Platform websites OMS 
+* [Order](#Order) - Handles all Application order and shipment api(s) 
 * [Rewards](#Rewards) - Earn and redeem reward points 
 * [PosCart](#PosCart) - Cart APIs 
 * [Logistic](#Logistic) - Logistics Promise Engine APIs allows you to configure zone, pincode, TAT, logistics and many more useful features.  
@@ -46,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [unfollowById](#unfollowbyid)
     * [followById](#followbyid)
+    * [unfollowById](#unfollowbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -268,16 +268,17 @@
   * Methods
     * [getOrders](#getorders)
     * [getOrderById](#getorderbyid)
-    * [getShipmentById](#getshipmentbyid)
-    * [getShipmentReasons](#getshipmentreasons)
-    * [getShipmentBagReasons](#getshipmentbagreasons)
-    * [updateShipmentStatus](#updateshipmentstatus)
-    * [trackShipment](#trackshipment)
     * [getPosOrderById](#getposorderbyid)
+    * [getShipmentById](#getshipmentbyid)
+    * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
+    * [trackShipment](#trackshipment)
     * [getCustomerDetailsByShipmentId](#getcustomerdetailsbyshipmentid)
     * [sendOtpToShipmentCustomer](#sendotptoshipmentcustomer)
     * [verifyOtpShipmentCustomer](#verifyotpshipmentcustomer)
-    * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
+    * [getShipmentBagReasons](#getshipmentbagreasons)
+    * [getShipmentReasons](#getshipmentreasons)
+    * [updateShipmentStatus](#updateshipmentstatus)
+    * [getInvoiceByShipmentId1](#getinvoicebyshipmentid1)
     * [getCreditNoteByShipmentId](#getcreditnotebyshipmentid)
     
 
@@ -1153,12 +1154,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1172,7 +1173,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1194,12 +1195,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1213,7 +1214,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -17949,7 +17950,7 @@ Get all orders
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `Status`, `CustomMeta`
+| xQuery | struct | Includes properties such as `Status`, `PageNo`, `PageSize`, `FromDate`, `ToDate`, `CustomMeta`
 
 
 
@@ -18013,6 +18014,44 @@ Schema: `OrderById`
 ---
 
 
+#### getPosOrderById
+Get POS Order
+
+```golang
+
+ data, err :=  Order.GetPosOrderById(OrderID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| OrderID | string | A unique number used for identifying and tracking your orders. | 
+
+
+
+
+Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `PosOrderById` for more details.
+
+
+Schema: `OrderList`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getShipmentById
 Get details of a shipment
 
@@ -18051,112 +18090,32 @@ Schema: `ShipmentById`
 ---
 
 
-#### getShipmentReasons
-Get reasons behind full or partial cancellation of a shipment
+#### getInvoiceByShipmentId
+Get Invoice of a shipment
 
 ```golang
 
- data, err :=  Order.GetShipmentReasons(ShipmentID);
+ data, err :=  Order.GetInvoiceByShipmentId(ShipmentID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+| ShipmentID | string | ID of the shipment. | 
 
 
 
 
-Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `ShipmentReasons` for more details.
-
-
-Schema: `ShipmentReasons`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getShipmentBagReasons
-Get reasons at l1,l2 and l3 for cancellation and return based on department
-
-```golang
-
- data, err :=  Order.GetShipmentBagReasons(ShipmentID, BagID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
-
-
-| BagID | string | ID of the bag. | 
-
-
-
-
-Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+Use this API to retrieve shipment invoice.
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `ShipmentBagReasons` for more details.
+Success. Check the example shown below or refer `ShipmentById` for more details.
 
 
-Schema: `ShipmentBagReasons`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateShipmentStatus
-Update the shipment status
-
-```golang
-
- data, err :=  Order.UpdateShipmentStatus(ShipmentID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
-
-
-| body |  ShipmentStatusUpdateBody | "Request body" 
-
-
-Use this API to update the status of a shipment using its shipment ID.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `ShipmentStatusUpdateBody` for more details.
-
-
-Schema: `ShipmentStatusUpdate`
+Schema: `ResponseGetInvoiceShipment`
 
 
 
@@ -18185,7 +18144,7 @@ Track shipment
 
 
 
-Use this API to track a shipment using its shipment ID.
+Track Shipment by shipment id, for application based on application Id
 
 *Success Response:*
 
@@ -18195,44 +18154,6 @@ Success. Check the example shown below or refer `ShipmentTrack` for more details
 
 
 Schema: `ShipmentTrack`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPosOrderById
-Get POS Order
-
-```golang
-
- data, err :=  Order.GetPosOrderById(OrderID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| OrderID | string | A unique number used for identifying and tracking your orders. | 
-
-
-
-
-Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `PosOrderById` for more details.
-
-
-Schema: `PosOrderById`
 
 
 
@@ -18256,10 +18177,10 @@ Get Customer Details by Shipment Id
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| OrderID | string | A unique number used for identifying and tracking your orders. | 
+| OrderID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+| ShipmentID | string | A unique number used for identifying and tracking your orders. | 
 
 
 
@@ -18273,7 +18194,7 @@ Use this API to retrieve customer details such as mobileno using Shipment ID.
 Success. Check the example shown below or refer `CustomerDetailsByShipmentId` for more details.
 
 
-Schema: `CustomerDetailsByShipmentId`
+Schema: `CustomerDetailsResponse`
 
 
 
@@ -18314,7 +18235,7 @@ Use this API to send OTP to the customer of the mapped Shipment.
 Success to acknowledge the service was notified
 
 
-Schema: `sendOTPApplicationResponse`
+Schema: `SendOtpToCustomerResponse`
 
 
 
@@ -18344,7 +18265,7 @@ Verify Otp code
 | ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
-| body |  ReqBodyVerifyOTPShipment | "Request body" 
+| body |  VerifyOtp | "Request body" 
 
 
 Use this API to verify OTP and create a session token with custom payload.
@@ -18356,7 +18277,7 @@ Use this API to verify OTP and create a session token with custom payload.
 Success, the code is valid and returns a session token
 
 
-Schema: `ResponseVerifyOTPShipment`
+Schema: `VerifyOtpResponse`
 
 
 
@@ -18369,12 +18290,53 @@ Schema: `ResponseVerifyOTPShipment`
 ---
 
 
-#### getInvoiceByShipmentId
-Get Invoice URL
+#### getShipmentBagReasons
+Get reasons behind full or partial cancellation of a shipment
 
 ```golang
 
- data, err :=  Order.GetInvoiceByShipmentId(ShipmentID);
+ data, err :=  Order.GetShipmentBagReasons(ShipmentID, BagID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| BagID | string | ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+
+
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ShipmentBagReasons` for more details.
+
+
+Schema: `ShipmentBagReasons`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentReasons
+Get reasons behind full or partial cancellation of a shipment
+
+```golang
+
+ data, err :=  Order.GetShipmentReasons(ShipmentID);
 ```
 
 | Argument  |  Type  | Description |
@@ -18385,16 +18347,96 @@ Get Invoice URL
 
 
 
-Use this API to get a generated Invoice URL for viewing or download.
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
 
 *Success Response:*
 
 
 
-Success, the code is valid and returns a SignedUrl
+Success. Check the example shown below or refer `ShipmentBagReasons` for more details.
 
 
-Schema: `ResponseGetInvoiceShipment`
+Schema: `ShipmentReasons`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateShipmentStatus
+
+
+```golang
+
+ data, err :=  Order.UpdateShipmentStatus(ShipmentID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string |  | 
+
+
+| body |  UpdateShipmentStatusRequest | "Request body" 
+
+
+updateShipmentStatus
+
+*Success Response:*
+
+
+
+Successfully updateShipmentStatus!
+
+
+Schema: `ShipmentApplicationStatusResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getInvoiceByShipmentId1
+Get Presigned URL to download Invoice
+
+```golang
+
+ data, err :=  Order.GetInvoiceByShipmentId1(ShipmentID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | Shiment ID | 
+
+
+
+| xQuery | struct | Includes properties such as `Parameters`
+
+
+
+Use this API to generate Presigned URLs for downloading Invoice
+
+*Success Response:*
+
+
+
+Success Response, Presigned URL of Invoice
+
+
+Schema: `ResponseGetInvoiceShipment1`
 
 
 
@@ -18408,31 +18450,34 @@ Schema: `ResponseGetInvoiceShipment`
 
 
 #### getCreditNoteByShipmentId
-Get Credit Note URL
+Get Presigned URL to download Invoice
 
 ```golang
 
- data, err :=  Order.GetCreditNoteByShipmentId(ShipmentID);
+ data, err :=  Order.GetCreditNoteByShipmentId(ShipmentID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+| ShipmentID | string | Shiment ID | 
 
 
 
+| xQuery | struct | Includes properties such as `Parameters`
 
-Use this API to get a generated Credit Note URL for viewing or download.
+
+
+Use this API to generate Presigned URLs for downloading Invoice
 
 *Success Response:*
 
 
 
-Success, the code is valid and returns a SignedUrl
+Success Response, Presigned URL of Invoice
 
 
-Schema: `ResponseGetCreditNoteShipment`
+Schema: `ResponseGetInvoiceShipment1`
 
 
 
