@@ -237,6 +237,8 @@
     * [getRupifiBannerDetails](#getrupifibannerdetails)
     * [getEpaylaterBannerDetails](#getepaylaterbannerdetails)
     * [resendOrCancelPayment](#resendorcancelpayment)
+    * [renderHTML](#renderhtml)
+    * [validateVPA](#validatevpa)
     * [getActiveRefundTransferModes](#getactiverefundtransfermodes)
     * [enableOrDisableRefundTransferMode](#enableordisablerefundtransfermode)
     * [getUserBeneficiariesDetail](#getuserbeneficiariesdetail)
@@ -325,7 +327,7 @@
     * [getPincodeCity](#getpincodecity)
     * [getTatProduct](#gettatproduct)
     * [getPincodeZones](#getpincodezones)
-    * [reassignStore](#reassignstore)
+    * [getOptimalLocations](#getoptimallocations)
     
 
 
@@ -1615,7 +1617,9 @@ Fetch all items added to the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `BuyNow`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`, `BuyNow`
 
 
 
@@ -16954,7 +16958,9 @@ Get a list of staff.
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `OrderIncent`, `OrderingStore`, `User`
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `OrderIncent`, `OrderingStore`, `User`, `UserName`
 
 
 
@@ -17247,7 +17253,7 @@ Schema: `ValidateCustomerResponse`
 *Examples:*
 
 
-User is allowed to make payment
+success is True i.e user is allowed
 ```json
 {
   "value": {
@@ -17261,13 +17267,12 @@ User is allowed to make payment
         "first_transaction": false
       },
       "aggregator": "Simpl"
-    },
-    "error": {}
+    }
   }
 }
 ```
 
-User is not allowed to make payment
+success is True i.e user not allowed
 ```json
 {
   "value": {
@@ -17664,6 +17669,78 @@ request_type is resend
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### renderHTML
+Convert base64 string to HTML form
+
+```golang
+
+ data, err :=  Payment.RenderHTML(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  renderHTMLRequest | "Request body" 
+
+
+Use this API to decode base64 html form to plain HTML string.
+
+*Success Response:*
+
+
+
+Success and return HTML decoded text
+
+
+Schema: `renderHTMLResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### validateVPA
+API to Validate UPI ID
+
+```golang
+
+ data, err :=  Payment.ValidateVPA(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  ValidateVPARequest | "Request body" 
+
+
+API to Validate UPI ID
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `ValidateVPAResponseSchema` for more details.
+
+
+Schema: `ValidateVPAResponse`
 
 
 
@@ -19300,7 +19377,9 @@ Fetch all items added to the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `BuyNow`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`, `BuyNow`
 
 
 
@@ -23780,12 +23859,12 @@ Schema: `GetZoneFromPincodeViewResponse`
 ---
 
 
-#### reassignStore
+#### getOptimalLocations
 GET zone from the Pincode.
 
 ```golang
 
- data, err :=  Logistic.ReassignStore(body);
+ data, err :=  Logistic.GetOptimalLocations(body);
 ```
 
 | Argument  |  Type  | Description |
