@@ -14096,6 +14096,8 @@ func NewAppClient(config *AppConfig) *Client {
 	    )
 
         
+            
+        
 
         
             
@@ -14172,6 +14174,10 @@ func NewAppClient(config *AppConfig) *Client {
              updateCartResponse UpdateCartDetailResponse
 	    )
 
+        
+            
+        
+            
         
 
         
@@ -14365,6 +14371,8 @@ func NewAppClient(config *AppConfig) *Client {
              applyCouponResponse CartDetailResponse
 	    )
 
+        
+            
         
 
         
@@ -14564,6 +14572,8 @@ func NewAppClient(config *AppConfig) *Client {
 	    )
 
         
+            
+        
 
         
             
@@ -14701,6 +14711,50 @@ func NewAppClient(config *AppConfig) *Client {
 	    )
 
         
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
 
         
 
@@ -14830,6 +14884,50 @@ func NewAppClient(config *AppConfig) *Client {
 	    )
 
         
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
 
         
 
@@ -14945,6 +15043,12 @@ func NewAppClient(config *AppConfig) *Client {
 	    )
 
         
+            
+        
+            
+        
+            
+        
 
         
             
@@ -15018,6 +15122,18 @@ func NewAppClient(config *AppConfig) *Client {
              selectPaymentModeResponse CartDetailResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
         
 
         
@@ -15433,6 +15549,14 @@ func NewAppClient(config *AppConfig) *Client {
 	    )
 
         
+            
+        
+            
+        
+            
+        
+            
+        
 
         
             
@@ -15607,6 +15731,10 @@ func NewAppClient(config *AppConfig) *Client {
              getCartShareLinkResponse GetShareCartLinkResponse
 	    )
 
+        
+            
+        
+            
         
 
         
