@@ -17,6 +17,7 @@
 * [Rewards](#Rewards) - Earn and redeem reward points 
 * [PosCart](#PosCart) - Cart APIs 
 * [Logistic](#Logistic) - Logistics Promise Engine APIs allows you to configure zone, pincode, TAT, logistics and many more useful features.  
+* [DocumentEngine](#DocumentEngine) - Handles financial pdf generation of Fulfilment 
 
 ----
 ----
@@ -328,6 +329,12 @@
     * [getTatProduct](#gettatproduct)
     * [getAllCountries](#getallcountries)
     * [getPincodeZones](#getpincodezones)
+    
+
+* [DocumentEngine](#DocumentEngine)
+  * Methods
+    * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
+    * [getCreditNoteByShipmentId](#getcreditnotebyshipmentid)
     
 
 
@@ -23682,14 +23689,7 @@ Pincode data found
             "display_name": "Thane",
             "uid": "city:INDIA|MAHARASHTRA|MUMBAI"
           }
-        ],
-        "lat_long": {
-          "type": "Point",
-          "coordinates": [
-            3.8858955,
-            7.2272335
-          ]
-        }
+        ]
       }
     ],
     "request_uuid": "fce9f431215e71c9ee0e86e792ae1dce4",
@@ -23944,6 +23944,95 @@ Response status_code
 
 
 Schema: `GetZoneFromPincodeViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+
+---
+
+
+## DocumentEngine
+
+
+#### getInvoiceByShipmentId
+Get Presigned URL to download Invoice
+
+```golang
+
+ data, err :=  DocumentEngine.GetInvoiceByShipmentId(ShipmentID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | Shiment ID | 
+
+
+
+| xQuery | struct | Includes properties such as `Parameters`
+
+
+
+Use this API to generate Presigned URLs for downloading Invoice
+
+*Success Response:*
+
+
+
+Success Response, Presigned URL of Invoice
+
+
+Schema: `ResponseGetInvoiceShipment`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCreditNoteByShipmentId
+Get Presigned URL to download Invoice
+
+```golang
+
+ data, err :=  DocumentEngine.GetCreditNoteByShipmentId(ShipmentID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | Shiment ID | 
+
+
+
+| xQuery | struct | Includes properties such as `Parameters`
+
+
+
+Use this API to generate Presigned URLs for downloading Invoice
+
+*Success Response:*
+
+
+
+Success Response, Presigned URL of Invoice
+
+
+Schema: `ResponseGetInvoiceShipment`
 
 
 
