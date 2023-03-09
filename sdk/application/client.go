@@ -42,6 +42,8 @@ type Client struct {
 	
 		Logistic  *Logistic
 	
+		DocumentEngine  *DocumentEngine
+	
 }
 
 // NewAppClient provides application client
@@ -79,6 +81,8 @@ func NewAppClient(config *AppConfig) *Client {
 				PosCart:  NewPosCart(config),
 			
 				Logistic:  NewLogistic(config),
+			
+				DocumentEngine:  NewDocumentEngine(config),
 			
 		}
 }
@@ -16030,6 +16034,128 @@ func NewAppClient(config *AppConfig) *Client {
             return ReAssignStoreResponse{}, common.NewFDKError(err.Error())
         }
          return getOptimalLocationsResponse, nil
+        
+    }
+          
+    
+
+    // DocumentEngine ...
+    type DocumentEngine struct {
+        config *AppConfig
+    }
+    // NewDocumentEngine ...
+    func NewDocumentEngine(config *AppConfig) *DocumentEngine {
+        return &DocumentEngine{config}
+    }
+    
+    
+    
+  
+    
+    
+    //DocumentEngineGetInvoiceByShipmentIdXQuery holds query params
+    type DocumentEngineGetInvoiceByShipmentIdXQuery struct { 
+        Parameters invoiceParameter  `url:"parameters,omitempty"`  
+    }
+    
+    // GetInvoiceByShipmentId Get Presigned URL to download Invoice
+    func (do *DocumentEngine)  GetInvoiceByShipmentId(ShipmentID string, xQuery DocumentEngineGetInvoiceByShipmentIdXQuery) (ResponseGetInvoiceShipment, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getInvoiceByShipmentIdResponse ResponseGetInvoiceShipment
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            do.config,
+            "get",
+            fmt.Sprintf("/service/application/document/v1.0/orders/shipments/%s/invoice",ShipmentID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ResponseGetInvoiceShipment{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getInvoiceByShipmentIdResponse)
+        if err != nil {
+            return ResponseGetInvoiceShipment{}, common.NewFDKError(err.Error())
+        }
+         return getInvoiceByShipmentIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //DocumentEngineGetCreditNoteByShipmentIdXQuery holds query params
+    type DocumentEngineGetCreditNoteByShipmentIdXQuery struct { 
+        Parameters creditNoteParameter  `url:"parameters,omitempty"`  
+    }
+    
+    // GetCreditNoteByShipmentId Get Presigned URL to download Invoice
+    func (do *DocumentEngine)  GetCreditNoteByShipmentId(ShipmentID string, xQuery DocumentEngineGetCreditNoteByShipmentIdXQuery) (ResponseGetInvoiceShipment, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getCreditNoteByShipmentIdResponse ResponseGetInvoiceShipment
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            do.config,
+            "get",
+            fmt.Sprintf("/service/application/document/v1.0/orders/shipments/%s/credit-note",ShipmentID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ResponseGetInvoiceShipment{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getCreditNoteByShipmentIdResponse)
+        if err != nil {
+            return ResponseGetInvoiceShipment{}, common.NewFDKError(err.Error())
+        }
+         return getCreditNoteByShipmentIdResponse, nil
         
     }
           
