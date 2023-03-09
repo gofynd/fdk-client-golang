@@ -17,7 +17,6 @@
 * [Rewards](#Rewards) - Earn and redeem reward points 
 * [PosCart](#PosCart) - Cart APIs 
 * [Logistic](#Logistic) - Logistics Promise Engine APIs allows you to configure zone, pincode, TAT, logistics and many more useful features.  
-* [DocumentEngine](#DocumentEngine) - Handles financial pdf generation of Fulfilment 
 
 ----
 ----
@@ -47,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [followById](#followbyid)
     * [unfollowById](#unfollowbyid)
+    * [followById](#followbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -329,12 +328,6 @@
     * [getTatProduct](#gettatproduct)
     * [getAllCountries](#getallcountries)
     * [getPincodeZones](#getpincodezones)
-    
-
-* [DocumentEngine](#DocumentEngine)
-  * Methods
-    * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
-    * [getCreditNoteByShipmentId](#getcreditnotebyshipmentid)
     
 
 
@@ -1160,12 +1153,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1179,7 +1172,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1201,12 +1194,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1220,7 +1213,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1531,10 +1524,10 @@ Prices may vary for different sizes of a product. Use this API to retrieve the p
 
 
 
-Success. Returns a ProductSizePriceV2 object. Check the example shown below or refer `ProductSizePriceResponseV2` for more details.
+Success. Returns a ProductSizePriceV3 object. Check the example shown below or refer `ProductSizePriceResponseV3` for more details.
 
 
-Schema: `ProductSizePriceResponseV2`
+Schema: `ProductSizePriceResponseV3`
 
 
 
@@ -1581,10 +1574,10 @@ A product of a particular size may be sold by multiple sellers. Use this API to 
 
 
 
-Success. Returns a ProductSizeSellerV2 object. Check the example shown below or refer `ProductSizeSellersResponseV2` for more details.
+Success. Returns a ProductSizeSellerV3 object. Check the example shown below or refer `ProductSizeSellersResponseV3` for more details.
 
 
-Schema: `ProductSizeSellersResponseV2`
+Schema: `ProductSizeSellersResponseV3`
 
 
 
@@ -18829,7 +18822,7 @@ Get Invoice of a shipment
 
 ```golang
 
- data, err :=  Order.GetInvoiceByShipmentId(ShipmentID);
+ data, err :=  Order.GetInvoiceByShipmentId(ShipmentID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -18837,6 +18830,9 @@ Get Invoice of a shipment
 
 | ShipmentID | string | ID of the shipment. | 
 
+
+
+| xQuery | struct | Includes properties such as `DocumentType`
 
 
 
@@ -23944,95 +23940,6 @@ Response status_code
 
 
 Schema: `GetZoneFromPincodeViewResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-
----
-
-
-## DocumentEngine
-
-
-#### getInvoiceByShipmentId
-Get Presigned URL to download Invoice
-
-```golang
-
- data, err :=  DocumentEngine.GetInvoiceByShipmentId(ShipmentID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ShipmentID | string | Shiment ID | 
-
-
-
-| xQuery | struct | Includes properties such as `Parameters`
-
-
-
-Use this API to generate Presigned URLs for downloading Invoice
-
-*Success Response:*
-
-
-
-Success Response, Presigned URL of Invoice
-
-
-Schema: `ResponseGetInvoiceShipment`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getCreditNoteByShipmentId
-Get Presigned URL to download Invoice
-
-```golang
-
- data, err :=  DocumentEngine.GetCreditNoteByShipmentId(ShipmentID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ShipmentID | string | Shiment ID | 
-
-
-
-| xQuery | struct | Includes properties such as `Parameters`
-
-
-
-Use this API to generate Presigned URLs for downloading Invoice
-
-*Success Response:*
-
-
-
-Success Response, Presigned URL of Invoice
-
-
-Schema: `ResponseGetInvoiceShipment`
 
 
 

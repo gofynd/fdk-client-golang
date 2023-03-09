@@ -42,8 +42,6 @@ type Client struct {
 	
 		Logistic  *Logistic
 	
-		DocumentEngine  *DocumentEngine
-	
 }
 
 // NewAppClient provides application client
@@ -81,8 +79,6 @@ func NewAppClient(config *AppConfig) *Client {
 				PosCart:  NewPosCart(config),
 			
 				Logistic:  NewLogistic(config),
-			
-				DocumentEngine:  NewDocumentEngine(config),
 			
 		}
 }
@@ -1661,55 +1657,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1750,6 +1697,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -2312,12 +2308,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // GetProductPriceBySlug Get the price of a product size at a PIN Code
-    func (ca *Catalog)  GetProductPriceBySlug(Slug string, Size string, xQuery CatalogGetProductPriceBySlugXQuery) (ProductSizePriceResponseV2, error){
+    func (ca *Catalog)  GetProductPriceBySlug(Slug string, Size string, xQuery CatalogGetProductPriceBySlugXQuery) (ProductSizePriceResponseV3, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getProductPriceBySlugResponse ProductSizePriceResponseV2
+             getProductPriceBySlugResponse ProductSizePriceResponseV3
 	    )
 
         
@@ -2345,18 +2341,18 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/application/catalog/v2.0/products/%s/sizes/%s/price/",Slug,Size),
+            fmt.Sprintf("/service/application/catalog/v3.0/products/%s/sizes/%s/price/",Slug,Size),
             nil,
             xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ProductSizePriceResponseV2{}, err
+            return ProductSizePriceResponseV3{}, err
 	    }
         
         err = json.Unmarshal(response, &getProductPriceBySlugResponse)
         if err != nil {
-            return ProductSizePriceResponseV2{}, common.NewFDKError(err.Error())
+            return ProductSizePriceResponseV3{}, common.NewFDKError(err.Error())
         }
          return getProductPriceBySlugResponse, nil
         
@@ -2377,12 +2373,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // GetProductSellersBySlug Get the sellers of a product size at a PIN Code
-    func (ca *Catalog)  GetProductSellersBySlug(Slug string, Size string, xQuery CatalogGetProductSellersBySlugXQuery) (ProductSizeSellersResponseV2, error){
+    func (ca *Catalog)  GetProductSellersBySlug(Slug string, Size string, xQuery CatalogGetProductSellersBySlugXQuery) (ProductSizeSellersResponseV3, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getProductSellersBySlugResponse ProductSizeSellersResponseV2
+             getProductSellersBySlugResponse ProductSizeSellersResponseV3
 	    )
 
         
@@ -2412,18 +2408,18 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/application/catalog/v2.0/products/%s/sizes/%s/sellers/",Slug,Size),
+            fmt.Sprintf("/service/application/catalog/v3.0/products/%s/sizes/%s/sellers/",Slug,Size),
             nil,
             xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ProductSizeSellersResponseV2{}, err
+            return ProductSizeSellersResponseV3{}, err
 	    }
         
         err = json.Unmarshal(response, &getProductSellersBySlugResponse)
         if err != nil {
-            return ProductSizeSellersResponseV2{}, common.NewFDKError(err.Error())
+            return ProductSizeSellersResponseV3{}, common.NewFDKError(err.Error())
         }
          return getProductSellersBySlugResponse, nil
         
@@ -12995,8 +12991,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //OrderGetInvoiceByShipmentIdXQuery holds query params
+    type OrderGetInvoiceByShipmentIdXQuery struct { 
+        DocumentType string  `url:"document_type,omitempty"`  
+    }
+    
     // GetInvoiceByShipmentId Get Invoice of a shipment
-    func (or *Order)  GetInvoiceByShipmentId(ShipmentID string) (ResponseGetInvoiceShipment, error){
+    func (or *Order)  GetInvoiceByShipmentId(ShipmentID string, xQuery OrderGetInvoiceByShipmentIdXQuery) (ResponseGetInvoiceShipment, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -13006,6 +13007,10 @@ func NewAppClient(config *AppConfig) *Client {
 
         
 
+        
+            
+                
+            
         
 
         
@@ -13021,7 +13026,7 @@ func NewAppClient(config *AppConfig) *Client {
             "get",
             fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/invoice",ShipmentID),
             nil,
-            nil,
+            xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -16018,128 +16023,6 @@ func NewAppClient(config *AppConfig) *Client {
             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
         }
          return getPincodeZonesResponse, nil
-        
-    }
-          
-    
-
-    // DocumentEngine ...
-    type DocumentEngine struct {
-        config *AppConfig
-    }
-    // NewDocumentEngine ...
-    func NewDocumentEngine(config *AppConfig) *DocumentEngine {
-        return &DocumentEngine{config}
-    }
-    
-    
-    
-  
-    
-    
-    //DocumentEngineGetInvoiceByShipmentIdXQuery holds query params
-    type DocumentEngineGetInvoiceByShipmentIdXQuery struct { 
-        Parameters invoiceParameter  `url:"parameters,omitempty"`  
-    }
-    
-    // GetInvoiceByShipmentId Get Presigned URL to download Invoice
-    func (do *DocumentEngine)  GetInvoiceByShipmentId(ShipmentID string, xQuery DocumentEngineGetInvoiceByShipmentIdXQuery) (ResponseGetInvoiceShipment, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getInvoiceByShipmentIdResponse ResponseGetInvoiceShipment
-	    )
-
-        
-
-        
-            
-                
-            
-        
-
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            do.config,
-            "get",
-            fmt.Sprintf("/service/application/document/v1.0/orders/shipments/%s/invoice",ShipmentID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ResponseGetInvoiceShipment{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getInvoiceByShipmentIdResponse)
-        if err != nil {
-            return ResponseGetInvoiceShipment{}, common.NewFDKError(err.Error())
-        }
-         return getInvoiceByShipmentIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    //DocumentEngineGetCreditNoteByShipmentIdXQuery holds query params
-    type DocumentEngineGetCreditNoteByShipmentIdXQuery struct { 
-        Parameters creditNoteParameter  `url:"parameters,omitempty"`  
-    }
-    
-    // GetCreditNoteByShipmentId Get Presigned URL to download Invoice
-    func (do *DocumentEngine)  GetCreditNoteByShipmentId(ShipmentID string, xQuery DocumentEngineGetCreditNoteByShipmentIdXQuery) (ResponseGetInvoiceShipment, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getCreditNoteByShipmentIdResponse ResponseGetInvoiceShipment
-	    )
-
-        
-
-        
-            
-                
-            
-        
-
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            do.config,
-            "get",
-            fmt.Sprintf("/service/application/document/v1.0/orders/shipments/%s/credit-note",ShipmentID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ResponseGetInvoiceShipment{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getCreditNoteByShipmentIdResponse)
-        if err != nil {
-            return ResponseGetInvoiceShipment{}, common.NewFDKError(err.Error())
-        }
-         return getCreditNoteByShipmentIdResponse, nil
         
     }
           
