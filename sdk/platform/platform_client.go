@@ -14633,58 +14633,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetZoneDataView Zone Data View of application.
-     func (se *PlatformServiceability)  GetZoneDataView(ZoneID string) (GetSingleZoneDataViewResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getZoneDataViewResponse GetSingleZoneDataViewResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            se.Config,
-            "get",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/zone/%s",se.CompanyID, ZoneID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return GetSingleZoneDataViewResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getZoneDataViewResponse)
-        if err != nil {
-             return GetSingleZoneDataViewResponse{}, common.NewFDKError(err.Error())
-        }
-        return getZoneDataViewResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
     // UpdateZoneControllerView Updation of zone collections in database.
      func (se *PlatformServiceability)  UpdateZoneControllerView(ZoneID string, body  ZoneUpdateRequest) (ZoneSuccessResponse, error){
         
@@ -14754,14 +14702,66 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // InsertZoneControllerView Insertion of zone in database.
-     func (se *PlatformServiceability)  InsertZoneControllerView(body  ZoneRequest) (ZoneResponse, error){
+    // GetZoneDataView Zone Data View of application.
+     func (se *PlatformServiceability)  GetZoneDataView(ZoneID string) (GetSingleZoneDataViewResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            insertZoneControllerViewResponse ZoneResponse
+            getZoneDataViewResponse GetSingleZoneDataViewResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.Config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/zone/%s",se.CompanyID, ZoneID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetSingleZoneDataViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getZoneDataViewResponse)
+        if err != nil {
+             return GetSingleZoneDataViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return getZoneDataViewResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // CreateZone Insertion of zone in database.
+     func (se *PlatformServiceability)  CreateZone(body  ZoneRequest) (ZoneResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            createZoneResponse ZoneResponse
 	    )
 
         
@@ -14794,7 +14794,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         rawRequest = NewRequest(
             se.Config,
             "post",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/zone/",se.CompanyID),
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/zone",se.CompanyID),
             nil,
             nil,
             reqBody)
@@ -14803,16 +14803,18 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return ZoneResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &insertZoneControllerViewResponse)
+        err = json.Unmarshal(response, &createZoneResponse)
         if err != nil {
              return ZoneResponse{}, common.NewFDKError(err.Error())
         }
-        return insertZoneControllerViewResponse, nil
+        return createZoneResponse, nil
         
     }
          
         
        
+    
+    
     
     
     

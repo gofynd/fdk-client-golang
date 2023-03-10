@@ -16595,8 +16595,8 @@ package platform
 
         
             ChannelType string  `json:"channel_type"`
-            ServiceabilityType string  `json:"serviceability_type"`
             ChannelID string  `json:"channel_id"`
+            ServiceabilityType string  `json:"serviceability_type"`
          
     }
     
@@ -16604,9 +16604,9 @@ package platform
     type ServiceabilityrErrorResponse struct {
 
         
+            Type string  `json:"type"`
             Value string  `json:"value"`
             Message string  `json:"message"`
-            Type string  `json:"type"`
          
     }
     
@@ -16614,8 +16614,8 @@ package platform
     type ApplicationServiceabilityConfigResponse struct {
 
         
-            Data ApplicationServiceabilityConfig  `json:"data"`
             Success bool  `json:"success"`
+            Data ApplicationServiceabilityConfig  `json:"data"`
             Error ServiceabilityrErrorResponse  `json:"error"`
          
     }
@@ -16624,8 +16624,18 @@ package platform
     type EntityRegionView_Request struct {
 
         
-            SubType []string  `json:"sub_type"`
             ParentID []string  `json:"parent_id"`
+            SubType []string  `json:"sub_type"`
+         
+    }
+    
+    // EntityRegionView_Error used by Serviceability
+    type EntityRegionView_Error struct {
+
+        
+            Type string  `json:"type"`
+            Value string  `json:"value"`
+            Message string  `json:"message"`
          
     }
     
@@ -16634,20 +16644,10 @@ package platform
 
         
             ItemTotal float64  `json:"item_total"`
-            Current float64  `json:"current"`
-            Type string  `json:"type"`
-            HasNext bool  `json:"has_next"`
             Size float64  `json:"size"`
-         
-    }
-    
-    // EntityRegionView_Error used by Serviceability
-    type EntityRegionView_Error struct {
-
-        
-            Value string  `json:"value"`
-            Message string  `json:"message"`
             Type string  `json:"type"`
+            Current float64  `json:"current"`
+            HasNext bool  `json:"has_next"`
          
     }
     
@@ -16656,8 +16656,8 @@ package platform
 
         
             Name string  `json:"name"`
-            SubType string  `json:"sub_type"`
             UID string  `json:"uid"`
+            SubType string  `json:"sub_type"`
          
     }
     
@@ -16665,32 +16665,10 @@ package platform
     type EntityRegionView_Response struct {
 
         
-            Page EntityRegionView_page  `json:"page"`
             Error EntityRegionView_Error  `json:"error"`
             Success bool  `json:"success"`
+            Page EntityRegionView_page  `json:"page"`
             Data []EntityRegionView_Items  `json:"data"`
-         
-    }
-    
-    // ZoneDataItem used by Serviceability
-    type ZoneDataItem struct {
-
-        
-            Type string  `json:"type"`
-            ItemTotal float64  `json:"item_total"`
-            Current float64  `json:"current"`
-            HasNext bool  `json:"has_next"`
-            Size float64  `json:"size"`
-         
-    }
-    
-    // ListViewSummary used by Serviceability
-    type ListViewSummary struct {
-
-        
-            TotalActiveZones float64  `json:"total_active_zones"`
-            TotalZones float64  `json:"total_zones"`
-            TotalPincodesServed float64  `json:"total_pincodes_served"`
          
     }
     
@@ -16716,15 +16694,37 @@ package platform
     type ListViewItems struct {
 
         
-            StoresCount float64  `json:"stores_count"`
-            Channels ListViewChannels  `json:"channels"`
             Name string  `json:"name"`
-            ZoneID string  `json:"zone_id"`
+            StoresCount float64  `json:"stores_count"`
             IsActive bool  `json:"is_active"`
+            CompanyID float64  `json:"company_id"`
+            ZoneID string  `json:"zone_id"`
+            Channels ListViewChannels  `json:"channels"`
             PincodesCount float64  `json:"pincodes_count"`
             Slug string  `json:"slug"`
             Product ListViewProduct  `json:"product"`
-            CompanyID float64  `json:"company_id"`
+         
+    }
+    
+    // ZoneDataItem used by Serviceability
+    type ZoneDataItem struct {
+
+        
+            ItemTotal float64  `json:"item_total"`
+            Type string  `json:"type"`
+            Size float64  `json:"size"`
+            Current float64  `json:"current"`
+            HasNext bool  `json:"has_next"`
+         
+    }
+    
+    // ListViewSummary used by Serviceability
+    type ListViewSummary struct {
+
+        
+            TotalActiveZones float64  `json:"total_active_zones"`
+            TotalZones float64  `json:"total_zones"`
+            TotalPincodesServed float64  `json:"total_pincodes_served"`
          
     }
     
@@ -16732,9 +16732,9 @@ package platform
     type ListViewResponse struct {
 
         
+            Items []ListViewItems  `json:"items"`
             Page []ZoneDataItem  `json:"page"`
             Summary []ListViewSummary  `json:"summary"`
-            Items []ListViewItems  `json:"items"`
          
     }
     
@@ -16743,10 +16743,10 @@ package platform
 
         
             ItemTotal float64  `json:"item_total"`
-            Current float64  `json:"current"`
-            Type string  `json:"type"`
-            HasNext bool  `json:"has_next"`
             Size float64  `json:"size"`
+            Type string  `json:"type"`
+            Current float64  `json:"current"`
+            HasNext bool  `json:"has_next"`
          
     }
     
@@ -16754,8 +16754,8 @@ package platform
     type CompanyStoreView_Response struct {
 
         
-            Page []CompanyStoreView_PageItems  `json:"page"`
             Items []map[string]interface{}  `json:"items"`
+            Page []CompanyStoreView_PageItems  `json:"page"`
          
     }
     
@@ -16781,37 +16781,9 @@ package platform
     type ZoneMappingType struct {
 
         
-            Pincode []string  `json:"pincode"`
-            Country string  `json:"country"`
             State []string  `json:"state"`
-         
-    }
-    
-    // GetZoneDataViewItems used by Serviceability
-    type GetZoneDataViewItems struct {
-
-        
-            ZoneID string  `json:"zone_id"`
-            Name string  `json:"name"`
-            Slug string  `json:"slug"`
-            CompanyID float64  `json:"company_id"`
-            IsActive bool  `json:"is_active"`
-            Channels []GetZoneDataViewChannels  `json:"channels"`
-            Product ZoneProductTypes  `json:"product"`
-            StoreIds []float64  `json:"store_ids"`
-            RegionType string  `json:"region_type"`
-            Mapping []ZoneMappingType  `json:"mapping"`
-            AssignmentPreference string  `json:"assignment_preference"`
-            StoresCount float64  `json:"stores_count"`
-            PincodesCount float64  `json:"pincodes_count"`
-         
-    }
-    
-    // GetSingleZoneDataViewResponse used by Serviceability
-    type GetSingleZoneDataViewResponse struct {
-
-        
-            Data GetZoneDataViewItems  `json:"data"`
+            Country string  `json:"country"`
+            Pincode []string  `json:"pincode"`
          
     }
     
@@ -16846,8 +16818,36 @@ package platform
     type ZoneSuccessResponse struct {
 
         
-            StatusCode float64  `json:"status_code"`
             Success bool  `json:"success"`
+            StatusCode float64  `json:"status_code"`
+         
+    }
+    
+    // GetZoneDataViewItems used by Serviceability
+    type GetZoneDataViewItems struct {
+
+        
+            ZoneID string  `json:"zone_id"`
+            Name string  `json:"name"`
+            Slug string  `json:"slug"`
+            CompanyID float64  `json:"company_id"`
+            IsActive bool  `json:"is_active"`
+            Channels []GetZoneDataViewChannels  `json:"channels"`
+            Product ZoneProductTypes  `json:"product"`
+            StoreIds []float64  `json:"store_ids"`
+            RegionType string  `json:"region_type"`
+            Mapping []ZoneMappingType  `json:"mapping"`
+            AssignmentPreference string  `json:"assignment_preference"`
+            StoresCount float64  `json:"stores_count"`
+            PincodesCount float64  `json:"pincodes_count"`
+         
+    }
+    
+    // GetSingleZoneDataViewResponse used by Serviceability
+    type GetSingleZoneDataViewResponse struct {
+
+        
+            Data GetZoneDataViewItems  `json:"data"`
          
     }
     
@@ -16881,9 +16881,28 @@ package platform
     type ZoneResponse struct {
 
         
+            Success bool  `json:"success"`
             StatusCode float64  `json:"status_code"`
             ZoneID string  `json:"zone_id"`
-            Success bool  `json:"success"`
+         
+    }
+    
+    // GetZoneFromApplicationIdViewResponse used by Serviceability
+    type GetZoneFromApplicationIdViewResponse struct {
+
+        
+            Items []ListViewItems  `json:"items"`
+            Page []ZoneDataItem  `json:"page"`
+         
+    }
+    
+    // ServiceabilityErrorResponse used by Serviceability
+    type ServiceabilityErrorResponse struct {
+
+        
+            Type string  `json:"type"`
+            Value string  `json:"value"`
+            Message string  `json:"message"`
          
     }
     
@@ -16891,8 +16910,8 @@ package platform
     type GetZoneFromPincodeViewRequest struct {
 
         
-            Pincode string  `json:"pincode"`
             Country string  `json:"country"`
+            Pincode string  `json:"pincode"`
          
     }
     
@@ -16905,53 +16924,12 @@ package platform
          
     }
     
-    // AddressResponse used by Serviceability
-    type AddressResponse struct {
+    // CreatedByResponse used by Serviceability
+    type CreatedByResponse struct {
 
         
-            Country string  `json:"country"`
-            Landmark string  `json:"landmark"`
-            State string  `json:"state"`
-            Longitude float64  `json:"longitude"`
-            Address1 string  `json:"address1"`
-            Pincode float64  `json:"pincode"`
-            Latitude float64  `json:"latitude"`
-            Address2 string  `json:"address2"`
-            City string  `json:"city"`
-         
-    }
-    
-    // IntegrationTypeResponse used by Serviceability
-    type IntegrationTypeResponse struct {
-
-        
-            Order string  `json:"order"`
-            Inventory string  `json:"inventory"`
-         
-    }
-    
-    // ContactNumberResponse used by Serviceability
-    type ContactNumberResponse struct {
-
-        
-            CountryCode float64  `json:"country_code"`
-            Number string  `json:"number"`
-         
-    }
-    
-    // WarningsResponse used by Serviceability
-    type WarningsResponse struct {
-
-        
-            StoreAddress string  `json:"store_address"`
-         
-    }
-    
-    // EinvoiceResponse used by Serviceability
-    type EinvoiceResponse struct {
-
-        
-            Enabled bool  `json:"enabled"`
+            Username string  `json:"username"`
+            UserID string  `json:"user_id"`
          
     }
     
@@ -16963,42 +16941,20 @@ package platform
          
     }
     
+    // EinvoiceResponse used by Serviceability
+    type EinvoiceResponse struct {
+
+        
+            Enabled bool  `json:"enabled"`
+         
+    }
+    
     // GstCredentialsResponse used by Serviceability
     type GstCredentialsResponse struct {
 
         
-            EInvoice EinvoiceResponse  `json:"e_invoice"`
             EWaybill EwayBillResponse  `json:"e_waybill"`
-         
-    }
-    
-    // DocumentsResponse used by Serviceability
-    type DocumentsResponse struct {
-
-        
-            Value string  `json:"value"`
-            LegalName string  `json:"legal_name"`
-            Type string  `json:"type"`
-            Verified bool  `json:"verified"`
-         
-    }
-    
-    // MobileNo used by Serviceability
-    type MobileNo struct {
-
-        
-            CountryCode float64  `json:"country_code"`
-            Number string  `json:"number"`
-         
-    }
-    
-    // ManagerResponse used by Serviceability
-    type ManagerResponse struct {
-
-        
-            Email string  `json:"email"`
-            Name string  `json:"name"`
-            MobileNo MobileNo  `json:"mobile_no"`
+            EInvoice EinvoiceResponse  `json:"e_invoice"`
          
     }
     
@@ -17015,10 +16971,99 @@ package platform
     type TimmingResponse struct {
 
         
-            Closing OpeningClosing  `json:"closing"`
-            Weekday string  `json:"weekday"`
             Opening OpeningClosing  `json:"opening"`
+            Weekday string  `json:"weekday"`
             Open bool  `json:"open"`
+            Closing OpeningClosing  `json:"closing"`
+         
+    }
+    
+    // Dp used by Serviceability
+    type Dp struct {
+
+        
+            ExternalAccountID string  `json:"external_account_id"`
+            FmPriority float64  `json:"fm_priority"`
+            InternalAccountID string  `json:"internal_account_id"`
+            Operations []string  `json:"operations"`
+            AreaCode float64  `json:"area_code"`
+            TransportMode string  `json:"transport_mode"`
+            PaymentMode string  `json:"payment_mode"`
+            AssignDpFromSb bool  `json:"assign_dp_from_sb"`
+            LmPriority float64  `json:"lm_priority"`
+            RvpPriority float64  `json:"rvp_priority"`
+         
+    }
+    
+    // LogisticsResponse used by Serviceability
+    type LogisticsResponse struct {
+
+        
+            Override bool  `json:"override"`
+            Dp Dp  `json:"dp"`
+         
+    }
+    
+    // ProductReturnConfigResponse used by Serviceability
+    type ProductReturnConfigResponse struct {
+
+        
+            OnSameStore bool  `json:"on_same_store"`
+         
+    }
+    
+    // DocumentsResponse used by Serviceability
+    type DocumentsResponse struct {
+
+        
+            Type string  `json:"type"`
+            Value string  `json:"value"`
+            Verified bool  `json:"verified"`
+            LegalName string  `json:"legal_name"`
+         
+    }
+    
+    // MobileNo used by Serviceability
+    type MobileNo struct {
+
+        
+            Number string  `json:"number"`
+            CountryCode float64  `json:"country_code"`
+         
+    }
+    
+    // ManagerResponse used by Serviceability
+    type ManagerResponse struct {
+
+        
+            Name string  `json:"name"`
+            Email string  `json:"email"`
+            MobileNo MobileNo  `json:"mobile_no"`
+         
+    }
+    
+    // ContactNumberResponse used by Serviceability
+    type ContactNumberResponse struct {
+
+        
+            Number string  `json:"number"`
+            CountryCode float64  `json:"country_code"`
+         
+    }
+    
+    // AddressResponse used by Serviceability
+    type AddressResponse struct {
+
+        
+            Landmark string  `json:"landmark"`
+            Pincode float64  `json:"pincode"`
+            City string  `json:"city"`
+            Country string  `json:"country"`
+            Address2 string  `json:"address2"`
+            Latitude float64  `json:"latitude"`
+            State string  `json:"state"`
+            Longitude float64  `json:"longitude"`
+            Address1 string  `json:"address1"`
          
     }
     
@@ -17031,46 +17076,20 @@ package platform
          
     }
     
-    // ProductReturnConfigResponse used by Serviceability
-    type ProductReturnConfigResponse struct {
+    // IntegrationTypeResponse used by Serviceability
+    type IntegrationTypeResponse struct {
 
         
-            OnSameStore bool  `json:"on_same_store"`
+            Order string  `json:"order"`
+            Inventory string  `json:"inventory"`
          
     }
     
-    // CreatedByResponse used by Serviceability
-    type CreatedByResponse struct {
+    // WarningsResponse used by Serviceability
+    type WarningsResponse struct {
 
         
-            Username string  `json:"username"`
-            UserID string  `json:"user_id"`
-         
-    }
-    
-    // Dp used by Serviceability
-    type Dp struct {
-
-        
-            AreaCode float64  `json:"area_code"`
-            InternalAccountID string  `json:"internal_account_id"`
-            AssignDpFromSb bool  `json:"assign_dp_from_sb"`
-            RvpPriority float64  `json:"rvp_priority"`
-            ExternalAccountID string  `json:"external_account_id"`
-            FmPriority float64  `json:"fm_priority"`
-            LmPriority float64  `json:"lm_priority"`
-            Operations []string  `json:"operations"`
-            PaymentMode string  `json:"payment_mode"`
-            TransportMode string  `json:"transport_mode"`
-         
-    }
-    
-    // LogisticsResponse used by Serviceability
-    type LogisticsResponse struct {
-
-        
-            Dp Dp  `json:"dp"`
-            Override bool  `json:"override"`
+            StoreAddress string  `json:"store_address"`
          
     }
     
@@ -17078,34 +17097,34 @@ package platform
     type ItemResponse struct {
 
         
-            Cls string  `json:"_cls"`
-            ModifiedOn string  `json:"modified_on"`
-            Address AddressResponse  `json:"address"`
-            Stage string  `json:"stage"`
-            SubType string  `json:"sub_type"`
-            CustomJson map[string]interface{}  `json:"_custom_json"`
-            StoreType string  `json:"store_type"`
-            IntegrationType IntegrationTypeResponse  `json:"integration_type"`
-            ContactNumbers []ContactNumberResponse  `json:"contact_numbers"`
-            Warnings WarningsResponse  `json:"warnings"`
-            Company float64  `json:"company"`
-            CreatedOn string  `json:"created_on"`
+            CreatedBy CreatedByResponse  `json:"created_by"`
             GstCredentials GstCredentialsResponse  `json:"gst_credentials"`
+            Timing []TimmingResponse  `json:"timing"`
+            Logistics LogisticsResponse  `json:"logistics"`
+            ProductReturnConfig ProductReturnConfigResponse  `json:"product_return_config"`
+            Documents []DocumentsResponse  `json:"documents"`
+            Manager ManagerResponse  `json:"manager"`
+            Cls string  `json:"_cls"`
+            DisplayName string  `json:"display_name"`
+            Company float64  `json:"company"`
+            CompanyID float64  `json:"company_id"`
+            ContactNumbers []ContactNumberResponse  `json:"contact_numbers"`
+            Address AddressResponse  `json:"address"`
+            ModifiedOn string  `json:"modified_on"`
+            SubType string  `json:"sub_type"`
+            StoreType string  `json:"store_type"`
+            CreatedOn string  `json:"created_on"`
+            VerifiedBy ModifiedByResponse  `json:"verified_by"`
+            IntegrationType IntegrationTypeResponse  `json:"integration_type"`
+            Warnings WarningsResponse  `json:"warnings"`
             Code string  `json:"code"`
             Name string  `json:"name"`
             VerifiedOn string  `json:"verified_on"`
-            Documents []DocumentsResponse  `json:"documents"`
-            Manager ManagerResponse  `json:"manager"`
-            CompanyID float64  `json:"company_id"`
-            Timing []TimmingResponse  `json:"timing"`
             UID float64  `json:"uid"`
-            ModifiedBy ModifiedByResponse  `json:"modified_by"`
-            ProductReturnConfig ProductReturnConfigResponse  `json:"product_return_config"`
-            VerifiedBy ModifiedByResponse  `json:"verified_by"`
-            CreatedBy CreatedByResponse  `json:"created_by"`
-            DisplayName string  `json:"display_name"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
             NotificationEmails []string  `json:"notification_emails"`
-            Logistics LogisticsResponse  `json:"logistics"`
+            Stage string  `json:"stage"`
+            ModifiedBy ModifiedByResponse  `json:"modified_by"`
          
     }
     
@@ -17113,8 +17132,8 @@ package platform
     type GetStoresViewResponse struct {
 
         
-            Page PageResponse  `json:"page"`
             Items []ItemResponse  `json:"items"`
+            Page PageResponse  `json:"page"`
          
     }
     
@@ -17211,10 +17230,10 @@ package platform
 
         
             ItemTotal float64  `json:"item_total"`
-            Type string  `json:"type"`
-            CurrentPageNumber float64  `json:"current_page_number"`
-            HasNext bool  `json:"has_next"`
             Size float64  `json:"size"`
+            Type string  `json:"type"`
+            HasNext bool  `json:"has_next"`
+            CurrentPageNumber float64  `json:"current_page_number"`
          
     }
     

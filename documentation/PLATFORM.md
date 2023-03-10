@@ -620,10 +620,11 @@
     * [getEntityRegionView](#getentityregionview)
     * [getListView](#getlistview)
     * [getCompanyStoreView](#getcompanystoreview)
-    * [getZoneDataView](#getzonedataview)
     * [updateZoneControllerView](#updatezonecontrollerview)
-    * [insertZoneControllerView](#insertzonecontrollerview)
-    * [upsertZoneControllerView](#upsertzonecontrollerview)
+    * [getZoneDataView](#getzonedataview)
+    * [createZone](#createzone)
+    * [getZonesFromApplicationIdView](#getzonesfromapplicationidview)
+    * [getZoneFromPincodeView](#getzonefrompincodeview)
     * [getStore](#getstore)
     * [getAllStores](#getallstores)
     * [updatePincodeMopView](#updatepincodemopview)
@@ -65748,46 +65749,6 @@ Schema: `CompanyStoreView_Response`
 ---
 
 
-#### getZoneDataView
-Zone Data View of application.
-
-```golang
-
-data, err := Serviceability.GetZoneDataView(CompanyID, ZoneID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
-
-
-
-This API returns Zone Data View of the application.
-
-*Success Response:*
-
-
-
-Get Application Zone Data
-
-
-Schema: `GetSingleZoneDataViewResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateZoneControllerView
 Updation of zone collections in database.
 
@@ -65829,12 +65790,52 @@ Schema: `ZoneSuccessResponse`
 ---
 
 
-#### insertZoneControllerView
+#### getZoneDataView
+Zone Data View of application.
+
+```golang
+
+data, err := Serviceability.GetZoneDataView(CompanyID, ZoneID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
+
+
+
+This API returns Zone Data View of the application.
+
+*Success Response:*
+
+
+
+Get Application Zone Data
+
+
+Schema: `GetSingleZoneDataViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createZone
 Insertion of zone in database.
 
 ```golang
 
-data, err := Serviceability.InsertZoneControllerView(CompanyID, body);
+data, err := Serviceability.CreateZone(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -65867,12 +65868,61 @@ Schema: `ZoneResponse`
 ---
 
 
-#### upsertZoneControllerView
+#### getZonesFromApplicationIdView
+GET zones from the application_id.
+
+```golang
+
+data, err := Serviceability.GetZonesFromApplicationIdView(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` contains a specific ID of a company. | 
+
+
+| ApplicationID | string | A `application_id` contains a unique ID. | 
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `ZoneID`, `Q`
+
+
+This API returns zones from the application_id View.
+
+*Success Response:*
+
+
+
+List of zones for the given application_id
+
+
+Schema: `GetZoneFromApplicationIdViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getZoneFromPincodeView
 GET zone from the Pincode.
 
 ```golang
 
-data, err := Serviceability.UpsertZoneControllerView(CompanyID, ApplicationID, body);
+data, err := Serviceability.GetZoneFromPincodeView(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
