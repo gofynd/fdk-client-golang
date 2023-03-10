@@ -18774,7 +18774,7 @@ Get Invoice of a shipment
 
 ```golang
 
- data, err :=  Order.GetInvoiceByShipmentId(ShipmentID);
+ data, err :=  Order.GetInvoiceByShipmentId(ShipmentID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -18782,6 +18782,9 @@ Get Invoice of a shipment
 
 | ShipmentID | string | ID of the shipment. | 
 
+
+
+| xQuery | struct | Includes properties such as `DocumentType`
 
 
 
