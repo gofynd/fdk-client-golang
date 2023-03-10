@@ -23886,11 +23886,17 @@ Get Country List
 
 ```golang
 
- data, err :=  Logistic.GetAllCountries();
+ data, err :=  Logistic.GetAllCountries(CompanyID, ApplicationID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
+
+| CompanyID | string | A `company id` unique id for the company. | 
+
+
+| ApplicationID | string | A `application id` is unique id for the application. | 
+
 
 
 

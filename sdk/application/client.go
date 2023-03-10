@@ -15926,7 +15926,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // GetAllCountries Get Country List
-    func (lo *Logistic)  GetAllCountries() (CountryListResponse, error){
+    func (lo *Logistic)  GetAllCountries(CompanyID string, ApplicationID string) (CountryListResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -15939,6 +15939,10 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+        
+        
+        
+        
     
          
         
@@ -15947,7 +15951,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             lo.config,
             "get",
-            "/service/application/logistics/v1.0/country-list",
+            fmt.Sprintf("/service/application/logistics/v1.0/country-list/company/%s/application/%s",CompanyID,ApplicationID),
             nil,
             nil,
             nil)
