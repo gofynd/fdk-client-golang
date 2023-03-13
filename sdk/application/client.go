@@ -10129,7 +10129,8 @@ func NewAppClient(config *AppConfig) *Client {
         PageSize float64  `url:"page_size,omitempty"` 
         OrderIncent bool  `url:"order_incent,omitempty"` 
         OrderingStore float64  `url:"ordering_store,omitempty"` 
-        User string  `url:"user,omitempty"`  
+        User string  `url:"user,omitempty"` 
+        UserName string  `url:"user_name,omitempty"`  
     }
     
     // GetAppStaffList Get a list of staff.
@@ -10144,6 +10145,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -10221,6 +10224,13 @@ func NewAppClient(config *AppConfig) *Client {
                     
                     
                 
+                    
+                    
+                    
+                        
+                    
+                    
+                
             
             // GetAppStaffListPaginator Get a list of staff.  
             func (co *Configuration)  GetAppStaffListPaginator( xQuery ConfigurationGetAppStaffListXQuery ) *common.Paginator {
@@ -10228,6 +10238,10 @@ func NewAppClient(config *AppConfig) *Client {
                  
                  
                  xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
                  
                  
                  

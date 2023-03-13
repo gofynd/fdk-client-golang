@@ -17008,7 +17008,9 @@ Get a list of staff.
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `OrderIncent`, `OrderingStore`, `User`
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `OrderIncent`, `OrderingStore`, `User`, `UserName`
 
 
 
