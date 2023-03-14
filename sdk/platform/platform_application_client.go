@@ -11417,6 +11417,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // GetSearchKeywords Get a Search Keywords Details
+     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getSearchKeywordsResponse GetSearchWordsDetailResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetSearchWordsDetailResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getSearchKeywordsResponse)
+        if err != nil {
+            return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
+        }
+        return getSearchKeywordsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // DeleteSearchKeywords Delete a Search Keywords
      func (ca *PlatformAppCatalog)  DeleteSearchKeywords(ID string) (DeleteResponse, error) {
         var (
@@ -11526,54 +11574,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetSearchWordsData{}, common.NewFDKError(err.Error())
         }
         return updateSearchKeywordsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetSearchKeywords Get a Search Keywords Details
-     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getSearchKeywordsResponse GetSearchWordsDetailResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetSearchWordsDetailResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getSearchKeywordsResponse)
-        if err != nil {
-            return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
-        }
-        return getSearchKeywordsResponse, nil
         
     }
            
@@ -11699,6 +11699,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
+     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAutocompleteKeywordDetailResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // DeleteAutocompleteKeyword Delete a Autocomplete Keywords
      func (ca *PlatformAppCatalog)  DeleteAutocompleteKeyword(ID string) (DeleteResponse, error) {
         var (
@@ -11808,54 +11856,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
         }
         return updateAutocompleteKeywordResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
-     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAutocompleteKeywordDetailResponse, nil
         
     }
            
@@ -20906,6 +20906,266 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
+    
+    
+  
+
+    
+    // UpdatePincodeMopView PincodeView update of MOP.
+     func (se *PlatformAppServiceability)  UpdatePincodeMopView(body  PincodeMopData) (PincodeMOPresponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updatePincodeMopViewResponse PincodeMOPresponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PincodeMOPresponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PincodeMOPresponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/application/%s/pincode-mop-update",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PincodeMOPresponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updatePincodeMopViewResponse)
+        if err != nil {
+            return PincodeMOPresponse{}, common.NewFDKError(err.Error())
+        }
+        return updatePincodeMopViewResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdatePincodeBulkView Bulk Update of pincode in the application.
+     func (se *PlatformAppServiceability)  UpdatePincodeBulkView(body  PincodeMopBulkData) (PincodeBulkViewResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updatePincodeBulkViewResponse PincodeBulkViewResponse
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PincodeBulkViewResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PincodeBulkViewResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/application/%s/pincode-mop-bulk-update",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PincodeBulkViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updatePincodeBulkViewResponse)
+        if err != nil {
+            return PincodeBulkViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return updatePincodeBulkViewResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdatePincodeCoDListing Pincode count view of application.
+     func (se *PlatformAppServiceability)  UpdatePincodeCoDListing(body  PincodeCodStatusListingRequest) (PincodeCodStatusListingResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updatePincodeCoDListingResponse PincodeCodStatusListingResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PincodeCodStatusListingResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PincodeCodStatusListingResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/application/%s/pincode-mop-data",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PincodeCodStatusListingResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updatePincodeCoDListingResponse)
+        if err != nil {
+            return PincodeCodStatusListingResponse{}, common.NewFDKError(err.Error())
+        }
+        return updatePincodeCoDListingResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdatePincodeAuditHistory Auditlog configuration of application.
+     func (se *PlatformAppServiceability)  UpdatePincodeAuditHistory(body  PincodeMopUpdateAuditHistoryRequest) (PincodeMopUpdateAuditHistoryResponseData, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updatePincodeAuditHistoryResponse PincodeMopUpdateAuditHistoryResponseData
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PincodeMopUpdateAuditHistoryResponseData{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PincodeMopUpdateAuditHistoryResponseData{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics-internal/v1.0/company/%s/application/%s/history",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PincodeMopUpdateAuditHistoryResponseData{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updatePincodeAuditHistoryResponse)
+        if err != nil {
+            return PincodeMopUpdateAuditHistoryResponseData{}, common.NewFDKError(err.Error())
+        }
+        return updatePincodeAuditHistoryResponse, nil
+        
+    }
+           
+       
     
 
  
