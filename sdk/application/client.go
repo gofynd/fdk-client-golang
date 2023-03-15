@@ -1657,55 +1657,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1746,6 +1697,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -3317,10 +3317,6 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
-            
-        
-            
-        
 
         
 
@@ -3449,10 +3445,6 @@ func NewAppClient(config *AppConfig) *Client {
              updateAddressResponse UpdateAddressResponse
 	    )
 
-        
-            
-        
-            
         
             
         
@@ -3911,8 +3903,6 @@ func NewAppClient(config *AppConfig) *Client {
              checkoutCartResponse CartCheckoutResponse
 	    )
 
-        
-            
         
             
         
@@ -13924,8 +13914,6 @@ func NewAppClient(config *AppConfig) *Client {
 	    )
 
         
-            
-        
 
         
             
@@ -14002,10 +13990,6 @@ func NewAppClient(config *AppConfig) *Client {
              updateCartResponse UpdateCartDetailResponse
 	    )
 
-        
-            
-        
-            
         
 
         
@@ -14199,8 +14183,6 @@ func NewAppClient(config *AppConfig) *Client {
              applyCouponResponse CartDetailResponse
 	    )
 
-        
-            
         
 
         
@@ -14400,8 +14382,6 @@ func NewAppClient(config *AppConfig) *Client {
 	    )
 
         
-            
-        
 
         
             
@@ -14539,54 +14519,6 @@ func NewAppClient(config *AppConfig) *Client {
 	    )
 
         
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
 
         
 
@@ -14716,54 +14648,6 @@ func NewAppClient(config *AppConfig) *Client {
 	    )
 
         
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
 
         
 
@@ -14879,12 +14763,6 @@ func NewAppClient(config *AppConfig) *Client {
 	    )
 
         
-            
-        
-            
-        
-            
-        
 
         
             
@@ -14958,18 +14836,6 @@ func NewAppClient(config *AppConfig) *Client {
              selectPaymentModeResponse CartDetailResponse
 	    )
 
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
         
 
         
@@ -15303,8 +15169,6 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
-            
-        
 
         
             
@@ -15372,14 +15236,6 @@ func NewAppClient(config *AppConfig) *Client {
              updateCartMetaResponse CartMetaResponse
 	    )
 
-        
-            
-        
-            
-        
-            
-        
-            
         
 
         
@@ -15556,10 +15412,6 @@ func NewAppClient(config *AppConfig) *Client {
 	    )
 
         
-            
-        
-            
-        
 
         
 
@@ -15714,26 +15566,143 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    //LogisticGetPincodeCityXQuery holds query params
-    type LogisticGetPincodeCityXQuery struct { 
-        CountryCode string  `url:"country_code,omitempty"`  
-    }
-    
-    // GetPincodeCity Get Pincode API
-    func (lo *Logistic)  GetPincodeCity(Pincode string, xQuery LogisticGetPincodeCityXQuery) (PincodeApiResponse, error){
+    // GetTatProduct Get TAT of a product
+    func (lo *Logistic)  GetTatProduct(body  GetTatProductReqBody) (GetTatProductResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getPincodeCityResponse PincodeApiResponse
+             getTatProductResponse GetTatProductResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return GetTatProductResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return GetTatProductResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.config,
+            "post",
+            "/service/application/logistics/v1.0",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetTatProductResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getTatProductResponse)
+        if err != nil {
+            return GetTatProductResponse{}, common.NewFDKError(err.Error())
+        }
+         return getTatProductResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetPincodeZones Get Pincode Zones
+    func (lo *Logistic)  GetPincodeZones(body  GetPincodeZonesReqBody) (GetPincodeZonesResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getPincodeZonesResponse GetPincodeZonesResponse
+	    )
+
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return GetPincodeZonesResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return GetPincodeZonesResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.config,
+            "post",
+            "/service/application/logistics/v1.0/pincode/zones",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetPincodeZonesResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPincodeZonesResponse)
+        if err != nil {
+            return GetPincodeZonesResponse{}, common.NewFDKError(err.Error())
+        }
+         return getPincodeZonesResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetPincodeCity Get city from PIN Code
+    func (lo *Logistic)  GetPincodeCity(Pincode string) (GetPincodeCityResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getPincodeCityResponse GetPincodeCityResponse
 	    )
 
         
 
-        
-            
-                
-            
         
 
         
@@ -15749,195 +15718,18 @@ func NewAppClient(config *AppConfig) *Client {
             "get",
             fmt.Sprintf("/service/application/logistics/v1.0/pincode/%s",Pincode),
             nil,
-            xQuery,
+            nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return PincodeApiResponse{}, err
+            return GetPincodeCityResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &getPincodeCityResponse)
         if err != nil {
-            return PincodeApiResponse{}, common.NewFDKError(err.Error())
+            return GetPincodeCityResponse{}, common.NewFDKError(err.Error())
         }
          return getPincodeCityResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // GetTatProduct Get TAT API
-    func (lo *Logistic)  GetTatProduct(body  TATViewRequest) (TATViewResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getTatProductResponse TATViewResponse
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-        
-
-        
-    
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return TATViewResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return TATViewResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            lo.config,
-            "post",
-            "/service/application/logistics/v1.0/",
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return TATViewResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getTatProductResponse)
-        if err != nil {
-            return TATViewResponse{}, common.NewFDKError(err.Error())
-        }
-         return getTatProductResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // GetAllCountries Get Country List
-    func (lo *Logistic)  GetAllCountries() (CountryListResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getAllCountriesResponse CountryListResponse
-	    )
-
-        
-
-        
-
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            lo.config,
-            "get",
-            "/service/application/logistics/v1.0/country-list",
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return CountryListResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAllCountriesResponse)
-        if err != nil {
-            return CountryListResponse{}, common.NewFDKError(err.Error())
-        }
-         return getAllCountriesResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // GetPincodeZones GET zone from the Pincode.
-    func (lo *Logistic)  GetPincodeZones(body  GetZoneFromPincodeViewRequest) (GetZoneFromPincodeViewResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getPincodeZonesResponse GetZoneFromPincodeViewResponse
-	    )
-
-        
-            
-        
-            
-        
-
-        
-
-        
-    
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            lo.config,
-            "post",
-            "/service/application/logistics/v1.0/pincode/zones",
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetZoneFromPincodeViewResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getPincodeZonesResponse)
-        if err != nil {
-            return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
-        }
-         return getPincodeZonesResponse, nil
         
     }
           
