@@ -68032,6 +68032,10 @@ Cart list for pos platform
   "value": {
     "data": [
       {
+        "pick_up_customer_details": {
+          "mobile": 7777996559,
+          "email": "test_pickup_customer@gmail.com"
+        },
         "created_on": 1675780233,
         "cart_value": 1999,
         "cart_id": "63e213d45e4206d94485935f",
@@ -68039,6 +68043,7 @@ Cart list for pos platform
         "user_id": "63d0bfa35b92b61cf50cfe29"
       },
       {
+        "pick_up_customer_details": {},
         "created_on": 1675779508,
         "cart_value": 5997,
         "cart_id": "63e210d03437dfb6c731062a",
