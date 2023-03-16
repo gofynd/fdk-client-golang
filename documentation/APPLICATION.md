@@ -1523,10 +1523,10 @@ Prices may vary for different sizes of a product. Use this API to retrieve the p
 
 
 
-Success. Returns a ProductSizePriceV2 object. Check the example shown below or refer `ProductSizePriceResponseV2` for more details.
+Success. Returns a ProductSizePriceV3 object. Check the example shown below or refer `ProductSizePriceResponseV3` for more details.
 
 
-Schema: `ProductSizePriceResponseV2`
+Schema: `ProductSizePriceResponseV3`
 
 
 
@@ -1573,10 +1573,10 @@ A product of a particular size may be sold by multiple sellers. Use this API to 
 
 
 
-Success. Returns a ProductSizeSellerV2 object. Check the example shown below or refer `ProductSizeSellersResponseV2` for more details.
+Success. Returns a ProductSizeSellerV3 object. Check the example shown below or refer `ProductSizeSellersResponseV3` for more details.
 
 
-Schema: `ProductSizeSellersResponseV2`
+Schema: `ProductSizeSellersResponseV3`
 
 
 
