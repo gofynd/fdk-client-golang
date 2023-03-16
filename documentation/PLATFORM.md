@@ -284,9 +284,9 @@
     * [setUserCODlimitRoutes](#setusercodlimitroutes)
     * [edcAggregatorsAndModelList](#edcaggregatorsandmodellist)
     * [edcDeviceStats](#edcdevicestats)
-    * [edcDevice](#edcdevice)
-    * [edcDevice](#edcdevice)
-    * [edcDevice](#edcdevice)
+    * [updateEdcDevice](#updateedcdevice)
+    * [getEdcDevice](#getedcdevice)
+    * [addEdcDevice](#addedcdevice)
     * [edcDeviceList](#edcdevicelist)
     * [getPosPaymentModeRoutes](#getpospaymentmoderoutes)
     * [initialisePayment](#initialisepayment)
@@ -330,14 +330,14 @@
     * [processManifest](#processmanifest)
     * [dispatchManifest](#dispatchmanifest)
     * [getRoleBasedActions](#getrolebasedactions)
-    * [postShipmentHistory](#postshipmenthistory)
     * [getShipmentHistory](#getshipmenthistory)
+    * [postShipmentHistory](#postshipmenthistory)
     * [sendSmsNinja](#sendsmsninja)
     * [platformManualAssignDPToShipment](#platformmanualassigndptoshipment)
     * [updatePackagingDimensions](#updatepackagingdimensions)
     * [createOrder](#createorder)
-    * [createChannelConfig](#createchannelconfig)
     * [getChannelConfig](#getchannelconfig)
+    * [createChannelConfig](#createchannelconfig)
     * [uploadConsent](#uploadconsent)
     * [orderUpdate](#orderupdate)
     * [checkOrderStatus](#checkorderstatus)
@@ -613,11 +613,11 @@
     * [getCartList](#getcartlist)
     * [updateCartUser](#updatecartuser)
     * [getCart](#getcart)
-    * [addItems](#additems)
-    * [updateCart](#updatecart)
+    * [platformAddItems](#platformadditems)
+    * [platformUpdateCart](#platformupdatecart)
     * [deleteCart](#deletecart)
     * [getItemCount](#getitemcount)
-    * [getPlatformPOSCoupons](#getplatformposcoupons)
+    * [getAppCoupons](#getappcoupons)
     * [applyCoupon](#applycoupon)
     * [removeCoupon](#removecoupon)
     * [getAddresses](#getaddresses)
@@ -629,7 +629,7 @@
     * [getShipments](#getshipments)
     * [updateShipments](#updateshipments)
     * [updateCartMeta](#updatecartmeta)
-    * [checkoutCart](#checkoutcart)
+    * [platformCheckoutCart](#platformcheckoutcart)
     * [getAvailableDeliveryModes](#getavailabledeliverymodes)
     * [getStoreAddressByUid](#getstoreaddressbyuid)
     * [selectPaymentMode](#selectpaymentmode)
@@ -52812,12 +52812,12 @@ Schema: `EdcDeviceStatsResponse`
 ---
 
 
-#### edcDevice
+#### updateEdcDevice
 map new edc device to the terminal
 
 ```golang
 
-data, err := Payment.EdcDevice(CompanyID, ApplicationID, TerminalUniqueIdentifier, body);
+data, err := Payment.UpdateEdcDevice(CompanyID, ApplicationID, TerminalUniqueIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -52856,12 +52856,12 @@ Schema: `EdcDeviceAddResponse`
 ---
 
 
-#### edcDevice
+#### getEdcDevice
 get details of a single edc device
 
 ```golang
 
-data, err := Payment.EdcDevice(CompanyID, ApplicationID, TerminalUniqueIdentifier);
+data, err := Payment.GetEdcDevice(CompanyID, ApplicationID, TerminalUniqueIdentifier);
 ```
 
 | Argument  |  Type  | Description |
@@ -52899,12 +52899,12 @@ Schema: `EdcDeviceDetailsResponse`
 ---
 
 
-#### edcDevice
+#### addEdcDevice
 Update store id and device tag of edc device
 
 ```golang
 
-data, err := Payment.EdcDevice(CompanyID, ApplicationID, TerminalUniqueIdentifier, body);
+data, err := Payment.AddEdcDevice(CompanyID, ApplicationID, TerminalUniqueIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -54798,12 +54798,12 @@ Schema: `GetActionsResponse`
 ---
 
 
-#### postShipmentHistory
+#### getShipmentHistory
 
 
 ```golang
 
-data, err := Order.PostShipmentHistory(CompanyID, body);
+data, err := Order.GetShipmentHistory(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -54812,7 +54812,11 @@ data, err := Order.PostShipmentHistory(CompanyID, body);
 | CompanyID | float64 |  | 
 
 
-| body |  PostShipmentHistory | "Request body" 
+
+
+
+| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
+
 
 
 
@@ -54836,12 +54840,12 @@ Schema: `ShipmentHistoryResponse`
 ---
 
 
-#### getShipmentHistory
+#### postShipmentHistory
 
 
 ```golang
 
-data, err := Order.GetShipmentHistory(CompanyID, xQuery);
+data, err := Order.PostShipmentHistory(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -54850,11 +54854,7 @@ data, err := Order.GetShipmentHistory(CompanyID, xQuery);
 | CompanyID | float64 |  | 
 
 
-
-
-
-| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
-
+| body |  PostShipmentHistory | "Request body" 
 
 
 
@@ -55030,6 +55030,43 @@ Schema: `CreateOrderResponse`
 ---
 
 
+#### getChannelConfig
+
+
+```golang
+
+data, err := Order.GetChannelConfig(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+getChannelConfig
+
+*Success Response:*
+
+
+
+Successfully created the config data
+
+
+Schema: `CreateChannelConfigData`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### createChannelConfig
 
 
@@ -55056,43 +55093,6 @@ Successfully updateShipmentStatus!
 
 
 Schema: `CreateChannelConfigResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getChannelConfig
-
-
-```golang
-
-data, err := Order.GetChannelConfig(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-getChannelConfig
-
-*Success Response:*
-
-
-
-Successfully created the config data
-
-
-Schema: `CreateChannelConfigData`
 
 
 
@@ -68491,12 +68491,12 @@ Schema: `CartDetailResponse`
 ---
 
 
-#### addItems
+#### platformAddItems
 Add items to cart
 
 ```golang
 
-data, err := Cart.AddItems(CompanyID, ApplicationID, xQuery, body);
+data, err := Cart.PlatformAddItems(CompanyID, ApplicationID, xQuery, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -69186,12 +69186,12 @@ Sorry, item is out of stock
 ---
 
 
-#### updateCart
+#### platformUpdateCart
 Update items in the customer 's cart using cart id
 
 ```golang
 
-data, err := Cart.UpdateCart(CompanyID, ApplicationID, xQuery, body);
+data, err := Cart.PlatformUpdateCart(CompanyID, ApplicationID, xQuery, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -69698,12 +69698,12 @@ Schema: `CartItemCountResponse`
 ---
 
 
-#### getPlatformPOSCoupons
+#### getAppCoupons
 Fetch Coupon
 
 ```golang
 
-data, err := Cart.GetPlatformPOSCoupons(CompanyID, ApplicationID, xQuery);
+data, err := Cart.GetAppCoupons(CompanyID, ApplicationID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -71568,12 +71568,12 @@ Schema: `CartMetaResponse`
 ---
 
 
-#### checkoutCart
+#### platformCheckoutCart
 Checkout all items in the cart
 
 ```golang
 
-data, err := Cart.CheckoutCart(CompanyID, ApplicationID, xQuery, body);
+data, err := Cart.PlatformCheckoutCart(CompanyID, ApplicationID, xQuery, body);
 ```
 
 | Argument  |  Type  | Description |

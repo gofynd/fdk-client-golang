@@ -12592,13 +12592,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // EdcDevice map new edc device to the terminal
-     func (pa *PlatformAppPayment)  EdcDevice(TerminalUniqueIdentifier string, body  EdcAddRequest) (EdcDeviceAddResponse, error) {
+    // UpdateEdcDevice map new edc device to the terminal
+     func (pa *PlatformAppPayment)  UpdateEdcDevice(TerminalUniqueIdentifier string, body  EdcAddRequest) (EdcDeviceAddResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            edcDeviceResponse EdcDeviceAddResponse
+            updateEdcDeviceResponse EdcDeviceAddResponse
 	    )
 
         
@@ -12650,11 +12650,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return EdcDeviceAddResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &edcDeviceResponse)
+        err = json.Unmarshal(response, &updateEdcDeviceResponse)
         if err != nil {
             return EdcDeviceAddResponse{}, common.NewFDKError(err.Error())
         }
-        return edcDeviceResponse, nil
+        return updateEdcDeviceResponse, nil
         
     }
            
@@ -12665,13 +12665,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // EdcDevice get details of a single edc device
-     func (pa *PlatformAppPayment)  EdcDevice(TerminalUniqueIdentifier string) (EdcDeviceDetailsResponse, error) {
+    // GetEdcDevice get details of a single edc device
+     func (pa *PlatformAppPayment)  GetEdcDevice(TerminalUniqueIdentifier string) (EdcDeviceDetailsResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            edcDeviceResponse EdcDeviceDetailsResponse
+            getEdcDeviceResponse EdcDeviceDetailsResponse
 	    )
 
         
@@ -12698,11 +12698,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return EdcDeviceDetailsResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &edcDeviceResponse)
+        err = json.Unmarshal(response, &getEdcDeviceResponse)
         if err != nil {
             return EdcDeviceDetailsResponse{}, common.NewFDKError(err.Error())
         }
-        return edcDeviceResponse, nil
+        return getEdcDeviceResponse, nil
         
     }
            
@@ -12713,13 +12713,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // EdcDevice Update store id and device tag of edc device
-     func (pa *PlatformAppPayment)  EdcDevice(TerminalUniqueIdentifier string, body  EdcUpdateRequest) (EdcDeviceUpdateResponse, error) {
+    // AddEdcDevice Update store id and device tag of edc device
+     func (pa *PlatformAppPayment)  AddEdcDevice(TerminalUniqueIdentifier string, body  EdcUpdateRequest) (EdcDeviceUpdateResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            edcDeviceResponse EdcDeviceUpdateResponse
+            addEdcDeviceResponse EdcDeviceUpdateResponse
 	    )
 
         
@@ -12773,11 +12773,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return EdcDeviceUpdateResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &edcDeviceResponse)
+        err = json.Unmarshal(response, &addEdcDeviceResponse)
         if err != nil {
             return EdcDeviceUpdateResponse{}, common.NewFDKError(err.Error())
         }
-        return edcDeviceResponse, nil
+        return addEdcDeviceResponse, nil
         
     }
            
@@ -22155,21 +22155,21 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    //PlatformAppAddItemsXQuery holds query params
-    type PlatformAppAddItemsXQuery struct { 
+    //PlatformAppPlatformAddItemsXQuery holds query params
+    type PlatformAppPlatformAddItemsXQuery struct { 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"` 
         ID string  `url:"id,omitempty"`  
     }
     
-    // AddItems Add items to cart
-     func (ca *PlatformAppCart)  AddItems(xQuery PlatformAppAddItemsXQuery, body  AddCartRequest) (AddCartDetailResponse, error) {
+    // PlatformAddItems Add items to cart
+     func (ca *PlatformAppCart)  PlatformAddItems(xQuery PlatformAppPlatformAddItemsXQuery, body  AddCartRequest) (AddCartDetailResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            addItemsResponse AddCartDetailResponse
+            platformAddItemsResponse AddCartDetailResponse
 	    )
 
         
@@ -22221,11 +22221,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return AddCartDetailResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &addItemsResponse)
+        err = json.Unmarshal(response, &platformAddItemsResponse)
         if err != nil {
             return AddCartDetailResponse{}, common.NewFDKError(err.Error())
         }
-        return addItemsResponse, nil
+        return platformAddItemsResponse, nil
         
     }
            
@@ -22236,21 +22236,21 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    //PlatformAppUpdateCartXQuery holds query params
-    type PlatformAppUpdateCartXQuery struct { 
+    //PlatformAppPlatformUpdateCartXQuery holds query params
+    type PlatformAppPlatformUpdateCartXQuery struct { 
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
-    // UpdateCart Update items in the customer 's cart using cart id
-     func (ca *PlatformAppCart)  UpdateCart(xQuery PlatformAppUpdateCartXQuery, body  UpdateCartRequest) (UpdateCartDetailResponse, error) {
+    // PlatformUpdateCart Update items in the customer 's cart using cart id
+     func (ca *PlatformAppCart)  PlatformUpdateCart(xQuery PlatformAppPlatformUpdateCartXQuery, body  UpdateCartRequest) (UpdateCartDetailResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            updateCartResponse UpdateCartDetailResponse
+            platformUpdateCartResponse UpdateCartDetailResponse
 	    )
 
         
@@ -22302,11 +22302,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return UpdateCartDetailResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &updateCartResponse)
+        err = json.Unmarshal(response, &platformUpdateCartResponse)
         if err != nil {
             return UpdateCartDetailResponse{}, common.NewFDKError(err.Error())
         }
-        return updateCartResponse, nil
+        return platformUpdateCartResponse, nil
         
     }
            
@@ -22430,19 +22430,19 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    //PlatformAppGetPlatformPOSCouponsXQuery holds query params
-    type PlatformAppGetPlatformPOSCouponsXQuery struct { 
+    //PlatformAppGetAppCouponsXQuery holds query params
+    type PlatformAppGetAppCouponsXQuery struct { 
         ID string  `url:"id,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
-    // GetPlatformPOSCoupons Fetch Coupon
-     func (ca *PlatformAppCart)  GetPlatformPOSCoupons(xQuery PlatformAppGetPlatformPOSCouponsXQuery) (GetCouponResponse, error) {
+    // GetAppCoupons Fetch Coupon
+     func (ca *PlatformAppCart)  GetAppCoupons(xQuery PlatformAppGetAppCouponsXQuery) (GetCouponResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getPlatformPOSCouponsResponse GetCouponResponse
+            getAppCouponsResponse GetCouponResponse
 	    )
 
         
@@ -22473,11 +22473,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetCouponResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getPlatformPOSCouponsResponse)
+        err = json.Unmarshal(response, &getAppCouponsResponse)
         if err != nil {
             return GetCouponResponse{}, common.NewFDKError(err.Error())
         }
-        return getPlatformPOSCouponsResponse, nil
+        return getAppCouponsResponse, nil
         
     }
            
@@ -23370,18 +23370,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    //PlatformAppCheckoutCartXQuery holds query params
-    type PlatformAppCheckoutCartXQuery struct { 
+    //PlatformAppPlatformCheckoutCartXQuery holds query params
+    type PlatformAppPlatformCheckoutCartXQuery struct { 
         ID string  `url:"id,omitempty"`  
     }
     
-    // CheckoutCart Checkout all items in the cart
-     func (ca *PlatformAppCart)  CheckoutCart(xQuery PlatformAppCheckoutCartXQuery, body  PlatformCartCheckoutDetailRequest) (CartCheckoutResponse, error) {
+    // PlatformCheckoutCart Checkout all items in the cart
+     func (ca *PlatformAppCart)  PlatformCheckoutCart(xQuery PlatformAppPlatformCheckoutCartXQuery, body  PlatformCartCheckoutDetailRequest) (CartCheckoutResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            checkoutCartResponse CartCheckoutResponse
+            platformCheckoutCartResponse CartCheckoutResponse
 	    )
 
         
@@ -23469,11 +23469,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return CartCheckoutResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &checkoutCartResponse)
+        err = json.Unmarshal(response, &platformCheckoutCartResponse)
         if err != nil {
             return CartCheckoutResponse{}, common.NewFDKError(err.Error())
         }
-        return checkoutCartResponse, nil
+        return platformCheckoutCartResponse, nil
         
     }
            
