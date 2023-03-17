@@ -186,6 +186,32 @@ import (
 
 
 
+    //GenerationEntityType used by Content
+    type GenerationEntityType  string
+    
+    const (
+            
+            //TITLE defines constant for the `title` 
+            TITLE GenerationEntityType = "title"
+            
+            
+            //DESCRIPTION defines constant for the `description` 
+            DESCRIPTION GenerationEntityType = "description"
+            
+            
+       )
+
+    //IsValid return error if enum is invalid
+    func (ge GenerationEntityType) IsValid() error {
+      switch ge {
+        case  TITLE, DESCRIPTION : 
+        return nil
+      }
+      return errors.New("Invalid GenerationEntityType type")
+    }
+
+
+
     //PageType used by Content
     type PageType  string
     
