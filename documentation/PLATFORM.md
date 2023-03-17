@@ -321,13 +321,13 @@
 
 * [Catalog](#Catalog)
   * Methods
-    * [getSearchKeywords](#getsearchkeywords)
     * [deleteSearchKeywords](#deletesearchkeywords)
+    * [getSearchKeywords](#getsearchkeywords)
     * [updateSearchKeywords](#updatesearchkeywords)
     * [getAllSearchKeyword](#getallsearchkeyword)
     * [createCustomKeyword](#createcustomkeyword)
-    * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
+    * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [updateAutocompleteKeyword](#updateautocompletekeyword)
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
@@ -381,10 +381,8 @@
     * [validateProductTemplateSchema](#validateproducttemplateschema)
     * [listHSNCodes](#listhsncodes)
     * [listProductTemplateExportDetails](#listproducttemplateexportdetails)
-    * [listAllProductTemplateExportDetails](#listallproducttemplateexportdetails)
+    * [getProductExportJobs](#getproductexportjobs)
     * [createProductExportJob](#createproductexportjob)
-    * [getProductTemplateExportDetail](#getproducttemplateexportdetail)
-    * [updateProductExportJob](#updateproductexportjob)
     * [listTemplateBrandTypeValues](#listtemplatebrandtypevalues)
     * [listCategories](#listcategories)
     * [createCategories](#createcategories)
@@ -394,8 +392,8 @@
     * [createProduct](#createproduct)
     * [getVariantsOfProducts](#getvariantsofproducts)
     * [getProductAttributes](#getproductattributes)
-    * [getProduct](#getproduct)
     * [deleteProduct](#deleteproduct)
+    * [getProduct](#getproduct)
     * [editProduct](#editproduct)
     * [allSizes](#allsizes)
     * [getProductValidation](#getproductvalidation)
@@ -423,8 +421,6 @@
     * [createInventoryExportJob](#createinventoryexportjob)
     * [listInventoryExport](#listinventoryexport)
     * [createInventoryExport](#createinventoryexport)
-    * [getInventoryExportJobDetail](#getinventoryexportjobdetail)
-    * [updateInventoryExportJob](#updateinventoryexportjob)
     * [exportInventoryConfig](#exportinventoryconfig)
     * [deleteRealtimeInventory](#deleterealtimeinventory)
     * [updateRealtimeInventory](#updaterealtimeinventory)
@@ -54092,49 +54088,6 @@ Schema: `OrderStatusResult`
 ## Catalog
 
 
-#### getSearchKeywords
-Get a Search Keywords Details
-
-```golang
-
-data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
-
-*Success Response:*
-
-
-
-The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
-
-
-Schema: `GetSearchWordsDetailResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### deleteSearchKeywords
 Delete a Search Keywords
 
@@ -54166,6 +54119,49 @@ Status object. Tells whether the operation was successful. See example below or 
 
 
 Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSearchKeywords
+Get a Search Keywords Details
+
+```golang
+
+data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
+
+*Success Response:*
+
+
+
+The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
+
+
+Schema: `GetSearchWordsDetailResponse`
 
 
 
@@ -54303,49 +54299,6 @@ Schema: `GetSearchWordsData`
 ---
 
 
-#### getAutocompleteKeywordDetail
-Get a Autocomplete Keywords Details
-
-```golang
-
-data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
-
-*Success Response:*
-
-
-
-The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
-
-
-Schema: `GetAutocompleteWordsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### deleteAutocompleteKeyword
 Delete a Autocomplete Keywords
 
@@ -54377,6 +54330,49 @@ Status object. Tells whether the operation was successful. See example below or 
 
 
 Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAutocompleteKeywordDetail
+Get a Autocomplete Keywords Details
+
+```golang
+
+data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
+
+*Success Response:*
+
+
+
+The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
+
+
+Schema: `GetAutocompleteWordsResponse`
 
 
 
@@ -56643,12 +56639,12 @@ Schema: `ProductDownloadsResponse`
 ---
 
 
-#### listAllProductTemplateExportDetails
+#### getProductExportJobs
 Allows you to list all product templates export list details
 
 ```golang
 
-data, err := Catalog.ListAllProductTemplateExportDetails(CompanyID, xQuery);
+data, err := Catalog.GetProductExportJobs(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -56706,87 +56702,6 @@ data, err := Catalog.CreateProductExportJob(CompanyID, body);
 | body |  ProductTemplateDownloadsExport | "Request body" 
 
 This API helps to create a Inventory export job.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `ProductDownloadsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getProductTemplateExportDetail
-Allows you to get product templates export details for the job_id.
-
-```golang
-
-data, err := Catalog.GetProductTemplateExportDetail(CompanyID, JobID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| JobID | string | A `job_id` is a unique identifier for a particular job. | 
-
-
-
-Can view details including export data, task id , etc for a job.
-
-*Success Response:*
-
-
-
-List of Product Downloads Data. See example below or refer `ProductDownloadsResponse` for details
-
-
-Schema: `ProductDownloadsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateProductExportJob
-Update Product export job.
-
-```golang
-
-data, err := Catalog.UpdateProductExportJob(CompanyID, JobID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| JobID | string | A `job_id` is a unique identifier for a particular job. | 
-
-
-| body |  ProductPartialExportRequest | "Request body" 
-
-This API helps to update a Product export job.
 
 *Success Response:*
 
@@ -57203,6 +57118,46 @@ Schema: `ProductAttributesResponse`
 ---
 
 
+#### deleteProduct
+Delete a product.
+
+```golang
+
+data, err := Catalog.DeleteProduct(CompanyID, ItemID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
+
+
+| ItemID | float64 | Id of the product to be updated. | 
+
+
+
+This API allows to delete product.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getProduct
 Get a single product.
 
@@ -57236,46 +57191,6 @@ Product object. See example below or refer `product.utils.format_product_respons
 
 
 Schema: `SingleProductResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteProduct
-Delete a product.
-
-```golang
-
-data, err := Catalog.DeleteProduct(CompanyID, ItemID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
-
-
-| ItemID | float64 | Id of the product to be updated. | 
-
-
-
-This API allows to delete product.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
 
 
 
@@ -58430,87 +58345,6 @@ Returns a success response
 
 
 Schema: `InventoryExportResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getInventoryExportJobDetail
-Get the job detail of an inventory export job by their Job ID.
-
-```golang
-
-data, err := Catalog.GetInventoryExportJobDetail(CompanyID, JobID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | This is the uid of the company. | 
-
-
-| JobID | string | This is the id of the job. | 
-
-
-
-This API gives you the details information of an invnetory export job by their job id.
-
-*Success Response:*
-
-
-
-Returns a list of inventory export jobs
-
-
-Schema: `InventoryJobDetailResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateInventoryExportJob
-Update the status and the notification email of the running export jobs.
-
-```golang
-
-data, err := Catalog.UpdateInventoryExportJob(CompanyID, JobID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
-
-
-| JobID | string | Job Id in which assets to be uploaded. | 
-
-
-| body |  InventoryPartialExportRequest | "Request body" 
-
-This API helps to update the status and the notification email of the running export jobs.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `InventoryExportCreateResponse`
 
 
 

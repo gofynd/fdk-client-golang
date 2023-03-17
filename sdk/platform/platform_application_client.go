@@ -11878,54 +11878,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetSearchKeywords Get a Search Keywords Details
-     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getSearchKeywordsResponse GetSearchWordsDetailResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetSearchWordsDetailResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getSearchKeywordsResponse)
-        if err != nil {
-            return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
-        }
-        return getSearchKeywordsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // DeleteSearchKeywords Delete a Search Keywords
      func (ca *PlatformAppCatalog)  DeleteSearchKeywords(ID string) (DeleteResponse, error) {
         var (
@@ -11964,6 +11916,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return DeleteResponse{}, common.NewFDKError(err.Error())
         }
         return deleteSearchKeywordsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetSearchKeywords Get a Search Keywords Details
+     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getSearchKeywordsResponse GetSearchWordsDetailResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetSearchWordsDetailResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getSearchKeywordsResponse)
+        if err != nil {
+            return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
+        }
+        return getSearchKeywordsResponse, nil
         
     }
            
@@ -12160,54 +12160,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
-     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAutocompleteKeywordDetailResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // DeleteAutocompleteKeyword Delete a Autocomplete Keywords
      func (ca *PlatformAppCatalog)  DeleteAutocompleteKeyword(ID string) (DeleteResponse, error) {
         var (
@@ -12246,6 +12198,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return DeleteResponse{}, common.NewFDKError(err.Error())
         }
         return deleteAutocompleteKeywordResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
+     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAutocompleteKeywordDetailResponse, nil
         
     }
            
@@ -14018,10 +14018,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
-    
-    
-    
-    
   
 
     
@@ -14087,10 +14083,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
            
        
-    
-    
-    
-    
     
     
     

@@ -7701,8 +7701,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    //PlatformListAllProductTemplateExportDetailsXQuery holds query params
-    type PlatformListAllProductTemplateExportDetailsXQuery struct { 
+    //PlatformGetProductExportJobsXQuery holds query params
+    type PlatformGetProductExportJobsXQuery struct { 
         Status string  `url:"status,omitempty"` 
         FromDate string  `url:"from_date,omitempty"` 
         ToDate string  `url:"to_date,omitempty"` 
@@ -7711,14 +7711,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // ListAllProductTemplateExportDetails Allows you to list all product templates export list details
-     func (ca *PlatformCatalog)  ListAllProductTemplateExportDetails(xQuery PlatformListAllProductTemplateExportDetailsXQuery) (ProductDownloadsResponse, error){
+    // GetProductExportJobs Allows you to list all product templates export list details
+     func (ca *PlatformCatalog)  GetProductExportJobs(xQuery PlatformGetProductExportJobsXQuery) (ProductDownloadsResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            listAllProductTemplateExportDetailsResponse ProductDownloadsResponse
+            getProductExportJobsResponse ProductDownloadsResponse
 	    )
 
         
@@ -7753,11 +7753,11 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return ProductDownloadsResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &listAllProductTemplateExportDetailsResponse)
+        err = json.Unmarshal(response, &getProductExportJobsResponse)
         if err != nil {
              return ProductDownloadsResponse{}, common.NewFDKError(err.Error())
         }
-        return listAllProductTemplateExportDetailsResponse, nil
+        return getProductExportJobsResponse, nil
         
     }
          
@@ -7827,127 +7827,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return ProductDownloadsResponse{}, common.NewFDKError(err.Error())
         }
         return createProductExportJobResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // GetProductTemplateExportDetail Allows you to get product templates export details for the job_id.
-     func (ca *PlatformCatalog)  GetProductTemplateExportDetail(JobID string) (ProductDownloadsResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getProductTemplateExportDetailResponse ProductDownloadsResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/downloads/%s",ca.CompanyID, JobID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return ProductDownloadsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProductTemplateExportDetailResponse)
-        if err != nil {
-             return ProductDownloadsResponse{}, common.NewFDKError(err.Error())
-        }
-        return getProductTemplateExportDetailResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // UpdateProductExportJob Update Product export job.
-     func (ca *PlatformCatalog)  UpdateProductExportJob(JobID string, body  ProductPartialExportRequest) (ProductDownloadsResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateProductExportJobResponse ProductDownloadsResponse
-	    )
-
-        
-        
-        
-        
-        
-
-        
-
-        
-        
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return ProductDownloadsResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return ProductDownloadsResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "put",
-            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/downloads/%s",ca.CompanyID, JobID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return ProductDownloadsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateProductExportJobResponse)
-        if err != nil {
-             return ProductDownloadsResponse{}, common.NewFDKError(err.Error())
-        }
-        return updateProductExportJobResponse, nil
         
     }
          
@@ -8677,6 +8556,58 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+
+
+    // DeleteProduct Delete a product.
+     func (ca *PlatformCatalog)  DeleteProduct(ItemID float64) (SuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteProductResponse SuccessResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteProductResponse)
+        if err != nil {
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteProductResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
     //PlatformGetProductXQuery holds query params
     type PlatformGetProductXQuery struct { 
         BrandUID float64  `url:"brand_uid,omitempty"` 
@@ -8730,58 +8661,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return SingleProductResponse{}, common.NewFDKError(err.Error())
         }
         return getProductResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // DeleteProduct Delete a product.
-     func (ca *PlatformCatalog)  DeleteProduct(ItemID float64) (SuccessResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteProductResponse SuccessResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteProductResponse)
-        if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteProductResponse, nil
         
     }
          
@@ -10628,127 +10507,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return InventoryExportResponse{}, common.NewFDKError(err.Error())
         }
         return createInventoryExportResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // GetInventoryExportJobDetail Get the job detail of an inventory export job by their Job ID.
-     func (ca *PlatformCatalog)  GetInventoryExportJobDetail(JobID string) (InventoryJobDetailResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getInventoryExportJobDetailResponse InventoryJobDetailResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/inventory/download/%s",ca.CompanyID, JobID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return InventoryJobDetailResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getInventoryExportJobDetailResponse)
-        if err != nil {
-             return InventoryJobDetailResponse{}, common.NewFDKError(err.Error())
-        }
-        return getInventoryExportJobDetailResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // UpdateInventoryExportJob Update the status and the notification email of the running export jobs.
-     func (ca *PlatformCatalog)  UpdateInventoryExportJob(JobID string, body  InventoryPartialExportRequest) (InventoryExportCreateResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateInventoryExportJobResponse InventoryExportCreateResponse
-	    )
-
-        
-        
-        
-        
-        
-
-        
-
-        
-        
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return InventoryExportCreateResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return InventoryExportCreateResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "put",
-            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/inventory/download/%s",ca.CompanyID, JobID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return InventoryExportCreateResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateInventoryExportJobResponse)
-        if err != nil {
-             return InventoryExportCreateResponse{}, common.NewFDKError(err.Error())
-        }
-        return updateInventoryExportJobResponse, nil
         
     }
          
