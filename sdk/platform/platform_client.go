@@ -2861,7 +2861,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         DpIds string  `url:"dp_ids,omitempty"` 
         OrderingCompanyID string  `url:"ordering_company_id,omitempty"` 
         Stores string  `url:"stores,omitempty"` 
-        SalesChannel string  `url:"sales_channel,omitempty"` 
+        SalesChannels string  `url:"sales_channels,omitempty"` 
         RequestByExt string  `url:"request_by_ext,omitempty"` 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
@@ -3188,7 +3188,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         ToDate string  `url:"to_date,omitempty"` 
         DpIds string  `url:"dp_ids,omitempty"` 
         Stores string  `url:"stores,omitempty"` 
-        SalesChannel string  `url:"sales_channel,omitempty"` 
+        SalesChannels string  `url:"sales_channels,omitempty"` 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
         IsPrioritySort bool  `url:"is_priority_sort,omitempty"` 
@@ -4285,6 +4285,67 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return GetBagsPlatformResponse{}, common.NewFDKError(err.Error())
         }
         return getBagsResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGeneratePOSReceiptByOrderIdXQuery holds query params
+    type PlatformGeneratePOSReceiptByOrderIdXQuery struct { 
+        DocumentType string  `url:"document_type,omitempty"`  
+    }
+    
+
+
+    // GeneratePOSReceiptByOrderId 
+     func (or *PlatformOrder)  GeneratePOSReceiptByOrderId(OrderID string, xQuery PlatformGeneratePOSReceiptByOrderIdXQuery) (GeneratePosOrderReceiptResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            generatePOSReceiptByOrderIdResponse GeneratePosOrderReceiptResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "get",
+            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/orders/%s/generate/pos-receipt",or.CompanyID, OrderID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GeneratePosOrderReceiptResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &generatePOSReceiptByOrderIdResponse)
+        if err != nil {
+             return GeneratePosOrderReceiptResponse{}, common.NewFDKError(err.Error())
+        }
+        return generatePOSReceiptByOrderIdResponse, nil
         
     }
          
