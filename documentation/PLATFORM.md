@@ -153,6 +153,7 @@
     * [deleteNavigation](#deletenavigation)
     * [getPageMeta](#getpagemeta)
     * [getPageSpec](#getpagespec)
+    * [createPagePreview](#createpagepreview)
     * [updatePagePreview](#updatepagepreview)
     * [deletePage](#deletepage)
     * [addPathRedirectionRules](#addpathredirectionrules)
@@ -541,10 +542,10 @@
     * [getAvailableOptIns](#getavailableoptins)
     * [getSelectedOptIns](#getselectedoptins)
     * [getIntegrationLevelConfig](#getintegrationlevelconfig)
+    * [updateLevelIntegration](#updatelevelintegration)
     * [getIntegrationByLevelId](#getintegrationbylevelid)
     * [updateLevelUidIntegration](#updateleveluidintegration)
     * [getLevelActiveIntegrations](#getlevelactiveintegrations)
-    * [updateLevelIntegration](#updatelevelintegration)
     * [getBrandsByCompany](#getbrandsbycompany)
     * [getCompanyByBrands](#getcompanybybrands)
     * [getStoreByBrands](#getstorebybrands)
@@ -39415,7 +39416,7 @@ data, err := User.UpdateUser(CompanyID, ApplicationID, UserID, body);
 
 | body |  UpdateUserRequestSchema | "Request body" 
 
-Update user
+Use this API to update user details, Note: Existing emails and phone numbers of user will be replaced directly if phone_numbers or emails field sent in request data.
 
 *Success Response:*
 
@@ -43914,7 +43915,7 @@ Get page meta
 
 ```golang
 
-data, err := Content.GetPageMeta(CompanyID, ApplicationID, xQuery);
+data, err := Content.GetPageMeta(CompanyID, ApplicationID);
 ```
 
 | Argument  |  Type  | Description |
@@ -43925,11 +43926,6 @@ data, err := Content.GetPageMeta(CompanyID, ApplicationID, xQuery);
 
 | ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
-
-
-
-
-| xQuery | struct | Includes properties such as `PageType`, `CartPages`
 
 
 Use this API to get the meta of custom pages (blog, page) and default system pages (e.g. home/brand/category/collection).
@@ -44081,6 +44077,112 @@ default
         "query": []
       }
     ]
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createPagePreview
+Create a page preview
+
+```golang
+
+data, err := Content.CreatePagePreview(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+
+
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
+
+
+| body |  PageRequest | "Request body" 
+
+Use this API to create a page preview to check the appearance of a custom page.
+
+*Success Response:*
+
+
+
+Success. Refer `PageSchema` for more details.
+
+
+Schema: `PageSchema`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "date_meta": {
+      "created_on": "2021-03-16T08:24:19.197Z",
+      "modified_on": "2021-03-16T08:24:19.197Z"
+    },
+    "tags": [
+      "my first page"
+    ],
+    "published": true,
+    "component_ids": [],
+    "archived": false,
+    "_id": "60506dcad18cb33946026862",
+    "title": "my first page",
+    "slug": "1st_page",
+    "feature_image": {
+      "secure_url": "https://google.com/some-image"
+    },
+    "content": [
+      {
+        "type": "html",
+        "value": "<div id=\"icfm\">Emtpy Page. Create Page here.</div><div id=\"izu5\" class=\"aa\">hello there!<div id=\"izzl\">how are you doing</div><div><br/></div></div><img id=\"ibgj\" src=\"https://hdn-1.addsale.com/x0/company/52/applications/614957b7e7a0ccc371e96094/pages/pictures/free-content/original/-zLi_CuyM-apple.jpeg\"/>"
+      },
+      {
+        "type": "css",
+        "value": "* { box-sizing: border-box; } body {margin: 0;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}#icfm{text-align:center;padding-top:30px;padding-right:30px;padding-bottom:30px;padding-left:30px;}#izu5{padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;}#ibgj{color:black;}#izzl{float:none;display:flex;}.aa{float:right;}"
+      },
+      {
+        "type": "js",
+        "value": ""
+      }
+    ],
+    "content_path": "https://hdn-1.fynd.com/company/1526/applications/61012f6a9250ccd1b9ef8a1d/pages/content/page_slug.html",
+    "platform": "web",
+    "description": "hey this is my first page",
+    "visibility": {
+      "test": true
+    },
+    "_schedule": {
+      "start": "2021-04-23T23:50:00.000Z",
+      "next_schedule": [
+        {}
+      ]
+    },
+    "seo": {
+      "title": "my first page",
+      "description": "hey this is my first page",
+      "image": {
+        "url": ""
+      }
+    },
+    "type": "rawhtml",
+    "application": "000000000000000000000001",
+    "orientation": "portrait",
+    "page_meta": []
   }
 }
 ```
@@ -52087,7 +52189,17 @@ data, err := Order.GetShipments(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `SearchValue`, `SearchID`, `FromDate`, `ToDate`, `DpIds`, `OrderingCompanyID`, `Stores`, `SalesChannels`, `RequestByExt`, `PageNo`, `PageSize`, `IsPrioritySort`, `ExcludeLockedShipments`, `PaymentMethods`, `ChannelShipmentID`, `ChannelOrderID`, `CustomMeta`
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Lane`, `BagStatus`, `StatusOverrideLane`, `SearchType`, `SearchValue`, `SearchID`, `FromDate`, `ToDate`, `DpIds`, `OrderingCompanyID`, `Stores`, `SalesChannels`, `RequestByExt`, `PageNo`, `PageSize`, `IsPrioritySort`, `FetchActiveShipment`, `ExcludeLockedShipments`, `PaymentMethods`, `ChannelShipmentID`, `ChannelOrderID`, `CustomMeta`, `OrderingChannel`, `CompanyAffiliateTag`
 
 
 
@@ -61215,7 +61327,7 @@ Schema: `ResponseEnvelopeListJobConfigListDTO`
 
 
 #### getBuildConfig
-Get configuration of latest mobile build
+Get latest build config
 
 ```golang
 
@@ -61225,17 +61337,17 @@ data, err := Configuration.GetBuildConfig(CompanyID, ApplicationID, PlatformType
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
-| PlatformType | string | The device platform for which the mobile app is built, e.g. android, ios. | 
+| PlatformType | string | Current platform name | 
 
 
 
-Fetch latest build configuration, such as app name, landing page image, splash image used in a mobile build.
+Get latest build config
 
 *Success Response:*
 
@@ -61258,7 +61370,7 @@ Schema: `MobileAppConfiguration`
 
 
 #### updateBuildConfig
-Update the configuration for next mobile build
+Update build config for next build
 
 ```golang
 
@@ -61268,18 +61380,18 @@ data, err := Configuration.UpdateBuildConfig(CompanyID, ApplicationID, PlatformT
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
-| PlatformType | string | The device platform for which the mobile app is built, e.g. android, ios. | 
+| PlatformType | string | Current platform name | 
 
 
 | body |  MobileAppConfigRequest | "Request body" 
 
-Modify the existing build configuration, such as app name, landing page image, splash image used in a mobile build.
+Update build config for next build
 
 *Success Response:*
 
@@ -61302,7 +61414,7 @@ Schema: `MobileAppConfiguration`
 
 
 #### getPreviousVersions
-Get details of previous mobile builds
+Get previous build versions
 
 ```golang
 
@@ -61312,17 +61424,17 @@ data, err := Configuration.GetPreviousVersions(CompanyID, ApplicationID, Platfor
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
-| PlatformType | string | The device platform for which the mobile app is built, e.g. android, ios. | 
+| PlatformType | string | Current platform name | 
 
 
 
-Fetch version details of the app, this includes the build status, build date, version name, latest version, and a lot more.
+Get previous build versions
 
 *Success Response:*
 
@@ -61345,7 +61457,7 @@ Schema: `BuildVersionHistory`
 
 
 #### getAppFeatures
-Get the sales channel configuration and features
+Get features of application
 
 ```golang
 
@@ -61355,14 +61467,14 @@ data, err := Configuration.GetAppFeatures(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
 
-Shows feature configuration of sales channel websites, such as product detail, landing page, options in the login/registration screen, home page, listing page, reward points, communication opt-in, cart options and many more.
+Get features of application
 
 *Success Response:*
 
@@ -61385,7 +61497,7 @@ Schema: `AppFeatureResponse`
 
 
 #### updateAppFeatures
-Update the sales channel configuration and features
+Update features of application
 
 ```golang
 
@@ -61395,15 +61507,15 @@ data, err := Configuration.UpdateAppFeatures(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
 | body |  AppFeatureRequest | "Request body" 
 
-Modify the feature configuration of sales channel websites, such as product detail, landing page, options in the login/registration screen, home page, listing page, reward points, communication opt-in, cart options and many more.
+Update features of application
 
 *Success Response:*
 
@@ -61426,7 +61538,7 @@ Schema: `AppFeature`
 
 
 #### getAppBasicDetails
-Get sales channel details
+Get basic application details
 
 ```golang
 
@@ -61436,14 +61548,14 @@ data, err := Configuration.GetAppBasicDetails(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
 
-Shows basic sales channel details like name, description, logo, domain, company ID, and other related information.
+Get basic application details like name
 
 *Success Response:*
 
@@ -61466,7 +61578,7 @@ Schema: `ApplicationDetail`
 
 
 #### updateAppBasicDetails
-Update sales channel details
+Add or update application's basic details
 
 ```golang
 
@@ -61476,15 +61588,15 @@ data, err := Configuration.UpdateAppBasicDetails(CompanyID, ApplicationID, body)
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
 | body |  ApplicationDetail | "Request body" 
 
-Modify sales channel details like name, description, logo, domain, company ID, and other related information.
+Add or update application's basic details
 
 *Success Response:*
 
@@ -61507,7 +61619,7 @@ Schema: `ApplicationDetail`
 
 
 #### getAppContactInfo
-Get current information of the sales channel
+Get application information
 
 ```golang
 
@@ -61517,14 +61629,14 @@ data, err := Configuration.GetAppContactInfo(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
 
-Fetch data such as social links, copyright text, business highlights, address and contact information of the company/seller/brand operating the application.
+Get Application Current Information. This includes information about social links, address and contact information of company/seller/brand of the application.
 
 *Success Response:*
 
@@ -61547,7 +61659,7 @@ Schema: `ApplicationInformation`
 
 
 #### updateAppContactInfo
-Save or update current information of the sales channel
+Get application information
 
 ```golang
 
@@ -61557,15 +61669,15 @@ data, err := Configuration.UpdateAppContactInfo(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
 | body |  ApplicationInformation | "Request body" 
 
-Modify the social links, copyright text, business highlights, address and contact information of the company/seller/brand operating the application.
+Save Application Current Information. This includes information about social links, address and contact information of an application.
 
 *Success Response:*
 
@@ -61588,7 +61700,7 @@ Schema: `ApplicationInformation`
 
 
 #### getAppApiTokens
-Get social tokens for the sales channel
+Get social tokens
 
 ```golang
 
@@ -61598,14 +61710,14 @@ data, err := Configuration.GetAppApiTokens(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
 
-Use this API to retrieve the tokens used for integrating Firebase, MoEngage, Segment, GTM, Freshchat, Safetynet, Google Map, Google, and Facebook auth. **Note** - Token values are encrypted with AES encryption using a secret key.
+Get social tokens.
 
 *Success Response:*
 
@@ -61628,7 +61740,7 @@ Schema: `TokenResponse`
 
 
 #### updateAppApiTokens
-Add or update social tokens for the sales channel
+Add social tokens
 
 ```golang
 
@@ -61638,15 +61750,15 @@ data, err := Configuration.UpdateAppApiTokens(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
 | body |  TokenResponse | "Request body" 
 
-Use this API to add or edit the tokens used for integrating Firebase, MoEngage, Segment, GTM, Freshchat, Safetynet, Google Map, Google and Facebook auth.
+Add social tokens.
 
 *Success Response:*
 
@@ -61669,7 +61781,7 @@ Schema: `TokenResponse`
 
 
 #### getAppCompanies
-Get companies enabled in the sales channel inventory
+Application inventory enabled companies
 
 ```golang
 
@@ -61679,10 +61791,10 @@ data, err := Configuration.GetAppCompanies(CompanyID, ApplicationID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
 
@@ -61693,7 +61805,7 @@ data, err := Configuration.GetAppCompanies(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `UID`, `PageNo`, `PageSize`
 
 
-Fetch info of all the companies (e.g. name, uid, and company type) whose inventory is fetched into the current sales channel application
+Application inventory enabled companies.
 
 *Success Response:*
 
@@ -61716,7 +61828,7 @@ Schema: `CompaniesResponse`
 
 
 #### getAppStores
-Get stores enabled in the sales channel inventory
+Application inventory enabled stores
 
 ```golang
 
@@ -61726,10 +61838,10 @@ data, err := Configuration.GetAppStores(CompanyID, ApplicationID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
 
@@ -61738,7 +61850,7 @@ data, err := Configuration.GetAppStores(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`
 
 
-Fetch info of all the companies (e.g. uid, name, display name, store type, store code and company id) whose inventory is fetched into the current sales channel application
+Application inventory enabled stores.
 
 *Success Response:*
 
@@ -61761,7 +61873,7 @@ Schema: `StoresResponse`
 
 
 #### getInventoryConfig
-Get sales channel configuration
+Get application configuration
 
 ```golang
 
@@ -61771,14 +61883,14 @@ data, err := Configuration.GetInventoryConfig(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
 
-Use this API to fetch configuration details of authentication, inventory, article assignment rules, reward points, cart, payment, order, logistics, etc.
+Get application configuration for various features and data
 
 *Success Response:*
 
@@ -61801,7 +61913,7 @@ Schema: `ApplicationInventory`
 
 
 #### updateInventoryConfig
-Update sales channel configuration
+Update application configuration
 
 ```golang
 
@@ -61811,15 +61923,15 @@ data, err := Configuration.UpdateInventoryConfig(CompanyID, ApplicationID, body)
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
 | body |  ApplicationInventory | "Request body" 
 
-Modify the configuration details of authentication, inventory, article assignment rules, reward points, cart, payment, order, logistics, etc.
+Update application configuration for various features and data
 
 *Success Response:*
 
@@ -61842,7 +61954,7 @@ Schema: `ApplicationInventory`
 
 
 #### partiallyUpdateInventoryConfig
-Partially update sales channel configuration
+Partially update application configuration
 
 ```golang
 
@@ -61852,15 +61964,15 @@ data, err := Configuration.PartiallyUpdateInventoryConfig(CompanyID, Application
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
 | body |  AppInventoryPartialUpdate | "Request body" 
 
-Partially update the configuration details of authentication, inventory, article assignment rules, reward points, cart, payment, order, logistics, etc.
+Partially update application configuration for various features and data
 
 *Success Response:*
 
@@ -61883,7 +61995,7 @@ Schema: `ApplicationInventory`
 
 
 #### getAppCurrencyConfig
-Get currencies supported in the application
+Get application enabled currency list
 
 ```golang
 
@@ -61893,14 +62005,14 @@ data, err := Configuration.GetAppCurrencyConfig(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
 
-Get a list of currencies supported in the current sales channel. Moreover, get the cuurency that is set as the default one in the application.
+Get application enabled currency list
 
 *Success Response:*
 
@@ -61923,7 +62035,7 @@ Schema: `AppSupportedCurrency`
 
 
 #### updateAppCurrencyConfig
-Update initial sales channel supported currency
+Add initial application supported currency
 
 ```golang
 
@@ -61933,15 +62045,15 @@ data, err := Configuration.UpdateAppCurrencyConfig(CompanyID, ApplicationID, bod
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
 | body |  AppSupportedCurrency | "Request body" 
 
-Use this API to add and edit the currencies supported in the application. Initially, INR will be enabled by default.
+Add initial application supported currency for various features and data. Default INR will be enabled.
 
 *Success Response:*
 
@@ -61974,10 +62086,10 @@ data, err := Configuration.GetAppSupportedCurrency(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
 
@@ -62014,10 +62126,10 @@ data, err := Configuration.GetOrderingStoresByFilter(CompanyID, ApplicationID, x
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
 
@@ -62027,7 +62139,7 @@ data, err := Configuration.GetOrderingStoresByFilter(CompanyID, ApplicationID, x
 
 | body |  FilterOrderingStoreRequest | "Request body" 
 
-Use this API to use filters and retrieve the details of the deployment stores (the selling locations where the application will be utilised for placing orders).
+Get ordering store by filter
 
 *Success Response:*
 
@@ -62060,15 +62172,15 @@ data, err := Configuration.UpdateOrderingStoreConfig(CompanyID, ApplicationID, b
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
 | body |  OrderingStoreConfig | "Request body" 
 
-Use this API to edit the details of the deployment stores (the selling locations where the application will be utilised for placing orders)
+Add/Update ordering store config.
 
 *Success Response:*
 
@@ -62101,10 +62213,10 @@ data, err := Configuration.GetStaffOrderingStores(CompanyID, ApplicationID, xQue
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
 
@@ -62138,7 +62250,7 @@ Schema: `OrderingStoresResponse`
 
 
 #### getDomains
-Fetch all the domains added to an  application (sales channel website), including pre-defined domain (free domain) or custom domain (owned by the brand). Know the verification status of each domain name, and find out which one is the primary domain, short link domain, or both.
+Get attached domain list
 
 ```golang
 
@@ -62148,14 +62260,14 @@ data, err := Configuration.GetDomains(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
 
-Get list of domains
+Get attached domain list.
 
 *Success Response:*
 
@@ -62178,7 +62290,7 @@ Schema: `DomainsResponse`
 
 
 #### addDomain
-Add new domain to current sales channel
+Add new domain to application
 
 ```golang
 
@@ -62188,15 +62300,15 @@ data, err := Configuration.AddDomain(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
 | body |  DomainAddRequest | "Request body" 
 
-Add a new domain to current sales channel, including pre-defined domain (free domain) or custom domain (owned by the brand)
+Add new domain to application.
 
 *Success Response:*
 
@@ -62219,7 +62331,7 @@ Schema: `Domain`
 
 
 #### removeDomainById
-Remove attached domain from current sales channel
+Remove attached domain
 
 ```golang
 
@@ -62229,17 +62341,17 @@ data, err := Configuration.RemoveDomainById(CompanyID, ApplicationID, ID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
-| ID | string | The unique identifier (24-digit Mongo Object ID) of the domain | 
+| ID | string | Domain _id | 
 
 
 
-Delete a domain (secondary or shortlink domain) added to a sales channel. It will disable user's access to website, shared links, and other features associated with this domain.
+Remove attached domain.
 
 *Success Response:*
 
@@ -62262,7 +62374,7 @@ Schema: `SuccessMessageResponse`
 
 
 #### changeDomainType
-Change the type of domain in the current sales channel
+Change domain type
 
 ```golang
 
@@ -62272,15 +62384,15 @@ data, err := Configuration.ChangeDomainType(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
 | body |  UpdateDomainTypeRequest | "Request body" 
 
-Primary domain is used as the URL of your website. Short link domain is comparatively smaller and used while generating short links. Use this API to change a domain to either Primary or a Shortlink domain.
+Change a domain to Primary or Shortlink domain
 
 *Success Response:*
 
@@ -62303,7 +62415,7 @@ Schema: `DomainsResponse`
 
 
 #### getDomainStatus
-Get the status of connected domain
+Get domain connected status.
 
 ```golang
 
@@ -62313,15 +62425,15 @@ data, err := Configuration.GetDomainStatus(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
 | body |  DomainStatusRequest | "Request body" 
 
-Shows if the A records and TXT records of the domain correctly points to appropriate IP on Fynd Servers.
+Get domain connected status. Check if domain is live and mapped to appropriate IP to fynd servers.
 
 *Success Response:*
 
@@ -62344,7 +62456,7 @@ Schema: `DomainStatusResponse`
 
 
 #### createApplication
-Create a new sales channel
+Create application
 
 ```golang
 
@@ -62354,12 +62466,12 @@ data, err := Configuration.CreateApplication(CompanyID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
 | body |  CreateApplicationRequest | "Request body" 
 
-Applications are sales channel websites which can be configured, personalized and customized. Use this API to create a new application in the current company.
+Create new application
 
 *Success Response:*
 
@@ -62382,7 +62494,7 @@ Schema: `CreateAppResponse`
 
 
 #### getApplications
-Get list of registered sales channels under company
+Get list of application under company
 
 ```golang
 
@@ -62392,7 +62504,7 @@ data, err := Configuration.GetApplications(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
 
@@ -62403,7 +62515,7 @@ data, err := Configuration.GetApplications(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`
 
 
-Applications are sales channel websites which can be configured, personalized and customised. Use this API to fetch a list of applications created within a company.
+Get list of application under company
 
 *Success Response:*
 
@@ -62426,7 +62538,7 @@ Schema: `ApplicationsResponse`
 
 
 #### getApplicationById
-Get sales channel data by ID
+Get application data from id
 
 ```golang
 
@@ -62436,14 +62548,14 @@ data, err := Configuration.GetApplicationById(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
+| ApplicationID | string | Current application id | 
 
 
 
-Use application ID to get the current sales channel details which includes channel name, description, banner, logo, favicon, domain details, token, etc.
+Get application data from id
 
 *Success Response:*
 
@@ -62476,11 +62588,11 @@ data, err := Configuration.GetCurrencies(CompanyID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
 
-Use this API to get a list of currencies allowed in the company. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
+Get all currencies
 
 *Success Response:*
 
@@ -62503,7 +62615,7 @@ Schema: `CurrenciesResponse`
 
 
 #### getDomainAvailibility
-Check domain availability before linking to application
+Check domain availibility before linking to application
 
 ```golang
 
@@ -62513,12 +62625,12 @@ data, err := Configuration.GetDomainAvailibility(CompanyID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
 | body |  DomainSuggestionsRequest | "Request body" 
 
-Use this API to check the domain availability before linking it to application. Also sends domain suggestions that are similar to the queried domain. Note - Custom domain search is currently powered by GoDaddy provider.
+Check domain availibility before linking to application. Also sends domain suggestions with similar to queried domain. \ Custom domain search is currently powered by GoDaddy provider.
 
 *Success Response:*
 
@@ -62585,7 +62697,7 @@ Suggestions for custom domains
 
 
 #### getIntegrationById
-Get integration data by its ID
+Get integration data
 
 ```golang
 
@@ -62595,14 +62707,14 @@ data, err := Configuration.GetIntegrationById(CompanyID, ID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
 | ID | float64 | Integration id | 
 
 
 
-Use this API to fetch the details of an integration (such as Ginesys, SAP, etc.) using its ID
+Get integration data
 
 *Success Response:*
 
@@ -62635,7 +62747,7 @@ data, err := Configuration.GetAvailableOptIns(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
 
@@ -62644,7 +62756,7 @@ data, err := Configuration.GetAvailableOptIns(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`
 
 
-Use this API to get a list of all available integrations in a company
+Get all available integration opt-ins
 
 *Success Response:*
 
@@ -62677,13 +62789,13 @@ data, err := Configuration.GetSelectedOptIns(CompanyID, Level, UID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| Level | string | store or company | 
+| Level | string | Integration level | 
 
 
-| UID | float64 | Unique identifier of the selected integration level. | 
+| UID | float64 | Integration level uid | 
 
 
 
@@ -62692,7 +62804,7 @@ data, err := Configuration.GetSelectedOptIns(CompanyID, Level, UID, xQuery);
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`
 
 
-Use this API to get the store-level/company-level integrations configured in a company
+Get company/store level integration opt-ins
 
 *Success Response:*
 
@@ -62725,7 +62837,7 @@ data, err := Configuration.GetIntegrationLevelConfig(CompanyID, ID, Level, xQuer
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
 | ID | string | Integration id | 
@@ -62762,8 +62874,52 @@ Schema: `IntegrationConfigResponse`
 ---
 
 
+#### updateLevelIntegration
+Update a store level opt-in for integration
+
+```golang
+
+data, err := Configuration.UpdateLevelIntegration(CompanyID, ID, Level, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ID | string | Integration id | 
+
+
+| Level | string | Integration level | 
+
+
+| body |  UpdateIntegrationLevelRequest | "Request body" 
+
+Update a store level opt-in for integration
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `IntegrationLevel`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getIntegrationByLevelId
-Get integration config at a particular level (store/company)
+Get level data for integration
 
 ```golang
 
@@ -62773,20 +62929,20 @@ data, err := Configuration.GetIntegrationByLevelId(CompanyID, ID, Level, UID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ID | string | Integration ID (24-digit Mongo Object ID) | 
+| ID | string | Integration id | 
 
 
-| Level | string | Integration level, `store` or `company` | 
+| Level | string | Integration level | 
 
 
-| UID | float64 | Unique identifier of integration level (store/company) | 
+| UID | float64 | Integration level uid | 
 
 
 
-Use this API to get the configuration details of an integration such as token, permissions, level, opted value, uid, meta, location ID, etc. at a particular level (store/company).
+Get level data for integration
 
 *Success Response:*
 
@@ -62809,7 +62965,7 @@ Schema: `IntegrationLevel`
 
 
 #### updateLevelUidIntegration
-Update integration level by store UID
+Update a store level opt-in for integration
 
 ```golang
 
@@ -62819,21 +62975,21 @@ data, err := Configuration.UpdateLevelUidIntegration(CompanyID, ID, Level, UID, 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ID | string | Integration ID (24-digit Mongo Object ID) | 
+| ID | string | Integration id | 
 
 
-| Level | string | Integration level, `store` or `company` | 
+| Level | string | Integration level | 
 
 
-| UID | float64 | Unique identifier of integration level (store/company) | 
+| UID | float64 | Integration level uid | 
 
 
 | body |  IntegrationLevel | "Request body" 
 
-Update the level of integration by store UID
+Update a store level opt-in for integration
 
 *Success Response:*
 
@@ -62856,33 +63012,30 @@ Schema: `IntegrationLevel`
 
 
 #### getLevelActiveIntegrations
-Check active integration at store
+Check store has active integration
 
 ```golang
 
-data, err := Configuration.GetLevelActiveIntegrations(CompanyID, ID, Level, UID, xQuery);
+data, err := Configuration.GetLevelActiveIntegrations(CompanyID, ID, Level, UID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ID | string | Integration ID (24-digit Mongo Object ID) | 
+| ID | string | Integration id | 
 
 
-| Level | string | Integration level, `store` or `company` | 
+| Level | string | Integration level | 
 
 
-| UID | float64 | Unique identifier of integration level (store/company) | 
+| UID | float64 | Integration level uid | 
 
 
 
-| xQuery | struct | Includes properties such as `Permission`
-
-
-Use this API to check if a store is already opted-in for any integration
+API checks if a store is already opted in any other integrations
 
 *Success Response:*
 
@@ -62904,52 +63057,8 @@ Schema: `OptedStoreIntegration`
 ---
 
 
-#### updateLevelIntegration
-Update a store level integration you opted
-
-```golang
-
-data, err := Configuration.UpdateLevelIntegration(CompanyID, ID, Level, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
-
-
-| ID | string | Integration ID (24-digit Mongo Object ID) | 
-
-
-| Level | string | Integration level, `store` or `company` | 
-
-
-| body |  UpdateIntegrationLevelRequest | "Request body" 
-
-Use this API to update the configuration details of an integration such as token, permissions, level, opted value, uid, meta, location ID, etc. at a particular level (store/company).
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `IntegrationLevel`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getBrandsByCompany
-Get brands by company.
+Get brands by company
 
 ```golang
 
@@ -62959,14 +63068,14 @@ data, err := Configuration.GetBrandsByCompany(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
 
 | xQuery | struct | Includes properties such as `Q`
 
 
-Use this API to get all the brands added in a company. Get all the brand names, along with URLs of their logo, banner, and portrait image.
+Get brands by company
 
 *Success Response:*
 
@@ -62999,7 +63108,7 @@ data, err := Configuration.GetCompanyByBrands(CompanyID, xQuery, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
 
@@ -63009,7 +63118,7 @@ data, err := Configuration.GetCompanyByBrands(CompanyID, xQuery, body);
 
 | body |  CompanyByBrandsRequest | "Request body" 
 
-Use this API to get a list of companies by the brands they deal
+Get company by brand uids
 
 *Success Response:*
 
@@ -63032,7 +63141,7 @@ Schema: `CompanyByBrandsResponse`
 
 
 #### getStoreByBrands
-Get stores by brand uids for the current company
+Get stores by brand uids
 
 ```golang
 
@@ -63042,7 +63151,7 @@ data, err := Configuration.GetStoreByBrands(CompanyID, xQuery, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
 
@@ -63052,7 +63161,7 @@ data, err := Configuration.GetStoreByBrands(CompanyID, xQuery, body);
 
 | body |  StoreByBrandsRequest | "Request body" 
 
-Use this API to get a list of selling locations (stores) by the brands they deal. Store has information about store name, store type, store code, store address, and company detail.
+Get stores by brand uids
 
 *Success Response:*
 
@@ -63075,7 +63184,7 @@ Schema: `StoreByBrandsResponse`
 
 
 #### getOtherSellerApplications
-Get other seller sales channels
+Get other seller applications
 
 ```golang
 
@@ -63085,7 +63194,7 @@ data, err := Configuration.GetOtherSellerApplications(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
 
@@ -63094,7 +63203,7 @@ data, err := Configuration.GetOtherSellerApplications(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`
 
 
-Use this API to fetch all other seller applications that were not created within the current company. but have opted for the current company's inventory
+Get other seller applications who has opted current company as inventory
 
 *Success Response:*
 
@@ -63117,7 +63226,7 @@ Schema: `OtherSellerApplications`
 
 
 #### getOtherSellerApplicationById
-Get other seller's sales channel by ID
+Get other seller applications
 
 ```golang
 
@@ -63127,14 +63236,14 @@ data, err := Configuration.GetOtherSellerApplicationById(CompanyID, ID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
 | ID | string | Application Id | 
 
 
 
-Use application ID to fetch details of a seller application that was not created within the current company. but has opted for the current company's inventory
+Get other seller application
 
 *Success Response:*
 
@@ -63157,7 +63266,7 @@ Schema: `OptedApplicationResponse`
 
 
 #### optOutFromApplication
-Opt-out company or store from other seller application
+Opt out company or store from other seller application
 
 ```golang
 
@@ -63167,15 +63276,15 @@ data, err := Configuration.OptOutFromApplication(CompanyID, ID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+| CompanyID | string | Current company id | 
 
 
-| ID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account. | 
+| ID | string | Application Id | 
 
 
 | body |  OptOutInventory | "Request body" 
 
-Use this API to opt-out your company or store from other seller application. The specific seller application will no longer fetch inventory from your company or store.
+Opt out company or store from other seller application
 
 *Success Response:*
 

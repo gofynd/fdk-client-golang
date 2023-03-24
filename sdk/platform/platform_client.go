@@ -2833,6 +2833,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     //PlatformGetShipmentsXQuery holds query params
     type PlatformGetShipmentsXQuery struct { 
         Lane string  `url:"lane,omitempty"` 
+        BagStatus string  `url:"bag_status,omitempty"` 
+        StatusOverrideLane bool  `url:"status_override_lane,omitempty"` 
         SearchType string  `url:"search_type,omitempty"` 
         SearchValue string  `url:"search_value,omitempty"` 
         SearchID string  `url:"search_id,omitempty"` 
@@ -2846,11 +2848,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
         IsPrioritySort bool  `url:"is_priority_sort,omitempty"` 
+        FetchActiveShipment bool  `url:"fetch_active_shipment,omitempty"` 
         ExcludeLockedShipments bool  `url:"exclude_locked_shipments,omitempty"` 
         PaymentMethods string  `url:"payment_methods,omitempty"` 
         ChannelShipmentID string  `url:"channel_shipment_id,omitempty"` 
         ChannelOrderID string  `url:"channel_order_id,omitempty"` 
-        CustomMeta string  `url:"custom_meta,omitempty"`  
+        CustomMeta string  `url:"custom_meta,omitempty"` 
+        OrderingChannel string  `url:"ordering_channel,omitempty"` 
+        CompanyAffiliateTag string  `url:"company_affiliate_tag,omitempty"`  
     }
     
 
@@ -2868,6 +2873,16 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
 
         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
             
                 
             
@@ -13658,7 +13673,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // CreateApplication Create a new sales channel
+    // CreateApplication Create application
      func (co *PlatformConfiguration)  CreateApplication(body  CreateApplicationRequest) (CreateAppResponse, error){
         
         var (
@@ -13734,7 +13749,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetApplications Get list of registered sales channels under company
+    // GetApplications Get list of application under company
      func (co *PlatformConfiguration)  GetApplications(xQuery PlatformGetApplicationsXQuery) (ApplicationsResponse, error){
         
         var (
@@ -13812,7 +13827,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
         
             
-            // GetApplicationsPaginator Get list of registered sales channels under company  
+            // GetApplicationsPaginator Get list of application under company  
             func (co *PlatformConfiguration)  GetApplicationsPaginator(
               xQuery PlatformGetApplicationsXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
@@ -13902,7 +13917,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetDomainAvailibility Check domain availability before linking to application
+    // GetDomainAvailibility Check domain availibility before linking to application
      func (co *PlatformConfiguration)  GetDomainAvailibility(body  DomainSuggestionsRequest) (DomainSuggestionsResponse, error){
         
         var (
@@ -13969,7 +13984,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetIntegrationById Get integration data by its ID
+    // GetIntegrationById Get integration data
      func (co *PlatformConfiguration)  GetIntegrationById(ID float64) (Integration, error){
         
         var (
@@ -14292,7 +14307,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         rawRequest = NewRequest(
             co.Config,
             "get",
-            fmt.Sprintf("/service/platform/configuration/v1.0/company/%s/integration-opt-in/configuration/new/%s/%s",co.CompanyID, ID, Level),
+            fmt.Sprintf("/service/platform/configuration/v1.0/company/%s/integration-opt-in/configuration/%s/%s",co.CompanyID, ID, Level),
             nil,
             xQuery,
             nil)
@@ -14319,7 +14334,76 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetIntegrationByLevelId Get integration config at a particular level (store/company)
+    // UpdateLevelIntegration Update a store level opt-in for integration
+     func (co *PlatformConfiguration)  UpdateLevelIntegration(ID string, Level string, body  UpdateIntegrationLevelRequest) (IntegrationLevel, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateLevelIntegrationResponse IntegrationLevel
+	    )
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return IntegrationLevel{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return IntegrationLevel{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            co.Config,
+            "put",
+            fmt.Sprintf("/service/platform/configuration/v1.0/company/%s/integration-opt-in/configuration/%s/%s",co.CompanyID, ID, Level),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return IntegrationLevel{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateLevelIntegrationResponse)
+        if err != nil {
+             return IntegrationLevel{}, common.NewFDKError(err.Error())
+        }
+        return updateLevelIntegrationResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetIntegrationByLevelId Get level data for integration
      func (co *PlatformConfiguration)  GetIntegrationByLevelId(ID string, Level string, UID float64) (IntegrationLevel, error){
         
         var (
@@ -14375,7 +14459,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // UpdateLevelUidIntegration Update integration level by store UID
+    // UpdateLevelUidIntegration Update a store level opt-in for integration
      func (co *PlatformConfiguration)  UpdateLevelUidIntegration(ID string, Level string, UID float64, body  IntegrationLevel) (IntegrationLevel, error){
         
         var (
@@ -14468,15 +14552,10 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    //PlatformGetLevelActiveIntegrationsXQuery holds query params
-    type PlatformGetLevelActiveIntegrationsXQuery struct { 
-        Permission string  `url:"permission,omitempty"`  
-    }
-    
 
 
-    // GetLevelActiveIntegrations Check active integration at store
-     func (co *PlatformConfiguration)  GetLevelActiveIntegrations(ID string, Level string, UID float64, xQuery PlatformGetLevelActiveIntegrationsXQuery) (OptedStoreIntegration, error){
+    // GetLevelActiveIntegrations Check store has active integration
+     func (co *PlatformConfiguration)  GetLevelActiveIntegrations(ID string, Level string, UID float64) (OptedStoreIntegration, error){
         
         var (
             rawRequest  *RawRequest
@@ -14487,10 +14566,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
         
 
-        
-            
-                
-            
         
 
         
@@ -14510,7 +14585,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             "get",
             fmt.Sprintf("/service/platform/configuration/v1.0/company/%s/integration-opt-in/check/configuration/%s/%s/undefined",co.CompanyID, ID, Level, UID),
             nil,
-            xQuery,
+            nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -14533,75 +14608,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-
-
-    // UpdateLevelIntegration Update a store level integration you opted
-     func (co *PlatformConfiguration)  UpdateLevelIntegration(ID string, Level string, body  UpdateIntegrationLevelRequest) (IntegrationLevel, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateLevelIntegrationResponse IntegrationLevel
-	    )
-
-        
-        
-        
-
-        
-
-        
-        
-        
-        
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return IntegrationLevel{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return IntegrationLevel{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            co.Config,
-            "put",
-            fmt.Sprintf("/service/platform/configuration/v1.0/company/%s/integration-opt-in/configuration/%s/%s",co.CompanyID, ID, Level),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return IntegrationLevel{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateLevelIntegrationResponse)
-        if err != nil {
-             return IntegrationLevel{}, common.NewFDKError(err.Error())
-        }
-        return updateLevelIntegrationResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
     //PlatformGetBrandsByCompanyXQuery holds query params
     type PlatformGetBrandsByCompanyXQuery struct { 
         Q string  `url:"q,omitempty"`  
@@ -14609,7 +14615,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetBrandsByCompany Get brands by company.
+    // GetBrandsByCompany Get brands by company
      func (co *PlatformConfiguration)  GetBrandsByCompany(xQuery PlatformGetBrandsByCompanyXQuery) (BrandsByCompanyResponse, error){
         
         var (
@@ -14796,7 +14802,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetStoreByBrands Get stores by brand uids for the current company
+    // GetStoreByBrands Get stores by brand uids
      func (co *PlatformConfiguration)  GetStoreByBrands(xQuery PlatformGetStoreByBrandsXQuery, body  StoreByBrandsRequest) (StoreByBrandsResponse, error){
         
         var (
@@ -14885,7 +14891,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
         
             
-            // GetStoreByBrandsPaginator Get stores by brand uids for the current company  
+            // GetStoreByBrandsPaginator Get stores by brand uids  
             func (co *PlatformConfiguration)  GetStoreByBrandsPaginator(
               xQuery PlatformGetStoreByBrandsXQuery  , body  StoreByBrandsRequest) *common.Paginator {
                 paginator := common.NewPaginator("number")
@@ -14925,7 +14931,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetOtherSellerApplications Get other seller sales channels
+    // GetOtherSellerApplications Get other seller applications
      func (co *PlatformConfiguration)  GetOtherSellerApplications(xQuery PlatformGetOtherSellerApplicationsXQuery) (OtherSellerApplications, error){
         
         var (
@@ -14995,7 +15001,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
         
             
-            // GetOtherSellerApplicationsPaginator Get other seller sales channels  
+            // GetOtherSellerApplicationsPaginator Get other seller applications  
             func (co *PlatformConfiguration)  GetOtherSellerApplicationsPaginator(
               xQuery PlatformGetOtherSellerApplicationsXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
@@ -15029,7 +15035,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetOtherSellerApplicationById Get other seller's sales channel by ID
+    // GetOtherSellerApplicationById Get other seller applications
      func (co *PlatformConfiguration)  GetOtherSellerApplicationById(ID string) (OptedApplicationResponse, error){
         
         var (
@@ -15081,7 +15087,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // OptOutFromApplication Opt-out company or store from other seller application
+    // OptOutFromApplication Opt out company or store from other seller application
      func (co *PlatformConfiguration)  OptOutFromApplication(ID string, body  OptOutInventory) (SuccessMessageResponse, error){
         
         var (

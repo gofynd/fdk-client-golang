@@ -1657,55 +1657,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1746,6 +1697,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -9406,7 +9406,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetApplication Get current sales channel details
+    // GetApplication Get current application details
     func (co *Configuration)  GetApplication() (Application, error){
         var (
             rawRequest  *RawRequest
@@ -9451,7 +9451,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetOwnerInfo Get sales channel, owner and seller information
+    // GetOwnerInfo Get application, owner and seller information
     func (co *Configuration)  GetOwnerInfo() (ApplicationAboutResponse, error){
         var (
             rawRequest  *RawRequest
@@ -9496,7 +9496,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetBasicDetails Get basic details of the application
+    // GetBasicDetails Get basic application details
     func (co *Configuration)  GetBasicDetails() (ApplicationDetail, error){
         var (
             rawRequest  *RawRequest
@@ -9593,7 +9593,7 @@ func NewAppClient(config *AppConfig) *Client {
         Q string  `url:"q,omitempty"`  
     }
     
-    // GetOrderingStores Get all deployment stores
+    // GetOrderingStores Get deployment stores
     func (co *Configuration)  GetOrderingStores(xQuery ConfigurationGetOrderingStoresXQuery) (OrderingStores, error){
         var (
             rawRequest  *RawRequest
@@ -9665,7 +9665,7 @@ func NewAppClient(config *AppConfig) *Client {
                     
                 
             
-            // GetOrderingStoresPaginator Get all deployment stores  
+            // GetOrderingStoresPaginator Get deployment stores  
             func (co *Configuration)  GetOrderingStoresPaginator( xQuery ConfigurationGetOrderingStoresXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
                  
@@ -10129,8 +10129,7 @@ func NewAppClient(config *AppConfig) *Client {
         PageSize float64  `url:"page_size,omitempty"` 
         OrderIncent bool  `url:"order_incent,omitempty"` 
         OrderingStore float64  `url:"ordering_store,omitempty"` 
-        User string  `url:"user,omitempty"` 
-        UserName string  `url:"user_name,omitempty"`  
+        User string  `url:"user,omitempty"`  
     }
     
     // GetAppStaffList Get a list of staff.
@@ -10145,8 +10144,6 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
-            
-                
             
                 
             
@@ -10224,13 +10221,6 @@ func NewAppClient(config *AppConfig) *Client {
                     
                     
                 
-                    
-                    
-                    
-                        
-                    
-                    
-                
             
             // GetAppStaffListPaginator Get a list of staff.  
             func (co *Configuration)  GetAppStaffListPaginator( xQuery ConfigurationGetAppStaffListXQuery ) *common.Paginator {
@@ -10238,10 +10228,6 @@ func NewAppClient(config *AppConfig) *Client {
                  
                  
                  xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
                  
                  
                  
@@ -15973,72 +15959,6 @@ func NewAppClient(config *AppConfig) *Client {
             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
         }
          return getPincodeZonesResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // GetOptimalLocations GET zone from the Pincode.
-    func (lo *Logistic)  GetOptimalLocations(body  ReAssignStoreRequest) (ReAssignStoreResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getOptimalLocationsResponse ReAssignStoreResponse
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-        
-
-        
-    
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return ReAssignStoreResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return ReAssignStoreResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            lo.config,
-            "post",
-            "/service/application/logistics/v1.0/reassign_stores",
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ReAssignStoreResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getOptimalLocationsResponse)
-        if err != nil {
-            return ReAssignStoreResponse{}, common.NewFDKError(err.Error())
-        }
-         return getOptimalLocationsResponse, nil
         
     }
           

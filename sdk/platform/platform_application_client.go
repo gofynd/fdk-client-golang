@@ -5813,14 +5813,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    //PlatformAppGetPageMetaXQuery holds query params
-    type PlatformAppGetPageMetaXQuery struct { 
-        PageType string  `url:"page_type,omitempty"` 
-        CartPages bool  `url:"cart_pages,omitempty"`  
-    }
-    
     // GetPageMeta Get page meta
-     func (co *PlatformAppContent)  GetPageMeta(xQuery PlatformAppGetPageMetaXQuery) (PageMetaSchema, error) {
+     func (co *PlatformAppContent)  GetPageMeta() (PageMetaSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -5831,12 +5825,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
 
          
-            
-                
-            
-                
-            
-        
 
         
         
@@ -5849,7 +5837,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             "get",
             fmt.Sprintf("/service/platform/content/v1.0/company/%s/application/%s/pages/meta",co.CompanyID, co.ApplicationID),
             nil,
-            xQuery,
+            nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -5907,6 +5895,91 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return PageSpec{}, common.NewFDKError(err.Error())
         }
         return getPageSpecResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // CreatePagePreview Create a page preview
+     func (co *PlatformAppContent)  CreatePagePreview(body  PageRequest) (PageSchema, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            createPagePreviewResponse PageSchema
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PageSchema{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PageSchema{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "post",
+            fmt.Sprintf("/service/platform/content/v1.0/company/%s/application/%s/pages/preview/",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PageSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createPagePreviewResponse)
+        if err != nil {
+            return PageSchema{}, common.NewFDKError(err.Error())
+        }
+        return createPagePreviewResponse, nil
         
     }
            
@@ -16333,7 +16406,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetBuildConfig Get configuration of latest mobile build
+    // GetBuildConfig Get latest build config
      func (co *PlatformAppConfiguration)  GetBuildConfig(PlatformType string) (MobileAppConfiguration, error) {
         var (
             rawRequest  *RawRequest
@@ -16381,7 +16454,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateBuildConfig Update the configuration for next mobile build
+    // UpdateBuildConfig Update build config for next build
      func (co *PlatformAppConfiguration)  UpdateBuildConfig(PlatformType string, body  MobileAppConfigRequest) (MobileAppConfiguration, error) {
         var (
             rawRequest  *RawRequest
@@ -16450,7 +16523,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetPreviousVersions Get details of previous mobile builds
+    // GetPreviousVersions Get previous build versions
      func (co *PlatformAppConfiguration)  GetPreviousVersions(PlatformType string) (BuildVersionHistory, error) {
         var (
             rawRequest  *RawRequest
@@ -16498,7 +16571,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetAppFeatures Get the sales channel configuration and features
+    // GetAppFeatures Get features of application
      func (co *PlatformAppConfiguration)  GetAppFeatures() (AppFeatureResponse, error) {
         var (
             rawRequest  *RawRequest
@@ -16544,7 +16617,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateAppFeatures Update the sales channel configuration and features
+    // UpdateAppFeatures Update features of application
      func (co *PlatformAppConfiguration)  UpdateAppFeatures(body  AppFeatureRequest) (AppFeature, error) {
         var (
             rawRequest  *RawRequest
@@ -16605,7 +16678,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetAppBasicDetails Get sales channel details
+    // GetAppBasicDetails Get basic application details
      func (co *PlatformAppConfiguration)  GetAppBasicDetails() (ApplicationDetail, error) {
         var (
             rawRequest  *RawRequest
@@ -16651,7 +16724,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateAppBasicDetails Update sales channel details
+    // UpdateAppBasicDetails Add or update application's basic details
      func (co *PlatformAppConfiguration)  UpdateAppBasicDetails(body  ApplicationDetail) (ApplicationDetail, error) {
         var (
             rawRequest  *RawRequest
@@ -16660,8 +16733,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             updateAppBasicDetailsResponse ApplicationDetail
 	    )
 
-        
-            
         
             
         
@@ -16730,7 +16801,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetAppContactInfo Get current information of the sales channel
+    // GetAppContactInfo Get application information
      func (co *PlatformAppConfiguration)  GetAppContactInfo() (ApplicationInformation, error) {
         var (
             rawRequest  *RawRequest
@@ -16776,7 +16847,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateAppContactInfo Save or update current information of the sales channel
+    // UpdateAppContactInfo Get application information
      func (co *PlatformAppConfiguration)  UpdateAppContactInfo(body  ApplicationInformation) (ApplicationInformation, error) {
         var (
             rawRequest  *RawRequest
@@ -16857,7 +16928,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetAppApiTokens Get social tokens for the sales channel
+    // GetAppApiTokens Get social tokens
      func (co *PlatformAppConfiguration)  GetAppApiTokens() (TokenResponse, error) {
         var (
             rawRequest  *RawRequest
@@ -16903,7 +16974,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateAppApiTokens Add or update social tokens for the sales channel
+    // UpdateAppApiTokens Add social tokens
      func (co *PlatformAppConfiguration)  UpdateAppApiTokens(body  TokenResponse) (TokenResponse, error) {
         var (
             rawRequest  *RawRequest
@@ -16981,7 +17052,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // GetAppCompanies Get companies enabled in the sales channel inventory
+    // GetAppCompanies Application inventory enabled companies
      func (co *PlatformAppConfiguration)  GetAppCompanies(xQuery PlatformAppGetAppCompaniesXQuery) (CompaniesResponse, error) {
         var (
             rawRequest  *RawRequest
@@ -17060,7 +17131,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             
             
             
-            // GetAppCompaniesPaginator Get companies enabled in the sales channel inventory  
+            // GetAppCompaniesPaginator Application inventory enabled companies  
             func (co *PlatformAppConfiguration)  GetAppCompaniesPaginator( xQuery PlatformAppGetAppCompaniesXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
                 
@@ -17101,7 +17172,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // GetAppStores Get stores enabled in the sales channel inventory
+    // GetAppStores Application inventory enabled stores
      func (co *PlatformAppConfiguration)  GetAppStores(xQuery PlatformAppGetAppStoresXQuery) (StoresResponse, error) {
         var (
             rawRequest  *RawRequest
@@ -17172,7 +17243,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             
             
             
-            // GetAppStoresPaginator Get stores enabled in the sales channel inventory  
+            // GetAppStoresPaginator Application inventory enabled stores  
             func (co *PlatformAppConfiguration)  GetAppStoresPaginator( xQuery PlatformAppGetAppStoresXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
                 
@@ -17203,7 +17274,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetInventoryConfig Get sales channel configuration
+    // GetInventoryConfig Get application configuration
      func (co *PlatformAppConfiguration)  GetInventoryConfig() (ApplicationInventory, error) {
         var (
             rawRequest  *RawRequest
@@ -17249,7 +17320,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateInventoryConfig Update sales channel configuration
+    // UpdateInventoryConfig Update application configuration
      func (co *PlatformAppConfiguration)  UpdateInventoryConfig(body  ApplicationInventory) (ApplicationInventory, error) {
         var (
             rawRequest  *RawRequest
@@ -17258,8 +17329,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             updateInventoryConfigResponse ApplicationInventory
 	    )
 
-        
-            
         
             
         
@@ -17344,7 +17413,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // PartiallyUpdateInventoryConfig Partially update sales channel configuration
+    // PartiallyUpdateInventoryConfig Partially update application configuration
      func (co *PlatformAppConfiguration)  PartiallyUpdateInventoryConfig(body  AppInventoryPartialUpdate) (ApplicationInventory, error) {
         var (
             rawRequest  *RawRequest
@@ -17353,8 +17422,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             partiallyUpdateInventoryConfigResponse ApplicationInventory
 	    )
 
-        
-            
         
             
         
@@ -17415,7 +17482,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetAppCurrencyConfig Get currencies supported in the application
+    // GetAppCurrencyConfig Get application enabled currency list
      func (co *PlatformAppConfiguration)  GetAppCurrencyConfig() (AppSupportedCurrency, error) {
         var (
             rawRequest  *RawRequest
@@ -17461,7 +17528,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateAppCurrencyConfig Update initial sales channel supported currency
+    // UpdateAppCurrencyConfig Add initial application supported currency
      func (co *PlatformAppConfiguration)  UpdateAppCurrencyConfig(body  AppSupportedCurrency) (AppSupportedCurrency, error) {
         var (
             rawRequest  *RawRequest
@@ -17593,8 +17660,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             getOrderingStoresByFilterResponse OrderingStores
 	    )
 
-        
-            
         
             
         
@@ -17889,7 +17954,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetDomains Fetch all the domains added to an  application (sales channel website), including pre-defined domain (free domain) or custom domain (owned by the brand). Know the verification status of each domain name, and find out which one is the primary domain, short link domain, or both.
+    // GetDomains Get attached domain list
      func (co *PlatformAppConfiguration)  GetDomains() (DomainsResponse, error) {
         var (
             rawRequest  *RawRequest
@@ -17935,7 +18000,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // AddDomain Add new domain to current sales channel
+    // AddDomain Add new domain to application
      func (co *PlatformAppConfiguration)  AddDomain(body  DomainAddRequest) (Domain, error) {
         var (
             rawRequest  *RawRequest
@@ -17996,7 +18061,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // RemoveDomainById Remove attached domain from current sales channel
+    // RemoveDomainById Remove attached domain
      func (co *PlatformAppConfiguration)  RemoveDomainById(ID string) (SuccessMessageResponse, error) {
         var (
             rawRequest  *RawRequest
@@ -18044,7 +18109,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // ChangeDomainType Change the type of domain in the current sales channel
+    // ChangeDomainType Change domain type
      func (co *PlatformAppConfiguration)  ChangeDomainType(body  UpdateDomainTypeRequest) (DomainsResponse, error) {
         var (
             rawRequest  *RawRequest
@@ -18107,7 +18172,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetDomainStatus Get the status of connected domain
+    // GetDomainStatus Get domain connected status.
      func (co *PlatformAppConfiguration)  GetDomainStatus(body  DomainStatusRequest) (DomainStatusResponse, error) {
         var (
             rawRequest  *RawRequest
@@ -18172,7 +18237,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetApplicationById Get sales channel data by ID
+    // GetApplicationById Get application data from id
      func (co *PlatformAppConfiguration)  GetApplicationById() (Application, error) {
         var (
             rawRequest  *RawRequest
