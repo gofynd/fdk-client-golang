@@ -1657,55 +1657,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1746,6 +1697,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -2308,12 +2308,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // GetProductPriceBySlug Get the price of a product size at a PIN Code
-    func (ca *Catalog)  GetProductPriceBySlug(Slug string, Size string, xQuery CatalogGetProductPriceBySlugXQuery) (ProductSizePriceResponseV3, error){
+    func (ca *Catalog)  GetProductPriceBySlug(Slug string, Size string, xQuery CatalogGetProductPriceBySlugXQuery) (ProductSizePriceResponseV2, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getProductPriceBySlugResponse ProductSizePriceResponseV3
+             getProductPriceBySlugResponse ProductSizePriceResponseV2
 	    )
 
         
@@ -2341,18 +2341,18 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/application/catalog/v3.0/products/%s/sizes/%s/price/",Slug,Size),
+            fmt.Sprintf("/service/application/catalog/v2.0/products/%s/sizes/%s/price/",Slug,Size),
             nil,
             xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ProductSizePriceResponseV3{}, err
+            return ProductSizePriceResponseV2{}, err
 	    }
         
         err = json.Unmarshal(response, &getProductPriceBySlugResponse)
         if err != nil {
-            return ProductSizePriceResponseV3{}, common.NewFDKError(err.Error())
+            return ProductSizePriceResponseV2{}, common.NewFDKError(err.Error())
         }
          return getProductPriceBySlugResponse, nil
         
@@ -2373,12 +2373,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // GetProductSellersBySlug Get the sellers of a product size at a PIN Code
-    func (ca *Catalog)  GetProductSellersBySlug(Slug string, Size string, xQuery CatalogGetProductSellersBySlugXQuery) (ProductSizeSellersResponseV3, error){
+    func (ca *Catalog)  GetProductSellersBySlug(Slug string, Size string, xQuery CatalogGetProductSellersBySlugXQuery) (ProductSizeSellersResponseV2, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getProductSellersBySlugResponse ProductSizeSellersResponseV3
+             getProductSellersBySlugResponse ProductSizeSellersResponseV2
 	    )
 
         
@@ -2408,18 +2408,18 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/application/catalog/v3.0/products/%s/sizes/%s/sellers/",Slug,Size),
+            fmt.Sprintf("/service/application/catalog/v2.0/products/%s/sizes/%s/sellers/",Slug,Size),
             nil,
             xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ProductSizeSellersResponseV3{}, err
+            return ProductSizeSellersResponseV2{}, err
 	    }
         
         err = json.Unmarshal(response, &getProductSellersBySlugResponse)
         if err != nil {
-            return ProductSizeSellersResponseV3{}, common.NewFDKError(err.Error())
+            return ProductSizeSellersResponseV2{}, common.NewFDKError(err.Error())
         }
          return getProductSellersBySlugResponse, nil
         
@@ -3317,10 +3317,6 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
-            
-        
-            
-        
 
         
 
@@ -3449,10 +3445,6 @@ func NewAppClient(config *AppConfig) *Client {
              updateAddressResponse UpdateAddressResponse
 	    )
 
-        
-            
-        
-            
         
             
         
@@ -3767,7 +3759,11 @@ func NewAppClient(config *AppConfig) *Client {
         PaymentMode string  `url:"payment_mode,omitempty"` 
         PaymentIdentifier string  `url:"payment_identifier,omitempty"` 
         AggregatorName string  `url:"aggregator_name,omitempty"` 
-        MerchantCode string  `url:"merchant_code,omitempty"`  
+        MerchantCode string  `url:"merchant_code,omitempty"` 
+        Iin string  `url:"iin,omitempty"` 
+        Network string  `url:"network,omitempty"` 
+        Type string  `url:"type,omitempty"` 
+        CardID string  `url:"card_id,omitempty"`  
     }
     
     // ValidateCouponForPayment Verify the coupon eligibility against the payment mode
@@ -3782,6 +3778,14 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
+            
+                
+            
+                
+            
+                
             
                 
             
@@ -3911,8 +3915,6 @@ func NewAppClient(config *AppConfig) *Client {
              checkoutCartResponse CartCheckoutResponse
 	    )
 
-        
-            
         
             
         
@@ -11289,6 +11291,62 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //PaymentCardDetailsXQuery holds query params
+    type PaymentCardDetailsXQuery struct { 
+        Aggregator string  `url:"aggregator,omitempty"`  
+    }
+    
+    // CardDetails API to get Card info from PG
+    func (pa *Payment)  CardDetails(CardInfo string, xQuery PaymentCardDetailsXQuery) (CardDetailsResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             cardDetailsResponse CardDetailsResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            fmt.Sprintf("/service/application/payment/v1.0/cards/info/%s",CardInfo),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CardDetailsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &cardDetailsResponse)
+        if err != nil {
+            return CardDetailsResponse{}, common.NewFDKError(err.Error())
+        }
+         return cardDetailsResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // GetActiveRefundTransferModes Lists the mode of refund
     func (pa *Payment)  GetActiveRefundTransferModes() (TransferModeResponse, error){
         var (
@@ -12757,7 +12815,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            "/service/application/order/v1.0/orders",
+            "/service/application/orders/v1.0/orders",
             nil,
             xQuery,
             nil)
@@ -12804,7 +12862,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/order/v1.0/orders/%s",OrderID),
+            fmt.Sprintf("/service/application/orders/v1.0/orders/%s",OrderID),
             nil,
             nil,
             nil)
@@ -12851,7 +12909,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/order/v1.0/orders/pos-order/%s",OrderID),
+            fmt.Sprintf("/service/application/orders/v1.0/orders/pos-order/%s",OrderID),
             nil,
             nil,
             nil)
@@ -12898,7 +12956,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s",ShipmentID),
+            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s",ShipmentID),
             nil,
             nil,
             nil)
@@ -12945,7 +13003,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/invoice",ShipmentID),
+            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s/invoice",ShipmentID),
             nil,
             nil,
             nil)
@@ -12992,7 +13050,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/track",ShipmentID),
+            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s/track",ShipmentID),
             nil,
             nil,
             nil)
@@ -13041,7 +13099,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/order/v1.0/orders/%s/shipments/%s/customer-details",OrderID,ShipmentID),
+            fmt.Sprintf("/service/application/orders/v1.0/orders/%s/shipments/%s/customer-details",OrderID,ShipmentID),
             nil,
             nil,
             nil)
@@ -13090,7 +13148,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "post",
-            fmt.Sprintf("/service/application/order/v1.0/orders/%s/shipments/%s/otp/send/",OrderID,ShipmentID),
+            fmt.Sprintf("/service/application/orders/v1.0/orders/%s/shipments/%s/otp/send/",OrderID,ShipmentID),
             nil,
             nil,
             nil)
@@ -13156,7 +13214,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "post",
-            fmt.Sprintf("/service/application/order/v1.0/orders/%s/shipments/%s/otp/verify/",OrderID,ShipmentID),
+            fmt.Sprintf("/service/application/orders/v1.0/orders/%s/shipments/%s/otp/verify/",OrderID,ShipmentID),
             nil,
             nil,
             reqBody)
@@ -13205,7 +13263,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/bags/%s/reasons",ShipmentID,BagID),
+            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s/bags/%s/reasons",ShipmentID,BagID),
             nil,
             nil,
             nil)
@@ -13252,7 +13310,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/reasons",ShipmentID),
+            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s/reasons",ShipmentID),
             nil,
             nil,
             nil)
@@ -13275,7 +13333,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UpdateShipmentStatus Update the shipment status
+    // UpdateShipmentStatus 
     func (or *Order)  UpdateShipmentStatus(ShipmentID string, body  UpdateShipmentStatusRequest) (ShipmentApplicationStatusResponse, error){
         var (
             rawRequest  *RawRequest
@@ -13322,7 +13380,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "put",
-            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/status",ShipmentID),
+            fmt.Sprintf("/service/application/order-manage/v1.0/orders/shipments/%s/status",ShipmentID),
             nil,
             nil,
             reqBody)
@@ -14583,10 +14641,6 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
-            
-        
-            
-        
 
         
 
@@ -14715,10 +14769,6 @@ func NewAppClient(config *AppConfig) *Client {
              updateAddressResponse UpdateAddressResponse
 	    )
 
-        
-            
-        
-            
         
             
         
@@ -15033,7 +15083,11 @@ func NewAppClient(config *AppConfig) *Client {
         PaymentMode string  `url:"payment_mode,omitempty"` 
         PaymentIdentifier string  `url:"payment_identifier,omitempty"` 
         AggregatorName string  `url:"aggregator_name,omitempty"` 
-        MerchantCode string  `url:"merchant_code,omitempty"`  
+        MerchantCode string  `url:"merchant_code,omitempty"` 
+        Iin string  `url:"iin,omitempty"` 
+        Network string  `url:"network,omitempty"` 
+        Type string  `url:"type,omitempty"` 
+        CardID string  `url:"card_id,omitempty"`  
     }
     
     // ValidateCouponForPayment Verify the coupon eligibility against the payment mode
@@ -15048,6 +15102,14 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
+            
+                
+            
+                
+            
+                
             
                 
             
@@ -15264,8 +15326,6 @@ func NewAppClient(config *AppConfig) *Client {
              checkoutCartResponse CartCheckoutResponse
 	    )
 
-        
-            
         
             
         
@@ -15714,26 +15774,143 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    //LogisticGetPincodeCityXQuery holds query params
-    type LogisticGetPincodeCityXQuery struct { 
-        CountryCode string  `url:"country_code,omitempty"`  
-    }
-    
-    // GetPincodeCity Get Pincode API
-    func (lo *Logistic)  GetPincodeCity(Pincode string, xQuery LogisticGetPincodeCityXQuery) (PincodeApiResponse, error){
+    // GetTatProduct Get TAT of a product
+    func (lo *Logistic)  GetTatProduct(body  GetTatProductReqBody) (GetTatProductResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getPincodeCityResponse PincodeApiResponse
+             getTatProductResponse GetTatProductResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return GetTatProductResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return GetTatProductResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.config,
+            "post",
+            "/service/application/logistics/v1.0",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetTatProductResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getTatProductResponse)
+        if err != nil {
+            return GetTatProductResponse{}, common.NewFDKError(err.Error())
+        }
+         return getTatProductResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetPincodeZones Get Pincode Zones
+    func (lo *Logistic)  GetPincodeZones(body  GetPincodeZonesReqBody) (GetPincodeZonesResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getPincodeZonesResponse GetPincodeZonesResponse
+	    )
+
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return GetPincodeZonesResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return GetPincodeZonesResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.config,
+            "post",
+            "/service/application/logistics/v1.0/pincode/zones",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetPincodeZonesResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPincodeZonesResponse)
+        if err != nil {
+            return GetPincodeZonesResponse{}, common.NewFDKError(err.Error())
+        }
+         return getPincodeZonesResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetPincodeCity Get city from PIN Code
+    func (lo *Logistic)  GetPincodeCity(Pincode string) (GetPincodeCityResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getPincodeCityResponse GetPincodeCityResponse
 	    )
 
         
 
-        
-            
-                
-            
         
 
         
@@ -15749,195 +15926,18 @@ func NewAppClient(config *AppConfig) *Client {
             "get",
             fmt.Sprintf("/service/application/logistics/v1.0/pincode/%s",Pincode),
             nil,
-            xQuery,
+            nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return PincodeApiResponse{}, err
+            return GetPincodeCityResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &getPincodeCityResponse)
         if err != nil {
-            return PincodeApiResponse{}, common.NewFDKError(err.Error())
+            return GetPincodeCityResponse{}, common.NewFDKError(err.Error())
         }
          return getPincodeCityResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // GetTatProduct Get TAT API
-    func (lo *Logistic)  GetTatProduct(body  TATViewRequest) (TATViewResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getTatProductResponse TATViewResponse
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-        
-
-        
-    
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return TATViewResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return TATViewResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            lo.config,
-            "post",
-            "/service/application/logistics/v1.0/",
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return TATViewResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getTatProductResponse)
-        if err != nil {
-            return TATViewResponse{}, common.NewFDKError(err.Error())
-        }
-         return getTatProductResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // GetAllCountries Get Country List
-    func (lo *Logistic)  GetAllCountries() (CountryListResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getAllCountriesResponse CountryListResponse
-	    )
-
-        
-
-        
-
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            lo.config,
-            "get",
-            "/service/application/logistics/v1.0/country-list",
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return CountryListResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAllCountriesResponse)
-        if err != nil {
-            return CountryListResponse{}, common.NewFDKError(err.Error())
-        }
-         return getAllCountriesResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // GetPincodeZones GET zone from the Pincode.
-    func (lo *Logistic)  GetPincodeZones(body  GetZoneFromPincodeViewRequest) (GetZoneFromPincodeViewResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getPincodeZonesResponse GetZoneFromPincodeViewResponse
-	    )
-
-        
-            
-        
-            
-        
-
-        
-
-        
-    
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            lo.config,
-            "post",
-            "/service/application/logistics/v1.0/pincode/zones",
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetZoneFromPincodeViewResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getPincodeZonesResponse)
-        if err != nil {
-            return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
-        }
-         return getPincodeZonesResponse, nil
         
     }
           
