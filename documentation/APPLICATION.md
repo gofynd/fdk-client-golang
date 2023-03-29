@@ -13,7 +13,7 @@
 * [FileStorage](#FileStorage) - File Storage 
 * [Configuration](#Configuration) - Application configuration apis 
 * [Payment](#Payment) - Collect payment through many payment gateway i.e Stripe, Razorpay, Juspay etc.into Fynd or Self account 
-* [Order](#Order) - Handles Platform websites OMS 
+* [Order](#Order) - Handles all Application order and shipment api(s) 
 * [Rewards](#Rewards) - Earn and redeem reward points 
 * [PosCart](#PosCart) - Cart APIs 
 * [Logistic](#Logistic) - Logistics Promise Engine APIs allows you to configure zone, pincode, TAT, logistics and many more useful features.  
@@ -46,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [unfollowById](#unfollowbyid)
     * [followById](#followbyid)
+    * [unfollowById](#unfollowbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -236,6 +236,8 @@
     * [getRupifiBannerDetails](#getrupifibannerdetails)
     * [getEpaylaterBannerDetails](#getepaylaterbannerdetails)
     * [resendOrCancelPayment](#resendorcancelpayment)
+    * [renderHTML](#renderhtml)
+    * [validateVPA](#validatevpa)
     * [getActiveRefundTransferModes](#getactiverefundtransfermodes)
     * [enableOrDisableRefundTransferMode](#enableordisablerefundtransfermode)
     * [getUserBeneficiariesDetail](#getuserbeneficiariesdetail)
@@ -246,6 +248,15 @@
     * [addRefundBankAccountUsingOTP](#addrefundbankaccountusingotp)
     * [verifyOtpAndAddBeneficiaryForWallet](#verifyotpandaddbeneficiaryforwallet)
     * [updateDefaultBeneficiary](#updatedefaultbeneficiary)
+    * [getPaymentLink](#getpaymentlink)
+    * [createPaymentLink](#createpaymentlink)
+    * [resendPaymentLink](#resendpaymentlink)
+    * [cancelPaymentLink](#cancelpaymentlink)
+    * [getPaymentModeRoutesPaymentLink](#getpaymentmoderoutespaymentlink)
+    * [pollingPaymentLink](#pollingpaymentlink)
+    * [createOrderHandlerPaymentLink](#createorderhandlerpaymentlink)
+    * [initialisePaymentPaymentLink](#initialisepaymentpaymentlink)
+    * [checkAndUpdatePaymentStatusPaymentLink](#checkandupdatepaymentstatuspaymentlink)
     * [customerCreditSummary](#customercreditsummary)
     * [redirectToAggregator](#redirecttoaggregator)
     * [checkCredit](#checkcredit)
@@ -258,27 +269,26 @@
   * Methods
     * [getOrders](#getorders)
     * [getOrderById](#getorderbyid)
-    * [getShipmentById](#getshipmentbyid)
-    * [getShipmentReasons](#getshipmentreasons)
-    * [getShipmentBagReasons](#getshipmentbagreasons)
-    * [updateShipmentStatus](#updateshipmentstatus)
-    * [trackShipment](#trackshipment)
     * [getPosOrderById](#getposorderbyid)
+    * [getShipmentById](#getshipmentbyid)
+    * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
+    * [trackShipment](#trackshipment)
     * [getCustomerDetailsByShipmentId](#getcustomerdetailsbyshipmentid)
     * [sendOtpToShipmentCustomer](#sendotptoshipmentcustomer)
     * [verifyOtpShipmentCustomer](#verifyotpshipmentcustomer)
-    * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
-    * [getCreditNoteByShipmentId](#getcreditnotebyshipmentid)
+    * [getShipmentBagReasons](#getshipmentbagreasons)
+    * [getShipmentReasons](#getshipmentreasons)
+    * [updateShipmentStatus](#updateshipmentstatus)
     
 
 * [Rewards](#Rewards)
   * Methods
-    * [getPointsOnProduct](#getpointsonproduct)
     * [getOfferByName](#getofferbyname)
-    * [getOrderDiscount](#getorderdiscount)
-    * [getUserPoints](#getuserpoints)
+    * [catalogueOrder](#catalogueorder)
     * [getUserPointsHistory](#getuserpointshistory)
+    * [getUserPoints](#getuserpoints)
     * [getUserReferralDetails](#getuserreferraldetails)
+    * [getOrderDiscount](#getorderdiscount)
     * [redeemReferralCode](#redeemreferralcode)
     
 
@@ -1143,12 +1153,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1162,7 +1172,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1184,12 +1194,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1203,7 +1213,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1607,7 +1617,9 @@ Fetch all items added to the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`, `BuyNow`
 
 
 
@@ -1683,7 +1695,9 @@ Add items to cart
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`, `ID`
+
+
+| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`, `ID`, `BuyNow`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -1769,6 +1783,11 @@ Product has been added to your cart
       "items": [
         {
           "key": "751083_10",
+          "parent_item_identifiers": {
+            "identifier": "ZASFF",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS"
+          },
           "article": {
             "type": "article",
             "uid": "612_9_SE61201_19100302_10",
@@ -2141,6 +2160,7 @@ Product has been added to your cart
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
+      "buy_now": false,
       "cart_id": 7927,
       "uid": "7927",
       "gstin": null,
@@ -2221,6 +2241,11 @@ Sorry, item is out of stock
         {
           "bulk_offer": {},
           "discount": "67% OFF",
+          "parent_item_identifiers": {
+            "identifier": "ZASFF",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS"
+          },
           "article": {
             "type": "article",
             "uid": "604_902_SSTC60401_636BLUE_1",
@@ -2319,6 +2344,7 @@ Sorry, item is out of stock
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
+      "buy_now": false,
       "cart_id": 54,
       "uid": "54",
       "gstin": null,
@@ -2361,7 +2387,9 @@ Update items in the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AreaCode`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AreaCode`, `BuyNow`
 
 | body |  UpdateCartRequest | "Request body" 
 
@@ -2446,6 +2474,11 @@ Nothing updated
         {
           "bulk_offer": {},
           "discount": "67% OFF",
+          "parent_item_identifiers": {
+            "identifier": "ZASFF",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS"
+          },
           "article": {
             "type": "article",
             "uid": "604_902_SSTC60401_636BLUE_1",
@@ -2544,6 +2577,7 @@ Nothing updated
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
+      "buy_now": false,
       "cart_id": 54,
       "uid": "54",
       "gstin": null,
@@ -2674,6 +2708,11 @@ Item updated in the cart
               }
             }
           },
+          "parent_item_identifiers": {
+            "identifier": "ZASFF",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS"
+          },
           "article": {
             "type": "article",
             "uid": "507_9_96099_35656851_7",
@@ -2719,6 +2758,7 @@ Item updated in the cart
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
+      "buy_now": false,
       "cart_id": 12426,
       "uid": "12426",
       "gstin": null,
@@ -2762,7 +2802,9 @@ Count items in the cart
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 
 
@@ -2800,7 +2842,9 @@ Fetch Coupon
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 
 
@@ -2844,7 +2888,9 @@ Apply Coupon
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `P`, `ID`
+
+
+| xQuery | struct | Includes properties such as `I`, `B`, `P`, `ID`, `BuyNow`
 
 | body |  ApplyCouponRequest | "Request body" 
 
@@ -2883,7 +2929,9 @@ Remove Coupon Applied
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 
 
@@ -3040,7 +3088,9 @@ Apply reward points at cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `BuyNow`
 
 | body |  RewardPointRequest | "Request body" 
 
@@ -3087,7 +3137,9 @@ Fetch address
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+
+
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -3172,7 +3224,9 @@ Fetch a single address by its ID
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+
+
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -3291,7 +3345,9 @@ Select an address from available addresses
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `I`, `B`
+
+
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `I`, `B`
 
 | body |  SelectCartAddressRequest | "Request body" 
 
@@ -3330,7 +3386,9 @@ Update cart payment
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 | body |  UpdateCartPaymentRequest | "Request body" 
 
@@ -3379,7 +3437,9 @@ Verify the coupon eligibility against the payment mode
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
 
 
 
@@ -3423,7 +3483,9 @@ Get delivery date and options before checkout
 
 
 
-| xQuery | struct | Includes properties such as `P`, `ID`, `AddressID`, `AreaCode`
+
+
+| xQuery | struct | Includes properties such as `P`, `ID`, `BuyNow`, `AddressID`, `AreaCode`
 
 
 
@@ -3447,6 +3509,7 @@ Shipment Generated
 {
   "value": {
     "items": [],
+    "buy_now": false,
     "cart_id": 7501,
     "uid": "7501",
     "success": true,
@@ -3833,6 +3896,7 @@ Shipment Generation Failed
 {
   "value": {
     "items": [],
+    "buy_now": false,
     "cart_id": 7501,
     "uid": "7501",
     "success": true,
@@ -4094,11 +4158,14 @@ Checkout all items in the cart
 
 ```golang
 
- data, err :=  Cart.CheckoutCart(body);
+ data, err :=  Cart.CheckoutCart(xQuery, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `BuyNow`
 
 | body |  CartCheckoutDetailRequest | "Request body" 
 
@@ -4514,7 +4581,9 @@ Update the cart meta
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 | body |  CartMetaRequest | "Request body" 
 
@@ -16499,6 +16568,49 @@ Success. Check the example shown below or refer `ValidateCustomerResponse` for m
 Schema: `ValidateCustomerResponse`
 
 
+*Examples:*
+
+
+success is True i.e user is allowed
+```json
+{
+  "value": {
+    "success": true,
+    "message": "data fetched",
+    "data": {
+      "api_version": 2,
+      "data": {
+        "approved": true,
+        "button_text": "Buy Now, Pay Later",
+        "first_transaction": false
+      },
+      "aggregator": "Simpl"
+    }
+  }
+}
+```
+
+success is True i.e user not allowed
+```json
+{
+  "value": {
+    "success": false,
+    "message": "data fetched",
+    "error": {
+      "api_version": 2,
+      "data": {
+        "approved": false,
+        "button_text": "Buy Now, Pay Later",
+        "first_transaction": false
+      },
+      "aggregator": "Simpl"
+    },
+    "data": {}
+  }
+}
+```
+
+
 
 
 
@@ -16887,6 +16999,78 @@ request_type is resend
 ---
 
 
+#### renderHTML
+Convert base64 string to HTML form
+
+```golang
+
+ data, err :=  Payment.RenderHTML(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  renderHTMLRequest | "Request body" 
+
+
+Use this API to decode base64 html form to plain HTML string.
+
+*Success Response:*
+
+
+
+Success and return HTML decoded text
+
+
+Schema: `renderHTMLResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### validateVPA
+API to Validate UPI ID
+
+```golang
+
+ data, err :=  Payment.ValidateVPA(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  ValidateVPARequest | "Request body" 
+
+
+API to Validate UPI ID
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `ValidateVPAResponseSchema` for more details.
+
+
+Schema: `ValidateVPAResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getActiveRefundTransferModes
 Lists the mode of refund
 
@@ -17252,6 +17436,336 @@ Schema: `SetDefaultBeneficiaryResponse`
 ---
 
 
+#### getPaymentLink
+Get payment link
+
+```golang
+
+ data, err :=  Payment.GetPaymentLink(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `PaymentLinkID`
+
+
+
+Use this API to get a payment link
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `GetPaymentLinkResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createPaymentLink
+Create payment link
+
+```golang
+
+ data, err :=  Payment.CreatePaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  CreatePaymentLinkRequest | "Request body" 
+
+
+Use this API to create a payment link for the customer
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `CreatePaymentLinkResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### resendPaymentLink
+Resend payment link
+
+```golang
+
+ data, err :=  Payment.ResendPaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  CancelOrResendPaymentLinkRequest | "Request body" 
+
+
+Use this API to resend a payment link for the customer
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `ResendPaymentLinkResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### cancelPaymentLink
+Cancel payment link
+
+```golang
+
+ data, err :=  Payment.CancelPaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  CancelOrResendPaymentLinkRequest | "Request body" 
+
+
+Use this API to cancel a payment link for the customer
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `CancelPaymentLinkResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPaymentModeRoutesPaymentLink
+Get applicable payment options for payment link
+
+```golang
+
+ data, err :=  Payment.GetPaymentModeRoutesPaymentLink(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `PaymentLinkID`
+
+
+
+Use this API to get all valid payment options for doing a payment through payment link
+
+*Success Response:*
+
+
+
+Success. Returns all available options for payment. Check the example shown below or refer `PaymentModeRouteResponse` for more details.
+
+
+Schema: `PaymentModeRouteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### pollingPaymentLink
+Used for polling if payment successful or not
+
+```golang
+
+ data, err :=  Payment.PollingPaymentLink(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `PaymentLinkID`
+
+
+
+Use this API to poll if payment through payment was successful or not
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `PollingPaymentLinkResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createOrderHandlerPaymentLink
+Create Order user
+
+```golang
+
+ data, err :=  Payment.CreateOrderHandlerPaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  CreateOrderUserRequest | "Request body" 
+
+
+Use this API to create a order and payment on aggregator side
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `CreateOrderUserResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### initialisePaymentPaymentLink
+Initialize a payment (server-to-server) for UPI and BharatQR
+
+```golang
+
+ data, err :=  Payment.InitialisePaymentPaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  PaymentInitializationRequest | "Request body" 
+
+
+Use this API to inititate payment using UPI, BharatQR, wherein the UPI requests are send to the app and QR code is displayed on the screen.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `PaymentInitializationResponse` for more details.
+
+
+Schema: `PaymentInitializationResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### checkAndUpdatePaymentStatusPaymentLink
+Performs continuous polling to check status of payment on the server
+
+```golang
+
+ data, err :=  Payment.CheckAndUpdatePaymentStatusPaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  PaymentStatusUpdateRequest | "Request body" 
+
+
+Use this API to perform continuous polling at intervals to check the status of payment until timeout.
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `PaymentStatusUpdateResponse` for more details.
+
+
+Schema: `PaymentStatusUpdateResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### customerCreditSummary
 API to fetch the customer credit summary
 
@@ -17509,7 +18023,7 @@ Get all orders
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `Status`, `CustomMeta`
+| xQuery | struct | Includes properties such as `Status`, `PageNo`, `PageSize`, `FromDate`, `ToDate`, `CustomMeta`
 
 
 
@@ -17573,6 +18087,44 @@ Schema: `OrderById`
 ---
 
 
+#### getPosOrderById
+Get POS Order
+
+```golang
+
+ data, err :=  Order.GetPosOrderById(OrderID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| OrderID | string | A unique number used for identifying and tracking your orders. | 
+
+
+
+
+Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `PosOrderById` for more details.
+
+
+Schema: `OrderList`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getShipmentById
 Get details of a shipment
 
@@ -17611,112 +18163,32 @@ Schema: `ShipmentById`
 ---
 
 
-#### getShipmentReasons
-Get reasons behind full or partial cancellation of a shipment
+#### getInvoiceByShipmentId
+Get Invoice of a shipment
 
 ```golang
 
- data, err :=  Order.GetShipmentReasons(ShipmentID);
+ data, err :=  Order.GetInvoiceByShipmentId(ShipmentID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+| ShipmentID | string | ID of the shipment. | 
 
 
 
 
-Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `ShipmentReasons` for more details.
-
-
-Schema: `ShipmentReasons`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getShipmentBagReasons
-Get reasons at l1,l2 and l3 for cancellation and return based on department
-
-```golang
-
- data, err :=  Order.GetShipmentBagReasons(ShipmentID, BagID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
-
-
-| BagID | string | ID of the bag. | 
-
-
-
-
-Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+Use this API to retrieve shipment invoice.
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `ShipmentBagReasons` for more details.
+Success. Check the example shown below or refer `ShipmentById` for more details.
 
 
-Schema: `ShipmentBagReasons`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateShipmentStatus
-Update the shipment status
-
-```golang
-
- data, err :=  Order.UpdateShipmentStatus(ShipmentID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
-
-
-| body |  ShipmentStatusUpdateBody | "Request body" 
-
-
-Use this API to update the status of a shipment using its shipment ID.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `ShipmentStatusUpdateBody` for more details.
-
-
-Schema: `ShipmentStatusUpdate`
+Schema: `ResponseGetInvoiceShipment`
 
 
 
@@ -17745,7 +18217,7 @@ Track shipment
 
 
 
-Use this API to track a shipment using its shipment ID.
+Track Shipment by shipment id, for application based on application Id
 
 *Success Response:*
 
@@ -17755,44 +18227,6 @@ Success. Check the example shown below or refer `ShipmentTrack` for more details
 
 
 Schema: `ShipmentTrack`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPosOrderById
-Get POS Order
-
-```golang
-
- data, err :=  Order.GetPosOrderById(OrderID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| OrderID | string | A unique number used for identifying and tracking your orders. | 
-
-
-
-
-Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `PosOrderById` for more details.
-
-
-Schema: `PosOrderById`
 
 
 
@@ -17816,10 +18250,10 @@ Get Customer Details by Shipment Id
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| OrderID | string | A unique number used for identifying and tracking your orders. | 
+| OrderID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+| ShipmentID | string | A unique number used for identifying and tracking your orders. | 
 
 
 
@@ -17833,7 +18267,7 @@ Use this API to retrieve customer details such as mobileno using Shipment ID.
 Success. Check the example shown below or refer `CustomerDetailsByShipmentId` for more details.
 
 
-Schema: `CustomerDetailsByShipmentId`
+Schema: `CustomerDetailsResponse`
 
 
 
@@ -17874,7 +18308,7 @@ Use this API to send OTP to the customer of the mapped Shipment.
 Success to acknowledge the service was notified
 
 
-Schema: `sendOTPApplicationResponse`
+Schema: `SendOtpToCustomerResponse`
 
 
 
@@ -17904,7 +18338,7 @@ Verify Otp code
 | ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
-| body |  ReqBodyVerifyOTPShipment | "Request body" 
+| body |  VerifyOtp | "Request body" 
 
 
 Use this API to verify OTP and create a session token with custom payload.
@@ -17916,7 +18350,7 @@ Use this API to verify OTP and create a session token with custom payload.
 Success, the code is valid and returns a session token
 
 
-Schema: `ResponseVerifyOTPShipment`
+Schema: `VerifyOtpResponse`
 
 
 
@@ -17929,32 +18363,35 @@ Schema: `ResponseVerifyOTPShipment`
 ---
 
 
-#### getInvoiceByShipmentId
-Get Invoice URL
+#### getShipmentBagReasons
+Get reasons behind full or partial cancellation of a shipment
 
 ```golang
 
- data, err :=  Order.GetInvoiceByShipmentId(ShipmentID);
+ data, err :=  Order.GetShipmentBagReasons(ShipmentID, BagID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+| ShipmentID | string | ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| BagID | string | ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
 
 
-Use this API to get a generated Invoice URL for viewing or download.
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
 
 *Success Response:*
 
 
 
-Success, the code is valid and returns a SignedUrl
+Success. Check the example shown below or refer `ShipmentBagReasons` for more details.
 
 
-Schema: `ResponseGetInvoiceShipment`
+Schema: `ShipmentBagReasons`
 
 
 
@@ -17967,12 +18404,12 @@ Schema: `ResponseGetInvoiceShipment`
 ---
 
 
-#### getCreditNoteByShipmentId
-Get Credit Note URL
+#### getShipmentReasons
+Get reasons behind full or partial cancellation of a shipment
 
 ```golang
 
- data, err :=  Order.GetCreditNoteByShipmentId(ShipmentID);
+ data, err :=  Order.GetShipmentReasons(ShipmentID);
 ```
 
 | Argument  |  Type  | Description |
@@ -17983,16 +18420,55 @@ Get Credit Note URL
 
 
 
-Use this API to get a generated Credit Note URL for viewing or download.
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
 
 *Success Response:*
 
 
 
-Success, the code is valid and returns a SignedUrl
+Success. Check the example shown below or refer `ShipmentBagReasons` for more details.
 
 
-Schema: `ResponseGetCreditNoteShipment`
+Schema: `ShipmentReasons`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateShipmentStatus
+Update the shipment status
+
+```golang
+
+ data, err :=  Order.UpdateShipmentStatus(ShipmentID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| body |  UpdateShipmentStatusRequest | "Request body" 
+
+
+Use this API to update the status of a shipment using its shipment ID.
+
+*Success Response:*
+
+
+
+Successfully updateShipmentStatus!
+
+
+Schema: `ShipmentApplicationStatusResponse`
 
 
 
@@ -18010,42 +18486,6 @@ Schema: `ResponseGetCreditNoteShipment`
 
 
 ## Rewards
-
-
-#### getPointsOnProduct
-Get the eligibility of reward points on a product
-
-```golang
-
- data, err :=  Rewards.GetPointsOnProduct(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  CatalogueOrderRequest | "Request body" 
-
-
-Use this API to evaluate the amount of reward points that could be earned on any catalogue product.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `CatalogueOrderRequest` for more details.
-
-
-Schema: `CatalogueOrderResponse`
-
-
-
-
-
-
-
-
-
----
 
 
 #### getOfferByName
@@ -18086,65 +18526,30 @@ Schema: `Offer`
 ---
 
 
-#### getOrderDiscount
-Calculates the discount on order-amount
+#### catalogueOrder
+Get all transactions of reward points
 
 ```golang
 
- data, err :=  Rewards.GetOrderDiscount(body);
+ data, err :=  Rewards.CatalogueOrder(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  OrderDiscountRequest | "Request body" 
+| body |  CatalogueOrderRequest | "Request body" 
 
 
-Use this API to calculate the discount on order-amount based on all the amount range configured in order_discount.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `OrderDiscountResponse` for more details.
-
-
-Schema: `OrderDiscountResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getUserPoints
-Get reward points available with a user
-
-```golang
-
- data, err :=  Rewards.GetUserPoints();
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-Use this API to retrieve total available points of a user for current application
+Use this API to evaluate the amount of reward points that could be earned on any catalogue product.
 
 *Success Response:*
 
 
 
-Success. Check example below or refer `PointsResponse` for more details.
+Success. Check example below or refer `CatalogueOrderResponse` for more details.
 
 
-Schema: `PointsResponse`
+Schema: `CatalogueOrderResponse`
 
 
 
@@ -18175,7 +18580,7 @@ Get all transactions of reward points
 
 
 
-Use this API to get a list of points transactions. The list of points history is paginated.
+Use this API to get a list of points transactions.
 
 *Success Response:*
 
@@ -18185,6 +18590,41 @@ Success. Check example below or refer `PointsHistoryResponse` for more details.
 
 
 Schema: `PointsHistoryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getUserPoints
+Get referral details of a user
+
+```golang
+
+ data, err :=  Rewards.GetUserPoints();
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+Use this API to retrieve total available points of a user for current application
+
+*Success Response:*
+
+
+
+Success. Check example below or refer `PointsResponse` for more details.
+
+
+Schema: `PointsResponse`
 
 
 
@@ -18220,6 +18660,42 @@ Success. Check example below or refer `ReferralDetailsResponse` for more details
 
 
 Schema: `ReferralDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOrderDiscount
+Calculates the discount on order-amount
+
+```golang
+
+ data, err :=  Rewards.GetOrderDiscount(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  OrderDiscountRequest | "Request body" 
+
+
+Use this API to calculate the discount on order-amount based on all the amount range configured in order_discount.
+
+*Success Response:*
+
+
+
+Success. Check example below or refer `OrderDiscountResponse` for more details.
+
+
+Schema: `OrderDiscountResponse`
 
 
 
@@ -18295,7 +18771,9 @@ Fetch all items added to the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AssignCardID`, `AreaCode`, `BuyNow`
 
 
 
@@ -18371,7 +18849,9 @@ Add items to cart
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`, `ID`
+
+
+| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`, `ID`, `BuyNow`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -18457,6 +18937,11 @@ Product has been added to your cart
       "items": [
         {
           "key": "751083_10",
+          "parent_item_identifiers": {
+            "identifier": "ZASFF",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS"
+          },
           "article": {
             "type": "article",
             "uid": "612_9_SE61201_19100302_10",
@@ -18829,6 +19314,7 @@ Product has been added to your cart
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
+      "buy_now": false,
       "cart_id": 7927,
       "uid": "7927",
       "gstin": null,
@@ -18909,6 +19395,11 @@ Sorry, item is out of stock
         {
           "bulk_offer": {},
           "discount": "67% OFF",
+          "parent_item_identifiers": {
+            "identifier": "ZASFF",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS"
+          },
           "article": {
             "type": "article",
             "uid": "604_902_SSTC60401_636BLUE_1",
@@ -19007,6 +19498,7 @@ Sorry, item is out of stock
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
+      "buy_now": false,
       "cart_id": 54,
       "uid": "54",
       "gstin": null,
@@ -19049,7 +19541,9 @@ Update items in the cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AreaCode`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `AreaCode`, `BuyNow`
 
 | body |  UpdateCartRequest | "Request body" 
 
@@ -19134,6 +19628,11 @@ Nothing updated
         {
           "bulk_offer": {},
           "discount": "67% OFF",
+          "parent_item_identifiers": {
+            "identifier": "ZASFF",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS"
+          },
           "article": {
             "type": "article",
             "uid": "604_902_SSTC60401_636BLUE_1",
@@ -19232,6 +19731,7 @@ Nothing updated
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
+      "buy_now": false,
       "cart_id": 54,
       "uid": "54",
       "gstin": null,
@@ -19362,6 +19862,11 @@ Item updated in the cart
               }
             }
           },
+          "parent_item_identifiers": {
+            "identifier": "ZASFF",
+            "parent_item_id": 7501190,
+            "parent_item_size": "OS"
+          },
           "article": {
             "type": "article",
             "uid": "507_9_96099_35656851_7",
@@ -19407,6 +19912,7 @@ Item updated in the cart
       ],
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
+      "buy_now": false,
       "cart_id": 12426,
       "uid": "12426",
       "gstin": null,
@@ -19450,7 +19956,9 @@ Count items in the cart
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 
 
@@ -19488,7 +19996,9 @@ Fetch Coupon
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 
 
@@ -19532,7 +20042,9 @@ Apply Coupon
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `P`, `ID`
+
+
+| xQuery | struct | Includes properties such as `I`, `B`, `P`, `ID`, `BuyNow`
 
 | body |  ApplyCouponRequest | "Request body" 
 
@@ -19571,7 +20083,9 @@ Remove Coupon Applied
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 
 
@@ -19728,7 +20242,9 @@ Apply reward points at cart
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `I`, `B`
+
+
+| xQuery | struct | Includes properties such as `ID`, `I`, `B`, `BuyNow`
 
 | body |  RewardPointRequest | "Request body" 
 
@@ -19775,7 +20291,9 @@ Fetch address
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+
+
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -19860,7 +20378,9 @@ Fetch a single address by its ID
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
+
+
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`
 
 
 
@@ -19979,7 +20499,9 @@ Select an address from available addresses
 
 
 
-| xQuery | struct | Includes properties such as `CartID`, `I`, `B`
+
+
+| xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `I`, `B`
 
 | body |  SelectCartAddressRequest | "Request body" 
 
@@ -20018,7 +20540,9 @@ Update cart payment
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 | body |  UpdateCartPaymentRequest | "Request body" 
 
@@ -20067,7 +20591,9 @@ Verify the coupon eligibility against the payment mode
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
 
 
 
@@ -21899,7 +22425,9 @@ Update the cart meta
 | --------- | ----  | --- |
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`
 
 | body |  CartMetaRequest | "Request body" 
 

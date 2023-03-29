@@ -1657,55 +1657,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UnfollowById Unfollow an entity (product/brand/collection)
-    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             unfollowByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &unfollowByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return unfollowByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // FollowById Follow an entity (product/brand/collection)
     func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1746,6 +1697,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return followByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UnfollowById Unfollow an entity (product/brand/collection)
+    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             unfollowByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &unfollowByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return unfollowByIdResponse, nil
         
     }
           
@@ -2527,7 +2527,8 @@ func NewAppClient(config *AppConfig) *Client {
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
         AssignCardID float64  `url:"assign_card_id,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"`  
+        AreaCode string  `url:"area_code,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // GetCart Fetch all items added to the cart
@@ -2542,6 +2543,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -2642,7 +2645,8 @@ func NewAppClient(config *AppConfig) *Client {
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
         AreaCode string  `url:"area_code,omitempty"` 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // AddItems Add items to cart
@@ -2661,6 +2665,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -2722,7 +2728,8 @@ func NewAppClient(config *AppConfig) *Client {
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"`  
+        AreaCode string  `url:"area_code,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // UpdateCart Update items in the cart
@@ -2741,6 +2748,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -2799,7 +2808,8 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartGetItemCountXQuery holds query params
     type CartGetItemCountXQuery struct { 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // GetItemCount Count items in the cart
@@ -2814,6 +2824,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -2853,7 +2865,8 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartGetCouponsXQuery holds query params
     type CartGetCouponsXQuery struct { 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // GetCoupons Fetch Coupon
@@ -2868,6 +2881,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -2910,7 +2925,8 @@ func NewAppClient(config *AppConfig) *Client {
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
         P bool  `url:"p,omitempty"` 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // ApplyCoupon Apply Coupon
@@ -2927,6 +2943,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -2985,7 +3003,8 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartRemoveCouponXQuery holds query params
     type CartRemoveCouponXQuery struct { 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // RemoveCoupon Remove Coupon Applied
@@ -3000,6 +3019,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -3104,7 +3125,8 @@ func NewAppClient(config *AppConfig) *Client {
     type CartApplyRewardPointsXQuery struct { 
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
-        B bool  `url:"b,omitempty"`  
+        B bool  `url:"b,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // ApplyRewardPoints Apply reward points at cart
@@ -3121,6 +3143,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -3178,6 +3202,7 @@ func NewAppClient(config *AppConfig) *Client {
     //CartGetAddressesXQuery holds query params
     type CartGetAddressesXQuery struct { 
         CartID string  `url:"cart_id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"` 
         MobileNo string  `url:"mobile_no,omitempty"` 
         CheckoutMode string  `url:"checkout_mode,omitempty"` 
         Tags string  `url:"tags,omitempty"` 
@@ -3196,6 +3221,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -3297,6 +3324,10 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
+            
+        
 
         
 
@@ -3348,6 +3379,7 @@ func NewAppClient(config *AppConfig) *Client {
     //CartGetAddressByIdXQuery holds query params
     type CartGetAddressByIdXQuery struct { 
         CartID string  `url:"cart_id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"` 
         MobileNo string  `url:"mobile_no,omitempty"` 
         CheckoutMode string  `url:"checkout_mode,omitempty"` 
         Tags string  `url:"tags,omitempty"` 
@@ -3366,6 +3398,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -3422,6 +3456,10 @@ func NewAppClient(config *AppConfig) *Client {
              updateAddressResponse UpdateAddressResponse
 	    )
 
+        
+            
+        
+            
         
             
         
@@ -3569,6 +3607,7 @@ func NewAppClient(config *AppConfig) *Client {
     //CartSelectAddressXQuery holds query params
     type CartSelectAddressXQuery struct { 
         CartID string  `url:"cart_id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"`  
     }
@@ -3591,6 +3630,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -3647,7 +3688,8 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartSelectPaymentModeXQuery holds query params
     type CartSelectPaymentModeXQuery struct { 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // SelectPaymentMode Update cart payment
@@ -3674,6 +3716,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -3727,6 +3771,7 @@ func NewAppClient(config *AppConfig) *Client {
     //CartValidateCouponForPaymentXQuery holds query params
     type CartValidateCouponForPaymentXQuery struct { 
         ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"` 
         AddressID string  `url:"address_id,omitempty"` 
         PaymentMode string  `url:"payment_mode,omitempty"` 
         PaymentIdentifier string  `url:"payment_identifier,omitempty"` 
@@ -3746,6 +3791,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -3797,6 +3844,7 @@ func NewAppClient(config *AppConfig) *Client {
     type CartGetShipmentsXQuery struct { 
         P bool  `url:"p,omitempty"` 
         ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"` 
         AddressID string  `url:"address_id,omitempty"` 
         AreaCode string  `url:"area_code,omitempty"`  
     }
@@ -3813,6 +3861,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -3856,8 +3906,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //CartCheckoutCartXQuery holds query params
+    type CartCheckoutCartXQuery struct { 
+        BuyNow bool  `url:"buy_now,omitempty"`  
+    }
+    
     // CheckoutCart Checkout all items in the cart
-    func (ca *Cart)  CheckoutCart(body  CartCheckoutDetailRequest) (CartCheckoutResponse, error){
+    func (ca *Cart)  CheckoutCart(xQuery CartCheckoutCartXQuery, body  CartCheckoutDetailRequest) (CartCheckoutResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -3902,6 +3957,10 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
+            
+        
 
         
     
@@ -3927,7 +3986,7 @@ func NewAppClient(config *AppConfig) *Client {
             "post",
             "/service/application/cart/v1.0/checkout",
             nil,
-            nil,
+            xQuery,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -3950,7 +4009,8 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartUpdateCartMetaXQuery holds query params
     type CartUpdateCartMetaXQuery struct { 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // UpdateCartMeta Update the cart meta
@@ -3975,6 +4035,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -10542,6 +10604,12 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
+            
+        
+            
+        
 
         
 
@@ -11110,6 +11178,124 @@ func NewAppClient(config *AppConfig) *Client {
             return ResendOrCancelPaymentResponse{}, common.NewFDKError(err.Error())
         }
          return resendOrCancelPaymentResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // RenderHTML Convert base64 string to HTML form
+    func (pa *Payment)  RenderHTML(body  renderHTMLRequest) ([]byte, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             
+	    )
+
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return []byte{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return []byte{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            "/service/application/payment/v1.0/payment/html/render/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return []byte{}, err
+	    }
+        
+        return response, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // ValidateVPA API to Validate UPI ID
+    func (pa *Payment)  ValidateVPA(body  ValidateVPARequest) (ValidateVPAResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             validateVPAResponse ValidateVPAResponse
+	    )
+
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return ValidateVPAResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return ValidateVPAResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            "/service/application/payment/v1.0/validate-vpa",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ValidateVPAResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &validateVPAResponse)
+        if err != nil {
+            return ValidateVPAResponse{}, common.NewFDKError(err.Error())
+        }
+         return validateVPAResponse, nil
         
     }
           
@@ -11710,6 +11896,590 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //PaymentGetPaymentLinkXQuery holds query params
+    type PaymentGetPaymentLinkXQuery struct { 
+        PaymentLinkID string  `url:"payment_link_id,omitempty"`  
+    }
+    
+    // GetPaymentLink Get payment link
+    func (pa *Payment)  GetPaymentLink(xQuery PaymentGetPaymentLinkXQuery) (GetPaymentLinkResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getPaymentLinkResponse GetPaymentLinkResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            "/service/application/payment/v1.0/create-payment-link/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetPaymentLinkResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPaymentLinkResponse)
+        if err != nil {
+            return GetPaymentLinkResponse{}, common.NewFDKError(err.Error())
+        }
+         return getPaymentLinkResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // CreatePaymentLink Create payment link
+    func (pa *Payment)  CreatePaymentLink(body  CreatePaymentLinkRequest) (CreatePaymentLinkResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             createPaymentLinkResponse CreatePaymentLinkResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return CreatePaymentLinkResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return CreatePaymentLinkResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            "/service/application/payment/v1.0/create-payment-link/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CreatePaymentLinkResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createPaymentLinkResponse)
+        if err != nil {
+            return CreatePaymentLinkResponse{}, common.NewFDKError(err.Error())
+        }
+         return createPaymentLinkResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // ResendPaymentLink Resend payment link
+    func (pa *Payment)  ResendPaymentLink(body  CancelOrResendPaymentLinkRequest) (ResendPaymentLinkResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             resendPaymentLinkResponse ResendPaymentLinkResponse
+	    )
+
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return ResendPaymentLinkResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return ResendPaymentLinkResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            "/service/application/payment/v1.0/resend-payment-link/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ResendPaymentLinkResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &resendPaymentLinkResponse)
+        if err != nil {
+            return ResendPaymentLinkResponse{}, common.NewFDKError(err.Error())
+        }
+         return resendPaymentLinkResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // CancelPaymentLink Cancel payment link
+    func (pa *Payment)  CancelPaymentLink(body  CancelOrResendPaymentLinkRequest) (CancelPaymentLinkResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             cancelPaymentLinkResponse CancelPaymentLinkResponse
+	    )
+
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return CancelPaymentLinkResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return CancelPaymentLinkResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            "/service/application/payment/v1.0/cancel-payment-link/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CancelPaymentLinkResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &cancelPaymentLinkResponse)
+        if err != nil {
+            return CancelPaymentLinkResponse{}, common.NewFDKError(err.Error())
+        }
+         return cancelPaymentLinkResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //PaymentGetPaymentModeRoutesPaymentLinkXQuery holds query params
+    type PaymentGetPaymentModeRoutesPaymentLinkXQuery struct { 
+        PaymentLinkID string  `url:"payment_link_id,omitempty"`  
+    }
+    
+    // GetPaymentModeRoutesPaymentLink Get applicable payment options for payment link
+    func (pa *Payment)  GetPaymentModeRoutesPaymentLink(xQuery PaymentGetPaymentModeRoutesPaymentLinkXQuery) (PaymentModeRouteResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getPaymentModeRoutesPaymentLinkResponse PaymentModeRouteResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            fmt.Sprintf("/service/application/payment/v1.0/payment/options/link/",),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PaymentModeRouteResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPaymentModeRoutesPaymentLinkResponse)
+        if err != nil {
+            return PaymentModeRouteResponse{}, common.NewFDKError(err.Error())
+        }
+         return getPaymentModeRoutesPaymentLinkResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //PaymentPollingPaymentLinkXQuery holds query params
+    type PaymentPollingPaymentLinkXQuery struct { 
+        PaymentLinkID string  `url:"payment_link_id,omitempty"`  
+    }
+    
+    // PollingPaymentLink Used for polling if payment successful or not
+    func (pa *Payment)  PollingPaymentLink(xQuery PaymentPollingPaymentLinkXQuery) (PollingPaymentLinkResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             pollingPaymentLinkResponse PollingPaymentLinkResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            "/service/application/payment/v1.0/polling-payment-link/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PollingPaymentLinkResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &pollingPaymentLinkResponse)
+        if err != nil {
+            return PollingPaymentLinkResponse{}, common.NewFDKError(err.Error())
+        }
+         return pollingPaymentLinkResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // CreateOrderHandlerPaymentLink Create Order user
+    func (pa *Payment)  CreateOrderHandlerPaymentLink(body  CreateOrderUserRequest) (CreateOrderUserResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             createOrderHandlerPaymentLinkResponse CreateOrderUserResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return CreateOrderUserResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return CreateOrderUserResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            "/service/application/payment/v1.0/create-order/link/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CreateOrderUserResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createOrderHandlerPaymentLinkResponse)
+        if err != nil {
+            return CreateOrderUserResponse{}, common.NewFDKError(err.Error())
+        }
+         return createOrderHandlerPaymentLinkResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // InitialisePaymentPaymentLink Initialize a payment (server-to-server) for UPI and BharatQR
+    func (pa *Payment)  InitialisePaymentPaymentLink(body  PaymentInitializationRequest) (PaymentInitializationResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             initialisePaymentPaymentLinkResponse PaymentInitializationResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return PaymentInitializationResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return PaymentInitializationResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            "/service/application/payment/v1.0/payment/request/link/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PaymentInitializationResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &initialisePaymentPaymentLinkResponse)
+        if err != nil {
+            return PaymentInitializationResponse{}, common.NewFDKError(err.Error())
+        }
+         return initialisePaymentPaymentLinkResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // CheckAndUpdatePaymentStatusPaymentLink Performs continuous polling to check status of payment on the server
+    func (pa *Payment)  CheckAndUpdatePaymentStatusPaymentLink(body  PaymentStatusUpdateRequest) (PaymentStatusUpdateResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             checkAndUpdatePaymentStatusPaymentLinkResponse PaymentStatusUpdateResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return PaymentStatusUpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return PaymentStatusUpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            "/service/application/payment/v1.0/payment/confirm/polling/link/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PaymentStatusUpdateResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &checkAndUpdatePaymentStatusPaymentLinkResponse)
+        if err != nil {
+            return PaymentStatusUpdateResponse{}, common.NewFDKError(err.Error())
+        }
+         return checkAndUpdatePaymentStatusPaymentLinkResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     //PaymentCustomerCreditSummaryXQuery holds query params
     type PaymentCustomerCreditSummaryXQuery struct { 
         Aggregator string  `url:"aggregator,omitempty"`  
@@ -12067,11 +12837,11 @@ func NewAppClient(config *AppConfig) *Client {
     
     //OrderGetOrdersXQuery holds query params
     type OrderGetOrdersXQuery struct { 
+        Status float64  `url:"status,omitempty"` 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
         FromDate string  `url:"from_date,omitempty"` 
         ToDate string  `url:"to_date,omitempty"` 
-        Status float64  `url:"status,omitempty"` 
         CustomMeta string  `url:"custom_meta,omitempty"`  
     }
     
@@ -12181,6 +12951,53 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // GetPosOrderById Get POS Order
+    func (or *Order)  GetPosOrderById(OrderID string) (OrderList, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getPosOrderByIdResponse OrderList
+	    )
+
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/application/order/v1.0/orders/pos-order/%s",OrderID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return OrderList{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPosOrderByIdResponse)
+        if err != nil {
+            return OrderList{}, common.NewFDKError(err.Error())
+        }
+         return getPosOrderByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // GetShipmentById Get details of a shipment
     func (or *Order)  GetShipmentById(ShipmentID string) (ShipmentById, error){
         var (
@@ -12228,13 +13045,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetShipmentReasons Get reasons behind full or partial cancellation of a shipment
-    func (or *Order)  GetShipmentReasons(ShipmentID string) (ShipmentReasons, error){
+    // GetInvoiceByShipmentId Get Invoice of a shipment
+    func (or *Order)  GetInvoiceByShipmentId(ShipmentID string) (ResponseGetInvoiceShipment, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getShipmentReasonsResponse ShipmentReasons
+             getInvoiceByShipmentIdResponse ResponseGetInvoiceShipment
 	    )
 
         
@@ -12252,135 +13069,20 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/reasons",ShipmentID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/invoice",ShipmentID),
             nil,
             nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ShipmentReasons{}, err
+            return ResponseGetInvoiceShipment{}, err
 	    }
         
-        err = json.Unmarshal(response, &getShipmentReasonsResponse)
+        err = json.Unmarshal(response, &getInvoiceByShipmentIdResponse)
         if err != nil {
-            return ShipmentReasons{}, common.NewFDKError(err.Error())
+            return ResponseGetInvoiceShipment{}, common.NewFDKError(err.Error())
         }
-         return getShipmentReasonsResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // GetShipmentBagReasons Get reasons at l1,l2 and l3 for cancellation and return based on department
-    func (or *Order)  GetShipmentBagReasons(ShipmentID string, BagID string) (ShipmentBagReasons, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getShipmentBagReasonsResponse ShipmentBagReasons
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.config,
-            "get",
-            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/bags/%s/reasons/",ShipmentID,BagID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ShipmentBagReasons{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getShipmentBagReasonsResponse)
-        if err != nil {
-            return ShipmentBagReasons{}, common.NewFDKError(err.Error())
-        }
-         return getShipmentBagReasonsResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // UpdateShipmentStatus Update the shipment status
-    func (or *Order)  UpdateShipmentStatus(ShipmentID string, body  ShipmentStatusUpdateBody) (ShipmentStatusUpdate, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             updateShipmentStatusResponse ShipmentStatusUpdate
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-
-        
-
-        
-        
-        
-    
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return ShipmentStatusUpdate{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return ShipmentStatusUpdate{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            or.config,
-            "put",
-            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/status",ShipmentID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ShipmentStatusUpdate{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateShipmentStatusResponse)
-        if err != nil {
-            return ShipmentStatusUpdate{}, common.NewFDKError(err.Error())
-        }
-         return updateShipmentStatusResponse, nil
+         return getInvoiceByShipmentIdResponse, nil
         
     }
           
@@ -12437,60 +13139,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetPosOrderById Get POS Order
-    func (or *Order)  GetPosOrderById(OrderID string) (PosOrderById, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getPosOrderByIdResponse PosOrderById
-	    )
-
-        
-
-        
-
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.config,
-            "get",
-            fmt.Sprintf("/service/application/order/v1.0/orders/pos-order/%s",OrderID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return PosOrderById{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getPosOrderByIdResponse)
-        if err != nil {
-            return PosOrderById{}, common.NewFDKError(err.Error())
-        }
-         return getPosOrderByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // GetCustomerDetailsByShipmentId Get Customer Details by Shipment Id
-    func (or *Order)  GetCustomerDetailsByShipmentId(OrderID string, ShipmentID string) (CustomerDetailsByShipmentId, error){
+    func (or *Order)  GetCustomerDetailsByShipmentId(OrderID string, ShipmentID string) (CustomerDetailsResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getCustomerDetailsByShipmentIdResponse CustomerDetailsByShipmentId
+             getCustomerDetailsByShipmentIdResponse CustomerDetailsResponse
 	    )
 
         
@@ -12516,12 +13171,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return CustomerDetailsByShipmentId{}, err
+            return CustomerDetailsResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &getCustomerDetailsByShipmentIdResponse)
         if err != nil {
-            return CustomerDetailsByShipmentId{}, common.NewFDKError(err.Error())
+            return CustomerDetailsResponse{}, common.NewFDKError(err.Error())
         }
          return getCustomerDetailsByShipmentIdResponse, nil
         
@@ -12534,12 +13189,12 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // SendOtpToShipmentCustomer Send and Resend Otp code to Order-Shipment customer
-    func (or *Order)  SendOtpToShipmentCustomer(OrderID string, ShipmentID string) (sendOTPApplicationResponse, error){
+    func (or *Order)  SendOtpToShipmentCustomer(OrderID string, ShipmentID string) (SendOtpToCustomerResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             sendOtpToShipmentCustomerResponse sendOTPApplicationResponse
+             sendOtpToShipmentCustomerResponse SendOtpToCustomerResponse
 	    )
 
         
@@ -12565,12 +13220,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return sendOTPApplicationResponse{}, err
+            return SendOtpToCustomerResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &sendOtpToShipmentCustomerResponse)
         if err != nil {
-            return sendOTPApplicationResponse{}, common.NewFDKError(err.Error())
+            return SendOtpToCustomerResponse{}, common.NewFDKError(err.Error())
         }
          return sendOtpToShipmentCustomerResponse, nil
         
@@ -12583,12 +13238,12 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // VerifyOtpShipmentCustomer Verify Otp code
-    func (or *Order)  VerifyOtpShipmentCustomer(OrderID string, ShipmentID string, body  ReqBodyVerifyOTPShipment) (ResponseVerifyOTPShipment, error){
+    func (or *Order)  VerifyOtpShipmentCustomer(OrderID string, ShipmentID string, body  VerifyOtp) (VerifyOtpResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             verifyOtpShipmentCustomerResponse ResponseVerifyOTPShipment
+             verifyOtpShipmentCustomerResponse VerifyOtpResponse
 	    )
 
         
@@ -12613,30 +13268,30 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return ResponseVerifyOTPShipment{}, common.NewFDKError(err.Error())
+             return VerifyOtpResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return ResponseVerifyOTPShipment{}, common.NewFDKError(err.Error())
+             return VerifyOtpResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
         rawRequest = NewRequest(
             or.config,
             "post",
-            fmt.Sprintf("/service/application/order/v1.0/orders/%s/shipments/%s/otp/verify",OrderID,ShipmentID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/%s/shipments/%s/otp/verify/",OrderID,ShipmentID),
             nil,
             nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ResponseVerifyOTPShipment{}, err
+            return VerifyOtpResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &verifyOtpShipmentCustomerResponse)
         if err != nil {
-            return ResponseVerifyOTPShipment{}, common.NewFDKError(err.Error())
+            return VerifyOtpResponse{}, common.NewFDKError(err.Error())
         }
          return verifyOtpShipmentCustomerResponse, nil
         
@@ -12648,19 +13303,21 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetInvoiceByShipmentId Get Invoice URL
-    func (or *Order)  GetInvoiceByShipmentId(ShipmentID string) (ResponseGetInvoiceShipment, error){
+    // GetShipmentBagReasons Get reasons behind full or partial cancellation of a shipment
+    func (or *Order)  GetShipmentBagReasons(ShipmentID string, BagID string) (ShipmentBagReasons, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getInvoiceByShipmentIdResponse ResponseGetInvoiceShipment
+             getShipmentBagReasonsResponse ShipmentBagReasons
 	    )
 
         
 
         
 
+        
+        
         
         
         
@@ -12672,20 +13329,20 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/invoice",ShipmentID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/bags/%s/reasons",ShipmentID,BagID),
             nil,
             nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ResponseGetInvoiceShipment{}, err
+            return ShipmentBagReasons{}, err
 	    }
         
-        err = json.Unmarshal(response, &getInvoiceByShipmentIdResponse)
+        err = json.Unmarshal(response, &getShipmentBagReasonsResponse)
         if err != nil {
-            return ResponseGetInvoiceShipment{}, common.NewFDKError(err.Error())
+            return ShipmentBagReasons{}, common.NewFDKError(err.Error())
         }
-         return getInvoiceByShipmentIdResponse, nil
+         return getShipmentBagReasonsResponse, nil
         
     }
           
@@ -12695,13 +13352,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetCreditNoteByShipmentId Get Credit Note URL
-    func (or *Order)  GetCreditNoteByShipmentId(ShipmentID string) (ResponseGetCreditNoteShipment, error){
+    // GetShipmentReasons Get reasons behind full or partial cancellation of a shipment
+    func (or *Order)  GetShipmentReasons(ShipmentID string) (ShipmentReasons, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getCreditNoteByShipmentIdResponse ResponseGetCreditNoteShipment
+             getShipmentReasonsResponse ShipmentReasons
 	    )
 
         
@@ -12719,20 +13376,90 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/credit-note/",ShipmentID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/reasons",ShipmentID),
             nil,
             nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ResponseGetCreditNoteShipment{}, err
+            return ShipmentReasons{}, err
 	    }
         
-        err = json.Unmarshal(response, &getCreditNoteByShipmentIdResponse)
+        err = json.Unmarshal(response, &getShipmentReasonsResponse)
         if err != nil {
-            return ResponseGetCreditNoteShipment{}, common.NewFDKError(err.Error())
+            return ShipmentReasons{}, common.NewFDKError(err.Error())
         }
-         return getCreditNoteByShipmentIdResponse, nil
+         return getShipmentReasonsResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UpdateShipmentStatus Update the shipment status
+    func (or *Order)  UpdateShipmentStatus(ShipmentID string, body  UpdateShipmentStatusRequest) (ShipmentApplicationStatusResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             updateShipmentStatusResponse ShipmentApplicationStatusResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return ShipmentApplicationStatusResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return ShipmentApplicationStatusResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "put",
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/status",ShipmentID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ShipmentApplicationStatusResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateShipmentStatusResponse)
+        if err != nil {
+            return ShipmentApplicationStatusResponse{}, common.NewFDKError(err.Error())
+        }
+         return updateShipmentStatusResponse, nil
         
     }
           
@@ -12746,66 +13473,6 @@ func NewAppClient(config *AppConfig) *Client {
     func NewRewards(config *AppConfig) *Rewards {
         return &Rewards{config}
     }
-    
-    
-    
-  
-    
-    
-    // GetPointsOnProduct Get the eligibility of reward points on a product
-    func (re *Rewards)  GetPointsOnProduct(body  CatalogueOrderRequest) (CatalogueOrderResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getPointsOnProductResponse CatalogueOrderResponse
-	    )
-
-        
-            
-        
-
-        
-
-        
-    
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return CatalogueOrderResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return CatalogueOrderResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            re.config,
-            "post",
-            "/service/application/rewards/v1.0/catalogue/offer/order/",
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return CatalogueOrderResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getPointsOnProductResponse)
-        if err != nil {
-            return CatalogueOrderResponse{}, common.NewFDKError(err.Error())
-        }
-         return getPointsOnProductResponse, nil
-        
-    }
-          
     
     
     
@@ -12859,17 +13526,15 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetOrderDiscount Calculates the discount on order-amount
-    func (re *Rewards)  GetOrderDiscount(body  OrderDiscountRequest) (OrderDiscountResponse, error){
+    // CatalogueOrder Get all transactions of reward points
+    func (re *Rewards)  CatalogueOrder(body  CatalogueOrderRequest) (CatalogueOrderResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getOrderDiscountResponse OrderDiscountResponse
+             catalogueOrderResponse CatalogueOrderResponse
 	    )
 
-        
-            
         
             
         
@@ -12886,77 +13551,32 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return OrderDiscountResponse{}, common.NewFDKError(err.Error())
+             return CatalogueOrderResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return OrderDiscountResponse{}, common.NewFDKError(err.Error())
+             return CatalogueOrderResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
         rawRequest = NewRequest(
             re.config,
             "post",
-            "/service/application/rewards/v1.0/user/offers/order-discount/",
+            "/service/application/rewards/v1.0/catalogue/offer/order/",
             nil,
             nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return OrderDiscountResponse{}, err
+            return CatalogueOrderResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getOrderDiscountResponse)
+        err = json.Unmarshal(response, &catalogueOrderResponse)
         if err != nil {
-            return OrderDiscountResponse{}, common.NewFDKError(err.Error())
+            return CatalogueOrderResponse{}, common.NewFDKError(err.Error())
         }
-         return getOrderDiscountResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // GetUserPoints Get reward points available with a user
-    func (re *Rewards)  GetUserPoints() (PointsResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getUserPointsResponse PointsResponse
-	    )
-
-        
-
-        
-
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            re.config,
-            "get",
-            "/service/application/rewards/v1.0/user/points/",
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return PointsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getUserPointsResponse)
-        if err != nil {
-            return PointsResponse{}, common.NewFDKError(err.Error())
-        }
-         return getUserPointsResponse, nil
+         return catalogueOrderResponse, nil
         
     }
           
@@ -13067,6 +13687,51 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // GetUserPoints Get referral details of a user
+    func (re *Rewards)  GetUserPoints() (PointsResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getUserPointsResponse PointsResponse
+	    )
+
+        
+
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            re.config,
+            "get",
+            "/service/application/rewards/v1.0/user/points/",
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PointsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getUserPointsResponse)
+        if err != nil {
+            return PointsResponse{}, common.NewFDKError(err.Error())
+        }
+         return getUserPointsResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // GetUserReferralDetails Get referral details of a user
     func (re *Rewards)  GetUserReferralDetails() (ReferralDetailsResponse, error){
         var (
@@ -13103,6 +13768,68 @@ func NewAppClient(config *AppConfig) *Client {
             return ReferralDetailsResponse{}, common.NewFDKError(err.Error())
         }
          return getUserReferralDetailsResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetOrderDiscount Calculates the discount on order-amount
+    func (re *Rewards)  GetOrderDiscount(body  OrderDiscountRequest) (OrderDiscountResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getOrderDiscountResponse OrderDiscountResponse
+	    )
+
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return OrderDiscountResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return OrderDiscountResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            re.config,
+            "post",
+            "/service/application/rewards/v1.0/user/offer/order-discount/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return OrderDiscountResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getOrderDiscountResponse)
+        if err != nil {
+            return OrderDiscountResponse{}, common.NewFDKError(err.Error())
+        }
+         return getOrderDiscountResponse, nil
         
     }
           
@@ -13190,7 +13917,8 @@ func NewAppClient(config *AppConfig) *Client {
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
         AssignCardID float64  `url:"assign_card_id,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"`  
+        AreaCode string  `url:"area_code,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // GetCart Fetch all items added to the cart
@@ -13205,6 +13933,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -13305,7 +14035,8 @@ func NewAppClient(config *AppConfig) *Client {
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
         AreaCode string  `url:"area_code,omitempty"` 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // AddItems Add items to cart
@@ -13320,6 +14051,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -13381,7 +14114,8 @@ func NewAppClient(config *AppConfig) *Client {
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"`  
+        AreaCode string  `url:"area_code,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // UpdateCart Update items in the cart
@@ -13396,6 +14130,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -13454,7 +14190,8 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartGetItemCountXQuery holds query params
     type PosCartGetItemCountXQuery struct { 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // GetItemCount Count items in the cart
@@ -13469,6 +14206,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -13508,7 +14247,8 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartGetCouponsXQuery holds query params
     type PosCartGetCouponsXQuery struct { 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // GetCoupons Fetch Coupon
@@ -13523,6 +14263,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -13565,7 +14307,8 @@ func NewAppClient(config *AppConfig) *Client {
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
         P bool  `url:"p,omitempty"` 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // ApplyCoupon Apply Coupon
@@ -13580,6 +14323,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -13638,7 +14383,8 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartRemoveCouponXQuery holds query params
     type PosCartRemoveCouponXQuery struct { 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // RemoveCoupon Remove Coupon Applied
@@ -13653,6 +14399,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -13757,7 +14505,8 @@ func NewAppClient(config *AppConfig) *Client {
     type PosCartApplyRewardPointsXQuery struct { 
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
-        B bool  `url:"b,omitempty"`  
+        B bool  `url:"b,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // ApplyRewardPoints Apply reward points at cart
@@ -13772,6 +14521,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -13829,6 +14580,7 @@ func NewAppClient(config *AppConfig) *Client {
     //PosCartGetAddressesXQuery holds query params
     type PosCartGetAddressesXQuery struct { 
         CartID string  `url:"cart_id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"` 
         MobileNo string  `url:"mobile_no,omitempty"` 
         CheckoutMode string  `url:"checkout_mode,omitempty"` 
         Tags string  `url:"tags,omitempty"` 
@@ -13847,6 +14599,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -13953,6 +14707,7 @@ func NewAppClient(config *AppConfig) *Client {
     //PosCartGetAddressByIdXQuery holds query params
     type PosCartGetAddressByIdXQuery struct { 
         CartID string  `url:"cart_id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"` 
         MobileNo string  `url:"mobile_no,omitempty"` 
         CheckoutMode string  `url:"checkout_mode,omitempty"` 
         Tags string  `url:"tags,omitempty"` 
@@ -13971,6 +14726,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -14128,6 +14885,7 @@ func NewAppClient(config *AppConfig) *Client {
     //PosCartSelectAddressXQuery holds query params
     type PosCartSelectAddressXQuery struct { 
         CartID string  `url:"cart_id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"`  
     }
@@ -14144,6 +14902,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -14200,7 +14960,8 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartSelectPaymentModeXQuery holds query params
     type PosCartSelectPaymentModeXQuery struct { 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // SelectPaymentMode Update cart payment
@@ -14215,6 +14976,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -14268,6 +15031,7 @@ func NewAppClient(config *AppConfig) *Client {
     //PosCartValidateCouponForPaymentXQuery holds query params
     type PosCartValidateCouponForPaymentXQuery struct { 
         ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"` 
         AddressID string  `url:"address_id,omitempty"` 
         PaymentMode string  `url:"payment_mode,omitempty"` 
         PaymentIdentifier string  `url:"payment_identifier,omitempty"` 
@@ -14287,6 +15051,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -14598,7 +15364,8 @@ func NewAppClient(config *AppConfig) *Client {
     
     //PosCartUpdateCartMetaXQuery holds query params
     type PosCartUpdateCartMetaXQuery struct { 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // UpdateCartMeta Update the cart meta
@@ -14613,6 +15380,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
