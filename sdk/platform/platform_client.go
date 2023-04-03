@@ -13766,7 +13766,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         PageSize float64  `url:"page_size,omitempty"` 
         Name string  `url:"name,omitempty"` 
         IsActive bool  `url:"is_active,omitempty"` 
-        ChannelIds string  `url:"channel_ids,omitempty"`  
+        ChannelIds string  `url:"channel_ids,omitempty"` 
+        Q string  `url:"q,omitempty"`  
     }
     
 
@@ -13784,6 +13785,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
 
         
+            
+                
             
                 
             
