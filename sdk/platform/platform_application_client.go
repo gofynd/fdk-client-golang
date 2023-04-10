@@ -4832,6 +4832,82 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // GenerateSEOTitle Get SEO meta tag title for content
+     func (co *PlatformAppContent)  GenerateSEOTitle(Type GenerationEntityType, body  GenerateSEOContent) (GeneratedSEOContent, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            generateSEOTitleResponse GeneratedSEOContent
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+               //enum validation inside path params
+                err = Type.IsValid()
+                if err != nil {
+                    
+                    return GeneratedSEOContent{}, common.NewFDKError(err.Error())
+                }
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return GeneratedSEOContent{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return GeneratedSEOContent{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "post",
+            fmt.Sprintf("/service/platform/content/v1.0/company/%s/application/%s/generate-seo/%s",co.CompanyID, co.ApplicationID, Type),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GeneratedSEOContent{}, err
+	    }
+        
+        err = json.Unmarshal(response, &generateSEOTitleResponse)
+        if err != nil {
+            return GeneratedSEOContent{}, common.NewFDKError(err.Error())
+        }
+        return generateSEOTitleResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     //PlatformAppGetLandingPagesXQuery holds query params
     type PlatformAppGetLandingPagesXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
@@ -5679,14 +5755,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    //PlatformAppGetPageMetaXQuery holds query params
-    type PlatformAppGetPageMetaXQuery struct { 
-        PageType string  `url:"page_type,omitempty"` 
-        CartPages bool  `url:"cart_pages,omitempty"`  
-    }
-    
     // GetPageMeta Get page meta
-     func (co *PlatformAppContent)  GetPageMeta(xQuery PlatformAppGetPageMetaXQuery) (PageMetaSchema, error) {
+     func (co *PlatformAppContent)  GetPageMeta() (PageMetaSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -5697,12 +5767,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
 
          
-            
-                
-            
-                
-            
-        
 
         
         
@@ -5715,7 +5779,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             "get",
             fmt.Sprintf("/service/platform/content/v1.0/company/%s/application/%s/pages/meta",co.CompanyID, co.ApplicationID),
             nil,
-            xQuery,
+            nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -5773,6 +5837,91 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return PageSpec{}, common.NewFDKError(err.Error())
         }
         return getPageSpecResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // CreatePagePreview Create a page preview
+     func (co *PlatformAppContent)  CreatePagePreview(body  PageRequest) (PageSchema, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            createPagePreviewResponse PageSchema
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PageSchema{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PageSchema{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "post",
+            fmt.Sprintf("/service/platform/content/v1.0/company/%s/application/%s/pages/preview/",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PageSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createPagePreviewResponse)
+        if err != nil {
+            return PageSchema{}, common.NewFDKError(err.Error())
+        }
+        return createPagePreviewResponse, nil
         
     }
            
@@ -12988,6 +13137,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // GetAppProduct Get company application product data.
+     func (ca *PlatformAppCatalog)  GetAppProduct(ItemID string) (OwnerAppItemResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAppProductResponse OwnerAppItemResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product/%s/",ca.CompanyID, ca.ApplicationID, ItemID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return OwnerAppItemResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAppProductResponse)
+        if err != nil {
+            return OwnerAppItemResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAppProductResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // UpdateAppProduct Update a single custom meta.
      func (ca *PlatformAppCatalog)  UpdateAppProduct(ItemID string, body  ApplicationItemMeta) (SuccessResponse1, error) {
         var (
@@ -13053,54 +13250,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return SuccessResponse1{}, common.NewFDKError(err.Error())
         }
         return updateAppProductResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetAppProduct Get company application product data.
-     func (ca *PlatformAppCatalog)  GetAppProduct(ItemID string) (OwnerAppItemResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAppProductResponse OwnerAppItemResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product/%s/",ca.CompanyID, ca.ApplicationID, ItemID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return OwnerAppItemResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAppProductResponse)
-        if err != nil {
-            return OwnerAppItemResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAppProductResponse, nil
         
     }
            

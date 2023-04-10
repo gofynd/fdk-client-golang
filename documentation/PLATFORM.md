@@ -138,6 +138,7 @@
     * [updateFaq](#updatefaq)
     * [deleteFaq](#deletefaq)
     * [getFaqByIdOrSlug](#getfaqbyidorslug)
+    * [generateSEOTitle](#generateseotitle)
     * [getLandingPages](#getlandingpages)
     * [createLandingPage](#createlandingpage)
     * [updateLandingPage](#updatelandingpage)
@@ -152,6 +153,7 @@
     * [deleteNavigation](#deletenavigation)
     * [getPageMeta](#getpagemeta)
     * [getPageSpec](#getpagespec)
+    * [createPagePreview](#createpagepreview)
     * [updatePagePreview](#updatepagepreview)
     * [deletePage](#deletepage)
     * [addPathRedirectionRules](#addpathredirectionrules)
@@ -346,8 +348,8 @@
     * [getSizeGuides](#getsizeguides)
     * [updateSizeGuide](#updatesizeguide)
     * [getSizeGuide](#getsizeguide)
-    * [updateAppProduct](#updateappproduct)
     * [getAppProduct](#getappproduct)
+    * [updateAppProduct](#updateappproduct)
     * [getConfigurationMetadata](#getconfigurationmetadata)
     * [createGroupConfiguration](#creategroupconfiguration)
     * [getGroupConfigurations](#getgroupconfigurations)
@@ -411,8 +413,8 @@
     * [createBulkProductUploadJob](#createbulkproductuploadjob)
     * [getProductBulkUploadHistory](#getproductbulkuploadhistory)
     * [uploadBulkProducts](#uploadbulkproducts)
-    * [createProductsInBulk](#createproductsinbulk)
     * [deleteProductBulkJob](#deleteproductbulkjob)
+    * [createProductsInBulk](#createproductsinbulk)
     * [getProductTags](#getproducttags)
     * [createProductAssetsInBulk](#createproductassetsinbulk)
     * [getProductAssetsInBulk](#getproductassetsinbulk)
@@ -425,13 +427,13 @@
     * [deleteInventory](#deleteinventory)
     * [createBulkInventoryJob](#createbulkinventoryjob)
     * [getInventoryBulkUploadHistory](#getinventorybulkuploadhistory)
-    * [createBulkInventory](#createbulkinventory)
     * [deleteBulkInventoryJob](#deletebulkinventoryjob)
+    * [createBulkInventory](#createbulkinventory)
     * [createInventoryExportJob](#createinventoryexportjob)
     * [getInventoryExport](#getinventoryexport)
     * [exportInventoryConfig](#exportinventoryconfig)
-    * [updateRealtimeInventory](#updaterealtimeinventory)
     * [deleteRealtimeInventory](#deleterealtimeinventory)
+    * [updateRealtimeInventory](#updaterealtimeinventory)
     * [updateInventories](#updateinventories)
     * [createHsnCode](#createhsncode)
     * [getAllHsnCodes](#getallhsncodes)
@@ -41016,7 +41018,7 @@ Use this to get all data loaders of an application
 
 
 
-Success. Refer `DataLoaderResponseSchema` for more details.
+Success. Refer `DataLoadersSchema` for more details.
 
 
 Schema: `DataLoadersSchema`
@@ -41630,6 +41632,64 @@ Success. Refer `CreateFaqResponseSchema` for more details.
 
 
 Schema: `CreateFaqResponseSchema`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### generateSEOTitle
+Get SEO meta tag title for content
+
+```golang
+
+data, err := Content.GenerateSEOTitle(CompanyID, ApplicationID, Type, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+
+
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
+
+
+| Type | GenerationEntityType | String representing the type of SEO content to be generated. Possible values are: title, description | 
+
+
+| body |  GenerateSEOContent | "Request body" 
+
+Use this API to get GPT3 generated SEO meta tag title for content
+
+*Success Response:*
+
+
+
+Returns the generated SEO title
+
+
+Schema: `GeneratedSEOContent`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "title": "SEO Title example",
+    "description": "SEO Description example"
+  }
+}
+```
 
 
 
@@ -43994,7 +44054,7 @@ Get page meta
 
 ```golang
 
-data, err := Content.GetPageMeta(CompanyID, ApplicationID, xQuery);
+data, err := Content.GetPageMeta(CompanyID, ApplicationID);
 ```
 
 | Argument  |  Type  | Description |
@@ -44005,11 +44065,6 @@ data, err := Content.GetPageMeta(CompanyID, ApplicationID, xQuery);
 
 | ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
 
-
-
-
-
-| xQuery | struct | Includes properties such as `PageType`, `CartPages`
 
 
 Use this API to get the meta of custom pages (blog, page) and default system pages (e.g. home/brand/category/collection).
@@ -44161,6 +44216,112 @@ default
         "query": []
       }
     ]
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createPagePreview
+Create a page preview
+
+```golang
+
+data, err := Content.CreatePagePreview(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+
+
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
+
+
+| body |  PageRequest | "Request body" 
+
+Use this API to create a page preview to check the appearance of a custom page.
+
+*Success Response:*
+
+
+
+Success. Refer `PageSchema` for more details.
+
+
+Schema: `PageSchema`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "date_meta": {
+      "created_on": "2021-03-16T08:24:19.197Z",
+      "modified_on": "2021-03-16T08:24:19.197Z"
+    },
+    "tags": [
+      "my first page"
+    ],
+    "published": true,
+    "component_ids": [],
+    "archived": false,
+    "_id": "60506dcad18cb33946026862",
+    "title": "my first page",
+    "slug": "1st_page",
+    "feature_image": {
+      "secure_url": "https://google.com/some-image"
+    },
+    "content": [
+      {
+        "type": "html",
+        "value": "<div id=\"icfm\">Emtpy Page. Create Page here.</div><div id=\"izu5\" class=\"aa\">hello there!<div id=\"izzl\">how are you doing</div><div><br/></div></div><img id=\"ibgj\" src=\"https://hdn-1.addsale.com/x0/company/52/applications/614957b7e7a0ccc371e96094/pages/pictures/free-content/original/-zLi_CuyM-apple.jpeg\"/>"
+      },
+      {
+        "type": "css",
+        "value": "* { box-sizing: border-box; } body {margin: 0;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}#icfm{text-align:center;padding-top:30px;padding-right:30px;padding-bottom:30px;padding-left:30px;}#izu5{padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;}#ibgj{color:black;}#izzl{float:none;display:flex;}.aa{float:right;}"
+      },
+      {
+        "type": "js",
+        "value": ""
+      }
+    ],
+    "content_path": "https://hdn-1.fynd.com/company/1526/applications/61012f6a9250ccd1b9ef8a1d/pages/content/page_slug.html",
+    "platform": "web",
+    "description": "hey this is my first page",
+    "visibility": {
+      "test": true
+    },
+    "_schedule": {
+      "start": "2021-04-23T23:50:00.000Z",
+      "next_schedule": [
+        {}
+      ]
+    },
+    "seo": {
+      "title": "my first page",
+      "description": "hey this is my first page",
+      "image": {
+        "url": ""
+      }
+    },
+    "type": "rawhtml",
+    "application": "000000000000000000000001",
+    "orientation": "portrait",
+    "page_meta": []
   }
 }
 ```
@@ -55313,6 +55474,49 @@ Schema: `SizeGuideResponse`
 ---
 
 
+#### getAppProduct
+Get company application product data.
+
+```golang
+
+data, err := Catalog.GetAppProduct(CompanyID, ApplicationID, ItemID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ItemID | string | product id for a particular product. | 
+
+
+
+Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
+
+*Success Response:*
+
+
+
+The Company Applicaton Product Data(MOQ/SEO).
+
+
+Schema: `OwnerAppItemResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateAppProduct
 Update a single custom meta.
 
@@ -55345,49 +55549,6 @@ Returns a success response
 
 
 Schema: `SuccessResponse1`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAppProduct
-Get company application product data.
-
-```golang
-
-data, err := Catalog.GetAppProduct(CompanyID, ApplicationID, ItemID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ItemID | string | product id for a particular product. | 
-
-
-
-Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
-
-*Success Response:*
-
-
-
-The Company Applicaton Product Data(MOQ/SEO).
-
-
-Schema: `OwnerAppItemResponse`
 
 
 
@@ -58088,26 +58249,25 @@ Schema: `BulkResponse`
 ---
 
 
-#### createProductsInBulk
-Create products in bulk associated with given batch Id.
+#### deleteProductBulkJob
+Delete Bulk product job.
 
 ```golang
 
-data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
+data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
 
 
-| BatchID | string | Batch Id in which assets to be uploaded. | 
+| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
 
 
-| body |  BulkProductRequest | "Request body" 
 
-This API helps to create products in bulk push to kafka for approval/creation.
+This API allows to delete bulk product job associated with company.
 
 *Success Response:*
 
@@ -58129,25 +58289,26 @@ Schema: `SuccessResponse`
 ---
 
 
-#### deleteProductBulkJob
-Delete Bulk product job.
+#### createProductsInBulk
+Create products in bulk associated with given batch Id.
 
 ```golang
 
-data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
+data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
 
 
-| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
+| BatchID | string | Batch Id in which assets to be uploaded. | 
 
 
+| body |  BulkProductRequest | "Request body" 
 
-This API allows to delete bulk product job associated with company.
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -58712,26 +58873,25 @@ Schema: `BulkInventoryGet`
 ---
 
 
-#### createBulkInventory
-Create products in bulk associated with given batch Id.
+#### deleteBulkInventoryJob
+Delete Bulk Inventory job.
 
 ```golang
 
-data, err := Catalog.CreateBulkInventory(CompanyID, BatchID, body);
+data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which Inventory is to be uploaded. | 
+| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
 
 
-| BatchID | string | Batch Id of the bulk create job. | 
+| BatchID | string | Batch Id of the bulk delete job. | 
 
 
-| body |  InventoryBulkRequest | "Request body" 
 
-This API helps to create products in bulk push to kafka for approval/creation.
+This API allows to delete bulk Inventory job associated with company.
 
 *Success Response:*
 
@@ -58753,25 +58913,26 @@ Schema: `SuccessResponse`
 ---
 
 
-#### deleteBulkInventoryJob
-Delete Bulk Inventory job.
+#### createBulkInventory
+Create products in bulk associated with given batch Id.
 
 ```golang
 
-data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
+data, err := Catalog.CreateBulkInventory(CompanyID, BatchID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
+| CompanyID | float64 | Company Id in which Inventory is to be uploaded. | 
 
 
-| BatchID | string | Batch Id of the bulk delete job. | 
+| BatchID | string | Batch Id of the bulk create job. | 
 
 
+| body |  InventoryBulkRequest | "Request body" 
 
-This API allows to delete bulk Inventory job associated with company.
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -58908,12 +59069,12 @@ Schema: `InventoryConfig`
 ---
 
 
-#### updateRealtimeInventory
+#### deleteRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -58952,12 +59113,12 @@ Schema: `InventoryUpdateResponse`
 ---
 
 
-#### deleteRealtimeInventory
+#### updateRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
