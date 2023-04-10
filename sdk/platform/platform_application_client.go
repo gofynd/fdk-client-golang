@@ -11428,6 +11428,670 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
            
        
     
+    
+    
+  
+
+    
+    // EdcAggregatorsAndModelList get some information about the store and edc device
+     func (pa *PlatformAppPayment)  EdcAggregatorsAndModelList() (EdcAggregatorAndModelListResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            edcAggregatorsAndModelListResponse EdcAggregatorAndModelListResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/edc-aggregator-list",pa.CompanyID, pa.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return EdcAggregatorAndModelListResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &edcAggregatorsAndModelListResponse)
+        if err != nil {
+            return EdcAggregatorAndModelListResponse{}, common.NewFDKError(err.Error())
+        }
+        return edcAggregatorsAndModelListResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // EdcDeviceStats get some information about the store and edc device
+     func (pa *PlatformAppPayment)  EdcDeviceStats() (EdcDeviceStatsResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            edcDeviceStatsResponse EdcDeviceStatsResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/edc-device-stats",pa.CompanyID, pa.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return EdcDeviceStatsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &edcDeviceStatsResponse)
+        if err != nil {
+            return EdcDeviceStatsResponse{}, common.NewFDKError(err.Error())
+        }
+        return edcDeviceStatsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdateEdcDevice map new edc device to the terminal
+     func (pa *PlatformAppPayment)  UpdateEdcDevice(TerminalUniqueIdentifier string, body  EdcAddRequest) (EdcDeviceAddResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateEdcDeviceResponse EdcDeviceAddResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return EdcDeviceAddResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return EdcDeviceAddResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/edc-device",pa.CompanyID, pa.ApplicationID, TerminalUniqueIdentifier),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return EdcDeviceAddResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateEdcDeviceResponse)
+        if err != nil {
+            return EdcDeviceAddResponse{}, common.NewFDKError(err.Error())
+        }
+        return updateEdcDeviceResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetEdcDevice get details of a single edc device
+     func (pa *PlatformAppPayment)  GetEdcDevice(TerminalUniqueIdentifier string) (EdcDeviceDetailsResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getEdcDeviceResponse EdcDeviceDetailsResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/edc-device/%s",pa.CompanyID, pa.ApplicationID, TerminalUniqueIdentifier),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return EdcDeviceDetailsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getEdcDeviceResponse)
+        if err != nil {
+            return EdcDeviceDetailsResponse{}, common.NewFDKError(err.Error())
+        }
+        return getEdcDeviceResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // AddEdcDevice Update store id and device tag of edc device
+     func (pa *PlatformAppPayment)  AddEdcDevice(TerminalUniqueIdentifier string, body  EdcUpdateRequest) (EdcDeviceUpdateResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            addEdcDeviceResponse EdcDeviceUpdateResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return EdcDeviceUpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return EdcDeviceUpdateResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "put",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/edc-device/%s",pa.CompanyID, pa.ApplicationID, TerminalUniqueIdentifier),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return EdcDeviceUpdateResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &addEdcDeviceResponse)
+        if err != nil {
+            return EdcDeviceUpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        return addEdcDeviceResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppEdcDeviceListXQuery holds query params
+    type PlatformAppEdcDeviceListXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        IsActive bool  `url:"is_active,omitempty"` 
+        StoreID float64  `url:"store_id,omitempty"` 
+        DeviceTag string  `url:"device_tag,omitempty"`  
+    }
+    
+    // EdcDeviceList get all the device list of an app
+     func (pa *PlatformAppPayment)  EdcDeviceList(xQuery PlatformAppEdcDeviceListXQuery) (EdcDeviceListResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            edcDeviceListResponse EdcDeviceListResponse
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/edc-device-list",pa.CompanyID, pa.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return EdcDeviceListResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &edcDeviceListResponse)
+        if err != nil {
+            return EdcDeviceListResponse{}, common.NewFDKError(err.Error())
+        }
+        return edcDeviceListResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppGetPosPaymentModeRoutesXQuery holds query params
+    type PlatformAppGetPosPaymentModeRoutesXQuery struct { 
+        Amount float64  `url:"amount,omitempty"` 
+        CartID string  `url:"cart_id,omitempty"` 
+        Pincode string  `url:"pincode,omitempty"` 
+        CheckoutMode string  `url:"checkout_mode,omitempty"` 
+        Refresh bool  `url:"refresh,omitempty"` 
+        CardReference string  `url:"card_reference,omitempty"` 
+        OrderType string  `url:"order_type,omitempty"` 
+        UserDetails string  `url:"user_details,omitempty"`  
+    }
+    
+    // GetPosPaymentModeRoutes Get All Valid Payment Options
+     func (pa *PlatformAppPayment)  GetPosPaymentModeRoutes(xQuery PlatformAppGetPosPaymentModeRoutesXQuery) (PaymentOptionsResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getPosPaymentModeRoutesResponse PaymentOptionsResponse
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/options/pos",pa.CompanyID, pa.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PaymentOptionsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPosPaymentModeRoutesResponse)
+        if err != nil {
+            return PaymentOptionsResponse{}, common.NewFDKError(err.Error())
+        }
+        return getPosPaymentModeRoutesResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // InitialisePayment Initialize a payment (server-to-server) for UPI and BharatQR
+     func (pa *PlatformAppPayment)  InitialisePayment(body  PaymentInitializationRequest) (PaymentInitializationResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            initialisePaymentResponse PaymentInitializationResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PaymentInitializationResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PaymentInitializationResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/request",pa.CompanyID, pa.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PaymentInitializationResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &initialisePaymentResponse)
+        if err != nil {
+            return PaymentInitializationResponse{}, common.NewFDKError(err.Error())
+        }
+        return initialisePaymentResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // CheckAndUpdatePaymentStatus Performs continuous polling to check status of payment on the server
+     func (pa *PlatformAppPayment)  CheckAndUpdatePaymentStatus(body  PaymentStatusUpdateRequest) (PaymentStatusUpdateResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            checkAndUpdatePaymentStatusResponse PaymentStatusUpdateResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PaymentStatusUpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PaymentStatusUpdateResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/confirm/polling",pa.CompanyID, pa.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PaymentStatusUpdateResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &checkAndUpdatePaymentStatusResponse)
+        if err != nil {
+            return PaymentStatusUpdateResponse{}, common.NewFDKError(err.Error())
+        }
+        return checkAndUpdatePaymentStatusResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // ResendOrCancelPayment API to resend and cancel a payment link which was already generated.
+     func (pa *PlatformAppPayment)  ResendOrCancelPayment(body  ResendOrCancelPaymentRequest) (ResendOrCancelPaymentResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            resendOrCancelPaymentResponse ResendOrCancelPaymentResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return ResendOrCancelPaymentResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return ResendOrCancelPaymentResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/cancel",pa.CompanyID, pa.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ResendOrCancelPaymentResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &resendOrCancelPaymentResponse)
+        if err != nil {
+            return ResendOrCancelPaymentResponse{}, common.NewFDKError(err.Error())
+        }
+        return resendOrCancelPaymentResponse, nil
+        
+    }
+           
+       
+    
 
  
 	 
@@ -11721,6 +12385,10 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+    
+    
+    
+    
 
  
 	 
@@ -11734,6 +12402,77 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     func NewPlatformAppCatalog(config *PlatformConfig, appID string) *PlatformAppCatalog {
         return &PlatformAppCatalog{config, config.CompanyID, appID}
     }
+    
+    
+    
+  
+
+    
+    // UpdateSearchKeywords Update Search Keyword
+     func (ca *PlatformAppCatalog)  UpdateSearchKeywords(ID string, body  CreateSearchKeyword) (GetSearchWordsData, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateSearchKeywordsResponse GetSearchWordsData
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return GetSearchWordsData{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return GetSearchWordsData{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "put",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetSearchWordsData{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateSearchKeywordsResponse)
+        if err != nil {
+            return GetSearchWordsData{}, common.NewFDKError(err.Error())
+        }
+        return updateSearchKeywordsResponse, nil
+        
+    }
+           
+       
     
     
     
@@ -11826,77 +12565,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
         }
         return getSearchKeywordsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // UpdateSearchKeywords Update Search Keyword
-     func (ca *PlatformAppCatalog)  UpdateSearchKeywords(ID string, body  CreateSearchKeyword) (GetSearchWordsData, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateSearchKeywordsResponse GetSearchWordsData
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return GetSearchWordsData{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return GetSearchWordsData{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "put",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetSearchWordsData{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateSearchKeywordsResponse)
-        if err != nil {
-            return GetSearchWordsData{}, common.NewFDKError(err.Error())
-        }
-        return updateSearchKeywordsResponse, nil
         
     }
            
@@ -12022,6 +12690,77 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // UpdateAutocompleteKeyword Create & Update Autocomplete Keyword
+     func (ca *PlatformAppCatalog)  UpdateAutocompleteKeyword(ID string, body  CreateAutocompleteKeyword) (GetAutocompleteWordsResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateAutocompleteKeywordResponse GetAutocompleteWordsResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "put",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateAutocompleteKeywordResponse)
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
+        }
+        return updateAutocompleteKeywordResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // DeleteAutocompleteKeyword Delete a Autocomplete Keywords
      func (ca *PlatformAppCatalog)  DeleteAutocompleteKeyword(ID string) (DeleteResponse, error) {
         var (
@@ -12108,77 +12847,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
         }
         return getAutocompleteKeywordDetailResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // UpdateAutocompleteKeyword Create & Update Autocomplete Keyword
-     func (ca *PlatformAppCatalog)  UpdateAutocompleteKeyword(ID string, body  CreateAutocompleteKeyword) (GetAutocompleteWordsResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateAutocompleteKeywordResponse GetAutocompleteWordsResponse
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "put",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateAutocompleteKeywordResponse)
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
-        }
-        return updateAutocompleteKeywordResponse, nil
         
     }
            
@@ -12645,56 +13313,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteGroupConfiguration Delete configuration of the product config type of the application.
-     func (ca *PlatformAppCatalog)  DeleteGroupConfiguration(ConfigType string, GroupSlug string) (ConfigSuccessResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteGroupConfigurationResponse ConfigSuccessResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/application/%s/product-configuration/%s/groups/%s",ca.CompanyID, ca.ApplicationID, ConfigType, GroupSlug),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ConfigSuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteGroupConfigurationResponse)
-        if err != nil {
-            return ConfigSuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteGroupConfigurationResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // UpdateGroupConfiguration Update the group configurations for the application.
      func (ca *PlatformAppCatalog)  UpdateGroupConfiguration(ConfigType string, GroupSlug string, body  AppConfigurationDetail) (AppConfigurationDetail, error) {
         var (
@@ -12766,6 +13384,56 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return AppConfigurationDetail{}, common.NewFDKError(err.Error())
         }
         return updateGroupConfigurationResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteGroupConfiguration Delete configuration of the product config type of the application.
+     func (ca *PlatformAppCatalog)  DeleteGroupConfiguration(ConfigType string, GroupSlug string) (ConfigSuccessResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteGroupConfigurationResponse ConfigSuccessResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/application/%s/product-configuration/%s/groups/%s",ca.CompanyID, ca.ApplicationID, ConfigType, GroupSlug),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ConfigSuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteGroupConfigurationResponse)
+        if err != nil {
+            return ConfigSuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteGroupConfigurationResponse, nil
         
     }
            
@@ -12916,56 +13584,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteListingConfiguration Delete configuration for listings
-     func (ca *PlatformAppCatalog)  DeleteListingConfiguration(ConfigType string, ConfigID string) (ConfigSuccessResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteListingConfigurationResponse ConfigSuccessResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/application/%s/product-configuration/%s/item/%s/",ca.CompanyID, ca.ApplicationID, ConfigType, ConfigID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ConfigSuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteListingConfigurationResponse)
-        if err != nil {
-            return ConfigSuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteListingConfigurationResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // UpdateListingConfiguration Update configuration for listings
      func (ca *PlatformAppCatalog)  UpdateListingConfiguration(ConfigType string, ConfigID string, body  AppConfigurationsSort) (AppConfigurationsSort, error) {
         var (
@@ -13035,6 +13653,56 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return AppConfigurationsSort{}, common.NewFDKError(err.Error())
         }
         return updateListingConfigurationResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteListingConfiguration Delete configuration for listings
+     func (ca *PlatformAppCatalog)  DeleteListingConfiguration(ConfigType string, ConfigID string) (ConfigSuccessResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteListingConfigurationResponse ConfigSuccessResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/application/%s/product-configuration/%s/item/%s/",ca.CompanyID, ca.ApplicationID, ConfigType, ConfigID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ConfigSuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteListingConfigurationResponse)
+        if err != nil {
+            return ConfigSuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteListingConfigurationResponse, nil
         
     }
            
@@ -13743,54 +14411,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteCollection Delete a Collection
-     func (ca *PlatformAppCatalog)  DeleteCollection(ID string) (DeleteResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteCollectionResponse DeleteResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/collections/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return DeleteResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteCollectionResponse)
-        if err != nil {
-            return DeleteResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteCollectionResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // UpdateCollection Update a collection
      func (ca *PlatformAppCatalog)  UpdateCollection(ID string, body  UpdateCollection) (UpdateCollection, error) {
         var (
@@ -13888,6 +14508,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return UpdateCollection{}, common.NewFDKError(err.Error())
         }
         return updateCollectionResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteCollection Delete a Collection
+     func (ca *PlatformAppCatalog)  DeleteCollection(ID string) (DeleteResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteCollectionResponse DeleteResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/collections/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DeleteResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteCollectionResponse)
+        if err != nil {
+            return DeleteResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteCollectionResponse, nil
         
     }
            
@@ -21268,6 +21936,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             selectAddressResponse CartDetailResponse
 	    )
 
+        
+            
         
             
         
