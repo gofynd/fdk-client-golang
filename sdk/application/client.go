@@ -1657,55 +1657,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1746,6 +1697,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -2527,6 +2527,7 @@ func NewAppClient(config *AppConfig) *Client {
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
         AssignCardID float64  `url:"assign_card_id,omitempty"` 
+        AreaCode string  `url:"area_code,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
@@ -2542,6 +2543,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -2641,6 +2644,7 @@ func NewAppClient(config *AppConfig) *Client {
     type CartAddItemsXQuery struct { 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
+        AreaCode string  `url:"area_code,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
@@ -2658,6 +2662,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -2717,6 +2723,7 @@ func NewAppClient(config *AppConfig) *Client {
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
+        AreaCode string  `url:"area_code,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
@@ -2736,6 +2743,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -13276,66 +13285,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetPointsOnProduct Get the eligibility of reward points on a product
-    func (re *Rewards)  GetPointsOnProduct(body  CatalogueOrderRequest) (CatalogueOrderResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getPointsOnProductResponse CatalogueOrderResponse
-	    )
-
-        
-            
-        
-
-        
-
-        
-    
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return CatalogueOrderResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return CatalogueOrderResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            re.config,
-            "post",
-            "/service/application/rewards/v1.0/catalogue/offer/order/",
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return CatalogueOrderResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getPointsOnProductResponse)
-        if err != nil {
-            return CatalogueOrderResponse{}, common.NewFDKError(err.Error())
-        }
-         return getPointsOnProductResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // GetOfferByName Get offer by name
     func (re *Rewards)  GetOfferByName(Name string) (Offer, error){
         var (
@@ -13383,17 +13332,15 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetOrderDiscount Calculates the discount on order-amount
-    func (re *Rewards)  GetOrderDiscount(body  OrderDiscountRequest) (OrderDiscountResponse, error){
+    // CatalogueOrder Get all transactions of reward points
+    func (re *Rewards)  CatalogueOrder(body  CatalogueOrderRequest) (CatalogueOrderResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getOrderDiscountResponse OrderDiscountResponse
+             catalogueOrderResponse CatalogueOrderResponse
 	    )
 
-        
-            
         
             
         
@@ -13410,77 +13357,32 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return OrderDiscountResponse{}, common.NewFDKError(err.Error())
+             return CatalogueOrderResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return OrderDiscountResponse{}, common.NewFDKError(err.Error())
+             return CatalogueOrderResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
         rawRequest = NewRequest(
             re.config,
             "post",
-            "/service/application/rewards/v1.0/user/offers/order-discount/",
+            "/service/application/rewards/v1.0/catalogue/offer/order/",
             nil,
             nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return OrderDiscountResponse{}, err
+            return CatalogueOrderResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getOrderDiscountResponse)
+        err = json.Unmarshal(response, &catalogueOrderResponse)
         if err != nil {
-            return OrderDiscountResponse{}, common.NewFDKError(err.Error())
+            return CatalogueOrderResponse{}, common.NewFDKError(err.Error())
         }
-         return getOrderDiscountResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // GetUserPoints Get reward points available with a user
-    func (re *Rewards)  GetUserPoints() (PointsResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getUserPointsResponse PointsResponse
-	    )
-
-        
-
-        
-
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            re.config,
-            "get",
-            "/service/application/rewards/v1.0/user/points/",
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return PointsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getUserPointsResponse)
-        if err != nil {
-            return PointsResponse{}, common.NewFDKError(err.Error())
-        }
-         return getUserPointsResponse, nil
+         return catalogueOrderResponse, nil
         
     }
           
@@ -13591,6 +13493,51 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // GetUserPoints Get referral details of a user
+    func (re *Rewards)  GetUserPoints() (PointsResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getUserPointsResponse PointsResponse
+	    )
+
+        
+
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            re.config,
+            "get",
+            "/service/application/rewards/v1.0/user/points/",
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PointsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getUserPointsResponse)
+        if err != nil {
+            return PointsResponse{}, common.NewFDKError(err.Error())
+        }
+         return getUserPointsResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // GetUserReferralDetails Get referral details of a user
     func (re *Rewards)  GetUserReferralDetails() (ReferralDetailsResponse, error){
         var (
@@ -13627,6 +13574,68 @@ func NewAppClient(config *AppConfig) *Client {
             return ReferralDetailsResponse{}, common.NewFDKError(err.Error())
         }
          return getUserReferralDetailsResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetOrderDiscount Calculates the discount on order-amount
+    func (re *Rewards)  GetOrderDiscount(body  OrderDiscountRequest) (OrderDiscountResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getOrderDiscountResponse OrderDiscountResponse
+	    )
+
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return OrderDiscountResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return OrderDiscountResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            re.config,
+            "post",
+            "/service/application/rewards/v1.0/user/offer/order-discount/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return OrderDiscountResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getOrderDiscountResponse)
+        if err != nil {
+            return OrderDiscountResponse{}, common.NewFDKError(err.Error())
+        }
+         return getOrderDiscountResponse, nil
         
     }
           
@@ -13714,6 +13723,7 @@ func NewAppClient(config *AppConfig) *Client {
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
         AssignCardID float64  `url:"assign_card_id,omitempty"` 
+        AreaCode string  `url:"area_code,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
@@ -13729,6 +13739,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -13828,6 +13840,7 @@ func NewAppClient(config *AppConfig) *Client {
     type PosCartAddItemsXQuery struct { 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
+        AreaCode string  `url:"area_code,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
@@ -13843,6 +13856,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -13902,6 +13917,7 @@ func NewAppClient(config *AppConfig) *Client {
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
+        AreaCode string  `url:"area_code,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
@@ -13917,6 +13933,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
