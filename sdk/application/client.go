@@ -1657,55 +1657,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1746,6 +1697,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -10131,7 +10131,8 @@ func NewAppClient(config *AppConfig) *Client {
         PageSize float64  `url:"page_size,omitempty"` 
         OrderIncent bool  `url:"order_incent,omitempty"` 
         OrderingStore float64  `url:"ordering_store,omitempty"` 
-        User string  `url:"user,omitempty"`  
+        User string  `url:"user,omitempty"` 
+        UserName string  `url:"user_name,omitempty"`  
     }
     
     // GetAppStaffList Get a list of staff.
@@ -10146,6 +10147,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -10223,6 +10226,13 @@ func NewAppClient(config *AppConfig) *Client {
                     
                     
                 
+                    
+                    
+                    
+                        
+                    
+                    
+                
             
             // GetAppStaffListPaginator Get a list of staff.  
             func (co *Configuration)  GetAppStaffListPaginator( xQuery ConfigurationGetAppStaffListXQuery ) *common.Paginator {
@@ -10230,6 +10240,10 @@ func NewAppClient(config *AppConfig) *Client {
                  
                  
                  xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
                  
                  
                  
@@ -13407,6 +13421,83 @@ func NewAppClient(config *AppConfig) *Client {
             return ShipmentApplicationStatusResponse{}, common.NewFDKError(err.Error())
         }
          return updateShipmentStatusResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //OrderGetProductsXQuery holds query params
+    type OrderGetProductsXQuery struct { 
+        Status float64  `url:"status,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        FromDate string  `url:"from_date,omitempty"` 
+        ToDate string  `url:"to_date,omitempty"` 
+        CustomMeta string  `url:"custom_meta,omitempty"` 
+        SearchType string  `url:"search_type,omitempty"` 
+        SearchValue string  `url:"search_value,omitempty"`  
+    }
+    
+    // GetProducts 
+    func (or *Order)  GetProducts(CompanyID float64, xQuery OrderGetProductsXQuery) (ProductListResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getProductsResponse ProductListResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/application/orders/v1.0/products",CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ProductListResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductsResponse)
+        if err != nil {
+            return ProductListResponse{}, common.NewFDKError(err.Error())
+        }
+         return getProductsResponse, nil
         
     }
           
