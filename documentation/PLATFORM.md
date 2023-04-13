@@ -64905,7 +64905,7 @@ Schema: `SubscriberResponse`
 
 
 #### fetchAllEventConfigurations
-Get All Webhook Events
+
 
 ```golang
 

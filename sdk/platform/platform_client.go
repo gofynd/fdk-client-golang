@@ -13957,7 +13957,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // FetchAllEventConfigurations Get All Webhook Events
+    // FetchAllEventConfigurations 
      func (we *PlatformWebhook)  FetchAllEventConfigurations() (EventConfigResponse, error){
         
         var (
