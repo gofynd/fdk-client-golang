@@ -328,6 +328,7 @@
     * [getTatProduct](#gettatproduct)
     * [getAllCountries](#getallcountries)
     * [getPincodeZones](#getpincodezones)
+    * [getOptimalLocations](#getoptimallocations)
     
 
 
@@ -20171,7 +20172,7 @@ Get Invoice of a shipment
 
 ```golang
 
- data, err :=  Order.GetInvoiceByShipmentId(ShipmentID, xQuery);
+ data, err :=  Order.GetInvoiceByShipmentId(ShipmentID);
 ```
 
 | Argument  |  Type  | Description |
@@ -20179,9 +20180,6 @@ Get Invoice of a shipment
 
 | ShipmentID | string | ID of the shipment. | 
 
-
-
-| xQuery | struct | Includes properties such as `DocumentType`
 
 
 
@@ -26689,6 +26687,42 @@ Response status_code
 
 
 Schema: `GetZoneFromPincodeViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOptimalLocations
+GET zone from the Pincode.
+
+```golang
+
+ data, err :=  Logistic.GetOptimalLocations(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  ReAssignStoreRequest | "Request body" 
+
+
+This API returns zone from the Pincode View.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `ReAssignStoreResponse`
 
 
 
