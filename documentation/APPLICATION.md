@@ -13,10 +13,10 @@
 * [FileStorage](#FileStorage) - File Storage 
 * [Configuration](#Configuration) - Application configuration apis 
 * [Payment](#Payment) - Collect payment through many payment gateway i.e Stripe, Razorpay, Juspay etc.into Fynd or Self account 
-* [Order](#Order) - Handles Platform websites OMS 
+* [Order](#Order) - Handles all Application order and shipment api(s) 
 * [Rewards](#Rewards) - Earn and redeem reward points 
 * [PosCart](#PosCart) - Cart APIs 
-* [Logistic](#Logistic) - Handles Platform websites OMS 
+* [Logistic](#Logistic) - Logistics Promise Engine APIs allows you to configure zone, pincode, TAT, logistics and many more useful features.  
 
 ----
 ----
@@ -46,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [followById](#followbyid)
     * [unfollowById](#unfollowbyid)
+    * [followById](#followbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -268,27 +268,26 @@
   * Methods
     * [getOrders](#getorders)
     * [getOrderById](#getorderbyid)
-    * [getShipmentById](#getshipmentbyid)
-    * [getShipmentReasons](#getshipmentreasons)
-    * [getShipmentBagReasons](#getshipmentbagreasons)
-    * [updateShipmentStatus](#updateshipmentstatus)
-    * [trackShipment](#trackshipment)
     * [getPosOrderById](#getposorderbyid)
+    * [getShipmentById](#getshipmentbyid)
+    * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
+    * [trackShipment](#trackshipment)
     * [getCustomerDetailsByShipmentId](#getcustomerdetailsbyshipmentid)
     * [sendOtpToShipmentCustomer](#sendotptoshipmentcustomer)
     * [verifyOtpShipmentCustomer](#verifyotpshipmentcustomer)
-    * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
-    * [getCreditNoteByShipmentId](#getcreditnotebyshipmentid)
+    * [getShipmentBagReasons](#getshipmentbagreasons)
+    * [getShipmentReasons](#getshipmentreasons)
+    * [updateShipmentStatus](#updateshipmentstatus)
     
 
 * [Rewards](#Rewards)
   * Methods
-    * [getPointsOnProduct](#getpointsonproduct)
     * [getOfferByName](#getofferbyname)
-    * [getOrderDiscount](#getorderdiscount)
-    * [getUserPoints](#getuserpoints)
-    * [getUserPointsHistory](#getuserpointshistory)
-    * [getUserReferralDetails](#getuserreferraldetails)
+    * [catalogueOrder](#catalogueorder)
+    * [getPointsHistory](#getpointshistory)
+    * [getPoints](#getpoints)
+    * [referral](#referral)
+    * [orderDiscount](#orderdiscount)
     * [redeemReferralCode](#redeemreferralcode)
     
 
@@ -325,9 +324,9 @@
 
 * [Logistic](#Logistic)
   * Methods
+    * [getPincodeCity](#getpincodecity)
     * [getTatProduct](#gettatproduct)
     * [getPincodeZones](#getpincodezones)
-    * [getPincodeCity](#getpincodecity)
     
 
 
@@ -1153,12 +1152,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1172,7 +1171,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1194,12 +1193,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1213,7 +1212,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1524,10 +1523,10 @@ Prices may vary for different sizes of a product. Use this API to retrieve the p
 
 
 
-Success. Returns a ProductSizePriceV2 object. Check the example shown below or refer `ProductSizePriceResponseV2` for more details.
+Success. Returns a ProductSizePriceV3 object. Check the example shown below or refer `ProductSizePriceResponseV3` for more details.
 
 
-Schema: `ProductSizePriceResponseV2`
+Schema: `ProductSizePriceResponseV3`
 
 
 
@@ -1574,10 +1573,10 @@ A product of a particular size may be sold by multiple sellers. Use this API to 
 
 
 
-Success. Returns a ProductSizeSellerV2 object. Check the example shown below or refer `ProductSizeSellersResponseV2` for more details.
+Success. Returns a ProductSizeSellerV3 object. Check the example shown below or refer `ProductSizeSellersResponseV3` for more details.
 
 
-Schema: `ProductSizeSellersResponseV2`
+Schema: `ProductSizeSellersResponseV3`
 
 
 
@@ -5314,7 +5313,7 @@ Default
           "primary": true,
           "verified": true,
           "countryCode": 91,
-          "phone": "9890425946"
+          "phone": "9999999999"
         }
       ],
       "firstName": "Nikhil",
@@ -5324,10 +5323,10 @@ Default
           "active": true,
           "primary": true,
           "verified": true,
-          "email": "nikhilmshchs@gmail.com"
+          "email": "niktest@xyz.com"
         }
       ],
-      "username": "nikhilmshchs_gmail_com_38425_20500281",
+      "username": "niktest_xyz_com_38425_20500281",
       "createdAt": "2019-01-01T17:22:38.528Z",
       "updatedAt": "2021-01-22T10:02:42.258Z",
       "uid": "20500281",
@@ -5375,7 +5374,7 @@ Default
             "primary": true,
             "verified": true,
             "countryCode": 91,
-            "phone": "9890425946"
+            "phone": "9999999999"
           }
         ],
         "firstName": "Nikhil",
@@ -5385,10 +5384,10 @@ Default
             "active": true,
             "primary": true,
             "verified": true,
-            "email": "nikhilmshchs@gmail.com"
+            "email": "niktest@xyz.com"
           }
         ],
-        "username": "nikhilmshchs_gmail_com_38425_20500281",
+        "username": "niktest_xyz_com_38425_20500281",
         "createdAt": "2019-01-01T17:22:38.528Z",
         "updatedAt": "2021-01-22T10:02:42.258Z",
         "uid": "20500281",
@@ -5636,7 +5635,7 @@ Default
           "primary": true,
           "verified": true,
           "countryCode": 91,
-          "phone": "9890425946"
+          "phone": "9999999999"
         }
       ],
       "firstName": "Nikhil",
@@ -5646,10 +5645,10 @@ Default
           "active": true,
           "primary": true,
           "verified": true,
-          "email": "nikhilmshchs@gmail.com"
+          "email": "niktest@xyz.com"
         }
       ],
-      "username": "nikhilmshchs_gmail_com_38425_20500281",
+      "username": "niktest_xyz_com_38425_20500281",
       "createdAt": "2019-01-01T17:22:38.528Z",
       "updatedAt": "2021-01-22T10:02:42.258Z",
       "uid": "20500281",
@@ -5697,7 +5696,7 @@ Default
             "primary": true,
             "verified": true,
             "countryCode": 91,
-            "phone": "9890425946"
+            "phone": "9999999999"
           }
         ],
         "firstName": "Nikhil",
@@ -5707,10 +5706,10 @@ Default
             "active": true,
             "primary": true,
             "verified": true,
-            "email": "nikhilmshchs@gmail.com"
+            "email": "niktest@xyz.com"
           }
         ],
-        "username": "nikhilmshchs_gmail_com_38425_20500281",
+        "username": "niktest_xyz_com_38425_20500281",
         "createdAt": "2019-01-01T17:22:38.528Z",
         "updatedAt": "2021-01-22T10:02:42.258Z",
         "uid": "20500281",
@@ -5971,7 +5970,7 @@ Default
             "primary": true,
             "verified": true,
             "countryCode": 91,
-            "phone": "9890425946"
+            "phone": "9999999999"
           }
         ],
         "firstName": "Nikhil",
@@ -5981,10 +5980,10 @@ Default
             "active": true,
             "primary": true,
             "verified": true,
-            "email": "nikhilmshchs@gmail.com"
+            "email": "niktest@xyz.com"
           }
         ],
-        "username": "nikhilmshchs_gmail_com_38425_20500281",
+        "username": "niktest_xyz_com_38425_20500281",
         "createdAt": "2019-01-01T17:22:38.528Z",
         "updatedAt": "2021-01-22T10:02:42.258Z",
         "uid": "20500281",
@@ -6032,7 +6031,7 @@ Default
               "primary": true,
               "verified": true,
               "countryCode": 91,
-              "phone": "9890425946"
+              "phone": "9999999999"
             }
           ],
           "firstName": "Nikhil",
@@ -6042,10 +6041,10 @@ Default
               "active": true,
               "primary": true,
               "verified": true,
-              "email": "nikhilmshchs@gmail.com"
+              "email": "niktest@xyz.com"
             }
           ],
-          "username": "nikhilmshchs_gmail_com_38425_20500281",
+          "username": "niktest_xyz_com_38425_20500281",
           "createdAt": "2019-01-01T17:22:38.528Z",
           "updatedAt": "2021-01-22T10:02:42.258Z",
           "uid": "20500281",
@@ -17942,7 +17941,7 @@ Get all orders
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `FromDate`, `ToDate`, `Status`, `CustomMeta`
+| xQuery | struct | Includes properties such as `Status`, `PageNo`, `PageSize`, `FromDate`, `ToDate`, `CustomMeta`
 
 
 
@@ -18006,6 +18005,44 @@ Schema: `OrderById`
 ---
 
 
+#### getPosOrderById
+Get POS Order
+
+```golang
+
+ data, err :=  Order.GetPosOrderById(OrderID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| OrderID | string | A unique number used for identifying and tracking your orders. | 
+
+
+
+
+Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `PosOrderById` for more details.
+
+
+Schema: `OrderList`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getShipmentById
 Get details of a shipment
 
@@ -18044,112 +18081,32 @@ Schema: `ShipmentById`
 ---
 
 
-#### getShipmentReasons
-Get reasons behind full or partial cancellation of a shipment
+#### getInvoiceByShipmentId
+Get Invoice of a shipment
 
 ```golang
 
- data, err :=  Order.GetShipmentReasons(ShipmentID);
+ data, err :=  Order.GetInvoiceByShipmentId(ShipmentID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+| ShipmentID | string | ID of the shipment. | 
 
 
 
 
-Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `ShipmentReasons` for more details.
-
-
-Schema: `ShipmentReasons`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getShipmentBagReasons
-Get reasons at l1,l2 and l3 for cancellation and return based on department
-
-```golang
-
- data, err :=  Order.GetShipmentBagReasons(ShipmentID, BagID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
-
-
-| BagID | string | ID of the bag. | 
-
-
-
-
-Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+Use this API to retrieve shipment invoice.
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `ShipmentBagReasons` for more details.
+Success. Check the example shown below or refer `ShipmentById` for more details.
 
 
-Schema: `ShipmentBagReasons`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateShipmentStatus
-Update the shipment status
-
-```golang
-
- data, err :=  Order.UpdateShipmentStatus(ShipmentID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
-
-
-| body |  ShipmentStatusUpdateBody | "Request body" 
-
-
-Use this API to update the status of a shipment using its shipment ID.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `ShipmentStatusUpdateBody` for more details.
-
-
-Schema: `ShipmentStatusUpdate`
+Schema: `ResponseGetInvoiceShipment`
 
 
 
@@ -18178,7 +18135,7 @@ Track shipment
 
 
 
-Use this API to track a shipment using its shipment ID.
+Track Shipment by shipment id, for application based on application Id
 
 *Success Response:*
 
@@ -18188,44 +18145,6 @@ Success. Check the example shown below or refer `ShipmentTrack` for more details
 
 
 Schema: `ShipmentTrack`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPosOrderById
-Get POS Order
-
-```golang
-
- data, err :=  Order.GetPosOrderById(OrderID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| OrderID | string | A unique number used for identifying and tracking your orders. | 
-
-
-
-
-Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `PosOrderById` for more details.
-
-
-Schema: `PosOrderById`
 
 
 
@@ -18249,10 +18168,10 @@ Get Customer Details by Shipment Id
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| OrderID | string | A unique number used for identifying and tracking your orders. | 
+| OrderID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+| ShipmentID | string | A unique number used for identifying and tracking your orders. | 
 
 
 
@@ -18266,7 +18185,7 @@ Use this API to retrieve customer details such as mobileno using Shipment ID.
 Success. Check the example shown below or refer `CustomerDetailsByShipmentId` for more details.
 
 
-Schema: `CustomerDetailsByShipmentId`
+Schema: `CustomerDetailsResponse`
 
 
 
@@ -18307,7 +18226,7 @@ Use this API to send OTP to the customer of the mapped Shipment.
 Success to acknowledge the service was notified
 
 
-Schema: `sendOTPApplicationResponse`
+Schema: `SendOtpToCustomerResponse`
 
 
 
@@ -18337,7 +18256,7 @@ Verify Otp code
 | ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
-| body |  ReqBodyVerifyOTPShipment | "Request body" 
+| body |  VerifyOtp | "Request body" 
 
 
 Use this API to verify OTP and create a session token with custom payload.
@@ -18349,7 +18268,7 @@ Use this API to verify OTP and create a session token with custom payload.
 Success, the code is valid and returns a session token
 
 
-Schema: `ResponseVerifyOTPShipment`
+Schema: `VerifyOtpResponse`
 
 
 
@@ -18362,32 +18281,35 @@ Schema: `ResponseVerifyOTPShipment`
 ---
 
 
-#### getInvoiceByShipmentId
-Get Invoice URL
+#### getShipmentBagReasons
+Get reasons behind full or partial cancellation of a shipment
 
 ```golang
 
- data, err :=  Order.GetInvoiceByShipmentId(ShipmentID);
+ data, err :=  Order.GetShipmentBagReasons(ShipmentID, BagID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+| ShipmentID | string | ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| BagID | string | ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
 
 
 
 
-Use this API to get a generated Invoice URL for viewing or download.
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
 
 *Success Response:*
 
 
 
-Success, the code is valid and returns a SignedUrl
+Success. Check the example shown below or refer `ShipmentBagReasons` for more details.
 
 
-Schema: `ResponseGetInvoiceShipment`
+Schema: `ShipmentBagReasons`
 
 
 
@@ -18400,12 +18322,12 @@ Schema: `ResponseGetInvoiceShipment`
 ---
 
 
-#### getCreditNoteByShipmentId
-Get Credit Note URL
+#### getShipmentReasons
+Get reasons behind full or partial cancellation of a shipment
 
 ```golang
 
- data, err :=  Order.GetCreditNoteByShipmentId(ShipmentID);
+ data, err :=  Order.GetShipmentReasons(ShipmentID);
 ```
 
 | Argument  |  Type  | Description |
@@ -18416,16 +18338,55 @@ Get Credit Note URL
 
 
 
-Use this API to get a generated Credit Note URL for viewing or download.
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
 
 *Success Response:*
 
 
 
-Success, the code is valid and returns a SignedUrl
+Success. Check the example shown below or refer `ShipmentBagReasons` for more details.
 
 
-Schema: `ResponseGetCreditNoteShipment`
+Schema: `ShipmentReasons`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateShipmentStatus
+Update the shipment status
+
+```golang
+
+ data, err :=  Order.UpdateShipmentStatus(ShipmentID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| body |  UpdateShipmentStatusRequest | "Request body" 
+
+
+Use this API to update the status of a shipment using its shipment ID.
+
+*Success Response:*
+
+
+
+Successfully updateShipmentStatus!
+
+
+Schema: `ShipmentApplicationStatusResponse`
 
 
 
@@ -18443,42 +18404,6 @@ Schema: `ResponseGetCreditNoteShipment`
 
 
 ## Rewards
-
-
-#### getPointsOnProduct
-Get the eligibility of reward points on a product
-
-```golang
-
- data, err :=  Rewards.GetPointsOnProduct(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  CatalogueOrderRequest | "Request body" 
-
-
-Use this API to evaluate the amount of reward points that could be earned on any catalogue product.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `CatalogueOrderRequest` for more details.
-
-
-Schema: `CatalogueOrderResponse`
-
-
-
-
-
-
-
-
-
----
 
 
 #### getOfferByName
@@ -18519,30 +18444,30 @@ Schema: `Offer`
 ---
 
 
-#### getOrderDiscount
-Calculates the discount on order-amount
+#### catalogueOrder
+Get all transactions of reward points
 
 ```golang
 
- data, err :=  Rewards.GetOrderDiscount(body);
+ data, err :=  Rewards.CatalogueOrder(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  OrderDiscountRequest | "Request body" 
+| body |  CatalogueOrderRequest | "Request body" 
 
 
-Use this API to calculate the discount on order-amount based on all the amount range configured in order_discount.
+Use this API to evaluate the amount of reward points that could be earned on any catalogue product.
 
 *Success Response:*
 
 
 
-Success. Check example below or refer `OrderDiscountResponse` for more details.
+Success. Check example below or refer `CatalogueOrderResponse` for more details.
 
 
-Schema: `OrderDiscountResponse`
+Schema: `CatalogueOrderResponse`
 
 
 
@@ -18555,12 +18480,52 @@ Schema: `OrderDiscountResponse`
 ---
 
 
-#### getUserPoints
-Get reward points available with a user
+#### getPointsHistory
+Get all transactions of reward points
 
 ```golang
 
- data, err :=  Rewards.GetUserPoints();
+ data, err :=  Rewards.GetPointsHistory(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+| xQuery | struct | Includes properties such as `PageID`, `PageSize`
+
+
+
+Use this API to get a list of points transactions.
+
+*Success Response:*
+
+
+
+Success. Check example below or refer `PointsHistoryResponse` for more details.
+
+
+Schema: `PointsHistoryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPoints
+Get referral details of a user
+
+```golang
+
+ data, err :=  Rewards.GetPoints();
 ```
 
 | Argument  |  Type  | Description |
@@ -18590,52 +18555,12 @@ Schema: `PointsResponse`
 ---
 
 
-#### getUserPointsHistory
-Get all transactions of reward points
-
-```golang
-
- data, err :=  Rewards.GetUserPointsHistory(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-| xQuery | struct | Includes properties such as `PageID`, `PageSize`
-
-
-
-Use this API to get a list of points transactions. The list of points history is paginated.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `PointsHistoryResponse` for more details.
-
-
-Schema: `PointsHistoryResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getUserReferralDetails
+#### referral
 Get referral details of a user
 
 ```golang
 
- data, err :=  Rewards.GetUserReferralDetails();
+ data, err :=  Rewards.Referral();
 ```
 
 | Argument  |  Type  | Description |
@@ -18653,6 +18578,42 @@ Success. Check example below or refer `ReferralDetailsResponse` for more details
 
 
 Schema: `ReferralDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### orderDiscount
+Calculates the discount on order-amount
+
+```golang
+
+ data, err :=  Rewards.OrderDiscount(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  OrderDiscountRequest | "Request body" 
+
+
+Use this API to calculate the discount on order-amount based on all the amount range configured in order_discount.
+
+*Success Response:*
+
+
+
+Success. Check example below or refer `OrderDiscountResponse` for more details.
+
+
+Schema: `OrderDiscountResponse`
 
 
 
@@ -22911,8 +22872,133 @@ Cart Merged/Replaced
 ## Logistic
 
 
+#### getPincodeCity
+Get Pincode API
+
+```golang
+
+ data, err :=  Logistic.GetPincodeCity(Pincode);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| Pincode | string | A `pincode` contains a specific address of a location. | 
+
+
+
+
+Get pincode data
+
+*Success Response:*
+
+
+
+Get pincode data
+
+
+Schema: `PincodeApiResponse`
+
+
+*Examples:*
+
+
+Pincode data found
+```json
+{
+  "value": {
+    "data": [
+      {
+        "sub_type": "pincode",
+        "name": "421202",
+        "error": {
+          "type": null,
+          "value": null,
+          "message": null
+        },
+        "uid": "pincode:INDIA|MAHARASHTRA|MUMBAI|421202",
+        "display_name": "421202",
+        "meta": {
+          "zone": "West",
+          "internal_zone_id": 4,
+          "deliverables": [
+            "essential"
+          ]
+        },
+        "parents": [
+          {
+            "sub_type": "country",
+            "name": "India",
+            "display_name": "India",
+            "uid": "country:INDIA"
+          },
+          {
+            "sub_type": "state",
+            "name": "Maharashtra",
+            "display_name": "Maharashtra",
+            "uid": "state:INDIA|MAHARASHTRA"
+          },
+          {
+            "sub_type": "city",
+            "name": "Thane",
+            "display_name": "Thane",
+            "uid": "city:INDIA|MAHARASHTRA|MUMBAI"
+          }
+        ]
+      }
+    ],
+    "request_uuid": "fce9f431215e71c9ee0e86e792ae1dce4",
+    "stormbreaker_uuid": "56cca764-9fab-41f4-adb8-6e9683532aa5",
+    "error": {
+      "type": null,
+      "value": null,
+      "message": null
+    },
+    "success": true
+  }
+}
+```
+
+Pincode not found
+```json
+{
+  "value": {
+    "data": [
+      {
+        "sub_type": "pincode",
+        "name": "999999",
+        "error": {
+          "type": "DoesNotExist",
+          "value": "999999",
+          "message": "pincode 999999 does not exist"
+        }
+      }
+    ],
+    "request_uuid": "fce9fb9215e71c9ee0e86e792ae1dce4",
+    "stormbreaker_uuid": "03b353ed-9dbd-4629-80b2-2be337859a20",
+    "error": {
+      "type": null,
+      "value": null,
+      "message": null
+    },
+    "success": false
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getTatProduct
-Get TAT of a product
+Get TAT API
 
 ```golang
 
@@ -22922,19 +23008,126 @@ Get TAT of a product
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  GetTatProductReqBody | "Request body" 
+| body |  TATViewRequest | "Request body" 
 
 
-Use this API to know the delivery turnaround time (TAT) by entering the product details along with the PIN Code of the location.
+Get TAT data
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `GetTatProductResponse` for more details.
+Get TAT  data
 
 
-Schema: `GetTatProductResponse`
+Schema: `TATViewResponse`
+
+
+*Examples:*
+
+
+Pincode data found
+```json
+{
+  "value": {
+    "source": "FYND-APP",
+    "identifier": "PDP",
+    "journey": "forward",
+    "action": "get_tat",
+    "to_pincode": "143001",
+    "location_details": [
+      {
+        "fulfillment_id": 8,
+        "from_pincode": "560023",
+        "articles": [
+          {
+            "category": {
+              "level": "l3",
+              "id": 155
+            },
+            "manufacturing_time": 2,
+            "manufacturing_time_unit": "days",
+            "promise": {
+              "timestamp": {
+                "min": 1663564548,
+                "max": 1663650948
+              },
+              "formatted": {
+                "min": "19 Sep, Monday",
+                "max": "20 Sep, Tuesday"
+              }
+            },
+            "error": {
+              "type": null,
+              "value": null,
+              "message": null
+            },
+            "is_cod_available": true,
+            "_manufacturing_time_seconds": 172800
+          }
+        ]
+      }
+    ],
+    "request_uuid": "b4adf5508e34f17971817c3581e16310",
+    "stormbreaker_uuid": "4b8084d4-ea74-45af-8ddc-c38e29bf0cfb",
+    "error": {
+      "type": null,
+      "value": null,
+      "message": null
+    },
+    "to_city": "Amritsar",
+    "payment_mode": "prepaid",
+    "is_cod_available": true,
+    "success": true
+  }
+}
+```
+
+Pincode not found
+```json
+{
+  "value": {
+    "source": "FYND-APP",
+    "identifier": "PDP",
+    "journey": "forward",
+    "action": "get_tat",
+    "to_pincode": "99999",
+    "location_details": [
+      {
+        "fulfillment_id": 8,
+        "from_pincode": "560023",
+        "articles": [
+          {
+            "category": {
+              "level": "l3",
+              "id": 155
+            },
+            "manufacturing_time": 2,
+            "manufacturing_time_unit": "days",
+            "promise": null,
+            "error": {
+              "type": "ValueError",
+              "value": "99999",
+              "message": "We are not delivering to 99999"
+            }
+          }
+        ]
+      }
+    ],
+    "request_uuid": "4b99d15fddb2b9fc2d6ab99a1c933010",
+    "stormbreaker_uuid": "6a847909-1d59-43e7-9ae0-15f5de8fc7d7",
+    "error": {
+      "type": "ValueError",
+      "value": "99999",
+      "message": "All of the items in your cart are not deliverable to 99999"
+    },
+    "to_city": "",
+    "payment_mode": "prepaid",
+    "is_cod_available": true,
+    "success": false
+  }
+}
+```
 
 
 
@@ -22948,7 +23141,7 @@ Schema: `GetTatProductResponse`
 
 
 #### getPincodeZones
-Get Pincode Zones
+GET zone from the Pincode.
 
 ```golang
 
@@ -22958,57 +23151,19 @@ Get Pincode Zones
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  GetPincodeZonesReqBody | "Request body" 
+| body |  GetZoneFromPincodeViewRequest | "Request body" 
 
 
-Get to know the zones of a specefic pincode
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `GetTatProductResponse` for more details.
-
-
-Schema: `GetPincodeZonesResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPincodeCity
-Get city from PIN Code
-
-```golang
-
- data, err :=  Logistic.GetPincodeCity(Pincode);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| Pincode | string | The PIN Code of the area, e.g. 400059 | 
-
-
-
-
-Use this API to retrieve a city by its PIN Code.
+This API returns zone from the Pincode View.
 
 *Success Response:*
 
 
 
-Success. Returns a JSON object containing the city name, state and country identified by its PIN Code. Check the example shown below or refer `GetPincodeCityResponse` for more details.
+Response status_code
 
 
-Schema: `GetPincodeCityResponse`
+Schema: `GetZoneFromPincodeViewResponse`
 
 
 
