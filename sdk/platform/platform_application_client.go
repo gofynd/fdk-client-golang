@@ -2738,6 +2738,10 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
             
         
+            
+        
+            
+        
 
          
 
@@ -2854,12 +2858,73 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    //PlatformAppDeleteSessionXQuery holds query params
+    type PlatformAppDeleteSessionXQuery struct { 
+        ID string  `url:"id,omitempty"` 
+        SessionID string  `url:"session_id,omitempty"` 
+        Reason string  `url:"reason,omitempty"`  
+    }
+    
+    // DeleteSession Delete a session for a user
+     func (us *PlatformAppUser)  DeleteSession(xQuery PlatformAppDeleteSessionXQuery) (SessionDeleteResponseSchema, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteSessionResponse SessionDeleteResponseSchema
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "delete",
+            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/customers/session",us.CompanyID, us.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return SessionDeleteResponseSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteSessionResponse)
+        if err != nil {
+            return SessionDeleteResponseSchema{}, common.NewFDKError(err.Error())
+        }
+        return deleteSessionResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     //PlatformAppGetActiveSessionsXQuery holds query params
     type PlatformAppGetActiveSessionsXQuery struct { 
         ID string  `url:"id,omitempty"`  
     }
     
-    // GetActiveSessions Get a list of all session for a user
+    // GetActiveSessions Get a list of all session with info for a user
      func (us *PlatformAppUser)  GetActiveSessions(xQuery PlatformAppGetActiveSessionsXQuery) (SessionListResponseSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -2885,7 +2950,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             us.config,
             "get",
-            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/customers/sesions",us.CompanyID, us.ApplicationID),
+            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/customers/sessions",us.CompanyID, us.ApplicationID),
             nil,
             xQuery,
             nil)
@@ -2911,7 +2976,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     //PlatformAppDeleteActiveSessionsXQuery holds query params
     type PlatformAppDeleteActiveSessionsXQuery struct { 
-        ID string  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"` 
+        Reason string  `url:"reason,omitempty"`  
     }
     
     // DeleteActiveSessions Delete a list of all session for a user
@@ -2929,6 +2995,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             
                 
             
+                
+            
         
 
         
@@ -2940,7 +3008,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             us.config,
             "delete",
-            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/customers/sesions",us.CompanyID, us.ApplicationID),
+            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/customers/sessions",us.CompanyID, us.ApplicationID),
             nil,
             xQuery,
             nil)
@@ -3109,6 +3177,253 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return PlatformSchema{}, common.NewFDKError(err.Error())
         }
         return updatePlatformConfigResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // CreateUserGroup Create an User Group
+     func (us *PlatformAppUser)  CreateUserGroup(body  CreateUserGroupSchema) (UserGroupResponseSchema, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            createUserGroupResponse UserGroupResponseSchema
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return UserGroupResponseSchema{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return UserGroupResponseSchema{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "post",
+            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/user_group",us.CompanyID, us.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return UserGroupResponseSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createUserGroupResponse)
+        if err != nil {
+            return UserGroupResponseSchema{}, common.NewFDKError(err.Error())
+        }
+        return createUserGroupResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppGetUserGroupsXQuery holds query params
+    type PlatformAppGetUserGroupsXQuery struct { 
+        PageNo string  `url:"page_no,omitempty"` 
+        PageSize string  `url:"page_size,omitempty"` 
+        Name string  `url:"name,omitempty"` 
+        Status string  `url:"status,omitempty"` 
+        GroupUID float64  `url:"group_uid,omitempty"`  
+    }
+    
+    // GetUserGroups Get User Groups mathcing criteria
+     func (us *PlatformAppUser)  GetUserGroups(xQuery PlatformAppGetUserGroupsXQuery) (UserGroupListResponseSchema, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getUserGroupsResponse UserGroupListResponseSchema
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "get",
+            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/user_group",us.CompanyID, us.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return UserGroupListResponseSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getUserGroupsResponse)
+        if err != nil {
+            return UserGroupListResponseSchema{}, common.NewFDKError(err.Error())
+        }
+        return getUserGroupsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdateUserGroup Update an User Group
+     func (us *PlatformAppUser)  UpdateUserGroup(GroupID string, body  UpdateUserGroupSchema) (UserGroupResponseSchema, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateUserGroupResponse UserGroupResponseSchema
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return UserGroupResponseSchema{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return UserGroupResponseSchema{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "put",
+            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/user_group/%s",us.CompanyID, us.ApplicationID, GroupID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return UserGroupResponseSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateUserGroupResponse)
+        if err != nil {
+            return UserGroupResponseSchema{}, common.NewFDKError(err.Error())
+        }
+        return updateUserGroupResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetUserGroupById Get an User Group by Id
+     func (us *PlatformAppUser)  GetUserGroupById(GroupID string) (UserGroupResponseSchema, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getUserGroupByIdResponse UserGroupResponseSchema
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "get",
+            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/user_group/%s",us.CompanyID, us.ApplicationID, GroupID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return UserGroupResponseSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getUserGroupByIdResponse)
+        if err != nil {
+            return UserGroupResponseSchema{}, common.NewFDKError(err.Error())
+        }
+        return getUserGroupByIdResponse, nil
         
     }
            
@@ -4818,6 +5133,82 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return CreateFaqResponseSchema{}, common.NewFDKError(err.Error())
         }
         return getFaqByIdOrSlugResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GenerateSEOTitle Get SEO meta tag title for content
+     func (co *PlatformAppContent)  GenerateSEOTitle(Type GenerationEntityType, body  GenerateSEOContent) (GeneratedSEOContent, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            generateSEOTitleResponse GeneratedSEOContent
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+               //enum validation inside path params
+                err = Type.IsValid()
+                if err != nil {
+                    
+                    return GeneratedSEOContent{}, common.NewFDKError(err.Error())
+                }
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return GeneratedSEOContent{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return GeneratedSEOContent{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "post",
+            fmt.Sprintf("/service/platform/content/v1.0/company/%s/application/%s/generate-seo/%s",co.CompanyID, co.ApplicationID, Type),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GeneratedSEOContent{}, err
+	    }
+        
+        err = json.Unmarshal(response, &generateSEOTitleResponse)
+        if err != nil {
+            return GeneratedSEOContent{}, common.NewFDKError(err.Error())
+        }
+        return generateSEOTitleResponse, nil
         
     }
            
@@ -11374,6 +11765,129 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
            
        
     
+    
+    
+  
+
+    
+    //PlatformAppGetUserCODlimitRoutesXQuery holds query params
+    type PlatformAppGetUserCODlimitRoutesXQuery struct { 
+        MerchantUserID string  `url:"merchant_user_id,omitempty"` 
+        MobileNo string  `url:"mobile_no,omitempty"`  
+    }
+    
+    // GetUserCODlimitRoutes Get COD limit for user
+     func (pa *PlatformAppPayment)  GetUserCODlimitRoutes(xQuery PlatformAppGetUserCODlimitRoutesXQuery) (GetUserCODLimitResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getUserCODlimitRoutesResponse GetUserCODLimitResponse
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/user-cod",pa.CompanyID, pa.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetUserCODLimitResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getUserCODlimitRoutesResponse)
+        if err != nil {
+            return GetUserCODLimitResponse{}, common.NewFDKError(err.Error())
+        }
+        return getUserCODlimitRoutesResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // SetUserCODlimitRoutes Set COD option for user for payment
+     func (pa *PlatformAppPayment)  SetUserCODlimitRoutes(body  SetCODForUserRequest) (SetCODOptionResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            setUserCODlimitRoutesResponse SetCODOptionResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return SetCODOptionResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return SetCODOptionResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "put",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/user-cod",pa.CompanyID, pa.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return SetCODOptionResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &setUserCODlimitRoutesResponse)
+        if err != nil {
+            return SetCODOptionResponse{}, common.NewFDKError(err.Error())
+        }
+        return setUserCODlimitRoutesResponse, nil
+        
+    }
+           
+       
+    
 
  
 	 
@@ -11688,54 +12202,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetSearchKeywords Get a Search Keywords Details
-     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getSearchKeywordsResponse GetSearchWordsDetailResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetSearchWordsDetailResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getSearchKeywordsResponse)
-        if err != nil {
-            return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
-        }
-        return getSearchKeywordsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // DeleteSearchKeywords Delete a Search Keywords
      func (ca *PlatformAppCatalog)  DeleteSearchKeywords(ID string) (DeleteResponse, error) {
         var (
@@ -11774,6 +12240,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return DeleteResponse{}, common.NewFDKError(err.Error())
         }
         return deleteSearchKeywordsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetSearchKeywords Get a Search Keywords Details
+     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getSearchKeywordsResponse GetSearchWordsDetailResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetSearchWordsDetailResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getSearchKeywordsResponse)
+        if err != nil {
+            return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
+        }
+        return getSearchKeywordsResponse, nil
         
     }
            
@@ -11970,54 +12484,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
-     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAutocompleteKeywordDetailResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // DeleteAutocompleteKeyword Delete a Autocomplete Keywords
      func (ca *PlatformAppCatalog)  DeleteAutocompleteKeyword(ID string) (DeleteResponse, error) {
         var (
@@ -12056,6 +12522,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return DeleteResponse{}, common.NewFDKError(err.Error())
         }
         return deleteAutocompleteKeywordResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
+     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAutocompleteKeywordDetailResponse, nil
         
     }
            
@@ -12268,54 +12782,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetAppProduct Get company application product data.
-     func (ca *PlatformAppCatalog)  GetAppProduct(ItemID string) (OwnerAppItemResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAppProductResponse OwnerAppItemResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product/%s/",ca.CompanyID, ca.ApplicationID, ItemID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return OwnerAppItemResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAppProductResponse)
-        if err != nil {
-            return OwnerAppItemResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAppProductResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // UpdateAppProduct Update a single custom meta.
      func (ca *PlatformAppCatalog)  UpdateAppProduct(ItemID string, body  ApplicationItemMeta) (SuccessResponse1, error) {
         var (
@@ -12381,6 +12847,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return SuccessResponse1{}, common.NewFDKError(err.Error())
         }
         return updateAppProductResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetAppProduct Get company application product data.
+     func (ca *PlatformAppCatalog)  GetAppProduct(ItemID string) (OwnerAppItemResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAppProductResponse OwnerAppItemResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product/%s/",ca.CompanyID, ca.ApplicationID, ItemID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return OwnerAppItemResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAppProductResponse)
+        if err != nil {
+            return OwnerAppItemResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAppProductResponse, nil
         
     }
            
@@ -16694,6 +17208,67 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return AppFeature{}, common.NewFDKError(err.Error())
         }
         return updateAppFeaturesResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // ModifyAppFeatures Update features of application
+     func (co *PlatformAppConfiguration)  ModifyAppFeatures(body  AppFeatureRequest) (AppFeature, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            modifyAppFeaturesResponse AppFeature
+	    )
+
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return AppFeature{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return AppFeature{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "patch",
+            fmt.Sprintf("/service/platform/configuration/v1.0/company/%s/application/%s/feature",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return AppFeature{}, err
+	    }
+        
+        err = json.Unmarshal(response, &modifyAppFeaturesResponse)
+        if err != nil {
+            return AppFeature{}, common.NewFDKError(err.Error())
+        }
+        return modifyAppFeaturesResponse, nil
         
     }
            

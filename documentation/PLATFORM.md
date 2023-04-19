@@ -102,10 +102,15 @@
     * [unDeleteUser](#undeleteuser)
     * [updateUser](#updateuser)
     * [createUserSession](#createusersession)
+    * [deleteSession](#deletesession)
     * [getActiveSessions](#getactivesessions)
     * [deleteActiveSessions](#deleteactivesessions)
     * [getPlatformConfig](#getplatformconfig)
     * [updatePlatformConfig](#updateplatformconfig)
+    * [createUserGroup](#createusergroup)
+    * [getUserGroups](#getusergroups)
+    * [updateUserGroup](#updateusergroup)
+    * [getUserGroupById](#getusergroupbyid)
     
 
 * [Content](#Content)
@@ -137,6 +142,7 @@
     * [updateFaq](#updatefaq)
     * [deleteFaq](#deletefaq)
     * [getFaqByIdOrSlug](#getfaqbyidorslug)
+    * [generateSEOTitle](#generateseotitle)
     * [getLandingPages](#getlandingpages)
     * [createLandingPage](#createlandingpage)
     * [updateLandingPage](#updatelandingpage)
@@ -186,6 +192,8 @@
     * [createSubscriptionCharge](#createsubscriptioncharge)
     * [getSubscriptionCharge](#getsubscriptioncharge)
     * [cancelSubscriptionCharge](#cancelsubscriptioncharge)
+    * [createOneTimeCharge](#createonetimecharge)
+    * [getChargeDetails](#getchargedetails)
     * [getInvoices](#getinvoices)
     * [getInvoiceById](#getinvoicebyid)
     * [getCustomerDetail](#getcustomerdetail)
@@ -262,6 +270,8 @@
     * [getUserOrderBeneficiaries](#getuserorderbeneficiaries)
     * [getUserBeneficiaries](#getuserbeneficiaries)
     * [confirmPayment](#confirmpayment)
+    * [getUserCODlimitRoutes](#getusercodlimitroutes)
+    * [setUserCODlimitRoutes](#setusercodlimitroutes)
     
 
 * [Order](#Order)
@@ -299,14 +309,14 @@
     * [processManifest](#processmanifest)
     * [dispatchManifest](#dispatchmanifest)
     * [getRoleBasedActions](#getrolebasedactions)
-    * [getShipmentHistory](#getshipmenthistory)
     * [postShipmentHistory](#postshipmenthistory)
+    * [getShipmentHistory](#getshipmenthistory)
     * [sendSmsNinja](#sendsmsninja)
     * [platformManualAssignDPToShipment](#platformmanualassigndptoshipment)
     * [updatePackagingDimensions](#updatepackagingdimensions)
     * [createOrder](#createorder)
-    * [getChannelConfig](#getchannelconfig)
     * [createChannelConfig](#createchannelconfig)
+    * [getChannelConfig](#getchannelconfig)
     * [uploadConsent](#uploadconsent)
     * [orderUpdate](#orderupdate)
     * [checkOrderStatus](#checkorderstatus)
@@ -315,13 +325,13 @@
 
 * [Catalog](#Catalog)
   * Methods
-    * [getSearchKeywords](#getsearchkeywords)
     * [deleteSearchKeywords](#deletesearchkeywords)
+    * [getSearchKeywords](#getsearchkeywords)
     * [updateSearchKeywords](#updatesearchkeywords)
     * [getAllSearchKeyword](#getallsearchkeyword)
     * [createCustomKeyword](#createcustomkeyword)
-    * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
+    * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [updateAutocompleteKeyword](#updateautocompletekeyword)
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
@@ -333,8 +343,8 @@
     * [createSizeGuide](#createsizeguide)
     * [getSizeGuide](#getsizeguide)
     * [updateSizeGuide](#updatesizeguide)
-    * [getAppProduct](#getappproduct)
     * [updateAppProduct](#updateappproduct)
+    * [getAppProduct](#getappproduct)
     * [getConfigurationMetadata](#getconfigurationmetadata)
     * [getGroupConfigurations](#getgroupconfigurations)
     * [createGroupConfiguration](#creategroupconfiguration)
@@ -391,8 +401,8 @@
     * [createProduct](#createproduct)
     * [getVariantsOfProducts](#getvariantsofproducts)
     * [getProductAttributes](#getproductattributes)
-    * [getProduct](#getproduct)
     * [deleteProduct](#deleteproduct)
+    * [getProduct](#getproduct)
     * [editProduct](#editproduct)
     * [allSizes](#allsizes)
     * [getProductValidation](#getproductvalidation)
@@ -509,6 +519,7 @@
     * [getPreviousVersions](#getpreviousversions)
     * [getAppFeatures](#getappfeatures)
     * [updateAppFeatures](#updateappfeatures)
+    * [modifyAppFeatures](#modifyappfeatures)
     * [getAppBasicDetails](#getappbasicdetails)
     * [updateAppBasicDetails](#updateappbasicdetails)
     * [getAppContactInfo](#getappcontactinfo)
@@ -4504,21 +4515,6 @@ All pages
         "__v": 9
       },
       {
-        "path": "product/:slug/reviews",
-        "type": "system",
-        "seo": {
-          "title": "",
-          "description": "",
-          "_id": "60ab5ca6d572fed64294eb24"
-        },
-        "_id": "60ab5ca6d572fed64294eb25",
-        "sections_meta": [],
-        "value": "product-reviews",
-        "text": "Product Reviews",
-        "theme": "5fb3ee4194a5181feeeba8e5",
-        "__v": 9
-      },
-      {
         "path": "blog",
         "type": "system",
         "seo": {
@@ -4591,21 +4587,6 @@ All pages
         "text": "Wishlist",
         "theme": "5fb3ee4194a5181feeeba8e5",
         "sections_meta": [],
-        "__v": 9
-      },
-      {
-        "path": "product/:slug/add-review",
-        "type": "system",
-        "seo": {
-          "title": "",
-          "description": "",
-          "_id": "60ab5ca6d572fed64294eb26"
-        },
-        "_id": "60ab5ca6d572fed64294eb27",
-        "sections_meta": [],
-        "value": "add-product-review",
-        "text": "Add Product Review",
-        "theme": "5fb3ee4194a5181feeeba8e5",
         "__v": 9
       },
       {
@@ -5262,21 +5243,6 @@ All pages
         "__v": 9
       },
       {
-        "path": "product/:slug/reviews",
-        "type": "system",
-        "seo": {
-          "title": "",
-          "description": "",
-          "_id": "60ab5ca6d572fed64294eb24"
-        },
-        "_id": "60ab5ca6d572fed64294eb25",
-        "sections_meta": [],
-        "value": "product-reviews",
-        "text": "Product Reviews",
-        "theme": "5fb3ee4194a5181feeeba8e5",
-        "__v": 9
-      },
-      {
         "path": "blog",
         "type": "system",
         "seo": {
@@ -5349,21 +5315,6 @@ All pages
         "text": "Wishlist",
         "theme": "5fb3ee4194a5181feeeba8e5",
         "sections_meta": [],
-        "__v": 9
-      },
-      {
-        "path": "product/:slug/add-review",
-        "type": "system",
-        "seo": {
-          "title": "",
-          "description": "",
-          "_id": "60ab5ca6d572fed64294eb26"
-        },
-        "_id": "60ab5ca6d572fed64294eb27",
-        "sections_meta": [],
-        "value": "add-product-review",
-        "text": "Add Product Review",
-        "theme": "5fb3ee4194a5181feeeba8e5",
         "__v": 9
       },
       {
@@ -9159,11 +9110,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -9373,11 +9319,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -11343,11 +11284,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -11557,11 +11493,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -13587,11 +13518,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -13801,11 +13727,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -17726,11 +17647,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -17940,11 +17856,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -19909,11 +19820,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -20123,11 +20029,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -22168,11 +22069,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -22382,11 +22278,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -24355,11 +24246,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -24569,11 +24455,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -26541,11 +26422,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -26755,11 +26631,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -28727,11 +28598,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -28941,11 +28807,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -30913,11 +30774,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -31127,11 +30983,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -33099,11 +32950,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -33313,11 +33159,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -35285,11 +35126,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -35499,11 +35335,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -37471,11 +37302,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -37685,11 +37511,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -39568,7 +39389,7 @@ data, err := User.UpdateUser(CompanyID, ApplicationID, UserID, body);
 
 | body |  UpdateUserRequestSchema | "Request body" 
 
-Update user
+Use this API to update user details, Note: Existing emails and phone numbers of user will be replaced directly if phone_numbers or emails field sent in request data.
 
 *Success Response:*
 
@@ -39631,8 +39452,71 @@ Schema: `CreateUserSessionResponseSchema`
 ---
 
 
+#### deleteSession
+Delete a session for a user
+
+```golang
+
+data, err := User.DeleteSession(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `ID`, `SessionID`, `Reason`
+
+
+Use this API to Delete a session of customers who have registered in the application.
+
+*Success Response:*
+
+
+
+Success. Refer `SessionDeleteResponseSchema` for more details.
+
+
+Schema: `SessionDeleteResponseSchema`
+
+
+*Examples:*
+
+
+Success
+```json
+{
+  "value": {
+    "items": [
+      "sess:123",
+      "sess:456"
+    ]
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getActiveSessions
-Get a list of all session for a user
+Get a list of all session with info for a user
 
 ```golang
 
@@ -39652,7 +39536,7 @@ data, err := User.GetActiveSessions(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `ID`
 
 
-Use this API to retrieve a list of session of customers who have registered in the application.
+Use this API to retrieve a list of session with info of customers who have registered in the application.
 
 *Success Response:*
 
@@ -39708,7 +39592,9 @@ data, err := User.DeleteActiveSessions(CompanyID, ApplicationID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `ID`
+
+
+| xQuery | struct | Includes properties such as `ID`, `Reason`
 
 
 Use this API to Delete a list of session of customers who have registered in the application.
@@ -39818,6 +39704,185 @@ Success. Returns a JSON object with the updated platform configurations. Refer `
 
 
 Schema: `PlatformSchema`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createUserGroup
+Create an User Group
+
+```golang
+
+data, err := User.CreateUserGroup(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
+
+
+| body |  CreateUserGroupSchema | "Request body" 
+
+Use this API to create new user Group
+
+*Success Response:*
+
+
+
+Success. returns created User Group. `UserGroupResponseSchema` for more details.
+
+
+Schema: `UserGroupResponseSchema`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getUserGroups
+Get User Groups mathcing criteria
+
+```golang
+
+data, err := User.GetUserGroups(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Name`, `Status`, `GroupUID`
+
+
+Use this API to get User Groups mathing criteria passed in query
+
+*Success Response:*
+
+
+
+Success. User Group details. `UserGroupListResponseSchema` for more details.
+
+
+Schema: `UserGroupListResponseSchema`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateUserGroup
+Update an User Group
+
+```golang
+
+data, err := User.UpdateUserGroup(CompanyID, ApplicationID, GroupID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
+
+
+| GroupID | string | Numeric ID allotted to a User Group | 
+
+
+| body |  UpdateUserGroupSchema | "Request body" 
+
+Use this API to update an existing user Group
+
+*Success Response:*
+
+
+
+Success. returns updated User Group. `UserGroupResponseSchema` for more details.
+
+
+Schema: `UserGroupResponseSchema`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getUserGroupById
+Get an User Group by Id
+
+```golang
+
+data, err := User.GetUserGroupById(CompanyID, ApplicationID, GroupID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
+
+
+| GroupID | string | Numeric ID allotted to a User Group | 
+
+
+
+Use this API to get details of an existing user Group
+
+*Success Response:*
+
+
+
+Success. User Group details. `UserGroupResponseSchema` for more details.
+
+
+Schema: `UserGroupResponseSchema`
 
 
 
@@ -41580,6 +41645,64 @@ Success. Refer `CreateFaqResponseSchema` for more details.
 
 
 Schema: `CreateFaqResponseSchema`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### generateSEOTitle
+Get SEO meta tag title for content
+
+```golang
+
+data, err := Content.GenerateSEOTitle(CompanyID, ApplicationID, Type, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+
+
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
+
+
+| Type | GenerationEntityType | String representing the type of SEO content to be generated. Possible values are: title, description | 
+
+
+| body |  GenerateSEOContent | "Request body" 
+
+Use this API to get GPT3 generated SEO meta tag title for content
+
+*Success Response:*
+
+
+
+Returns the generated SEO title
+
+
+Schema: `GeneratedSEOContent`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "title": "SEO Title example",
+    "description": "SEO Description example"
+  }
+}
+```
 
 
 
@@ -44775,6 +44898,7 @@ default
       },
       "robots_txt": "User-agent: * \nAllow: / \nsancisciasn xwsaixjowqnxwsiwjs",
       "sitemap_enabled": false,
+      "cannonical_enabled": false,
       "_id": "6009819ee463ad40de397eb2",
       "app": "000000000000000000000001",
       "created_at": "2021-01-21T13:29:02.543Z",
@@ -46362,6 +46486,90 @@ Schema: `EntitySubscription`
 ---
 
 
+#### createOneTimeCharge
+Create one time subscription charge
+
+```golang
+
+data, err := Billing.CreateOneTimeCharge(CompanyID, ExtensionID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Customer unique id. In case of company it will be company id. | 
+
+
+| ExtensionID | string | Extension _id | 
+
+
+| body |  CreateOneTimeCharge | "Request body" 
+
+Register one time subscription charge for a seller of your extension.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `CreateOneTimeChargeResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getChargeDetails
+Get subscription charge details
+
+```golang
+
+data, err := Billing.GetChargeDetails(CompanyID, ExtensionID, ChargeID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Customer unique id. In case of company it will be company id. | 
+
+
+| ExtensionID | string | Extension _id | 
+
+
+| ChargeID | string | Standalone charge _id | 
+
+
+
+Get created subscription charge details
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `OneTimeChargeEntity`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getInvoices
 Get invoices
 
@@ -47099,6 +47307,7 @@ Active subscription
 {
   "value": {
     "is_enabled": true,
+    "mandate_amount": 150000,
     "subscription": {
       "current_period": {
         "start": "2020-12-17T13:45:36.722Z",
@@ -51987,6 +52196,92 @@ Schema: `PaymentConfirmationResponse`
 ---
 
 
+#### getUserCODlimitRoutes
+Get COD limit for user
+
+```golang
+
+data, err := Payment.GetUserCODlimitRoutes(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `MerchantUserID`, `MobileNo`
+
+
+Use this API to get user cod limit and reamining limit for the payment
+
+*Success Response:*
+
+
+
+Success. Returns user cod limit , remaining limit and usage of user for COD. Check the example shown below or refer `GetUserCODLimitResponseSchema` for more details.
+
+
+Schema: `GetUserCODLimitResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### setUserCODlimitRoutes
+Set COD option for user for payment
+
+```golang
+
+data, err := Payment.SetUserCODlimitRoutes(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company ID | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| body |  SetCODForUserRequest | "Request body" 
+
+Use this API to set cod option as true or false for the payment
+
+*Success Response:*
+
+
+
+Success. Returns true/false for user cod option for payment. Check the example shown below or refer `GetUserCODLimitResponseSchema` for more details.
+
+
+Schema: `SetCODOptionResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ---
 
@@ -52045,7 +52340,17 @@ data, err := Order.GetShipments(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `SearchValue`, `SearchID`, `FromDate`, `ToDate`, `DpIds`, `OrderingCompanyID`, `Stores`, `SalesChannel`, `RequestByExt`, `PageNo`, `PageSize`, `IsPrioritySort`, `ExcludeLockedShipments`, `PaymentMethods`, `ChannelShipmentID`, `ChannelOrderID`, `CustomMeta`
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Lane`, `BagStatus`, `StatusOverrideLane`, `SearchType`, `SearchValue`, `SearchID`, `FromDate`, `ToDate`, `DpIds`, `OrderingCompanyID`, `Stores`, `SalesChannel`, `RequestByExt`, `PageNo`, `PageSize`, `IsPrioritySort`, `FetchActiveShipment`, `ExcludeLockedShipments`, `PaymentMethods`, `ChannelShipmentID`, `ChannelOrderID`, `CustomMeta`, `OrderingChannel`, `CompanyAffiliateTag`
 
 
 
@@ -53538,12 +53843,12 @@ Schema: `GetActionsResponse`
 ---
 
 
-#### getShipmentHistory
+#### postShipmentHistory
 
 
 ```golang
 
-data, err := Order.GetShipmentHistory(CompanyID, xQuery);
+data, err := Order.PostShipmentHistory(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -53552,11 +53857,7 @@ data, err := Order.GetShipmentHistory(CompanyID, xQuery);
 | CompanyID | float64 |  | 
 
 
-
-
-
-| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
-
+| body |  PostShipmentHistory | "Request body" 
 
 
 
@@ -53580,12 +53881,12 @@ Schema: `ShipmentHistoryResponse`
 ---
 
 
-#### postShipmentHistory
+#### getShipmentHistory
 
 
 ```golang
 
-data, err := Order.PostShipmentHistory(CompanyID, body);
+data, err := Order.GetShipmentHistory(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -53594,7 +53895,11 @@ data, err := Order.PostShipmentHistory(CompanyID, body);
 | CompanyID | float64 |  | 
 
 
-| body |  PostShipmentHistory | "Request body" 
+
+
+
+| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
+
 
 
 
@@ -53770,43 +54075,6 @@ Schema: `CreateOrderResponse`
 ---
 
 
-#### getChannelConfig
-
-
-```golang
-
-data, err := Order.GetChannelConfig(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-getChannelConfig
-
-*Success Response:*
-
-
-
-Successfully created the config data
-
-
-Schema: `CreateChannelConfigData`
-
-
-
-
-
-
-
-
-
----
-
-
 #### createChannelConfig
 
 
@@ -53833,6 +54101,43 @@ Successfully updateShipmentStatus!
 
 
 Schema: `CreateChannelConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getChannelConfig
+
+
+```golang
+
+data, err := Order.GetChannelConfig(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+getChannelConfig
+
+*Success Response:*
+
+
+
+Successfully created the config data
+
+
+Schema: `CreateChannelConfigData`
 
 
 
@@ -54003,49 +54308,6 @@ Schema: `OrderStatusResult`
 ## Catalog
 
 
-#### getSearchKeywords
-Get a Search Keywords Details
-
-```golang
-
-data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
-
-*Success Response:*
-
-
-
-The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
-
-
-Schema: `GetSearchWordsDetailResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### deleteSearchKeywords
 Delete a Search Keywords
 
@@ -54077,6 +54339,49 @@ Status object. Tells whether the operation was successful. See example below or 
 
 
 Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSearchKeywords
+Get a Search Keywords Details
+
+```golang
+
+data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
+
+*Success Response:*
+
+
+
+The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
+
+
+Schema: `GetSearchWordsDetailResponse`
 
 
 
@@ -54214,49 +54519,6 @@ Schema: `GetSearchWordsData`
 ---
 
 
-#### getAutocompleteKeywordDetail
-Get a Autocomplete Keywords Details
-
-```golang
-
-data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
-
-*Success Response:*
-
-
-
-The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
-
-
-Schema: `GetAutocompleteWordsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### deleteAutocompleteKeyword
 Delete a Autocomplete Keywords
 
@@ -54288,6 +54550,49 @@ Status object. Tells whether the operation was successful. See example below or 
 
 
 Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAutocompleteKeywordDetail
+Get a Autocomplete Keywords Details
+
+```golang
+
+data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
+
+*Success Response:*
+
+
+
+The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
+
+
+Schema: `GetAutocompleteWordsResponse`
 
 
 
@@ -54753,49 +55058,6 @@ Schema: `SuccessResponse`
 ---
 
 
-#### getAppProduct
-Get company application product data.
-
-```golang
-
-data, err := Catalog.GetAppProduct(CompanyID, ApplicationID, ItemID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ItemID | string | product id for a particular product. | 
-
-
-
-Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
-
-*Success Response:*
-
-
-
-The Company Applicaton Product Data(MOQ/SEO).
-
-
-Schema: `OwnerAppItemResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateAppProduct
 Update a single custom meta.
 
@@ -54828,6 +55090,49 @@ Returns a success response
 
 
 Schema: `SuccessResponse1`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAppProduct
+Get company application product data.
+
+```golang
+
+data, err := Catalog.GetAppProduct(CompanyID, ApplicationID, ItemID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ItemID | string | product id for a particular product. | 
+
+
+
+Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
+
+*Success Response:*
+
+
+
+The Company Applicaton Product Data(MOQ/SEO).
+
+
+Schema: `OwnerAppItemResponse`
 
 
 
@@ -57243,6 +57548,46 @@ Schema: `ProductAttributesResponse`
 ---
 
 
+#### deleteProduct
+Delete a product.
+
+```golang
+
+data, err := Catalog.DeleteProduct(CompanyID, ItemID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
+
+
+| ItemID | float64 | Id of the product to be updated. | 
+
+
+
+This API allows to delete product.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getProduct
 Get a single product.
 
@@ -57276,46 +57621,6 @@ Product object. See example below or refer `product.utils.format_product_respons
 
 
 Schema: `SingleProductResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteProduct
-Delete a product.
-
-```golang
-
-data, err := Catalog.DeleteProduct(CompanyID, ItemID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
-
-
-| ItemID | float64 | Id of the product to be updated. | 
-
-
-
-This API allows to delete product.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
 
 
 
@@ -61506,6 +61811,47 @@ Update features of application
 ```golang
 
 data, err := Configuration.UpdateAppFeatures(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current application id | 
+
+
+| body |  AppFeatureRequest | "Request body" 
+
+Update features of application
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `AppFeature`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### modifyAppFeatures
+Update features of application
+
+```golang
+
+data, err := Configuration.ModifyAppFeatures(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |

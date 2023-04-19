@@ -236,6 +236,8 @@
     * [getRupifiBannerDetails](#getrupifibannerdetails)
     * [getEpaylaterBannerDetails](#getepaylaterbannerdetails)
     * [resendOrCancelPayment](#resendorcancelpayment)
+    * [renderHTML](#renderhtml)
+    * [validateVPA](#validatevpa)
     * [getActiveRefundTransferModes](#getactiverefundtransfermodes)
     * [enableOrDisableRefundTransferMode](#enableordisablerefundtransfermode)
     * [getUserBeneficiariesDetail](#getuserbeneficiariesdetail)
@@ -325,6 +327,7 @@
     * [getTatProduct](#gettatproduct)
     * [getAllCountries](#getallcountries)
     * [getPincodeZones](#getpincodezones)
+    * [getOptimalLocations](#getoptimallocations)
     
 
 
@@ -6320,21 +6323,6 @@ All pages
         "__v": 9
       },
       {
-        "path": "product/:slug/reviews",
-        "type": "system",
-        "seo": {
-          "title": "",
-          "description": "",
-          "_id": "60ab5ca6d572fed64294eb24"
-        },
-        "_id": "60ab5ca6d572fed64294eb25",
-        "sections_meta": [],
-        "value": "product-reviews",
-        "text": "Product Reviews",
-        "theme": "5fb3ee4194a5181feeeba8e5",
-        "__v": 9
-      },
-      {
         "path": "blog",
         "type": "system",
         "seo": {
@@ -6407,21 +6395,6 @@ All pages
         "text": "Wishlist",
         "theme": "5fb3ee4194a5181feeeba8e5",
         "sections_meta": [],
-        "__v": 9
-      },
-      {
-        "path": "product/:slug/add-review",
-        "type": "system",
-        "seo": {
-          "title": "",
-          "description": "",
-          "_id": "60ab5ca6d572fed64294eb26"
-        },
-        "_id": "60ab5ca6d572fed64294eb27",
-        "sections_meta": [],
-        "value": "add-product-review",
-        "text": "Add Product Review",
-        "theme": "5fb3ee4194a5181feeeba8e5",
         "__v": 9
       },
       {
@@ -7416,11 +7389,6 @@ Applied Theme
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -7630,11 +7598,6 @@ Applied Theme
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -9597,11 +9560,6 @@ Preview Theme
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -9811,11 +9769,6 @@ Preview Theme
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -14569,6 +14522,7 @@ Success
       },
       "robots_txt": "User-agent: * \nAllow: / \nsancisciasn xwsaixjowqnxwsiwjs",
       "sitemap_enabled": false,
+      "cannonical_enabled": false,
       "_id": "6009819ee463ad40de397eb2",
       "app": "000000000000000000000001",
       "created_at": "2021-01-21T13:29:02.543Z",
@@ -16982,6 +16936,78 @@ request_type is resend
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### renderHTML
+Convert base64 string to HTML form
+
+```golang
+
+ data, err :=  Payment.RenderHTML(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  renderHTMLRequest | "Request body" 
+
+
+Use this API to decode base64 html form to plain HTML string.
+
+*Success Response:*
+
+
+
+Success and return HTML decoded text
+
+
+Schema: `renderHTMLResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### validateVPA
+API to Validate UPI ID
+
+```golang
+
+ data, err :=  Payment.ValidateVPA(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  ValidateVPARequest | "Request body" 
+
+
+API to Validate UPI ID
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `ValidateVPAResponseSchema` for more details.
+
+
+Schema: `ValidateVPAResponse`
 
 
 
@@ -22804,7 +22830,7 @@ Get Pincode API
 
 ```golang
 
- data, err :=  Logistic.GetPincodeCity(Pincode, xQuery);
+ data, err :=  Logistic.GetPincodeCity(Pincode);
 ```
 
 | Argument  |  Type  | Description |
@@ -22812,9 +22838,6 @@ Get Pincode API
 
 | Pincode | string | A `pincode` contains a specific address of a location. | 
 
-
-
-| xQuery | struct | Includes properties such as `CountryCode`
 
 
 
@@ -22875,7 +22898,14 @@ Pincode data found
             "display_name": "Thane",
             "uid": "city:INDIA|MAHARASHTRA|MUMBAI"
           }
-        ]
+        ],
+        "lat_long": {
+          "type": "Point",
+          "coordinates": [
+            3.8858955,
+            7.2272335
+          ]
+        }
       }
     ],
     "request_uuid": "fce9f431215e71c9ee0e86e792ae1dce4",
@@ -23130,6 +23160,42 @@ Response status_code
 
 
 Schema: `GetZoneFromPincodeViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOptimalLocations
+GET zone from the Pincode.
+
+```golang
+
+ data, err :=  Logistic.GetOptimalLocations(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  ReAssignStoreRequest | "Request body" 
+
+
+This API returns zone from the Pincode View.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `ReAssignStoreResponse`
 
 
 

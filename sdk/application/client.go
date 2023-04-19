@@ -11185,6 +11185,124 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // RenderHTML Convert base64 string to HTML form
+    func (pa *Payment)  RenderHTML(body  renderHTMLRequest) ([]byte, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             
+	    )
+
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return []byte{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return []byte{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            "/service/application/payment/v1.0/payment/html/render/",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return []byte{}, err
+	    }
+        
+        return response, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // ValidateVPA API to Validate UPI ID
+    func (pa *Payment)  ValidateVPA(body  ValidateVPARequest) (ValidateVPAResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             validateVPAResponse ValidateVPAResponse
+	    )
+
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return ValidateVPAResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return ValidateVPAResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            "/service/application/payment/v1.0/validate-vpa",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ValidateVPAResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &validateVPAResponse)
+        if err != nil {
+            return ValidateVPAResponse{}, common.NewFDKError(err.Error())
+        }
+         return validateVPAResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // GetActiveRefundTransferModes Lists the mode of refund
     func (pa *Payment)  GetActiveRefundTransferModes() (TransferModeResponse, error){
         var (
@@ -12534,6 +12652,8 @@ func NewAppClient(config *AppConfig) *Client {
              customerOnboardResponse CustomerOnboardingResponse
 	    )
 
+        
+            
         
             
         
@@ -15608,13 +15728,8 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    //LogisticGetPincodeCityXQuery holds query params
-    type LogisticGetPincodeCityXQuery struct { 
-        CountryCode string  `url:"country_code,omitempty"`  
-    }
-    
     // GetPincodeCity Get Pincode API
-    func (lo *Logistic)  GetPincodeCity(Pincode string, xQuery LogisticGetPincodeCityXQuery) (PincodeApiResponse, error){
+    func (lo *Logistic)  GetPincodeCity(Pincode string) (PincodeApiResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -15624,10 +15739,6 @@ func NewAppClient(config *AppConfig) *Client {
 
         
 
-        
-            
-                
-            
         
 
         
@@ -15643,7 +15754,7 @@ func NewAppClient(config *AppConfig) *Client {
             "get",
             fmt.Sprintf("/service/application/logistics/v1.0/pincode/%s",Pincode),
             nil,
-            xQuery,
+            nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -15832,6 +15943,74 @@ func NewAppClient(config *AppConfig) *Client {
             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
         }
          return getPincodeZonesResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetOptimalLocations GET zone from the Pincode.
+    func (lo *Logistic)  GetOptimalLocations(body  ReAssignStoreRequest) (ReAssignStoreResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getOptimalLocationsResponse ReAssignStoreResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return ReAssignStoreResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return ReAssignStoreResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.config,
+            "post",
+            "/service/application/logistics/v1.0/reassign_stores",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ReAssignStoreResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getOptimalLocationsResponse)
+        if err != nil {
+            return ReAssignStoreResponse{}, common.NewFDKError(err.Error())
+        }
+         return getOptimalLocationsResponse, nil
         
     }
           
