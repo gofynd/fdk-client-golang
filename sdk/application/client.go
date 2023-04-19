@@ -13426,6 +13426,77 @@ func NewAppClient(config *AppConfig) *Client {
     }
           
     
+    
+    
+  
+    
+    
+    //OrderGetProductsXQuery holds query params
+    type OrderGetProductsXQuery struct { 
+        Status float64  `url:"status,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        FromDate string  `url:"from_date,omitempty"` 
+        ToDate string  `url:"to_date,omitempty"` 
+        SearchValue string  `url:"search_value,omitempty"`  
+    }
+    
+    // GetProducts 
+    func (or *Order)  GetProducts(CompanyID float64, xQuery OrderGetProductsXQuery) (ProductListResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getProductsResponse ProductListResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/application/order/v1.0/products",CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ProductListResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductsResponse)
+        if err != nil {
+            return ProductListResponse{}, common.NewFDKError(err.Error())
+        }
+         return getProductsResponse, nil
+        
+    }
+          
+    
 
     // Rewards ...
     type Rewards struct {
