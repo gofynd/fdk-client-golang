@@ -24779,7 +24779,9 @@ Update shipment delivery type and quantity before checkout
 
 
 
-| xQuery | struct | Includes properties such as `I`, `P`, `ID`, `AddressID`, `OrderType`
+
+
+| xQuery | struct | Includes properties such as `I`, `P`, `ID`, `AddressID`, `AreaCode`, `OrderType`
 
 | body |  UpdateCartShipmentRequest | "Request body" 
 

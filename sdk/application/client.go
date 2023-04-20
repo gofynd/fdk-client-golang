@@ -10904,6 +10904,10 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
+            
+        
 
         
 
@@ -12477,6 +12481,10 @@ func NewAppClient(config *AppConfig) *Client {
              checkAndUpdatePaymentStatusPaymentLinkResponse PaymentStatusUpdateResponse
 	    )
 
+        
+            
+        
+            
         
             
         
@@ -15338,6 +15346,7 @@ func NewAppClient(config *AppConfig) *Client {
         P bool  `url:"p,omitempty"` 
         ID string  `url:"id,omitempty"` 
         AddressID string  `url:"address_id,omitempty"` 
+        AreaCode string  `url:"area_code,omitempty"` 
         OrderType string  `url:"order_type,omitempty"`  
     }
     
@@ -15355,6 +15364,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
