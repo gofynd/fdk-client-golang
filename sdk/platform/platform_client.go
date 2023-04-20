@@ -41,8 +41,6 @@ type PlatformClient struct {
 	
 		AuditTrail  *PlatformAuditTrail
 	
-		DocumentEngine  *PlatformDocumentEngine
-	
 	ApplicationClient *ApplicationClient //ApplicationClient embedded
 }
 
@@ -80,8 +78,6 @@ func NewPlatformClient(config *PlatformConfig) *PlatformClient {
 				Webhook:  NewPlatformWebhook(config),
 			
 				AuditTrail:  NewPlatformAuditTrail(config),
-			
-				DocumentEngine:  NewPlatformDocumentEngine(config),
 			
 			ApplicationClient: &ApplicationClient{},
 		}
@@ -8246,6 +8242,70 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformGetProductXQuery holds query params
+    type PlatformGetProductXQuery struct { 
+        BrandUID float64  `url:"brand_uid,omitempty"` 
+        ItemCode string  `url:"item_code,omitempty"`  
+    }
+    
+
+
+    // GetProduct Get a single product.
+     func (ca *PlatformCatalog)  GetProduct(ItemID float64, xQuery PlatformGetProductXQuery) (SingleProductResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getProductResponse SingleProductResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SingleProductResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProductResponse)
+        if err != nil {
+             return SingleProductResponse{}, common.NewFDKError(err.Error())
+        }
+        return getProductResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
 
 
     // EditProduct Edit a product.
@@ -8436,70 +8496,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return SuccessResponse{}, common.NewFDKError(err.Error())
         }
         return deleteProductResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformGetProductXQuery holds query params
-    type PlatformGetProductXQuery struct { 
-        BrandUID float64  `url:"brand_uid,omitempty"` 
-        ItemCode string  `url:"item_code,omitempty"`  
-    }
-    
-
-
-    // GetProduct Get a single product.
-     func (ca *PlatformCatalog)  GetProduct(ItemID float64, xQuery PlatformGetProductXQuery) (SingleProductResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getProductResponse SingleProductResponse
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-        
-
-        
-        
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SingleProductResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProductResponse)
-        if err != nil {
-             return SingleProductResponse{}, common.NewFDKError(err.Error())
-        }
-        return getProductResponse, nil
         
     }
          
@@ -16606,622 +16602,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return EntityTypesResponse{}, common.NewFDKError(err.Error())
         }
         return getEntityTypesResponse, nil
-        
-    }
-         
-        
-       
-    
-
-
-	
-   // PlatformDocumentEngine holds PlatformDocumentEngine object properties
-    type PlatformDocumentEngine struct {
-        Config *PlatformConfig
-        CompanyID string
-    }
-    // NewPlatformDocumentEngine returns new PlatformDocumentEngine instance
-    func NewPlatformDocumentEngine(config *PlatformConfig) *PlatformDocumentEngine {
-        return &PlatformDocumentEngine{Config: config, CompanyID: config.CompanyID}
-    }
-    
-    
-   
-  
-    
-    
-
-
-    // GenerateBulkPackageLabel Generate Labels for Packages
-     func (do *PlatformDocumentEngine)  GenerateBulkPackageLabel(body  GenerateBulkPackageLabel) (SuccessResponseGenerateBulk, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            generateBulkPackageLabelResponse SuccessResponseGenerateBulk
-	    )
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return SuccessResponseGenerateBulk{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return SuccessResponseGenerateBulk{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            do.Config,
-            "post",
-            fmt.Sprintf("/service/platform/document/v1.0/company/%s/generate-bulk-package-label",do.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SuccessResponseGenerateBulk{}, err
-	    }
-        
-        err = json.Unmarshal(response, &generateBulkPackageLabelResponse)
-        if err != nil {
-             return SuccessResponseGenerateBulk{}, common.NewFDKError(err.Error())
-        }
-        return generateBulkPackageLabelResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // GenerateBulkBoxLabel Generate Labels for Boxes which will go inside package
-     func (do *PlatformDocumentEngine)  GenerateBulkBoxLabel(body  GenerateBulkBoxLabel) (SuccessResponseGenerateBulk, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            generateBulkBoxLabelResponse SuccessResponseGenerateBulk
-	    )
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return SuccessResponseGenerateBulk{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return SuccessResponseGenerateBulk{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            do.Config,
-            "post",
-            fmt.Sprintf("/service/platform/document/v1.0/company/%s/generate-bulk-box-label",do.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SuccessResponseGenerateBulk{}, err
-	    }
-        
-        err = json.Unmarshal(response, &generateBulkBoxLabelResponse)
-        if err != nil {
-             return SuccessResponseGenerateBulk{}, common.NewFDKError(err.Error())
-        }
-        return generateBulkBoxLabelResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // GenerateBulkShipmentLabel Generate Labels for Shipments which contains packaged
-     func (do *PlatformDocumentEngine)  GenerateBulkShipmentLabel(body  GenerateBulkShipmentLabel) (SuccessResponseGenerateBulk, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            generateBulkShipmentLabelResponse SuccessResponseGenerateBulk
-	    )
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return SuccessResponseGenerateBulk{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return SuccessResponseGenerateBulk{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            do.Config,
-            "post",
-            fmt.Sprintf("/service/platform/document/v1.0/company/%s/generate-bulk-shipment-label",do.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SuccessResponseGenerateBulk{}, err
-	    }
-        
-        err = json.Unmarshal(response, &generateBulkShipmentLabelResponse)
-        if err != nil {
-             return SuccessResponseGenerateBulk{}, common.NewFDKError(err.Error())
-        }
-        return generateBulkShipmentLabelResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // GenerateNoc Generate NOC for Seller having access to a fullfillment center
-     func (do *PlatformDocumentEngine)  GenerateNoc(body  GenerateNoc) (SuccessResponseGenerateBulk, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            generateNocResponse SuccessResponseGenerateBulk
-	    )
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return SuccessResponseGenerateBulk{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return SuccessResponseGenerateBulk{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            do.Config,
-            "post",
-            fmt.Sprintf("/service/platform/document/v1.0/company/%s/generate-noc",do.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SuccessResponseGenerateBulk{}, err
-	    }
-        
-        err = json.Unmarshal(response, &generateNocResponse)
-        if err != nil {
-             return SuccessResponseGenerateBulk{}, common.NewFDKError(err.Error())
-        }
-        return generateNocResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformGetLabelStatusXQuery holds query params
-    type PlatformGetLabelStatusXQuery struct { 
-        UID string  `url:"uid,omitempty"`  
-    }
-    
-
-
-    // GetLabelStatus Get Staus of Label generations
-     func (do *PlatformDocumentEngine)  GetLabelStatus(xQuery PlatformGetLabelStatusXQuery) (StatusSuccessResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getLabelStatusResponse StatusSuccessResponse
-	    )
-
-        
-
-        
-            
-                
-            
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            do.Config,
-            "get",
-            fmt.Sprintf("/service/platform/document/v1.0/company/%s/get-label-list",do.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return StatusSuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getLabelStatusResponse)
-        if err != nil {
-             return StatusSuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return getLabelStatusResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformGetNocStatusXQuery holds query params
-    type PlatformGetNocStatusXQuery struct { 
-        UID string  `url:"uid,omitempty"`  
-    }
-    
-
-
-    // GetNocStatus Get Staus of NOC generation
-     func (do *PlatformDocumentEngine)  GetNocStatus(xQuery PlatformGetNocStatusXQuery) (StatusSuccessResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getNocStatusResponse StatusSuccessResponse
-	    )
-
-        
-
-        
-            
-                
-            
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            do.Config,
-            "get",
-            fmt.Sprintf("/service/platform/document/v1.0/company/%s/get-noc-status",do.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return StatusSuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getNocStatusResponse)
-        if err != nil {
-             return StatusSuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return getNocStatusResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // GetPresignedURL Get Presigned URL to download PDFs
-     func (do *PlatformDocumentEngine)  GetPresignedURL(body  InvoiceLabelPresignedRequestBody) (SignedSuccessResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getPresignedURLResponse SignedSuccessResponse
-	    )
-
-        
-        
-        
-        
-        
-        
-        
-
-        
-
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return SignedSuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return SignedSuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            do.Config,
-            "post",
-            fmt.Sprintf("/service/platform/document/v1.0/company/%s/get-single-presigned-url",do.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SignedSuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getPresignedURLResponse)
-        if err != nil {
-             return SignedSuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return getPresignedURLResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformGetLabelPresignedURLXQuery holds query params
-    type PlatformGetLabelPresignedURLXQuery struct { 
-        UID string  `url:"uid,omitempty"`  
-    }
-    
-
-
-    // GetLabelPresignedURL Get Presigned URL to download labels
-     func (do *PlatformDocumentEngine)  GetLabelPresignedURL(xQuery PlatformGetLabelPresignedURLXQuery) (SignedSuccessResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getLabelPresignedURLResponse SignedSuccessResponse
-	    )
-
-        
-
-        
-            
-                
-            
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            do.Config,
-            "get",
-            fmt.Sprintf("/service/platform/document/v1.0/company/%s/get-label-presigned-url",do.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SignedSuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getLabelPresignedURLResponse)
-        if err != nil {
-             return SignedSuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return getLabelPresignedURLResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformGetNocPresignedURLXQuery holds query params
-    type PlatformGetNocPresignedURLXQuery struct { 
-        UID string  `url:"uid,omitempty"`  
-    }
-    
-
-
-    // GetNocPresignedURL Get Presigned URL to download NOC Pdf
-     func (do *PlatformDocumentEngine)  GetNocPresignedURL(xQuery PlatformGetNocPresignedURLXQuery) (SignedSuccessResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getNocPresignedURLResponse SignedSuccessResponse
-	    )
-
-        
-
-        
-            
-                
-            
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            do.Config,
-            "get",
-            fmt.Sprintf("/service/platform/document/v1.0/company/%s/get-noc-presigned-url",do.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SignedSuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getNocPresignedURLResponse)
-        if err != nil {
-             return SignedSuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return getNocPresignedURLResponse, nil
         
     }
          

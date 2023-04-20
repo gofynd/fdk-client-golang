@@ -278,6 +278,7 @@
     * [getShipmentBagReasons](#getshipmentbagreasons)
     * [getShipmentReasons](#getshipmentreasons)
     * [updateShipmentStatus](#updateshipmentstatus)
+    * [updateShipmentStatus1](#updateshipmentstatus1)
     
 
 * [Rewards](#Rewards)
@@ -18399,6 +18400,45 @@ Schema: `ShipmentApplicationStatusResponse`
 ---
 
 
+#### updateShipmentStatus1
+
+
+```golang
+
+ data, err :=  Order.UpdateShipmentStatus1(ShipmentID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string |  | 
+
+
+| body |  UpdateShipmentStatusRequest | "Request body" 
+
+
+updateShipmentStatus
+
+*Success Response:*
+
+
+
+Successfully updateShipmentStatus!
+
+
+Schema: `ShipmentApplicationStatusResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ---
 
@@ -22920,10 +22960,7 @@ Pincode data found
         "display_name": "421202",
         "meta": {
           "zone": "West",
-          "internal_zone_id": 4,
-          "deliverables": [
-            "essential"
-          ]
+          "internal_zone_id": 4
         },
         "parents": [
           {
@@ -22944,7 +22981,14 @@ Pincode data found
             "display_name": "Thane",
             "uid": "city:INDIA|MAHARASHTRA|MUMBAI"
           }
-        ]
+        ],
+        "lat_long": {
+          "type": "Point",
+          "coordinates": [
+            3.8858955,
+            7.2272335
+          ]
+        }
       }
     ],
     "request_uuid": "fce9f431215e71c9ee0e86e792ae1dce4",

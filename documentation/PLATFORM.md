@@ -23,7 +23,6 @@
 * [Partner](#Partner) - Partner configuration apis 
 * [Webhook](#Webhook) - Webhook dispatcher with retry and one event to many subscriber vice versa 
 * [AuditTrail](#AuditTrail) - Audit Logging Service that logs the crucial updates on the Platform 
-* [DocumentEngine](#DocumentEngine) - Handles financial pdf generation of Fulfilment 
 
 ----
 ----
@@ -316,14 +315,14 @@
 
 * [Catalog](#Catalog)
   * Methods
+    * [getSearchKeywords](#getsearchkeywords)
     * [updateSearchKeywords](#updatesearchkeywords)
     * [deleteSearchKeywords](#deletesearchkeywords)
-    * [getSearchKeywords](#getsearchkeywords)
     * [createCustomKeyword](#createcustomkeyword)
     * [getAllSearchKeyword](#getallsearchkeyword)
+    * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [updateAutocompleteKeyword](#updateautocompletekeyword)
     * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
-    * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createProductBundle](#createproductbundle)
@@ -390,9 +389,9 @@
     * [getProducts](#getproducts)
     * [getVariantsOfProducts](#getvariantsofproducts)
     * [getProductAttributes](#getproductattributes)
+    * [getProduct](#getproduct)
     * [editProduct](#editproduct)
     * [deleteProduct](#deleteproduct)
-    * [getProduct](#getproduct)
     * [allSizes](#allsizes)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
@@ -640,19 +639,6 @@
     * [createAuditLog](#createauditlog)
     * [getAuditLog](#getauditlog)
     * [getEntityTypes](#getentitytypes)
-    
-
-* [DocumentEngine](#DocumentEngine)
-  * Methods
-    * [generateBulkPackageLabel](#generatebulkpackagelabel)
-    * [generateBulkBoxLabel](#generatebulkboxlabel)
-    * [generateBulkShipmentLabel](#generatebulkshipmentlabel)
-    * [generateNoc](#generatenoc)
-    * [getLabelStatus](#getlabelstatus)
-    * [getNocStatus](#getnocstatus)
-    * [getPresignedURL](#getpresignedurl)
-    * [getLabelPresignedURL](#getlabelpresignedurl)
-    * [getNocPresignedURL](#getnocpresignedurl)
     
 
 
@@ -54023,6 +54009,49 @@ Schema: `OrderStatusResult`
 ## Catalog
 
 
+#### getSearchKeywords
+Get a Search Keywords Details
+
+```golang
+
+data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
+
+*Success Response:*
+
+
+
+The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
+
+
+Schema: `GetSearchWordsDetailResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateSearchKeywords
 Update Search Keyword
 
@@ -54098,49 +54127,6 @@ Status object. Tells whether the operation was successful. See example below or 
 
 
 Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getSearchKeywords
-Get a Search Keywords Details
-
-```golang
-
-data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
-
-*Success Response:*
-
-
-
-The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
-
-
-Schema: `GetSearchWordsDetailResponse`
 
 
 
@@ -54234,6 +54220,49 @@ Schema: `GetSearchWordsResponse`
 ---
 
 
+#### getAutocompleteKeywordDetail
+Get a Autocomplete Keywords Details
+
+```golang
+
+data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
+
+*Success Response:*
+
+
+
+The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
+
+
+Schema: `GetAutocompleteWordsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateAutocompleteKeyword
 Create & Update Autocomplete Keyword
 
@@ -54309,49 +54338,6 @@ Status object. Tells whether the operation was successful. See example below or 
 
 
 Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAutocompleteKeywordDetail
-Get a Autocomplete Keywords Details
-
-```golang
-
-data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
-
-*Success Response:*
-
-
-
-The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
-
-
-Schema: `GetAutocompleteWordsResponse`
 
 
 
@@ -57173,6 +57159,51 @@ Schema: `ProductAttributesResponse`
 ---
 
 
+#### getProduct
+Get a single product.
+
+```golang
+
+data, err := Catalog.GetProduct(CompanyID, ItemID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id of the product. | 
+
+
+| ItemID | float64 | Item Id of the product. | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `BrandUID`, `ItemCode`
+
+
+This API helps to get data associated to a particular product.
+
+*Success Response:*
+
+
+
+Product object. See example below or refer `product.utils.format_product_response` for details
+
+
+Schema: `SingleProductResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### editProduct
 Edit a product.
 
@@ -57242,51 +57273,6 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getProduct
-Get a single product.
-
-```golang
-
-data, err := Catalog.GetProduct(CompanyID, ItemID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id of the product. | 
-
-
-| ItemID | float64 | Item Id of the product. | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `BrandUID`, `ItemCode`
-
-
-This API helps to get data associated to a particular product.
-
-*Success Response:*
-
-
-
-Product object. See example below or refer `product.utils.format_product_response` for details
-
-
-Schema: `SingleProductResponse`
 
 
 
@@ -68146,405 +68132,6 @@ default
         "display_name": "Shipment Update"
       }
     ]
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-
----
-
-
-## DocumentEngine
-
-
-#### generateBulkPackageLabel
-Generate Labels for Packages
-
-```golang
-
-data, err := DocumentEngine.GenerateBulkPackageLabel(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-| body |  GenerateBulkPackageLabel | "Request body" 
-
-Use this API to generate label for Packages
-
-*Success Response:*
-
-
-
-Sucsess Response, Labels will be generated
-
-
-Schema: `SuccessResponseGenerateBulk`
-
-
-
-
-
-
-
-
-
----
-
-
-#### generateBulkBoxLabel
-Generate Labels for Boxes which will go inside package
-
-```golang
-
-data, err := DocumentEngine.GenerateBulkBoxLabel(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-| body |  GenerateBulkBoxLabel | "Request body" 
-
-Use this API to generate label for Boxes
-
-*Success Response:*
-
-
-
-Sucsess Response, Labels will be generated
-
-
-Schema: `SuccessResponseGenerateBulk`
-
-
-
-
-
-
-
-
-
----
-
-
-#### generateBulkShipmentLabel
-Generate Labels for Shipments which contains packaged
-
-```golang
-
-data, err := DocumentEngine.GenerateBulkShipmentLabel(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-| body |  GenerateBulkShipmentLabel | "Request body" 
-
-Use this API to generate label for Shipments
-
-*Success Response:*
-
-
-
-Sucsess Response, Labels will be generated
-
-
-Schema: `SuccessResponseGenerateBulk`
-
-
-
-
-
-
-
-
-
----
-
-
-#### generateNoc
-Generate NOC for Seller having access to a fullfillment center
-
-```golang
-
-data, err := DocumentEngine.GenerateNoc(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-| body |  GenerateNoc | "Request body" 
-
-Use this API to generate NOC for Seller
-
-*Success Response:*
-
-
-
-Sucsess Response, NOC Pdf will be generated
-
-
-Schema: `SuccessResponseGenerateBulk`
-
-
-*Examples:*
-
-
-success response
-```json
-{
-  "value": {
-    "status": true
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getLabelStatus
-Get Staus of Label generations
-
-```golang
-
-data, err := DocumentEngine.GetLabelStatus(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-
-| xQuery | struct | Includes properties such as `UID`
-
-
-Use this API to fetch status of PDF generation of Labels
-
-*Success Response:*
-
-
-
-Sucess Response, Status Of Label generation
-
-
-Schema: `StatusSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getNocStatus
-Get Staus of NOC generation
-
-```golang
-
-data, err := DocumentEngine.GetNocStatus(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-
-| xQuery | struct | Includes properties such as `UID`
-
-
-Use this API to fetch status of PDF generation of NOC
-
-*Success Response:*
-
-
-
-Sucess Response, Status Of NOC Pdf generation
-
-
-Schema: `StatusSuccessResponse`
-
-
-*Examples:*
-
-
-success response
-```json
-{
-  "value": {
-    "success": true,
-    "status": "created"
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPresignedURL
-Get Presigned URL to download PDFs
-
-```golang
-
-data, err := DocumentEngine.GetPresignedURL(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-| body |  InvoiceLabelPresignedRequestBody | "Request body" 
-
-Use this API to generate Presigned URLs for downloading PDFs
-
-*Success Response:*
-
-
-
-Sucess Response, Presigned URL of PDFs
-
-
-Schema: `SignedSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getLabelPresignedURL
-Get Presigned URL to download labels
-
-```golang
-
-data, err := DocumentEngine.GetLabelPresignedURL(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-
-| xQuery | struct | Includes properties such as `UID`
-
-
-Use this API to generate Presigned URLs for downloading labels
-
-*Success Response:*
-
-
-
-Sucess Response, Presigned URL of Labels
-
-
-Schema: `SignedSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getNocPresignedURL
-Get Presigned URL to download NOC Pdf
-
-```golang
-
-data, err := DocumentEngine.GetNocPresignedURL(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID | 
-
-
-
-| xQuery | struct | Includes properties such as `UID`
-
-
-Use this API to generate Presigned URL for downloading NOC Pdf
-
-*Success Response:*
-
-
-
-Sucess Response, Presigned URL of NOC Pdf
-
-
-Schema: `SignedSuccessResponse`
-
-
-*Examples:*
-
-
-success response
-```json
-{
-  "value": {
-    "uid": "l27h38uy",
-    "expires_in": 300,
-    "url": "presigned-url"
   }
 }
 ```
