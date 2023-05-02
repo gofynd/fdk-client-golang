@@ -5145,6 +5145,98 @@ func NewAppClient(config *AppConfig) *Client {
     }
           
     
+    
+    
+  
+    
+    
+    // GetAppliedThemeV2 Get the theme currently applied to an application
+    func (th *Theme)  GetAppliedThemeV2() (ThemesSchema, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getAppliedThemeV2Response ThemesSchema
+	    )
+
+        
+
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            th.config,
+            "get",
+            "/service/application/theme/v2.0/applied-theme",
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ThemesSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAppliedThemeV2Response)
+        if err != nil {
+            return ThemesSchema{}, common.NewFDKError(err.Error())
+        }
+         return getAppliedThemeV2Response, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetThemeForPreviewV2 Get a theme for a preview
+    func (th *Theme)  GetThemeForPreviewV2(ThemeID string) (ThemesSchema, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getThemeForPreviewV2Response ThemesSchema
+	    )
+
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            th.config,
+            "get",
+            fmt.Sprintf("/service/application/theme/v2.0/%s/preview",ThemeID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ThemesSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getThemeForPreviewV2Response)
+        if err != nil {
+            return ThemesSchema{}, common.NewFDKError(err.Error())
+        }
+         return getThemeForPreviewV2Response, nil
+        
+    }
+          
+    
 
     // User ...
     type User struct {
