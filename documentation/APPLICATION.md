@@ -15964,7 +15964,9 @@ Success
   "value": {
     "seo": {
       "details": {
-        "title": "Zyosa Zyosa"
+        "title": "Zyosa Zyosa",
+        "description": "",
+        "image_url": ""
       },
       "robots_txt": "User-agent: * \nAllow: / \nsancisciasn xwsaixjowqnxwsiwjs",
       "sitemap_enabled": false,
@@ -25670,7 +25672,7 @@ Get Pincode API
 
 ```golang
 
- data, err :=  Logistic.GetPincodeCity(Pincode, xQuery);
+ data, err :=  Logistic.GetPincodeCity(Pincode);
 ```
 
 | Argument  |  Type  | Description |
@@ -25678,9 +25680,6 @@ Get Pincode API
 
 | Pincode | string | A `pincode` contains a specific address of a location. | 
 
-
-
-| xQuery | struct | Includes properties such as `CountryCode`
 
 
 
