@@ -4028,6 +4028,8 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
 
         
             
@@ -4453,6 +4455,8 @@ func NewAppClient(config *AppConfig) *Client {
              checkoutCartV2Response CartCheckoutResponseSchema
 	    )
 
+        
+            
         
             
         
