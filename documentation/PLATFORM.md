@@ -247,6 +247,15 @@
     * [updateSmsTemplateById](#updatesmstemplatebyid)
     * [deleteSmsTemplateById](#deletesmstemplatebyid)
     * [getSystemSystemTemplates](#getsystemsystemtemplates)
+    * [getVoiceProviders](#getvoiceproviders)
+    * [createVoiceProvider](#createvoiceprovider)
+    * [getVoiceProviderById](#getvoiceproviderbyid)
+    * [getVoiceTemplates](#getvoicetemplates)
+    * [createVoiceTemplate](#createvoicetemplate)
+    * [getVoiceTemplateById](#getvoicetemplatebyid)
+    * [updateVoiceTemplateById](#updatevoicetemplatebyid)
+    * [deleteVoiceTemplateById](#deletevoicetemplatebyid)
+    * [getSystemVoiceTemplates](#getsystemvoicetemplates)
     
 
 * [Payment](#Payment)
@@ -323,14 +332,14 @@
     * [processManifest](#processmanifest)
     * [dispatchManifest](#dispatchmanifest)
     * [getRoleBasedActions](#getrolebasedactions)
-    * [postShipmentHistory](#postshipmenthistory)
     * [getShipmentHistory](#getshipmenthistory)
+    * [postShipmentHistory](#postshipmenthistory)
     * [sendSmsNinja](#sendsmsninja)
     * [platformManualAssignDPToShipment](#platformmanualassigndptoshipment)
     * [updatePackagingDimensions](#updatepackagingdimensions)
     * [createOrder](#createorder)
-    * [createChannelConfig](#createchannelconfig)
     * [getChannelConfig](#getchannelconfig)
+    * [createChannelConfig](#createchannelconfig)
     * [uploadConsent](#uploadconsent)
     * [orderUpdate](#orderupdate)
     * [checkOrderStatus](#checkorderstatus)
@@ -367,12 +376,12 @@
     * [getConfigurationMetadata](#getconfigurationmetadata)
     * [getGroupConfigurations](#getgroupconfigurations)
     * [createGroupConfiguration](#creategroupconfiguration)
-    * [deleteGroupConfiguration](#deletegroupconfiguration)
     * [updateGroupConfiguration](#updategroupconfiguration)
+    * [deleteGroupConfiguration](#deletegroupconfiguration)
     * [getListingConfigurations](#getlistingconfigurations)
     * [createListingConfiguration](#createlistingconfiguration)
-    * [deleteListingConfiguration](#deletelistingconfiguration)
     * [updateListingConfiguration](#updatelistingconfiguration)
+    * [deleteListingConfiguration](#deletelistingconfiguration)
     * [updateAllowSingle](#updateallowsingle)
     * [updateDefaultSort](#updatedefaultsort)
     * [getCatalogConfiguration](#getcatalogconfiguration)
@@ -384,8 +393,8 @@
     * [getAllCollections](#getallcollections)
     * [createCollection](#createcollection)
     * [getCollectionDetail](#getcollectiondetail)
-    * [deleteCollection](#deletecollection)
     * [updateCollection](#updatecollection)
+    * [deleteCollection](#deletecollection)
     * [getCollectionItems](#getcollectionitems)
     * [addCollectionItems](#addcollectionitems)
     * [getCatalogInsights](#getcataloginsights)
@@ -51467,6 +51476,694 @@ default
 ---
 
 
+#### getVoiceProviders
+Get voice providers
+
+```golang
+
+data, err := Communication.GetVoiceProviders(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Sort`
+
+
+Get voice providers
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `VoiceProviders`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "items": [
+      {
+        "_id": "643e76194f4a21735ab87d7a",
+        "username": "16b0357856247a0dcb9330bb3911ae46890350e1a1dc16c4",
+        "password": "849320ef5051ca4d56ce98f097761bc225595f2465917e26",
+        "caller_id": "09513886363",
+        "applet_url": "http://my.exotel.com/exoml/start/628847",
+        "whitelisted_ip": [
+          "127.0.0.2",
+          "127.0.0.3"
+        ],
+        "application": "637b6355dc65337da9b5c951",
+        "type": "application",
+        "name": "Exotel Sales Channel",
+        "description": "Exotel Voice Provider",
+        "provider": "exotel",
+        "created_at": "2023-04-18T10:51:05.186Z",
+        "updated_at": "2023-04-22T15:59:42.471Z",
+        "slug": "Exotel-Sales-Channel-application-exotel-VC-Wdk7xC",
+        "__v": 2
+      }
+    ],
+    "page": {
+      "type": "number",
+      "current": 1,
+      "size": 10,
+      "item_total": 1,
+      "has_next": false
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createVoiceProvider
+Create voice provider
+
+```golang
+
+data, err := Communication.CreateVoiceProvider(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| body |  VoiceProviderReq | "Request body" 
+
+Create voice provider
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `VoiceProvider`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "_id": "643e76194f4a21735ab87d7a",
+    "username": "16b0357856247a0dcb9330bb3911ae46890350e1a1dc16c4",
+    "password": "849320ef5051ca4d56ce98f097761bc225595f2465917e26",
+    "caller_id": "09513886363",
+    "applet_url": "http://my.exotel.com/exoml/start/628847",
+    "whitelisted_ip": [
+      "127.0.0.2",
+      "127.0.0.3"
+    ],
+    "application": "637b6355dc65337da9b5c951",
+    "type": "application",
+    "name": "Exotel Sales Channel",
+    "description": "Exotel Voice Provider",
+    "provider": "exotel",
+    "created_at": "2023-04-18T10:51:05.186Z",
+    "updated_at": "2023-04-22T15:59:42.471Z",
+    "slug": "Exotel-Sales-Channel-application-exotel-VC-Wdk7xC",
+    "__v": 2
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getVoiceProviderById
+Get voice provider by id
+
+```golang
+
+data, err := Communication.GetVoiceProviderById(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| ID | string | Voice provider id | 
+
+
+
+Get voice provider by id
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `VoiceProvider`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "_id": "643e76194f4a21735ab87d7a",
+    "username": "16b0357856247a0dcb9330bb3911ae46890350e1a1dc16c4",
+    "password": "849320ef5051ca4d56ce98f097761bc225595f2465917e26",
+    "caller_id": "09513886363",
+    "applet_url": "http://my.exotel.com/exoml/start/628847",
+    "whitelisted_ip": [
+      "127.0.0.2",
+      "127.0.0.3"
+    ],
+    "application": "637b6355dc65337da9b5c951",
+    "type": "application",
+    "name": "Exotel Sales Channel",
+    "description": "Exotel Voice Provider",
+    "provider": "exotel",
+    "created_at": "2023-04-18T10:51:05.186Z",
+    "updated_at": "2023-04-22T15:59:42.471Z",
+    "slug": "Exotel-Sales-Channel-application-exotel-VC-Wdk7xC",
+    "__v": 2
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getVoiceTemplates
+Get voice templates
+
+```golang
+
+data, err := Communication.GetVoiceTemplates(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Sort`
+
+
+Get voice templates
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `VoiceTemplates`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "items": [
+      {
+        "is_system": false,
+        "is_internal": true,
+        "description": "This is a test voice template",
+        "priority": "high",
+        "tags": [],
+        "published": true,
+        "_id": "5fd447728394dbf0d21329b3",
+        "slug": "test-voice",
+        "name": "Test voice",
+        "message": {
+          "template_type": "nunjucks",
+          "template": "This is a test voice for order - {{ orderId }}"
+        },
+        "template_variables": {
+          "orderId": "12345"
+        },
+        "created_at": "2020-12-12T04:30:42.456Z",
+        "updated_at": "2020-12-24T15:13:20.558Z",
+        "__v": 0
+      }
+    ],
+    "page": {
+      "type": "number",
+      "current": 1,
+      "size": 1,
+      "item_total": 66,
+      "has_next": true
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createVoiceTemplate
+Create voice template
+
+```golang
+
+data, err := Communication.CreateVoiceTemplate(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| body |  VoiceTemplateReq | "Request body" 
+
+Create voice template
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `VoiceTemplateRes`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "is_system": false,
+    "is_internal": true,
+    "description": "This is a test voice template",
+    "priority": "high",
+    "tags": [],
+    "published": true,
+    "_id": "5fd447728394dbf0d21329b3",
+    "slug": "test-voice",
+    "name": "Test voice",
+    "message": {
+      "template_type": "nunjucks",
+      "template": "This is a test voice for order - {{ orderId }}"
+    },
+    "template_variables": {
+      "orderId": "12345"
+    },
+    "created_at": "2020-12-12T04:30:42.456Z",
+    "updated_at": "2020-12-24T15:13:20.558Z",
+    "__v": 0
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getVoiceTemplateById
+Get voice template by id
+
+```golang
+
+data, err := Communication.GetVoiceTemplateById(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| ID | string | Voice template id | 
+
+
+
+Get voice template by id
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `VoiceTemplate`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "is_system": false,
+    "is_internal": true,
+    "description": "This is a test voice template",
+    "priority": "high",
+    "tags": [],
+    "published": true,
+    "_id": "5fd447728394dbf0d21329b3",
+    "slug": "test-voice",
+    "name": "Test voice",
+    "message": {
+      "template_type": "nunjucks",
+      "template": "This is a test voice for order - {{ orderId }}"
+    },
+    "template_variables": {
+      "orderId": "12345"
+    },
+    "created_at": "2020-12-12T04:30:42.456Z",
+    "updated_at": "2020-12-24T15:13:20.558Z",
+    "__v": 0
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateVoiceTemplateById
+Update voice template by id
+
+```golang
+
+data, err := Communication.UpdateVoiceTemplateById(CompanyID, ApplicationID, ID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| ID | string | Voice template id | 
+
+
+| body |  VoiceTemplateReq | "Request body" 
+
+Update voice template by id
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `VoiceTemplateRes`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "is_system": false,
+    "is_internal": true,
+    "description": "This is a test voice template",
+    "priority": "high",
+    "tags": [],
+    "published": true,
+    "_id": "5fd447728394dbf0d21329b3",
+    "slug": "test-voice",
+    "name": "Test voice",
+    "message": {
+      "template_type": "nunjucks",
+      "template": "This is a test voice for order - {{ orderId }}"
+    },
+    "template_variables": {
+      "orderId": "12345"
+    },
+    "created_at": "2020-12-12T04:30:42.456Z",
+    "updated_at": "2020-12-24T15:13:20.558Z",
+    "__v": 0
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteVoiceTemplateById
+Delete voice template by id
+
+```golang
+
+data, err := Communication.DeleteVoiceTemplateById(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| ID | string | Voice template id | 
+
+
+
+Delete voice template by id
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `VoiceTemplateDeleteSuccessRes`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "success": true,
+    "message": "Deleted successfully"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSystemVoiceTemplates
+Get system voice templates
+
+```golang
+
+data, err := Communication.GetSystemVoiceTemplates(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Sort`
+
+
+Get system voice templates
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `SystemVoiceTemplates`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "items": [
+      {
+        "is_system": true,
+        "is_internal": true,
+        "description": "This is a test voice template",
+        "priority": "high",
+        "tags": [],
+        "published": true,
+        "_id": "5fd447728394dbf0d21329b3",
+        "slug": "test-voice",
+        "name": "Test voice",
+        "message": {
+          "template_type": "nunjucks",
+          "template": "This is a test voice for order - {{ orderId }}"
+        },
+        "template_variables": {
+          "orderId": "12345"
+        },
+        "created_at": "2020-12-12T04:30:42.456Z",
+        "updated_at": "2020-12-24T15:13:20.558Z",
+        "__v": 0
+      }
+    ],
+    "page": {
+      "type": "number",
+      "current": 1,
+      "size": 1,
+      "item_total": 66,
+      "has_next": true
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ---
 
@@ -54538,12 +55235,12 @@ Schema: `GetActionsResponse`
 ---
 
 
-#### postShipmentHistory
+#### getShipmentHistory
 
 
 ```golang
 
-data, err := Order.PostShipmentHistory(CompanyID, body);
+data, err := Order.GetShipmentHistory(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -54552,7 +55249,11 @@ data, err := Order.PostShipmentHistory(CompanyID, body);
 | CompanyID | float64 |  | 
 
 
-| body |  PostShipmentHistory | "Request body" 
+
+
+
+| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
+
 
 
 
@@ -54576,12 +55277,12 @@ Schema: `ShipmentHistoryResponse`
 ---
 
 
-#### getShipmentHistory
+#### postShipmentHistory
 
 
 ```golang
 
-data, err := Order.GetShipmentHistory(CompanyID, xQuery);
+data, err := Order.PostShipmentHistory(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -54590,11 +55291,7 @@ data, err := Order.GetShipmentHistory(CompanyID, xQuery);
 | CompanyID | float64 |  | 
 
 
-
-
-
-| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
-
+| body |  PostShipmentHistory | "Request body" 
 
 
 
@@ -54770,6 +55467,43 @@ Schema: `CreateOrderResponse`
 ---
 
 
+#### getChannelConfig
+
+
+```golang
+
+data, err := Order.GetChannelConfig(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+getChannelConfig
+
+*Success Response:*
+
+
+
+Successfully created the config data
+
+
+Schema: `CreateChannelConfigData`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### createChannelConfig
 
 
@@ -54796,43 +55530,6 @@ Successfully updateShipmentStatus!
 
 
 Schema: `CreateChannelConfigResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getChannelConfig
-
-
-```golang
-
-data, err := Order.GetChannelConfig(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-getChannelConfig
-
-*Success Response:*
-
-
-
-Successfully created the config data
-
-
-Schema: `CreateChannelConfigData`
 
 
 
@@ -56172,52 +56869,6 @@ Schema: `AppConfigurationDetail`
 ---
 
 
-#### deleteGroupConfiguration
-Delete configuration of the product config type of the application.
-
-```golang
-
-data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
-
-
-| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
-
-
-
-Delete configuration of the product config type of the application.
-
-*Success Response:*
-
-
-
-success message will tell whether the operation was successful.
-
-
-Schema: `ConfigSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateGroupConfiguration
 Update the group configurations for the application.
 
@@ -56253,6 +56904,52 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationDetail`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteGroupConfiguration
+Delete configuration of the product config type of the application.
+
+```golang
+
+data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
+
+
+| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration of the product config type of the application.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
 
 
 
@@ -56359,52 +57056,6 @@ Schema: `AppConfigurationsSort`
 ---
 
 
-#### deleteListingConfiguration
-Delete configuration for listings
-
-```golang
-
-data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
-
-
-| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
-
-
-
-Delete configuration for listing.
-
-*Success Response:*
-
-
-
-success message will tell whether the operation was successful.
-
-
-Schema: `ConfigSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateListingConfiguration
 Update configuration for listings
 
@@ -56440,6 +57091,52 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationsSort`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteListingConfiguration
+Delete configuration for listings
+
+```golang
+
+data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
+
+
+| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration for listing.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
 
 
 
@@ -56921,49 +57618,6 @@ Schema: `CollectionDetailResponse`
 ---
 
 
-#### deleteCollection
-Delete a Collection
-
-```golang
-
-data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier of a collection. | 
-
-
-
-Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateCollection
 Update a collection
 
@@ -56996,6 +57650,49 @@ The Collection object. See example below or refer `UpdateCollectionSchema` for d
 
 
 Schema: `UpdateCollection`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteCollection
+Delete a Collection
+
+```golang
+
+data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier of a collection. | 
+
+
+
+Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
