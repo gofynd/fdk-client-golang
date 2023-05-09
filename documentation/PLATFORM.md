@@ -9,6 +9,7 @@
 * [Billing](#Billing) - Handle platform subscription 
 * [Communication](#Communication) - Manages email, sms, push notifications sent to users 
 * [Payment](#Payment) - Collect payment through many payment gateway i.e Stripe, Razorpay, Juspay etc.into Fynd or Self account 
+* [Order](#Order) - Handles all platform order and shipment api(s) 
 * [Catalog](#Catalog) - Catalog - Platform Front API's' API's allows you to access list of products, prices, seller details, similar features, variants and many more useful features.  
 * [CompanyProfile](#CompanyProfile) -  
 * [FileStorage](#FileStorage) - File Storage 
@@ -16,7 +17,7 @@
 * [Inventory](#Inventory) -  
 * [Configuration](#Configuration) - Application configuration apis 
 * [Cart](#Cart) - Cart APIs 
-* [Rewards](#Rewards) - Earn and redeem reward points 
+* [Rewards](#Rewards) - Rewards 
 * [Analytics](#Analytics) - Perceptor analytics 
 * [Discount](#Discount) - Discount 
 * [Partner](#Partner) - Partner configuration apis 
@@ -141,6 +142,7 @@
     * [updateFaq](#updatefaq)
     * [deleteFaq](#deletefaq)
     * [getFaqByIdOrSlug](#getfaqbyidorslug)
+    * [generateSEOTitle](#generateseotitle)
     * [getLandingPages](#getlandingpages)
     * [createLandingPage](#createlandingpage)
     * [updateLandingPage](#updatelandingpage)
@@ -272,52 +274,101 @@
     * [merchantOnBoarding](#merchantonboarding)
     
 
+* [Order](#Order)
+  * Methods
+    * [getShipments](#getshipments)
+    * [getShipmentById](#getshipmentbyid)
+    * [getOrderById](#getorderbyid)
+    * [getLaneConfig](#getlaneconfig)
+    * [getApplicationShipments](#getapplicationshipments)
+    * [getOrders](#getorders)
+    * [getMetricCount](#getmetriccount)
+    * [getAppOrderShipmentDetails](#getappordershipmentdetails)
+    * [trackPlatformShipment](#trackplatformshipment)
+    * [getfilters](#getfilters)
+    * [createShipmentReport](#createshipmentreport)
+    * [getReportsShipmentListing](#getreportsshipmentlisting)
+    * [upsertJioCode](#upsertjiocode)
+    * [getBulkInvoice](#getbulkinvoice)
+    * [getBulkInvoiceLabel](#getbulkinvoicelabel)
+    * [getBulkShipmentExcelFile](#getbulkshipmentexcelfile)
+    * [getBulkList](#getbulklist)
+    * [getBulkActionFailedReport](#getbulkactionfailedreport)
+    * [getShipmentReasons](#getshipmentreasons)
+    * [bulkActionProcessXlsxFile](#bulkactionprocessxlsxfile)
+    * [bulkActionDetails](#bulkactiondetails)
+    * [getBagById](#getbagbyid)
+    * [getBags](#getbags)
+    * [invalidateShipmentCache](#invalidateshipmentcache)
+    * [reassignLocation](#reassignlocation)
+    * [updateShipmentLock](#updateshipmentlock)
+    * [getAnnouncements](#getannouncements)
+    * [updateAddress](#updateaddress)
+    * [click2Call](#click2call)
+    * [updateShipmentStatus](#updateshipmentstatus)
+    * [processManifest](#processmanifest)
+    * [dispatchManifest](#dispatchmanifest)
+    * [getRoleBasedActions](#getrolebasedactions)
+    * [postShipmentHistory](#postshipmenthistory)
+    * [getShipmentHistory](#getshipmenthistory)
+    * [sendSmsNinja](#sendsmsninja)
+    * [platformManualAssignDPToShipment](#platformmanualassigndptoshipment)
+    * [updatePackagingDimensions](#updatepackagingdimensions)
+    * [createOrder](#createorder)
+    * [createChannelConfig](#createchannelconfig)
+    * [getChannelConfig](#getchannelconfig)
+    * [uploadConsent](#uploadconsent)
+    * [orderUpdate](#orderupdate)
+    * [checkOrderStatus](#checkorderstatus)
+    * [sendSmsNinjaPlatform](#sendsmsninjaplatform)
+    
+
 * [Catalog](#Catalog)
   * Methods
-    * [updateSearchKeywords](#updatesearchkeywords)
-    * [getSearchKeywords](#getsearchkeywords)
     * [deleteSearchKeywords](#deletesearchkeywords)
-    * [createCustomKeyword](#createcustomkeyword)
+    * [getSearchKeywords](#getsearchkeywords)
+    * [updateSearchKeywords](#updatesearchkeywords)
     * [getAllSearchKeyword](#getallsearchkeyword)
-    * [updateAutocompleteKeyword](#updateautocompletekeyword)
-    * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
+    * [createCustomKeyword](#createcustomkeyword)
     * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
-    * [createCustomAutocompleteRule](#createcustomautocompleterule)
+    * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
+    * [updateAutocompleteKeyword](#updateautocompletekeyword)
     * [getAutocompleteConfig](#getautocompleteconfig)
-    * [createProductBundle](#createproductbundle)
+    * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [getProductBundle](#getproductbundle)
-    * [updateProductBundle](#updateproductbundle)
+    * [createProductBundle](#createproductbundle)
     * [getProductBundleDetail](#getproductbundledetail)
-    * [createSizeGuide](#createsizeguide)
+    * [updateProductBundle](#updateproductbundle)
     * [getSizeGuides](#getsizeguides)
-    * [updateSizeGuide](#updatesizeguide)
+    * [createSizeGuide](#createsizeguide)
     * [getSizeGuide](#getsizeguide)
-    * [getAppProduct](#getappproduct)
+    * [updateSizeGuide](#updatesizeguide)
     * [updateAppProduct](#updateappproduct)
+    * [getAppProduct](#getappproduct)
     * [getConfigurationMetadata](#getconfigurationmetadata)
-    * [createGroupConfiguration](#creategroupconfiguration)
     * [getGroupConfigurations](#getgroupconfigurations)
-    * [updateGroupConfiguration](#updategroupconfiguration)
+    * [createGroupConfiguration](#creategroupconfiguration)
     * [deleteGroupConfiguration](#deletegroupconfiguration)
-    * [createListingConfiguration](#createlistingconfiguration)
+    * [updateGroupConfiguration](#updategroupconfiguration)
     * [getListingConfigurations](#getlistingconfigurations)
-    * [updateListingConfiguration](#updatelistingconfiguration)
+    * [createListingConfiguration](#createlistingconfiguration)
     * [deleteListingConfiguration](#deletelistingconfiguration)
+    * [updateListingConfiguration](#updatelistingconfiguration)
     * [updateAllowSingle](#updateallowsingle)
     * [updateDefaultSort](#updatedefaultsort)
     * [getCatalogConfiguration](#getcatalogconfiguration)
-    * [createConfigurationProductListing](#createconfigurationproductlisting)
     * [getConfigurations](#getconfigurations)
-    * [createConfigurationByType](#createconfigurationbytype)
+    * [createConfigurationProductListing](#createconfigurationproductlisting)
     * [getConfigurationByType](#getconfigurationbytype)
+    * [createConfigurationByType](#createconfigurationbytype)
     * [getQueryFilters](#getqueryfilters)
-    * [createCollection](#createcollection)
     * [getAllCollections](#getallcollections)
+    * [createCollection](#createcollection)
     * [getCollectionDetail](#getcollectiondetail)
-    * [updateCollection](#updatecollection)
     * [deleteCollection](#deletecollection)
-    * [addCollectionItems](#addcollectionitems)
+    * [updateCollection](#updatecollection)
     * [getCollectionItems](#getcollectionitems)
+    * [addCollectionItems](#addcollectionitems)
     * [getCatalogInsights](#getcataloginsights)
     * [getSellerInsights](#getsellerinsights)
     * [createMarketplaceOptin](#createmarketplaceoptin)
@@ -328,10 +379,10 @@
     * [getStoreDetail](#getstoredetail)
     * [getGenderAttribute](#getgenderattribute)
     * [listProductTemplateCategories](#listproducttemplatecategories)
-    * [createDepartments](#createdepartments)
     * [listDepartmentsData](#listdepartmentsdata)
-    * [updateDepartment](#updatedepartment)
+    * [createDepartments](#createdepartments)
     * [getDepartmentData](#getdepartmentdata)
+    * [updateDepartment](#updatedepartment)
     * [listProductTemplate](#listproducttemplate)
     * [validateProductTemplate](#validateproducttemplate)
     * [downloadProductTemplateViews](#downloadproducttemplateviews)
@@ -340,48 +391,49 @@
     * [listHSNCodes](#listhsncodes)
     * [listProductTemplateExportDetails](#listproducttemplateexportdetails)
     * [listTemplateBrandTypeValues](#listtemplatebrandtypevalues)
-    * [createCategories](#createcategories)
     * [listCategories](#listcategories)
-    * [updateCategory](#updatecategory)
+    * [createCategories](#createcategories)
     * [getCategoryData](#getcategorydata)
-    * [createProduct](#createproduct)
+    * [updateCategory](#updatecategory)
     * [getProducts](#getproducts)
+    * [createProduct](#createproduct)
     * [getVariantsOfProducts](#getvariantsofproducts)
     * [getProductAttributes](#getproductattributes)
-    * [editProduct](#editproduct)
-    * [getProduct](#getproduct)
     * [deleteProduct](#deleteproduct)
+    * [getProduct](#getproduct)
+    * [editProduct](#editproduct)
+    * [allSizes](#allsizes)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
-    * [createBulkProductUploadJob](#createbulkproductuploadjob)
     * [getProductBulkUploadHistory](#getproductbulkuploadhistory)
+    * [createBulkProductUploadJob](#createbulkproductuploadjob)
     * [uploadBulkProducts](#uploadbulkproducts)
-    * [createProductsInBulk](#createproductsinbulk)
     * [deleteProductBulkJob](#deleteproductbulkjob)
+    * [createProductsInBulk](#createproductsinbulk)
     * [getProductTags](#getproducttags)
-    * [createProductAssetsInBulk](#createproductassetsinbulk)
     * [getProductAssetsInBulk](#getproductassetsinbulk)
+    * [createProductAssetsInBulk](#createproductassetsinbulk)
     * [deleteSize](#deletesize)
-    * [addInventory](#addinventory)
     * [getInventoryBySize](#getinventorybysize)
+    * [addInventory](#addinventory)
     * [getInventoryBySizeIdentifier](#getinventorybysizeidentifier)
     * [getInventories](#getinventories)
     * [getDiscountedInventoryBySizeIdentifier](#getdiscountedinventorybysizeidentifier)
     * [deleteInventory](#deleteinventory)
-    * [createBulkInventoryJob](#createbulkinventoryjob)
     * [getInventoryBulkUploadHistory](#getinventorybulkuploadhistory)
-    * [createBulkInventory](#createbulkinventory)
+    * [createBulkInventoryJob](#createbulkinventoryjob)
     * [deleteBulkInventoryJob](#deletebulkinventoryjob)
-    * [createInventoryExportJob](#createinventoryexportjob)
+    * [createBulkInventory](#createbulkinventory)
     * [getInventoryExport](#getinventoryexport)
+    * [createInventoryExportJob](#createinventoryexportjob)
     * [exportInventoryConfig](#exportinventoryconfig)
-    * [updateRealtimeInventory](#updaterealtimeinventory)
     * [deleteRealtimeInventory](#deleterealtimeinventory)
+    * [updateRealtimeInventory](#updaterealtimeinventory)
     * [updateInventories](#updateinventories)
-    * [createHsnCode](#createhsncode)
     * [getAllHsnCodes](#getallhsncodes)
-    * [updateHsnCode](#updatehsncode)
+    * [createHsnCode](#createhsncode)
     * [getHsnCode](#gethsncode)
+    * [updateHsnCode](#updatehsncode)
     * [bulkHsnCode](#bulkhsncode)
     * [getAllProductHsnCodes](#getallproducthsncodes)
     * [getSingleProductHSNCode](#getsingleproducthsncode)
@@ -532,19 +584,16 @@
 
 * [Rewards](#Rewards)
   * Methods
-    * [showGiveaways](#showgiveaways)
-    * [saveGiveAway](#savegiveaway)
-    * [getGiveawayById](#getgiveawaybyid)
-    * [updateGiveAway](#updategiveaway)
-    * [getGiveawayAudienceStatus](#getgiveawayaudiencestatus)
-    * [showOffers](#showoffers)
+    * [getGiveaways](#getgiveaways)
+    * [createGiveaway](#creategiveaway)
+    * [getGiveawayByID](#getgiveawaybyid)
+    * [updateGiveaway](#updategiveaway)
+    * [getOffers](#getoffers)
     * [getOfferByName](#getofferbyname)
     * [updateOfferByName](#updateofferbyname)
+    * [getUserAvailablePoints](#getuseravailablepoints)
     * [updateUserStatus](#updateuserstatus)
-    * [user](#user)
     * [getUserPointsHistory](#getuserpointshistory)
-    * [getRewardsConfiguration](#getrewardsconfiguration)
-    * [setRewardsConfiguration](#setrewardsconfiguration)
     
 
 * [Analytics](#Analytics)
@@ -608,11 +657,11 @@
     * [getEntityRegionView](#getentityregionview)
     * [getListView](#getlistview)
     * [getCompanyStoreView](#getcompanystoreview)
-    * [updateZoneControllerView](#updatezonecontrollerview)
     * [getZoneDataView](#getzonedataview)
+    * [updateZoneControllerView](#updatezonecontrollerview)
     * [createZone](#createzone)
-    * [getZoneFromPincodeView](#getzonefrompincodeview)
     * [getZonesFromApplicationIdView](#getzonesfromapplicationidview)
+    * [getZoneFromPincodeView](#getzonefrompincodeview)
     * [getStore](#getstore)
     * [getAllStores](#getallstores)
     * [updatePincodeMopView](#updatepincodemopview)
@@ -4480,21 +4529,6 @@ All pages
         "__v": 9
       },
       {
-        "path": "product/:slug/reviews",
-        "type": "system",
-        "seo": {
-          "title": "",
-          "description": "",
-          "_id": "60ab5ca6d572fed64294eb24"
-        },
-        "_id": "60ab5ca6d572fed64294eb25",
-        "sections_meta": [],
-        "value": "product-reviews",
-        "text": "Product Reviews",
-        "theme": "5fb3ee4194a5181feeeba8e5",
-        "__v": 9
-      },
-      {
         "path": "blog",
         "type": "system",
         "seo": {
@@ -4567,21 +4601,6 @@ All pages
         "text": "Wishlist",
         "theme": "5fb3ee4194a5181feeeba8e5",
         "sections_meta": [],
-        "__v": 9
-      },
-      {
-        "path": "product/:slug/add-review",
-        "type": "system",
-        "seo": {
-          "title": "",
-          "description": "",
-          "_id": "60ab5ca6d572fed64294eb26"
-        },
-        "_id": "60ab5ca6d572fed64294eb27",
-        "sections_meta": [],
-        "value": "add-product-review",
-        "text": "Add Product Review",
-        "theme": "5fb3ee4194a5181feeeba8e5",
         "__v": 9
       },
       {
@@ -5238,21 +5257,6 @@ All pages
         "__v": 9
       },
       {
-        "path": "product/:slug/reviews",
-        "type": "system",
-        "seo": {
-          "title": "",
-          "description": "",
-          "_id": "60ab5ca6d572fed64294eb24"
-        },
-        "_id": "60ab5ca6d572fed64294eb25",
-        "sections_meta": [],
-        "value": "product-reviews",
-        "text": "Product Reviews",
-        "theme": "5fb3ee4194a5181feeeba8e5",
-        "__v": 9
-      },
-      {
         "path": "blog",
         "type": "system",
         "seo": {
@@ -5325,21 +5329,6 @@ All pages
         "text": "Wishlist",
         "theme": "5fb3ee4194a5181feeeba8e5",
         "sections_meta": [],
-        "__v": 9
-      },
-      {
-        "path": "product/:slug/add-review",
-        "type": "system",
-        "seo": {
-          "title": "",
-          "description": "",
-          "_id": "60ab5ca6d572fed64294eb26"
-        },
-        "_id": "60ab5ca6d572fed64294eb27",
-        "sections_meta": [],
-        "value": "add-product-review",
-        "text": "Add Product Review",
-        "theme": "5fb3ee4194a5181feeeba8e5",
         "__v": 9
       },
       {
@@ -9135,11 +9124,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -9349,11 +9333,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -11319,11 +11298,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -11533,11 +11507,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -13563,11 +13532,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -13777,11 +13741,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -17702,11 +17661,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -17916,11 +17870,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -19885,11 +19834,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -20099,11 +20043,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -22144,11 +22083,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -22358,11 +22292,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -24331,11 +24260,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -24545,11 +24469,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -26517,11 +26436,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -26731,11 +26645,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -28703,11 +28612,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -28917,11 +28821,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -30889,11 +30788,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -31103,11 +30997,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -33075,11 +32964,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -33289,11 +33173,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -35261,11 +35140,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -35475,11 +35349,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -37447,11 +37316,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -37661,11 +37525,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -41747,6 +41606,64 @@ Schema: `CreateFaqResponseSchema`
 ---
 
 
+#### generateSEOTitle
+Get SEO meta tag title for content
+
+```golang
+
+data, err := Content.GenerateSEOTitle(CompanyID, ApplicationID, Type, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+
+
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
+
+
+| Type | GenerationEntityType | String representing the type of SEO content to be generated. Possible values are: title, description | 
+
+
+| body |  GenerateSEOContent | "Request body" 
+
+Use this API to get GPT3 generated SEO meta tag title for content
+
+*Success Response:*
+
+
+
+Returns the generated SEO title
+
+
+Schema: `GeneratedSEOContent`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "title": "SEO Title example",
+    "description": "SEO Description example"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getLandingPages
 Get landing pages
 
@@ -44930,6 +44847,7 @@ default
       },
       "robots_txt": "User-agent: * \nAllow: / \nsancisciasn xwsaixjowqnxwsiwjs",
       "sitemap_enabled": false,
+      "cannonical_enabled": false,
       "_id": "6009819ee463ad40de397eb2",
       "app": "000000000000000000000001",
       "created_at": "2021-01-21T13:29:02.543Z",
@@ -52314,15 +52232,2024 @@ Schema: `MerchantOnBoardingResponse`
 ---
 
 
-## Catalog
+## Order
 
 
-#### updateSearchKeywords
-Update Search Keyword
+#### getShipments
+
 
 ```golang
 
-data, err := Catalog.UpdateSearchKeywords(CompanyID, ApplicationID, ID, body);
+data, err := Order.GetShipments(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `SearchValue`, `SearchID`, `FromDate`, `ToDate`, `DpIds`, `OrderingCompanyID`, `Stores`, `SalesChannel`, `RequestByExt`, `PageNo`, `PageSize`, `IsPrioritySort`, `ExcludeLockedShipments`, `PaymentMethods`, `ChannelShipmentID`, `ChannelOrderID`, `CustomMeta`
+
+
+
+
+*Success Response:*
+
+
+
+We are processing the report!
+
+
+Schema: `ShipmentInternalPlatformViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentById
+
+
+```golang
+
+data, err := Order.GetShipmentById(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `ChannelShipmentID`, `ShipmentID`, `OrderingCompanyID`, `RequestByExt`
+
+
+
+
+*Success Response:*
+
+
+
+We are processing the report!
+
+
+Schema: `ShipmentInfoResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOrderById
+
+
+```golang
+
+data, err := Order.GetOrderById(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+| xQuery | struct | Includes properties such as `OrderID`
+
+
+
+
+*Success Response:*
+
+
+
+We are processing the report!
+
+
+Schema: `ShipmentDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getLaneConfig
+
+
+```golang
+
+data, err := Order.GetLaneConfig(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `SuperLane`, `GroupEntity`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannel`, `PaymentMode`, `BagStatus`
+
+
+
+
+*Success Response:*
+
+
+
+Response containing count of shipments of the given status
+
+
+Schema: `LaneConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getApplicationShipments
+
+
+```golang
+
+data, err := Order.GetApplicationShipments(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| ApplicationID | string |  | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `SearchID`, `FromDate`, `ToDate`, `DpIds`, `OrderingCompanyID`, `Stores`, `SalesChannel`, `RequestByExt`, `PageNo`, `PageSize`, `CustomerID`, `IsPrioritySort`
+
+
+
+
+*Success Response:*
+
+
+
+We are processing the report!
+
+
+Schema: `ShipmentInternalPlatformViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOrders
+
+
+```golang
+
+data, err := Order.GetOrders(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `BagStatus`, `TimeToDispatch`, `PaymentMethods`, `Tags`, `SearchValue`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannel`, `PageNo`, `PageSize`, `IsPrioritySort`, `CustomMeta`
+
+
+
+
+*Success Response:*
+
+
+
+We are processing the report!
+
+
+Schema: `OrderListingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getMetricCount
+
+
+```golang
+
+data, err := Order.GetMetricCount(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `FromDate`, `ToDate`
+
+
+
+
+*Success Response:*
+
+
+
+Response containing count of shipments of the given metrics
+
+
+Schema: `MetricCountResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAppOrderShipmentDetails
+
+
+```golang
+
+data, err := Order.GetAppOrderShipmentDetails(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| ApplicationID | string |  | 
+
+
+
+| xQuery | struct | Includes properties such as `OrderID`
+
+
+
+
+*Success Response:*
+
+
+
+We render shipment details.
+
+
+Schema: `ShipmentDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### trackPlatformShipment
+Track shipment
+
+```golang
+
+data, err := Order.TrackPlatformShipment(CompanyID, ApplicationID, ShipmentID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string |  | 
+
+
+| ApplicationID | string |  | 
+
+
+| ShipmentID | string |  | 
+
+
+
+Track Shipment by shipment id, for application based on application Id
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `PlatformShipmentTrack` for more details.
+
+
+Schema: `PlatformShipmentTrack`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getfilters
+
+
+```golang
+
+data, err := Order.Getfilters(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `View`, `GroupEntity`
+
+
+
+
+*Success Response:*
+
+
+
+List of filters
+
+
+Schema: `FiltersResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createShipmentReport
+
+
+```golang
+
+data, err := Order.CreateShipmentReport(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `FromDate`, `ToDate`
+
+
+
+
+*Success Response:*
+
+
+
+We have accepted report generation request.
+
+
+Schema: `Success`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getReportsShipmentListing
+
+
+```golang
+
+data, err := Order.GetReportsShipmentListing(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
+
+
+
+
+*Success Response:*
+
+
+
+We have are getting the info.
+
+
+Schema: `OmsReports`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### upsertJioCode
+
+
+```golang
+
+data, err := Order.UpsertJioCode(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  JioCodeUpsertPayload | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+We are processing the report!
+
+
+Schema: `JioCodeUpsertResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getBulkInvoice
+
+
+```golang
+
+data, err := Order.GetBulkInvoice(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `BatchID`, `DocType`
+
+
+
+
+*Success Response:*
+
+
+
+We are processing the file!
+
+
+Schema: `BulkInvoicingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getBulkInvoiceLabel
+
+
+```golang
+
+data, err := Order.GetBulkInvoiceLabel(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+| xQuery | struct | Includes properties such as `BatchID`
+
+
+
+
+*Success Response:*
+
+
+
+We are processing the file!
+
+
+Schema: `BulkInvoiceLabelResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getBulkShipmentExcelFile
+
+
+```golang
+
+data, err := Order.GetBulkShipmentExcelFile(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `SearchID`, `FromDate`, `ToDate`, `DpIds`, `OrderingCompanyID`, `Stores`, `SalesChannel`, `RequestByExt`, `PageNo`, `PageSize`, `CustomerID`, `IsPrioritySort`
+
+
+
+
+*Success Response:*
+
+
+
+We are processing the file!
+
+
+Schema: `FileResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getBulkList
+
+
+```golang
+
+data, err := Order.GetBulkList(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `SearchID`, `FromDate`, `ToDate`, `DpIds`, `OrderingCompanyID`, `Stores`, `SalesChannel`, `RequestByExt`, `PageNo`, `PageSize`, `CustomerID`, `IsPrioritySort`
+
+
+
+
+*Success Response:*
+
+
+
+We are processing the file!
+
+
+Schema: `BulkListingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getBulkActionFailedReport
+
+
+```golang
+
+data, err := Order.GetBulkActionFailedReport(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string |  | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `BatchID`, `ReportType`
+
+
+
+
+*Success Response:*
+
+
+
+File Processed!
+
+
+Schema: `FileResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentReasons
+Get reasons behind full or partial cancellation of a shipment
+
+```golang
+
+data, err := Order.GetShipmentReasons(CompanyID, ShipmentID, BagID, State);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| BagID | string | ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| State | string | State for which reasons are required. | 
+
+
+
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `PlatformShipmentReasonsResponse` for more details.
+
+
+Schema: `PlatformShipmentReasonsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### bulkActionProcessXlsxFile
+emits uuid to kafka topic.
+
+```golang
+
+data, err := Order.BulkActionProcessXlsxFile(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string |  | 
+
+
+| body |  BulkActionPayload | "Request body" 
+
+Use this API to start processing Xlsx file.
+
+*Success Response:*
+
+
+
+Success to acknowledge the service was notified
+
+
+Schema: `BulkActionResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### bulkActionDetails
+Returns failed, processing and successfully processed shipments.
+
+```golang
+
+data, err := Order.BulkActionDetails(CompanyID, BatchID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string |  | 
+
+
+| BatchID | string |  | 
+
+
+
+Returns failed, processing and successfully processed shipments along with their counts and failed reasons.
+
+*Success Response:*
+
+
+
+Success to acknowledge the service was notified
+
+
+Schema: `BulkActionDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getBagById
+
+
+```golang
+
+data, err := Order.GetBagById(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `BagID`, `ChannelBagID`, `ChannelID`
+
+
+
+
+*Success Response:*
+
+
+
+Successfully retrived shipment details!
+
+
+Schema: `BagDetailsPlatformResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getBags
+
+
+```golang
+
+data, err := Order.GetBags(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `BagIds`, `ShipmentIds`, `OrderIds`, `ChannelBagIds`, `ChannelShipmentIds`, `ChannelOrderIds`, `ChannelID`, `PageNo`, `PageSize`
+
+
+
+
+*Success Response:*
+
+
+
+Successfully retrived all the given shipments details!
+
+
+Schema: `GetBagsPlatformResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### invalidateShipmentCache
+
+
+```golang
+
+data, err := Order.InvalidateShipmentCache(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  InvalidateShipmentCachePayload | "Request body" 
+
+Invalidate shipment Cache
+
+*Success Response:*
+
+
+
+Successfully updated shipment cache!
+
+
+Schema: `InvalidateShipmentCacheResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### reassignLocation
+
+
+```golang
+
+data, err := Order.ReassignLocation(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  StoreReassign | "Request body" 
+
+Reassign Location
+
+*Success Response:*
+
+
+
+Successfully reassigned location!
+
+
+Schema: `StoreReassignResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateShipmentLock
+
+
+```golang
+
+data, err := Order.UpdateShipmentLock(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  UpdateShipmentLockPayload | "Request body" 
+
+update shipment lock
+
+*Success Response:*
+
+
+
+Successfully updated shipment cache!
+
+
+Schema: `UpdateShipmentLockResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAnnouncements
+
+
+```golang
+
+data, err := Order.GetAnnouncements(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+| xQuery | struct | Includes properties such as `Date`
+
+
+
+
+*Success Response:*
+
+
+
+Announcements retrieved successfully
+
+
+Schema: `AnnouncementsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateAddress
+
+
+```golang
+
+data, err := Order.UpdateAddress(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| CompanyID | float64 |  | 
+
+| xQuery | struct | Includes properties such as `ShipmentID`, `Name`, `Address`, `AddressType`, `Pincode`, `Phone`, `Email`, `Landmark`, `AddressCategory`, `City`, `State`, `Country`
+
+
+
+
+*Success Response:*
+
+
+
+Update Address will be processed!
+
+
+Schema: `BaseResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### click2Call
+
+
+```golang
+
+data, err := Order.Click2Call(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+
+
+
+
+
+
+
+| CompanyID | float64 |  | 
+
+| xQuery | struct | Includes properties such as `Caller`, `Receiver`, `BagID`, `CallingTo`, `CallerID`
+
+
+
+
+*Success Response:*
+
+
+
+Process call on request!
+
+
+Schema: `Click2CallResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateShipmentStatus
+
+
+```golang
+
+data, err := Order.UpdateShipmentStatus(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  UpdateShipmentStatusRequest | "Request body" 
+
+Update shipment status
+
+*Success Response:*
+
+
+
+Successfully reassigned location!
+
+
+Schema: `UpdateShipmentStatusResponseBody`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### processManifest
+
+
+```golang
+
+data, err := Order.ProcessManifest(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  CreateOrderPayload | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Manifest will be processed!
+
+
+Schema: `CreateOrderResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### dispatchManifest
+
+
+```golang
+
+data, err := Order.DispatchManifest(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  DispatchManifest | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Shipment Dispatched mapped with manifest!
+
+
+Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getRoleBasedActions
+
+
+```golang
+
+data, err := Order.GetRoleBasedActions(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+*Success Response:*
+
+
+
+You will get an array of actions allowed for that particular user based on their role
+
+
+Schema: `GetActionsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### postShipmentHistory
+
+
+```golang
+
+data, err := Order.PostShipmentHistory(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  PostShipmentHistory | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+It shows the journey of the shipment!
+
+
+Schema: `ShipmentHistoryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipmentHistory
+
+
+```golang
+
+data, err := Order.GetShipmentHistory(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
+
+
+
+
+*Success Response:*
+
+
+
+It shows the journey of the shipment!
+
+
+Schema: `ShipmentHistoryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### sendSmsNinja
+
+
+```golang
+
+data, err := Order.SendSmsNinja(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  SendSmsPayload | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Sms Sent successfully
+
+
+Schema: `OrderStatusResult`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### platformManualAssignDPToShipment
+
+
+```golang
+
+data, err := Order.PlatformManualAssignDPToShipment(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  ManualAssignDPToShipment | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+DP Assigned for the given shipment Ids.
+
+
+Schema: `ManualAssignDPToShipmentResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updatePackagingDimensions
+
+
+```golang
+
+data, err := Order.UpdatePackagingDimensions(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  CreateOrderPayload | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Manifest will be processed!
+
+
+Schema: `CreateOrderResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createOrder
+
+
+```golang
+
+data, err := Order.CreateOrder(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  CreateOrderAPI | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Successfully created an order!
+
+
+Schema: `CreateOrderResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createChannelConfig
+
+
+```golang
+
+data, err := Order.CreateChannelConfig(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  CreateChannelConfigData | "Request body" 
+
+createChannelConfig
+
+*Success Response:*
+
+
+
+Successfully updateShipmentStatus!
+
+
+Schema: `CreateChannelConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getChannelConfig
+
+
+```golang
+
+data, err := Order.GetChannelConfig(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+getChannelConfig
+
+*Success Response:*
+
+
+
+Successfully created the config data
+
+
+Schema: `CreateChannelConfigData`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### uploadConsent
+
+
+```golang
+
+data, err := Order.UploadConsent(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  UploadConsent | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Successful Manifest upload!
+
+
+Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### orderUpdate
+
+
+```golang
+
+data, err := Order.OrderUpdate(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  PlatformOrderUpdate | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+We are processing the order!
+
+
+Schema: `ResponseDetail`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### checkOrderStatus
+
+
+```golang
+
+data, err := Order.CheckOrderStatus(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  OrderStatus | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Order Status retrieved successfully
+
+
+Schema: `OrderStatusResult`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### sendSmsNinjaPlatform
+
+
+```golang
+
+data, err := Order.SendSmsNinjaPlatform(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+*Success Response:*
+
+
+
+Sms Sent successfully
+
+
+Schema: `OrderStatusResult`
+
+
+
+
+
+
+
+
+
+---
+
+
+
+---
+
+
+## Catalog
+
+
+#### deleteSearchKeywords
+Delete a Search Keywords
+
+```golang
+
+data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -52337,18 +54264,17 @@ data, err := Catalog.UpdateSearchKeywords(CompanyID, ApplicationID, ID, body);
 | ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
 
 
-| body |  CreateSearchKeyword | "Request body" 
 
-Update Search Keyword by its id. On successful request, returns the updated collection
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
 
 *Success Response:*
 
 
 
-The Collection object. See example below or refer `GetSearchWordsDataSchema` for details.
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
 
 
-Schema: `GetSearchWordsData`
+Schema: `DeleteResponse`
 
 
 
@@ -52404,12 +54330,12 @@ Schema: `GetSearchWordsDetailResponse`
 ---
 
 
-#### deleteSearchKeywords
-Delete a Search Keywords
+#### updateSearchKeywords
+Update Search Keyword
 
 ```golang
 
-data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
+data, err := Catalog.UpdateSearchKeywords(CompanyID, ApplicationID, ID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -52424,17 +54350,58 @@ data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
 | ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
 
 
+| body |  CreateSearchKeyword | "Request body" 
 
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+Update Search Keyword by its id. On successful request, returns the updated collection
 
 *Success Response:*
 
 
 
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+The Collection object. See example below or refer `GetSearchWordsDataSchema` for details.
 
 
-Schema: `DeleteResponse`
+Schema: `GetSearchWordsData`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAllSearchKeyword
+List all Search Custom Keyword Listing
+
+```golang
+
+data, err := Catalog.GetAllSearchKeyword(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+
+Custom Search Keyword allows you to map conditions with keywords to give you the ultimate results
+
+*Success Response:*
+
+
+
+List of custom search keywords. See example below or refer `GetSearchWordsResponseSchema` for details
+
+
+Schema: `GetSearchWordsResponse`
 
 
 
@@ -52488,12 +54455,12 @@ Schema: `GetSearchWordsData`
 ---
 
 
-#### getAllSearchKeyword
-List all Search Custom Keyword Listing
+#### deleteAutocompleteKeyword
+Delete a Autocomplete Keywords
 
 ```golang
 
-data, err := Catalog.GetAllSearchKeyword(CompanyID, ApplicationID);
+data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -52505,17 +54472,63 @@ data, err := Catalog.GetAllSearchKeyword(CompanyID, ApplicationID);
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
 
-Custom Search Keyword allows you to map conditions with keywords to give you the ultimate results
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
 
 *Success Response:*
 
 
 
-List of custom search keywords. See example below or refer `GetSearchWordsResponseSchema` for details
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
 
 
-Schema: `GetSearchWordsResponse`
+Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAutocompleteKeywordDetail
+Get a Autocomplete Keywords Details
+
+```golang
+
+data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
+
+*Success Response:*
+
+
+
+The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
+
+
+Schema: `GetAutocompleteWordsResponse`
 
 
 
@@ -52572,12 +54585,12 @@ Schema: `GetAutocompleteWordsResponse`
 ---
 
 
-#### getAutocompleteKeywordDetail
-Get a Autocomplete Keywords Details
+#### getAutocompleteConfig
+List all Autocomplete Keyword Listing
 
 ```golang
 
-data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
+data, err := Catalog.GetAutocompleteConfig(CompanyID, ApplicationID);
 ```
 
 | Argument  |  Type  | Description |
@@ -52589,63 +54602,17 @@ data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
 
-
-
-Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
+Custom Autocomplete Keyword allows you to map conditions with keywords to give you the ultimate results
 
 *Success Response:*
 
 
 
-The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
+List of custom autocomplete keywords. See example below or refer `GetAutocompleteWordsResponseSchema` for details
 
 
 Schema: `GetAutocompleteWordsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteAutocompleteKeyword
-Delete a Autocomplete Keywords
-
-```golang
-
-data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
 
 
 
@@ -52687,84 +54654,6 @@ List of all the collections including the one you added. See example below or re
 
 
 Schema: `CreateAutocompleteWordsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAutocompleteConfig
-List all Autocomplete Keyword Listing
-
-```golang
-
-data, err := Catalog.GetAutocompleteConfig(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-
-Custom Autocomplete Keyword allows you to map conditions with keywords to give you the ultimate results
-
-*Success Response:*
-
-
-
-List of custom autocomplete keywords. See example below or refer `GetAutocompleteWordsResponseSchema` for details
-
-
-Schema: `GetAutocompleteWordsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createProductBundle
-Create Product Bundle
-
-```golang
-
-data, err := Catalog.CreateProductBundle(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| body |  ProductBundleRequest | "Request body" 
-
-Create Product Bundle. See `ProductBundleRequest` for the request body parameter need to create a product bundle. On successful request, returns in `ProductBundleRequest` with id
-
-*Success Response:*
-
-
-
-Get bundle with id that is added. See example below or refer `GetProductBundleCreateResponse` for details
-
-
-Schema: `GetProductBundleCreateResponse`
 
 
 
@@ -52819,12 +54708,12 @@ Schema: `GetProductBundleListingResponse`
 ---
 
 
-#### updateProductBundle
-Update a Product Bundle
+#### createProductBundle
+Create Product Bundle
 
 ```golang
 
-data, err := Catalog.UpdateProductBundle(CompanyID, ID, body);
+data, err := Catalog.CreateProductBundle(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -52833,18 +54722,15 @@ data, err := Catalog.UpdateProductBundle(CompanyID, ID, body);
 | CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
 
 
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+| body |  ProductBundleRequest | "Request body" 
 
-
-| body |  ProductBundleUpdateRequest | "Request body" 
-
-Update a Product Bundle by its id. On successful request, returns the updated product bundle
+Create Product Bundle. See `ProductBundleRequest` for the request body parameter need to create a product bundle. On successful request, returns in `ProductBundleRequest` with id
 
 *Success Response:*
 
 
 
-The Collection object. See example below or refer `GetProductBundleCreateResponse` for details.
+Get bundle with id that is added. See example below or refer `GetProductBundleCreateResponse` for details
 
 
 Schema: `GetProductBundleCreateResponse`
@@ -52900,32 +54786,35 @@ Schema: `GetProductBundleResponse`
 ---
 
 
-#### createSizeGuide
-Create a size guide.
+#### updateProductBundle
+Update a Product Bundle
 
 ```golang
 
-data, err := Catalog.CreateSizeGuide(CompanyID, body);
+data, err := Catalog.UpdateProductBundle(CompanyID, ID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Id of the company inside which the size guide is to be created. | 
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
 
 
-| body |  ValidateSizeGuide | "Request body" 
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
 
-This API allows to create a size guide associated to a brand.
+
+| body |  ProductBundleUpdateRequest | "Request body" 
+
+Update a Product Bundle by its id. On successful request, returns the updated product bundle
 
 *Success Response:*
 
 
 
-Returns a success response
+The Collection object. See example below or refer `GetProductBundleCreateResponse` for details.
 
 
-Schema: `SuccessResponse`
+Schema: `GetProductBundleCreateResponse`
 
 
 
@@ -52986,26 +54875,23 @@ Schema: `ListSizeGuide`
 ---
 
 
-#### updateSizeGuide
-Edit a size guide.
+#### createSizeGuide
+Create a size guide.
 
 ```golang
 
-data, err := Catalog.UpdateSizeGuide(CompanyID, ID, body);
+data, err := Catalog.CreateSizeGuide(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Id of the company. | 
-
-
-| ID | string | Mongo id of the size guide to be edited | 
+| CompanyID | string | Id of the company inside which the size guide is to be created. | 
 
 
 | body |  ValidateSizeGuide | "Request body" 
 
-This API allows to edit a size guide.
+This API allows to create a size guide associated to a brand.
 
 *Success Response:*
 
@@ -53067,37 +54953,35 @@ Schema: `SizeGuideResponse`
 ---
 
 
-#### getAppProduct
-Get company application product data.
+#### updateSizeGuide
+Edit a size guide.
 
 ```golang
 
-data, err := Catalog.GetAppProduct(CompanyID, ApplicationID, ItemID);
+data, err := Catalog.UpdateSizeGuide(CompanyID, ID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+| CompanyID | string | Id of the company. | 
 
 
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+| ID | string | Mongo id of the size guide to be edited | 
 
 
-| ItemID | string | product id for a particular product. | 
+| body |  ValidateSizeGuide | "Request body" 
 
-
-
-Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
+This API allows to edit a size guide.
 
 *Success Response:*
 
 
 
-The Company Applicaton Product Data(MOQ/SEO).
+Returns a success response
 
 
-Schema: `OwnerAppItemResponse`
+Schema: `SuccessResponse`
 
 
 
@@ -53154,6 +55038,49 @@ Schema: `SuccessResponse1`
 ---
 
 
+#### getAppProduct
+Get company application product data.
+
+```golang
+
+data, err := Catalog.GetAppProduct(CompanyID, ApplicationID, ItemID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ItemID | string | product id for a particular product. | 
+
+
+
+Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
+
+*Success Response:*
+
+
+
+The Company Applicaton Product Data(MOQ/SEO).
+
+
+Schema: `OwnerAppItemResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getConfigurationMetadata
 Get configuration metadata details for catalog for admin panel
 
@@ -53188,50 +55115,6 @@ configuration details for catalog. See example below or refer `GetConfigMetadata
 
 
 Schema: `GetConfigMetadataResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createGroupConfiguration
-Create configuration for Group config types.
-
-```golang
-
-data, err := Catalog.CreateGroupConfiguration(CompanyID, ApplicationID, ConfigType, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
-
-
-| body |  AppConfigurationDetail | "Request body" 
-
-Create configuration for Group config types.
-
-*Success Response:*
-
-
-
-success flag will tell whether the operation was successful.
-
-
-Schema: `AppConfigurationDetail`
 
 
 
@@ -53296,12 +55179,12 @@ Schema: `GetConfigResponse`
 ---
 
 
-#### updateGroupConfiguration
-Update the group configurations for the application.
+#### createGroupConfiguration
+Create configuration for Group config types.
 
 ```golang
 
-data, err := Catalog.UpdateGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug, body);
+data, err := Catalog.CreateGroupConfiguration(CompanyID, ApplicationID, ConfigType, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -53316,12 +55199,9 @@ data, err := Catalog.UpdateGroupConfiguration(CompanyID, ApplicationID, ConfigTy
 | ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
 
 
-| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
-
-
 | body |  AppConfigurationDetail | "Request body" 
 
-Update the group configurations for the application.
+Create configuration for Group config types.
 
 *Success Response:*
 
@@ -53389,12 +55269,12 @@ Schema: `ConfigSuccessResponse`
 ---
 
 
-#### createListingConfiguration
-Add configuration for listings
+#### updateGroupConfiguration
+Update the group configurations for the application.
 
 ```golang
 
-data, err := Catalog.CreateListingConfiguration(CompanyID, ApplicationID, ConfigType, body);
+data, err := Catalog.UpdateGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -53406,12 +55286,15 @@ data, err := Catalog.CreateListingConfiguration(CompanyID, ApplicationID, Config
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
+| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
 
 
-| body |  AppConfigurationsSort | "Request body" 
+| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
 
-Add configuration for listing.
+
+| body |  AppConfigurationDetail | "Request body" 
+
+Update the group configurations for the application.
 
 *Success Response:*
 
@@ -53420,7 +55303,7 @@ Add configuration for listing.
 success flag will tell whether the operation was successful.
 
 
-Schema: `AppConfigurationsSort`
+Schema: `AppConfigurationDetail`
 
 
 
@@ -53483,12 +55366,12 @@ Schema: `GetConfigResponse`
 ---
 
 
-#### updateListingConfiguration
-Update configuration for listings
+#### createListingConfiguration
+Add configuration for listings
 
 ```golang
 
-data, err := Catalog.UpdateListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID, body);
+data, err := Catalog.CreateListingConfiguration(CompanyID, ApplicationID, ConfigType, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -53503,12 +55386,9 @@ data, err := Catalog.UpdateListingConfiguration(CompanyID, ApplicationID, Config
 | ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
 
 
-| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
-
-
 | body |  AppConfigurationsSort | "Request body" 
 
-Update configuration for listing.
+Add configuration for listing.
 
 *Success Response:*
 
@@ -53564,6 +55444,53 @@ success message will tell whether the operation was successful.
 
 
 Schema: `ConfigSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateListingConfiguration
+Update configuration for listings
+
+```golang
+
+data, err := Catalog.UpdateListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
+
+
+| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
+
+
+| body |  AppConfigurationsSort | "Request body" 
+
+Update configuration for listing.
+
+*Success Response:*
+
+
+
+success flag will tell whether the operation was successful.
+
+
+Schema: `AppConfigurationsSort`
 
 
 
@@ -53698,47 +55625,6 @@ Schema: `GetCatalogConfigurationMetaData`
 ---
 
 
-#### createConfigurationProductListing
-Add configuration for products & listings
-
-```golang
-
-data, err := Catalog.CreateConfigurationProductListing(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| body |  AppConfiguration | "Request body" 
-
-Add configuration for products & listing.
-
-*Success Response:*
-
-
-
-success flag will tell whether the operation was successful.
-
-
-Schema: `GetAppCatalogConfiguration`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getConfigurations
 Get configured details for catalog
 
@@ -53779,12 +55665,12 @@ Schema: `GetAppCatalogConfiguration`
 ---
 
 
-#### createConfigurationByType
-Add configuration for categories and brands
+#### createConfigurationProductListing
+Add configuration for products & listings
 
 ```golang
 
-data, err := Catalog.CreateConfigurationByType(CompanyID, ApplicationID, Type, body);
+data, err := Catalog.CreateConfigurationProductListing(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -53796,12 +55682,9 @@ data, err := Catalog.CreateConfigurationByType(CompanyID, ApplicationID, Type, b
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| Type | string | type can be brands, categories etc. | 
-
-
 | body |  AppConfiguration | "Request body" 
 
-Add configuration for categories & brands.
+Add configuration for products & listing.
 
 *Success Response:*
 
@@ -53866,6 +55749,50 @@ Schema: `GetAppCatalogEntityConfiguration`
 ---
 
 
+#### createConfigurationByType
+Add configuration for categories and brands
+
+```golang
+
+data, err := Catalog.CreateConfigurationByType(CompanyID, ApplicationID, Type, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| Type | string | type can be brands, categories etc. | 
+
+
+| body |  AppConfiguration | "Request body" 
+
+Add configuration for categories & brands.
+
+*Success Response:*
+
+
+
+success flag will tell whether the operation was successful.
+
+
+Schema: `GetAppCatalogConfiguration`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getQueryFilters
 Get query filters to configure a collection
 
@@ -53894,47 +55821,6 @@ The attached items of an collection. See example below or refer `GetCollectionQu
 
 
 Schema: `GetCollectionQueryOptionResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createCollection
-Add a Collection
-
-```golang
-
-data, err := Catalog.CreateCollection(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| body |  CreateCollection | "Request body" 
-
-Create a collection. See `CreateCollectionRequestSchema` for the list of attributes needed to create a collection and collections/query-options for the available options to create a collection. On successful request, returns a paginated list of collections specified in `CollectionCreateResponse`
-
-*Success Response:*
-
-
-
-List of all the collections including the one you added. See example below or refer `CollectionCreateResponse` for details
-
-
-Schema: `CollectionCreateResponse`
 
 
 
@@ -54002,6 +55888,47 @@ Schema: `GetCollectionListingResponse`
 ---
 
 
+#### createCollection
+Add a Collection
+
+```golang
+
+data, err := Catalog.CreateCollection(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  CreateCollection | "Request body" 
+
+Create a collection. See `CreateCollectionRequestSchema` for the list of attributes needed to create a collection and collections/query-options for the available options to create a collection. On successful request, returns a paginated list of collections specified in `CollectionCreateResponse`
+
+*Success Response:*
+
+
+
+List of all the collections including the one you added. See example below or refer `CollectionCreateResponse` for details
+
+
+Schema: `CollectionCreateResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getCollectionDetail
 Get a particular collection
 
@@ -54033,6 +55960,49 @@ The Collection object. See example below or refer `CollectionDetailResponse` for
 
 
 Schema: `CollectionDetailResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteCollection
+Delete a Collection
+
+```golang
+
+data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier of a collection. | 
+
+
+
+Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -54089,12 +56059,12 @@ Schema: `UpdateCollection`
 ---
 
 
-#### deleteCollection
-Delete a Collection
+#### getCollectionItems
+Get the items for a collection
 
 ```golang
 
-data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
+data, err := Catalog.GetCollectionItems(CompanyID, ApplicationID, ID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -54110,16 +56080,23 @@ data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
 
 
 
-Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
+
+
+
+
+| xQuery | struct | Includes properties such as `SortOn`, `PageID`, `PageSize`
+
+
+Get items from a collection specified by its `id`.
 
 *Success Response:*
 
 
 
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+The attached items of an collection. See example below or refer `GetCollectionItemsResponseSchema` for details
 
 
-Schema: `DeleteResponse`
+Schema: `GetCollectionItemsResponse`
 
 
 
@@ -54164,56 +56141,6 @@ Status object. Tells whether the operation was successful.
 
 
 Schema: `UpdatedResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getCollectionItems
-Get the items for a collection
-
-```golang
-
-data, err := Catalog.GetCollectionItems(CompanyID, ApplicationID, ID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier of a collection. | 
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `SortOn`, `PageID`, `PageSize`
-
-
-Get items from a collection specified by its `id`.
-
-*Success Response:*
-
-
-
-The attached items of an collection. See example below or refer `GetCollectionItemsResponseSchema` for details
-
-
-Schema: `GetCollectionItemsResponse`
 
 
 
@@ -54635,44 +56562,6 @@ Schema: `ProdcutTemplateCategoriesResponse`
 ---
 
 
-#### createDepartments
-Create the department.
-
-```golang
-
-data, err := Catalog.CreateDepartments(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| body |  DepartmentCreateUpdate | "Request body" 
-
-Create departments using the API.
-
-*Success Response:*
-
-
-
-Success Response. See example below or refer `DepartmentCreateResponseSchema` for details
-
-
-Schema: `DepartmentCreateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### listDepartmentsData
 List all Departments.
 
@@ -54721,12 +56610,12 @@ Schema: `DepartmentsResponse`
 ---
 
 
-#### updateDepartment
-Update the department by their uid.
+#### createDepartments
+Create the department.
 
 ```golang
 
-data, err := Catalog.UpdateDepartment(CompanyID, UID, body);
+data, err := Catalog.CreateDepartments(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -54735,12 +56624,9 @@ data, err := Catalog.UpdateDepartment(CompanyID, UID, body);
 | CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
 
 
-| UID | string | A `uid` is a unique identifier of a department. | 
-
-
 | body |  DepartmentCreateUpdate | "Request body" 
 
-Update the department by their uid using this API.
+Create departments using the API.
 
 *Success Response:*
 
@@ -54749,7 +56635,7 @@ Update the department by their uid using this API.
 Success Response. See example below or refer `DepartmentCreateResponseSchema` for details
 
 
-Schema: `DepartmentModel`
+Schema: `DepartmentCreateResponse`
 
 
 
@@ -54790,6 +56676,47 @@ Departments Data. See example below or refer `DepartmentsResponse` for details
 
 
 Schema: `DepartmentsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateDepartment
+Update the department by their uid.
+
+```golang
+
+data, err := Catalog.UpdateDepartment(CompanyID, UID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| UID | string | A `uid` is a unique identifier of a department. | 
+
+
+| body |  DepartmentCreateUpdate | "Request body" 
+
+Update the department by their uid using this API.
+
+*Success Response:*
+
+
+
+Success Response. See example below or refer `DepartmentCreateResponseSchema` for details
+
+
+Schema: `DepartmentModel`
 
 
 
@@ -55116,44 +57043,6 @@ Schema: `ProductConfigurationDownloads`
 ---
 
 
-#### createCategories
-Create product categories
-
-```golang
-
-data, err := Catalog.CreateCategories(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| body |  CategoryRequestBody | "Request body" 
-
-This API lets user create product categories
-
-*Success Response:*
-
-
-
-Category Meta. See example below or refer `CategoryCreateResponse` for details
-
-
-Schema: `CategoryCreateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### listCategories
 Get product categories list
 
@@ -55202,12 +57091,12 @@ Schema: `CategoryResponse`
 ---
 
 
-#### updateCategory
-Update product categories
+#### createCategories
+Create product categories
 
 ```golang
 
-data, err := Catalog.UpdateCategory(CompanyID, UID, body);
+data, err := Catalog.CreateCategories(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -55216,21 +57105,18 @@ data, err := Catalog.UpdateCategory(CompanyID, UID, body);
 | CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
 
 
-| UID | string | Category unique id | 
-
-
 | body |  CategoryRequestBody | "Request body" 
 
-Update a product category using this apu
+This API lets user create product categories
 
 *Success Response:*
 
 
 
-Category Meta. See example below or refer `CategoryUpdateResponse` for details
+Category Meta. See example below or refer `CategoryCreateResponse` for details
 
 
-Schema: `CategoryUpdateResponse`
+Schema: `CategoryCreateResponse`
 
 
 
@@ -55283,32 +57169,35 @@ Schema: `SingleCategoryResponse`
 ---
 
 
-#### createProduct
-Create a product.
+#### updateCategory
+Update product categories
 
 ```golang
 
-data, err := Catalog.CreateProduct(CompanyID, body);
+data, err := Catalog.UpdateCategory(CompanyID, UID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
 
 
-| body |  ProductCreateUpdate | "Request body" 
+| UID | string | Category unique id | 
 
-This API allows to create product.
+
+| body |  CategoryRequestBody | "Request body" 
+
+Update a product category using this apu
 
 *Success Response:*
 
 
 
-Returns a success response
+Category Meta. See example below or refer `CategoryUpdateResponse` for details
 
 
-Schema: `SuccessResponse`
+Schema: `CategoryUpdateResponse`
 
 
 
@@ -55365,6 +57254,44 @@ Product Meta. See example below for details
 
 
 Schema: `ProductListingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createProduct
+Create a product.
+
+```golang
+
+data, err := Catalog.CreateProduct(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+
+
+| body |  ProductCreateUpdateSchemaV2 | "Request body" 
+
+This API allows to create product.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
@@ -55467,26 +57394,25 @@ Schema: `ProductAttributesResponse`
 ---
 
 
-#### editProduct
-Edit a product.
+#### deleteProduct
+Delete a product.
 
 ```golang
 
-data, err := Catalog.EditProduct(CompanyID, ItemID, body);
+data, err := Catalog.DeleteProduct(CompanyID, ItemID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
 
 
 | ItemID | float64 | Id of the product to be updated. | 
 
 
-| body |  ProductCreateUpdate | "Request body" 
 
-This API allows to edit product.
+This API allows to delete product.
 
 *Success Response:*
 
@@ -55519,8 +57445,6 @@ data, err := Catalog.GetProduct(CompanyID, ItemID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-
-
 | CompanyID | float64 | Company Id of the product. | 
 
 
@@ -55528,7 +57452,9 @@ data, err := Catalog.GetProduct(CompanyID, ItemID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `ItemCode`, `BrandUID`
+
+
+| xQuery | struct | Includes properties such as `BrandUID`, `ItemCode`
 
 
 This API helps to get data associated to a particular product.
@@ -55540,7 +57466,7 @@ This API helps to get data associated to a particular product.
 Product object. See example below or refer `product.utils.format_product_response` for details
 
 
-Schema: `Product`
+Schema: `SingleProductResponse`
 
 
 
@@ -55553,25 +57479,26 @@ Schema: `Product`
 ---
 
 
-#### deleteProduct
-Delete a product.
+#### editProduct
+Edit a product.
 
 ```golang
 
-data, err := Catalog.DeleteProduct(CompanyID, ItemID);
+data, err := Catalog.EditProduct(CompanyID, ItemID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
 
 
 | ItemID | float64 | Id of the product to be updated. | 
 
 
+| body |  ProductCreateUpdateSchemaV2 | "Request body" 
 
-This API allows to delete product.
+This API allows to edit product.
 
 *Success Response:*
 
@@ -55581,6 +57508,46 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### allSizes
+All Sizes for a given Product
+
+```golang
+
+data, err := Catalog.AllSizes(CompanyID, ItemID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+
+
+| ItemID | float64 | Id of the product to be updated. | 
+
+
+
+This API allows to get  All Sizes for a given Product.
+
+*Success Response:*
+
+
+
+List Product Sizes. See example below or refer `AllSizes` for details
+
+
+Schema: `GetAllSizes`
 
 
 
@@ -55677,44 +57644,6 @@ Schema: `ProductListingResponse`
 ---
 
 
-#### createBulkProductUploadJob
-Create a Bulk product to upload job.
-
-```golang
-
-data, err := Catalog.CreateBulkProductUploadJob(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
-
-
-| body |  BulkJob | "Request body" 
-
-This API helps to create a bulk products upload job.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `BulkResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getProductBulkUploadHistory
 Get a list of all bulk product upload jobs.
 
@@ -55747,6 +57676,44 @@ List of bulk product upload jobs. See `BulkRequestGetSchema` for details
 
 
 Schema: `ProductBulkRequestList`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createBulkProductUploadJob
+Create a Bulk product to upload job.
+
+```golang
+
+data, err := Catalog.CreateBulkProductUploadJob(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+
+
+| body |  BulkJob | "Request body" 
+
+This API helps to create a bulk products upload job.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `BulkResponse`
 
 
 
@@ -55802,26 +57769,25 @@ Schema: `BulkResponse`
 ---
 
 
-#### createProductsInBulk
-Create products in bulk associated with given batch Id.
+#### deleteProductBulkJob
+Delete Bulk product job.
 
 ```golang
 
-data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
+data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
 
 
-| BatchID | string | Batch Id in which assets to be uploaded. | 
+| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
 
 
-| body |  BulkProductRequest | "Request body" 
 
-This API helps to create products in bulk push to kafka for approval/creation.
+This API allows to delete bulk product job associated with company.
 
 *Success Response:*
 
@@ -55843,25 +57809,26 @@ Schema: `SuccessResponse`
 ---
 
 
-#### deleteProductBulkJob
-Delete Bulk product job.
+#### createProductsInBulk
+Create products in bulk associated with given batch Id.
 
 ```golang
 
-data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
+data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
 
 
-| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
+| BatchID | string | Batch Id in which assets to be uploaded. | 
 
 
+| body |  BulkProductRequest | "Request body" 
 
-This API allows to delete bulk product job associated with company.
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -55920,44 +57887,6 @@ Schema: `ProductTagsViewResponse`
 ---
 
 
-#### createProductAssetsInBulk
-Create a Bulk asset upload Job.
-
-```golang
-
-data, err := Catalog.CreateProductAssetsInBulk(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
-
-
-| body |  ProductBulkAssets | "Request body" 
-
-This API helps to create a bulk asset upload job.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getProductAssetsInBulk
 Get a list of all bulk asset jobs.
 
@@ -56000,6 +57929,44 @@ Schema: `BulkAssetResponse`
 ---
 
 
+#### createProductAssetsInBulk
+Create a Bulk asset upload Job.
+
+```golang
+
+data, err := Catalog.CreateProductAssetsInBulk(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+
+
+| body |  ProductBulkAssets | "Request body" 
+
+This API helps to create a bulk asset upload job.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### deleteSize
 Delete a Size associated with product.
 
@@ -56011,13 +57978,13 @@ data, err := Catalog.DeleteSize(CompanyID, ItemID, Size);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
+| CompanyID | float64 | Company Id of the company associated to size that is to be deleted. | 
 
 
 | ItemID | float64 | Item Id of the product associated with size to be deleted. | 
 
 
-| Size | float64 | size to be deleted. | 
+| Size | string | size to be deleted. | 
 
 
 
@@ -56031,50 +57998,6 @@ Returns a success response
 
 
 Schema: `ProductSizeDeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### addInventory
-Add Inventory for particular size and store.
-
-```golang
-
-data, err := Catalog.AddInventory(CompanyID, ItemID, Size, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to product that is to be viewed. | 
-
-
-| ItemID | float64 | Item code of the product of which size is to be get. | 
-
-
-| Size | string | Size in which inventory is to be added. | 
-
-
-| body |  InventoryRequest | "Request body" 
-
-This API allows add Inventory for particular size and store.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
 
 
 
@@ -56127,6 +58050,50 @@ returns a list of all inventory grouped by size and store
 
 
 Schema: `InventoryResponsePaginated`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### addInventory
+Add Inventory for particular size and store.
+
+```golang
+
+data, err := Catalog.AddInventory(CompanyID, ItemID, Size, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+
+
+| ItemID | float64 | Item code of the product of which size is to be get. | 
+
+
+| Size | string | Size in which inventory is to be added. | 
+
+
+| body |  InventoryRequest | "Request body" 
+
+This API allows add Inventory for particular size and store.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
@@ -56346,6 +58313,48 @@ Schema: `SuccessResponse`
 ---
 
 
+#### getInventoryBulkUploadHistory
+Get a list of all bulk Inventory upload jobs.
+
+```golang
+
+data, err := Catalog.GetInventoryBulkUploadHistory(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id of of which Inventory Bulk Upload History to be obtained. | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
+
+
+This API helps to get bulk Inventory upload jobs data.
+
+*Success Response:*
+
+
+
+List of bulk Inventory upload jobs. See `BulkInventoryGetSchema` for details
+
+
+Schema: `BulkInventoryGet`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### createBulkInventoryJob
 Create a Bulk Inventory upload Job.
 
@@ -56384,36 +58393,34 @@ Schema: `BulkResponse`
 ---
 
 
-#### getInventoryBulkUploadHistory
-Get a list of all bulk Inventory upload jobs.
+#### deleteBulkInventoryJob
+Delete Bulk Inventory job.
 
 ```golang
 
-data, err := Catalog.GetInventoryBulkUploadHistory(CompanyID, xQuery);
+data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id of of which Inventory Bulk Upload History to be obtained. | 
+| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
+
+
+| BatchID | string | Batch Id of the bulk delete job. | 
 
 
 
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-
-This API helps to get bulk Inventory upload jobs data.
+This API allows to delete bulk Inventory job associated with company.
 
 *Success Response:*
 
 
 
-List of bulk Inventory upload jobs. See `BulkInventoryGetSchema` for details
+Returns a success response
 
 
-Schema: `BulkInventoryGet`
+Schema: `SuccessResponse`
 
 
 
@@ -56467,34 +58474,31 @@ Schema: `SuccessResponse`
 ---
 
 
-#### deleteBulkInventoryJob
-Delete Bulk Inventory job.
+#### getInventoryExport
+Get Inventory export history.
 
 ```golang
 
-data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
+data, err := Catalog.GetInventoryExport(CompanyID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
-
-
-| BatchID | string | Batch Id of the bulk delete job. | 
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
 
 
 
-This API allows to delete bulk Inventory job associated with company.
+This API helps to get Inventory export history.
 
 *Success Response:*
 
 
 
-Returns a success response
+Returns a list of inventory export jobs
 
 
-Schema: `SuccessResponse`
+Schema: `InventoryExportJob`
 
 
 
@@ -56533,43 +58537,6 @@ Returns a success response
 
 
 Schema: `InventoryExportResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getInventoryExport
-Get Inventory export history.
-
-```golang
-
-data, err := Catalog.GetInventoryExport(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
-
-
-
-This API helps to get Inventory export history.
-
-*Success Response:*
-
-
-
-Returns a list of inventory export jobs
-
-
-Schema: `InventoryExportJob`
 
 
 
@@ -56622,12 +58589,12 @@ Schema: `InventoryConfig`
 ---
 
 
-#### updateRealtimeInventory
+#### deleteRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -56666,12 +58633,12 @@ Schema: `InventoryUpdateResponse`
 ---
 
 
-#### deleteRealtimeInventory
+#### updateRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -56748,44 +58715,6 @@ Schema: `InventoryUpdateResponse`
 ---
 
 
-#### createHsnCode
-Create Hsn Code.
-
-```golang
-
-data, err := Catalog.CreateHsnCode(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| body |  HsnUpsert | "Request body" 
-
-Create Hsn Code.
-
-*Success Response:*
-
-
-
-See example below for details
-
-
-Schema: `HsnCode`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getAllHsnCodes
 Hsn Code List.
 
@@ -56830,12 +58759,12 @@ Schema: `HsnCodesListingResponse`
 ---
 
 
-#### updateHsnCode
-Update Hsn Code.
+#### createHsnCode
+Create Hsn Code.
 
 ```golang
 
-data, err := Catalog.UpdateHsnCode(CompanyID, ID, body);
+data, err := Catalog.CreateHsnCode(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -56844,12 +58773,9 @@ data, err := Catalog.UpdateHsnCode(CompanyID, ID, body);
 | CompanyID | string | company id | 
 
 
-| ID | string | Unique id | 
-
-
 | body |  HsnUpsert | "Request body" 
 
-Update Hsn Code.
+Create Hsn Code.
 
 *Success Response:*
 
@@ -56896,6 +58822,47 @@ Fetch Hsn Code.
 
 
 See example below details
+
+
+Schema: `HsnCode`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateHsnCode
+Update Hsn Code.
+
+```golang
+
+data, err := Catalog.UpdateHsnCode(CompanyID, ID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ID | string | Unique id | 
+
+
+| body |  HsnUpsert | "Request body" 
+
+Update Hsn Code.
+
+*Success Response:*
+
+
+
+See example below for details
 
 
 Schema: `HsnCode`
@@ -64323,12 +66290,12 @@ Item updated in the cart
 ## Rewards
 
 
-#### showGiveaways
+#### getGiveaways
 List of giveaways of the current application.
 
 ```golang
 
-data, err := Rewards.ShowGiveaways(CompanyID, ApplicationID, xQuery);
+data, err := Rewards.GetGiveaways(CompanyID, ApplicationID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -64368,12 +66335,12 @@ Schema: `GiveawayResponse`
 ---
 
 
-#### saveGiveAway
-List of giveaways of the current application.
+#### createGiveaway
+Adds a new giveaway.
 
 ```golang
 
-data, err := Rewards.SaveGiveAway(CompanyID, ApplicationID, body);
+data, err := Rewards.CreateGiveaway(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -64409,12 +66376,12 @@ Schema: `Giveaway`
 ---
 
 
-#### getGiveawayById
+#### getGiveawayByID
 Get giveaway by ID.
 
 ```golang
 
-data, err := Rewards.GetGiveawayById(CompanyID, ApplicationID, ID);
+data, err := Rewards.GetGiveawayByID(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -64452,12 +66419,12 @@ Schema: `Giveaway`
 ---
 
 
-#### updateGiveAway
+#### updateGiveaway
 Updates the giveaway by it's ID.
 
 ```golang
 
-data, err := Rewards.UpdateGiveAway(CompanyID, ApplicationID, ID, body);
+data, err := Rewards.UpdateGiveaway(CompanyID, ApplicationID, ID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -64496,55 +66463,12 @@ Schema: `Giveaway`
 ---
 
 
-#### getGiveawayAudienceStatus
-Get the Giveaway audience status
+#### getOffers
+List of offer of the current application.
 
 ```golang
 
-data, err := Rewards.GetGiveawayAudienceStatus(AudienceID, CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| AudienceID | string | audience id | 
-
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-
-Get giveaway audience status
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `GiveawayAudience`
-
-
-
-
-
-
-
-
-
----
-
-
-#### showOffers
-List of offers of the current application.
-
-```golang
-
-data, err := Rewards.ShowOffers(CompanyID, ApplicationID);
+data, err := Rewards.GetOffers(CompanyID, ApplicationID);
 ```
 
 | Argument  |  Type  | Description |
@@ -64557,7 +66481,7 @@ data, err := Rewards.ShowOffers(CompanyID, ApplicationID);
 
 
 
-List of offers of the current application.
+List of offer of the current application.
 
 *Success Response:*
 
@@ -64580,18 +66504,15 @@ Schema: `Array<Offer>`
 
 
 #### getOfferByName
-Get offer by name
+Get offer by name.
 
 ```golang
 
-data, err := Rewards.GetOfferByName(Name, CompanyID, ApplicationID, Cookie);
+data, err := Rewards.GetOfferByName(CompanyID, ApplicationID, Cookie, Name);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
-
-| Name | string | The name given to the offer. | 
-
 
 | CompanyID | string | company id | 
 
@@ -64602,14 +66523,17 @@ data, err := Rewards.GetOfferByName(Name, CompanyID, ApplicationID, Cookie);
 | Cookie | string | User's session cookie. This cookie is set in browser cookie when logged-in to fynd's authentication system i.e. `Grimlock` or by using grimlock-backend SDK for backend implementation. | 
 
 
+| Name | string | Offer name | 
 
-Use this API to get the offer details and configuration by entering the name of the offer.
+
+
+Get offer by name.
 
 *Success Response:*
 
 
 
-Success. Check example below or refer `Offer` for more details.
+ok
 
 
 Schema: `Offer`
@@ -64626,18 +66550,15 @@ Schema: `Offer`
 
 
 #### updateOfferByName
-Update offer by name
+Updates the offer by name.
 
 ```golang
 
-data, err := Rewards.UpdateOfferByName(Name, CompanyID, ApplicationID, body);
+data, err := Rewards.UpdateOfferByName(CompanyID, ApplicationID, Name, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
-
-| Name | string | The name given to the offer. | 
-
 
 | CompanyID | string | company id | 
 
@@ -64645,15 +66566,18 @@ data, err := Rewards.UpdateOfferByName(Name, CompanyID, ApplicationID, body);
 | ApplicationID | string | application id | 
 
 
+| Name | string | Offer name | 
+
+
 | body |  Offer | "Request body" 
 
-Use this API to update the offer details
+Updates the offer by name.
 
 *Success Response:*
 
 
 
-Success. Check example below or refer `Offer` for more details.
+ok
 
 
 Schema: `Offer`
@@ -64669,19 +66593,16 @@ Schema: `Offer`
 ---
 
 
-#### updateUserStatus
-Update user status
+#### getUserAvailablePoints
+User's reward details.
 
 ```golang
 
-data, err := Rewards.UpdateUserStatus(UserID, CompanyID, ApplicationID, body);
+data, err := Rewards.GetUserAvailablePoints(CompanyID, ApplicationID, UserID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
-
-| UserID | string | user id | 
-
 
 | CompanyID | string | company id | 
 
@@ -64689,9 +66610,55 @@ data, err := Rewards.UpdateUserStatus(UserID, CompanyID, ApplicationID, body);
 | ApplicationID | string | application id | 
 
 
+| UserID | string | user id | 
+
+
+
+User's reward details.
+
+*Success Response:*
+
+
+
+ok
+
+
+Schema: `UserRes`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateUserStatus
+Update User status
+
+```golang
+
+data, err := Rewards.UpdateUserStatus(CompanyID, ApplicationID, UserID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
+
+| UserID | string | user id | 
+
+
 | body |  AppUser | "Request body" 
 
-Use this API to update the user status active/archive
+Update user status, active/archive
 
 *Success Response:*
 
@@ -64713,157 +66680,36 @@ Schema: `AppUser`
 ---
 
 
-#### user
-Get user reward details
-
-```golang
-
-data, err := Rewards.User(UserID, CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| UserID | string | user id | 
-
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-
-Use this API to get the user reward details
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `UserRes` for more details.
-
-
-Schema: `UserRes`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getUserPointsHistory
-Get all transactions of reward points
+Get list of points transactions.
 
 ```golang
 
-data, err := Rewards.GetUserPointsHistory(UserID, CompanyID, ApplicationID, xQuery);
+data, err := Rewards.GetUserPointsHistory(CompanyID, ApplicationID, UserID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ApplicationID | string | application id | 
+
 
 | UserID | string | user id | 
 
 
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
 
 
 
 
 
-| xQuery | struct | Includes properties such as `PageID`, `PageSize`
+| xQuery | struct | Includes properties such as `PageID`, `PageLimit`, `PageSize`
 
 
-Use this API to get a list of points transactions.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `HistoryRes` for more details.
-
-
-Schema: `HistoryRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getRewardsConfiguration
-Get all valid android paths
-
-```golang
-
-data, err := Rewards.GetRewardsConfiguration(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-
-Use this API to get a list of valid android paths required by the Rewards INIT API to validate a fradualent device.
-
-*Success Response:*
-
-
-
-Success. Refer `ConfigurationRes` for more details.
-
-
-Schema: `ConfigurationRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### setRewardsConfiguration
-Updates the collection with given android paths.
-
-```golang
-
-data, err := Rewards.SetRewardsConfiguration(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-| body |  ConfigurationRequest | "Request body" 
-
-Updates the configuration or inserts new records.
+Get list of points transactions.
+The list of points history is paginated.
 
 *Success Response:*
 
@@ -64872,7 +66718,7 @@ Updates the configuration or inserts new records.
 ok
 
 
-Schema: `SetConfigurationRes`
+Schema: `HistoryRes`
 
 
 
@@ -66289,7 +68135,7 @@ default
             "first_name": "Paul",
             "last_name": "Lobo",
             "full_name": "Paul Lobo",
-            "email": "paullobo@gofynd.com"
+            "email": "paullobo@xyz.com"
           }
         },
         "_id": "634eef735e84e7e1b09aa07c",
@@ -66415,7 +68261,7 @@ default
         "first_name": "Paul",
         "last_name": "Lobo",
         "full_name": "Paul Lobo",
-        "email": "paullobo@gofynd.com"
+        "email": "paullobo@xyz.com"
       }
     },
     "device_info": {
@@ -66718,6 +68564,46 @@ Schema: `CompanyStoreView_Response`
 ---
 
 
+#### getZoneDataView
+Zone Data View of application.
+
+```golang
+
+data, err := Serviceability.GetZoneDataView(CompanyID, ZoneID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
+
+
+
+This API returns Zone Data View of the application.
+
+*Success Response:*
+
+
+
+Get Application Zone Data
+
+
+Schema: `GetSingleZoneDataViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateZoneControllerView
 Updation of zone collections in database.
 
@@ -66747,46 +68633,6 @@ Response status_code
 
 
 Schema: `ZoneSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getZoneDataView
-Zone Data View of application.
-
-```golang
-
-data, err := Serviceability.GetZoneDataView(CompanyID, ZoneID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
-
-
-
-This API returns Zone Data View of the application.
-
-*Success Response:*
-
-
-
-Get Application Zone Data
-
-
-Schema: `GetSingleZoneDataViewResponse`
 
 
 
@@ -66837,47 +68683,6 @@ Schema: `ZoneResponse`
 ---
 
 
-#### getZoneFromPincodeView
-GET zone from the Pincode.
-
-```golang
-
-data, err := Serviceability.GetZoneFromPincodeView(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` contains a specific ID of a company. | 
-
-
-| ApplicationID | string | A `application_id` contains a unique ID. | 
-
-
-| body |  GetZoneFromPincodeViewRequest | "Request body" 
-
-This API returns zone from the Pincode View.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `GetZoneFromPincodeViewResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getZonesFromApplicationIdView
 GET zones from the application_id.
 
@@ -66915,6 +68720,47 @@ List of zones for the given application_id
 
 
 Schema: `GetZoneFromApplicationIdViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getZoneFromPincodeView
+GET zone from the Pincode.
+
+```golang
+
+data, err := Serviceability.GetZoneFromPincodeView(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` contains a specific ID of a company. | 
+
+
+| ApplicationID | string | A `application_id` contains a unique ID. | 
+
+
+| body |  GetZoneFromPincodeViewRequest | "Request body" 
+
+This API returns zone from the Pincode View.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `GetZoneFromPincodeViewResponse`
 
 
 

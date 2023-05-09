@@ -16,7 +16,7 @@
 * [Order](#Order) - Handles all Application order and shipment api(s) 
 * [Rewards](#Rewards) - Earn and redeem reward points 
 * [PosCart](#PosCart) - Cart APIs 
-* [Logistic](#Logistic) - Logistics Promise Engine APIs allows you to configure zone, pincode, TAT, logistics and many more useful features.  
+* [Logistic](#Logistic) - Handles Platform websites OMS 
 
 ----
 ----
@@ -46,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [followById](#followbyid)
     * [unfollowById](#unfollowbyid)
+    * [followById](#followbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -283,12 +283,12 @@
 
 * [Rewards](#Rewards)
   * Methods
+    * [getPointsOnProduct](#getpointsonproduct)
     * [getOfferByName](#getofferbyname)
-    * [catalogueOrder](#catalogueorder)
-    * [getUserPointsHistory](#getuserpointshistory)
-    * [getUserPoints](#getuserpoints)
-    * [getUserReferralDetails](#getuserreferraldetails)
     * [getOrderDiscount](#getorderdiscount)
+    * [getUserPoints](#getuserpoints)
+    * [getUserPointsHistory](#getuserpointshistory)
+    * [getUserReferralDetails](#getuserreferraldetails)
     * [redeemReferralCode](#redeemreferralcode)
     
 
@@ -325,9 +325,9 @@
 
 * [Logistic](#Logistic)
   * Methods
-    * [getPincodeCity](#getpincodecity)
     * [getTatProduct](#gettatproduct)
     * [getPincodeZones](#getpincodezones)
+    * [getPincodeCity](#getpincodecity)
     
 
 
@@ -1153,12 +1153,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1172,7 +1172,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1194,12 +1194,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1213,7 +1213,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -6327,21 +6327,6 @@ All pages
         "__v": 9
       },
       {
-        "path": "product/:slug/reviews",
-        "type": "system",
-        "seo": {
-          "title": "",
-          "description": "",
-          "_id": "60ab5ca6d572fed64294eb24"
-        },
-        "_id": "60ab5ca6d572fed64294eb25",
-        "sections_meta": [],
-        "value": "product-reviews",
-        "text": "Product Reviews",
-        "theme": "5fb3ee4194a5181feeeba8e5",
-        "__v": 9
-      },
-      {
         "path": "blog",
         "type": "system",
         "seo": {
@@ -6414,21 +6399,6 @@ All pages
         "text": "Wishlist",
         "theme": "5fb3ee4194a5181feeeba8e5",
         "sections_meta": [],
-        "__v": 9
-      },
-      {
-        "path": "product/:slug/add-review",
-        "type": "system",
-        "seo": {
-          "title": "",
-          "description": "",
-          "_id": "60ab5ca6d572fed64294eb26"
-        },
-        "_id": "60ab5ca6d572fed64294eb27",
-        "sections_meta": [],
-        "value": "add-product-review",
-        "text": "Add Product Review",
-        "theme": "5fb3ee4194a5181feeeba8e5",
         "__v": 9
       },
       {
@@ -7423,11 +7393,6 @@ Applied Theme
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -7637,11 +7602,6 @@ Applied Theme
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -9604,11 +9564,6 @@ Preview Theme
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -9818,11 +9773,6 @@ Preview Theme
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -14576,6 +14526,7 @@ Success
       },
       "robots_txt": "User-agent: * \nAllow: / \nsancisciasn xwsaixjowqnxwsiwjs",
       "sitemap_enabled": false,
+      "cannonical_enabled": false,
       "_id": "6009819ee463ad40de397eb2",
       "app": "000000000000000000000001",
       "created_at": "2021-01-21T13:29:02.543Z",
@@ -18488,6 +18439,42 @@ Schema: `ShipmentApplicationStatusResponse`
 ## Rewards
 
 
+#### getPointsOnProduct
+Get the eligibility of reward points on a product
+
+```golang
+
+ data, err :=  Rewards.GetPointsOnProduct(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  CatalogueOrderRequest | "Request body" 
+
+
+Use this API to evaluate the amount of reward points that could be earned on any catalogue product.
+
+*Success Response:*
+
+
+
+Success. Check example below or refer `CatalogueOrderRequest` for more details.
+
+
+Schema: `CatalogueOrderResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getOfferByName
 Get offer by name
 
@@ -18526,30 +18513,65 @@ Schema: `Offer`
 ---
 
 
-#### catalogueOrder
-Get all transactions of reward points
+#### getOrderDiscount
+Calculates the discount on order-amount
 
 ```golang
 
- data, err :=  Rewards.CatalogueOrder(body);
+ data, err :=  Rewards.GetOrderDiscount(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  CatalogueOrderRequest | "Request body" 
+| body |  OrderDiscountRequest | "Request body" 
 
 
-Use this API to evaluate the amount of reward points that could be earned on any catalogue product.
+Use this API to calculate the discount on order-amount based on all the amount range configured in order_discount.
 
 *Success Response:*
 
 
 
-Success. Check example below or refer `CatalogueOrderResponse` for more details.
+Success. Check example below or refer `OrderDiscountResponse` for more details.
 
 
-Schema: `CatalogueOrderResponse`
+Schema: `OrderDiscountResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getUserPoints
+Get reward points available with a user
+
+```golang
+
+ data, err :=  Rewards.GetUserPoints();
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+Use this API to retrieve total available points of a user for current application
+
+*Success Response:*
+
+
+
+Success. Check example below or refer `PointsResponse` for more details.
+
+
+Schema: `PointsResponse`
 
 
 
@@ -18580,7 +18602,7 @@ Get all transactions of reward points
 
 
 
-Use this API to get a list of points transactions.
+Use this API to get a list of points transactions. The list of points history is paginated.
 
 *Success Response:*
 
@@ -18590,41 +18612,6 @@ Success. Check example below or refer `PointsHistoryResponse` for more details.
 
 
 Schema: `PointsHistoryResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getUserPoints
-Get referral details of a user
-
-```golang
-
- data, err :=  Rewards.GetUserPoints();
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-Use this API to retrieve total available points of a user for current application
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `PointsResponse` for more details.
-
-
-Schema: `PointsResponse`
 
 
 
@@ -18660,42 +18647,6 @@ Success. Check example below or refer `ReferralDetailsResponse` for more details
 
 
 Schema: `ReferralDetailsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getOrderDiscount
-Calculates the discount on order-amount
-
-```golang
-
- data, err :=  Rewards.GetOrderDiscount(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  OrderDiscountRequest | "Request body" 
-
-
-Use this API to calculate the discount on order-amount based on all the amount range configured in order_discount.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `OrderDiscountResponse` for more details.
-
-
-Schema: `OrderDiscountResponse`
 
 
 
@@ -22954,130 +22905,8 @@ Cart Merged/Replaced
 ## Logistic
 
 
-#### getPincodeCity
-Get Pincode API
-
-```golang
-
- data, err :=  Logistic.GetPincodeCity(Pincode);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| Pincode | string | A `pincode` contains a specific address of a location. | 
-
-
-
-
-Get pincode data
-
-*Success Response:*
-
-
-
-Get pincode data
-
-
-Schema: `PincodeApiResponse`
-
-
-*Examples:*
-
-
-Pincode data found
-```json
-{
-  "value": {
-    "data": [
-      {
-        "sub_type": "pincode",
-        "name": "421202",
-        "error": {
-          "type": null,
-          "value": null,
-          "message": null
-        },
-        "uid": "pincode:INDIA|MAHARASHTRA|MUMBAI|421202",
-        "display_name": "421202",
-        "meta": {
-          "zone": "West",
-          "internal_zone_id": 4
-        },
-        "parents": [
-          {
-            "sub_type": "country",
-            "name": "India",
-            "display_name": "India",
-            "uid": "country:INDIA"
-          },
-          {
-            "sub_type": "state",
-            "name": "Maharashtra",
-            "display_name": "Maharashtra",
-            "uid": "state:INDIA|MAHARASHTRA"
-          },
-          {
-            "sub_type": "city",
-            "name": "Thane",
-            "display_name": "Thane",
-            "uid": "city:INDIA|MAHARASHTRA|MUMBAI"
-          }
-        ]
-      }
-    ],
-    "request_uuid": "fce9f431215e71c9ee0e86e792ae1dce4",
-    "stormbreaker_uuid": "56cca764-9fab-41f4-adb8-6e9683532aa5",
-    "error": {
-      "type": null,
-      "value": null,
-      "message": null
-    },
-    "success": true
-  }
-}
-```
-
-Pincode not found
-```json
-{
-  "value": {
-    "data": [
-      {
-        "sub_type": "pincode",
-        "name": "999999",
-        "error": {
-          "type": "DoesNotExist",
-          "value": "999999",
-          "message": "pincode 999999 does not exist"
-        }
-      }
-    ],
-    "request_uuid": "fce9fb9215e71c9ee0e86e792ae1dce4",
-    "stormbreaker_uuid": "03b353ed-9dbd-4629-80b2-2be337859a20",
-    "error": {
-      "type": null,
-      "value": null,
-      "message": null
-    },
-    "success": false
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
 #### getTatProduct
-Get TAT API
+Get TAT of a product
 
 ```golang
 
@@ -23087,126 +22916,19 @@ Get TAT API
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  TATViewRequest | "Request body" 
+| body |  GetTatProductReqBody | "Request body" 
 
 
-Get TAT data
+Use this API to know the delivery turnaround time (TAT) by entering the product details along with the PIN Code of the location.
 
 *Success Response:*
 
 
 
-Get TAT  data
+Success. Check the example shown below or refer `GetTatProductResponse` for more details.
 
 
-Schema: `TATViewResponse`
-
-
-*Examples:*
-
-
-Pincode data found
-```json
-{
-  "value": {
-    "source": "FYND-APP",
-    "identifier": "PDP",
-    "journey": "forward",
-    "action": "get_tat",
-    "to_pincode": "143001",
-    "location_details": [
-      {
-        "fulfillment_id": 8,
-        "from_pincode": "560023",
-        "articles": [
-          {
-            "category": {
-              "level": "l3",
-              "id": 155
-            },
-            "manufacturing_time": 2,
-            "manufacturing_time_unit": "days",
-            "promise": {
-              "timestamp": {
-                "min": 1663564548,
-                "max": 1663650948
-              },
-              "formatted": {
-                "min": "19 Sep, Monday",
-                "max": "20 Sep, Tuesday"
-              }
-            },
-            "error": {
-              "type": null,
-              "value": null,
-              "message": null
-            },
-            "is_cod_available": true,
-            "_manufacturing_time_seconds": 172800
-          }
-        ]
-      }
-    ],
-    "request_uuid": "b4adf5508e34f17971817c3581e16310",
-    "stormbreaker_uuid": "4b8084d4-ea74-45af-8ddc-c38e29bf0cfb",
-    "error": {
-      "type": null,
-      "value": null,
-      "message": null
-    },
-    "to_city": "Amritsar",
-    "payment_mode": "prepaid",
-    "is_cod_available": true,
-    "success": true
-  }
-}
-```
-
-Pincode not found
-```json
-{
-  "value": {
-    "source": "FYND-APP",
-    "identifier": "PDP",
-    "journey": "forward",
-    "action": "get_tat",
-    "to_pincode": "99999",
-    "location_details": [
-      {
-        "fulfillment_id": 8,
-        "from_pincode": "560023",
-        "articles": [
-          {
-            "category": {
-              "level": "l3",
-              "id": 155
-            },
-            "manufacturing_time": 2,
-            "manufacturing_time_unit": "days",
-            "promise": null,
-            "error": {
-              "type": "ValueError",
-              "value": "99999",
-              "message": "We are not delivering to 99999"
-            }
-          }
-        ]
-      }
-    ],
-    "request_uuid": "4b99d15fddb2b9fc2d6ab99a1c933010",
-    "stormbreaker_uuid": "6a847909-1d59-43e7-9ae0-15f5de8fc7d7",
-    "error": {
-      "type": "ValueError",
-      "value": "99999",
-      "message": "All of the items in your cart are not deliverable to 99999"
-    },
-    "to_city": "",
-    "payment_mode": "prepaid",
-    "is_cod_available": true,
-    "success": false
-  }
-}
-```
+Schema: `GetTatProductResponse`
 
 
 
@@ -23220,7 +22942,7 @@ Pincode not found
 
 
 #### getPincodeZones
-GET zone from the Pincode.
+Get Pincode Zones
 
 ```golang
 
@@ -23230,19 +22952,57 @@ GET zone from the Pincode.
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  GetZoneFromPincodeViewRequest | "Request body" 
+| body |  GetPincodeZonesReqBody | "Request body" 
 
 
-This API returns zone from the Pincode View.
+Get to know the zones of a specefic pincode
 
 *Success Response:*
 
 
 
-Response status_code
+Success. Check the example shown below or refer `GetTatProductResponse` for more details.
 
 
-Schema: `GetZoneFromPincodeViewResponse`
+Schema: `GetPincodeZonesResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPincodeCity
+Get city from PIN Code
+
+```golang
+
+ data, err :=  Logistic.GetPincodeCity(Pincode);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| Pincode | string | The PIN Code of the area, e.g. 400059 | 
+
+
+
+
+Use this API to retrieve a city by its PIN Code.
+
+*Success Response:*
+
+
+
+Success. Returns a JSON object containing the city name, state and country identified by its PIN Code. Check the example shown below or refer `GetPincodeCityResponse` for more details.
+
+
+Schema: `GetPincodeCityResponse`
 
 
 
