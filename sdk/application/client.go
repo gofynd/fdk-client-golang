@@ -1352,9 +1352,7 @@ func NewAppClient(config *AppConfig) *Client {
         Filters bool  `url:"filters,omitempty"` 
         SortOn string  `url:"sort_on,omitempty"` 
         PageID string  `url:"page_id,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"` 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageType string  `url:"page_type,omitempty"`  
+        PageSize float64  `url:"page_size,omitempty"`  
     }
     
     // GetCollectionItemsBySlug Get the items in a collection
@@ -1369,10 +1367,6 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
-            
-                
-            
-                
             
                 
             
@@ -1462,16 +1456,6 @@ func NewAppClient(config *AppConfig) *Client {
                     
                     
                 
-                    
-                    
-                    
-                    
-                
-                    
-                    
-                    
-                    
-                
             
             // GetCollectionItemsBySlugPaginator Get the items in a collection  
             func (ca *Catalog)  GetCollectionItemsBySlugPaginator(Slug string  ,  xQuery CatalogGetCollectionItemsBySlugXQuery ) *common.Paginator {
@@ -1497,14 +1481,6 @@ func NewAppClient(config *AppConfig) *Client {
                  
                  
                  
-                 
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 xQuery.PageType = "cursor"
                  
                  
                 paginator.Next = func() (interface{}, error) {
@@ -2332,12 +2308,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // GetProductPriceBySlug Get the price of a product size at a PIN Code
-    func (ca *Catalog)  GetProductPriceBySlug(Slug string, Size string, xQuery CatalogGetProductPriceBySlugXQuery) (ProductSizePriceResponseV2, error){
+    func (ca *Catalog)  GetProductPriceBySlug(Slug string, Size string, xQuery CatalogGetProductPriceBySlugXQuery) (ProductSizePriceResponseV3, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getProductPriceBySlugResponse ProductSizePriceResponseV2
+             getProductPriceBySlugResponse ProductSizePriceResponseV3
 	    )
 
         
@@ -2365,18 +2341,18 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/application/catalog/v2.0/products/%s/sizes/%s/price/",Slug,Size),
+            fmt.Sprintf("/service/application/catalog/v3.0/products/%s/sizes/%s/price/",Slug,Size),
             nil,
             xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ProductSizePriceResponseV2{}, err
+            return ProductSizePriceResponseV3{}, err
 	    }
         
         err = json.Unmarshal(response, &getProductPriceBySlugResponse)
         if err != nil {
-            return ProductSizePriceResponseV2{}, common.NewFDKError(err.Error())
+            return ProductSizePriceResponseV3{}, common.NewFDKError(err.Error())
         }
          return getProductPriceBySlugResponse, nil
         
@@ -2397,12 +2373,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // GetProductSellersBySlug Get the sellers of a product size at a PIN Code
-    func (ca *Catalog)  GetProductSellersBySlug(Slug string, Size string, xQuery CatalogGetProductSellersBySlugXQuery) (ProductSizeSellersResponseV2, error){
+    func (ca *Catalog)  GetProductSellersBySlug(Slug string, Size string, xQuery CatalogGetProductSellersBySlugXQuery) (ProductSizeSellersResponseV3, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getProductSellersBySlugResponse ProductSizeSellersResponseV2
+             getProductSellersBySlugResponse ProductSizeSellersResponseV3
 	    )
 
         
@@ -2432,18 +2408,18 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/application/catalog/v2.0/products/%s/sizes/%s/sellers/",Slug,Size),
+            fmt.Sprintf("/service/application/catalog/v3.0/products/%s/sizes/%s/sellers/",Slug,Size),
             nil,
             xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ProductSizeSellersResponseV2{}, err
+            return ProductSizeSellersResponseV3{}, err
 	    }
         
         err = json.Unmarshal(response, &getProductSellersBySlugResponse)
         if err != nil {
-            return ProductSizeSellersResponseV2{}, common.NewFDKError(err.Error())
+            return ProductSizeSellersResponseV3{}, common.NewFDKError(err.Error())
         }
          return getProductSellersBySlugResponse, nil
         
