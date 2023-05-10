@@ -309,14 +309,14 @@
     * [processManifest](#processmanifest)
     * [dispatchManifest](#dispatchmanifest)
     * [getRoleBasedActions](#getrolebasedactions)
-    * [postShipmentHistory](#postshipmenthistory)
     * [getShipmentHistory](#getshipmenthistory)
+    * [postShipmentHistory](#postshipmenthistory)
     * [sendSmsNinja](#sendsmsninja)
     * [platformManualAssignDPToShipment](#platformmanualassigndptoshipment)
     * [updatePackagingDimensions](#updatepackagingdimensions)
     * [createOrder](#createorder)
-    * [createChannelConfig](#createchannelconfig)
     * [getChannelConfig](#getchannelconfig)
+    * [createChannelConfig](#createchannelconfig)
     * [uploadConsent](#uploadconsent)
     * [orderUpdate](#orderupdate)
     * [checkOrderStatus](#checkorderstatus)
@@ -53846,12 +53846,12 @@ Schema: `GetActionsResponse`
 ---
 
 
-#### postShipmentHistory
+#### getShipmentHistory
 
 
 ```golang
 
-data, err := Order.PostShipmentHistory(CompanyID, body);
+data, err := Order.GetShipmentHistory(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -53860,7 +53860,11 @@ data, err := Order.PostShipmentHistory(CompanyID, body);
 | CompanyID | float64 |  | 
 
 
-| body |  PostShipmentHistory | "Request body" 
+
+
+
+| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
+
 
 
 
@@ -53884,12 +53888,12 @@ Schema: `ShipmentHistoryResponse`
 ---
 
 
-#### getShipmentHistory
+#### postShipmentHistory
 
 
 ```golang
 
-data, err := Order.GetShipmentHistory(CompanyID, xQuery);
+data, err := Order.PostShipmentHistory(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -53898,11 +53902,7 @@ data, err := Order.GetShipmentHistory(CompanyID, xQuery);
 | CompanyID | float64 |  | 
 
 
-
-
-
-| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
-
+| body |  PostShipmentHistory | "Request body" 
 
 
 
@@ -54078,6 +54078,43 @@ Schema: `CreateOrderResponse`
 ---
 
 
+#### getChannelConfig
+
+
+```golang
+
+data, err := Order.GetChannelConfig(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+getChannelConfig
+
+*Success Response:*
+
+
+
+Successfully created the config data
+
+
+Schema: `CreateChannelConfigData`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### createChannelConfig
 
 
@@ -54104,43 +54141,6 @@ Successfully updateShipmentStatus!
 
 
 Schema: `CreateChannelConfigResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getChannelConfig
-
-
-```golang
-
-data, err := Order.GetChannelConfig(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-getChannelConfig
-
-*Success Response:*
-
-
-
-Successfully created the config data
-
-
-Schema: `CreateChannelConfigData`
 
 
 
@@ -57345,7 +57345,7 @@ data, err := Catalog.UpdateCategory(CompanyID, UID, body);
 
 | body |  CategoryRequestBody | "Request body" 
 
-Update a product category using this apu
+Update a product category using this api
 
 *Success Response:*
 
@@ -67960,7 +67960,7 @@ data, err := Discount.ValidateDiscountFile(CompanyID, xQuery, body);
 
 | xQuery | struct | Includes properties such as `Discount`
 
-| body |  DiscountJob | "Request body" 
+| body |  FileJobRequest | "Request body" 
 
 Validate File.
 
