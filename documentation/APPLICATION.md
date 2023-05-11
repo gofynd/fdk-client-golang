@@ -1046,7 +1046,11 @@ Get the items in a collection
 
 
 
-| xQuery | struct | Includes properties such as `F`, `Filters`, `SortOn`, `PageID`, `PageSize`
+
+
+
+
+| xQuery | struct | Includes properties such as `F`, `Filters`, `SortOn`, `PageID`, `PageSize`, `PageNo`, `PageType`
 
 
 

@@ -1352,7 +1352,9 @@ func NewAppClient(config *AppConfig) *Client {
         Filters bool  `url:"filters,omitempty"` 
         SortOn string  `url:"sort_on,omitempty"` 
         PageID string  `url:"page_id,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
+        PageSize float64  `url:"page_size,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageType string  `url:"page_type,omitempty"`  
     }
     
     // GetCollectionItemsBySlug Get the items in a collection
@@ -1367,6 +1369,10 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
+            
+                
             
                 
             
@@ -1456,6 +1462,16 @@ func NewAppClient(config *AppConfig) *Client {
                     
                     
                 
+                    
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                
             
             // GetCollectionItemsBySlugPaginator Get the items in a collection  
             func (ca *Catalog)  GetCollectionItemsBySlugPaginator(Slug string  ,  xQuery CatalogGetCollectionItemsBySlugXQuery ) *common.Paginator {
@@ -1481,6 +1497,14 @@ func NewAppClient(config *AppConfig) *Client {
                  
                  
                  
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 xQuery.PageType = "cursor"
                  
                  
                 paginator.Next = func() (interface{}, error) {
