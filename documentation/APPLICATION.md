@@ -21444,7 +21444,9 @@ Success
   "value": {
     "seo": {
       "details": {
-        "title": "Zyosa Zyosa"
+        "title": "Zyosa Zyosa",
+        "description": "",
+        "image_url": ""
       },
       "robots_txt": "User-agent: * \nAllow: / \nsancisciasn xwsaixjowqnxwsiwjs",
       "sitemap_enabled": false,
