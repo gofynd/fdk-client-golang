@@ -1657,55 +1657,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1746,6 +1697,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -10061,7 +10061,8 @@ func NewAppClient(config *AppConfig) *Client {
         PageSize float64  `url:"page_size,omitempty"` 
         OrderIncent bool  `url:"order_incent,omitempty"` 
         OrderingStore float64  `url:"ordering_store,omitempty"` 
-        User string  `url:"user,omitempty"`  
+        User string  `url:"user,omitempty"` 
+        UserName string  `url:"user_name,omitempty"`  
     }
     
     // GetAppStaffList Get a list of staff.
@@ -10076,6 +10077,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -10153,6 +10156,13 @@ func NewAppClient(config *AppConfig) *Client {
                     
                     
                 
+                    
+                    
+                    
+                        
+                    
+                    
+                
             
             // GetAppStaffListPaginator Get a list of staff.  
             func (co *Configuration)  GetAppStaffListPaginator( xQuery ConfigurationGetAppStaffListXQuery ) *common.Paginator {
@@ -10160,6 +10170,10 @@ func NewAppClient(config *AppConfig) *Client {
                  
                  
                  xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
                  
                  
                  
@@ -11272,6 +11286,62 @@ func NewAppClient(config *AppConfig) *Client {
             return ValidateVPAResponse{}, common.NewFDKError(err.Error())
         }
          return validateVPAResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //PaymentCardDetailsXQuery holds query params
+    type PaymentCardDetailsXQuery struct { 
+        Aggregator string  `url:"aggregator,omitempty"`  
+    }
+    
+    // CardDetails API to get Card info from PG
+    func (pa *Payment)  CardDetails(CardInfo string, xQuery PaymentCardDetailsXQuery) (CardDetailsResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             cardDetailsResponse CardDetailsResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            fmt.Sprintf("/service/application/payment/v1.0/cards/info/%s",CardInfo),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CardDetailsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &cardDetailsResponse)
+        if err != nil {
+            return CardDetailsResponse{}, common.NewFDKError(err.Error())
+        }
+         return cardDetailsResponse, nil
         
     }
           
@@ -12913,8 +12983,13 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //OrderGetInvoiceByShipmentIdXQuery holds query params
+    type OrderGetInvoiceByShipmentIdXQuery struct { 
+        DocumentType string  `url:"document_type,omitempty"`  
+    }
+    
     // GetInvoiceByShipmentId Get Invoice of a shipment
-    func (or *Order)  GetInvoiceByShipmentId(ShipmentID string) (ResponseGetInvoiceShipment, error){
+    func (or *Order)  GetInvoiceByShipmentId(ShipmentID string, xQuery OrderGetInvoiceByShipmentIdXQuery) (ResponseGetInvoiceShipment, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -12924,6 +12999,10 @@ func NewAppClient(config *AppConfig) *Client {
 
         
 
+        
+            
+                
+            
         
 
         
@@ -12939,7 +13018,7 @@ func NewAppClient(config *AppConfig) *Client {
             "get",
             fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/invoice",ShipmentID),
             nil,
-            nil,
+            xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -13328,6 +13407,76 @@ func NewAppClient(config *AppConfig) *Client {
             return ShipmentApplicationStatusResponse{}, common.NewFDKError(err.Error())
         }
          return updateShipmentStatusResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UpdateShipmentStatus1 
+    func (or *Order)  UpdateShipmentStatus1(ShipmentID string, body  UpdateShipmentStatusRequest) (ShipmentApplicationStatusResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             updateShipmentStatus1Response ShipmentApplicationStatusResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return ShipmentApplicationStatusResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return ShipmentApplicationStatusResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "put",
+            fmt.Sprintf("/service/application/order-manage/v1.0/orders/shipments/%s/status",ShipmentID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ShipmentApplicationStatusResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateShipmentStatus1Response)
+        if err != nil {
+            return ShipmentApplicationStatusResponse{}, common.NewFDKError(err.Error())
+        }
+         return updateShipmentStatus1Response, nil
         
     }
           
@@ -13916,6 +14065,8 @@ func NewAppClient(config *AppConfig) *Client {
 	    )
 
         
+            
+        
 
         
             
@@ -13992,6 +14143,10 @@ func NewAppClient(config *AppConfig) *Client {
              updateCartResponse UpdateCartDetailResponse
 	    )
 
+        
+            
+        
+            
         
 
         
@@ -14185,6 +14340,8 @@ func NewAppClient(config *AppConfig) *Client {
              applyCouponResponse CartDetailResponse
 	    )
 
+        
+            
         
 
         
@@ -14384,6 +14541,8 @@ func NewAppClient(config *AppConfig) *Client {
 	    )
 
         
+            
+        
 
         
             
@@ -14521,6 +14680,50 @@ func NewAppClient(config *AppConfig) *Client {
 	    )
 
         
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
 
         
 
@@ -14650,6 +14853,50 @@ func NewAppClient(config *AppConfig) *Client {
 	    )
 
         
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
 
         
 
@@ -14765,6 +15012,12 @@ func NewAppClient(config *AppConfig) *Client {
 	    )
 
         
+            
+        
+            
+        
+            
+        
 
         
             
@@ -14838,6 +15091,18 @@ func NewAppClient(config *AppConfig) *Client {
              selectPaymentModeResponse CartDetailResponse
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
         
 
         
@@ -15239,6 +15504,16 @@ func NewAppClient(config *AppConfig) *Client {
 	    )
 
         
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
 
         
             
@@ -15413,6 +15688,10 @@ func NewAppClient(config *AppConfig) *Client {
              getCartShareLinkResponse GetShareCartLinkResponse
 	    )
 
+        
+            
+        
+            
         
 
         
