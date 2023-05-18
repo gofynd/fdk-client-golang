@@ -997,7 +997,9 @@ List all the collections
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Tag`
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Tag`, `Q`
 
 
 
