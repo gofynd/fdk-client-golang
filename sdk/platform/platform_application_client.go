@@ -2397,7 +2397,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     //PlatformAppSearchUsersXQuery holds query params
     type PlatformAppSearchUsersXQuery struct { 
-        Q string  `url:"q,omitempty"`  
+        Q map[string]interface{}  `url:"q,omitempty"`  
     }
     
     // SearchUsers Search an existing user.
