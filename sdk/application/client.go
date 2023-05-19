@@ -1695,55 +1695,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UnfollowById Unfollow an entity (product/brand/collection)
-    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             unfollowByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &unfollowByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return unfollowByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // FollowById Follow an entity (product/brand/collection)
     func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1784,6 +1735,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return followByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UnfollowById Unfollow an entity (product/brand/collection)
+    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             unfollowByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &unfollowByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return unfollowByIdResponse, nil
         
     }
           
@@ -3222,7 +3222,7 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // ApplyRewardPoints Apply reward points at cart
-    func (ca *Cart)  ApplyRewardPoints(xQuery CartApplyRewardPointsXQuery, body  RewardPointRequestSchema) (CartDetailResponse, error){
+    func (ca *Cart)  ApplyRewardPoints(xQuery CartApplyRewardPointsXQuery, body  RewardPointRequest) (CartDetailResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -3876,12 +3876,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // ValidateCouponForPayment Verify the coupon eligibility against the payment mode
-    func (ca *Cart)  ValidateCouponForPayment(xQuery CartValidateCouponForPaymentXQuery) (PaymentCouponValidateSchema, error){
+    func (ca *Cart)  ValidateCouponForPayment(xQuery CartValidateCouponForPaymentXQuery) (PaymentCouponValidate, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             validateCouponForPaymentResponse PaymentCouponValidateSchema
+             validateCouponForPaymentResponse PaymentCouponValidate
 	    )
 
         
@@ -3919,12 +3919,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return PaymentCouponValidateSchema{}, err
+            return PaymentCouponValidate{}, err
 	    }
         
         err = json.Unmarshal(response, &validateCouponForPaymentResponse)
         if err != nil {
-            return PaymentCouponValidateSchema{}, common.NewFDKError(err.Error())
+            return PaymentCouponValidate{}, common.NewFDKError(err.Error())
         }
          return validateCouponForPaymentResponse, nil
         
@@ -4008,12 +4008,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // CheckoutCart Checkout all items in the cart
-    func (ca *Cart)  CheckoutCart(xQuery CartCheckoutCartXQuery, body  CartCheckoutDetailRequest) (CartCheckoutResponseSchema, error){
+    func (ca *Cart)  CheckoutCart(xQuery CartCheckoutCartXQuery, body  CartCheckoutDetailRequest) (CartCheckoutResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             checkoutCartResponse CartCheckoutResponseSchema
+             checkoutCartResponse CartCheckoutResponse
 	    )
 
         
@@ -4070,12 +4070,12 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return CartCheckoutResponseSchema{}, common.NewFDKError(err.Error())
+             return CartCheckoutResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return CartCheckoutResponseSchema{}, common.NewFDKError(err.Error())
+             return CartCheckoutResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -4088,12 +4088,12 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return CartCheckoutResponseSchema{}, err
+            return CartCheckoutResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &checkoutCartResponse)
         if err != nil {
-            return CartCheckoutResponseSchema{}, common.NewFDKError(err.Error())
+            return CartCheckoutResponse{}, common.NewFDKError(err.Error())
         }
          return checkoutCartResponse, nil
         
@@ -4475,12 +4475,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // CheckoutCartV2 Checkout all items in the cart
-    func (ca *Cart)  CheckoutCartV2(xQuery CartCheckoutCartV2XQuery, body  CartCheckoutDetailV2Request) (CartCheckoutResponseSchema, error){
+    func (ca *Cart)  CheckoutCartV2(xQuery CartCheckoutCartV2XQuery, body  CartCheckoutDetailV2Request) (CartCheckoutResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             checkoutCartV2Response CartCheckoutResponseSchema
+             checkoutCartV2Response CartCheckoutResponse
 	    )
 
         
@@ -4541,12 +4541,12 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return CartCheckoutResponseSchema{}, common.NewFDKError(err.Error())
+             return CartCheckoutResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return CartCheckoutResponseSchema{}, common.NewFDKError(err.Error())
+             return CartCheckoutResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -4559,12 +4559,12 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return CartCheckoutResponseSchema{}, err
+            return CartCheckoutResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &checkoutCartV2Response)
         if err != nil {
-            return CartCheckoutResponseSchema{}, common.NewFDKError(err.Error())
+            return CartCheckoutResponse{}, common.NewFDKError(err.Error())
         }
          return checkoutCartV2Response, nil
         
@@ -14831,7 +14831,7 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // ApplyRewardPoints Apply reward points at cart
-    func (po *PosCart)  ApplyRewardPoints(xQuery PosCartApplyRewardPointsXQuery, body  RewardPointRequestSchema) (CartDetailResponse, error){
+    func (po *PosCart)  ApplyRewardPoints(xQuery PosCartApplyRewardPointsXQuery, body  RewardPointRequest) (CartDetailResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -15485,12 +15485,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // ValidateCouponForPayment Verify the coupon eligibility against the payment mode
-    func (po *PosCart)  ValidateCouponForPayment(xQuery PosCartValidateCouponForPaymentXQuery) (PaymentCouponValidateSchema, error){
+    func (po *PosCart)  ValidateCouponForPayment(xQuery PosCartValidateCouponForPaymentXQuery) (PaymentCouponValidate, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             validateCouponForPaymentResponse PaymentCouponValidateSchema
+             validateCouponForPaymentResponse PaymentCouponValidate
 	    )
 
         
@@ -15528,12 +15528,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return PaymentCouponValidateSchema{}, err
+            return PaymentCouponValidate{}, err
 	    }
         
         err = json.Unmarshal(response, &validateCouponForPaymentResponse)
         if err != nil {
-            return PaymentCouponValidateSchema{}, common.NewFDKError(err.Error())
+            return PaymentCouponValidate{}, common.NewFDKError(err.Error())
         }
          return validateCouponForPaymentResponse, nil
         
@@ -15707,12 +15707,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // CheckoutCart Checkout all items in the cart
-    func (po *PosCart)  CheckoutCart(xQuery PosCartCheckoutCartXQuery, body  CartPosCheckoutDetailRequest) (CartCheckoutResponseSchema, error){
+    func (po *PosCart)  CheckoutCart(xQuery PosCartCheckoutCartXQuery, body  CartPosCheckoutDetailRequest) (CartCheckoutResponse, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             checkoutCartResponse CartCheckoutResponseSchema
+             checkoutCartResponse CartCheckoutResponse
 	    )
 
         
@@ -15775,12 +15775,12 @@ func NewAppClient(config *AppConfig) *Client {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
           
-             return CartCheckoutResponseSchema{}, common.NewFDKError(err.Error())
+             return CartCheckoutResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
              
-             return CartCheckoutResponseSchema{}, common.NewFDKError(err.Error())
+             return CartCheckoutResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -15793,12 +15793,12 @@ func NewAppClient(config *AppConfig) *Client {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return CartCheckoutResponseSchema{}, err
+            return CartCheckoutResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &checkoutCartResponse)
         if err != nil {
-            return CartCheckoutResponseSchema{}, common.NewFDKError(err.Error())
+            return CartCheckoutResponse{}, common.NewFDKError(err.Error())
         }
          return checkoutCartResponse, nil
         
