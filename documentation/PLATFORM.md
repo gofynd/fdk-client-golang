@@ -18,12 +18,11 @@
 * [Configuration](#Configuration) - Application configuration apis 
 * [Cart](#Cart) - Cart APIs 
 * [Rewards](#Rewards) - Earn and redeem reward points 
-* [Analytics](#Analytics) - Perceptor analytics 
 * [Discount](#Discount) - Discount 
 * [Partner](#Partner) - Partner configuration apis 
 * [Webhook](#Webhook) - Webhook dispatcher with retry and one event to many subscriber vice versa 
 * [AuditTrail](#AuditTrail) - Audit Logging Service that logs the crucial updates on the Platform 
-* [Serviceability](#Serviceability) - Logistics Configuration API's allows you to configure zone, application logistics and many more useful features.  
+* [Logistics](#Logistics) - Logistics Configuration API's allows you to configure zone, application logistics and many more useful features.  
 
 ----
 ----
@@ -664,22 +663,6 @@
     * [setRewardsConfiguration](#setrewardsconfiguration)
     
 
-* [Analytics](#Analytics)
-  * Methods
-    * [getStatiscticsGroups](#getstatiscticsgroups)
-    * [getStatiscticsGroupComponents](#getstatiscticsgroupcomponents)
-    * [getComponentStatsCSV](#getcomponentstatscsv)
-    * [getComponentStatsPDF](#getcomponentstatspdf)
-    * [getComponentStats](#getcomponentstats)
-    * [getAbandonCartList](#getabandoncartlist)
-    * [getAbandonCartsCSV](#getabandoncartscsv)
-    * [getAbandonCartDetail](#getabandoncartdetail)
-    * [createExportJob](#createexportjob)
-    * [getExportJobStatus](#getexportjobstatus)
-    * [getLogsList](#getlogslist)
-    * [searchLogs](#searchlogs)
-    
-
 * [Discount](#Discount)
   * Methods
     * [getDiscounts](#getdiscounts)
@@ -719,7 +702,7 @@
     * [getEntityTypes](#getentitytypes)
     
 
-* [Serviceability](#Serviceability)
+* [Logistics](#Logistics)
   * Methods
     * [getApplicationServiceability](#getapplicationserviceability)
     * [getEntityRegionView](#getentityregionview)
@@ -74006,541 +73989,6 @@ Schema: `SetConfigurationRes`
 ---
 
 
-## Analytics
-
-
-#### getStatiscticsGroups
-Get statistics groups
-
-```golang
-
-data, err := Analytics.GetStatiscticsGroups(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-
-Get statistics groups
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `StatsGroups`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getStatiscticsGroupComponents
-Get statistics group components
-
-```golang
-
-data, err := Analytics.GetStatiscticsGroupComponents(CompanyID, ApplicationID, GroupName);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| GroupName | string | Group name | 
-
-
-
-Get statistics group components
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `StatsGroupComponents`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getComponentStatsCSV
-Get component statistics csv
-
-```golang
-
-data, err := Analytics.GetComponentStatsCSV(CompanyID, ApplicationID, ComponentName);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| ComponentName | string | Component name | 
-
-
-
-Get component statistics csv
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `string`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getComponentStatsPDF
-Get component statistics pdf
-
-```golang
-
-data, err := Analytics.GetComponentStatsPDF(CompanyID, ApplicationID, ComponentName);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| ComponentName | string | Component name | 
-
-
-
-Get component statistics pdf
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `string`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getComponentStats
-Get component statistics
-
-```golang
-
-data, err := Analytics.GetComponentStats(CompanyID, ApplicationID, ComponentName);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| ComponentName | string | Component name | 
-
-
-
-Get component statistics
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `StatsRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAbandonCartList
-Get abandon carts list
-
-```golang
-
-data, err := Analytics.GetAbandonCartList(CompanyID, ApplicationID, FromDate, ToDate, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| FromDate | string | From date | 
-
-
-| ToDate | string | To date | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-
-Get abandon carts list
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `AbandonCartsList`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAbandonCartsCSV
-Get abandon carts csv
-
-```golang
-
-data, err := Analytics.GetAbandonCartsCSV(CompanyID, ApplicationID, FromDate, ToDate);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| FromDate | string | From date | 
-
-
-| ToDate | string | To date | 
-
-
-
-Get abandon carts csv
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `string`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAbandonCartDetail
-Get abandon carts details
-
-```golang
-
-data, err := Analytics.GetAbandonCartDetail(CompanyID, ApplicationID, CartID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ApplicationID | string | Application Id | 
-
-
-| CartID | string | Cart Id | 
-
-
-
-Get abandon cart details
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `AbandonCartDetail`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createExportJob
-Create data export job in required format
-
-```golang
-
-data, err := Analytics.CreateExportJob(CompanyID, ExportType, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ExportType | string | Export type / format | 
-
-
-| body |  ExportJobReq | "Request body" 
-
-Create data export job in required format
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `ExportJobRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getExportJobStatus
-Get data export job status
-
-```golang
-
-data, err := Analytics.GetExportJobStatus(CompanyID, ExportType, JobID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| ExportType | string | Export type / format | 
-
-
-| JobID | string | Export job id | 
-
-
-
-Get data export job status
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `ExportJobStatusRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getLogsList
-Get logs list
-
-```golang
-
-data, err := Analytics.GetLogsList(CompanyID, LogType, xQuery, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-| LogType | string | Log type | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-| body |  GetLogsListReq | "Request body" 
-
-Get logs list
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `GetLogsListRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### searchLogs
-Search logs
-
-```golang
-
-data, err := Analytics.SearchLogs(CompanyID, LogType, xQuery, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id | 
-
-
-
-
-
-
-| LogType | string | Log type | 
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-| body |  SearchLogReq | "Request body" 
-
-Search logs
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `SearchLogRes`
-
-
-
-
-
-
-
-
-
----
-
-
-
----
-
-
 ## Discount
 
 
@@ -75667,7 +75115,7 @@ default
 ---
 
 
-## Serviceability
+## Logistics
 
 
 #### getApplicationServiceability
@@ -75675,7 +75123,7 @@ Zone configuration of application.
 
 ```golang
 
-data, err := Serviceability.GetApplicationServiceability(CompanyID, ApplicationID);
+data, err := Logistics.GetApplicationServiceability(CompanyID, ApplicationID);
 ```
 
 | Argument  |  Type  | Description |
@@ -75715,7 +75163,7 @@ Get country and state list
 
 ```golang
 
-data, err := Serviceability.GetEntityRegionView(CompanyID, body);
+data, err := Logistics.GetEntityRegionView(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -75753,7 +75201,7 @@ Zone List of application.
 
 ```golang
 
-data, err := Serviceability.GetListView(CompanyID, xQuery);
+data, err := Logistics.GetListView(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -75803,7 +75251,7 @@ Company Store View of application.
 
 ```golang
 
-data, err := Serviceability.GetCompanyStoreView(CompanyID);
+data, err := Logistics.GetCompanyStoreView(CompanyID);
 ```
 
 | Argument  |  Type  | Description |
@@ -75840,7 +75288,7 @@ Updation of zone collections in database.
 
 ```golang
 
-data, err := Serviceability.UpdateZoneControllerView(ZoneID, CompanyID, body);
+data, err := Logistics.UpdateZoneControllerView(ZoneID, CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -75881,7 +75329,7 @@ Zone Data View of application.
 
 ```golang
 
-data, err := Serviceability.GetZoneDataView(CompanyID, ZoneID);
+data, err := Logistics.GetZoneDataView(CompanyID, ZoneID);
 ```
 
 | Argument  |  Type  | Description |
@@ -75921,7 +75369,7 @@ Insertion of zone in database.
 
 ```golang
 
-data, err := Serviceability.CreateZone(CompanyID, body);
+data, err := Logistics.CreateZone(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -75959,7 +75407,7 @@ GET zone from the Pincode.
 
 ```golang
 
-data, err := Serviceability.GetZoneFromPincodeView(CompanyID, ApplicationID, body);
+data, err := Logistics.GetZoneFromPincodeView(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -76000,7 +75448,7 @@ GET zones from the application_id.
 
 ```golang
 
-data, err := Serviceability.GetZonesFromApplicationIdView(CompanyID, ApplicationID, xQuery);
+data, err := Logistics.GetZonesFromApplicationIdView(CompanyID, ApplicationID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -76049,7 +75497,7 @@ GET stores data
 
 ```golang
 
-data, err := Serviceability.GetStore(CompanyID, StoreUID);
+data, err := Logistics.GetStore(CompanyID, StoreUID);
 ```
 
 | Argument  |  Type  | Description |
@@ -76089,7 +75537,7 @@ GET stores data
 
 ```golang
 
-data, err := Serviceability.GetAllStores(CompanyID);
+data, err := Logistics.GetAllStores(CompanyID);
 ```
 
 | Argument  |  Type  | Description |
@@ -76126,7 +75574,7 @@ PincodeView update of MOP.
 
 ```golang
 
-data, err := Serviceability.UpdatePincodeMopView(CompanyID, ApplicationID, body);
+data, err := Logistics.UpdatePincodeMopView(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -76167,7 +75615,7 @@ Bulk Update of pincode in the application.
 
 ```golang
 
-data, err := Serviceability.UpdatePincodeBulkView(CompanyID, ApplicationID, body);
+data, err := Logistics.UpdatePincodeBulkView(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -76208,7 +75656,7 @@ Pincode count view of application.
 
 ```golang
 
-data, err := Serviceability.UpdatePincodeCoDListing(CompanyID, ApplicationID, body);
+data, err := Logistics.UpdatePincodeCoDListing(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -76249,7 +75697,7 @@ Auditlog configuration of application.
 
 ```golang
 
-data, err := Serviceability.UpdatePincodeAuditHistory(CompanyID, ApplicationID, body);
+data, err := Logistics.UpdatePincodeAuditHistory(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |

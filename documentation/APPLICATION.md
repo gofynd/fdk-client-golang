@@ -282,7 +282,6 @@
     * [getShipmentReasons](#getshipmentreasons)
     * [updateShipmentStatus](#updateshipmentstatus)
     * [getProducts](#getproducts)
-    * [updateShipmentStatus1](#updateshipmentstatus1)
     
 
 * [Rewards](#Rewards)
@@ -25327,45 +25326,6 @@ Successfully retrived all the given shipments details!
 
 
 Schema: `ProductListResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateShipmentStatus1
-
-
-```golang
-
- data, err :=  Order.UpdateShipmentStatus1(ShipmentID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ShipmentID | string |  | 
-
-
-| body |  UpdateShipmentStatusRequest1 | "Request body" 
-
-
-updateShipmentStatus
-
-*Success Response:*
-
-
-
-Successfully updateShipmentStatus!
-
-
-Schema: `ShipmentApplicationStatusResponse`
 
 
 
