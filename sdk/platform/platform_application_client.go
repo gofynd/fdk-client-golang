@@ -12639,6 +12639,81 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
            
        
     
+    
+    
+  
+
+    
+    // VerifyCustomerForPayment Validate customer for payment
+     func (pa *PlatformAppPayment)  VerifyCustomerForPayment(body  ValidateCustomerRequest) (ValidateCustomerResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            verifyCustomerForPaymentResponse ValidateCustomerResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return ValidateCustomerResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return ValidateCustomerResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/customer/validation",pa.CompanyID, pa.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ValidateCustomerResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &verifyCustomerForPaymentResponse)
+        if err != nil {
+            return ValidateCustomerResponse{}, common.NewFDKError(err.Error())
+        }
+        return verifyCustomerForPaymentResponse, nil
+        
+    }
+           
+       
+    
 
  
 	 
