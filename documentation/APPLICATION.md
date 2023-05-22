@@ -46,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [unfollowById](#unfollowbyid)
     * [followById](#followbyid)
+    * [unfollowById](#unfollowbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -282,6 +282,7 @@
     * [getShipmentReasons](#getshipmentreasons)
     * [updateShipmentStatus](#updateshipmentstatus)
     * [getProducts](#getproducts)
+    * [updateShipmentStatus1](#updateshipmentstatus1)
     
 
 * [Rewards](#Rewards)
@@ -1164,12 +1165,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1183,7 +1184,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1205,12 +1206,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1224,7 +1225,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -25326,6 +25327,45 @@ Successfully retrived all the given shipments details!
 
 
 Schema: `ProductListResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateShipmentStatus1
+
+
+```golang
+
+ data, err :=  Order.UpdateShipmentStatus1(ShipmentID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string |  | 
+
+
+| body |  UpdateShipmentStatusRequest1 | "Request body" 
+
+
+updateShipmentStatus
+
+*Success Response:*
+
+
+
+Successfully updateShipmentStatus!
+
+
+Schema: `ShipmentApplicationStatusResponse`
 
 
 
