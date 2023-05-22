@@ -4500,8 +4500,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         Caller string  `url:"caller,omitempty"` 
         Receiver string  `url:"receiver,omitempty"` 
         BagID string  `url:"bag_id,omitempty"` 
-        CallingTo string  `url:"calling_to,omitempty"` 
-        CallerID string  `url:"caller_id,omitempty"`  
+        CallerID string  `url:"caller_id,omitempty"` 
+        Method string  `url:"method,omitempty"`  
     }
     
 
@@ -4890,7 +4890,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
     //PlatformGetShipmentHistoryXQuery holds query params
     type PlatformGetShipmentHistoryXQuery struct { 
-        ShipmentID string  `url:"shipment_id,omitempty"` 
+        ShipmentID float64  `url:"shipment_id,omitempty"` 
         BagID float64  `url:"bag_id,omitempty"`  
     }
     
@@ -5093,7 +5093,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
 
     // UpdatePackagingDimensions 
-     func (or *PlatformOrder)  UpdatePackagingDimensions(body  CreateOrderPayload) (CreateOrderResponse, error){
+     func (or *PlatformOrder)  UpdatePackagingDimensions(body  UpdatePackagingDimensionsPayload) (CreateOrderResponse, error){
         
         var (
             rawRequest  *RawRequest
