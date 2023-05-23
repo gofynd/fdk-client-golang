@@ -186,6 +186,32 @@ import (
 
 
 
+    //GenerationEntityType used by Content
+    type GenerationEntityType  string
+    
+    const (
+            
+            //TITLE defines constant for the `title` 
+            TITLE GenerationEntityType = "title"
+            
+            
+            //DESCRIPTION defines constant for the `description` 
+            DESCRIPTION GenerationEntityType = "description"
+            
+            
+       )
+
+    //IsValid return error if enum is invalid
+    func (ge GenerationEntityType) IsValid() error {
+      switch ge {
+        case  TITLE, DESCRIPTION : 
+        return nil
+      }
+      return errors.New("Invalid GenerationEntityType type")
+    }
+
+
+
     //PageType used by Content
     type PageType  string
     
@@ -273,14 +299,6 @@ import (
             
             //PRODUCT defines constant for the `product` 
             PRODUCT PageType = "product"
-            
-            
-            //PRODUCT-REVIEWS defines constant for the `product-reviews` 
-            PRODUCT-REVIEWS PageType = "product-reviews"
-            
-            
-            //ADD-PRODUCT-REVIEW defines constant for the `add-product-review` 
-            ADD-PRODUCT-REVIEW PageType = "add-product-review"
             
             
             //PRODUCT-REQUEST defines constant for the `product-request` 
@@ -384,11 +402,12 @@ import (
     //IsValid return error if enum is invalid
     func (pa PageType) IsValid() error {
       switch pa {
-        case  ABOUT-US, ADDRESSES, BLOG, BRANDS, CARDS, CART, CATEGORIES, BRAND, CATEGORY, COLLECTION, COLLECTIONS, CONTACT-US, EXTERNAL, FAQ, FRESHCHAT, HOME, NOTIFICATION-SETTINGS, ORDERS, PAGE, POLICY, PRODUCT, PRODUCT-REVIEWS, ADD-PRODUCT-REVIEW, PRODUCT-REQUEST, PRODUCTS, PROFILE, PROFILE-ORDER-SHIPMENT, PROFILE-BASIC, PROFILE-COMPANY, PROFILE-EMAILS, PROFILE-PHONES, RATE-US, REFER-EARN, SETTINGS, SHARED-CART, TNC, TRACK-ORDER, WISHLIST, SECTIONS, FORM, CART-DELIVERY, CART-PAYMENT, CART-REVIEW, LOGIN, REGISTER, SHIPPING-POLICY, RETURN-POLICY : 
+        case  ABOUT-US, ADDRESSES, BLOG, BRANDS, CARDS, CART, CATEGORIES, BRAND, CATEGORY, COLLECTION, COLLECTIONS, CONTACT-US, EXTERNAL, FAQ, FRESHCHAT, HOME, NOTIFICATION-SETTINGS, ORDERS, PAGE, POLICY, PRODUCT, PRODUCT-REQUEST, PRODUCTS, PROFILE, PROFILE-ORDER-SHIPMENT, PROFILE-BASIC, PROFILE-COMPANY, PROFILE-EMAILS, PROFILE-PHONES, RATE-US, REFER-EARN, SETTINGS, SHARED-CART, TNC, TRACK-ORDER, WISHLIST, SECTIONS, FORM, CART-DELIVERY, CART-PAYMENT, CART-REVIEW, LOGIN, REGISTER, SHIPPING-POLICY, RETURN-POLICY : 
         return nil
       }
       return errors.New("Invalid PageType type")
     }
+
 
 
 
@@ -485,14 +504,6 @@ import (
             PRODUCT PageType = "product"
             
             
-            //PRODUCT-REVIEWS defines constant for the `product-reviews` 
-            PRODUCT-REVIEWS PageType = "product-reviews"
-            
-            
-            //ADD-PRODUCT-REVIEW defines constant for the `add-product-review` 
-            ADD-PRODUCT-REVIEW PageType = "add-product-review"
-            
-            
             //PRODUCT-REQUEST defines constant for the `product-request` 
             PRODUCT-REQUEST PageType = "product-request"
             
@@ -594,11 +605,13 @@ import (
     //IsValid return error if enum is invalid
     func (pa PageType) IsValid() error {
       switch pa {
-        case  ABOUT-US, ADDRESSES, BLOG, BRANDS, CARDS, CART, CATEGORIES, BRAND, CATEGORY, COLLECTION, COLLECTIONS, CONTACT-US, EXTERNAL, FAQ, FRESHCHAT, HOME, NOTIFICATION-SETTINGS, ORDERS, PAGE, POLICY, PRODUCT, PRODUCT-REVIEWS, ADD-PRODUCT-REVIEW, PRODUCT-REQUEST, PRODUCTS, PROFILE, PROFILE-ORDER-SHIPMENT, PROFILE-BASIC, PROFILE-COMPANY, PROFILE-EMAILS, PROFILE-PHONES, RATE-US, REFER-EARN, SETTINGS, SHARED-CART, TNC, TRACK-ORDER, WISHLIST, SECTIONS, FORM, CART-DELIVERY, CART-PAYMENT, CART-REVIEW, LOGIN, REGISTER, SHIPPING-POLICY, RETURN-POLICY : 
+        case  ABOUT-US, ADDRESSES, BLOG, BRANDS, CARDS, CART, CATEGORIES, BRAND, CATEGORY, COLLECTION, COLLECTIONS, CONTACT-US, EXTERNAL, FAQ, FRESHCHAT, HOME, NOTIFICATION-SETTINGS, ORDERS, PAGE, POLICY, PRODUCT, PRODUCT-REQUEST, PRODUCTS, PROFILE, PROFILE-ORDER-SHIPMENT, PROFILE-BASIC, PROFILE-COMPANY, PROFILE-EMAILS, PROFILE-PHONES, RATE-US, REFER-EARN, SETTINGS, SHARED-CART, TNC, TRACK-ORDER, WISHLIST, SECTIONS, FORM, CART-DELIVERY, CART-PAYMENT, CART-REVIEW, LOGIN, REGISTER, SHIPPING-POLICY, RETURN-POLICY : 
         return nil
       }
       return errors.New("Invalid PageType type")
     }
+
+
 
 
 
