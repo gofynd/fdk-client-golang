@@ -7180,26 +7180,26 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    //PlatformListDepartmentsDataXQuery holds query params
-    type PlatformListDepartmentsDataXQuery struct { 
+    //PlatformListDepartmentsXQuery holds query params
+    type PlatformListDepartmentsXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
-        ItemType string  `url:"item_type,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
         Name string  `url:"name,omitempty"` 
         Search string  `url:"search,omitempty"` 
-        IsActive bool  `url:"is_active,omitempty"`  
+        IsActive bool  `url:"is_active,omitempty"` 
+        ItemType string  `url:"item_type,omitempty"`  
     }
     
 
 
-    // ListDepartmentsData List all Departments.
-     func (ca *PlatformCatalog)  ListDepartmentsData(xQuery PlatformListDepartmentsDataXQuery) (DepartmentsResponse, error){
+    // ListDepartments Retrieve a list of departments using various filters
+     func (ca *PlatformCatalog)  ListDepartments(xQuery PlatformListDepartmentsXQuery) (DepartmentListResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            listDepartmentsDataResponse DepartmentsResponse
+            listDepartmentsResponse DepartmentListResponse
 	    )
 
         
@@ -7235,14 +7235,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-             return DepartmentsResponse{}, err
+             return DepartmentListResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &listDepartmentsDataResponse)
+        err = json.Unmarshal(response, &listDepartmentsResponse)
         if err != nil {
-             return DepartmentsResponse{}, common.NewFDKError(err.Error())
+             return DepartmentListResponse{}, common.NewFDKError(err.Error())
         }
-        return listDepartmentsDataResponse, nil
+        return listDepartmentsResponse, nil
         
     }
          
@@ -7256,99 +7256,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // CreateDepartments Create the department.
-     func (ca *PlatformCatalog)  CreateDepartments(body  DepartmentCreateUpdate) (DepartmentCreateResponse, error){
+    // GetDepartment This API is used to retrieve detailed information about a specific department based on its UID.
+     func (ca *PlatformCatalog)  GetDepartment(UID float64) (DepartmentUpdate, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            createDepartmentsResponse DepartmentCreateResponse
-	    )
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return DepartmentCreateResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return DepartmentCreateResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "post",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/departments/",ca.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return DepartmentCreateResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &createDepartmentsResponse)
-        if err != nil {
-             return DepartmentCreateResponse{}, common.NewFDKError(err.Error())
-        }
-        return createDepartmentsResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // GetDepartmentData Get specific departments details by passing in unique id of the department.
-     func (ca *PlatformCatalog)  GetDepartmentData(UID string) (DepartmentsResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getDepartmentDataResponse DepartmentsResponse
+            getDepartmentResponse DepartmentUpdate
 	    )
 
         
@@ -7366,107 +7281,20 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         rawRequest = NewRequest(
             ca.Config,
             "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/departments/%s/",ca.CompanyID, UID),
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/departments/undefined/",ca.CompanyID, UID),
             nil,
             nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-             return DepartmentsResponse{}, err
+             return DepartmentUpdate{}, err
 	    }
         
-        err = json.Unmarshal(response, &getDepartmentDataResponse)
+        err = json.Unmarshal(response, &getDepartmentResponse)
         if err != nil {
-             return DepartmentsResponse{}, common.NewFDKError(err.Error())
+             return DepartmentUpdate{}, common.NewFDKError(err.Error())
         }
-        return getDepartmentDataResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // UpdateDepartment Update the department by their uid.
-     func (ca *PlatformCatalog)  UpdateDepartment(UID string, body  DepartmentCreateUpdate) (DepartmentModel, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateDepartmentResponse DepartmentModel
-	    )
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-
-        
-        
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return DepartmentModel{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return DepartmentModel{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "put",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/departments/%s/",ca.CompanyID, UID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return DepartmentModel{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateDepartmentResponse)
-        if err != nil {
-             return DepartmentModel{}, common.NewFDKError(err.Error())
-        }
-        return updateDepartmentResponse, nil
+        return getDepartmentResponse, nil
         
     }
          
@@ -8706,6 +8534,58 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+
+
+    // DeleteProduct Delete a product.
+     func (ca *PlatformCatalog)  DeleteProduct(ItemID float64) (SuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteProductResponse SuccessResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteProductResponse)
+        if err != nil {
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteProductResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
     //PlatformGetProductXQuery holds query params
     type PlatformGetProductXQuery struct { 
         BrandUID float64  `url:"brand_uid,omitempty"` 
@@ -8908,58 +8788,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return SuccessResponse{}, common.NewFDKError(err.Error())
         }
         return editProductResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // DeleteProduct Delete a product.
-     func (ca *PlatformCatalog)  DeleteProduct(ItemID float64) (SuccessResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteProductResponse SuccessResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteProductResponse)
-        if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteProductResponse, nil
         
     }
          
