@@ -1657,55 +1657,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UnfollowById Unfollow an entity (product/brand/collection)
-    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             unfollowByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &unfollowByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return unfollowByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // FollowById Follow an entity (product/brand/collection)
     func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1746,6 +1697,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return followByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UnfollowById Unfollow an entity (product/brand/collection)
+    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             unfollowByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &unfollowByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return unfollowByIdResponse, nil
         
     }
           
@@ -2528,8 +2528,7 @@ func NewAppClient(config *AppConfig) *Client {
         B bool  `url:"b,omitempty"` 
         AssignCardID float64  `url:"assign_card_id,omitempty"` 
         AreaCode string  `url:"area_code,omitempty"` 
-        BuyNow bool  `url:"buy_now,omitempty"` 
-        EmptyCart bool  `url:"empty_cart,omitempty"`  
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // GetCart Fetch all items added to the cart
@@ -2544,8 +2543,6 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
-            
-                
             
                 
             
@@ -2795,60 +2792,6 @@ func NewAppClient(config *AppConfig) *Client {
             return UpdateCartDetailResponse{}, common.NewFDKError(err.Error())
         }
          return updateCartResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    //CartDeleteCartXQuery holds query params
-    type CartDeleteCartXQuery struct { 
-        ID float64  `url:"id,omitempty"`  
-    }
-    
-    // DeleteCart Delete cart once user made successful checkout
-    func (ca *Cart)  DeleteCart(xQuery CartDeleteCartXQuery) (DeleteCartDetailResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             deleteCartResponse DeleteCartDetailResponse
-	    )
-
-        
-
-        
-            
-                
-            
-        
-
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "put",
-            "/service/application/cart/v1.0/cart_archive",
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return DeleteCartDetailResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteCartResponse)
-        if err != nil {
-            return DeleteCartDetailResponse{}, common.NewFDKError(err.Error())
-        }
-         return deleteCartResponse, nil
         
     }
           
@@ -3374,6 +3317,10 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
+            
+        
 
         
 
@@ -3502,6 +3449,10 @@ func NewAppClient(config *AppConfig) *Client {
              updateAddressResponse UpdateAddressResponse
 	    )
 
+        
+            
+        
+            
         
             
         
@@ -3886,8 +3837,7 @@ func NewAppClient(config *AppConfig) *Client {
         ID string  `url:"id,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"` 
         AddressID string  `url:"address_id,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"` 
-        OrderType string  `url:"order_type,omitempty"`  
+        AreaCode string  `url:"area_code,omitempty"`  
     }
     
     // GetShipments Get delivery date and options before checkout
@@ -3902,8 +3852,6 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
-            
-                
             
                 
             
@@ -12809,7 +12757,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            "/service/application/orders/v1.0/orders",
+            "/service/application/order/v1.0/orders",
             nil,
             xQuery,
             nil)
@@ -12856,7 +12804,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/%s",OrderID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/%s",OrderID),
             nil,
             nil,
             nil)
@@ -12903,7 +12851,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/pos-order/%s",OrderID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/pos-order/%s",OrderID),
             nil,
             nil,
             nil)
@@ -12950,7 +12898,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s",ShipmentID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s",ShipmentID),
             nil,
             nil,
             nil)
@@ -12997,7 +12945,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s/invoice",ShipmentID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/invoice",ShipmentID),
             nil,
             nil,
             nil)
@@ -13044,7 +12992,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s/track",ShipmentID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/track",ShipmentID),
             nil,
             nil,
             nil)
@@ -13093,7 +13041,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/%s/shipments/%s/customer-details",OrderID,ShipmentID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/%s/shipments/%s/customer-details",OrderID,ShipmentID),
             nil,
             nil,
             nil)
@@ -13142,7 +13090,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "post",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/%s/shipments/%s/otp/send/",OrderID,ShipmentID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/%s/shipments/%s/otp/send/",OrderID,ShipmentID),
             nil,
             nil,
             nil)
@@ -13208,7 +13156,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "post",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/%s/shipments/%s/otp/verify/",OrderID,ShipmentID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/%s/shipments/%s/otp/verify/",OrderID,ShipmentID),
             nil,
             nil,
             reqBody)
@@ -13257,7 +13205,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s/bags/%s/reasons",ShipmentID,BagID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/bags/%s/reasons",ShipmentID,BagID),
             nil,
             nil,
             nil)
@@ -13304,7 +13252,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             or.config,
             "get",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s/reasons",ShipmentID),
+            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/reasons",ShipmentID),
             nil,
             nil,
             nil)
@@ -13318,146 +13266,6 @@ func NewAppClient(config *AppConfig) *Client {
             return ShipmentReasons{}, common.NewFDKError(err.Error())
         }
          return getShipmentReasonsResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // UpdateShipmentStatus Update the shipment status
-    func (or *Order)  UpdateShipmentStatus(ShipmentID string, body  UpdateShipmentStatusRequest) (ShipmentApplicationStatusResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             updateShipmentStatusResponse ShipmentApplicationStatusResponse
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-        
-
-        
-        
-        
-    
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return ShipmentApplicationStatusResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return ShipmentApplicationStatusResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            or.config,
-            "put",
-            fmt.Sprintf("/service/application/orders/v1.0/orders/shipments/%s/status",ShipmentID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ShipmentApplicationStatusResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateShipmentStatusResponse)
-        if err != nil {
-            return ShipmentApplicationStatusResponse{}, common.NewFDKError(err.Error())
-        }
-         return updateShipmentStatusResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // UpdateShipmentStatus1 
-    func (or *Order)  UpdateShipmentStatus1(ShipmentID string, body  UpdateShipmentStatusRequest) (ShipmentApplicationStatusResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             updateShipmentStatus1Response ShipmentApplicationStatusResponse
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-        
-
-        
-        
-        
-    
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return ShipmentApplicationStatusResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return ShipmentApplicationStatusResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            or.config,
-            "put",
-            fmt.Sprintf("/service/application/order-manage/v1.0/orders/shipments/%s/status",ShipmentID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ShipmentApplicationStatusResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateShipmentStatus1Response)
-        if err != nil {
-            return ShipmentApplicationStatusResponse{}, common.NewFDKError(err.Error())
-        }
-         return updateShipmentStatus1Response, nil
         
     }
           
@@ -13916,8 +13724,7 @@ func NewAppClient(config *AppConfig) *Client {
         B bool  `url:"b,omitempty"` 
         AssignCardID float64  `url:"assign_card_id,omitempty"` 
         AreaCode string  `url:"area_code,omitempty"` 
-        BuyNow bool  `url:"buy_now,omitempty"` 
-        EmptyCart bool  `url:"empty_cart,omitempty"`  
+        BuyNow bool  `url:"buy_now,omitempty"`  
     }
     
     // GetCart Fetch all items added to the cart
@@ -13932,8 +13739,6 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
-            
-                
             
                 
             
@@ -14708,6 +14513,10 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
+            
+        
 
         
 
@@ -14836,6 +14645,10 @@ func NewAppClient(config *AppConfig) *Client {
              updateAddressResponse UpdateAddressResponse
 	    )
 
+        
+            
+        
+            
         
             
         
@@ -15420,6 +15233,8 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
 
         
             
@@ -15946,6 +15761,51 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // GetAllCountries Get Country List
+    func (lo *Logistic)  GetAllCountries() (CountryListResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getAllCountriesResponse CountryListResponse
+	    )
+
+        
+
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.config,
+            "get",
+            "/service/application/logistics/v1.0/country-list",
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CountryListResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAllCountriesResponse)
+        if err != nil {
+            return CountryListResponse{}, common.NewFDKError(err.Error())
+        }
+         return getAllCountriesResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // GetPincodeZones GET zone from the Pincode.
     func (lo *Logistic)  GetPincodeZones(body  GetZoneFromPincodeViewRequest) (GetZoneFromPincodeViewResponse, error){
         var (
@@ -15999,6 +15859,74 @@ func NewAppClient(config *AppConfig) *Client {
             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
         }
          return getPincodeZonesResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetOptimalLocations GET zone from the Pincode.
+    func (lo *Logistic)  GetOptimalLocations(body  ReAssignStoreRequest) (ReAssignStoreResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getOptimalLocationsResponse ReAssignStoreResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return ReAssignStoreResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return ReAssignStoreResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.config,
+            "post",
+            "/service/application/logistics/v1.0/reassign_stores",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ReAssignStoreResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getOptimalLocationsResponse)
+        if err != nil {
+            return ReAssignStoreResponse{}, common.NewFDKError(err.Error())
+        }
+         return getOptimalLocationsResponse, nil
         
     }
           
