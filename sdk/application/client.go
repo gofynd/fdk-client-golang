@@ -1363,6 +1363,7 @@ func NewAppClient(config *AppConfig) *Client {
     //CatalogGetCollectionItemsBySlugXQuery holds query params
     type CatalogGetCollectionItemsBySlugXQuery struct { 
         F string  `url:"f,omitempty"` 
+        Q string  `url:"q,omitempty"` 
         Filters bool  `url:"filters,omitempty"` 
         SortOn string  `url:"sort_on,omitempty"` 
         PageID string  `url:"page_id,omitempty"` 
@@ -1383,6 +1384,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -1465,6 +1468,13 @@ func NewAppClient(config *AppConfig) *Client {
                     
                     
                     
+                        
+                    
+                    
+                
+                    
+                    
+                    
                     
                         
                     
@@ -1490,6 +1500,10 @@ func NewAppClient(config *AppConfig) *Client {
             // GetCollectionItemsBySlugPaginator Get the items in a collection  
             func (ca *Catalog)  GetCollectionItemsBySlugPaginator(Slug string  ,  xQuery CatalogGetCollectionItemsBySlugXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("cursor")
+                 
+                 
+                 
+                 
                  
                  
                  
@@ -1695,55 +1709,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1784,6 +1749,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -3949,6 +3963,8 @@ func NewAppClient(config *AppConfig) *Client {
              checkoutCartResponse CartCheckoutResponse
 	    )
 
+        
+            
         
             
         
@@ -10876,12 +10892,6 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
-            
-        
-            
-        
-            
-        
 
         
 
@@ -12474,12 +12484,6 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
-            
-        
-            
-        
-            
-        
 
         
 
@@ -13627,7 +13631,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetUserPoints Get referral details of a user
+    // GetUserPoints Get total available points of a user
     func (re *Rewards)  GetUserPoints() (PointsResponse, error){
         var (
             rawRequest  *RawRequest
@@ -13779,7 +13783,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // RedeemReferralCode Redeems a referral code and credits reward points to users
+    // RedeemReferralCode Redeems a referral code and credits reward points to referee and the referrer as per the configuration
     func (re *Rewards)  RedeemReferralCode(body  RedeemReferralCodeRequest) (RedeemReferralCodeResponse, error){
         var (
             rawRequest  *RawRequest
