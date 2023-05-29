@@ -41,7 +41,7 @@ type ApplicationClient struct {
 	 
 		Partner  *PlatformAppPartner
 	 
-		Logistics  *PlatformAppLogistics
+		Serviceability  *PlatformAppServiceability
 	 
 }
 
@@ -80,7 +80,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 			 
 				Partner:  NewPlatformAppPartner(config, appID),
 			 
-				Logistics:  NewPlatformAppLogistics(config, appID),
+				Serviceability:  NewPlatformAppServiceability(config, appID),
 			 
 		}
 }
@@ -13917,54 +13917,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetAppProduct Get company application product data.
-     func (ca *PlatformAppCatalog)  GetAppProduct(ItemID string) (OwnerAppItemResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAppProductResponse OwnerAppItemResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product/%s/",ca.CompanyID, ca.ApplicationID, ItemID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return OwnerAppItemResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAppProductResponse)
-        if err != nil {
-            return OwnerAppItemResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAppProductResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // UpdateAppProduct Update a single custom meta.
      func (ca *PlatformAppCatalog)  UpdateAppProduct(ItemID string, body  ApplicationItemMeta) (SuccessResponse1, error) {
         var (
@@ -14030,6 +13982,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return SuccessResponse1{}, common.NewFDKError(err.Error())
         }
         return updateAppProductResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetAppProduct Get company application product data.
+     func (ca *PlatformAppCatalog)  GetAppProduct(ItemID string) (OwnerAppItemResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAppProductResponse OwnerAppItemResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product/%s/",ca.CompanyID, ca.ApplicationID, ItemID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return OwnerAppItemResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAppProductResponse)
+        if err != nil {
+            return OwnerAppItemResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAppProductResponse, nil
         
     }
            
@@ -20649,7 +20649,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
         Q string  `url:"q,omitempty"` 
-        Status string  `url:"status,omitempty"` 
+        IsActive bool  `url:"is_active,omitempty"` 
         PromoGroup string  `url:"promo_group,omitempty"` 
         PromotionType string  `url:"promotion_type,omitempty"` 
         FpPanel string  `url:"fp_panel,omitempty"` 
@@ -21620,6 +21620,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     //PlatformAppGetAbandonedCartXQuery holds query params
     type PlatformAppGetAbandonedCartXQuery struct { 
+        UserID string  `url:"user_id,omitempty"` 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
         FromDate string  `url:"from_date,omitempty"` 
@@ -21641,6 +21642,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
 
          
+            
+                
             
                 
             
@@ -21718,6 +21721,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
              
             
             
+             
+            
+            
+            
+            
+            
             
             
             
@@ -21745,6 +21754,10 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
                 paginator := common.NewPaginator("number")
                 
                 
+                 
+                 
+                 
+                 
                  xQuery.PageNo  = paginator.PageNo
                  
                  
@@ -21793,6 +21806,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     //PlatformAppGetAbandonedCartDetailsXQuery holds query params
     type PlatformAppGetAbandonedCartDetailsXQuery struct { 
+        UserID string  `url:"user_id,omitempty"` 
         ID string  `url:"id,omitempty"` 
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"`  
@@ -21810,6 +21824,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
 
          
+            
+                
             
                 
             
@@ -21854,7 +21870,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     //PlatformAppAddItemsXQuery holds query params
     type PlatformAppAddItemsXQuery struct { 
-        B bool  `url:"b,omitempty"`  
+        B bool  `url:"b,omitempty"` 
+        UserID string  `url:"user_id,omitempty"`  
     }
     
     // AddItems Add items to abandoned cart
@@ -21873,6 +21890,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
 
          
+            
+                
             
                 
             
@@ -21928,7 +21947,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     //PlatformAppUpdateCartXQuery holds query params
     type PlatformAppUpdateCartXQuery struct { 
-        B bool  `url:"b,omitempty"`  
+        B bool  `url:"b,omitempty"` 
+        UserID string  `url:"user_id,omitempty"`  
     }
     
     // UpdateCart Update items in the abandoned cart
@@ -21947,6 +21967,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
 
          
+            
+                
             
                 
             
@@ -22146,6 +22168,87 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return map[string]interface{}{}, common.NewFDKError(err.Error())
         }
         return getPromotionCodeExistsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // OverrideCart Create Fynd order with overriding cart details
+     func (ca *PlatformAppCart)  OverrideCart(body  OverrideCheckoutReq) (OverrideCheckoutResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            overrideCartResponse OverrideCheckoutResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return OverrideCheckoutResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return OverrideCheckoutResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/checkout/over-ride",ca.CompanyID, ca.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return OverrideCheckoutResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &overrideCartResponse)
+        if err != nil {
+            return OverrideCheckoutResponse{}, common.NewFDKError(err.Error())
+        }
+        return overrideCartResponse, nil
         
     }
            
@@ -24642,56 +24745,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetGiveawayAudienceStatus Get the Giveaway audience status
-     func (re *PlatformAppRewards)  GetGiveawayAudienceStatus(ID string, AudienceID string, ) (GiveawayAudience, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getGiveawayAudienceStatusResponse GiveawayAudience
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            re.config,
-            "get",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/giveaways/:id/audience/%s/status",ID, AudienceID, re.CompanyID, re.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GiveawayAudience{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getGiveawayAudienceStatusResponse)
-        if err != nil {
-            return GiveawayAudience{}, common.NewFDKError(err.Error())
-        }
-        return getGiveawayAudienceStatusResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // ShowOffers List of offers of the current application.
      func (re *PlatformAppRewards)  ShowOffers() ([]Offer, error) {
         var (
@@ -24738,7 +24791,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetOfferByName Get offer by name
+    // GetOfferByName Fetch a offer by its name
      func (re *PlatformAppRewards)  GetOfferByName(Name string, ) (Offer, error) {
         var (
             rawRequest  *RawRequest
@@ -25232,6 +25285,76 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+    
+    // GetProxyPath Proxy
+     func (pa *PlatformAppPartner)  GetProxyPath(ExtensionID string) (getProxyPathRes, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getProxyPathResponse getProxyPathRes
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/application/%s/proxy/{extension_id}",pa.CompanyID, pa.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return getProxyPathRes{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProxyPathResponse)
+        if err != nil {
+            return getProxyPathRes{}, common.NewFDKError(err.Error())
+        }
+        return getProxyPathResponse, nil
+        
+    }
+           
+       
+    
+    
+    
   
 
     
@@ -25300,6 +25423,56 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // GetProxyPathAttachedPath Proxy
+     func (pa *PlatformAppPartner)  GetProxyPathAttachedPath(ExtensionID string, AttachedPath string) (AddProxyResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getProxyPathAttachedPathResponse AddProxyResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/application/%s/proxy/{extension_id}/{attached_path}",pa.CompanyID, pa.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return AddProxyResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getProxyPathAttachedPathResponse)
+        if err != nil {
+            return AddProxyResponse{}, common.NewFDKError(err.Error())
+        }
+        return getProxyPathAttachedPathResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // RemoveProxyPath Remove proxy URL for the external URL
      func (pa *PlatformAppPartner)  RemoveProxyPath(ExtensionID string, AttachedPath string) (RemoveProxyResponse, error) {
         var (
@@ -25348,15 +25521,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
  
 	 
-   // PlatformAppLogistics holds PlatformAppLogistics object properties
-    type PlatformAppLogistics struct {
+   // PlatformAppServiceability holds PlatformAppServiceability object properties
+    type PlatformAppServiceability struct {
         config *PlatformConfig
         CompanyID string
         ApplicationID string
     }
-    // NewPlatformAppLogistics returns new PlatformAppLogistics instance
-    func NewPlatformAppLogistics(config *PlatformConfig, appID string) *PlatformAppLogistics {
-        return &PlatformAppLogistics{config, config.CompanyID, appID}
+    // NewPlatformAppServiceability returns new PlatformAppServiceability instance
+    func NewPlatformAppServiceability(config *PlatformConfig, appID string) *PlatformAppServiceability {
+        return &PlatformAppServiceability{config, config.CompanyID, appID}
     }
     
     
@@ -25365,7 +25538,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
     
     // GetApplicationServiceability Zone configuration of application.
-     func (lo *PlatformAppLogistics)  GetApplicationServiceability() (ApplicationServiceabilityConfigResponse, error) {
+     func (se *PlatformAppServiceability)  GetApplicationServiceability() (ApplicationServiceabilityConfigResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -25384,9 +25557,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
         //API call
         rawRequest = NewRequest(
-            lo.config,
+            se.config,
             "get",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/serviceability",lo.CompanyID, lo.ApplicationID),
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/serviceability",se.CompanyID, se.ApplicationID),
             nil,
             nil,
             nil)
@@ -25423,7 +25596,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
     
     // GetZoneFromPincodeView GET zone from the Pincode.
-     func (lo *PlatformAppLogistics)  GetZoneFromPincodeView(body  GetZoneFromPincodeViewRequest) (GetZoneFromPincodeViewResponse, error) {
+     func (se *PlatformAppServiceability)  GetZoneFromPincodeView(body  GetZoneFromPincodeViewRequest) (GetZoneFromPincodeViewResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -25459,9 +25632,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
         //API call
         rawRequest = NewRequest(
-            lo.config,
+            se.config,
             "post",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/zones",lo.CompanyID, lo.ApplicationID),
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/zones",se.CompanyID, se.ApplicationID),
             nil,
             nil,
             reqBody)
@@ -25494,7 +25667,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetZonesFromApplicationIdView GET zones from the application_id.
-     func (lo *PlatformAppLogistics)  GetZonesFromApplicationIdView(xQuery PlatformAppGetZonesFromApplicationIdViewXQuery) (GetZoneFromApplicationIdViewResponse, error) {
+     func (se *PlatformAppServiceability)  GetZonesFromApplicationIdView(xQuery PlatformAppGetZonesFromApplicationIdViewXQuery) (GetZoneFromApplicationIdViewResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -25523,9 +25696,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
         //API call
         rawRequest = NewRequest(
-            lo.config,
+            se.config,
             "get",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/zones",lo.CompanyID, lo.ApplicationID),
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/zones",se.CompanyID, se.ApplicationID),
             nil,
             xQuery,
             nil)
@@ -25550,11 +25723,122 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+    
+    
+  
+
+    
+    // AddAppDp Add application dp data
+     func (se *PlatformAppServiceability)  AddAppDp(body  ApplicationCompanyDpViewRequest) (ApplicationCompanyDpViewResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            addAppDpResponse ApplicationCompanyDpViewResponse
+	    )
+
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return ApplicationCompanyDpViewResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return ApplicationCompanyDpViewResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationCompanyDpViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &addAppDpResponse)
+        if err != nil {
+            return ApplicationCompanyDpViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return addAppDpResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteAppDp Delete application dp data
+     func (se *PlatformAppServiceability)  DeleteAppDp(CourierPartnerID float64) (ApplicationCompanyDpViewResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteAppDpResponse ApplicationCompanyDpViewResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "delete",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/courier-partner/undefined",se.CompanyID, se.ApplicationID, CourierPartnerID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationCompanyDpViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteAppDpResponse)
+        if err != nil {
+            return ApplicationCompanyDpViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteAppDpResponse, nil
+        
+    }
+           
+       
+    
+    
+    
   
 
     
     // UpdatePincodeMopView PincodeView update of MOP.
-     func (lo *PlatformAppLogistics)  UpdatePincodeMopView(body  PincodeMopData) (PincodeMOPresponse, error) {
+     func (se *PlatformAppServiceability)  UpdatePincodeMopView(body  PincodeMopData) (PincodeMOPresponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -25592,9 +25876,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
         //API call
         rawRequest = NewRequest(
-            lo.config,
+            se.config,
             "post",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/pincode-mop-update",lo.CompanyID, lo.ApplicationID),
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/pincode-mop-update",se.CompanyID, se.ApplicationID),
             nil,
             nil,
             reqBody)
@@ -25619,7 +25903,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
     
     // UpdatePincodeBulkView Bulk Update of pincode in the application.
-     func (lo *PlatformAppLogistics)  UpdatePincodeBulkView(body  PincodeMopBulkData) (PincodeBulkViewResponse, error) {
+     func (se *PlatformAppServiceability)  UpdatePincodeBulkView(body  PincodeMopBulkData) (PincodeBulkViewResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -25655,9 +25939,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
         //API call
         rawRequest = NewRequest(
-            lo.config,
+            se.config,
             "post",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/pincode-mop-bulk-update",lo.CompanyID, lo.ApplicationID),
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/pincode-mop-bulk-update",se.CompanyID, se.ApplicationID),
             nil,
             nil,
             reqBody)
@@ -25682,7 +25966,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
     
     // UpdatePincodeCoDListing Pincode count view of application.
-     func (lo *PlatformAppLogistics)  UpdatePincodeCoDListing(body  PincodeCodStatusListingRequest) (PincodeCodStatusListingResponse, error) {
+     func (se *PlatformAppServiceability)  UpdatePincodeCoDListing(body  PincodeCodStatusListingRequest) (PincodeCodStatusListingResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -25724,9 +26008,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
         //API call
         rawRequest = NewRequest(
-            lo.config,
+            se.config,
             "post",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/pincode-mop-data",lo.CompanyID, lo.ApplicationID),
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/pincode-mop-data",se.CompanyID, se.ApplicationID),
             nil,
             nil,
             reqBody)
@@ -25751,7 +26035,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
     
     // UpdatePincodeAuditHistory Auditlog configuration of application.
-     func (lo *PlatformAppLogistics)  UpdatePincodeAuditHistory(body  PincodeMopUpdateAuditHistoryRequest) (PincodeMopUpdateAuditHistoryResponseData, error) {
+     func (se *PlatformAppServiceability)  UpdatePincodeAuditHistory(body  PincodeMopUpdateAuditHistoryRequest) (PincodeMopUpdateAuditHistoryResponseData, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -25787,9 +26071,9 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
         //API call
         rawRequest = NewRequest(
-            lo.config,
+            se.config,
             "post",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/history",lo.CompanyID, lo.ApplicationID),
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/history",se.CompanyID, se.ApplicationID),
             nil,
             nil,
             reqBody)
