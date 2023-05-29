@@ -16,7 +16,7 @@
 * [Order](#Order) - Handles all platform order and shipment api(s) 
 * [Rewards](#Rewards) - Earn and redeem reward points 
 * [PosCart](#PosCart) - Cart APIs 
-* [Logistic](#Logistic) - Handles Platform websites OMS 
+* [Logistic](#Logistic) - Logistics Promise Engine APIs allows you to configure zone, pincode, TAT, logistics and many more useful features.  
 
 ----
 ----
@@ -31,7 +31,6 @@
     * [getProductComparisonBySlugs](#getproductcomparisonbyslugs)
     * [getSimilarComparisonProductBySlug](#getsimilarcomparisonproductbyslug)
     * [getComparedFrequentlyProductBySlug](#getcomparedfrequentlyproductbyslug)
-    * [getProductSimilarByIdentifier](#getproductsimilarbyidentifier)
     * [getProductVariantsBySlug](#getproductvariantsbyslug)
     * [getProductStockByIds](#getproductstockbyids)
     * [getProductStockForTimeByIds](#getproductstockfortimebyids)
@@ -125,6 +124,7 @@
     * [loginWithOTP](#loginwithotp)
     * [loginWithEmailAndPassword](#loginwithemailandpassword)
     * [sendResetPasswordEmail](#sendresetpasswordemail)
+    * [sendResetPasswordMobile](#sendresetpasswordmobile)
     * [forgotPassword](#forgotpassword)
     * [sendResetToken](#sendresettoken)
     * [loginWithToken](#loginwithtoken)
@@ -133,6 +133,7 @@
     * [verifyMobile](#verifymobile)
     * [hasPassword](#haspassword)
     * [updatePassword](#updatepassword)
+    * [deleteUser](#deleteuser)
     * [logout](#logout)
     * [sendOTPOnMobile](#sendotponmobile)
     * [verifyMobileOTP](#verifymobileotp)
@@ -264,18 +265,16 @@
     * [getPosOrderById](#getposorderbyid)
     * [trackShipment](#trackshipment)
     * [updateShipmentStatus](#updateshipmentstatus)
-    * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
-    * [getCreditNoteByShipmentId](#getcreditnotebyshipmentid)
     
 
 * [Rewards](#Rewards)
   * Methods
-    * [getPointsOnProduct](#getpointsonproduct)
     * [getOfferByName](#getofferbyname)
-    * [getOrderDiscount](#getorderdiscount)
-    * [getUserPoints](#getuserpoints)
+    * [catalogueOrder](#catalogueorder)
     * [getUserPointsHistory](#getuserpointshistory)
+    * [getUserPoints](#getuserpoints)
     * [getUserReferralDetails](#getuserreferraldetails)
+    * [getOrderDiscount](#getorderdiscount)
     * [redeemReferralCode](#redeemreferralcode)
     
 
@@ -312,9 +311,9 @@
 
 * [Logistic](#Logistic)
   * Methods
+    * [getPincodeCity](#getpincodecity)
     * [getTatProduct](#gettatproduct)
     * [getPincodeZones](#getpincodezones)
-    * [getPincodeCity](#getpincodecity)
     
 
 
@@ -507,47 +506,6 @@ Success. Returns an array of objects containing the attributes for comparision. 
 
 
 Schema: `ProductFrequentlyComparedSimilarResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getProductSimilarByIdentifier
-Get similar products
-
-```golang
-
- data, err :=  Catalog.GetProductSimilarByIdentifier(Slug, SimilarType);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| Slug | string | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ | 
-
-
-| SimilarType | string | Similarity criteria such as basic, visual, price, seller, category and spec. Visual - Products having similar patterns, Price - Products in similar price range, Seller - Products sold by the same seller, Category - Products belonging to the same category, e.g. sports shoes, Spec - Products having similar specifications, e.g. phones with same memory. | 
-
-
-
-
-Use this API to retrieve products similar to the one specified by its slug. You can search not only similar looking products, but also those that are sold by same seller, or those that belong to the same category, price, specifications, etc.
-
-*Success Response:*
-
-
-
-Success. Returns a group of similar products based on type. Check the example shown below or refer `SimilarProductByTypeResponse` for more details.
-
-
-Schema: `SimilarProductByTypeResponse`
 
 
 
@@ -1540,7 +1498,9 @@ Get the price of a product size at a PIN Code
 
 
 
-| xQuery | struct | Includes properties such as `StoreID`, `Pincode`
+
+
+| xQuery | struct | Includes properties such as `StoreID`, `Pincode`, `Moq`
 
 
 
@@ -6330,21 +6290,6 @@ All pages
         "__v": 9
       },
       {
-        "path": "product/:slug/reviews",
-        "type": "system",
-        "seo": {
-          "title": "",
-          "description": "",
-          "_id": "60ab5ca6d572fed64294eb24"
-        },
-        "_id": "60ab5ca6d572fed64294eb25",
-        "sections_meta": [],
-        "value": "product-reviews",
-        "text": "Product Reviews",
-        "theme": "5fb3ee4194a5181feeeba8e5",
-        "__v": 9
-      },
-      {
         "path": "blog",
         "type": "system",
         "seo": {
@@ -6417,21 +6362,6 @@ All pages
         "text": "Wishlist",
         "theme": "5fb3ee4194a5181feeeba8e5",
         "sections_meta": [],
-        "__v": 9
-      },
-      {
-        "path": "product/:slug/add-review",
-        "type": "system",
-        "seo": {
-          "title": "",
-          "description": "",
-          "_id": "60ab5ca6d572fed64294eb26"
-        },
-        "_id": "60ab5ca6d572fed64294eb27",
-        "sections_meta": [],
-        "value": "add-product-review",
-        "text": "Add Product Review",
-        "theme": "5fb3ee4194a5181feeeba8e5",
         "__v": 9
       },
       {
@@ -7426,11 +7356,6 @@ Applied Theme
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -7640,11 +7565,6 @@ Applied Theme
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -9607,11 +9527,6 @@ Preview Theme
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -9821,11 +9736,6 @@ Preview Theme
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -11874,6 +11784,45 @@ Schema: `ResetPasswordSuccess`
 ---
 
 
+#### sendResetPasswordMobile
+Reset Password
+
+```golang
+
+ data, err :=  User.SendResetPasswordMobile(xQuery, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Platform`
+
+| body |  SendResetPasswordMobileRequestSchema | "Request body" 
+
+
+Use this API to reset a password using the link sent on mobile.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ResetPasswordSuccess` for more details.
+
+
+Schema: `ResetPasswordSuccess`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### forgotPassword
 Forgot Password
 
@@ -12268,6 +12217,42 @@ Success. Returns a success message. Refer `VerifyEmailSuccess` for more details.
 
 
 Schema: `VerifyEmailSuccess`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteUser
+verify otp and delete user
+
+```golang
+
+ data, err :=  User.DeleteUser(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  DeleteApplicationUserRequestSchema | "Request body" 
+
+
+verify otp and delete user
+
+*Success Response:*
+
+
+
+Success. Returns a success message. Refer `DeleteUserSuccess` for more details.
+
+
+Schema: `DeleteUserSuccess`
 
 
 
@@ -14504,6 +14489,7 @@ Success
       },
       "robots_txt": "User-agent: * \nAllow: / \nsancisciasn xwsaixjowqnxwsiwjs",
       "sitemap_enabled": false,
+      "cannonical_enabled": false,
       "_id": "6009819ee463ad40de397eb2",
       "app": "000000000000000000000001",
       "created_at": "2021-01-21T13:29:02.543Z",
@@ -17810,129 +17796,11 @@ Schema: `ShipmentStatusUpdate`
 ---
 
 
-#### getInvoiceByShipmentId
-Get Presigned URL to download Invoice
-
-```golang
-
- data, err :=  Order.GetInvoiceByShipmentId(ShipmentID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ShipmentID | string | Shiment ID | 
-
-
-
-| xQuery | struct | Includes properties such as `Parameters`
-
-
-
-Use this API to generate Presigned URLs for downloading Invoice
-
-*Success Response:*
-
-
-
-Success Response, Presigned URL of Invoice
-
-
-Schema: `getInvoiceByShipmentId200Response`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getCreditNoteByShipmentId
-Get Presigned URL to download Invoice
-
-```golang
-
- data, err :=  Order.GetCreditNoteByShipmentId(ShipmentID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ShipmentID | string | Shiment ID | 
-
-
-
-| xQuery | struct | Includes properties such as `Parameters`
-
-
-
-Use this API to generate Presigned URLs for downloading Invoice
-
-*Success Response:*
-
-
-
-Success Response, Presigned URL of Invoice
-
-
-Schema: `getInvoiceByShipmentId200Response`
-
-
-
-
-
-
-
-
-
----
-
-
 
 ---
 
 
 ## Rewards
-
-
-#### getPointsOnProduct
-Get the eligibility of reward points on a product
-
-```golang
-
- data, err :=  Rewards.GetPointsOnProduct(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  CatalogueOrderRequest | "Request body" 
-
-
-Use this API to evaluate the amount of reward points that could be earned on any catalogue product.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `CatalogueOrderRequest` for more details.
-
-
-Schema: `CatalogueOrderResponse`
-
-
-
-
-
-
-
-
-
----
 
 
 #### getOfferByName
@@ -17973,65 +17841,30 @@ Schema: `Offer`
 ---
 
 
-#### getOrderDiscount
-Calculates the discount on order-amount
+#### catalogueOrder
+Get all transactions of reward points
 
 ```golang
 
- data, err :=  Rewards.GetOrderDiscount(body);
+ data, err :=  Rewards.CatalogueOrder(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  OrderDiscountRequest | "Request body" 
+| body |  CatalogueOrderRequest | "Request body" 
 
 
-Use this API to calculate the discount on order-amount based on all the amount range configured in order_discount.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `OrderDiscountResponse` for more details.
-
-
-Schema: `OrderDiscountResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getUserPoints
-Get reward points available with a user
-
-```golang
-
- data, err :=  Rewards.GetUserPoints();
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-Use this API to retrieve total available points of a user for current application
+Use this API to evaluate the amount of reward points that could be earned on any catalogue product.
 
 *Success Response:*
 
 
 
-Success. Check example below or refer `PointsResponse` for more details.
+Success. Check example below or refer `CatalogueOrderResponse` for more details.
 
 
-Schema: `PointsResponse`
+Schema: `CatalogueOrderResponse`
 
 
 
@@ -18062,7 +17895,7 @@ Get all transactions of reward points
 
 
 
-Use this API to get a list of points transactions. The list of points history is paginated.
+Use this API to get a list of points transactions.
 
 *Success Response:*
 
@@ -18072,6 +17905,41 @@ Success. Check example below or refer `PointsHistoryResponse` for more details.
 
 
 Schema: `PointsHistoryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getUserPoints
+Get referral details of a user
+
+```golang
+
+ data, err :=  Rewards.GetUserPoints();
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+Use this API to retrieve total available points of a user for current application
+
+*Success Response:*
+
+
+
+Success. Check example below or refer `PointsResponse` for more details.
+
+
+Schema: `PointsResponse`
 
 
 
@@ -18107,6 +17975,42 @@ Success. Check example below or refer `ReferralDetailsResponse` for more details
 
 
 Schema: `ReferralDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOrderDiscount
+Calculates the discount on order-amount
+
+```golang
+
+ data, err :=  Rewards.GetOrderDiscount(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  OrderDiscountRequest | "Request body" 
+
+
+Use this API to calculate the discount on order-amount based on all the amount range configured in order_discount.
+
+*Success Response:*
+
+
+
+Success. Check example below or refer `OrderDiscountResponse` for more details.
+
+
+Schema: `OrderDiscountResponse`
 
 
 
@@ -22311,8 +22215,133 @@ Cart Merged/Replaced
 ## Logistic
 
 
+#### getPincodeCity
+Get Pincode API
+
+```golang
+
+ data, err :=  Logistic.GetPincodeCity(Pincode);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| Pincode | string | A `pincode` contains a specific address of a location. | 
+
+
+
+
+Get pincode data
+
+*Success Response:*
+
+
+
+Get pincode data
+
+
+Schema: `PincodeApiResponse`
+
+
+*Examples:*
+
+
+Pincode data found
+```json
+{
+  "value": {
+    "data": [
+      {
+        "sub_type": "pincode",
+        "name": "421202",
+        "error": {
+          "type": null,
+          "value": null,
+          "message": null
+        },
+        "uid": "pincode:INDIA|MAHARASHTRA|MUMBAI|421202",
+        "display_name": "421202",
+        "meta": {
+          "zone": "West",
+          "internal_zone_id": 4,
+          "deliverables": [
+            "essential"
+          ]
+        },
+        "parents": [
+          {
+            "sub_type": "country",
+            "name": "India",
+            "display_name": "India",
+            "uid": "country:INDIA"
+          },
+          {
+            "sub_type": "state",
+            "name": "Maharashtra",
+            "display_name": "Maharashtra",
+            "uid": "state:INDIA|MAHARASHTRA"
+          },
+          {
+            "sub_type": "city",
+            "name": "Thane",
+            "display_name": "Thane",
+            "uid": "city:INDIA|MAHARASHTRA|MUMBAI"
+          }
+        ]
+      }
+    ],
+    "request_uuid": "fce9f431215e71c9ee0e86e792ae1dce4",
+    "stormbreaker_uuid": "56cca764-9fab-41f4-adb8-6e9683532aa5",
+    "error": {
+      "type": null,
+      "value": null,
+      "message": null
+    },
+    "success": true
+  }
+}
+```
+
+Pincode not found
+```json
+{
+  "value": {
+    "data": [
+      {
+        "sub_type": "pincode",
+        "name": "999999",
+        "error": {
+          "type": "DoesNotExist",
+          "value": "999999",
+          "message": "pincode 999999 does not exist"
+        }
+      }
+    ],
+    "request_uuid": "fce9fb9215e71c9ee0e86e792ae1dce4",
+    "stormbreaker_uuid": "03b353ed-9dbd-4629-80b2-2be337859a20",
+    "error": {
+      "type": null,
+      "value": null,
+      "message": null
+    },
+    "success": false
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getTatProduct
-Get TAT of a product
+Get TAT API
 
 ```golang
 
@@ -22322,19 +22351,126 @@ Get TAT of a product
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  GetTatProductReqBody | "Request body" 
+| body |  TATViewRequest | "Request body" 
 
 
-Use this API to know the delivery turnaround time (TAT) by entering the product details along with the PIN Code of the location.
+Get TAT data
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `GetTatProductResponse` for more details.
+Get TAT  data
 
 
-Schema: `GetTatProductResponse`
+Schema: `TATViewResponse`
+
+
+*Examples:*
+
+
+Pincode data found
+```json
+{
+  "value": {
+    "source": "FYND-APP",
+    "identifier": "PDP",
+    "journey": "forward",
+    "action": "get_tat",
+    "to_pincode": "143001",
+    "location_details": [
+      {
+        "fulfillment_id": 8,
+        "from_pincode": "560023",
+        "articles": [
+          {
+            "category": {
+              "level": "l3",
+              "id": 155
+            },
+            "manufacturing_time": 2,
+            "manufacturing_time_unit": "days",
+            "promise": {
+              "timestamp": {
+                "min": 1663564548,
+                "max": 1663650948
+              },
+              "formatted": {
+                "min": "19 Sep, Monday",
+                "max": "20 Sep, Tuesday"
+              }
+            },
+            "error": {
+              "type": null,
+              "value": null,
+              "message": null
+            },
+            "is_cod_available": true,
+            "_manufacturing_time_seconds": 172800
+          }
+        ]
+      }
+    ],
+    "request_uuid": "b4adf5508e34f17971817c3581e16310",
+    "stormbreaker_uuid": "4b8084d4-ea74-45af-8ddc-c38e29bf0cfb",
+    "error": {
+      "type": null,
+      "value": null,
+      "message": null
+    },
+    "to_city": "Amritsar",
+    "payment_mode": "prepaid",
+    "is_cod_available": true,
+    "success": true
+  }
+}
+```
+
+Pincode not found
+```json
+{
+  "value": {
+    "source": "FYND-APP",
+    "identifier": "PDP",
+    "journey": "forward",
+    "action": "get_tat",
+    "to_pincode": "99999",
+    "location_details": [
+      {
+        "fulfillment_id": 8,
+        "from_pincode": "560023",
+        "articles": [
+          {
+            "category": {
+              "level": "l3",
+              "id": 155
+            },
+            "manufacturing_time": 2,
+            "manufacturing_time_unit": "days",
+            "promise": null,
+            "error": {
+              "type": "ValueError",
+              "value": "99999",
+              "message": "We are not delivering to 99999"
+            }
+          }
+        ]
+      }
+    ],
+    "request_uuid": "4b99d15fddb2b9fc2d6ab99a1c933010",
+    "stormbreaker_uuid": "6a847909-1d59-43e7-9ae0-15f5de8fc7d7",
+    "error": {
+      "type": "ValueError",
+      "value": "99999",
+      "message": "All of the items in your cart are not deliverable to 99999"
+    },
+    "to_city": "",
+    "payment_mode": "prepaid",
+    "is_cod_available": true,
+    "success": false
+  }
+}
+```
 
 
 
@@ -22348,7 +22484,7 @@ Schema: `GetTatProductResponse`
 
 
 #### getPincodeZones
-Get Pincode Zones
+GET zone from the Pincode.
 
 ```golang
 
@@ -22358,57 +22494,19 @@ Get Pincode Zones
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  GetPincodeZonesReqBody | "Request body" 
+| body |  GetZoneFromPincodeViewRequest | "Request body" 
 
 
-Get to know the zones of a specefic pincode
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `GetTatProductResponse` for more details.
-
-
-Schema: `GetPincodeZonesResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPincodeCity
-Get city from PIN Code
-
-```golang
-
- data, err :=  Logistic.GetPincodeCity(Pincode);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| Pincode | string | The PIN Code of the area, e.g. 400059 | 
-
-
-
-
-Use this API to retrieve a city by its PIN Code.
+This API returns zone from the Pincode View.
 
 *Success Response:*
 
 
 
-Success. Returns a JSON object containing the city name, state and country identified by its PIN Code. Check the example shown below or refer `GetPincodeCityResponse` for more details.
+Response status_code
 
 
-Schema: `GetPincodeCityResponse`
+Schema: `GetZoneFromPincodeViewResponse`
 
 
 
