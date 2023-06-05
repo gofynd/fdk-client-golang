@@ -23,6 +23,7 @@
 * [Partner](#Partner) - Partner configuration apis 
 * [Webhook](#Webhook) - Webhook dispatcher with retry and one event to many subscriber vice versa 
 * [AuditTrail](#AuditTrail) - Audit Logging Service that logs the crucial updates on the Platform 
+* [Serviceability](#Serviceability) - Logistics Configuration API's allows you to configure zone, application logistics and many more useful features.  
 
 ----
 ----
@@ -180,6 +181,7 @@
     * [addInjectableTag](#addinjectabletag)
     * [removeInjectableTag](#removeinjectabletag)
     * [editInjectableTag](#editinjectabletag)
+    * [getBlogBySlug](#getblogbyslug)
     * [createPage](#createpage)
     * [getPages](#getpages)
     * [updatePage](#updatepage)
@@ -192,6 +194,8 @@
     * [createSubscriptionCharge](#createsubscriptioncharge)
     * [getSubscriptionCharge](#getsubscriptioncharge)
     * [cancelSubscriptionCharge](#cancelsubscriptioncharge)
+    * [createOneTimeCharge](#createonetimecharge)
+    * [getChargeDetails](#getchargedetails)
     * [getInvoices](#getinvoices)
     * [getInvoiceById](#getinvoicebyid)
     * [getCustomerDetail](#getcustomerdetail)
@@ -277,23 +281,13 @@
     * [getShipmentById](#getshipmentbyid)
     * [getOrderById](#getorderbyid)
     * [getLaneConfig](#getlaneconfig)
-    * [getApplicationShipments](#getapplicationshipments)
     * [getOrders](#getorders)
-    * [getMetricCount](#getmetriccount)
-    * [getAppOrderShipmentDetails](#getappordershipmentdetails)
-    * [trackPlatformShipment](#trackplatformshipment)
+    * [trackShipmentPlatform](#trackshipmentplatform)
     * [getfilters](#getfilters)
-    * [createShipmentReport](#createshipmentreport)
-    * [getReportsShipmentListing](#getreportsshipmentlisting)
-    * [upsertJioCode](#upsertjiocode)
-    * [getBulkInvoice](#getbulkinvoice)
-    * [getBulkInvoiceLabel](#getbulkinvoicelabel)
     * [getBulkShipmentExcelFile](#getbulkshipmentexcelfile)
-    * [getBulkList](#getbulklist)
-    * [getBulkActionFailedReport](#getbulkactionfailedreport)
+    * [getBulkActionTemplate](#getbulkactiontemplate)
+    * [downloadBulkActionTemplate](#downloadbulkactiontemplate)
     * [getShipmentReasons](#getshipmentreasons)
-    * [bulkActionProcessXlsxFile](#bulkactionprocessxlsxfile)
-    * [bulkActionDetails](#bulkactiondetails)
     * [getBagById](#getbagbyid)
     * [getBags](#getbags)
     * [invalidateShipmentCache](#invalidateshipmentcache)
@@ -323,13 +317,13 @@
 * [Catalog](#Catalog)
   * Methods
     * [updateSearchKeywords](#updatesearchkeywords)
-    * [deleteSearchKeywords](#deletesearchkeywords)
     * [getSearchKeywords](#getsearchkeywords)
+    * [deleteSearchKeywords](#deletesearchkeywords)
     * [createCustomKeyword](#createcustomkeyword)
     * [getAllSearchKeyword](#getallsearchkeyword)
     * [updateAutocompleteKeyword](#updateautocompletekeyword)
-    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
+    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createProductBundle](#createproductbundle)
@@ -399,8 +393,8 @@
     * [getVariantsOfProducts](#getvariantsofproducts)
     * [getProductAttributes](#getproductattributes)
     * [editProduct](#editproduct)
-    * [deleteProduct](#deleteproduct)
     * [getProduct](#getproduct)
+    * [deleteProduct](#deleteproduct)
     * [allSizes](#allsizes)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
@@ -443,6 +437,7 @@
     * [getProductDetailBySlug](#getproductdetailbyslug)
     * [getAppProducts](#getappproducts)
     * [getAppInventory](#getappinventory)
+    * [getOptimalLocations](#getoptimallocations)
     * [getAppLocations](#getapplocations)
     * [getApplicationBrandListing](#getapplicationbrandlisting)
     * [updateAppBrand](#updateappbrand)
@@ -591,7 +586,7 @@
     * [getOfferByName](#getofferbyname)
     * [updateOfferByName](#updateofferbyname)
     * [updateUserStatus](#updateuserstatus)
-    * [user](#user)
+    * [getUserDetails](#getuserdetails)
     * [getUserPointsHistory](#getuserpointshistory)
     * [getRewardsConfiguration](#getrewardsconfiguration)
     * [setRewardsConfiguration](#setrewardsconfiguration)
@@ -650,6 +645,25 @@
     * [createAuditLog](#createauditlog)
     * [getAuditLog](#getauditlog)
     * [getEntityTypes](#getentitytypes)
+    
+
+* [Serviceability](#Serviceability)
+  * Methods
+    * [getApplicationServiceability](#getapplicationserviceability)
+    * [getEntityRegionView](#getentityregionview)
+    * [getListView](#getlistview)
+    * [getCompanyStoreView](#getcompanystoreview)
+    * [getZoneDataView](#getzonedataview)
+    * [updateZoneControllerView](#updatezonecontrollerview)
+    * [createZone](#createzone)
+    * [getZonesFromApplicationIdView](#getzonesfromapplicationidview)
+    * [getZoneFromPincodeView](#getzonefrompincodeview)
+    * [getStore](#getstore)
+    * [getAllStores](#getallstores)
+    * [updatePincodeMopView](#updatepincodemopview)
+    * [updatePincodeBulkView](#updatepincodebulkview)
+    * [updatePincodeCoDListing](#updatepincodecodlisting)
+    * [updatePincodeAuditHistory](#updatepincodeaudithistory)
     
 
 
@@ -4511,21 +4525,6 @@ All pages
         "__v": 9
       },
       {
-        "path": "product/:slug/reviews",
-        "type": "system",
-        "seo": {
-          "title": "",
-          "description": "",
-          "_id": "60ab5ca6d572fed64294eb24"
-        },
-        "_id": "60ab5ca6d572fed64294eb25",
-        "sections_meta": [],
-        "value": "product-reviews",
-        "text": "Product Reviews",
-        "theme": "5fb3ee4194a5181feeeba8e5",
-        "__v": 9
-      },
-      {
         "path": "blog",
         "type": "system",
         "seo": {
@@ -4598,21 +4597,6 @@ All pages
         "text": "Wishlist",
         "theme": "5fb3ee4194a5181feeeba8e5",
         "sections_meta": [],
-        "__v": 9
-      },
-      {
-        "path": "product/:slug/add-review",
-        "type": "system",
-        "seo": {
-          "title": "",
-          "description": "",
-          "_id": "60ab5ca6d572fed64294eb26"
-        },
-        "_id": "60ab5ca6d572fed64294eb27",
-        "sections_meta": [],
-        "value": "add-product-review",
-        "text": "Add Product Review",
-        "theme": "5fb3ee4194a5181feeeba8e5",
         "__v": 9
       },
       {
@@ -5269,21 +5253,6 @@ All pages
         "__v": 9
       },
       {
-        "path": "product/:slug/reviews",
-        "type": "system",
-        "seo": {
-          "title": "",
-          "description": "",
-          "_id": "60ab5ca6d572fed64294eb24"
-        },
-        "_id": "60ab5ca6d572fed64294eb25",
-        "sections_meta": [],
-        "value": "product-reviews",
-        "text": "Product Reviews",
-        "theme": "5fb3ee4194a5181feeeba8e5",
-        "__v": 9
-      },
-      {
         "path": "blog",
         "type": "system",
         "seo": {
@@ -5356,21 +5325,6 @@ All pages
         "text": "Wishlist",
         "theme": "5fb3ee4194a5181feeeba8e5",
         "sections_meta": [],
-        "__v": 9
-      },
-      {
-        "path": "product/:slug/add-review",
-        "type": "system",
-        "seo": {
-          "title": "",
-          "description": "",
-          "_id": "60ab5ca6d572fed64294eb26"
-        },
-        "_id": "60ab5ca6d572fed64294eb27",
-        "sections_meta": [],
-        "value": "add-product-review",
-        "text": "Add Product Review",
-        "theme": "5fb3ee4194a5181feeeba8e5",
         "__v": 9
       },
       {
@@ -9166,11 +9120,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -9380,11 +9329,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -11350,11 +11294,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -11564,11 +11503,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -13594,11 +13528,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -13808,11 +13737,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -17733,11 +17657,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -17947,11 +17866,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -19916,11 +19830,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -20130,11 +20039,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -22175,11 +22079,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -22389,11 +22288,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -24362,11 +24256,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -24576,11 +24465,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -26548,11 +26432,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -26762,11 +26641,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -28734,11 +28608,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -28948,11 +28817,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -30920,11 +30784,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -31134,11 +30993,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -33106,11 +32960,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -33320,11 +33169,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -35292,11 +35136,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -35506,11 +35345,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -37478,11 +37312,6 @@ Success
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -37692,11 +37521,6 @@ Success
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -45080,7 +44904,9 @@ default
   "value": {
     "seo": {
       "details": {
-        "title": "Zyosa Zyosa"
+        "title": "Zyosa Zyosa",
+        "description": "",
+        "image_url": ""
       },
       "robots_txt": "User-agent: * \nAllow: / \nsancisciasn xwsaixjowqnxwsiwjs",
       "sitemap_enabled": false,
@@ -45157,7 +44983,9 @@ default
 {
   "value": {
     "details": {
-      "title": "Zyosa Zyosa"
+      "title": "Zyosa Zyosa",
+      "description": "",
+      "image_url": ""
     },
     "robots_txt": "User-agent: * \nAllow: / \nsancisciasn xwsaixjowqnxwsiwjs",
     "sitemap_enabled": false,
@@ -46072,6 +45900,97 @@ Schema: `TagsSchema`
 ---
 
 
+#### getBlogBySlug
+Get blog by slug
+
+```golang
+
+data, err := Content.GetBlogBySlug(CompanyID, ApplicationID, Slug);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
+
+
+| ApplicationID | string | Numeric ID allotted to an application created within a business account. | 
+
+
+| Slug | string | A short, human-readable, URL-friendly identifier of a blog page. You can get slug value of a blog from `getBlogs` API. | 
+
+
+
+Use this API to retrieve the components of a blog, such as title, slug, feature image, content, schedule, publish status, author, etc.
+
+*Success Response:*
+
+
+
+Success. Returns a a JSON object with components. Refer `BlogSchema` for more details.
+
+
+Schema: `BlogSchema`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "_id": "5eaa451a21a4dd75f0fd96c5",
+    "application": "5d3ebd89f540e7506b8b3548",
+    "tags": [
+      "abhinav"
+    ],
+    "title": "my first blog",
+    "slug": "1st_blog",
+    "feature_image": {
+      "secure_url": "https://google.com"
+    },
+    "content": [
+      {
+        "type": "html",
+        "value": "<p>hey there!</p>"
+      }
+    ],
+    "_schedule": {
+      "cron": "* 10 * * *",
+      "start": "2021-03-31T23:30:00.000Z",
+      "end": "2021-03-31T23:55:00.000Z",
+      "duration": 1000,
+      "next_schedule": [
+        {
+          "start": "2021-03-17T04:30:00.000Z",
+          "end": "2021-03-17T04:46:40.000Z"
+        }
+      ]
+    },
+    "published": true,
+    "author": {
+      "name": "Fynd App"
+    },
+    "date_meta": {
+      "created_on": "2021-03-14T06:49:03.945Z",
+      "modified_on": "2021-03-14T06:49:03.945Z"
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
 #### createPage
 Create a page
 
@@ -46389,7 +46308,7 @@ default
 
 
 #### getPageBySlug
-Get pages by component Id
+Get page by slug
 
 ```golang
 
@@ -46660,6 +46579,90 @@ Success
 
 
 Schema: `EntitySubscription`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createOneTimeCharge
+Create one time subscription charge
+
+```golang
+
+data, err := Billing.CreateOneTimeCharge(CompanyID, ExtensionID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Customer unique id. In case of company it will be company id. | 
+
+
+| ExtensionID | string | Extension _id | 
+
+
+| body |  CreateOneTimeCharge | "Request body" 
+
+Register one time subscription charge for a seller of your extension.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `CreateOneTimeChargeResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getChargeDetails
+Get subscription charge details
+
+```golang
+
+data, err := Billing.GetChargeDetails(CompanyID, ExtensionID, ChargeID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Customer unique id. In case of company it will be company id. | 
+
+
+| ExtensionID | string | Extension _id | 
+
+
+| ChargeID | string | Standalone charge _id | 
+
+
+
+Get created subscription charge details
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `OneTimeChargeEntity`
 
 
 
@@ -47409,6 +47412,7 @@ Active subscription
 {
   "value": {
     "is_enabled": true,
+    "mandate_amount": 150000,
     "subscription": {
       "current_period": {
         "start": "2020-12-17T13:45:36.722Z",
@@ -52572,75 +52576,6 @@ Schema: `LaneConfigResponse`
 ---
 
 
-#### getApplicationShipments
-
-
-```golang
-
-data, err := Order.GetApplicationShipments(CompanyID, ApplicationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| ApplicationID | string |  | 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `SearchID`, `FromDate`, `ToDate`, `DpIds`, `OrderingCompanyID`, `Stores`, `SalesChannel`, `RequestByExt`, `PageNo`, `PageSize`, `CustomerID`, `IsPrioritySort`
-
-
-
-
-*Success Response:*
-
-
-
-We are processing the report!
-
-
-Schema: `ShipmentInternalPlatformViewResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getOrders
 
 
@@ -52711,97 +52646,12 @@ Schema: `OrderListingResponse`
 ---
 
 
-#### getMetricCount
-
-
-```golang
-
-data, err := Order.GetMetricCount(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `FromDate`, `ToDate`
-
-
-
-
-*Success Response:*
-
-
-
-Response containing count of shipments of the given metrics
-
-
-Schema: `MetricCountResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAppOrderShipmentDetails
-
-
-```golang
-
-data, err := Order.GetAppOrderShipmentDetails(CompanyID, ApplicationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| ApplicationID | string |  | 
-
-
-
-| xQuery | struct | Includes properties such as `OrderID`
-
-
-
-
-*Success Response:*
-
-
-
-We render shipment details.
-
-
-Schema: `ShipmentDetailsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### trackPlatformShipment
+#### trackShipmentPlatform
 Track shipment
 
 ```golang
 
-data, err := Order.TrackPlatformShipment(CompanyID, ApplicationID, ShipmentID);
+data, err := Order.TrackShipmentPlatform(CompanyID, ApplicationID, ShipmentID);
 ```
 
 | Argument  |  Type  | Description |
@@ -52881,210 +52731,6 @@ Schema: `FiltersResponse`
 ---
 
 
-#### createShipmentReport
-
-
-```golang
-
-data, err := Order.CreateShipmentReport(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `FromDate`, `ToDate`
-
-
-
-
-*Success Response:*
-
-
-
-We have accepted report generation request.
-
-
-Schema: `Success`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getReportsShipmentListing
-
-
-```golang
-
-data, err := Order.GetReportsShipmentListing(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-
-
-
-*Success Response:*
-
-
-
-We have are getting the info.
-
-
-Schema: `OmsReports`
-
-
-
-
-
-
-
-
-
----
-
-
-#### upsertJioCode
-
-
-```golang
-
-data, err := Order.UpsertJioCode(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| body |  JioCodeUpsertPayload | "Request body" 
-
-
-
-*Success Response:*
-
-
-
-We are processing the report!
-
-
-Schema: `JioCodeUpsertResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getBulkInvoice
-
-
-```golang
-
-data, err := Order.GetBulkInvoice(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `BatchID`, `DocType`
-
-
-
-
-*Success Response:*
-
-
-
-We are processing the file!
-
-
-Schema: `BulkInvoicingResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getBulkInvoiceLabel
-
-
-```golang
-
-data, err := Order.GetBulkInvoiceLabel(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-| xQuery | struct | Includes properties such as `BatchID`
-
-
-
-
-*Success Response:*
-
-
-
-We are processing the file!
-
-
-Schema: `BulkInvoiceLabelResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getBulkShipmentExcelFile
 
 
@@ -53096,7 +52742,7 @@ data, err := Order.GetBulkShipmentExcelFile(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | float64 | Id of company | 
 
 
 
@@ -53122,11 +52768,7 @@ data, err := Order.GetBulkShipmentExcelFile(CompanyID, xQuery);
 
 
 
-
-
-
-
-| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `SearchID`, `FromDate`, `ToDate`, `DpIds`, `OrderingCompanyID`, `Stores`, `SalesChannel`, `RequestByExt`, `PageNo`, `PageSize`, `CustomerID`, `IsPrioritySort`
+| xQuery | struct | Includes properties such as `SalesChannels`, `DpIds`, `FromDate`, `ToDate`, `Stores`, `Tags`, `BagStatus`, `PaymentMethods`, `FileType`, `TimeToDispatch`, `PageNo`, `PageSize`
 
 
 
@@ -53151,48 +52793,19 @@ Schema: `FileResponse`
 ---
 
 
-#### getBulkList
+#### getBulkActionTemplate
 
 
 ```golang
 
-data, err := Order.GetBulkList(CompanyID, xQuery);
+data, err := Order.GetBulkActionTemplate(CompanyID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | float64 | Id of company | 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `SearchID`, `FromDate`, `ToDate`, `DpIds`, `OrderingCompanyID`, `Stores`, `SalesChannel`, `RequestByExt`, `PageNo`, `PageSize`, `CustomerID`, `IsPrioritySort`
 
 
 
@@ -53201,10 +52814,10 @@ data, err := Order.GetBulkList(CompanyID, xQuery);
 
 
 
-We are processing the file!
+Slug names
 
 
-Schema: `BulkListingResponse`
+Schema: `BulkActionTemplateResponse`
 
 
 
@@ -53217,24 +52830,22 @@ Schema: `BulkListingResponse`
 ---
 
 
-#### getBulkActionFailedReport
+#### downloadBulkActionTemplate
 
 
 ```golang
 
-data, err := Order.GetBulkActionFailedReport(CompanyID, xQuery);
+data, err := Order.DownloadBulkActionTemplate(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string |  | 
+| CompanyID | float64 | Id of company | 
 
 
 
-
-
-| xQuery | struct | Includes properties such as `BatchID`, `ReportType`
+| xQuery | struct | Includes properties such as `TemplateSlug`
 
 
 
@@ -53243,7 +52854,7 @@ data, err := Order.GetBulkActionFailedReport(CompanyID, xQuery);
 
 
 
-File Processed!
+We are processing the file!
 
 
 Schema: `FileResponse`
@@ -53293,84 +52904,6 @@ Success. Check the example shown below or refer `PlatformShipmentReasonsResponse
 
 
 Schema: `PlatformShipmentReasonsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### bulkActionProcessXlsxFile
-emits uuid to kafka topic.
-
-```golang
-
-data, err := Order.BulkActionProcessXlsxFile(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string |  | 
-
-
-| body |  BulkActionPayload | "Request body" 
-
-Use this API to start processing Xlsx file.
-
-*Success Response:*
-
-
-
-Success to acknowledge the service was notified
-
-
-Schema: `BulkActionResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### bulkActionDetails
-Returns failed, processing and successfully processed shipments.
-
-```golang
-
-data, err := Order.BulkActionDetails(CompanyID, BatchID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string |  | 
-
-
-| BatchID | string |  | 
-
-
-
-Returns failed, processing and successfully processed shipments along with their counts and failed reasons.
-
-*Success Response:*
-
-
-
-Success to acknowledge the service was notified
-
-
-Schema: `BulkActionDetailsResponse`
 
 
 
@@ -54407,49 +53940,6 @@ Schema: `GetSearchWordsData`
 ---
 
 
-#### deleteSearchKeywords
-Delete a Search Keywords
-
-```golang
-
-data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getSearchKeywords
 Get a Search Keywords Details
 
@@ -54481,6 +53971,49 @@ The Collection object. See example below or refer `GetSearchWordsDetailResponseS
 
 
 Schema: `GetSearchWordsDetailResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteSearchKeywords
+Delete a Search Keywords
+
+```golang
+
+data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -54618,49 +54151,6 @@ Schema: `GetAutocompleteWordsResponse`
 ---
 
 
-#### deleteAutocompleteKeyword
-Delete a Autocomplete Keywords
-
-```golang
-
-data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getAutocompleteKeywordDetail
 Get a Autocomplete Keywords Details
 
@@ -54692,6 +54182,49 @@ The mapping object. See example below or refer `GetAutocompleteWordsResponseSche
 
 
 Schema: `GetAutocompleteWordsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteAutocompleteKeyword
+Delete a Autocomplete Keywords
+
+```golang
+
+data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -57644,46 +57177,6 @@ Schema: `SuccessResponse`
 ---
 
 
-#### deleteProduct
-Delete a product.
-
-```golang
-
-data, err := Catalog.DeleteProduct(CompanyID, ItemID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
-
-
-| ItemID | float64 | Id of the product to be updated. | 
-
-
-
-This API allows to delete product.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getProduct
 Get a single product.
 
@@ -57717,6 +57210,46 @@ Product object. See example below or refer `product.utils.format_product_respons
 
 
 Schema: `SingleProductResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteProduct
+Delete a product.
+
+```golang
+
+data, err := Catalog.DeleteProduct(CompanyID, ItemID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
+
+
+| ItemID | float64 | Id of the product to be updated. | 
+
+
+
+This API allows to delete product.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
@@ -59383,9 +58916,7 @@ data, err := Catalog.GetAppicationProducts(CompanyID, ApplicationID, xQuery);
 
 
 
-
-
-| xQuery | struct | Includes properties such as `Q`, `F`, `C`, `Filters`, `IsDependent`, `SortOn`, `PageID`, `PageSize`, `PageNo`, `PageType`, `ItemIds`
+| xQuery | struct | Includes properties such as `Q`, `F`, `C`, `Filters`, `SortOn`, `PageID`, `PageSize`, `PageNo`, `PageType`, `ItemIds`
 
 
 List all the products associated with a brand, collection or category in a requested sort order. The API additionally supports arbitrary search queries that may refer the name of any product, brand, category or collection. If successful, returns a paginated list of products specified in `ApplicationProductListingResponse`
@@ -59483,7 +59014,9 @@ data, err := Catalog.GetAppProducts(CompanyID, ApplicationID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `BrandIds`, `CategoryIds`, `DepartmentIds`, `Tags`, `PageNo`, `PageSize`, `Q`
+
+
+| xQuery | struct | Includes properties such as `BrandIds`, `CategoryIds`, `DepartmentIds`, `Tags`, `ItemIds`, `PageNo`, `PageSize`, `Q`
 
 
 Products are the core resource of an application. Products can be associated by categories, collections, brands and more. If successful, returns a Product resource in the response body specified in `ApplicationProductListingResponseDatabasePowered`
@@ -59551,6 +59084,44 @@ Success. Returns the article/stock of the product stock.
 
 
 Schema: `InventoryStockResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOptimalLocations
+Location Reassignment
+
+```golang
+
+data, err := Catalog.GetOptimalLocations(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company inside which the location is to be created. | 
+
+
+| body |  AssignStore | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `StoreAssignResponse`
 
 
 
@@ -66637,11 +66208,14 @@ Get the Giveaway audience status
 
 ```golang
 
-data, err := Rewards.GetGiveawayAudienceStatus(AudienceID, CompanyID, ApplicationID);
+data, err := Rewards.GetGiveawayAudienceStatus(ID, AudienceID, CompanyID, ApplicationID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
+
+| ID | string | Giveaway ID | 
+
 
 | AudienceID | string | audience id | 
 
@@ -66720,7 +66294,7 @@ Get offer by name
 
 ```golang
 
-data, err := Rewards.GetOfferByName(Name, CompanyID, ApplicationID, Cookie);
+data, err := Rewards.GetOfferByName(Name, CompanyID, ApplicationID);
 ```
 
 | Argument  |  Type  | Description |
@@ -66733,9 +66307,6 @@ data, err := Rewards.GetOfferByName(Name, CompanyID, ApplicationID, Cookie);
 
 
 | ApplicationID | string | application id | 
-
-
-| Cookie | string | User's session cookie. This cookie is set in browser cookie when logged-in to fynd's authentication system i.e. `Grimlock` or by using grimlock-backend SDK for backend implementation. | 
 
 
 
@@ -66849,12 +66420,12 @@ Schema: `AppUser`
 ---
 
 
-#### user
+#### getUserDetails
 Get user reward details
 
 ```golang
 
-data, err := Rewards.User(UserID, CompanyID, ApplicationID);
+data, err := Rewards.GetUserDetails(UserID, CompanyID, ApplicationID);
 ```
 
 | Argument  |  Type  | Description |
@@ -68425,7 +67996,7 @@ default
             "first_name": "Paul",
             "last_name": "Lobo",
             "full_name": "Paul Lobo",
-            "email": "paullobo@gofynd.com"
+            "email": "paullobo@xyz.com"
           }
         },
         "_id": "634eef735e84e7e1b09aa07c",
@@ -68551,7 +68122,7 @@ default
         "first_name": "Paul",
         "last_name": "Lobo",
         "full_name": "Paul Lobo",
-        "email": "paullobo@gofynd.com"
+        "email": "paullobo@xyz.com"
       }
     },
     "device_info": {
@@ -68670,6 +68241,628 @@ default
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+---
+
+
+
+---
+
+
+## Serviceability
+
+
+#### getApplicationServiceability
+Zone configuration of application.
+
+```golang
+
+data, err := Serviceability.GetApplicationServiceability(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+
+This API returns serviceability config of the application.
+
+*Success Response:*
+
+
+
+Response Data
+
+
+Schema: `ApplicationServiceabilityConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getEntityRegionView
+Get country and state list
+
+```golang
+
+data, err := Serviceability.GetEntityRegionView(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  EntityRegionView_Request | "Request body" 
+
+This API returns response for Entity Region View.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `EntityRegionView_Response`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getListView
+Zone List of application.
+
+```golang
+
+data, err := Serviceability.GetListView(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNumber`, `PageSize`, `Name`, `IsActive`, `ChannelIds`, `Q`
+
+
+This API returns Zone List View of the application.
+
+*Success Response:*
+
+
+
+Zone List of application in descending order of their last modified date.
+
+
+Schema: `ListViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCompanyStoreView
+Company Store View of application.
+
+```golang
+
+data, err := Serviceability.GetCompanyStoreView(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular company. | 
+
+
+
+This API returns Company Store View of the application.
+
+*Success Response:*
+
+
+
+Get Company Store View Data
+
+
+Schema: `CompanyStoreView_Response`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getZoneDataView
+Zone Data View of application.
+
+```golang
+
+data, err := Serviceability.GetZoneDataView(CompanyID, ZoneID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
+
+
+
+This API returns Zone Data View of the application.
+
+*Success Response:*
+
+
+
+Get Application Zone Data
+
+
+Schema: `GetSingleZoneDataViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateZoneControllerView
+Updation of zone collections in database.
+
+```golang
+
+data, err := Serviceability.UpdateZoneControllerView(ZoneID, CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
+
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  ZoneUpdateRequest | "Request body" 
+
+This API returns response of updation of zone in mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `ZoneSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createZone
+Insertion of zone in database.
+
+```golang
+
+data, err := Serviceability.CreateZone(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  ZoneRequest | "Request body" 
+
+This API returns response of insertion of zone in mongo database.<br>Correction- `zone_id` in the path must be removed.<br> path is `/service/platform/logistics-internal/v1.0/company/{}/zone/`
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `ZoneResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getZonesFromApplicationIdView
+GET zones from the application_id.
+
+```golang
+
+data, err := Serviceability.GetZonesFromApplicationIdView(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` contains a specific ID of a company. | 
+
+
+| ApplicationID | string | A `application_id` contains a unique ID. | 
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `ZoneID`, `Q`
+
+
+This API returns zones from the application_id View.
+
+*Success Response:*
+
+
+
+List of zones for the given application_id
+
+
+Schema: `GetZoneFromApplicationIdViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getZoneFromPincodeView
+GET zone from the Pincode.
+
+```golang
+
+data, err := Serviceability.GetZoneFromPincodeView(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` contains a specific ID of a company. | 
+
+
+| ApplicationID | string | A `application_id` contains a unique ID. | 
+
+
+| body |  GetZoneFromPincodeViewRequest | "Request body" 
+
+This API returns zone from the Pincode View.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `GetZoneFromPincodeViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getStore
+GET stores data
+
+```golang
+
+data, err := Serviceability.GetStore(CompanyID, StoreUID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| StoreUID | float64 | A `store_uid` contains a specific ID of a store. | 
+
+
+
+This API returns stores data.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `GetStoresViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAllStores
+GET stores data
+
+```golang
+
+data, err := Serviceability.GetAllStores(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+
+This API returns stores data.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `GetStoresViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updatePincodeMopView
+PincodeView update of MOP.
+
+```golang
+
+data, err := Serviceability.UpdatePincodeMopView(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  PincodeMopData | "Request body" 
+
+This API updates Pincode method of payment.
+
+*Success Response:*
+
+
+
+Response Data
+
+
+Schema: `PincodeMOPresponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updatePincodeBulkView
+Bulk Update of pincode in the application.
+
+```golang
+
+data, err := Serviceability.UpdatePincodeBulkView(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  PincodeMopBulkData | "Request body" 
+
+This API constructs bulk write operations to update the MOP data for each pincode in the payload.
+
+*Success Response:*
+
+
+
+Response Data
+
+
+Schema: `PincodeBulkViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updatePincodeCoDListing
+Pincode count view of application.
+
+```golang
+
+data, err := Serviceability.UpdatePincodeCoDListing(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  PincodeCodStatusListingRequest | "Request body" 
+
+This API returns count of active pincode.
+
+*Success Response:*
+
+
+
+Response Data
+
+
+Schema: `PincodeCodStatusListingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updatePincodeAuditHistory
+Auditlog configuration of application.
+
+```golang
+
+data, err := Serviceability.UpdatePincodeAuditHistory(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  PincodeMopUpdateAuditHistoryRequest | "Request body" 
+
+This API returns Audit logs of Pincode.
+
+*Success Response:*
+
+
+
+Response Data
+
+
+Schema: `PincodeMopUpdateAuditHistoryResponseData`
 
 
 

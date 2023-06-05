@@ -46,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [unfollowById](#unfollowbyid)
     * [followById](#followbyid)
+    * [unfollowById](#unfollowbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -278,7 +278,6 @@
     * [getShipmentBagReasons](#getshipmentbagreasons)
     * [getShipmentReasons](#getshipmentreasons)
     * [updateShipmentStatus](#updateshipmentstatus)
-    * [updateShipmentStatus1](#updateshipmentstatus1)
     
 
 * [Rewards](#Rewards)
@@ -327,7 +326,9 @@
   * Methods
     * [getPincodeCity](#getpincodecity)
     * [getTatProduct](#gettatproduct)
+    * [getAllCountries](#getallcountries)
     * [getPincodeZones](#getpincodezones)
+    * [getOptimalLocations](#getoptimallocations)
     
 
 
@@ -1153,12 +1154,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1172,7 +1173,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1194,12 +1195,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1213,7 +1214,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1524,10 +1525,10 @@ Prices may vary for different sizes of a product. Use this API to retrieve the p
 
 
 
-Success. Returns a ProductSizePriceV2 object. Check the example shown below or refer `ProductSizePriceResponseV2` for more details.
+Success. Returns a ProductSizePriceV3 object. Check the example shown below or refer `ProductSizePriceResponseV3` for more details.
 
 
-Schema: `ProductSizePriceResponseV2`
+Schema: `ProductSizePriceResponseV3`
 
 
 
@@ -1574,10 +1575,10 @@ A product of a particular size may be sold by multiple sellers. Use this API to 
 
 
 
-Success. Returns a ProductSizeSellerV2 object. Check the example shown below or refer `ProductSizeSellersResponseV2` for more details.
+Success. Returns a ProductSizeSellerV3 object. Check the example shown below or refer `ProductSizeSellersResponseV3` for more details.
 
 
-Schema: `ProductSizeSellersResponseV2`
+Schema: `ProductSizeSellersResponseV3`
 
 
 
@@ -6331,21 +6332,6 @@ All pages
         "__v": 9
       },
       {
-        "path": "product/:slug/reviews",
-        "type": "system",
-        "seo": {
-          "title": "",
-          "description": "",
-          "_id": "60ab5ca6d572fed64294eb24"
-        },
-        "_id": "60ab5ca6d572fed64294eb25",
-        "sections_meta": [],
-        "value": "product-reviews",
-        "text": "Product Reviews",
-        "theme": "5fb3ee4194a5181feeeba8e5",
-        "__v": 9
-      },
-      {
         "path": "blog",
         "type": "system",
         "seo": {
@@ -6418,21 +6404,6 @@ All pages
         "text": "Wishlist",
         "theme": "5fb3ee4194a5181feeeba8e5",
         "sections_meta": [],
-        "__v": 9
-      },
-      {
-        "path": "product/:slug/add-review",
-        "type": "system",
-        "seo": {
-          "title": "",
-          "description": "",
-          "_id": "60ab5ca6d572fed64294eb26"
-        },
-        "_id": "60ab5ca6d572fed64294eb27",
-        "sections_meta": [],
-        "value": "add-product-review",
-        "text": "Add Product Review",
-        "theme": "5fb3ee4194a5181feeeba8e5",
         "__v": 9
       },
       {
@@ -7427,11 +7398,6 @@ Applied Theme
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -7641,11 +7607,6 @@ Applied Theme
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -9608,11 +9569,6 @@ Preview Theme
       "page_schema": [
         {
           "props": [],
-          "_id": "5fe182f763d26d042fd205c4",
-          "page": "add-product-review"
-        },
-        {
-          "props": [],
           "_id": "5fe182f763d26dadc8d205c6",
           "page": "blog"
         },
@@ -9822,11 +9778,6 @@ Preview Theme
           "props": [],
           "_id": "5fe182f763d26da5f0d205d3",
           "page": "product-listing"
-        },
-        {
-          "props": [],
-          "_id": "5fe182f763d26d3d18d205d4",
-          "page": "product-reviews"
         },
         {
           "props": [],
@@ -14576,7 +14527,9 @@ Success
   "value": {
     "seo": {
       "details": {
-        "title": "Zyosa Zyosa"
+        "title": "Zyosa Zyosa",
+        "description": "",
+        "image_url": ""
       },
       "robots_txt": "User-agent: * \nAllow: / \nsancisciasn xwsaixjowqnxwsiwjs",
       "sitemap_enabled": false,
@@ -18370,50 +18323,11 @@ Schema: `ShipmentReasons`
 
 
 #### updateShipmentStatus
-Update the shipment status
+
 
 ```golang
 
  data, err :=  Order.UpdateShipmentStatus(ShipmentID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
-
-
-| body |  UpdateShipmentStatusRequest | "Request body" 
-
-
-Use this API to update the status of a shipment using its shipment ID.
-
-*Success Response:*
-
-
-
-Successfully updateShipmentStatus!
-
-
-Schema: `ShipmentApplicationStatusResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateShipmentStatus1
-
-
-```golang
-
- data, err :=  Order.UpdateShipmentStatus1(ShipmentID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -22976,6 +22890,10 @@ Pincode data found
           "zone": "West",
           "internal_zone_id": 4
         },
+        "meta_code": {
+          "country_code": "IND",
+          "isd_code": "+91"
+        },
         "parents": [
           {
             "sub_type": "country",
@@ -23198,6 +23116,41 @@ Pincode not found
 ---
 
 
+#### getAllCountries
+Get Country List
+
+```golang
+
+ data, err :=  Logistic.GetAllCountries();
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+Get all countries
+
+*Success Response:*
+
+
+
+Get Country List
+
+
+Schema: `CountryListResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getPincodeZones
 GET zone from the Pincode.
 
@@ -23222,6 +23175,42 @@ Response status_code
 
 
 Schema: `GetZoneFromPincodeViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOptimalLocations
+GET zone from the Pincode.
+
+```golang
+
+ data, err :=  Logistic.GetOptimalLocations(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  ReAssignStoreRequest | "Request body" 
+
+
+This API returns zone from the Pincode View.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `ReAssignStoreResponse`
 
 
 
