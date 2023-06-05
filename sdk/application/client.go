@@ -1237,7 +1237,8 @@ func NewAppClient(config *AppConfig) *Client {
     type CatalogGetCollectionsXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
-        Tag []string  `url:"tag,omitempty"`  
+        Tag []string  `url:"tag,omitempty"` 
+        Q string  `url:"q,omitempty"`  
     }
     
     // GetCollections List all the collections
@@ -1252,6 +1253,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -1311,6 +1314,13 @@ func NewAppClient(config *AppConfig) *Client {
                     
                     
                 
+                    
+                    
+                    
+                        
+                    
+                    
+                
             
             // GetCollectionsPaginator List all the collections  
             func (ca *Catalog)  GetCollectionsPaginator( xQuery CatalogGetCollectionsXQuery ) *common.Paginator {
@@ -1318,6 +1328,10 @@ func NewAppClient(config *AppConfig) *Client {
                  
                  
                  xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
                  
                  
                  
@@ -13169,12 +13183,12 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // GetPosOrderById Get POS Order
-    func (or *Order)  GetPosOrderById(OrderID string) (OrderList, error){
+    func (or *Order)  GetPosOrderById(OrderID string) (OrderById, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getPosOrderByIdResponse OrderList
+             getPosOrderByIdResponse OrderById
 	    )
 
         
@@ -13198,12 +13212,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return OrderList{}, err
+            return OrderById{}, err
 	    }
         
         err = json.Unmarshal(response, &getPosOrderByIdResponse)
         if err != nil {
-            return OrderList{}, common.NewFDKError(err.Error())
+            return OrderById{}, common.NewFDKError(err.Error())
         }
          return getPosOrderByIdResponse, nil
         

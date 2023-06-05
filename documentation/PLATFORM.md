@@ -358,40 +358,40 @@
 
 * [Catalog](#Catalog)
   * Methods
-    * [deleteSearchKeywords](#deletesearchkeywords)
-    * [updateSearchKeywords](#updatesearchkeywords)
     * [getSearchKeywords](#getsearchkeywords)
+    * [updateSearchKeywords](#updatesearchkeywords)
+    * [deleteSearchKeywords](#deletesearchkeywords)
     * [getAllSearchKeyword](#getallsearchkeyword)
     * [createCustomKeyword](#createcustomkeyword)
-    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
-    * [updateAutocompleteKeyword](#updateautocompletekeyword)
     * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
+    * [updateAutocompleteKeyword](#updateautocompletekeyword)
+    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [listSearchRerankConfig](#listsearchrerankconfig)
     * [createSearchRerankingConfig](#createsearchrerankingconfig)
-    * [deleteSearchRerankConfig](#deletesearchrerankconfig)
-    * [updateSearchRerankConfig](#updatesearchrerankconfig)
     * [getSearchRerankingConfig](#getsearchrerankingconfig)
+    * [updateSearchRerankConfig](#updatesearchrerankconfig)
+    * [deleteSearchRerankConfig](#deletesearchrerankconfig)
     * [getProductBundle](#getproductbundle)
     * [createProductBundle](#createproductbundle)
-    * [updateProductBundle](#updateproductbundle)
     * [getProductBundleDetail](#getproductbundledetail)
+    * [updateProductBundle](#updateproductbundle)
     * [getSizeGuides](#getsizeguides)
     * [createSizeGuide](#createsizeguide)
-    * [updateSizeGuide](#updatesizeguide)
     * [getSizeGuide](#getsizeguide)
+    * [updateSizeGuide](#updatesizeguide)
     * [getAppProduct](#getappproduct)
     * [updateAppProduct](#updateappproduct)
     * [getConfigurationMetadata](#getconfigurationmetadata)
     * [getGroupConfigurations](#getgroupconfigurations)
     * [createGroupConfiguration](#creategroupconfiguration)
-    * [deleteGroupConfiguration](#deletegroupconfiguration)
     * [updateGroupConfiguration](#updategroupconfiguration)
+    * [deleteGroupConfiguration](#deletegroupconfiguration)
     * [getListingConfigurations](#getlistingconfigurations)
     * [createListingConfiguration](#createlistingconfiguration)
-    * [deleteListingConfiguration](#deletelistingconfiguration)
     * [updateListingConfiguration](#updatelistingconfiguration)
+    * [deleteListingConfiguration](#deletelistingconfiguration)
     * [updateAllowSingle](#updateallowsingle)
     * [updateDefaultSort](#updatedefaultsort)
     * [getCatalogConfiguration](#getcatalogconfiguration)
@@ -403,8 +403,8 @@
     * [getAllCollections](#getallcollections)
     * [createCollection](#createcollection)
     * [getCollectionDetail](#getcollectiondetail)
-    * [deleteCollection](#deletecollection)
     * [updateCollection](#updatecollection)
+    * [deleteCollection](#deletecollection)
     * [getCollectionItems](#getcollectionitems)
     * [addCollectionItems](#addcollectionitems)
     * [getCatalogInsights](#getcataloginsights)
@@ -431,23 +431,23 @@
     * [listTemplateBrandTypeValues](#listtemplatebrandtypevalues)
     * [listCategories](#listcategories)
     * [createCategories](#createcategories)
-    * [updateCategory](#updatecategory)
     * [getCategoryData](#getcategorydata)
+    * [updateCategory](#updatecategory)
     * [getProducts](#getproducts)
     * [createProduct](#createproduct)
     * [getVariantsOfProducts](#getvariantsofproducts)
     * [getProductAttributes](#getproductattributes)
-    * [deleteProduct](#deleteproduct)
-    * [editProduct](#editproduct)
     * [getProduct](#getproduct)
+    * [editProduct](#editproduct)
+    * [deleteProduct](#deleteproduct)
     * [allSizes](#allsizes)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
     * [getProductBulkUploadHistory](#getproductbulkuploadhistory)
     * [createBulkProductUploadJob](#createbulkproductuploadjob)
     * [uploadBulkProducts](#uploadbulkproducts)
-    * [deleteProductBulkJob](#deleteproductbulkjob)
     * [createProductsInBulk](#createproductsinbulk)
+    * [deleteProductBulkJob](#deleteproductbulkjob)
     * [getProductTags](#getproducttags)
     * [getProductAssetsInBulk](#getproductassetsinbulk)
     * [createProductAssetsInBulk](#createproductassetsinbulk)
@@ -460,18 +460,18 @@
     * [deleteInventory](#deleteinventory)
     * [getInventoryBulkUploadHistory](#getinventorybulkuploadhistory)
     * [createBulkInventoryJob](#createbulkinventoryjob)
-    * [deleteBulkInventoryJob](#deletebulkinventoryjob)
     * [createBulkInventory](#createbulkinventory)
+    * [deleteBulkInventoryJob](#deletebulkinventoryjob)
     * [getInventoryExport](#getinventoryexport)
     * [createInventoryExportJob](#createinventoryexportjob)
     * [listInventoryExport](#listinventoryexport)
     * [createInventoryExport](#createinventoryexport)
     * [exportInventoryConfig](#exportinventoryconfig)
-    * [deleteRealtimeInventory](#deleterealtimeinventory)
     * [updateRealtimeInventory](#updaterealtimeinventory)
+    * [deleteRealtimeInventory](#deleterealtimeinventory)
     * [updateInventories](#updateinventories)
-    * [updateHsnCode](#updatehsncode)
     * [getHsnCode](#gethsncode)
+    * [updateHsnCode](#updatehsncode)
     * [bulkHsnCode](#bulkhsncode)
     * [getAllProductHsnCodes](#getallproducthsncodes)
     * [getSingleProductHSNCode](#getsingleproducthsncode)
@@ -47381,8 +47381,7 @@ default
     "data": {
       "pg_user_exists": true,
       "id": 2
-    },
-    "credit_balance": 500
+    }
   }
 }
 ```
@@ -47455,8 +47454,7 @@ default
     "data": {
       "pg_user_exists": true,
       "id": 2
-    },
-    "credit_balance": 500
+    }
   }
 }
 ```
@@ -47508,11 +47506,10 @@ Active subscription
 {
   "value": {
     "is_enabled": true,
-    "mandate_amount": 150000,
     "subscription": {
       "current_period": {
-        "start": "2020-12-17T13:45:36.722Z",
-        "end": "2021-01-17T13:45:36.722Z"
+        "start": "2023-05-23T07:00:31.345Z",
+        "end": "2023-06-22T07:00:31.345Z"
       },
       "pause_collection": {},
       "trial": {},
@@ -47522,14 +47519,1423 @@ Active subscription
       },
       "is_active": true,
       "cancel_at_period_end": false,
-      "_id": "5f3a8a00668947663b7fbd38",
-      "subscriber_id": "5ee773e1351e5e84289ed9cf",
-      "plan_id": "5f3a8786c90d780037723a12",
-      "product_suite_id": "5f3a8786c90d7800377239f3",
+      "freezed": false,
+      "channel_type": "ecomm",
+      "_id": "6385dc9389fe3577db6935f3",
+      "subscriber_id": "6385dc9289fe356a346935eb",
+      "plan_id": "5f2e30cad1456d00386abf1c",
+      "product_suite_id": "5f2e30cad1456d00386abefc",
       "plan_data": {
+        "plan_components": [
+          {
+            "is_active": true,
+            "display_text": null,
+            "_id": "5f2e30cbd1456d00386ac008",
+            "plan_id": "5f2e30cad1456d00386abf1c",
+            "created_at": "2020-08-08T04:57:47.829Z",
+            "modified_at": "2021-07-31T12:13:51.221Z",
+            "component": {
+              "is_visible": true,
+              "is_active": true,
+              "is_display": true,
+              "_id": "5f2e30cad1456d00386abefd",
+              "component_price_config": {
+                "type": "display",
+                "display_text": "4%"
+              },
+              "name": "Transaction Fees",
+              "slug": "transaction-fee",
+              "description": "Transaction fees is inclusive of Payment Gateway",
+              "group": "Key Features",
+              "icon": "",
+              "product_suite_id": "5f2e30cad1456d00386abefc",
+              "created_at": "2020-08-08T04:57:46.648Z",
+              "modified_at": "2021-07-31T12:13:50.344Z",
+              "links": {}
+            },
+            "component_price": {
+              "display_text": "3.5%",
+              "is_default": false,
+              "is_active": true,
+              "processing_type": "display",
+              "tags": [],
+              "_id": "5f2e30cbd1456d00386abf77",
+              "component_id": "5f2e30cad1456d00386abefd",
+              "created_at": "2020-08-08T04:57:47.433Z",
+              "modified_at": "2023-04-21T07:04:22.574Z",
+              "__v": 0
+            }
+          },
+          {
+            "is_active": true,
+            "display_text": null,
+            "_id": "5f2e30cbd1456d00386abff4",
+            "plan_id": "5f2e30cad1456d00386abf1c",
+            "created_at": "2020-08-08T04:57:47.829Z",
+            "modified_at": "2021-07-31T12:13:51.221Z",
+            "component": {
+              "is_visible": true,
+              "is_active": true,
+              "is_display": true,
+              "_id": "5f2e30cad1456d00386abeff",
+              "component_price_config": {
+                "type": "display",
+                "display_text": "4%"
+              },
+              "name": "Shipping",
+              "slug": "shipping",
+              "description": "",
+              "group": "General",
+              "icon": "",
+              "product_suite_id": "5f2e30cad1456d00386abefc",
+              "created_at": "2020-08-08T04:57:46.648Z",
+              "modified_at": "2021-07-31T12:13:50.439Z",
+              "links": {}
+            },
+            "component_price": {
+              "display_text": "As per rate card",
+              "is_default": false,
+              "is_active": true,
+              "processing_type": "display",
+              "tags": [],
+              "_id": "5f2e30cbd1456d00386abf78",
+              "component_id": "5f2e30cad1456d00386abeff",
+              "created_at": "2020-08-08T04:57:47.433Z",
+              "modified_at": "2023-04-21T07:04:22.574Z",
+              "__v": 0
+            }
+          },
+          {
+            "is_active": true,
+            "display_text": null,
+            "_id": "5f2e30cbd1456d00386ac031",
+            "plan_id": "5f2e30cad1456d00386abf1c",
+            "created_at": "2020-08-08T04:57:47.830Z",
+            "modified_at": "2021-07-31T12:13:51.221Z",
+            "component": {
+              "is_visible": true,
+              "is_active": true,
+              "is_display": true,
+              "_id": "5f2e30cad1456d00386abf00",
+              "component_price_config": {
+                "default_config": {
+                  "recurring": {
+                    "aggregate_usage": "sum",
+                    "usage_type": "licensed",
+                    "interval_count": 1
+                  },
+                  "transform_quantity": {
+                    "divide_by": 1,
+                    "round": "up"
+                  },
+                  "free_tier": {
+                    "type": "TIME_BASED",
+                    "value": 0
+                  },
+                  "unit_amount": 0,
+                  "quantity": 1,
+                  "price_type": "static",
+                  "price_ui_type": "standard",
+                  "bill_type": "one_time",
+                  "billing_scheme": "per_unit",
+                  "display_text": "Yes",
+                  "tiers": [],
+                  "currency": "INR"
+                },
+                "type": "revenue",
+                "display_text": "Free",
+                "price_meta": {
+                  "price_ui_type": "standard",
+                  "unit_amount": 0,
+                  "price_type": "static",
+                  "bill_type": "one_time",
+                  "billing_scheme": "per_unit",
+                  "transform_quantity": {
+                    "divide_by": 1,
+                    "round": "up"
+                  }
+                }
+              },
+              "name": "SSL Certificates",
+              "slug": "ssl-certificate",
+              "description": "",
+              "group": "Key Features",
+              "icon": "",
+              "product_suite_id": "5f2e30cad1456d00386abefc",
+              "created_at": "2020-08-08T04:57:46.648Z",
+              "modified_at": "2023-04-17T10:44:42.610Z",
+              "links": {}
+            },
+            "component_price": {
+              "recurring": {
+                "aggregate_usage": "sum",
+                "usage_type": "licensed",
+                "interval_count": 1
+              },
+              "transform_quantity": {
+                "divide_by": 1,
+                "round": "up"
+              },
+              "free_tier": {
+                "type": "TIME_BASED",
+                "value": 0
+              },
+              "currency": "INR",
+              "unit_amount": 0,
+              "quantity": 1,
+              "price_ui_type": "standard",
+              "price_type": "static",
+              "bill_type": "one_time",
+              "billing_scheme": "per_unit",
+              "display_text": "Yes",
+              "is_default": false,
+              "is_active": true,
+              "processing_type": "revenue",
+              "tags": [],
+              "tiers": [],
+              "_id": "5f2e30cbd1456d00386abf7f",
+              "component_id": "5f2e30cad1456d00386abf00",
+              "created_at": "2020-08-08T04:57:47.433Z",
+              "modified_at": "2023-04-21T07:04:22.574Z",
+              "__v": 0
+            }
+          },
+          {
+            "is_active": true,
+            "display_text": null,
+            "_id": "5f2e30cbd1456d00386ac032",
+            "plan_id": "5f2e30cad1456d00386abf1c",
+            "created_at": "2020-08-08T04:57:47.830Z",
+            "modified_at": "2021-07-31T12:13:51.221Z",
+            "component": {
+              "is_visible": true,
+              "is_active": true,
+              "is_display": true,
+              "_id": "5f2e30cad1456d00386abf01",
+              "component_price_config": {
+                "type": "feature_config",
+                "display_text": "No",
+                "feature_config": {
+                  "enabled": {
+                    "display": "enabled",
+                    "type": "Boolean",
+                    "default": false
+                  }
+                }
+              },
+              "name": "Configure Self PG",
+              "slug": "custom-payment-gatway-setup",
+              "description": "",
+              "group": "General",
+              "icon": "",
+              "product_suite_id": "5f2e30cad1456d00386abefc",
+              "created_at": "2020-08-08T04:57:46.648Z",
+              "modified_at": "2023-04-21T07:04:23.938Z",
+              "links": {}
+            },
+            "component_price": {
+              "display_text": "No",
+              "is_default": false,
+              "is_active": true,
+              "processing_type": "feature_config",
+              "tags": [],
+              "feature_config": {
+                "enabled": false
+              },
+              "_id": "5f2e30cbd1456d00386abf84",
+              "component_id": "5f2e30cad1456d00386abf01",
+              "created_at": "2020-08-08T04:57:47.433Z",
+              "modified_at": "2023-04-21T07:04:22.574Z",
+              "__v": 0
+            }
+          },
+          {
+            "is_active": true,
+            "display_text": null,
+            "_id": "5f2e30cbd1456d00386abfe3",
+            "plan_id": "5f2e30cad1456d00386abf1c",
+            "created_at": "2020-08-08T04:57:47.829Z",
+            "modified_at": "2021-07-31T12:13:51.221Z",
+            "component": {
+              "is_visible": true,
+              "is_active": true,
+              "is_display": true,
+              "_id": "5f2e30cad1456d00386abf03",
+              "component_price_config": {
+                "type": "feature_config",
+                "display_text": "10",
+                "feature_config": {
+                  "limit": {
+                    "display": "limit",
+                    "type": "Number",
+                    "default": 10
+                  }
+                }
+              },
+              "name": "Team Member",
+              "slug": "team-management",
+              "description": "",
+              "group": "Key Features",
+              "icon": "",
+              "product_suite_id": "5f2e30cad1456d00386abefc",
+              "created_at": "2020-08-08T04:57:46.648Z",
+              "modified_at": "2021-07-31T12:13:50.539Z",
+              "links": {}
+            },
+            "component_price": {
+              "display_text": "10",
+              "is_default": false,
+              "is_active": true,
+              "processing_type": "feature_config",
+              "tags": [],
+              "feature_config": {
+                "limit": 100
+              },
+              "_id": "5f2e30cbd1456d00386abf79",
+              "component_id": "5f2e30cad1456d00386abf03",
+              "created_at": "2020-08-08T04:57:47.433Z",
+              "modified_at": "2023-04-21T07:04:22.574Z",
+              "__v": 0
+            }
+          },
+          {
+            "is_active": true,
+            "display_text": null,
+            "_id": "5f2e30cbd1456d00386abff5",
+            "plan_id": "5f2e30cad1456d00386abf1c",
+            "created_at": "2020-08-08T04:57:47.829Z",
+            "modified_at": "2021-07-31T12:13:51.221Z",
+            "component": {
+              "is_visible": true,
+              "is_active": true,
+              "is_display": true,
+              "_id": "5f2e30cad1456d00386abf04",
+              "component_price_config": {
+                "type": "feature_config",
+                "display_text": "5",
+                "feature_config": {
+                  "hard_limit": {
+                    "display": "hard limit",
+                    "type": "Number",
+                    "default": 1
+                  },
+                  "soft_limit": {
+                    "display": "soft limit",
+                    "type": "Number",
+                    "default": 1
+                  }
+                }
+              },
+              "name": "Websites",
+              "slug": "sale-websites",
+              "description": "",
+              "group": "Key Features",
+              "icon": "",
+              "product_suite_id": "5f2e30cad1456d00386abefc",
+              "created_at": "2020-08-08T04:57:46.648Z",
+              "modified_at": "2021-07-31T12:13:50.532Z",
+              "links": {}
+            },
+            "component_price": {
+              "display_text": "1",
+              "is_default": false,
+              "is_active": true,
+              "processing_type": "feature_config",
+              "tags": [],
+              "feature_config": {
+                "hard_limit": 4,
+                "soft_limit": 3
+              },
+              "_id": "5f2e30cbd1456d00386abf7d",
+              "component_id": "5f2e30cad1456d00386abf04",
+              "created_at": "2020-08-08T04:57:47.433Z",
+              "modified_at": "2023-04-21T07:04:22.574Z",
+              "__v": 0
+            }
+          },
+          {
+            "is_active": true,
+            "display_text": null,
+            "_id": "5f2e30cbd1456d00386abff6",
+            "plan_id": "5f2e30cad1456d00386abf1c",
+            "created_at": "2020-08-08T04:57:47.829Z",
+            "modified_at": "2021-07-31T12:13:51.221Z",
+            "component": {
+              "is_visible": true,
+              "is_active": true,
+              "is_display": true,
+              "_id": "5f2e30cad1456d00386abf05",
+              "component_price_config": {
+                "type": "display",
+                "display_text": "Yes"
+              },
+              "name": "Fynd Payment Gateway",
+              "slug": "fynd-supported-payment-gateway",
+              "description": "",
+              "group": "Key Features",
+              "icon": "",
+              "product_suite_id": "5f2e30cad1456d00386abefc",
+              "created_at": "2020-08-08T04:57:46.648Z",
+              "modified_at": "2021-07-31T12:13:50.545Z",
+              "links": {}
+            },
+            "component_price": {
+              "display_text": "Yes",
+              "is_default": false,
+              "is_active": true,
+              "processing_type": "display",
+              "tags": [],
+              "_id": "5f2e30cbd1456d00386abf82",
+              "component_id": "5f2e30cad1456d00386abf05",
+              "created_at": "2020-08-08T04:57:47.433Z",
+              "modified_at": "2023-04-21T07:04:22.574Z",
+              "__v": 0
+            }
+          },
+          {
+            "is_active": true,
+            "display_text": null,
+            "_id": "5f2e30cbd1456d00386abfe4",
+            "plan_id": "5f2e30cad1456d00386abf1c",
+            "created_at": "2020-08-08T04:57:47.829Z",
+            "modified_at": "2021-07-31T12:13:51.221Z",
+            "component": {
+              "is_visible": true,
+              "is_active": true,
+              "is_display": true,
+              "_id": "5f2e30cad1456d00386abf09",
+              "component_price_config": {
+                "default_config": {
+                  "recurring": {
+                    "aggregate_usage": "sum",
+                    "usage_type": "licensed",
+                    "interval_count": 1
+                  },
+                  "transform_quantity": {
+                    "divide_by": 1,
+                    "round": "up"
+                  },
+                  "free_tier": {
+                    "type": "TIME_BASED",
+                    "value": 0
+                  },
+                  "unit_amount": 0,
+                  "quantity": 1,
+                  "price_type": "dynamic",
+                  "price_ui_type": "standard",
+                  "bill_type": "one_time",
+                  "billing_scheme": "per_unit",
+                  "display_text": "Themes",
+                  "tiers": [],
+                  "currency": "INR"
+                },
+                "type": "revenue",
+                "display_text": "Basic Themes",
+                "price_meta": {
+                  "price_ui_type": "standard",
+                  "price_type": "dynamic",
+                  "bill_type": "one_time",
+                  "billing_scheme": "per_unit",
+                  "transform_quantity": {
+                    "divide_by": 1,
+                    "round": "up"
+                  }
+                }
+              },
+              "name": "Themes",
+              "slug": "themes",
+              "description": "Fynd Platform partner themes available on extra charges",
+              "group": "General",
+              "icon": "",
+              "product_suite_id": "5f2e30cad1456d00386abefc",
+              "created_at": "2020-08-08T04:57:46.648Z",
+              "modified_at": "2023-04-21T07:04:23.449Z",
+              "links": {}
+            },
+            "component_price": {
+              "recurring": {
+                "aggregate_usage": "sum",
+                "usage_type": "licensed",
+                "interval_count": 1
+              },
+              "transform_quantity": {
+                "divide_by": 1,
+                "round": "up"
+              },
+              "free_tier": {
+                "type": "TIME_BASED",
+                "value": 0
+              },
+              "currency": "INR",
+              "unit_amount": 0,
+              "quantity": 1,
+              "price_ui_type": "standard",
+              "price_type": "dynamic",
+              "bill_type": "one_time",
+              "billing_scheme": "per_unit",
+              "display_text": "Premium Themes",
+              "is_default": false,
+              "is_active": true,
+              "processing_type": "revenue",
+              "tags": [],
+              "tiers": [],
+              "_id": "5f2e30cbd1456d00386abf7e",
+              "component_id": "5f2e30cad1456d00386abf09",
+              "created_at": "2020-08-08T04:57:47.433Z",
+              "modified_at": "2023-04-21T07:04:22.574Z",
+              "__v": 0
+            }
+          },
+          {
+            "is_active": true,
+            "display_text": null,
+            "_id": "5f2e30cbd1456d00386abfe5",
+            "plan_id": "5f2e30cad1456d00386abf1c",
+            "created_at": "2020-08-08T04:57:47.829Z",
+            "modified_at": "2021-07-31T12:13:51.221Z",
+            "component": {
+              "is_visible": true,
+              "is_active": true,
+              "is_display": true,
+              "_id": "5f2e30cad1456d00386abf0a",
+              "component_price_config": {
+                "default_config": {
+                  "recurring": {
+                    "aggregate_usage": "sum",
+                    "usage_type": "licensed",
+                    "interval_count": 1
+                  },
+                  "transform_quantity": {
+                    "divide_by": 1,
+                    "round": "up"
+                  },
+                  "free_tier": {
+                    "type": "TIME_BASED",
+                    "value": 0
+                  },
+                  "unit_amount": 0,
+                  "quantity": 1,
+                  "price_type": "dynamic",
+                  "price_ui_type": "standard",
+                  "bill_type": "one_time",
+                  "billing_scheme": "per_unit",
+                  "display_text": "Yes",
+                  "tiers": [],
+                  "currency": "INR"
+                },
+                "type": "revenue",
+                "display_text": "Yes",
+                "price_meta": {
+                  "price_ui_type": "standard",
+                  "price_type": "dynamic",
+                  "bill_type": "one_time",
+                  "billing_scheme": "per_unit",
+                  "transform_quantity": {
+                    "divide_by": 1,
+                    "round": "up"
+                  }
+                }
+              },
+              "name": "Custom Domain",
+              "slug": "custom-domain",
+              "description": "Connect your custom domain to your website",
+              "group": "Key Features",
+              "icon": "",
+              "product_suite_id": "5f2e30cad1456d00386abefc",
+              "created_at": "2020-08-08T04:57:46.648Z",
+              "modified_at": "2023-04-21T07:04:23.847Z",
+              "links": {}
+            },
+            "component_price": {
+              "recurring": {
+                "aggregate_usage": "sum",
+                "usage_type": "licensed",
+                "interval_count": 1
+              },
+              "transform_quantity": {
+                "divide_by": 1,
+                "round": "up"
+              },
+              "free_tier": {
+                "type": "TIME_BASED",
+                "value": 0
+              },
+              "currency": "INR",
+              "unit_amount": 0,
+              "quantity": 1,
+              "price_ui_type": "standard",
+              "price_type": "dynamic",
+              "bill_type": "one_time",
+              "billing_scheme": "per_unit",
+              "display_text": "Yes",
+              "is_default": false,
+              "is_active": true,
+              "processing_type": "revenue",
+              "tags": [],
+              "tiers": [],
+              "_id": "5f2e30cbd1456d00386abf83",
+              "component_id": "5f2e30cad1456d00386abf0a",
+              "created_at": "2020-08-08T04:57:47.433Z",
+              "modified_at": "2023-04-21T07:04:22.574Z",
+              "__v": 0
+            }
+          },
+          {
+            "is_active": true,
+            "display_text": null,
+            "_id": "5f2e30cbd1456d00386abfe6",
+            "plan_id": "5f2e30cad1456d00386abf1c",
+            "created_at": "2020-08-08T04:57:47.829Z",
+            "modified_at": "2021-07-31T12:13:51.221Z",
+            "component": {
+              "is_visible": true,
+              "is_active": true,
+              "is_display": true,
+              "_id": "5f2e30cad1456d00386abf0b",
+              "component_price_config": {
+                "type": "feature_config",
+                "display_text": "No",
+                "feature_config": {
+                  "enabled": {
+                    "display": "enabled",
+                    "type": "Boolean",
+                    "default": false
+                  }
+                }
+              },
+              "name": "POS",
+              "slug": "pos-inventory-integration",
+              "description": "Integration Costs Extra",
+              "group": "Sales Channel",
+              "icon": "",
+              "product_suite_id": "5f2e30cad1456d00386abefc",
+              "created_at": "2020-08-08T04:57:46.648Z",
+              "modified_at": "2021-07-31T12:13:50.529Z",
+              "links": {}
+            },
+            "component_price": {
+              "display_text": "Yes",
+              "is_default": false,
+              "is_active": true,
+              "processing_type": "feature_config",
+              "tags": [],
+              "feature_config": {
+                "enabled": true
+              },
+              "_id": "5f2e30cbd1456d00386abf88",
+              "component_id": "5f2e30cad1456d00386abf0b",
+              "created_at": "2020-08-08T04:57:47.434Z",
+              "modified_at": "2023-04-21T07:04:22.574Z",
+              "__v": 0
+            }
+          },
+          {
+            "is_active": true,
+            "display_text": null,
+            "_id": "5f2e30cbd1456d00386ac030",
+            "plan_id": "5f2e30cad1456d00386abf1c",
+            "created_at": "2020-08-08T04:57:47.830Z",
+            "modified_at": "2021-07-31T12:13:51.221Z",
+            "component": {
+              "is_visible": true,
+              "is_active": true,
+              "is_display": true,
+              "_id": "5f2e30cad1456d00386abf0d",
+              "component_price_config": {
+                "type": "feature_config",
+                "display_text": "100",
+                "feature_config": {
+                  "limit": {
+                    "display": "limit",
+                    "type": "Number",
+                    "default": 10
+                  }
+                }
+              },
+              "name": "Selling Locations",
+              "slug": "selling-locations",
+              "description": "The number of selling locations you can plug in inventory for: eg: warehouse, retail store etc.",
+              "group": "Key Features",
+              "icon": "",
+              "product_suite_id": "5f2e30cad1456d00386abefc",
+              "created_at": "2020-08-08T04:57:46.648Z",
+              "modified_at": "2021-07-31T12:13:50.623Z",
+              "links": {}
+            },
+            "component_price": {
+              "display_text": "5",
+              "is_default": false,
+              "is_active": true,
+              "processing_type": "feature_config",
+              "tags": [],
+              "feature_config": {
+                "limit": 200
+              },
+              "_id": "5f2e30cbd1456d00386abf7a",
+              "component_id": "5f2e30cad1456d00386abf0d",
+              "created_at": "2020-08-08T04:57:47.433Z",
+              "modified_at": "2023-04-21T07:04:22.574Z",
+              "__v": 0
+            }
+          },
+          {
+            "is_active": true,
+            "display_text": null,
+            "_id": "5f2e30cbd1456d00386ac01e",
+            "plan_id": "5f2e30cad1456d00386abf1c",
+            "created_at": "2020-08-08T04:57:47.829Z",
+            "modified_at": "2021-07-31T12:13:51.221Z",
+            "component": {
+              "is_visible": true,
+              "is_active": true,
+              "is_display": true,
+              "_id": "5f2e30cad1456d00386abf0e",
+              "component_price_config": {
+                "default_config": {
+                  "recurring": {
+                    "aggregate_usage": "sum",
+                    "usage_type": "metered",
+                    "interval_count": 1,
+                    "interval": "month"
+                  },
+                  "transform_quantity": {
+                    "divide_by": 1,
+                    "round": "up"
+                  },
+                  "free_tier": {
+                    "type": "TIME_BASED",
+                    "value": 0
+                  },
+                  "unit_amount": 0,
+                  "quantity": 1,
+                  "price_type": "static",
+                  "price_ui_type": "standard",
+                  "bill_type": "recurring",
+                  "billing_scheme": "per_unit",
+                  "display_text": "Free 500 email <br> Additional email charged at 0.25 INR per email",
+                  "tiers": [],
+                  "currency": "INR"
+                },
+                "type": "revenue",
+                "display_text": "",
+                "price_meta": {
+                  "price_ui_type": "standard",
+                  "price_type": "static",
+                  "bill_type": "recurring",
+                  "recurring": {
+                    "aggregate_usage": "sum",
+                    "usage_type": "metered",
+                    "interval": "month",
+                    "interval_count": 1
+                  },
+                  "billing_scheme": "per_unit",
+                  "transform_quantity": {
+                    "divide_by": 1,
+                    "round": "up"
+                  }
+                }
+              },
+              "name": "Email",
+              "slug": "email-campagin",
+              "description": "Send emails to your customers. Choose from pre-defined emailers or create your own.",
+              "group": "Marketing",
+              "icon": "",
+              "product_suite_id": "5f2e30cad1456d00386abefc",
+              "created_at": "2020-08-08T04:57:46.648Z",
+              "modified_at": "2023-04-21T07:04:23.569Z",
+              "links": {}
+            },
+            "component_price": {
+              "recurring": {
+                "aggregate_usage": "sum",
+                "usage_type": "metered",
+                "interval_count": 1,
+                "interval": "month"
+              },
+              "transform_quantity": {
+                "divide_by": 1,
+                "round": "up"
+              },
+              "free_tier": {
+                "type": "TIME_BASED",
+                "value": 0
+              },
+              "currency": "INR",
+              "unit_amount": 0,
+              "quantity": 1,
+              "price_ui_type": "standard",
+              "price_type": "static",
+              "bill_type": "recurring",
+              "billing_scheme": "per_unit",
+              "display_text": "Free 50k email <br> Additional email charged at 0.25 INR per email",
+              "is_default": false,
+              "is_active": true,
+              "processing_type": "revenue",
+              "tags": [],
+              "tiers": [],
+              "_id": "5f2e30cbd1456d00386abf80",
+              "component_id": "5f2e30cad1456d00386abf0e",
+              "created_at": "2020-08-08T04:57:47.433Z",
+              "modified_at": "2023-04-21T07:04:22.574Z",
+              "__v": 0
+            }
+          },
+          {
+            "is_active": true,
+            "display_text": null,
+            "_id": "5f2e30cbd1456d00386ac00a",
+            "plan_id": "5f2e30cad1456d00386abf1c",
+            "created_at": "2020-08-08T04:57:47.829Z",
+            "modified_at": "2021-07-31T12:13:51.221Z",
+            "component": {
+              "is_visible": true,
+              "is_active": true,
+              "is_display": true,
+              "_id": "5f2e30cad1456d00386abf11",
+              "component_price_config": {
+                "default_config": {
+                  "recurring": {
+                    "aggregate_usage": "sum",
+                    "usage_type": "metered",
+                    "interval_count": 1,
+                    "interval": "month"
+                  },
+                  "transform_quantity": {
+                    "divide_by": 1,
+                    "round": "up"
+                  },
+                  "free_tier": {
+                    "type": "TIME_BASED",
+                    "value": 0
+                  },
+                  "unit_amount": 0,
+                  "quantity": 1,
+                  "price_type": "static",
+                  "price_ui_type": "standard",
+                  "bill_type": "recurring",
+                  "billing_scheme": "per_unit",
+                  "display_text": "Free 500 SMS <br> Additional SMS charged at 0.25 INR per SMS",
+                  "tiers": [],
+                  "currency": "INR"
+                },
+                "type": "revenue",
+                "display_text": "",
+                "price_meta": {
+                  "price_ui_type": "standard",
+                  "price_type": "static",
+                  "bill_type": "recurring",
+                  "recurring": {
+                    "aggregate_usage": "sum",
+                    "usage_type": "metered",
+                    "interval": "month",
+                    "interval_count": 1
+                  },
+                  "billing_scheme": "per_unit",
+                  "transform_quantity": {
+                    "divide_by": 1,
+                    "round": "up"
+                  }
+                }
+              },
+              "name": "SMS",
+              "slug": "sms-campagin",
+              "description": "",
+              "group": "Marketing",
+              "icon": "",
+              "product_suite_id": "5f2e30cad1456d00386abefc",
+              "created_at": "2020-08-08T04:57:46.727Z",
+              "modified_at": "2023-04-21T07:04:23.657Z",
+              "links": {}
+            },
+            "component_price": {
+              "recurring": {
+                "aggregate_usage": "sum",
+                "usage_type": "metered",
+                "interval_count": 1,
+                "interval": "month"
+              },
+              "transform_quantity": {
+                "divide_by": 1,
+                "round": "up"
+              },
+              "free_tier": {
+                "type": "TIME_BASED",
+                "value": 0
+              },
+              "currency": "INR",
+              "unit_amount": 0,
+              "quantity": 1,
+              "price_ui_type": "standard",
+              "price_type": "static",
+              "bill_type": "recurring",
+              "billing_scheme": "per_unit",
+              "display_text": "Free 50k SMS <br> Additional SMS charged at 0.25 INR per SMS",
+              "is_default": false,
+              "is_active": true,
+              "processing_type": "revenue",
+              "tags": [],
+              "tiers": [],
+              "_id": "5f2e30cbd1456d00386abf81",
+              "component_id": "5f2e30cad1456d00386abf11",
+              "created_at": "2020-08-08T04:57:47.433Z",
+              "modified_at": "2023-04-21T07:04:22.574Z",
+              "__v": 0
+            }
+          },
+          {
+            "is_active": true,
+            "display_text": null,
+            "_id": "5f2e30cbd1456d00386ac00b",
+            "plan_id": "5f2e30cad1456d00386abf1c",
+            "created_at": "2020-08-08T04:57:47.829Z",
+            "modified_at": "2021-07-31T12:13:51.221Z",
+            "component": {
+              "is_visible": true,
+              "is_active": true,
+              "is_display": true,
+              "_id": "5f2e30cad1456d00386abf12",
+              "component_price_config": {
+                "type": "feature_config",
+                "display_text": "No",
+                "feature_config": {
+                  "enabled": {
+                    "display": "enabled",
+                    "type": "Boolean",
+                    "default": false
+                  }
+                }
+              },
+              "name": "Integrate on other marketplaces",
+              "slug": "marketplace-integration",
+              "description": "Integrate your products on Amazon/Myntra/Flipkart/Ajio/Nykaa/Fynd/Uniket. Manage all your orders at one dashboard. Commission and onboarding fees extra.",
+              "group": "Sales Channel",
+              "icon": "",
+              "product_suite_id": "5f2e30cad1456d00386abefc",
+              "created_at": "2020-08-08T04:57:46.727Z",
+              "modified_at": "2021-07-31T12:13:50.630Z",
+              "links": {}
+            },
+            "component_price": {
+              "display_text": "Yes",
+              "is_default": false,
+              "is_active": true,
+              "processing_type": "feature_config",
+              "tags": [],
+              "feature_config": {
+                "enabled": true
+              },
+              "_id": "5f2e30cbd1456d00386abf86",
+              "component_id": "5f2e30cad1456d00386abf12",
+              "created_at": "2020-08-08T04:57:47.434Z",
+              "modified_at": "2023-04-21T07:04:22.574Z",
+              "__v": 0
+            }
+          },
+          {
+            "is_active": true,
+            "display_text": "1",
+            "_id": "61029cfdd110f5003968a459",
+            "plan_id": "5f2e30cad1456d00386abf1c",
+            "created_at": "2021-07-29T12:20:13.864Z",
+            "modified_at": "2021-07-31T12:13:51.221Z",
+            "component": {
+              "is_visible": true,
+              "is_active": true,
+              "is_display": true,
+              "_id": "61029cfdd110f5003968a418",
+              "component_price_config": {
+                "type": "feature_config",
+                "display_text": "1",
+                "feature_config": {
+                  "limit": {
+                    "display": "limit",
+                    "type": "Number",
+                    "default": 1
+                  }
+                }
+              },
+              "name": "Number of Brands",
+              "description": "If you want to sell with multiple Brands, please Contact Us",
+              "group": "General",
+              "icon": "",
+              "links": {},
+              "slug": "brand",
+              "product_suite_id": "5f2e30cad1456d00386abefc",
+              "created_at": "2021-07-29T12:20:13.267Z",
+              "modified_at": "2021-07-31T12:13:50.729Z"
+            },
+            "component_price": {
+              "display_text": "1",
+              "is_default": false,
+              "is_active": true,
+              "processing_type": "feature_config",
+              "tags": [],
+              "feature_config": {
+                "limit": 1
+              },
+              "_id": "61029cfdd110f5003968a458",
+              "component_id": "61029cfdd110f5003968a418",
+              "created_at": "2021-07-29T12:20:13.863Z",
+              "modified_at": "2023-04-21T07:04:22.574Z",
+              "__v": 0
+            }
+          },
+          {
+            "is_active": true,
+            "display_text": "Yes",
+            "_id": "61029cfdd110f5003968a45f",
+            "plan_id": "5f2e30cad1456d00386abf1c",
+            "created_at": "2021-07-29T12:20:13.943Z",
+            "modified_at": "2021-07-31T12:13:51.221Z",
+            "component": {
+              "is_visible": true,
+              "is_active": true,
+              "is_display": true,
+              "_id": "61029cfdd110f5003968a419",
+              "component_price_config": {
+                "type": "display",
+                "display_text": "Yes"
+              },
+              "name": "Page Editor",
+              "group": "General",
+              "icon": "",
+              "links": {},
+              "slug": "page-editor",
+              "description": "Drag and Drop UI and customize your themes.No coding required",
+              "product_suite_id": "5f2e30cad1456d00386abefc",
+              "created_at": "2021-07-29T12:20:13.274Z",
+              "modified_at": "2021-07-31T12:13:50.733Z"
+            },
+            "component_price": {
+              "display_text": "Yes",
+              "is_default": false,
+              "is_active": true,
+              "processing_type": "feature_config",
+              "tags": [],
+              "feature_config": {
+                "enabled": true
+              },
+              "_id": "61029cfdd110f5003968a45e",
+              "component_id": "61029cfdd110f5003968a419",
+              "created_at": "2021-07-29T12:20:13.941Z",
+              "modified_at": "2023-04-21T07:04:22.574Z",
+              "__v": 0
+            }
+          },
+          {
+            "is_active": true,
+            "display_text": "Yes",
+            "_id": "61029cfdd110f5003968a465",
+            "plan_id": "5f2e30cad1456d00386abf1c",
+            "created_at": "2021-07-29T12:20:13.953Z",
+            "modified_at": "2021-07-31T12:13:51.221Z",
+            "component": {
+              "is_visible": true,
+              "is_active": true,
+              "is_display": true,
+              "_id": "61029cfdd110f5003968a41a",
+              "component_price_config": {
+                "type": "display",
+                "display_text": "Yes"
+              },
+              "name": "SEO Friendly",
+              "description": "",
+              "group": "General",
+              "icon": "",
+              "links": {},
+              "slug": "seo-friendly",
+              "product_suite_id": "5f2e30cad1456d00386abefc",
+              "created_at": "2021-07-29T12:20:13.340Z",
+              "modified_at": "2021-07-31T12:13:50.736Z"
+            },
+            "component_price": {
+              "display_text": "Yes",
+              "is_default": false,
+              "is_active": true,
+              "processing_type": "feature_config",
+              "tags": [],
+              "feature_config": {
+                "enabled": true
+              },
+              "_id": "61029cfdd110f5003968a464",
+              "component_id": "61029cfdd110f5003968a41a",
+              "created_at": "2021-07-29T12:20:13.952Z",
+              "modified_at": "2023-04-21T07:04:22.574Z",
+              "__v": 0
+            }
+          },
+          {
+            "is_active": true,
+            "display_text": "Yes",
+            "_id": "61029cfed110f5003968a47d",
+            "plan_id": "5f2e30cad1456d00386abf1c",
+            "created_at": "2021-07-29T12:20:14.074Z",
+            "modified_at": "2021-07-31T12:13:51.221Z",
+            "component": {
+              "is_visible": true,
+              "is_active": true,
+              "is_display": true,
+              "_id": "61029cfdd110f5003968a41e",
+              "component_price_config": {
+                "type": "feature_config",
+                "display_text": "No",
+                "feature_config": {
+                  "enabled": {
+                    "display": "enabled",
+                    "type": "Boolean",
+                    "default": false
+                  }
+                }
+              },
+              "name": "Analytics Integration",
+              "description": "",
+              "group": "General",
+              "icon": "",
+              "links": {},
+              "slug": "analytics-integration",
+              "product_suite_id": "5f2e30cad1456d00386abefc",
+              "created_at": "2021-07-29T12:20:13.356Z",
+              "modified_at": "2021-07-31T12:13:50.809Z"
+            },
+            "component_price": {
+              "display_text": "Yes",
+              "is_default": false,
+              "is_active": true,
+              "processing_type": "feature_config",
+              "tags": [],
+              "feature_config": {
+                "enabled": true
+              },
+              "_id": "61029cfed110f5003968a47c",
+              "component_id": "61029cfdd110f5003968a41e",
+              "created_at": "2021-07-29T12:20:14.073Z",
+              "modified_at": "2023-04-21T07:04:22.574Z",
+              "__v": 0
+            }
+          },
+          {
+            "is_active": true,
+            "display_text": "Yes",
+            "_id": "61029cfed110f5003968a483",
+            "plan_id": "5f2e30cad1456d00386abf1c",
+            "created_at": "2021-07-29T12:20:14.150Z",
+            "modified_at": "2021-07-31T12:13:51.221Z",
+            "component": {
+              "is_visible": true,
+              "is_active": true,
+              "is_display": true,
+              "_id": "61029cfdd110f5003968a41f",
+              "component_price_config": {
+                "type": "feature_config",
+                "display_text": "No",
+                "feature_config": {
+                  "enabled": {
+                    "display": "enabled",
+                    "type": "Boolean",
+                    "default": false
+                  }
+                }
+              },
+              "name": "Pixel Integration",
+              "description": "",
+              "group": "General",
+              "icon": "",
+              "links": {},
+              "slug": "pixel-integration",
+              "product_suite_id": "5f2e30cad1456d00386abefc",
+              "created_at": "2021-07-29T12:20:13.360Z",
+              "modified_at": "2021-07-31T12:13:50.814Z"
+            },
+            "component_price": {
+              "display_text": "Yes",
+              "is_default": false,
+              "is_active": true,
+              "processing_type": "feature_config",
+              "tags": [],
+              "feature_config": {
+                "enabled": true
+              },
+              "_id": "61029cfed110f5003968a482",
+              "component_id": "61029cfdd110f5003968a41f",
+              "created_at": "2021-07-29T12:20:14.148Z",
+              "modified_at": "2023-04-21T07:04:22.574Z",
+              "__v": 0
+            }
+          }
+        ],
+        "components": [
+          {
+            "_id": "634569a3675d1912531e5ef3",
+            "component_price_config": {
+              "type": "revenue",
+              "default_config": {
+                "recurring": {
+                  "aggregate_usage": "sum",
+                  "usage_type": "licensed",
+                  "interval_count": 1
+                },
+                "transform_quantity": {
+                  "divide_by": 1,
+                  "round": "up"
+                },
+                "free_tier": {
+                  "type": "TIME_BASED",
+                  "value": 0
+                },
+                "unit_amount": 0,
+                "quantity": 1,
+                "price_type": "static",
+                "price_ui_type": "standard",
+                "bill_type": "one_time",
+                "billing_scheme": "per_unit",
+                "display_text": "Yes",
+                "tiers": [],
+                "currency": "INR"
+              },
+              "display_text": "Free",
+              "price_meta": {
+                "unit_amount": 0,
+                "price_type": "static",
+                "bill_type": "one_time",
+                "billing_scheme": "per_unit",
+                "transform_quantity": {
+                  "divide_by": 1,
+                  "round": "up"
+                }
+              }
+            },
+            "is_visible": true,
+            "is_active": true,
+            "is_display": true,
+            "product_suite_id": "5ececa006415744de9228e2e",
+            "name": "SSL Certificates",
+            "slug": "ssl-certificates",
+            "description": "",
+            "group": "Key Features",
+            "icon": "",
+            "links": {},
+            "created_at": "2022-10-11T13:03:31.767Z",
+            "modified_at": "2023-04-21T07:04:23.544Z"
+          },
+          {
+            "_id": "644235768818ad006300f92d",
+            "is_visible": true,
+            "is_active": true,
+            "is_display": true,
+            "name": "Domain Integration",
+            "slug": "domain-integration",
+            "description": "Domain Integration",
+            "group": "Key Features",
+            "icon": "",
+            "component_price_config": {
+              "type": "feature_config",
+              "display_text": "No",
+              "feature_config": {
+                "enabled": {
+                  "display": "enabled",
+                  "type": "Boolean",
+                  "default": false
+                }
+              },
+              "default_config": {
+                "processing_type": "feature_config",
+                "display_text": "No",
+                "feature_config": {
+                  "enabled": false
+                },
+                "is_active": false
+              }
+            },
+            "product_suite_id": "5f2e30cad1456d00386abefc",
+            "links": {},
+            "created_at": "2023-04-21T07:04:22.774Z",
+            "modified_at": "2023-04-21T07:04:22.774Z"
+          },
+          {
+            "_id": "644235768818ad006300f933",
+            "is_visible": true,
+            "is_active": true,
+            "is_display": true,
+            "name": "Customisation of SMS sender",
+            "slug": "sms-sender-customization",
+            "description": "Customisation of SMS sender",
+            "group": "Key Features",
+            "icon": "",
+            "component_price_config": {
+              "type": "feature_config",
+              "display_text": "No",
+              "feature_config": {
+                "enabled": {
+                  "display": "enabled",
+                  "type": "Boolean",
+                  "default": false
+                }
+              },
+              "default_config": {
+                "processing_type": "feature_config",
+                "display_text": "No",
+                "feature_config": {
+                  "enabled": false
+                },
+                "is_active": false
+              }
+            },
+            "product_suite_id": "5f2e30cad1456d00386abefc",
+            "links": {},
+            "created_at": "2023-04-21T07:04:22.844Z",
+            "modified_at": "2023-04-21T07:04:22.844Z"
+          },
+          {
+            "_id": "644235768818ad006300f939",
+            "is_visible": true,
+            "is_active": true,
+            "is_display": true,
+            "name": "Customisation of Invoice",
+            "slug": "invoice-customization",
+            "description": "Customisation of Invoice",
+            "group": "Key Features",
+            "icon": "",
+            "component_price_config": {
+              "type": "feature_config",
+              "display_text": "No",
+              "feature_config": {
+                "enabled": {
+                  "display": "enabled",
+                  "type": "Boolean",
+                  "default": false
+                }
+              },
+              "default_config": {
+                "processing_type": "feature_config",
+                "display_text": "No",
+                "feature_config": {
+                  "enabled": false
+                },
+                "is_active": false
+              }
+            },
+            "product_suite_id": "5f2e30cad1456d00386abefc",
+            "links": {},
+            "created_at": "2023-04-21T07:04:22.859Z",
+            "modified_at": "2023-04-21T07:04:22.859Z"
+          },
+          {
+            "_id": "644235768818ad006300f93f",
+            "is_visible": true,
+            "is_active": true,
+            "is_display": true,
+            "name": "Webhook Integration",
+            "slug": "webhook-integration",
+            "description": "Webhook Integration",
+            "group": "Key Features",
+            "icon": "",
+            "component_price_config": {
+              "type": "feature_config",
+              "display_text": "No",
+              "feature_config": {
+                "enabled": {
+                  "display": "enabled",
+                  "type": "Boolean",
+                  "default": false
+                }
+              },
+              "default_config": {
+                "processing_type": "feature_config",
+                "display_text": "No",
+                "feature_config": {
+                  "enabled": false
+                },
+                "is_active": false
+              }
+            },
+            "product_suite_id": "5f2e30cad1456d00386abefc",
+            "links": {},
+            "created_at": "2023-04-21T07:04:22.939Z",
+            "modified_at": "2023-04-21T07:04:22.939Z"
+          },
+          {
+            "_id": "644235768818ad006300f945",
+            "is_visible": true,
+            "is_active": true,
+            "is_display": true,
+            "name": "Access to API and SDK",
+            "slug": "api-sdk-access",
+            "description": "Access to API and SDK",
+            "group": "Key Features",
+            "icon": "",
+            "component_price_config": {
+              "type": "feature_config",
+              "display_text": "No",
+              "feature_config": {
+                "enabled": {
+                  "display": "enabled",
+                  "type": "Boolean",
+                  "default": false
+                }
+              },
+              "default_config": {
+                "processing_type": "feature_config",
+                "display_text": "No",
+                "feature_config": {
+                  "enabled": false
+                },
+                "is_active": false
+              }
+            },
+            "product_suite_id": "5f2e30cad1456d00386abefc",
+            "links": {},
+            "created_at": "2023-04-21T07:04:22.952Z",
+            "modified_at": "2023-04-21T07:04:22.952Z"
+          },
+          {
+            "_id": "644235768818ad006300f94b",
+            "is_visible": true,
+            "is_active": true,
+            "is_display": true,
+            "name": "Custom DP enablement",
+            "slug": "custom-dp",
+            "description": "Custom DP enablement",
+            "group": "Key Features",
+            "icon": "",
+            "component_price_config": {
+              "type": "feature_config",
+              "display_text": "No",
+              "feature_config": {
+                "enabled": {
+                  "display": "enabled",
+                  "type": "Boolean",
+                  "default": false
+                }
+              },
+              "default_config": {
+                "processing_type": "feature_config",
+                "display_text": "No",
+                "feature_config": {
+                  "enabled": false
+                },
+                "is_active": false
+              }
+            },
+            "product_suite_id": "5f2e30cad1456d00386abefc",
+            "links": {},
+            "created_at": "2023-04-21T07:04:22.966Z",
+            "modified_at": "2023-04-21T07:04:22.966Z"
+          }
+        ],
+        "fee_components": [],
         "recurring": {
-          "interval": "month",
-          "interval_count": 1
+          "interval_count": 1,
+          "interval": "month"
+        },
+        "taxation": {
+          "gst": 0.18
+        },
+        "one_time_fees": {
+          "developement": 0,
+          "marketing": 0
+        },
+        "credit_line": {
+          "is_active": false
         },
         "is_trial_plan": false,
         "plan_group": "default",
@@ -47539,23 +48945,1888 @@ Active subscription
         "is_visible": true,
         "trial_period": 0,
         "addons": [],
-        "tags": [],
+        "tags": [
+          "popular"
+        ],
         "type": "public",
         "country": "IN",
-        "_id": "5f3a8786c90d780037723a12",
-        "name": "Standard",
-        "description": "Standard",
-        "amount": 999,
-        "product_suite_id": "5f3a8786c90d7800377239f3",
-        "created_at": "2020-08-17T13:35:02.547Z",
-        "modified_at": "2020-08-17T13:35:02.547Z"
+        "company_ids": [],
+        "channel_type": "ecomm",
+        "_id": "5f2e30cad1456d00386abf1c",
+        "tagLines": [],
+        "name": "Premium",
+        "description": "For scaled up businesses",
+        "amount": 2499,
+        "product_suite_id": "5f2e30cad1456d00386abefc",
+        "created_at": "2020-08-08T04:57:46.830Z",
+        "modified_at": "2023-04-21T07:04:22.363Z",
+        "current_status": "active",
+        "plan_leeway_after_activation": 7,
+        "activated_on": "2023-06-02T07:57:16.638Z"
       },
       "current_status": "active",
       "collection_method": "charge_automatically",
-      "created_at": "2020-08-17T13:45:36.731Z",
-      "modified_at": "2020-12-17T11:01:15.960Z",
-      "latest_invoice": "5fdb3a7bfc849c2153b944d5"
-    }
+      "created_at": "2022-11-29T10:18:59.466Z",
+      "modified_at": "2023-06-02T07:57:17.254Z",
+      "latest_invoice": "6479a0dda77a156ad997bd4d"
+    },
+    "latest_invoice": {
+      "documents": {},
+      "payment": {},
+      "period": {
+        "start": "2023-05-23T07:00:31.345Z",
+        "end": "2023-06-22T07:00:31.345Z"
+      },
+      "client": {
+        "address_lines": [
+          "TEST, TEST ,TEST, TEST",
+          "",
+          "NAVI MUMBAI, 400614, MAHARASHTRA, INDIA"
+        ],
+        "name": "avi_test",
+        "email": "avinashsharma@gofynd.com",
+        "phone": "undefined undefined"
+      },
+      "discount": {},
+      "taxation": {
+        "cgst": 0.09,
+        "sgst": 0.09,
+        "igst": 0
+      },
+      "auto_advance": false,
+      "currency": "INR",
+      "paid": true,
+      "attemp": 1,
+      "credit_note_amount": 1768.82,
+      "_id": "6479a0dda77a156ad997bd4d",
+      "collection_method": "charge_automatically",
+      "subscriber_id": "6385dc9289fe356a346935eb",
+      "invoice_url": "",
+      "number": "PS-P-A00515-FY24",
+      "pg_data": {},
+      "old_settlement": 999.33,
+      "credit_balance": null,
+      "receipt_number": "",
+      "statement_descriptor": "avi_test",
+      "current_status": "paid",
+      "status_trail": [
+        {
+          "_id": "6479a0dda77a157bd397bd4e",
+          "value": "open",
+          "timestamp": "2023-06-02T07:57:17.096Z"
+        },
+        {
+          "_id": "6479a196244a37915c4b9448",
+          "value": "paid",
+          "timestamp": "2023-06-02T08:00:22.059Z"
+        },
+        {
+          "_id": "6479a196e3c6582ed5ea7157",
+          "value": "paid",
+          "timestamp": "2023-06-02T08:00:22.099Z"
+        }
+      ],
+      "subtotal": 2555.4900000000002,
+      "total": 786.67,
+      "subscription": "6385dc9389fe3577db6935f3",
+      "next_action_time": "2023-06-02T07:57:17.112Z",
+      "meta": {
+        "old_plan_amount": 499.67,
+        "new_plan_amount": 1666,
+        "credit_note_id": "FP-C27-A00055-24",
+        "isPlanChanged": true
+      },
+      "created_at": "2023-06-02T07:57:17.128Z",
+      "modified_at": "2023-06-02T08:00:23.182Z",
+      "hash_identifier": "987abf78c61bfef585242bbbeaab1b59",
+      "pdf_url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/company/13781/self/subscription/documents/invoices/original/U6ffgNlo_-PS-P-A00515-FY24-paid.pdf"
+    },
+    "latestInvoice": {
+      "documents": {},
+      "payment": {},
+      "period": {
+        "start": "2023-05-23T07:00:31.345Z",
+        "end": "2023-06-22T07:00:31.345Z"
+      },
+      "client": {
+        "address_lines": [
+          "TEST, TEST ,TEST, TEST",
+          "",
+          "NAVI MUMBAI, 400614, MAHARASHTRA, INDIA"
+        ],
+        "name": "avi_test",
+        "email": "avinashsharma@gofynd.com",
+        "phone": "undefined undefined"
+      },
+      "discount": {},
+      "taxation": {
+        "cgst": 0.09,
+        "sgst": 0.09,
+        "igst": 0
+      },
+      "auto_advance": false,
+      "currency": "INR",
+      "paid": true,
+      "attemp": 1,
+      "credit_note_amount": 1768.82,
+      "_id": "6479a0dda77a156ad997bd4d",
+      "collection_method": "charge_automatically",
+      "subscriber_id": "6385dc9289fe356a346935eb",
+      "invoice_url": "",
+      "number": "PS-P-A00515-FY24",
+      "pg_data": {},
+      "old_settlement": 999.33,
+      "credit_balance": null,
+      "receipt_number": "",
+      "statement_descriptor": "avi_test",
+      "current_status": "paid",
+      "status_trail": [
+        {
+          "_id": "6479a0dda77a157bd397bd4e",
+          "value": "open",
+          "timestamp": "2023-06-02T07:57:17.096Z"
+        },
+        {
+          "_id": "6479a196244a37915c4b9448",
+          "value": "paid",
+          "timestamp": "2023-06-02T08:00:22.059Z"
+        },
+        {
+          "_id": "6479a196e3c6582ed5ea7157",
+          "value": "paid",
+          "timestamp": "2023-06-02T08:00:22.099Z"
+        }
+      ],
+      "subtotal": 2555.4900000000002,
+      "total": 786.67,
+      "subscription": "6385dc9389fe3577db6935f3",
+      "next_action_time": "2023-06-02T07:57:17.112Z",
+      "meta": {
+        "old_plan_amount": 499.67,
+        "new_plan_amount": 1666,
+        "credit_note_id": "FP-C27-A00055-24",
+        "isPlanChanged": true
+      },
+      "created_at": "2023-06-02T07:57:17.128Z",
+      "modified_at": "2023-06-02T08:00:23.182Z",
+      "hash_identifier": "987abf78c61bfef585242bbbeaab1b59",
+      "pdf_url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/company/13781/self/subscription/documents/invoices/original/U6ffgNlo_-PS-P-A00515-FY24-paid.pdf"
+    },
+    "mandate_amount": 630000,
+    "current_subscriptions": [
+      {
+        "current_period": {
+          "start": "2023-05-07T12:40:21.936Z",
+          "end": "2023-06-06T12:40:21.936Z"
+        },
+        "pause_collection": {},
+        "trial": {},
+        "invoice_settings": {
+          "generation": true,
+          "charging": true
+        },
+        "is_active": true,
+        "cancel_at_period_end": false,
+        "freezed": false,
+        "channel_type": "fynd",
+        "_id": "64579c35cb540c6b018ff262",
+        "subscriber_id": "6385dc9289fe356a346935eb",
+        "plan_id": "6470546ccbc6402178b3ecb9",
+        "product_suite_id": "5f2e30cad1456d00386abefc",
+        "plan_data": {
+          "plan_components": [
+            {
+              "is_active": true,
+              "display_text": null,
+              "_id": "6470546ccbc6401d9bb3ecbf",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.389Z",
+              "modified_at": "2023-05-26T06:40:44.389Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "5f2e30cad1456d00386abefd",
+                "component_price_config": {
+                  "type": "display",
+                  "display_text": "4%"
+                },
+                "name": "Transaction Fees",
+                "slug": "transaction-fee",
+                "description": "Transaction fees is inclusive of Payment Gateway",
+                "group": "Key Features",
+                "icon": "",
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "created_at": "2020-08-08T04:57:46.648Z",
+                "modified_at": "2021-07-31T12:13:50.344Z",
+                "links": {}
+              },
+              "component_price": {
+                "display_text": "4%",
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "display",
+                "tags": [],
+                "_id": "644235778818ad006300f953",
+                "component_id": "5f2e30cad1456d00386abefd",
+                "created_at": "2023-04-21T07:04:23.057Z",
+                "modified_at": "2023-04-21T07:04:23.057Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": true,
+              "display_text": null,
+              "_id": "6470546ccbc64077dbb3ecc0",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.389Z",
+              "modified_at": "2023-05-26T06:40:44.389Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "5f2e30cad1456d00386abeff",
+                "component_price_config": {
+                  "type": "display",
+                  "display_text": "4%"
+                },
+                "name": "Shipping",
+                "slug": "shipping",
+                "description": "",
+                "group": "General",
+                "icon": "",
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "created_at": "2020-08-08T04:57:46.648Z",
+                "modified_at": "2021-07-31T12:13:50.439Z",
+                "links": {}
+              },
+              "component_price": {
+                "display_text": "4%",
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "display",
+                "tags": [],
+                "_id": "644235778818ad006300f959",
+                "component_id": "5f2e30cad1456d00386abeff",
+                "created_at": "2023-04-21T07:04:23.237Z",
+                "modified_at": "2023-04-21T07:04:23.237Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": true,
+              "display_text": null,
+              "_id": "6470546ccbc6403423b3eccb",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.390Z",
+              "modified_at": "2023-05-26T06:40:44.390Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "5f2e30cad1456d00386abf00",
+                "component_price_config": {
+                  "default_config": {
+                    "recurring": {
+                      "aggregate_usage": "sum",
+                      "usage_type": "licensed",
+                      "interval_count": 1
+                    },
+                    "transform_quantity": {
+                      "divide_by": 1,
+                      "round": "up"
+                    },
+                    "free_tier": {
+                      "type": "TIME_BASED",
+                      "value": 0
+                    },
+                    "unit_amount": 0,
+                    "quantity": 1,
+                    "price_type": "static",
+                    "price_ui_type": "standard",
+                    "bill_type": "one_time",
+                    "billing_scheme": "per_unit",
+                    "display_text": "Yes",
+                    "tiers": [],
+                    "currency": "INR"
+                  },
+                  "type": "revenue",
+                  "display_text": "Free",
+                  "price_meta": {
+                    "price_ui_type": "standard",
+                    "unit_amount": 0,
+                    "price_type": "static",
+                    "bill_type": "one_time",
+                    "billing_scheme": "per_unit",
+                    "transform_quantity": {
+                      "divide_by": 1,
+                      "round": "up"
+                    }
+                  }
+                },
+                "name": "SSL Certificates",
+                "slug": "ssl-certificate",
+                "description": "",
+                "group": "Key Features",
+                "icon": "",
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "created_at": "2020-08-08T04:57:46.648Z",
+                "modified_at": "2023-04-17T10:44:42.610Z",
+                "links": {}
+              },
+              "component_price": {
+                "recurring": {
+                  "aggregate_usage": "sum",
+                  "usage_type": "licensed",
+                  "interval_count": 1
+                },
+                "transform_quantity": {
+                  "divide_by": 1,
+                  "round": "up"
+                },
+                "free_tier": {
+                  "type": "TIME_BASED",
+                  "value": 0
+                },
+                "currency": "INR",
+                "unit_amount": 0,
+                "quantity": 1,
+                "price_ui_type": "standard",
+                "price_type": "static",
+                "bill_type": "one_time",
+                "billing_scheme": "per_unit",
+                "display_text": "Yes",
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "revenue",
+                "tags": [],
+                "tiers": [],
+                "_id": "6442387ea9afb613ab179011",
+                "component_id": "5f2e30cad1456d00386abf00",
+                "created_at": "2023-04-21T07:17:18.856Z",
+                "modified_at": "2023-04-21T07:17:18.856Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": false,
+              "display_text": null,
+              "_id": "6470546ccbc6409656b3ecd3",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.390Z",
+              "modified_at": "2023-05-26T06:40:44.390Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "5f2e30cad1456d00386abf01",
+                "component_price_config": {
+                  "type": "feature_config",
+                  "display_text": "No",
+                  "feature_config": {
+                    "enabled": {
+                      "display": "enabled",
+                      "type": "Boolean",
+                      "default": false
+                    }
+                  }
+                },
+                "name": "Configure Self PG",
+                "slug": "custom-payment-gatway-setup",
+                "description": "",
+                "group": "General",
+                "icon": "",
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "created_at": "2020-08-08T04:57:46.648Z",
+                "modified_at": "2023-04-21T07:04:23.938Z",
+                "links": {}
+              },
+              "component_price": {
+                "display_text": null,
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "feature_config",
+                "tags": [],
+                "_id": "6442387ea9afb67646179012",
+                "component_id": "5f2e30cad1456d00386abf01",
+                "created_at": "2023-04-21T07:17:18.856Z",
+                "modified_at": "2023-04-21T07:17:18.856Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": false,
+              "display_text": null,
+              "_id": "6470546ccbc640c444b3ecd4",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.390Z",
+              "modified_at": "2023-05-26T06:40:44.390Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "5f2e30cad1456d00386abf03",
+                "component_price_config": {
+                  "type": "feature_config",
+                  "display_text": "10",
+                  "feature_config": {
+                    "limit": {
+                      "display": "limit",
+                      "type": "Number",
+                      "default": 10
+                    }
+                  }
+                },
+                "name": "Team Member",
+                "slug": "team-management",
+                "description": "",
+                "group": "Key Features",
+                "icon": "",
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "created_at": "2020-08-08T04:57:46.648Z",
+                "modified_at": "2021-07-31T12:13:50.539Z",
+                "links": {}
+              },
+              "component_price": {
+                "display_text": null,
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "feature_config",
+                "tags": [],
+                "_id": "6442387ea9afb6559b179014",
+                "component_id": "5f2e30cad1456d00386abf03",
+                "created_at": "2023-04-21T07:17:18.856Z",
+                "modified_at": "2023-04-21T07:17:18.856Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": false,
+              "display_text": null,
+              "_id": "6470546ccbc640f50cb3ecc1",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.389Z",
+              "modified_at": "2023-05-26T06:40:44.389Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "5f2e30cad1456d00386abf04",
+                "component_price_config": {
+                  "type": "feature_config",
+                  "display_text": "5",
+                  "feature_config": {
+                    "hard_limit": {
+                      "display": "hard limit",
+                      "type": "Number",
+                      "default": 1
+                    },
+                    "soft_limit": {
+                      "display": "soft limit",
+                      "type": "Number",
+                      "default": 1
+                    }
+                  }
+                },
+                "name": "Websites",
+                "slug": "sale-websites",
+                "description": "",
+                "group": "Key Features",
+                "icon": "",
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "created_at": "2020-08-08T04:57:46.648Z",
+                "modified_at": "2021-07-31T12:13:50.532Z",
+                "links": {}
+              },
+              "component_price": {
+                "display_text": "1",
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "feature_config",
+                "tags": [],
+                "feature_config": {
+                  "hard_limit": 1,
+                  "soft_limit": 1
+                },
+                "_id": "644235778818ad006300f973",
+                "component_id": "5f2e30cad1456d00386abf04",
+                "created_at": "2023-04-21T07:04:23.435Z",
+                "modified_at": "2023-04-21T07:04:23.435Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": true,
+              "display_text": null,
+              "_id": "6470546ccbc640fef6b3ecc6",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.389Z",
+              "modified_at": "2023-05-26T06:40:44.389Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "5f2e30cad1456d00386abf05",
+                "component_price_config": {
+                  "type": "display",
+                  "display_text": "Yes"
+                },
+                "name": "Fynd Payment Gateway",
+                "slug": "fynd-supported-payment-gateway",
+                "description": "",
+                "group": "Key Features",
+                "icon": "",
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "created_at": "2020-08-08T04:57:46.648Z",
+                "modified_at": "2021-07-31T12:13:50.545Z",
+                "links": {}
+              },
+              "component_price": {
+                "display_text": "Yes",
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "display",
+                "tags": [],
+                "_id": "644235778818ad006300f991",
+                "component_id": "5f2e30cad1456d00386abf05",
+                "created_at": "2023-04-21T07:04:23.835Z",
+                "modified_at": "2023-04-21T07:04:23.835Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": true,
+              "display_text": null,
+              "_id": "6470546ccbc6405590b3ecc2",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.389Z",
+              "modified_at": "2023-05-26T06:40:44.389Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "5f2e30cad1456d00386abf09",
+                "component_price_config": {
+                  "default_config": {
+                    "recurring": {
+                      "aggregate_usage": "sum",
+                      "usage_type": "licensed",
+                      "interval_count": 1
+                    },
+                    "transform_quantity": {
+                      "divide_by": 1,
+                      "round": "up"
+                    },
+                    "free_tier": {
+                      "type": "TIME_BASED",
+                      "value": 0
+                    },
+                    "unit_amount": 0,
+                    "quantity": 1,
+                    "price_type": "dynamic",
+                    "price_ui_type": "standard",
+                    "bill_type": "one_time",
+                    "billing_scheme": "per_unit",
+                    "display_text": "Themes",
+                    "tiers": [],
+                    "currency": "INR"
+                  },
+                  "type": "revenue",
+                  "display_text": "Basic Themes",
+                  "price_meta": {
+                    "price_ui_type": "standard",
+                    "price_type": "dynamic",
+                    "bill_type": "one_time",
+                    "billing_scheme": "per_unit",
+                    "transform_quantity": {
+                      "divide_by": 1,
+                      "round": "up"
+                    }
+                  }
+                },
+                "name": "Themes",
+                "slug": "themes",
+                "description": "Fynd Platform partner themes available on extra charges",
+                "group": "General",
+                "icon": "",
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "created_at": "2020-08-08T04:57:46.648Z",
+                "modified_at": "2023-04-21T07:04:23.449Z",
+                "links": {}
+              },
+              "component_price": {
+                "recurring": {
+                  "aggregate_usage": "sum",
+                  "usage_type": "licensed",
+                  "interval_count": 1
+                },
+                "transform_quantity": {
+                  "divide_by": 1,
+                  "round": "up"
+                },
+                "free_tier": {
+                  "type": "TIME_BASED",
+                  "value": 0
+                },
+                "currency": "INR",
+                "unit_amount": 0,
+                "quantity": 1,
+                "price_ui_type": "standard",
+                "price_type": "dynamic",
+                "bill_type": "one_time",
+                "billing_scheme": "per_unit",
+                "display_text": "Themes",
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "revenue",
+                "tags": [],
+                "tiers": [],
+                "_id": "644235778818ad006300f979",
+                "component_id": "5f2e30cad1456d00386abf09",
+                "created_at": "2023-04-21T07:04:23.463Z",
+                "modified_at": "2023-04-21T07:04:23.463Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": true,
+              "display_text": null,
+              "_id": "6470546ccbc64066a1b3ecc7",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.389Z",
+              "modified_at": "2023-05-26T06:40:44.389Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "5f2e30cad1456d00386abf0a",
+                "component_price_config": {
+                  "default_config": {
+                    "recurring": {
+                      "aggregate_usage": "sum",
+                      "usage_type": "licensed",
+                      "interval_count": 1
+                    },
+                    "transform_quantity": {
+                      "divide_by": 1,
+                      "round": "up"
+                    },
+                    "free_tier": {
+                      "type": "TIME_BASED",
+                      "value": 0
+                    },
+                    "unit_amount": 0,
+                    "quantity": 1,
+                    "price_type": "dynamic",
+                    "price_ui_type": "standard",
+                    "bill_type": "one_time",
+                    "billing_scheme": "per_unit",
+                    "display_text": "Yes",
+                    "tiers": [],
+                    "currency": "INR"
+                  },
+                  "type": "revenue",
+                  "display_text": "Yes",
+                  "price_meta": {
+                    "price_ui_type": "standard",
+                    "price_type": "dynamic",
+                    "bill_type": "one_time",
+                    "billing_scheme": "per_unit",
+                    "transform_quantity": {
+                      "divide_by": 1,
+                      "round": "up"
+                    }
+                  }
+                },
+                "name": "Custom Domain",
+                "slug": "custom-domain",
+                "description": "Connect your custom domain to your website",
+                "group": "Key Features",
+                "icon": "",
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "created_at": "2020-08-08T04:57:46.648Z",
+                "modified_at": "2023-04-21T07:04:23.847Z",
+                "links": {}
+              },
+              "component_price": {
+                "recurring": {
+                  "aggregate_usage": "sum",
+                  "usage_type": "licensed",
+                  "interval_count": 1
+                },
+                "transform_quantity": {
+                  "divide_by": 1,
+                  "round": "up"
+                },
+                "free_tier": {
+                  "type": "TIME_BASED",
+                  "value": 0
+                },
+                "currency": "INR",
+                "unit_amount": 0,
+                "quantity": 1,
+                "price_ui_type": "standard",
+                "price_type": "dynamic",
+                "bill_type": "one_time",
+                "billing_scheme": "per_unit",
+                "display_text": "Yes",
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "revenue",
+                "tags": [],
+                "tiers": [],
+                "_id": "644235778818ad006300f997",
+                "component_id": "5f2e30cad1456d00386abf0a",
+                "created_at": "2023-04-21T07:04:23.858Z",
+                "modified_at": "2023-04-21T07:04:23.858Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": false,
+              "display_text": null,
+              "_id": "6470546ccbc640dc54b3ecd2",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.390Z",
+              "modified_at": "2023-05-26T06:40:44.390Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "5f2e30cad1456d00386abf0b",
+                "component_price_config": {
+                  "type": "feature_config",
+                  "display_text": "No",
+                  "feature_config": {
+                    "enabled": {
+                      "display": "enabled",
+                      "type": "Boolean",
+                      "default": false
+                    }
+                  }
+                },
+                "name": "POS",
+                "slug": "pos-inventory-integration",
+                "description": "Integration Costs Extra",
+                "group": "Sales Channel",
+                "icon": "",
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "created_at": "2020-08-08T04:57:46.648Z",
+                "modified_at": "2021-07-31T12:13:50.529Z",
+                "links": {}
+              },
+              "component_price": {
+                "display_text": null,
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "feature_config",
+                "tags": [],
+                "_id": "6442387ea9afb65a2c179013",
+                "component_id": "5f2e30cad1456d00386abf0b",
+                "created_at": "2023-04-21T07:17:18.856Z",
+                "modified_at": "2023-04-21T07:17:18.856Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": false,
+              "display_text": null,
+              "_id": "6470546ccbc6405043b3ecd8",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.390Z",
+              "modified_at": "2023-05-26T06:40:44.390Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "5f2e30cad1456d00386abf0d",
+                "component_price_config": {
+                  "type": "feature_config",
+                  "display_text": "100",
+                  "feature_config": {
+                    "limit": {
+                      "display": "limit",
+                      "type": "Number",
+                      "default": 10
+                    }
+                  }
+                },
+                "name": "Selling Locations",
+                "slug": "selling-locations",
+                "description": "The number of selling locations you can plug in inventory for: eg: warehouse, retail store etc.",
+                "group": "Key Features",
+                "icon": "",
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "created_at": "2020-08-08T04:57:46.648Z",
+                "modified_at": "2021-07-31T12:13:50.623Z",
+                "links": {}
+              },
+              "component_price": {
+                "display_text": null,
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "feature_config",
+                "tags": [],
+                "_id": "6442387ea9afb6407e179015",
+                "component_id": "5f2e30cad1456d00386abf0d",
+                "created_at": "2023-04-21T07:17:18.856Z",
+                "modified_at": "2023-04-21T07:17:18.856Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": true,
+              "display_text": null,
+              "_id": "6470546ccbc64083b2b3ecc4",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.389Z",
+              "modified_at": "2023-05-26T06:40:44.389Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "5f2e30cad1456d00386abf0e",
+                "component_price_config": {
+                  "default_config": {
+                    "recurring": {
+                      "aggregate_usage": "sum",
+                      "usage_type": "metered",
+                      "interval_count": 1,
+                      "interval": "month"
+                    },
+                    "transform_quantity": {
+                      "divide_by": 1,
+                      "round": "up"
+                    },
+                    "free_tier": {
+                      "type": "TIME_BASED",
+                      "value": 0
+                    },
+                    "unit_amount": 0,
+                    "quantity": 1,
+                    "price_type": "static",
+                    "price_ui_type": "standard",
+                    "bill_type": "recurring",
+                    "billing_scheme": "per_unit",
+                    "display_text": "Free 500 email <br> Additional email charged at 0.25 INR per email",
+                    "tiers": [],
+                    "currency": "INR"
+                  },
+                  "type": "revenue",
+                  "display_text": "",
+                  "price_meta": {
+                    "price_ui_type": "standard",
+                    "price_type": "static",
+                    "bill_type": "recurring",
+                    "recurring": {
+                      "aggregate_usage": "sum",
+                      "usage_type": "metered",
+                      "interval": "month",
+                      "interval_count": 1
+                    },
+                    "billing_scheme": "per_unit",
+                    "transform_quantity": {
+                      "divide_by": 1,
+                      "round": "up"
+                    }
+                  }
+                },
+                "name": "Email",
+                "slug": "email-campagin",
+                "description": "Send emails to your customers. Choose from pre-defined emailers or create your own.",
+                "group": "Marketing",
+                "icon": "",
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "created_at": "2020-08-08T04:57:46.648Z",
+                "modified_at": "2023-04-21T07:04:23.569Z",
+                "links": {}
+              },
+              "component_price": {
+                "recurring": {
+                  "aggregate_usage": "sum",
+                  "usage_type": "metered",
+                  "interval_count": 1,
+                  "interval": "month"
+                },
+                "transform_quantity": {
+                  "divide_by": 1,
+                  "round": "up"
+                },
+                "free_tier": {
+                  "type": "TIME_BASED",
+                  "value": 0
+                },
+                "currency": "INR",
+                "unit_amount": 0,
+                "quantity": 1,
+                "price_ui_type": "standard",
+                "price_type": "static",
+                "bill_type": "recurring",
+                "billing_scheme": "per_unit",
+                "display_text": "Free 500 email <br> Additional email charged at 0.25 INR per email",
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "revenue",
+                "tags": [],
+                "tiers": [],
+                "_id": "644235778818ad006300f985",
+                "component_id": "5f2e30cad1456d00386abf0e",
+                "created_at": "2023-04-21T07:04:23.637Z",
+                "modified_at": "2023-04-21T07:04:23.637Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": true,
+              "display_text": null,
+              "_id": "6470546ccbc6405152b3ecc5",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.389Z",
+              "modified_at": "2023-05-26T06:40:44.389Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "5f2e30cad1456d00386abf11",
+                "component_price_config": {
+                  "default_config": {
+                    "recurring": {
+                      "aggregate_usage": "sum",
+                      "usage_type": "metered",
+                      "interval_count": 1,
+                      "interval": "month"
+                    },
+                    "transform_quantity": {
+                      "divide_by": 1,
+                      "round": "up"
+                    },
+                    "free_tier": {
+                      "type": "TIME_BASED",
+                      "value": 0
+                    },
+                    "unit_amount": 0,
+                    "quantity": 1,
+                    "price_type": "static",
+                    "price_ui_type": "standard",
+                    "bill_type": "recurring",
+                    "billing_scheme": "per_unit",
+                    "display_text": "Free 500 SMS <br> Additional SMS charged at 0.25 INR per SMS",
+                    "tiers": [],
+                    "currency": "INR"
+                  },
+                  "type": "revenue",
+                  "display_text": "",
+                  "price_meta": {
+                    "price_ui_type": "standard",
+                    "price_type": "static",
+                    "bill_type": "recurring",
+                    "recurring": {
+                      "aggregate_usage": "sum",
+                      "usage_type": "metered",
+                      "interval": "month",
+                      "interval_count": 1
+                    },
+                    "billing_scheme": "per_unit",
+                    "transform_quantity": {
+                      "divide_by": 1,
+                      "round": "up"
+                    }
+                  }
+                },
+                "name": "SMS",
+                "slug": "sms-campagin",
+                "description": "",
+                "group": "Marketing",
+                "icon": "",
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "created_at": "2020-08-08T04:57:46.727Z",
+                "modified_at": "2023-04-21T07:04:23.657Z",
+                "links": {}
+              },
+              "component_price": {
+                "recurring": {
+                  "aggregate_usage": "sum",
+                  "usage_type": "metered",
+                  "interval_count": 1,
+                  "interval": "month"
+                },
+                "transform_quantity": {
+                  "divide_by": 1,
+                  "round": "up"
+                },
+                "free_tier": {
+                  "type": "TIME_BASED",
+                  "value": 0
+                },
+                "currency": "INR",
+                "unit_amount": 0,
+                "quantity": 1,
+                "price_ui_type": "standard",
+                "price_type": "static",
+                "bill_type": "recurring",
+                "billing_scheme": "per_unit",
+                "display_text": "Free 500 SMS <br> Additional SMS charged at 0.25 INR per SMS",
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "revenue",
+                "tags": [],
+                "tiers": [],
+                "_id": "644235778818ad006300f98b",
+                "component_id": "5f2e30cad1456d00386abf11",
+                "created_at": "2023-04-21T07:04:23.740Z",
+                "modified_at": "2023-04-21T07:04:23.740Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": false,
+              "display_text": null,
+              "_id": "6470546ccbc6401e5cb3eccc",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.390Z",
+              "modified_at": "2023-05-26T06:40:44.390Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "5f2e30cad1456d00386abf12",
+                "component_price_config": {
+                  "type": "feature_config",
+                  "display_text": "No",
+                  "feature_config": {
+                    "enabled": {
+                      "display": "enabled",
+                      "type": "Boolean",
+                      "default": false
+                    }
+                  }
+                },
+                "name": "Integrate on other marketplaces",
+                "slug": "marketplace-integration",
+                "description": "Integrate your products on Amazon/Myntra/Flipkart/Ajio/Nykaa/Fynd/Uniket. Manage all your orders at one dashboard. Commission and onboarding fees extra.",
+                "group": "Sales Channel",
+                "icon": "",
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "created_at": "2020-08-08T04:57:46.727Z",
+                "modified_at": "2021-07-31T12:13:50.630Z",
+                "links": {}
+              },
+              "component_price": {
+                "display_text": null,
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "feature_config",
+                "tags": [],
+                "_id": "6442387ea9afb62cd2179016",
+                "component_id": "5f2e30cad1456d00386abf12",
+                "created_at": "2023-04-21T07:17:18.857Z",
+                "modified_at": "2023-04-21T07:17:18.857Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": false,
+              "display_text": null,
+              "_id": "6470546ccbc64046ffb3ecd7",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.390Z",
+              "modified_at": "2023-05-26T06:40:44.390Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "61029cfdd110f5003968a418",
+                "component_price_config": {
+                  "type": "feature_config",
+                  "display_text": "1",
+                  "feature_config": {
+                    "limit": {
+                      "display": "limit",
+                      "type": "Number",
+                      "default": 1
+                    }
+                  }
+                },
+                "name": "Number of Brands",
+                "description": "If you want to sell with multiple Brands, please Contact Us",
+                "group": "General",
+                "icon": "",
+                "links": {},
+                "slug": "brand",
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "created_at": "2021-07-29T12:20:13.267Z",
+                "modified_at": "2021-07-31T12:13:50.729Z"
+              },
+              "component_price": {
+                "display_text": null,
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "feature_config",
+                "tags": [],
+                "_id": "6442387ea9afb67c1e179017",
+                "component_id": "61029cfdd110f5003968a418",
+                "created_at": "2023-04-21T07:17:18.857Z",
+                "modified_at": "2023-04-21T07:17:18.857Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": true,
+              "display_text": null,
+              "_id": "6470546ccbc6402008b3ecc9",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.389Z",
+              "modified_at": "2023-05-26T06:40:44.389Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "61029cfdd110f5003968a419",
+                "component_price_config": {
+                  "type": "display",
+                  "display_text": "Yes"
+                },
+                "name": "Page Editor",
+                "group": "General",
+                "icon": "",
+                "links": {},
+                "slug": "page-editor",
+                "description": "Drag and Drop UI and customize your themes.No coding required",
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "created_at": "2021-07-29T12:20:13.274Z",
+                "modified_at": "2021-07-31T12:13:50.733Z"
+              },
+              "component_price": {
+                "display_text": "Yes",
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "display",
+                "tags": [],
+                "_id": "644235788818ad006300f9da",
+                "component_id": "61029cfdd110f5003968a419",
+                "created_at": "2023-04-21T07:04:24.463Z",
+                "modified_at": "2023-04-21T07:04:24.463Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": true,
+              "display_text": null,
+              "_id": "6470546ccbc64049b9b3ecca",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.390Z",
+              "modified_at": "2023-05-26T06:40:44.390Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "61029cfdd110f5003968a41a",
+                "component_price_config": {
+                  "type": "display",
+                  "display_text": "Yes"
+                },
+                "name": "SEO Friendly",
+                "description": "",
+                "group": "General",
+                "icon": "",
+                "links": {},
+                "slug": "seo-friendly",
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "created_at": "2021-07-29T12:20:13.340Z",
+                "modified_at": "2021-07-31T12:13:50.736Z"
+              },
+              "component_price": {
+                "display_text": "Yes",
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "display",
+                "tags": [],
+                "_id": "644235788818ad006300f9e0",
+                "component_id": "61029cfdd110f5003968a41a",
+                "created_at": "2023-04-21T07:04:24.547Z",
+                "modified_at": "2023-04-21T07:04:24.547Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": false,
+              "display_text": null,
+              "_id": "6470546ccbc6403bc8b3eccf",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.390Z",
+              "modified_at": "2023-05-26T06:40:44.390Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "61029cfdd110f5003968a41e",
+                "component_price_config": {
+                  "type": "feature_config",
+                  "display_text": "No",
+                  "feature_config": {
+                    "enabled": {
+                      "display": "enabled",
+                      "type": "Boolean",
+                      "default": false
+                    }
+                  }
+                },
+                "name": "Analytics Integration",
+                "description": "",
+                "group": "General",
+                "icon": "",
+                "links": {},
+                "slug": "analytics-integration",
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "created_at": "2021-07-29T12:20:13.356Z",
+                "modified_at": "2021-07-31T12:13:50.809Z"
+              },
+              "component_price": {
+                "display_text": null,
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "feature_config",
+                "tags": [],
+                "_id": "6442387ea9afb6002d179018",
+                "component_id": "61029cfdd110f5003968a41e",
+                "created_at": "2023-04-21T07:17:18.857Z",
+                "modified_at": "2023-04-21T07:17:18.857Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": false,
+              "display_text": null,
+              "_id": "6470546ccbc640c5bab3ecd6",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.390Z",
+              "modified_at": "2023-05-26T06:40:44.390Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "61029cfdd110f5003968a41f",
+                "component_price_config": {
+                  "type": "feature_config",
+                  "display_text": "No",
+                  "feature_config": {
+                    "enabled": {
+                      "display": "enabled",
+                      "type": "Boolean",
+                      "default": false
+                    }
+                  }
+                },
+                "name": "Pixel Integration",
+                "description": "",
+                "group": "General",
+                "icon": "",
+                "links": {},
+                "slug": "pixel-integration",
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "created_at": "2021-07-29T12:20:13.360Z",
+                "modified_at": "2021-07-31T12:13:50.814Z"
+              },
+              "component_price": {
+                "display_text": null,
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "feature_config",
+                "tags": [],
+                "_id": "6442387ea9afb67764179019",
+                "component_id": "61029cfdd110f5003968a41f",
+                "created_at": "2023-04-21T07:17:18.857Z",
+                "modified_at": "2023-04-21T07:17:18.857Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": true,
+              "display_text": null,
+              "_id": "6470546ccbc6405921b3ecc3",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.389Z",
+              "modified_at": "2023-05-26T06:40:44.389Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "634569a3675d1912531e5ef3",
+                "component_price_config": {
+                  "default_config": {
+                    "recurring": {
+                      "aggregate_usage": "sum",
+                      "usage_type": "licensed",
+                      "interval_count": 1
+                    },
+                    "transform_quantity": {
+                      "divide_by": 1,
+                      "round": "up"
+                    },
+                    "free_tier": {
+                      "type": "TIME_BASED",
+                      "value": 0
+                    },
+                    "unit_amount": 0,
+                    "quantity": 1,
+                    "price_type": "static",
+                    "price_ui_type": "standard",
+                    "bill_type": "one_time",
+                    "billing_scheme": "per_unit",
+                    "display_text": "Yes",
+                    "tiers": [],
+                    "currency": "INR"
+                  },
+                  "type": "revenue",
+                  "display_text": "Free",
+                  "price_meta": {
+                    "unit_amount": 0,
+                    "price_type": "static",
+                    "bill_type": "one_time",
+                    "billing_scheme": "per_unit",
+                    "transform_quantity": {
+                      "divide_by": 1,
+                      "round": "up"
+                    }
+                  }
+                },
+                "product_suite_id": "5ececa006415744de9228e2e",
+                "name": "SSL Certificates",
+                "slug": "ssl-certificates",
+                "description": "",
+                "group": "Key Features",
+                "icon": "",
+                "links": {},
+                "created_at": "2022-10-11T13:03:31.767Z",
+                "modified_at": "2023-04-21T07:04:23.544Z"
+              },
+              "component_price": {
+                "recurring": {
+                  "aggregate_usage": "sum",
+                  "usage_type": "licensed",
+                  "interval_count": 1
+                },
+                "transform_quantity": {
+                  "divide_by": 1,
+                  "round": "up"
+                },
+                "free_tier": {
+                  "type": "TIME_BASED",
+                  "value": 0
+                },
+                "currency": "INR",
+                "unit_amount": 0,
+                "quantity": 1,
+                "price_ui_type": "standard",
+                "price_type": "static",
+                "bill_type": "one_time",
+                "billing_scheme": "per_unit",
+                "display_text": "Yes",
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "revenue",
+                "tags": [],
+                "tiers": [],
+                "_id": "644235778818ad006300f97f",
+                "component_id": "634569a3675d1912531e5ef3",
+                "created_at": "2023-04-21T07:04:23.555Z",
+                "modified_at": "2023-04-21T07:04:23.555Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": false,
+              "display_text": null,
+              "_id": "6470546ccbc640685ab3ecd5",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.390Z",
+              "modified_at": "2023-05-26T06:40:44.390Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "644235768818ad006300f92d",
+                "name": "Domain Integration",
+                "slug": "domain-integration",
+                "description": "Domain Integration",
+                "group": "Key Features",
+                "icon": "",
+                "component_price_config": {
+                  "type": "feature_config",
+                  "default_config": {
+                    "processing_type": "feature_config",
+                    "display_text": "No",
+                    "feature_config": {
+                      "enabled": false
+                    },
+                    "is_active": false
+                  },
+                  "display_text": "No",
+                  "feature_config": {
+                    "enabled": {
+                      "display": "enabled",
+                      "type": "Boolean",
+                      "default": false
+                    }
+                  }
+                },
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "links": {},
+                "created_at": "2023-04-21T07:04:22.774Z",
+                "modified_at": "2023-04-21T07:04:22.774Z"
+              },
+              "component_price": {
+                "display_text": "No",
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "feature_config",
+                "tags": [],
+                "feature_config": {
+                  "enabled": false
+                },
+                "_id": "6442387ea9afb6052417901a",
+                "component_id": "644235768818ad006300f92d",
+                "created_at": "2023-04-21T07:17:18.857Z",
+                "modified_at": "2023-04-21T07:17:18.857Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": false,
+              "display_text": null,
+              "_id": "6470546ccbc64030cdb3ecce",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.390Z",
+              "modified_at": "2023-05-26T06:40:44.390Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "644235768818ad006300f933",
+                "name": "Customisation of SMS sender",
+                "slug": "sms-sender-customization",
+                "description": "Customisation of SMS sender",
+                "group": "Key Features",
+                "icon": "",
+                "component_price_config": {
+                  "type": "feature_config",
+                  "default_config": {
+                    "processing_type": "feature_config",
+                    "display_text": "No",
+                    "feature_config": {
+                      "enabled": false
+                    },
+                    "is_active": false
+                  },
+                  "display_text": "No",
+                  "feature_config": {
+                    "enabled": {
+                      "display": "enabled",
+                      "type": "Boolean",
+                      "default": false
+                    }
+                  }
+                },
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "links": {},
+                "created_at": "2023-04-21T07:04:22.844Z",
+                "modified_at": "2023-04-21T07:04:22.844Z"
+              },
+              "component_price": {
+                "display_text": "No",
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "feature_config",
+                "tags": [],
+                "feature_config": {
+                  "enabled": false
+                },
+                "_id": "6442387ea9afb613bd17901b",
+                "component_id": "644235768818ad006300f933",
+                "created_at": "2023-04-21T07:17:18.857Z",
+                "modified_at": "2023-04-21T07:17:18.857Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": false,
+              "display_text": null,
+              "_id": "6470546ccbc640a718b3ecd0",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.390Z",
+              "modified_at": "2023-05-26T06:40:44.390Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "644235768818ad006300f939",
+                "name": "Customisation of Invoice",
+                "slug": "invoice-customization",
+                "description": "Customisation of Invoice",
+                "group": "Key Features",
+                "icon": "",
+                "component_price_config": {
+                  "type": "feature_config",
+                  "default_config": {
+                    "processing_type": "feature_config",
+                    "display_text": "No",
+                    "feature_config": {
+                      "enabled": false
+                    },
+                    "is_active": false
+                  },
+                  "display_text": "No",
+                  "feature_config": {
+                    "enabled": {
+                      "display": "enabled",
+                      "type": "Boolean",
+                      "default": false
+                    }
+                  }
+                },
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "links": {},
+                "created_at": "2023-04-21T07:04:22.859Z",
+                "modified_at": "2023-04-21T07:04:22.859Z"
+              },
+              "component_price": {
+                "display_text": "No",
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "feature_config",
+                "tags": [],
+                "feature_config": {
+                  "enabled": false
+                },
+                "_id": "6442387ea9afb604a617901c",
+                "component_id": "644235768818ad006300f939",
+                "created_at": "2023-04-21T07:17:18.857Z",
+                "modified_at": "2023-04-21T07:17:18.857Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": false,
+              "display_text": null,
+              "_id": "6470546ccbc6403c11b3ecd1",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.390Z",
+              "modified_at": "2023-05-26T06:40:44.390Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "644235768818ad006300f93f",
+                "name": "Webhook Integration",
+                "slug": "webhook-integration",
+                "description": "Webhook Integration",
+                "group": "Key Features",
+                "icon": "",
+                "component_price_config": {
+                  "type": "feature_config",
+                  "default_config": {
+                    "processing_type": "feature_config",
+                    "display_text": "No",
+                    "feature_config": {
+                      "enabled": false
+                    },
+                    "is_active": false
+                  },
+                  "display_text": "No",
+                  "feature_config": {
+                    "enabled": {
+                      "display": "enabled",
+                      "type": "Boolean",
+                      "default": false
+                    }
+                  }
+                },
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "links": {},
+                "created_at": "2023-04-21T07:04:22.939Z",
+                "modified_at": "2023-04-21T07:04:22.939Z"
+              },
+              "component_price": {
+                "display_text": "No",
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "feature_config",
+                "tags": [],
+                "feature_config": {
+                  "enabled": false
+                },
+                "_id": "6442387ea9afb61c9617901d",
+                "component_id": "644235768818ad006300f93f",
+                "created_at": "2023-04-21T07:17:18.857Z",
+                "modified_at": "2023-04-21T07:17:18.857Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": false,
+              "display_text": null,
+              "_id": "6470546ccbc64062e2b3eccd",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.390Z",
+              "modified_at": "2023-05-26T06:40:44.390Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "644235768818ad006300f945",
+                "name": "Access to API and SDK",
+                "slug": "api-sdk-access",
+                "description": "Access to API and SDK",
+                "group": "Key Features",
+                "icon": "",
+                "component_price_config": {
+                  "type": "feature_config",
+                  "default_config": {
+                    "processing_type": "feature_config",
+                    "display_text": "No",
+                    "feature_config": {
+                      "enabled": false
+                    },
+                    "is_active": false
+                  },
+                  "display_text": "No",
+                  "feature_config": {
+                    "enabled": {
+                      "display": "enabled",
+                      "type": "Boolean",
+                      "default": false
+                    }
+                  }
+                },
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "links": {},
+                "created_at": "2023-04-21T07:04:22.952Z",
+                "modified_at": "2023-04-21T07:04:22.952Z"
+              },
+              "component_price": {
+                "display_text": "No",
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "feature_config",
+                "tags": [],
+                "feature_config": {
+                  "enabled": false
+                },
+                "_id": "6442387ea9afb6805617901e",
+                "component_id": "644235768818ad006300f945",
+                "created_at": "2023-04-21T07:17:18.857Z",
+                "modified_at": "2023-04-21T07:17:18.857Z",
+                "__v": 0
+              }
+            },
+            {
+              "is_active": false,
+              "display_text": null,
+              "_id": "6470546ccbc640d3f0b3ecd9",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "config": {},
+              "created_at": "2023-05-26T06:40:44.390Z",
+              "modified_at": "2023-05-26T06:40:44.390Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "644235768818ad006300f94b",
+                "name": "Custom DP enablement",
+                "slug": "custom-dp",
+                "description": "Custom DP enablement",
+                "group": "Key Features",
+                "icon": "",
+                "component_price_config": {
+                  "type": "feature_config",
+                  "default_config": {
+                    "processing_type": "feature_config",
+                    "display_text": "No",
+                    "feature_config": {
+                      "enabled": false
+                    },
+                    "is_active": false
+                  },
+                  "display_text": "No",
+                  "feature_config": {
+                    "enabled": {
+                      "display": "enabled",
+                      "type": "Boolean",
+                      "default": false
+                    }
+                  }
+                },
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "links": {},
+                "created_at": "2023-04-21T07:04:22.966Z",
+                "modified_at": "2023-04-21T07:04:22.966Z"
+              },
+              "component_price": {
+                "display_text": "No",
+                "is_default": true,
+                "is_active": true,
+                "processing_type": "feature_config",
+                "tags": [],
+                "feature_config": {
+                  "enabled": false
+                },
+                "_id": "6442387ea9afb6469317901f",
+                "component_id": "644235768818ad006300f94b",
+                "created_at": "2023-04-21T07:17:18.857Z",
+                "modified_at": "2023-04-21T07:17:18.857Z",
+                "__v": 0
+              }
+            }
+          ],
+          "components": [],
+          "fee_components": [
+            {
+              "settle_cycle_period": {
+                "mall": 7,
+                "highstreet": 7,
+                "warehouse": 7
+              },
+              "is_default": false,
+              "marketplaces": [],
+              "brand": [],
+              "location": [
+                {
+                  "id": "high_street",
+                  "name": "High Street"
+                },
+                {
+                  "id": "mall",
+                  "name": "Mall"
+                },
+                {
+                  "id": "warehouse",
+                  "name": "Warehouse"
+                }
+              ],
+              "channel": [
+                {
+                  "id": "fynd",
+                  "name": "Fynd"
+                }
+              ],
+              "affiliate": [],
+              "is_active": true,
+              "is_tp": false,
+              "change_settlement_status": false,
+              "_id": "6470546ccbc6407313b3ecbd",
+              "plan_id": "6470546ccbc6402178b3ecb9",
+              "settlement_type": "monthly",
+              "config": {
+                "location": [
+                  {
+                    "id": "high_street",
+                    "name": "High Street"
+                  },
+                  {
+                    "id": "mall",
+                    "name": "Mall"
+                  },
+                  {
+                    "id": "warehouse",
+                    "name": "Warehouse"
+                  }
+                ],
+                "channel": [
+                  {
+                    "id": "fynd",
+                    "name": "Fynd"
+                  }
+                ],
+                "settlement_type": "monthly",
+                "settle_cycle_period": {
+                  "highstreet": 7,
+                  "mall": 7,
+                  "warehouse": 7
+                },
+                "components": [],
+                "change_settlement_status": false
+              },
+              "created_at": "2023-05-26T06:40:44.356Z",
+              "modified_at": "2023-05-26T06:40:44.356Z",
+              "components": []
+            }
+          ],
+          "recurring": {
+            "interval_count": 1,
+            "interval": "month"
+          },
+          "taxation": {
+            "gst": 0.18
+          },
+          "one_time_fees": {
+            "developement": 200,
+            "marketing": 200
+          },
+          "credit_line": {
+            "is_active": false
+          },
+          "is_trial_plan": false,
+          "plan_group": "default",
+          "tag_lines": [],
+          "currency": "INR",
+          "is_active": true,
+          "is_visible": true,
+          "trial_period": 0,
+          "addons": [],
+          "tags": [],
+          "type": "company_specific",
+          "country": "IN",
+          "company_ids": [
+            "13781"
+          ],
+          "channel_type": "fynd",
+          "_id": "6470546ccbc6402178b3ecb9",
+          "name": "test new scheduled plan",
+          "description": "this is a new scheduled plan",
+          "start_date": "2023-05-25T18:30:00.000Z",
+          "plan_leeway_after_activation": 45,
+          "amount": 200,
+          "current_status": "approved",
+          "created_by": "40d667ad5fdd8aa378abdb3b",
+          "product_suite_id": "5f2e30cad1456d00386abefc",
+          "created_at": "2023-05-26T06:40:44.293Z",
+          "modified_at": "2023-05-26T06:40:50.230Z",
+          "approved_by": "40d667ad5fdd8aa378abdb3b",
+          "updated_by": "40d667ad5fdd8aa378abdb3b",
+          "activated_on": "2023-05-31T07:35:43.650Z"
+        },
+        "current_status": "active",
+        "collection_method": "charge_automatically",
+        "created_at": "2023-05-07T12:40:21.958Z",
+        "modified_at": "2023-05-31T07:35:44.627Z",
+        "latest_invoice": "6476f8d0bc080600abd95849"
+      }
+    ]
   }
 }
 ```
@@ -56181,12 +59452,12 @@ Schema: `PointBlankOtpData`
 ## Catalog
 
 
-#### deleteSearchKeywords
-Delete a custom keyword mapping by thier ID.
+#### getSearchKeywords
+Get a custom keyword search detail by their ID.
 
 ```golang
 
-data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
+data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -56198,20 +59469,20 @@ data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
 | ApplicationID | string | A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account. | 
 
 
-| ID | string | A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to delete. | 
+| ID | string | A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to retrieve. | 
 
 
 
-This API allows you to delete a custom keyword mapping by their ID within an application. Returns an object that tells whether the keywords was deleted successfully
+The API allows you to get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
 
 *Success Response:*
 
 
 
-A successful response contains the success message if the keyword search mapping is deleted. See example below or refer `DeleteResponse`
+A successful response contains the detail of the custom keyword search mapping if exists. See example below or refer `GetSearchWordsDetailResponseSchema` for details
 
 
-Schema: `DeleteResponse`
+Schema: `GetSearchWordsData`
 
 
 
@@ -56268,12 +59539,12 @@ Schema: `GetSearchWordsData`
 ---
 
 
-#### getSearchKeywords
-Get a custom keyword search detail by their ID.
+#### deleteSearchKeywords
+Delete a custom keyword mapping by thier ID.
 
 ```golang
 
-data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
+data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -56285,20 +59556,20 @@ data, err := Catalog.GetSearchKeywords(CompanyID, ApplicationID, ID);
 | ApplicationID | string | A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account. | 
 
 
-| ID | string | A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to retrieve. | 
+| ID | string | A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to delete. | 
 
 
 
-The API allows you to get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
+This API allows you to delete a custom keyword mapping by their ID within an application. Returns an object that tells whether the keywords was deleted successfully
 
 *Success Response:*
 
 
 
-A successful response contains the detail of the custom keyword search mapping if exists. See example below or refer `GetSearchWordsDetailResponseSchema` for details
+A successful response contains the success message if the keyword search mapping is deleted. See example below or refer `DeleteResponse`
 
 
-Schema: `GetSearchWordsData`
+Schema: `DeleteResponse`
 
 
 
@@ -56397,12 +59668,12 @@ Schema: `GetSearchWordsData`
 ---
 
 
-#### deleteAutocompleteKeyword
-Delete a autocomplete keyword config by ID.
+#### getAutocompleteKeywordDetail
+Get the detail of the autocomplete config by ID.
 
 ```golang
 
-data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
+data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -56414,20 +59685,20 @@ data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
 | ApplicationID | string | A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account. | 
 
 
-| ID | string | A `id` is a unique identifier for a specific autocomplete keyword map. Pass the `id` of the keywords which you want to delete. | 
+| ID | string | A `id` is a unique identifier for a specific autocomplete keyword map. Pass the `id` of the keywords which you want to retrieve. | 
 
 
 
-Autocomplete keywords configuration help you to extend and customize the behaviour of autocomplete search results in Fynd Platform. This API allows you to delete a keywords by it's `id`.
+Autocomplete keywords configuration help you to extend and customize the behaviour of autocomplete search results in Fynd Platform. This API allows you to get the details of a words by its `id`.
 
 *Success Response:*
 
 
 
-A successful response contains success message if config is deleted. See example below or refer `DeleteResponse`
+A successful response contains the data of the autocomplete with its specific ID. See example below or refer `GetAutocompleteWordsResponseSchema` for details
 
 
-Schema: `DeleteResponse`
+Schema: `GetAutocompleteWordsData`
 
 
 
@@ -56484,12 +59755,12 @@ Schema: `UpdateAutocompleteWordData`
 ---
 
 
-#### getAutocompleteKeywordDetail
-Get the detail of the autocomplete config by ID.
+#### deleteAutocompleteKeyword
+Delete a autocomplete keyword config by ID.
 
 ```golang
 
-data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
+data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -56501,20 +59772,20 @@ data, err := Catalog.GetAutocompleteKeywordDetail(CompanyID, ApplicationID, ID);
 | ApplicationID | string | A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account. | 
 
 
-| ID | string | A `id` is a unique identifier for a specific autocomplete keyword map. Pass the `id` of the keywords which you want to retrieve. | 
+| ID | string | A `id` is a unique identifier for a specific autocomplete keyword map. Pass the `id` of the keywords which you want to delete. | 
 
 
 
-Autocomplete keywords configuration help you to extend and customize the behaviour of autocomplete search results in Fynd Platform. This API allows you to get the details of a words by its `id`.
+Autocomplete keywords configuration help you to extend and customize the behaviour of autocomplete search results in Fynd Platform. This API allows you to delete a keywords by it's `id`.
 
 *Success Response:*
 
 
 
-A successful response contains the data of the autocomplete with its specific ID. See example below or refer `GetAutocompleteWordsResponseSchema` for details
+A successful response contains success message if config is deleted. See example below or refer `DeleteResponse`
 
 
-Schema: `GetAutocompleteWordsData`
+Schema: `DeleteResponse`
 
 
 
@@ -56694,12 +59965,12 @@ Schema: `SearchRerankingModel`
 ---
 
 
-#### deleteSearchRerankConfig
-Delete the search re-ranking configured for an application bt its ID.
+#### getSearchRerankingConfig
+Get the search rerank details of an application by its ID.
 
 ```golang
 
-data, err := Catalog.DeleteSearchRerankConfig(CompanyID, ApplicationID, ID);
+data, err := Catalog.GetSearchRerankingConfig(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -56711,20 +59982,20 @@ data, err := Catalog.DeleteSearchRerankConfig(CompanyID, ApplicationID, ID);
 | ApplicationID | string | A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account. | 
 
 
-| ID | string | A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to delete. | 
+| ID | string | A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to retrieve. | 
 
 
 
-Search Reranking allows you rank and boost the search of the keywords and products in the product listing. This API allows you to delete a search re-ranking configured for the application.
+Search Reranking allows you rank and boost the search of the keywords and products in the product listing. This API allows you to get the data of a search re-ranking configured for the application by their ID.
 
 *Success Response:*
 
 
 
-A successful response contains the success response for the deleted custom search rerank configured for the application. See example below or refer `DeleteRerankResponseSchema` for details
+A successful response contains the detail of the custom search rerank configured for the application. See example below or refer `GetSearchWordsResponseSchema` for details
 
 
-Schema: `DeleteRerankResponse`
+Schema: `SearchRerankingModel`
 
 
 
@@ -56781,12 +60052,12 @@ Schema: `SearchRerankingModel`
 ---
 
 
-#### getSearchRerankingConfig
-Get the search rerank details of an application by its ID.
+#### deleteSearchRerankConfig
+Delete the search re-ranking configured for an application bt its ID.
 
 ```golang
 
-data, err := Catalog.GetSearchRerankingConfig(CompanyID, ApplicationID, ID);
+data, err := Catalog.DeleteSearchRerankConfig(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -56798,20 +60069,20 @@ data, err := Catalog.GetSearchRerankingConfig(CompanyID, ApplicationID, ID);
 | ApplicationID | string | A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account. | 
 
 
-| ID | string | A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to retrieve. | 
+| ID | string | A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to delete. | 
 
 
 
-Search Reranking allows you rank and boost the search of the keywords and products in the product listing. This API allows you to get the data of a search re-ranking configured for the application by their ID.
+Search Reranking allows you rank and boost the search of the keywords and products in the product listing. This API allows you to delete a search re-ranking configured for the application.
 
 *Success Response:*
 
 
 
-A successful response contains the detail of the custom search rerank configured for the application. See example below or refer `GetSearchWordsResponseSchema` for details
+A successful response contains the success response for the deleted custom search rerank configured for the application. See example below or refer `DeleteRerankResponseSchema` for details
 
 
-Schema: `SearchRerankingModel`
+Schema: `DeleteRerankResponse`
 
 
 
@@ -56904,6 +60175,46 @@ Schema: `GetProductBundleCreateResponse`
 ---
 
 
+#### getProductBundleDetail
+Get a particular Product Bundle details
+
+```golang
+
+data, err := Catalog.GetProductBundleDetail(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
+
+*Success Response:*
+
+
+
+The Collection object. See example below or refer `GetProductBundleResponse` for details
+
+
+Schema: `GetProductBundleResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateProductBundle
 Update a Product Bundle
 
@@ -56933,46 +60244,6 @@ The Collection object. See example below or refer `GetProductBundleCreateRespons
 
 
 Schema: `GetProductBundleCreateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getProductBundleDetail
-Get a particular Product Bundle details
-
-```golang
-
-data, err := Catalog.GetProductBundleDetail(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
-
-*Success Response:*
-
-
-
-The Collection object. See example below or refer `GetProductBundleResponse` for details
-
-
-Schema: `GetProductBundleResponse`
 
 
 
@@ -57071,6 +60342,46 @@ Schema: `SuccessResponse`
 ---
 
 
+#### getSizeGuide
+Get a single size guide.
+
+```golang
+
+data, err := Catalog.GetSizeGuide(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to size guide. | 
+
+
+| ID | string | Id of the size guide to be viewed. | 
+
+
+
+This API helps to get data associated to a size guide.
+
+*Success Response:*
+
+
+
+Brand object. See example below or refer `SizeGuideResponseSchema` for details
+
+
+Schema: `SizeGuideResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateSizeGuide
 Edit a size guide.
 
@@ -57100,46 +60411,6 @@ Returns a success response
 
 
 Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getSizeGuide
-Get a single size guide.
-
-```golang
-
-data, err := Catalog.GetSizeGuide(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to size guide. | 
-
-
-| ID | string | Id of the size guide to be viewed. | 
-
-
-
-This API helps to get data associated to a size guide.
-
-*Success Response:*
-
-
-
-Brand object. See example below or refer `SizeGuideResponseSchema` for details
-
-
-Schema: `SizeGuideResponse`
 
 
 
@@ -57381,52 +60652,6 @@ Schema: `AppConfigurationDetail`
 ---
 
 
-#### deleteGroupConfiguration
-Delete configuration of the product config type of the application.
-
-```golang
-
-data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
-
-
-| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
-
-
-
-Delete configuration of the product config type of the application.
-
-*Success Response:*
-
-
-
-success message will tell whether the operation was successful.
-
-
-Schema: `ConfigSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateGroupConfiguration
 Update the group configurations for the application.
 
@@ -57462,6 +60687,52 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationDetail`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteGroupConfiguration
+Delete configuration of the product config type of the application.
+
+```golang
+
+data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
+
+
+| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration of the product config type of the application.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
 
 
 
@@ -57568,52 +60839,6 @@ Schema: `AppConfigurationsSort`
 ---
 
 
-#### deleteListingConfiguration
-Delete configuration for listings
-
-```golang
-
-data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
-
-
-| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
-
-
-
-Delete configuration for listing.
-
-*Success Response:*
-
-
-
-success message will tell whether the operation was successful.
-
-
-Schema: `ConfigSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateListingConfiguration
 Update configuration for listings
 
@@ -57649,6 +60874,52 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationsSort`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteListingConfiguration
+Delete configuration for listings
+
+```golang
+
+data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
+
+
+| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration for listing.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
 
 
 
@@ -58135,49 +61406,6 @@ Schema: `CollectionDetailResponse`
 ---
 
 
-#### deleteCollection
-Delete a collection.
-
-```golang
-
-data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a numeric ID allotted to a business account on Fynd Platform. | 
-
-
-| ApplicationID | string | A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account. | 
-
-
-| ID | string | An `id` is a unique identifier of a collection. | 
-
-
-
-This API allows you to delete the collection of an application.
-
-*Success Response:*
-
-
-
-A successful response contains the success message if the collection is deleted. See example below or refer `DeleteResponse` for details
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateCollection
 Update a collection by its ID.
 
@@ -58210,6 +61438,49 @@ A successful response contains the data of the collection with the updated data.
 
 
 Schema: `CollectionUpdateResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteCollection
+Delete a collection.
+
+```golang
+
+data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account. | 
+
+
+| ID | string | An `id` is a unique identifier of a collection. | 
+
+
+
+This API allows you to delete the collection of an application.
+
+*Success Response:*
+
+
+
+A successful response contains the success message if the collection is deleted. See example below or refer `DeleteResponse` for details
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -59378,6 +62649,46 @@ Schema: `CategoryCreateResponse`
 ---
 
 
+#### getCategoryData
+Get product category by uid
+
+```golang
+
+data, err := Catalog.GetCategoryData(CompanyID, UID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| UID | string | Category unique id | 
+
+
+
+This API gets meta associated to product categories.
+
+*Success Response:*
+
+
+
+Get Data for one category. See example below or refer `CategoryResponse` for details
+
+
+Schema: `SingleCategoryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateCategory
 Update product categories
 
@@ -59407,46 +62718,6 @@ Category Meta. See example below or refer `CategoryUpdateResponse` for details
 
 
 Schema: `CategoryUpdateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getCategoryData
-Get product category by uid
-
-```golang
-
-data, err := Catalog.GetCategoryData(CompanyID, UID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| UID | string | Category unique id | 
-
-
-
-This API gets meta associated to product categories.
-
-*Success Response:*
-
-
-
-Get Data for one category. See example below or refer `CategoryResponse` for details
-
-
-Schema: `SingleCategoryResponse`
 
 
 
@@ -59643,34 +62914,39 @@ Schema: `ProductAttributesResponse`
 ---
 
 
-#### deleteProduct
-Delete a product.
+#### getProduct
+Get a single product.
 
 ```golang
 
-data, err := Catalog.DeleteProduct(CompanyID, ItemID);
+data, err := Catalog.GetProduct(CompanyID, ItemID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
+| CompanyID | float64 | Company Id of the product. | 
 
 
-| ItemID | float64 | Id of the product to be updated. | 
+| ItemID | float64 | Item Id of the product. | 
 
 
 
-This API allows to delete product.
+
+
+| xQuery | struct | Includes properties such as `BrandUID`, `ItemCode`
+
+
+This API helps to get data associated to a particular product.
 
 *Success Response:*
 
 
 
-Returns a success response
+Product object. See example below or refer `product.utils.format_product_response` for details
 
 
-Schema: `SuccessResponse`
+Schema: `SingleProductResponse`
 
 
 
@@ -59724,39 +63000,34 @@ Schema: `SuccessResponse`
 ---
 
 
-#### getProduct
-Get a single product.
+#### deleteProduct
+Delete a product.
 
 ```golang
 
-data, err := Catalog.GetProduct(CompanyID, ItemID, xQuery);
+data, err := Catalog.DeleteProduct(CompanyID, ItemID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id of the product. | 
+| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
 
 
-| ItemID | float64 | Item Id of the product. | 
-
-
+| ItemID | float64 | Id of the product to be updated. | 
 
 
 
-| xQuery | struct | Includes properties such as `BrandUID`, `ItemCode`
-
-
-This API helps to get data associated to a particular product.
+This API allows to delete product.
 
 *Success Response:*
 
 
 
-Product object. See example below or refer `product.utils.format_product_response` for details
+Returns a success response
 
 
-Schema: `SingleProductResponse`
+Schema: `SuccessResponse`
 
 
 
@@ -60018,25 +63289,26 @@ Schema: `BulkResponse`
 ---
 
 
-#### deleteProductBulkJob
-Delete Bulk product job.
+#### createProductsInBulk
+Create products in bulk associated with given batch Id.
 
 ```golang
 
-data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
+data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
 
 
-| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
+| BatchID | string | Batch Id in which assets to be uploaded. | 
 
 
+| body |  BulkProductRequest | "Request body" 
 
-This API allows to delete bulk product job associated with company.
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -60058,26 +63330,25 @@ Schema: `SuccessResponse`
 ---
 
 
-#### createProductsInBulk
-Create products in bulk associated with given batch Id.
+#### deleteProductBulkJob
+Delete Bulk product job.
 
 ```golang
 
-data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
+data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
 
 
-| BatchID | string | Batch Id in which assets to be uploaded. | 
+| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
 
 
-| body |  BulkProductRequest | "Request body" 
 
-This API helps to create products in bulk push to kafka for approval/creation.
+This API allows to delete bulk product job associated with company.
 
 *Success Response:*
 
@@ -60642,25 +63913,26 @@ Schema: `BulkResponse`
 ---
 
 
-#### deleteBulkInventoryJob
-Delete Bulk Inventory job.
+#### createBulkInventory
+Create products in bulk associated with given batch Id.
 
 ```golang
 
-data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
+data, err := Catalog.CreateBulkInventory(CompanyID, BatchID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
+| CompanyID | float64 | Company Id in which Inventory is to be uploaded. | 
 
 
-| BatchID | string | Batch Id of the bulk delete job. | 
+| BatchID | string | Batch Id of the bulk create job. | 
 
 
+| body |  InventoryBulkRequest | "Request body" 
 
-This API allows to delete bulk Inventory job associated with company.
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -60682,26 +63954,25 @@ Schema: `SuccessResponse`
 ---
 
 
-#### createBulkInventory
-Create products in bulk associated with given batch Id.
+#### deleteBulkInventoryJob
+Delete Bulk Inventory job.
 
 ```golang
 
-data, err := Catalog.CreateBulkInventory(CompanyID, BatchID, body);
+data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which Inventory is to be uploaded. | 
+| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
 
 
-| BatchID | string | Batch Id of the bulk create job. | 
+| BatchID | string | Batch Id of the bulk delete job. | 
 
 
-| body |  InventoryBulkRequest | "Request body" 
 
-This API helps to create products in bulk push to kafka for approval/creation.
+This API allows to delete bulk Inventory job associated with company.
 
 *Success Response:*
 
@@ -60922,12 +64193,12 @@ Schema: `InventoryConfig`
 ---
 
 
-#### deleteRealtimeInventory
+#### updateRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -60966,12 +64237,12 @@ Schema: `InventoryUpdateResponse`
 ---
 
 
-#### updateRealtimeInventory
+#### deleteRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -61048,6 +64319,46 @@ Schema: `InventoryUpdateResponse`
 ---
 
 
+#### getHsnCode
+Fetch Hsn Code.
+
+```golang
+
+data, err := Catalog.GetHsnCode(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ID | string | Unique id | 
+
+
+
+Fetch Hsn Code.
+
+*Success Response:*
+
+
+
+See example below details
+
+
+Schema: `HsnCode`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateHsnCode
 Update Hsn Code.
 
@@ -61074,46 +64385,6 @@ Update Hsn Code.
 
 
 See example below for details
-
-
-Schema: `HsnCode`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getHsnCode
-Fetch Hsn Code.
-
-```golang
-
-data, err := Catalog.GetHsnCode(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ID | string | Unique id | 
-
-
-
-Fetch Hsn Code.
-
-*Success Response:*
-
-
-
-See example below details
 
 
 Schema: `HsnCode`

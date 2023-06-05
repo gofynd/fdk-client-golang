@@ -1002,7 +1002,9 @@ List all the collections
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Tag`
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Tag`, `Q`
 
 
 
@@ -24914,7 +24916,7 @@ Use this API to retrieve a POS order and all its details such as tracking detail
 Success. Check the example shown below or refer `PosOrderById` for more details.
 
 
-Schema: `OrderList`
+Schema: `OrderById`
 
 
 
