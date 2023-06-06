@@ -46,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [unfollowById](#unfollowbyid)
     * [followById](#followbyid)
+    * [unfollowById](#unfollowbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -1164,12 +1164,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1183,7 +1183,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1205,12 +1205,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1224,7 +1224,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
