@@ -3264,6 +3264,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         FromDate string  `url:"from_date,omitempty"` 
         ToDate string  `url:"to_date,omitempty"` 
         DpIds string  `url:"dp_ids,omitempty"` 
+        Stores string  `url:"stores,omitempty"` 
         SalesChannels string  `url:"sales_channels,omitempty"` 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
@@ -3287,6 +3288,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
 
         
+            
+                
             
                 
             
@@ -4080,6 +4083,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
     //PlatformGeneratePOSReceiptByOrderIdXQuery holds query params
     type PlatformGeneratePOSReceiptByOrderIdXQuery struct { 
+        ShipmentID string  `url:"shipment_id,omitempty"` 
         DocumentType string  `url:"document_type,omitempty"`  
     }
     
@@ -4098,6 +4102,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
 
         
+            
+                
             
                 
             
