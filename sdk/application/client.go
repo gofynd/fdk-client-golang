@@ -1352,7 +1352,9 @@ func NewAppClient(config *AppConfig) *Client {
         Filters bool  `url:"filters,omitempty"` 
         SortOn string  `url:"sort_on,omitempty"` 
         PageID string  `url:"page_id,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
+        PageSize float64  `url:"page_size,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageType string  `url:"page_type,omitempty"`  
     }
     
     // GetCollectionItemsBySlug Get the items in a collection
@@ -1367,6 +1369,10 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
+            
+                
             
                 
             
@@ -1456,6 +1462,16 @@ func NewAppClient(config *AppConfig) *Client {
                     
                     
                 
+                    
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                
             
             // GetCollectionItemsBySlugPaginator Get the items in a collection  
             func (ca *Catalog)  GetCollectionItemsBySlugPaginator(Slug string  ,  xQuery CatalogGetCollectionItemsBySlugXQuery ) *common.Paginator {
@@ -1481,6 +1497,14 @@ func NewAppClient(config *AppConfig) *Client {
                  
                  
                  
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 xQuery.PageType = "cursor"
                  
                  
                 paginator.Next = func() (interface{}, error) {
@@ -1657,55 +1681,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1746,6 +1721,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -2308,12 +2332,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // GetProductPriceBySlug Get the price of a product size at a PIN Code
-    func (ca *Catalog)  GetProductPriceBySlug(Slug string, Size string, xQuery CatalogGetProductPriceBySlugXQuery) (ProductSizePriceResponseV2, error){
+    func (ca *Catalog)  GetProductPriceBySlug(Slug string, Size string, xQuery CatalogGetProductPriceBySlugXQuery) (ProductSizePriceResponseV3, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getProductPriceBySlugResponse ProductSizePriceResponseV2
+             getProductPriceBySlugResponse ProductSizePriceResponseV3
 	    )
 
         
@@ -2341,18 +2365,18 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/application/catalog/v2.0/products/%s/sizes/%s/price/",Slug,Size),
+            fmt.Sprintf("/service/application/catalog/v3.0/products/%s/sizes/%s/price/",Slug,Size),
             nil,
             xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ProductSizePriceResponseV2{}, err
+            return ProductSizePriceResponseV3{}, err
 	    }
         
         err = json.Unmarshal(response, &getProductPriceBySlugResponse)
         if err != nil {
-            return ProductSizePriceResponseV2{}, common.NewFDKError(err.Error())
+            return ProductSizePriceResponseV3{}, common.NewFDKError(err.Error())
         }
          return getProductPriceBySlugResponse, nil
         
@@ -2373,12 +2397,12 @@ func NewAppClient(config *AppConfig) *Client {
     }
     
     // GetProductSellersBySlug Get the sellers of a product size at a PIN Code
-    func (ca *Catalog)  GetProductSellersBySlug(Slug string, Size string, xQuery CatalogGetProductSellersBySlugXQuery) (ProductSizeSellersResponseV2, error){
+    func (ca *Catalog)  GetProductSellersBySlug(Slug string, Size string, xQuery CatalogGetProductSellersBySlugXQuery) (ProductSizeSellersResponseV3, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getProductSellersBySlugResponse ProductSizeSellersResponseV2
+             getProductSellersBySlugResponse ProductSizeSellersResponseV3
 	    )
 
         
@@ -2408,18 +2432,18 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             ca.config,
             "get",
-            fmt.Sprintf("/service/application/catalog/v2.0/products/%s/sizes/%s/sellers/",Slug,Size),
+            fmt.Sprintf("/service/application/catalog/v3.0/products/%s/sizes/%s/sellers/",Slug,Size),
             nil,
             xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ProductSizeSellersResponseV2{}, err
+            return ProductSizeSellersResponseV3{}, err
 	    }
         
         err = json.Unmarshal(response, &getProductSellersBySlugResponse)
         if err != nil {
-            return ProductSizeSellersResponseV2{}, common.NewFDKError(err.Error())
+            return ProductSizeSellersResponseV3{}, common.NewFDKError(err.Error())
         }
          return getProductSellersBySlugResponse, nil
         
@@ -13400,118 +13424,6 @@ func NewAppClient(config *AppConfig) *Client {
     }
           
     
-    
-    
-  
-    
-    
-    //OrderGetInvoiceByShipmentId1XQuery holds query params
-    type OrderGetInvoiceByShipmentId1XQuery struct { 
-        Parameters invoiceParameter  `url:"parameters,omitempty"`  
-    }
-    
-    // GetInvoiceByShipmentId1 Get Presigned URL to download Invoice
-    func (or *Order)  GetInvoiceByShipmentId1(ShipmentID string, xQuery OrderGetInvoiceByShipmentId1XQuery) (ResponseGetInvoiceShipment1, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getInvoiceByShipmentId1Response ResponseGetInvoiceShipment1
-	    )
-
-        
-
-        
-            
-                
-            
-        
-
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.config,
-            "get",
-            fmt.Sprintf("/service/application/document/v1.0/orders/shipments/%s/invoice",ShipmentID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ResponseGetInvoiceShipment1{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getInvoiceByShipmentId1Response)
-        if err != nil {
-            return ResponseGetInvoiceShipment1{}, common.NewFDKError(err.Error())
-        }
-         return getInvoiceByShipmentId1Response, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    //OrderGetCreditNoteByShipmentIdXQuery holds query params
-    type OrderGetCreditNoteByShipmentIdXQuery struct { 
-        Parameters creditNoteParameter  `url:"parameters,omitempty"`  
-    }
-    
-    // GetCreditNoteByShipmentId Get Presigned URL to download Invoice
-    func (or *Order)  GetCreditNoteByShipmentId(ShipmentID string, xQuery OrderGetCreditNoteByShipmentIdXQuery) (ResponseGetInvoiceShipment1, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getCreditNoteByShipmentIdResponse ResponseGetInvoiceShipment1
-	    )
-
-        
-
-        
-            
-                
-            
-        
-
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.config,
-            "get",
-            fmt.Sprintf("/service/application/document/v1.0/orders/shipments/%s/credit-note",ShipmentID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ResponseGetInvoiceShipment1{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getCreditNoteByShipmentIdResponse)
-        if err != nil {
-            return ResponseGetInvoiceShipment1{}, common.NewFDKError(err.Error())
-        }
-         return getCreditNoteByShipmentIdResponse, nil
-        
-    }
-          
-    
 
     // Rewards ...
     type Rewards struct {
@@ -16007,6 +15919,51 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // GetAllCountries Get Country List
+    func (lo *Logistic)  GetAllCountries() (CountryListResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getAllCountriesResponse CountryListResponse
+	    )
+
+        
+
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.config,
+            "get",
+            "/service/application/logistics/v1.0/country-list",
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CountryListResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAllCountriesResponse)
+        if err != nil {
+            return CountryListResponse{}, common.NewFDKError(err.Error())
+        }
+         return getAllCountriesResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // GetPincodeZones GET zone from the Pincode.
     func (lo *Logistic)  GetPincodeZones(body  GetZoneFromPincodeViewRequest) (GetZoneFromPincodeViewResponse, error){
         var (
@@ -16060,6 +16017,74 @@ func NewAppClient(config *AppConfig) *Client {
             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
         }
          return getPincodeZonesResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetOptimalLocations GET zone from the Pincode.
+    func (lo *Logistic)  GetOptimalLocations(body  ReAssignStoreRequest) (ReAssignStoreResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getOptimalLocationsResponse ReAssignStoreResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return ReAssignStoreResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return ReAssignStoreResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.config,
+            "post",
+            "/service/application/logistics/v1.0/reassign_stores",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ReAssignStoreResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getOptimalLocationsResponse)
+        if err != nil {
+            return ReAssignStoreResponse{}, common.NewFDKError(err.Error())
+        }
+         return getOptimalLocationsResponse, nil
         
     }
           
