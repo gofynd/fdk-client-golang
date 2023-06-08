@@ -25,8 +25,6 @@ type ApplicationClient struct {
 	 
 		Payment  *PlatformAppPayment
 	 
-		Order  *PlatformAppOrder
-	 
 		Catalog  *PlatformAppCatalog
 	 
 		FileStorage  *PlatformAppFileStorage
@@ -38,8 +36,6 @@ type ApplicationClient struct {
 		Cart  *PlatformAppCart
 	 
 		Rewards  *PlatformAppRewards
-	 
-		Analytics  *PlatformAppAnalytics
 	 
 		Partner  *PlatformAppPartner
 	 
@@ -64,8 +60,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 			 
 				Payment:  NewPlatformAppPayment(config, appID),
 			 
-				Order:  NewPlatformAppOrder(config, appID),
-			 
 				Catalog:  NewPlatformAppCatalog(config, appID),
 			 
 				FileStorage:  NewPlatformAppFileStorage(config, appID),
@@ -77,8 +71,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 				Cart:  NewPlatformAppCart(config, appID),
 			 
 				Rewards:  NewPlatformAppRewards(config, appID),
-			 
-				Analytics:  NewPlatformAppAnalytics(config, appID),
 			 
 				Partner:  NewPlatformAppPartner(config, appID),
 			 
@@ -2738,10 +2730,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
             
         
-            
-        
-            
-        
 
          
 
@@ -2858,73 +2846,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    //PlatformAppDeleteSessionXQuery holds query params
-    type PlatformAppDeleteSessionXQuery struct { 
-        ID string  `url:"id,omitempty"` 
-        SessionID string  `url:"session_id,omitempty"` 
-        Reason string  `url:"reason,omitempty"`  
-    }
-    
-    // DeleteSession Delete a session for a user
-     func (us *PlatformAppUser)  DeleteSession(xQuery PlatformAppDeleteSessionXQuery) (SessionDeleteResponseSchema, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteSessionResponse SessionDeleteResponseSchema
-	    )
-
-        
-
-         
-            
-                
-            
-                
-            
-                
-            
-        
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            us.config,
-            "delete",
-            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/customers/session",us.CompanyID, us.ApplicationID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return SessionDeleteResponseSchema{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteSessionResponse)
-        if err != nil {
-            return SessionDeleteResponseSchema{}, common.NewFDKError(err.Error())
-        }
-        return deleteSessionResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     //PlatformAppGetActiveSessionsXQuery holds query params
     type PlatformAppGetActiveSessionsXQuery struct { 
         ID string  `url:"id,omitempty"`  
     }
     
-    // GetActiveSessions Get a list of all session with info for a user
+    // GetActiveSessions Get a list of all session for a user
      func (us *PlatformAppUser)  GetActiveSessions(xQuery PlatformAppGetActiveSessionsXQuery) (SessionListResponseSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -2950,7 +2877,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             us.config,
             "get",
-            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/customers/sessions",us.CompanyID, us.ApplicationID),
+            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/customers/sesions",us.CompanyID, us.ApplicationID),
             nil,
             xQuery,
             nil)
@@ -2976,8 +2903,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     //PlatformAppDeleteActiveSessionsXQuery holds query params
     type PlatformAppDeleteActiveSessionsXQuery struct { 
-        ID string  `url:"id,omitempty"` 
-        Reason string  `url:"reason,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // DeleteActiveSessions Delete a list of all session for a user
@@ -2995,8 +2921,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             
                 
             
-                
-            
         
 
         
@@ -3008,7 +2932,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             us.config,
             "delete",
-            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/customers/sessions",us.CompanyID, us.ApplicationID),
+            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/customers/sesions",us.CompanyID, us.ApplicationID),
             nil,
             xQuery,
             nil)
@@ -3136,8 +3060,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
             
         
-            
-        
 
          
 
@@ -3177,253 +3099,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return PlatformSchema{}, common.NewFDKError(err.Error())
         }
         return updatePlatformConfigResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // CreateUserGroup Create an User Group
-     func (us *PlatformAppUser)  CreateUserGroup(body  CreateUserGroupSchema) (UserGroupResponseSchema, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            createUserGroupResponse UserGroupResponseSchema
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return UserGroupResponseSchema{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return UserGroupResponseSchema{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            us.config,
-            "post",
-            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/user_group",us.CompanyID, us.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return UserGroupResponseSchema{}, err
-	    }
-        
-        err = json.Unmarshal(response, &createUserGroupResponse)
-        if err != nil {
-            return UserGroupResponseSchema{}, common.NewFDKError(err.Error())
-        }
-        return createUserGroupResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    //PlatformAppGetUserGroupsXQuery holds query params
-    type PlatformAppGetUserGroupsXQuery struct { 
-        PageNo string  `url:"page_no,omitempty"` 
-        PageSize string  `url:"page_size,omitempty"` 
-        Name string  `url:"name,omitempty"` 
-        Status string  `url:"status,omitempty"` 
-        GroupUID float64  `url:"group_uid,omitempty"`  
-    }
-    
-    // GetUserGroups Get User Groups mathcing criteria
-     func (us *PlatformAppUser)  GetUserGroups(xQuery PlatformAppGetUserGroupsXQuery) (UserGroupListResponseSchema, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getUserGroupsResponse UserGroupListResponseSchema
-	    )
-
-        
-
-         
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            us.config,
-            "get",
-            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/user_group",us.CompanyID, us.ApplicationID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return UserGroupListResponseSchema{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getUserGroupsResponse)
-        if err != nil {
-            return UserGroupListResponseSchema{}, common.NewFDKError(err.Error())
-        }
-        return getUserGroupsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // UpdateUserGroup Update an User Group
-     func (us *PlatformAppUser)  UpdateUserGroup(GroupID string, body  UpdateUserGroupSchema) (UserGroupResponseSchema, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateUserGroupResponse UserGroupResponseSchema
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return UserGroupResponseSchema{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return UserGroupResponseSchema{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            us.config,
-            "put",
-            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/user_group/%s",us.CompanyID, us.ApplicationID, GroupID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return UserGroupResponseSchema{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateUserGroupResponse)
-        if err != nil {
-            return UserGroupResponseSchema{}, common.NewFDKError(err.Error())
-        }
-        return updateUserGroupResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetUserGroupById Get an User Group by Id
-     func (us *PlatformAppUser)  GetUserGroupById(GroupID string) (UserGroupResponseSchema, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getUserGroupByIdResponse UserGroupResponseSchema
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            us.config,
-            "get",
-            fmt.Sprintf("/service/platform/user/v1.0/company/%s/application/%s/user_group/%s",us.CompanyID, us.ApplicationID, GroupID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return UserGroupResponseSchema{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getUserGroupByIdResponse)
-        if err != nil {
-            return UserGroupResponseSchema{}, common.NewFDKError(err.Error())
-        }
-        return getUserGroupByIdResponse, nil
         
     }
            
@@ -8000,66 +7675,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetCampaignsPaginator Get campaigns  
-            func (co *PlatformAppCommunication)  GetCampaignsPaginator( xQuery PlatformAppGetCampaignsXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetCampaigns(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
@@ -8373,66 +7988,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetAudiencesPaginator Get audiences  
-            func (co *PlatformAppCommunication)  GetAudiencesPaginator( xQuery PlatformAppGetAudiencesXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetAudiences(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
@@ -8826,66 +8381,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetEmailProvidersPaginator Get email providers  
-            func (co *PlatformAppCommunication)  GetEmailProvidersPaginator( xQuery PlatformAppGetEmailProvidersXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetEmailProviders(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
@@ -9139,66 +8634,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetEmailTemplatesPaginator Get email templates  
-            func (co *PlatformAppCommunication)  GetEmailTemplatesPaginator( xQuery PlatformAppGetEmailTemplatesXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetEmailTemplates(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
@@ -9345,66 +8780,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetSystemEmailTemplatesPaginator Get system email templates  
-            func (co *PlatformAppCommunication)  GetSystemEmailTemplatesPaginator( xQuery PlatformAppGetSystemEmailTemplatesXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetSystemEmailTemplates(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
@@ -9775,66 +9150,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetEventSubscriptionsPaginator Get event subscriptions  
-            func (co *PlatformAppCommunication)  GetEventSubscriptionsPaginator( xQuery PlatformAppGetEventSubscriptionsXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetEventSubscriptions(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
@@ -9896,66 +9211,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetJobsPaginator Get jobs  
-            func (co *PlatformAppCommunication)  GetJobsPaginator( xQuery PlatformAppGetJobsXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetJobs(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
@@ -10078,66 +9333,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetJobLogsPaginator Get job logs  
-            func (co *PlatformAppCommunication)  GetJobLogsPaginator( xQuery PlatformAppGetJobLogsXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetJobLogs(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
@@ -10202,76 +9397,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetCommunicationLogsPaginator Get communication logs  
-            func (co *PlatformAppCommunication)  GetCommunicationLogsPaginator( xQuery PlatformAppGetCommunicationLogsXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("cursor")
-                
-                
-                 
-                 xQuery.PageID = paginator.NextID
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetCommunicationLogs(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
@@ -10463,66 +9588,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetSmsProvidersPaginator Get sms providers  
-            func (co *PlatformAppCommunication)  GetSmsProvidersPaginator( xQuery PlatformAppGetSmsProvidersXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetSmsProviders(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
@@ -10780,66 +9845,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetSmsTemplatesPaginator Get sms templates  
-            func (co *PlatformAppCommunication)  GetSmsTemplatesPaginator( xQuery PlatformAppGetSmsTemplatesXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetSmsTemplates(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
@@ -11141,66 +10146,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetSystemSystemTemplatesPaginator Get system sms templates  
-            func (co *PlatformAppCommunication)  GetSystemSystemTemplatesPaginator( xQuery PlatformAppGetSystemSystemTemplatesXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetSystemSystemTemplates(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
 
@@ -11888,300 +10833,66 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
            
        
     
-
- 
-	 
-   // PlatformAppOrder holds PlatformAppOrder object properties
-    type PlatformAppOrder struct {
-        config *PlatformConfig
-        CompanyID string
-        ApplicationID string
-    }
-    // NewPlatformAppOrder returns new PlatformAppOrder instance
-    func NewPlatformAppOrder(config *PlatformConfig, appID string) *PlatformAppOrder {
-        return &PlatformAppOrder{config, config.CompanyID, appID}
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
   
 
     
-    //PlatformAppGetApplicationShipmentsXQuery holds query params
-    type PlatformAppGetApplicationShipmentsXQuery struct { 
-        Lane string  `url:"lane,omitempty"` 
-        SearchType string  `url:"search_type,omitempty"` 
-        SearchID string  `url:"search_id,omitempty"` 
-        FromDate string  `url:"from_date,omitempty"` 
-        ToDate string  `url:"to_date,omitempty"` 
-        DpIds string  `url:"dp_ids,omitempty"` 
-        OrderingCompanyID string  `url:"ordering_company_id,omitempty"` 
-        Stores string  `url:"stores,omitempty"` 
-        SalesChannel string  `url:"sales_channel,omitempty"` 
-        RequestByExt string  `url:"request_by_ext,omitempty"` 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"` 
-        CustomerID string  `url:"customer_id,omitempty"` 
-        IsPrioritySort bool  `url:"is_priority_sort,omitempty"`  
-    }
-    
-    // GetApplicationShipments 
-     func (or *PlatformAppOrder)  GetApplicationShipments(xQuery PlatformAppGetApplicationShipmentsXQuery) (ShipmentInternalPlatformViewResponse, error) {
+    // PaymentStatusBulk Get Payment status and information for a list of order_ids
+     func (pa *PlatformAppPayment)  PaymentStatusBulk(body  PaymentStatusBulkHandlerRequest) (PaymentStatusBulkHandlerResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getApplicationShipmentsResponse ShipmentInternalPlatformViewResponse
+            paymentStatusBulkResponse PaymentStatusBulkHandlerResponse
 	    )
 
         
-
-         
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
             
         
+
+         
 
         
         
          
         
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PaymentStatusBulkHandlerResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PaymentStatusBulkHandlerResponse{}, common.NewFDKError(err.Error())       
+        }
         
         //API call
         rawRequest = NewRequest(
-            or.config,
-            "get",
-            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/application/%s/shipments/",or.CompanyID, or.ApplicationID),
+            pa.config,
+            "post",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/payment-status-bulk/",pa.CompanyID, pa.ApplicationID),
             nil,
-            xQuery,
-            nil)
+            nil,
+            reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ShipmentInternalPlatformViewResponse{}, err
+            return PaymentStatusBulkHandlerResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getApplicationShipmentsResponse)
+        err = json.Unmarshal(response, &paymentStatusBulkResponse)
         if err != nil {
-            return ShipmentInternalPlatformViewResponse{}, common.NewFDKError(err.Error())
+            return PaymentStatusBulkHandlerResponse{}, common.NewFDKError(err.Error())
         }
-        return getApplicationShipmentsResponse, nil
+        return paymentStatusBulkResponse, nil
         
     }
            
        
-    
-    
-    
-    
-    
-    
-    
-  
-
-    
-    //PlatformAppGetAppOrderShipmentDetailsXQuery holds query params
-    type PlatformAppGetAppOrderShipmentDetailsXQuery struct { 
-        OrderID string  `url:"order_id,omitempty"`  
-    }
-    
-    // GetAppOrderShipmentDetails 
-     func (or *PlatformAppOrder)  GetAppOrderShipmentDetails(xQuery PlatformAppGetAppOrderShipmentDetailsXQuery) (ShipmentDetailsResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAppOrderShipmentDetailsResponse ShipmentDetailsResponse
-	    )
-
-        
-
-         
-            
-                
-            
-        
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.config,
-            "get",
-            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/application/%s/order-details",or.CompanyID, or.ApplicationID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ShipmentDetailsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAppOrderShipmentDetailsResponse)
-        if err != nil {
-            return ShipmentDetailsResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAppOrderShipmentDetailsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // TrackPlatformShipment Track shipment
-     func (or *PlatformAppOrder)  TrackPlatformShipment(ShipmentID string) (PlatformShipmentTrack, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            trackPlatformShipmentResponse PlatformShipmentTrack
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.config,
-            "get",
-            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/application/%s/orders/shipments/%s/track",or.CompanyID, or.ApplicationID, ShipmentID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return PlatformShipmentTrack{}, err
-	    }
-        
-        err = json.Unmarshal(response, &trackPlatformShipmentResponse)
-        if err != nil {
-            return PlatformShipmentTrack{}, common.NewFDKError(err.Error())
-        }
-        return trackPlatformShipmentResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 
  
@@ -12273,54 +10984,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetSearchKeywords Get a Search Keywords Details
-     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getSearchKeywordsResponse GetSearchWordsDetailResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetSearchWordsDetailResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getSearchKeywordsResponse)
-        if err != nil {
-            return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
-        }
-        return getSearchKeywordsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // DeleteSearchKeywords Delete a Search Keywords
      func (ca *PlatformAppCatalog)  DeleteSearchKeywords(ID string) (DeleteResponse, error) {
         var (
@@ -12359,6 +11022,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return DeleteResponse{}, common.NewFDKError(err.Error())
         }
         return deleteSearchKeywordsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetSearchKeywords Get a Search Keywords Details
+     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getSearchKeywordsResponse GetSearchWordsDetailResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetSearchWordsDetailResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getSearchKeywordsResponse)
+        if err != nil {
+            return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
+        }
+        return getSearchKeywordsResponse, nil
         
     }
            
@@ -12555,54 +11266,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
-     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAutocompleteKeywordDetailResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // DeleteAutocompleteKeyword Delete a Autocomplete Keywords
      func (ca *PlatformAppCatalog)  DeleteAutocompleteKeyword(ID string) (DeleteResponse, error) {
         var (
@@ -12641,6 +11304,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return DeleteResponse{}, common.NewFDKError(err.Error())
         }
         return deleteAutocompleteKeywordResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
+     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAutocompleteKeywordDetailResponse, nil
         
     }
            
@@ -12782,54 +11493,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetAppProduct Get company application product data.
-     func (ca *PlatformAppCatalog)  GetAppProduct(ItemID string) (OwnerAppItemResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAppProductResponse OwnerAppItemResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product/%s/",ca.CompanyID, ca.ApplicationID, ItemID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return OwnerAppItemResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAppProductResponse)
-        if err != nil {
-            return OwnerAppItemResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAppProductResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // UpdateAppProduct Update a single custom meta.
      func (ca *PlatformAppCatalog)  UpdateAppProduct(ItemID string, body  ApplicationItemMeta) (SuccessResponse1, error) {
         var (
@@ -12839,16 +11502,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             updateAppProductResponse SuccessResponse1
 	    )
 
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
         
             
         
@@ -12895,6 +11548,63 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return SuccessResponse1{}, common.NewFDKError(err.Error())
         }
         return updateAppProductResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppGetAppProductXQuery holds query params
+    type PlatformAppGetAppProductXQuery struct { 
+        SliceAttr string  `url:"slice_attr,omitempty"`  
+    }
+    
+    // GetAppProduct Get company application product data.
+     func (ca *PlatformAppCatalog)  GetAppProduct(ItemID string, xQuery PlatformAppGetAppProductXQuery) (ApplicationItemResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAppProductResponse ApplicationItemResponse
+	    )
+
+        
+
+         
+            
+                
+            
+        
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product/%s/",ca.CompanyID, ca.ApplicationID, ItemID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationItemResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAppProductResponse)
+        if err != nil {
+            return ApplicationItemResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAppProductResponse, nil
         
     }
            
@@ -14424,7 +13134,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
     
     // AddCollectionItems Add items to a collection
-     func (ca *PlatformAppCatalog)  AddCollectionItems(ID string, body  CollectionItemUpdate) (UpdatedResponse, error) {
+     func (ca *PlatformAppCatalog)  AddCollectionItems(ID string, body  CollectionItemRequest) (UpdatedResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -14432,12 +13142,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             addCollectionItemsResponse UpdatedResponse
 	    )
 
-        
-            
-        
-            
-        
-            
         
             
         
@@ -14545,18 +13249,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
            
        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -17215,67 +15907,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // ModifyAppFeatures Update features of application
-     func (co *PlatformAppConfiguration)  ModifyAppFeatures(body  AppFeatureRequest) (AppFeature, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            modifyAppFeaturesResponse AppFeature
-	    )
-
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return AppFeature{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return AppFeature{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            co.config,
-            "patch",
-            fmt.Sprintf("/service/platform/configuration/v1.0/company/%s/application/%s/feature",co.CompanyID, co.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return AppFeature{}, err
-	    }
-        
-        err = json.Unmarshal(response, &modifyAppFeaturesResponse)
-        if err != nil {
-            return AppFeature{}, common.NewFDKError(err.Error())
-        }
-        return modifyAppFeaturesResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // GetAppBasicDetails Get basic application details
      func (co *PlatformAppConfiguration)  GetAppBasicDetails() (ApplicationDetail, error) {
         var (
@@ -17962,8 +16593,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
             
         
-            
-        
 
          
 
@@ -18022,8 +16651,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             partiallyUpdateInventoryConfigResponse ApplicationInventory
 	    )
 
-        
-            
         
             
         
@@ -20515,162 +19142,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
            
        
     
-    
-    
-  
-
-    
-    // GetCouponOptionValues Get coupon options enums with display values
-     func (ca *PlatformAppCart)  GetCouponOptionValues() (map[string]interface{}, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getCouponOptionValuesResponse map[string]interface{}
-	    )
-
-        
-
-         
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/coupon_options",ca.CompanyID, ca.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return map[string]interface{}{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getCouponOptionValuesResponse)
-        if err != nil {
-            return map[string]interface{}{}, common.NewFDKError(err.Error())
-        }
-        return getCouponOptionValuesResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    //PlatformAppGetCouponCodeExistsXQuery holds query params
-    type PlatformAppGetCouponCodeExistsXQuery struct { 
-        Code string  `url:"code,omitempty"`  
-    }
-    
-    // GetCouponCodeExists Check if coupon is already created with coupon code
-     func (ca *PlatformAppCart)  GetCouponCodeExists(xQuery PlatformAppGetCouponCodeExistsXQuery) (map[string]interface{}, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getCouponCodeExistsResponse map[string]interface{}
-	    )
-
-        
-
-         
-            
-                
-            
-        
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/coupon_code_exists",ca.CompanyID, ca.ApplicationID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return map[string]interface{}{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getCouponCodeExistsResponse)
-        if err != nil {
-            return map[string]interface{}{}, common.NewFDKError(err.Error())
-        }
-        return getCouponCodeExistsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    //PlatformAppGetPromotionCodeExistsXQuery holds query params
-    type PlatformAppGetPromotionCodeExistsXQuery struct { 
-        Code string  `url:"code,omitempty"`  
-    }
-    
-    // GetPromotionCodeExists Check if promotion is already created with promotion code
-     func (ca *PlatformAppCart)  GetPromotionCodeExists(xQuery PlatformAppGetPromotionCodeExistsXQuery) (map[string]interface{}, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getPromotionCodeExistsResponse map[string]interface{}
-	    )
-
-        
-
-         
-            
-                
-            
-        
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/promotion_code_exists",ca.CompanyID, ca.ApplicationID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return map[string]interface{}{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getPromotionCodeExistsResponse)
-        if err != nil {
-            return map[string]interface{}{}, common.NewFDKError(err.Error())
-        }
-        return getPromotionCodeExistsResponse, nil
-        
-    }
-           
-       
-    
 
  
 	 
@@ -20690,19 +19161,19 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    //PlatformAppShowGiveawaysXQuery holds query params
-    type PlatformAppShowGiveawaysXQuery struct { 
+    //PlatformAppGetGiveawaysXQuery holds query params
+    type PlatformAppGetGiveawaysXQuery struct { 
         PageID string  `url:"page_id,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // ShowGiveaways List of giveaways of the current application.
-     func (re *PlatformAppRewards)  ShowGiveaways(xQuery PlatformAppShowGiveawaysXQuery) (GiveawayResponse, error) {
+    // GetGiveaways List of giveaways of the current application.
+     func (re *PlatformAppRewards)  GetGiveaways(xQuery PlatformAppGetGiveawaysXQuery) (GiveawayResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            showGiveawaysResponse GiveawayResponse
+            getGiveawaysResponse GiveawayResponse
 	    )
 
         
@@ -20724,7 +19195,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             re.config,
             "get",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/giveaways",re.CompanyID, re.ApplicationID),
+            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/giveaways/",re.CompanyID, re.ApplicationID),
             nil,
             xQuery,
             nil)
@@ -20733,14 +19204,64 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GiveawayResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &showGiveawaysResponse)
+        err = json.Unmarshal(response, &getGiveawaysResponse)
         if err != nil {
             return GiveawayResponse{}, common.NewFDKError(err.Error())
         }
-        return showGiveawaysResponse, nil
+        return getGiveawaysResponse, nil
         
     }
            
+            
+            
+            
+            
+            
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            // GetGiveawaysPaginator List of giveaways of the current application.  
+            func (re *PlatformAppRewards)  GetGiveawaysPaginator( xQuery PlatformAppGetGiveawaysXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("cursor")
+                
+                
+                 
+                 xQuery.PageID = paginator.NextID
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := re.GetGiveaways(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+        
        
     
     
@@ -20748,13 +19269,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // SaveGiveAway List of giveaways of the current application.
-     func (re *PlatformAppRewards)  SaveGiveAway(body  Giveaway) (Giveaway, error) {
+    // CreateGiveaway Adds a new giveaway.
+     func (re *PlatformAppRewards)  CreateGiveaway(body  Giveaway) (Giveaway, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            saveGiveAwayResponse Giveaway
+            createGiveawayResponse Giveaway
 	    )
 
         
@@ -20807,7 +19328,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             re.config,
             "post",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/giveaways",re.CompanyID, re.ApplicationID),
+            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/giveaways/",re.CompanyID, re.ApplicationID),
             nil,
             nil,
             reqBody)
@@ -20816,11 +19337,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return Giveaway{}, err
 	    }
         
-        err = json.Unmarshal(response, &saveGiveAwayResponse)
+        err = json.Unmarshal(response, &createGiveawayResponse)
         if err != nil {
             return Giveaway{}, common.NewFDKError(err.Error())
         }
-        return saveGiveAwayResponse, nil
+        return createGiveawayResponse, nil
         
     }
            
@@ -20831,13 +19352,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetGiveawayById Get giveaway by ID.
-     func (re *PlatformAppRewards)  GetGiveawayById(ID string) (Giveaway, error) {
+    // GetGiveawayByID Get giveaway by ID.
+     func (re *PlatformAppRewards)  GetGiveawayByID(ID string) (Giveaway, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getGiveawayByIdResponse Giveaway
+            getGiveawayByIDResponse Giveaway
 	    )
 
         
@@ -20855,7 +19376,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             re.config,
             "get",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/giveaways/%s",re.CompanyID, re.ApplicationID, ID),
+            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/giveaways/%s/",re.CompanyID, re.ApplicationID, ID),
             nil,
             nil,
             nil)
@@ -20864,11 +19385,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return Giveaway{}, err
 	    }
         
-        err = json.Unmarshal(response, &getGiveawayByIdResponse)
+        err = json.Unmarshal(response, &getGiveawayByIDResponse)
         if err != nil {
             return Giveaway{}, common.NewFDKError(err.Error())
         }
-        return getGiveawayByIdResponse, nil
+        return getGiveawayByIDResponse, nil
         
     }
            
@@ -20879,13 +19400,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateGiveAway Updates the giveaway by it's ID.
-     func (re *PlatformAppRewards)  UpdateGiveAway(ID string, body  Giveaway) (Giveaway, error) {
+    // UpdateGiveaway Updates the giveaway by it's ID.
+     func (re *PlatformAppRewards)  UpdateGiveaway(ID string, body  Giveaway) (Giveaway, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            updateGiveAwayResponse Giveaway
+            updateGiveawayResponse Giveaway
 	    )
 
         
@@ -20940,7 +19461,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             re.config,
             "put",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/giveaways/%s",re.CompanyID, re.ApplicationID, ID),
+            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/giveaways/%s/",re.CompanyID, re.ApplicationID, ID),
             nil,
             nil,
             reqBody)
@@ -20949,11 +19470,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return Giveaway{}, err
 	    }
         
-        err = json.Unmarshal(response, &updateGiveAwayResponse)
+        err = json.Unmarshal(response, &updateGiveawayResponse)
         if err != nil {
             return Giveaway{}, common.NewFDKError(err.Error())
         }
-        return updateGiveAwayResponse, nil
+        return updateGiveawayResponse, nil
         
     }
            
@@ -20964,63 +19485,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetGiveawayAudienceStatus Get the Giveaway audience status
-     func (re *PlatformAppRewards)  GetGiveawayAudienceStatus(ID string, AudienceID string, ) (GiveawayAudience, error) {
+    // GetOffers List of offer of the current application.
+     func (re *PlatformAppRewards)  GetOffers() ([]Offer, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getGiveawayAudienceStatusResponse GiveawayAudience
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            re.config,
-            "get",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/giveaways/:id/audience/%s/status",ID, AudienceID, re.CompanyID, re.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GiveawayAudience{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getGiveawayAudienceStatusResponse)
-        if err != nil {
-            return GiveawayAudience{}, common.NewFDKError(err.Error())
-        }
-        return getGiveawayAudienceStatusResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // ShowOffers List of offers of the current application.
-     func (re *PlatformAppRewards)  ShowOffers() ([]Offer, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            showOffersResponse []Offer
+            getOffersResponse []Offer
 	    )
 
         
@@ -21045,11 +19516,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return []Offer{}, err
 	    }
         
-        err = json.Unmarshal(response, &showOffersResponse)
+        err = json.Unmarshal(response, &getOffersResponse)
         if err != nil {
             return []Offer{}, common.NewFDKError(err.Error())
         }
-        return showOffersResponse, nil
+        return getOffersResponse, nil
         
     }
            
@@ -21060,8 +19531,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetOfferByName Get offer by name
-     func (re *PlatformAppRewards)  GetOfferByName(Name string, ) (Offer, error) {
+    // GetOfferByName Get offer by name.
+     func (re *PlatformAppRewards)  GetOfferByName(Cookie string, Name string) (Offer, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -21077,6 +19548,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
         
         
+        
+        //Adding extra headers
+        var xHeaders = make(map[string]string) 
+        
+         
+         xHeaders["cookie"] =  Cookie
          
         
         
@@ -21084,8 +19561,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             re.config,
             "get",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/offers/%s/",Name, re.CompanyID, re.ApplicationID),
-            nil,
+            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/offers/%s/",re.CompanyID, re.ApplicationID, Name),
+            xHeaders,
             nil,
             nil)
         response, err = rawRequest.Execute()
@@ -21108,7 +19585,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateOfferByName Update offer by name
+    // UpdateOfferByName Updates the offer by name.
      func (re *PlatformAppRewards)  UpdateOfferByName(Name string, body  Offer) (Offer, error) {
         var (
             rawRequest  *RawRequest
@@ -21173,7 +19650,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             re.config,
             "put",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/offers/%s/",Name, re.CompanyID, re.ApplicationID),
+            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/offers/%s/",re.CompanyID, re.ApplicationID, Name),
             nil,
             nil,
             reqBody)
@@ -21197,7 +19674,55 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateUserStatus Update user status
+    // GetUserAvailablePoints User's reward details.
+     func (re *PlatformAppRewards)  GetUserAvailablePoints(UserID string) (UserRes, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getUserAvailablePointsResponse UserRes
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            re.config,
+            "get",
+            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/users/%s/",re.CompanyID, re.ApplicationID, UserID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return UserRes{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getUserAvailablePointsResponse)
+        if err != nil {
+            return UserRes{}, common.NewFDKError(err.Error())
+        }
+        return getUserAvailablePointsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdateUserStatus Update User status
      func (re *PlatformAppRewards)  UpdateUserStatus(UserID string, body  AppUser) (AppUser, error) {
         var (
             rawRequest  *RawRequest
@@ -21248,7 +19773,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             re.config,
             "patch",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/users/%s/",UserID, re.CompanyID, re.ApplicationID),
+            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/users/%s/",re.CompanyID, re.ApplicationID, UserID),
             nil,
             nil,
             reqBody)
@@ -21272,61 +19797,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetUserDetails Get user reward details
-     func (re *PlatformAppRewards)  GetUserDetails(UserID string, ) (UserRes, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getUserDetailsResponse UserRes
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            re.config,
-            "get",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/users/%s/",UserID, re.CompanyID, re.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return UserRes{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getUserDetailsResponse)
-        if err != nil {
-            return UserRes{}, common.NewFDKError(err.Error())
-        }
-        return getUserDetailsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     //PlatformAppGetUserPointsHistoryXQuery holds query params
     type PlatformAppGetUserPointsHistoryXQuery struct { 
         PageID string  `url:"page_id,omitempty"` 
+        PageLimit float64  `url:"page_limit,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // GetUserPointsHistory Get all transactions of reward points
+    // GetUserPointsHistory Get list of points transactions.
      func (re *PlatformAppRewards)  GetUserPointsHistory(UserID string, xQuery PlatformAppGetUserPointsHistoryXQuery) (HistoryRes, error) {
         var (
             rawRequest  *RawRequest
@@ -21343,6 +19821,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             
                 
             
+                
+            
         
 
         
@@ -21356,7 +19836,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             re.config,
             "get",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/users/%s/points/history/",UserID, re.CompanyID, re.ApplicationID),
+            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/users/%s/points/history/",re.CompanyID, re.ApplicationID, UserID),
             nil,
             xQuery,
             nil)
@@ -21383,6 +19863,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
              
             
             
+             
+            
+            
+             
+            
+            
             
              
             
@@ -21393,7 +19879,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
              
             
             
-             
             
             
             
@@ -21403,13 +19888,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             
             
             
-            // GetUserPointsHistoryPaginator Get all transactions of reward points  
+            
+            // GetUserPointsHistoryPaginator Get list of points transactions.  
             func (re *PlatformAppRewards)  GetUserPointsHistoryPaginator(UserID string ,  xQuery PlatformAppGetUserPointsHistoryXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("cursor")
                 
                 
                  
                  xQuery.PageID = paginator.NextID
+                 
+                 
+                 
+                 
                  
                  
                  
@@ -21428,581 +19918,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             }
         
        
-    
-    
-    
-  
-
-    
-    // GetRewardsConfiguration Get all valid android paths
-     func (re *PlatformAppRewards)  GetRewardsConfiguration() (ConfigurationRes, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getRewardsConfigurationResponse ConfigurationRes
-	    )
-
-        
-
-         
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            re.config,
-            "get",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/configuration/",re.CompanyID, re.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ConfigurationRes{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getRewardsConfigurationResponse)
-        if err != nil {
-            return ConfigurationRes{}, common.NewFDKError(err.Error())
-        }
-        return getRewardsConfigurationResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // SetRewardsConfiguration Updates the collection with given android paths.
-     func (re *PlatformAppRewards)  SetRewardsConfiguration(body  ConfigurationRequest) (SetConfigurationRes, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            setRewardsConfigurationResponse SetConfigurationRes
-	    )
-
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return SetConfigurationRes{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return SetConfigurationRes{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            re.config,
-            "post",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/configuration/",re.CompanyID, re.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return SetConfigurationRes{}, err
-	    }
-        
-        err = json.Unmarshal(response, &setRewardsConfigurationResponse)
-        if err != nil {
-            return SetConfigurationRes{}, common.NewFDKError(err.Error())
-        }
-        return setRewardsConfigurationResponse, nil
-        
-    }
-           
-       
-    
-
- 
-	 
-   // PlatformAppAnalytics holds PlatformAppAnalytics object properties
-    type PlatformAppAnalytics struct {
-        config *PlatformConfig
-        CompanyID string
-        ApplicationID string
-    }
-    // NewPlatformAppAnalytics returns new PlatformAppAnalytics instance
-    func NewPlatformAppAnalytics(config *PlatformConfig, appID string) *PlatformAppAnalytics {
-        return &PlatformAppAnalytics{config, config.CompanyID, appID}
-    }
-    
-    
-    
-  
-
-    
-    // GetStatiscticsGroups Get statistics groups
-     func (an *PlatformAppAnalytics)  GetStatiscticsGroups() (StatsGroups, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getStatiscticsGroupsResponse StatsGroups
-	    )
-
-        
-
-         
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            an.config,
-            "get",
-            fmt.Sprintf("/service/platform/analytics/v1.0/company/%s/application/%s/stats/group",an.CompanyID, an.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return StatsGroups{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getStatiscticsGroupsResponse)
-        if err != nil {
-            return StatsGroups{}, common.NewFDKError(err.Error())
-        }
-        return getStatiscticsGroupsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetStatiscticsGroupComponents Get statistics group components
-     func (an *PlatformAppAnalytics)  GetStatiscticsGroupComponents(GroupName string) (StatsGroupComponents, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getStatiscticsGroupComponentsResponse StatsGroupComponents
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            an.config,
-            "get",
-            fmt.Sprintf("/service/platform/analytics/v1.0/company/%s/application/%s/stats/group/%s",an.CompanyID, an.ApplicationID, GroupName),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return StatsGroupComponents{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getStatiscticsGroupComponentsResponse)
-        if err != nil {
-            return StatsGroupComponents{}, common.NewFDKError(err.Error())
-        }
-        return getStatiscticsGroupComponentsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetComponentStatsCSV Get component statistics csv
-     func (an *PlatformAppAnalytics)  GetComponentStatsCSV(ComponentName string) ([]byte, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            an.config,
-            "get",
-            fmt.Sprintf("/service/platform/analytics/v1.0/company/%s/application/%s/stats/component/%s.csv",an.CompanyID, an.ApplicationID, ComponentName),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return []byte{}, err
-	    }
-        
-        return response, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetComponentStatsPDF Get component statistics pdf
-     func (an *PlatformAppAnalytics)  GetComponentStatsPDF(ComponentName string) ([]byte, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            an.config,
-            "get",
-            fmt.Sprintf("/service/platform/analytics/v1.0/company/%s/application/%s/stats/component/%s.pdf",an.CompanyID, an.ApplicationID, ComponentName),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return []byte{}, err
-	    }
-        
-        return response, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetComponentStats Get component statistics
-     func (an *PlatformAppAnalytics)  GetComponentStats(ComponentName string) (StatsRes, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getComponentStatsResponse StatsRes
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            an.config,
-            "get",
-            fmt.Sprintf("/service/platform/analytics/v1.0/company/%s/application/%s/stats/component/%s",an.CompanyID, an.ApplicationID, ComponentName),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return StatsRes{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getComponentStatsResponse)
-        if err != nil {
-            return StatsRes{}, common.NewFDKError(err.Error())
-        }
-        return getComponentStatsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    //PlatformAppGetAbandonCartListXQuery holds query params
-    type PlatformAppGetAbandonCartListXQuery struct { 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
-    }
-    
-    // GetAbandonCartList Get abandon carts list
-     func (an *PlatformAppAnalytics)  GetAbandonCartList(FromDate string, ToDate string, xQuery PlatformAppGetAbandonCartListXQuery) (AbandonCartsList, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAbandonCartListResponse AbandonCartsList
-	    )
-
-        
-
-         
-            
-                
-            
-                
-            
-        
-
-        
-        
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            an.config,
-            "get",
-            fmt.Sprintf("/service/platform/analytics/v1.0/company/%s/application/%s/cart/from/%s/to/%s/abandon-cart/",an.CompanyID, an.ApplicationID, FromDate, ToDate),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return AbandonCartsList{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAbandonCartListResponse)
-        if err != nil {
-            return AbandonCartsList{}, common.NewFDKError(err.Error())
-        }
-        return getAbandonCartListResponse, nil
-        
-    }
-           
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-             
-            
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetAbandonCartListPaginator Get abandon carts list  
-            func (an *PlatformAppAnalytics)  GetAbandonCartListPaginator(FromDate string , ToDate string ,  xQuery PlatformAppGetAbandonCartListXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := an.GetAbandonCartList(FromDate, ToDate, xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
-       
-    
-    
-    
-  
-
-    
-    // GetAbandonCartsCSV Get abandon carts csv
-     func (an *PlatformAppAnalytics)  GetAbandonCartsCSV(FromDate string, ToDate string) ([]byte, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            an.config,
-            "get",
-            fmt.Sprintf("/service/platform/analytics/v1.0/company/%s/application/%s/cart/%s/to/%s/abandon-cart.csv",an.CompanyID, an.ApplicationID, FromDate, ToDate),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return []byte{}, err
-	    }
-        
-        return response, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetAbandonCartDetail Get abandon carts details
-     func (an *PlatformAppAnalytics)  GetAbandonCartDetail(CartID string) (AbandonCartDetail, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAbandonCartDetailResponse AbandonCartDetail
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            an.config,
-            "get",
-            fmt.Sprintf("/service/platform/analytics/v1.0/company/%s/application/%s/cart/abandon-cart/%s",an.CompanyID, an.ApplicationID, CartID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return AbandonCartDetail{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAbandonCartDetailResponse)
-        if err != nil {
-            return AbandonCartDetail{}, common.NewFDKError(err.Error())
-        }
-        return getAbandonCartDetailResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-    
-    
-    
-    
-    
     
 
  
@@ -22023,7 +19938,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // AddProxyPath Create proxy URL for the external URL
+    // AddProxyPath Add proxy path for external url
      func (pa *PlatformAppPartner)  AddProxyPath(ExtensionID string, body  AddProxyReq) (AddProxyResponse, error) {
         var (
             rawRequest  *RawRequest
@@ -22088,7 +20003,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // RemoveProxyPath Remove proxy URL for the external URL
+    // RemoveProxyPath Remove proxy path for external url
      func (pa *PlatformAppPartner)  RemoveProxyPath(ExtensionID string, AttachedPath string) (RemoveProxyResponse, error) {
         var (
             rawRequest  *RawRequest
