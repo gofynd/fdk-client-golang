@@ -18706,14 +18706,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetInvoiceList 
-     func (fi *PlatformFinance)  GetInvoiceList(body  GetInvoiceListRequest) (GetInvoiceListResponse, error){
+    // GetInvoiceType 
+     func (fi *PlatformFinance)  GetInvoiceType(body  GetInvoiceListRequest) (GetInvoiceListResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getInvoiceListResponse GetInvoiceListResponse
+            getInvoiceTypeResponse GetInvoiceListResponse
 	    )
 
         
@@ -18753,11 +18753,11 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return GetInvoiceListResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getInvoiceListResponse)
+        err = json.Unmarshal(response, &getInvoiceTypeResponse)
         if err != nil {
              return GetInvoiceListResponse{}, common.NewFDKError(err.Error())
         }
-        return getInvoiceListResponse, nil
+        return getInvoiceTypeResponse, nil
         
     }
          

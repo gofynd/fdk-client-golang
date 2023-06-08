@@ -767,7 +767,7 @@
     * [getAffiliate](#getaffiliate)
     * [downloadCreditDebitNote](#downloadcreditdebitnote)
     * [paymentProcess](#paymentprocess)
-    * [getInvoiceList](#getinvoicelist)
+    * [getInvoiceType](#getinvoicetype)
     * [invoiceListing](#invoicelisting)
     * [invoicePDF](#invoicepdf)
     
@@ -81621,12 +81621,12 @@ Schema: `PaymentProcessResponse`
 ---
 
 
-#### getInvoiceList
+#### getInvoiceType
 
 
 ```golang
 
-data, err := Finance.GetInvoiceList(CompanyID, body);
+data, err := Finance.GetInvoiceType(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
