@@ -13404,54 +13404,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteSearchKeywords Delete a custom keyword mapping by thier ID.
-     func (ca *PlatformAppCatalog)  DeleteSearchKeywords(ID string) (DeleteResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteSearchKeywordsResponse DeleteResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return DeleteResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteSearchKeywordsResponse)
-        if err != nil {
-            return DeleteResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteSearchKeywordsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // GetSearchKeywords Get a custom keyword search detail by their ID.
      func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsData, error) {
         var (
@@ -13490,6 +13442,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetSearchWordsData{}, common.NewFDKError(err.Error())
         }
         return getSearchKeywordsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteSearchKeywords Delete a custom keyword mapping by thier ID.
+     func (ca *PlatformAppCatalog)  DeleteSearchKeywords(ID string) (DeleteResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteSearchKeywordsResponse DeleteResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DeleteResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteSearchKeywordsResponse)
+        if err != nil {
+            return DeleteResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteSearchKeywordsResponse, nil
         
     }
            
@@ -13700,54 +13700,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteAutocompleteKeyword Delete a autocomplete keyword config by ID.
-     func (ca *PlatformAppCatalog)  DeleteAutocompleteKeyword(ID string) (DeleteResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteAutocompleteKeywordResponse DeleteResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return DeleteResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteAutocompleteKeywordResponse)
-        if err != nil {
-            return DeleteResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteAutocompleteKeywordResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // GetAutocompleteKeywordDetail Get the detail of the autocomplete config by ID.
      func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsData, error) {
         var (
@@ -13786,6 +13738,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetAutocompleteWordsData{}, common.NewFDKError(err.Error())
         }
         return getAutocompleteKeywordDetailResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteAutocompleteKeyword Delete a autocomplete keyword config by ID.
+     func (ca *PlatformAppCatalog)  DeleteAutocompleteKeyword(ID string) (DeleteResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteAutocompleteKeywordResponse DeleteResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DeleteResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteAutocompleteKeywordResponse)
+        if err != nil {
+            return DeleteResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteAutocompleteKeywordResponse, nil
         
     }
            
@@ -14121,54 +14121,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteSearchRerankConfig Delete the search re-ranking configured for an application bt its ID.
-     func (ca *PlatformAppCatalog)  DeleteSearchRerankConfig(ID string) (DeleteRerankResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteSearchRerankConfigResponse DeleteRerankResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/rerank/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return DeleteRerankResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteSearchRerankConfigResponse)
-        if err != nil {
-            return DeleteRerankResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteSearchRerankConfigResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // GetSearchRerankingConfig Get the search rerank details of an application by its ID.
      func (ca *PlatformAppCatalog)  GetSearchRerankingConfig(ID string) (SearchRerankingModel, error) {
         var (
@@ -14207,6 +14159,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return SearchRerankingModel{}, common.NewFDKError(err.Error())
         }
         return getSearchRerankingConfigResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteSearchRerankConfig Delete the search re-ranking configured for an application bt its ID.
+     func (ca *PlatformAppCatalog)  DeleteSearchRerankConfig(ID string) (DeleteRerankResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteSearchRerankConfigResponse DeleteRerankResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/rerank/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DeleteRerankResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteSearchRerankConfigResponse)
+        if err != nil {
+            return DeleteRerankResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteSearchRerankConfigResponse, nil
         
     }
            
@@ -26046,117 +26046,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
-    
-    
-  
-
-    
-    // AddAppDp Add application dp data
-     func (se *PlatformAppServiceability)  AddAppDp(body  ApplicationCompanyDpViewRequest) (ApplicationCompanyDpViewResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            addAppDpResponse ApplicationCompanyDpViewResponse
-	    )
-
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return ApplicationCompanyDpViewResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return ApplicationCompanyDpViewResponse{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            se.config,
-            "post",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s",se.CompanyID, se.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ApplicationCompanyDpViewResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &addAppDpResponse)
-        if err != nil {
-            return ApplicationCompanyDpViewResponse{}, common.NewFDKError(err.Error())
-        }
-        return addAppDpResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // DeleteAppDp Delete application dp data
-     func (se *PlatformAppServiceability)  DeleteAppDp(CourierPartnerID float64) (ApplicationCompanyDpViewResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteAppDpResponse ApplicationCompanyDpViewResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            se.config,
-            "delete",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/courier-partner/undefined",se.CompanyID, se.ApplicationID, CourierPartnerID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ApplicationCompanyDpViewResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteAppDpResponse)
-        if err != nil {
-            return ApplicationCompanyDpViewResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteAppDpResponse, nil
-        
-    }
-           
-       
-    
-    
-    
   
 
     
@@ -26410,127 +26299,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return PincodeMopUpdateAuditHistoryResponseData{}, common.NewFDKError(err.Error())
         }
         return updatePincodeAuditHistoryResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-  
-
-    
-    // UpsertDpApplicationRules Upsert of DpApplicationRules in database.
-     func (se *PlatformAppServiceability)  UpsertDpApplicationRules(body  DPApplicationRuleRequest) (DPApplicationRuleResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            upsertDpApplicationRulesResponse DPApplicationRuleResponse
-	    )
-
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return DPApplicationRuleResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return DPApplicationRuleResponse{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            se.config,
-            "put",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/courier/priority",se.CompanyID, se.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return DPApplicationRuleResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &upsertDpApplicationRulesResponse)
-        if err != nil {
-            return DPApplicationRuleResponse{}, common.NewFDKError(err.Error())
-        }
-        return upsertDpApplicationRulesResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetDpApplicationRules Get All DpApplicationRules rules added at application level from database.
-     func (se *PlatformAppServiceability)  GetDpApplicationRules() (DPApplicationRuleResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getDpApplicationRulesResponse DPApplicationRuleResponse
-	    )
-
-        
-
-         
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            se.config,
-            "get",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/courier/priority",se.CompanyID, se.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return DPApplicationRuleResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getDpApplicationRulesResponse)
-        if err != nil {
-            return DPApplicationRuleResponse{}, common.NewFDKError(err.Error())
-        }
-        return getDpApplicationRulesResponse, nil
         
     }
            

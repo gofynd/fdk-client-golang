@@ -359,20 +359,20 @@
 * [Catalog](#Catalog)
   * Methods
     * [updateSearchKeywords](#updatesearchkeywords)
-    * [deleteSearchKeywords](#deletesearchkeywords)
     * [getSearchKeywords](#getsearchkeywords)
+    * [deleteSearchKeywords](#deletesearchkeywords)
     * [createCustomKeyword](#createcustomkeyword)
     * [getAllSearchKeyword](#getallsearchkeyword)
     * [updateAutocompleteKeyword](#updateautocompletekeyword)
-    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
+    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createSearchRerankingConfig](#createsearchrerankingconfig)
     * [listSearchRerankConfig](#listsearchrerankconfig)
     * [updateSearchRerankConfig](#updatesearchrerankconfig)
-    * [deleteSearchRerankConfig](#deletesearchrerankconfig)
     * [getSearchRerankingConfig](#getsearchrerankingconfig)
+    * [deleteSearchRerankConfig](#deletesearchrerankconfig)
     * [createProductBundle](#createproductbundle)
     * [getProductBundle](#getproductbundle)
     * [updateProductBundle](#updateproductbundle)
@@ -438,8 +438,8 @@
     * [getVariantsOfProducts](#getvariantsofproducts)
     * [getProductAttributes](#getproductattributes)
     * [editProduct](#editproduct)
-    * [deleteProduct](#deleteproduct)
     * [getProduct](#getproduct)
+    * [deleteProduct](#deleteproduct)
     * [allSizes](#allsizes)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
@@ -732,29 +732,17 @@
     * [getEntityRegionView](#getentityregionview)
     * [getListView](#getlistview)
     * [getCompanyStoreView](#getcompanystoreview)
-    * [updateZoneControllerView](#updatezonecontrollerview)
     * [getZoneDataView](#getzonedataview)
+    * [updateZoneControllerView](#updatezonecontrollerview)
     * [createZone](#createzone)
     * [getZoneFromPincodeView](#getzonefrompincodeview)
     * [getZonesFromApplicationIdView](#getzonesfromapplicationidview)
     * [getStore](#getstore)
     * [getAllStores](#getallstores)
-    * [getOptimalLocations](#getoptimallocations)
-    * [addAppDp](#addappdp)
-    * [deleteAppDp](#deleteappdp)
     * [updatePincodeMopView](#updatepincodemopview)
     * [updatePincodeBulkView](#updatepincodebulkview)
     * [updatePincodeCoDListing](#updatepincodecodlisting)
     * [updatePincodeAuditHistory](#updatepincodeaudithistory)
-    * [upsertDpAccount](#upsertdpaccount)
-    * [updateDpRule](#updatedprule)
-    * [getDpRules](#getdprules)
-    * [upsertDpRules](#upsertdprules)
-    * [getDpRuleInsert](#getdpruleinsert)
-    * [upsertDpCompanyRules](#upsertdpcompanyrules)
-    * [getDpCompanyRules](#getdpcompanyrules)
-    * [upsertDpApplicationRules](#upsertdpapplicationrules)
-    * [getDpApplicationRules](#getdpapplicationrules)
     
 
 * [Finance](#Finance)
@@ -59508,49 +59496,6 @@ Schema: `GetSearchWordsData`
 ---
 
 
-#### deleteSearchKeywords
-Delete a custom keyword mapping by thier ID.
-
-```golang
-
-data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a numeric ID allotted to a business account on Fynd Platform. | 
-
-
-| ApplicationID | string | A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account. | 
-
-
-| ID | string | A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-This API allows you to delete a custom keyword mapping by their ID within an application. Returns an object that tells whether the keywords was deleted successfully
-
-*Success Response:*
-
-
-
-A successful response contains the success message if the keyword search mapping is deleted. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getSearchKeywords
 Get a custom keyword search detail by their ID.
 
@@ -59582,6 +59527,49 @@ A successful response contains the detail of the custom keyword search mapping i
 
 
 Schema: `GetSearchWordsData`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteSearchKeywords
+Delete a custom keyword mapping by thier ID.
+
+```golang
+
+data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account. | 
+
+
+| ID | string | A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+This API allows you to delete a custom keyword mapping by their ID within an application. Returns an object that tells whether the keywords was deleted successfully
+
+*Success Response:*
+
+
+
+A successful response contains the success message if the keyword search mapping is deleted. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -59724,49 +59712,6 @@ Schema: `UpdateAutocompleteWordData`
 ---
 
 
-#### deleteAutocompleteKeyword
-Delete a autocomplete keyword config by ID.
-
-```golang
-
-data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a numeric ID allotted to a business account on Fynd Platform. | 
-
-
-| ApplicationID | string | A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account. | 
-
-
-| ID | string | A `id` is a unique identifier for a specific autocomplete keyword map. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Autocomplete keywords configuration help you to extend and customize the behaviour of autocomplete search results in Fynd Platform. This API allows you to delete a keywords by it's `id`.
-
-*Success Response:*
-
-
-
-A successful response contains success message if config is deleted. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getAutocompleteKeywordDetail
 Get the detail of the autocomplete config by ID.
 
@@ -59798,6 +59743,49 @@ A successful response contains the data of the autocomplete with its specific ID
 
 
 Schema: `GetAutocompleteWordsData`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteAutocompleteKeyword
+Delete a autocomplete keyword config by ID.
+
+```golang
+
+data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account. | 
+
+
+| ID | string | A `id` is a unique identifier for a specific autocomplete keyword map. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+Autocomplete keywords configuration help you to extend and customize the behaviour of autocomplete search results in Fynd Platform. This API allows you to delete a keywords by it's `id`.
+
+*Success Response:*
+
+
+
+A successful response contains success message if config is deleted. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -60021,49 +60009,6 @@ Schema: `SearchRerankingModel`
 ---
 
 
-#### deleteSearchRerankConfig
-Delete the search re-ranking configured for an application bt its ID.
-
-```golang
-
-data, err := Catalog.DeleteSearchRerankConfig(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a numeric ID allotted to a business account on Fynd Platform. | 
-
-
-| ApplicationID | string | A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account. | 
-
-
-| ID | string | A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Search Reranking allows you rank and boost the search of the keywords and products in the product listing. This API allows you to delete a search re-ranking configured for the application.
-
-*Success Response:*
-
-
-
-A successful response contains the success response for the deleted custom search rerank configured for the application. See example below or refer `DeleteRerankResponseSchema` for details
-
-
-Schema: `DeleteRerankResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getSearchRerankingConfig
 Get the search rerank details of an application by its ID.
 
@@ -60095,6 +60040,49 @@ A successful response contains the detail of the custom search rerank configured
 
 
 Schema: `SearchRerankingModel`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteSearchRerankConfig
+Delete the search re-ranking configured for an application bt its ID.
+
+```golang
+
+data, err := Catalog.DeleteSearchRerankConfig(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account. | 
+
+
+| ID | string | A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+Search Reranking allows you rank and boost the search of the keywords and products in the product listing. This API allows you to delete a search re-ranking configured for the application.
+
+*Success Response:*
+
+
+
+A successful response contains the success response for the deleted custom search rerank configured for the application. See example below or refer `DeleteRerankResponseSchema` for details
+
+
+Schema: `DeleteRerankResponse`
 
 
 
@@ -62967,46 +62955,6 @@ Schema: `SuccessResponse`
 ---
 
 
-#### deleteProduct
-Delete a product.
-
-```golang
-
-data, err := Catalog.DeleteProduct(CompanyID, ItemID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
-
-
-| ItemID | float64 | Id of the product to be updated. | 
-
-
-
-This API allows to delete product.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getProduct
 Get a single product.
 
@@ -63040,6 +62988,46 @@ Product object. See example below or refer `product.utils.format_product_respons
 
 
 Schema: `SingleProductResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteProduct
+Delete a product.
+
+```golang
+
+data, err := Catalog.DeleteProduct(CompanyID, ItemID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
+
+
+| ItemID | float64 | Id of the product to be updated. | 
+
+
+
+This API allows to delete product.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
@@ -80388,6 +80376,46 @@ Schema: `CompanyStoreView_Response`
 ---
 
 
+#### getZoneDataView
+Zone Data View of application.
+
+```golang
+
+data, err := Serviceability.GetZoneDataView(CompanyID, ZoneID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
+
+
+
+This API returns Zone Data View of the application.
+
+*Success Response:*
+
+
+
+Get Application Zone Data
+
+
+Schema: `GetSingleZoneDataViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateZoneControllerView
 Updation of zone collections in database.
 
@@ -80417,46 +80445,6 @@ Response status_code
 
 
 Schema: `ZoneSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getZoneDataView
-Zone Data View of application.
-
-```golang
-
-data, err := Serviceability.GetZoneDataView(CompanyID, ZoneID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
-
-
-
-This API returns Zone Data View of the application.
-
-*Success Response:*
-
-
-
-Get Application Zone Data
-
-
-Schema: `GetSingleZoneDataViewResponse`
 
 
 
@@ -80674,128 +80662,6 @@ Schema: `GetStoresViewResponse`
 ---
 
 
-#### getOptimalLocations
-Get serviceable store of the item
-
-```golang
-
-data, err := Serviceability.GetOptimalLocations(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| body |  ReAssignStoreRequest | "Request body" 
-
-This API returns serviceable store of the item.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `ReAssignStoreResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### addAppDp
-Add application dp data
-
-```golang
-
-data, err := Serviceability.AddAppDp(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier of a particular sale channel. | 
-
-
-| body |  ApplicationCompanyDpViewRequest | "Request body" 
-
-This API add application dp data.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `ApplicationCompanyDpViewResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteAppDp
-Delete application dp data
-
-```golang
-
-data, err := Serviceability.DeleteAppDp(CompanyID, ApplicationID, CourierPartnerID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier of a particular sale channel. | 
-
-
-| CourierPartnerID | float64 | A `courier_partner_id` is a unique identifier of a particular delivery partner. | 
-
-
-
-This API remove application dp data.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `ApplicationCompanyDpViewResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updatePincodeMopView
 PincodeView update of MOP.
 
@@ -80948,356 +80814,6 @@ Response Data
 
 
 Schema: `PincodeMopUpdateAuditHistoryResponseData`
-
-
-
-
-
-
-
-
-
----
-
-
-#### upsertDpAccount
-Upsertion of DpAccount in database.
-
-```golang
-
-data, err := Serviceability.UpsertDpAccount(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| body |  CompanyDpAccountRequest | "Request body" 
-
-This API returns response of upsertion of DpAccount in mongo database.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `CompanyDpAccountResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateDpRule
-Updating of DpRules from database.
-
-```golang
-
-data, err := Serviceability.UpdateDpRule(CompanyID, RuleUID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| RuleUID | string | A `rule_uid` is a unique identifier for a particular Dp. | 
-
-
-| body |  DpRulesUpdateRequest | "Request body" 
-
-This API updates and returns response of DpRules from mongo database.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `DpRuleUpdateSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getDpRules
-Fetching of DpRules from database.
-
-```golang
-
-data, err := Serviceability.GetDpRules(CompanyID, RuleUID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| RuleUID | string | A `rule_uid` is a unique identifier for a particular Dp. | 
-
-
-
-This API returns response of DpRules from mongo database.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `DpRuleSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### upsertDpRules
-Upsert of DpRules in database.
-
-```golang
-
-data, err := Serviceability.UpsertDpRules(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| body |  DpRuleRequest | "Request body" 
-
-This API returns response of upsert of DpRules in mongo database.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `DpRuleSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getDpRuleInsert
-Fetching of DpRules from database.
-
-```golang
-
-data, err := Serviceability.GetDpRuleInsert(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-
-This API returns response of DpRules from mongo database.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `DpMultipleRuleSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### upsertDpCompanyRules
-Upsert of DpCompanyRules in database.
-
-```golang
-
-data, err := Serviceability.UpsertDpCompanyRules(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| body |  DPCompanyRuleRequest | "Request body" 
-
-This API returns response of upsert of DpCompanyRules in mongo database.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `DPCompanyRuleResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getDpCompanyRules
-Get All DpCompanyRules applied to company from database.
-
-```golang
-
-data, err := Serviceability.GetDpCompanyRules(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-
-This API returns response of all DpCompanyRules from mongo database.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `DPCompanyRuleResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### upsertDpApplicationRules
-Upsert of DpApplicationRules in database.
-
-```golang
-
-data, err := Serviceability.UpsertDpApplicationRules(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular application channel. | 
-
-
-| body |  DPApplicationRuleRequest | "Request body" 
-
-This API returns response of upsert of DpApplicationRules in mongo database.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `DPApplicationRuleResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getDpApplicationRules
-Get All DpApplicationRules rules added at application level from database.
-
-```golang
-
-data, err := Serviceability.GetDpApplicationRules(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular application channel. | 
-
-
-
-This API returns response of all rules of DpApplicationRules from mongo database.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `DPApplicationRuleResponse`
 
 
 
