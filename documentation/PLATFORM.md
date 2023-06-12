@@ -253,7 +253,6 @@
   * Methods
     * [getBrandPaymentGatewayConfig](#getbrandpaymentgatewayconfig)
     * [saveBrandPaymentGatewayConfig](#savebrandpaymentgatewayconfig)
-    * [updateBrandPaymentGatewayConfig](#updatebrandpaymentgatewayconfig)
     * [getPaymentModeRoutes](#getpaymentmoderoutes)
     * [getAllPayouts](#getallpayouts)
     * [savePayout](#savepayout)
@@ -272,6 +271,8 @@
     * [confirmPayment](#confirmpayment)
     * [getUserCODlimitRoutes](#getusercodlimitroutes)
     * [setUserCODlimitRoutes](#setusercodlimitroutes)
+    * [oauthGetUrl](#oauthgeturl)
+    * [revokeOauthToken](#revokeoauthtoken)
     
 
 * [Order](#Order)
@@ -299,14 +300,14 @@
     * [processManifest](#processmanifest)
     * [dispatchManifest](#dispatchmanifest)
     * [getRoleBasedActions](#getrolebasedactions)
-    * [postShipmentHistory](#postshipmenthistory)
     * [getShipmentHistory](#getshipmenthistory)
+    * [postShipmentHistory](#postshipmenthistory)
     * [sendSmsNinja](#sendsmsninja)
     * [platformManualAssignDPToShipment](#platformmanualassigndptoshipment)
     * [updatePackagingDimensions](#updatepackagingdimensions)
     * [createOrder](#createorder)
-    * [createChannelConfig](#createchannelconfig)
     * [getChannelConfig](#getchannelconfig)
+    * [createChannelConfig](#createchannelconfig)
     * [uploadConsent](#uploadconsent)
     * [orderUpdate](#orderupdate)
     * [checkOrderStatus](#checkorderstatus)
@@ -315,14 +316,14 @@
 
 * [Catalog](#Catalog)
   * Methods
-    * [deleteSearchKeywords](#deletesearchkeywords)
     * [getSearchKeywords](#getsearchkeywords)
     * [updateSearchKeywords](#updatesearchkeywords)
+    * [deleteSearchKeywords](#deletesearchkeywords)
     * [getAllSearchKeyword](#getallsearchkeyword)
     * [createCustomKeyword](#createcustomkeyword)
-    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [updateAutocompleteKeyword](#updateautocompletekeyword)
+    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [getProductBundle](#getproductbundle)
@@ -338,12 +339,12 @@
     * [getConfigurationMetadata](#getconfigurationmetadata)
     * [getGroupConfigurations](#getgroupconfigurations)
     * [createGroupConfiguration](#creategroupconfiguration)
-    * [deleteGroupConfiguration](#deletegroupconfiguration)
     * [updateGroupConfiguration](#updategroupconfiguration)
+    * [deleteGroupConfiguration](#deletegroupconfiguration)
     * [getListingConfigurations](#getlistingconfigurations)
     * [createListingConfiguration](#createlistingconfiguration)
-    * [deleteListingConfiguration](#deletelistingconfiguration)
     * [updateListingConfiguration](#updatelistingconfiguration)
+    * [deleteListingConfiguration](#deletelistingconfiguration)
     * [updateAllowSingle](#updateallowsingle)
     * [updateDefaultSort](#updatedefaultsort)
     * [getCatalogConfiguration](#getcatalogconfiguration)
@@ -355,8 +356,8 @@
     * [getAllCollections](#getallcollections)
     * [createCollection](#createcollection)
     * [getCollectionDetail](#getcollectiondetail)
-    * [deleteCollection](#deletecollection)
     * [updateCollection](#updatecollection)
+    * [deleteCollection](#deletecollection)
     * [getCollectionItems](#getcollectionitems)
     * [addCollectionItems](#addcollectionitems)
     * [getCatalogInsights](#getcataloginsights)
@@ -391,9 +392,9 @@
     * [createProduct](#createproduct)
     * [getVariantsOfProducts](#getvariantsofproducts)
     * [getProductAttributes](#getproductattributes)
-    * [deleteProduct](#deleteproduct)
     * [getProduct](#getproduct)
     * [editProduct](#editproduct)
+    * [deleteProduct](#deleteproduct)
     * [allSizes](#allsizes)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
@@ -550,6 +551,10 @@
     * [getPromotionById](#getpromotionbyid)
     * [updatePromotion](#updatepromotion)
     * [updatePromotionPartially](#updatepromotionpartially)
+    * [getPromosCouponConfig](#getpromoscouponconfig)
+    * [updateCartMetaConfig](#updatecartmetaconfig)
+    * [fetchCartMetaConfig](#fetchcartmetaconfig)
+    * [createCartMetaConfig](#createcartmetaconfig)
     * [fetchAndvalidateCartItems](#fetchandvalidatecartitems)
     * [checkCartServiceability](#checkcartserviceability)
     * [checkoutCart](#checkoutcart)
@@ -560,6 +565,7 @@
     * [getCouponOptionValues](#getcouponoptionvalues)
     * [getCouponCodeExists](#getcouponcodeexists)
     * [getPromotionCodeExists](#getpromotioncodeexists)
+    * [overrideCart](#overridecart)
     
 
 * [Rewards](#Rewards)
@@ -568,7 +574,6 @@
     * [saveGiveAway](#savegiveaway)
     * [getGiveawayById](#getgiveawaybyid)
     * [updateGiveAway](#updategiveaway)
-    * [getGiveawayAudienceStatus](#getgiveawayaudiencestatus)
     * [showOffers](#showoffers)
     * [getOfferByName](#getofferbyname)
     * [updateOfferByName](#updateofferbyname)
@@ -612,7 +617,20 @@
 
 * [Partner](#Partner)
   * Methods
+    * [subscribeExtension](#subscribeextension)
+    * [getExtensionsForCompany](#getextensionsforcompany)
+    * [getPublicExtension](#getpublicextension)
+    * [getExtensionById](#getextensionbyid)
+    * [deleteExtensionById](#deleteextensionbyid)
+    * [getPrivateExtensions](#getprivateextensions)
+    * [getExtensionsSuggestions](#getextensionssuggestions)
+    * [getPartnerInvites](#getpartnerinvites)
+    * [getPartnerRequestDetails](#getpartnerrequestdetails)
+    * [modifyPartnerRequest](#modifypartnerrequest)
+    * [setupProducts](#setupproducts)
+    * [getProxyPath](#getproxypath)
     * [addProxyPath](#addproxypath)
+    * [getProxyPathAttachedPath](#getproxypathattachedpath)
     * [removeProxyPath](#removeproxypath)
     
 
@@ -45062,7 +45080,9 @@ default
   "value": {
     "seo": {
       "details": {
-        "title": "Zyosa Zyosa"
+        "title": "Zyosa Zyosa",
+        "description": "",
+        "image_url": ""
       },
       "robots_txt": "User-agent: * \nAllow: / \nsancisciasn xwsaixjowqnxwsiwjs",
       "sitemap_enabled": false,
@@ -45139,7 +45159,9 @@ default
 {
   "value": {
     "details": {
-      "title": "Zyosa Zyosa"
+      "title": "Zyosa Zyosa",
+      "description": "",
+      "image_url": ""
     },
     "robots_txt": "User-agent: * \nAllow: / \nsancisciasn xwsaixjowqnxwsiwjs",
     "sitemap_enabled": false,
@@ -51759,47 +51781,6 @@ Schema: `PaymentGatewayToBeReviewed`
 ---
 
 
-#### updateBrandPaymentGatewayConfig
-Save Config Secret For Brand Payment Gateway
-
-```golang
-
-data, err := Payment.UpdateBrandPaymentGatewayConfig(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| body |  PaymentGatewayConfigRequest | "Request body" 
-
-Save Config Secret For Brand Payment Gateway
-
-*Success Response:*
-
-
-
-Save Config Secret For Brand Payment Gateway Success Response.
-
-
-Schema: `PaymentGatewayToBeReviewed`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getPaymentModeRoutes
 Get All Valid Payment Options
 
@@ -52529,6 +52510,97 @@ Success. Returns true/false for user cod option for payment. Check the example s
 
 
 Schema: `SetCODOptionResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### oauthGetUrl
+API to Get the url to call for oauth
+
+```golang
+
+data, err := Payment.OauthGetUrl(CompanyID, ApplicationID, Aggregator, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| Aggregator | string | aggregator | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `SuccessRedirectURL`, `FailureRedirectURL`
+
+
+Use this API to Get the url to call for oauth.
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `GetOauthUrlResponseSchema` for more details.
+
+
+Schema: `GetOauthUrlResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### revokeOauthToken
+API to Revoke oauth for razorpay partnership
+
+```golang
+
+data, err := Payment.RevokeOauthToken(CompanyID, ApplicationID, Aggregator);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| Aggregator | string | aggregator_slug | 
+
+
+
+Use this API to Revoke oauth for razorpay partnership
+
+*Success Response:*
+
+
+
+Success. Returns the status of revokation. Check the example shown below or refer `RevokeOAuthTokenSchema` for more details.
+
+
+Schema: `RevokeOAuthToken`
 
 
 
@@ -53631,12 +53703,12 @@ Schema: `GetActionsResponse`
 ---
 
 
-#### postShipmentHistory
+#### getShipmentHistory
 
 
 ```golang
 
-data, err := Order.PostShipmentHistory(CompanyID, body);
+data, err := Order.GetShipmentHistory(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -53645,7 +53717,11 @@ data, err := Order.PostShipmentHistory(CompanyID, body);
 | CompanyID | float64 |  | 
 
 
-| body |  PostShipmentHistory | "Request body" 
+
+
+
+| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
+
 
 
 
@@ -53669,12 +53745,12 @@ Schema: `ShipmentHistoryResponse`
 ---
 
 
-#### getShipmentHistory
+#### postShipmentHistory
 
 
 ```golang
 
-data, err := Order.GetShipmentHistory(CompanyID, xQuery);
+data, err := Order.PostShipmentHistory(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -53683,11 +53759,7 @@ data, err := Order.GetShipmentHistory(CompanyID, xQuery);
 | CompanyID | float64 |  | 
 
 
-
-
-
-| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
-
+| body |  PostShipmentHistory | "Request body" 
 
 
 
@@ -53863,6 +53935,43 @@ Schema: `CreateOrderResponse`
 ---
 
 
+#### getChannelConfig
+
+
+```golang
+
+data, err := Order.GetChannelConfig(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+getChannelConfig
+
+*Success Response:*
+
+
+
+Successfully created the config data
+
+
+Schema: `CreateChannelConfigData`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### createChannelConfig
 
 
@@ -53889,43 +53998,6 @@ Successfully updateShipmentStatus!
 
 
 Schema: `CreateChannelConfigResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getChannelConfig
-
-
-```golang
-
-data, err := Order.GetChannelConfig(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-getChannelConfig
-
-*Success Response:*
-
-
-
-Successfully created the config data
-
-
-Schema: `CreateChannelConfigData`
 
 
 
@@ -54096,49 +54168,6 @@ Schema: `OrderStatusResult`
 ## Catalog
 
 
-#### deleteSearchKeywords
-Delete a Search Keywords
-
-```golang
-
-data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getSearchKeywords
 Get a Search Keywords Details
 
@@ -54214,6 +54243,49 @@ The Collection object. See example below or refer `GetSearchWordsDataSchema` for
 
 
 Schema: `GetSearchWordsData`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteSearchKeywords
+Delete a Search Keywords
+
+```golang
+
+data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -54307,49 +54379,6 @@ Schema: `GetSearchWordsData`
 ---
 
 
-#### deleteAutocompleteKeyword
-Delete a Autocomplete Keywords
-
-```golang
-
-data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getAutocompleteKeywordDetail
 Get a Autocomplete Keywords Details
 
@@ -54425,6 +54454,49 @@ The Mapping object. See example below or refer `GetAutocompleteWordsResponseSche
 
 
 Schema: `GetAutocompleteWordsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteAutocompleteKeyword
+Delete a Autocomplete Keywords
+
+```golang
+
+data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -55075,52 +55147,6 @@ Schema: `AppConfigurationDetail`
 ---
 
 
-#### deleteGroupConfiguration
-Delete configuration of the product config type of the application.
-
-```golang
-
-data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
-
-
-| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
-
-
-
-Delete configuration of the product config type of the application.
-
-*Success Response:*
-
-
-
-success message will tell whether the operation was successful.
-
-
-Schema: `ConfigSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateGroupConfiguration
 Update the group configurations for the application.
 
@@ -55156,6 +55182,52 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationDetail`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteGroupConfiguration
+Delete configuration of the product config type of the application.
+
+```golang
+
+data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
+
+
+| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration of the product config type of the application.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
 
 
 
@@ -55262,52 +55334,6 @@ Schema: `AppConfigurationsSort`
 ---
 
 
-#### deleteListingConfiguration
-Delete configuration for listings
-
-```golang
-
-data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
-
-
-| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
-
-
-
-Delete configuration for listing.
-
-*Success Response:*
-
-
-
-success message will tell whether the operation was successful.
-
-
-Schema: `ConfigSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateListingConfiguration
 Update configuration for listings
 
@@ -55343,6 +55369,52 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationsSort`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteListingConfiguration
+Delete configuration for listings
+
+```golang
+
+data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
+
+
+| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration for listing.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
 
 
 
@@ -55824,49 +55896,6 @@ Schema: `CollectionDetailResponse`
 ---
 
 
-#### deleteCollection
-Delete a Collection
-
-```golang
-
-data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier of a collection. | 
-
-
-
-Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateCollection
 Update a collection
 
@@ -55899,6 +55928,49 @@ The Collection object. See example below or refer `UpdateCollectionSchema` for d
 
 
 Schema: `UpdateCollection`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteCollection
+Delete a Collection
+
+```golang
+
+data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier of a collection. | 
+
+
+
+Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -57336,46 +57408,6 @@ Schema: `ProductAttributesResponse`
 ---
 
 
-#### deleteProduct
-Delete a product.
-
-```golang
-
-data, err := Catalog.DeleteProduct(CompanyID, ItemID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
-
-
-| ItemID | float64 | Id of the product to be updated. | 
-
-
-
-This API allows to delete product.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getProduct
 Get a single product.
 
@@ -57441,6 +57473,46 @@ data, err := Catalog.EditProduct(CompanyID, ItemID, body);
 | body |  ProductCreateUpdateSchemaV2 | "Request body" 
 
 This API allows to edit product.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteProduct
+Delete a product.
+
+```golang
+
+data, err := Catalog.DeleteProduct(CompanyID, ItemID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
+
+
+| ItemID | float64 | Id of the product to be updated. | 
+
+
+
+This API allows to delete product.
 
 *Success Response:*
 
@@ -63607,6 +63679,171 @@ Promotion schedule updated successfully
 ---
 
 
+#### getPromosCouponConfig
+Fetch all promos that are set as active
+
+```golang
+
+data, err := Cart.GetPromosCouponConfig(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current Application _id | 
+
+
+
+Use this API to get list of all the active promos/coupons.
+
+*Success Response:*
+
+
+
+Success. Returns a list of all the curently active coupons/promos
+
+
+Schema: `ActivePromosResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateCartMetaConfig
+Update cart meta configuration
+
+```golang
+
+data, err := Cart.UpdateCartMetaConfig(CompanyID, ApplicationID, CartMetaID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current Application _id | 
+
+
+| CartMetaID | string |  | 
+
+
+| body |  CartMetaConfigUpdate | "Request body" 
+
+Update cart meta configuration
+
+*Success Response:*
+
+
+
+Cart Meta Config Created successfully
+
+
+Schema: `CartMetaConfigUpdate`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### fetchCartMetaConfig
+Fetch cart meta configuration
+
+```golang
+
+data, err := Cart.FetchCartMetaConfig(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current Application _id | 
+
+
+
+Fetch cart meta configuration
+
+*Success Response:*
+
+
+
+Cart Meta Config Fetched successfully
+
+
+Schema: `CartMetaConfigAdd`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createCartMetaConfig
+Create new cart meta configuration
+
+```golang
+
+data, err := Cart.CreateCartMetaConfig(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current Application _id | 
+
+
+| body |  CartMetaConfigAdd | "Request body" 
+
+Create new cart meta configuration
+
+*Success Response:*
+
+
+
+Cart Meta Config Created successfully
+
+
+Schema: `CartMetaConfigAdd`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### fetchAndvalidateCartItems
 Fetch Cart Details
 
@@ -65948,6 +66185,47 @@ Promotion code is new
 ---
 
 
+#### overrideCart
+Create Fynd order with overriding cart details
+
+```golang
+
+data, err := Cart.OverrideCart(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current Application _id | 
+
+
+| body |  OverrideCheckoutReq | "Request body" 
+
+Generate Fynd order while overriding cart details sent with provided `cart_items`
+
+*Success Response:*
+
+
+
+Checkout cart and create Fynd order id
+
+
+Schema: `OverrideCheckoutResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ---
 
@@ -65978,7 +66256,7 @@ data, err := Rewards.ShowGiveaways(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `PageID`, `PageSize`
 
 
-List of giveaways of the current application.
+Fetch the detailed compilation of live, completed, and scheduled point-based giveaways created.
 
 *Success Response:*
 
@@ -65988,6 +66266,77 @@ ok
 
 
 Schema: `GiveawayResponse`
+
+
+*Examples:*
+
+
+Success
+```json
+{
+  "value": {
+    "items": [
+      {
+        "_id": "645c9cdd199c5232d7848bc2",
+        "application_id": "5d5c304a4df829372e2ad6d1",
+        "name": "test deacs",
+        "title": "wscws",
+        "description": "wscfws",
+        "active": true,
+        "audience": {
+          "header_user_id": "uid",
+          "id": "645b6c682c6786d31eac6c89"
+        },
+        "rule": {
+          "amount": 100
+        },
+        "_schedule": {
+          "start": "2023-05-11T07:44:09.542Z",
+          "end": "2023-05-11T18:30:00.000Z"
+        },
+        "banner_image": {
+          "aspect_ratio": "2:1",
+          "secure_url": ""
+        },
+        "updated_by": "600693a01faf8695d70a15df",
+        "created_at": "2023-05-11T07:44:29.123Z",
+        "id": "645c9cdd199c5232d7848bc2"
+      },
+      {
+        "_id": "645b6e9be02d1131fc06c2b4",
+        "application_id": "5d5c304a4df829372e2ad6d1",
+        "name": "yedbx",
+        "title": "wdc",
+        "description": "wdfc",
+        "active": true,
+        "audience": {
+          "header_user_id": "uid",
+          "id": "645b6c682c6786d31eac6c89"
+        },
+        "rule": {
+          "amount": 100
+        },
+        "_schedule": {
+          "start": "2023-05-10T10:14:45.672Z",
+          "end": "2023-05-10T18:30:00.000Z"
+        },
+        "banner_image": {
+          "aspect_ratio": "2:1",
+          "secure_url": ""
+        },
+        "created_at": "2023-05-10T10:14:51.807Z",
+        "id": "645b6e9be02d1131fc06c2b4"
+      }
+    ],
+    "page": {
+      "item_total": 2,
+      "size": 10,
+      "current": 1,
+      "has_next": false
+    }
+  }
+}
+```
 
 
 
@@ -66019,7 +66368,7 @@ data, err := Rewards.SaveGiveAway(CompanyID, ApplicationID, body);
 
 | body |  Giveaway | "Request body" 
 
-Adds a new giveaway.
+Creates a new giveaway in the current application, specifying the target audience, points allocation, as well as the name and display name of the giveaway.
 
 *Success Response:*
 
@@ -66029,6 +66378,38 @@ ok
 
 
 Schema: `Giveaway`
+
+
+*Examples:*
+
+
+Success
+```json
+{
+  "value": {
+    "application_id": "5d5c304a4df829372e2ad6d1",
+    "name": "abhinav test",
+    "title": "abhinav test",
+    "description": "abhinav test",
+    "active": true,
+    "audience": {
+      "id": "6459029c9020a3d96599c528",
+      "header_user_id": "uid"
+    },
+    "rule": {
+      "amount": 1000
+    },
+    "_schedule": {
+      "start": "2023-05-24T09:35:02.800Z",
+      "end": "2023-05-24T18:30:00.000Z"
+    },
+    "banner_image": {
+      "secure_url": "",
+      "aspect_ratio": "2:1"
+    }
+  }
+}
+```
 
 
 
@@ -66062,7 +66443,7 @@ data, err := Rewards.GetGiveawayById(CompanyID, ApplicationID, ID);
 
 
 
-Get giveaway by ID.
+Retrieve the specific giveaway by giveaway ID. It will show all the details of the requested giveaway.
 
 *Success Response:*
 
@@ -66072,6 +66453,38 @@ ok
 
 
 Schema: `Giveaway`
+
+
+*Examples:*
+
+
+Success
+```json
+{
+  "value": {
+    "application_id": "5d5c304a4df829372e2ad6d1",
+    "name": "abhinav test",
+    "title": "abhinav test",
+    "description": "abhinav test",
+    "active": true,
+    "audience": {
+      "id": "6459029c9020a3d96599c528",
+      "header_user_id": "uid"
+    },
+    "rule": {
+      "amount": 1000
+    },
+    "_schedule": {
+      "start": "2023-05-24T09:35:02.800Z",
+      "end": "2023-05-24T18:30:00.000Z"
+    },
+    "banner_image": {
+      "secure_url": "",
+      "aspect_ratio": "2:1"
+    }
+  }
+}
+```
 
 
 
@@ -66106,7 +66519,7 @@ data, err := Rewards.UpdateGiveAway(CompanyID, ApplicationID, ID, body);
 
 | body |  Giveaway | "Request body" 
 
-Updates the giveaway by it's ID.
+Make the necessary updates to the giveaway based on its giveaway ID.
 
 *Success Response:*
 
@@ -66118,50 +66531,36 @@ ok
 Schema: `Giveaway`
 
 
-
-
-
-
-
-
-
----
-
-
-#### getGiveawayAudienceStatus
-Get the Giveaway audience status
-
-```golang
-
-data, err := Rewards.GetGiveawayAudienceStatus(ID, AudienceID, CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ID | string | Giveaway ID | 
-
-
-| AudienceID | string | audience id | 
-
-
-| CompanyID | string | company id | 
-
-
-| ApplicationID | string | application id | 
-
-
-
-Get giveaway audience status
-
-*Success Response:*
-
+*Examples:*
 
 
 Success
-
-
-Schema: `GiveawayAudience`
+```json
+{
+  "value": {
+    "application_id": "5d5c304a4df829372e2ad6d1",
+    "name": "abhinav test",
+    "title": "abhinav test",
+    "description": "abhinav test",
+    "active": true,
+    "audience": {
+      "id": "6459029c9020a3d96599c528",
+      "header_user_id": "uid"
+    },
+    "rule": {
+      "amount": 1000
+    },
+    "_schedule": {
+      "start": "2023-05-24T09:35:02.800Z",
+      "end": "2023-05-24T18:30:00.000Z"
+    },
+    "banner_image": {
+      "secure_url": "",
+      "aspect_ratio": "2:1"
+    }
+  }
+}
+```
 
 
 
@@ -66192,7 +66591,7 @@ data, err := Rewards.ShowOffers(CompanyID, ApplicationID);
 
 
 
-List of offers of the current application.
+Retrieve the list of offers within the current application, including order_discount, order, sign_up, and referral, along with their respective details.
 
 *Success Response:*
 
@@ -66202,6 +66601,227 @@ ok
 
 
 Schema: `Array<Offer>`
+
+
+*Examples:*
+
+
+Offer
+```json
+{
+  "value": [
+    {
+      "_id": "63bfb9c1195d62ac089641cd",
+      "application_id": "5d5c304a4df829372e2ad6d1",
+      "name": "order",
+      "_schedule": {},
+      "active": true,
+      "banner_image": {
+        "aspect_ratio": "2:1",
+        "secure_url": "https://hdn-1.fynd.com/company/884/applications/000000000000000000000001/rewards/pictures/landscape-banner/original/dbY4bHh9d-reward-banner.png"
+      },
+      "created_at": "2023-01-12T07:41:53.356Z",
+      "display": {
+        "validity": 1000,
+        "validity_unit": "hours"
+      },
+      "info_action": {
+        "type": "",
+        "page": {
+          "type": "",
+          "params": {
+            "slug": null
+          },
+          "url": ""
+        }
+      },
+      "rule": {
+        "claimed": true,
+        "value": 10,
+        "value_type": "percent",
+        "validity": 60000
+      },
+      "share": {
+        "default": "Hey, join me on {{application_name}} and get exciting offers and reward points. Signup today and quickly earn Rs.{{offer_amount}}. Visit {{offer_link}} now!",
+        "text": ""
+      },
+      "sub_text": "Purchase and get reward points",
+      "text": "Order & Earn",
+      "type": "earn",
+      "updated_at": "2023-01-12T15:46:04.854Z",
+      "updated_by": "6678589f5d0df704c9996644",
+      "url": ""
+    },
+    {
+      "_id": "6363f62638693f31a29e51ea",
+      "application_id": "5d5c304a4df829372e2ad6d1",
+      "name": "order_discount",
+      "_schedule": {},
+      "active": true,
+      "banner_image": {
+        "aspect_ratio": "2:1",
+        "secure_url": "https://hdn-1.fynd.com/company/884/applications/000000000000000000000001/rewards/pictures/landscape-banner/original/dbY4bHh9d-reward-banner.png"
+      },
+      "created_at": "2022-11-03T17:11:02.555Z",
+      "display": {
+        "validity": 0,
+        "validity_unit": ""
+      },
+      "info_action": {
+        "type": "",
+        "page": {
+          "type": "",
+          "params": {
+            "slug": null
+          },
+          "url": ""
+        }
+      },
+      "rule": {
+        "currency": "INR",
+        "buckets": [
+          {
+            "low": 1,
+            "high": 1000,
+            "max": 10000,
+            "value": 100,
+            "value_type": "percent"
+          },
+          {
+            "low": 1001,
+            "high": -1,
+            "max": 15000,
+            "value": 1000,
+            "value_type": "percent"
+          }
+        ]
+      },
+      "share": {
+        "default": "",
+        "text": ""
+      },
+      "sub_text": "Get flat discounts on total order amount. Shop now!",
+      "text": "Get flat discounts on total order amount",
+      "type": "redeem",
+      "updated_at": "2022-11-03T17:11:02.557Z",
+      "updated_by": "3d20f854d736c43f7fd4a9e3",
+      "url": ""
+    },
+    {
+      "_id": "6321aee18c981b2d5053942a",
+      "application_id": "5d5c304a4df829372e2ad6d1",
+      "name": "referral",
+      "_schedule": {},
+      "active": true,
+      "banner_image": {
+        "aspect_ratio": "2:1",
+        "secure_url": "https://hdn-1.fynd.com/company/884/applications/000000000000000000000001/rewards/pictures/landscape-banner/original/dbY4bHh9d-reward-banner.png"
+      },
+      "created_at": "0001-01-01T00:00:00.000Z",
+      "display": {
+        "validity": 10,
+        "validity_unit": "days"
+      },
+      "info_action": {
+        "type": "",
+        "page": {
+          "type": "",
+          "params": {
+            "slug": null
+          },
+          "url": ""
+        }
+      },
+      "rule": {
+        "counter": 0,
+        "amount": 100,
+        "referrer_amount": 100,
+        "amount_validity": 14400,
+        "threshold": 10000
+      },
+      "share": {
+        "default": "Hey, join me on {{application_name}} and get exciting offers and reward points. Signup today and quickly earn Rs.{{offer_amount}}. Visit {{offer_link}} now!",
+        "text": ""
+      },
+      "sub_text": "Share your referral code, invite your friends and you'll both get exciting reward points!",
+      "text": "Refer & Earn",
+      "type": "earn",
+      "updated_at": "2022-09-14T10:37:22.340Z",
+      "updated_by": "600693a01faf8695d70a15df",
+      "url": ""
+    },
+    {
+      "_id": "642312c095baca2e5ba4e8a7",
+      "application_id": "5d5c304a4df829372e2ad6d1",
+      "name": "refund_points",
+      "__v": 0,
+      "active": true,
+      "banner_image": {
+        "secure_url": "",
+        "aspect_ratio": "2:1"
+      },
+      "created_at": "2023-03-28T16:15:54.294Z",
+      "rule": {
+        "amount_validity": 60000,
+        "counter": 0
+      },
+      "sub_text": "Your wallet is configure with the points related to the most recent order cancellation. Happy shopping.",
+      "text": "Points Returned",
+      "type": "earn",
+      "updated_at": "2023-03-28T16:16:01.539Z",
+      "updated_by": "600693a01faf8695d70a15df",
+      "updated_by_name": "abhinavmaurya_gofynd_com_44493",
+      "display": {
+        "validity": 60000,
+        "validity_unit": "minutes"
+      },
+      "share": {}
+    },
+    {
+      "_id": "6385d7d8a30091f25bf71514",
+      "application_id": "5d5c304a4df829372e2ad6d1",
+      "name": "sign_up",
+      "_schedule": {},
+      "active": true,
+      "banner_image": {
+        "aspect_ratio": "2:1",
+        "secure_url": "https://hdn-1.fynd.com/company/884/applications/000000000000000000000001/rewards/pictures/landscape-banner/original/dbY4bHh9d-reward-banner.png"
+      },
+      "created_at": "2022-11-29T09:58:48.487Z",
+      "display": {
+        "validity": 10,
+        "validity_unit": "days"
+      },
+      "info_action": {
+        "type": "",
+        "page": {
+          "type": "",
+          "params": {
+            "slug": null
+          },
+          "url": ""
+        }
+      },
+      "rule": {
+        "counter": 0,
+        "amount": 1000,
+        "amount_validity": 14400,
+        "threshold": 10000
+      },
+      "share": {
+        "default": "",
+        "text": ""
+      },
+      "sub_text": "Sign-up today and get exclusive offers and reward points!",
+      "text": "Sign Up & Win",
+      "type": "earn",
+      "updated_at": "2022-11-29T09:58:48.491Z",
+      "updated_by": "600693a01faf8695d70a15df",
+      "url": ""
+    }
+  ]
+}
+```
 
 
 
@@ -66215,7 +66835,7 @@ Schema: `Array<Offer>`
 
 
 #### getOfferByName
-Get offer by name
+Fetch a offer by its name
 
 ```golang
 
@@ -66235,7 +66855,7 @@ data, err := Rewards.GetOfferByName(Name, CompanyID, ApplicationID);
 
 
 
-Use this API to get the offer details and configuration by entering the name of the offer.
+Fetch the specific offer details and configuration by the name of the offer.
 
 *Success Response:*
 
@@ -66245,6 +66865,58 @@ Success. Check example below or refer `Offer` for more details.
 
 
 Schema: `Offer`
+
+
+*Examples:*
+
+
+Success
+```json
+{
+  "value": {
+    "_id": "63bfb9c1195d62ac089641cd",
+    "application_id": "5d5c304a4df829372e2ad6d1",
+    "name": "order",
+    "_schedule": {},
+    "active": true,
+    "banner_image": {
+      "aspect_ratio": "2:1",
+      "secure_url": "https://hdn-1.fynd.com/company/884/applications/000000000000000000000001/rewards/pictures/landscape-banner/original/dbY4bHh9d-reward-banner.png"
+    },
+    "created_at": "2023-01-12T07:41:53.356Z",
+    "display": {
+      "validity": 1000,
+      "validity_unit": "hours"
+    },
+    "info_action": {
+      "type": "",
+      "page": {
+        "type": "",
+        "params": {
+          "slug": null
+        },
+        "url": ""
+      }
+    },
+    "rule": {
+      "claimed": true,
+      "value": 10,
+      "value_type": "percent",
+      "validity": 60000
+    },
+    "share": {
+      "default": "Hey, join me on {{application_name}} and get exciting offers and reward points. Signup today and quickly earn Rs.{{offer_amount}}. Visit {{offer_link}} now!",
+      "text": ""
+    },
+    "sub_text": "Purchase and get reward points",
+    "text": "Order & Earn",
+    "type": "earn",
+    "updated_at": "2023-01-12T15:46:04.854Z",
+    "updated_by": "6678589f5d0df704c9996644",
+    "url": ""
+  }
+}
+```
 
 
 
@@ -66279,7 +66951,7 @@ data, err := Rewards.UpdateOfferByName(Name, CompanyID, ApplicationID, body);
 
 | body |  Offer | "Request body" 
 
-Use this API to update the offer details
+Update the specific offer details and its configuration by offer name.
 
 *Success Response:*
 
@@ -66289,6 +66961,58 @@ Success. Check example below or refer `Offer` for more details.
 
 
 Schema: `Offer`
+
+
+*Examples:*
+
+
+Success
+```json
+{
+  "value": {
+    "_id": "63bfb9c1195d62ac089641cd",
+    "application_id": "5d5c304a4df829372e2ad6d1",
+    "name": "order",
+    "_schedule": {},
+    "active": true,
+    "banner_image": {
+      "aspect_ratio": "2:1",
+      "secure_url": "https://hdn-1.fynd.com/company/884/applications/000000000000000000000001/rewards/pictures/landscape-banner/original/dbY4bHh9d-reward-banner.png"
+    },
+    "created_at": "2023-01-12T07:41:53.356Z",
+    "display": {
+      "validity": 1000,
+      "validity_unit": "hours"
+    },
+    "info_action": {
+      "type": "",
+      "page": {
+        "type": "",
+        "params": {
+          "slug": null
+        },
+        "url": ""
+      }
+    },
+    "rule": {
+      "claimed": true,
+      "value": 10,
+      "value_type": "percent",
+      "validity": 60000
+    },
+    "share": {
+      "default": "Hey, join me on {{application_name}} and get exciting offers and reward points. Signup today and quickly earn Rs.{{offer_amount}}. Visit {{offer_link}} now!",
+      "text": ""
+    },
+    "sub_text": "Purchase and get reward points",
+    "text": "Order & Earn",
+    "type": "earn",
+    "updated_at": "2023-01-12T15:46:04.854Z",
+    "updated_by": "6678589f5d0df704c9996644",
+    "url": ""
+  }
+}
+```
 
 
 
@@ -66323,7 +67047,7 @@ data, err := Rewards.UpdateUserStatus(UserID, CompanyID, ApplicationID, body);
 
 | body |  AppUser | "Request body" 
 
-Use this API to update the user status active/archive
+Update the user status by marking them as a block or unblock. It can be done by changing the active flag in request body.
 
 *Success Response:*
 
@@ -66333,6 +67057,33 @@ Success
 
 
 Schema: `AppUser`
+
+
+*Examples:*
+
+
+Success
+```json
+{
+  "value": {
+    "user": {
+      "_id": "6362648a38693f31a29e51e2",
+      "user_id": "620f8234e517800d9497660d",
+      "referral": {
+        "code": "HASE02"
+      },
+      "application_id": "5d5c304a4df829372e2ad6d1",
+      "created_at": "2022-11-02T12:37:30.078Z",
+      "updated_at": "2022-11-02T12:37:30.078Z",
+      "active": false,
+      "block_reason": "test"
+    },
+    "points": {
+      "available": 0
+    }
+  }
+}
+```
 
 
 
@@ -66366,7 +67117,7 @@ data, err := Rewards.GetUserDetails(UserID, CompanyID, ApplicationID);
 
 
 
-Use this API to get the user reward details
+Fetches the user details and the user reward details with their current reward points for the specific user.
 
 *Success Response:*
 
@@ -66376,6 +67127,33 @@ Success. Check example below or refer `UserRes` for more details.
 
 
 Schema: `UserRes`
+
+
+*Examples:*
+
+
+Success
+```json
+{
+  "value": {
+    "user": {
+      "_id": "6362648a38693f31a29e51e2",
+      "user_id": "620f8234e517800d9497660d",
+      "referral": {
+        "code": "HASE02"
+      },
+      "application_id": "5d5c304a4df829372e2ad6d1",
+      "created_at": "2022-11-02T12:37:30.078Z",
+      "updated_at": "2022-11-02T12:37:30.078Z",
+      "active": false,
+      "block_reason": "test"
+    },
+    "points": {
+      "available": 0
+    }
+  }
+}
+```
 
 
 
@@ -66414,7 +67192,7 @@ data, err := Rewards.GetUserPointsHistory(UserID, CompanyID, ApplicationID, xQue
 | xQuery | struct | Includes properties such as `PageID`, `PageSize`
 
 
-Use this API to get a list of points transactions.
+Fetches a list of points transactions like giveaway points, signup points, referral points, order earn points, redeem points and expired points.
 
 *Success Response:*
 
@@ -66424,6 +67202,65 @@ Success. Check example below or refer `HistoryRes` for more details.
 
 
 Schema: `HistoryRes`
+
+
+*Examples:*
+
+
+Success
+```json
+{
+  "value": {
+    "items": [
+      {
+        "_id": "6464a9eb70e0debb8462667d",
+        "application_id": "000000000000000000000001",
+        "user_id": "000000000000000009802478",
+        "points": 500,
+        "remaining_points": 500,
+        "txn_name": "signup_credit",
+        "claimed": true,
+        "expires_on": "2023-06-14T10:18:19.118Z",
+        "meta": {
+          "offer_id": "630e0b8e349f3f1cfbec572f"
+        },
+        "created_at": "2023-05-17T10:18:19.118Z",
+        "updated_at": "2023-05-17T10:18:19.118Z",
+        "text_1": "Signup points",
+        "text_2": "Additional Points",
+        "text_3": "Will expire on 3:48 PM, 14 Jun'23"
+      },
+      {
+        "_id": "6464a9d370e0debb84626677",
+        "application_id": "000000000000000000000001",
+        "user_id": "000000000000000009802478",
+        "points": 500,
+        "remaining_points": 500,
+        "txn_name": "signup_credit",
+        "claimed": true,
+        "expires_on": "2023-06-14T10:17:55.588Z",
+        "meta": {
+          "offer_id": "630e0b8e349f3f1cfbec572f"
+        },
+        "created_at": "2023-05-17T10:17:55.588Z",
+        "updated_at": "2023-05-17T10:17:55.588Z",
+        "text_1": "Signup points",
+        "text_2": "Additional Points",
+        "text_3": "Will expire on 3:47 PM, 14 Jun'23"
+      }
+    ],
+    "page": {
+      "current": 0,
+      "item_total": 2,
+      "type": "cursor",
+      "size": 1,
+      "has_previous": true,
+      "has_next": false,
+      "next_id": ""
+    }
+  }
+}
+```
 
 
 
@@ -66454,7 +67291,7 @@ data, err := Rewards.GetRewardsConfiguration(CompanyID, ApplicationID);
 
 
 
-Use this API to get a list of valid android paths required by the Rewards INIT API to validate a fradualent device.
+Use this API to get a list of valid android paths required by the Rewards INIT API to validate a fraudulent device.
 
 *Success Response:*
 
@@ -66464,6 +67301,24 @@ Success. Refer `ConfigurationRes` for more details.
 
 
 Schema: `ConfigurationRes`
+
+
+*Examples:*
+
+
+ConfigurationRes
+```json
+{
+  "value": {
+    "success": true,
+    "terms_conditions_link": "https://fynd.freshdesk.com/support/solutions/folders/33000111619",
+    "valid_android_packages": [
+      "co.abc.com"
+    ],
+    "application_id": "5d5c304a4df829372e2ad6d1"
+  }
+}
+```
 
 
 
@@ -66495,7 +67350,7 @@ data, err := Rewards.SetRewardsConfiguration(CompanyID, ApplicationID, body);
 
 | body |  ConfigurationRequest | "Request body" 
 
-Updates the configuration or inserts new records.
+Updates the configuration or inserts new records with the given android paths.
 
 *Success Response:*
 
@@ -66505,6 +67360,24 @@ ok
 
 
 Schema: `SetConfigurationRes`
+
+
+*Examples:*
+
+
+Success
+```json
+{
+  "value": {
+    "success": true,
+    "terms_conditions_link": "https://fynd.freshdesk.com/support/solutions/folders/33000111619",
+    "valid_android_packages": [
+      "co.abc.com"
+    ],
+    "application_id": "5d5c304a4df829372e2ad6d1"
+  }
+}
+```
 
 
 
@@ -67524,6 +68397,520 @@ Schema: `CancelJobResponse`
 ## Partner
 
 
+#### subscribeExtension
+Subscribe for extension plan
+
+```golang
+
+data, err := Partner.SubscribeExtension(CompanyID, Entity, ExtensionID, EntityID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| Entity | string | entity | 
+
+
+| ExtensionID | string | extension id | 
+
+
+| EntityID | string | entity id | 
+
+
+| body |  SubscriptionRequest | "Request body" 
+
+Use this API to select plan for paid extension
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `SubscriptionRes`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getExtensionsForCompany
+Get the list of all the extensions
+
+```golang
+
+data, err := Partner.GetExtensionsForCompany(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageSize`, `Tag`, `CurrentPage`, `PageNo`, `FilterBy`, `Query`
+
+
+Use this API to get the the extensions for the company
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `ExtensionList`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPublicExtension
+Get details of public extension
+
+```golang
+
+data, err := Partner.GetPublicExtension(CompanyID, ExtensionID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ExtensionID | string | Extension id | 
+
+
+
+Use this API to get the details of public extensions
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `PublicExtension`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getExtensionById
+Get extension details
+
+```golang
+
+data, err := Partner.GetExtensionById(CompanyID, ExtensionID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ExtensionID | string | Extension id | 
+
+
+
+Use this API to get the details of extension
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `ExtensionCommon`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteExtensionById
+Uninstall extension
+
+```golang
+
+data, err := Partner.DeleteExtensionById(CompanyID, ExtensionID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ExtensionID | string | Extension id | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Message`, `UninstallReasonType`
+
+
+Use this API to remove extension from yout company or channel
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `UninstallExtension`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPrivateExtensions
+Get the list of private extensions
+
+```golang
+
+data, err := Partner.GetPrivateExtensions(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageSize`, `PageNo`, `Query`
+
+
+Use this API to get the list of private extensions
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `ExtensionResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getExtensionsSuggestions
+Get the list of all the extension suggestions
+
+```golang
+
+data, err := Partner.GetExtensionsSuggestions(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+
+| xQuery | struct | Includes properties such as `PageSize`
+
+
+Use this API to get the the extensions suggestions
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `ExtensionSuggestionList`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPartnerInvites
+Get partner invites
+
+```golang
+
+data, err := Partner.GetPartnerInvites(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `RequestStatus`, `PageSize`, `PageNo`
+
+
+Use this API to get pending, accepted and rejected partner invites in platform
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `PartnerRequestList`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPartnerRequestDetails
+Get partner request details
+
+```golang
+
+data, err := Partner.GetPartnerRequestDetails(CompanyID, InviteID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| InviteID | string | invitation id | 
+
+
+
+Use this API to get details of pending partner request
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `PartnerInviteDetails`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### modifyPartnerRequest
+Act on the pending partner request
+
+```golang
+
+data, err := Partner.ModifyPartnerRequest(CompanyID, InviteID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| InviteID | string | invitation id | 
+
+
+| body |  ModifyPartnerReq | "Request body" 
+
+Use this API to approve or reject the pending partner request
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `PartnerInviteDetails`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### setupProducts
+
+
+```golang
+
+data, err := Partner.SetupProducts(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+
+| xQuery | struct | Includes properties such as `RequestID`
+
+
+Use this API for setup
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `SetupProductRes`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProxyPath
+Proxy
+
+```golang
+
+data, err := Partner.GetProxyPath(CompanyID, ApplicationID, ExtensionID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current application id | 
+
+
+| ExtensionID | string | extension id | 
+
+
+
+Use this API to get proxy url
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `getProxyPathRes`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### addProxyPath
 Create proxy URL for the external URL
 
@@ -67553,6 +68940,52 @@ Use this API to generate proxy URL for the external URL
 
 
 Proxy created successfully
+
+
+Schema: `AddProxyResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProxyPathAttachedPath
+Proxy
+
+```golang
+
+data, err := Partner.GetProxyPathAttachedPath(CompanyID, ApplicationID, ExtensionID, AttachedPath);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current application id | 
+
+
+| ExtensionID | string | extension id | 
+
+
+| AttachedPath | string | application id | 
+
+
+
+Use this API to get proxy url
+
+*Success Response:*
+
+
+
+Success
 
 
 Schema: `AddProxyResponse`

@@ -35,6 +35,8 @@ type PlatformClient struct {
 	
 		Discount  *PlatformDiscount
 	
+		Partner  *PlatformPartner
+	
 		Webhook  *PlatformWebhook
 	
 		AuditTrail  *PlatformAuditTrail
@@ -70,6 +72,8 @@ func NewPlatformClient(config *PlatformConfig) *PlatformClient {
 				Analytics:  NewPlatformAnalytics(config),
 			
 				Discount:  NewPlatformDiscount(config),
+			
+				Partner:  NewPlatformPartner(config),
 			
 				Webhook:  NewPlatformWebhook(config),
 			
@@ -2160,8 +2164,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
     
     
-    
-    
    
   
     
@@ -2793,6 +2795,10 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
          
         
        
+    
+    
+    
+    
     
     
     
@@ -4431,6 +4437,68 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformGetShipmentHistoryXQuery holds query params
+    type PlatformGetShipmentHistoryXQuery struct { 
+        ShipmentID float64  `url:"shipment_id,omitempty"` 
+        BagID float64  `url:"bag_id,omitempty"`  
+    }
+    
+
+
+    // GetShipmentHistory 
+     func (or *PlatformOrder)  GetShipmentHistory(xQuery PlatformGetShipmentHistoryXQuery) (ShipmentHistoryResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getShipmentHistoryResponse ShipmentHistoryResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "get",
+            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/shipment/history",or.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ShipmentHistoryResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getShipmentHistoryResponse)
+        if err != nil {
+             return ShipmentHistoryResponse{}, common.NewFDKError(err.Error())
+        }
+        return getShipmentHistoryResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
 
 
     // PostShipmentHistory 
@@ -4485,68 +4553,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return ShipmentHistoryResponse{}, common.NewFDKError(err.Error())
         }
         return postShipmentHistoryResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformGetShipmentHistoryXQuery holds query params
-    type PlatformGetShipmentHistoryXQuery struct { 
-        ShipmentID float64  `url:"shipment_id,omitempty"` 
-        BagID float64  `url:"bag_id,omitempty"`  
-    }
-    
-
-
-    // GetShipmentHistory 
-     func (or *PlatformOrder)  GetShipmentHistory(xQuery PlatformGetShipmentHistoryXQuery) (ShipmentHistoryResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getShipmentHistoryResponse ShipmentHistoryResponse
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "get",
-            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/shipment/history",or.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return ShipmentHistoryResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getShipmentHistoryResponse)
-        if err != nil {
-             return ShipmentHistoryResponse{}, common.NewFDKError(err.Error())
-        }
-        return getShipmentHistoryResponse, nil
         
     }
          
@@ -4854,6 +4860,56 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
+    // GetChannelConfig 
+     func (or *PlatformOrder)  GetChannelConfig() (CreateChannelConfigData, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getChannelConfigResponse CreateChannelConfigData
+	    )
+
+        
+
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "get",
+            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/order-config",or.CompanyID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return CreateChannelConfigData{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getChannelConfigResponse)
+        if err != nil {
+             return CreateChannelConfigData{}, common.NewFDKError(err.Error())
+        }
+        return getChannelConfigResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
     // CreateChannelConfig 
      func (or *PlatformOrder)  CreateChannelConfig(body  CreateChannelConfigData) (CreateChannelConfigResponse, error){
         
@@ -4906,56 +4962,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return CreateChannelConfigResponse{}, common.NewFDKError(err.Error())
         }
         return createChannelConfigResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // GetChannelConfig 
-     func (or *PlatformOrder)  GetChannelConfig() (CreateChannelConfigData, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getChannelConfigResponse CreateChannelConfigData
-	    )
-
-        
-
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.Config,
-            "get",
-            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/order-config",or.CompanyID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return CreateChannelConfigData{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getChannelConfigResponse)
-        if err != nil {
-             return CreateChannelConfigData{}, common.NewFDKError(err.Error())
-        }
-        return getChannelConfigResponse, nil
         
     }
          
@@ -7967,58 +7973,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-
-
-    // DeleteProduct Delete a product.
-     func (ca *PlatformCatalog)  DeleteProduct(ItemID float64) (SuccessResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteProductResponse SuccessResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteProductResponse)
-        if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteProductResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
     //PlatformGetProductXQuery holds query params
     type PlatformGetProductXQuery struct { 
         BrandUID float64  `url:"brand_uid,omitempty"` 
@@ -8221,6 +8175,58 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return SuccessResponse{}, common.NewFDKError(err.Error())
         }
         return editProductResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // DeleteProduct Delete a product.
+     func (ca *PlatformCatalog)  DeleteProduct(ItemID float64) (SuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteProductResponse SuccessResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteProductResponse)
+        if err != nil {
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteProductResponse, nil
         
     }
          
@@ -14977,6 +14983,735 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
          
         
        
+    
+
+
+	
+   // PlatformPartner holds PlatformPartner object properties
+    type PlatformPartner struct {
+        Config *PlatformConfig
+        CompanyID string
+    }
+    // NewPlatformPartner returns new PlatformPartner instance
+    func NewPlatformPartner(config *PlatformConfig) *PlatformPartner {
+        return &PlatformPartner{Config: config, CompanyID: config.CompanyID}
+    }
+    
+    
+   
+  
+    
+    
+
+
+    // SubscribeExtension Subscribe for extension plan
+     func (pa *PlatformPartner)  SubscribeExtension(Entity string, ExtensionID string, EntityID string, body  SubscriptionRequest) (SubscriptionRes, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            subscribeExtensionResponse SubscriptionRes
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+        
+        
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return SubscriptionRes{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return SubscriptionRes{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.Config,
+            "post",
+            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/extension/%s/%s/%s/charge_consent",pa.CompanyID, Entity, ExtensionID, EntityID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SubscriptionRes{}, err
+	    }
+        
+        err = json.Unmarshal(response, &subscribeExtensionResponse)
+        if err != nil {
+             return SubscriptionRes{}, common.NewFDKError(err.Error())
+        }
+        return subscribeExtensionResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetExtensionsForCompanyXQuery holds query params
+    type PlatformGetExtensionsForCompanyXQuery struct { 
+        PageSize float64  `url:"page_size,omitempty"` 
+        Tag string  `url:"tag,omitempty"` 
+        CurrentPage string  `url:"current_page,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        FilterBy string  `url:"filter_by,omitempty"` 
+        Query string  `url:"query,omitempty"`  
+    }
+    
+
+
+    // GetExtensionsForCompany Get the list of all the extensions
+     func (pa *PlatformPartner)  GetExtensionsForCompany(xQuery PlatformGetExtensionsForCompanyXQuery) (ExtensionList, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getExtensionsForCompanyResponse ExtensionList
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.Config,
+            "get",
+            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/extensions",pa.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ExtensionList{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getExtensionsForCompanyResponse)
+        if err != nil {
+             return ExtensionList{}, common.NewFDKError(err.Error())
+        }
+        return getExtensionsForCompanyResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetPublicExtension Get details of public extension
+     func (pa *PlatformPartner)  GetPublicExtension(ExtensionID string) (PublicExtension, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getPublicExtensionResponse PublicExtension
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.Config,
+            "get",
+            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/public-extension/%s",pa.CompanyID, ExtensionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return PublicExtension{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPublicExtensionResponse)
+        if err != nil {
+             return PublicExtension{}, common.NewFDKError(err.Error())
+        }
+        return getPublicExtensionResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetExtensionById Get extension details
+     func (pa *PlatformPartner)  GetExtensionById(ExtensionID string) (ExtensionCommon, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getExtensionByIdResponse ExtensionCommon
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.Config,
+            "get",
+            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/extension/%s",pa.CompanyID, ExtensionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ExtensionCommon{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getExtensionByIdResponse)
+        if err != nil {
+             return ExtensionCommon{}, common.NewFDKError(err.Error())
+        }
+        return getExtensionByIdResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformDeleteExtensionByIdXQuery holds query params
+    type PlatformDeleteExtensionByIdXQuery struct { 
+        Message string  `url:"message,omitempty"` 
+        UninstallReasonType string  `url:"uninstall_reason_type,omitempty"`  
+    }
+    
+
+
+    // DeleteExtensionById Uninstall extension
+     func (pa *PlatformPartner)  DeleteExtensionById(ExtensionID string, xQuery PlatformDeleteExtensionByIdXQuery) (UninstallExtension, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteExtensionByIdResponse UninstallExtension
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.Config,
+            "delete",
+            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/extension/%s",pa.CompanyID, ExtensionID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return UninstallExtension{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteExtensionByIdResponse)
+        if err != nil {
+             return UninstallExtension{}, common.NewFDKError(err.Error())
+        }
+        return deleteExtensionByIdResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetPrivateExtensionsXQuery holds query params
+    type PlatformGetPrivateExtensionsXQuery struct { 
+        PageSize float64  `url:"page_size,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        Query string  `url:"query,omitempty"`  
+    }
+    
+
+
+    // GetPrivateExtensions Get the list of private extensions
+     func (pa *PlatformPartner)  GetPrivateExtensions(xQuery PlatformGetPrivateExtensionsXQuery) (ExtensionResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getPrivateExtensionsResponse ExtensionResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.Config,
+            "get",
+            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/private-extensions",pa.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ExtensionResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPrivateExtensionsResponse)
+        if err != nil {
+             return ExtensionResponse{}, common.NewFDKError(err.Error())
+        }
+        return getPrivateExtensionsResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetExtensionsSuggestionsXQuery holds query params
+    type PlatformGetExtensionsSuggestionsXQuery struct { 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // GetExtensionsSuggestions Get the list of all the extension suggestions
+     func (pa *PlatformPartner)  GetExtensionsSuggestions(xQuery PlatformGetExtensionsSuggestionsXQuery) (ExtensionSuggestionList, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getExtensionsSuggestionsResponse ExtensionSuggestionList
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.Config,
+            "get",
+            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/extension/suggestions",pa.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ExtensionSuggestionList{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getExtensionsSuggestionsResponse)
+        if err != nil {
+             return ExtensionSuggestionList{}, common.NewFDKError(err.Error())
+        }
+        return getExtensionsSuggestionsResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformGetPartnerInvitesXQuery holds query params
+    type PlatformGetPartnerInvitesXQuery struct { 
+        RequestStatus string  `url:"request_status,omitempty"` 
+        PageSize string  `url:"page_size,omitempty"` 
+        PageNo string  `url:"page_no,omitempty"`  
+    }
+    
+
+
+    // GetPartnerInvites Get partner invites
+     func (pa *PlatformPartner)  GetPartnerInvites(xQuery PlatformGetPartnerInvitesXQuery) (PartnerRequestList, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getPartnerInvitesResponse PartnerRequestList
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.Config,
+            "get",
+            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/partner-request",pa.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return PartnerRequestList{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPartnerInvitesResponse)
+        if err != nil {
+             return PartnerRequestList{}, common.NewFDKError(err.Error())
+        }
+        return getPartnerInvitesResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetPartnerRequestDetails Get partner request details
+     func (pa *PlatformPartner)  GetPartnerRequestDetails(InviteID string) (PartnerInviteDetails, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getPartnerRequestDetailsResponse PartnerInviteDetails
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.Config,
+            "get",
+            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/partner-request/%s",pa.CompanyID, InviteID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return PartnerInviteDetails{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPartnerRequestDetailsResponse)
+        if err != nil {
+             return PartnerInviteDetails{}, common.NewFDKError(err.Error())
+        }
+        return getPartnerRequestDetailsResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // ModifyPartnerRequest Act on the pending partner request
+     func (pa *PlatformPartner)  ModifyPartnerRequest(InviteID string, body  ModifyPartnerReq) (PartnerInviteDetails, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            modifyPartnerRequestResponse PartnerInviteDetails
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return PartnerInviteDetails{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return PartnerInviteDetails{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.Config,
+            "put",
+            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/partner-request/%s",pa.CompanyID, InviteID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return PartnerInviteDetails{}, err
+	    }
+        
+        err = json.Unmarshal(response, &modifyPartnerRequestResponse)
+        if err != nil {
+             return PartnerInviteDetails{}, common.NewFDKError(err.Error())
+        }
+        return modifyPartnerRequestResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+    //PlatformSetupProductsXQuery holds query params
+    type PlatformSetupProductsXQuery struct { 
+        RequestID string  `url:"request_id,omitempty"`  
+    }
+    
+
+
+    // SetupProducts 
+     func (pa *PlatformPartner)  SetupProducts(xQuery PlatformSetupProductsXQuery) (SetupProductRes, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            setupProductsResponse SetupProductRes
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.Config,
+            "post",
+            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/setup",pa.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SetupProductRes{}, err
+	    }
+        
+        err = json.Unmarshal(response, &setupProductsResponse)
+        if err != nil {
+             return SetupProductRes{}, common.NewFDKError(err.Error())
+        }
+        return setupProductsResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+    
+    
+    
+    
+    
+    
     
 
 
