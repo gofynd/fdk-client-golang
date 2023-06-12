@@ -1363,6 +1363,7 @@ func NewAppClient(config *AppConfig) *Client {
     //CatalogGetCollectionItemsBySlugXQuery holds query params
     type CatalogGetCollectionItemsBySlugXQuery struct { 
         F string  `url:"f,omitempty"` 
+        Q string  `url:"q,omitempty"` 
         Filters bool  `url:"filters,omitempty"` 
         SortOn string  `url:"sort_on,omitempty"` 
         PageID string  `url:"page_id,omitempty"` 
@@ -1383,6 +1384,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -1465,6 +1468,13 @@ func NewAppClient(config *AppConfig) *Client {
                     
                     
                     
+                        
+                    
+                    
+                
+                    
+                    
+                    
                     
                         
                     
@@ -1490,6 +1500,10 @@ func NewAppClient(config *AppConfig) *Client {
             // GetCollectionItemsBySlugPaginator Get the items in a collection  
             func (ca *Catalog)  GetCollectionItemsBySlugPaginator(Slug string  ,  xQuery CatalogGetCollectionItemsBySlugXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("cursor")
+                 
+                 
+                 
+                 
                  
                  
                  
