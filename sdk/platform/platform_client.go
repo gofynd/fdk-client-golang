@@ -17168,6 +17168,56 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
+    // GetDpRuleInsert Fetching of DpRules from database.
+     func (se *PlatformServiceability)  GetDpRuleInsert() (DpMultipleRuleSuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getDpRuleInsertResponse DpMultipleRuleSuccessResponse
+	    )
+
+        
+
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.Config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/courier/rules",se.CompanyID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return DpMultipleRuleSuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getDpRuleInsertResponse)
+        if err != nil {
+             return DpMultipleRuleSuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return getDpRuleInsertResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
     // UpsertDpRules Upsert of DpRules in database.
      func (se *PlatformServiceability)  UpsertDpRules(body  DpRuleRequest) (DpRuleSuccessResponse, error){
         
@@ -17228,56 +17278,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return DpRuleSuccessResponse{}, common.NewFDKError(err.Error())
         }
         return upsertDpRulesResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // GetDpRuleInsert Fetching of DpRules from database.
-     func (se *PlatformServiceability)  GetDpRuleInsert() (DpMultipleRuleSuccessResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getDpRuleInsertResponse DpMultipleRuleSuccessResponse
-	    )
-
-        
-
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            se.Config,
-            "get",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/courier/rules",se.CompanyID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return DpMultipleRuleSuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getDpRuleInsertResponse)
-        if err != nil {
-             return DpMultipleRuleSuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return getDpRuleInsertResponse, nil
         
     }
          
