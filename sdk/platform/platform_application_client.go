@@ -25608,76 +25608,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-  
-
-    
-    // GetProxyPath Proxy
-     func (pa *PlatformAppPartner)  GetProxyPath(ExtensionID string) (getProxyPathRes, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getProxyPathResponse getProxyPathRes
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "get",
-            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/application/%s/proxy/{extension_id}",pa.CompanyID, pa.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return getProxyPathRes{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProxyPathResponse)
-        if err != nil {
-            return getProxyPathRes{}, common.NewFDKError(err.Error())
-        }
-        return getProxyPathResponse, nil
-        
-    }
-           
-       
-    
-    
-    
   
 
     
@@ -25736,56 +25666,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return AddProxyResponse{}, common.NewFDKError(err.Error())
         }
         return addProxyPathResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetProxyPathAttachedPath Proxy
-     func (pa *PlatformAppPartner)  GetProxyPathAttachedPath(ExtensionID string, AttachedPath string) (AddProxyResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getProxyPathAttachedPathResponse AddProxyResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "get",
-            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/application/%s/proxy/{extension_id}/{attached_path}",pa.CompanyID, pa.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return AddProxyResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProxyPathAttachedPathResponse)
-        if err != nil {
-            return AddProxyResponse{}, common.NewFDKError(err.Error())
-        }
-        return getProxyPathAttachedPathResponse, nil
         
     }
            
@@ -25918,6 +25798,69 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // GetZoneFromPincodeView GET zone from the Pincode.
+     func (se *PlatformAppServiceability)  GetZoneFromPincodeView(body  GetZoneFromPincodeViewRequest) (GetZoneFromPincodeViewResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getZoneFromPincodeViewResponse GetZoneFromPincodeViewResponse
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/zones",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetZoneFromPincodeViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getZoneFromPincodeViewResponse)
+        if err != nil {
+            return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return getZoneFromPincodeViewResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     //PlatformAppGetZonesFromApplicationIdViewXQuery holds query params
     type PlatformAppGetZonesFromApplicationIdViewXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
@@ -25972,69 +25915,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetZoneFromApplicationIdViewResponse{}, common.NewFDKError(err.Error())
         }
         return getZonesFromApplicationIdViewResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetZoneFromPincodeView GET zone from the Pincode.
-     func (se *PlatformAppServiceability)  GetZoneFromPincodeView(body  GetZoneFromPincodeViewRequest) (GetZoneFromPincodeViewResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getZoneFromPincodeViewResponse GetZoneFromPincodeViewResponse
-	    )
-
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            se.config,
-            "post",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/zones",se.CompanyID, se.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetZoneFromPincodeViewResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getZoneFromPincodeViewResponse)
-        if err != nil {
-            return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
-        }
-        return getZoneFromPincodeViewResponse, nil
         
     }
            

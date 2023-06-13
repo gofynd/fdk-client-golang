@@ -344,13 +344,13 @@
     * [processManifest](#processmanifest)
     * [dispatchManifest](#dispatchmanifest)
     * [getRoleBasedActions](#getrolebasedactions)
-    * [postShipmentHistory](#postshipmenthistory)
     * [getShipmentHistory](#getshipmenthistory)
+    * [postShipmentHistory](#postshipmenthistory)
     * [sendSmsNinja](#sendsmsninja)
     * [updatePackagingDimensions](#updatepackagingdimensions)
     * [createOrder](#createorder)
-    * [createChannelConfig](#createchannelconfig)
     * [getChannelConfig](#getchannelconfig)
+    * [createChannelConfig](#createchannelconfig)
     * [uploadConsent](#uploadconsent)
     * [orderUpdate](#orderupdate)
     * [checkOrderStatus](#checkorderstatus)
@@ -697,20 +697,7 @@
 
 * [Partner](#Partner)
   * Methods
-    * [subscribeExtension](#subscribeextension)
-    * [getExtensionsForCompany](#getextensionsforcompany)
-    * [getPublicExtension](#getpublicextension)
-    * [getExtensionById](#getextensionbyid)
-    * [deleteExtensionById](#deleteextensionbyid)
-    * [getPrivateExtensions](#getprivateextensions)
-    * [getExtensionsSuggestions](#getextensionssuggestions)
-    * [getPartnerInvites](#getpartnerinvites)
-    * [getPartnerRequestDetails](#getpartnerrequestdetails)
-    * [modifyPartnerRequest](#modifypartnerrequest)
-    * [setupProducts](#setupproducts)
-    * [getProxyPath](#getproxypath)
     * [addProxyPath](#addproxypath)
-    * [getProxyPathAttachedPath](#getproxypathattachedpath)
     * [removeProxyPath](#removeproxypath)
     
 
@@ -741,8 +728,8 @@
     * [getZoneDataView](#getzonedataview)
     * [updateZoneControllerView](#updatezonecontrollerview)
     * [createZone](#createzone)
-    * [getZonesFromApplicationIdView](#getzonesfromapplicationidview)
     * [getZoneFromPincodeView](#getzonefrompincodeview)
+    * [getZonesFromApplicationIdView](#getzonesfromapplicationidview)
     * [getStore](#getstore)
     * [getAllStores](#getallstores)
     * [getOptimalLocations](#getoptimallocations)
@@ -755,8 +742,8 @@
     * [upsertDpAccount](#upsertdpaccount)
     * [getDpRules](#getdprules)
     * [updateDpRule](#updatedprule)
-    * [getDpRuleInsert](#getdpruleinsert)
     * [upsertDpRules](#upsertdprules)
+    * [getDpRuleInsert](#getdpruleinsert)
     * [getDpCompanyRules](#getdpcompanyrules)
     * [upsertDpCompanyRules](#upsertdpcompanyrules)
     * [getDpApplicationRules](#getdpapplicationrules)
@@ -58853,21 +58840,25 @@ Schema: `GetActionsResponse`
 ---
 
 
-#### postShipmentHistory
+#### getShipmentHistory
 
 
 ```golang
 
-data, err := Order.PostShipmentHistory(CompanyID, body);
+data, err := Order.GetShipmentHistory(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | float64 | Company Id | 
 
 
-| body |  PostShipmentHistory | "Request body" 
+
+
+
+| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
+
 
 
 
@@ -58891,25 +58882,21 @@ Schema: `ShipmentHistoryResponse`
 ---
 
 
-#### getShipmentHistory
+#### postShipmentHistory
 
 
 ```golang
 
-data, err := Order.GetShipmentHistory(CompanyID, xQuery);
+data, err := Order.PostShipmentHistory(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id | 
+| CompanyID | float64 |  | 
 
 
-
-
-
-| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
-
+| body |  PostShipmentHistory | "Request body" 
 
 
 
@@ -59047,6 +59034,43 @@ Schema: `CreateOrderResponse`
 ---
 
 
+#### getChannelConfig
+
+
+```golang
+
+data, err := Order.GetChannelConfig(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+getChannelConfig
+
+*Success Response:*
+
+
+
+Successfully created the config data
+
+
+Schema: `CreateChannelConfigData`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### createChannelConfig
 
 
@@ -59073,43 +59097,6 @@ Successfully updateShipmentStatus!
 
 
 Schema: `CreateChannelConfigResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getChannelConfig
-
-
-```golang
-
-data, err := Order.GetChannelConfig(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-getChannelConfig
-
-*Success Response:*
-
-
-
-Successfully created the config data
-
-
-Schema: `CreateChannelConfigData`
 
 
 
@@ -78996,532 +78983,6 @@ Schema: `CancelJobResponse`
 ## Partner
 
 
-#### subscribeExtension
-Subscribe for extension plan
-
-```golang
-
-data, err := Partner.SubscribeExtension(CompanyID, Entity, ExtensionID, EntityID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Current company id | 
-
-
-| Entity | string | entity | 
-
-
-| ExtensionID | string | extension id | 
-
-
-| EntityID | string | entity id | 
-
-
-| body |  SubscriptionRequest | "Request body" 
-
-Use this API to select plan for paid extension
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `SubscriptionRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getExtensionsForCompany
-Get the list of all the extensions
-
-```golang
-
-data, err := Partner.GetExtensionsForCompany(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Current company id | 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageSize`, `Tag`, `CurrentPage`, `PageNo`, `FilterBy`, `Query`, `Q`, `IsApplicationLevel`, `IsSaleschannel`, `ExtentionType`
-
-
-Use this API to get the the extensions for the company
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `ExtensionList`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPublicExtension
-Get details of public extension
-
-```golang
-
-data, err := Partner.GetPublicExtension(CompanyID, ExtensionID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Current company id | 
-
-
-| ExtensionID | string | Extension id | 
-
-
-
-Use this API to get the details of public extensions
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `PublicExtension`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getExtensionById
-Get extension details
-
-```golang
-
-data, err := Partner.GetExtensionById(CompanyID, ExtensionID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Current company id | 
-
-
-| ExtensionID | string | Extension id | 
-
-
-
-Use this API to get the details of extension
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `ExtensionCommon`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteExtensionById
-Uninstall extension
-
-```golang
-
-data, err := Partner.DeleteExtensionById(CompanyID, ExtensionID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Current company id | 
-
-
-| ExtensionID | string | Extension id | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `Message`, `UninstallReasonType`
-
-
-Use this API to remove extension from yout company or channel
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `UninstallExtension`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPrivateExtensions
-Get the list of private extensions
-
-```golang
-
-data, err := Partner.GetPrivateExtensions(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Current company id | 
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageSize`, `PageNo`, `Query`, `Q`, `Installed`
-
-
-Use this API to get the list of private extensions
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `ExtensionResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getExtensionsSuggestions
-Get the list of all the extension suggestions
-
-```golang
-
-data, err := Partner.GetExtensionsSuggestions(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Current company id | 
-
-
-
-| xQuery | struct | Includes properties such as `PageSize`
-
-
-Use this API to get the the extensions suggestions
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `ExtensionSuggestionList`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPartnerInvites
-Get partner invites
-
-```golang
-
-data, err := Partner.GetPartnerInvites(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Current company id | 
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `RequestStatus`, `PageSize`, `PageNo`
-
-
-Use this API to get pending, accepted and rejected partner invites in platform
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `PartnerRequestList`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPartnerRequestDetails
-Get partner request details
-
-```golang
-
-data, err := Partner.GetPartnerRequestDetails(CompanyID, InviteID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Current company id | 
-
-
-| InviteID | string | invitation id | 
-
-
-
-Use this API to get details of pending partner request
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `PartnerInviteDetails`
-
-
-
-
-
-
-
-
-
----
-
-
-#### modifyPartnerRequest
-Act on the pending partner request
-
-```golang
-
-data, err := Partner.ModifyPartnerRequest(CompanyID, InviteID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Current company id | 
-
-
-| InviteID | string | invitation id | 
-
-
-| body |  ModifyPartnerReq | "Request body" 
-
-Use this API to approve or reject the pending partner request
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `PartnerInviteDetails`
-
-
-
-
-
-
-
-
-
----
-
-
-#### setupProducts
-
-
-```golang
-
-data, err := Partner.SetupProducts(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Current company id | 
-
-
-
-| xQuery | struct | Includes properties such as `RequestID`
-
-
-Use this API for setup
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `SetupProductRes`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getProxyPath
-Proxy
-
-```golang
-
-data, err := Partner.GetProxyPath(CompanyID, ApplicationID, ExtensionID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Current company id | 
-
-
-| ApplicationID | string | Current application id | 
-
-
-| ExtensionID | string | extension id | 
-
-
-
-Use this API to get proxy url
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `getProxyPathRes`
-
-
-
-
-
-
-
-
-
----
-
-
 #### addProxyPath
 Create proxy URL for the external URL
 
@@ -79551,52 +79012,6 @@ Use this API to generate proxy URL for the external URL
 
 
 Proxy created successfully
-
-
-Schema: `AddProxyResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getProxyPathAttachedPath
-Proxy
-
-```golang
-
-data, err := Partner.GetProxyPathAttachedPath(CompanyID, ApplicationID, ExtensionID, AttachedPath);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Current company id | 
-
-
-| ApplicationID | string | Current application id | 
-
-
-| ExtensionID | string | extension id | 
-
-
-| AttachedPath | string | application id | 
-
-
-
-Use this API to get proxy url
-
-*Success Response:*
-
-
-
-Success
 
 
 Schema: `AddProxyResponse`
@@ -80513,6 +79928,47 @@ Schema: `ZoneResponse`
 ---
 
 
+#### getZoneFromPincodeView
+GET zone from the Pincode.
+
+```golang
+
+data, err := Serviceability.GetZoneFromPincodeView(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` contains a specific ID of a company. | 
+
+
+| ApplicationID | string | A `application_id` contains a unique ID. | 
+
+
+| body |  GetZoneFromPincodeViewRequest | "Request body" 
+
+This API returns zone from the Pincode View.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `GetZoneFromPincodeViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getZonesFromApplicationIdView
 GET zones from the application_id.
 
@@ -80550,47 +80006,6 @@ List of zones for the given application_id
 
 
 Schema: `GetZoneFromApplicationIdViewResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getZoneFromPincodeView
-GET zone from the Pincode.
-
-```golang
-
-data, err := Serviceability.GetZoneFromPincodeView(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` contains a specific ID of a company. | 
-
-
-| ApplicationID | string | A `application_id` contains a unique ID. | 
-
-
-| body |  GetZoneFromPincodeViewRequest | "Request body" 
-
-This API returns zone from the Pincode View.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `GetZoneFromPincodeViewResponse`
 
 
 
@@ -81085,43 +80500,6 @@ Schema: `DpRuleUpdateSuccessResponse`
 ---
 
 
-#### getDpRuleInsert
-Fetching of DpRules from database.
-
-```golang
-
-data, err := Serviceability.GetDpRuleInsert(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-
-This API returns response of DpRules from mongo database.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `DpMultipleRuleSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### upsertDpRules
 Upsert of DpRules in database.
 
@@ -81148,6 +80526,43 @@ Response status_code
 
 
 Schema: `DpRuleSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDpRuleInsert
+Fetching of DpRules from database.
+
+```golang
+
+data, err := Serviceability.GetDpRuleInsert(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+
+This API returns response of DpRules from mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `DpMultipleRuleSuccessResponse`
 
 
 
