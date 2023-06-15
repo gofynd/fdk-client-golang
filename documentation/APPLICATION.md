@@ -17000,7 +17000,7 @@ Initiates an upload and returns a storage link that is valid for 30 minutes. You
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Namespace | string | Segregation of different types of files(prodcuts, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. | 
+| Namespace | string | Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. | 
 
 
 | body |  StartRequest | "Request body" 
@@ -17057,7 +17057,7 @@ Completes the upload process. After successfully uploading a file, call this API
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Namespace | string | Segregation of different types of files(prodcuts, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. | 
+| Namespace | string | Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. | 
 
 
 | body |  StartResponse | "Request body" 
