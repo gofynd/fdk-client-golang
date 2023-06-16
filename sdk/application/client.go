@@ -1709,55 +1709,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1798,6 +1749,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -13206,12 +13206,12 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // GetPosOrderById Get POS Order
-    func (or *Order)  GetPosOrderById(OrderID string) (OrderById, error){
+    func (or *Order)  GetPosOrderById(OrderID string) (OrderList, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getPosOrderByIdResponse OrderById
+             getPosOrderByIdResponse OrderList
 	    )
 
         
@@ -13235,12 +13235,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return OrderById{}, err
+            return OrderList{}, err
 	    }
         
         err = json.Unmarshal(response, &getPosOrderByIdResponse)
         if err != nil {
-            return OrderById{}, common.NewFDKError(err.Error())
+            return OrderList{}, common.NewFDKError(err.Error())
         }
          return getPosOrderByIdResponse, nil
         
@@ -13299,13 +13299,8 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    //OrderGetInvoiceByShipmentIdXQuery holds query params
-    type OrderGetInvoiceByShipmentIdXQuery struct { 
-        DocumentType string  `url:"document_type,omitempty"`  
-    }
-    
     // GetInvoiceByShipmentId Get Invoice of a shipment
-    func (or *Order)  GetInvoiceByShipmentId(ShipmentID string, xQuery OrderGetInvoiceByShipmentIdXQuery) (ResponseGetInvoiceShipment, error){
+    func (or *Order)  GetInvoiceByShipmentId(ShipmentID string) (ResponseGetInvoiceShipment, error){
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -13315,10 +13310,6 @@ func NewAppClient(config *AppConfig) *Client {
 
         
 
-        
-            
-                
-            
         
 
         
@@ -13334,7 +13325,7 @@ func NewAppClient(config *AppConfig) *Client {
             "get",
             fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/invoice",ShipmentID),
             nil,
-            xQuery,
+            nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -13653,147 +13644,6 @@ func NewAppClient(config *AppConfig) *Client {
             return ShipmentReasons{}, common.NewFDKError(err.Error())
         }
          return getShipmentReasonsResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // UpdateShipmentStatus Update the shipment status
-    func (or *Order)  UpdateShipmentStatus(ShipmentID string, body  UpdateShipmentStatusRequest) (ShipmentApplicationStatusResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             updateShipmentStatusResponse ShipmentApplicationStatusResponse
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-        
-
-        
-        
-        
-    
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-          
-             return ShipmentApplicationStatusResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-             
-             return ShipmentApplicationStatusResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            or.config,
-            "put",
-            fmt.Sprintf("/service/application/order/v1.0/orders/shipments/%s/status",ShipmentID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ShipmentApplicationStatusResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateShipmentStatusResponse)
-        if err != nil {
-            return ShipmentApplicationStatusResponse{}, common.NewFDKError(err.Error())
-        }
-         return updateShipmentStatusResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    //OrderGetProductsXQuery holds query params
-    type OrderGetProductsXQuery struct { 
-        Status float64  `url:"status,omitempty"` 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"` 
-        FromDate string  `url:"from_date,omitempty"` 
-        ToDate string  `url:"to_date,omitempty"` 
-        SearchValue string  `url:"search_value,omitempty"`  
-    }
-    
-    // GetProducts 
-    func (or *Order)  GetProducts(CompanyID float64, xQuery OrderGetProductsXQuery) (ProductListResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getProductsResponse ProductListResponse
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.config,
-            "get",
-            fmt.Sprintf("/service/application/order/v1.0/products",CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ProductListResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProductsResponse)
-        if err != nil {
-            return ProductListResponse{}, common.NewFDKError(err.Error())
-        }
-         return getProductsResponse, nil
         
     }
           

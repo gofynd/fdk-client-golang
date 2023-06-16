@@ -46,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [followById](#followbyid)
     * [unfollowById](#unfollowbyid)
+    * [followById](#followbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -280,8 +280,6 @@
     * [verifyOtpShipmentCustomer](#verifyotpshipmentcustomer)
     * [getShipmentBagReasons](#getshipmentbagreasons)
     * [getShipmentReasons](#getshipmentreasons)
-    * [updateShipmentStatus](#updateshipmentstatus)
-    * [getProducts](#getproducts)
     
 
 * [Rewards](#Rewards)
@@ -1166,12 +1164,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1185,7 +1183,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1207,12 +1205,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1226,7 +1224,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -22494,7 +22492,7 @@ Initiates an upload and returns a storage link that is valid for 30 minutes. You
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Namespace | string | Segregation of different types of files(prodcuts, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. | 
+| Namespace | string | Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. | 
 
 
 | body |  StartRequest | "Request body" 
@@ -22551,7 +22549,7 @@ Completes the upload process. After successfully uploading a file, call this API
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Namespace | string | Segregation of different types of files(prodcuts, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. | 
+| Namespace | string | Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. | 
 
 
 | body |  StartResponse | "Request body" 
@@ -24924,7 +24922,7 @@ Use this API to retrieve a POS order and all its details such as tracking detail
 Success. Check the example shown below or refer `PosOrderById` for more details.
 
 
-Schema: `OrderById`
+Schema: `OrderList`
 
 
 
@@ -24980,7 +24978,7 @@ Get Invoice of a shipment
 
 ```golang
 
- data, err :=  Order.GetInvoiceByShipmentId(ShipmentID, xQuery);
+ data, err :=  Order.GetInvoiceByShipmentId(ShipmentID);
 ```
 
 | Argument  |  Type  | Description |
@@ -24988,9 +24986,6 @@ Get Invoice of a shipment
 
 | ShipmentID | string | ID of the shipment. | 
 
-
-
-| xQuery | struct | Includes properties such as `DocumentType`
 
 
 
@@ -25245,96 +25240,6 @@ Success. Check the example shown below or refer `ShipmentBagReasons` for more de
 
 
 Schema: `ShipmentReasons`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateShipmentStatus
-Update the shipment status
-
-```golang
-
- data, err :=  Order.UpdateShipmentStatus(ShipmentID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
-
-
-| body |  UpdateShipmentStatusRequest | "Request body" 
-
-
-Use this API to update the status of a shipment using its shipment ID.
-
-*Success Response:*
-
-
-
-Successfully updateShipmentStatus!
-
-
-Schema: `ShipmentApplicationStatusResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getProducts
-
-
-```golang
-
- data, err :=  Order.GetProducts(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `Status`, `PageNo`, `PageSize`, `FromDate`, `ToDate`, `SearchValue`
-
-
-
-
-
-*Success Response:*
-
-
-
-Successfully retrived all the given shipments details!
-
-
-Schema: `ProductListResponse`
 
 
 
