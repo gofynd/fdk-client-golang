@@ -351,17 +351,22 @@
     * [processManifest](#processmanifest)
     * [dispatchManifest](#dispatchmanifest)
     * [getRoleBasedActions](#getrolebasedactions)
-    * [getShipmentHistory](#getshipmenthistory)
     * [postShipmentHistory](#postshipmenthistory)
+    * [getShipmentHistory](#getshipmenthistory)
     * [sendSmsNinja](#sendsmsninja)
     * [updatePackagingDimensions](#updatepackagingdimensions)
     * [createOrder](#createorder)
-    * [getChannelConfig](#getchannelconfig)
     * [createChannelConfig](#createchannelconfig)
+    * [getChannelConfig](#getchannelconfig)
     * [uploadConsent](#uploadconsent)
     * [orderUpdate](#orderupdate)
     * [checkOrderStatus](#checkorderstatus)
     * [getStateTransitionMap](#getstatetransitionmap)
+    * [fetchCreditBalanceDetail](#fetchcreditbalancedetail)
+    * [fetchRefundModeConfig](#fetchrefundmodeconfig)
+    * [attachOrderUser](#attachorderuser)
+    * [sendUserMobileOTP](#sendusermobileotp)
+    * [verifyMobileOTP](#verifymobileotp)
     
 
 * [Catalog](#Catalog)
@@ -59340,25 +59345,21 @@ Schema: `GetActionsResponse`
 ---
 
 
-#### getShipmentHistory
+#### postShipmentHistory
 
 
 ```golang
 
-data, err := Order.GetShipmentHistory(CompanyID, xQuery);
+data, err := Order.PostShipmentHistory(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id | 
+| CompanyID | float64 |  | 
 
 
-
-
-
-| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
-
+| body |  PostShipmentHistory | "Request body" 
 
 
 
@@ -59382,21 +59383,25 @@ Schema: `ShipmentHistoryResponse`
 ---
 
 
-#### postShipmentHistory
+#### getShipmentHistory
 
 
 ```golang
 
-data, err := Order.PostShipmentHistory(CompanyID, body);
+data, err := Order.GetShipmentHistory(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | float64 | Company Id | 
 
 
-| body |  PostShipmentHistory | "Request body" 
+
+
+
+| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
+
 
 
 
@@ -59472,7 +59477,7 @@ data, err := Order.UpdatePackagingDimensions(CompanyID, body);
 | CompanyID | float64 |  | 
 
 
-| body |  CreateOrderPayload | "Request body" 
+| body |  UpdatePackagingDimensionsPayload | "Request body" 
 
 
 
@@ -59483,7 +59488,7 @@ data, err := Order.UpdatePackagingDimensions(CompanyID, body);
 Manifest will be processed!
 
 
-Schema: `CreateOrderResponse`
+Schema: `UpdatePackagingDimensionsResponse`
 
 
 
@@ -59534,43 +59539,6 @@ Schema: `CreateOrderResponse`
 ---
 
 
-#### getChannelConfig
-
-
-```golang
-
-data, err := Order.GetChannelConfig(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-getChannelConfig
-
-*Success Response:*
-
-
-
-Successfully created the config data
-
-
-Schema: `CreateChannelConfigData`
-
-
-
-
-
-
-
-
-
----
-
-
 #### createChannelConfig
 
 
@@ -59597,6 +59565,43 @@ Successfully updateShipmentStatus!
 
 
 Schema: `CreateChannelConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getChannelConfig
+
+
+```golang
+
+data, err := Order.GetChannelConfig(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+getChannelConfig
+
+*Success Response:*
+
+
+
+Successfully created the config data
+
+
+Schema: `CreateChannelConfigData`
 
 
 
@@ -59748,6 +59753,196 @@ State Transition Mapping, for next possible state
 
 
 Schema: `BagStateTransitionMap`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### fetchCreditBalanceDetail
+
+
+```golang
+
+data, err := Order.FetchCreditBalanceDetail(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  FetchCreditBalanceRequestPayload | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Credit Balance will be fetched
+
+
+Schema: `FetchCreditBalanceResponsePayload`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### fetchRefundModeConfig
+
+
+```golang
+
+data, err := Order.FetchRefundModeConfig(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  RefundModeConfigRequestPayload | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Refund mode config is returned based on input parameter
+
+
+Schema: `RefundModeConfigResponsePayload`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### attachOrderUser
+
+
+```golang
+
+data, err := Order.AttachOrderUser(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  AttachOrderUser | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Attach user to order
+
+
+Schema: `AttachOrderUserResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### sendUserMobileOTP
+
+
+```golang
+
+data, err := Order.SendUserMobileOTP(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  SendUserMobileOTP | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Send OTP to user mobile
+
+
+Schema: `SendUserMobileOtpResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### verifyMobileOTP
+
+
+```golang
+
+data, err := Order.VerifyMobileOTP(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  VerifyMobileOTP | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Verify OTP
+
+
+Schema: `VerifyOtpResponse`
 
 
 
