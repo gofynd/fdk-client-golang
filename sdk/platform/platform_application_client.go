@@ -13389,6 +13389,159 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    //PlatformAppGetApplicationShipmentsXQuery holds query params
+    type PlatformAppGetApplicationShipmentsXQuery struct { 
+        Lane string  `url:"lane,omitempty"` 
+        SearchType string  `url:"search_type,omitempty"` 
+        SearchID string  `url:"search_id,omitempty"` 
+        FromDate string  `url:"from_date,omitempty"` 
+        ToDate string  `url:"to_date,omitempty"` 
+        DpIds string  `url:"dp_ids,omitempty"` 
+        OrderingCompanyID string  `url:"ordering_company_id,omitempty"` 
+        Stores string  `url:"stores,omitempty"` 
+        SalesChannels string  `url:"sales_channels,omitempty"` 
+        RequestByExt string  `url:"request_by_ext,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        CustomerID string  `url:"customer_id,omitempty"` 
+        IsPrioritySort bool  `url:"is_priority_sort,omitempty"`  
+    }
+    
+    // GetApplicationShipments 
+     func (or *PlatformAppOrder)  GetApplicationShipments(xQuery PlatformAppGetApplicationShipmentsXQuery) (ShipmentInternalPlatformViewResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getApplicationShipmentsResponse ShipmentInternalPlatformViewResponse
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/application/%s/shipments/",or.CompanyID, or.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ShipmentInternalPlatformViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getApplicationShipmentsResponse)
+        if err != nil {
+            return ShipmentInternalPlatformViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return getApplicationShipmentsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+    
+    
+    
+    
+  
+
+    
+    //PlatformAppGetAppOrderShipmentDetailsXQuery holds query params
+    type PlatformAppGetAppOrderShipmentDetailsXQuery struct { 
+        OrderID string  `url:"order_id,omitempty"`  
+    }
+    
+    // GetAppOrderShipmentDetails 
+     func (or *PlatformAppOrder)  GetAppOrderShipmentDetails(xQuery PlatformAppGetAppOrderShipmentDetailsXQuery) (OrderDetailsResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAppOrderShipmentDetailsResponse OrderDetailsResponse
+	    )
+
+        
+
+         
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/application/%s/order-details",or.CompanyID, or.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return OrderDetailsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAppOrderShipmentDetailsResponse)
+        if err != nil {
+            return OrderDetailsResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAppOrderShipmentDetailsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // TrackShipmentPlatform Track shipment
      func (or *PlatformAppOrder)  TrackShipmentPlatform(ShipmentID string) (PlatformShipmentTrack, error) {
         var (
@@ -13431,6 +13584,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
            
        
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

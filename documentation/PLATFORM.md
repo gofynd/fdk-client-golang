@@ -20,7 +20,13 @@
 * [Rewards](#Rewards) - Earn and redeem reward points 
 * [Discount](#Discount) - Discount 
 * [Partner](#Partner) - Partner configuration apis 
-* [Webhook](#Webhook) - Webhook dispatcher with retry and one event to many subscriber vice versa 
+* [Webhook](#Webhook) - Sureshot is a webhook system where user can register their webhook to all available events in Fynd Platform, On event trigger. Sureshot will call all registered webhook endpoints for that specific event.This is the feature where sellers can subscribe(register webhook) to events provided. 
+
+ Sellers can view list of events available for subscription. 
+
+ They can register their webhook to specific event. 
+
+ Once that event gets triggered in system, sellers will receive event data on their registered webhook 
 * [AuditTrail](#AuditTrail) - Audit Logging Service that logs the crucial updates on the Platform 
 * [Serviceability](#Serviceability) - Logistics Configuration API's allows you to configure zone, application logistics and many more useful features.  
 * [Finance](#Finance) - Handles all finance related activities 
@@ -316,17 +322,25 @@
   * Methods
     * [getShipments](#getshipments)
     * [getShipmentById](#getshipmentbyid)
+    * [getAssetByShipmentIds](#getassetbyshipmentids)
     * [getOrderById](#getorderbyid)
     * [getLaneConfig](#getlaneconfig)
+    * [getApplicationShipments](#getapplicationshipments)
     * [getOrders](#getorders)
+    * [getMetricCount](#getmetriccount)
+    * [getAppOrderShipmentDetails](#getappordershipmentdetails)
     * [trackShipmentPlatform](#trackshipmentplatform)
     * [getfilters](#getfilters)
+    * [createShipmentReport](#createshipmentreport)
+    * [getReportsShipmentListing](#getreportsshipmentlisting)
+    * [upsertJioCode](#upsertjiocode)
     * [getBulkShipmentExcelFile](#getbulkshipmentexcelfile)
     * [getBulkActionTemplate](#getbulkactiontemplate)
     * [downloadBulkActionTemplate](#downloadbulkactiontemplate)
     * [getShipmentReasons](#getshipmentreasons)
     * [getBagById](#getbagbyid)
     * [getBags](#getbags)
+    * [generatePOSReceiptByOrderId](#generateposreceiptbyorderid)
     * [invalidateShipmentCache](#invalidateshipmentcache)
     * [reassignLocation](#reassignlocation)
     * [updateShipmentLock](#updateshipmentlock)
@@ -337,13 +351,13 @@
     * [processManifest](#processmanifest)
     * [dispatchManifest](#dispatchmanifest)
     * [getRoleBasedActions](#getrolebasedactions)
-    * [postShipmentHistory](#postshipmenthistory)
     * [getShipmentHistory](#getshipmenthistory)
+    * [postShipmentHistory](#postshipmenthistory)
     * [sendSmsNinja](#sendsmsninja)
     * [updatePackagingDimensions](#updatepackagingdimensions)
     * [createOrder](#createorder)
-    * [createChannelConfig](#createchannelconfig)
     * [getChannelConfig](#getchannelconfig)
+    * [createChannelConfig](#createchannelconfig)
     * [uploadConsent](#uploadconsent)
     * [orderUpdate](#orderupdate)
     * [checkOrderStatus](#checkorderstatus)
@@ -57885,7 +57899,7 @@ data, err := Order.GetShipments(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | float64 | Id of company | 
 
 
 
@@ -57931,11 +57945,7 @@ data, err := Order.GetShipments(CompanyID, xQuery);
 
 
 
-
-
-
-
-| xQuery | struct | Includes properties such as `Lane`, `BagStatus`, `StatusOverrideLane`, `SearchType`, `SearchValue`, `SearchID`, `FromDate`, `ToDate`, `DpIds`, `OrderingCompanyID`, `Stores`, `SalesChannel`, `RequestByExt`, `PageNo`, `PageSize`, `IsPrioritySort`, `FetchActiveShipment`, `ExcludeLockedShipments`, `PaymentMethods`, `ChannelShipmentID`, `ChannelOrderID`, `CustomMeta`, `OrderingChannel`, `CompanyAffiliateTag`
+| xQuery | struct | Includes properties such as `Lane`, `BagStatus`, `StatusOverrideLane`, `TimeToDispatch`, `SearchType`, `SearchValue`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PageNo`, `PageSize`, `FetchActiveShipment`, `ExcludeLockedShipments`, `PaymentMethods`, `ChannelShipmentID`, `ChannelOrderID`, `CustomMeta`, `OrderingChannel`, `CompanyAffiliateTag`, `PlatformUserID`
 
 
 
@@ -57971,17 +57981,13 @@ data, err := Order.GetShipmentById(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | float64 | Id of company | 
 
 
 
 
 
-
-
-
-
-| xQuery | struct | Includes properties such as `ChannelShipmentID`, `ShipmentID`, `OrderingCompanyID`, `RequestByExt`
+| xQuery | struct | Includes properties such as `ChannelShipmentID`, `ShipmentID`
 
 
 
@@ -58006,6 +58012,50 @@ Schema: `ShipmentInfoResponse`
 ---
 
 
+#### getAssetByShipmentIds
+Get Invoice or Label or Pos of a shipment
+
+```golang
+
+data, err := Order.GetAssetByShipmentIds(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `ShipmentIds`, `Invoice`, `ExpiresIn`
+
+
+Use this API to retrieve shipments invoice, label and pos.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ShipmentByIds` for more details.
+
+
+Schema: `ResponseGetAssetShipment`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getOrderById
 
 
@@ -58017,7 +58067,7 @@ data, err := Order.GetOrderById(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | float64 | Id of company | 
 
 
 
@@ -58033,7 +58083,7 @@ data, err := Order.GetOrderById(CompanyID, xQuery);
 We are processing the report!
 
 
-Schema: `ShipmentDetailsResponse`
+Schema: `OrderDetailsResponse`
 
 
 
@@ -58077,7 +58127,17 @@ data, err := Order.GetLaneConfig(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `SuperLane`, `GroupEntity`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannel`, `PaymentMode`, `BagStatus`
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `SuperLane`, `GroupEntity`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PaymentMode`, `BagStatus`, `SearchType`, `SearchValue`, `Tags`, `TimeToDispatch`, `PaymentMethods`
 
 
 
@@ -58102,6 +58162,75 @@ Schema: `LaneConfigResponse`
 ---
 
 
+#### getApplicationShipments
+
+
+```golang
+
+data, err := Order.GetApplicationShipments(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| ApplicationID | string |  | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `SearchID`, `FromDate`, `ToDate`, `DpIds`, `OrderingCompanyID`, `Stores`, `SalesChannels`, `RequestByExt`, `PageNo`, `PageSize`, `CustomerID`, `IsPrioritySort`
+
+
+
+
+*Success Response:*
+
+
+
+We are processing the report!
+
+
+Schema: `ShipmentInternalPlatformViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getOrders
 
 
@@ -58113,7 +58242,7 @@ data, err := Order.GetOrders(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | float64 | Id of company | 
 
 
 
@@ -58147,7 +58276,9 @@ data, err := Order.GetOrders(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `BagStatus`, `TimeToDispatch`, `PaymentMethods`, `Tags`, `SearchValue`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PageNo`, `PageSize`, `IsPrioritySort`, `CustomMeta`
+
+
+| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `BagStatus`, `TimeToDispatch`, `PaymentMethods`, `Tags`, `SearchValue`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PageNo`, `PageSize`, `IsPrioritySort`, `CustomMeta`, `PlatformUserID`
 
 
 
@@ -58160,6 +58291,91 @@ We are processing the report!
 
 
 Schema: `OrderListingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getMetricCount
+
+
+```golang
+
+data, err := Order.GetMetricCount(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `FromDate`, `ToDate`
+
+
+
+
+*Success Response:*
+
+
+
+Response containing count of shipments of the given metrics
+
+
+Schema: `MetricCountResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAppOrderShipmentDetails
+
+
+```golang
+
+data, err := Order.GetAppOrderShipmentDetails(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| ApplicationID | string |  | 
+
+
+
+| xQuery | struct | Includes properties such as `OrderID`
+
+
+
+
+*Success Response:*
+
+
+
+We render shipment details.
+
+
+Schema: `OrderDetailsResponse`
 
 
 
@@ -58226,7 +58442,7 @@ data, err := Order.Getfilters(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | float64 | Id of company | 
 
 
 
@@ -58245,6 +58461,128 @@ List of filters
 
 
 Schema: `FiltersResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createShipmentReport
+
+
+```golang
+
+data, err := Order.CreateShipmentReport(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `FromDate`, `ToDate`
+
+
+
+
+*Success Response:*
+
+
+
+We have accepted report generation request.
+
+
+Schema: `Success`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getReportsShipmentListing
+
+
+```golang
+
+data, err := Order.GetReportsShipmentListing(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
+
+
+
+
+*Success Response:*
+
+
+
+We have are getting the info.
+
+
+Schema: `OmsReports`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### upsertJioCode
+
+
+```golang
+
+data, err := Order.UpsertJioCode(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  JioCodeUpsertPayload | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+We are processing the report!
+
+
+Schema: `JioCodeUpsertResponse`
 
 
 
@@ -58530,6 +58868,51 @@ Successfully retrived all the given shipments details!
 
 
 Schema: `GetBagsPlatformResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### generatePOSReceiptByOrderId
+
+
+```golang
+
+data, err := Order.GeneratePOSReceiptByOrderId(CompanyID, OrderID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| OrderID | string |  | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `ShipmentID`, `DocumentType`
+
+
+
+
+*Success Response:*
+
+
+
+We are processing the request!
+
+
+Schema: `GeneratePosOrderReceiptResponse`
 
 
 
@@ -58957,21 +59340,25 @@ Schema: `GetActionsResponse`
 ---
 
 
-#### postShipmentHistory
+#### getShipmentHistory
 
 
 ```golang
 
-data, err := Order.PostShipmentHistory(CompanyID, body);
+data, err := Order.GetShipmentHistory(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | float64 | Company Id | 
 
 
-| body |  PostShipmentHistory | "Request body" 
+
+
+
+| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
+
 
 
 
@@ -58995,25 +59382,21 @@ Schema: `ShipmentHistoryResponse`
 ---
 
 
-#### getShipmentHistory
+#### postShipmentHistory
 
 
 ```golang
 
-data, err := Order.GetShipmentHistory(CompanyID, xQuery);
+data, err := Order.PostShipmentHistory(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id | 
+| CompanyID | float64 |  | 
 
 
-
-
-
-| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
-
+| body |  PostShipmentHistory | "Request body" 
 
 
 
@@ -59151,6 +59534,43 @@ Schema: `CreateOrderResponse`
 ---
 
 
+#### getChannelConfig
+
+
+```golang
+
+data, err := Order.GetChannelConfig(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+getChannelConfig
+
+*Success Response:*
+
+
+
+Successfully created the config data
+
+
+Schema: `CreateChannelConfigData`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### createChannelConfig
 
 
@@ -59177,43 +59597,6 @@ Successfully updateShipmentStatus!
 
 
 Schema: `CreateChannelConfigResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getChannelConfig
-
-
-```golang
-
-data, err := Order.GetChannelConfig(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-getChannelConfig
-
-*Success Response:*
-
-
-
-Successfully created the config data
-
-
-Schema: `CreateChannelConfigData`
 
 
 
