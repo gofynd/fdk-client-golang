@@ -327,40 +327,40 @@
 
 * [Catalog](#Catalog)
   * Methods
-    * [deleteSearchKeywords](#deletesearchkeywords)
     * [getSearchKeywords](#getsearchkeywords)
     * [updateSearchKeywords](#updatesearchkeywords)
+    * [deleteSearchKeywords](#deletesearchkeywords)
     * [getAllSearchKeyword](#getallsearchkeyword)
     * [createCustomKeyword](#createcustomkeyword)
-    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [updateAutocompleteKeyword](#updateautocompletekeyword)
+    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [listSearchRerankConfig](#listsearchrerankconfig)
     * [createSearchRerankingConfig](#createsearchrerankingconfig)
-    * [deleteSearchRerankConfig](#deletesearchrerankconfig)
     * [getSearchRerankingConfig](#getsearchrerankingconfig)
     * [updateSearchRerankConfig](#updatesearchrerankconfig)
+    * [deleteSearchRerankConfig](#deletesearchrerankconfig)
     * [getProductBundle](#getproductbundle)
     * [createProductBundle](#createproductbundle)
-    * [updateProductBundle](#updateproductbundle)
     * [getProductBundleDetail](#getproductbundledetail)
+    * [updateProductBundle](#updateproductbundle)
     * [getSizeGuides](#getsizeguides)
     * [createSizeGuide](#createsizeguide)
-    * [updateSizeGuide](#updatesizeguide)
     * [getSizeGuide](#getsizeguide)
-    * [updateAppProduct](#updateappproduct)
+    * [updateSizeGuide](#updatesizeguide)
     * [getAppProduct](#getappproduct)
+    * [updateAppProduct](#updateappproduct)
     * [getConfigurationMetadata](#getconfigurationmetadata)
     * [getGroupConfigurations](#getgroupconfigurations)
     * [createGroupConfiguration](#creategroupconfiguration)
-    * [deleteGroupConfiguration](#deletegroupconfiguration)
     * [updateGroupConfiguration](#updategroupconfiguration)
+    * [deleteGroupConfiguration](#deletegroupconfiguration)
     * [getListingConfigurations](#getlistingconfigurations)
     * [createListingConfiguration](#createlistingconfiguration)
-    * [deleteListingConfiguration](#deletelistingconfiguration)
     * [updateListingConfiguration](#updatelistingconfiguration)
+    * [deleteListingConfiguration](#deletelistingconfiguration)
     * [updateAllowSingle](#updateallowsingle)
     * [updateDefaultSort](#updatedefaultsort)
     * [getCatalogConfiguration](#getcatalogconfiguration)
@@ -372,8 +372,8 @@
     * [getAllCollections](#getallcollections)
     * [createCollection](#createcollection)
     * [getCollectionDetail](#getcollectiondetail)
-    * [deleteCollection](#deletecollection)
     * [updateCollection](#updatecollection)
+    * [deleteCollection](#deletecollection)
     * [getCollectionItems](#getcollectionitems)
     * [addCollectionItems](#addcollectionitems)
     * [getCatalogInsights](#getcataloginsights)
@@ -388,8 +388,8 @@
     * [listProductTemplateCategories](#listproducttemplatecategories)
     * [listDepartmentsData](#listdepartmentsdata)
     * [createDepartments](#createdepartments)
-    * [updateDepartment](#updatedepartment)
     * [getDepartmentData](#getdepartmentdata)
+    * [updateDepartment](#updatedepartment)
     * [listProductTemplate](#listproducttemplate)
     * [validateProductTemplate](#validateproducttemplate)
     * [downloadProductTemplateViews](#downloadproducttemplateviews)
@@ -402,23 +402,23 @@
     * [listTemplateBrandTypeValues](#listtemplatebrandtypevalues)
     * [listCategories](#listcategories)
     * [createCategories](#createcategories)
-    * [updateCategory](#updatecategory)
     * [getCategoryData](#getcategorydata)
+    * [updateCategory](#updatecategory)
     * [getProducts](#getproducts)
     * [createProduct](#createproduct)
     * [getVariantsOfProducts](#getvariantsofproducts)
     * [getProductAttributes](#getproductattributes)
-    * [deleteProduct](#deleteproduct)
     * [getProduct](#getproduct)
     * [editProduct](#editproduct)
+    * [deleteProduct](#deleteproduct)
     * [allSizes](#allsizes)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
     * [getProductBulkUploadHistory](#getproductbulkuploadhistory)
     * [createBulkProductUploadJob](#createbulkproductuploadjob)
     * [uploadBulkProducts](#uploadbulkproducts)
-    * [deleteProductBulkJob](#deleteproductbulkjob)
     * [createProductsInBulk](#createproductsinbulk)
+    * [deleteProductBulkJob](#deleteproductbulkjob)
     * [getProductTags](#getproducttags)
     * [getProductAssetsInBulk](#getproductassetsinbulk)
     * [createProductAssetsInBulk](#createproductassetsinbulk)
@@ -431,18 +431,18 @@
     * [deleteInventory](#deleteinventory)
     * [getInventoryBulkUploadHistory](#getinventorybulkuploadhistory)
     * [createBulkInventoryJob](#createbulkinventoryjob)
-    * [deleteBulkInventoryJob](#deletebulkinventoryjob)
     * [createBulkInventory](#createbulkinventory)
+    * [deleteBulkInventoryJob](#deletebulkinventoryjob)
     * [getInventoryExport](#getinventoryexport)
     * [createInventoryExportJob](#createinventoryexportjob)
     * [listInventoryExport](#listinventoryexport)
     * [createInventoryExport](#createinventoryexport)
     * [exportInventoryConfig](#exportinventoryconfig)
-    * [deleteRealtimeInventory](#deleterealtimeinventory)
     * [updateRealtimeInventory](#updaterealtimeinventory)
+    * [deleteRealtimeInventory](#deleterealtimeinventory)
     * [updateInventories](#updateinventories)
-    * [updateHsnCode](#updatehsncode)
     * [getHsnCode](#gethsncode)
+    * [updateHsnCode](#updatehsncode)
     * [bulkHsnCode](#bulkhsncode)
     * [getAllProductHsnCodes](#getallproducthsncodes)
     * [getSingleProductHSNCode](#getsingleproducthsncode)
@@ -47433,11 +47433,10 @@ Active subscription
 {
   "value": {
     "is_enabled": true,
-    "mandate_amount": 150000,
     "subscription": {
       "current_period": {
-        "start": "2020-12-17T13:45:36.722Z",
-        "end": "2021-01-17T13:45:36.722Z"
+        "start": "2023-05-23T07:00:31.345Z",
+        "end": "2023-06-22T07:00:31.345Z"
       },
       "pause_collection": {},
       "trial": {},
@@ -47447,14 +47446,123 @@ Active subscription
       },
       "is_active": true,
       "cancel_at_period_end": false,
-      "_id": "5f3a8a00668947663b7fbd38",
-      "subscriber_id": "5ee773e1351e5e84289ed9cf",
-      "plan_id": "5f3a8786c90d780037723a12",
-      "product_suite_id": "5f3a8786c90d7800377239f3",
+      "freezed": false,
+      "channel_type": "ecomm",
+      "_id": "6385dc9389fe3577db6935f3",
+      "subscriber_id": "6385dc9289fe356a346935eb",
+      "plan_id": "5f2e30cad1456d00386abf1c",
+      "product_suite_id": "5f2e30cad1456d00386abefc",
       "plan_data": {
+        "plan_components": [
+          {
+            "is_active": true,
+            "display_text": null,
+            "_id": "5f2e30cbd1456d00386ac008",
+            "plan_id": "5f2e30cad1456d00386abf1c",
+            "created_at": "2020-08-08T04:57:47.829Z",
+            "modified_at": "2021-07-31T12:13:51.221Z",
+            "component": {
+              "is_visible": true,
+              "is_active": true,
+              "is_display": true,
+              "_id": "5f2e30cad1456d00386abefd",
+              "component_price_config": {
+                "type": "display",
+                "display_text": "4%"
+              },
+              "name": "Transaction Fees",
+              "slug": "transaction-fee",
+              "description": "Transaction fees is inclusive of Payment Gateway",
+              "group": "Key Features",
+              "icon": "",
+              "product_suite_id": "5f2e30cad1456d00386abefc",
+              "created_at": "2020-08-08T04:57:46.648Z",
+              "modified_at": "2021-07-31T12:13:50.344Z",
+              "links": {}
+            },
+            "component_price": {
+              "display_text": "3.5%",
+              "is_default": false,
+              "is_active": true,
+              "processing_type": "display",
+              "tags": [],
+              "_id": "5f2e30cbd1456d00386abf77",
+              "component_id": "5f2e30cad1456d00386abefd",
+              "created_at": "2020-08-08T04:57:47.433Z",
+              "modified_at": "2023-04-21T07:04:22.574Z",
+              "__v": 0
+            }
+          }
+        ],
+        "components": [
+          {
+            "_id": "634569a3675d1912531e5ef3",
+            "component_price_config": {
+              "type": "revenue",
+              "default_config": {
+                "recurring": {
+                  "aggregate_usage": "sum",
+                  "usage_type": "licensed",
+                  "interval_count": 1
+                },
+                "transform_quantity": {
+                  "divide_by": 1,
+                  "round": "up"
+                },
+                "free_tier": {
+                  "type": "TIME_BASED",
+                  "value": 0
+                },
+                "unit_amount": 0,
+                "quantity": 1,
+                "price_type": "static",
+                "price_ui_type": "standard",
+                "bill_type": "one_time",
+                "billing_scheme": "per_unit",
+                "display_text": "Yes",
+                "tiers": [],
+                "currency": "INR"
+              },
+              "display_text": "Free",
+              "price_meta": {
+                "unit_amount": 0,
+                "price_type": "static",
+                "bill_type": "one_time",
+                "billing_scheme": "per_unit",
+                "transform_quantity": {
+                  "divide_by": 1,
+                  "round": "up"
+                }
+              }
+            },
+            "is_visible": true,
+            "is_active": true,
+            "is_display": true,
+            "product_suite_id": "5ececa006415744de9228e2e",
+            "name": "SSL Certificates",
+            "slug": "ssl-certificates",
+            "description": "",
+            "group": "Key Features",
+            "icon": "",
+            "links": {},
+            "created_at": "2022-10-11T13:03:31.767Z",
+            "modified_at": "2023-04-21T07:04:23.544Z"
+          }
+        ],
+        "fee_components": [],
         "recurring": {
-          "interval": "month",
-          "interval_count": 1
+          "interval_count": 1,
+          "interval": "month"
+        },
+        "taxation": {
+          "gst": 0.18
+        },
+        "one_time_fees": {
+          "developement": 0,
+          "marketing": 0
+        },
+        "credit_line": {
+          "is_active": false
         },
         "is_trial_plan": false,
         "plan_group": "default",
@@ -47464,23 +47572,340 @@ Active subscription
         "is_visible": true,
         "trial_period": 0,
         "addons": [],
-        "tags": [],
+        "tags": [
+          "popular"
+        ],
         "type": "public",
         "country": "IN",
-        "_id": "5f3a8786c90d780037723a12",
-        "name": "Standard",
-        "description": "Standard",
-        "amount": 999,
-        "product_suite_id": "5f3a8786c90d7800377239f3",
-        "created_at": "2020-08-17T13:35:02.547Z",
-        "modified_at": "2020-08-17T13:35:02.547Z"
+        "company_ids": [],
+        "channel_type": "ecomm",
+        "_id": "5f2e30cad1456d00386abf1c",
+        "tagLines": [],
+        "name": "Premium",
+        "description": "For scaled up businesses",
+        "amount": 2499,
+        "product_suite_id": "5f2e30cad1456d00386abefc",
+        "created_at": "2020-08-08T04:57:46.830Z",
+        "modified_at": "2023-04-21T07:04:22.363Z",
+        "current_status": "active",
+        "plan_leeway_after_activation": 7,
+        "activated_on": "2023-06-02T07:57:16.638Z"
       },
       "current_status": "active",
       "collection_method": "charge_automatically",
-      "created_at": "2020-08-17T13:45:36.731Z",
-      "modified_at": "2020-12-17T11:01:15.960Z",
-      "latest_invoice": "5fdb3a7bfc849c2153b944d5"
-    }
+      "created_at": "2022-11-29T10:18:59.466Z",
+      "modified_at": "2023-06-02T07:57:17.254Z",
+      "latest_invoice": "6479a0dda77a156ad997bd4d"
+    },
+    "latest_invoice": {
+      "documents": {},
+      "payment": {},
+      "period": {
+        "start": "2023-05-23T07:00:31.345Z",
+        "end": "2023-06-22T07:00:31.345Z"
+      },
+      "client": {
+        "address_lines": [
+          "TEST, TEST ,TEST, TEST",
+          "",
+          "NAVI MUMBAI, 400614, MAHARASHTRA, INDIA"
+        ],
+        "name": "avi_test",
+        "email": "avinashsharma@gofynd.com",
+        "phone": "undefined undefined"
+      },
+      "discount": {},
+      "taxation": {
+        "cgst": 0.09,
+        "sgst": 0.09,
+        "igst": 0
+      },
+      "auto_advance": false,
+      "currency": "INR",
+      "paid": true,
+      "attemp": 1,
+      "credit_note_amount": 1768.82,
+      "_id": "6479a0dda77a156ad997bd4d",
+      "collection_method": "charge_automatically",
+      "subscriber_id": "6385dc9289fe356a346935eb",
+      "invoice_url": "",
+      "number": "PS-P-A00515-FY24",
+      "pg_data": {},
+      "old_settlement": 999.33,
+      "credit_balance": null,
+      "receipt_number": "",
+      "statement_descriptor": "avi_test",
+      "current_status": "paid",
+      "status_trail": [
+        {
+          "_id": "6479a0dda77a157bd397bd4e",
+          "value": "open",
+          "timestamp": "2023-06-02T07:57:17.096Z"
+        },
+        {
+          "_id": "6479a196244a37915c4b9448",
+          "value": "paid",
+          "timestamp": "2023-06-02T08:00:22.059Z"
+        },
+        {
+          "_id": "6479a196e3c6582ed5ea7157",
+          "value": "paid",
+          "timestamp": "2023-06-02T08:00:22.099Z"
+        }
+      ],
+      "subtotal": 2555.4900000000002,
+      "total": 786.67,
+      "subscription": "6385dc9389fe3577db6935f3",
+      "next_action_time": "2023-06-02T07:57:17.112Z",
+      "meta": {
+        "old_plan_amount": 499.67,
+        "new_plan_amount": 1666,
+        "credit_note_id": "FP-C27-A00055-24",
+        "isPlanChanged": true
+      },
+      "created_at": "2023-06-02T07:57:17.128Z",
+      "modified_at": "2023-06-02T08:00:23.182Z",
+      "hash_identifier": "987abf78c61bfef585242bbbeaab1b59",
+      "pdf_url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/company/13781/self/subscription/documents/invoices/original/U6ffgNlo_-PS-P-A00515-FY24-paid.pdf"
+    },
+    "latestInvoice": {
+      "documents": {},
+      "payment": {},
+      "period": {
+        "start": "2023-05-23T07:00:31.345Z",
+        "end": "2023-06-22T07:00:31.345Z"
+      },
+      "client": {
+        "address_lines": [
+          "TEST, TEST ,TEST, TEST",
+          "",
+          "NAVI MUMBAI, 400614, MAHARASHTRA, INDIA"
+        ],
+        "name": "avi_test",
+        "email": "avinashsharma@gofynd.com",
+        "phone": "undefined undefined"
+      },
+      "discount": {},
+      "taxation": {
+        "cgst": 0.09,
+        "sgst": 0.09,
+        "igst": 0
+      },
+      "auto_advance": false,
+      "currency": "INR",
+      "paid": true,
+      "attemp": 1,
+      "credit_note_amount": 1768.82,
+      "_id": "6479a0dda77a156ad997bd4d",
+      "collection_method": "charge_automatically",
+      "subscriber_id": "6385dc9289fe356a346935eb",
+      "invoice_url": "",
+      "number": "PS-P-A00515-FY24",
+      "pg_data": {},
+      "old_settlement": 999.33,
+      "credit_balance": null,
+      "receipt_number": "",
+      "statement_descriptor": "avi_test",
+      "current_status": "paid",
+      "status_trail": [
+        {
+          "_id": "6479a0dda77a157bd397bd4e",
+          "value": "open",
+          "timestamp": "2023-06-02T07:57:17.096Z"
+        },
+        {
+          "_id": "6479a196244a37915c4b9448",
+          "value": "paid",
+          "timestamp": "2023-06-02T08:00:22.059Z"
+        },
+        {
+          "_id": "6479a196e3c6582ed5ea7157",
+          "value": "paid",
+          "timestamp": "2023-06-02T08:00:22.099Z"
+        }
+      ],
+      "subtotal": 2555.4900000000002,
+      "total": 786.67,
+      "subscription": "6385dc9389fe3577db6935f3",
+      "next_action_time": "2023-06-02T07:57:17.112Z",
+      "meta": {
+        "old_plan_amount": 499.67,
+        "new_plan_amount": 1666,
+        "credit_note_id": "FP-C27-A00055-24",
+        "isPlanChanged": true
+      },
+      "created_at": "2023-06-02T07:57:17.128Z",
+      "modified_at": "2023-06-02T08:00:23.182Z",
+      "hash_identifier": "987abf78c61bfef585242bbbeaab1b59",
+      "pdf_url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/company/13781/self/subscription/documents/invoices/original/U6ffgNlo_-PS-P-A00515-FY24-paid.pdf"
+    },
+    "mandate_amount": 630000,
+    "current_subscriptions": [
+      {
+        "current_period": {
+          "start": "2023-05-23T07:00:31.345Z",
+          "end": "2023-06-22T07:00:31.345Z"
+        },
+        "pause_collection": {},
+        "trial": {},
+        "invoice_settings": {
+          "generation": true,
+          "charging": true
+        },
+        "is_active": true,
+        "cancel_at_period_end": false,
+        "freezed": false,
+        "channel_type": "ecomm",
+        "_id": "6385dc9389fe3577db6935f3",
+        "subscriber_id": "6385dc9289fe356a346935eb",
+        "plan_id": "5f2e30cad1456d00386abf1c",
+        "product_suite_id": "5f2e30cad1456d00386abefc",
+        "plan_data": {
+          "plan_components": [
+            {
+              "is_active": true,
+              "display_text": null,
+              "_id": "5f2e30cbd1456d00386ac008",
+              "plan_id": "5f2e30cad1456d00386abf1c",
+              "created_at": "2020-08-08T04:57:47.829Z",
+              "modified_at": "2021-07-31T12:13:51.221Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "5f2e30cad1456d00386abefd",
+                "component_price_config": {
+                  "type": "display",
+                  "display_text": "4%"
+                },
+                "name": "Transaction Fees",
+                "slug": "transaction-fee",
+                "description": "Transaction fees is inclusive of Payment Gateway",
+                "group": "Key Features",
+                "icon": "",
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "created_at": "2020-08-08T04:57:46.648Z",
+                "modified_at": "2021-07-31T12:13:50.344Z",
+                "links": {}
+              },
+              "component_price": {
+                "display_text": "3.5%",
+                "is_default": false,
+                "is_active": true,
+                "processing_type": "display",
+                "tags": [],
+                "_id": "5f2e30cbd1456d00386abf77",
+                "component_id": "5f2e30cad1456d00386abefd",
+                "created_at": "2020-08-08T04:57:47.433Z",
+                "modified_at": "2023-04-21T07:04:22.574Z",
+                "__v": 0
+              }
+            }
+          ],
+          "components": [
+            {
+              "_id": "634569a3675d1912531e5ef3",
+              "component_price_config": {
+                "type": "revenue",
+                "default_config": {
+                  "recurring": {
+                    "aggregate_usage": "sum",
+                    "usage_type": "licensed",
+                    "interval_count": 1
+                  },
+                  "transform_quantity": {
+                    "divide_by": 1,
+                    "round": "up"
+                  },
+                  "free_tier": {
+                    "type": "TIME_BASED",
+                    "value": 0
+                  },
+                  "unit_amount": 0,
+                  "quantity": 1,
+                  "price_type": "static",
+                  "price_ui_type": "standard",
+                  "bill_type": "one_time",
+                  "billing_scheme": "per_unit",
+                  "display_text": "Yes",
+                  "tiers": [],
+                  "currency": "INR"
+                },
+                "display_text": "Free",
+                "price_meta": {
+                  "unit_amount": 0,
+                  "price_type": "static",
+                  "bill_type": "one_time",
+                  "billing_scheme": "per_unit",
+                  "transform_quantity": {
+                    "divide_by": 1,
+                    "round": "up"
+                  }
+                }
+              },
+              "is_visible": true,
+              "is_active": true,
+              "is_display": true,
+              "product_suite_id": "5ececa006415744de9228e2e",
+              "name": "SSL Certificates",
+              "slug": "ssl-certificates",
+              "description": "",
+              "group": "Key Features",
+              "icon": "",
+              "links": {},
+              "created_at": "2022-10-11T13:03:31.767Z",
+              "modified_at": "2023-04-21T07:04:23.544Z"
+            }
+          ],
+          "fee_components": [],
+          "recurring": {
+            "interval_count": 1,
+            "interval": "month"
+          },
+          "taxation": {
+            "gst": 0.18
+          },
+          "one_time_fees": {
+            "developement": 0,
+            "marketing": 0
+          },
+          "credit_line": {
+            "is_active": false
+          },
+          "is_trial_plan": false,
+          "plan_group": "default",
+          "tag_lines": [],
+          "currency": "INR",
+          "is_active": true,
+          "is_visible": true,
+          "trial_period": 0,
+          "addons": [],
+          "tags": [
+            "popular"
+          ],
+          "type": "public",
+          "country": "IN",
+          "company_ids": [],
+          "channel_type": "ecomm",
+          "_id": "5f2e30cad1456d00386abf1c",
+          "tagLines": [],
+          "name": "Premium",
+          "description": "For scaled up businesses",
+          "amount": 2499,
+          "product_suite_id": "5f2e30cad1456d00386abefc",
+          "created_at": "2020-08-08T04:57:46.830Z",
+          "modified_at": "2023-04-21T07:04:22.363Z",
+          "current_status": "active",
+          "plan_leeway_after_activation": 7,
+          "activated_on": "2023-06-02T07:57:16.638Z"
+        },
+        "current_status": "active",
+        "collection_method": "charge_automatically",
+        "created_at": "2022-11-29T10:18:59.466Z",
+        "modified_at": "2023-06-02T07:57:17.254Z",
+        "latest_invoice": "6479a0dda77a156ad997bd4d"
+      }
+    ]
   }
 }
 ```
@@ -54502,49 +54927,6 @@ Schema: `BagStateTransitionMap`
 ## Catalog
 
 
-#### deleteSearchKeywords
-Delete a custom keyword mapping by thier ID.
-
-```golang
-
-data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a numeric ID allotted to a business account on Fynd Platform. | 
-
-
-| ApplicationID | string | A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account. | 
-
-
-| ID | string | A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-This API allows you to delete a custom keyword mapping by their ID within an application. Returns an object that tells whether the keywords was deleted successfully
-
-*Success Response:*
-
-
-
-A successful response contains the success message if the keyword search mapping is deleted. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getSearchKeywords
 Get a custom keyword search detail by their ID.
 
@@ -54620,6 +55002,49 @@ A successful response contains the keyword object with id that is updated. See e
 
 
 Schema: `GetSearchWordsData`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteSearchKeywords
+Delete a custom keyword mapping by thier ID.
+
+```golang
+
+data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account. | 
+
+
+| ID | string | A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+This API allows you to delete a custom keyword mapping by their ID within an application. Returns an object that tells whether the keywords was deleted successfully
+
+*Success Response:*
+
+
+
+A successful response contains the success message if the keyword search mapping is deleted. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -54718,49 +55143,6 @@ Schema: `GetSearchWordsData`
 ---
 
 
-#### deleteAutocompleteKeyword
-Delete a autocomplete keyword config by ID.
-
-```golang
-
-data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a numeric ID allotted to a business account on Fynd Platform. | 
-
-
-| ApplicationID | string | A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account. | 
-
-
-| ID | string | A `id` is a unique identifier for a specific autocomplete keyword map. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Autocomplete keywords configuration help you to extend and customize the behaviour of autocomplete search results in Fynd Platform. This API allows you to delete a keywords by it's `id`.
-
-*Success Response:*
-
-
-
-A successful response contains success message if config is deleted. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getAutocompleteKeywordDetail
 Get the detail of the autocomplete config by ID.
 
@@ -54836,6 +55218,49 @@ The Mapping object. See example below or refer `GetAutocompleteWordsResponseSche
 
 
 Schema: `UpdateAutocompleteWordData`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteAutocompleteKeyword
+Delete a autocomplete keyword config by ID.
+
+```golang
+
+data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account. | 
+
+
+| ID | string | A `id` is a unique identifier for a specific autocomplete keyword map. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+Autocomplete keywords configuration help you to extend and customize the behaviour of autocomplete search results in Fynd Platform. This API allows you to delete a keywords by it's `id`.
+
+*Success Response:*
+
+
+
+A successful response contains success message if config is deleted. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -55015,49 +55440,6 @@ Schema: `SearchRerankingModel`
 ---
 
 
-#### deleteSearchRerankConfig
-Delete the search re-ranking configured for an application bt its ID.
-
-```golang
-
-data, err := Catalog.DeleteSearchRerankConfig(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a numeric ID allotted to a business account on Fynd Platform. | 
-
-
-| ApplicationID | string | A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account. | 
-
-
-| ID | string | A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Search Reranking allows you rank and boost the search of the keywords and products in the product listing. This API allows you to delete a search re-ranking configured for the application.
-
-*Success Response:*
-
-
-
-A successful response contains the success response for the deleted custom search rerank configured for the application. See example below or refer `DeleteRerankResponseSchema` for details
-
-
-Schema: `DeleteRerankResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getSearchRerankingConfig
 Get the search rerank details of an application by its ID.
 
@@ -55133,6 +55515,49 @@ A successful response contains the data of the updated custom search rerank conf
 
 
 Schema: `SearchRerankingModel`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteSearchRerankConfig
+Delete the search re-ranking configured for an application bt its ID.
+
+```golang
+
+data, err := Catalog.DeleteSearchRerankConfig(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account. | 
+
+
+| ID | string | A `id` is a unique identifier for a specific keyword search configuration. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+Search Reranking allows you rank and boost the search of the keywords and products in the product listing. This API allows you to delete a search re-ranking configured for the application.
+
+*Success Response:*
+
+
+
+A successful response contains the success response for the deleted custom search rerank configured for the application. See example below or refer `DeleteRerankResponseSchema` for details
+
+
+Schema: `DeleteRerankResponse`
 
 
 
@@ -55225,6 +55650,46 @@ Schema: `GetProductBundleCreateResponse`
 ---
 
 
+#### getProductBundleDetail
+Get a particular Product Bundle details
+
+```golang
+
+data, err := Catalog.GetProductBundleDetail(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
+
+
+
+Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
+
+*Success Response:*
+
+
+
+The Collection object. See example below or refer `GetProductBundleResponse` for details
+
+
+Schema: `GetProductBundleResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateProductBundle
 Update a Product Bundle
 
@@ -55254,46 +55719,6 @@ The Collection object. See example below or refer `GetProductBundleCreateRespons
 
 
 Schema: `GetProductBundleCreateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getProductBundleDetail
-Get a particular Product Bundle details
-
-```golang
-
-data, err := Catalog.GetProductBundleDetail(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. | 
-
-
-
-Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
-
-*Success Response:*
-
-
-
-The Collection object. See example below or refer `GetProductBundleResponse` for details
-
-
-Schema: `GetProductBundleResponse`
 
 
 
@@ -55392,6 +55817,46 @@ Schema: `SuccessResponse`
 ---
 
 
+#### getSizeGuide
+Get a single size guide.
+
+```golang
+
+data, err := Catalog.GetSizeGuide(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to size guide. | 
+
+
+| ID | string | Id of the size guide to be viewed. | 
+
+
+
+This API helps to get data associated to a size guide.
+
+*Success Response:*
+
+
+
+Brand object. See example below or refer `SizeGuideResponseSchema` for details
+
+
+Schema: `SizeGuideResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateSizeGuide
 Edit a size guide.
 
@@ -55433,34 +55898,37 @@ Schema: `SuccessResponse`
 ---
 
 
-#### getSizeGuide
-Get a single size guide.
+#### getAppProduct
+Get company application product data.
 
 ```golang
 
-data, err := Catalog.GetSizeGuide(CompanyID, ID);
+data, err := Catalog.GetAppProduct(CompanyID, ApplicationID, ItemID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Id of the company associated to size guide. | 
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
 
 
-| ID | string | Id of the size guide to be viewed. | 
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ItemID | string | product id for a particular product. | 
 
 
 
-This API helps to get data associated to a size guide.
+Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
 
 *Success Response:*
 
 
 
-Brand object. See example below or refer `SizeGuideResponseSchema` for details
+The Company Applicaton Product Data(MOQ/SEO).
 
 
-Schema: `SizeGuideResponse`
+Schema: `OwnerAppItemResponse`
 
 
 
@@ -55505,49 +55973,6 @@ Returns a success response
 
 
 Schema: `SuccessResponse1`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAppProduct
-Get company application product data.
-
-```golang
-
-data, err := Catalog.GetAppProduct(CompanyID, ApplicationID, ItemID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ItemID | string | product id for a particular product. | 
-
-
-
-Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
-
-*Success Response:*
-
-
-
-The Company Applicaton Product Data(MOQ/SEO).
-
-
-Schema: `OwnerAppItemResponse`
 
 
 
@@ -55702,52 +56127,6 @@ Schema: `AppConfigurationDetail`
 ---
 
 
-#### deleteGroupConfiguration
-Delete configuration of the product config type of the application.
-
-```golang
-
-data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
-
-
-| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
-
-
-
-Delete configuration of the product config type of the application.
-
-*Success Response:*
-
-
-
-success message will tell whether the operation was successful.
-
-
-Schema: `ConfigSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateGroupConfiguration
 Update the group configurations for the application.
 
@@ -55783,6 +56162,52 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationDetail`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteGroupConfiguration
+Delete configuration of the product config type of the application.
+
+```golang
+
+data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
+
+
+| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration of the product config type of the application.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
 
 
 
@@ -55889,52 +56314,6 @@ Schema: `AppConfigurationsSort`
 ---
 
 
-#### deleteListingConfiguration
-Delete configuration for listings
-
-```golang
-
-data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
-
-
-| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
-
-
-
-Delete configuration for listing.
-
-*Success Response:*
-
-
-
-success message will tell whether the operation was successful.
-
-
-Schema: `ConfigSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateListingConfiguration
 Update configuration for listings
 
@@ -55970,6 +56349,52 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationsSort`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteListingConfiguration
+Delete configuration for listings
+
+```golang
+
+data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
+
+
+| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration for listing.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
 
 
 
@@ -56456,49 +56881,6 @@ Schema: `CollectionDetailResponse`
 ---
 
 
-#### deleteCollection
-Delete a collection.
-
-```golang
-
-data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a numeric ID allotted to a business account on Fynd Platform. | 
-
-
-| ApplicationID | string | A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account. | 
-
-
-| ID | string | An `id` is a unique identifier of a collection. | 
-
-
-
-This API allows you to delete the collection of an application.
-
-*Success Response:*
-
-
-
-A successful response contains the success message if the collection is deleted. See example below or refer `DeleteResponse` for details
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateCollection
 Update a collection by its ID.
 
@@ -56531,6 +56913,49 @@ A successful response contains the data of the collection with the updated data.
 
 
 Schema: `CollectionUpdateResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteCollection
+Delete a collection.
+
+```golang
+
+data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a numeric ID allotted to a business account on Fynd Platform. | 
+
+
+| ApplicationID | string | A `application_id` is alphanumeric ID allotted to a sales channel application created within a business account. | 
+
+
+| ID | string | An `id` is a unique identifier of a collection. | 
+
+
+
+This API allows you to delete the collection of an application.
+
+*Success Response:*
+
+
+
+A successful response contains the success message if the collection is deleted. See example below or refer `DeleteResponse` for details
+
+
+Schema: `DeleteResponse`
 
 
 
@@ -57209,6 +57634,46 @@ Schema: `DepartmentCreateResponse`
 ---
 
 
+#### getDepartmentData
+Get specific departments details by passing in unique id of the department.
+
+```golang
+
+data, err := Catalog.GetDepartmentData(CompanyID, UID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| UID | string | A `uid` is a unique identifier of a department. | 
+
+
+
+Allows you to get department data, by uid.
+
+*Success Response:*
+
+
+
+Departments Data. See example below or refer `DepartmentsResponse` for details
+
+
+Schema: `DepartmentsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateDepartment
 Update the department by their uid.
 
@@ -57238,46 +57703,6 @@ Success Response. See example below or refer `DepartmentCreateResponseSchema` fo
 
 
 Schema: `DepartmentModel`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getDepartmentData
-Get specific departments details by passing in unique id of the department.
-
-```golang
-
-data, err := Catalog.GetDepartmentData(CompanyID, UID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| UID | string | A `uid` is a unique identifier of a department. | 
-
-
-
-Allows you to get department data, by uid.
-
-*Success Response:*
-
-
-
-Departments Data. See example below or refer `DepartmentsResponse` for details
-
-
-Schema: `DepartmentsResponse`
 
 
 
@@ -57778,6 +58203,46 @@ Schema: `CategoryCreateResponse`
 ---
 
 
+#### getCategoryData
+Get product category by uid
+
+```golang
+
+data, err := Catalog.GetCategoryData(CompanyID, UID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| UID | string | Category unique id | 
+
+
+
+This API gets meta associated to product categories.
+
+*Success Response:*
+
+
+
+Get Data for one category. See example below or refer `CategoryResponse` for details
+
+
+Schema: `SingleCategoryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateCategory
 Update product categories
 
@@ -57807,46 +58272,6 @@ Category Meta. See example below or refer `CategoryUpdateResponse` for details
 
 
 Schema: `CategoryUpdateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getCategoryData
-Get product category by uid
-
-```golang
-
-data, err := Catalog.GetCategoryData(CompanyID, UID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| UID | string | Category unique id | 
-
-
-
-This API gets meta associated to product categories.
-
-*Success Response:*
-
-
-
-Get Data for one category. See example below or refer `CategoryResponse` for details
-
-
-Schema: `SingleCategoryResponse`
 
 
 
@@ -58043,46 +58468,6 @@ Schema: `ProductAttributesResponse`
 ---
 
 
-#### deleteProduct
-Delete a product.
-
-```golang
-
-data, err := Catalog.DeleteProduct(CompanyID, ItemID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
-
-
-| ItemID | float64 | Id of the product to be updated. | 
-
-
-
-This API allows to delete product.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getProduct
 Get a single product.
 
@@ -58148,6 +58533,46 @@ data, err := Catalog.EditProduct(CompanyID, ItemID, body);
 | body |  ProductCreateUpdateSchemaV2 | "Request body" 
 
 This API allows to edit product.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteProduct
+Delete a product.
+
+```golang
+
+data, err := Catalog.DeleteProduct(CompanyID, ItemID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
+
+
+| ItemID | float64 | Id of the product to be updated. | 
+
+
+
+This API allows to delete product.
 
 *Success Response:*
 
@@ -58418,25 +58843,26 @@ Schema: `BulkResponse`
 ---
 
 
-#### deleteProductBulkJob
-Delete Bulk product job.
+#### createProductsInBulk
+Create products in bulk associated with given batch Id.
 
 ```golang
 
-data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
+data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
 
 
-| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
+| BatchID | string | Batch Id in which assets to be uploaded. | 
 
 
+| body |  BulkProductRequest | "Request body" 
 
-This API allows to delete bulk product job associated with company.
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -58458,26 +58884,25 @@ Schema: `SuccessResponse`
 ---
 
 
-#### createProductsInBulk
-Create products in bulk associated with given batch Id.
+#### deleteProductBulkJob
+Delete Bulk product job.
 
 ```golang
 
-data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
+data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
 
 
-| BatchID | string | Batch Id in which assets to be uploaded. | 
+| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
 
 
-| body |  BulkProductRequest | "Request body" 
 
-This API helps to create products in bulk push to kafka for approval/creation.
+This API allows to delete bulk product job associated with company.
 
 *Success Response:*
 
@@ -59042,25 +59467,26 @@ Schema: `BulkResponse`
 ---
 
 
-#### deleteBulkInventoryJob
-Delete Bulk Inventory job.
+#### createBulkInventory
+Create products in bulk associated with given batch Id.
 
 ```golang
 
-data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
+data, err := Catalog.CreateBulkInventory(CompanyID, BatchID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
+| CompanyID | float64 | Company Id in which Inventory is to be uploaded. | 
 
 
-| BatchID | string | Batch Id of the bulk delete job. | 
+| BatchID | string | Batch Id of the bulk create job. | 
 
 
+| body |  InventoryBulkRequest | "Request body" 
 
-This API allows to delete bulk Inventory job associated with company.
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -59082,26 +59508,25 @@ Schema: `SuccessResponse`
 ---
 
 
-#### createBulkInventory
-Create products in bulk associated with given batch Id.
+#### deleteBulkInventoryJob
+Delete Bulk Inventory job.
 
 ```golang
 
-data, err := Catalog.CreateBulkInventory(CompanyID, BatchID, body);
+data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which Inventory is to be uploaded. | 
+| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
 
 
-| BatchID | string | Batch Id of the bulk create job. | 
+| BatchID | string | Batch Id of the bulk delete job. | 
 
 
-| body |  InventoryBulkRequest | "Request body" 
 
-This API helps to create products in bulk push to kafka for approval/creation.
+This API allows to delete bulk Inventory job associated with company.
 
 *Success Response:*
 
@@ -59322,12 +59747,12 @@ Schema: `InventoryConfig`
 ---
 
 
-#### deleteRealtimeInventory
+#### updateRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -59366,12 +59791,12 @@ Schema: `InventoryUpdateResponse`
 ---
 
 
-#### updateRealtimeInventory
+#### deleteRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -59448,6 +59873,46 @@ Schema: `InventoryUpdateResponse`
 ---
 
 
+#### getHsnCode
+Fetch Hsn Code.
+
+```golang
+
+data, err := Catalog.GetHsnCode(CompanyID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | company id | 
+
+
+| ID | string | Unique id | 
+
+
+
+Fetch Hsn Code.
+
+*Success Response:*
+
+
+
+See example below details
+
+
+Schema: `HsnCode`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateHsnCode
 Update Hsn Code.
 
@@ -59474,46 +59939,6 @@ Update Hsn Code.
 
 
 See example below for details
-
-
-Schema: `HsnCode`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getHsnCode
-Fetch Hsn Code.
-
-```golang
-
-data, err := Catalog.GetHsnCode(CompanyID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | company id | 
-
-
-| ID | string | Unique id | 
-
-
-
-Fetch Hsn Code.
-
-*Success Response:*
-
-
-
-See example below details
 
 
 Schema: `HsnCode`
