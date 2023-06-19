@@ -3895,7 +3895,11 @@ func NewAppClient(config *AppConfig) *Client {
         PaymentMode string  `url:"payment_mode,omitempty"` 
         PaymentIdentifier string  `url:"payment_identifier,omitempty"` 
         AggregatorName string  `url:"aggregator_name,omitempty"` 
-        MerchantCode string  `url:"merchant_code,omitempty"`  
+        MerchantCode string  `url:"merchant_code,omitempty"` 
+        Iin string  `url:"iin,omitempty"` 
+        Network string  `url:"network,omitempty"` 
+        Type string  `url:"type,omitempty"` 
+        CardID string  `url:"card_id,omitempty"`  
     }
     
     // ValidateCouponForPayment Verify the coupon eligibility against the payment mode
@@ -3910,6 +3914,14 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
+            
+                
+            
+                
+            
+                
             
                 
             
@@ -4076,6 +4088,8 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
 
         
             
@@ -4143,6 +4157,8 @@ func NewAppClient(config *AppConfig) *Client {
              updateCartMetaResponse CartMetaResponse
 	    )
 
+        
+            
         
             
         
@@ -4506,6 +4522,8 @@ func NewAppClient(config *AppConfig) *Client {
              checkoutCartV2Response CartCheckoutResponse
 	    )
 
+        
+            
         
             
         
@@ -15511,7 +15529,11 @@ func NewAppClient(config *AppConfig) *Client {
         PaymentMode string  `url:"payment_mode,omitempty"` 
         PaymentIdentifier string  `url:"payment_identifier,omitempty"` 
         AggregatorName string  `url:"aggregator_name,omitempty"` 
-        MerchantCode string  `url:"merchant_code,omitempty"`  
+        MerchantCode string  `url:"merchant_code,omitempty"` 
+        Iin string  `url:"iin,omitempty"` 
+        Network string  `url:"network,omitempty"` 
+        Type string  `url:"type,omitempty"` 
+        CardID string  `url:"card_id,omitempty"`  
     }
     
     // ValidateCouponForPayment Verify the coupon eligibility against the payment mode
@@ -15526,6 +15548,14 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
+            
+                
+            
+                
+            
+                
             
                 
             
@@ -15788,6 +15818,8 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
 
         
             
@@ -15855,6 +15887,8 @@ func NewAppClient(config *AppConfig) *Client {
              updateCartMetaResponse CartMetaResponse
 	    )
 
+        
+            
         
             
         

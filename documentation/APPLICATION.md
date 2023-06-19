@@ -4920,7 +4920,15 @@ Verify the coupon eligibility against the payment mode
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`, `Iin`, `Network`, `Type`, `CardID`
 
 
 
@@ -29151,7 +29159,15 @@ Verify the coupon eligibility against the payment mode
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`, `Iin`, `Network`, `Type`, `CardID`
 
 
 
