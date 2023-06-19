@@ -99,6 +99,7 @@
     * [getApplicationThemeByIdV2](#getapplicationthemebyidv2)
     * [updateThemeV2](#updatethemev2)
     * [applyThemeV2](#applythemev2)
+    * [updateThemeNameV2](#updatethemenamev2)
     
 
 * [User](#User)
@@ -295,29 +296,13 @@
     * [getUserOrderBeneficiaries](#getuserorderbeneficiaries)
     * [getUserBeneficiaries](#getuserbeneficiaries)
     * [confirmPayment](#confirmpayment)
-    * [getPlatformPaymentConfig](#getplatformpaymentconfig)
-    * [updatePlatformPaymentConfig](#updateplatformpaymentconfig)
     * [getUserCODlimitRoutes](#getusercodlimitroutes)
     * [setUserCODlimitRoutes](#setusercodlimitroutes)
-    * [edcAggregatorsAndModelList](#edcaggregatorsandmodellist)
-    * [edcDeviceStats](#edcdevicestats)
-    * [updateEdcDevice](#updateedcdevice)
-    * [getEdcDevice](#getedcdevice)
-    * [addEdcDevice](#addedcdevice)
-    * [edcDeviceList](#edcdevicelist)
-    * [getPosPaymentModeRoutes](#getpospaymentmoderoutes)
-    * [initialisePayment](#initialisepayment)
-    * [checkAndUpdatePaymentStatus](#checkandupdatepaymentstatus)
-    * [resendOrCancelPayment](#resendorcancelpayment)
-    * [paymentStatusBulk](#paymentstatusbulk)
     * [oauthGetUrl](#oauthgeturl)
     * [revokeOauthToken](#revokeoauthtoken)
-    * [verifyCustomerForPayment](#verifycustomerforpayment)
-    * [getPaymentLink](#getpaymentlink)
-    * [createPaymentLink](#createpaymentlink)
-    * [pollingPaymentLink](#pollingpaymentlink)
-    * [resendPaymentLink](#resendpaymentlink)
-    * [cancelPaymentLink](#cancelpaymentlink)
+    * [repaymentDetails](#repaymentdetails)
+    * [merchantOnBoarding](#merchantonboarding)
+    * [getPaymentCodeOption](#getpaymentcodeoption)
     
 
 * [Order](#Order)
@@ -353,13 +338,13 @@
     * [processManifest](#processmanifest)
     * [dispatchManifest](#dispatchmanifest)
     * [getRoleBasedActions](#getrolebasedactions)
-    * [getShipmentHistory](#getshipmenthistory)
     * [postShipmentHistory](#postshipmenthistory)
+    * [getShipmentHistory](#getshipmenthistory)
     * [sendSmsNinja](#sendsmsninja)
     * [updatePackagingDimensions](#updatepackagingdimensions)
     * [createOrder](#createorder)
-    * [getChannelConfig](#getchannelconfig)
     * [createChannelConfig](#createchannelconfig)
+    * [getChannelConfig](#getchannelconfig)
     * [uploadConsent](#uploadconsent)
     * [orderUpdate](#orderupdate)
     * [checkOrderStatus](#checkorderstatus)
@@ -734,20 +719,33 @@
     * [getEntityRegionView](#getentityregionview)
     * [getListView](#getlistview)
     * [getCompanyStoreView](#getcompanystoreview)
-    * [getZoneDataView](#getzonedataview)
     * [updateZoneControllerView](#updatezonecontrollerview)
+    * [getZoneDataView](#getzonedataview)
     * [createZone](#createzone)
-    * [getZonesFromApplicationIdView](#getzonesfromapplicationidview)
     * [getZoneFromPincodeView](#getzonefrompincodeview)
+    * [getZonesFromApplicationIdView](#getzonesfromapplicationidview)
     * [getZoneListView](#getzonelistview)
     * [getStore](#getstore)
     * [getAllStores](#getallstores)
+    * [getOptimalLocations](#getoptimallocations)
     * [addAppDp](#addappdp)
     * [deleteAppDp](#deleteappdp)
     * [updatePincodeMopView](#updatepincodemopview)
     * [updatePincodeBulkView](#updatepincodebulkview)
     * [updatePincodeCoDListing](#updatepincodecodlisting)
     * [updatePincodeAuditHistory](#updatepincodeaudithistory)
+    * [upsertDpAccount](#upsertdpaccount)
+    * [getDpAccount](#getdpaccount)
+    * [updateDpRule](#updatedprule)
+    * [getDpRules](#getdprules)
+    * [upsertDpRules](#upsertdprules)
+    * [getDpRuleInsert](#getdpruleinsert)
+    * [upsertDpCompanyRules](#upsertdpcompanyrules)
+    * [getDpCompanyRules](#getdpcompanyrules)
+    * [upsertDpApplicationRules](#upsertdpapplicationrules)
+    * [getDpApplicationRules](#getdpapplicationrules)
+    * [getApplicationServiceabilitySelfShipment](#getapplicationserviceabilityselfshipment)
+    * [patchApplicationServiceabilitySelfShipment](#patchapplicationserviceabilityselfshipment)
     
 
 * [Finance](#Finance)
@@ -39480,6 +39478,50 @@ Schema: `ApplyThemeResponseV2`
 ---
 
 
+#### updateThemeNameV2
+Update Theme Name
+
+```golang
+
+data, err := Theme.UpdateThemeNameV2(CompanyID, ApplicationID, ThemeID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | The ID of the company. | 
+
+
+| ApplicationID | string | The ID of the application. | 
+
+
+| ThemeID | string | The ID of the theme to be updated. | 
+
+
+| body |  UpdateThemeNameRequestBodyV2 | "Request body" 
+
+Update the name of a theme for a specific company and application.
+
+*Success Response:*
+
+
+
+Theme name updated successfully.
+
+
+Schema: `AllThemesApplicationResponseV2`
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ---
 
@@ -57138,87 +57180,6 @@ Schema: `PaymentConfirmationResponse`
 ---
 
 
-#### getPlatformPaymentConfig
-API to fetch the payment options of the merchant for paltform
-
-```golang
-
-data, err := Payment.GetPlatformPaymentConfig(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-
-Use this API to fetch the payment options.
-
-*Success Response:*
-
-
-
-Success. Returns the status of API. Check the example shown below or refer `PlatfromPaymentConfigSchema` for more details.
-
-
-Schema: `PlatfromPaymentConfig`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updatePlatformPaymentConfig
-API to update the payment options of the merchant for paltform
-
-```golang
-
-data, err := Payment.UpdatePlatformPaymentConfig(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| body |  UpdatePlatformPaymentConfig | "Request body" 
-
-Use this API to update the payment options.
-
-*Success Response:*
-
-
-
-Success. Returns the status of API. Check the example shown below or refer `PlatfromPaymentConfigSchema` for more details.
-
-
-Schema: `PlatfromPaymentConfig`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getUserCODlimitRoutes
 Get COD limit for user
 
@@ -57293,516 +57254,6 @@ Success. Returns true/false for user cod option for payment. Check the example s
 
 
 Schema: `SetCODOptionResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### edcAggregatorsAndModelList
-get some information about the store and edc device
-
-```golang
-
-data, err := Payment.EdcAggregatorsAndModelList(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-
-Use this API to get info of devices linked to a particular app.
-
-*Success Response:*
-
-
-
-Success. Returns the list of devices linked to the application Check the example shown below or refer `EdcAggregatorAndModelListResponseSchema` for more details.
-
-
-Schema: `EdcAggregatorAndModelListResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### edcDeviceStats
-get some information about the store and edc device
-
-```golang
-
-data, err := Payment.EdcDeviceStats(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-
-Use this API to get info of devices linked to a particular app.
-
-*Success Response:*
-
-
-
-Success. Returns the list of devices linked to the application Check the example shown below or refer `EdcDeviceStatsResponseSchema` for more details.
-
-
-Schema: `EdcDeviceStatsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateEdcDevice
-map new edc device to the terminal
-
-```golang
-
-data, err := Payment.UpdateEdcDevice(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| body |  EdcAddRequest | "Request body" 
-
-Use this API to map new edc device to the terminal
-
-*Success Response:*
-
-
-
-Success. Returns the single edc device mapped to the terminal. Check the example shown below or refer `EdcDeviceAddResponseSchema` for more details.
-
-
-Schema: `EdcDeviceAddResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getEdcDevice
-get details of a single edc device
-
-```golang
-
-data, err := Payment.GetEdcDevice(CompanyID, ApplicationID, TerminalUniqueIdentifier);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| TerminalUniqueIdentifier | string | Terminal unique identifier | 
-
-
-
-Use this API to get details of a single edc device
-
-*Success Response:*
-
-
-
-Success. Returns the single edc device mapped to the terminal. Check the example shown below or refer `EdcDeviceDetailsResponseSchema` for more details.
-
-
-Schema: `EdcDeviceDetailsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### addEdcDevice
-Update store id and device tag of edc device
-
-```golang
-
-data, err := Payment.AddEdcDevice(CompanyID, ApplicationID, TerminalUniqueIdentifier, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| TerminalUniqueIdentifier | string | Terminal unique identifier | 
-
-
-| body |  EdcUpdateRequest | "Request body" 
-
-Use this API to Update store id and device tag of edc device
-
-*Success Response:*
-
-
-
-Check the example shown below or refer `EdcDeviceUpdateResponseSchema` for more details.
-
-
-Schema: `EdcDeviceUpdateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### edcDeviceList
-get all the device list of an app
-
-```golang
-
-data, err := Payment.EdcDeviceList(CompanyID, ApplicationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-
-
-
-
-
-
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application id | 
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `IsActive`, `StoreID`, `DeviceTag`
-
-
-Use this API to get all devices linked to a particular app.
-
-*Success Response:*
-
-
-
-Success. Returns the list of devices linked to the application Check the example shown below or refer `EdcDeviceListResponseSchema` for more details.
-
-
-Schema: `EdcDeviceListResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPosPaymentModeRoutes
-Get All Valid Payment Options
-
-```golang
-
-data, err := Payment.GetPosPaymentModeRoutes(CompanyID, ApplicationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `Amount`, `CartID`, `Pincode`, `CheckoutMode`, `Refresh`, `CardReference`, `OrderType`, `UserDetails`
-
-
-Use this API to get Get All Valid Payment Options for making payment
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `PaymentOptionsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### initialisePayment
-Initialize a payment (server-to-server) for UPI and BharatQR
-
-```golang
-
-data, err := Payment.InitialisePayment(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| body |  PaymentInitializationRequest | "Request body" 
-
-PUse this API to inititate payment using UPI, BharatQR, wherein the UPI requests are send to the app and QR code is displayed on the screen.
-
-*Success Response:*
-
-
-
-Success. Check the example shown below or refer `PaymentInitializationResponse` for more details.
-
-
-Schema: `PaymentInitializationResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### checkAndUpdatePaymentStatus
-Performs continuous polling to check status of payment on the server
-
-```golang
-
-data, err := Payment.CheckAndUpdatePaymentStatus(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| body |  PaymentStatusUpdateRequest | "Request body" 
-
-Use this API to perform continuous polling at intervals to check the status of payment until timeout.
-
-*Success Response:*
-
-
-
-Success. Returns the status of payment. Check the example shown below or refer `PaymentStatusUpdateResponse` for more details.
-
-
-Schema: `PaymentStatusUpdateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### resendOrCancelPayment
-API to resend and cancel a payment link which was already generated.
-
-```golang
-
-data, err := Payment.ResendOrCancelPayment(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| body |  ResendOrCancelPaymentRequest | "Request body" 
-
-Use this API to perform resend or cancel a payment link based on request payload.
-
-*Success Response:*
-
-
-
-Success. Returns the status of payment. Check the example shown below or refer `ResendOrCancelPaymentResponse` for more details.
-
-
-Schema: `ResendOrCancelPaymentResponse`
-
-
-*Examples:*
-
-
-request_type is cancel
-```json
-{
-  "value": {
-    "success": true,
-    "data": {
-      "message": "Payment link Cancelled.",
-      "status": true
-    }
-  }
-}
-```
-
-request_type is resend
-```json
-{
-  "value": {
-    "success": true,
-    "data": {
-      "message": "Notification triggered.",
-      "status": true
-    }
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### paymentStatusBulk
-Get Payment status and information for a list of order_ids
-
-```golang
-
-data, err := Payment.PaymentStatusBulk(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| body |  PaymentStatusBulkHandlerRequest | "Request body" 
-
-Use this API to get Payment status and information for a list of order_ids
-
-*Success Response:*
-
-
-
-Success. Returns the status of payment. Check the example shown below or refer `PaymentConfirmationResponseSchema` for more details.
-
-
-Schema: `PaymentStatusBulkHandlerResponse`
 
 
 
@@ -57906,12 +57357,12 @@ Schema: `RevokeOAuthToken`
 ---
 
 
-#### verifyCustomerForPayment
-Validate customer for payment
+#### repaymentDetails
+API to register repayment details
 
 ```golang
 
-data, err := Payment.VerifyCustomerForPayment(CompanyID, ApplicationID, body);
+data, err := Payment.RepaymentDetails(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -57923,61 +57374,18 @@ data, err := Payment.VerifyCustomerForPayment(CompanyID, ApplicationID, body);
 | ApplicationID | string | Application id | 
 
 
-| body |  ValidateCustomerRequest | "Request body" 
+| body |  RepaymentDetailsSerialiserPayAll | "Request body" 
 
-Use this API to check if the customer is eligible to use credit-line facilities such as Simpl Pay Later and Rupifi.
+Use this API to register any repayment record in the db and notify the aggrgator
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `ValidateCustomerResponse` for more details.
+Success. Returns the status of API. Check the example shown below or refer `RepaymentResponseSchema` for more details.
 
 
-Schema: `ValidateCustomerResponse`
-
-
-*Examples:*
-
-
-success is True i.e user is allowed
-```json
-{
-  "value": {
-    "success": true,
-    "message": "data fetched",
-    "data": {
-      "api_version": 2,
-      "data": {
-        "approved": true,
-        "button_text": "Buy Now, Pay Later",
-        "first_transaction": false
-      },
-      "aggregator": "Simpl"
-    }
-  }
-}
-```
-
-success is True i.e user not allowed
-```json
-{
-  "value": {
-    "success": false,
-    "message": "data fetched",
-    "error": {
-      "api_version": 2,
-      "data": {
-        "approved": false,
-        "button_text": "Buy Now, Pay Later",
-        "first_transaction": false
-      },
-      "aggregator": "Simpl"
-    },
-    "data": {}
-  }
-}
-```
+Schema: `RepaymentResponse`
 
 
 
@@ -57990,12 +57398,12 @@ success is True i.e user not allowed
 ---
 
 
-#### getPaymentLink
-Get payment link
+#### merchantOnBoarding
+API to push Ajiodhan merchant data to Gringotts system
 
 ```golang
 
-data, err := Payment.GetPaymentLink(CompanyID, ApplicationID, xQuery);
+data, err := Payment.MerchantOnBoarding(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -58007,20 +57415,18 @@ data, err := Payment.GetPaymentLink(CompanyID, ApplicationID, xQuery);
 | ApplicationID | string | Application id | 
 
 
+| body |  MerchantOnBoardingRequest | "Request body" 
 
-| xQuery | struct | Includes properties such as `PaymentLinkID`
-
-
-Use this API to get a payment link
+Use this API to push Ajiodhan merchant data to Gringotts system
 
 *Success Response:*
 
 
 
-Success. Check the example shown below
+Success. Returns the status of API. Check the example shown below or refer `RepaymentResponseSchema` for more details.
 
 
-Schema: `GetPaymentLinkResponse`
+Schema: `MerchantOnBoardingResponse`
 
 
 
@@ -58033,53 +57439,12 @@ Schema: `GetPaymentLinkResponse`
 ---
 
 
-#### createPaymentLink
-Create payment link
+#### getPaymentCodeOption
+List Payment Options Method Codes
 
 ```golang
 
-data, err := Payment.CreatePaymentLink(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| body |  CreatePaymentLinkRequest | "Request body" 
-
-Use this API to create a payment link for the customer
-
-*Success Response:*
-
-
-
-Success. Check the example shown below
-
-
-Schema: `CreatePaymentLinkResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### pollingPaymentLink
-Used for polling if payment successful or not
-
-```golang
-
-data, err := Payment.PollingPaymentLink(CompanyID, ApplicationID, xQuery);
+data, err := Payment.GetPaymentCodeOption(CompanyID, ApplicationID);
 ```
 
 | Argument  |  Type  | Description |
@@ -58092,101 +57457,16 @@ data, err := Payment.PollingPaymentLink(CompanyID, ApplicationID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `PaymentLinkID`
-
-
-Use this API to poll if payment through payment was successful or not
+Get all active List Payment Options Method Codes
 
 *Success Response:*
 
 
 
-Success. Check the example shown below
+List Order Beneficiary
 
 
-Schema: `PollingPaymentLinkResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### resendPaymentLink
-Resend payment link
-
-```golang
-
-data, err := Payment.ResendPaymentLink(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| body |  CancelOrResendPaymentLinkRequest | "Request body" 
-
-Use this API to resend a payment link for the customer
-
-*Success Response:*
-
-
-
-Success. Check the example shown below
-
-
-Schema: `ResendPaymentLinkResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### cancelPaymentLink
-Cancel payment link
-
-```golang
-
-data, err := Payment.CancelPaymentLink(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| body |  CancelOrResendPaymentLinkRequest | "Request body" 
-
-Use this API to cancel a payment link for the customer
-
-*Success Response:*
-
-
-
-Success. Check the example shown below
-
-
-Schema: `CancelPaymentLinkResponse`
+Schema: `GetPaymentCodeResponse`
 
 
 
@@ -59658,25 +58938,21 @@ Schema: `GetActionsResponse`
 ---
 
 
-#### getShipmentHistory
+#### postShipmentHistory
 
 
 ```golang
 
-data, err := Order.GetShipmentHistory(CompanyID, xQuery);
+data, err := Order.PostShipmentHistory(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id | 
+| CompanyID | float64 |  | 
 
 
-
-
-
-| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
-
+| body |  PostShipmentHistory | "Request body" 
 
 
 
@@ -59700,21 +58976,25 @@ Schema: `ShipmentHistoryResponse`
 ---
 
 
-#### postShipmentHistory
+#### getShipmentHistory
 
 
 ```golang
 
-data, err := Order.PostShipmentHistory(CompanyID, body);
+data, err := Order.GetShipmentHistory(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | float64 | Company Id | 
 
 
-| body |  PostShipmentHistory | "Request body" 
+
+
+
+| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
+
 
 
 
@@ -59852,43 +59132,6 @@ Schema: `CreateOrderResponse`
 ---
 
 
-#### getChannelConfig
-
-
-```golang
-
-data, err := Order.GetChannelConfig(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-getChannelConfig
-
-*Success Response:*
-
-
-
-Successfully created the config data
-
-
-Schema: `CreateChannelConfigData`
-
-
-
-
-
-
-
-
-
----
-
-
 #### createChannelConfig
 
 
@@ -59915,6 +59158,43 @@ Successfully updateShipmentStatus!
 
 
 Schema: `CreateChannelConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getChannelConfig
+
+
+```golang
+
+data, err := Order.GetChannelConfig(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+getChannelConfig
+
+*Success Response:*
+
+
+
+Successfully created the config data
+
+
+Schema: `CreateChannelConfigData`
 
 
 
@@ -79476,7 +78756,7 @@ data, err := Discount.ValidateDiscountFile(CompanyID, xQuery, body);
 
 | xQuery | struct | Includes properties such as `Discount`
 
-| body |  DiscountJob | "Request body" 
+| body |  FileJobRequest | "Request body" 
 
 Validate File.
 
@@ -80539,46 +79819,6 @@ Schema: `CompanyStoreView_Response`
 ---
 
 
-#### getZoneDataView
-Zone Data View of application.
-
-```golang
-
-data, err := Serviceability.GetZoneDataView(CompanyID, ZoneID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
-
-
-
-This API returns Zone Data View of the application.
-
-*Success Response:*
-
-
-
-Get Application Zone Data
-
-
-Schema: `GetSingleZoneDataViewResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateZoneControllerView
 Updation of zone collections in database.
 
@@ -80608,6 +79848,46 @@ Response status_code
 
 
 Schema: `ZoneSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getZoneDataView
+Zone Data View of application.
+
+```golang
+
+data, err := Serviceability.GetZoneDataView(CompanyID, ZoneID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
+
+
+
+This API returns Zone Data View of the application.
+
+*Success Response:*
+
+
+
+Get Application Zone Data
+
+
+Schema: `GetSingleZoneDataViewResponse`
 
 
 
@@ -80658,6 +79938,47 @@ Schema: `ZoneResponse`
 ---
 
 
+#### getZoneFromPincodeView
+GET zone from the Pincode.
+
+```golang
+
+data, err := Serviceability.GetZoneFromPincodeView(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` contains a specific ID of a company. | 
+
+
+| ApplicationID | string | A `application_id` contains a unique ID. | 
+
+
+| body |  GetZoneFromPincodeViewRequest | "Request body" 
+
+This API returns zone from the Pincode View.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `GetZoneFromPincodeViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getZonesFromApplicationIdView
 GET zones from the application_id.
 
@@ -80695,47 +80016,6 @@ List of zones for the given application_id
 
 
 Schema: `GetZoneFromApplicationIdViewResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getZoneFromPincodeView
-GET zone from the Pincode.
-
-```golang
-
-data, err := Serviceability.GetZoneFromPincodeView(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` contains a specific ID of a company. | 
-
-
-| ApplicationID | string | A `application_id` contains a unique ID. | 
-
-
-| body |  GetZoneFromPincodeViewRequest | "Request body" 
-
-This API returns zone from the Pincode View.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `GetZoneFromPincodeViewResponse`
 
 
 
@@ -80867,6 +80147,44 @@ Response status_code
 
 
 Schema: `GetStoresViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOptimalLocations
+Get serviceable store of the item
+
+```golang
+
+data, err := Serviceability.GetOptimalLocations(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  ReAssignStoreRequest | "Request body" 
+
+This API returns serviceable store of the item.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `ReAssignStoreResponse`
 
 
 
@@ -81115,6 +80433,490 @@ Response Data
 
 
 Schema: `PincodeMopUpdateAuditHistoryResponseData`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### upsertDpAccount
+Upsertion of DpAccount in database.
+
+```golang
+
+data, err := Serviceability.UpsertDpAccount(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  CompanyDpAccountRequest | "Request body" 
+
+This API returns response of upsertion of DpAccount in mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `CompanyDpAccountResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDpAccount
+Getting DpAccount of a company from database.
+
+```golang
+
+data, err := Serviceability.GetDpAccount(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNumber`, `PageSize`, `Stage`, `PaymentMode`, `TransportType`
+
+
+This API returns response DpAccount of a company from mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `CompanyDpAccountListResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateDpRule
+Updating of DpRules from database.
+
+```golang
+
+data, err := Serviceability.UpdateDpRule(CompanyID, RuleUID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| RuleUID | string | A `rule_uid` is a unique identifier for a particular Dp. | 
+
+
+| body |  DpRulesUpdateRequest | "Request body" 
+
+This API updates and returns response of DpRules from mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `DpRuleUpdateSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDpRules
+Fetching of DpRules from database.
+
+```golang
+
+data, err := Serviceability.GetDpRules(CompanyID, RuleUID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| RuleUID | string | A `rule_uid` is a unique identifier for a particular Dp. | 
+
+
+
+This API returns response of DpRules from mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `DpRuleSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### upsertDpRules
+Upsert of DpRules in database.
+
+```golang
+
+data, err := Serviceability.UpsertDpRules(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  DpRuleRequest | "Request body" 
+
+This API returns response of upsert of DpRules in mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `DpRuleSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDpRuleInsert
+Fetching of DpRules from database.
+
+```golang
+
+data, err := Serviceability.GetDpRuleInsert(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNumber`, `PageSize`
+
+
+This API returns response of DpRules from mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `DpMultipleRuleSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### upsertDpCompanyRules
+Upsert of DpCompanyRules in database.
+
+```golang
+
+data, err := Serviceability.UpsertDpCompanyRules(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  DPCompanyRuleRequest | "Request body" 
+
+This API returns response of upsert of DpCompanyRules in mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `DPCompanyRuleResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDpCompanyRules
+Get All DpCompanyRules applied to company from database.
+
+```golang
+
+data, err := Serviceability.GetDpCompanyRules(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+
+This API returns response of all DpCompanyRules from mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `DPCompanyRuleResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### upsertDpApplicationRules
+Upsert of DpApplicationRules in database.
+
+```golang
+
+data, err := Serviceability.UpsertDpApplicationRules(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular application channel. | 
+
+
+| body |  DPApplicationRuleRequest | "Request body" 
+
+This API returns response of upsert of DpApplicationRules in mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `DPApplicationRuleResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDpApplicationRules
+Get All DpApplicationRules rules added at application level from database.
+
+```golang
+
+data, err := Serviceability.GetDpApplicationRules(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular application channel. | 
+
+
+
+This API returns response of all rules of DpApplicationRules from mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `DPApplicationRuleResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getApplicationServiceabilitySelfShipment
+Self-ship configuration of application.
+
+```golang
+
+data, err := Serviceability.GetApplicationServiceabilitySelfShipment(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+
+This API returns Self-ship configuration of the application.
+
+*Success Response:*
+
+
+
+Response Data
+
+
+Schema: `ApplicationSelfShipConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### patchApplicationServiceabilitySelfShipment
+Self-ship configuration of application.
+
+```golang
+
+data, err := Serviceability.PatchApplicationServiceabilitySelfShipment(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  SelfShipResponse | "Request body" 
+
+This API updates Self-ship configuration of the application.
+
+*Success Response:*
+
+
+
+Response Data
+
+
+Schema: `ApplicationSelfShipConfigResponse`
 
 
 

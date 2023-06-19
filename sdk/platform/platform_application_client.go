@@ -2591,6 +2591,69 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
            
        
     
+    
+    
+  
+
+    
+    // UpdateThemeNameV2 Update Theme Name
+     func (th *PlatformAppTheme)  UpdateThemeNameV2(ThemeID string, body  UpdateThemeNameRequestBodyV2) (AllThemesApplicationResponseV2, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateThemeNameV2Response AllThemesApplicationResponseV2
+	    )
+
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return AllThemesApplicationResponseV2{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return AllThemesApplicationResponseV2{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            th.config,
+            "patch",
+            fmt.Sprintf("/service/platform/theme/v2.0/company/%s/application/%s/%s/name",th.CompanyID, th.ApplicationID, ThemeID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return AllThemesApplicationResponseV2{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateThemeNameV2Response)
+        if err != nil {
+            return AllThemesApplicationResponseV2{}, common.NewFDKError(err.Error())
+        }
+        return updateThemeNameV2Response, nil
+        
+    }
+           
+       
+    
 
  
 	 
@@ -12184,121 +12247,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetPlatformPaymentConfig API to fetch the payment options of the merchant for paltform
-     func (pa *PlatformAppPayment)  GetPlatformPaymentConfig() (PlatfromPaymentConfig, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getPlatformPaymentConfigResponse PlatfromPaymentConfig
-	    )
-
-        
-
-         
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "get",
-            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/configuration",pa.CompanyID, pa.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return PlatfromPaymentConfig{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getPlatformPaymentConfigResponse)
-        if err != nil {
-            return PlatfromPaymentConfig{}, common.NewFDKError(err.Error())
-        }
-        return getPlatformPaymentConfigResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // UpdatePlatformPaymentConfig API to update the payment options of the merchant for paltform
-     func (pa *PlatformAppPayment)  UpdatePlatformPaymentConfig(body  UpdatePlatformPaymentConfig) (PlatfromPaymentConfig, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updatePlatformPaymentConfigResponse PlatfromPaymentConfig
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return PlatfromPaymentConfig{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return PlatfromPaymentConfig{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "patch",
-            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/configuration",pa.CompanyID, pa.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return PlatfromPaymentConfig{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updatePlatformPaymentConfigResponse)
-        if err != nil {
-            return PlatfromPaymentConfig{}, common.NewFDKError(err.Error())
-        }
-        return updatePlatformPaymentConfigResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     //PlatformAppGetUserCODlimitRoutesXQuery holds query params
     type PlatformAppGetUserCODlimitRoutesXQuery struct { 
         MerchantUserID string  `url:"merchant_user_id,omitempty"` 
@@ -12422,735 +12370,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // EdcAggregatorsAndModelList get some information about the store and edc device
-     func (pa *PlatformAppPayment)  EdcAggregatorsAndModelList() (EdcAggregatorAndModelListResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            edcAggregatorsAndModelListResponse EdcAggregatorAndModelListResponse
-	    )
-
-        
-
-         
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "get",
-            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/edc-aggregator-list",pa.CompanyID, pa.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return EdcAggregatorAndModelListResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &edcAggregatorsAndModelListResponse)
-        if err != nil {
-            return EdcAggregatorAndModelListResponse{}, common.NewFDKError(err.Error())
-        }
-        return edcAggregatorsAndModelListResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // EdcDeviceStats get some information about the store and edc device
-     func (pa *PlatformAppPayment)  EdcDeviceStats() (EdcDeviceStatsResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            edcDeviceStatsResponse EdcDeviceStatsResponse
-	    )
-
-        
-
-         
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "get",
-            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/edc-device-stats",pa.CompanyID, pa.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return EdcDeviceStatsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &edcDeviceStatsResponse)
-        if err != nil {
-            return EdcDeviceStatsResponse{}, common.NewFDKError(err.Error())
-        }
-        return edcDeviceStatsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // UpdateEdcDevice map new edc device to the terminal
-     func (pa *PlatformAppPayment)  UpdateEdcDevice(body  EdcAddRequest) (EdcDeviceAddResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateEdcDeviceResponse EdcDeviceAddResponse
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return EdcDeviceAddResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return EdcDeviceAddResponse{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "post",
-            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/edc-device",pa.CompanyID, pa.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return EdcDeviceAddResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateEdcDeviceResponse)
-        if err != nil {
-            return EdcDeviceAddResponse{}, common.NewFDKError(err.Error())
-        }
-        return updateEdcDeviceResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetEdcDevice get details of a single edc device
-     func (pa *PlatformAppPayment)  GetEdcDevice(TerminalUniqueIdentifier string) (EdcDeviceDetailsResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getEdcDeviceResponse EdcDeviceDetailsResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "get",
-            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/edc-device/%s",pa.CompanyID, pa.ApplicationID, TerminalUniqueIdentifier),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return EdcDeviceDetailsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getEdcDeviceResponse)
-        if err != nil {
-            return EdcDeviceDetailsResponse{}, common.NewFDKError(err.Error())
-        }
-        return getEdcDeviceResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // AddEdcDevice Update store id and device tag of edc device
-     func (pa *PlatformAppPayment)  AddEdcDevice(TerminalUniqueIdentifier string, body  EdcUpdateRequest) (EdcDeviceUpdateResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            addEdcDeviceResponse EdcDeviceUpdateResponse
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return EdcDeviceUpdateResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return EdcDeviceUpdateResponse{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "put",
-            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/edc-device/%s",pa.CompanyID, pa.ApplicationID, TerminalUniqueIdentifier),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return EdcDeviceUpdateResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &addEdcDeviceResponse)
-        if err != nil {
-            return EdcDeviceUpdateResponse{}, common.NewFDKError(err.Error())
-        }
-        return addEdcDeviceResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    //PlatformAppEdcDeviceListXQuery holds query params
-    type PlatformAppEdcDeviceListXQuery struct { 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"` 
-        IsActive bool  `url:"is_active,omitempty"` 
-        StoreID float64  `url:"store_id,omitempty"` 
-        DeviceTag string  `url:"device_tag,omitempty"`  
-    }
-    
-    // EdcDeviceList get all the device list of an app
-     func (pa *PlatformAppPayment)  EdcDeviceList(xQuery PlatformAppEdcDeviceListXQuery) (EdcDeviceListResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            edcDeviceListResponse EdcDeviceListResponse
-	    )
-
-        
-
-         
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "get",
-            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/edc-device-list",pa.CompanyID, pa.ApplicationID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return EdcDeviceListResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &edcDeviceListResponse)
-        if err != nil {
-            return EdcDeviceListResponse{}, common.NewFDKError(err.Error())
-        }
-        return edcDeviceListResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    //PlatformAppGetPosPaymentModeRoutesXQuery holds query params
-    type PlatformAppGetPosPaymentModeRoutesXQuery struct { 
-        Amount float64  `url:"amount,omitempty"` 
-        CartID string  `url:"cart_id,omitempty"` 
-        Pincode string  `url:"pincode,omitempty"` 
-        CheckoutMode string  `url:"checkout_mode,omitempty"` 
-        Refresh bool  `url:"refresh,omitempty"` 
-        CardReference string  `url:"card_reference,omitempty"` 
-        OrderType string  `url:"order_type,omitempty"` 
-        UserDetails string  `url:"user_details,omitempty"`  
-    }
-    
-    // GetPosPaymentModeRoutes Get All Valid Payment Options
-     func (pa *PlatformAppPayment)  GetPosPaymentModeRoutes(xQuery PlatformAppGetPosPaymentModeRoutesXQuery) (PaymentOptionsResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getPosPaymentModeRoutesResponse PaymentOptionsResponse
-	    )
-
-        
-
-         
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "get",
-            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/options/pos",pa.CompanyID, pa.ApplicationID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return PaymentOptionsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getPosPaymentModeRoutesResponse)
-        if err != nil {
-            return PaymentOptionsResponse{}, common.NewFDKError(err.Error())
-        }
-        return getPosPaymentModeRoutesResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // InitialisePayment Initialize a payment (server-to-server) for UPI and BharatQR
-     func (pa *PlatformAppPayment)  InitialisePayment(body  PaymentInitializationRequest) (PaymentInitializationResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            initialisePaymentResponse PaymentInitializationResponse
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return PaymentInitializationResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return PaymentInitializationResponse{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "post",
-            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/request",pa.CompanyID, pa.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return PaymentInitializationResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &initialisePaymentResponse)
-        if err != nil {
-            return PaymentInitializationResponse{}, common.NewFDKError(err.Error())
-        }
-        return initialisePaymentResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // CheckAndUpdatePaymentStatus Performs continuous polling to check status of payment on the server
-     func (pa *PlatformAppPayment)  CheckAndUpdatePaymentStatus(body  PaymentStatusUpdateRequest) (PaymentStatusUpdateResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            checkAndUpdatePaymentStatusResponse PaymentStatusUpdateResponse
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return PaymentStatusUpdateResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return PaymentStatusUpdateResponse{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "post",
-            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/confirm/polling",pa.CompanyID, pa.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return PaymentStatusUpdateResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &checkAndUpdatePaymentStatusResponse)
-        if err != nil {
-            return PaymentStatusUpdateResponse{}, common.NewFDKError(err.Error())
-        }
-        return checkAndUpdatePaymentStatusResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // ResendOrCancelPayment API to resend and cancel a payment link which was already generated.
-     func (pa *PlatformAppPayment)  ResendOrCancelPayment(body  ResendOrCancelPaymentRequest) (ResendOrCancelPaymentResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            resendOrCancelPaymentResponse ResendOrCancelPaymentResponse
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return ResendOrCancelPaymentResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return ResendOrCancelPaymentResponse{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "post",
-            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/cancel",pa.CompanyID, pa.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ResendOrCancelPaymentResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &resendOrCancelPaymentResponse)
-        if err != nil {
-            return ResendOrCancelPaymentResponse{}, common.NewFDKError(err.Error())
-        }
-        return resendOrCancelPaymentResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // PaymentStatusBulk Get Payment status and information for a list of order_ids
-     func (pa *PlatformAppPayment)  PaymentStatusBulk(body  PaymentStatusBulkHandlerRequest) (PaymentStatusBulkHandlerResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            paymentStatusBulkResponse PaymentStatusBulkHandlerResponse
-	    )
-
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return PaymentStatusBulkHandlerResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return PaymentStatusBulkHandlerResponse{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "post",
-            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/payment-status-bulk/",pa.CompanyID, pa.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return PaymentStatusBulkHandlerResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &paymentStatusBulkResponse)
-        if err != nil {
-            return PaymentStatusBulkHandlerResponse{}, common.NewFDKError(err.Error())
-        }
-        return paymentStatusBulkResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     //PlatformAppOauthGetUrlXQuery holds query params
     type PlatformAppOauthGetUrlXQuery struct { 
         SuccessRedirectURL string  `url:"success_redirect_url,omitempty"` 
@@ -13259,21 +12478,15 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // VerifyCustomerForPayment Validate customer for payment
-     func (pa *PlatformAppPayment)  VerifyCustomerForPayment(body  ValidateCustomerRequest) (ValidateCustomerResponse, error) {
+    // RepaymentDetails API to register repayment details
+     func (pa *PlatformAppPayment)  RepaymentDetails(body  RepaymentDetailsSerialiserPayAll) (RepaymentResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            verifyCustomerForPaymentResponse ValidateCustomerResponse
+            repaymentDetailsResponse RepaymentResponse
 	    )
 
-        
-            
-        
-            
-        
-            
         
             
         
@@ -13298,32 +12511,32 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
             
-             return ValidateCustomerResponse{}, common.NewFDKError(err.Error())
+             return RepaymentResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
             
-             return ValidateCustomerResponse{}, common.NewFDKError(err.Error())       
+             return RepaymentResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
         rawRequest = NewRequest(
             pa.config,
             "post",
-            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/customer/validation",pa.CompanyID, pa.ApplicationID),
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/repayment-details",pa.CompanyID, pa.ApplicationID),
             nil,
             nil,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ValidateCustomerResponse{}, err
+            return RepaymentResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &verifyCustomerForPaymentResponse)
+        err = json.Unmarshal(response, &repaymentDetailsResponse)
         if err != nil {
-            return ValidateCustomerResponse{}, common.NewFDKError(err.Error())
+            return RepaymentResponse{}, common.NewFDKError(err.Error())
         }
-        return verifyCustomerForPaymentResponse, nil
+        return repaymentDetailsResponse, nil
         
     }
            
@@ -13334,27 +12547,87 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    //PlatformAppGetPaymentLinkXQuery holds query params
-    type PlatformAppGetPaymentLinkXQuery struct { 
-        PaymentLinkID string  `url:"payment_link_id,omitempty"`  
-    }
-    
-    // GetPaymentLink Get payment link
-     func (pa *PlatformAppPayment)  GetPaymentLink(xQuery PlatformAppGetPaymentLinkXQuery) (GetPaymentLinkResponse, error) {
+    // MerchantOnBoarding API to push Ajiodhan merchant data to Gringotts system
+     func (pa *PlatformAppPayment)  MerchantOnBoarding(body  MerchantOnBoardingRequest) (MerchantOnBoardingResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getPaymentLinkResponse GetPaymentLinkResponse
+            merchantOnBoardingResponse MerchantOnBoardingResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return MerchantOnBoardingResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return MerchantOnBoardingResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/merchant-onboarding",pa.CompanyID, pa.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return MerchantOnBoardingResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &merchantOnBoardingResponse)
+        if err != nil {
+            return MerchantOnBoardingResponse{}, common.NewFDKError(err.Error())
+        }
+        return merchantOnBoardingResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetPaymentCodeOption List Payment Options Method Codes
+     func (pa *PlatformAppPayment)  GetPaymentCodeOption() (GetPaymentCodeResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getPaymentCodeOptionResponse GetPaymentCodeResponse
 	    )
 
         
 
          
-            
-                
-            
-        
 
         
         
@@ -13365,268 +12638,20 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             pa.config,
             "get",
-            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/create-payment-link/",pa.CompanyID, pa.ApplicationID),
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/codes",pa.CompanyID, pa.ApplicationID),
             nil,
-            xQuery,
+            nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return GetPaymentLinkResponse{}, err
+            return GetPaymentCodeResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getPaymentLinkResponse)
+        err = json.Unmarshal(response, &getPaymentCodeOptionResponse)
         if err != nil {
-            return GetPaymentLinkResponse{}, common.NewFDKError(err.Error())
+            return GetPaymentCodeResponse{}, common.NewFDKError(err.Error())
         }
-        return getPaymentLinkResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // CreatePaymentLink Create payment link
-     func (pa *PlatformAppPayment)  CreatePaymentLink(body  CreatePaymentLinkRequest) (CreatePaymentLinkResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            createPaymentLinkResponse CreatePaymentLinkResponse
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return CreatePaymentLinkResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return CreatePaymentLinkResponse{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "post",
-            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/create-payment-link/",pa.CompanyID, pa.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return CreatePaymentLinkResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &createPaymentLinkResponse)
-        if err != nil {
-            return CreatePaymentLinkResponse{}, common.NewFDKError(err.Error())
-        }
-        return createPaymentLinkResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    //PlatformAppPollingPaymentLinkXQuery holds query params
-    type PlatformAppPollingPaymentLinkXQuery struct { 
-        PaymentLinkID string  `url:"payment_link_id,omitempty"`  
-    }
-    
-    // PollingPaymentLink Used for polling if payment successful or not
-     func (pa *PlatformAppPayment)  PollingPaymentLink(xQuery PlatformAppPollingPaymentLinkXQuery) (PollingPaymentLinkResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            pollingPaymentLinkResponse PollingPaymentLinkResponse
-	    )
-
-        
-
-         
-            
-                
-            
-        
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "get",
-            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/polling-payment-link/",pa.CompanyID, pa.ApplicationID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return PollingPaymentLinkResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &pollingPaymentLinkResponse)
-        if err != nil {
-            return PollingPaymentLinkResponse{}, common.NewFDKError(err.Error())
-        }
-        return pollingPaymentLinkResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // ResendPaymentLink Resend payment link
-     func (pa *PlatformAppPayment)  ResendPaymentLink(body  CancelOrResendPaymentLinkRequest) (ResendPaymentLinkResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            resendPaymentLinkResponse ResendPaymentLinkResponse
-	    )
-
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return ResendPaymentLinkResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return ResendPaymentLinkResponse{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "post",
-            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/resend-payment-link/",pa.CompanyID, pa.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ResendPaymentLinkResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &resendPaymentLinkResponse)
-        if err != nil {
-            return ResendPaymentLinkResponse{}, common.NewFDKError(err.Error())
-        }
-        return resendPaymentLinkResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // CancelPaymentLink Cancel payment link
-     func (pa *PlatformAppPayment)  CancelPaymentLink(body  CancelOrResendPaymentLinkRequest) (CancelPaymentLinkResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            cancelPaymentLinkResponse CancelPaymentLinkResponse
-	    )
-
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return CancelPaymentLinkResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return CancelPaymentLinkResponse{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "post",
-            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/cancel-payment-link/",pa.CompanyID, pa.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return CancelPaymentLinkResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &cancelPaymentLinkResponse)
-        if err != nil {
-            return CancelPaymentLinkResponse{}, common.NewFDKError(err.Error())
-        }
-        return cancelPaymentLinkResponse, nil
+        return getPaymentCodeOptionResponse, nil
         
     }
            
@@ -26292,6 +25317,69 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // GetZoneFromPincodeView GET zone from the Pincode.
+     func (se *PlatformAppServiceability)  GetZoneFromPincodeView(body  GetZoneFromPincodeViewRequest) (GetZoneFromPincodeViewResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getZoneFromPincodeViewResponse GetZoneFromPincodeViewResponse
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/zones",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetZoneFromPincodeViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getZoneFromPincodeViewResponse)
+        if err != nil {
+            return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return getZoneFromPincodeViewResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     //PlatformAppGetZonesFromApplicationIdViewXQuery holds query params
     type PlatformAppGetZonesFromApplicationIdViewXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
@@ -26352,67 +25440,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
-    
-  
-
-    
-    // GetZoneFromPincodeView GET zone from the Pincode.
-     func (se *PlatformAppServiceability)  GetZoneFromPincodeView(body  GetZoneFromPincodeViewRequest) (GetZoneFromPincodeViewResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getZoneFromPincodeViewResponse GetZoneFromPincodeViewResponse
-	    )
-
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            se.config,
-            "post",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/zones",se.CompanyID, se.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetZoneFromPincodeViewResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getZoneFromPincodeViewResponse)
-        if err != nil {
-            return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
-        }
-        return getZoneFromPincodeViewResponse, nil
-        
-    }
-           
-       
     
     
     
@@ -26784,6 +25811,238 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return PincodeMopUpdateAuditHistoryResponseData{}, common.NewFDKError(err.Error())
         }
         return updatePincodeAuditHistoryResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+    
+    // UpsertDpApplicationRules Upsert of DpApplicationRules in database.
+     func (se *PlatformAppServiceability)  UpsertDpApplicationRules(body  DPApplicationRuleRequest) (DPApplicationRuleResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            upsertDpApplicationRulesResponse DPApplicationRuleResponse
+	    )
+
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return DPApplicationRuleResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return DPApplicationRuleResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "put",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/courier/priority",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DPApplicationRuleResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &upsertDpApplicationRulesResponse)
+        if err != nil {
+            return DPApplicationRuleResponse{}, common.NewFDKError(err.Error())
+        }
+        return upsertDpApplicationRulesResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetDpApplicationRules Get All DpApplicationRules rules added at application level from database.
+     func (se *PlatformAppServiceability)  GetDpApplicationRules() (DPApplicationRuleResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getDpApplicationRulesResponse DPApplicationRuleResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/courier/priority",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DPApplicationRuleResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getDpApplicationRulesResponse)
+        if err != nil {
+            return DPApplicationRuleResponse{}, common.NewFDKError(err.Error())
+        }
+        return getDpApplicationRulesResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetApplicationServiceabilitySelfShipment Self-ship configuration of application.
+     func (se *PlatformAppServiceability)  GetApplicationServiceabilitySelfShipment() (ApplicationSelfShipConfigResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getApplicationServiceabilitySelfShipmentResponse ApplicationSelfShipConfigResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/selfship",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationSelfShipConfigResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getApplicationServiceabilitySelfShipmentResponse)
+        if err != nil {
+            return ApplicationSelfShipConfigResponse{}, common.NewFDKError(err.Error())
+        }
+        return getApplicationServiceabilitySelfShipmentResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // PatchApplicationServiceabilitySelfShipment Self-ship configuration of application.
+     func (se *PlatformAppServiceability)  PatchApplicationServiceabilitySelfShipment(body  SelfShipResponse) (ApplicationSelfShipConfigResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            patchApplicationServiceabilitySelfShipmentResponse ApplicationSelfShipConfigResponse
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return ApplicationSelfShipConfigResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return ApplicationSelfShipConfigResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "patch",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/selfship",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationSelfShipConfigResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &patchApplicationServiceabilitySelfShipmentResponse)
+        if err != nil {
+            return ApplicationSelfShipConfigResponse{}, common.NewFDKError(err.Error())
+        }
+        return patchApplicationServiceabilitySelfShipmentResponse, nil
         
     }
            

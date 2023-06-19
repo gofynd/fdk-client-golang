@@ -46,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [followById](#followbyid)
     * [unfollowById](#unfollowbyid)
+    * [followById](#followbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -242,6 +242,7 @@
     * [resendOrCancelPayment](#resendorcancelpayment)
     * [renderHTML](#renderhtml)
     * [validateVPA](#validatevpa)
+    * [cardDetails](#carddetails)
     * [getActiveRefundTransferModes](#getactiverefundtransfermodes)
     * [enableOrDisableRefundTransferMode](#enableordisablerefundtransfermode)
     * [getUserBeneficiariesDetail](#getuserbeneficiariesdetail)
@@ -265,6 +266,8 @@
     * [redirectToAggregator](#redirecttoaggregator)
     * [checkCredit](#checkcredit)
     * [customerOnboard](#customeronboard)
+    * [outstandingOrderDetails](#outstandingorderdetails)
+    * [paidOrderDetails](#paidorderdetails)
     
 
 * [Order](#Order)
@@ -1166,12 +1169,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1185,7 +1188,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -1207,12 +1210,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1226,7 +1229,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -23967,6 +23970,47 @@ Schema: `ValidateVPAResponse`
 ---
 
 
+#### cardDetails
+API to get Card info from PG
+
+```golang
+
+ data, err :=  Payment.CardDetails(CardInfo, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CardInfo | string | Card first 6 digit IIN(prefix) number. | 
+
+
+
+| xQuery | struct | Includes properties such as `Aggregator`
+
+
+
+API to get Card info from PG
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `CardDetailsResponseSchema` for more details.
+
+
+Schema: `CardDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getActiveRefundTransferModes
 Lists the mode of refund
 
@@ -24802,6 +24846,82 @@ Success. Returns the status of payment. Check the example shown below or refer `
 
 
 Schema: `CustomerOnboardingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### outstandingOrderDetails
+API to fetch the outstanding order details
+
+```golang
+
+ data, err :=  Payment.OutstandingOrderDetails(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Aggregator`
+
+
+
+Use this API to fetch the outstanding order details.
+
+*Success Response:*
+
+
+
+Success. Returns the status of API. Check the example shown below or refer `PaidOrderDetailsResponseSchema` for more details.
+
+
+Schema: `OutstandingOrderDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### paidOrderDetails
+API to fetch the paid order details
+
+```golang
+
+ data, err :=  Payment.PaidOrderDetails(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Aggregator`
+
+
+
+Use this API to fetch the paid order details.
+
+*Success Response:*
+
+
+
+Success. Returns the status of API. Check the example shown below or refer `PaidOrderDetailsResponseSchema` for more details.
+
+
+Schema: `PaidOrderDetailsResponse`
 
 
 

@@ -1709,55 +1709,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1798,6 +1749,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -11118,8 +11118,6 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
-            
-        
 
         
 
@@ -11177,14 +11175,6 @@ func NewAppClient(config *AppConfig) *Client {
              checkAndUpdatePaymentStatusResponse PaymentStatusUpdateResponse
 	    )
 
-        
-            
-        
-            
-        
-            
-        
-            
         
             
         
@@ -11507,8 +11497,6 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
-            
-        
 
         
 
@@ -11666,6 +11654,62 @@ func NewAppClient(config *AppConfig) *Client {
             return ValidateVPAResponse{}, common.NewFDKError(err.Error())
         }
          return validateVPAResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //PaymentCardDetailsXQuery holds query params
+    type PaymentCardDetailsXQuery struct { 
+        Aggregator string  `url:"aggregator,omitempty"`  
+    }
+    
+    // CardDetails API to get Card info from PG
+    func (pa *Payment)  CardDetails(CardInfo string, xQuery PaymentCardDetailsXQuery) (CardDetailsResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             cardDetailsResponse CardDetailsResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            fmt.Sprintf("/service/application/payment/v1.0/cards/info/%s",CardInfo),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CardDetailsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &cardDetailsResponse)
+        if err != nil {
+            return CardDetailsResponse{}, common.NewFDKError(err.Error())
+        }
+         return cardDetailsResponse, nil
         
     }
           
@@ -12722,8 +12766,6 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
-            
-        
 
         
 
@@ -12781,14 +12823,6 @@ func NewAppClient(config *AppConfig) *Client {
              checkAndUpdatePaymentStatusPaymentLinkResponse PaymentStatusUpdateResponse
 	    )
 
-        
-            
-        
-            
-        
-            
-        
-            
         
             
         
@@ -13088,6 +13122,114 @@ func NewAppClient(config *AppConfig) *Client {
             return CustomerOnboardingResponse{}, common.NewFDKError(err.Error())
         }
          return customerOnboardResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //PaymentOutstandingOrderDetailsXQuery holds query params
+    type PaymentOutstandingOrderDetailsXQuery struct { 
+        Aggregator string  `url:"aggregator,omitempty"`  
+    }
+    
+    // OutstandingOrderDetails API to fetch the outstanding order details
+    func (pa *Payment)  OutstandingOrderDetails(xQuery PaymentOutstandingOrderDetailsXQuery) (OutstandingOrderDetailsResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             outstandingOrderDetailsResponse OutstandingOrderDetailsResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            "/service/application/payment/v1.0/payment/outstanding-orders/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return OutstandingOrderDetailsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &outstandingOrderDetailsResponse)
+        if err != nil {
+            return OutstandingOrderDetailsResponse{}, common.NewFDKError(err.Error())
+        }
+         return outstandingOrderDetailsResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //PaymentPaidOrderDetailsXQuery holds query params
+    type PaymentPaidOrderDetailsXQuery struct { 
+        Aggregator string  `url:"aggregator,omitempty"`  
+    }
+    
+    // PaidOrderDetails API to fetch the paid order details
+    func (pa *Payment)  PaidOrderDetails(xQuery PaymentPaidOrderDetailsXQuery) (PaidOrderDetailsResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             paidOrderDetailsResponse PaidOrderDetailsResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            "/service/application/payment/v1.0/payment/paid-orders/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PaidOrderDetailsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &paidOrderDetailsResponse)
+        if err != nil {
+            return PaidOrderDetailsResponse{}, common.NewFDKError(err.Error())
+        }
+         return paidOrderDetailsResponse, nil
         
     }
           
