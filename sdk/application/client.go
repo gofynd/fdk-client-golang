@@ -13647,7 +13647,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetUserPoints Get referral details of a user
+    // GetUserPoints Get total available points of a user
     func (re *Rewards)  GetUserPoints() (PointsResponse, error){
         var (
             rawRequest  *RawRequest
@@ -13799,7 +13799,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // RedeemReferralCode Redeems a referral code and credits reward points to users
+    // RedeemReferralCode Redeems a referral code and credits reward points to referee and the referrer as per the configuration
     func (re *Rewards)  RedeemReferralCode(body  RedeemReferralCodeRequest) (RedeemReferralCodeResponse, error){
         var (
             rawRequest  *RawRequest
