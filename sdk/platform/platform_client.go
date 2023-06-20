@@ -43,6 +43,8 @@ type PlatformClient struct {
 	
 		Serviceability  *PlatformServiceability
 	
+		Finance  *PlatformFinance
+	
 	ApplicationClient *ApplicationClient //ApplicationClient embedded
 }
 
@@ -82,6 +84,8 @@ func NewPlatformClient(config *PlatformConfig) *PlatformClient {
 				AuditTrail:  NewPlatformAuditTrail(config),
 			
 				Serviceability:  NewPlatformServiceability(config),
+			
+				Finance:  NewPlatformFinance(config),
 			
 			ApplicationClient: &ApplicationClient{},
 		}
@@ -17621,6 +17625,740 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
     
     
+    
+
+
+	
+   // PlatformFinance holds PlatformFinance object properties
+    type PlatformFinance struct {
+        Config *PlatformConfig
+        CompanyID string
+    }
+    // NewPlatformFinance returns new PlatformFinance instance
+    func NewPlatformFinance(config *PlatformConfig) *PlatformFinance {
+        return &PlatformFinance{Config: config, CompanyID: config.CompanyID}
+    }
+    
+    
+   
+  
+    
+    
+
+
+    // GenerateReport 
+     func (fi *PlatformFinance)  GenerateReport(body  GenerateReportRequest) (GenerateReportJson, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            generateReportResponse GenerateReportJson
+	    )
+
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return GenerateReportJson{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return GenerateReportJson{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.Config,
+            "post",
+            fmt.Sprintf("/service/platform/finance/v1.0/company/%s/generate-report",fi.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GenerateReportJson{}, err
+	    }
+        
+        err = json.Unmarshal(response, &generateReportResponse)
+        if err != nil {
+             return GenerateReportJson{}, common.NewFDKError(err.Error())
+        }
+        return generateReportResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // DownloadReport 
+     func (fi *PlatformFinance)  DownloadReport(body  DownloadReport) (DownloadReportList, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            downloadReportResponse DownloadReportList
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return DownloadReportList{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return DownloadReportList{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.Config,
+            "post",
+            fmt.Sprintf("/service/platform/finance/v1.0/company/%s/download-report",fi.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return DownloadReportList{}, err
+	    }
+        
+        err = json.Unmarshal(response, &downloadReportResponse)
+        if err != nil {
+             return DownloadReportList{}, common.NewFDKError(err.Error())
+        }
+        return downloadReportResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetData 
+     func (fi *PlatformFinance)  GetData(body  GetEngineRequest) (GetEngineResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getDataResponse GetEngineResponse
+	    )
+
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return GetEngineResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return GetEngineResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.Config,
+            "post",
+            fmt.Sprintf("/service/platform/finance/v1.0/company/%s/get-data",fi.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetEngineResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getDataResponse)
+        if err != nil {
+             return GetEngineResponse{}, common.NewFDKError(err.Error())
+        }
+        return getDataResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetReason 
+     func (fi *PlatformFinance)  GetReason(body  GetReasonRequest) (GetReasonResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getReasonResponse GetReasonResponse
+	    )
+
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return GetReasonResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return GetReasonResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.Config,
+            "post",
+            fmt.Sprintf("/service/platform/finance/v1.0/company/%s/get-reason",fi.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetReasonResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getReasonResponse)
+        if err != nil {
+             return GetReasonResponse{}, common.NewFDKError(err.Error())
+        }
+        return getReasonResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetReportList 
+     func (fi *PlatformFinance)  GetReportList(body  GetReportListRequest) (GetEngineResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getReportListResponse GetEngineResponse
+	    )
+
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return GetEngineResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return GetEngineResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.Config,
+            "post",
+            fmt.Sprintf("/service/platform/finance/v1.0/company/%s/get-report-list",fi.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetEngineResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getReportListResponse)
+        if err != nil {
+             return GetEngineResponse{}, common.NewFDKError(err.Error())
+        }
+        return getReportListResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetAffiliate 
+     func (fi *PlatformFinance)  GetAffiliate(body  GetAffiliate) (GetAffiliateResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAffiliateResponse GetAffiliateResponse
+	    )
+
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return GetAffiliateResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return GetAffiliateResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.Config,
+            "post",
+            fmt.Sprintf("/service/platform/finance/v1.0/company/%s/get-affiliate-list",fi.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetAffiliateResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAffiliateResponse)
+        if err != nil {
+             return GetAffiliateResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAffiliateResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // DownloadCreditDebitNote 
+     func (fi *PlatformFinance)  DownloadCreditDebitNote(body  DownloadCreditDebitNoteRequest) (DownloadCreditDebitNoteResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            downloadCreditDebitNoteResponse DownloadCreditDebitNoteResponse
+	    )
+
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return DownloadCreditDebitNoteResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return DownloadCreditDebitNoteResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.Config,
+            "post",
+            fmt.Sprintf("/service/platform/finance/v1.0/company/%s/download-credit-debit-note",fi.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return DownloadCreditDebitNoteResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &downloadCreditDebitNoteResponse)
+        if err != nil {
+             return DownloadCreditDebitNoteResponse{}, common.NewFDKError(err.Error())
+        }
+        return downloadCreditDebitNoteResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // PaymentProcess 
+     func (fi *PlatformFinance)  PaymentProcess(body  PaymentProcessRequest) (PaymentProcessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            paymentProcessResponse PaymentProcessResponse
+	    )
+
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return PaymentProcessResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return PaymentProcessResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.Config,
+            "post",
+            fmt.Sprintf("/service/platform/finance/v1.0/company/%s/payment-process",fi.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return PaymentProcessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &paymentProcessResponse)
+        if err != nil {
+             return PaymentProcessResponse{}, common.NewFDKError(err.Error())
+        }
+        return paymentProcessResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetInvoiceType 
+     func (fi *PlatformFinance)  GetInvoiceType(body  GetInvoiceListRequest) (GetInvoiceListResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getInvoiceTypeResponse GetInvoiceListResponse
+	    )
+
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return GetInvoiceListResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return GetInvoiceListResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.Config,
+            "post",
+            fmt.Sprintf("/service/platform/finance/v1.0/company/%s/invoice-type",fi.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetInvoiceListResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getInvoiceTypeResponse)
+        if err != nil {
+             return GetInvoiceListResponse{}, common.NewFDKError(err.Error())
+        }
+        return getInvoiceTypeResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // InvoiceListing 
+     func (fi *PlatformFinance)  InvoiceListing(body  InvoiceListingRequest) (InvoiceListingResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            invoiceListingResponse InvoiceListingResponse
+	    )
+
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return InvoiceListingResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return InvoiceListingResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.Config,
+            "post",
+            fmt.Sprintf("/service/platform/finance/v1.0/company/%s/invoice/listing",fi.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return InvoiceListingResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &invoiceListingResponse)
+        if err != nil {
+             return InvoiceListingResponse{}, common.NewFDKError(err.Error())
+        }
+        return invoiceListingResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // InvoicePDF 
+     func (fi *PlatformFinance)  InvoicePDF(body  InvoicePdfRequest) (InvoicePdfResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            invoicePDFResponse InvoicePdfResponse
+	    )
+
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return InvoicePdfResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return InvoicePdfResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.Config,
+            "post",
+            fmt.Sprintf("/service/platform/finance/v1.0/company/%s/invoice/pdf-view",fi.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return InvoicePdfResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &invoicePDFResponse)
+        if err != nil {
+             return InvoicePdfResponse{}, common.NewFDKError(err.Error())
+        }
+        return invoicePDFResponse, nil
+        
+    }
+         
+        
+       
     
 
 

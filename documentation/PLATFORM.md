@@ -23,6 +23,7 @@
 * [Webhook](#Webhook) - Webhook dispatcher with retry and one event to many subscriber vice versa 
 * [AuditTrail](#AuditTrail) - Audit Logging Service that logs the crucial updates on the Platform 
 * [Serviceability](#Serviceability) - Logistics Configuration API's allows you to configure zone, application logistics and many more useful features.  
+* [Finance](#Finance) - Handles all finance related activities 
 
 ----
 ----
@@ -685,6 +686,21 @@
     * [updatePincodeBulkView](#updatepincodebulkview)
     * [updatePincodeCoDListing](#updatepincodecodlisting)
     * [updatePincodeAuditHistory](#updatepincodeaudithistory)
+    
+
+* [Finance](#Finance)
+  * Methods
+    * [generateReport](#generatereport)
+    * [downloadReport](#downloadreport)
+    * [getData](#getdata)
+    * [getReason](#getreason)
+    * [getReportList](#getreportlist)
+    * [getAffiliate](#getaffiliate)
+    * [downloadCreditDebitNote](#downloadcreditdebitnote)
+    * [paymentProcess](#paymentprocess)
+    * [getInvoiceType](#getinvoicetype)
+    * [invoiceListing](#invoicelisting)
+    * [invoicePDF](#invoicepdf)
     
 
 
@@ -71247,6 +71263,431 @@ Response Data
 
 
 Schema: `PincodeMopUpdateAuditHistoryResponseData`
+
+
+
+
+
+
+
+
+
+---
+
+
+
+---
+
+
+## Finance
+
+
+#### generateReport
+
+
+```golang
+
+data, err := Finance.GenerateReport(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company_id is required. | 
+
+
+| body |  GenerateReportRequest | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+We are processing the report!
+
+
+Schema: `GenerateReportJson`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### downloadReport
+
+
+```golang
+
+data, err := Finance.DownloadReport(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  DownloadReport | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `DownloadReportList`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getData
+
+
+```golang
+
+data, err := Finance.GetData(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  GetEngineRequest | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetEngineResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getReason
+
+
+```golang
+
+data, err := Finance.GetReason(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  GetReasonRequest | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetReasonResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getReportList
+
+
+```golang
+
+data, err := Finance.GetReportList(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  GetReportListRequest | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetEngineResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAffiliate
+
+
+```golang
+
+data, err := Finance.GetAffiliate(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is reqired. | 
+
+
+| body |  GetAffiliate | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetAffiliateResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### downloadCreditDebitNote
+
+
+```golang
+
+data, err := Finance.DownloadCreditDebitNote(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  DownloadCreditDebitNoteRequest | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `DownloadCreditDebitNoteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### paymentProcess
+
+
+```golang
+
+data, err := Finance.PaymentProcess(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  PaymentProcessRequest | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `PaymentProcessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getInvoiceType
+
+
+```golang
+
+data, err := Finance.GetInvoiceType(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  GetInvoiceListRequest | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetInvoiceListResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### invoiceListing
+
+
+```golang
+
+data, err := Finance.InvoiceListing(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  InvoiceListingRequest | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `InvoiceListingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### invoicePDF
+
+
+```golang
+
+data, err := Finance.InvoicePDF(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  InvoicePdfRequest | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `InvoicePdfResponse`
 
 
 
