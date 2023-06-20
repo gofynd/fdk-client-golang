@@ -46,8 +46,8 @@
     * [getCollectionItemsBySlug](#getcollectionitemsbyslug)
     * [getCollectionDetailBySlug](#getcollectiondetailbyslug)
     * [getFollowedListing](#getfollowedlisting)
-    * [unfollowById](#unfollowbyid)
     * [followById](#followbyid)
+    * [unfollowById](#unfollowbyid)
     * [getFollowerCountById](#getfollowercountbyid)
     * [getFollowIds](#getfollowids)
     * [getStores](#getstores)
@@ -238,6 +238,10 @@
     * [getPaymentModeRoutes](#getpaymentmoderoutes)
     * [getPosPaymentModeRoutes](#getpospaymentmoderoutes)
     * [getRupifiBannerDetails](#getrupifibannerdetails)
+    * [getEpaylaterBannerDetails](#getepaylaterbannerdetails)
+    * [resendOrCancelPayment](#resendorcancelpayment)
+    * [renderHTML](#renderhtml)
+    * [validateVPA](#validatevpa)
     * [getActiveRefundTransferModes](#getactiverefundtransfermodes)
     * [enableOrDisableRefundTransferMode](#enableordisablerefundtransfermode)
     * [getUserBeneficiariesDetail](#getuserbeneficiariesdetail)
@@ -248,6 +252,19 @@
     * [addRefundBankAccountUsingOTP](#addrefundbankaccountusingotp)
     * [verifyOtpAndAddBeneficiaryForWallet](#verifyotpandaddbeneficiaryforwallet)
     * [updateDefaultBeneficiary](#updatedefaultbeneficiary)
+    * [getPaymentLink](#getpaymentlink)
+    * [createPaymentLink](#createpaymentlink)
+    * [resendPaymentLink](#resendpaymentlink)
+    * [cancelPaymentLink](#cancelpaymentlink)
+    * [getPaymentModeRoutesPaymentLink](#getpaymentmoderoutespaymentlink)
+    * [pollingPaymentLink](#pollingpaymentlink)
+    * [createOrderHandlerPaymentLink](#createorderhandlerpaymentlink)
+    * [initialisePaymentPaymentLink](#initialisepaymentpaymentlink)
+    * [checkAndUpdatePaymentStatusPaymentLink](#checkandupdatepaymentstatuspaymentlink)
+    * [customerCreditSummary](#customercreditsummary)
+    * [redirectToAggregator](#redirecttoaggregator)
+    * [checkCredit](#checkcredit)
+    * [customerOnboard](#customeronboard)
     
 
 * [Order](#Order)
@@ -1149,12 +1166,12 @@ Schema: `GetFollowListingResponse`
 ---
 
 
-#### unfollowById
-Unfollow an entity (product/brand/collection)
+#### followById
+Follow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.FollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1168,7 +1185,7 @@ Unfollow an entity (product/brand/collection)
 
 
 
-You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Success Response:*
 
@@ -1190,12 +1207,12 @@ Schema: `FollowPostResponse`
 ---
 
 
-#### followById
-Follow an entity (product/brand/collection)
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 ```golang
 
- data, err :=  Catalog.FollowById(CollectionType, CollectionID);
+ data, err :=  Catalog.UnfollowById(CollectionType, CollectionID);
 ```
 
 | Argument  |  Type  | Description |
@@ -1209,7 +1226,7 @@ Follow an entity (product/brand/collection)
 
 
 
-Follow a particular entity such as product, brand, collection specified by its ID.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Success Response:*
 
@@ -23447,6 +23464,49 @@ Success. Check the example shown below or refer `ValidateCustomerResponse` for m
 Schema: `ValidateCustomerResponse`
 
 
+*Examples:*
+
+
+success is True i.e user is allowed
+```json
+{
+  "value": {
+    "success": true,
+    "message": "data fetched",
+    "data": {
+      "api_version": 2,
+      "data": {
+        "approved": true,
+        "button_text": "Buy Now, Pay Later",
+        "first_transaction": false
+      },
+      "aggregator": "Simpl"
+    }
+  }
+}
+```
+
+success is True i.e user not allowed
+```json
+{
+  "value": {
+    "success": false,
+    "message": "data fetched",
+    "error": {
+      "api_version": 2,
+      "data": {
+        "approved": false,
+        "button_text": "Buy Now, Pay Later",
+        "first_transaction": false
+      },
+      "aggregator": "Simpl"
+    },
+    "data": {}
+  }
+}
+```
+
+
 
 
 
@@ -23690,6 +23750,211 @@ Success. Return CreditLine Offer detail. Check the example shown below or refer 
 
 
 Schema: `RupifiBannerResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getEpaylaterBannerDetails
+Get Epaylater Enabled
+
+```golang
+
+ data, err :=  Payment.GetEpaylaterBannerDetails();
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+Get Epaylater Enabled if user is tentatively approved by epaylater
+
+*Success Response:*
+
+
+
+Success. Return Epaylater Offer detail. Check the example shown below or refer `EpaylaterBannerResponseSchema` for more details. if `display=True`, then show banner otherwise do not show.
+
+
+Schema: `EpaylaterBannerResponse`
+
+
+*Examples:*
+
+
+User is registered successfully
+```json
+{
+  "value": {
+    "success": true,
+    "data": {
+      "display": false,
+      "message": "User is Active",
+      "status": "ACTIVE"
+    }
+  }
+}
+```
+
+User is not registered or KYC not done or approval pending
+```json
+{
+  "value": {
+    "success": true,
+    "data": {
+      "display": true,
+      "message": "User is not registered",
+      "status": "NOT REGISTERED"
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### resendOrCancelPayment
+API to resend and cancel a payment link which was already generated.
+
+```golang
+
+ data, err :=  Payment.ResendOrCancelPayment(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  ResendOrCancelPaymentRequest | "Request body" 
+
+
+Use this API to perform resend or cancel a payment link based on request payload.
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `ResendOrCancelPaymentResponse` for more details.
+
+
+Schema: `ResendOrCancelPaymentResponse`
+
+
+*Examples:*
+
+
+request_type is cancel
+```json
+{
+  "value": {
+    "success": true,
+    "data": {
+      "message": "Payment link Cancelled.",
+      "status": true
+    }
+  }
+}
+```
+
+request_type is resend
+```json
+{
+  "value": {
+    "success": true,
+    "data": {
+      "message": "Notification triggered.",
+      "status": true
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### renderHTML
+Convert base64 string to HTML form
+
+```golang
+
+ data, err :=  Payment.RenderHTML(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  renderHTMLRequest | "Request body" 
+
+
+Use this API to decode base64 html form to plain HTML string.
+
+*Success Response:*
+
+
+
+Success and return HTML decoded text
+
+
+Schema: `renderHTMLResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### validateVPA
+API to Validate UPI ID
+
+```golang
+
+ data, err :=  Payment.ValidateVPA(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  ValidateVPARequest | "Request body" 
+
+
+API to Validate UPI ID
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `ValidateVPAResponseSchema` for more details.
+
+
+Schema: `ValidateVPAResponse`
 
 
 
@@ -24055,6 +24320,488 @@ Success. Check the example shown below or refer `SetDefaultBeneficiaryResponse` 
 
 
 Schema: `SetDefaultBeneficiaryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPaymentLink
+Get payment link
+
+```golang
+
+ data, err :=  Payment.GetPaymentLink(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `PaymentLinkID`
+
+
+
+Use this API to get a payment link
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `GetPaymentLinkResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createPaymentLink
+Create payment link
+
+```golang
+
+ data, err :=  Payment.CreatePaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  CreatePaymentLinkRequest | "Request body" 
+
+
+Use this API to create a payment link for the customer
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `CreatePaymentLinkResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### resendPaymentLink
+Resend payment link
+
+```golang
+
+ data, err :=  Payment.ResendPaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  CancelOrResendPaymentLinkRequest | "Request body" 
+
+
+Use this API to resend a payment link for the customer
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `ResendPaymentLinkResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### cancelPaymentLink
+Cancel payment link
+
+```golang
+
+ data, err :=  Payment.CancelPaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  CancelOrResendPaymentLinkRequest | "Request body" 
+
+
+Use this API to cancel a payment link for the customer
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `CancelPaymentLinkResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPaymentModeRoutesPaymentLink
+Get applicable payment options for payment link
+
+```golang
+
+ data, err :=  Payment.GetPaymentModeRoutesPaymentLink(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `PaymentLinkID`
+
+
+
+Use this API to get all valid payment options for doing a payment through payment link
+
+*Success Response:*
+
+
+
+Success. Returns all available options for payment. Check the example shown below or refer `PaymentModeRouteResponse` for more details.
+
+
+Schema: `PaymentModeRouteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### pollingPaymentLink
+Used for polling if payment successful or not
+
+```golang
+
+ data, err :=  Payment.PollingPaymentLink(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `PaymentLinkID`
+
+
+
+Use this API to poll if payment through payment was successful or not
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `PollingPaymentLinkResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createOrderHandlerPaymentLink
+Create Order user
+
+```golang
+
+ data, err :=  Payment.CreateOrderHandlerPaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  CreateOrderUserRequest | "Request body" 
+
+
+Use this API to create a order and payment on aggregator side
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `CreateOrderUserResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### initialisePaymentPaymentLink
+Initialize a payment (server-to-server) for UPI and BharatQR
+
+```golang
+
+ data, err :=  Payment.InitialisePaymentPaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  PaymentInitializationRequest | "Request body" 
+
+
+Use this API to inititate payment using UPI, BharatQR, wherein the UPI requests are send to the app and QR code is displayed on the screen.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `PaymentInitializationResponse` for more details.
+
+
+Schema: `PaymentInitializationResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### checkAndUpdatePaymentStatusPaymentLink
+Performs continuous polling to check status of payment on the server
+
+```golang
+
+ data, err :=  Payment.CheckAndUpdatePaymentStatusPaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  PaymentStatusUpdateRequest | "Request body" 
+
+
+Use this API to perform continuous polling at intervals to check the status of payment until timeout.
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `PaymentStatusUpdateResponse` for more details.
+
+
+Schema: `PaymentStatusUpdateResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### customerCreditSummary
+API to fetch the customer credit summary
+
+```golang
+
+ data, err :=  Payment.CustomerCreditSummary(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Aggregator`
+
+
+
+Use this API to fetch the customer credit summary.
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `CustomerCreditSummaryResponseSchema` for more details.
+
+
+Schema: `CustomerCreditSummaryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### redirectToAggregator
+API to get the redirect url to redirect the user to aggregator's page
+
+```golang
+
+ data, err :=  Payment.RedirectToAggregator(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+
+| xQuery | struct | Includes properties such as `Source`, `Aggregator`
+
+
+
+Use this API to get the redirect url to redirect the user to aggregator's page
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `RedirectToAggregatorResponseSchema` for more details.
+
+
+Schema: `RedirectToAggregatorResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### checkCredit
+API to fetch the customer credit summary
+
+```golang
+
+ data, err :=  Payment.CheckCredit(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Aggregator`
+
+
+
+Use this API to fetch the customer credit summary.
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `CheckCreditResponseSchema` for more details.
+
+
+Schema: `CheckCreditResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### customerOnboard
+API to fetch the customer credit summary
+
+```golang
+
+ data, err :=  Payment.CustomerOnboard(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  CustomerOnboardingRequest | "Request body" 
+
+
+Use this API to fetch the customer credit summary.
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `CustomerOnboardingResponseSchema` for more details.
+
+
+Schema: `CustomerOnboardingResponse`
 
 
 
