@@ -1709,55 +1709,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // UnfollowById Unfollow an entity (product/brand/collection)
-    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             unfollowByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &unfollowByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return unfollowByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // FollowById Follow an entity (product/brand/collection)
     func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1798,6 +1749,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return followByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // UnfollowById Unfollow an entity (product/brand/collection)
+    func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             unfollowByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &unfollowByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return unfollowByIdResponse, nil
         
     }
           
@@ -2712,6 +2712,8 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
 
         
             
@@ -2855,7 +2857,7 @@ func NewAppClient(config *AppConfig) *Client {
     
     //CartDeleteCartXQuery holds query params
     type CartDeleteCartXQuery struct { 
-        ID float64  `url:"id,omitempty"`  
+        ID string  `url:"id,omitempty"`  
     }
     
     // DeleteCart Delete cart once user made successful checkout
@@ -3427,6 +3429,8 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
 
         
 
@@ -3555,6 +3559,8 @@ func NewAppClient(config *AppConfig) *Client {
              updateAddressResponse UpdateAddressResponse
 	    )
 
+        
+            
         
             
         
@@ -4454,6 +4460,111 @@ func NewAppClient(config *AppConfig) *Client {
             return LadderPriceOffers{}, common.NewFDKError(err.Error())
         }
          return getLadderOffersResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //CartCheckoutCartV2XQuery holds query params
+    type CartCheckoutCartV2XQuery struct { 
+        BuyNow bool  `url:"buy_now,omitempty"`  
+    }
+    
+    // CheckoutCartV2 Checkout all items in the cart
+    func (ca *Cart)  CheckoutCartV2(xQuery CartCheckoutCartV2XQuery, body  CartCheckoutDetailV2Request) (CartCheckoutResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             checkoutCartV2Response CartCheckoutResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return CartCheckoutResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return CartCheckoutResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            "/service/application/cart/v2.0/checkout",
+            nil,
+            xQuery,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CartCheckoutResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &checkoutCartV2Response)
+        if err != nil {
+            return CartCheckoutResponse{}, common.NewFDKError(err.Error())
+        }
+         return checkoutCartV2Response, nil
         
     }
           
@@ -6627,6 +6738,8 @@ func NewAppClient(config *AppConfig) *Client {
              sendOTPOnEmailResponse EmailOtpSuccess
 	    )
 
+        
+            
         
             
         
@@ -14060,6 +14173,8 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
 
         
             
@@ -14721,6 +14836,8 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
 
         
 
@@ -14849,6 +14966,8 @@ func NewAppClient(config *AppConfig) *Client {
              updateAddressResponse UpdateAddressResponse
 	    )
 
+        
+            
         
             
         
@@ -15309,6 +15428,7 @@ func NewAppClient(config *AppConfig) *Client {
         P bool  `url:"p,omitempty"` 
         ID string  `url:"id,omitempty"` 
         AddressID string  `url:"address_id,omitempty"` 
+        AreaCode string  `url:"area_code,omitempty"` 
         OrderType string  `url:"order_type,omitempty"`  
     }
     
@@ -15326,6 +15446,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
