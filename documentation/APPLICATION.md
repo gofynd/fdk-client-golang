@@ -242,6 +242,7 @@
     * [resendOrCancelPayment](#resendorcancelpayment)
     * [renderHTML](#renderhtml)
     * [validateVPA](#validatevpa)
+    * [cardDetails](#carddetails)
     * [getActiveRefundTransferModes](#getactiverefundtransfermodes)
     * [enableOrDisableRefundTransferMode](#enableordisablerefundtransfermode)
     * [getUserBeneficiariesDetail](#getuserbeneficiariesdetail)
@@ -265,6 +266,8 @@
     * [redirectToAggregator](#redirecttoaggregator)
     * [checkCredit](#checkcredit)
     * [customerOnboard](#customeronboard)
+    * [outstandingOrderDetails](#outstandingorderdetails)
+    * [paidOrderDetails](#paidorderdetails)
     
 
 * [Order](#Order)
@@ -23967,6 +23970,47 @@ Schema: `ValidateVPAResponse`
 ---
 
 
+#### cardDetails
+API to get Card info from PG
+
+```golang
+
+ data, err :=  Payment.CardDetails(CardInfo, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CardInfo | string | Card first 6 digit IIN(prefix) number. | 
+
+
+
+| xQuery | struct | Includes properties such as `Aggregator`
+
+
+
+API to get Card info from PG
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `CardDetailsResponseSchema` for more details.
+
+
+Schema: `CardDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getActiveRefundTransferModes
 Lists the mode of refund
 
@@ -24802,6 +24846,82 @@ Success. Returns the status of payment. Check the example shown below or refer `
 
 
 Schema: `CustomerOnboardingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### outstandingOrderDetails
+API to fetch the outstanding order details
+
+```golang
+
+ data, err :=  Payment.OutstandingOrderDetails(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Aggregator`
+
+
+
+Use this API to fetch the outstanding order details.
+
+*Success Response:*
+
+
+
+Success. Returns the status of API. Check the example shown below or refer `PaidOrderDetailsResponseSchema` for more details.
+
+
+Schema: `OutstandingOrderDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### paidOrderDetails
+API to fetch the paid order details
+
+```golang
+
+ data, err :=  Payment.PaidOrderDetails(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Aggregator`
+
+
+
+Use this API to fetch the paid order details.
+
+*Success Response:*
+
+
+
+Success. Returns the status of API. Check the example shown below or refer `PaidOrderDetailsResponseSchema` for more details.
+
+
+Schema: `PaidOrderDetailsResponse`
 
 
 
