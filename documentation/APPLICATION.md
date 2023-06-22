@@ -22652,7 +22652,7 @@ Schema: `SignUrlResponse`
 
 
 #### getApplication
-Get current application details
+Get current sales channel details
 
 ```golang
 
@@ -22664,7 +22664,7 @@ Get current application details
 
 
 
-Use this API to get the current application details which includes configurations that indicate the status of the website, domain, ID, tokens, images, etc.
+Use this API to get the current sales channel details which includes configurations that indicate the status of the website, domain, ID, tokens, images, etc.
 
 *Success Response:*
 
@@ -22687,7 +22687,7 @@ Schema: `Application`
 
 
 #### getOwnerInfo
-Get application, owner and seller information
+Get sales channel, owner and seller information
 
 ```golang
 
@@ -22699,7 +22699,7 @@ Get application, owner and seller information
 
 
 
-Use this API to get the current application details which includes channel name, description, banner, logo, favicon, domain details, etc. This API also retrieves the seller and owner information such as address, email address, and phone number.
+Use this API to get the current sales channel details which includes channel name, description, banner, logo, favicon, domain details, etc. This API also retrieves the seller and owner information such as address, email address, and phone number.
 
 *Success Response:*
 
@@ -22722,7 +22722,7 @@ Schema: `ApplicationAboutResponse`
 
 
 #### getBasicDetails
-Get basic application details
+Get basic details of the application
 
 ```golang
 
@@ -22792,7 +22792,7 @@ Schema: `AppTokenResponse`
 
 
 #### getOrderingStores
-Get deployment stores
+Get all deployment stores
 
 ```golang
 
@@ -23062,7 +23062,7 @@ Get list of languages
 
 
 
-Use this API to get a list of languages supported in the application.
+Use this API to get a list of languages supported in the application
 
 *Success Response:*
 

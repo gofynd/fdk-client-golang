@@ -20,7 +20,13 @@
 * [Rewards](#Rewards) - Earn and redeem reward points 
 * [Discount](#Discount) - Discount 
 * [Partner](#Partner) - Partner configuration apis 
-* [Webhook](#Webhook) - Webhook dispatcher with retry and one event to many subscriber vice versa 
+* [Webhook](#Webhook) - Sureshot is a webhook system where user can register their webhook to all available events in Fynd Platform, On event trigger. Sureshot will call all registered webhook endpoints for that specific event.This is the feature where sellers can subscribe(register webhook) to events provided. 
+
+ Sellers can view list of events available for subscription. 
+
+ They can register their webhook to specific event. 
+
+ Once that event gets triggered in system, sellers will receive event data on their registered webhook 
 * [AuditTrail](#AuditTrail) - Audit Logging Service that logs the crucial updates on the Platform 
 * [Serviceability](#Serviceability) - Logistics Configuration API's allows you to configure zone, application logistics and many more useful features.  
 * [Finance](#Finance) - Handles all finance related activities 
@@ -361,19 +367,23 @@
     * [click2Call](#click2call)
     * [updateShipmentStatus](#updateshipmentstatus)
     * [processManifest](#processmanifest)
+    * [getManifestfilters](#getmanifestfilters)
     * [dispatchManifest](#dispatchmanifest)
     * [getRoleBasedActions](#getrolebasedactions)
-    * [getShipmentHistory](#getshipmenthistory)
     * [postShipmentHistory](#postshipmenthistory)
+    * [getShipmentHistory](#getshipmenthistory)
     * [sendSmsNinja](#sendsmsninja)
     * [updatePackagingDimensions](#updatepackagingdimensions)
     * [createOrder](#createorder)
-    * [getChannelConfig](#getchannelconfig)
     * [createChannelConfig](#createchannelconfig)
+    * [getChannelConfig](#getchannelconfig)
     * [uploadConsent](#uploadconsent)
     * [orderUpdate](#orderupdate)
     * [checkOrderStatus](#checkorderstatus)
     * [getStateTransitionMap](#getstatetransitionmap)
+    * [getManifestShipments](#getmanifestshipments)
+    * [getManifests](#getmanifests)
+    * [getManifestDetails](#getmanifestdetails)
     * [fetchCreditBalanceDetail](#fetchcreditbalancedetail)
     * [fetchRefundModeConfig](#fetchrefundmodeconfig)
     * [attachOrderUser](#attachorderuser)
@@ -383,50 +393,50 @@
 
 * [Catalog](#Catalog)
   * Methods
-    * [deleteSearchKeywords](#deletesearchkeywords)
     * [updateSearchKeywords](#updatesearchkeywords)
     * [getSearchKeywords](#getsearchkeywords)
-    * [createCustomKeyword](#createcustomkeyword)
+    * [deleteSearchKeywords](#deletesearchkeywords)
     * [getAllSearchKeyword](#getallsearchkeyword)
-    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
+    * [createCustomKeyword](#createcustomkeyword)
     * [updateAutocompleteKeyword](#updateautocompletekeyword)
     * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
-    * [createCustomAutocompleteRule](#createcustomautocompleterule)
+    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [getAutocompleteConfig](#getautocompleteconfig)
-    * [createProductBundle](#createproductbundle)
+    * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [getProductBundle](#getproductbundle)
+    * [createProductBundle](#createproductbundle)
     * [updateProductBundle](#updateproductbundle)
     * [getProductBundleDetail](#getproductbundledetail)
-    * [createSizeGuide](#createsizeguide)
     * [getSizeGuides](#getsizeguides)
+    * [createSizeGuide](#createsizeguide)
     * [updateSizeGuide](#updatesizeguide)
     * [getSizeGuide](#getsizeguide)
-    * [updateAppProduct](#updateappproduct)
     * [getAppProduct](#getappproduct)
+    * [updateAppProduct](#updateappproduct)
     * [getConfigurationMetadata](#getconfigurationmetadata)
-    * [createGroupConfiguration](#creategroupconfiguration)
     * [getGroupConfigurations](#getgroupconfigurations)
-    * [deleteGroupConfiguration](#deletegroupconfiguration)
+    * [createGroupConfiguration](#creategroupconfiguration)
     * [updateGroupConfiguration](#updategroupconfiguration)
-    * [createListingConfiguration](#createlistingconfiguration)
+    * [deleteGroupConfiguration](#deletegroupconfiguration)
     * [getListingConfigurations](#getlistingconfigurations)
-    * [deleteListingConfiguration](#deletelistingconfiguration)
+    * [createListingConfiguration](#createlistingconfiguration)
     * [updateListingConfiguration](#updatelistingconfiguration)
+    * [deleteListingConfiguration](#deletelistingconfiguration)
     * [updateAllowSingle](#updateallowsingle)
     * [updateDefaultSort](#updatedefaultsort)
     * [getCatalogConfiguration](#getcatalogconfiguration)
-    * [createConfigurationProductListing](#createconfigurationproductlisting)
     * [getConfigurations](#getconfigurations)
-    * [createConfigurationByType](#createconfigurationbytype)
+    * [createConfigurationProductListing](#createconfigurationproductlisting)
     * [getConfigurationByType](#getconfigurationbytype)
+    * [createConfigurationByType](#createconfigurationbytype)
     * [getQueryFilters](#getqueryfilters)
-    * [createCollection](#createcollection)
     * [getAllCollections](#getallcollections)
+    * [createCollection](#createcollection)
     * [getCollectionDetail](#getcollectiondetail)
-    * [deleteCollection](#deletecollection)
     * [updateCollection](#updatecollection)
-    * [addCollectionItems](#addcollectionitems)
+    * [deleteCollection](#deletecollection)
     * [getCollectionItems](#getcollectionitems)
+    * [addCollectionItems](#addcollectionitems)
     * [getCatalogInsights](#getcataloginsights)
     * [getSellerInsights](#getsellerinsights)
     * [createMarketplaceOptin](#createmarketplaceoptin)
@@ -437,8 +447,8 @@
     * [getStoreDetail](#getstoredetail)
     * [getGenderAttribute](#getgenderattribute)
     * [listProductTemplateCategories](#listproducttemplatecategories)
-    * [createDepartments](#createdepartments)
     * [listDepartmentsData](#listdepartmentsdata)
+    * [createDepartments](#createdepartments)
     * [updateDepartment](#updatedepartment)
     * [getDepartmentData](#getdepartmentdata)
     * [listProductTemplate](#listproducttemplate)
@@ -448,49 +458,49 @@
     * [validateProductTemplateSchema](#validateproducttemplateschema)
     * [listHSNCodes](#listhsncodes)
     * [listProductTemplateExportDetails](#listproducttemplateexportdetails)
-    * [createProductExportJob](#createproductexportjob)
     * [getProductExportJobs](#getproductexportjobs)
+    * [createProductExportJob](#createproductexportjob)
     * [listTemplateBrandTypeValues](#listtemplatebrandtypevalues)
-    * [createCategories](#createcategories)
     * [listCategories](#listcategories)
+    * [createCategories](#createcategories)
     * [updateCategory](#updatecategory)
     * [getCategoryData](#getcategorydata)
-    * [createProduct](#createproduct)
     * [getProducts](#getproducts)
+    * [createProduct](#createproduct)
     * [getVariantsOfProducts](#getvariantsofproducts)
     * [getProductAttributes](#getproductattributes)
-    * [deleteProduct](#deleteproduct)
     * [editProduct](#editproduct)
     * [getProduct](#getproduct)
+    * [deleteProduct](#deleteproduct)
     * [allSizes](#allsizes)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
-    * [createBulkProductUploadJob](#createbulkproductuploadjob)
     * [getProductBulkUploadHistory](#getproductbulkuploadhistory)
+    * [createBulkProductUploadJob](#createbulkproductuploadjob)
     * [uploadBulkProducts](#uploadbulkproducts)
-    * [createProductsInBulk](#createproductsinbulk)
     * [deleteProductBulkJob](#deleteproductbulkjob)
+    * [createProductsInBulk](#createproductsinbulk)
     * [getProductTags](#getproducttags)
-    * [createProductAssetsInBulk](#createproductassetsinbulk)
     * [getProductAssetsInBulk](#getproductassetsinbulk)
+    * [createProductAssetsInBulk](#createproductassetsinbulk)
     * [deleteSize](#deletesize)
-    * [addInventory](#addinventory)
     * [getInventoryBySize](#getinventorybysize)
+    * [addInventory](#addinventory)
     * [getInventoryBySizeIdentifier](#getinventorybysizeidentifier)
     * [getInventories](#getinventories)
     * [getDiscountedInventoryBySizeIdentifier](#getdiscountedinventorybysizeidentifier)
     * [deleteInventory](#deleteinventory)
-    * [createBulkInventoryJob](#createbulkinventoryjob)
     * [getInventoryBulkUploadHistory](#getinventorybulkuploadhistory)
-    * [createBulkInventory](#createbulkinventory)
+    * [createBulkInventoryJob](#createbulkinventoryjob)
     * [deleteBulkInventoryJob](#deletebulkinventoryjob)
-    * [createInventoryExportJob](#createinventoryexportjob)
+    * [createBulkInventory](#createbulkinventory)
     * [getInventoryExport](#getinventoryexport)
-    * [createInventoryExport](#createinventoryexport)
+    * [createInventoryExportJob](#createinventoryexportjob)
     * [listInventoryExport](#listinventoryexport)
+    * [createInventoryExport](#createinventoryexport)
     * [exportInventoryConfig](#exportinventoryconfig)
-    * [updateRealtimeInventory](#updaterealtimeinventory)
     * [deleteRealtimeInventory](#deleterealtimeinventory)
+    * [updateRealtimeInventory](#updaterealtimeinventory)
     * [updateInventories](#updateinventories)
     * [updateHsnCode](#updatehsncode)
     * [getHsnCode](#gethsncode)
@@ -744,11 +754,11 @@
     * [getEntityRegionView](#getentityregionview)
     * [getListView](#getlistview)
     * [getCompanyStoreView](#getcompanystoreview)
-    * [updateZoneControllerView](#updatezonecontrollerview)
     * [getZoneDataView](#getzonedataview)
+    * [updateZoneControllerView](#updatezonecontrollerview)
     * [createZone](#createzone)
-    * [getZoneFromPincodeView](#getzonefrompincodeview)
     * [getZonesFromApplicationIdView](#getzonesfromapplicationidview)
+    * [getZoneFromPincodeView](#getzonefrompincodeview)
     * [getZoneListView](#getzonelistview)
     * [getStore](#getstore)
     * [getAllStores](#getallstores)
@@ -759,18 +769,18 @@
     * [updatePincodeBulkView](#updatepincodebulkview)
     * [updatePincodeCoDListing](#updatepincodecodlisting)
     * [updatePincodeAuditHistory](#updatepincodeaudithistory)
-    * [upsertDpAccount](#upsertdpaccount)
     * [getDpAccount](#getdpaccount)
-    * [updateDpRule](#updatedprule)
+    * [upsertDpAccount](#upsertdpaccount)
     * [getDpRules](#getdprules)
-    * [upsertDpRules](#upsertdprules)
+    * [updateDpRule](#updatedprule)
     * [getDpRuleInsert](#getdpruleinsert)
-    * [upsertDpCompanyRules](#upsertdpcompanyrules)
+    * [upsertDpRules](#upsertdprules)
     * [getDpCompanyRules](#getdpcompanyrules)
-    * [upsertDpApplicationRules](#upsertdpapplicationrules)
+    * [upsertDpCompanyRules](#upsertdpcompanyrules)
     * [getDpApplicationRules](#getdpapplicationrules)
-    * [patchApplicationServiceabilitySelfShipment](#patchapplicationserviceabilityselfshipment)
+    * [upsertDpApplicationRules](#upsertdpapplicationrules)
     * [getApplicationServiceabilitySelfShipment](#getapplicationserviceabilityselfshipment)
+    * [patchApplicationServiceabilitySelfShipment](#patchapplicationserviceabilityselfshipment)
     
 
 * [Finance](#Finance)
@@ -48325,1102 +48335,6 @@ Active subscription
               "modified_at": "2023-04-21T07:04:22.574Z",
               "__v": 0
             }
-          },
-          {
-            "is_active": true,
-            "display_text": null,
-            "_id": "5f2e30cbd1456d00386abff4",
-            "plan_id": "5f2e30cad1456d00386abf1c",
-            "created_at": "2020-08-08T04:57:47.829Z",
-            "modified_at": "2021-07-31T12:13:51.221Z",
-            "component": {
-              "is_visible": true,
-              "is_active": true,
-              "is_display": true,
-              "_id": "5f2e30cad1456d00386abeff",
-              "component_price_config": {
-                "type": "display",
-                "display_text": "4%"
-              },
-              "name": "Shipping",
-              "slug": "shipping",
-              "description": "",
-              "group": "General",
-              "icon": "",
-              "product_suite_id": "5f2e30cad1456d00386abefc",
-              "created_at": "2020-08-08T04:57:46.648Z",
-              "modified_at": "2021-07-31T12:13:50.439Z",
-              "links": {}
-            },
-            "component_price": {
-              "display_text": "As per rate card",
-              "is_default": false,
-              "is_active": true,
-              "processing_type": "display",
-              "tags": [],
-              "_id": "5f2e30cbd1456d00386abf78",
-              "component_id": "5f2e30cad1456d00386abeff",
-              "created_at": "2020-08-08T04:57:47.433Z",
-              "modified_at": "2023-04-21T07:04:22.574Z",
-              "__v": 0
-            }
-          },
-          {
-            "is_active": true,
-            "display_text": null,
-            "_id": "5f2e30cbd1456d00386ac031",
-            "plan_id": "5f2e30cad1456d00386abf1c",
-            "created_at": "2020-08-08T04:57:47.830Z",
-            "modified_at": "2021-07-31T12:13:51.221Z",
-            "component": {
-              "is_visible": true,
-              "is_active": true,
-              "is_display": true,
-              "_id": "5f2e30cad1456d00386abf00",
-              "component_price_config": {
-                "default_config": {
-                  "recurring": {
-                    "aggregate_usage": "sum",
-                    "usage_type": "licensed",
-                    "interval_count": 1
-                  },
-                  "transform_quantity": {
-                    "divide_by": 1,
-                    "round": "up"
-                  },
-                  "free_tier": {
-                    "type": "TIME_BASED",
-                    "value": 0
-                  },
-                  "unit_amount": 0,
-                  "quantity": 1,
-                  "price_type": "static",
-                  "price_ui_type": "standard",
-                  "bill_type": "one_time",
-                  "billing_scheme": "per_unit",
-                  "display_text": "Yes",
-                  "tiers": [],
-                  "currency": "INR"
-                },
-                "type": "revenue",
-                "display_text": "Free",
-                "price_meta": {
-                  "price_ui_type": "standard",
-                  "unit_amount": 0,
-                  "price_type": "static",
-                  "bill_type": "one_time",
-                  "billing_scheme": "per_unit",
-                  "transform_quantity": {
-                    "divide_by": 1,
-                    "round": "up"
-                  }
-                }
-              },
-              "name": "SSL Certificates",
-              "slug": "ssl-certificate",
-              "description": "",
-              "group": "Key Features",
-              "icon": "",
-              "product_suite_id": "5f2e30cad1456d00386abefc",
-              "created_at": "2020-08-08T04:57:46.648Z",
-              "modified_at": "2023-04-17T10:44:42.610Z",
-              "links": {}
-            },
-            "component_price": {
-              "recurring": {
-                "aggregate_usage": "sum",
-                "usage_type": "licensed",
-                "interval_count": 1
-              },
-              "transform_quantity": {
-                "divide_by": 1,
-                "round": "up"
-              },
-              "free_tier": {
-                "type": "TIME_BASED",
-                "value": 0
-              },
-              "currency": "INR",
-              "unit_amount": 0,
-              "quantity": 1,
-              "price_ui_type": "standard",
-              "price_type": "static",
-              "bill_type": "one_time",
-              "billing_scheme": "per_unit",
-              "display_text": "Yes",
-              "is_default": false,
-              "is_active": true,
-              "processing_type": "revenue",
-              "tags": [],
-              "tiers": [],
-              "_id": "5f2e30cbd1456d00386abf7f",
-              "component_id": "5f2e30cad1456d00386abf00",
-              "created_at": "2020-08-08T04:57:47.433Z",
-              "modified_at": "2023-04-21T07:04:22.574Z",
-              "__v": 0
-            }
-          },
-          {
-            "is_active": true,
-            "display_text": null,
-            "_id": "5f2e30cbd1456d00386ac032",
-            "plan_id": "5f2e30cad1456d00386abf1c",
-            "created_at": "2020-08-08T04:57:47.830Z",
-            "modified_at": "2021-07-31T12:13:51.221Z",
-            "component": {
-              "is_visible": true,
-              "is_active": true,
-              "is_display": true,
-              "_id": "5f2e30cad1456d00386abf01",
-              "component_price_config": {
-                "type": "feature_config",
-                "display_text": "No",
-                "feature_config": {
-                  "enabled": {
-                    "display": "enabled",
-                    "type": "Boolean",
-                    "default": false
-                  }
-                }
-              },
-              "name": "Configure Self PG",
-              "slug": "custom-payment-gatway-setup",
-              "description": "",
-              "group": "General",
-              "icon": "",
-              "product_suite_id": "5f2e30cad1456d00386abefc",
-              "created_at": "2020-08-08T04:57:46.648Z",
-              "modified_at": "2023-04-21T07:04:23.938Z",
-              "links": {}
-            },
-            "component_price": {
-              "display_text": "No",
-              "is_default": false,
-              "is_active": true,
-              "processing_type": "feature_config",
-              "tags": [],
-              "feature_config": {
-                "enabled": false
-              },
-              "_id": "5f2e30cbd1456d00386abf84",
-              "component_id": "5f2e30cad1456d00386abf01",
-              "created_at": "2020-08-08T04:57:47.433Z",
-              "modified_at": "2023-04-21T07:04:22.574Z",
-              "__v": 0
-            }
-          },
-          {
-            "is_active": true,
-            "display_text": null,
-            "_id": "5f2e30cbd1456d00386abfe3",
-            "plan_id": "5f2e30cad1456d00386abf1c",
-            "created_at": "2020-08-08T04:57:47.829Z",
-            "modified_at": "2021-07-31T12:13:51.221Z",
-            "component": {
-              "is_visible": true,
-              "is_active": true,
-              "is_display": true,
-              "_id": "5f2e30cad1456d00386abf03",
-              "component_price_config": {
-                "type": "feature_config",
-                "display_text": "10",
-                "feature_config": {
-                  "limit": {
-                    "display": "limit",
-                    "type": "Number",
-                    "default": 10
-                  }
-                }
-              },
-              "name": "Team Member",
-              "slug": "team-management",
-              "description": "",
-              "group": "Key Features",
-              "icon": "",
-              "product_suite_id": "5f2e30cad1456d00386abefc",
-              "created_at": "2020-08-08T04:57:46.648Z",
-              "modified_at": "2021-07-31T12:13:50.539Z",
-              "links": {}
-            },
-            "component_price": {
-              "display_text": "10",
-              "is_default": false,
-              "is_active": true,
-              "processing_type": "feature_config",
-              "tags": [],
-              "feature_config": {
-                "limit": 100
-              },
-              "_id": "5f2e30cbd1456d00386abf79",
-              "component_id": "5f2e30cad1456d00386abf03",
-              "created_at": "2020-08-08T04:57:47.433Z",
-              "modified_at": "2023-04-21T07:04:22.574Z",
-              "__v": 0
-            }
-          },
-          {
-            "is_active": true,
-            "display_text": null,
-            "_id": "5f2e30cbd1456d00386abff5",
-            "plan_id": "5f2e30cad1456d00386abf1c",
-            "created_at": "2020-08-08T04:57:47.829Z",
-            "modified_at": "2021-07-31T12:13:51.221Z",
-            "component": {
-              "is_visible": true,
-              "is_active": true,
-              "is_display": true,
-              "_id": "5f2e30cad1456d00386abf04",
-              "component_price_config": {
-                "type": "feature_config",
-                "display_text": "5",
-                "feature_config": {
-                  "hard_limit": {
-                    "display": "hard limit",
-                    "type": "Number",
-                    "default": 1
-                  },
-                  "soft_limit": {
-                    "display": "soft limit",
-                    "type": "Number",
-                    "default": 1
-                  }
-                }
-              },
-              "name": "Websites",
-              "slug": "sale-websites",
-              "description": "",
-              "group": "Key Features",
-              "icon": "",
-              "product_suite_id": "5f2e30cad1456d00386abefc",
-              "created_at": "2020-08-08T04:57:46.648Z",
-              "modified_at": "2021-07-31T12:13:50.532Z",
-              "links": {}
-            },
-            "component_price": {
-              "display_text": "1",
-              "is_default": false,
-              "is_active": true,
-              "processing_type": "feature_config",
-              "tags": [],
-              "feature_config": {
-                "hard_limit": 4,
-                "soft_limit": 3
-              },
-              "_id": "5f2e30cbd1456d00386abf7d",
-              "component_id": "5f2e30cad1456d00386abf04",
-              "created_at": "2020-08-08T04:57:47.433Z",
-              "modified_at": "2023-04-21T07:04:22.574Z",
-              "__v": 0
-            }
-          },
-          {
-            "is_active": true,
-            "display_text": null,
-            "_id": "5f2e30cbd1456d00386abff6",
-            "plan_id": "5f2e30cad1456d00386abf1c",
-            "created_at": "2020-08-08T04:57:47.829Z",
-            "modified_at": "2021-07-31T12:13:51.221Z",
-            "component": {
-              "is_visible": true,
-              "is_active": true,
-              "is_display": true,
-              "_id": "5f2e30cad1456d00386abf05",
-              "component_price_config": {
-                "type": "display",
-                "display_text": "Yes"
-              },
-              "name": "Fynd Payment Gateway",
-              "slug": "fynd-supported-payment-gateway",
-              "description": "",
-              "group": "Key Features",
-              "icon": "",
-              "product_suite_id": "5f2e30cad1456d00386abefc",
-              "created_at": "2020-08-08T04:57:46.648Z",
-              "modified_at": "2021-07-31T12:13:50.545Z",
-              "links": {}
-            },
-            "component_price": {
-              "display_text": "Yes",
-              "is_default": false,
-              "is_active": true,
-              "processing_type": "display",
-              "tags": [],
-              "_id": "5f2e30cbd1456d00386abf82",
-              "component_id": "5f2e30cad1456d00386abf05",
-              "created_at": "2020-08-08T04:57:47.433Z",
-              "modified_at": "2023-04-21T07:04:22.574Z",
-              "__v": 0
-            }
-          },
-          {
-            "is_active": true,
-            "display_text": null,
-            "_id": "5f2e30cbd1456d00386abfe4",
-            "plan_id": "5f2e30cad1456d00386abf1c",
-            "created_at": "2020-08-08T04:57:47.829Z",
-            "modified_at": "2021-07-31T12:13:51.221Z",
-            "component": {
-              "is_visible": true,
-              "is_active": true,
-              "is_display": true,
-              "_id": "5f2e30cad1456d00386abf09",
-              "component_price_config": {
-                "default_config": {
-                  "recurring": {
-                    "aggregate_usage": "sum",
-                    "usage_type": "licensed",
-                    "interval_count": 1
-                  },
-                  "transform_quantity": {
-                    "divide_by": 1,
-                    "round": "up"
-                  },
-                  "free_tier": {
-                    "type": "TIME_BASED",
-                    "value": 0
-                  },
-                  "unit_amount": 0,
-                  "quantity": 1,
-                  "price_type": "dynamic",
-                  "price_ui_type": "standard",
-                  "bill_type": "one_time",
-                  "billing_scheme": "per_unit",
-                  "display_text": "Themes",
-                  "tiers": [],
-                  "currency": "INR"
-                },
-                "type": "revenue",
-                "display_text": "Basic Themes",
-                "price_meta": {
-                  "price_ui_type": "standard",
-                  "price_type": "dynamic",
-                  "bill_type": "one_time",
-                  "billing_scheme": "per_unit",
-                  "transform_quantity": {
-                    "divide_by": 1,
-                    "round": "up"
-                  }
-                }
-              },
-              "name": "Themes",
-              "slug": "themes",
-              "description": "Fynd Platform partner themes available on extra charges",
-              "group": "General",
-              "icon": "",
-              "product_suite_id": "5f2e30cad1456d00386abefc",
-              "created_at": "2020-08-08T04:57:46.648Z",
-              "modified_at": "2023-04-21T07:04:23.449Z",
-              "links": {}
-            },
-            "component_price": {
-              "recurring": {
-                "aggregate_usage": "sum",
-                "usage_type": "licensed",
-                "interval_count": 1
-              },
-              "transform_quantity": {
-                "divide_by": 1,
-                "round": "up"
-              },
-              "free_tier": {
-                "type": "TIME_BASED",
-                "value": 0
-              },
-              "currency": "INR",
-              "unit_amount": 0,
-              "quantity": 1,
-              "price_ui_type": "standard",
-              "price_type": "dynamic",
-              "bill_type": "one_time",
-              "billing_scheme": "per_unit",
-              "display_text": "Premium Themes",
-              "is_default": false,
-              "is_active": true,
-              "processing_type": "revenue",
-              "tags": [],
-              "tiers": [],
-              "_id": "5f2e30cbd1456d00386abf7e",
-              "component_id": "5f2e30cad1456d00386abf09",
-              "created_at": "2020-08-08T04:57:47.433Z",
-              "modified_at": "2023-04-21T07:04:22.574Z",
-              "__v": 0
-            }
-          },
-          {
-            "is_active": true,
-            "display_text": null,
-            "_id": "5f2e30cbd1456d00386abfe5",
-            "plan_id": "5f2e30cad1456d00386abf1c",
-            "created_at": "2020-08-08T04:57:47.829Z",
-            "modified_at": "2021-07-31T12:13:51.221Z",
-            "component": {
-              "is_visible": true,
-              "is_active": true,
-              "is_display": true,
-              "_id": "5f2e30cad1456d00386abf0a",
-              "component_price_config": {
-                "default_config": {
-                  "recurring": {
-                    "aggregate_usage": "sum",
-                    "usage_type": "licensed",
-                    "interval_count": 1
-                  },
-                  "transform_quantity": {
-                    "divide_by": 1,
-                    "round": "up"
-                  },
-                  "free_tier": {
-                    "type": "TIME_BASED",
-                    "value": 0
-                  },
-                  "unit_amount": 0,
-                  "quantity": 1,
-                  "price_type": "dynamic",
-                  "price_ui_type": "standard",
-                  "bill_type": "one_time",
-                  "billing_scheme": "per_unit",
-                  "display_text": "Yes",
-                  "tiers": [],
-                  "currency": "INR"
-                },
-                "type": "revenue",
-                "display_text": "Yes",
-                "price_meta": {
-                  "price_ui_type": "standard",
-                  "price_type": "dynamic",
-                  "bill_type": "one_time",
-                  "billing_scheme": "per_unit",
-                  "transform_quantity": {
-                    "divide_by": 1,
-                    "round": "up"
-                  }
-                }
-              },
-              "name": "Custom Domain",
-              "slug": "custom-domain",
-              "description": "Connect your custom domain to your website",
-              "group": "Key Features",
-              "icon": "",
-              "product_suite_id": "5f2e30cad1456d00386abefc",
-              "created_at": "2020-08-08T04:57:46.648Z",
-              "modified_at": "2023-04-21T07:04:23.847Z",
-              "links": {}
-            },
-            "component_price": {
-              "recurring": {
-                "aggregate_usage": "sum",
-                "usage_type": "licensed",
-                "interval_count": 1
-              },
-              "transform_quantity": {
-                "divide_by": 1,
-                "round": "up"
-              },
-              "free_tier": {
-                "type": "TIME_BASED",
-                "value": 0
-              },
-              "currency": "INR",
-              "unit_amount": 0,
-              "quantity": 1,
-              "price_ui_type": "standard",
-              "price_type": "dynamic",
-              "bill_type": "one_time",
-              "billing_scheme": "per_unit",
-              "display_text": "Yes",
-              "is_default": false,
-              "is_active": true,
-              "processing_type": "revenue",
-              "tags": [],
-              "tiers": [],
-              "_id": "5f2e30cbd1456d00386abf83",
-              "component_id": "5f2e30cad1456d00386abf0a",
-              "created_at": "2020-08-08T04:57:47.433Z",
-              "modified_at": "2023-04-21T07:04:22.574Z",
-              "__v": 0
-            }
-          },
-          {
-            "is_active": true,
-            "display_text": null,
-            "_id": "5f2e30cbd1456d00386abfe6",
-            "plan_id": "5f2e30cad1456d00386abf1c",
-            "created_at": "2020-08-08T04:57:47.829Z",
-            "modified_at": "2021-07-31T12:13:51.221Z",
-            "component": {
-              "is_visible": true,
-              "is_active": true,
-              "is_display": true,
-              "_id": "5f2e30cad1456d00386abf0b",
-              "component_price_config": {
-                "type": "feature_config",
-                "display_text": "No",
-                "feature_config": {
-                  "enabled": {
-                    "display": "enabled",
-                    "type": "Boolean",
-                    "default": false
-                  }
-                }
-              },
-              "name": "POS",
-              "slug": "pos-inventory-integration",
-              "description": "Integration Costs Extra",
-              "group": "Sales Channel",
-              "icon": "",
-              "product_suite_id": "5f2e30cad1456d00386abefc",
-              "created_at": "2020-08-08T04:57:46.648Z",
-              "modified_at": "2021-07-31T12:13:50.529Z",
-              "links": {}
-            },
-            "component_price": {
-              "display_text": "Yes",
-              "is_default": false,
-              "is_active": true,
-              "processing_type": "feature_config",
-              "tags": [],
-              "feature_config": {
-                "enabled": true
-              },
-              "_id": "5f2e30cbd1456d00386abf88",
-              "component_id": "5f2e30cad1456d00386abf0b",
-              "created_at": "2020-08-08T04:57:47.434Z",
-              "modified_at": "2023-04-21T07:04:22.574Z",
-              "__v": 0
-            }
-          },
-          {
-            "is_active": true,
-            "display_text": null,
-            "_id": "5f2e30cbd1456d00386ac030",
-            "plan_id": "5f2e30cad1456d00386abf1c",
-            "created_at": "2020-08-08T04:57:47.830Z",
-            "modified_at": "2021-07-31T12:13:51.221Z",
-            "component": {
-              "is_visible": true,
-              "is_active": true,
-              "is_display": true,
-              "_id": "5f2e30cad1456d00386abf0d",
-              "component_price_config": {
-                "type": "feature_config",
-                "display_text": "100",
-                "feature_config": {
-                  "limit": {
-                    "display": "limit",
-                    "type": "Number",
-                    "default": 10
-                  }
-                }
-              },
-              "name": "Selling Locations",
-              "slug": "selling-locations",
-              "description": "The number of selling locations you can plug in inventory for: eg: warehouse, retail store etc.",
-              "group": "Key Features",
-              "icon": "",
-              "product_suite_id": "5f2e30cad1456d00386abefc",
-              "created_at": "2020-08-08T04:57:46.648Z",
-              "modified_at": "2021-07-31T12:13:50.623Z",
-              "links": {}
-            },
-            "component_price": {
-              "display_text": "5",
-              "is_default": false,
-              "is_active": true,
-              "processing_type": "feature_config",
-              "tags": [],
-              "feature_config": {
-                "limit": 200
-              },
-              "_id": "5f2e30cbd1456d00386abf7a",
-              "component_id": "5f2e30cad1456d00386abf0d",
-              "created_at": "2020-08-08T04:57:47.433Z",
-              "modified_at": "2023-04-21T07:04:22.574Z",
-              "__v": 0
-            }
-          },
-          {
-            "is_active": true,
-            "display_text": null,
-            "_id": "5f2e30cbd1456d00386ac01e",
-            "plan_id": "5f2e30cad1456d00386abf1c",
-            "created_at": "2020-08-08T04:57:47.829Z",
-            "modified_at": "2021-07-31T12:13:51.221Z",
-            "component": {
-              "is_visible": true,
-              "is_active": true,
-              "is_display": true,
-              "_id": "5f2e30cad1456d00386abf0e",
-              "component_price_config": {
-                "default_config": {
-                  "recurring": {
-                    "aggregate_usage": "sum",
-                    "usage_type": "metered",
-                    "interval_count": 1,
-                    "interval": "month"
-                  },
-                  "transform_quantity": {
-                    "divide_by": 1,
-                    "round": "up"
-                  },
-                  "free_tier": {
-                    "type": "TIME_BASED",
-                    "value": 0
-                  },
-                  "unit_amount": 0,
-                  "quantity": 1,
-                  "price_type": "static",
-                  "price_ui_type": "standard",
-                  "bill_type": "recurring",
-                  "billing_scheme": "per_unit",
-                  "display_text": "Free 500 email <br> Additional email charged at 0.25 INR per email",
-                  "tiers": [],
-                  "currency": "INR"
-                },
-                "type": "revenue",
-                "display_text": "",
-                "price_meta": {
-                  "price_ui_type": "standard",
-                  "price_type": "static",
-                  "bill_type": "recurring",
-                  "recurring": {
-                    "aggregate_usage": "sum",
-                    "usage_type": "metered",
-                    "interval": "month",
-                    "interval_count": 1
-                  },
-                  "billing_scheme": "per_unit",
-                  "transform_quantity": {
-                    "divide_by": 1,
-                    "round": "up"
-                  }
-                }
-              },
-              "name": "Email",
-              "slug": "email-campagin",
-              "description": "Send emails to your customers. Choose from pre-defined emailers or create your own.",
-              "group": "Marketing",
-              "icon": "",
-              "product_suite_id": "5f2e30cad1456d00386abefc",
-              "created_at": "2020-08-08T04:57:46.648Z",
-              "modified_at": "2023-04-21T07:04:23.569Z",
-              "links": {}
-            },
-            "component_price": {
-              "recurring": {
-                "aggregate_usage": "sum",
-                "usage_type": "metered",
-                "interval_count": 1,
-                "interval": "month"
-              },
-              "transform_quantity": {
-                "divide_by": 1,
-                "round": "up"
-              },
-              "free_tier": {
-                "type": "TIME_BASED",
-                "value": 0
-              },
-              "currency": "INR",
-              "unit_amount": 0,
-              "quantity": 1,
-              "price_ui_type": "standard",
-              "price_type": "static",
-              "bill_type": "recurring",
-              "billing_scheme": "per_unit",
-              "display_text": "Free 50k email <br> Additional email charged at 0.25 INR per email",
-              "is_default": false,
-              "is_active": true,
-              "processing_type": "revenue",
-              "tags": [],
-              "tiers": [],
-              "_id": "5f2e30cbd1456d00386abf80",
-              "component_id": "5f2e30cad1456d00386abf0e",
-              "created_at": "2020-08-08T04:57:47.433Z",
-              "modified_at": "2023-04-21T07:04:22.574Z",
-              "__v": 0
-            }
-          },
-          {
-            "is_active": true,
-            "display_text": null,
-            "_id": "5f2e30cbd1456d00386ac00a",
-            "plan_id": "5f2e30cad1456d00386abf1c",
-            "created_at": "2020-08-08T04:57:47.829Z",
-            "modified_at": "2021-07-31T12:13:51.221Z",
-            "component": {
-              "is_visible": true,
-              "is_active": true,
-              "is_display": true,
-              "_id": "5f2e30cad1456d00386abf11",
-              "component_price_config": {
-                "default_config": {
-                  "recurring": {
-                    "aggregate_usage": "sum",
-                    "usage_type": "metered",
-                    "interval_count": 1,
-                    "interval": "month"
-                  },
-                  "transform_quantity": {
-                    "divide_by": 1,
-                    "round": "up"
-                  },
-                  "free_tier": {
-                    "type": "TIME_BASED",
-                    "value": 0
-                  },
-                  "unit_amount": 0,
-                  "quantity": 1,
-                  "price_type": "static",
-                  "price_ui_type": "standard",
-                  "bill_type": "recurring",
-                  "billing_scheme": "per_unit",
-                  "display_text": "Free 500 SMS <br> Additional SMS charged at 0.25 INR per SMS",
-                  "tiers": [],
-                  "currency": "INR"
-                },
-                "type": "revenue",
-                "display_text": "",
-                "price_meta": {
-                  "price_ui_type": "standard",
-                  "price_type": "static",
-                  "bill_type": "recurring",
-                  "recurring": {
-                    "aggregate_usage": "sum",
-                    "usage_type": "metered",
-                    "interval": "month",
-                    "interval_count": 1
-                  },
-                  "billing_scheme": "per_unit",
-                  "transform_quantity": {
-                    "divide_by": 1,
-                    "round": "up"
-                  }
-                }
-              },
-              "name": "SMS",
-              "slug": "sms-campagin",
-              "description": "",
-              "group": "Marketing",
-              "icon": "",
-              "product_suite_id": "5f2e30cad1456d00386abefc",
-              "created_at": "2020-08-08T04:57:46.727Z",
-              "modified_at": "2023-04-21T07:04:23.657Z",
-              "links": {}
-            },
-            "component_price": {
-              "recurring": {
-                "aggregate_usage": "sum",
-                "usage_type": "metered",
-                "interval_count": 1,
-                "interval": "month"
-              },
-              "transform_quantity": {
-                "divide_by": 1,
-                "round": "up"
-              },
-              "free_tier": {
-                "type": "TIME_BASED",
-                "value": 0
-              },
-              "currency": "INR",
-              "unit_amount": 0,
-              "quantity": 1,
-              "price_ui_type": "standard",
-              "price_type": "static",
-              "bill_type": "recurring",
-              "billing_scheme": "per_unit",
-              "display_text": "Free 50k SMS <br> Additional SMS charged at 0.25 INR per SMS",
-              "is_default": false,
-              "is_active": true,
-              "processing_type": "revenue",
-              "tags": [],
-              "tiers": [],
-              "_id": "5f2e30cbd1456d00386abf81",
-              "component_id": "5f2e30cad1456d00386abf11",
-              "created_at": "2020-08-08T04:57:47.433Z",
-              "modified_at": "2023-04-21T07:04:22.574Z",
-              "__v": 0
-            }
-          },
-          {
-            "is_active": true,
-            "display_text": null,
-            "_id": "5f2e30cbd1456d00386ac00b",
-            "plan_id": "5f2e30cad1456d00386abf1c",
-            "created_at": "2020-08-08T04:57:47.829Z",
-            "modified_at": "2021-07-31T12:13:51.221Z",
-            "component": {
-              "is_visible": true,
-              "is_active": true,
-              "is_display": true,
-              "_id": "5f2e30cad1456d00386abf12",
-              "component_price_config": {
-                "type": "feature_config",
-                "display_text": "No",
-                "feature_config": {
-                  "enabled": {
-                    "display": "enabled",
-                    "type": "Boolean",
-                    "default": false
-                  }
-                }
-              },
-              "name": "Integrate on other marketplaces",
-              "slug": "marketplace-integration",
-              "description": "Integrate your products on Amazon/Myntra/Flipkart/Ajio/Nykaa/Fynd/Uniket. Manage all your orders at one dashboard. Commission and onboarding fees extra.",
-              "group": "Sales Channel",
-              "icon": "",
-              "product_suite_id": "5f2e30cad1456d00386abefc",
-              "created_at": "2020-08-08T04:57:46.727Z",
-              "modified_at": "2021-07-31T12:13:50.630Z",
-              "links": {}
-            },
-            "component_price": {
-              "display_text": "Yes",
-              "is_default": false,
-              "is_active": true,
-              "processing_type": "feature_config",
-              "tags": [],
-              "feature_config": {
-                "enabled": true
-              },
-              "_id": "5f2e30cbd1456d00386abf86",
-              "component_id": "5f2e30cad1456d00386abf12",
-              "created_at": "2020-08-08T04:57:47.434Z",
-              "modified_at": "2023-04-21T07:04:22.574Z",
-              "__v": 0
-            }
-          },
-          {
-            "is_active": true,
-            "display_text": "1",
-            "_id": "61029cfdd110f5003968a459",
-            "plan_id": "5f2e30cad1456d00386abf1c",
-            "created_at": "2021-07-29T12:20:13.864Z",
-            "modified_at": "2021-07-31T12:13:51.221Z",
-            "component": {
-              "is_visible": true,
-              "is_active": true,
-              "is_display": true,
-              "_id": "61029cfdd110f5003968a418",
-              "component_price_config": {
-                "type": "feature_config",
-                "display_text": "1",
-                "feature_config": {
-                  "limit": {
-                    "display": "limit",
-                    "type": "Number",
-                    "default": 1
-                  }
-                }
-              },
-              "name": "Number of Brands",
-              "description": "If you want to sell with multiple Brands, please Contact Us",
-              "group": "General",
-              "icon": "",
-              "links": {},
-              "slug": "brand",
-              "product_suite_id": "5f2e30cad1456d00386abefc",
-              "created_at": "2021-07-29T12:20:13.267Z",
-              "modified_at": "2021-07-31T12:13:50.729Z"
-            },
-            "component_price": {
-              "display_text": "1",
-              "is_default": false,
-              "is_active": true,
-              "processing_type": "feature_config",
-              "tags": [],
-              "feature_config": {
-                "limit": 1
-              },
-              "_id": "61029cfdd110f5003968a458",
-              "component_id": "61029cfdd110f5003968a418",
-              "created_at": "2021-07-29T12:20:13.863Z",
-              "modified_at": "2023-04-21T07:04:22.574Z",
-              "__v": 0
-            }
-          },
-          {
-            "is_active": true,
-            "display_text": "Yes",
-            "_id": "61029cfdd110f5003968a45f",
-            "plan_id": "5f2e30cad1456d00386abf1c",
-            "created_at": "2021-07-29T12:20:13.943Z",
-            "modified_at": "2021-07-31T12:13:51.221Z",
-            "component": {
-              "is_visible": true,
-              "is_active": true,
-              "is_display": true,
-              "_id": "61029cfdd110f5003968a419",
-              "component_price_config": {
-                "type": "display",
-                "display_text": "Yes"
-              },
-              "name": "Page Editor",
-              "group": "General",
-              "icon": "",
-              "links": {},
-              "slug": "page-editor",
-              "description": "Drag and Drop UI and customize your themes.No coding required",
-              "product_suite_id": "5f2e30cad1456d00386abefc",
-              "created_at": "2021-07-29T12:20:13.274Z",
-              "modified_at": "2021-07-31T12:13:50.733Z"
-            },
-            "component_price": {
-              "display_text": "Yes",
-              "is_default": false,
-              "is_active": true,
-              "processing_type": "feature_config",
-              "tags": [],
-              "feature_config": {
-                "enabled": true
-              },
-              "_id": "61029cfdd110f5003968a45e",
-              "component_id": "61029cfdd110f5003968a419",
-              "created_at": "2021-07-29T12:20:13.941Z",
-              "modified_at": "2023-04-21T07:04:22.574Z",
-              "__v": 0
-            }
-          },
-          {
-            "is_active": true,
-            "display_text": "Yes",
-            "_id": "61029cfdd110f5003968a465",
-            "plan_id": "5f2e30cad1456d00386abf1c",
-            "created_at": "2021-07-29T12:20:13.953Z",
-            "modified_at": "2021-07-31T12:13:51.221Z",
-            "component": {
-              "is_visible": true,
-              "is_active": true,
-              "is_display": true,
-              "_id": "61029cfdd110f5003968a41a",
-              "component_price_config": {
-                "type": "display",
-                "display_text": "Yes"
-              },
-              "name": "SEO Friendly",
-              "description": "",
-              "group": "General",
-              "icon": "",
-              "links": {},
-              "slug": "seo-friendly",
-              "product_suite_id": "5f2e30cad1456d00386abefc",
-              "created_at": "2021-07-29T12:20:13.340Z",
-              "modified_at": "2021-07-31T12:13:50.736Z"
-            },
-            "component_price": {
-              "display_text": "Yes",
-              "is_default": false,
-              "is_active": true,
-              "processing_type": "feature_config",
-              "tags": [],
-              "feature_config": {
-                "enabled": true
-              },
-              "_id": "61029cfdd110f5003968a464",
-              "component_id": "61029cfdd110f5003968a41a",
-              "created_at": "2021-07-29T12:20:13.952Z",
-              "modified_at": "2023-04-21T07:04:22.574Z",
-              "__v": 0
-            }
-          },
-          {
-            "is_active": true,
-            "display_text": "Yes",
-            "_id": "61029cfed110f5003968a47d",
-            "plan_id": "5f2e30cad1456d00386abf1c",
-            "created_at": "2021-07-29T12:20:14.074Z",
-            "modified_at": "2021-07-31T12:13:51.221Z",
-            "component": {
-              "is_visible": true,
-              "is_active": true,
-              "is_display": true,
-              "_id": "61029cfdd110f5003968a41e",
-              "component_price_config": {
-                "type": "feature_config",
-                "display_text": "No",
-                "feature_config": {
-                  "enabled": {
-                    "display": "enabled",
-                    "type": "Boolean",
-                    "default": false
-                  }
-                }
-              },
-              "name": "Analytics Integration",
-              "description": "",
-              "group": "General",
-              "icon": "",
-              "links": {},
-              "slug": "analytics-integration",
-              "product_suite_id": "5f2e30cad1456d00386abefc",
-              "created_at": "2021-07-29T12:20:13.356Z",
-              "modified_at": "2021-07-31T12:13:50.809Z"
-            },
-            "component_price": {
-              "display_text": "Yes",
-              "is_default": false,
-              "is_active": true,
-              "processing_type": "feature_config",
-              "tags": [],
-              "feature_config": {
-                "enabled": true
-              },
-              "_id": "61029cfed110f5003968a47c",
-              "component_id": "61029cfdd110f5003968a41e",
-              "created_at": "2021-07-29T12:20:14.073Z",
-              "modified_at": "2023-04-21T07:04:22.574Z",
-              "__v": 0
-            }
-          },
-          {
-            "is_active": true,
-            "display_text": "Yes",
-            "_id": "61029cfed110f5003968a483",
-            "plan_id": "5f2e30cad1456d00386abf1c",
-            "created_at": "2021-07-29T12:20:14.150Z",
-            "modified_at": "2021-07-31T12:13:51.221Z",
-            "component": {
-              "is_visible": true,
-              "is_active": true,
-              "is_display": true,
-              "_id": "61029cfdd110f5003968a41f",
-              "component_price_config": {
-                "type": "feature_config",
-                "display_text": "No",
-                "feature_config": {
-                  "enabled": {
-                    "display": "enabled",
-                    "type": "Boolean",
-                    "default": false
-                  }
-                }
-              },
-              "name": "Pixel Integration",
-              "description": "",
-              "group": "General",
-              "icon": "",
-              "links": {},
-              "slug": "pixel-integration",
-              "product_suite_id": "5f2e30cad1456d00386abefc",
-              "created_at": "2021-07-29T12:20:13.360Z",
-              "modified_at": "2021-07-31T12:13:50.814Z"
-            },
-            "component_price": {
-              "display_text": "Yes",
-              "is_default": false,
-              "is_active": true,
-              "processing_type": "feature_config",
-              "tags": [],
-              "feature_config": {
-                "enabled": true
-              },
-              "_id": "61029cfed110f5003968a482",
-              "component_id": "61029cfdd110f5003968a41f",
-              "created_at": "2021-07-29T12:20:14.148Z",
-              "modified_at": "2023-04-21T07:04:22.574Z",
-              "__v": 0
-            }
           }
         ],
         "components": [
@@ -49476,210 +48390,6 @@ Active subscription
             "links": {},
             "created_at": "2022-10-11T13:03:31.767Z",
             "modified_at": "2023-04-21T07:04:23.544Z"
-          },
-          {
-            "_id": "644235768818ad006300f92d",
-            "is_visible": true,
-            "is_active": true,
-            "is_display": true,
-            "name": "Domain Integration",
-            "slug": "domain-integration",
-            "description": "Domain Integration",
-            "group": "Key Features",
-            "icon": "",
-            "component_price_config": {
-              "type": "feature_config",
-              "display_text": "No",
-              "feature_config": {
-                "enabled": {
-                  "display": "enabled",
-                  "type": "Boolean",
-                  "default": false
-                }
-              },
-              "default_config": {
-                "processing_type": "feature_config",
-                "display_text": "No",
-                "feature_config": {
-                  "enabled": false
-                },
-                "is_active": false
-              }
-            },
-            "product_suite_id": "5f2e30cad1456d00386abefc",
-            "links": {},
-            "created_at": "2023-04-21T07:04:22.774Z",
-            "modified_at": "2023-04-21T07:04:22.774Z"
-          },
-          {
-            "_id": "644235768818ad006300f933",
-            "is_visible": true,
-            "is_active": true,
-            "is_display": true,
-            "name": "Customisation of SMS sender",
-            "slug": "sms-sender-customization",
-            "description": "Customisation of SMS sender",
-            "group": "Key Features",
-            "icon": "",
-            "component_price_config": {
-              "type": "feature_config",
-              "display_text": "No",
-              "feature_config": {
-                "enabled": {
-                  "display": "enabled",
-                  "type": "Boolean",
-                  "default": false
-                }
-              },
-              "default_config": {
-                "processing_type": "feature_config",
-                "display_text": "No",
-                "feature_config": {
-                  "enabled": false
-                },
-                "is_active": false
-              }
-            },
-            "product_suite_id": "5f2e30cad1456d00386abefc",
-            "links": {},
-            "created_at": "2023-04-21T07:04:22.844Z",
-            "modified_at": "2023-04-21T07:04:22.844Z"
-          },
-          {
-            "_id": "644235768818ad006300f939",
-            "is_visible": true,
-            "is_active": true,
-            "is_display": true,
-            "name": "Customisation of Invoice",
-            "slug": "invoice-customization",
-            "description": "Customisation of Invoice",
-            "group": "Key Features",
-            "icon": "",
-            "component_price_config": {
-              "type": "feature_config",
-              "display_text": "No",
-              "feature_config": {
-                "enabled": {
-                  "display": "enabled",
-                  "type": "Boolean",
-                  "default": false
-                }
-              },
-              "default_config": {
-                "processing_type": "feature_config",
-                "display_text": "No",
-                "feature_config": {
-                  "enabled": false
-                },
-                "is_active": false
-              }
-            },
-            "product_suite_id": "5f2e30cad1456d00386abefc",
-            "links": {},
-            "created_at": "2023-04-21T07:04:22.859Z",
-            "modified_at": "2023-04-21T07:04:22.859Z"
-          },
-          {
-            "_id": "644235768818ad006300f93f",
-            "is_visible": true,
-            "is_active": true,
-            "is_display": true,
-            "name": "Webhook Integration",
-            "slug": "webhook-integration",
-            "description": "Webhook Integration",
-            "group": "Key Features",
-            "icon": "",
-            "component_price_config": {
-              "type": "feature_config",
-              "display_text": "No",
-              "feature_config": {
-                "enabled": {
-                  "display": "enabled",
-                  "type": "Boolean",
-                  "default": false
-                }
-              },
-              "default_config": {
-                "processing_type": "feature_config",
-                "display_text": "No",
-                "feature_config": {
-                  "enabled": false
-                },
-                "is_active": false
-              }
-            },
-            "product_suite_id": "5f2e30cad1456d00386abefc",
-            "links": {},
-            "created_at": "2023-04-21T07:04:22.939Z",
-            "modified_at": "2023-04-21T07:04:22.939Z"
-          },
-          {
-            "_id": "644235768818ad006300f945",
-            "is_visible": true,
-            "is_active": true,
-            "is_display": true,
-            "name": "Access to API and SDK",
-            "slug": "api-sdk-access",
-            "description": "Access to API and SDK",
-            "group": "Key Features",
-            "icon": "",
-            "component_price_config": {
-              "type": "feature_config",
-              "display_text": "No",
-              "feature_config": {
-                "enabled": {
-                  "display": "enabled",
-                  "type": "Boolean",
-                  "default": false
-                }
-              },
-              "default_config": {
-                "processing_type": "feature_config",
-                "display_text": "No",
-                "feature_config": {
-                  "enabled": false
-                },
-                "is_active": false
-              }
-            },
-            "product_suite_id": "5f2e30cad1456d00386abefc",
-            "links": {},
-            "created_at": "2023-04-21T07:04:22.952Z",
-            "modified_at": "2023-04-21T07:04:22.952Z"
-          },
-          {
-            "_id": "644235768818ad006300f94b",
-            "is_visible": true,
-            "is_active": true,
-            "is_display": true,
-            "name": "Custom DP enablement",
-            "slug": "custom-dp",
-            "description": "Custom DP enablement",
-            "group": "Key Features",
-            "icon": "",
-            "component_price_config": {
-              "type": "feature_config",
-              "display_text": "No",
-              "feature_config": {
-                "enabled": {
-                  "display": "enabled",
-                  "type": "Boolean",
-                  "default": false
-                }
-              },
-              "default_config": {
-                "processing_type": "feature_config",
-                "display_text": "No",
-                "feature_config": {
-                  "enabled": false
-                },
-                "is_active": false
-              }
-            },
-            "product_suite_id": "5f2e30cad1456d00386abefc",
-            "links": {},
-            "created_at": "2023-04-21T07:04:22.966Z",
-            "modified_at": "2023-04-21T07:04:22.966Z"
           }
         ],
         "fee_components": [],
@@ -49876,8 +48586,8 @@ Active subscription
     "current_subscriptions": [
       {
         "current_period": {
-          "start": "2023-05-07T12:40:21.936Z",
-          "end": "2023-06-06T12:40:21.936Z"
+          "start": "2023-05-23T07:00:31.345Z",
+          "end": "2023-06-22T07:00:31.345Z"
         },
         "pause_collection": {},
         "trial": {},
@@ -49888,21 +48598,20 @@ Active subscription
         "is_active": true,
         "cancel_at_period_end": false,
         "freezed": false,
-        "channel_type": "fynd",
-        "_id": "64579c35cb540c6b018ff262",
+        "channel_type": "ecomm",
+        "_id": "6385dc9389fe3577db6935f3",
         "subscriber_id": "6385dc9289fe356a346935eb",
-        "plan_id": "6470546ccbc6402178b3ecb9",
+        "plan_id": "5f2e30cad1456d00386abf1c",
         "product_suite_id": "5f2e30cad1456d00386abefc",
         "plan_data": {
           "plan_components": [
             {
               "is_active": true,
               "display_text": null,
-              "_id": "6470546ccbc6401d9bb3ecbf",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.389Z",
-              "modified_at": "2023-05-26T06:40:44.389Z",
+              "_id": "5f2e30cbd1456d00386ac008",
+              "plan_id": "5f2e30cad1456d00386abf1c",
+              "created_at": "2020-08-08T04:57:47.829Z",
+              "modified_at": "2021-07-31T12:13:51.221Z",
               "component": {
                 "is_visible": true,
                 "is_active": true,
@@ -49923,1619 +48632,75 @@ Active subscription
                 "links": {}
               },
               "component_price": {
-                "display_text": "4%",
-                "is_default": true,
+                "display_text": "3.5%",
+                "is_default": false,
                 "is_active": true,
                 "processing_type": "display",
                 "tags": [],
-                "_id": "644235778818ad006300f953",
+                "_id": "5f2e30cbd1456d00386abf77",
                 "component_id": "5f2e30cad1456d00386abefd",
-                "created_at": "2023-04-21T07:04:23.057Z",
-                "modified_at": "2023-04-21T07:04:23.057Z",
+                "created_at": "2020-08-08T04:57:47.433Z",
+                "modified_at": "2023-04-21T07:04:22.574Z",
                 "__v": 0
               }
-            },
+            }
+          ],
+          "components": [
             {
-              "is_active": true,
-              "display_text": null,
-              "_id": "6470546ccbc64077dbb3ecc0",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.389Z",
-              "modified_at": "2023-05-26T06:40:44.389Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "5f2e30cad1456d00386abeff",
-                "component_price_config": {
-                  "type": "display",
-                  "display_text": "4%"
-                },
-                "name": "Shipping",
-                "slug": "shipping",
-                "description": "",
-                "group": "General",
-                "icon": "",
-                "product_suite_id": "5f2e30cad1456d00386abefc",
-                "created_at": "2020-08-08T04:57:46.648Z",
-                "modified_at": "2021-07-31T12:13:50.439Z",
-                "links": {}
-              },
-              "component_price": {
-                "display_text": "4%",
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "display",
-                "tags": [],
-                "_id": "644235778818ad006300f959",
-                "component_id": "5f2e30cad1456d00386abeff",
-                "created_at": "2023-04-21T07:04:23.237Z",
-                "modified_at": "2023-04-21T07:04:23.237Z",
-                "__v": 0
-              }
-            },
-            {
-              "is_active": true,
-              "display_text": null,
-              "_id": "6470546ccbc6403423b3eccb",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.390Z",
-              "modified_at": "2023-05-26T06:40:44.390Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "5f2e30cad1456d00386abf00",
-                "component_price_config": {
-                  "default_config": {
-                    "recurring": {
-                      "aggregate_usage": "sum",
-                      "usage_type": "licensed",
-                      "interval_count": 1
-                    },
-                    "transform_quantity": {
-                      "divide_by": 1,
-                      "round": "up"
-                    },
-                    "free_tier": {
-                      "type": "TIME_BASED",
-                      "value": 0
-                    },
-                    "unit_amount": 0,
-                    "quantity": 1,
-                    "price_type": "static",
-                    "price_ui_type": "standard",
-                    "bill_type": "one_time",
-                    "billing_scheme": "per_unit",
-                    "display_text": "Yes",
-                    "tiers": [],
-                    "currency": "INR"
+              "_id": "634569a3675d1912531e5ef3",
+              "component_price_config": {
+                "type": "revenue",
+                "default_config": {
+                  "recurring": {
+                    "aggregate_usage": "sum",
+                    "usage_type": "licensed",
+                    "interval_count": 1
                   },
-                  "type": "revenue",
-                  "display_text": "Free",
-                  "price_meta": {
-                    "price_ui_type": "standard",
-                    "unit_amount": 0,
-                    "price_type": "static",
-                    "bill_type": "one_time",
-                    "billing_scheme": "per_unit",
-                    "transform_quantity": {
-                      "divide_by": 1,
-                      "round": "up"
-                    }
-                  }
-                },
-                "name": "SSL Certificates",
-                "slug": "ssl-certificate",
-                "description": "",
-                "group": "Key Features",
-                "icon": "",
-                "product_suite_id": "5f2e30cad1456d00386abefc",
-                "created_at": "2020-08-08T04:57:46.648Z",
-                "modified_at": "2023-04-17T10:44:42.610Z",
-                "links": {}
-              },
-              "component_price": {
-                "recurring": {
-                  "aggregate_usage": "sum",
-                  "usage_type": "licensed",
-                  "interval_count": 1
-                },
-                "transform_quantity": {
-                  "divide_by": 1,
-                  "round": "up"
-                },
-                "free_tier": {
-                  "type": "TIME_BASED",
-                  "value": 0
-                },
-                "currency": "INR",
-                "unit_amount": 0,
-                "quantity": 1,
-                "price_ui_type": "standard",
-                "price_type": "static",
-                "bill_type": "one_time",
-                "billing_scheme": "per_unit",
-                "display_text": "Yes",
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "revenue",
-                "tags": [],
-                "tiers": [],
-                "_id": "6442387ea9afb613ab179011",
-                "component_id": "5f2e30cad1456d00386abf00",
-                "created_at": "2023-04-21T07:17:18.856Z",
-                "modified_at": "2023-04-21T07:17:18.856Z",
-                "__v": 0
-              }
-            },
-            {
-              "is_active": false,
-              "display_text": null,
-              "_id": "6470546ccbc6409656b3ecd3",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.390Z",
-              "modified_at": "2023-05-26T06:40:44.390Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "5f2e30cad1456d00386abf01",
-                "component_price_config": {
-                  "type": "feature_config",
-                  "display_text": "No",
-                  "feature_config": {
-                    "enabled": {
-                      "display": "enabled",
-                      "type": "Boolean",
-                      "default": false
-                    }
-                  }
-                },
-                "name": "Configure Self PG",
-                "slug": "custom-payment-gatway-setup",
-                "description": "",
-                "group": "General",
-                "icon": "",
-                "product_suite_id": "5f2e30cad1456d00386abefc",
-                "created_at": "2020-08-08T04:57:46.648Z",
-                "modified_at": "2023-04-21T07:04:23.938Z",
-                "links": {}
-              },
-              "component_price": {
-                "display_text": null,
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "feature_config",
-                "tags": [],
-                "_id": "6442387ea9afb67646179012",
-                "component_id": "5f2e30cad1456d00386abf01",
-                "created_at": "2023-04-21T07:17:18.856Z",
-                "modified_at": "2023-04-21T07:17:18.856Z",
-                "__v": 0
-              }
-            },
-            {
-              "is_active": false,
-              "display_text": null,
-              "_id": "6470546ccbc640c444b3ecd4",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.390Z",
-              "modified_at": "2023-05-26T06:40:44.390Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "5f2e30cad1456d00386abf03",
-                "component_price_config": {
-                  "type": "feature_config",
-                  "display_text": "10",
-                  "feature_config": {
-                    "limit": {
-                      "display": "limit",
-                      "type": "Number",
-                      "default": 10
-                    }
-                  }
-                },
-                "name": "Team Member",
-                "slug": "team-management",
-                "description": "",
-                "group": "Key Features",
-                "icon": "",
-                "product_suite_id": "5f2e30cad1456d00386abefc",
-                "created_at": "2020-08-08T04:57:46.648Z",
-                "modified_at": "2021-07-31T12:13:50.539Z",
-                "links": {}
-              },
-              "component_price": {
-                "display_text": null,
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "feature_config",
-                "tags": [],
-                "_id": "6442387ea9afb6559b179014",
-                "component_id": "5f2e30cad1456d00386abf03",
-                "created_at": "2023-04-21T07:17:18.856Z",
-                "modified_at": "2023-04-21T07:17:18.856Z",
-                "__v": 0
-              }
-            },
-            {
-              "is_active": false,
-              "display_text": null,
-              "_id": "6470546ccbc640f50cb3ecc1",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.389Z",
-              "modified_at": "2023-05-26T06:40:44.389Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "5f2e30cad1456d00386abf04",
-                "component_price_config": {
-                  "type": "feature_config",
-                  "display_text": "5",
-                  "feature_config": {
-                    "hard_limit": {
-                      "display": "hard limit",
-                      "type": "Number",
-                      "default": 1
-                    },
-                    "soft_limit": {
-                      "display": "soft limit",
-                      "type": "Number",
-                      "default": 1
-                    }
-                  }
-                },
-                "name": "Websites",
-                "slug": "sale-websites",
-                "description": "",
-                "group": "Key Features",
-                "icon": "",
-                "product_suite_id": "5f2e30cad1456d00386abefc",
-                "created_at": "2020-08-08T04:57:46.648Z",
-                "modified_at": "2021-07-31T12:13:50.532Z",
-                "links": {}
-              },
-              "component_price": {
-                "display_text": "1",
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "feature_config",
-                "tags": [],
-                "feature_config": {
-                  "hard_limit": 1,
-                  "soft_limit": 1
-                },
-                "_id": "644235778818ad006300f973",
-                "component_id": "5f2e30cad1456d00386abf04",
-                "created_at": "2023-04-21T07:04:23.435Z",
-                "modified_at": "2023-04-21T07:04:23.435Z",
-                "__v": 0
-              }
-            },
-            {
-              "is_active": true,
-              "display_text": null,
-              "_id": "6470546ccbc640fef6b3ecc6",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.389Z",
-              "modified_at": "2023-05-26T06:40:44.389Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "5f2e30cad1456d00386abf05",
-                "component_price_config": {
-                  "type": "display",
-                  "display_text": "Yes"
-                },
-                "name": "Fynd Payment Gateway",
-                "slug": "fynd-supported-payment-gateway",
-                "description": "",
-                "group": "Key Features",
-                "icon": "",
-                "product_suite_id": "5f2e30cad1456d00386abefc",
-                "created_at": "2020-08-08T04:57:46.648Z",
-                "modified_at": "2021-07-31T12:13:50.545Z",
-                "links": {}
-              },
-              "component_price": {
-                "display_text": "Yes",
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "display",
-                "tags": [],
-                "_id": "644235778818ad006300f991",
-                "component_id": "5f2e30cad1456d00386abf05",
-                "created_at": "2023-04-21T07:04:23.835Z",
-                "modified_at": "2023-04-21T07:04:23.835Z",
-                "__v": 0
-              }
-            },
-            {
-              "is_active": true,
-              "display_text": null,
-              "_id": "6470546ccbc6405590b3ecc2",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.389Z",
-              "modified_at": "2023-05-26T06:40:44.389Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "5f2e30cad1456d00386abf09",
-                "component_price_config": {
-                  "default_config": {
-                    "recurring": {
-                      "aggregate_usage": "sum",
-                      "usage_type": "licensed",
-                      "interval_count": 1
-                    },
-                    "transform_quantity": {
-                      "divide_by": 1,
-                      "round": "up"
-                    },
-                    "free_tier": {
-                      "type": "TIME_BASED",
-                      "value": 0
-                    },
-                    "unit_amount": 0,
-                    "quantity": 1,
-                    "price_type": "dynamic",
-                    "price_ui_type": "standard",
-                    "bill_type": "one_time",
-                    "billing_scheme": "per_unit",
-                    "display_text": "Themes",
-                    "tiers": [],
-                    "currency": "INR"
+                  "transform_quantity": {
+                    "divide_by": 1,
+                    "round": "up"
                   },
-                  "type": "revenue",
-                  "display_text": "Basic Themes",
-                  "price_meta": {
-                    "price_ui_type": "standard",
-                    "price_type": "dynamic",
-                    "bill_type": "one_time",
-                    "billing_scheme": "per_unit",
-                    "transform_quantity": {
-                      "divide_by": 1,
-                      "round": "up"
-                    }
-                  }
-                },
-                "name": "Themes",
-                "slug": "themes",
-                "description": "Fynd Platform partner themes available on extra charges",
-                "group": "General",
-                "icon": "",
-                "product_suite_id": "5f2e30cad1456d00386abefc",
-                "created_at": "2020-08-08T04:57:46.648Z",
-                "modified_at": "2023-04-21T07:04:23.449Z",
-                "links": {}
-              },
-              "component_price": {
-                "recurring": {
-                  "aggregate_usage": "sum",
-                  "usage_type": "licensed",
-                  "interval_count": 1
-                },
-                "transform_quantity": {
-                  "divide_by": 1,
-                  "round": "up"
-                },
-                "free_tier": {
-                  "type": "TIME_BASED",
-                  "value": 0
-                },
-                "currency": "INR",
-                "unit_amount": 0,
-                "quantity": 1,
-                "price_ui_type": "standard",
-                "price_type": "dynamic",
-                "bill_type": "one_time",
-                "billing_scheme": "per_unit",
-                "display_text": "Themes",
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "revenue",
-                "tags": [],
-                "tiers": [],
-                "_id": "644235778818ad006300f979",
-                "component_id": "5f2e30cad1456d00386abf09",
-                "created_at": "2023-04-21T07:04:23.463Z",
-                "modified_at": "2023-04-21T07:04:23.463Z",
-                "__v": 0
-              }
-            },
-            {
-              "is_active": true,
-              "display_text": null,
-              "_id": "6470546ccbc64066a1b3ecc7",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.389Z",
-              "modified_at": "2023-05-26T06:40:44.389Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "5f2e30cad1456d00386abf0a",
-                "component_price_config": {
-                  "default_config": {
-                    "recurring": {
-                      "aggregate_usage": "sum",
-                      "usage_type": "licensed",
-                      "interval_count": 1
-                    },
-                    "transform_quantity": {
-                      "divide_by": 1,
-                      "round": "up"
-                    },
-                    "free_tier": {
-                      "type": "TIME_BASED",
-                      "value": 0
-                    },
-                    "unit_amount": 0,
-                    "quantity": 1,
-                    "price_type": "dynamic",
-                    "price_ui_type": "standard",
-                    "bill_type": "one_time",
-                    "billing_scheme": "per_unit",
-                    "display_text": "Yes",
-                    "tiers": [],
-                    "currency": "INR"
+                  "free_tier": {
+                    "type": "TIME_BASED",
+                    "value": 0
                   },
-                  "type": "revenue",
+                  "unit_amount": 0,
+                  "quantity": 1,
+                  "price_type": "static",
+                  "price_ui_type": "standard",
+                  "bill_type": "one_time",
+                  "billing_scheme": "per_unit",
                   "display_text": "Yes",
-                  "price_meta": {
-                    "price_ui_type": "standard",
-                    "price_type": "dynamic",
-                    "bill_type": "one_time",
-                    "billing_scheme": "per_unit",
-                    "transform_quantity": {
-                      "divide_by": 1,
-                      "round": "up"
-                    }
+                  "tiers": [],
+                  "currency": "INR"
+                },
+                "display_text": "Free",
+                "price_meta": {
+                  "unit_amount": 0,
+                  "price_type": "static",
+                  "bill_type": "one_time",
+                  "billing_scheme": "per_unit",
+                  "transform_quantity": {
+                    "divide_by": 1,
+                    "round": "up"
                   }
-                },
-                "name": "Custom Domain",
-                "slug": "custom-domain",
-                "description": "Connect your custom domain to your website",
-                "group": "Key Features",
-                "icon": "",
-                "product_suite_id": "5f2e30cad1456d00386abefc",
-                "created_at": "2020-08-08T04:57:46.648Z",
-                "modified_at": "2023-04-21T07:04:23.847Z",
-                "links": {}
+                }
               },
-              "component_price": {
-                "recurring": {
-                  "aggregate_usage": "sum",
-                  "usage_type": "licensed",
-                  "interval_count": 1
-                },
-                "transform_quantity": {
-                  "divide_by": 1,
-                  "round": "up"
-                },
-                "free_tier": {
-                  "type": "TIME_BASED",
-                  "value": 0
-                },
-                "currency": "INR",
-                "unit_amount": 0,
-                "quantity": 1,
-                "price_ui_type": "standard",
-                "price_type": "dynamic",
-                "bill_type": "one_time",
-                "billing_scheme": "per_unit",
-                "display_text": "Yes",
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "revenue",
-                "tags": [],
-                "tiers": [],
-                "_id": "644235778818ad006300f997",
-                "component_id": "5f2e30cad1456d00386abf0a",
-                "created_at": "2023-04-21T07:04:23.858Z",
-                "modified_at": "2023-04-21T07:04:23.858Z",
-                "__v": 0
-              }
-            },
-            {
-              "is_active": false,
-              "display_text": null,
-              "_id": "6470546ccbc640dc54b3ecd2",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.390Z",
-              "modified_at": "2023-05-26T06:40:44.390Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "5f2e30cad1456d00386abf0b",
-                "component_price_config": {
-                  "type": "feature_config",
-                  "display_text": "No",
-                  "feature_config": {
-                    "enabled": {
-                      "display": "enabled",
-                      "type": "Boolean",
-                      "default": false
-                    }
-                  }
-                },
-                "name": "POS",
-                "slug": "pos-inventory-integration",
-                "description": "Integration Costs Extra",
-                "group": "Sales Channel",
-                "icon": "",
-                "product_suite_id": "5f2e30cad1456d00386abefc",
-                "created_at": "2020-08-08T04:57:46.648Z",
-                "modified_at": "2021-07-31T12:13:50.529Z",
-                "links": {}
-              },
-              "component_price": {
-                "display_text": null,
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "feature_config",
-                "tags": [],
-                "_id": "6442387ea9afb65a2c179013",
-                "component_id": "5f2e30cad1456d00386abf0b",
-                "created_at": "2023-04-21T07:17:18.856Z",
-                "modified_at": "2023-04-21T07:17:18.856Z",
-                "__v": 0
-              }
-            },
-            {
-              "is_active": false,
-              "display_text": null,
-              "_id": "6470546ccbc6405043b3ecd8",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.390Z",
-              "modified_at": "2023-05-26T06:40:44.390Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "5f2e30cad1456d00386abf0d",
-                "component_price_config": {
-                  "type": "feature_config",
-                  "display_text": "100",
-                  "feature_config": {
-                    "limit": {
-                      "display": "limit",
-                      "type": "Number",
-                      "default": 10
-                    }
-                  }
-                },
-                "name": "Selling Locations",
-                "slug": "selling-locations",
-                "description": "The number of selling locations you can plug in inventory for: eg: warehouse, retail store etc.",
-                "group": "Key Features",
-                "icon": "",
-                "product_suite_id": "5f2e30cad1456d00386abefc",
-                "created_at": "2020-08-08T04:57:46.648Z",
-                "modified_at": "2021-07-31T12:13:50.623Z",
-                "links": {}
-              },
-              "component_price": {
-                "display_text": null,
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "feature_config",
-                "tags": [],
-                "_id": "6442387ea9afb6407e179015",
-                "component_id": "5f2e30cad1456d00386abf0d",
-                "created_at": "2023-04-21T07:17:18.856Z",
-                "modified_at": "2023-04-21T07:17:18.856Z",
-                "__v": 0
-              }
-            },
-            {
+              "is_visible": true,
               "is_active": true,
-              "display_text": null,
-              "_id": "6470546ccbc64083b2b3ecc4",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.389Z",
-              "modified_at": "2023-05-26T06:40:44.389Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "5f2e30cad1456d00386abf0e",
-                "component_price_config": {
-                  "default_config": {
-                    "recurring": {
-                      "aggregate_usage": "sum",
-                      "usage_type": "metered",
-                      "interval_count": 1,
-                      "interval": "month"
-                    },
-                    "transform_quantity": {
-                      "divide_by": 1,
-                      "round": "up"
-                    },
-                    "free_tier": {
-                      "type": "TIME_BASED",
-                      "value": 0
-                    },
-                    "unit_amount": 0,
-                    "quantity": 1,
-                    "price_type": "static",
-                    "price_ui_type": "standard",
-                    "bill_type": "recurring",
-                    "billing_scheme": "per_unit",
-                    "display_text": "Free 500 email <br> Additional email charged at 0.25 INR per email",
-                    "tiers": [],
-                    "currency": "INR"
-                  },
-                  "type": "revenue",
-                  "display_text": "",
-                  "price_meta": {
-                    "price_ui_type": "standard",
-                    "price_type": "static",
-                    "bill_type": "recurring",
-                    "recurring": {
-                      "aggregate_usage": "sum",
-                      "usage_type": "metered",
-                      "interval": "month",
-                      "interval_count": 1
-                    },
-                    "billing_scheme": "per_unit",
-                    "transform_quantity": {
-                      "divide_by": 1,
-                      "round": "up"
-                    }
-                  }
-                },
-                "name": "Email",
-                "slug": "email-campagin",
-                "description": "Send emails to your customers. Choose from pre-defined emailers or create your own.",
-                "group": "Marketing",
-                "icon": "",
-                "product_suite_id": "5f2e30cad1456d00386abefc",
-                "created_at": "2020-08-08T04:57:46.648Z",
-                "modified_at": "2023-04-21T07:04:23.569Z",
-                "links": {}
-              },
-              "component_price": {
-                "recurring": {
-                  "aggregate_usage": "sum",
-                  "usage_type": "metered",
-                  "interval_count": 1,
-                  "interval": "month"
-                },
-                "transform_quantity": {
-                  "divide_by": 1,
-                  "round": "up"
-                },
-                "free_tier": {
-                  "type": "TIME_BASED",
-                  "value": 0
-                },
-                "currency": "INR",
-                "unit_amount": 0,
-                "quantity": 1,
-                "price_ui_type": "standard",
-                "price_type": "static",
-                "bill_type": "recurring",
-                "billing_scheme": "per_unit",
-                "display_text": "Free 500 email <br> Additional email charged at 0.25 INR per email",
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "revenue",
-                "tags": [],
-                "tiers": [],
-                "_id": "644235778818ad006300f985",
-                "component_id": "5f2e30cad1456d00386abf0e",
-                "created_at": "2023-04-21T07:04:23.637Z",
-                "modified_at": "2023-04-21T07:04:23.637Z",
-                "__v": 0
-              }
-            },
-            {
-              "is_active": true,
-              "display_text": null,
-              "_id": "6470546ccbc6405152b3ecc5",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.389Z",
-              "modified_at": "2023-05-26T06:40:44.389Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "5f2e30cad1456d00386abf11",
-                "component_price_config": {
-                  "default_config": {
-                    "recurring": {
-                      "aggregate_usage": "sum",
-                      "usage_type": "metered",
-                      "interval_count": 1,
-                      "interval": "month"
-                    },
-                    "transform_quantity": {
-                      "divide_by": 1,
-                      "round": "up"
-                    },
-                    "free_tier": {
-                      "type": "TIME_BASED",
-                      "value": 0
-                    },
-                    "unit_amount": 0,
-                    "quantity": 1,
-                    "price_type": "static",
-                    "price_ui_type": "standard",
-                    "bill_type": "recurring",
-                    "billing_scheme": "per_unit",
-                    "display_text": "Free 500 SMS <br> Additional SMS charged at 0.25 INR per SMS",
-                    "tiers": [],
-                    "currency": "INR"
-                  },
-                  "type": "revenue",
-                  "display_text": "",
-                  "price_meta": {
-                    "price_ui_type": "standard",
-                    "price_type": "static",
-                    "bill_type": "recurring",
-                    "recurring": {
-                      "aggregate_usage": "sum",
-                      "usage_type": "metered",
-                      "interval": "month",
-                      "interval_count": 1
-                    },
-                    "billing_scheme": "per_unit",
-                    "transform_quantity": {
-                      "divide_by": 1,
-                      "round": "up"
-                    }
-                  }
-                },
-                "name": "SMS",
-                "slug": "sms-campagin",
-                "description": "",
-                "group": "Marketing",
-                "icon": "",
-                "product_suite_id": "5f2e30cad1456d00386abefc",
-                "created_at": "2020-08-08T04:57:46.727Z",
-                "modified_at": "2023-04-21T07:04:23.657Z",
-                "links": {}
-              },
-              "component_price": {
-                "recurring": {
-                  "aggregate_usage": "sum",
-                  "usage_type": "metered",
-                  "interval_count": 1,
-                  "interval": "month"
-                },
-                "transform_quantity": {
-                  "divide_by": 1,
-                  "round": "up"
-                },
-                "free_tier": {
-                  "type": "TIME_BASED",
-                  "value": 0
-                },
-                "currency": "INR",
-                "unit_amount": 0,
-                "quantity": 1,
-                "price_ui_type": "standard",
-                "price_type": "static",
-                "bill_type": "recurring",
-                "billing_scheme": "per_unit",
-                "display_text": "Free 500 SMS <br> Additional SMS charged at 0.25 INR per SMS",
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "revenue",
-                "tags": [],
-                "tiers": [],
-                "_id": "644235778818ad006300f98b",
-                "component_id": "5f2e30cad1456d00386abf11",
-                "created_at": "2023-04-21T07:04:23.740Z",
-                "modified_at": "2023-04-21T07:04:23.740Z",
-                "__v": 0
-              }
-            },
-            {
-              "is_active": false,
-              "display_text": null,
-              "_id": "6470546ccbc6401e5cb3eccc",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.390Z",
-              "modified_at": "2023-05-26T06:40:44.390Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "5f2e30cad1456d00386abf12",
-                "component_price_config": {
-                  "type": "feature_config",
-                  "display_text": "No",
-                  "feature_config": {
-                    "enabled": {
-                      "display": "enabled",
-                      "type": "Boolean",
-                      "default": false
-                    }
-                  }
-                },
-                "name": "Integrate on other marketplaces",
-                "slug": "marketplace-integration",
-                "description": "Integrate your products on Amazon/Myntra/Flipkart/Ajio/Nykaa/Fynd/Uniket. Manage all your orders at one dashboard. Commission and onboarding fees extra.",
-                "group": "Sales Channel",
-                "icon": "",
-                "product_suite_id": "5f2e30cad1456d00386abefc",
-                "created_at": "2020-08-08T04:57:46.727Z",
-                "modified_at": "2021-07-31T12:13:50.630Z",
-                "links": {}
-              },
-              "component_price": {
-                "display_text": null,
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "feature_config",
-                "tags": [],
-                "_id": "6442387ea9afb62cd2179016",
-                "component_id": "5f2e30cad1456d00386abf12",
-                "created_at": "2023-04-21T07:17:18.857Z",
-                "modified_at": "2023-04-21T07:17:18.857Z",
-                "__v": 0
-              }
-            },
-            {
-              "is_active": false,
-              "display_text": null,
-              "_id": "6470546ccbc64046ffb3ecd7",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.390Z",
-              "modified_at": "2023-05-26T06:40:44.390Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "61029cfdd110f5003968a418",
-                "component_price_config": {
-                  "type": "feature_config",
-                  "display_text": "1",
-                  "feature_config": {
-                    "limit": {
-                      "display": "limit",
-                      "type": "Number",
-                      "default": 1
-                    }
-                  }
-                },
-                "name": "Number of Brands",
-                "description": "If you want to sell with multiple Brands, please Contact Us",
-                "group": "General",
-                "icon": "",
-                "links": {},
-                "slug": "brand",
-                "product_suite_id": "5f2e30cad1456d00386abefc",
-                "created_at": "2021-07-29T12:20:13.267Z",
-                "modified_at": "2021-07-31T12:13:50.729Z"
-              },
-              "component_price": {
-                "display_text": null,
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "feature_config",
-                "tags": [],
-                "_id": "6442387ea9afb67c1e179017",
-                "component_id": "61029cfdd110f5003968a418",
-                "created_at": "2023-04-21T07:17:18.857Z",
-                "modified_at": "2023-04-21T07:17:18.857Z",
-                "__v": 0
-              }
-            },
-            {
-              "is_active": true,
-              "display_text": null,
-              "_id": "6470546ccbc6402008b3ecc9",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.389Z",
-              "modified_at": "2023-05-26T06:40:44.389Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "61029cfdd110f5003968a419",
-                "component_price_config": {
-                  "type": "display",
-                  "display_text": "Yes"
-                },
-                "name": "Page Editor",
-                "group": "General",
-                "icon": "",
-                "links": {},
-                "slug": "page-editor",
-                "description": "Drag and Drop UI and customize your themes.No coding required",
-                "product_suite_id": "5f2e30cad1456d00386abefc",
-                "created_at": "2021-07-29T12:20:13.274Z",
-                "modified_at": "2021-07-31T12:13:50.733Z"
-              },
-              "component_price": {
-                "display_text": "Yes",
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "display",
-                "tags": [],
-                "_id": "644235788818ad006300f9da",
-                "component_id": "61029cfdd110f5003968a419",
-                "created_at": "2023-04-21T07:04:24.463Z",
-                "modified_at": "2023-04-21T07:04:24.463Z",
-                "__v": 0
-              }
-            },
-            {
-              "is_active": true,
-              "display_text": null,
-              "_id": "6470546ccbc64049b9b3ecca",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.390Z",
-              "modified_at": "2023-05-26T06:40:44.390Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "61029cfdd110f5003968a41a",
-                "component_price_config": {
-                  "type": "display",
-                  "display_text": "Yes"
-                },
-                "name": "SEO Friendly",
-                "description": "",
-                "group": "General",
-                "icon": "",
-                "links": {},
-                "slug": "seo-friendly",
-                "product_suite_id": "5f2e30cad1456d00386abefc",
-                "created_at": "2021-07-29T12:20:13.340Z",
-                "modified_at": "2021-07-31T12:13:50.736Z"
-              },
-              "component_price": {
-                "display_text": "Yes",
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "display",
-                "tags": [],
-                "_id": "644235788818ad006300f9e0",
-                "component_id": "61029cfdd110f5003968a41a",
-                "created_at": "2023-04-21T07:04:24.547Z",
-                "modified_at": "2023-04-21T07:04:24.547Z",
-                "__v": 0
-              }
-            },
-            {
-              "is_active": false,
-              "display_text": null,
-              "_id": "6470546ccbc6403bc8b3eccf",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.390Z",
-              "modified_at": "2023-05-26T06:40:44.390Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "61029cfdd110f5003968a41e",
-                "component_price_config": {
-                  "type": "feature_config",
-                  "display_text": "No",
-                  "feature_config": {
-                    "enabled": {
-                      "display": "enabled",
-                      "type": "Boolean",
-                      "default": false
-                    }
-                  }
-                },
-                "name": "Analytics Integration",
-                "description": "",
-                "group": "General",
-                "icon": "",
-                "links": {},
-                "slug": "analytics-integration",
-                "product_suite_id": "5f2e30cad1456d00386abefc",
-                "created_at": "2021-07-29T12:20:13.356Z",
-                "modified_at": "2021-07-31T12:13:50.809Z"
-              },
-              "component_price": {
-                "display_text": null,
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "feature_config",
-                "tags": [],
-                "_id": "6442387ea9afb6002d179018",
-                "component_id": "61029cfdd110f5003968a41e",
-                "created_at": "2023-04-21T07:17:18.857Z",
-                "modified_at": "2023-04-21T07:17:18.857Z",
-                "__v": 0
-              }
-            },
-            {
-              "is_active": false,
-              "display_text": null,
-              "_id": "6470546ccbc640c5bab3ecd6",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.390Z",
-              "modified_at": "2023-05-26T06:40:44.390Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "61029cfdd110f5003968a41f",
-                "component_price_config": {
-                  "type": "feature_config",
-                  "display_text": "No",
-                  "feature_config": {
-                    "enabled": {
-                      "display": "enabled",
-                      "type": "Boolean",
-                      "default": false
-                    }
-                  }
-                },
-                "name": "Pixel Integration",
-                "description": "",
-                "group": "General",
-                "icon": "",
-                "links": {},
-                "slug": "pixel-integration",
-                "product_suite_id": "5f2e30cad1456d00386abefc",
-                "created_at": "2021-07-29T12:20:13.360Z",
-                "modified_at": "2021-07-31T12:13:50.814Z"
-              },
-              "component_price": {
-                "display_text": null,
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "feature_config",
-                "tags": [],
-                "_id": "6442387ea9afb67764179019",
-                "component_id": "61029cfdd110f5003968a41f",
-                "created_at": "2023-04-21T07:17:18.857Z",
-                "modified_at": "2023-04-21T07:17:18.857Z",
-                "__v": 0
-              }
-            },
-            {
-              "is_active": true,
-              "display_text": null,
-              "_id": "6470546ccbc6405921b3ecc3",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.389Z",
-              "modified_at": "2023-05-26T06:40:44.389Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "634569a3675d1912531e5ef3",
-                "component_price_config": {
-                  "default_config": {
-                    "recurring": {
-                      "aggregate_usage": "sum",
-                      "usage_type": "licensed",
-                      "interval_count": 1
-                    },
-                    "transform_quantity": {
-                      "divide_by": 1,
-                      "round": "up"
-                    },
-                    "free_tier": {
-                      "type": "TIME_BASED",
-                      "value": 0
-                    },
-                    "unit_amount": 0,
-                    "quantity": 1,
-                    "price_type": "static",
-                    "price_ui_type": "standard",
-                    "bill_type": "one_time",
-                    "billing_scheme": "per_unit",
-                    "display_text": "Yes",
-                    "tiers": [],
-                    "currency": "INR"
-                  },
-                  "type": "revenue",
-                  "display_text": "Free",
-                  "price_meta": {
-                    "unit_amount": 0,
-                    "price_type": "static",
-                    "bill_type": "one_time",
-                    "billing_scheme": "per_unit",
-                    "transform_quantity": {
-                      "divide_by": 1,
-                      "round": "up"
-                    }
-                  }
-                },
-                "product_suite_id": "5ececa006415744de9228e2e",
-                "name": "SSL Certificates",
-                "slug": "ssl-certificates",
-                "description": "",
-                "group": "Key Features",
-                "icon": "",
-                "links": {},
-                "created_at": "2022-10-11T13:03:31.767Z",
-                "modified_at": "2023-04-21T07:04:23.544Z"
-              },
-              "component_price": {
-                "recurring": {
-                  "aggregate_usage": "sum",
-                  "usage_type": "licensed",
-                  "interval_count": 1
-                },
-                "transform_quantity": {
-                  "divide_by": 1,
-                  "round": "up"
-                },
-                "free_tier": {
-                  "type": "TIME_BASED",
-                  "value": 0
-                },
-                "currency": "INR",
-                "unit_amount": 0,
-                "quantity": 1,
-                "price_ui_type": "standard",
-                "price_type": "static",
-                "bill_type": "one_time",
-                "billing_scheme": "per_unit",
-                "display_text": "Yes",
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "revenue",
-                "tags": [],
-                "tiers": [],
-                "_id": "644235778818ad006300f97f",
-                "component_id": "634569a3675d1912531e5ef3",
-                "created_at": "2023-04-21T07:04:23.555Z",
-                "modified_at": "2023-04-21T07:04:23.555Z",
-                "__v": 0
-              }
-            },
-            {
-              "is_active": false,
-              "display_text": null,
-              "_id": "6470546ccbc640685ab3ecd5",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.390Z",
-              "modified_at": "2023-05-26T06:40:44.390Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "644235768818ad006300f92d",
-                "name": "Domain Integration",
-                "slug": "domain-integration",
-                "description": "Domain Integration",
-                "group": "Key Features",
-                "icon": "",
-                "component_price_config": {
-                  "type": "feature_config",
-                  "default_config": {
-                    "processing_type": "feature_config",
-                    "display_text": "No",
-                    "feature_config": {
-                      "enabled": false
-                    },
-                    "is_active": false
-                  },
-                  "display_text": "No",
-                  "feature_config": {
-                    "enabled": {
-                      "display": "enabled",
-                      "type": "Boolean",
-                      "default": false
-                    }
-                  }
-                },
-                "product_suite_id": "5f2e30cad1456d00386abefc",
-                "links": {},
-                "created_at": "2023-04-21T07:04:22.774Z",
-                "modified_at": "2023-04-21T07:04:22.774Z"
-              },
-              "component_price": {
-                "display_text": "No",
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "feature_config",
-                "tags": [],
-                "feature_config": {
-                  "enabled": false
-                },
-                "_id": "6442387ea9afb6052417901a",
-                "component_id": "644235768818ad006300f92d",
-                "created_at": "2023-04-21T07:17:18.857Z",
-                "modified_at": "2023-04-21T07:17:18.857Z",
-                "__v": 0
-              }
-            },
-            {
-              "is_active": false,
-              "display_text": null,
-              "_id": "6470546ccbc64030cdb3ecce",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.390Z",
-              "modified_at": "2023-05-26T06:40:44.390Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "644235768818ad006300f933",
-                "name": "Customisation of SMS sender",
-                "slug": "sms-sender-customization",
-                "description": "Customisation of SMS sender",
-                "group": "Key Features",
-                "icon": "",
-                "component_price_config": {
-                  "type": "feature_config",
-                  "default_config": {
-                    "processing_type": "feature_config",
-                    "display_text": "No",
-                    "feature_config": {
-                      "enabled": false
-                    },
-                    "is_active": false
-                  },
-                  "display_text": "No",
-                  "feature_config": {
-                    "enabled": {
-                      "display": "enabled",
-                      "type": "Boolean",
-                      "default": false
-                    }
-                  }
-                },
-                "product_suite_id": "5f2e30cad1456d00386abefc",
-                "links": {},
-                "created_at": "2023-04-21T07:04:22.844Z",
-                "modified_at": "2023-04-21T07:04:22.844Z"
-              },
-              "component_price": {
-                "display_text": "No",
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "feature_config",
-                "tags": [],
-                "feature_config": {
-                  "enabled": false
-                },
-                "_id": "6442387ea9afb613bd17901b",
-                "component_id": "644235768818ad006300f933",
-                "created_at": "2023-04-21T07:17:18.857Z",
-                "modified_at": "2023-04-21T07:17:18.857Z",
-                "__v": 0
-              }
-            },
-            {
-              "is_active": false,
-              "display_text": null,
-              "_id": "6470546ccbc640a718b3ecd0",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.390Z",
-              "modified_at": "2023-05-26T06:40:44.390Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "644235768818ad006300f939",
-                "name": "Customisation of Invoice",
-                "slug": "invoice-customization",
-                "description": "Customisation of Invoice",
-                "group": "Key Features",
-                "icon": "",
-                "component_price_config": {
-                  "type": "feature_config",
-                  "default_config": {
-                    "processing_type": "feature_config",
-                    "display_text": "No",
-                    "feature_config": {
-                      "enabled": false
-                    },
-                    "is_active": false
-                  },
-                  "display_text": "No",
-                  "feature_config": {
-                    "enabled": {
-                      "display": "enabled",
-                      "type": "Boolean",
-                      "default": false
-                    }
-                  }
-                },
-                "product_suite_id": "5f2e30cad1456d00386abefc",
-                "links": {},
-                "created_at": "2023-04-21T07:04:22.859Z",
-                "modified_at": "2023-04-21T07:04:22.859Z"
-              },
-              "component_price": {
-                "display_text": "No",
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "feature_config",
-                "tags": [],
-                "feature_config": {
-                  "enabled": false
-                },
-                "_id": "6442387ea9afb604a617901c",
-                "component_id": "644235768818ad006300f939",
-                "created_at": "2023-04-21T07:17:18.857Z",
-                "modified_at": "2023-04-21T07:17:18.857Z",
-                "__v": 0
-              }
-            },
-            {
-              "is_active": false,
-              "display_text": null,
-              "_id": "6470546ccbc6403c11b3ecd1",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.390Z",
-              "modified_at": "2023-05-26T06:40:44.390Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "644235768818ad006300f93f",
-                "name": "Webhook Integration",
-                "slug": "webhook-integration",
-                "description": "Webhook Integration",
-                "group": "Key Features",
-                "icon": "",
-                "component_price_config": {
-                  "type": "feature_config",
-                  "default_config": {
-                    "processing_type": "feature_config",
-                    "display_text": "No",
-                    "feature_config": {
-                      "enabled": false
-                    },
-                    "is_active": false
-                  },
-                  "display_text": "No",
-                  "feature_config": {
-                    "enabled": {
-                      "display": "enabled",
-                      "type": "Boolean",
-                      "default": false
-                    }
-                  }
-                },
-                "product_suite_id": "5f2e30cad1456d00386abefc",
-                "links": {},
-                "created_at": "2023-04-21T07:04:22.939Z",
-                "modified_at": "2023-04-21T07:04:22.939Z"
-              },
-              "component_price": {
-                "display_text": "No",
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "feature_config",
-                "tags": [],
-                "feature_config": {
-                  "enabled": false
-                },
-                "_id": "6442387ea9afb61c9617901d",
-                "component_id": "644235768818ad006300f93f",
-                "created_at": "2023-04-21T07:17:18.857Z",
-                "modified_at": "2023-04-21T07:17:18.857Z",
-                "__v": 0
-              }
-            },
-            {
-              "is_active": false,
-              "display_text": null,
-              "_id": "6470546ccbc64062e2b3eccd",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.390Z",
-              "modified_at": "2023-05-26T06:40:44.390Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "644235768818ad006300f945",
-                "name": "Access to API and SDK",
-                "slug": "api-sdk-access",
-                "description": "Access to API and SDK",
-                "group": "Key Features",
-                "icon": "",
-                "component_price_config": {
-                  "type": "feature_config",
-                  "default_config": {
-                    "processing_type": "feature_config",
-                    "display_text": "No",
-                    "feature_config": {
-                      "enabled": false
-                    },
-                    "is_active": false
-                  },
-                  "display_text": "No",
-                  "feature_config": {
-                    "enabled": {
-                      "display": "enabled",
-                      "type": "Boolean",
-                      "default": false
-                    }
-                  }
-                },
-                "product_suite_id": "5f2e30cad1456d00386abefc",
-                "links": {},
-                "created_at": "2023-04-21T07:04:22.952Z",
-                "modified_at": "2023-04-21T07:04:22.952Z"
-              },
-              "component_price": {
-                "display_text": "No",
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "feature_config",
-                "tags": [],
-                "feature_config": {
-                  "enabled": false
-                },
-                "_id": "6442387ea9afb6805617901e",
-                "component_id": "644235768818ad006300f945",
-                "created_at": "2023-04-21T07:17:18.857Z",
-                "modified_at": "2023-04-21T07:17:18.857Z",
-                "__v": 0
-              }
-            },
-            {
-              "is_active": false,
-              "display_text": null,
-              "_id": "6470546ccbc640d3f0b3ecd9",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "config": {},
-              "created_at": "2023-05-26T06:40:44.390Z",
-              "modified_at": "2023-05-26T06:40:44.390Z",
-              "component": {
-                "is_visible": true,
-                "is_active": true,
-                "is_display": true,
-                "_id": "644235768818ad006300f94b",
-                "name": "Custom DP enablement",
-                "slug": "custom-dp",
-                "description": "Custom DP enablement",
-                "group": "Key Features",
-                "icon": "",
-                "component_price_config": {
-                  "type": "feature_config",
-                  "default_config": {
-                    "processing_type": "feature_config",
-                    "display_text": "No",
-                    "feature_config": {
-                      "enabled": false
-                    },
-                    "is_active": false
-                  },
-                  "display_text": "No",
-                  "feature_config": {
-                    "enabled": {
-                      "display": "enabled",
-                      "type": "Boolean",
-                      "default": false
-                    }
-                  }
-                },
-                "product_suite_id": "5f2e30cad1456d00386abefc",
-                "links": {},
-                "created_at": "2023-04-21T07:04:22.966Z",
-                "modified_at": "2023-04-21T07:04:22.966Z"
-              },
-              "component_price": {
-                "display_text": "No",
-                "is_default": true,
-                "is_active": true,
-                "processing_type": "feature_config",
-                "tags": [],
-                "feature_config": {
-                  "enabled": false
-                },
-                "_id": "6442387ea9afb6469317901f",
-                "component_id": "644235768818ad006300f94b",
-                "created_at": "2023-04-21T07:17:18.857Z",
-                "modified_at": "2023-04-21T07:17:18.857Z",
-                "__v": 0
-              }
+              "is_display": true,
+              "product_suite_id": "5ececa006415744de9228e2e",
+              "name": "SSL Certificates",
+              "slug": "ssl-certificates",
+              "description": "",
+              "group": "Key Features",
+              "icon": "",
+              "links": {},
+              "created_at": "2022-10-11T13:03:31.767Z",
+              "modified_at": "2023-04-21T07:04:23.544Z"
             }
           ],
-          "components": [],
-          "fee_components": [
-            {
-              "settle_cycle_period": {
-                "mall": 7,
-                "highstreet": 7,
-                "warehouse": 7
-              },
-              "is_default": false,
-              "marketplaces": [],
-              "brand": [],
-              "location": [
-                {
-                  "id": "high_street",
-                  "name": "High Street"
-                },
-                {
-                  "id": "mall",
-                  "name": "Mall"
-                },
-                {
-                  "id": "warehouse",
-                  "name": "Warehouse"
-                }
-              ],
-              "channel": [
-                {
-                  "id": "fynd",
-                  "name": "Fynd"
-                }
-              ],
-              "affiliate": [],
-              "is_active": true,
-              "is_tp": false,
-              "change_settlement_status": false,
-              "_id": "6470546ccbc6407313b3ecbd",
-              "plan_id": "6470546ccbc6402178b3ecb9",
-              "settlement_type": "monthly",
-              "config": {
-                "location": [
-                  {
-                    "id": "high_street",
-                    "name": "High Street"
-                  },
-                  {
-                    "id": "mall",
-                    "name": "Mall"
-                  },
-                  {
-                    "id": "warehouse",
-                    "name": "Warehouse"
-                  }
-                ],
-                "channel": [
-                  {
-                    "id": "fynd",
-                    "name": "Fynd"
-                  }
-                ],
-                "settlement_type": "monthly",
-                "settle_cycle_period": {
-                  "highstreet": 7,
-                  "mall": 7,
-                  "warehouse": 7
-                },
-                "components": [],
-                "change_settlement_status": false
-              },
-              "created_at": "2023-05-26T06:40:44.356Z",
-              "modified_at": "2023-05-26T06:40:44.356Z",
-              "components": []
-            }
-          ],
+          "fee_components": [],
           "recurring": {
             "interval_count": 1,
             "interval": "month"
@@ -51544,8 +48709,8 @@ Active subscription
             "gst": 0.18
           },
           "one_time_fees": {
-            "developement": 200,
-            "marketing": 200
+            "developement": 0,
+            "marketing": 0
           },
           "credit_line": {
             "is_active": false
@@ -51558,33 +48723,30 @@ Active subscription
           "is_visible": true,
           "trial_period": 0,
           "addons": [],
-          "tags": [],
-          "type": "company_specific",
-          "country": "IN",
-          "company_ids": [
-            "13781"
+          "tags": [
+            "popular"
           ],
-          "channel_type": "fynd",
-          "_id": "6470546ccbc6402178b3ecb9",
-          "name": "test new scheduled plan",
-          "description": "this is a new scheduled plan",
-          "start_date": "2023-05-25T18:30:00.000Z",
-          "plan_leeway_after_activation": 45,
-          "amount": 200,
-          "current_status": "approved",
-          "created_by": "40d667ad5fdd8aa378abdb3b",
+          "type": "public",
+          "country": "IN",
+          "company_ids": [],
+          "channel_type": "ecomm",
+          "_id": "5f2e30cad1456d00386abf1c",
+          "tagLines": [],
+          "name": "Premium",
+          "description": "For scaled up businesses",
+          "amount": 2499,
           "product_suite_id": "5f2e30cad1456d00386abefc",
-          "created_at": "2023-05-26T06:40:44.293Z",
-          "modified_at": "2023-05-26T06:40:50.230Z",
-          "approved_by": "40d667ad5fdd8aa378abdb3b",
-          "updated_by": "40d667ad5fdd8aa378abdb3b",
-          "activated_on": "2023-05-31T07:35:43.650Z"
+          "created_at": "2020-08-08T04:57:46.830Z",
+          "modified_at": "2023-04-21T07:04:22.363Z",
+          "current_status": "active",
+          "plan_leeway_after_activation": 7,
+          "activated_on": "2023-06-02T07:57:16.638Z"
         },
         "current_status": "active",
         "collection_method": "charge_automatically",
-        "created_at": "2023-05-07T12:40:21.958Z",
-        "modified_at": "2023-05-31T07:35:44.627Z",
-        "latest_invoice": "6476f8d0bc080600abd95849"
+        "created_at": "2022-11-29T10:18:59.466Z",
+        "modified_at": "2023-06-02T07:57:17.254Z",
+        "latest_invoice": "6479a0dda77a156ad997bd4d"
       }
     ]
   }
@@ -60032,7 +57194,7 @@ data, err := Order.ProcessManifest(CompanyID, body);
 | CompanyID | float64 |  | 
 
 
-| body |  CreateOrderPayload | "Request body" 
+| body |  ProcessManifest | "Request body" 
 
 
 
@@ -60043,7 +57205,47 @@ data, err := Order.ProcessManifest(CompanyID, body);
 Manifest will be processed!
 
 
-Schema: `CreateOrderResponse`
+Schema: `ProcessManifestItemResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getManifestfilters
+
+
+```golang
+
+data, err := Order.GetManifestfilters(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Id of company | 
+
+
+
+| xQuery | struct | Includes properties such as `View`
+
+
+
+
+*Success Response:*
+
+
+
+List of filters
+
+
+Schema: `ManifestFiltersResponse`
 
 
 
@@ -60131,25 +57333,21 @@ Schema: `GetActionsResponse`
 ---
 
 
-#### getShipmentHistory
+#### postShipmentHistory
 
 
 ```golang
 
-data, err := Order.GetShipmentHistory(CompanyID, xQuery);
+data, err := Order.PostShipmentHistory(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id | 
+| CompanyID | float64 |  | 
 
 
-
-
-
-| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
-
+| body |  PostShipmentHistory | "Request body" 
 
 
 
@@ -60173,21 +57371,25 @@ Schema: `ShipmentHistoryResponse`
 ---
 
 
-#### postShipmentHistory
+#### getShipmentHistory
 
 
 ```golang
 
-data, err := Order.PostShipmentHistory(CompanyID, body);
+data, err := Order.GetShipmentHistory(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | float64 | Company Id | 
 
 
-| body |  PostShipmentHistory | "Request body" 
+
+
+
+| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
+
 
 
 
@@ -60325,43 +57527,6 @@ Schema: `CreateOrderResponse`
 ---
 
 
-#### getChannelConfig
-
-
-```golang
-
-data, err := Order.GetChannelConfig(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-getChannelConfig
-
-*Success Response:*
-
-
-
-Successfully created the config data
-
-
-Schema: `CreateChannelConfigData`
-
-
-
-
-
-
-
-
-
----
-
-
 #### createChannelConfig
 
 
@@ -60388,6 +57553,43 @@ Successfully updateShipmentStatus!
 
 
 Schema: `CreateChannelConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getChannelConfig
+
+
+```golang
+
+data, err := Order.GetChannelConfig(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+getChannelConfig
+
+*Success Response:*
+
+
+
+Successfully created the config data
+
+
+Schema: `CreateChannelConfigData`
 
 
 
@@ -60539,6 +57741,172 @@ State Transition Mapping, for next possible state
 
 
 Schema: `BagStateTransitionMap`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getManifestShipments
+
+
+```golang
+
+data, err := Order.GetManifestShipments(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `DpIds`, `Stores`, `ToDate`, `FromDate`, `DpName`, `SalesChannels`, `SearchType`, `SearchValue`, `PageNo`, `PageSize`
+
+
+
+
+*Success Response:*
+
+
+
+Successful Manifest upload!
+
+
+Schema: `ManifestShipmentListing`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getManifests
+
+
+```golang
+
+data, err := Order.GetManifests(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `Status`, `ToDate`, `FromDate`, `SearchValue`, `DpIds`, `PageNo`, `PageSize`
+
+
+
+
+*Success Response:*
+
+
+
+Successful Manifest upload!
+
+
+Schema: `ManifestList`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getManifestDetails
+
+
+```golang
+
+data, err := Order.GetManifestDetails(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `ManifestID`, `Status`, `ToDate`, `FromDate`, `SearchType`, `SearchValue`, `DpIds`, `PageNo`, `PageSize`
+
+
+
+
+*Success Response:*
+
+
+
+Successful Manifest upload!
+
+
+Schema: `ManifestDetails`
 
 
 
@@ -60748,49 +58116,6 @@ Schema: `VerifyOtpResponse`
 ## Catalog
 
 
-#### deleteSearchKeywords
-Delete a Search Keywords
-
-```golang
-
-data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateSearchKeywords
 Update Search Keyword
 
@@ -60878,12 +58203,12 @@ Schema: `GetSearchWordsDetailResponse`
 ---
 
 
-#### createCustomKeyword
-Add a Custom Search Keywords
+#### deleteSearchKeywords
+Delete a Search Keywords
 
 ```golang
 
-data, err := Catalog.CreateCustomKeyword(CompanyID, ApplicationID, body);
+data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -60895,18 +58220,20 @@ data, err := Catalog.CreateCustomKeyword(CompanyID, ApplicationID, body);
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| body |  CreateSearchKeyword | "Request body" 
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
 
-Create a Custom Search Keywords. See `CreateSearchKeywordSchema` for the list of attributes needed to create a mapping and /collections/query-options for the available options to create a rule. On successful request, returns a paginated list of collections specified in `CreateSearchKeywordSchema`
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
 
 *Success Response:*
 
 
 
-Get keyword object with id that is added. See example below or refer `GetSearchWordsDataSchema` for details
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
 
 
-Schema: `GetSearchWordsData`
+Schema: `DeleteResponse`
 
 
 
@@ -60959,12 +58286,12 @@ Schema: `GetSearchWordsResponse`
 ---
 
 
-#### deleteAutocompleteKeyword
-Delete a Autocomplete Keywords
+#### createCustomKeyword
+Add a Custom Search Keywords
 
 ```golang
 
-data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
+data, err := Catalog.CreateCustomKeyword(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -60976,20 +58303,18 @@ data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+| body |  CreateSearchKeyword | "Request body" 
 
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+Create a Custom Search Keywords. See `CreateSearchKeywordSchema` for the list of attributes needed to create a mapping and /collections/query-options for the available options to create a rule. On successful request, returns a paginated list of collections specified in `CreateSearchKeywordSchema`
 
 *Success Response:*
 
 
 
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+Get keyword object with id that is added. See example below or refer `GetSearchWordsDataSchema` for details
 
 
-Schema: `DeleteResponse`
+Schema: `GetSearchWordsData`
 
 
 
@@ -61089,12 +58414,12 @@ Schema: `GetAutocompleteWordsResponse`
 ---
 
 
-#### createCustomAutocompleteRule
-Add a Custom Autocomplete Keywords
+#### deleteAutocompleteKeyword
+Delete a Autocomplete Keywords
 
 ```golang
 
-data, err := Catalog.CreateCustomAutocompleteRule(CompanyID, ApplicationID, body);
+data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -61106,18 +58431,20 @@ data, err := Catalog.CreateCustomAutocompleteRule(CompanyID, ApplicationID, body
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| body |  CreateAutocompleteKeyword | "Request body" 
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
 
-Create a Custom Autocomplete Keywords. See `CreateAutocompleteKeywordSchema` for the list of attributes needed to create a mapping and /collections/query-options for the available options to create a rule. On successful request, returns a paginated list of collections specified in `CreateAutocompleteKeywordSchema`
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
 
 *Success Response:*
 
 
 
-List of all the collections including the one you added. See example below or refer `CreateAutocompleteWordsResponseSchema` for details
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
 
 
-Schema: `CreateAutocompleteWordsResponse`
+Schema: `DeleteResponse`
 
 
 
@@ -61170,12 +58497,12 @@ Schema: `GetAutocompleteWordsResponse`
 ---
 
 
-#### createProductBundle
-Create Product Bundle
+#### createCustomAutocompleteRule
+Add a Custom Autocomplete Keywords
 
 ```golang
 
-data, err := Catalog.CreateProductBundle(CompanyID, body);
+data, err := Catalog.CreateCustomAutocompleteRule(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -61184,18 +58511,21 @@ data, err := Catalog.CreateProductBundle(CompanyID, body);
 | CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
 
 
-| body |  ProductBundleRequest | "Request body" 
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
-Create Product Bundle. See `ProductBundleRequest` for the request body parameter need to create a product bundle. On successful request, returns in `ProductBundleRequest` with id
+
+| body |  CreateAutocompleteKeyword | "Request body" 
+
+Create a Custom Autocomplete Keywords. See `CreateAutocompleteKeywordSchema` for the list of attributes needed to create a mapping and /collections/query-options for the available options to create a rule. On successful request, returns a paginated list of collections specified in `CreateAutocompleteKeywordSchema`
 
 *Success Response:*
 
 
 
-Get bundle with id that is added. See example below or refer `GetProductBundleCreateResponse` for details
+List of all the collections including the one you added. See example below or refer `CreateAutocompleteWordsResponseSchema` for details
 
 
-Schema: `GetProductBundleCreateResponse`
+Schema: `CreateAutocompleteWordsResponse`
 
 
 
@@ -61238,6 +58568,44 @@ List of bundle configured for a company. See example below or refer `GetProductB
 
 
 Schema: `GetProductBundleListingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createProductBundle
+Create Product Bundle
+
+```golang
+
+data, err := Catalog.CreateProductBundle(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| body |  ProductBundleRequest | "Request body" 
+
+Create Product Bundle. See `ProductBundleRequest` for the request body parameter need to create a product bundle. On successful request, returns in `ProductBundleRequest` with id
+
+*Success Response:*
+
+
+
+Get bundle with id that is added. See example below or refer `GetProductBundleCreateResponse` for details
+
+
+Schema: `GetProductBundleCreateResponse`
 
 
 
@@ -61331,44 +58699,6 @@ Schema: `GetProductBundleResponse`
 ---
 
 
-#### createSizeGuide
-Create a size guide.
-
-```golang
-
-data, err := Catalog.CreateSizeGuide(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company inside which the size guide is to be created. | 
-
-
-| body |  ValidateSizeGuide | "Request body" 
-
-This API allows to create a size guide associated to a brand.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getSizeGuides
 Get list of size guides
 
@@ -61405,6 +58735,44 @@ Size guide object. See example below or refer `ListSizeGuide` for details
 
 
 Schema: `ListSizeGuide`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createSizeGuide
+Create a size guide.
+
+```golang
+
+data, err := Catalog.CreateSizeGuide(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company inside which the size guide is to be created. | 
+
+
+| body |  ValidateSizeGuide | "Request body" 
+
+This API allows to create a size guide associated to a brand.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
@@ -61498,6 +58866,49 @@ Schema: `SizeGuideResponse`
 ---
 
 
+#### getAppProduct
+Get company application product data.
+
+```golang
+
+data, err := Catalog.GetAppProduct(CompanyID, ApplicationID, ItemID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ItemID | string | product id for a particular product. | 
+
+
+
+Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
+
+*Success Response:*
+
+
+
+The Company Applicaton Product Data(MOQ/SEO).
+
+
+Schema: `OwnerAppItemResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateAppProduct
 Update a single custom meta.
 
@@ -61530,49 +58941,6 @@ Returns a success response
 
 
 Schema: `SuccessResponse1`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAppProduct
-Get company application product data.
-
-```golang
-
-data, err := Catalog.GetAppProduct(CompanyID, ApplicationID, ItemID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ItemID | string | product id for a particular product. | 
-
-
-
-Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
-
-*Success Response:*
-
-
-
-The Company Applicaton Product Data(MOQ/SEO).
-
-
-Schema: `OwnerAppItemResponse`
 
 
 
@@ -61619,50 +58987,6 @@ configuration details for catalog. See example below or refer `GetConfigMetadata
 
 
 Schema: `GetConfigMetadataResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createGroupConfiguration
-Create configuration for Group config types.
-
-```golang
-
-data, err := Catalog.CreateGroupConfiguration(CompanyID, ApplicationID, ConfigType, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
-
-
-| body |  AppConfigurationDetail | "Request body" 
-
-Create configuration for Group config types.
-
-*Success Response:*
-
-
-
-success flag will tell whether the operation was successful.
-
-
-Schema: `AppConfigurationDetail`
 
 
 
@@ -61727,12 +59051,12 @@ Schema: `GetConfigResponse`
 ---
 
 
-#### deleteGroupConfiguration
-Delete configuration of the product config type of the application.
+#### createGroupConfiguration
+Create configuration for Group config types.
 
 ```golang
 
-data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
+data, err := Catalog.CreateGroupConfiguration(CompanyID, ApplicationID, ConfigType, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -61747,20 +59071,18 @@ data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigTy
 | ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
 
 
-| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
+| body |  AppConfigurationDetail | "Request body" 
 
-
-
-Delete configuration of the product config type of the application.
+Create configuration for Group config types.
 
 *Success Response:*
 
 
 
-success message will tell whether the operation was successful.
+success flag will tell whether the operation was successful.
 
 
-Schema: `ConfigSuccessResponse`
+Schema: `AppConfigurationDetail`
 
 
 
@@ -61820,12 +59142,12 @@ Schema: `AppConfigurationDetail`
 ---
 
 
-#### createListingConfiguration
-Add configuration for listings
+#### deleteGroupConfiguration
+Delete configuration of the product config type of the application.
 
 ```golang
 
-data, err := Catalog.CreateListingConfiguration(CompanyID, ApplicationID, ConfigType, body);
+data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
 ```
 
 | Argument  |  Type  | Description |
@@ -61837,21 +59159,23 @@ data, err := Catalog.CreateListingConfiguration(CompanyID, ApplicationID, Config
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
+| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
 
 
-| body |  AppConfigurationsSort | "Request body" 
+| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
 
-Add configuration for listing.
+
+
+Delete configuration of the product config type of the application.
 
 *Success Response:*
 
 
 
-success flag will tell whether the operation was successful.
+success message will tell whether the operation was successful.
 
 
-Schema: `AppConfigurationsSort`
+Schema: `ConfigSuccessResponse`
 
 
 
@@ -61914,12 +59238,12 @@ Schema: `GetConfigResponse`
 ---
 
 
-#### deleteListingConfiguration
-Delete configuration for listings
+#### createListingConfiguration
+Add configuration for listings
 
 ```golang
 
-data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
+data, err := Catalog.CreateListingConfiguration(CompanyID, ApplicationID, ConfigType, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -61934,20 +59258,18 @@ data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, Config
 | ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
 
 
-| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
+| body |  AppConfigurationsSort | "Request body" 
 
-
-
-Delete configuration for listing.
+Add configuration for listing.
 
 *Success Response:*
 
 
 
-success message will tell whether the operation was successful.
+success flag will tell whether the operation was successful.
 
 
-Schema: `ConfigSuccessResponse`
+Schema: `AppConfigurationsSort`
 
 
 
@@ -61995,6 +59317,52 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationsSort`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteListingConfiguration
+Delete configuration for listings
+
+```golang
+
+data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
+
+
+| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration for listing.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
 
 
 
@@ -62129,47 +59497,6 @@ Schema: `GetCatalogConfigurationMetaData`
 ---
 
 
-#### createConfigurationProductListing
-Add configuration for products & listings
-
-```golang
-
-data, err := Catalog.CreateConfigurationProductListing(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| body |  AppConfiguration | "Request body" 
-
-Add configuration for products & listing.
-
-*Success Response:*
-
-
-
-success flag will tell whether the operation was successful.
-
-
-Schema: `GetAppCatalogConfiguration`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getConfigurations
 Get configured details for catalog
 
@@ -62210,12 +59537,12 @@ Schema: `GetAppCatalogConfiguration`
 ---
 
 
-#### createConfigurationByType
-Add configuration for categories and brands
+#### createConfigurationProductListing
+Add configuration for products & listings
 
 ```golang
 
-data, err := Catalog.CreateConfigurationByType(CompanyID, ApplicationID, Type, body);
+data, err := Catalog.CreateConfigurationProductListing(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -62227,12 +59554,9 @@ data, err := Catalog.CreateConfigurationByType(CompanyID, ApplicationID, Type, b
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| Type | string | type can be brands, categories etc. | 
-
-
 | body |  AppConfiguration | "Request body" 
 
-Add configuration for categories & brands.
+Add configuration for products & listing.
 
 *Success Response:*
 
@@ -62297,6 +59621,50 @@ Schema: `GetAppCatalogEntityConfiguration`
 ---
 
 
+#### createConfigurationByType
+Add configuration for categories and brands
+
+```golang
+
+data, err := Catalog.CreateConfigurationByType(CompanyID, ApplicationID, Type, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| Type | string | type can be brands, categories etc. | 
+
+
+| body |  AppConfiguration | "Request body" 
+
+Add configuration for categories & brands.
+
+*Success Response:*
+
+
+
+success flag will tell whether the operation was successful.
+
+
+Schema: `GetAppCatalogConfiguration`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getQueryFilters
 Get query filters to configure a collection
 
@@ -62325,47 +59693,6 @@ The attached items of an collection. See example below or refer `GetCollectionQu
 
 
 Schema: `GetCollectionQueryOptionResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createCollection
-Add a Collection
-
-```golang
-
-data, err := Catalog.CreateCollection(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| body |  CreateCollection | "Request body" 
-
-Create a collection. See `CreateCollectionRequestSchema` for the list of attributes needed to create a collection and collections/query-options for the available options to create a collection. On successful request, returns a paginated list of collections specified in `CollectionCreateResponse`
-
-*Success Response:*
-
-
-
-List of all the collections including the one you added. See example below or refer `CollectionCreateResponse` for details
-
-
-Schema: `CollectionCreateResponse`
 
 
 
@@ -62433,6 +59760,47 @@ Schema: `GetCollectionListingResponse`
 ---
 
 
+#### createCollection
+Add a Collection
+
+```golang
+
+data, err := Catalog.CreateCollection(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  CreateCollection | "Request body" 
+
+Create a collection. See `CreateCollectionRequestSchema` for the list of attributes needed to create a collection and collections/query-options for the available options to create a collection. On successful request, returns a paginated list of collections specified in `CollectionCreateResponse`
+
+*Success Response:*
+
+
+
+List of all the collections including the one you added. See example below or refer `CollectionCreateResponse` for details
+
+
+Schema: `CollectionCreateResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getCollectionDetail
 Get a particular collection
 
@@ -62464,49 +59832,6 @@ The Collection object. See example below or refer `CollectionDetailResponse` for
 
 
 Schema: `CollectionDetailResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteCollection
-Delete a Collection
-
-```golang
-
-data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier of a collection. | 
-
-
-
-Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
 
 
 
@@ -62563,12 +59888,12 @@ Schema: `UpdateCollection`
 ---
 
 
-#### addCollectionItems
-Add items to a collection
+#### deleteCollection
+Delete a Collection
 
 ```golang
 
-data, err := Catalog.AddCollectionItems(CompanyID, ApplicationID, ID, body);
+data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -62583,18 +59908,17 @@ data, err := Catalog.AddCollectionItems(CompanyID, ApplicationID, ID, body);
 | ID | string | A `id` is a unique identifier of a collection. | 
 
 
-| body |  CollectionItemUpdate | "Request body" 
 
-Adds items to a collection specified by its `id`. See `CollectionItemRequest` for the list of attributes needed to add items to an collection.
+Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
 
 *Success Response:*
 
 
 
-Status object. Tells whether the operation was successful.
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
 
 
-Schema: `UpdatedResponse`
+Schema: `DeleteResponse`
 
 
 
@@ -62645,6 +59969,50 @@ The attached items of an collection. See example below or refer `GetCollectionIt
 
 
 Schema: `GetCollectionItemsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### addCollectionItems
+Add items to a collection
+
+```golang
+
+data, err := Catalog.AddCollectionItems(CompanyID, ApplicationID, ID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier of a collection. | 
+
+
+| body |  CollectionItemUpdate | "Request body" 
+
+Adds items to a collection specified by its `id`. See `CollectionItemRequest` for the list of attributes needed to add items to an collection.
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful.
+
+
+Schema: `UpdatedResponse`
 
 
 
@@ -63066,44 +60434,6 @@ Schema: `ProdcutTemplateCategoriesResponse`
 ---
 
 
-#### createDepartments
-Create the department.
-
-```golang
-
-data, err := Catalog.CreateDepartments(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| body |  DepartmentCreateUpdate | "Request body" 
-
-Create departments using the API.
-
-*Success Response:*
-
-
-
-Success Response. See example below or refer `DepartmentCreateResponseSchema` for details
-
-
-Schema: `DepartmentCreateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### listDepartmentsData
 List all Departments.
 
@@ -63142,6 +60472,44 @@ List of departments data. See example below or refer `DepartmentsResponse` for d
 
 
 Schema: `DepartmentsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createDepartments
+Create the department.
+
+```golang
+
+data, err := Catalog.CreateDepartments(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| body |  DepartmentCreateUpdate | "Request body" 
+
+Create departments using the API.
+
+*Success Response:*
+
+
+
+Success Response. See example below or refer `DepartmentCreateResponseSchema` for details
+
+
+Schema: `DepartmentCreateResponse`
 
 
 
@@ -63509,44 +60877,6 @@ Schema: `ProductDownloadsResponse`
 ---
 
 
-#### createProductExportJob
-Create a product export job.
-
-```golang
-
-data, err := Catalog.CreateProductExportJob(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| body |  ProductTemplateDownloadsExport | "Request body" 
-
-This API helps to create a Inventory export job.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `ProductDownloadsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getProductExportJobs
 Allows you to list all product templates export list details
 
@@ -63578,6 +60908,44 @@ Can view details including trigger data, task id , etc.
 
 
 List of Product Downloads Data. See example below or refer `ProductDownloadsResponse` for details
+
+
+Schema: `ProductDownloadsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createProductExportJob
+Create a product export job.
+
+```golang
+
+data, err := Catalog.CreateProductExportJob(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| body |  ProductTemplateDownloadsExport | "Request body" 
+
+This API helps to create a Inventory export job.
+
+*Success Response:*
+
+
+
+Returns a success response
 
 
 Schema: `ProductDownloadsResponse`
@@ -63637,44 +61005,6 @@ Schema: `ProductConfigurationDownloads`
 ---
 
 
-#### createCategories
-Create product categories
-
-```golang
-
-data, err := Catalog.CreateCategories(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| body |  CategoryRequestBody | "Request body" 
-
-This API lets user create product categories
-
-*Success Response:*
-
-
-
-Category Meta. See example below or refer `CategoryCreateResponse` for details
-
-
-Schema: `CategoryCreateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### listCategories
 Get product categories list
 
@@ -63711,6 +61041,44 @@ Category Meta. See example below or refer `CategoryResponse` for details
 
 
 Schema: `CategoryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createCategories
+Create product categories
+
+```golang
+
+data, err := Catalog.CreateCategories(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| body |  CategoryRequestBody | "Request body" 
+
+This API lets user create product categories
+
+*Success Response:*
+
+
+
+Category Meta. See example below or refer `CategoryCreateResponse` for details
+
+
+Schema: `CategoryCreateResponse`
 
 
 
@@ -63804,44 +61172,6 @@ Schema: `SingleCategoryResponse`
 ---
 
 
-#### createProduct
-Create a product.
-
-```golang
-
-data, err := Catalog.CreateProduct(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to product that is to be viewed. | 
-
-
-| body |  ProductCreateUpdateSchemaV2 | "Request body" 
-
-This API allows to create product.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getProducts
 Get product list
 
@@ -63886,6 +61216,44 @@ Product Meta. See example below for details
 
 
 Schema: `ProductListingResponseV2`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createProduct
+Create a product.
+
+```golang
+
+data, err := Catalog.CreateProduct(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+
+
+| body |  ProductCreateUpdateSchemaV2 | "Request body" 
+
+This API allows to create product.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
@@ -63988,46 +61356,6 @@ Schema: `ProductAttributesResponse`
 ---
 
 
-#### deleteProduct
-Delete a product.
-
-```golang
-
-data, err := Catalog.DeleteProduct(CompanyID, ItemID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
-
-
-| ItemID | float64 | Id of the product to be updated. | 
-
-
-
-This API allows to delete product.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### editProduct
 Edit a product.
 
@@ -64102,6 +61430,46 @@ Product object. See example below or refer `product.utils.format_product_respons
 
 
 Schema: `SingleProductResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteProduct
+Delete a product.
+
+```golang
+
+data, err := Catalog.DeleteProduct(CompanyID, ItemID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
+
+
+| ItemID | float64 | Id of the product to be updated. | 
+
+
+
+This API allows to delete product.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
@@ -64238,44 +61606,6 @@ Schema: `ProductListingResponse`
 ---
 
 
-#### createBulkProductUploadJob
-Create a Bulk product to upload job.
-
-```golang
-
-data, err := Catalog.CreateBulkProductUploadJob(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
-
-
-| body |  BulkJob | "Request body" 
-
-This API helps to create a bulk products upload job.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `BulkResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getProductBulkUploadHistory
 Get a list of all bulk product upload jobs.
 
@@ -64308,6 +61638,44 @@ List of bulk product upload jobs. See `BulkRequestGetSchema` for details
 
 
 Schema: `ProductBulkRequestList`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createBulkProductUploadJob
+Create a Bulk product to upload job.
+
+```golang
+
+data, err := Catalog.CreateBulkProductUploadJob(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+
+
+| body |  BulkJob | "Request body" 
+
+This API helps to create a bulk products upload job.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `BulkResponse`
 
 
 
@@ -64363,26 +61731,25 @@ Schema: `BulkResponse`
 ---
 
 
-#### createProductsInBulk
-Create products in bulk associated with given batch Id.
+#### deleteProductBulkJob
+Delete Bulk product job.
 
 ```golang
 
-data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
+data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
 
 
-| BatchID | string | Batch Id in which assets to be uploaded. | 
+| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
 
 
-| body |  BulkProductRequest | "Request body" 
 
-This API helps to create products in bulk push to kafka for approval/creation.
+This API allows to delete bulk product job associated with company.
 
 *Success Response:*
 
@@ -64404,25 +61771,26 @@ Schema: `SuccessResponse`
 ---
 
 
-#### deleteProductBulkJob
-Delete Bulk product job.
+#### createProductsInBulk
+Create products in bulk associated with given batch Id.
 
 ```golang
 
-data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
+data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
 
 
-| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
+| BatchID | string | Batch Id in which assets to be uploaded. | 
 
 
+| body |  BulkProductRequest | "Request body" 
 
-This API allows to delete bulk product job associated with company.
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -64481,44 +61849,6 @@ Schema: `ProductTagsViewResponse`
 ---
 
 
-#### createProductAssetsInBulk
-Create a Bulk asset upload Job.
-
-```golang
-
-data, err := Catalog.CreateProductAssetsInBulk(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
-
-
-| body |  ProductBulkAssets | "Request body" 
-
-This API helps to create a bulk asset upload job.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getProductAssetsInBulk
 Get a list of all bulk asset jobs.
 
@@ -64549,6 +61879,44 @@ List of bulk asset jobs List. See `BulkUtil.modify_batch_response` for details
 
 
 Schema: `BulkAssetResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createProductAssetsInBulk
+Create a Bulk asset upload Job.
+
+```golang
+
+data, err := Catalog.CreateProductAssetsInBulk(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+
+
+| body |  ProductBulkAssets | "Request body" 
+
+This API helps to create a bulk asset upload job.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
@@ -64604,50 +61972,6 @@ Schema: `ProductSizeDeleteResponse`
 ---
 
 
-#### addInventory
-Add Inventory for particular size and store.
-
-```golang
-
-data, err := Catalog.AddInventory(CompanyID, ItemID, Size, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Id of the company associated to product that is to be viewed. | 
-
-
-| ItemID | float64 | Item code of the product of which size is to be get. | 
-
-
-| Size | string | Size in which inventory is to be added. | 
-
-
-| body |  InventoryRequest | "Request body" 
-
-This API allows add Inventory for particular size and store.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getInventoryBySize
 Get Inventory for company
 
@@ -64688,6 +62012,50 @@ returns a list of all inventory grouped by size and store
 
 
 Schema: `InventoryResponsePaginated`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### addInventory
+Add Inventory for particular size and store.
+
+```golang
+
+data, err := Catalog.AddInventory(CompanyID, ItemID, Size, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Id of the company associated to product that is to be viewed. | 
+
+
+| ItemID | float64 | Item code of the product of which size is to be get. | 
+
+
+| Size | string | Size in which inventory is to be added. | 
+
+
+| body |  InventoryRequest | "Request body" 
+
+This API allows add Inventory for particular size and store.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
@@ -64907,6 +62275,48 @@ Schema: `SuccessResponse`
 ---
 
 
+#### getInventoryBulkUploadHistory
+Get a list of all bulk Inventory upload jobs.
+
+```golang
+
+data, err := Catalog.GetInventoryBulkUploadHistory(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id of of which Inventory Bulk Upload History to be obtained. | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
+
+
+This API helps to get bulk Inventory upload jobs data.
+
+*Success Response:*
+
+
+
+List of bulk Inventory upload jobs. See `BulkInventoryGetSchema` for details
+
+
+Schema: `BulkInventoryGet`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### createBulkInventoryJob
 Create a Bulk Inventory upload Job.
 
@@ -64945,36 +62355,34 @@ Schema: `BulkResponse`
 ---
 
 
-#### getInventoryBulkUploadHistory
-Get a list of all bulk Inventory upload jobs.
+#### deleteBulkInventoryJob
+Delete Bulk Inventory job.
 
 ```golang
 
-data, err := Catalog.GetInventoryBulkUploadHistory(CompanyID, xQuery);
+data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id of of which Inventory Bulk Upload History to be obtained. | 
+| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
+
+
+| BatchID | string | Batch Id of the bulk delete job. | 
 
 
 
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-
-This API helps to get bulk Inventory upload jobs data.
+This API allows to delete bulk Inventory job associated with company.
 
 *Success Response:*
 
 
 
-List of bulk Inventory upload jobs. See `BulkInventoryGetSchema` for details
+Returns a success response
 
 
-Schema: `BulkInventoryGet`
+Schema: `SuccessResponse`
 
 
 
@@ -65028,84 +62436,6 @@ Schema: `SuccessResponse`
 ---
 
 
-#### deleteBulkInventoryJob
-Delete Bulk Inventory job.
-
-```golang
-
-data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
-
-
-| BatchID | string | Batch Id of the bulk delete job. | 
-
-
-
-This API allows to delete bulk Inventory job associated with company.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createInventoryExportJob
-Create a Inventory export Job.
-
-```golang
-
-data, err := Catalog.CreateInventoryExportJob(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
-
-
-| body |  InventoryExportRequest | "Request body" 
-
-This API helps to create a Inventory export job.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `InventoryExportResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getInventoryExport
 Get Inventory export history.
 
@@ -65143,12 +62473,12 @@ Schema: `InventoryExportJob`
 ---
 
 
-#### createInventoryExport
-Create an inventory export job.
+#### createInventoryExportJob
+Create a Inventory export Job.
 
 ```golang
 
-data, err := Catalog.CreateInventoryExport(CompanyID, body);
+data, err := Catalog.CreateInventoryExportJob(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -65157,7 +62487,7 @@ data, err := Catalog.CreateInventoryExport(CompanyID, body);
 | CompanyID | float64 | Company Id in which assets to be uploaded. | 
 
 
-| body |  InventoryCreateRequest | "Request body" 
+| body |  InventoryExportRequest | "Request body" 
 
 This API helps to create a Inventory export job.
 
@@ -65227,6 +62557,44 @@ Schema: `InventoryExportJobListResponse`
 ---
 
 
+#### createInventoryExport
+Create an inventory export job.
+
+```golang
+
+data, err := Catalog.CreateInventoryExport(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+
+
+| body |  InventoryCreateRequest | "Request body" 
+
+This API helps to create a Inventory export job.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `InventoryExportResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### exportInventoryConfig
 Get List of different filters for inventory export
 
@@ -65267,12 +62635,12 @@ Schema: `InventoryConfig`
 ---
 
 
-#### updateRealtimeInventory
+#### deleteRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -65311,12 +62679,12 @@ Schema: `InventoryUpdateResponse`
 ---
 
 
-#### deleteRealtimeInventory
+#### updateRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -68119,7 +65487,7 @@ Schema: `ResponseEnvelopeListJobConfigListDTO`
 
 
 #### getBuildConfig
-Get latest build config
+Get configuration of latest mobile build
 
 ```golang
 
@@ -68129,17 +65497,17 @@ data, err := Configuration.GetBuildConfig(CompanyID, ApplicationID, PlatformType
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
-| PlatformType | string | Current platform name | 
+| PlatformType | string | The device platform for which the mobile app is built, e.g. android, ios. | 
 
 
 
-Get latest build config
+Fetch latest build configuration, such as app name, landing page image, splash image used in a mobile build.
 
 *Success Response:*
 
@@ -68162,7 +65530,7 @@ Schema: `MobileAppConfiguration`
 
 
 #### updateBuildConfig
-Update build config for next build
+Update the configuration for next mobile build
 
 ```golang
 
@@ -68172,18 +65540,18 @@ data, err := Configuration.UpdateBuildConfig(CompanyID, ApplicationID, PlatformT
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
-| PlatformType | string | Current platform name | 
+| PlatformType | string | The device platform for which the mobile app is built, e.g. android, ios. | 
 
 
 | body |  MobileAppConfigRequest | "Request body" 
 
-Update build config for next build
+Modify the existing build configuration, such as app name, landing page image, splash image used in a mobile build.
 
 *Success Response:*
 
@@ -68206,7 +65574,7 @@ Schema: `MobileAppConfiguration`
 
 
 #### getPreviousVersions
-Get previous build versions
+Get details of previous mobile builds
 
 ```golang
 
@@ -68216,17 +65584,17 @@ data, err := Configuration.GetPreviousVersions(CompanyID, ApplicationID, Platfor
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
-| PlatformType | string | Current platform name | 
+| PlatformType | string | The device platform for which the mobile app is built, e.g. android, ios. | 
 
 
 
-Get previous build versions
+Fetch version details of the app, this includes the build status, build date, version name, latest version, and a lot more.
 
 *Success Response:*
 
@@ -68249,7 +65617,7 @@ Schema: `BuildVersionHistory`
 
 
 #### getAppFeatures
-Get features of application
+Get the sales channel configuration and features
 
 ```golang
 
@@ -68259,14 +65627,14 @@ data, err := Configuration.GetAppFeatures(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
-Get features of application
+Shows feature configuration of sales channel websites, such as product detail, landing page, options in the login/registration screen, home page, listing page, reward points, communication opt-in, cart options and many more.
 
 *Success Response:*
 
@@ -68289,7 +65657,7 @@ Schema: `AppFeatureResponse`
 
 
 #### updateAppFeatures
-Update features of application
+Update the sales channel configuration and features
 
 ```golang
 
@@ -68299,15 +65667,15 @@ data, err := Configuration.UpdateAppFeatures(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 | body |  AppFeatureRequest | "Request body" 
 
-Update features of application
+Modify the feature configuration of sales channel websites, such as product detail, landing page, options in the login/registration screen, home page, listing page, reward points, communication opt-in, cart options and many more.
 
 *Success Response:*
 
@@ -68340,10 +65708,10 @@ data, err := Configuration.ModifyAppFeatures(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 | body |  AppFeatureRequest | "Request body" 
@@ -68371,7 +65739,7 @@ Schema: `AppFeature`
 
 
 #### getAppBasicDetails
-Get basic application details
+Get sales channel details
 
 ```golang
 
@@ -68381,14 +65749,14 @@ data, err := Configuration.GetAppBasicDetails(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
-Get basic application details like name
+Shows basic sales channel details like name, description, logo, domain, company ID, and other related information.
 
 *Success Response:*
 
@@ -68411,7 +65779,7 @@ Schema: `ApplicationDetail`
 
 
 #### updateAppBasicDetails
-Add or update application's basic details
+Update sales channel details
 
 ```golang
 
@@ -68421,15 +65789,15 @@ data, err := Configuration.UpdateAppBasicDetails(CompanyID, ApplicationID, body)
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 | body |  ApplicationDetail | "Request body" 
 
-Add or update application's basic details
+Modify sales channel details like name, description, logo, domain, company ID, and other related information.
 
 *Success Response:*
 
@@ -68452,7 +65820,7 @@ Schema: `ApplicationDetail`
 
 
 #### getAppContactInfo
-Get application information
+Get current information of the sales channel
 
 ```golang
 
@@ -68462,14 +65830,14 @@ data, err := Configuration.GetAppContactInfo(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
-Get Application Current Information. This includes information about social links, address and contact information of company/seller/brand of the application.
+Fetch data such as social links, copyright text, business highlights, address and contact information of the company/seller/brand operating the application.
 
 *Success Response:*
 
@@ -68492,7 +65860,7 @@ Schema: `ApplicationInformation`
 
 
 #### updateAppContactInfo
-Get application information
+Save or update current information of the sales channel
 
 ```golang
 
@@ -68502,15 +65870,15 @@ data, err := Configuration.UpdateAppContactInfo(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 | body |  ApplicationInformation | "Request body" 
 
-Save Application Current Information. This includes information about social links, address and contact information of an application.
+Modify the social links, copyright text, business highlights, address and contact information of the company/seller/brand operating the application.
 
 *Success Response:*
 
@@ -68533,7 +65901,7 @@ Schema: `ApplicationInformation`
 
 
 #### getAppApiTokens
-Get social tokens
+Get social tokens for the sales channel
 
 ```golang
 
@@ -68543,14 +65911,14 @@ data, err := Configuration.GetAppApiTokens(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
-Get social tokens.
+Use this API to retrieve the tokens used for integrating Firebase, MoEngage, Segment, GTM, Freshchat, Safetynet, Google Map, Google, and Facebook auth. **Note** - Token values are encrypted with AES encryption using a secret key.
 
 *Success Response:*
 
@@ -68573,7 +65941,7 @@ Schema: `TokenResponse`
 
 
 #### updateAppApiTokens
-Add social tokens
+Add or update social tokens for the sales channel
 
 ```golang
 
@@ -68583,15 +65951,15 @@ data, err := Configuration.UpdateAppApiTokens(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 | body |  TokenResponse | "Request body" 
 
-Add social tokens.
+Use this API to add or edit the tokens used for integrating Firebase, MoEngage, Segment, GTM, Freshchat, Safetynet, Google Map, Google and Facebook auth.
 
 *Success Response:*
 
@@ -68614,7 +65982,7 @@ Schema: `TokenResponse`
 
 
 #### getAppCompanies
-Application inventory enabled companies
+Get companies enabled in the sales channel inventory
 
 ```golang
 
@@ -68624,10 +65992,10 @@ data, err := Configuration.GetAppCompanies(CompanyID, ApplicationID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
@@ -68638,7 +66006,7 @@ data, err := Configuration.GetAppCompanies(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `UID`, `PageNo`, `PageSize`
 
 
-Application inventory enabled companies.
+Fetch info of all the companies (e.g. name, uid, and company type) whose inventory is fetched into the current sales channel application
 
 *Success Response:*
 
@@ -68661,7 +66029,7 @@ Schema: `CompaniesResponse`
 
 
 #### getAppStores
-Application inventory enabled stores
+Get stores enabled in the sales channel inventory
 
 ```golang
 
@@ -68671,10 +66039,10 @@ data, err := Configuration.GetAppStores(CompanyID, ApplicationID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
@@ -68683,7 +66051,7 @@ data, err := Configuration.GetAppStores(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`
 
 
-Application inventory enabled stores.
+Fetch info of all the companies (e.g. uid, name, display name, store type, store code and company id) whose inventory is fetched into the current sales channel application
 
 *Success Response:*
 
@@ -68706,7 +66074,7 @@ Schema: `StoresResponse`
 
 
 #### getInventoryConfig
-Get application configuration
+Get sales channel configuration
 
 ```golang
 
@@ -68716,14 +66084,14 @@ data, err := Configuration.GetInventoryConfig(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
-Get application configuration for various features and data
+Use this API to fetch configuration details of authentication, inventory, article assignment rules, reward points, cart, payment, order, logistics, etc.
 
 *Success Response:*
 
@@ -68746,7 +66114,7 @@ Schema: `ApplicationInventory`
 
 
 #### updateInventoryConfig
-Update application configuration
+Update sales channel configuration
 
 ```golang
 
@@ -68756,15 +66124,15 @@ data, err := Configuration.UpdateInventoryConfig(CompanyID, ApplicationID, body)
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 | body |  ApplicationInventory | "Request body" 
 
-Update application configuration for various features and data
+Modify the configuration details of authentication, inventory, article assignment rules, reward points, cart, payment, order, logistics, etc.
 
 *Success Response:*
 
@@ -68787,7 +66155,7 @@ Schema: `ApplicationInventory`
 
 
 #### partiallyUpdateInventoryConfig
-Partially update application configuration
+Partially update sales channel configuration
 
 ```golang
 
@@ -68797,15 +66165,15 @@ data, err := Configuration.PartiallyUpdateInventoryConfig(CompanyID, Application
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 | body |  AppInventoryPartialUpdate | "Request body" 
 
-Partially update application configuration for various features and data
+Partially update the configuration details of authentication, inventory, article assignment rules, reward points, cart, payment, order, logistics, etc.
 
 *Success Response:*
 
@@ -68828,7 +66196,7 @@ Schema: `ApplicationInventory`
 
 
 #### getAppCurrencyConfig
-Get application enabled currency list
+Get currencies supported in the application
 
 ```golang
 
@@ -68838,14 +66206,14 @@ data, err := Configuration.GetAppCurrencyConfig(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
-Get application enabled currency list
+Get a list of currencies supported in the current sales channel. Moreover, get the cuurency that is set as the default one in the application.
 
 *Success Response:*
 
@@ -68868,7 +66236,7 @@ Schema: `AppSupportedCurrency`
 
 
 #### updateAppCurrencyConfig
-Add initial application supported currency
+Update initial sales channel supported currency
 
 ```golang
 
@@ -68878,15 +66246,15 @@ data, err := Configuration.UpdateAppCurrencyConfig(CompanyID, ApplicationID, bod
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 | body |  AppSupportedCurrency | "Request body" 
 
-Add initial application supported currency for various features and data. Default INR will be enabled.
+Use this API to add and edit the currencies supported in the application. Initially, INR will be enabled by default.
 
 *Success Response:*
 
@@ -68919,10 +66287,10 @@ data, err := Configuration.GetAppSupportedCurrency(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
@@ -68959,10 +66327,10 @@ data, err := Configuration.GetOrderingStoresByFilter(CompanyID, ApplicationID, x
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
@@ -68972,7 +66340,7 @@ data, err := Configuration.GetOrderingStoresByFilter(CompanyID, ApplicationID, x
 
 | body |  FilterOrderingStoreRequest | "Request body" 
 
-Get ordering store by filter
+Use this API to use filters and retrieve the details of the deployment stores (the selling locations where the application will be utilised for placing orders).
 
 *Success Response:*
 
@@ -69005,15 +66373,15 @@ data, err := Configuration.UpdateOrderingStoreConfig(CompanyID, ApplicationID, b
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 | body |  OrderingStoreConfig | "Request body" 
 
-Add/Update ordering store config.
+Use this API to edit the details of the deployment stores (the selling locations where the application will be utilised for placing orders)
 
 *Success Response:*
 
@@ -69046,10 +66414,10 @@ data, err := Configuration.GetStaffOrderingStores(CompanyID, ApplicationID, xQue
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
@@ -69083,7 +66451,7 @@ Schema: `OrderingStoresResponse`
 
 
 #### getDomains
-Get attached domain list
+Fetch all the domains added to an  application (sales channel website), including pre-defined domain (free domain) or custom domain (owned by the brand). Know the verification status of each domain name, and find out which one is the primary domain, short link domain, or both.
 
 ```golang
 
@@ -69093,14 +66461,14 @@ data, err := Configuration.GetDomains(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
-Get attached domain list.
+Get list of domains
 
 *Success Response:*
 
@@ -69123,7 +66491,7 @@ Schema: `DomainsResponse`
 
 
 #### addDomain
-Add new domain to application
+Add new domain to current sales channel
 
 ```golang
 
@@ -69133,15 +66501,15 @@ data, err := Configuration.AddDomain(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 | body |  DomainAddRequest | "Request body" 
 
-Add new domain to application.
+Add a new domain to current sales channel, including pre-defined domain (free domain) or custom domain (owned by the brand)
 
 *Success Response:*
 
@@ -69164,7 +66532,7 @@ Schema: `Domain`
 
 
 #### removeDomainById
-Remove attached domain
+Remove attached domain from current sales channel
 
 ```golang
 
@@ -69174,17 +66542,17 @@ data, err := Configuration.RemoveDomainById(CompanyID, ApplicationID, ID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
-| ID | string | Domain _id | 
+| ID | string | The unique identifier (24-digit Mongo Object ID) of the domain | 
 
 
 
-Remove attached domain.
+Delete a domain (secondary or shortlink domain) added to a sales channel. It will disable user's access to website, shared links, and other features associated with this domain.
 
 *Success Response:*
 
@@ -69207,7 +66575,7 @@ Schema: `SuccessMessageResponse`
 
 
 #### changeDomainType
-Change domain type
+Change the type of domain in the current sales channel
 
 ```golang
 
@@ -69217,15 +66585,15 @@ data, err := Configuration.ChangeDomainType(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 | body |  UpdateDomainTypeRequest | "Request body" 
 
-Change a domain to Primary or Shortlink domain
+Primary domain is used as the URL of your website. Short link domain is comparatively smaller and used while generating short links. Use this API to change a domain to either Primary or a Shortlink domain.
 
 *Success Response:*
 
@@ -69248,7 +66616,7 @@ Schema: `DomainsResponse`
 
 
 #### getDomainStatus
-Get domain connected status.
+Get the status of connected domain
 
 ```golang
 
@@ -69258,15 +66626,15 @@ data, err := Configuration.GetDomainStatus(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 | body |  DomainStatusRequest | "Request body" 
 
-Get domain connected status. Check if domain is live and mapped to appropriate IP to fynd servers.
+Shows if the A records and TXT records of the domain correctly points to appropriate IP on Fynd Servers.
 
 *Success Response:*
 
@@ -69289,7 +66657,7 @@ Schema: `DomainStatusResponse`
 
 
 #### createApplication
-Create application
+Create a new sales channel
 
 ```golang
 
@@ -69299,12 +66667,12 @@ data, err := Configuration.CreateApplication(CompanyID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
 | body |  CreateApplicationRequest | "Request body" 
 
-Create new application
+Applications are sales channel websites which can be configured, personalized and customized. Use this API to create a new application in the current company.
 
 *Success Response:*
 
@@ -69327,7 +66695,7 @@ Schema: `CreateAppResponse`
 
 
 #### getApplications
-Get list of application under company
+Get list of registered sales channels under company
 
 ```golang
 
@@ -69337,7 +66705,7 @@ data, err := Configuration.GetApplications(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
 
@@ -69348,7 +66716,7 @@ data, err := Configuration.GetApplications(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`
 
 
-Get list of application under company
+Applications are sales channel websites which can be configured, personalized and customised. Use this API to fetch a list of applications created within a company.
 
 *Success Response:*
 
@@ -69371,7 +66739,7 @@ Schema: `ApplicationsResponse`
 
 
 #### getApplicationById
-Get application data from id
+Get sales channel data by ID
 
 ```golang
 
@@ -69381,14 +66749,14 @@ data, err := Configuration.GetApplicationById(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
-Get application data from id
+Use application ID to get the current sales channel details which includes channel name, description, banner, logo, favicon, domain details, token, etc.
 
 *Success Response:*
 
@@ -69421,11 +66789,11 @@ data, err := Configuration.GetCurrencies(CompanyID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
 
-Get all currencies
+Use this API to get a list of currencies allowed in the company. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
 
 *Success Response:*
 
@@ -69448,7 +66816,7 @@ Schema: `CurrenciesResponse`
 
 
 #### getDomainAvailibility
-Check domain availibility before linking to application
+Check domain availability before linking to application
 
 ```golang
 
@@ -69458,12 +66826,12 @@ data, err := Configuration.GetDomainAvailibility(CompanyID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
 | body |  DomainSuggestionsRequest | "Request body" 
 
-Check domain availibility before linking to application. Also sends domain suggestions with similar to queried domain. \ Custom domain search is currently powered by GoDaddy provider.
+Use this API to check the domain availability before linking it to application. Also sends domain suggestions that are similar to the queried domain. Note - Custom domain search is currently powered by GoDaddy provider.
 
 *Success Response:*
 
@@ -69530,7 +66898,7 @@ Suggestions for custom domains
 
 
 #### getIntegrationById
-Get integration data
+Get integration data by its ID
 
 ```golang
 
@@ -69540,14 +66908,14 @@ data, err := Configuration.GetIntegrationById(CompanyID, ID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
 | ID | float64 | Integration id | 
 
 
 
-Get integration data
+Use this API to fetch the details of an integration (such as Ginesys, SAP, etc.) using its ID
 
 *Success Response:*
 
@@ -69580,7 +66948,7 @@ data, err := Configuration.GetAvailableOptIns(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
 
@@ -69589,7 +66957,7 @@ data, err := Configuration.GetAvailableOptIns(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`
 
 
-Get all available integration opt-ins
+Use this API to get a list of all available integrations in a company
 
 *Success Response:*
 
@@ -69622,13 +66990,13 @@ data, err := Configuration.GetSelectedOptIns(CompanyID, Level, UID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| Level | string | Integration level | 
+| Level | string | store or company | 
 
 
-| UID | float64 | Integration level uid | 
+| UID | float64 | Unique identifier of the selected integration level. | 
 
 
 
@@ -69637,7 +67005,7 @@ data, err := Configuration.GetSelectedOptIns(CompanyID, Level, UID, xQuery);
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`
 
 
-Get company/store level integration opt-ins
+Use this API to get the store-level/company-level integrations configured in a company
 
 *Success Response:*
 
@@ -69670,13 +67038,13 @@ data, err := Configuration.GetIntegrationLevelConfig(CompanyID, ID, Level, xQuer
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ID | string | Integration id | 
+| ID | string | Integration ID (24-digit Mongo Object ID) | 
 
 
-| Level | string | Integration level | 
+| Level | string | store or company | 
 
 
 
@@ -69685,7 +67053,7 @@ data, err := Configuration.GetIntegrationLevelConfig(CompanyID, ID, Level, xQuer
 | xQuery | struct | Includes properties such as `Opted`, `CheckPermission`
 
 
-Get integration/integration-opt-in level config
+Use this API to get the configuration details of an integration such as token, permissions, level, opted value, uid, meta, location ID, etc.
 
 *Success Response:*
 
@@ -69708,7 +67076,7 @@ Schema: `IntegrationConfigResponse`
 
 
 #### updateLevelIntegration
-Update a store level opt-in for integration
+Update a store level integration you opted
 
 ```golang
 
@@ -69718,18 +67086,18 @@ data, err := Configuration.UpdateLevelIntegration(CompanyID, ID, Level, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ID | string | Integration id | 
+| ID | string | Integration ID (24-digit Mongo Object ID) | 
 
 
-| Level | string | Integration level | 
+| Level | string | Integration level, `store` or `company` | 
 
 
 | body |  UpdateIntegrationLevelRequest | "Request body" 
 
-Update a store level opt-in for integration
+Use this API to update the configuration details of an integration such as token, permissions, level, opted value, uid, meta, location ID, etc. at a particular level (store/company).
 
 *Success Response:*
 
@@ -69752,7 +67120,7 @@ Schema: `IntegrationLevel`
 
 
 #### getIntegrationByLevelId
-Get level data for integration
+Get integration config at a particular level (store/company)
 
 ```golang
 
@@ -69762,20 +67130,20 @@ data, err := Configuration.GetIntegrationByLevelId(CompanyID, ID, Level, UID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ID | string | Integration id | 
+| ID | string | Integration ID (24-digit Mongo Object ID) | 
 
 
-| Level | string | Integration level | 
+| Level | string | Integration level, `store` or `company` | 
 
 
-| UID | float64 | Integration level uid | 
+| UID | float64 | Unique identifier of integration level (store/company) | 
 
 
 
-Get level data for integration
+Use this API to get the configuration details of an integration such as token, permissions, level, opted value, uid, meta, location ID, etc. at a particular level (store/company).
 
 *Success Response:*
 
@@ -69798,7 +67166,7 @@ Schema: `IntegrationLevel`
 
 
 #### updateLevelUidIntegration
-Update a store level opt-in for integration
+Update integration level by store UID
 
 ```golang
 
@@ -69808,21 +67176,21 @@ data, err := Configuration.UpdateLevelUidIntegration(CompanyID, ID, Level, UID, 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ID | string | Integration id | 
+| ID | string | Integration ID (24-digit Mongo Object ID) | 
 
 
-| Level | string | Integration level | 
+| Level | string | Integration level, `store` or `company` | 
 
 
-| UID | float64 | Integration level uid | 
+| UID | float64 | Unique identifier of integration level (store/company) | 
 
 
 | body |  IntegrationLevel | "Request body" 
 
-Update a store level opt-in for integration
+Update the level of integration by store UID
 
 *Success Response:*
 
@@ -69845,7 +67213,7 @@ Schema: `IntegrationLevel`
 
 
 #### getLevelActiveIntegrations
-Check store has active integration
+Check active integration at store
 
 ```golang
 
@@ -69855,23 +67223,23 @@ data, err := Configuration.GetLevelActiveIntegrations(CompanyID, ID, Level, UID,
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ID | string | Integration id | 
+| ID | string | Integration ID (24-digit Mongo Object ID) | 
 
 
-| Level | string | Integration level | 
+| Level | string | Integration level, `store` or `company` | 
 
 
-| UID | float64 | Integration level uid | 
+| UID | float64 | Unique identifier of integration level (store/company) | 
 
 
 
 | xQuery | struct | Includes properties such as `Permission`
 
 
-API checks if a store is already opted in any other integrations
+Use this API to check if a store is already opted-in for any integration
 
 *Success Response:*
 
@@ -69894,7 +67262,7 @@ Schema: `OptedStoreIntegration`
 
 
 #### getBrandsByCompany
-Get brands by company
+Get brands by company.
 
 ```golang
 
@@ -69904,14 +67272,14 @@ data, err := Configuration.GetBrandsByCompany(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
 
 | xQuery | struct | Includes properties such as `Q`
 
 
-Get brands by company
+Use this API to get all the brands added in a company. Get all the brand names, along with URLs of their logo, banner, and portrait image.
 
 *Success Response:*
 
@@ -69944,7 +67312,7 @@ data, err := Configuration.GetCompanyByBrands(CompanyID, xQuery, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
 
@@ -69954,7 +67322,7 @@ data, err := Configuration.GetCompanyByBrands(CompanyID, xQuery, body);
 
 | body |  CompanyByBrandsRequest | "Request body" 
 
-Get company by brand uids
+Use this API to get a list of companies by the brands they deal
 
 *Success Response:*
 
@@ -69977,7 +67345,7 @@ Schema: `CompanyByBrandsResponse`
 
 
 #### getStoreByBrands
-Get stores by brand uids
+Get stores by brand uids for the current company
 
 ```golang
 
@@ -69987,7 +67355,7 @@ data, err := Configuration.GetStoreByBrands(CompanyID, xQuery, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
 
@@ -69997,7 +67365,7 @@ data, err := Configuration.GetStoreByBrands(CompanyID, xQuery, body);
 
 | body |  StoreByBrandsRequest | "Request body" 
 
-Get stores by brand uids
+Use this API to get a list of selling locations (stores) by the brands they deal. Store has information about store name, store type, store code, store address, and company detail.
 
 *Success Response:*
 
@@ -70020,7 +67388,7 @@ Schema: `StoreByBrandsResponse`
 
 
 #### getOtherSellerApplications
-Get other seller applications
+Get other seller sales channels
 
 ```golang
 
@@ -70030,7 +67398,7 @@ data, err := Configuration.GetOtherSellerApplications(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
 
@@ -70039,7 +67407,7 @@ data, err := Configuration.GetOtherSellerApplications(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`
 
 
-Get other seller applications who has opted current company as inventory
+Use this API to fetch all other seller applications that were not created within the current company. but have opted for the current company's inventory
 
 *Success Response:*
 
@@ -70062,7 +67430,7 @@ Schema: `OtherSellerApplications`
 
 
 #### getOtherSellerApplicationById
-Get other seller applications
+Get other seller's sales channel by ID
 
 ```golang
 
@@ -70072,14 +67440,14 @@ data, err := Configuration.GetOtherSellerApplicationById(CompanyID, ID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
 | ID | string | Application Id | 
 
 
 
-Get other seller application
+Use application ID to fetch details of a seller application that was not created within the current company. but has opted for the current company's inventory
 
 *Success Response:*
 
@@ -70102,7 +67470,7 @@ Schema: `OptedApplicationResponse`
 
 
 #### optOutFromApplication
-Opt out company or store from other seller application
+Opt-out company or store from other seller application
 
 ```golang
 
@@ -70112,15 +67480,15 @@ data, err := Configuration.OptOutFromApplication(CompanyID, ID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ID | string | Application Id | 
+| ID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account. | 
 
 
 | body |  OptOutInventory | "Request body" 
 
-Opt out company or store from other seller application
+Use this API to opt-out your company or store from other seller application. The specific seller application will no longer fetch inventory from your company or store.
 
 *Success Response:*
 
@@ -81012,6 +78380,46 @@ Schema: `CompanyStoreView_Response`
 ---
 
 
+#### getZoneDataView
+Zone Data View of application.
+
+```golang
+
+data, err := Serviceability.GetZoneDataView(CompanyID, ZoneID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
+
+
+
+This API returns Zone Data View of the application.
+
+*Success Response:*
+
+
+
+Get Application Zone Data
+
+
+Schema: `GetSingleZoneDataViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateZoneControllerView
 Updation of zone collections in database.
 
@@ -81041,46 +78449,6 @@ Response status_code
 
 
 Schema: `ZoneSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getZoneDataView
-Zone Data View of application.
-
-```golang
-
-data, err := Serviceability.GetZoneDataView(CompanyID, ZoneID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
-
-
-
-This API returns Zone Data View of the application.
-
-*Success Response:*
-
-
-
-Get Application Zone Data
-
-
-Schema: `GetSingleZoneDataViewResponse`
 
 
 
@@ -81131,47 +78499,6 @@ Schema: `ZoneResponse`
 ---
 
 
-#### getZoneFromPincodeView
-GET zone from the Pincode.
-
-```golang
-
-data, err := Serviceability.GetZoneFromPincodeView(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` contains a specific ID of a company. | 
-
-
-| ApplicationID | string | A `application_id` contains a unique ID. | 
-
-
-| body |  GetZoneFromPincodeViewRequest | "Request body" 
-
-This API returns zone from the Pincode View.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `GetZoneFromPincodeViewResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getZonesFromApplicationIdView
 GET zones from the application_id.
 
@@ -81209,6 +78536,47 @@ List of zones for the given application_id
 
 
 Schema: `GetZoneFromApplicationIdViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getZoneFromPincodeView
+GET zone from the Pincode.
+
+```golang
+
+data, err := Serviceability.GetZoneFromPincodeView(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` contains a specific ID of a company. | 
+
+
+| ApplicationID | string | A `application_id` contains a unique ID. | 
+
+
+| body |  GetZoneFromPincodeViewRequest | "Request body" 
+
+This API returns zone from the Pincode View.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `GetZoneFromPincodeViewResponse`
 
 
 
@@ -81638,44 +79006,6 @@ Schema: `PincodeMopUpdateAuditHistoryResponseData`
 ---
 
 
-#### upsertDpAccount
-Upsertion of DpAccount in database.
-
-```golang
-
-data, err := Serviceability.UpsertDpAccount(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| body |  CompanyDpAccountRequest | "Request body" 
-
-This API returns response of upsertion of DpAccount in mongo database.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `CompanyDpAccountResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getDpAccount
 Getting DpAccount of a company from database.
 
@@ -81724,12 +79054,12 @@ Schema: `CompanyDpAccountListResponse`
 ---
 
 
-#### updateDpRule
-Updating of DpRules from database.
+#### upsertDpAccount
+Upsertion of DpAccount in database.
 
 ```golang
 
-data, err := Serviceability.UpdateDpRule(CompanyID, RuleUID, body);
+data, err := Serviceability.UpsertDpAccount(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -81738,12 +79068,9 @@ data, err := Serviceability.UpdateDpRule(CompanyID, RuleUID, body);
 | CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
 
 
-| RuleUID | string | A `rule_uid` is a unique identifier for a particular Dp. | 
+| body |  CompanyDpAccountRequest | "Request body" 
 
-
-| body |  DpRulesUpdateRequest | "Request body" 
-
-This API updates and returns response of DpRules from mongo database.
+This API returns response of upsertion of DpAccount in mongo database.
 
 *Success Response:*
 
@@ -81752,7 +79079,7 @@ This API updates and returns response of DpRules from mongo database.
 Response status_code
 
 
-Schema: `DpRuleUpdateSuccessResponse`
+Schema: `CompanyDpAccountResponse`
 
 
 
@@ -81805,12 +79132,12 @@ Schema: `DpRuleSuccessResponse`
 ---
 
 
-#### upsertDpRules
-Upsert of DpRules in database.
+#### updateDpRule
+Updating of DpRules from database.
 
 ```golang
 
-data, err := Serviceability.UpsertDpRules(CompanyID, body);
+data, err := Serviceability.UpdateDpRule(CompanyID, RuleUID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -81819,9 +79146,12 @@ data, err := Serviceability.UpsertDpRules(CompanyID, body);
 | CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
 
 
-| body |  DpRuleRequest | "Request body" 
+| RuleUID | string | A `rule_uid` is a unique identifier for a particular Dp. | 
 
-This API returns response of upsert of DpRules in mongo database.
+
+| body |  DpRulesUpdateRequest | "Request body" 
+
+This API updates and returns response of DpRules from mongo database.
 
 *Success Response:*
 
@@ -81830,7 +79160,7 @@ This API returns response of upsert of DpRules in mongo database.
 Response status_code
 
 
-Schema: `DpRuleSuccessResponse`
+Schema: `DpRuleUpdateSuccessResponse`
 
 
 
@@ -81885,6 +79215,81 @@ Schema: `DpMultipleRuleSuccessResponse`
 ---
 
 
+#### upsertDpRules
+Upsert of DpRules in database.
+
+```golang
+
+data, err := Serviceability.UpsertDpRules(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  DpRuleRequest | "Request body" 
+
+This API returns response of upsert of DpRules in mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `DpRuleSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDpCompanyRules
+Get All DpCompanyRules applied to company from database.
+
+```golang
+
+data, err := Serviceability.GetDpCompanyRules(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+
+This API returns response of all DpCompanyRules from mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `DPCompanyRuleResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### upsertDpCompanyRules
 Upsert of DpCompanyRules in database.
 
@@ -81923,12 +79328,12 @@ Schema: `DPCompanyRuleResponse`
 ---
 
 
-#### getDpCompanyRules
-Get All DpCompanyRules applied to company from database.
+#### getDpApplicationRules
+Get All DpApplicationRules rules added at application level from database.
 
 ```golang
 
-data, err := Serviceability.GetDpCompanyRules(CompanyID);
+data, err := Serviceability.GetDpApplicationRules(CompanyID, ApplicationID);
 ```
 
 | Argument  |  Type  | Description |
@@ -81937,8 +79342,11 @@ data, err := Serviceability.GetDpCompanyRules(CompanyID);
 | CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
 
 
+| ApplicationID | string | A `application_id` is a unique identifier for a particular application channel. | 
 
-This API returns response of all DpCompanyRules from mongo database.
+
+
+This API returns response of all rules of DpApplicationRules from mongo database.
 
 *Success Response:*
 
@@ -81947,7 +79355,7 @@ This API returns response of all DpCompanyRules from mongo database.
 Response status_code
 
 
-Schema: `DPCompanyRuleResponse`
+Schema: `DPApplicationRuleResponse`
 
 
 
@@ -82001,34 +79409,34 @@ Schema: `DPApplicationRuleResponse`
 ---
 
 
-#### getDpApplicationRules
-Get All DpApplicationRules rules added at application level from database.
+#### getApplicationServiceabilitySelfShipment
+Self-ship configuration of application.
 
 ```golang
 
-data, err := Serviceability.GetDpApplicationRules(CompanyID, ApplicationID);
+data, err := Serviceability.GetApplicationServiceabilitySelfShipment(CompanyID, ApplicationID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
 
 
-| ApplicationID | string | A `application_id` is a unique identifier for a particular application channel. | 
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
 
-This API returns response of all rules of DpApplicationRules from mongo database.
+This API returns Self-ship configuration of the application.
 
 *Success Response:*
 
 
 
-Response status_code
+Response Data
 
 
-Schema: `DPApplicationRuleResponse`
+Schema: `ApplicationSelfShipConfigResponse`
 
 
 
@@ -82061,46 +79469,6 @@ data, err := Serviceability.PatchApplicationServiceabilitySelfShipment(CompanyID
 | body |  SelfShipResponse | "Request body" 
 
 This API updates Self-ship configuration of the application.
-
-*Success Response:*
-
-
-
-Response Data
-
-
-Schema: `ApplicationSelfShipConfigResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getApplicationServiceabilitySelfShipment
-Self-ship configuration of application.
-
-```golang
-
-data, err := Serviceability.GetApplicationServiceabilitySelfShipment(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-
-This API returns Self-ship configuration of the application.
 
 *Success Response:*
 
