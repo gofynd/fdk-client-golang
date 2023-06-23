@@ -10889,6 +10889,8 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
 
         
 
@@ -10946,6 +10948,10 @@ func NewAppClient(config *AppConfig) *Client {
              checkAndUpdatePaymentStatusResponse PaymentStatusUpdateResponse
 	    )
 
+        
+            
+        
+            
         
             
         
@@ -11268,6 +11274,8 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
 
         
 
@@ -11425,6 +11433,62 @@ func NewAppClient(config *AppConfig) *Client {
             return ValidateVPAResponse{}, common.NewFDKError(err.Error())
         }
          return validateVPAResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //PaymentCardDetailsXQuery holds query params
+    type PaymentCardDetailsXQuery struct { 
+        Aggregator string  `url:"aggregator,omitempty"`  
+    }
+    
+    // CardDetails API to get Card info from PG
+    func (pa *Payment)  CardDetails(CardInfo string, xQuery PaymentCardDetailsXQuery) (CardDetailsResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             cardDetailsResponse CardDetailsResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            fmt.Sprintf("/service/application/payment/v1.0/cards/info/%s",CardInfo),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CardDetailsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &cardDetailsResponse)
+        if err != nil {
+            return CardDetailsResponse{}, common.NewFDKError(err.Error())
+        }
+         return cardDetailsResponse, nil
         
     }
           
@@ -12481,6 +12545,8 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
 
         
 
@@ -12538,6 +12604,10 @@ func NewAppClient(config *AppConfig) *Client {
              checkAndUpdatePaymentStatusPaymentLinkResponse PaymentStatusUpdateResponse
 	    )
 
+        
+            
+        
+            
         
             
         

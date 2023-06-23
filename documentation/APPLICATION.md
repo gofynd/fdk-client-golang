@@ -239,6 +239,7 @@
     * [resendOrCancelPayment](#resendorcancelpayment)
     * [renderHTML](#renderhtml)
     * [validateVPA](#validatevpa)
+    * [cardDetails](#carddetails)
     * [getActiveRefundTransferModes](#getactiverefundtransfermodes)
     * [enableOrDisableRefundTransferMode](#enableordisablerefundtransfermode)
     * [getUserBeneficiariesDetail](#getuserbeneficiariesdetail)
@@ -17431,6 +17432,47 @@ Success. Returns the status of payment. Check the example shown below or refer `
 
 
 Schema: `ValidateVPAResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### cardDetails
+API to get Card info from PG
+
+```golang
+
+ data, err :=  Payment.CardDetails(CardInfo, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CardInfo | string | Card first 6 digit IIN(prefix) number. | 
+
+
+
+| xQuery | struct | Includes properties such as `Aggregator`
+
+
+
+API to get Card info from PG
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `CardDetailsResponseSchema` for more details.
+
+
+Schema: `CardDetailsResponse`
 
 
 
