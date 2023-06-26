@@ -288,6 +288,7 @@
     * [getBulkActionTemplate](#getbulkactiontemplate)
     * [downloadBulkActionTemplate](#downloadbulkactiontemplate)
     * [getShipmentReasons](#getshipmentreasons)
+    * [getPlatformShipmentReasons](#getplatformshipmentreasons)
     * [getBagById](#getbagbyid)
     * [getBags](#getbags)
     * [invalidateShipmentCache](#invalidateshipmentcache)
@@ -318,47 +319,47 @@
     * [deleteSearchKeywords](#deletesearchkeywords)
     * [getSearchKeywords](#getsearchkeywords)
     * [updateSearchKeywords](#updatesearchkeywords)
-    * [createCustomKeyword](#createcustomkeyword)
     * [getAllSearchKeyword](#getallsearchkeyword)
+    * [createCustomKeyword](#createcustomkeyword)
     * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [updateAutocompleteKeyword](#updateautocompletekeyword)
-    * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [getAutocompleteConfig](#getautocompleteconfig)
-    * [createProductBundle](#createproductbundle)
+    * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [getProductBundle](#getproductbundle)
+    * [createProductBundle](#createproductbundle)
     * [getProductBundleDetail](#getproductbundledetail)
     * [updateProductBundle](#updateproductbundle)
-    * [createSizeGuide](#createsizeguide)
     * [getSizeGuides](#getsizeguides)
+    * [createSizeGuide](#createsizeguide)
     * [getSizeGuide](#getsizeguide)
     * [updateSizeGuide](#updatesizeguide)
     * [getAppProduct](#getappproduct)
     * [updateAppProduct](#updateappproduct)
     * [getConfigurationMetadata](#getconfigurationmetadata)
-    * [createGroupConfiguration](#creategroupconfiguration)
     * [getGroupConfigurations](#getgroupconfigurations)
+    * [createGroupConfiguration](#creategroupconfiguration)
     * [deleteGroupConfiguration](#deletegroupconfiguration)
     * [updateGroupConfiguration](#updategroupconfiguration)
-    * [createListingConfiguration](#createlistingconfiguration)
     * [getListingConfigurations](#getlistingconfigurations)
+    * [createListingConfiguration](#createlistingconfiguration)
     * [deleteListingConfiguration](#deletelistingconfiguration)
     * [updateListingConfiguration](#updatelistingconfiguration)
     * [updateAllowSingle](#updateallowsingle)
     * [updateDefaultSort](#updatedefaultsort)
     * [getCatalogConfiguration](#getcatalogconfiguration)
-    * [createConfigurationProductListing](#createconfigurationproductlisting)
     * [getConfigurations](#getconfigurations)
-    * [createConfigurationByType](#createconfigurationbytype)
+    * [createConfigurationProductListing](#createconfigurationproductlisting)
     * [getConfigurationByType](#getconfigurationbytype)
+    * [createConfigurationByType](#createconfigurationbytype)
     * [getQueryFilters](#getqueryfilters)
-    * [createCollection](#createcollection)
     * [getAllCollections](#getallcollections)
+    * [createCollection](#createcollection)
     * [getCollectionDetail](#getcollectiondetail)
     * [deleteCollection](#deletecollection)
     * [updateCollection](#updatecollection)
-    * [addCollectionItems](#addcollectionitems)
     * [getCollectionItems](#getcollectionitems)
+    * [addCollectionItems](#addcollectionitems)
     * [getCatalogInsights](#getcataloginsights)
     * [getSellerInsights](#getsellerinsights)
     * [createMarketplaceOptin](#createmarketplaceoptin)
@@ -369,8 +370,8 @@
     * [getStoreDetail](#getstoredetail)
     * [getGenderAttribute](#getgenderattribute)
     * [listProductTemplateCategories](#listproducttemplatecategories)
-    * [createDepartments](#createdepartments)
     * [listDepartmentsData](#listdepartmentsdata)
+    * [createDepartments](#createdepartments)
     * [getDepartmentData](#getdepartmentdata)
     * [updateDepartment](#updatedepartment)
     * [listProductTemplate](#listproducttemplate)
@@ -380,15 +381,15 @@
     * [validateProductTemplateSchema](#validateproducttemplateschema)
     * [listHSNCodes](#listhsncodes)
     * [listProductTemplateExportDetails](#listproducttemplateexportdetails)
-    * [createProductExportJob](#createproductexportjob)
     * [getProductExportJobs](#getproductexportjobs)
+    * [createProductExportJob](#createproductexportjob)
     * [listTemplateBrandTypeValues](#listtemplatebrandtypevalues)
-    * [createCategories](#createcategories)
     * [listCategories](#listcategories)
+    * [createCategories](#createcategories)
     * [getCategoryData](#getcategorydata)
     * [updateCategory](#updatecategory)
-    * [createProduct](#createproduct)
     * [getProducts](#getproducts)
+    * [createProduct](#createproduct)
     * [getVariantsOfProducts](#getvariantsofproducts)
     * [getProductAttributes](#getproductattributes)
     * [deleteProduct](#deleteproduct)
@@ -397,32 +398,32 @@
     * [allSizes](#allsizes)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
-    * [createBulkProductUploadJob](#createbulkproductuploadjob)
     * [getProductBulkUploadHistory](#getproductbulkuploadhistory)
+    * [createBulkProductUploadJob](#createbulkproductuploadjob)
     * [uploadBulkProducts](#uploadbulkproducts)
-    * [createProductsInBulk](#createproductsinbulk)
     * [deleteProductBulkJob](#deleteproductbulkjob)
+    * [createProductsInBulk](#createproductsinbulk)
     * [getProductTags](#getproducttags)
-    * [createProductAssetsInBulk](#createproductassetsinbulk)
     * [getProductAssetsInBulk](#getproductassetsinbulk)
+    * [createProductAssetsInBulk](#createproductassetsinbulk)
     * [deleteSize](#deletesize)
-    * [addInventory](#addinventory)
     * [getInventoryBySize](#getinventorybysize)
+    * [addInventory](#addinventory)
     * [getInventoryBySizeIdentifier](#getinventorybysizeidentifier)
     * [getInventories](#getinventories)
     * [getDiscountedInventoryBySizeIdentifier](#getdiscountedinventorybysizeidentifier)
     * [deleteInventory](#deleteinventory)
-    * [createBulkInventoryJob](#createbulkinventoryjob)
     * [getInventoryBulkUploadHistory](#getinventorybulkuploadhistory)
-    * [createBulkInventory](#createbulkinventory)
+    * [createBulkInventoryJob](#createbulkinventoryjob)
     * [deleteBulkInventoryJob](#deletebulkinventoryjob)
-    * [createInventoryExportJob](#createinventoryexportjob)
+    * [createBulkInventory](#createbulkinventory)
     * [getInventoryExport](#getinventoryexport)
-    * [createInventoryExport](#createinventoryexport)
+    * [createInventoryExportJob](#createinventoryexportjob)
     * [listInventoryExport](#listinventoryexport)
+    * [createInventoryExport](#createinventoryexport)
     * [exportInventoryConfig](#exportinventoryconfig)
-    * [updateRealtimeInventory](#updaterealtimeinventory)
     * [deleteRealtimeInventory](#deleterealtimeinventory)
+    * [updateRealtimeInventory](#updaterealtimeinventory)
     * [updateInventories](#updateinventories)
     * [getHsnCode](#gethsncode)
     * [updateHsnCode](#updatehsncode)
@@ -47574,11 +47575,10 @@ Active subscription
 {
   "value": {
     "is_enabled": true,
-    "mandate_amount": 150000,
     "subscription": {
       "current_period": {
-        "start": "2020-12-17T13:45:36.722Z",
-        "end": "2021-01-17T13:45:36.722Z"
+        "start": "2023-05-23T07:00:31.345Z",
+        "end": "2023-06-22T07:00:31.345Z"
       },
       "pause_collection": {},
       "trial": {},
@@ -47588,14 +47588,123 @@ Active subscription
       },
       "is_active": true,
       "cancel_at_period_end": false,
-      "_id": "5f3a8a00668947663b7fbd38",
-      "subscriber_id": "5ee773e1351e5e84289ed9cf",
-      "plan_id": "5f3a8786c90d780037723a12",
-      "product_suite_id": "5f3a8786c90d7800377239f3",
+      "freezed": false,
+      "channel_type": "ecomm",
+      "_id": "6385dc9389fe3577db6935f3",
+      "subscriber_id": "6385dc9289fe356a346935eb",
+      "plan_id": "5f2e30cad1456d00386abf1c",
+      "product_suite_id": "5f2e30cad1456d00386abefc",
       "plan_data": {
+        "plan_components": [
+          {
+            "is_active": true,
+            "display_text": null,
+            "_id": "5f2e30cbd1456d00386ac008",
+            "plan_id": "5f2e30cad1456d00386abf1c",
+            "created_at": "2020-08-08T04:57:47.829Z",
+            "modified_at": "2021-07-31T12:13:51.221Z",
+            "component": {
+              "is_visible": true,
+              "is_active": true,
+              "is_display": true,
+              "_id": "5f2e30cad1456d00386abefd",
+              "component_price_config": {
+                "type": "display",
+                "display_text": "4%"
+              },
+              "name": "Transaction Fees",
+              "slug": "transaction-fee",
+              "description": "Transaction fees is inclusive of Payment Gateway",
+              "group": "Key Features",
+              "icon": "",
+              "product_suite_id": "5f2e30cad1456d00386abefc",
+              "created_at": "2020-08-08T04:57:46.648Z",
+              "modified_at": "2021-07-31T12:13:50.344Z",
+              "links": {}
+            },
+            "component_price": {
+              "display_text": "3.5%",
+              "is_default": false,
+              "is_active": true,
+              "processing_type": "display",
+              "tags": [],
+              "_id": "5f2e30cbd1456d00386abf77",
+              "component_id": "5f2e30cad1456d00386abefd",
+              "created_at": "2020-08-08T04:57:47.433Z",
+              "modified_at": "2023-04-21T07:04:22.574Z",
+              "__v": 0
+            }
+          }
+        ],
+        "components": [
+          {
+            "_id": "634569a3675d1912531e5ef3",
+            "component_price_config": {
+              "type": "revenue",
+              "default_config": {
+                "recurring": {
+                  "aggregate_usage": "sum",
+                  "usage_type": "licensed",
+                  "interval_count": 1
+                },
+                "transform_quantity": {
+                  "divide_by": 1,
+                  "round": "up"
+                },
+                "free_tier": {
+                  "type": "TIME_BASED",
+                  "value": 0
+                },
+                "unit_amount": 0,
+                "quantity": 1,
+                "price_type": "static",
+                "price_ui_type": "standard",
+                "bill_type": "one_time",
+                "billing_scheme": "per_unit",
+                "display_text": "Yes",
+                "tiers": [],
+                "currency": "INR"
+              },
+              "display_text": "Free",
+              "price_meta": {
+                "unit_amount": 0,
+                "price_type": "static",
+                "bill_type": "one_time",
+                "billing_scheme": "per_unit",
+                "transform_quantity": {
+                  "divide_by": 1,
+                  "round": "up"
+                }
+              }
+            },
+            "is_visible": true,
+            "is_active": true,
+            "is_display": true,
+            "product_suite_id": "5ececa006415744de9228e2e",
+            "name": "SSL Certificates",
+            "slug": "ssl-certificates",
+            "description": "",
+            "group": "Key Features",
+            "icon": "",
+            "links": {},
+            "created_at": "2022-10-11T13:03:31.767Z",
+            "modified_at": "2023-04-21T07:04:23.544Z"
+          }
+        ],
+        "fee_components": [],
         "recurring": {
-          "interval": "month",
-          "interval_count": 1
+          "interval_count": 1,
+          "interval": "month"
+        },
+        "taxation": {
+          "gst": 0.18
+        },
+        "one_time_fees": {
+          "developement": 0,
+          "marketing": 0
+        },
+        "credit_line": {
+          "is_active": false
         },
         "is_trial_plan": false,
         "plan_group": "default",
@@ -47605,23 +47714,340 @@ Active subscription
         "is_visible": true,
         "trial_period": 0,
         "addons": [],
-        "tags": [],
+        "tags": [
+          "popular"
+        ],
         "type": "public",
         "country": "IN",
-        "_id": "5f3a8786c90d780037723a12",
-        "name": "Standard",
-        "description": "Standard",
-        "amount": 999,
-        "product_suite_id": "5f3a8786c90d7800377239f3",
-        "created_at": "2020-08-17T13:35:02.547Z",
-        "modified_at": "2020-08-17T13:35:02.547Z"
+        "company_ids": [],
+        "channel_type": "ecomm",
+        "_id": "5f2e30cad1456d00386abf1c",
+        "tagLines": [],
+        "name": "Premium",
+        "description": "For scaled up businesses",
+        "amount": 2499,
+        "product_suite_id": "5f2e30cad1456d00386abefc",
+        "created_at": "2020-08-08T04:57:46.830Z",
+        "modified_at": "2023-04-21T07:04:22.363Z",
+        "current_status": "active",
+        "plan_leeway_after_activation": 7,
+        "activated_on": "2023-06-02T07:57:16.638Z"
       },
       "current_status": "active",
       "collection_method": "charge_automatically",
-      "created_at": "2020-08-17T13:45:36.731Z",
-      "modified_at": "2020-12-17T11:01:15.960Z",
-      "latest_invoice": "5fdb3a7bfc849c2153b944d5"
-    }
+      "created_at": "2022-11-29T10:18:59.466Z",
+      "modified_at": "2023-06-02T07:57:17.254Z",
+      "latest_invoice": "6479a0dda77a156ad997bd4d"
+    },
+    "latest_invoice": {
+      "documents": {},
+      "payment": {},
+      "period": {
+        "start": "2023-05-23T07:00:31.345Z",
+        "end": "2023-06-22T07:00:31.345Z"
+      },
+      "client": {
+        "address_lines": [
+          "TEST, TEST ,TEST, TEST",
+          "",
+          "NAVI MUMBAI, 400614, MAHARASHTRA, INDIA"
+        ],
+        "name": "avi_test",
+        "email": "avinashsharma@gofynd.com",
+        "phone": "undefined undefined"
+      },
+      "discount": {},
+      "taxation": {
+        "cgst": 0.09,
+        "sgst": 0.09,
+        "igst": 0
+      },
+      "auto_advance": false,
+      "currency": "INR",
+      "paid": true,
+      "attemp": 1,
+      "credit_note_amount": 1768.82,
+      "_id": "6479a0dda77a156ad997bd4d",
+      "collection_method": "charge_automatically",
+      "subscriber_id": "6385dc9289fe356a346935eb",
+      "invoice_url": "",
+      "number": "PS-P-A00515-FY24",
+      "pg_data": {},
+      "old_settlement": 999.33,
+      "credit_balance": null,
+      "receipt_number": "",
+      "statement_descriptor": "avi_test",
+      "current_status": "paid",
+      "status_trail": [
+        {
+          "_id": "6479a0dda77a157bd397bd4e",
+          "value": "open",
+          "timestamp": "2023-06-02T07:57:17.096Z"
+        },
+        {
+          "_id": "6479a196244a37915c4b9448",
+          "value": "paid",
+          "timestamp": "2023-06-02T08:00:22.059Z"
+        },
+        {
+          "_id": "6479a196e3c6582ed5ea7157",
+          "value": "paid",
+          "timestamp": "2023-06-02T08:00:22.099Z"
+        }
+      ],
+      "subtotal": 2555.4900000000002,
+      "total": 786.67,
+      "subscription": "6385dc9389fe3577db6935f3",
+      "next_action_time": "2023-06-02T07:57:17.112Z",
+      "meta": {
+        "old_plan_amount": 499.67,
+        "new_plan_amount": 1666,
+        "credit_note_id": "FP-C27-A00055-24",
+        "isPlanChanged": true
+      },
+      "created_at": "2023-06-02T07:57:17.128Z",
+      "modified_at": "2023-06-02T08:00:23.182Z",
+      "hash_identifier": "987abf78c61bfef585242bbbeaab1b59",
+      "pdf_url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/company/13781/self/subscription/documents/invoices/original/U6ffgNlo_-PS-P-A00515-FY24-paid.pdf"
+    },
+    "latestInvoice": {
+      "documents": {},
+      "payment": {},
+      "period": {
+        "start": "2023-05-23T07:00:31.345Z",
+        "end": "2023-06-22T07:00:31.345Z"
+      },
+      "client": {
+        "address_lines": [
+          "TEST, TEST ,TEST, TEST",
+          "",
+          "NAVI MUMBAI, 400614, MAHARASHTRA, INDIA"
+        ],
+        "name": "avi_test",
+        "email": "avinashsharma@gofynd.com",
+        "phone": "undefined undefined"
+      },
+      "discount": {},
+      "taxation": {
+        "cgst": 0.09,
+        "sgst": 0.09,
+        "igst": 0
+      },
+      "auto_advance": false,
+      "currency": "INR",
+      "paid": true,
+      "attemp": 1,
+      "credit_note_amount": 1768.82,
+      "_id": "6479a0dda77a156ad997bd4d",
+      "collection_method": "charge_automatically",
+      "subscriber_id": "6385dc9289fe356a346935eb",
+      "invoice_url": "",
+      "number": "PS-P-A00515-FY24",
+      "pg_data": {},
+      "old_settlement": 999.33,
+      "credit_balance": null,
+      "receipt_number": "",
+      "statement_descriptor": "avi_test",
+      "current_status": "paid",
+      "status_trail": [
+        {
+          "_id": "6479a0dda77a157bd397bd4e",
+          "value": "open",
+          "timestamp": "2023-06-02T07:57:17.096Z"
+        },
+        {
+          "_id": "6479a196244a37915c4b9448",
+          "value": "paid",
+          "timestamp": "2023-06-02T08:00:22.059Z"
+        },
+        {
+          "_id": "6479a196e3c6582ed5ea7157",
+          "value": "paid",
+          "timestamp": "2023-06-02T08:00:22.099Z"
+        }
+      ],
+      "subtotal": 2555.4900000000002,
+      "total": 786.67,
+      "subscription": "6385dc9389fe3577db6935f3",
+      "next_action_time": "2023-06-02T07:57:17.112Z",
+      "meta": {
+        "old_plan_amount": 499.67,
+        "new_plan_amount": 1666,
+        "credit_note_id": "FP-C27-A00055-24",
+        "isPlanChanged": true
+      },
+      "created_at": "2023-06-02T07:57:17.128Z",
+      "modified_at": "2023-06-02T08:00:23.182Z",
+      "hash_identifier": "987abf78c61bfef585242bbbeaab1b59",
+      "pdf_url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/company/13781/self/subscription/documents/invoices/original/U6ffgNlo_-PS-P-A00515-FY24-paid.pdf"
+    },
+    "mandate_amount": 630000,
+    "current_subscriptions": [
+      {
+        "current_period": {
+          "start": "2023-05-23T07:00:31.345Z",
+          "end": "2023-06-22T07:00:31.345Z"
+        },
+        "pause_collection": {},
+        "trial": {},
+        "invoice_settings": {
+          "generation": true,
+          "charging": true
+        },
+        "is_active": true,
+        "cancel_at_period_end": false,
+        "freezed": false,
+        "channel_type": "ecomm",
+        "_id": "6385dc9389fe3577db6935f3",
+        "subscriber_id": "6385dc9289fe356a346935eb",
+        "plan_id": "5f2e30cad1456d00386abf1c",
+        "product_suite_id": "5f2e30cad1456d00386abefc",
+        "plan_data": {
+          "plan_components": [
+            {
+              "is_active": true,
+              "display_text": null,
+              "_id": "5f2e30cbd1456d00386ac008",
+              "plan_id": "5f2e30cad1456d00386abf1c",
+              "created_at": "2020-08-08T04:57:47.829Z",
+              "modified_at": "2021-07-31T12:13:51.221Z",
+              "component": {
+                "is_visible": true,
+                "is_active": true,
+                "is_display": true,
+                "_id": "5f2e30cad1456d00386abefd",
+                "component_price_config": {
+                  "type": "display",
+                  "display_text": "4%"
+                },
+                "name": "Transaction Fees",
+                "slug": "transaction-fee",
+                "description": "Transaction fees is inclusive of Payment Gateway",
+                "group": "Key Features",
+                "icon": "",
+                "product_suite_id": "5f2e30cad1456d00386abefc",
+                "created_at": "2020-08-08T04:57:46.648Z",
+                "modified_at": "2021-07-31T12:13:50.344Z",
+                "links": {}
+              },
+              "component_price": {
+                "display_text": "3.5%",
+                "is_default": false,
+                "is_active": true,
+                "processing_type": "display",
+                "tags": [],
+                "_id": "5f2e30cbd1456d00386abf77",
+                "component_id": "5f2e30cad1456d00386abefd",
+                "created_at": "2020-08-08T04:57:47.433Z",
+                "modified_at": "2023-04-21T07:04:22.574Z",
+                "__v": 0
+              }
+            }
+          ],
+          "components": [
+            {
+              "_id": "634569a3675d1912531e5ef3",
+              "component_price_config": {
+                "type": "revenue",
+                "default_config": {
+                  "recurring": {
+                    "aggregate_usage": "sum",
+                    "usage_type": "licensed",
+                    "interval_count": 1
+                  },
+                  "transform_quantity": {
+                    "divide_by": 1,
+                    "round": "up"
+                  },
+                  "free_tier": {
+                    "type": "TIME_BASED",
+                    "value": 0
+                  },
+                  "unit_amount": 0,
+                  "quantity": 1,
+                  "price_type": "static",
+                  "price_ui_type": "standard",
+                  "bill_type": "one_time",
+                  "billing_scheme": "per_unit",
+                  "display_text": "Yes",
+                  "tiers": [],
+                  "currency": "INR"
+                },
+                "display_text": "Free",
+                "price_meta": {
+                  "unit_amount": 0,
+                  "price_type": "static",
+                  "bill_type": "one_time",
+                  "billing_scheme": "per_unit",
+                  "transform_quantity": {
+                    "divide_by": 1,
+                    "round": "up"
+                  }
+                }
+              },
+              "is_visible": true,
+              "is_active": true,
+              "is_display": true,
+              "product_suite_id": "5ececa006415744de9228e2e",
+              "name": "SSL Certificates",
+              "slug": "ssl-certificates",
+              "description": "",
+              "group": "Key Features",
+              "icon": "",
+              "links": {},
+              "created_at": "2022-10-11T13:03:31.767Z",
+              "modified_at": "2023-04-21T07:04:23.544Z"
+            }
+          ],
+          "fee_components": [],
+          "recurring": {
+            "interval_count": 1,
+            "interval": "month"
+          },
+          "taxation": {
+            "gst": 0.18
+          },
+          "one_time_fees": {
+            "developement": 0,
+            "marketing": 0
+          },
+          "credit_line": {
+            "is_active": false
+          },
+          "is_trial_plan": false,
+          "plan_group": "default",
+          "tag_lines": [],
+          "currency": "INR",
+          "is_active": true,
+          "is_visible": true,
+          "trial_period": 0,
+          "addons": [],
+          "tags": [
+            "popular"
+          ],
+          "type": "public",
+          "country": "IN",
+          "company_ids": [],
+          "channel_type": "ecomm",
+          "_id": "5f2e30cad1456d00386abf1c",
+          "tagLines": [],
+          "name": "Premium",
+          "description": "For scaled up businesses",
+          "amount": 2499,
+          "product_suite_id": "5f2e30cad1456d00386abefc",
+          "created_at": "2020-08-08T04:57:46.830Z",
+          "modified_at": "2023-04-21T07:04:22.363Z",
+          "current_status": "active",
+          "plan_leeway_after_activation": 7,
+          "activated_on": "2023-06-02T07:57:16.638Z"
+        },
+        "current_status": "active",
+        "collection_method": "charge_automatically",
+        "created_at": "2022-11-29T10:18:59.466Z",
+        "modified_at": "2023-06-02T07:57:17.254Z",
+        "latest_invoice": "6479a0dda77a156ad997bd4d"
+      }
+    ]
   }
 }
 ```
@@ -52617,7 +53043,7 @@ data, err := Order.GetShipments(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | float64 | Id of company | 
 
 
 
@@ -52663,11 +53089,7 @@ data, err := Order.GetShipments(CompanyID, xQuery);
 
 
 
-
-
-
-
-| xQuery | struct | Includes properties such as `Lane`, `BagStatus`, `StatusOverrideLane`, `SearchType`, `SearchValue`, `SearchID`, `FromDate`, `ToDate`, `DpIds`, `OrderingCompanyID`, `Stores`, `SalesChannel`, `RequestByExt`, `PageNo`, `PageSize`, `IsPrioritySort`, `FetchActiveShipment`, `ExcludeLockedShipments`, `PaymentMethods`, `ChannelShipmentID`, `ChannelOrderID`, `CustomMeta`, `OrderingChannel`, `CompanyAffiliateTag`
+| xQuery | struct | Includes properties such as `Lane`, `BagStatus`, `StatusOverrideLane`, `TimeToDispatch`, `SearchType`, `SearchValue`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PageNo`, `PageSize`, `FetchActiveShipment`, `ExcludeLockedShipments`, `PaymentMethods`, `ChannelShipmentID`, `ChannelOrderID`, `CustomMeta`, `OrderingChannel`, `CompanyAffiliateTag`, `PlatformUserID`
 
 
 
@@ -52703,17 +53125,13 @@ data, err := Order.GetShipmentById(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | float64 | Id of company | 
 
 
 
 
 
-
-
-
-
-| xQuery | struct | Includes properties such as `ChannelShipmentID`, `ShipmentID`, `OrderingCompanyID`, `RequestByExt`
+| xQuery | struct | Includes properties such as `ChannelShipmentID`, `ShipmentID`
 
 
 
@@ -52749,7 +53167,7 @@ data, err := Order.GetOrderById(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | float64 | Id of company | 
 
 
 
@@ -52765,7 +53183,7 @@ data, err := Order.GetOrderById(CompanyID, xQuery);
 We are processing the report!
 
 
-Schema: `ShipmentDetailsResponse`
+Schema: `OrderDetailsResponse`
 
 
 
@@ -52789,7 +53207,7 @@ data, err := Order.GetLaneConfig(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | float64 | Id of company | 
 
 
 
@@ -52809,7 +53227,17 @@ data, err := Order.GetLaneConfig(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `SuperLane`, `GroupEntity`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannel`, `PaymentMode`, `BagStatus`
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `SuperLane`, `GroupEntity`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PaymentMode`, `BagStatus`, `SearchType`, `SearchValue`, `Tags`, `TimeToDispatch`, `PaymentMethods`
 
 
 
@@ -52845,7 +53273,7 @@ data, err := Order.GetOrders(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | float64 | Id of company | 
 
 
 
@@ -52915,13 +53343,13 @@ data, err := Order.TrackShipmentPlatform(CompanyID, ApplicationID, ShipmentID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string |  | 
+| CompanyID | string | Id of company | 
 
 
-| ApplicationID | string |  | 
+| ApplicationID | string | Id of application | 
 
 
-| ShipmentID | string |  | 
+| ShipmentID | string | Shipment Id | 
 
 
 
@@ -52958,7 +53386,7 @@ data, err := Order.Getfilters(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | float64 | Id of company | 
 
 
 
@@ -53174,6 +53602,49 @@ Schema: `PlatformShipmentReasonsResponse`
 ---
 
 
+#### getPlatformShipmentReasons
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+
+```golang
+
+data, err := Order.GetPlatformShipmentReasons(CompanyID, ApplicationID, Action);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| ApplicationID | string |  | 
+
+
+| Action | string |  | 
+
+
+
+Using action, get reasons behind full or partial cancellation of a shipment
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ShipmentReasonsResponse` for more details.
+
+
+Schema: `ShipmentReasonsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getBagById
 
 
@@ -53185,7 +53656,7 @@ data, err := Order.GetBagById(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | float64 | Id of company | 
 
 
 
@@ -53229,7 +53700,7 @@ data, err := Order.GetBags(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | float64 | Id of company | 
 
 
 
@@ -53821,7 +54292,7 @@ data, err := Order.UpdatePackagingDimensions(CompanyID, body);
 | CompanyID | float64 |  | 
 
 
-| body |  CreateOrderPayload | "Request body" 
+| body |  UpdatePackagingDimensionsPayload | "Request body" 
 
 
 
@@ -53832,7 +54303,7 @@ data, err := Order.UpdatePackagingDimensions(CompanyID, body);
 Manifest will be processed!
 
 
-Schema: `CreateOrderResponse`
+Schema: `UpdatePackagingDimensionsResponse`
 
 
 
@@ -54246,6 +54717,46 @@ Schema: `GetSearchWordsData`
 ---
 
 
+#### getAllSearchKeyword
+List all Search Custom Keyword Listing
+
+```golang
+
+data, err := Catalog.GetAllSearchKeyword(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+
+Custom Search Keyword allows you to map conditions with keywords to give you the ultimate results
+
+*Success Response:*
+
+
+
+List of custom search keywords. See example below or refer `GetSearchWordsResponseSchema` for details
+
+
+Schema: `GetSearchWordsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### createCustomKeyword
 Add a Custom Search Keywords
 
@@ -54275,46 +54786,6 @@ Get keyword object with id that is added. See example below or refer `GetSearchW
 
 
 Schema: `GetSearchWordsData`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAllSearchKeyword
-List all Search Custom Keyword Listing
-
-```golang
-
-data, err := Catalog.GetAllSearchKeyword(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-
-Custom Search Keyword allows you to map conditions with keywords to give you the ultimate results
-
-*Success Response:*
-
-
-
-List of custom search keywords. See example below or refer `GetSearchWordsResponseSchema` for details
-
-
-Schema: `GetSearchWordsResponse`
 
 
 
@@ -54457,47 +54928,6 @@ Schema: `GetAutocompleteWordsResponse`
 ---
 
 
-#### createCustomAutocompleteRule
-Add a Custom Autocomplete Keywords
-
-```golang
-
-data, err := Catalog.CreateCustomAutocompleteRule(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| body |  CreateAutocompleteKeyword | "Request body" 
-
-Create a Custom Autocomplete Keywords. See `CreateAutocompleteKeywordSchema` for the list of attributes needed to create a mapping and /collections/query-options for the available options to create a rule. On successful request, returns a paginated list of collections specified in `CreateAutocompleteKeywordSchema`
-
-*Success Response:*
-
-
-
-List of all the collections including the one you added. See example below or refer `CreateAutocompleteWordsResponseSchema` for details
-
-
-Schema: `CreateAutocompleteWordsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getAutocompleteConfig
 List all Autocomplete Keyword Listing
 
@@ -54538,12 +54968,12 @@ Schema: `GetAutocompleteWordsResponse`
 ---
 
 
-#### createProductBundle
-Create Product Bundle
+#### createCustomAutocompleteRule
+Add a Custom Autocomplete Keywords
 
 ```golang
 
-data, err := Catalog.CreateProductBundle(CompanyID, body);
+data, err := Catalog.CreateCustomAutocompleteRule(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -54552,18 +54982,21 @@ data, err := Catalog.CreateProductBundle(CompanyID, body);
 | CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
 
 
-| body |  ProductBundleRequest | "Request body" 
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
-Create Product Bundle. See `ProductBundleRequest` for the request body parameter need to create a product bundle. On successful request, returns in `ProductBundleRequest` with id
+
+| body |  CreateAutocompleteKeyword | "Request body" 
+
+Create a Custom Autocomplete Keywords. See `CreateAutocompleteKeywordSchema` for the list of attributes needed to create a mapping and /collections/query-options for the available options to create a rule. On successful request, returns a paginated list of collections specified in `CreateAutocompleteKeywordSchema`
 
 *Success Response:*
 
 
 
-Get bundle with id that is added. See example below or refer `GetProductBundleCreateResponse` for details
+List of all the collections including the one you added. See example below or refer `CreateAutocompleteWordsResponseSchema` for details
 
 
-Schema: `GetProductBundleCreateResponse`
+Schema: `CreateAutocompleteWordsResponse`
 
 
 
@@ -54606,6 +55039,44 @@ List of bundle configured for a company. See example below or refer `GetProductB
 
 
 Schema: `GetProductBundleListingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createProductBundle
+Create Product Bundle
+
+```golang
+
+data, err := Catalog.CreateProductBundle(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| body |  ProductBundleRequest | "Request body" 
+
+Create Product Bundle. See `ProductBundleRequest` for the request body parameter need to create a product bundle. On successful request, returns in `ProductBundleRequest` with id
+
+*Success Response:*
+
+
+
+Get bundle with id that is added. See example below or refer `GetProductBundleCreateResponse` for details
+
+
+Schema: `GetProductBundleCreateResponse`
 
 
 
@@ -54699,44 +55170,6 @@ Schema: `GetProductBundleCreateResponse`
 ---
 
 
-#### createSizeGuide
-Create a size guide.
-
-```golang
-
-data, err := Catalog.CreateSizeGuide(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company inside which the size guide is to be created. | 
-
-
-| body |  ValidateSizeGuide | "Request body" 
-
-This API allows to create a size guide associated to a brand.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getSizeGuides
 Get list of size guides
 
@@ -54773,6 +55206,44 @@ Size guide object. See example below or refer `ListSizeGuide` for details
 
 
 Schema: `ListSizeGuide`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createSizeGuide
+Create a size guide.
+
+```golang
+
+data, err := Catalog.CreateSizeGuide(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company inside which the size guide is to be created. | 
+
+
+| body |  ValidateSizeGuide | "Request body" 
+
+This API allows to create a size guide associated to a brand.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
@@ -54999,50 +55470,6 @@ Schema: `GetConfigMetadataResponse`
 ---
 
 
-#### createGroupConfiguration
-Create configuration for Group config types.
-
-```golang
-
-data, err := Catalog.CreateGroupConfiguration(CompanyID, ApplicationID, ConfigType, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
-
-
-| body |  AppConfigurationDetail | "Request body" 
-
-Create configuration for Group config types.
-
-*Success Response:*
-
-
-
-success flag will tell whether the operation was successful.
-
-
-Schema: `AppConfigurationDetail`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getGroupConfigurations
 Get the details of the application configured configurations of group config types.
 
@@ -55083,6 +55510,50 @@ configuration details for catalog. See example below or refer `GetConfigResponse
 
 
 Schema: `GetConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createGroupConfiguration
+Create configuration for Group config types.
+
+```golang
+
+data, err := Catalog.CreateGroupConfiguration(CompanyID, ApplicationID, ConfigType, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
+
+
+| body |  AppConfigurationDetail | "Request body" 
+
+Create configuration for Group config types.
+
+*Success Response:*
+
+
+
+success flag will tell whether the operation was successful.
+
+
+Schema: `AppConfigurationDetail`
 
 
 
@@ -55188,50 +55659,6 @@ Schema: `AppConfigurationDetail`
 ---
 
 
-#### createListingConfiguration
-Add configuration for listings
-
-```golang
-
-data, err := Catalog.CreateListingConfiguration(CompanyID, ApplicationID, ConfigType, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
-
-
-| body |  AppConfigurationsSort | "Request body" 
-
-Add configuration for listing.
-
-*Success Response:*
-
-
-
-success flag will tell whether the operation was successful.
-
-
-Schema: `AppConfigurationsSort`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getListingConfigurations
 Get the details of the application configured configurations of listing config types.
 
@@ -55270,6 +55697,50 @@ configuration details for catalog. See example below or refer `GetConfigResponse
 
 
 Schema: `GetConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createListingConfiguration
+Add configuration for listings
+
+```golang
+
+data, err := Catalog.CreateListingConfiguration(CompanyID, ApplicationID, ConfigType, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
+
+
+| body |  AppConfigurationsSort | "Request body" 
+
+Add configuration for listing.
+
+*Success Response:*
+
+
+
+success flag will tell whether the operation was successful.
+
+
+Schema: `AppConfigurationsSort`
 
 
 
@@ -55497,47 +55968,6 @@ Schema: `GetCatalogConfigurationMetaData`
 ---
 
 
-#### createConfigurationProductListing
-Add configuration for products & listings
-
-```golang
-
-data, err := Catalog.CreateConfigurationProductListing(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| body |  AppConfiguration | "Request body" 
-
-Add configuration for products & listing.
-
-*Success Response:*
-
-
-
-success flag will tell whether the operation was successful.
-
-
-Schema: `GetAppCatalogConfiguration`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getConfigurations
 Get configured details for catalog
 
@@ -55578,12 +56008,12 @@ Schema: `GetAppCatalogConfiguration`
 ---
 
 
-#### createConfigurationByType
-Add configuration for categories and brands
+#### createConfigurationProductListing
+Add configuration for products & listings
 
 ```golang
 
-data, err := Catalog.CreateConfigurationByType(CompanyID, ApplicationID, Type, body);
+data, err := Catalog.CreateConfigurationProductListing(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -55595,12 +56025,9 @@ data, err := Catalog.CreateConfigurationByType(CompanyID, ApplicationID, Type, b
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| Type | string | type can be brands, categories etc. | 
-
-
 | body |  AppConfiguration | "Request body" 
 
-Add configuration for categories & brands.
+Add configuration for products & listing.
 
 *Success Response:*
 
@@ -55665,6 +56092,50 @@ Schema: `GetAppCatalogEntityConfiguration`
 ---
 
 
+#### createConfigurationByType
+Add configuration for categories and brands
+
+```golang
+
+data, err := Catalog.CreateConfigurationByType(CompanyID, ApplicationID, Type, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| Type | string | type can be brands, categories etc. | 
+
+
+| body |  AppConfiguration | "Request body" 
+
+Add configuration for categories & brands.
+
+*Success Response:*
+
+
+
+success flag will tell whether the operation was successful.
+
+
+Schema: `GetAppCatalogConfiguration`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getQueryFilters
 Get query filters to configure a collection
 
@@ -55693,47 +56164,6 @@ The attached items of an collection. See example below or refer `GetCollectionQu
 
 
 Schema: `GetCollectionQueryOptionResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createCollection
-Add a Collection
-
-```golang
-
-data, err := Catalog.CreateCollection(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| body |  CreateCollection | "Request body" 
-
-Create a collection. See `CreateCollectionRequestSchema` for the list of attributes needed to create a collection and collections/query-options for the available options to create a collection. On successful request, returns a paginated list of collections specified in `CollectionCreateResponse`
-
-*Success Response:*
-
-
-
-List of all the collections including the one you added. See example below or refer `CollectionCreateResponse` for details
-
-
-Schema: `CollectionCreateResponse`
 
 
 
@@ -55789,6 +56219,47 @@ List of collections. See example below or refer `GetCollectionListingResponse` f
 
 
 Schema: `GetCollectionListingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createCollection
+Add a Collection
+
+```golang
+
+data, err := Catalog.CreateCollection(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  CreateCollection | "Request body" 
+
+Create a collection. See `CreateCollectionRequestSchema` for the list of attributes needed to create a collection and collections/query-options for the available options to create a collection. On successful request, returns a paginated list of collections specified in `CollectionCreateResponse`
+
+*Success Response:*
+
+
+
+List of all the collections including the one you added. See example below or refer `CollectionCreateResponse` for details
+
+
+Schema: `CollectionCreateResponse`
 
 
 
@@ -55931,50 +56402,6 @@ Schema: `UpdateCollection`
 ---
 
 
-#### addCollectionItems
-Add items to a collection
-
-```golang
-
-data, err := Catalog.AddCollectionItems(CompanyID, ApplicationID, ID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier of a collection. | 
-
-
-| body |  CollectionItemUpdate | "Request body" 
-
-Adds items to a collection specified by its `id`. See `CollectionItemRequest` for the list of attributes needed to add items to an collection.
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful.
-
-
-Schema: `UpdatedResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getCollectionItems
 Get the items for a collection
 
@@ -56013,6 +56440,50 @@ The attached items of an collection. See example below or refer `GetCollectionIt
 
 
 Schema: `GetCollectionItemsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### addCollectionItems
+Add items to a collection
+
+```golang
+
+data, err := Catalog.AddCollectionItems(CompanyID, ApplicationID, ID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier of a collection. | 
+
+
+| body |  CollectionItemUpdate | "Request body" 
+
+Adds items to a collection specified by its `id`. See `CollectionItemRequest` for the list of attributes needed to add items to an collection.
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful.
+
+
+Schema: `UpdatedResponse`
 
 
 
@@ -56434,44 +56905,6 @@ Schema: `ProdcutTemplateCategoriesResponse`
 ---
 
 
-#### createDepartments
-Create the department.
-
-```golang
-
-data, err := Catalog.CreateDepartments(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| body |  DepartmentCreateUpdate | "Request body" 
-
-Create departments using the API.
-
-*Success Response:*
-
-
-
-Success Response. See example below or refer `DepartmentCreateResponseSchema` for details
-
-
-Schema: `DepartmentCreateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### listDepartmentsData
 List all Departments.
 
@@ -56510,6 +56943,44 @@ List of departments data. See example below or refer `DepartmentsResponse` for d
 
 
 Schema: `DepartmentsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createDepartments
+Create the department.
+
+```golang
+
+data, err := Catalog.CreateDepartments(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| body |  DepartmentCreateUpdate | "Request body" 
+
+Create departments using the API.
+
+*Success Response:*
+
+
+
+Success Response. See example below or refer `DepartmentCreateResponseSchema` for details
+
+
+Schema: `DepartmentCreateResponse`
 
 
 
@@ -56877,44 +57348,6 @@ Schema: `ProductDownloadsResponse`
 ---
 
 
-#### createProductExportJob
-Create a product export job.
-
-```golang
-
-data, err := Catalog.CreateProductExportJob(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| body |  ProductTemplateDownloadsExport | "Request body" 
-
-This API helps to create a Inventory export job.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `ProductDownloadsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getProductExportJobs
 Allows you to list all product templates export list details
 
@@ -56946,6 +57379,44 @@ Can view details including trigger data, task id , etc.
 
 
 List of Product Downloads Data. See example below or refer `ProductDownloadsResponse` for details
+
+
+Schema: `ProductDownloadsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createProductExportJob
+Create a product export job.
+
+```golang
+
+data, err := Catalog.CreateProductExportJob(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| body |  ProductTemplateDownloadsExport | "Request body" 
+
+This API helps to create a Inventory export job.
+
+*Success Response:*
+
+
+
+Returns a success response
 
 
 Schema: `ProductDownloadsResponse`
@@ -57005,44 +57476,6 @@ Schema: `ProductConfigurationDownloads`
 ---
 
 
-#### createCategories
-Create product categories
-
-```golang
-
-data, err := Catalog.CreateCategories(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| body |  CategoryRequestBody | "Request body" 
-
-This API lets user create product categories
-
-*Success Response:*
-
-
-
-Category Meta. See example below or refer `CategoryCreateResponse` for details
-
-
-Schema: `CategoryCreateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### listCategories
 Get product categories list
 
@@ -57079,6 +57512,44 @@ Category Meta. See example below or refer `CategoryResponse` for details
 
 
 Schema: `CategoryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createCategories
+Create product categories
+
+```golang
+
+data, err := Catalog.CreateCategories(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| body |  CategoryRequestBody | "Request body" 
+
+This API lets user create product categories
+
+*Success Response:*
+
+
+
+Category Meta. See example below or refer `CategoryCreateResponse` for details
+
+
+Schema: `CategoryCreateResponse`
 
 
 
@@ -57172,44 +57643,6 @@ Schema: `CategoryUpdateResponse`
 ---
 
 
-#### createProduct
-Create a product.
-
-```golang
-
-data, err := Catalog.CreateProduct(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to product that is to be viewed. | 
-
-
-| body |  ProductCreateUpdateSchemaV2 | "Request body" 
-
-This API allows to create product.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getProducts
 Get product list
 
@@ -57254,6 +57687,44 @@ Product Meta. See example below for details
 
 
 Schema: `ProductListingResponseV2`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createProduct
+Create a product.
+
+```golang
+
+data, err := Catalog.CreateProduct(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+
+
+| body |  ProductCreateUpdateSchemaV2 | "Request body" 
+
+This API allows to create product.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
@@ -57606,44 +58077,6 @@ Schema: `ProductListingResponse`
 ---
 
 
-#### createBulkProductUploadJob
-Create a Bulk product to upload job.
-
-```golang
-
-data, err := Catalog.CreateBulkProductUploadJob(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
-
-
-| body |  BulkJob | "Request body" 
-
-This API helps to create a bulk products upload job.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `BulkResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getProductBulkUploadHistory
 Get a list of all bulk product upload jobs.
 
@@ -57676,6 +58109,44 @@ List of bulk product upload jobs. See `BulkRequestGetSchema` for details
 
 
 Schema: `ProductBulkRequestList`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createBulkProductUploadJob
+Create a Bulk product to upload job.
+
+```golang
+
+data, err := Catalog.CreateBulkProductUploadJob(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+
+
+| body |  BulkJob | "Request body" 
+
+This API helps to create a bulk products upload job.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `BulkResponse`
 
 
 
@@ -57731,26 +58202,25 @@ Schema: `BulkResponse`
 ---
 
 
-#### createProductsInBulk
-Create products in bulk associated with given batch Id.
+#### deleteProductBulkJob
+Delete Bulk product job.
 
 ```golang
 
-data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
+data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
 
 
-| BatchID | string | Batch Id in which assets to be uploaded. | 
+| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
 
 
-| body |  BulkProductRequest | "Request body" 
 
-This API helps to create products in bulk push to kafka for approval/creation.
+This API allows to delete bulk product job associated with company.
 
 *Success Response:*
 
@@ -57772,25 +58242,26 @@ Schema: `SuccessResponse`
 ---
 
 
-#### deleteProductBulkJob
-Delete Bulk product job.
+#### createProductsInBulk
+Create products in bulk associated with given batch Id.
 
 ```golang
 
-data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
+data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
 
 
-| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
+| BatchID | string | Batch Id in which assets to be uploaded. | 
 
 
+| body |  BulkProductRequest | "Request body" 
 
-This API allows to delete bulk product job associated with company.
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -57849,44 +58320,6 @@ Schema: `ProductTagsViewResponse`
 ---
 
 
-#### createProductAssetsInBulk
-Create a Bulk asset upload Job.
-
-```golang
-
-data, err := Catalog.CreateProductAssetsInBulk(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
-
-
-| body |  ProductBulkAssets | "Request body" 
-
-This API helps to create a bulk asset upload job.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getProductAssetsInBulk
 Get a list of all bulk asset jobs.
 
@@ -57917,6 +58350,44 @@ List of bulk asset jobs List. See `BulkUtil.modify_batch_response` for details
 
 
 Schema: `BulkAssetResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createProductAssetsInBulk
+Create a Bulk asset upload Job.
+
+```golang
+
+data, err := Catalog.CreateProductAssetsInBulk(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+
+
+| body |  ProductBulkAssets | "Request body" 
+
+This API helps to create a bulk asset upload job.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
@@ -57972,50 +58443,6 @@ Schema: `ProductSizeDeleteResponse`
 ---
 
 
-#### addInventory
-Add Inventory for particular size and store.
-
-```golang
-
-data, err := Catalog.AddInventory(CompanyID, ItemID, Size, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Id of the company associated to product that is to be viewed. | 
-
-
-| ItemID | float64 | Item code of the product of which size is to be get. | 
-
-
-| Size | string | Size in which inventory is to be added. | 
-
-
-| body |  InventoryRequest | "Request body" 
-
-This API allows add Inventory for particular size and store.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getInventoryBySize
 Get Inventory for company
 
@@ -58056,6 +58483,50 @@ returns a list of all inventory grouped by size and store
 
 
 Schema: `InventoryResponsePaginated`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### addInventory
+Add Inventory for particular size and store.
+
+```golang
+
+data, err := Catalog.AddInventory(CompanyID, ItemID, Size, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Id of the company associated to product that is to be viewed. | 
+
+
+| ItemID | float64 | Item code of the product of which size is to be get. | 
+
+
+| Size | string | Size in which inventory is to be added. | 
+
+
+| body |  InventoryRequest | "Request body" 
+
+This API allows add Inventory for particular size and store.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
@@ -58275,6 +58746,48 @@ Schema: `SuccessResponse`
 ---
 
 
+#### getInventoryBulkUploadHistory
+Get a list of all bulk Inventory upload jobs.
+
+```golang
+
+data, err := Catalog.GetInventoryBulkUploadHistory(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id of of which Inventory Bulk Upload History to be obtained. | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
+
+
+This API helps to get bulk Inventory upload jobs data.
+
+*Success Response:*
+
+
+
+List of bulk Inventory upload jobs. See `BulkInventoryGetSchema` for details
+
+
+Schema: `BulkInventoryGet`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### createBulkInventoryJob
 Create a Bulk Inventory upload Job.
 
@@ -58313,36 +58826,34 @@ Schema: `BulkResponse`
 ---
 
 
-#### getInventoryBulkUploadHistory
-Get a list of all bulk Inventory upload jobs.
+#### deleteBulkInventoryJob
+Delete Bulk Inventory job.
 
 ```golang
 
-data, err := Catalog.GetInventoryBulkUploadHistory(CompanyID, xQuery);
+data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id of of which Inventory Bulk Upload History to be obtained. | 
+| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
+
+
+| BatchID | string | Batch Id of the bulk delete job. | 
 
 
 
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-
-This API helps to get bulk Inventory upload jobs data.
+This API allows to delete bulk Inventory job associated with company.
 
 *Success Response:*
 
 
 
-List of bulk Inventory upload jobs. See `BulkInventoryGetSchema` for details
+Returns a success response
 
 
-Schema: `BulkInventoryGet`
+Schema: `SuccessResponse`
 
 
 
@@ -58396,84 +58907,6 @@ Schema: `SuccessResponse`
 ---
 
 
-#### deleteBulkInventoryJob
-Delete Bulk Inventory job.
-
-```golang
-
-data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
-
-
-| BatchID | string | Batch Id of the bulk delete job. | 
-
-
-
-This API allows to delete bulk Inventory job associated with company.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createInventoryExportJob
-Create a Inventory export Job.
-
-```golang
-
-data, err := Catalog.CreateInventoryExportJob(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
-
-
-| body |  InventoryExportRequest | "Request body" 
-
-This API helps to create a Inventory export job.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `InventoryExportResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getInventoryExport
 Get Inventory export history.
 
@@ -58511,12 +58944,12 @@ Schema: `InventoryExportJob`
 ---
 
 
-#### createInventoryExport
-Create an inventory export job.
+#### createInventoryExportJob
+Create a Inventory export Job.
 
 ```golang
 
-data, err := Catalog.CreateInventoryExport(CompanyID, body);
+data, err := Catalog.CreateInventoryExportJob(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -58525,7 +58958,7 @@ data, err := Catalog.CreateInventoryExport(CompanyID, body);
 | CompanyID | float64 | Company Id in which assets to be uploaded. | 
 
 
-| body |  InventoryCreateRequest | "Request body" 
+| body |  InventoryExportRequest | "Request body" 
 
 This API helps to create a Inventory export job.
 
@@ -58595,6 +59028,44 @@ Schema: `InventoryExportJobListResponse`
 ---
 
 
+#### createInventoryExport
+Create an inventory export job.
+
+```golang
+
+data, err := Catalog.CreateInventoryExport(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+
+
+| body |  InventoryCreateRequest | "Request body" 
+
+This API helps to create a Inventory export job.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `InventoryExportResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### exportInventoryConfig
 Get List of different filters for inventory export
 
@@ -58635,12 +59106,12 @@ Schema: `InventoryConfig`
 ---
 
 
-#### updateRealtimeInventory
+#### deleteRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -58679,12 +59150,12 @@ Schema: `InventoryUpdateResponse`
 ---
 
 
-#### deleteRealtimeInventory
+#### updateRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -61487,7 +61958,7 @@ Schema: `ResponseEnvelopeListJobConfigListDTO`
 
 
 #### getBuildConfig
-Get latest build config
+Get configuration of latest mobile build
 
 ```golang
 
@@ -61497,17 +61968,17 @@ data, err := Configuration.GetBuildConfig(CompanyID, ApplicationID, PlatformType
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
-| PlatformType | string | Current platform name | 
+| PlatformType | string | The device platform for which the mobile app is built, e.g. android, ios. | 
 
 
 
-Get latest build config
+Fetch latest build configuration, such as app name, landing page image, splash image used in a mobile build.
 
 *Success Response:*
 
@@ -61530,7 +62001,7 @@ Schema: `MobileAppConfiguration`
 
 
 #### updateBuildConfig
-Update build config for next build
+Update the configuration for next mobile build
 
 ```golang
 
@@ -61540,18 +62011,18 @@ data, err := Configuration.UpdateBuildConfig(CompanyID, ApplicationID, PlatformT
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
-| PlatformType | string | Current platform name | 
+| PlatformType | string | The device platform for which the mobile app is built, e.g. android, ios. | 
 
 
 | body |  MobileAppConfigRequest | "Request body" 
 
-Update build config for next build
+Modify the existing build configuration, such as app name, landing page image, splash image used in a mobile build.
 
 *Success Response:*
 
@@ -61574,7 +62045,7 @@ Schema: `MobileAppConfiguration`
 
 
 #### getPreviousVersions
-Get previous build versions
+Get details of previous mobile builds
 
 ```golang
 
@@ -61584,17 +62055,17 @@ data, err := Configuration.GetPreviousVersions(CompanyID, ApplicationID, Platfor
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
-| PlatformType | string | Current platform name | 
+| PlatformType | string | The device platform for which the mobile app is built, e.g. android, ios. | 
 
 
 
-Get previous build versions
+Fetch version details of the app, this includes the build status, build date, version name, latest version, and a lot more.
 
 *Success Response:*
 
@@ -61617,7 +62088,7 @@ Schema: `BuildVersionHistory`
 
 
 #### getAppFeatures
-Get features of application
+Get the sales channel configuration and features
 
 ```golang
 
@@ -61627,14 +62098,14 @@ data, err := Configuration.GetAppFeatures(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
-Get features of application
+Shows feature configuration of sales channel websites, such as product detail, landing page, options in the login/registration screen, home page, listing page, reward points, communication opt-in, cart options and many more.
 
 *Success Response:*
 
@@ -61657,7 +62128,7 @@ Schema: `AppFeatureResponse`
 
 
 #### updateAppFeatures
-Update features of application
+Update the sales channel configuration and features
 
 ```golang
 
@@ -61667,15 +62138,15 @@ data, err := Configuration.UpdateAppFeatures(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 | body |  AppFeatureRequest | "Request body" 
 
-Update features of application
+Modify the feature configuration of sales channel websites, such as product detail, landing page, options in the login/registration screen, home page, listing page, reward points, communication opt-in, cart options and many more.
 
 *Success Response:*
 
@@ -61708,10 +62179,10 @@ data, err := Configuration.ModifyAppFeatures(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 | body |  AppFeatureRequest | "Request body" 
@@ -61739,7 +62210,7 @@ Schema: `AppFeature`
 
 
 #### getAppBasicDetails
-Get basic application details
+Get sales channel details
 
 ```golang
 
@@ -61749,14 +62220,14 @@ data, err := Configuration.GetAppBasicDetails(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
-Get basic application details like name
+Shows basic sales channel details like name, description, logo, domain, company ID, and other related information.
 
 *Success Response:*
 
@@ -61779,7 +62250,7 @@ Schema: `ApplicationDetail`
 
 
 #### updateAppBasicDetails
-Add or update application's basic details
+Update sales channel details
 
 ```golang
 
@@ -61789,15 +62260,15 @@ data, err := Configuration.UpdateAppBasicDetails(CompanyID, ApplicationID, body)
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 | body |  ApplicationDetail | "Request body" 
 
-Add or update application's basic details
+Modify sales channel details like name, description, logo, domain, company ID, and other related information.
 
 *Success Response:*
 
@@ -61820,7 +62291,7 @@ Schema: `ApplicationDetail`
 
 
 #### getAppContactInfo
-Get application information
+Get current information of the sales channel
 
 ```golang
 
@@ -61830,14 +62301,14 @@ data, err := Configuration.GetAppContactInfo(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
-Get Application Current Information. This includes information about social links, address and contact information of company/seller/brand of the application.
+Fetch data such as social links, copyright text, business highlights, address and contact information of the company/seller/brand operating the application.
 
 *Success Response:*
 
@@ -61860,7 +62331,7 @@ Schema: `ApplicationInformation`
 
 
 #### updateAppContactInfo
-Get application information
+Save or update current information of the sales channel
 
 ```golang
 
@@ -61870,15 +62341,15 @@ data, err := Configuration.UpdateAppContactInfo(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 | body |  ApplicationInformation | "Request body" 
 
-Save Application Current Information. This includes information about social links, address and contact information of an application.
+Modify the social links, copyright text, business highlights, address and contact information of the company/seller/brand operating the application.
 
 *Success Response:*
 
@@ -61901,7 +62372,7 @@ Schema: `ApplicationInformation`
 
 
 #### getAppApiTokens
-Get social tokens
+Get social tokens for the sales channel
 
 ```golang
 
@@ -61911,14 +62382,14 @@ data, err := Configuration.GetAppApiTokens(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
-Get social tokens.
+Use this API to retrieve the tokens used for integrating Firebase, MoEngage, Segment, GTM, Freshchat, Safetynet, Google Map, Google, and Facebook auth. **Note** - Token values are encrypted with AES encryption using a secret key.
 
 *Success Response:*
 
@@ -61941,7 +62412,7 @@ Schema: `TokenResponse`
 
 
 #### updateAppApiTokens
-Add social tokens
+Add or update social tokens for the sales channel
 
 ```golang
 
@@ -61951,15 +62422,15 @@ data, err := Configuration.UpdateAppApiTokens(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 | body |  TokenResponse | "Request body" 
 
-Add social tokens.
+Use this API to add or edit the tokens used for integrating Firebase, MoEngage, Segment, GTM, Freshchat, Safetynet, Google Map, Google and Facebook auth.
 
 *Success Response:*
 
@@ -61982,7 +62453,7 @@ Schema: `TokenResponse`
 
 
 #### getAppCompanies
-Application inventory enabled companies
+Get companies enabled in the sales channel inventory
 
 ```golang
 
@@ -61992,10 +62463,10 @@ data, err := Configuration.GetAppCompanies(CompanyID, ApplicationID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
@@ -62006,7 +62477,7 @@ data, err := Configuration.GetAppCompanies(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `UID`, `PageNo`, `PageSize`
 
 
-Application inventory enabled companies.
+Fetch info of all the companies (e.g. name, uid, and company type) whose inventory is fetched into the current sales channel application
 
 *Success Response:*
 
@@ -62029,7 +62500,7 @@ Schema: `CompaniesResponse`
 
 
 #### getAppStores
-Application inventory enabled stores
+Get stores enabled in the sales channel inventory
 
 ```golang
 
@@ -62039,10 +62510,10 @@ data, err := Configuration.GetAppStores(CompanyID, ApplicationID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
@@ -62051,7 +62522,7 @@ data, err := Configuration.GetAppStores(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`
 
 
-Application inventory enabled stores.
+Fetch info of all the companies (e.g. uid, name, display name, store type, store code and company id) whose inventory is fetched into the current sales channel application
 
 *Success Response:*
 
@@ -62074,7 +62545,7 @@ Schema: `StoresResponse`
 
 
 #### getInventoryConfig
-Get application configuration
+Get sales channel configuration
 
 ```golang
 
@@ -62084,14 +62555,14 @@ data, err := Configuration.GetInventoryConfig(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
-Get application configuration for various features and data
+Use this API to fetch configuration details of authentication, inventory, article assignment rules, reward points, cart, payment, order, logistics, etc.
 
 *Success Response:*
 
@@ -62114,7 +62585,7 @@ Schema: `ApplicationInventory`
 
 
 #### updateInventoryConfig
-Update application configuration
+Update sales channel configuration
 
 ```golang
 
@@ -62124,15 +62595,15 @@ data, err := Configuration.UpdateInventoryConfig(CompanyID, ApplicationID, body)
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 | body |  ApplicationInventory | "Request body" 
 
-Update application configuration for various features and data
+Modify the configuration details of authentication, inventory, article assignment rules, reward points, cart, payment, order, logistics, etc.
 
 *Success Response:*
 
@@ -62155,7 +62626,7 @@ Schema: `ApplicationInventory`
 
 
 #### partiallyUpdateInventoryConfig
-Partially update application configuration
+Partially update sales channel configuration
 
 ```golang
 
@@ -62165,15 +62636,15 @@ data, err := Configuration.PartiallyUpdateInventoryConfig(CompanyID, Application
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 | body |  AppInventoryPartialUpdate | "Request body" 
 
-Partially update application configuration for various features and data
+Partially update the configuration details of authentication, inventory, article assignment rules, reward points, cart, payment, order, logistics, etc.
 
 *Success Response:*
 
@@ -62196,7 +62667,7 @@ Schema: `ApplicationInventory`
 
 
 #### getAppCurrencyConfig
-Get application enabled currency list
+Get currencies supported in the application
 
 ```golang
 
@@ -62206,14 +62677,14 @@ data, err := Configuration.GetAppCurrencyConfig(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
-Get application enabled currency list
+Get a list of currencies supported in the current sales channel. Moreover, get the cuurency that is set as the default one in the application.
 
 *Success Response:*
 
@@ -62236,7 +62707,7 @@ Schema: `AppSupportedCurrency`
 
 
 #### updateAppCurrencyConfig
-Add initial application supported currency
+Update initial sales channel supported currency
 
 ```golang
 
@@ -62246,15 +62717,15 @@ data, err := Configuration.UpdateAppCurrencyConfig(CompanyID, ApplicationID, bod
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 | body |  AppSupportedCurrency | "Request body" 
 
-Add initial application supported currency for various features and data. Default INR will be enabled.
+Use this API to add and edit the currencies supported in the application. Initially, INR will be enabled by default.
 
 *Success Response:*
 
@@ -62287,10 +62758,10 @@ data, err := Configuration.GetAppSupportedCurrency(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
@@ -62327,10 +62798,10 @@ data, err := Configuration.GetOrderingStoresByFilter(CompanyID, ApplicationID, x
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
@@ -62340,7 +62811,7 @@ data, err := Configuration.GetOrderingStoresByFilter(CompanyID, ApplicationID, x
 
 | body |  FilterOrderingStoreRequest | "Request body" 
 
-Get ordering store by filter
+Use this API to use filters and retrieve the details of the deployment stores (the selling locations where the application will be utilised for placing orders).
 
 *Success Response:*
 
@@ -62373,15 +62844,15 @@ data, err := Configuration.UpdateOrderingStoreConfig(CompanyID, ApplicationID, b
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 | body |  OrderingStoreConfig | "Request body" 
 
-Add/Update ordering store config.
+Use this API to edit the details of the deployment stores (the selling locations where the application will be utilised for placing orders)
 
 *Success Response:*
 
@@ -62414,10 +62885,10 @@ data, err := Configuration.GetStaffOrderingStores(CompanyID, ApplicationID, xQue
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
@@ -62451,7 +62922,7 @@ Schema: `OrderingStoresResponse`
 
 
 #### getDomains
-Get attached domain list
+Fetch all the domains added to an  application (sales channel website), including pre-defined domain (free domain) or custom domain (owned by the brand). Know the verification status of each domain name, and find out which one is the primary domain, short link domain, or both.
 
 ```golang
 
@@ -62461,14 +62932,14 @@ data, err := Configuration.GetDomains(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
-Get attached domain list.
+Get list of domains
 
 *Success Response:*
 
@@ -62491,7 +62962,7 @@ Schema: `DomainsResponse`
 
 
 #### addDomain
-Add new domain to application
+Add new domain to current sales channel
 
 ```golang
 
@@ -62501,15 +62972,15 @@ data, err := Configuration.AddDomain(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 | body |  DomainAddRequest | "Request body" 
 
-Add new domain to application.
+Add a new domain to current sales channel, including pre-defined domain (free domain) or custom domain (owned by the brand)
 
 *Success Response:*
 
@@ -62532,7 +63003,7 @@ Schema: `Domain`
 
 
 #### removeDomainById
-Remove attached domain
+Remove attached domain from current sales channel
 
 ```golang
 
@@ -62542,17 +63013,17 @@ data, err := Configuration.RemoveDomainById(CompanyID, ApplicationID, ID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
-| ID | string | Domain _id | 
+| ID | string | The unique identifier (24-digit Mongo Object ID) of the domain | 
 
 
 
-Remove attached domain.
+Delete a domain (secondary or shortlink domain) added to a sales channel. It will disable user's access to website, shared links, and other features associated with this domain.
 
 *Success Response:*
 
@@ -62575,7 +63046,7 @@ Schema: `SuccessMessageResponse`
 
 
 #### changeDomainType
-Change domain type
+Change the type of domain in the current sales channel
 
 ```golang
 
@@ -62585,15 +63056,15 @@ data, err := Configuration.ChangeDomainType(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 | body |  UpdateDomainTypeRequest | "Request body" 
 
-Change a domain to Primary or Shortlink domain
+Primary domain is used as the URL of your website. Short link domain is comparatively smaller and used while generating short links. Use this API to change a domain to either Primary or a Shortlink domain.
 
 *Success Response:*
 
@@ -62616,7 +63087,7 @@ Schema: `DomainsResponse`
 
 
 #### getDomainStatus
-Get domain connected status.
+Get the status of connected domain
 
 ```golang
 
@@ -62626,15 +63097,15 @@ data, err := Configuration.GetDomainStatus(CompanyID, ApplicationID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 | body |  DomainStatusRequest | "Request body" 
 
-Get domain connected status. Check if domain is live and mapped to appropriate IP to fynd servers.
+Shows if the A records and TXT records of the domain correctly points to appropriate IP on Fynd Servers.
 
 *Success Response:*
 
@@ -62657,7 +63128,7 @@ Schema: `DomainStatusResponse`
 
 
 #### createApplication
-Create application
+Create a new sales channel
 
 ```golang
 
@@ -62667,12 +63138,12 @@ data, err := Configuration.CreateApplication(CompanyID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
 | body |  CreateApplicationRequest | "Request body" 
 
-Create new application
+Applications are sales channel websites which can be configured, personalized and customized. Use this API to create a new application in the current company.
 
 *Success Response:*
 
@@ -62695,7 +63166,7 @@ Schema: `CreateAppResponse`
 
 
 #### getApplications
-Get list of application under company
+Get list of registered sales channels under company
 
 ```golang
 
@@ -62705,7 +63176,7 @@ data, err := Configuration.GetApplications(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
 
@@ -62716,7 +63187,7 @@ data, err := Configuration.GetApplications(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`
 
 
-Get list of application under company
+Applications are sales channel websites which can be configured, personalized and customised. Use this API to fetch a list of applications created within a company.
 
 *Success Response:*
 
@@ -62739,7 +63210,7 @@ Schema: `ApplicationsResponse`
 
 
 #### getApplicationById
-Get application data from id
+Get sales channel data by ID
 
 ```golang
 
@@ -62749,14 +63220,14 @@ data, err := Configuration.GetApplicationById(CompanyID, ApplicationID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ApplicationID | string | Current application id | 
+| ApplicationID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account | 
 
 
 
-Get application data from id
+Use application ID to get the current sales channel details which includes channel name, description, banner, logo, favicon, domain details, token, etc.
 
 *Success Response:*
 
@@ -62789,11 +63260,11 @@ data, err := Configuration.GetCurrencies(CompanyID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
 
-Get all currencies
+Use this API to get a list of currencies allowed in the company. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
 
 *Success Response:*
 
@@ -62816,7 +63287,7 @@ Schema: `CurrenciesResponse`
 
 
 #### getDomainAvailibility
-Check domain availibility before linking to application
+Check domain availability before linking to application
 
 ```golang
 
@@ -62826,12 +63297,12 @@ data, err := Configuration.GetDomainAvailibility(CompanyID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
 | body |  DomainSuggestionsRequest | "Request body" 
 
-Check domain availibility before linking to application. Also sends domain suggestions with similar to queried domain. \ Custom domain search is currently powered by GoDaddy provider.
+Use this API to check the domain availability before linking it to application. Also sends domain suggestions that are similar to the queried domain. Note - Custom domain search is currently powered by GoDaddy provider.
 
 *Success Response:*
 
@@ -62898,7 +63369,7 @@ Suggestions for custom domains
 
 
 #### getIntegrationById
-Get integration data
+Get integration data by its ID
 
 ```golang
 
@@ -62908,14 +63379,14 @@ data, err := Configuration.GetIntegrationById(CompanyID, ID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
 | ID | float64 | Integration id | 
 
 
 
-Get integration data
+Use this API to fetch the details of an integration (such as Ginesys, SAP, etc.) using its ID
 
 *Success Response:*
 
@@ -62948,7 +63419,7 @@ data, err := Configuration.GetAvailableOptIns(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
 
@@ -62957,7 +63428,7 @@ data, err := Configuration.GetAvailableOptIns(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`
 
 
-Get all available integration opt-ins
+Use this API to get a list of all available integrations in a company
 
 *Success Response:*
 
@@ -62990,13 +63461,13 @@ data, err := Configuration.GetSelectedOptIns(CompanyID, Level, UID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| Level | string | Integration level | 
+| Level | string | store or company | 
 
 
-| UID | float64 | Integration level uid | 
+| UID | float64 | Unique identifier of the selected integration level. | 
 
 
 
@@ -63005,7 +63476,7 @@ data, err := Configuration.GetSelectedOptIns(CompanyID, Level, UID, xQuery);
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`
 
 
-Get company/store level integration opt-ins
+Use this API to get the store-level/company-level integrations configured in a company
 
 *Success Response:*
 
@@ -63038,13 +63509,13 @@ data, err := Configuration.GetIntegrationLevelConfig(CompanyID, ID, Level, xQuer
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ID | string | Integration id | 
+| ID | string | Integration ID (24-digit Mongo Object ID) | 
 
 
-| Level | string | Integration level | 
+| Level | string | store or company | 
 
 
 
@@ -63053,7 +63524,7 @@ data, err := Configuration.GetIntegrationLevelConfig(CompanyID, ID, Level, xQuer
 | xQuery | struct | Includes properties such as `Opted`, `CheckPermission`
 
 
-Get integration/integration-opt-in level config
+Use this API to get the configuration details of an integration such as token, permissions, level, opted value, uid, meta, location ID, etc.
 
 *Success Response:*
 
@@ -63076,7 +63547,7 @@ Schema: `IntegrationConfigResponse`
 
 
 #### updateLevelIntegration
-Update a store level opt-in for integration
+Update a store level integration you opted
 
 ```golang
 
@@ -63086,18 +63557,18 @@ data, err := Configuration.UpdateLevelIntegration(CompanyID, ID, Level, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ID | string | Integration id | 
+| ID | string | Integration ID (24-digit Mongo Object ID) | 
 
 
-| Level | string | Integration level | 
+| Level | string | Integration level, `store` or `company` | 
 
 
 | body |  UpdateIntegrationLevelRequest | "Request body" 
 
-Update a store level opt-in for integration
+Use this API to update the configuration details of an integration such as token, permissions, level, opted value, uid, meta, location ID, etc. at a particular level (store/company).
 
 *Success Response:*
 
@@ -63120,7 +63591,7 @@ Schema: `IntegrationLevel`
 
 
 #### getIntegrationByLevelId
-Get level data for integration
+Get integration config at a particular level (store/company)
 
 ```golang
 
@@ -63130,20 +63601,20 @@ data, err := Configuration.GetIntegrationByLevelId(CompanyID, ID, Level, UID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ID | string | Integration id | 
+| ID | string | Integration ID (24-digit Mongo Object ID) | 
 
 
-| Level | string | Integration level | 
+| Level | string | Integration level, `store` or `company` | 
 
 
-| UID | float64 | Integration level uid | 
+| UID | float64 | Unique identifier of integration level (store/company) | 
 
 
 
-Get level data for integration
+Use this API to get the configuration details of an integration such as token, permissions, level, opted value, uid, meta, location ID, etc. at a particular level (store/company).
 
 *Success Response:*
 
@@ -63166,7 +63637,7 @@ Schema: `IntegrationLevel`
 
 
 #### updateLevelUidIntegration
-Update a store level opt-in for integration
+Update integration level by store UID
 
 ```golang
 
@@ -63176,21 +63647,21 @@ data, err := Configuration.UpdateLevelUidIntegration(CompanyID, ID, Level, UID, 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ID | string | Integration id | 
+| ID | string | Integration ID (24-digit Mongo Object ID) | 
 
 
-| Level | string | Integration level | 
+| Level | string | Integration level, `store` or `company` | 
 
 
-| UID | float64 | Integration level uid | 
+| UID | float64 | Unique identifier of integration level (store/company) | 
 
 
 | body |  IntegrationLevel | "Request body" 
 
-Update a store level opt-in for integration
+Update the level of integration by store UID
 
 *Success Response:*
 
@@ -63213,7 +63684,7 @@ Schema: `IntegrationLevel`
 
 
 #### getLevelActiveIntegrations
-Check store has active integration
+Check active integration at store
 
 ```golang
 
@@ -63223,20 +63694,20 @@ data, err := Configuration.GetLevelActiveIntegrations(CompanyID, ID, Level, UID)
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ID | string | Integration id | 
+| ID | string | Integration ID (24-digit Mongo Object ID) | 
 
 
-| Level | string | Integration level | 
+| Level | string | Integration level, `store` or `company` | 
 
 
-| UID | float64 | Integration level uid | 
+| UID | float64 | Unique identifier of integration level (store/company) | 
 
 
 
-API checks if a store is already opted in any other integrations
+Use this API to check if a store is already opted-in for any integration
 
 *Success Response:*
 
@@ -63259,7 +63730,7 @@ Schema: `OptedStoreIntegration`
 
 
 #### getBrandsByCompany
-Get brands by company
+Get brands by company.
 
 ```golang
 
@@ -63269,14 +63740,14 @@ data, err := Configuration.GetBrandsByCompany(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
 
 | xQuery | struct | Includes properties such as `Q`
 
 
-Get brands by company
+Use this API to get all the brands added in a company. Get all the brand names, along with URLs of their logo, banner, and portrait image.
 
 *Success Response:*
 
@@ -63309,7 +63780,7 @@ data, err := Configuration.GetCompanyByBrands(CompanyID, xQuery, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
 
@@ -63319,7 +63790,7 @@ data, err := Configuration.GetCompanyByBrands(CompanyID, xQuery, body);
 
 | body |  CompanyByBrandsRequest | "Request body" 
 
-Get company by brand uids
+Use this API to get a list of companies by the brands they deal
 
 *Success Response:*
 
@@ -63342,7 +63813,7 @@ Schema: `CompanyByBrandsResponse`
 
 
 #### getStoreByBrands
-Get stores by brand uids
+Get stores by brand uids for the current company
 
 ```golang
 
@@ -63352,7 +63823,7 @@ data, err := Configuration.GetStoreByBrands(CompanyID, xQuery, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
 
@@ -63362,7 +63833,7 @@ data, err := Configuration.GetStoreByBrands(CompanyID, xQuery, body);
 
 | body |  StoreByBrandsRequest | "Request body" 
 
-Get stores by brand uids
+Use this API to get a list of selling locations (stores) by the brands they deal. Store has information about store name, store type, store code, store address, and company detail.
 
 *Success Response:*
 
@@ -63385,7 +63856,7 @@ Schema: `StoreByBrandsResponse`
 
 
 #### getOtherSellerApplications
-Get other seller applications
+Get other seller sales channels
 
 ```golang
 
@@ -63395,7 +63866,7 @@ data, err := Configuration.GetOtherSellerApplications(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
 
@@ -63404,7 +63875,7 @@ data, err := Configuration.GetOtherSellerApplications(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`
 
 
-Get other seller applications who has opted current company as inventory
+Use this API to fetch all other seller applications that were not created within the current company. but have opted for the current company's inventory
 
 *Success Response:*
 
@@ -63427,7 +63898,7 @@ Schema: `OtherSellerApplications`
 
 
 #### getOtherSellerApplicationById
-Get other seller applications
+Get other seller's sales channel by ID
 
 ```golang
 
@@ -63437,14 +63908,14 @@ data, err := Configuration.GetOtherSellerApplicationById(CompanyID, ID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
 | ID | string | Application Id | 
 
 
 
-Get other seller application
+Use application ID to fetch details of a seller application that was not created within the current company. but has opted for the current company's inventory
 
 *Success Response:*
 
@@ -63467,7 +63938,7 @@ Schema: `OptedApplicationResponse`
 
 
 #### optOutFromApplication
-Opt out company or store from other seller application
+Opt-out company or store from other seller application
 
 ```golang
 
@@ -63477,15 +63948,15 @@ data, err := Configuration.OptOutFromApplication(CompanyID, ID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Current company id | 
+| CompanyID | string | Numeric ID allotted to a business account on Fynd Platform | 
 
 
-| ID | string | Application Id | 
+| ID | string | Alphanumeric ID allotted to an application (sales channel website) created within a business account. | 
 
 
 | body |  OptOutInventory | "Request body" 
 
-Opt out company or store from other seller application
+Use this API to opt-out your company or store from other seller application. The specific seller application will no longer fetch inventory from your company or store.
 
 *Success Response:*
 
