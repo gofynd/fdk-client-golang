@@ -14143,77 +14143,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // ExtensionPaymentUpdate Extension will call this api to set the payment status of an order
-     func (pa *PlatformAppPayment)  ExtensionPaymentUpdate(body  ExtensionPaymentUpdateRequestSerializer) (ExtensionPaymentUpdateResponseSerializer, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            extensionPaymentUpdateResponse ExtensionPaymentUpdateResponseSerializer
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return ExtensionPaymentUpdateResponseSerializer{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return ExtensionPaymentUpdateResponseSerializer{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "post",
-            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/update/",pa.CompanyID, pa.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ExtensionPaymentUpdateResponseSerializer{}, err
-	    }
-        
-        err = json.Unmarshal(response, &extensionPaymentUpdateResponse)
-        if err != nil {
-            return ExtensionPaymentUpdateResponseSerializer{}, common.NewFDKError(err.Error())
-        }
-        return extensionPaymentUpdateResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // GetPaymentCodeOption List Payment Options Method Codes
      func (pa *PlatformAppPayment)  GetPaymentCodeOption() (GetPaymentCodeResponse, error) {
         var (
@@ -14284,6 +14213,159 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    //PlatformAppGetApplicationShipmentsXQuery holds query params
+    type PlatformAppGetApplicationShipmentsXQuery struct { 
+        Lane string  `url:"lane,omitempty"` 
+        SearchType string  `url:"search_type,omitempty"` 
+        SearchID string  `url:"search_id,omitempty"` 
+        FromDate string  `url:"from_date,omitempty"` 
+        ToDate string  `url:"to_date,omitempty"` 
+        DpIds string  `url:"dp_ids,omitempty"` 
+        OrderingCompanyID string  `url:"ordering_company_id,omitempty"` 
+        Stores string  `url:"stores,omitempty"` 
+        SalesChannels string  `url:"sales_channels,omitempty"` 
+        RequestByExt string  `url:"request_by_ext,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        CustomerID string  `url:"customer_id,omitempty"` 
+        IsPrioritySort bool  `url:"is_priority_sort,omitempty"`  
+    }
+    
+    // GetApplicationShipments 
+     func (or *PlatformAppOrder)  GetApplicationShipments(xQuery PlatformAppGetApplicationShipmentsXQuery) (ShipmentInternalPlatformViewResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getApplicationShipmentsResponse ShipmentInternalPlatformViewResponse
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/application/%s/shipments/",or.CompanyID, or.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ShipmentInternalPlatformViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getApplicationShipmentsResponse)
+        if err != nil {
+            return ShipmentInternalPlatformViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return getApplicationShipmentsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+    
+    
+    
+    
+  
+
+    
+    //PlatformAppGetAppOrderShipmentDetailsXQuery holds query params
+    type PlatformAppGetAppOrderShipmentDetailsXQuery struct { 
+        OrderID string  `url:"order_id,omitempty"`  
+    }
+    
+    // GetAppOrderShipmentDetails 
+     func (or *PlatformAppOrder)  GetAppOrderShipmentDetails(xQuery PlatformAppGetAppOrderShipmentDetailsXQuery) (OrderDetailsResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAppOrderShipmentDetailsResponse OrderDetailsResponse
+	    )
+
+        
+
+         
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.config,
+            "get",
+            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/application/%s/order-details",or.CompanyID, or.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return OrderDetailsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAppOrderShipmentDetailsResponse)
+        if err != nil {
+            return OrderDetailsResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAppOrderShipmentDetailsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // TrackShipmentPlatform Track shipment
      func (or *PlatformAppOrder)  TrackShipmentPlatform(ShipmentID string) (PlatformShipmentTrack, error) {
         var (
@@ -14326,6 +14408,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
            
        
+    
+    
+    
+    
+    
+    
     
     
     
@@ -14431,6 +14519,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+    
+    
 
  
 	 
@@ -14444,6 +14534,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     func NewPlatformAppCatalog(config *PlatformConfig, appID string) *PlatformAppCatalog {
         return &PlatformAppCatalog{config, config.CompanyID, appID}
     }
+    
+    
+    
+  
+
+    
+    // GetSearchKeywords Get a Search Keywords Details
+     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getSearchKeywordsResponse GetSearchWordsDetailResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetSearchWordsDetailResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getSearchKeywordsResponse)
+        if err != nil {
+            return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
+        }
+        return getSearchKeywordsResponse, nil
+        
+    }
+           
+       
     
     
     
@@ -14569,54 +14707,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetSearchKeywords Get a Search Keywords Details
-     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getSearchKeywordsResponse GetSearchWordsDetailResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetSearchWordsDetailResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getSearchKeywordsResponse)
-        if err != nil {
-            return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
-        }
-        return getSearchKeywordsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // GetAllSearchKeyword List all Search Custom Keyword Listing
      func (ca *PlatformAppCatalog)  GetAllSearchKeyword() (GetSearchWordsResponse, error) {
         var (
@@ -14722,6 +14812,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetSearchWordsData{}, common.NewFDKError(err.Error())
         }
         return createCustomKeywordResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
+     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAutocompleteKeywordDetailResponse, nil
         
     }
            
@@ -14841,54 +14979,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
         }
         return updateAutocompleteKeywordResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
-     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAutocompleteKeywordDetailResponse, nil
         
     }
            
@@ -27274,6 +27364,52 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // GetDpApplicationRulePriority Get All DpApplicationRules rules added at application level from database.
+     func (se *PlatformAppServiceability)  GetDpApplicationRulePriority() (DPApplicationRuleResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getDpApplicationRulePriorityResponse DPApplicationRuleResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/courier/priority",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DPApplicationRuleResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getDpApplicationRulePriorityResponse)
+        if err != nil {
+            return DPApplicationRuleResponse{}, common.NewFDKError(err.Error())
+        }
+        return getDpApplicationRulePriorityResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // UpsertDpApplicationRulePriority Upsert of DpApplicationRules in database.
      func (se *PlatformAppServiceability)  UpsertDpApplicationRulePriority(body  DPApplicationRuleRequest) (DPApplicationRuleResponse, error) {
         var (
@@ -27325,98 +27461,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return DPApplicationRuleResponse{}, common.NewFDKError(err.Error())
         }
         return upsertDpApplicationRulePriorityResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetDpApplicationRulePriority Get All DpApplicationRules rules added at application level from database.
-     func (se *PlatformAppServiceability)  GetDpApplicationRulePriority() (DPApplicationRuleResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getDpApplicationRulePriorityResponse DPApplicationRuleResponse
-	    )
-
-        
-
-         
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            se.config,
-            "get",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/courier/priority",se.CompanyID, se.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return DPApplicationRuleResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getDpApplicationRulePriorityResponse)
-        if err != nil {
-            return DPApplicationRuleResponse{}, common.NewFDKError(err.Error())
-        }
-        return getDpApplicationRulePriorityResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetApplicationServiceabilitySelfShipment Self-ship configuration of application.
-     func (se *PlatformAppServiceability)  GetApplicationServiceabilitySelfShipment() (ApplicationSelfShipConfigResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getApplicationServiceabilitySelfShipmentResponse ApplicationSelfShipConfigResponse
-	    )
-
-        
-
-         
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            se.config,
-            "get",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/selfship",se.CompanyID, se.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ApplicationSelfShipConfigResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getApplicationServiceabilitySelfShipmentResponse)
-        if err != nil {
-            return ApplicationSelfShipConfigResponse{}, common.NewFDKError(err.Error())
-        }
-        return getApplicationServiceabilitySelfShipmentResponse, nil
         
     }
            
@@ -27480,6 +27524,52 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return ApplicationSelfShipConfigResponse{}, common.NewFDKError(err.Error())
         }
         return patchApplicationServiceabilitySelfShipmentResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetApplicationServiceabilitySelfShipment Self-ship configuration of application.
+     func (se *PlatformAppServiceability)  GetApplicationServiceabilitySelfShipment() (ApplicationSelfShipConfigResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getApplicationServiceabilitySelfShipmentResponse ApplicationSelfShipConfigResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/selfship",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationSelfShipConfigResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getApplicationServiceabilitySelfShipmentResponse)
+        if err != nil {
+            return ApplicationSelfShipConfigResponse{}, common.NewFDKError(err.Error())
+        }
+        return getApplicationServiceabilitySelfShipmentResponse, nil
         
     }
            
