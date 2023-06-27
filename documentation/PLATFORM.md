@@ -372,8 +372,6 @@
     * [sendSmsNinja](#sendsmsninja)
     * [updatePackagingDimensions](#updatepackagingdimensions)
     * [createOrder](#createorder)
-    * [getChannelConfig](#getchannelconfig)
-    * [createChannelConfig](#createchannelconfig)
     * [uploadConsent](#uploadconsent)
     * [orderUpdate](#orderupdate)
     * [checkOrderStatus](#checkorderstatus)
@@ -58018,81 +58016,6 @@ Successfully created an order!
 
 
 Schema: `CreateOrderResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getChannelConfig
-
-
-```golang
-
-data, err := Order.GetChannelConfig(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-
-getChannelConfig
-
-*Success Response:*
-
-
-
-Successfully created the config data
-
-
-Schema: `CreateChannelConfigData`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createChannelConfig
-
-
-```golang
-
-data, err := Order.CreateChannelConfig(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| body |  CreateChannelConfigData | "Request body" 
-
-createChannelConfig
-
-*Success Response:*
-
-
-
-Successfully updateShipmentStatus!
-
-
-Schema: `CreateChannelConfigResponse`
 
 
 
