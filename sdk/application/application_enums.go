@@ -277,14 +277,6 @@ import (
             PRODUCT PageType = "product"
             
             
-            //PRODUCT-REVIEWS defines constant for the `product-reviews` 
-            PRODUCT-REVIEWS PageType = "product-reviews"
-            
-            
-            //ADD-PRODUCT-REVIEW defines constant for the `add-product-review` 
-            ADD-PRODUCT-REVIEW PageType = "add-product-review"
-            
-            
             //PRODUCT-REQUEST defines constant for the `product-request` 
             PRODUCT-REQUEST PageType = "product-request"
             
@@ -295,6 +287,10 @@ import (
             
             //PROFILE defines constant for the `profile` 
             PROFILE PageType = "profile"
+            
+            
+            //PROFILE-ORDER-SHIPMENT defines constant for the `profile-order-shipment` 
+            PROFILE-ORDER-SHIPMENT PageType = "profile-order-shipment"
             
             
             //PROFILE-BASIC defines constant for the `profile-basic` 
@@ -382,12 +378,11 @@ import (
     //IsValid return error if enum is invalid
     func (pa PageType) IsValid() error {
       switch pa {
-        case  ABOUT-US, ADDRESSES, BLOG, BRANDS, CARDS, CART, CATEGORIES, BRAND, CATEGORY, COLLECTION, COLLECTIONS, CONTACT-US, EXTERNAL, FAQ, FRESHCHAT, HOME, NOTIFICATION-SETTINGS, ORDERS, PAGE, POLICY, PRODUCT, PRODUCT-REVIEWS, ADD-PRODUCT-REVIEW, PRODUCT-REQUEST, PRODUCTS, PROFILE, PROFILE-BASIC, PROFILE-COMPANY, PROFILE-EMAILS, PROFILE-PHONES, RATE-US, REFER-EARN, SETTINGS, SHARED-CART, TNC, TRACK-ORDER, WISHLIST, SECTIONS, FORM, CART-DELIVERY, CART-PAYMENT, CART-REVIEW, LOGIN, REGISTER, SHIPPING-POLICY, RETURN-POLICY : 
+        case  ABOUT-US, ADDRESSES, BLOG, BRANDS, CARDS, CART, CATEGORIES, BRAND, CATEGORY, COLLECTION, COLLECTIONS, CONTACT-US, EXTERNAL, FAQ, FRESHCHAT, HOME, NOTIFICATION-SETTINGS, ORDERS, PAGE, POLICY, PRODUCT, PRODUCT-REQUEST, PRODUCTS, PROFILE, PROFILE-ORDER-SHIPMENT, PROFILE-BASIC, PROFILE-COMPANY, PROFILE-EMAILS, PROFILE-PHONES, RATE-US, REFER-EARN, SETTINGS, SHARED-CART, TNC, TRACK-ORDER, WISHLIST, SECTIONS, FORM, CART-DELIVERY, CART-PAYMENT, CART-REVIEW, LOGIN, REGISTER, SHIPPING-POLICY, RETURN-POLICY : 
         return nil
       }
       return errors.New("Invalid PageType type")
     }
-
 
 
 
