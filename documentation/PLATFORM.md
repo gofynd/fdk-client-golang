@@ -253,6 +253,7 @@
     * [getEmailTemplateById](#getemailtemplatebyid)
     * [updateEmailTemplateById](#updateemailtemplatebyid)
     * [deleteEmailTemplateById](#deleteemailtemplatebyid)
+    * [getSubscribedEmailTemplates](#getsubscribedemailtemplates)
     * [sendCommunicationSynchronously](#sendcommunicationsynchronously)
     * [sendCommunicationAsynchronously](#sendcommunicationasynchronously)
     * [getEventSubscriptions](#geteventsubscriptions)
@@ -271,10 +272,11 @@
     * [deleteSmsProviderById](#deletesmsproviderbyid)
     * [getSmsTemplates](#getsmstemplates)
     * [createSmsTemplate](#createsmstemplate)
+    * [getSystemSmsTemplates](#getsystemsmstemplates)
     * [getSmsTemplateById](#getsmstemplatebyid)
     * [updateSmsTemplateById](#updatesmstemplatebyid)
     * [deleteSmsTemplateById](#deletesmstemplatebyid)
-    * [getSystemSystemTemplates](#getsystemsystemtemplates)
+    * [getSubscribedSmsTemplates](#getsubscribedsmstemplates)
     * [getVoiceProviders](#getvoiceproviders)
     * [createVoiceProvider](#createvoiceprovider)
     * [getVoiceProviderById](#getvoiceproviderbyid)
@@ -329,6 +331,7 @@
     * [pollingPaymentLink](#pollingpaymentlink)
     * [resendPaymentLink](#resendpaymentlink)
     * [cancelPaymentLink](#cancelpaymentlink)
+    * [extensionPaymentUpdate](#extensionpaymentupdate)
     * [getPaymentCodeOption](#getpaymentcodeoption)
     
 
@@ -367,8 +370,8 @@
     * [getManifestfilters](#getmanifestfilters)
     * [dispatchManifest](#dispatchmanifest)
     * [getRoleBasedActions](#getrolebasedactions)
-    * [postShipmentHistory](#postshipmenthistory)
     * [getShipmentHistory](#getshipmenthistory)
+    * [postShipmentHistory](#postshipmenthistory)
     * [sendSmsNinja](#sendsmsninja)
     * [updatePackagingDimensions](#updatepackagingdimensions)
     * [createOrder](#createorder)
@@ -388,50 +391,50 @@
 
 * [Catalog](#Catalog)
   * Methods
-    * [deleteSearchKeywords](#deletesearchkeywords)
     * [getSearchKeywords](#getsearchkeywords)
     * [updateSearchKeywords](#updatesearchkeywords)
-    * [createCustomKeyword](#createcustomkeyword)
+    * [deleteSearchKeywords](#deletesearchkeywords)
     * [getAllSearchKeyword](#getallsearchkeyword)
-    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
+    * [createCustomKeyword](#createcustomkeyword)
     * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
     * [updateAutocompleteKeyword](#updateautocompletekeyword)
-    * [createCustomAutocompleteRule](#createcustomautocompleterule)
+    * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
     * [getAutocompleteConfig](#getautocompleteconfig)
-    * [createProductBundle](#createproductbundle)
+    * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [getProductBundle](#getproductbundle)
+    * [createProductBundle](#createproductbundle)
     * [getProductBundleDetail](#getproductbundledetail)
     * [updateProductBundle](#updateproductbundle)
-    * [createSizeGuide](#createsizeguide)
     * [getSizeGuides](#getsizeguides)
+    * [createSizeGuide](#createsizeguide)
     * [getSizeGuide](#getsizeguide)
     * [updateSizeGuide](#updatesizeguide)
-    * [getAppProduct](#getappproduct)
     * [updateAppProduct](#updateappproduct)
+    * [getAppProduct](#getappproduct)
     * [getConfigurationMetadata](#getconfigurationmetadata)
-    * [createGroupConfiguration](#creategroupconfiguration)
     * [getGroupConfigurations](#getgroupconfigurations)
-    * [deleteGroupConfiguration](#deletegroupconfiguration)
+    * [createGroupConfiguration](#creategroupconfiguration)
     * [updateGroupConfiguration](#updategroupconfiguration)
-    * [createListingConfiguration](#createlistingconfiguration)
+    * [deleteGroupConfiguration](#deletegroupconfiguration)
     * [getListingConfigurations](#getlistingconfigurations)
-    * [deleteListingConfiguration](#deletelistingconfiguration)
+    * [createListingConfiguration](#createlistingconfiguration)
     * [updateListingConfiguration](#updatelistingconfiguration)
+    * [deleteListingConfiguration](#deletelistingconfiguration)
     * [updateAllowSingle](#updateallowsingle)
     * [updateDefaultSort](#updatedefaultsort)
     * [getCatalogConfiguration](#getcatalogconfiguration)
-    * [createConfigurationProductListing](#createconfigurationproductlisting)
     * [getConfigurations](#getconfigurations)
-    * [createConfigurationByType](#createconfigurationbytype)
+    * [createConfigurationProductListing](#createconfigurationproductlisting)
     * [getConfigurationByType](#getconfigurationbytype)
+    * [createConfigurationByType](#createconfigurationbytype)
     * [getQueryFilters](#getqueryfilters)
-    * [createCollection](#createcollection)
     * [getAllCollections](#getallcollections)
+    * [createCollection](#createcollection)
     * [getCollectionDetail](#getcollectiondetail)
-    * [deleteCollection](#deletecollection)
     * [updateCollection](#updatecollection)
-    * [addCollectionItems](#addcollectionitems)
+    * [deleteCollection](#deletecollection)
     * [getCollectionItems](#getcollectionitems)
+    * [addCollectionItems](#addcollectionitems)
     * [getCatalogInsights](#getcataloginsights)
     * [getSellerInsights](#getsellerinsights)
     * [createMarketplaceOptin](#createmarketplaceoptin)
@@ -442,8 +445,8 @@
     * [getStoreDetail](#getstoredetail)
     * [getGenderAttribute](#getgenderattribute)
     * [listProductTemplateCategories](#listproducttemplatecategories)
-    * [createDepartments](#createdepartments)
     * [listDepartmentsData](#listdepartmentsdata)
+    * [createDepartments](#createdepartments)
     * [getDepartmentData](#getdepartmentdata)
     * [updateDepartment](#updatedepartment)
     * [listProductTemplate](#listproducttemplate)
@@ -453,49 +456,50 @@
     * [validateProductTemplateSchema](#validateproducttemplateschema)
     * [listHSNCodes](#listhsncodes)
     * [listProductTemplateExportDetails](#listproducttemplateexportdetails)
-    * [createProductExportJob](#createproductexportjob)
     * [getProductExportJobs](#getproductexportjobs)
+    * [createProductExportJob](#createproductexportjob)
     * [listTemplateBrandTypeValues](#listtemplatebrandtypevalues)
-    * [createCategories](#createcategories)
     * [listCategories](#listcategories)
+    * [createCategories](#createcategories)
     * [getCategoryData](#getcategorydata)
     * [updateCategory](#updatecategory)
-    * [createProduct](#createproduct)
     * [getProducts](#getproducts)
+    * [createProduct](#createproduct)
     * [getVariantsOfProducts](#getvariantsofproducts)
     * [getProductAttributes](#getproductattributes)
-    * [deleteProduct](#deleteproduct)
     * [getProduct](#getproduct)
     * [editProduct](#editproduct)
+    * [deleteProduct](#deleteproduct)
     * [allSizes](#allsizes)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
-    * [createBulkProductUploadJob](#createbulkproductuploadjob)
     * [getProductBulkUploadHistory](#getproductbulkuploadhistory)
+    * [createBulkProductUploadJob](#createbulkproductuploadjob)
     * [uploadBulkProducts](#uploadbulkproducts)
-    * [deleteProductBulkJob](#deleteproductbulkjob)
     * [createProductsInBulk](#createproductsinbulk)
+    * [deleteProductBulkJob](#deleteproductbulkjob)
     * [getProductTags](#getproducttags)
-    * [createProductAssetsInBulk](#createproductassetsinbulk)
     * [getProductAssetsInBulk](#getproductassetsinbulk)
+    * [createProductAssetsInBulk](#createproductassetsinbulk)
     * [deleteSize](#deletesize)
-    * [addInventory](#addinventory)
     * [getInventoryBySize](#getinventorybysize)
+    * [addInventory](#addinventory)
+    * [getProductSizeSellers](#getproductsizesellers)
     * [getInventoryBySizeIdentifier](#getinventorybysizeidentifier)
     * [getInventories](#getinventories)
     * [getDiscountedInventoryBySizeIdentifier](#getdiscountedinventorybysizeidentifier)
     * [deleteInventory](#deleteinventory)
-    * [createBulkInventoryJob](#createbulkinventoryjob)
     * [getInventoryBulkUploadHistory](#getinventorybulkuploadhistory)
-    * [deleteBulkInventoryJob](#deletebulkinventoryjob)
+    * [createBulkInventoryJob](#createbulkinventoryjob)
     * [createBulkInventory](#createbulkinventory)
-    * [createInventoryExportJob](#createinventoryexportjob)
+    * [deleteBulkInventoryJob](#deletebulkinventoryjob)
     * [getInventoryExport](#getinventoryexport)
-    * [createInventoryExport](#createinventoryexport)
+    * [createInventoryExportJob](#createinventoryexportjob)
     * [listInventoryExport](#listinventoryexport)
+    * [createInventoryExport](#createinventoryexport)
     * [exportInventoryConfig](#exportinventoryconfig)
-    * [deleteRealtimeInventory](#deleterealtimeinventory)
     * [updateRealtimeInventory](#updaterealtimeinventory)
+    * [deleteRealtimeInventory](#deleterealtimeinventory)
     * [updateInventories](#updateinventories)
     * [getHsnCode](#gethsncode)
     * [updateHsnCode](#updatehsncode)
@@ -749,8 +753,8 @@
     * [getEntityRegionView](#getentityregionview)
     * [getListView](#getlistview)
     * [getCompanyStoreView](#getcompanystoreview)
-    * [updateZoneControllerView](#updatezonecontrollerview)
     * [getZoneDataView](#getzonedataview)
+    * [updateZoneControllerView](#updatezonecontrollerview)
     * [createZone](#createzone)
     * [getZoneFromPincodeView](#getzonefrompincodeview)
     * [getZonesFromApplicationIdView](#getzonesfromapplicationidview)
@@ -768,14 +772,14 @@
     * [getRegionJobBulkBatchId](#getregionjobbulkbatchid)
     * [upsertDpAccount](#upsertdpaccount)
     * [getDpAccountList](#getdpaccountlist)
-    * [updateDpRule](#updatedprule)
     * [getDpRule](#getdprule)
+    * [updateDpRule](#updatedprule)
     * [createDpRule](#createdprule)
     * [getDpRuleList](#getdprulelist)
-    * [upsertDpCompanyRulePriority](#upsertdpcompanyrulepriority)
     * [getDpCompanyRulePriority](#getdpcompanyrulepriority)
-    * [upsertDpApplicationRulePriority](#upsertdpapplicationrulepriority)
+    * [upsertDpCompanyRulePriority](#upsertdpcompanyrulepriority)
     * [getDpApplicationRulePriority](#getdpapplicationrulepriority)
+    * [upsertDpApplicationRulePriority](#upsertdpapplicationrulepriority)
     * [patchApplicationServiceabilitySelfShipment](#patchapplicationserviceabilityselfshipment)
     * [getApplicationServiceabilitySelfShipment](#getapplicationserviceabilityselfshipment)
     
@@ -795,6 +799,17 @@
     * [invoiceType](#invoicetype)
     * [invoiceListing](#invoicelisting)
     * [invoicePDF](#invoicepdf)
+    * [asCnRefund](#ascnrefund)
+    * [createSellerCreditNoteConfig](#createsellercreditnoteconfig)
+    * [deleteConfig](#deleteconfig)
+    * [channelDisplayName](#channeldisplayname)
+    * [getPdfUrlView](#getpdfurlview)
+    * [creditNoteDetails](#creditnotedetails)
+    * [getCustomerCreditBalance](#getcustomercreditbalance)
+    * [getCnConfig](#getcnconfig)
+    * [generateReportCustomerCn](#generatereportcustomercn)
+    * [downloadReportCustomerCn](#downloadreportcustomercn)
+    * [getReportingFilters](#getreportingfilters)
     
 
 
@@ -51112,13 +51127,13 @@ data, err := Communication.GetEmailTemplates(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Sort`
 
 
-Get email templates
+Email templates are predefined formats linked to various events for delivering messages to users. Use this API to get all email templates.
 
 *Success Response:*
 
 
 
-Success
+Refer `EmailTemplates` schema for more details.
 
 
 Schema: `EmailTemplates`
@@ -51133,36 +51148,53 @@ default
   "value": {
     "items": [
       {
+        "application": "637b6355dc65337da9b5c951",
         "is_system": false,
-        "is_internal": true,
-        "description": "Application creation",
+        "is_internal": false,
+        "name": "title",
+        "description": "desc",
+        "editor_type": "bee",
+        "editor_meta": "",
         "static_to": [],
-        "static_cc": [],
-        "static_bcc": [],
-        "tags": [],
-        "priority": "high",
-        "published": true,
-        "_id": "5ef42a49c8b67d279c27a980",
-        "slug": "application-creation",
-        "name": "Application creation",
-        "from_name": "Fynd",
+        "static_cc": [
+          "abc@abc.com"
+        ],
+        "static_bcc": [
+          "abc@abc.com"
+        ],
+        "reply_to": "abc@abc.com",
+        "tags": [
+          "tag"
+        ],
         "subject": {
           "template_type": "nunjucks",
-          "template": "This is a test email subject"
+          "template": "subject"
         },
         "html": {
           "template_type": "nunjucks",
-          "template": "This is a test email body"
+          "template": ""
         },
-        "text": {
-          "template_type": "nunjucks",
-          "template": "This is a test email body"
+        "url_shorten": {
+          "enabled": false
         },
+        "priority": "low",
+        "template_variables": {
+          "hello": "world"
+        },
+        "published": true,
+        "category": "website",
+        "_id": "649fca8fe89b403f490f9c55",
         "headers": [],
         "attachments": [],
-        "created_at": "2020-06-25T04:38:34.003Z",
-        "updated_at": "2020-08-10T12:27:43.583Z",
-        "__v": 0
+        "created_at": "2023-07-01T06:41:19.360Z",
+        "updated_at": "2023-07-01T06:41:19.360Z",
+        "slug": "title-W9qbdl8AJ",
+        "__v": 0,
+        "from_name": "Fynd",
+        "text": {
+          "template_type": "nunjucks",
+          "template": "subject"
+        }
       }
     ],
     "page": {
@@ -51206,16 +51238,16 @@ data, err := Communication.CreateEmailTemplate(CompanyID, ApplicationID, body);
 
 | body |  EmailTemplateReq | "Request body" 
 
-Create email template
+Email templates are predefined formats linked to various events for delivering messages to users. Use this API to create an email template.
 
 *Success Response:*
 
 
 
-Success
+Refer `EmailTemplate` schema for more details.
 
 
-Schema: `EmailTemplateRes`
+Schema: `EmailTemplate`
 
 
 *Examples:*
@@ -51225,50 +51257,53 @@ default
 ```json
 {
   "value": {
+    "application": "637b6355dc65337da9b5c951",
     "is_system": false,
     "is_internal": false,
-    "description": "test template",
-    "static_to": [
-      "abc@gofynd.com"
-    ],
+    "name": "title",
+    "description": "desc",
+    "editor_type": "bee",
+    "editor_meta": "",
+    "static_to": [],
     "static_cc": [
-      "abc@gofynd.com"
+      "abc@abc.com"
     ],
     "static_bcc": [
-      "abc@gofynd.com"
+      "abc@abc.com"
     ],
-    "tags": [],
-    "priority": "low",
-    "published": false,
-    "_id": "5ef42a49c8b67d279c27a980",
-    "name": "test",
-    "keys": {
-      "bcc": "abc@gofynd.com"
-    },
-    "reply_to": "abc@gofynd.com",
-    "headers": [
-      {
-        "key": "x-test-header",
-        "value": "test123"
-      }
+    "reply_to": "abc@abc.com",
+    "tags": [
+      "tag"
     ],
     "subject": {
-      "template_type": "static",
-      "template": "This is test email"
+      "template_type": "nunjucks",
+      "template": "subject"
     },
     "html": {
-      "template_type": "static",
-      "template": "This is test email"
+      "template_type": "nunjucks",
+      "template": ""
     },
-    "text": {
-      "template_type": "static",
-      "template": "This is test email"
+    "url_shorten": {
+      "enabled": false
     },
+    "priority": "low",
+    "template_variables": {
+      "hello": "world"
+    },
+    "published": true,
+    "category": "website",
+    "_id": "649fca8fe89b403f490f9c55",
+    "headers": [],
     "attachments": [],
-    "created_at": "2021-02-08T03:33:42.103Z",
-    "updated_at": "2021-02-08T03:33:42.103Z",
-    "slug": "test-fZfGq0lSQ",
-    "__v": 0
+    "created_at": "2023-07-01T06:41:19.360Z",
+    "updated_at": "2023-07-01T06:41:19.360Z",
+    "slug": "title-W9qbdl8AJ",
+    "__v": 0,
+    "from_name": "Fynd",
+    "text": {
+      "template_type": "nunjucks",
+      "template": "subject"
+    }
   }
 }
 ```
@@ -51289,7 +51324,7 @@ Get system email templates
 
 ```golang
 
-data, err := Communication.GetSystemEmailTemplates(CompanyID, ApplicationID, xQuery);
+data, err := Communication.GetSystemEmailTemplates(CompanyID, ApplicationID);
 ```
 
 | Argument  |  Type  | Description |
@@ -51302,20 +51337,13 @@ data, err := Communication.GetSystemEmailTemplates(CompanyID, ApplicationID, xQu
 
 
 
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Sort`
-
-
-Get system email templates
+Email templates are predefined formats linked to various events for delivering messages to users. Use this API to get all system email templates.
 
 *Success Response:*
 
 
 
-Success
+Refer `SystemEmailTemplates` schema for more details.
 
 
 Schema: `SystemEmailTemplates`
@@ -51327,49 +51355,44 @@ Schema: `SystemEmailTemplates`
 default
 ```json
 {
-  "value": {
-    "items": [
-      {
-        "is_system": true,
-        "is_internal": true,
-        "description": "Application creation",
-        "static_to": [],
-        "static_cc": [],
-        "static_bcc": [],
-        "tags": [],
-        "priority": "high",
-        "published": true,
-        "_id": "5ef42a49c8b67d279c27a980",
-        "slug": "application-creation",
-        "name": "Application creation",
-        "from_name": "Fynd",
-        "subject": {
-          "template_type": "nunjucks",
-          "template": "This is a test email subject"
-        },
-        "html": {
-          "template_type": "nunjucks",
-          "template": "This is a test email body"
-        },
-        "text": {
-          "template_type": "nunjucks",
-          "template": "This is a test email body"
-        },
-        "headers": [],
-        "attachments": [],
-        "created_at": "2020-06-25T04:38:34.003Z",
-        "updated_at": "2020-08-10T12:27:43.583Z",
-        "__v": 0
-      }
-    ],
-    "page": {
-      "type": "number",
-      "current": 1,
-      "size": 1,
-      "item_total": 66,
-      "has_next": true
+  "value": [
+    {
+      "url_shorten": {
+        "enabled": false
+      },
+      "_id": "646b73e7e10612283cfd977f",
+      "is_system": true,
+      "is_internal": false,
+      "name": "Online order confirmed",
+      "slug": "bag_confirmed-email",
+      "description": "Use this email template for notifying the customers, that their order is Confirmed.",
+      "static_to": [],
+      "static_cc": [],
+      "static_bcc": [],
+      "tags": [],
+      "subject": {
+        "template_type": "nunjucks",
+        "template": "{{ email_subject }}"
+      },
+      "html": {
+        "template_type": "nunjucks",
+        "template": ""
+      },
+      "text": {
+        "template_type": "nunjucks",
+        "template": ""
+      },
+      "priority": "high",
+      "template_variables": {},
+      "published": true,
+      "category": "website",
+      "headers": [],
+      "attachments": [],
+      "created_at": "2023-05-22T13:53:43.468Z",
+      "updated_at": "2023-05-22T13:53:43.468Z",
+      "__v": 0
     }
-  }
+  ]
 }
 ```
 
@@ -51405,13 +51428,13 @@ data, err := Communication.GetEmailTemplateById(CompanyID, ApplicationID, ID);
 
 
 
-Get email template by id
+Email templates are predefined formats linked to various events for delivering messages to users. Use this API to get an email template by id.
 
 *Success Response:*
 
 
 
-Success
+Refer `EmailTemplate` schema for more details.
 
 
 Schema: `EmailTemplate`
@@ -51424,36 +51447,53 @@ default
 ```json
 {
   "value": {
+    "application": "637b6355dc65337da9b5c951",
     "is_system": false,
-    "is_internal": true,
-    "description": "Application creation",
+    "is_internal": false,
+    "name": "title",
+    "description": "desc",
+    "editor_type": "bee",
+    "editor_meta": "",
     "static_to": [],
-    "static_cc": [],
-    "static_bcc": [],
-    "tags": [],
-    "priority": "high",
-    "published": true,
-    "_id": "5ef42a49c8b67d279c27a980",
-    "slug": "application-creation",
-    "name": "Application creation",
-    "from_name": "Fynd",
+    "static_cc": [
+      "abc@abc.com"
+    ],
+    "static_bcc": [
+      "abc@abc.com"
+    ],
+    "reply_to": "abc@abc.com",
+    "tags": [
+      "tag"
+    ],
     "subject": {
       "template_type": "nunjucks",
-      "template": "This is a test email subject"
+      "template": "subject"
     },
     "html": {
       "template_type": "nunjucks",
-      "template": "This is a test email body"
+      "template": ""
     },
-    "text": {
-      "template_type": "nunjucks",
-      "template": "This is a test email body"
+    "url_shorten": {
+      "enabled": false
     },
+    "priority": "low",
+    "template_variables": {
+      "hello": "world"
+    },
+    "published": true,
+    "category": "website",
+    "_id": "649fca8fe89b403f490f9c55",
     "headers": [],
     "attachments": [],
-    "created_at": "2020-06-25T04:38:34.003Z",
-    "updated_at": "2020-08-10T12:27:43.583Z",
-    "__v": 0
+    "created_at": "2023-07-01T06:41:19.360Z",
+    "updated_at": "2023-07-01T06:41:19.360Z",
+    "slug": "title-W9qbdl8AJ",
+    "__v": 0,
+    "from_name": "Fynd",
+    "text": {
+      "template_type": "nunjucks",
+      "template": "subject"
+    }
   }
 }
 ```
@@ -51491,16 +51531,16 @@ data, err := Communication.UpdateEmailTemplateById(CompanyID, ApplicationID, ID,
 
 | body |  EmailTemplateReq | "Request body" 
 
-Update email template by id
+Email templates are predefined formats linked to various events for delivering messages to users. Use this API to update an email template by id.
 
 *Success Response:*
 
 
 
-Success
+Refer `EmailTemplate` schema for more details.
 
 
-Schema: `EmailTemplateRes`
+Schema: `EmailTemplate`
 
 
 *Examples:*
@@ -51510,50 +51550,53 @@ default
 ```json
 {
   "value": {
+    "application": "637b6355dc65337da9b5c951",
     "is_system": false,
     "is_internal": false,
-    "description": "test template",
-    "static_to": [
-      "abc@gofynd.com"
-    ],
+    "name": "title",
+    "description": "desc",
+    "editor_type": "bee",
+    "editor_meta": "",
+    "static_to": [],
     "static_cc": [
-      "abc@gofynd.com"
+      "abc@abc.com"
     ],
     "static_bcc": [
-      "abc@gofynd.com"
+      "abc@abc.com"
     ],
-    "tags": [],
-    "priority": "low",
-    "published": false,
-    "_id": "5ef42a49c8b67d279c27a980",
-    "name": "test",
-    "keys": {
-      "bcc": "abc@gofynd.com"
-    },
-    "reply_to": "abc@gofynd.com",
-    "headers": [
-      {
-        "key": "x-test-header",
-        "value": "test123"
-      }
+    "reply_to": "abc@abc.com",
+    "tags": [
+      "tag"
     ],
     "subject": {
-      "template_type": "static",
-      "template": "This is test email"
+      "template_type": "nunjucks",
+      "template": "subject"
     },
     "html": {
-      "template_type": "static",
-      "template": "This is test email"
+      "template_type": "nunjucks",
+      "template": ""
     },
-    "text": {
-      "template_type": "static",
-      "template": "This is test email"
+    "url_shorten": {
+      "enabled": false
     },
+    "priority": "low",
+    "template_variables": {
+      "hello": "world"
+    },
+    "published": true,
+    "category": "website",
+    "_id": "649fca8fe89b403f490f9c55",
+    "headers": [],
     "attachments": [],
-    "created_at": "2021-02-08T03:33:42.103Z",
-    "updated_at": "2021-02-08T03:33:42.103Z",
-    "slug": "test-fZfGq0lSQ",
-    "__v": 0
+    "created_at": "2023-07-01T06:41:19.360Z",
+    "updated_at": "2023-07-01T06:41:19.360Z",
+    "slug": "title-W9qbdl8AJ",
+    "__v": 0,
+    "from_name": "Fynd",
+    "text": {
+      "template_type": "nunjucks",
+      "template": "subject"
+    }
   }
 }
 ```
@@ -51590,16 +51633,16 @@ data, err := Communication.DeleteEmailTemplateById(CompanyID, ApplicationID, ID)
 
 
 
-Delete email template by id
+Email templates are predefined formats linked to various events for delivering messages to users. Use this API to delete an email template by id.
 
 *Success Response:*
 
 
 
-Success
+Refer `GenericDelete` schema for more details.
 
 
-Schema: `EmailTemplateDeleteSuccessRes`
+Schema: `GenericDelete`
 
 
 *Examples:*
@@ -51609,8 +51652,125 @@ default
 ```json
 {
   "value": {
-    "success": true,
-    "message": "Deleted successfully"
+    "message": "Deletion Successfull",
+    "acknowledged": true,
+    "affected": 1,
+    "operation": "TEMP-ST-DEL:ID"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSubscribedEmailTemplates
+Get subscribed email templates
+
+```golang
+
+data, err := Communication.GetSubscribedEmailTemplates(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
+
+
+Email templates are predefined formats linked to various events for delivering messages to users. Use this API to get all subscribed email templates.
+
+*Success Response:*
+
+
+
+Refer `EmailTemplates` schema for more details.
+
+
+Schema: `EmailTemplates`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "items": [
+      {
+        "application": "637b6355dc65337da9b5c951",
+        "is_system": false,
+        "is_internal": false,
+        "name": "title",
+        "description": "desc",
+        "editor_type": "bee",
+        "editor_meta": "",
+        "static_to": [],
+        "static_cc": [
+          "abc@abc.com"
+        ],
+        "static_bcc": [
+          "abc@abc.com"
+        ],
+        "reply_to": "abc@abc.com",
+        "tags": [
+          "tag"
+        ],
+        "subject": {
+          "template_type": "nunjucks",
+          "template": "subject"
+        },
+        "html": {
+          "template_type": "nunjucks",
+          "template": ""
+        },
+        "url_shorten": {
+          "enabled": false
+        },
+        "priority": "low",
+        "template_variables": {
+          "hello": "world"
+        },
+        "published": true,
+        "category": "website",
+        "_id": "649fca8fe89b403f490f9c55",
+        "headers": [],
+        "attachments": [],
+        "created_at": "2023-07-01T06:41:19.360Z",
+        "updated_at": "2023-07-01T06:41:19.360Z",
+        "slug": "title-W9qbdl8AJ",
+        "__v": 0,
+        "from_name": "Fynd",
+        "text": {
+          "template_type": "nunjucks",
+          "template": "subject"
+        }
+      }
+    ],
+    "page": {
+      "type": "number",
+      "current": 1,
+      "size": 1,
+      "item_total": 66,
+      "has_next": true
+    }
   }
 }
 ```
@@ -53326,13 +53486,13 @@ data, err := Communication.GetSmsTemplates(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Sort`
 
 
-Get sms templates
+SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to get all sms templates.
 
 *Success Response:*
 
 
 
-Success
+Refer `SmsTemplates` schema for more details.
 
 
 Schema: `SmsTemplates`
@@ -53347,32 +53507,46 @@ default
   "value": {
     "items": [
       {
+        "url_shorten": {
+          "enabled": false
+        },
+        "_id": "649968feca21d7edd0595b35",
+        "application": "637b6355dc65337da9b5c951",
         "is_system": false,
-        "is_internal": true,
-        "description": "This is a test sms template",
-        "priority": "high",
-        "tags": [],
-        "published": true,
-        "_id": "5fd447728394dbf0d21329b3",
-        "slug": "test-sms",
-        "name": "Test sms",
+        "is_internal": false,
+        "meta": {
+          "type": "cloned",
+          "template": "61963d42ce3af81bde44a67d",
+          "is_system": true
+        },
+        "name": "TD sms templates",
+        "description": "description",
         "message": {
           "template_type": "nunjucks",
-          "template": "This is a test sms for order - {{ orderId }}"
+          "template": "This is a test message"
         },
+        "priority": "low",
+        "tags": [
+          "tag1",
+          "tag2"
+        ],
         "template_variables": {
-          "orderId": "12345"
+          "hello": "world"
         },
-        "created_at": "2020-12-12T04:30:42.456Z",
-        "updated_at": "2020-12-24T15:13:20.558Z",
+        "template_id": "1234567891234567890123",
+        "published": true,
+        "category": "website",
+        "created_at": "2023-06-26T10:31:26.212Z",
+        "updated_at": "2023-06-26T10:31:26.212Z",
+        "slug": "TD-sms-templates-KwtzEUcpn",
         "__v": 0
       }
     ],
     "page": {
       "type": "number",
       "current": 1,
-      "size": 1,
-      "item_total": 66,
+      "size": 10,
+      "item_total": 17,
       "has_next": true
     }
   }
@@ -53409,16 +53583,16 @@ data, err := Communication.CreateSmsTemplate(CompanyID, ApplicationID, body);
 
 | body |  SmsTemplateReq | "Request body" 
 
-Create sms template
+SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to create an sms template.
 
 *Success Response:*
 
 
 
-Success
+Refer `SmsTemplate` schema for more details.
 
 
-Schema: `SmsTemplateRes`
+Schema: `SmsTemplate`
 
 
 *Examples:*
@@ -53428,26 +53602,149 @@ default
 ```json
 {
   "value": {
+    "url_shorten": {
+      "enabled": false
+    },
+    "_id": "649968feca21d7edd0595b35",
+    "application": "637b6355dc65337da9b5c951",
     "is_system": false,
-    "is_internal": true,
-    "description": "This is a test sms template",
-    "priority": "high",
-    "tags": [],
-    "published": true,
-    "_id": "5fd447728394dbf0d21329b3",
-    "slug": "test-sms",
-    "name": "Test sms",
+    "is_internal": false,
+    "meta": {
+      "type": "cloned",
+      "template": "61963d42ce3af81bde44a67d",
+      "is_system": true
+    },
+    "name": "TD sms templates",
+    "description": "description",
     "message": {
       "template_type": "nunjucks",
-      "template": "This is a test sms for order - {{ orderId }}"
+      "template": "This is a test message"
     },
+    "priority": "low",
+    "tags": [
+      "tag1",
+      "tag2"
+    ],
     "template_variables": {
-      "orderId": "12345"
+      "hello": "world"
     },
-    "created_at": "2020-12-12T04:30:42.456Z",
-    "updated_at": "2020-12-24T15:13:20.558Z",
+    "template_id": "1234567891234567890123",
+    "published": true,
+    "category": "website",
+    "created_at": "2023-06-26T10:31:26.212Z",
+    "updated_at": "2023-06-26T10:31:26.212Z",
+    "slug": "TD-sms-templates-KwtzEUcpn",
     "__v": 0
   }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSystemSmsTemplates
+Get system sms templates
+
+```golang
+
+data, err := Communication.GetSystemSmsTemplates(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+
+SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to get all system sms templates.
+
+*Success Response:*
+
+
+
+Refer `SystemSmsTemplates` schema for more details.
+
+
+Schema: `Array<SystemSmsTemplates>`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": [
+    {
+      "url_shorten": {
+        "enabled": false
+      },
+      "_id": "646b73e7e10612283cfd9773",
+      "is_system": true,
+      "is_internal": false,
+      "name": "Order Arrived at Store",
+      "description": "Use this SMS template, for notifying the customers, that their requested order has arrived at the store.",
+      "slug": "arrived_at_store-sms",
+      "message": {
+        "template_type": "nunjucks",
+        "template": "Delivered. Your shipment for {{ articles }} with {{ orderID }} has been delivered today at {{ delivered_at }}. You can collect it from store on or before {{ collection_date }}. Notification via Fynd"
+      },
+      "priority": "low",
+      "tags": [],
+      "template_variables": {
+        "email": "care@fynd.com",
+        "orderID": "Order ID FY5E53AFAA091115C235",
+        "brand": "SAPPER",
+        "name": "Alwira Sheikh",
+        "tracking_url": "http://go.fyndi.ng/track-order",
+        "articles": "Blue Solid Slim Fit Trackpants (28)",
+        "contact": 8767087087,
+        "ordering_channel": "ECOMM",
+        "delivered_at": "GT_Store, Vashi",
+        "collection_date": "Fri, Nov 15",
+        "credits": 0,
+        "slot": "By 9:00 PM",
+        "datetime": "Feb 28",
+        "cashback": 0,
+        "ref_application": {
+          "support_email": "care@fynd.com",
+          "app_information": {
+            "additional_data": {
+              "address_line": "Kurar village,Malad",
+              "city_pincode": "Mumbai - 400097",
+              "contactUs": "https://uniket-testing.addsale.link/contact-us",
+              "domain": "uniket-testing.addsale.link",
+              "privacyPolicy": "https://fynd.freshdesk.com/support/solutions/articles/33000214398-privacy-policy"
+            }
+          },
+          "domain": {
+            "name": "https://fynd.com"
+          },
+          "logo": {
+            "secure_url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1587981831/production/system/pointblank/fynd_logo_square_vunk4f.png"
+          }
+        }
+      },
+      "template_id": "1007569169965694807",
+      "published": true,
+      "category": "website",
+      "created_at": "2023-05-22T13:53:43.439Z",
+      "updated_at": "2023-05-22T13:53:43.439Z",
+      "__v": 0
+    }
+  ]
 }
 ```
 
@@ -53483,13 +53780,13 @@ data, err := Communication.GetSmsTemplateById(CompanyID, ApplicationID, ID);
 
 
 
-Get sms template by id
+SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to get an sms template by ID.
 
 *Success Response:*
 
 
 
-Success
+Refer `SmsTemplate` schema for more details.
 
 
 Schema: `SmsTemplate`
@@ -53502,24 +53799,38 @@ default
 ```json
 {
   "value": {
+    "url_shorten": {
+      "enabled": false
+    },
+    "_id": "649968feca21d7edd0595b35",
+    "application": "637b6355dc65337da9b5c951",
     "is_system": false,
-    "is_internal": true,
-    "description": "This is a test sms template",
-    "priority": "high",
-    "tags": [],
-    "published": true,
-    "_id": "5fd447728394dbf0d21329b3",
-    "slug": "test-sms",
-    "name": "Test sms",
+    "is_internal": false,
+    "meta": {
+      "type": "cloned",
+      "template": "61963d42ce3af81bde44a67d",
+      "is_system": true
+    },
+    "name": "TD sms templates",
+    "description": "description",
     "message": {
       "template_type": "nunjucks",
-      "template": "This is a test sms for order - {{ orderId }}"
+      "template": "This is a test message"
     },
+    "priority": "low",
+    "tags": [
+      "tag1",
+      "tag2"
+    ],
     "template_variables": {
-      "orderId": "12345"
+      "hello": "world"
     },
-    "created_at": "2020-12-12T04:30:42.456Z",
-    "updated_at": "2020-12-24T15:13:20.558Z",
+    "template_id": "1234567891234567890123",
+    "published": true,
+    "category": "website",
+    "created_at": "2023-06-26T10:31:26.212Z",
+    "updated_at": "2023-06-26T10:31:26.212Z",
+    "slug": "TD-sms-templates-KwtzEUcpn",
     "__v": 0
   }
 }
@@ -53558,16 +53869,16 @@ data, err := Communication.UpdateSmsTemplateById(CompanyID, ApplicationID, ID, b
 
 | body |  SmsTemplateReq | "Request body" 
 
-Update sms template by id
+SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to update an sms template by ID.
 
 *Success Response:*
 
 
 
-Success
+Refer `SmsTemplate` schema for more details.
 
 
-Schema: `SmsTemplateRes`
+Schema: `SmsTemplate`
 
 
 *Examples:*
@@ -53577,24 +53888,38 @@ default
 ```json
 {
   "value": {
+    "url_shorten": {
+      "enabled": false
+    },
+    "_id": "649968feca21d7edd0595b35",
+    "application": "637b6355dc65337da9b5c951",
     "is_system": false,
-    "is_internal": true,
-    "description": "This is a test sms template",
-    "priority": "high",
-    "tags": [],
-    "published": true,
-    "_id": "5fd447728394dbf0d21329b3",
-    "slug": "test-sms",
-    "name": "Test sms",
+    "is_internal": false,
+    "meta": {
+      "type": "cloned",
+      "template": "61963d42ce3af81bde44a67d",
+      "is_system": true
+    },
+    "name": "TD sms templates",
+    "description": "description",
     "message": {
       "template_type": "nunjucks",
-      "template": "This is a test sms for order - {{ orderId }}"
+      "template": "This is a test message"
     },
+    "priority": "low",
+    "tags": [
+      "tag1",
+      "tag2"
+    ],
     "template_variables": {
-      "orderId": "12345"
+      "hello": "world"
     },
-    "created_at": "2020-12-12T04:30:42.456Z",
-    "updated_at": "2020-12-24T15:13:20.558Z",
+    "template_id": "1234567891234567890123",
+    "published": true,
+    "category": "website",
+    "created_at": "2023-06-26T10:31:26.212Z",
+    "updated_at": "2023-06-26T10:31:26.212Z",
+    "slug": "TD-sms-templates-KwtzEUcpn",
     "__v": 0
   }
 }
@@ -53632,16 +53957,16 @@ data, err := Communication.DeleteSmsTemplateById(CompanyID, ApplicationID, ID);
 
 
 
-Delete sms template by id
+SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to delete an sms template by ID.
 
 *Success Response:*
 
 
 
-Success
+Refer `GenericDelete` schema for more details.
 
 
-Schema: `SmsTemplateDeleteSuccessRes`
+Schema: `GenericDelete`
 
 
 *Examples:*
@@ -53651,8 +53976,10 @@ default
 ```json
 {
   "value": {
-    "success": true,
-    "message": "Deleted successfully"
+    "message": "Deletion Successfull",
+    "acknowledged": true,
+    "affected": 1,
+    "operation": "TEMP-ST-DEL:ID"
   }
 }
 ```
@@ -53668,12 +53995,12 @@ default
 ---
 
 
-#### getSystemSystemTemplates
-Get system sms templates
+#### getSubscribedSmsTemplates
+Get subscribed sms templates
 
 ```golang
 
-data, err := Communication.GetSystemSystemTemplates(CompanyID, ApplicationID, xQuery);
+data, err := Communication.GetSubscribedSmsTemplates(CompanyID, ApplicationID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -53688,21 +54015,19 @@ data, err := Communication.GetSystemSystemTemplates(CompanyID, ApplicationID, xQ
 
 
 
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Sort`
-
-
-Get system sms templates
+SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to get all subscribed sms templates.
 
 *Success Response:*
 
 
 
-Success
+Refer `SmsTemplates` schema for more details.
 
 
-Schema: `SystemSmsTemplates`
+Schema: `SmsTemplates`
 
 
 *Examples:*
@@ -53714,32 +54039,46 @@ default
   "value": {
     "items": [
       {
-        "is_system": true,
-        "is_internal": true,
-        "description": "This is a test sms template",
-        "priority": "high",
-        "tags": [],
-        "published": true,
-        "_id": "5fd447728394dbf0d21329b3",
-        "slug": "test-sms",
-        "name": "Test sms",
+        "url_shorten": {
+          "enabled": false
+        },
+        "_id": "649968feca21d7edd0595b35",
+        "application": "637b6355dc65337da9b5c951",
+        "is_system": false,
+        "is_internal": false,
+        "meta": {
+          "type": "cloned",
+          "template": "61963d42ce3af81bde44a67d",
+          "is_system": true
+        },
+        "name": "TD sms templates",
+        "description": "description",
         "message": {
           "template_type": "nunjucks",
-          "template": "This is a test sms for order - {{ orderId }}"
+          "template": "This is a test message"
         },
+        "priority": "low",
+        "tags": [
+          "tag1",
+          "tag2"
+        ],
         "template_variables": {
-          "orderId": "12345"
+          "hello": "world"
         },
-        "created_at": "2020-12-12T04:30:42.456Z",
-        "updated_at": "2020-12-24T15:13:20.558Z",
+        "template_id": "1234567891234567890123",
+        "published": true,
+        "category": "website",
+        "created_at": "2023-06-26T10:31:26.212Z",
+        "updated_at": "2023-06-26T10:31:26.212Z",
+        "slug": "TD-sms-templates-KwtzEUcpn",
         "__v": 0
       }
     ],
     "page": {
       "type": "number",
       "current": 1,
-      "size": 1,
-      "item_total": 66,
+      "size": 10,
+      "item_total": 17,
       "has_next": true
     }
   }
@@ -56250,6 +56589,47 @@ Schema: `CancelPaymentLinkResponse`
 ---
 
 
+#### extensionPaymentUpdate
+Extension will call this api to set the payment status of an order
+
+```golang
+
+data, err := Payment.ExtensionPaymentUpdate(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| body |  ExtensionPaymentUpdateRequestSerializer | "Request body" 
+
+Use this API to Extension will call this api to set the payment status of an order
+
+*Success Response:*
+
+
+
+Success. Returns the status of Update or not. Check the example shown below or refer `ExtensionPaymentUpdateResponseSerializer` for more details.
+
+
+Schema: `ExtensionPaymentUpdateResponseSerializer`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getPaymentCodeOption
 List Payment Options Method Codes
 
@@ -57834,21 +58214,25 @@ Schema: `GetActionsResponse`
 ---
 
 
-#### postShipmentHistory
+#### getShipmentHistory
 
 
 ```golang
 
-data, err := Order.PostShipmentHistory(CompanyID, body);
+data, err := Order.GetShipmentHistory(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 |  | 
+| CompanyID | float64 | Company Id | 
 
 
-| body |  PostShipmentHistory | "Request body" 
+
+
+
+| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
+
 
 
 
@@ -57872,25 +58256,21 @@ Schema: `ShipmentHistoryResponse`
 ---
 
 
-#### getShipmentHistory
+#### postShipmentHistory
 
 
 ```golang
 
-data, err := Order.GetShipmentHistory(CompanyID, xQuery);
+data, err := Order.PostShipmentHistory(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id | 
+| CompanyID | float64 |  | 
 
 
-
-
-
-| xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
-
+| body |  PostShipmentHistory | "Request body" 
 
 
 
@@ -58542,49 +58922,6 @@ Schema: `VerifyOtpResponse`
 ## Catalog
 
 
-#### deleteSearchKeywords
-Delete a Search Keywords
-
-```golang
-
-data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getSearchKeywords
 Get a Search Keywords Details
 
@@ -58672,12 +59009,12 @@ Schema: `GetSearchWordsData`
 ---
 
 
-#### createCustomKeyword
-Add a Custom Search Keywords
+#### deleteSearchKeywords
+Delete a Search Keywords
 
 ```golang
 
-data, err := Catalog.CreateCustomKeyword(CompanyID, ApplicationID, body);
+data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -58689,18 +59026,20 @@ data, err := Catalog.CreateCustomKeyword(CompanyID, ApplicationID, body);
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| body |  CreateSearchKeyword | "Request body" 
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
 
-Create a Custom Search Keywords. See `CreateSearchKeywordSchema` for the list of attributes needed to create a mapping and /collections/query-options for the available options to create a rule. On successful request, returns a paginated list of collections specified in `CreateSearchKeywordSchema`
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
 
 *Success Response:*
 
 
 
-Get keyword object with id that is added. See example below or refer `GetSearchWordsDataSchema` for details
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
 
 
-Schema: `GetSearchWordsData`
+Schema: `DeleteResponse`
 
 
 
@@ -58753,12 +59092,12 @@ Schema: `GetSearchWordsResponse`
 ---
 
 
-#### deleteAutocompleteKeyword
-Delete a Autocomplete Keywords
+#### createCustomKeyword
+Add a Custom Search Keywords
 
 ```golang
 
-data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
+data, err := Catalog.CreateCustomKeyword(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -58770,20 +59109,18 @@ data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+| body |  CreateSearchKeyword | "Request body" 
 
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+Create a Custom Search Keywords. See `CreateSearchKeywordSchema` for the list of attributes needed to create a mapping and /collections/query-options for the available options to create a rule. On successful request, returns a paginated list of collections specified in `CreateSearchKeywordSchema`
 
 *Success Response:*
 
 
 
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+Get keyword object with id that is added. See example below or refer `GetSearchWordsDataSchema` for details
 
 
-Schema: `DeleteResponse`
+Schema: `GetSearchWordsData`
 
 
 
@@ -58883,12 +59220,12 @@ Schema: `GetAutocompleteWordsResponse`
 ---
 
 
-#### createCustomAutocompleteRule
-Add a Custom Autocomplete Keywords
+#### deleteAutocompleteKeyword
+Delete a Autocomplete Keywords
 
 ```golang
 
-data, err := Catalog.CreateCustomAutocompleteRule(CompanyID, ApplicationID, body);
+data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -58900,18 +59237,20 @@ data, err := Catalog.CreateCustomAutocompleteRule(CompanyID, ApplicationID, body
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| body |  CreateAutocompleteKeyword | "Request body" 
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
 
-Create a Custom Autocomplete Keywords. See `CreateAutocompleteKeywordSchema` for the list of attributes needed to create a mapping and /collections/query-options for the available options to create a rule. On successful request, returns a paginated list of collections specified in `CreateAutocompleteKeywordSchema`
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
 
 *Success Response:*
 
 
 
-List of all the collections including the one you added. See example below or refer `CreateAutocompleteWordsResponseSchema` for details
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
 
 
-Schema: `CreateAutocompleteWordsResponse`
+Schema: `DeleteResponse`
 
 
 
@@ -58964,12 +59303,12 @@ Schema: `GetAutocompleteWordsResponse`
 ---
 
 
-#### createProductBundle
-Create Product Bundle
+#### createCustomAutocompleteRule
+Add a Custom Autocomplete Keywords
 
 ```golang
 
-data, err := Catalog.CreateProductBundle(CompanyID, body);
+data, err := Catalog.CreateCustomAutocompleteRule(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -58978,18 +59317,21 @@ data, err := Catalog.CreateProductBundle(CompanyID, body);
 | CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
 
 
-| body |  ProductBundleRequest | "Request body" 
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
-Create Product Bundle. See `ProductBundleRequest` for the request body parameter need to create a product bundle. On successful request, returns in `ProductBundleRequest` with id
+
+| body |  CreateAutocompleteKeyword | "Request body" 
+
+Create a Custom Autocomplete Keywords. See `CreateAutocompleteKeywordSchema` for the list of attributes needed to create a mapping and /collections/query-options for the available options to create a rule. On successful request, returns a paginated list of collections specified in `CreateAutocompleteKeywordSchema`
 
 *Success Response:*
 
 
 
-Get bundle with id that is added. See example below or refer `GetProductBundleCreateResponse` for details
+List of all the collections including the one you added. See example below or refer `CreateAutocompleteWordsResponseSchema` for details
 
 
-Schema: `GetProductBundleCreateResponse`
+Schema: `CreateAutocompleteWordsResponse`
 
 
 
@@ -59032,6 +59374,44 @@ List of bundle configured for a company. See example below or refer `GetProductB
 
 
 Schema: `GetProductBundleListingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createProductBundle
+Create Product Bundle
+
+```golang
+
+data, err := Catalog.CreateProductBundle(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| body |  ProductBundleRequest | "Request body" 
+
+Create Product Bundle. See `ProductBundleRequest` for the request body parameter need to create a product bundle. On successful request, returns in `ProductBundleRequest` with id
+
+*Success Response:*
+
+
+
+Get bundle with id that is added. See example below or refer `GetProductBundleCreateResponse` for details
+
+
+Schema: `GetProductBundleCreateResponse`
 
 
 
@@ -59125,44 +59505,6 @@ Schema: `GetProductBundleCreateResponse`
 ---
 
 
-#### createSizeGuide
-Create a size guide.
-
-```golang
-
-data, err := Catalog.CreateSizeGuide(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company inside which the size guide is to be created. | 
-
-
-| body |  ValidateSizeGuide | "Request body" 
-
-This API allows to create a size guide associated to a brand.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getSizeGuides
 Get list of size guides
 
@@ -59199,6 +59541,44 @@ Size guide object. See example below or refer `ListSizeGuide` for details
 
 
 Schema: `ListSizeGuide`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createSizeGuide
+Create a size guide.
+
+```golang
+
+data, err := Catalog.CreateSizeGuide(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company inside which the size guide is to be created. | 
+
+
+| body |  ValidateSizeGuide | "Request body" 
+
+This API allows to create a size guide associated to a brand.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
@@ -59292,49 +59672,6 @@ Schema: `SuccessResponse`
 ---
 
 
-#### getAppProduct
-Get company application product data.
-
-```golang
-
-data, err := Catalog.GetAppProduct(CompanyID, ApplicationID, ItemID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ItemID | string | product id for a particular product. | 
-
-
-
-Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
-
-*Success Response:*
-
-
-
-The Company Applicaton Product Data(MOQ/SEO).
-
-
-Schema: `OwnerAppItemResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateAppProduct
 Update a single custom meta.
 
@@ -59367,6 +59704,49 @@ Returns a success response
 
 
 Schema: `SuccessResponse1`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAppProduct
+Get company application product data.
+
+```golang
+
+data, err := Catalog.GetAppProduct(CompanyID, ApplicationID, ItemID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ItemID | string | product id for a particular product. | 
+
+
+
+Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
+
+*Success Response:*
+
+
+
+The Company Applicaton Product Data(MOQ/SEO).
+
+
+Schema: `OwnerAppItemResponse`
 
 
 
@@ -59413,50 +59793,6 @@ configuration details for catalog. See example below or refer `GetConfigMetadata
 
 
 Schema: `GetConfigMetadataResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createGroupConfiguration
-Create configuration for Group config types.
-
-```golang
-
-data, err := Catalog.CreateGroupConfiguration(CompanyID, ApplicationID, ConfigType, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
-
-
-| body |  AppConfigurationDetail | "Request body" 
-
-Create configuration for Group config types.
-
-*Success Response:*
-
-
-
-success flag will tell whether the operation was successful.
-
-
-Schema: `AppConfigurationDetail`
 
 
 
@@ -59521,12 +59857,12 @@ Schema: `GetConfigResponse`
 ---
 
 
-#### deleteGroupConfiguration
-Delete configuration of the product config type of the application.
+#### createGroupConfiguration
+Create configuration for Group config types.
 
 ```golang
 
-data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
+data, err := Catalog.CreateGroupConfiguration(CompanyID, ApplicationID, ConfigType, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -59541,20 +59877,18 @@ data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigTy
 | ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
 
 
-| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
+| body |  AppConfigurationDetail | "Request body" 
 
-
-
-Delete configuration of the product config type of the application.
+Create configuration for Group config types.
 
 *Success Response:*
 
 
 
-success message will tell whether the operation was successful.
+success flag will tell whether the operation was successful.
 
 
-Schema: `ConfigSuccessResponse`
+Schema: `AppConfigurationDetail`
 
 
 
@@ -59614,12 +59948,12 @@ Schema: `AppConfigurationDetail`
 ---
 
 
-#### createListingConfiguration
-Add configuration for listings
+#### deleteGroupConfiguration
+Delete configuration of the product config type of the application.
 
 ```golang
 
-data, err := Catalog.CreateListingConfiguration(CompanyID, ApplicationID, ConfigType, body);
+data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
 ```
 
 | Argument  |  Type  | Description |
@@ -59631,21 +59965,23 @@ data, err := Catalog.CreateListingConfiguration(CompanyID, ApplicationID, Config
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
+| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
 
 
-| body |  AppConfigurationsSort | "Request body" 
+| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
 
-Add configuration for listing.
+
+
+Delete configuration of the product config type of the application.
 
 *Success Response:*
 
 
 
-success flag will tell whether the operation was successful.
+success message will tell whether the operation was successful.
 
 
-Schema: `AppConfigurationsSort`
+Schema: `ConfigSuccessResponse`
 
 
 
@@ -59708,12 +60044,12 @@ Schema: `GetConfigResponse`
 ---
 
 
-#### deleteListingConfiguration
-Delete configuration for listings
+#### createListingConfiguration
+Add configuration for listings
 
 ```golang
 
-data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
+data, err := Catalog.CreateListingConfiguration(CompanyID, ApplicationID, ConfigType, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -59728,20 +60064,18 @@ data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, Config
 | ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
 
 
-| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
+| body |  AppConfigurationsSort | "Request body" 
 
-
-
-Delete configuration for listing.
+Add configuration for listing.
 
 *Success Response:*
 
 
 
-success message will tell whether the operation was successful.
+success flag will tell whether the operation was successful.
 
 
-Schema: `ConfigSuccessResponse`
+Schema: `AppConfigurationsSort`
 
 
 
@@ -59789,6 +60123,52 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationsSort`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteListingConfiguration
+Delete configuration for listings
+
+```golang
+
+data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
+
+
+| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration for listing.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
 
 
 
@@ -59923,47 +60303,6 @@ Schema: `GetCatalogConfigurationMetaData`
 ---
 
 
-#### createConfigurationProductListing
-Add configuration for products & listings
-
-```golang
-
-data, err := Catalog.CreateConfigurationProductListing(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| body |  AppConfiguration | "Request body" 
-
-Add configuration for products & listing.
-
-*Success Response:*
-
-
-
-success flag will tell whether the operation was successful.
-
-
-Schema: `GetAppCatalogConfiguration`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getConfigurations
 Get configured details for catalog
 
@@ -60004,12 +60343,12 @@ Schema: `GetAppCatalogConfiguration`
 ---
 
 
-#### createConfigurationByType
-Add configuration for categories and brands
+#### createConfigurationProductListing
+Add configuration for products & listings
 
 ```golang
 
-data, err := Catalog.CreateConfigurationByType(CompanyID, ApplicationID, Type, body);
+data, err := Catalog.CreateConfigurationProductListing(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -60021,12 +60360,9 @@ data, err := Catalog.CreateConfigurationByType(CompanyID, ApplicationID, Type, b
 | ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
 
 
-| Type | string | type can be brands, categories etc. | 
-
-
 | body |  AppConfiguration | "Request body" 
 
-Add configuration for categories & brands.
+Add configuration for products & listing.
 
 *Success Response:*
 
@@ -60091,6 +60427,50 @@ Schema: `GetAppCatalogEntityConfiguration`
 ---
 
 
+#### createConfigurationByType
+Add configuration for categories and brands
+
+```golang
+
+data, err := Catalog.CreateConfigurationByType(CompanyID, ApplicationID, Type, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| Type | string | type can be brands, categories etc. | 
+
+
+| body |  AppConfiguration | "Request body" 
+
+Add configuration for categories & brands.
+
+*Success Response:*
+
+
+
+success flag will tell whether the operation was successful.
+
+
+Schema: `GetAppCatalogConfiguration`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getQueryFilters
 Get query filters to configure a collection
 
@@ -60119,47 +60499,6 @@ The attached items of an collection. See example below or refer `GetCollectionQu
 
 
 Schema: `GetCollectionQueryOptionResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### createCollection
-Add a Collection
-
-```golang
-
-data, err := Catalog.CreateCollection(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| body |  CreateCollection | "Request body" 
-
-Create a collection. See `CreateCollectionRequestSchema` for the list of attributes needed to create a collection and collections/query-options for the available options to create a collection. On successful request, returns a paginated list of collections specified in `CollectionCreateResponse`
-
-*Success Response:*
-
-
-
-List of all the collections including the one you added. See example below or refer `CollectionCreateResponse` for details
-
-
-Schema: `CollectionCreateResponse`
 
 
 
@@ -60227,6 +60566,47 @@ Schema: `GetCollectionListingResponse`
 ---
 
 
+#### createCollection
+Add a Collection
+
+```golang
+
+data, err := Catalog.CreateCollection(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  CreateCollection | "Request body" 
+
+Create a collection. See `CreateCollectionRequestSchema` for the list of attributes needed to create a collection and collections/query-options for the available options to create a collection. On successful request, returns a paginated list of collections specified in `CollectionCreateResponse`
+
+*Success Response:*
+
+
+
+List of all the collections including the one you added. See example below or refer `CollectionCreateResponse` for details
+
+
+Schema: `CollectionCreateResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getCollectionDetail
 Get a particular collection
 
@@ -60258,49 +60638,6 @@ The Collection object. See example below or refer `CollectionDetailResponse` for
 
 
 Schema: `CollectionDetailResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteCollection
-Delete a Collection
-
-```golang
-
-data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier of a collection. | 
-
-
-
-Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
 
 
 
@@ -60357,12 +60694,12 @@ Schema: `UpdateCollection`
 ---
 
 
-#### addCollectionItems
-Add items to a collection
+#### deleteCollection
+Delete a Collection
 
 ```golang
 
-data, err := Catalog.AddCollectionItems(CompanyID, ApplicationID, ID, body);
+data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -60377,18 +60714,17 @@ data, err := Catalog.AddCollectionItems(CompanyID, ApplicationID, ID, body);
 | ID | string | A `id` is a unique identifier of a collection. | 
 
 
-| body |  CollectionItemUpdate | "Request body" 
 
-Adds items to a collection specified by its `id`. See `CollectionItemRequest` for the list of attributes needed to add items to an collection.
+Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
 
 *Success Response:*
 
 
 
-Status object. Tells whether the operation was successful.
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
 
 
-Schema: `UpdatedResponse`
+Schema: `DeleteResponse`
 
 
 
@@ -60439,6 +60775,50 @@ The attached items of an collection. See example below or refer `GetCollectionIt
 
 
 Schema: `GetCollectionItemsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### addCollectionItems
+Add items to a collection
+
+```golang
+
+data, err := Catalog.AddCollectionItems(CompanyID, ApplicationID, ID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier of a collection. | 
+
+
+| body |  CollectionItemUpdate | "Request body" 
+
+Adds items to a collection specified by its `id`. See `CollectionItemRequest` for the list of attributes needed to add items to an collection.
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful.
+
+
+Schema: `UpdatedResponse`
 
 
 
@@ -60860,44 +61240,6 @@ Schema: `ProdcutTemplateCategoriesResponse`
 ---
 
 
-#### createDepartments
-Create the department.
-
-```golang
-
-data, err := Catalog.CreateDepartments(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| body |  DepartmentCreateUpdate | "Request body" 
-
-Create departments using the API.
-
-*Success Response:*
-
-
-
-Success Response. See example below or refer `DepartmentCreateResponseSchema` for details
-
-
-Schema: `DepartmentCreateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### listDepartmentsData
 List all Departments.
 
@@ -60936,6 +61278,44 @@ List of departments data. See example below or refer `DepartmentsResponse` for d
 
 
 Schema: `DepartmentsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createDepartments
+Create the department.
+
+```golang
+
+data, err := Catalog.CreateDepartments(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| body |  DepartmentCreateUpdate | "Request body" 
+
+Create departments using the API.
+
+*Success Response:*
+
+
+
+Success Response. See example below or refer `DepartmentCreateResponseSchema` for details
+
+
+Schema: `DepartmentCreateResponse`
 
 
 
@@ -61303,44 +61683,6 @@ Schema: `ProductDownloadsResponse`
 ---
 
 
-#### createProductExportJob
-Create a product export job.
-
-```golang
-
-data, err := Catalog.CreateProductExportJob(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| body |  ProductTemplateDownloadsExport | "Request body" 
-
-This API helps to create a Inventory export job.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `ProductDownloadsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getProductExportJobs
 Allows you to list all product templates export list details
 
@@ -61372,6 +61714,44 @@ Can view details including trigger data, task id , etc.
 
 
 List of Product Downloads Data. See example below or refer `ProductDownloadsResponse` for details
+
+
+Schema: `ProductDownloadsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createProductExportJob
+Create a product export job.
+
+```golang
+
+data, err := Catalog.CreateProductExportJob(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| body |  ProductTemplateDownloadsExport | "Request body" 
+
+This API helps to create a Inventory export job.
+
+*Success Response:*
+
+
+
+Returns a success response
 
 
 Schema: `ProductDownloadsResponse`
@@ -61431,44 +61811,6 @@ Schema: `ProductConfigurationDownloads`
 ---
 
 
-#### createCategories
-Create product categories
-
-```golang
-
-data, err := Catalog.CreateCategories(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| body |  CategoryRequestBody | "Request body" 
-
-This API lets user create product categories
-
-*Success Response:*
-
-
-
-Category Meta. See example below or refer `CategoryCreateResponse` for details
-
-
-Schema: `CategoryCreateResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### listCategories
 Get product categories list
 
@@ -61505,6 +61847,44 @@ Category Meta. See example below or refer `CategoryResponse` for details
 
 
 Schema: `CategoryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createCategories
+Create product categories
+
+```golang
+
+data, err := Catalog.CreateCategories(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| body |  CategoryRequestBody | "Request body" 
+
+This API lets user create product categories
+
+*Success Response:*
+
+
+
+Category Meta. See example below or refer `CategoryCreateResponse` for details
+
+
+Schema: `CategoryCreateResponse`
 
 
 
@@ -61598,44 +61978,6 @@ Schema: `CategoryUpdateResponse`
 ---
 
 
-#### createProduct
-Create a product.
-
-```golang
-
-data, err := Catalog.CreateProduct(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Id of the company associated to product that is to be viewed. | 
-
-
-| body |  ProductCreateUpdateSchemaV2 | "Request body" 
-
-This API allows to create product.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getProducts
 Get product list
 
@@ -61680,6 +62022,44 @@ Product Meta. See example below for details
 
 
 Schema: `ProductListingResponseV2`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createProduct
+Create a product.
+
+```golang
+
+data, err := Catalog.CreateProduct(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+
+
+| body |  ProductCreateUpdateSchemaV2 | "Request body" 
+
+This API allows to create product.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
@@ -61782,46 +62162,6 @@ Schema: `ProductAttributesResponse`
 ---
 
 
-#### deleteProduct
-Delete a product.
-
-```golang
-
-data, err := Catalog.DeleteProduct(CompanyID, ItemID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
-
-
-| ItemID | float64 | Id of the product to be updated. | 
-
-
-
-This API allows to delete product.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getProduct
 Get a single product.
 
@@ -61887,6 +62227,46 @@ data, err := Catalog.EditProduct(CompanyID, ItemID, body);
 | body |  ProductCreateUpdateSchemaV2 | "Request body" 
 
 This API allows to edit product.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteProduct
+Delete a product.
+
+```golang
+
+data, err := Catalog.DeleteProduct(CompanyID, ItemID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
+
+
+| ItemID | float64 | Id of the product to be updated. | 
+
+
+
+This API allows to delete product.
 
 *Success Response:*
 
@@ -62032,44 +62412,6 @@ Schema: `ProductListingResponse`
 ---
 
 
-#### createBulkProductUploadJob
-Create a Bulk product to upload job.
-
-```golang
-
-data, err := Catalog.CreateBulkProductUploadJob(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
-
-
-| body |  BulkJob | "Request body" 
-
-This API helps to create a bulk products upload job.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `BulkResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getProductBulkUploadHistory
 Get a list of all bulk product upload jobs.
 
@@ -62102,6 +62444,44 @@ List of bulk product upload jobs. See `BulkRequestGetSchema` for details
 
 
 Schema: `ProductBulkRequestList`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createBulkProductUploadJob
+Create a Bulk product to upload job.
+
+```golang
+
+data, err := Catalog.CreateBulkProductUploadJob(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+
+
+| body |  BulkJob | "Request body" 
+
+This API helps to create a bulk products upload job.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `BulkResponse`
 
 
 
@@ -62157,25 +62537,26 @@ Schema: `BulkResponse`
 ---
 
 
-#### deleteProductBulkJob
-Delete Bulk product job.
+#### createProductsInBulk
+Create products in bulk associated with given batch Id.
 
 ```golang
 
-data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
+data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
 
 
-| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
+| BatchID | string | Batch Id in which assets to be uploaded. | 
 
 
+| body |  BulkProductRequest | "Request body" 
 
-This API allows to delete bulk product job associated with company.
+This API helps to create products in bulk push to kafka for approval/creation.
 
 *Success Response:*
 
@@ -62197,26 +62578,25 @@ Schema: `SuccessResponse`
 ---
 
 
-#### createProductsInBulk
-Create products in bulk associated with given batch Id.
+#### deleteProductBulkJob
+Delete Bulk product job.
 
 ```golang
 
-data, err := Catalog.CreateProductsInBulk(CompanyID, BatchID, body);
+data, err := Catalog.DeleteProductBulkJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+| CompanyID | string | Company Id of the company associated to size that is to be deleted. | 
 
 
-| BatchID | string | Batch Id in which assets to be uploaded. | 
+| BatchID | float64 | Batch Id of the bulk product job to be deleted. | 
 
 
-| body |  BulkProductRequest | "Request body" 
 
-This API helps to create products in bulk push to kafka for approval/creation.
+This API allows to delete bulk product job associated with company.
 
 *Success Response:*
 
@@ -62275,44 +62655,6 @@ Schema: `ProductTagsViewResponse`
 ---
 
 
-#### createProductAssetsInBulk
-Create a Bulk asset upload Job.
-
-```golang
-
-data, err := Catalog.CreateProductAssetsInBulk(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
-
-
-| body |  ProductBulkAssets | "Request body" 
-
-This API helps to create a bulk asset upload job.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getProductAssetsInBulk
 Get a list of all bulk asset jobs.
 
@@ -62343,6 +62685,44 @@ List of bulk asset jobs List. See `BulkUtil.modify_batch_response` for details
 
 
 Schema: `BulkAssetResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createProductAssetsInBulk
+Create a Bulk asset upload Job.
+
+```golang
+
+data, err := Catalog.CreateProductAssetsInBulk(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+
+
+| body |  ProductBulkAssets | "Request body" 
+
+This API helps to create a bulk asset upload job.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
@@ -62386,6 +62766,58 @@ Returns a success response
 
 
 Schema: `ProductSizeDeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getInventoryBySize
+Get Inventory for company
+
+```golang
+
+data, err := Catalog.GetInventoryBySize(CompanyID, ItemID, Size, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Id of the company associated to product that is to be viewed. | 
+
+
+| ItemID | float64 | Item code of the product of which size is to be get. | 
+
+
+| Size | string | Size of which inventory is to get. | 
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`, `Sellable`
+
+
+This API allows get Inventory data for particular company grouped by size and store.
+
+*Success Response:*
+
+
+
+returns a list of all inventory grouped by size and store
+
+
+Schema: `InventoryResponsePaginated`
 
 
 
@@ -62442,46 +62874,49 @@ Schema: `SuccessResponse`
 ---
 
 
-#### getInventoryBySize
-Get Inventory for company
+#### getProductSizeSellers
+Get the sellers of a product size at a PIN Code
 
 ```golang
 
-data, err := Catalog.GetInventoryBySize(CompanyID, ItemID, Size, xQuery);
+data, err := Catalog.GetProductSizeSellers(ItemID, CompanyID, ApplicationID, Size, xQuery);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Id of the company associated to product that is to be viewed. | 
+| ItemID | string | Item code of the product of which size is to be get. | 
 
 
-| ItemID | float64 | Item code of the product of which size is to be get. | 
+| CompanyID | float64 | Company id of the product size . | 
 
 
-| Size | string | Size of which inventory is to get. | 
+| ApplicationID | string | Application id of company for which product size to be fetched. | 
 
 
-
-
-
-
+| Size | string | A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes | 
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Q`, `Sellable`
 
 
-This API allows get Inventory data for particular company grouped by size and store.
+
+
+
+
+| xQuery | struct | Includes properties such as `Pincode`, `Strategy`, `PageNo`, `PageSize`
+
+
+A product of a particular size may be sold by multiple sellers. Use this API to fetch the sellers having the stock of a particular size at a given PIN Code.
 
 *Success Response:*
 
 
 
-returns a list of all inventory grouped by size and store
+Success. Returns a ProductSizeSeller object. Check the example shown below or refer `ProductSizeSellersResponseV3` for more details.
 
 
-Schema: `InventoryResponsePaginated`
+Schema: `ProductSizeSellersResponse`
 
 
 
@@ -62701,44 +63136,6 @@ Schema: `SuccessResponse`
 ---
 
 
-#### createBulkInventoryJob
-Create a Bulk Inventory upload Job.
-
-```golang
-
-data, err := Catalog.CreateBulkInventoryJob(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id in which Inventory to be uploaded. | 
-
-
-| body |  BulkJob | "Request body" 
-
-This API helps to create a bulk Inventory upload job.
-
-*Success Response:*
-
-
-
-Returns a success response
-
-
-Schema: `BulkResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getInventoryBulkUploadHistory
 Get a list of all bulk Inventory upload jobs.
 
@@ -62781,25 +63178,23 @@ Schema: `BulkInventoryGet`
 ---
 
 
-#### deleteBulkInventoryJob
-Delete Bulk Inventory job.
+#### createBulkInventoryJob
+Create a Bulk Inventory upload Job.
 
 ```golang
 
-data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
+data, err := Catalog.CreateBulkInventoryJob(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
+| CompanyID | float64 | Company Id in which Inventory to be uploaded. | 
 
 
-| BatchID | string | Batch Id of the bulk delete job. | 
+| body |  BulkJob | "Request body" 
 
-
-
-This API allows to delete bulk Inventory job associated with company.
+This API helps to create a bulk Inventory upload job.
 
 *Success Response:*
 
@@ -62808,7 +63203,7 @@ This API allows to delete bulk Inventory job associated with company.
 Returns a success response
 
 
-Schema: `SuccessResponse`
+Schema: `BulkResponse`
 
 
 
@@ -62862,23 +63257,25 @@ Schema: `SuccessResponse`
 ---
 
 
-#### createInventoryExportJob
-Create a Inventory export Job.
+#### deleteBulkInventoryJob
+Delete Bulk Inventory job.
 
 ```golang
 
-data, err := Catalog.CreateInventoryExportJob(CompanyID, body);
+data, err := Catalog.DeleteBulkInventoryJob(CompanyID, BatchID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+| CompanyID | string | Company Id of the company of which bulk Inventory job is to be deleted. | 
 
 
-| body |  InventoryExportRequest | "Request body" 
+| BatchID | string | Batch Id of the bulk delete job. | 
 
-This API helps to create a Inventory export job.
+
+
+This API allows to delete bulk Inventory job associated with company.
 
 *Success Response:*
 
@@ -62887,7 +63284,7 @@ This API helps to create a Inventory export job.
 Returns a success response
 
 
-Schema: `InventoryExportResponse`
+Schema: `SuccessResponse`
 
 
 
@@ -62937,12 +63334,12 @@ Schema: `InventoryExportJob`
 ---
 
 
-#### createInventoryExport
-Create an inventory export job.
+#### createInventoryExportJob
+Create a Inventory export Job.
 
 ```golang
 
-data, err := Catalog.CreateInventoryExport(CompanyID, body);
+data, err := Catalog.CreateInventoryExportJob(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -62951,7 +63348,7 @@ data, err := Catalog.CreateInventoryExport(CompanyID, body);
 | CompanyID | float64 | Company Id in which assets to be uploaded. | 
 
 
-| body |  InventoryCreateRequest | "Request body" 
+| body |  InventoryExportRequest | "Request body" 
 
 This API helps to create a Inventory export job.
 
@@ -63021,6 +63418,44 @@ Schema: `InventoryExportJobListResponse`
 ---
 
 
+#### createInventoryExport
+Create an inventory export job.
+
+```golang
+
+data, err := Catalog.CreateInventoryExport(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id in which assets to be uploaded. | 
+
+
+| body |  InventoryCreateRequest | "Request body" 
+
+This API helps to create a Inventory export job.
+
+*Success Response:*
+
+
+
+Returns a success response
+
+
+Schema: `InventoryExportResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### exportInventoryConfig
 Get List of different filters for inventory export
 
@@ -63061,12 +63496,12 @@ Schema: `InventoryConfig`
 ---
 
 
-#### deleteRealtimeInventory
+#### updateRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier);
+data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -63081,6 +63516,7 @@ data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier
 | SellerIdentifier | string | Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get. | 
 
 
+| body |  InventoryRequestSchemaV2 | "Request body" 
 
 This API allows add Inventory for particular size and store.
 
@@ -63104,12 +63540,12 @@ Schema: `InventoryUpdateResponse`
 ---
 
 
-#### updateRealtimeInventory
+#### deleteRealtimeInventory
 Add Inventory for particular size and store.
 
 ```golang
 
-data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier, body);
+data, err := Catalog.DeleteRealtimeInventory(CompanyID, ItemID, SellerIdentifier);
 ```
 
 | Argument  |  Type  | Description |
@@ -63124,7 +63560,6 @@ data, err := Catalog.UpdateRealtimeInventory(CompanyID, ItemID, SellerIdentifier
 | SellerIdentifier | string | Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get. | 
 
 
-| body |  InventoryRequestSchemaV2 | "Request body" 
 
 This API allows add Inventory for particular size and store.
 
@@ -75790,7 +76225,9 @@ data, err := Cart.SelectPaymentMode(CompanyID, ApplicationID, xQuery, body);
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `OrderType`
 
 | body |  UpdateCartPaymentRequest | "Request body" 
 
@@ -76312,7 +76749,9 @@ data, err := Cart.SelectPaymentModeV2(CompanyID, ApplicationID, xQuery, body);
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `OrderType`
 
 | body |  UpdateCartPaymentRequestV2 | "Request body" 
 
@@ -78805,6 +79244,46 @@ Schema: `CompanyStoreView_Response`
 ---
 
 
+#### getZoneDataView
+Zone Data View of application.
+
+```golang
+
+data, err := Serviceability.GetZoneDataView(CompanyID, ZoneID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
+
+
+
+This API returns Zone Data View of the application.
+
+*Success Response:*
+
+
+
+Get Application Zone Data
+
+
+Schema: `GetSingleZoneDataViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateZoneControllerView
 Updation of zone collections in database.
 
@@ -78834,46 +79313,6 @@ Response status_code
 
 
 Schema: `ZoneSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getZoneDataView
-Zone Data View of application.
-
-```golang
-
-data, err := Serviceability.GetZoneDataView(CompanyID, ZoneID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
-
-
-
-This API returns Zone Data View of the application.
-
-*Success Response:*
-
-
-
-Get Application Zone Data
-
-
-Schema: `GetSingleZoneDataViewResponse`
 
 
 
@@ -79594,6 +80033,46 @@ Schema: `CompanyDpAccountListResponse`
 ---
 
 
+#### getDpRule
+Fetching of DpRules from database.
+
+```golang
+
+data, err := Serviceability.GetDpRule(CompanyID, RuleUID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| RuleUID | string | A `rule_uid` is a unique identifier for a particular Dp. | 
+
+
+
+This API returns response of DpRules from mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `DpRuleSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateDpRule
 Updating of DpRules from database.
 
@@ -79623,46 +80102,6 @@ Response status_code
 
 
 Schema: `DpRuleUpdateSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getDpRule
-Fetching of DpRules from database.
-
-```golang
-
-data, err := Serviceability.GetDpRule(CompanyID, RuleUID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| RuleUID | string | A `rule_uid` is a unique identifier for a particular Dp. | 
-
-
-
-This API returns response of DpRules from mongo database.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `DpRuleSuccessResponse`
 
 
 
@@ -79755,6 +80194,43 @@ Schema: `DpMultipleRuleSuccessResponse`
 ---
 
 
+#### getDpCompanyRulePriority
+Get All DpCompanyRules applied to company from database.
+
+```golang
+
+data, err := Serviceability.GetDpCompanyRulePriority(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+
+This API returns response of all DpCompanyRules from mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `DPCompanyRuleResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### upsertDpCompanyRulePriority
 Upsert of DpCompanyRules in database.
 
@@ -79793,12 +80269,12 @@ Schema: `DPCompanyRuleResponse`
 ---
 
 
-#### getDpCompanyRulePriority
-Get All DpCompanyRules applied to company from database.
+#### getDpApplicationRulePriority
+Get All DpApplicationRules rules added at application level from database.
 
 ```golang
 
-data, err := Serviceability.GetDpCompanyRulePriority(CompanyID);
+data, err := Serviceability.GetDpApplicationRulePriority(CompanyID, ApplicationID);
 ```
 
 | Argument  |  Type  | Description |
@@ -79807,8 +80283,11 @@ data, err := Serviceability.GetDpCompanyRulePriority(CompanyID);
 | CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
 
 
+| ApplicationID | string | A `application_id` is a unique identifier for a particular application channel. | 
 
-This API returns response of all DpCompanyRules from mongo database.
+
+
+This API returns response of all rules of DpApplicationRules from mongo database.
 
 *Success Response:*
 
@@ -79817,7 +80296,7 @@ This API returns response of all DpCompanyRules from mongo database.
 Response status_code
 
 
-Schema: `DPCompanyRuleResponse`
+Schema: `DPApplicationRuleResponse`
 
 
 
@@ -79850,46 +80329,6 @@ data, err := Serviceability.UpsertDpApplicationRulePriority(CompanyID, Applicati
 | body |  DPApplicationRuleRequest | "Request body" 
 
 This API returns response of upsert of DpApplicationRules in mongo database.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `DPApplicationRuleResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getDpApplicationRulePriority
-Get All DpApplicationRules rules added at application level from database.
-
-```golang
-
-data, err := Serviceability.GetDpApplicationRulePriority(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular application channel. | 
-
-
-
-This API returns response of all rules of DpApplicationRules from mongo database.
 
 *Success Response:*
 
@@ -80481,6 +80920,430 @@ Success
 
 
 Schema: `InvoicePdfResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### asCnRefund
+
+
+```golang
+
+data, err := Finance.AsCnRefund(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  AsCnRefundRequest | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `AsCnRefundResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createSellerCreditNoteConfig
+
+
+```golang
+
+data, err := Finance.CreateSellerCreditNoteConfig(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  CreateSellerCreditNoteConfigRequest | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `CreateSellerCreditNoteConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteConfig
+
+
+```golang
+
+data, err := Finance.DeleteConfig(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  DeleteConfigRequest | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `DeleteConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### channelDisplayName
+
+
+```golang
+
+data, err := Finance.ChannelDisplayName(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+
+| xQuery | struct | Includes properties such as `FilterKey`
+
+
+
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `ChannelDisplayNameResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPdfUrlView
+
+
+```golang
+
+data, err := Finance.GetPdfUrlView(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  GetPdfUrlViewRequest | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetPdfUrlViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### creditNoteDetails
+
+
+```golang
+
+data, err := Finance.CreditNoteDetails(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  CreditNoteDetailsRequest | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `CreditNoteDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCustomerCreditBalance
+
+
+```golang
+
+data, err := Finance.GetCustomerCreditBalance(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  GetCustomerCreditBalanceRequest | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetCustomerCreditBalanceResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCnConfig
+
+
+```golang
+
+data, err := Finance.GetCnConfig(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  GetCnConfigRequest | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetCnConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### generateReportCustomerCn
+
+
+```golang
+
+data, err := Finance.GenerateReportCustomerCn(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  GenerateReportCustomerCnRequest | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GenerateReportCustomerCnResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### downloadReportCustomerCn
+
+
+```golang
+
+data, err := Finance.DownloadReportCustomerCn(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  DownloadReportCustomerCnRequest | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `DownloadReportCustomerCnResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getReportingFilters
+
+
+```golang
+
+data, err := Finance.GetReportingFilters(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `FilterKey`, `AffiliateID`
+
+
+
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetReportingFiltersResponse`
 
 
 
