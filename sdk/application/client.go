@@ -1237,7 +1237,8 @@ func NewAppClient(config *AppConfig) *Client {
     type CatalogGetCollectionsXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
-        Tag []string  `url:"tag,omitempty"`  
+        Tag []string  `url:"tag,omitempty"` 
+        Q string  `url:"q,omitempty"`  
     }
     
     // GetCollections List all the collections
@@ -1252,6 +1253,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -1311,6 +1314,13 @@ func NewAppClient(config *AppConfig) *Client {
                     
                     
                 
+                    
+                    
+                    
+                        
+                    
+                    
+                
             
             // GetCollectionsPaginator List all the collections  
             func (ca *Catalog)  GetCollectionsPaginator( xQuery CatalogGetCollectionsXQuery ) *common.Paginator {
@@ -1318,6 +1328,10 @@ func NewAppClient(config *AppConfig) *Client {
                  
                  
                  xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
                  
                  
                  
@@ -1349,10 +1363,13 @@ func NewAppClient(config *AppConfig) *Client {
     //CatalogGetCollectionItemsBySlugXQuery holds query params
     type CatalogGetCollectionItemsBySlugXQuery struct { 
         F string  `url:"f,omitempty"` 
+        Q string  `url:"q,omitempty"` 
         Filters bool  `url:"filters,omitempty"` 
         SortOn string  `url:"sort_on,omitempty"` 
         PageID string  `url:"page_id,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
+        PageSize float64  `url:"page_size,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageType string  `url:"page_type,omitempty"`  
     }
     
     // GetCollectionItemsBySlug Get the items in a collection
@@ -1367,6 +1384,12 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
+            
+                
+            
+                
             
                 
             
@@ -1445,6 +1468,13 @@ func NewAppClient(config *AppConfig) *Client {
                     
                     
                     
+                        
+                    
+                    
+                
+                    
+                    
+                    
                     
                         
                     
@@ -1453,6 +1483,16 @@ func NewAppClient(config *AppConfig) *Client {
                     
                     
                         
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                
+                    
+                    
                     
                     
                 
@@ -1475,12 +1515,24 @@ func NewAppClient(config *AppConfig) *Client {
                  
                  
                  
+                 
+                 
+                 
+                 
                  xQuery.PageID = paginator.NextID
                  
                  
                  
                  
                  
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 xQuery.PageType = "cursor"
                  
                  
                 paginator.Next = func() (interface{}, error) {
@@ -1657,55 +1709,6 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // FollowById Follow an entity (product/brand/collection)
-    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             followByIdResponse FollowPostResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "post",
-            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return FollowPostResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &followByIdResponse)
-        if err != nil {
-            return FollowPostResponse{}, common.NewFDKError(err.Error())
-        }
-         return followByIdResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
     // UnfollowById Unfollow an entity (product/brand/collection)
     func (ca *Catalog)  UnfollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
         var (
@@ -1746,6 +1749,55 @@ func NewAppClient(config *AppConfig) *Client {
             return FollowPostResponse{}, common.NewFDKError(err.Error())
         }
          return unfollowByIdResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // FollowById Follow an entity (product/brand/collection)
+    func (ca *Catalog)  FollowById(CollectionType string, CollectionID string) (FollowPostResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             followByIdResponse FollowPostResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/application/catalog/v1.0/follow/%s/%s/",CollectionType,CollectionID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return FollowPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &followByIdResponse)
+        if err != nil {
+            return FollowPostResponse{}, common.NewFDKError(err.Error())
+        }
+         return followByIdResponse, nil
         
     }
           
@@ -2792,6 +2844,60 @@ func NewAppClient(config *AppConfig) *Client {
             return UpdateCartDetailResponse{}, common.NewFDKError(err.Error())
         }
          return updateCartResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //CartDeleteCartXQuery holds query params
+    type CartDeleteCartXQuery struct { 
+        ID float64  `url:"id,omitempty"`  
+    }
+    
+    // DeleteCart Delete cart once user made successful checkout
+    func (ca *Cart)  DeleteCart(xQuery CartDeleteCartXQuery) (DeleteCartDetailResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             deleteCartResponse DeleteCartDetailResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "put",
+            "/service/application/cart/v1.0/cart_archive",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DeleteCartDetailResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteCartResponse)
+        if err != nil {
+            return DeleteCartDetailResponse{}, common.NewFDKError(err.Error())
+        }
+         return deleteCartResponse, nil
         
     }
           
@@ -3911,6 +4017,8 @@ func NewAppClient(config *AppConfig) *Client {
              checkoutCartResponse CartCheckoutResponse
 	    )
 
+        
+            
         
             
         
@@ -9346,7 +9454,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetApplication Get current application details
+    // GetApplication Get current sales channel details
     func (co *Configuration)  GetApplication() (Application, error){
         var (
             rawRequest  *RawRequest
@@ -9391,7 +9499,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetOwnerInfo Get application, owner and seller information
+    // GetOwnerInfo Get sales channel, owner and seller information
     func (co *Configuration)  GetOwnerInfo() (ApplicationAboutResponse, error){
         var (
             rawRequest  *RawRequest
@@ -9436,7 +9544,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetBasicDetails Get basic application details
+    // GetBasicDetails Get basic details of the application
     func (co *Configuration)  GetBasicDetails() (ApplicationDetail, error){
         var (
             rawRequest  *RawRequest
@@ -9533,7 +9641,7 @@ func NewAppClient(config *AppConfig) *Client {
         Q string  `url:"q,omitempty"`  
     }
     
-    // GetOrderingStores Get deployment stores
+    // GetOrderingStores Get all deployment stores
     func (co *Configuration)  GetOrderingStores(xQuery ConfigurationGetOrderingStoresXQuery) (OrderingStores, error){
         var (
             rawRequest  *RawRequest
@@ -9605,7 +9713,7 @@ func NewAppClient(config *AppConfig) *Client {
                     
                 
             
-            // GetOrderingStoresPaginator Get deployment stores  
+            // GetOrderingStoresPaginator Get all deployment stores  
             func (co *Configuration)  GetOrderingStoresPaginator( xQuery ConfigurationGetOrderingStoresXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
                  
@@ -12828,12 +12936,12 @@ func NewAppClient(config *AppConfig) *Client {
     
     
     // GetPosOrderById Get POS Order
-    func (or *Order)  GetPosOrderById(OrderID string) (OrderList, error){
+    func (or *Order)  GetPosOrderById(OrderID string) (OrderById, error){
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-             getPosOrderByIdResponse OrderList
+             getPosOrderByIdResponse OrderById
 	    )
 
         
@@ -12857,12 +12965,12 @@ func NewAppClient(config *AppConfig) *Client {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return OrderList{}, err
+            return OrderById{}, err
 	    }
         
         err = json.Unmarshal(response, &getPosOrderByIdResponse)
         if err != nil {
-            return OrderList{}, common.NewFDKError(err.Error())
+            return OrderById{}, common.NewFDKError(err.Error())
         }
          return getPosOrderByIdResponse, nil
         
@@ -13563,7 +13671,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // GetUserPoints Get referral details of a user
+    // GetUserPoints Get total available points of a user
     func (re *Rewards)  GetUserPoints() (PointsResponse, error){
         var (
             rawRequest  *RawRequest
@@ -13715,7 +13823,7 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
-    // RedeemReferralCode Redeems a referral code and credits reward points to users
+    // RedeemReferralCode Redeems a referral code and credits reward points to referee and the referrer as per the configuration
     func (re *Rewards)  RedeemReferralCode(body  RedeemReferralCodeRequest) (RedeemReferralCodeResponse, error){
         var (
             rawRequest  *RawRequest
