@@ -317,7 +317,9 @@
   * Methods
     * [getPincodeCity](#getpincodecity)
     * [getTatProduct](#gettatproduct)
+    * [getAllCountries](#getallcountries)
     * [getPincodeZones](#getpincodezones)
+    * [getOptimalLocations](#getoptimallocations)
     
 
 
@@ -22516,6 +22518,10 @@ Pincode data found
           "zone": "West",
           "internal_zone_id": 4
         },
+        "meta_code": {
+          "country_code": "IND",
+          "isd_code": "+91"
+        },
         "parents": [
           {
             "sub_type": "country",
@@ -22535,7 +22541,14 @@ Pincode data found
             "display_name": "Thane",
             "uid": "city:INDIA|MAHARASHTRA|MUMBAI"
           }
-        ]
+        ],
+        "lat_long": {
+          "type": "Point",
+          "coordinates": [
+            3.8858955,
+            7.2272335
+          ]
+        }
       }
     ],
     "request_uuid": "fce9f431215e71c9ee0e86e792ae1dce4",
@@ -22731,6 +22744,41 @@ Pincode not found
 ---
 
 
+#### getAllCountries
+Get Country List
+
+```golang
+
+ data, err :=  Logistic.GetAllCountries();
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+Get all countries
+
+*Success Response:*
+
+
+
+Get Country List
+
+
+Schema: `CountryListResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getPincodeZones
 GET zone from the Pincode.
 
@@ -22755,6 +22803,42 @@ Response status_code
 
 
 Schema: `GetZoneFromPincodeViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOptimalLocations
+GET zone from the Pincode.
+
+```golang
+
+ data, err :=  Logistic.GetOptimalLocations(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  ReAssignStoreRequest | "Request body" 
+
+
+This API returns zone from the Pincode View.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `ReAssignStoreResponse`
 
 
 
