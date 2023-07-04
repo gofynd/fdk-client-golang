@@ -3106,8 +3106,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
     
     
-    
-    
 
 
 	
@@ -9200,6 +9198,58 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
+    // DeleteProduct Delete a product.
+     func (ca *PlatformCatalog)  DeleteProduct(ItemID float64) (SuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteProductResponse SuccessResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.Config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteProductResponse)
+        if err != nil {
+             return SuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteProductResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
     // EditProduct Edit a product.
      func (ca *PlatformCatalog)  EditProduct(ItemID float64, body  ProductCreateUpdateSchemaV2) (SuccessResponse, error){
         
@@ -9336,58 +9386,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return SuccessResponse{}, common.NewFDKError(err.Error())
         }
         return editProductResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // DeleteProduct Delete a product.
-     func (ca *PlatformCatalog)  DeleteProduct(ItemID float64) (SuccessResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteProductResponse SuccessResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.Config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/",ca.CompanyID, ItemID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteProductResponse)
-        if err != nil {
-             return SuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteProductResponse, nil
         
     }
          
@@ -12621,6 +12619,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
 
         
 
@@ -12778,6 +12784,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
 
         
 
@@ -12884,6 +12898,56 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return ProfileSuccessResponse{}, common.NewFDKError(err.Error())
         }
         return createLocationBulkResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetLocationTags Get tags associated with locations for a company.
+     func (co *PlatformCompanyProfile)  GetLocationTags() (StoreTagsResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getLocationTagsResponse StoreTagsResponse
+	    )
+
+        
+
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.Config,
+            "get",
+            fmt.Sprintf("/service/platform/company-profile/v1.0/company/%s/location/tags",co.CompanyID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return StoreTagsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getLocationTagsResponse)
+        if err != nil {
+             return StoreTagsResponse{}, common.NewFDKError(err.Error())
+        }
+        return getLocationTagsResponse, nil
         
     }
          
@@ -17690,191 +17754,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
     
     
-   
-  
-    
-    
-
-
-    // PostRegionJobBulk This Api creates a Bulk Job for region tat data upsert
-     func (se *PlatformServiceability)  PostRegionJobBulk(body  BulkRegionJobSerializer) (PostBulkRegionJobResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            postRegionJobBulkResponse PostBulkRegionJobResponse
-	    )
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-
-        
-
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-             
-             return PostBulkRegionJobResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-               
-             return PostBulkRegionJobResponse{}, common.NewFDKError(err.Error())
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            se.Config,
-            "post",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/tat/bulk",se.CompanyID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return PostBulkRegionJobResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &postRegionJobBulkResponse)
-        if err != nil {
-             return PostBulkRegionJobResponse{}, common.NewFDKError(err.Error())
-        }
-        return postRegionJobBulkResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-    //PlatformGetRegionJobBulkXQuery holds query params
-    type PlatformGetRegionJobBulkXQuery struct { 
-        CurrentPageNumber float64  `url:"current_page_number,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
-    }
-    
-
-
-    // GetRegionJobBulk Get bulk_export_job collection all records
-     func (se *PlatformServiceability)  GetRegionJobBulk(xQuery PlatformGetRegionJobBulkXQuery) (GetBulkRegionJobResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getRegionJobBulkResponse GetBulkRegionJobResponse
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            se.Config,
-            "get",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/tat/bulk",se.CompanyID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return GetBulkRegionJobResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getRegionJobBulkResponse)
-        if err != nil {
-             return GetBulkRegionJobResponse{}, common.NewFDKError(err.Error())
-        }
-        return getRegionJobBulkResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
-    // GetRegionJobBulkBatchId Get bulk_export_job data for a given batch_id
-     func (se *PlatformServiceability)  GetRegionJobBulkBatchId(BatchID string, ) (GetBulkRegionJobResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getRegionJobBulkBatchIdResponse GetBulkRegionJobResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            se.Config,
-            "get",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/tat/bulk/%s",BatchID, se.CompanyID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return GetBulkRegionJobResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getRegionJobBulkBatchIdResponse)
-        if err != nil {
-             return GetBulkRegionJobResponse{}, common.NewFDKError(err.Error())
-        }
-        return getRegionJobBulkBatchIdResponse, nil
-        
-    }
-         
-        
-       
     
     
    
@@ -17946,8 +17825,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    //PlatformGetDpAccountListXQuery holds query params
-    type PlatformGetDpAccountListXQuery struct { 
+    //PlatformGetDpAccountXQuery holds query params
+    type PlatformGetDpAccountXQuery struct { 
         PageNumber float64  `url:"page_number,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
         Stage string  `url:"stage,omitempty"` 
@@ -17957,14 +17836,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetDpAccountList Getting DpAccount of a company from database.
-     func (se *PlatformServiceability)  GetDpAccountList(xQuery PlatformGetDpAccountListXQuery) (CompanyDpAccountListResponse, error){
+    // GetDpAccount Getting DpAccount of a company from database.
+     func (se *PlatformServiceability)  GetDpAccount(xQuery PlatformGetDpAccountXQuery) (CompanyDpAccountListResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getDpAccountListResponse CompanyDpAccountListResponse
+            getDpAccountResponse CompanyDpAccountListResponse
 	    )
 
         
@@ -18001,11 +17880,11 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return CompanyDpAccountListResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getDpAccountListResponse)
+        err = json.Unmarshal(response, &getDpAccountResponse)
         if err != nil {
              return CompanyDpAccountListResponse{}, common.NewFDKError(err.Error())
         }
-        return getDpAccountListResponse, nil
+        return getDpAccountResponse, nil
         
     }
          
@@ -18019,14 +17898,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetDpRule Fetching of DpRules from database.
-     func (se *PlatformServiceability)  GetDpRule(RuleUID string) (DpRuleSuccessResponse, error){
+    // GetDpRules Fetching of DpRules from database.
+     func (se *PlatformServiceability)  GetDpRules(RuleUID string) (DpRuleSuccessResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getDpRuleResponse DpRuleSuccessResponse
+            getDpRulesResponse DpRuleSuccessResponse
 	    )
 
         
@@ -18053,11 +17932,11 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return DpRuleSuccessResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getDpRuleResponse)
+        err = json.Unmarshal(response, &getDpRulesResponse)
         if err != nil {
              return DpRuleSuccessResponse{}, common.NewFDKError(err.Error())
         }
-        return getDpRuleResponse, nil
+        return getDpRulesResponse, nil
         
     }
          
@@ -18144,14 +18023,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // CreateDpRule Upsert of DpRules in database.
-     func (se *PlatformServiceability)  CreateDpRule(body  DpRuleRequest) (DpRuleSuccessResponse, error){
+    // UpsertDpRules Upsert of DpRules in database.
+     func (se *PlatformServiceability)  UpsertDpRules(body  DpRuleRequest) (DpRuleSuccessResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            createDpRuleResponse DpRuleSuccessResponse
+            upsertDpRulesResponse DpRuleSuccessResponse
 	    )
 
         
@@ -18199,11 +18078,11 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return DpRuleSuccessResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &createDpRuleResponse)
+        err = json.Unmarshal(response, &upsertDpRulesResponse)
         if err != nil {
              return DpRuleSuccessResponse{}, common.NewFDKError(err.Error())
         }
-        return createDpRuleResponse, nil
+        return upsertDpRulesResponse, nil
         
     }
          
@@ -18215,22 +18094,22 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    //PlatformGetDpRuleListXQuery holds query params
-    type PlatformGetDpRuleListXQuery struct { 
+    //PlatformGetDpRuleInsertXQuery holds query params
+    type PlatformGetDpRuleInsertXQuery struct { 
         PageNumber float64  `url:"page_number,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"`  
     }
     
 
 
-    // GetDpRuleList Fetching of DpRules from database.
-     func (se *PlatformServiceability)  GetDpRuleList(xQuery PlatformGetDpRuleListXQuery) (DpMultipleRuleSuccessResponse, error){
+    // GetDpRuleInsert Fetching of DpRules from database.
+     func (se *PlatformServiceability)  GetDpRuleInsert(xQuery PlatformGetDpRuleInsertXQuery) (DpMultipleRuleSuccessResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getDpRuleListResponse DpMultipleRuleSuccessResponse
+            getDpRuleInsertResponse DpMultipleRuleSuccessResponse
 	    )
 
         
@@ -18261,11 +18140,11 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return DpMultipleRuleSuccessResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getDpRuleListResponse)
+        err = json.Unmarshal(response, &getDpRuleInsertResponse)
         if err != nil {
              return DpMultipleRuleSuccessResponse{}, common.NewFDKError(err.Error())
         }
-        return getDpRuleListResponse, nil
+        return getDpRuleInsertResponse, nil
         
     }
          
@@ -18279,14 +18158,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetDpCompanyRulePriority Get All DpCompanyRules applied to company from database.
-     func (se *PlatformServiceability)  GetDpCompanyRulePriority() (DPCompanyRuleResponse, error){
+    // GetDpCompanyRules Get All DpCompanyRules applied to company from database.
+     func (se *PlatformServiceability)  GetDpCompanyRules() (DPCompanyRuleResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getDpCompanyRulePriorityResponse DPCompanyRuleResponse
+            getDpCompanyRulesResponse DPCompanyRuleResponse
 	    )
 
         
@@ -18311,11 +18190,11 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return DPCompanyRuleResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getDpCompanyRulePriorityResponse)
+        err = json.Unmarshal(response, &getDpCompanyRulesResponse)
         if err != nil {
              return DPCompanyRuleResponse{}, common.NewFDKError(err.Error())
         }
-        return getDpCompanyRulePriorityResponse, nil
+        return getDpCompanyRulesResponse, nil
         
     }
          
@@ -18329,14 +18208,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // UpsertDpCompanyRulePriority Upsert of DpCompanyRules in database.
-     func (se *PlatformServiceability)  UpsertDpCompanyRulePriority(body  DPCompanyRuleRequest) (DPCompanyRuleResponse, error){
+    // UpsertDpCompanyRules Upsert of DpCompanyRules in database.
+     func (se *PlatformServiceability)  UpsertDpCompanyRules(body  DPCompanyRuleRequest) (DPCompanyRuleResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            upsertDpCompanyRulePriorityResponse DPCompanyRuleResponse
+            upsertDpCompanyRulesResponse DPCompanyRuleResponse
 	    )
 
         
@@ -18376,11 +18255,11 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return DPCompanyRuleResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &upsertDpCompanyRulePriorityResponse)
+        err = json.Unmarshal(response, &upsertDpCompanyRulesResponse)
         if err != nil {
              return DPCompanyRuleResponse{}, common.NewFDKError(err.Error())
         }
-        return upsertDpCompanyRulePriorityResponse, nil
+        return upsertDpCompanyRulesResponse, nil
         
     }
          

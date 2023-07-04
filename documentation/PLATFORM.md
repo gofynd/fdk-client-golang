@@ -331,7 +331,6 @@
     * [pollingPaymentLink](#pollingpaymentlink)
     * [resendPaymentLink](#resendpaymentlink)
     * [cancelPaymentLink](#cancelpaymentlink)
-    * [extensionPaymentUpdate](#extensionpaymentupdate)
     * [getPaymentCodeOption](#getpaymentcodeoption)
     
 
@@ -392,13 +391,13 @@
 * [Catalog](#Catalog)
   * Methods
     * [getSearchKeywords](#getsearchkeywords)
-    * [updateSearchKeywords](#updatesearchkeywords)
     * [deleteSearchKeywords](#deletesearchkeywords)
+    * [updateSearchKeywords](#updatesearchkeywords)
     * [getAllSearchKeyword](#getallsearchkeyword)
     * [createCustomKeyword](#createcustomkeyword)
     * [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
-    * [updateAutocompleteKeyword](#updateautocompletekeyword)
     * [deleteAutocompleteKeyword](#deleteautocompletekeyword)
+    * [updateAutocompleteKeyword](#updateautocompletekeyword)
     * [getAutocompleteConfig](#getautocompleteconfig)
     * [createCustomAutocompleteRule](#createcustomautocompleterule)
     * [getProductBundle](#getproductbundle)
@@ -414,12 +413,12 @@
     * [getConfigurationMetadata](#getconfigurationmetadata)
     * [getGroupConfigurations](#getgroupconfigurations)
     * [createGroupConfiguration](#creategroupconfiguration)
-    * [updateGroupConfiguration](#updategroupconfiguration)
     * [deleteGroupConfiguration](#deletegroupconfiguration)
+    * [updateGroupConfiguration](#updategroupconfiguration)
     * [getListingConfigurations](#getlistingconfigurations)
     * [createListingConfiguration](#createlistingconfiguration)
-    * [updateListingConfiguration](#updatelistingconfiguration)
     * [deleteListingConfiguration](#deletelistingconfiguration)
+    * [updateListingConfiguration](#updatelistingconfiguration)
     * [updateAllowSingle](#updateallowsingle)
     * [updateDefaultSort](#updatedefaultsort)
     * [getCatalogConfiguration](#getcatalogconfiguration)
@@ -431,8 +430,8 @@
     * [getAllCollections](#getallcollections)
     * [createCollection](#createcollection)
     * [getCollectionDetail](#getcollectiondetail)
-    * [updateCollection](#updatecollection)
     * [deleteCollection](#deletecollection)
+    * [updateCollection](#updatecollection)
     * [getCollectionItems](#getcollectionitems)
     * [addCollectionItems](#addcollectionitems)
     * [getCatalogInsights](#getcataloginsights)
@@ -468,8 +467,8 @@
     * [getVariantsOfProducts](#getvariantsofproducts)
     * [getProductAttributes](#getproductattributes)
     * [getProduct](#getproduct)
-    * [editProduct](#editproduct)
     * [deleteProduct](#deleteproduct)
+    * [editProduct](#editproduct)
     * [allSizes](#allsizes)
     * [getProductValidation](#getproductvalidation)
     * [getProductSize](#getproductsize)
@@ -539,6 +538,7 @@
     * [getLocationDetail](#getlocationdetail)
     * [updateLocation](#updatelocation)
     * [createLocationBulk](#createlocationbulk)
+    * [getLocationTags](#getlocationtags)
     
 
 * [FileStorage](#FileStorage)
@@ -763,23 +763,21 @@
     * [getAllStores](#getallstores)
     * [getOptimalLocations](#getoptimallocations)
     * [addAppDp](#addappdp)
+    * [deleteAppDp](#deleteappdp)
     * [updatePincodeMopView](#updatepincodemopview)
     * [updatePincodeBulkView](#updatepincodebulkview)
     * [updatePincodeCoDListing](#updatepincodecodlisting)
     * [updatePincodeAuditHistory](#updatepincodeaudithistory)
-    * [postRegionJobBulk](#postregionjobbulk)
-    * [getRegionJobBulk](#getregionjobbulk)
-    * [getRegionJobBulkBatchId](#getregionjobbulkbatchid)
     * [upsertDpAccount](#upsertdpaccount)
-    * [getDpAccountList](#getdpaccountlist)
-    * [getDpRule](#getdprule)
+    * [getDpAccount](#getdpaccount)
+    * [getDpRules](#getdprules)
     * [updateDpRule](#updatedprule)
-    * [createDpRule](#createdprule)
-    * [getDpRuleList](#getdprulelist)
-    * [getDpCompanyRulePriority](#getdpcompanyrulepriority)
-    * [upsertDpCompanyRulePriority](#upsertdpcompanyrulepriority)
-    * [getDpApplicationRulePriority](#getdpapplicationrulepriority)
-    * [upsertDpApplicationRulePriority](#upsertdpapplicationrulepriority)
+    * [upsertDpRules](#upsertdprules)
+    * [getDpRuleInsert](#getdpruleinsert)
+    * [getDpCompanyRules](#getdpcompanyrules)
+    * [upsertDpCompanyRules](#upsertdpcompanyrules)
+    * [getDpApplicationRules](#getdpapplicationrules)
+    * [upsertDpApplicationRules](#upsertdpapplicationrules)
     * [patchApplicationServiceabilitySelfShipment](#patchapplicationserviceabilityselfshipment)
     * [getApplicationServiceabilitySelfShipment](#getapplicationserviceabilityselfshipment)
     
@@ -51916,7 +51914,9 @@ data, err := Communication.GetEventSubscriptions(CompanyID, ApplicationID, xQuer
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Populate`
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Populate`, `Query`
 
 
 Get event subscriptions
@@ -56589,47 +56589,6 @@ Schema: `CancelPaymentLinkResponse`
 ---
 
 
-#### extensionPaymentUpdate
-Extension will call this api to set the payment status of an order
-
-```golang
-
-data, err := Payment.ExtensionPaymentUpdate(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company Id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| body |  ExtensionPaymentUpdateRequestSerializer | "Request body" 
-
-Use this API to Extension will call this api to set the payment status of an order
-
-*Success Response:*
-
-
-
-Success. Returns the status of Update or not. Check the example shown below or refer `ExtensionPaymentUpdateResponseSerializer` for more details.
-
-
-Schema: `ExtensionPaymentUpdateResponseSerializer`
-
-
-
-
-
-
-
-
-
----
-
-
 #### getPaymentCodeOption
 List Payment Options Method Codes
 
@@ -58965,6 +58924,49 @@ Schema: `GetSearchWordsDetailResponse`
 ---
 
 
+#### deleteSearchKeywords
+Delete a Search Keywords
+
+```golang
+
+data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateSearchKeywords
 Update Search Keyword
 
@@ -58997,49 +58999,6 @@ The Collection object. See example below or refer `GetSearchWordsDataSchema` for
 
 
 Schema: `GetSearchWordsData`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteSearchKeywords
-Delete a Search Keywords
-
-```golang
-
-data, err := Catalog.DeleteSearchKeywords(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
 
 
 
@@ -59176,6 +59135,49 @@ Schema: `GetAutocompleteWordsResponse`
 ---
 
 
+#### deleteAutocompleteKeyword
+Delete a Autocomplete Keywords
+
+```golang
+
+data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
+
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateAutocompleteKeyword
 Create & Update Autocomplete Keyword
 
@@ -59208,49 +59210,6 @@ The Mapping object. See example below or refer `GetAutocompleteWordsResponseSche
 
 
 Schema: `GetAutocompleteWordsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteAutocompleteKeyword
-Delete a Autocomplete Keywords
-
-```golang
-
-data, err := Catalog.DeleteAutocompleteKeyword(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. | 
-
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
 
 
 
@@ -59901,6 +59860,52 @@ Schema: `AppConfigurationDetail`
 ---
 
 
+#### deleteGroupConfiguration
+Delete configuration of the product config type of the application.
+
+```golang
+
+data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
+
+
+| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration of the product config type of the application.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateGroupConfiguration
 Update the group configurations for the application.
 
@@ -59936,52 +59941,6 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationDetail`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteGroupConfiguration
-Delete configuration of the product config type of the application.
-
-```golang
-
-data, err := Catalog.DeleteGroupConfiguration(CompanyID, ApplicationID, ConfigType, GroupSlug);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular group configuration type. | 
-
-
-| GroupSlug | string | A `group_slug` is a unique identifier of a particular configuration. | 
-
-
-
-Delete configuration of the product config type of the application.
-
-*Success Response:*
-
-
-
-success message will tell whether the operation was successful.
-
-
-Schema: `ConfigSuccessResponse`
 
 
 
@@ -60088,6 +60047,52 @@ Schema: `AppConfigurationsSort`
 ---
 
 
+#### deleteListingConfiguration
+Delete configuration for listings
+
+```golang
+
+data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
+
+
+| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
+
+
+
+Delete configuration for listing.
+
+*Success Response:*
+
+
+
+success message will tell whether the operation was successful.
+
+
+Schema: `ConfigSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateListingConfiguration
 Update configuration for listings
 
@@ -60123,52 +60128,6 @@ success flag will tell whether the operation was successful.
 
 
 Schema: `AppConfigurationsSort`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteListingConfiguration
-Delete configuration for listings
-
-```golang
-
-data, err := Catalog.DeleteListingConfiguration(CompanyID, ApplicationID, ConfigType, ConfigID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ConfigType | string | A `config_type` is a unique identifier for a particular listing configuration type. | 
-
-
-| ConfigID | string | A `config_id` is a unique identifier of a particular configuration. | 
-
-
-
-Delete configuration for listing.
-
-*Success Response:*
-
-
-
-success message will tell whether the operation was successful.
-
-
-Schema: `ConfigSuccessResponse`
 
 
 
@@ -60650,6 +60609,49 @@ Schema: `CollectionDetailResponse`
 ---
 
 
+#### deleteCollection
+Delete a Collection
+
+```golang
+
+data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ID | string | A `id` is a unique identifier of a collection. | 
+
+
+
+Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
+
+*Success Response:*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateCollection
 Update a collection
 
@@ -60682,49 +60684,6 @@ The Collection object. See example below or refer `UpdateCollectionSchema` for d
 
 
 Schema: `UpdateCollection`
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteCollection
-Delete a Collection
-
-```golang
-
-data, err := Catalog.DeleteCollection(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ID | string | A `id` is a unique identifier of a collection. | 
-
-
-
-Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
-
-*Success Response:*
-
-
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-Schema: `DeleteResponse`
 
 
 
@@ -62207,26 +62166,25 @@ Schema: `SingleProductResponse`
 ---
 
 
-#### editProduct
-Edit a product.
+#### deleteProduct
+Delete a product.
 
 ```golang
 
-data, err := Catalog.EditProduct(CompanyID, ItemID, body);
+data, err := Catalog.DeleteProduct(CompanyID, ItemID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Id of the company associated to product that is to be viewed. | 
+| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
 
 
 | ItemID | float64 | Id of the product to be updated. | 
 
 
-| body |  ProductCreateUpdateSchemaV2 | "Request body" 
 
-This API allows to edit product.
+This API allows to delete product.
 
 *Success Response:*
 
@@ -62248,25 +62206,26 @@ Schema: `SuccessResponse`
 ---
 
 
-#### deleteProduct
-Delete a product.
+#### editProduct
+Edit a product.
 
 ```golang
 
-data, err := Catalog.DeleteProduct(CompanyID, ItemID);
+data, err := Catalog.EditProduct(CompanyID, ItemID, body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company Id of the company associated to product that is to be deleted. | 
+| CompanyID | string | Id of the company associated to product that is to be viewed. | 
 
 
 | ItemID | float64 | Id of the product to be updated. | 
 
 
+| body |  ProductCreateUpdateSchemaV2 | "Request body" 
 
-This API allows to delete product.
+This API allows to edit product.
 
 *Success Response:*
 
@@ -65101,6 +65060,43 @@ Returns a success response
 
 
 Schema: `ProfileSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getLocationTags
+Get tags associated with locations for a company.
+
+```golang
+
+data, err := CompanyProfile.GetLocationTags(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Id of the company inside which the location is to be created. | 
+
+
+
+This API fetches all the tags associated to a company.
+
+*Success Response:*
+
+
+
+Tags list. See example below or refer `StoreTagsResponseSchema` for details
+
+
+Schema: `StoreTagsResponse`
 
 
 
@@ -79663,6 +79659,49 @@ Schema: `ApplicationCompanyDpViewResponse`
 ---
 
 
+#### deleteAppDp
+Delete application dp data
+
+```golang
+
+data, err := Serviceability.DeleteAppDp(CompanyID, ApplicationID, CourierPartnerID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier of a particular sale channel. | 
+
+
+| CourierPartnerID | float64 | A `courier_partner_id` is a unique identifier of a particular delivery partner. | 
+
+
+
+This API remove application dp data.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `ApplicationCompanyDpViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updatePincodeMopView
 PincodeView update of MOP.
 
@@ -79827,126 +79866,6 @@ Schema: `PincodeMopUpdateAuditHistoryResponseData`
 ---
 
 
-#### postRegionJobBulk
-This Api creates a Bulk Job for region tat data upsert
-
-```golang
-
-data, err := Serviceability.PostRegionJobBulk(CompanyID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| body |  BulkRegionJobSerializer | "Request body" 
-
-This API takes request body, validates it and sends it to kafka topic
-
-*Success Response:*
-
-
-
-Successful response
-
-
-Schema: `PostBulkRegionJobResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getRegionJobBulk
-Get bulk_export_job collection all records
-
-```golang
-
-data, err := Serviceability.GetRegionJobBulk(CompanyID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `CurrentPageNumber`, `PageSize`
-
-
-This API takes gives all the records of bulk_export_job collection
-
-*Success Response:*
-
-
-
-Successful response
-
-
-Schema: `GetBulkRegionJobResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getRegionJobBulkBatchId
-Get bulk_export_job data for a given batch_id
-
-```golang
-
-data, err := Serviceability.GetRegionJobBulkBatchId(BatchID, CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| BatchID | string | The batch ID | 
-
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-
-This API takes batch_id and gives the detail of bulk_export_job collection for the batch_id
-
-*Success Response:*
-
-
-
-Successful response
-
-
-Schema: `GetBulkRegionJobResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### upsertDpAccount
 Upsertion of DpAccount in database.
 
@@ -79985,12 +79904,12 @@ Schema: `CompanyDpAccountResponse`
 ---
 
 
-#### getDpAccountList
+#### getDpAccount
 Getting DpAccount of a company from database.
 
 ```golang
 
-data, err := Serviceability.GetDpAccountList(CompanyID, xQuery);
+data, err := Serviceability.GetDpAccount(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -80033,12 +79952,12 @@ Schema: `CompanyDpAccountListResponse`
 ---
 
 
-#### getDpRule
+#### getDpRules
 Fetching of DpRules from database.
 
 ```golang
 
-data, err := Serviceability.GetDpRule(CompanyID, RuleUID);
+data, err := Serviceability.GetDpRules(CompanyID, RuleUID);
 ```
 
 | Argument  |  Type  | Description |
@@ -80114,12 +80033,12 @@ Schema: `DpRuleUpdateSuccessResponse`
 ---
 
 
-#### createDpRule
+#### upsertDpRules
 Upsert of DpRules in database.
 
 ```golang
 
-data, err := Serviceability.CreateDpRule(CompanyID, body);
+data, err := Serviceability.UpsertDpRules(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -80152,12 +80071,12 @@ Schema: `DpRuleSuccessResponse`
 ---
 
 
-#### getDpRuleList
+#### getDpRuleInsert
 Fetching of DpRules from database.
 
 ```golang
 
-data, err := Serviceability.GetDpRuleList(CompanyID, xQuery);
+data, err := Serviceability.GetDpRuleInsert(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -80194,12 +80113,12 @@ Schema: `DpMultipleRuleSuccessResponse`
 ---
 
 
-#### getDpCompanyRulePriority
+#### getDpCompanyRules
 Get All DpCompanyRules applied to company from database.
 
 ```golang
 
-data, err := Serviceability.GetDpCompanyRulePriority(CompanyID);
+data, err := Serviceability.GetDpCompanyRules(CompanyID);
 ```
 
 | Argument  |  Type  | Description |
@@ -80231,12 +80150,12 @@ Schema: `DPCompanyRuleResponse`
 ---
 
 
-#### upsertDpCompanyRulePriority
+#### upsertDpCompanyRules
 Upsert of DpCompanyRules in database.
 
 ```golang
 
-data, err := Serviceability.UpsertDpCompanyRulePriority(CompanyID, body);
+data, err := Serviceability.UpsertDpCompanyRules(CompanyID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -80269,12 +80188,12 @@ Schema: `DPCompanyRuleResponse`
 ---
 
 
-#### getDpApplicationRulePriority
+#### getDpApplicationRules
 Get All DpApplicationRules rules added at application level from database.
 
 ```golang
 
-data, err := Serviceability.GetDpApplicationRulePriority(CompanyID, ApplicationID);
+data, err := Serviceability.GetDpApplicationRules(CompanyID, ApplicationID);
 ```
 
 | Argument  |  Type  | Description |
@@ -80309,12 +80228,12 @@ Schema: `DPApplicationRuleResponse`
 ---
 
 
-#### upsertDpApplicationRulePriority
+#### upsertDpApplicationRules
 Upsert of DpApplicationRules in database.
 
 ```golang
 
-data, err := Serviceability.UpsertDpApplicationRulePriority(CompanyID, ApplicationID, body);
+data, err := Serviceability.UpsertDpApplicationRules(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
