@@ -2697,7 +2697,8 @@ func NewAppClient(config *AppConfig) *Client {
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
         AreaCode string  `url:"area_code,omitempty"` 
-        BuyNow bool  `url:"buy_now,omitempty"`  
+        BuyNow bool  `url:"buy_now,omitempty"` 
+        ID string  `url:"id,omitempty"`  
     }
     
     // AddItems Add items to cart
@@ -2716,6 +2717,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -3431,6 +3434,8 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
 
         
 
@@ -3559,6 +3564,8 @@ func NewAppClient(config *AppConfig) *Client {
              updateAddressResponse UpdateAddressResponse
 	    )
 
+        
+            
         
             
         
@@ -3879,7 +3886,11 @@ func NewAppClient(config *AppConfig) *Client {
         PaymentMode string  `url:"payment_mode,omitempty"` 
         PaymentIdentifier string  `url:"payment_identifier,omitempty"` 
         AggregatorName string  `url:"aggregator_name,omitempty"` 
-        MerchantCode string  `url:"merchant_code,omitempty"`  
+        MerchantCode string  `url:"merchant_code,omitempty"` 
+        Iin string  `url:"iin,omitempty"` 
+        Network string  `url:"network,omitempty"` 
+        Type string  `url:"type,omitempty"` 
+        CardID string  `url:"card_id,omitempty"`  
     }
     
     // ValidateCouponForPayment Verify the coupon eligibility against the payment mode
@@ -3894,6 +3905,14 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
+            
+                
+            
+                
+            
+                
             
                 
             
@@ -4058,6 +4077,10 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
+            
+        
 
         
             
@@ -4125,6 +4148,10 @@ func NewAppClient(config *AppConfig) *Client {
              updateCartMetaResponse CartMetaResponse
 	    )
 
+        
+            
+        
+            
         
             
         
@@ -4350,7 +4377,8 @@ func NewAppClient(config *AppConfig) *Client {
     type CartGetPromotionOffersXQuery struct { 
         Slug string  `url:"slug,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
-        PromotionGroup string  `url:"promotion_group,omitempty"`  
+        PromotionGroup string  `url:"promotion_group,omitempty"` 
+        StoreID float64  `url:"store_id,omitempty"`  
     }
     
     // GetPromotionOffers Fetch available promotions
@@ -4365,6 +4393,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -4483,6 +4513,10 @@ func NewAppClient(config *AppConfig) *Client {
              checkoutCartV2Response CartCheckoutResponse
 	    )
 
+        
+            
+        
+            
         
             
         
@@ -6738,8 +6772,6 @@ func NewAppClient(config *AppConfig) *Client {
              sendOTPOnEmailResponse EmailOtpSuccess
 	    )
 
-        
-            
         
             
         
@@ -10979,6 +11011,8 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
 
         
 
@@ -11036,8 +11070,6 @@ func NewAppClient(config *AppConfig) *Client {
              checkAndUpdatePaymentStatusResponse PaymentStatusUpdateResponse
 	    )
 
-        
-            
         
             
         
@@ -11364,6 +11396,8 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
 
         
 
@@ -11521,6 +11555,62 @@ func NewAppClient(config *AppConfig) *Client {
             return ValidateVPAResponse{}, common.NewFDKError(err.Error())
         }
          return validateVPAResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //PaymentCardDetailsXQuery holds query params
+    type PaymentCardDetailsXQuery struct { 
+        Aggregator string  `url:"aggregator,omitempty"`  
+    }
+    
+    // CardDetails API to get Card info from PG
+    func (pa *Payment)  CardDetails(CardInfo string, xQuery PaymentCardDetailsXQuery) (CardDetailsResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             cardDetailsResponse CardDetailsResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            fmt.Sprintf("/service/application/payment/v1.0/cards/info/%s",CardInfo),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return CardDetailsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &cardDetailsResponse)
+        if err != nil {
+            return CardDetailsResponse{}, common.NewFDKError(err.Error())
+        }
+         return cardDetailsResponse, nil
         
     }
           
@@ -12577,6 +12667,8 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
 
         
 
@@ -12634,8 +12726,6 @@ func NewAppClient(config *AppConfig) *Client {
              checkAndUpdatePaymentStatusPaymentLinkResponse PaymentStatusUpdateResponse
 	    )
 
-        
-            
         
             
         
@@ -12939,6 +13029,114 @@ func NewAppClient(config *AppConfig) *Client {
             return CustomerOnboardingResponse{}, common.NewFDKError(err.Error())
         }
          return customerOnboardResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //PaymentOutstandingOrderDetailsXQuery holds query params
+    type PaymentOutstandingOrderDetailsXQuery struct { 
+        Aggregator string  `url:"aggregator,omitempty"`  
+    }
+    
+    // OutstandingOrderDetails API to fetch the outstanding order details
+    func (pa *Payment)  OutstandingOrderDetails(xQuery PaymentOutstandingOrderDetailsXQuery) (OutstandingOrderDetailsResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             outstandingOrderDetailsResponse OutstandingOrderDetailsResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            "/service/application/payment/v1.0/payment/outstanding-orders/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return OutstandingOrderDetailsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &outstandingOrderDetailsResponse)
+        if err != nil {
+            return OutstandingOrderDetailsResponse{}, common.NewFDKError(err.Error())
+        }
+         return outstandingOrderDetailsResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //PaymentPaidOrderDetailsXQuery holds query params
+    type PaymentPaidOrderDetailsXQuery struct { 
+        Aggregator string  `url:"aggregator,omitempty"`  
+    }
+    
+    // PaidOrderDetails API to fetch the paid order details
+    func (pa *Payment)  PaidOrderDetails(xQuery PaymentPaidOrderDetailsXQuery) (PaidOrderDetailsResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             paidOrderDetailsResponse PaidOrderDetailsResponse
+	    )
+
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            "/service/application/payment/v1.0/payment/paid-orders/",
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PaidOrderDetailsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &paidOrderDetailsResponse)
+        if err != nil {
+            return PaidOrderDetailsResponse{}, common.NewFDKError(err.Error())
+        }
+         return paidOrderDetailsResponse, nil
         
     }
           
@@ -14158,7 +14356,8 @@ func NewAppClient(config *AppConfig) *Client {
         I bool  `url:"i,omitempty"` 
         B bool  `url:"b,omitempty"` 
         AreaCode string  `url:"area_code,omitempty"` 
-        BuyNow bool  `url:"buy_now,omitempty"`  
+        BuyNow bool  `url:"buy_now,omitempty"` 
+        ID string  `url:"id,omitempty"`  
     }
     
     // AddItems Add items to cart
@@ -14177,6 +14376,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -14838,6 +15039,8 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
 
         
 
@@ -14966,6 +15169,8 @@ func NewAppClient(config *AppConfig) *Client {
              updateAddressResponse UpdateAddressResponse
 	    )
 
+        
+            
         
             
         
@@ -15286,7 +15491,11 @@ func NewAppClient(config *AppConfig) *Client {
         PaymentMode string  `url:"payment_mode,omitempty"` 
         PaymentIdentifier string  `url:"payment_identifier,omitempty"` 
         AggregatorName string  `url:"aggregator_name,omitempty"` 
-        MerchantCode string  `url:"merchant_code,omitempty"`  
+        MerchantCode string  `url:"merchant_code,omitempty"` 
+        Iin string  `url:"iin,omitempty"` 
+        Network string  `url:"network,omitempty"` 
+        Type string  `url:"type,omitempty"` 
+        CardID string  `url:"card_id,omitempty"`  
     }
     
     // ValidateCouponForPayment Verify the coupon eligibility against the payment mode
@@ -15301,6 +15510,14 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
+            
+                
+            
+                
+            
+                
             
                 
             
@@ -15561,6 +15778,10 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
+            
+        
 
         
             
@@ -15628,6 +15849,10 @@ func NewAppClient(config *AppConfig) *Client {
              updateCartMetaResponse CartMetaResponse
 	    )
 
+        
+            
+        
+            
         
             
         
