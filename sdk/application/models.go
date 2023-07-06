@@ -3,13 +3,23 @@ package application
 
 
     
-    // ApplicationItemMOQ ...
-    type ApplicationItemMOQ struct {
+    // Price ...
+    type Price struct {
 
         
-            Maximum float64  `json:"maximum"`
-            Minimum float64  `json:"minimum"`
-            IncrementUnit float64  `json:"increment_unit"`
+            CurrencySymbol string  `json:"currency_symbol"`
+            CurrencyCode string  `json:"currency_code"`
+            Max float64  `json:"max"`
+            Min float64  `json:"min"`
+         
+    }
+    
+    // ProductListingPrice ...
+    type ProductListingPrice struct {
+
+        
+            Effective Price  `json:"effective"`
+            Marked Price  `json:"marked"`
          
     }
     
@@ -17,9 +27,9 @@ package application
     type ProductListingActionPage struct {
 
         
-            Type string  `json:"type"`
-            Query map[string]interface{}  `json:"query"`
             Params map[string]interface{}  `json:"params"`
+            Query map[string]interface{}  `json:"query"`
+            Type string  `json:"type"`
          
     }
     
@@ -29,6 +39,24 @@ package application
         
             Type string  `json:"type"`
             Page ProductListingActionPage  `json:"page"`
+         
+    }
+    
+    // CustomMetaFields ...
+    type CustomMetaFields struct {
+
+        
+            Value string  `json:"value"`
+            Key string  `json:"key"`
+         
+    }
+    
+    // ApplicationItemSEO ...
+    type ApplicationItemSEO struct {
+
+        
+            Title string  `json:"title"`
+            Description string  `json:"description"`
          
     }
     
@@ -44,9 +72,9 @@ package application
     type Media struct {
 
         
-            Meta Meta  `json:"meta"`
-            Type string  `json:"type"`
             Alt string  `json:"alt"`
+            Type string  `json:"type"`
+            Meta Meta  `json:"meta"`
             URL string  `json:"url"`
          
     }
@@ -55,11 +83,11 @@ package application
     type ProductBrand struct {
 
         
-            Description string  `json:"description"`
-            UID float64  `json:"uid"`
             Action ProductListingAction  `json:"action"`
+            UID float64  `json:"uid"`
             Logo Media  `json:"logo"`
             Name string  `json:"name"`
+            Description string  `json:"description"`
          
     }
     
@@ -67,28 +95,19 @@ package application
     type ProductCategoryMap struct {
 
         
-            L3 ProductBrand  `json:"l3"`
-            L2 ProductBrand  `json:"l2"`
             L1 ProductBrand  `json:"l1"`
+            L2 ProductBrand  `json:"l2"`
+            L3 ProductBrand  `json:"l3"`
          
     }
     
-    // ProductDetailAttribute ...
-    type ProductDetailAttribute struct {
+    // ApplicationItemMOQ ...
+    type ApplicationItemMOQ struct {
 
         
-            Type string  `json:"type"`
-            Key string  `json:"key"`
-            Value string  `json:"value"`
-         
-    }
-    
-    // ProductDetailGroupedAttribute ...
-    type ProductDetailGroupedAttribute struct {
-
-        
-            Title string  `json:"title"`
-            Details []ProductDetailAttribute  `json:"details"`
+            Minimum float64  `json:"minimum"`
+            IncrementUnit float64  `json:"increment_unit"`
+            Maximum float64  `json:"maximum"`
          
     }
     
@@ -111,41 +130,22 @@ package application
          
     }
     
-    // CustomMetaFields ...
-    type CustomMetaFields struct {
+    // ProductDetailAttribute ...
+    type ProductDetailAttribute struct {
 
         
             Value string  `json:"value"`
+            Type string  `json:"type"`
             Key string  `json:"key"`
          
     }
     
-    // ApplicationItemSEO ...
-    type ApplicationItemSEO struct {
+    // ProductDetailGroupedAttribute ...
+    type ProductDetailGroupedAttribute struct {
 
         
-            Description string  `json:"description"`
             Title string  `json:"title"`
-         
-    }
-    
-    // Price ...
-    type Price struct {
-
-        
-            Max float64  `json:"max"`
-            Min float64  `json:"min"`
-            CurrencySymbol string  `json:"currency_symbol"`
-            CurrencyCode string  `json:"currency_code"`
-         
-    }
-    
-    // ProductListingPrice ...
-    type ProductListingPrice struct {
-
-        
-            Effective Price  `json:"effective"`
-            Marked Price  `json:"marked"`
+            Details []ProductDetailAttribute  `json:"details"`
          
     }
     
@@ -153,42 +153,42 @@ package application
     type ProductDetail struct {
 
         
-            TeaserTag string  `json:"teaser_tag"`
-            Moq ApplicationItemMOQ  `json:"moq"`
-            ProductGroupTag []string  `json:"product_group_tag"`
-            RatingCount float64  `json:"rating_count"`
-            ItemCode string  `json:"item_code"`
-            Discount string  `json:"discount"`
-            Color string  `json:"color"`
-            Highlights []string  `json:"highlights"`
-            CategoryMap ProductCategoryMap  `json:"category_map"`
-            GroupedAttributes []ProductDetailGroupedAttribute  `json:"grouped_attributes"`
-            IsDependent bool  `json:"is_dependent"`
-            Rating float64  `json:"rating"`
-            Brand ProductBrand  `json:"brand"`
-            UID float64  `json:"uid"`
-            Similars []string  `json:"similars"`
+            Price ProductListingPrice  `json:"price"`
             Action ProductListingAction  `json:"action"`
-            Medias []Media  `json:"medias"`
+            HasVariant bool  `json:"has_variant"`
+            ShortDescription string  `json:"short_description"`
+            Discount string  `json:"discount"`
+            CustomMeta []CustomMetaFields  `json:"_custom_meta"`
+            Tags []string  `json:"tags"`
+            Rating float64  `json:"rating"`
+            Seo ApplicationItemSEO  `json:"seo"`
+            Description string  `json:"description"`
+            Slug string  `json:"slug"`
+            CategoryMap ProductCategoryMap  `json:"category_map"`
+            Highlights []string  `json:"highlights"`
+            IsDependent bool  `json:"is_dependent"`
+            Moq ApplicationItemMOQ  `json:"moq"`
+            ItemType string  `json:"item_type"`
+            TeaserTag string  `json:"teaser_tag"`
+            Type string  `json:"type"`
+            ImageNature string  `json:"image_nature"`
+            Tryouts []string  `json:"tryouts"`
             Categories []ProductBrand  `json:"categories"`
             ProductOnlineDate string  `json:"product_online_date"`
-            ShortDescription string  `json:"short_description"`
-            NetQuantity NetQuantity  `json:"net_quantity"`
-            Description string  `json:"description"`
-            CustomJson map[string]interface{}  `json:"_custom_json"`
-            Tryouts []string  `json:"tryouts"`
-            Tags []string  `json:"tags"`
-            ImageNature string  `json:"image_nature"`
-            ItemType string  `json:"item_type"`
-            Slug string  `json:"slug"`
-            Name string  `json:"name"`
-            CustomOrder ProductDetailCustomOrder  `json:"custom_order"`
-            Type string  `json:"type"`
-            CustomMeta []CustomMetaFields  `json:"_custom_meta"`
-            Seo ApplicationItemSEO  `json:"seo"`
+            ItemCode string  `json:"item_code"`
+            RatingCount float64  `json:"rating_count"`
             Attributes map[string]interface{}  `json:"attributes"`
-            Price ProductListingPrice  `json:"price"`
-            HasVariant bool  `json:"has_variant"`
+            NetQuantity NetQuantity  `json:"net_quantity"`
+            Brand ProductBrand  `json:"brand"`
+            ProductGroupTag []string  `json:"product_group_tag"`
+            Medias []Media  `json:"medias"`
+            Color string  `json:"color"`
+            Name string  `json:"name"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
+            CustomOrder ProductDetailCustomOrder  `json:"custom_order"`
+            Similars []string  `json:"similars"`
+            UID float64  `json:"uid"`
+            GroupedAttributes []ProductDetailGroupedAttribute  `json:"grouped_attributes"`
          
     }
     
@@ -208,55 +208,6 @@ package application
          
     }
     
-    // Dimension ...
-    type Dimension struct {
-
-        
-            Width float64  `json:"width"`
-            Length float64  `json:"length"`
-            Height float64  `json:"height"`
-            IsDefault bool  `json:"is_default"`
-            Unit string  `json:"unit"`
-         
-    }
-    
-    // Weight ...
-    type Weight struct {
-
-        
-            Shipping float64  `json:"shipping"`
-            IsDefault bool  `json:"is_default"`
-            Unit string  `json:"unit"`
-         
-    }
-    
-    // ProductSize ...
-    type ProductSize struct {
-
-        
-            Value string  `json:"value"`
-            Dimension Dimension  `json:"dimension"`
-            IsAvailable bool  `json:"is_available"`
-            Display string  `json:"display"`
-            Weight Weight  `json:"weight"`
-            SellerIdentifiers []string  `json:"seller_identifiers"`
-            Quantity float64  `json:"quantity"`
-         
-    }
-    
-    // SizeChartValues ...
-    type SizeChartValues struct {
-
-        
-            Col3 string  `json:"col_3"`
-            Col5 string  `json:"col_5"`
-            Col1 string  `json:"col_1"`
-            Col4 string  `json:"col_4"`
-            Col6 string  `json:"col_6"`
-            Col2 string  `json:"col_2"`
-         
-    }
-    
     // ColumnHeader ...
     type ColumnHeader struct {
 
@@ -270,12 +221,25 @@ package application
     type ColumnHeaders struct {
 
         
-            Col3 ColumnHeader  `json:"col_3"`
-            Col5 ColumnHeader  `json:"col_5"`
-            Col1 ColumnHeader  `json:"col_1"`
-            Col4 ColumnHeader  `json:"col_4"`
             Col6 ColumnHeader  `json:"col_6"`
+            Col1 ColumnHeader  `json:"col_1"`
+            Col3 ColumnHeader  `json:"col_3"`
             Col2 ColumnHeader  `json:"col_2"`
+            Col4 ColumnHeader  `json:"col_4"`
+            Col5 ColumnHeader  `json:"col_5"`
+         
+    }
+    
+    // SizeChartValues ...
+    type SizeChartValues struct {
+
+        
+            Col6 string  `json:"col_6"`
+            Col1 string  `json:"col_1"`
+            Col3 string  `json:"col_3"`
+            Col2 string  `json:"col_2"`
+            Col4 string  `json:"col_4"`
+            Col5 string  `json:"col_5"`
          
     }
     
@@ -283,13 +247,49 @@ package application
     type SizeChart struct {
 
         
-            Description string  `json:"description"`
-            Title string  `json:"title"`
-            SizeTip string  `json:"size_tip"`
-            Sizes []SizeChartValues  `json:"sizes"`
             Image string  `json:"image"`
+            SizeTip string  `json:"size_tip"`
+            Title string  `json:"title"`
             Headers ColumnHeaders  `json:"headers"`
+            Sizes []SizeChartValues  `json:"sizes"`
             Unit string  `json:"unit"`
+            Description string  `json:"description"`
+         
+    }
+    
+    // Weight ...
+    type Weight struct {
+
+        
+            IsDefault bool  `json:"is_default"`
+            Unit string  `json:"unit"`
+            Shipping float64  `json:"shipping"`
+         
+    }
+    
+    // Dimension ...
+    type Dimension struct {
+
+        
+            IsDefault bool  `json:"is_default"`
+            Height float64  `json:"height"`
+            Length float64  `json:"length"`
+            Unit string  `json:"unit"`
+            Width float64  `json:"width"`
+         
+    }
+    
+    // ProductSize ...
+    type ProductSize struct {
+
+        
+            Display string  `json:"display"`
+            Quantity float64  `json:"quantity"`
+            Weight Weight  `json:"weight"`
+            Dimension Dimension  `json:"dimension"`
+            SellerIdentifiers []string  `json:"seller_identifiers"`
+            Value string  `json:"value"`
+            IsAvailable bool  `json:"is_available"`
          
     }
     
@@ -297,13 +297,13 @@ package application
     type ProductSizes struct {
 
         
+            Price ProductListingPrice  `json:"price"`
             Stores ProductSizeStores  `json:"stores"`
-            MultiSize bool  `json:"multi_size"`
+            Discount string  `json:"discount"`
+            SizeChart SizeChart  `json:"size_chart"`
             Sizes []ProductSize  `json:"sizes"`
             Sellable bool  `json:"sellable"`
-            Discount string  `json:"discount"`
-            Price ProductListingPrice  `json:"price"`
-            SizeChart SizeChart  `json:"size_chart"`
+            MultiSize bool  `json:"multi_size"`
          
     }
     
@@ -311,10 +311,10 @@ package application
     type AttributeDetail struct {
 
         
-            Description string  `json:"description"`
             Display string  `json:"display"`
-            Key string  `json:"key"`
+            Description string  `json:"description"`
             Logo string  `json:"logo"`
+            Key string  `json:"key"`
          
     }
     
@@ -331,8 +331,8 @@ package application
     type ProductsComparisonResponse struct {
 
         
-            Items []ProductDetail  `json:"items"`
             AttributesMetadata []AttributeMetadata  `json:"attributes_metadata"`
+            Items []ProductDetail  `json:"items"`
          
     }
     
@@ -340,8 +340,8 @@ package application
     type ProductCompareResponse struct {
 
         
-            Items []ProductDetail  `json:"items"`
             Title string  `json:"title"`
+            Items []ProductDetail  `json:"items"`
             AttributesMetadata []AttributeMetadata  `json:"attributes_metadata"`
             Subtitle string  `json:"subtitle"`
          
@@ -359,16 +359,16 @@ package application
     type ProductVariantItemResponse struct {
 
         
-            ColorName string  `json:"color_name"`
-            Value string  `json:"value"`
-            CustomMeta []CustomMetaFields  `json:"_custom_meta"`
-            UID float64  `json:"uid"`
             Action ProductListingAction  `json:"action"`
             Medias []Media  `json:"medias"`
+            CustomMeta []CustomMetaFields  `json:"_custom_meta"`
             Color string  `json:"color"`
-            Slug string  `json:"slug"`
             Name string  `json:"name"`
+            ColorName string  `json:"color_name"`
+            Value string  `json:"value"`
             IsAvailable bool  `json:"is_available"`
+            UID float64  `json:"uid"`
+            Slug string  `json:"slug"`
          
     }
     
@@ -377,8 +377,8 @@ package application
 
         
             Items []ProductVariantItemResponse  `json:"items"`
-            DisplayType string  `json:"display_type"`
             Key string  `json:"key"`
+            DisplayType string  `json:"display_type"`
             Header string  `json:"header"`
          
     }
@@ -391,33 +391,13 @@ package application
          
     }
     
-    // CompanyDetail ...
-    type CompanyDetail struct {
-
-        
-            ID float64  `json:"id"`
-            Name string  `json:"name"`
-         
-    }
-    
     // ProductStockPrice ...
     type ProductStockPrice struct {
 
         
             Effective float64  `json:"effective"`
-            Currency string  `json:"currency"`
             Marked float64  `json:"marked"`
-         
-    }
-    
-    // StoreDetail ...
-    type StoreDetail struct {
-
-        
-            City string  `json:"city"`
-            ID float64  `json:"id"`
-            Name string  `json:"name"`
-            Code string  `json:"code"`
+            Currency string  `json:"currency"`
          
     }
     
@@ -425,9 +405,29 @@ package application
     type Seller struct {
 
         
-            Count float64  `json:"count"`
             Name string  `json:"name"`
+            Count float64  `json:"count"`
             UID float64  `json:"uid"`
+         
+    }
+    
+    // CompanyDetail ...
+    type CompanyDetail struct {
+
+        
+            Name string  `json:"name"`
+            ID float64  `json:"id"`
+         
+    }
+    
+    // StoreDetail ...
+    type StoreDetail struct {
+
+        
+            Name string  `json:"name"`
+            City string  `json:"city"`
+            Code string  `json:"code"`
+            ID float64  `json:"id"`
          
     }
     
@@ -435,15 +435,15 @@ package application
     type ProductStockStatusItem struct {
 
         
-            Company CompanyDetail  `json:"company"`
-            ItemID float64  `json:"item_id"`
-            Identifier map[string]interface{}  `json:"identifier"`
-            UID string  `json:"uid"`
-            Size string  `json:"size"`
             Price ProductStockPrice  `json:"price"`
-            Store StoreDetail  `json:"store"`
+            Size string  `json:"size"`
             Seller Seller  `json:"seller"`
             Quantity float64  `json:"quantity"`
+            ItemID float64  `json:"item_id"`
+            Identifier map[string]interface{}  `json:"identifier"`
+            Company CompanyDetail  `json:"company"`
+            Store StoreDetail  `json:"store"`
+            UID string  `json:"uid"`
          
     }
     
@@ -473,67 +473,18 @@ package application
     type ProductStockPolling struct {
 
         
-            Items []ProductStockStatusItem  `json:"items"`
             Page Page  `json:"page"`
+            Items []ProductStockStatusItem  `json:"items"`
          
     }
     
-    // ProductVariantListingResponse ...
-    type ProductVariantListingResponse struct {
+    // ProductSortOn ...
+    type ProductSortOn struct {
 
         
-            Items []ProductVariantItemResponse  `json:"items"`
-            Total float64  `json:"total"`
-            DisplayType string  `json:"display_type"`
-            Header string  `json:"header"`
-            Key string  `json:"key"`
-         
-    }
-    
-    // ProductListingDetail ...
-    type ProductListingDetail struct {
-
-        
-            TeaserTag string  `json:"teaser_tag"`
-            Moq ApplicationItemMOQ  `json:"moq"`
-            ProductGroupTag []string  `json:"product_group_tag"`
-            RatingCount float64  `json:"rating_count"`
-            Sellable bool  `json:"sellable"`
-            ItemCode string  `json:"item_code"`
-            Discount string  `json:"discount"`
-            Color string  `json:"color"`
-            Highlights []string  `json:"highlights"`
-            CategoryMap ProductCategoryMap  `json:"category_map"`
-            GroupedAttributes []ProductDetailGroupedAttribute  `json:"grouped_attributes"`
-            IsDependent bool  `json:"is_dependent"`
-            Rating float64  `json:"rating"`
-            Sizes []string  `json:"sizes"`
-            Brand ProductBrand  `json:"brand"`
-            UID float64  `json:"uid"`
-            Similars []string  `json:"similars"`
-            Action ProductListingAction  `json:"action"`
-            Medias []Media  `json:"medias"`
-            Categories []ProductBrand  `json:"categories"`
-            Variants []ProductVariantListingResponse  `json:"variants"`
-            ProductOnlineDate string  `json:"product_online_date"`
-            ShortDescription string  `json:"short_description"`
-            Identifiers []string  `json:"identifiers"`
-            NetQuantity NetQuantity  `json:"net_quantity"`
-            Description string  `json:"description"`
-            CustomJson map[string]interface{}  `json:"_custom_json"`
-            Tryouts []string  `json:"tryouts"`
-            Tags []string  `json:"tags"`
-            ImageNature string  `json:"image_nature"`
-            ItemType string  `json:"item_type"`
-            Slug string  `json:"slug"`
             Name string  `json:"name"`
-            CustomOrder ProductDetailCustomOrder  `json:"custom_order"`
-            Type string  `json:"type"`
-            CustomMeta []CustomMetaFields  `json:"_custom_meta"`
-            Seo ApplicationItemSEO  `json:"seo"`
-            Attributes map[string]interface{}  `json:"attributes"`
-            Price ProductListingPrice  `json:"price"`
-            HasVariant bool  `json:"has_variant"`
+            IsSelected bool  `json:"is_selected"`
+            Value string  `json:"value"`
          
     }
     
@@ -541,18 +492,18 @@ package application
     type ProductFiltersValue struct {
 
         
-            Value string  `json:"value"`
-            IsSelected bool  `json:"is_selected"`
-            SelectedMin float64  `json:"selected_min"`
-            QueryFormat string  `json:"query_format"`
-            Count float64  `json:"count"`
-            Min float64  `json:"min"`
-            SelectedMax float64  `json:"selected_max"`
-            CurrencySymbol string  `json:"currency_symbol"`
-            DisplayFormat string  `json:"display_format"`
-            Max float64  `json:"max"`
-            Display string  `json:"display"`
             CurrencyCode string  `json:"currency_code"`
+            Min float64  `json:"min"`
+            SelectedMin float64  `json:"selected_min"`
+            Display string  `json:"display"`
+            IsSelected bool  `json:"is_selected"`
+            Max float64  `json:"max"`
+            CurrencySymbol string  `json:"currency_symbol"`
+            SelectedMax float64  `json:"selected_max"`
+            QueryFormat string  `json:"query_format"`
+            Value string  `json:"value"`
+            Count float64  `json:"count"`
+            DisplayFormat string  `json:"display_format"`
          
     }
     
@@ -560,10 +511,10 @@ package application
     type ProductFiltersKey struct {
 
         
-            Kind string  `json:"kind"`
-            Display string  `json:"display"`
             Name string  `json:"name"`
+            Display string  `json:"display"`
             Logo string  `json:"logo"`
+            Kind string  `json:"kind"`
          
     }
     
@@ -576,13 +527,62 @@ package application
          
     }
     
-    // ProductSortOn ...
-    type ProductSortOn struct {
+    // ProductVariantListingResponse ...
+    type ProductVariantListingResponse struct {
 
         
-            Value string  `json:"value"`
+            Items []ProductVariantItemResponse  `json:"items"`
+            DisplayType string  `json:"display_type"`
+            Key string  `json:"key"`
+            Total float64  `json:"total"`
+            Header string  `json:"header"`
+         
+    }
+    
+    // ProductListingDetail ...
+    type ProductListingDetail struct {
+
+        
+            Price ProductListingPrice  `json:"price"`
+            Action ProductListingAction  `json:"action"`
+            HasVariant bool  `json:"has_variant"`
+            ShortDescription string  `json:"short_description"`
+            Discount string  `json:"discount"`
+            CustomMeta []CustomMetaFields  `json:"_custom_meta"`
+            Tags []string  `json:"tags"`
+            Rating float64  `json:"rating"`
+            Seo ApplicationItemSEO  `json:"seo"`
+            Description string  `json:"description"`
+            Slug string  `json:"slug"`
+            CategoryMap ProductCategoryMap  `json:"category_map"`
+            Highlights []string  `json:"highlights"`
+            IsDependent bool  `json:"is_dependent"`
+            Moq ApplicationItemMOQ  `json:"moq"`
+            ItemType string  `json:"item_type"`
+            Sizes []string  `json:"sizes"`
+            TeaserTag string  `json:"teaser_tag"`
+            Type string  `json:"type"`
+            ImageNature string  `json:"image_nature"`
+            Tryouts []string  `json:"tryouts"`
+            Categories []ProductBrand  `json:"categories"`
+            ProductOnlineDate string  `json:"product_online_date"`
+            ItemCode string  `json:"item_code"`
+            RatingCount float64  `json:"rating_count"`
+            Attributes map[string]interface{}  `json:"attributes"`
+            Variants []ProductVariantListingResponse  `json:"variants"`
+            Identifiers []string  `json:"identifiers"`
+            NetQuantity NetQuantity  `json:"net_quantity"`
+            Brand ProductBrand  `json:"brand"`
+            ProductGroupTag []string  `json:"product_group_tag"`
+            Sellable bool  `json:"sellable"`
+            Medias []Media  `json:"medias"`
+            Color string  `json:"color"`
             Name string  `json:"name"`
-            IsSelected bool  `json:"is_selected"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
+            CustomOrder ProductDetailCustomOrder  `json:"custom_order"`
+            Similars []string  `json:"similars"`
+            UID float64  `json:"uid"`
+            GroupedAttributes []ProductDetailGroupedAttribute  `json:"grouped_attributes"`
          
     }
     
@@ -590,10 +590,10 @@ package application
     type ProductListingResponse struct {
 
         
-            Items []ProductListingDetail  `json:"items"`
+            SortOn []ProductSortOn  `json:"sort_on"`
             Filters []ProductFilters  `json:"filters"`
             Page Page  `json:"page"`
-            SortOn []ProductSortOn  `json:"sort_on"`
+            Items []ProductListingDetail  `json:"items"`
          
     }
     
@@ -610,14 +610,14 @@ package application
     type BrandItem struct {
 
         
-            Description string  `json:"description"`
-            UID float64  `json:"uid"`
             Action ProductListingAction  `json:"action"`
             Logo Media  `json:"logo"`
+            Banners ImageUrls  `json:"banners"`
             Discount string  `json:"discount"`
+            Description string  `json:"description"`
             Departments []string  `json:"departments"`
             Name string  `json:"name"`
-            Banners ImageUrls  `json:"banners"`
+            UID float64  `json:"uid"`
             Slug string  `json:"slug"`
          
     }
@@ -626,8 +626,8 @@ package application
     type BrandListingResponse struct {
 
         
-            Items []BrandItem  `json:"items"`
             Page Page  `json:"page"`
+            Items []BrandItem  `json:"items"`
          
     }
     
@@ -635,12 +635,54 @@ package application
     type BrandDetailResponse struct {
 
         
-            Description string  `json:"description"`
-            UID float64  `json:"uid"`
-            CustomJson map[string]interface{}  `json:"_custom_json"`
             Logo Media  `json:"logo"`
-            Name string  `json:"name"`
             Banners ImageUrls  `json:"banners"`
+            Description string  `json:"description"`
+            Name string  `json:"name"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
+            UID float64  `json:"uid"`
+         
+    }
+    
+    // ThirdLevelChild ...
+    type ThirdLevelChild struct {
+
+        
+            Action ProductListingAction  `json:"action"`
+            Childs []map[string]interface{}  `json:"childs"`
+            Banners ImageUrls  `json:"banners"`
+            Name string  `json:"name"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
+            UID float64  `json:"uid"`
+            Slug string  `json:"slug"`
+         
+    }
+    
+    // SecondLevelChild ...
+    type SecondLevelChild struct {
+
+        
+            Action ProductListingAction  `json:"action"`
+            Childs []ThirdLevelChild  `json:"childs"`
+            Banners ImageUrls  `json:"banners"`
+            Name string  `json:"name"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
+            UID float64  `json:"uid"`
+            Slug string  `json:"slug"`
+         
+    }
+    
+    // Child ...
+    type Child struct {
+
+        
+            Action ProductListingAction  `json:"action"`
+            Childs []SecondLevelChild  `json:"childs"`
+            Banners ImageUrls  `json:"banners"`
+            Name string  `json:"name"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
+            UID float64  `json:"uid"`
+            Slug string  `json:"slug"`
          
     }
     
@@ -653,58 +695,16 @@ package application
          
     }
     
-    // ThirdLevelChild ...
-    type ThirdLevelChild struct {
-
-        
-            UID float64  `json:"uid"`
-            Action ProductListingAction  `json:"action"`
-            CustomJson map[string]interface{}  `json:"_custom_json"`
-            Banners ImageUrls  `json:"banners"`
-            Slug string  `json:"slug"`
-            Name string  `json:"name"`
-            Childs []map[string]interface{}  `json:"childs"`
-         
-    }
-    
-    // SecondLevelChild ...
-    type SecondLevelChild struct {
-
-        
-            UID float64  `json:"uid"`
-            Action ProductListingAction  `json:"action"`
-            CustomJson map[string]interface{}  `json:"_custom_json"`
-            Banners ImageUrls  `json:"banners"`
-            Slug string  `json:"slug"`
-            Name string  `json:"name"`
-            Childs []ThirdLevelChild  `json:"childs"`
-         
-    }
-    
-    // Child ...
-    type Child struct {
-
-        
-            UID float64  `json:"uid"`
-            Action ProductListingAction  `json:"action"`
-            CustomJson map[string]interface{}  `json:"_custom_json"`
-            Banners ImageUrls  `json:"banners"`
-            Slug string  `json:"slug"`
-            Name string  `json:"name"`
-            Childs []SecondLevelChild  `json:"childs"`
-         
-    }
-    
     // CategoryItems ...
     type CategoryItems struct {
 
         
-            UID float64  `json:"uid"`
             Action ProductListingAction  `json:"action"`
-            Banners CategoryBanner  `json:"banners"`
-            Slug string  `json:"slug"`
-            Name string  `json:"name"`
             Childs []Child  `json:"childs"`
+            Banners CategoryBanner  `json:"banners"`
+            Name string  `json:"name"`
+            UID float64  `json:"uid"`
+            Slug string  `json:"slug"`
          
     }
     
@@ -712,8 +712,8 @@ package application
     type DepartmentCategoryTree struct {
 
         
-            Department string  `json:"department"`
             Items []CategoryItems  `json:"items"`
+            Department string  `json:"department"`
          
     }
     
@@ -721,8 +721,8 @@ package application
     type DepartmentIdentifier struct {
 
         
-            Slug string  `json:"slug"`
             UID float64  `json:"uid"`
+            Slug string  `json:"slug"`
          
     }
     
@@ -739,11 +739,11 @@ package application
     type CategoryMetaResponse struct {
 
         
-            UID float64  `json:"uid"`
-            CustomJson map[string]interface{}  `json:"_custom_json"`
             Logo Media  `json:"logo"`
-            Name string  `json:"name"`
             Banners ImageUrls  `json:"banners"`
+            Name string  `json:"name"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
+            UID float64  `json:"uid"`
          
     }
     
@@ -751,9 +751,9 @@ package application
     type HomeListingResponse struct {
 
         
-            Items []ProductListingDetail  `json:"items"`
             Message string  `json:"message"`
             Page Page  `json:"page"`
+            Items []ProductListingDetail  `json:"items"`
          
     }
     
@@ -762,9 +762,9 @@ package application
 
         
             UID float64  `json:"uid"`
+            Name string  `json:"name"`
             Logo Media  `json:"logo"`
             Slug string  `json:"slug"`
-            Name string  `json:"name"`
             PriorityOrder float64  `json:"priority_order"`
          
     }
@@ -781,11 +781,11 @@ package application
     type AutocompleteItem struct {
 
         
-            Type string  `json:"type"`
             Action ProductListingAction  `json:"action"`
-            CustomJson map[string]interface{}  `json:"_custom_json"`
-            Logo Media  `json:"logo"`
             Display string  `json:"display"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
+            Type string  `json:"type"`
+            Logo Media  `json:"logo"`
          
     }
     
@@ -797,51 +797,12 @@ package application
          
     }
     
-    // CollectionQuery ...
-    type CollectionQuery struct {
-
-        
-            Op string  `json:"op"`
-            Value []interface{}  `json:"value"`
-            Attribute string  `json:"attribute"`
-         
-    }
-    
-    // GetCollectionDetailNest ...
-    type GetCollectionDetailNest struct {
-
-        
-            Banners ImageUrls  `json:"banners"`
-            Tag []string  `json:"tag"`
-            IsActive bool  `json:"is_active"`
-            UID string  `json:"uid"`
-            Action ProductListingAction  `json:"action"`
-            Badge map[string]interface{}  `json:"badge"`
-            Description string  `json:"description"`
-            AllowSort bool  `json:"allow_sort"`
-            CustomJson map[string]interface{}  `json:"_custom_json"`
-            Name string  `json:"name"`
-            Slug string  `json:"slug"`
-            AllowFacets bool  `json:"allow_facets"`
-            Meta map[string]interface{}  `json:"meta"`
-            Query []CollectionQuery  `json:"query"`
-            AppID string  `json:"app_id"`
-            Type string  `json:"type"`
-            Cron map[string]interface{}  `json:"cron"`
-            Schedule map[string]interface{}  `json:"_schedule"`
-            Priority float64  `json:"priority"`
-            SortOn string  `json:"sort_on"`
-            Logo Media  `json:"logo"`
-            VisibleFacetsKeys []string  `json:"visible_facets_keys"`
-         
-    }
-    
     // CollectionListingFilterTag ...
     type CollectionListingFilterTag struct {
 
         
-            Display string  `json:"display"`
             Name string  `json:"name"`
+            Display string  `json:"display"`
             IsSelected bool  `json:"is_selected"`
          
     }
@@ -850,8 +811,8 @@ package application
     type CollectionListingFilterType struct {
 
         
-            Display string  `json:"display"`
             Name string  `json:"name"`
+            Display string  `json:"display"`
             IsSelected bool  `json:"is_selected"`
          
     }
@@ -865,13 +826,52 @@ package application
          
     }
     
+    // CollectionQuery ...
+    type CollectionQuery struct {
+
+        
+            Value []interface{}  `json:"value"`
+            Attribute string  `json:"attribute"`
+            Op string  `json:"op"`
+         
+    }
+    
+    // GetCollectionDetailNest ...
+    type GetCollectionDetailNest struct {
+
+        
+            Action ProductListingAction  `json:"action"`
+            VisibleFacetsKeys []string  `json:"visible_facets_keys"`
+            Meta map[string]interface{}  `json:"meta"`
+            AllowSort bool  `json:"allow_sort"`
+            Logo Media  `json:"logo"`
+            Slug string  `json:"slug"`
+            Schedule map[string]interface{}  `json:"_schedule"`
+            IsActive bool  `json:"is_active"`
+            Description string  `json:"description"`
+            Banners ImageUrls  `json:"banners"`
+            AllowFacets bool  `json:"allow_facets"`
+            Type string  `json:"type"`
+            Query []CollectionQuery  `json:"query"`
+            Tag []string  `json:"tag"`
+            Priority float64  `json:"priority"`
+            Badge map[string]interface{}  `json:"badge"`
+            AppID string  `json:"app_id"`
+            SortOn string  `json:"sort_on"`
+            Name string  `json:"name"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
+            Cron map[string]interface{}  `json:"cron"`
+            UID string  `json:"uid"`
+         
+    }
+    
     // GetCollectionListingResponse ...
     type GetCollectionListingResponse struct {
 
         
-            Items []GetCollectionDetailNest  `json:"items"`
             Filters CollectionListingFilter  `json:"filters"`
             Page Page  `json:"page"`
+            Items []GetCollectionDetailNest  `json:"items"`
          
     }
     
@@ -879,26 +879,26 @@ package application
     type CollectionDetailResponse struct {
 
         
-            Banners ImageUrls  `json:"banners"`
-            Tag []string  `json:"tag"`
-            IsActive bool  `json:"is_active"`
-            Badge map[string]interface{}  `json:"badge"`
-            Description string  `json:"description"`
-            AllowSort bool  `json:"allow_sort"`
-            CustomJson map[string]interface{}  `json:"_custom_json"`
-            Name string  `json:"name"`
-            Slug string  `json:"slug"`
-            AllowFacets bool  `json:"allow_facets"`
-            Meta map[string]interface{}  `json:"meta"`
-            Query []CollectionQuery  `json:"query"`
-            AppID string  `json:"app_id"`
-            Type string  `json:"type"`
-            Cron map[string]interface{}  `json:"cron"`
-            Schedule map[string]interface{}  `json:"_schedule"`
-            Priority float64  `json:"priority"`
-            SortOn string  `json:"sort_on"`
-            Logo Media  `json:"logo"`
             VisibleFacetsKeys []string  `json:"visible_facets_keys"`
+            Meta map[string]interface{}  `json:"meta"`
+            AllowSort bool  `json:"allow_sort"`
+            Logo Media  `json:"logo"`
+            Slug string  `json:"slug"`
+            Schedule map[string]interface{}  `json:"_schedule"`
+            IsActive bool  `json:"is_active"`
+            Description string  `json:"description"`
+            Banners ImageUrls  `json:"banners"`
+            AllowFacets bool  `json:"allow_facets"`
+            Type string  `json:"type"`
+            Query []CollectionQuery  `json:"query"`
+            Tag []string  `json:"tag"`
+            Priority float64  `json:"priority"`
+            Badge map[string]interface{}  `json:"badge"`
+            AppID string  `json:"app_id"`
+            SortOn string  `json:"sort_on"`
+            Name string  `json:"name"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
+            Cron map[string]interface{}  `json:"cron"`
          
     }
     
@@ -906,8 +906,8 @@ package application
     type GetFollowListingResponse struct {
 
         
-            Items []ProductListingDetail  `json:"items"`
             Page Page  `json:"page"`
+            Items []ProductListingDetail  `json:"items"`
          
     }
     
@@ -932,8 +932,8 @@ package application
     type FollowIdsData struct {
 
         
-            Brands []float64  `json:"brands"`
             Products []float64  `json:"products"`
+            Brands []float64  `json:"brands"`
             Collections []float64  `json:"collections"`
          
     }
@@ -950,8 +950,8 @@ package application
     type LatLong struct {
 
         
-            Type string  `json:"type"`
             Coordinates []float64  `json:"coordinates"`
+            Type string  `json:"type"`
          
     }
     
@@ -959,16 +959,16 @@ package application
     type Store struct {
 
         
+            Country string  `json:"country"`
+            Name string  `json:"name"`
             StoreEmail string  `json:"store_email"`
             Address string  `json:"address"`
-            Country string  `json:"country"`
-            UID float64  `json:"uid"`
             Pincode float64  `json:"pincode"`
-            Name string  `json:"name"`
-            StoreCode string  `json:"store_code"`
             State string  `json:"state"`
-            City string  `json:"city"`
             LatLong LatLong  `json:"lat_long"`
+            StoreCode string  `json:"store_code"`
+            City string  `json:"city"`
+            UID float64  `json:"uid"`
          
     }
     
@@ -976,35 +976,8 @@ package application
     type StoreListingResponse struct {
 
         
-            Items []Store  `json:"items"`
             Page Page  `json:"page"`
-         
-    }
-    
-    // CompanyStore ...
-    type CompanyStore struct {
-
-        
-            CompanyType string  `json:"company_type"`
-            BusinessType string  `json:"business_type"`
-            Name string  `json:"name"`
-            UID float64  `json:"uid"`
-         
-    }
-    
-    // StoreAddressSerializer ...
-    type StoreAddressSerializer struct {
-
-        
-            Address2 string  `json:"address2"`
-            Country string  `json:"country"`
-            Latitude float64  `json:"latitude"`
-            Longitude float64  `json:"longitude"`
-            Landmark string  `json:"landmark"`
-            Pincode float64  `json:"pincode"`
-            Address1 string  `json:"address1"`
-            State string  `json:"state"`
-            City string  `json:"city"`
+            Items []Store  `json:"items"`
          
     }
     
@@ -1012,8 +985,18 @@ package application
     type SellerPhoneNumber struct {
 
         
-            CountryCode float64  `json:"country_code"`
             Number string  `json:"number"`
+            CountryCode float64  `json:"country_code"`
+         
+    }
+    
+    // StoreManagerSerializer ...
+    type StoreManagerSerializer struct {
+
+        
+            Name string  `json:"name"`
+            MobileNo SellerPhoneNumber  `json:"mobile_no"`
+            Email string  `json:"email"`
          
     }
     
@@ -1022,20 +1005,37 @@ package application
 
         
             UID float64  `json:"uid"`
+            Name string  `json:"name"`
             Logo map[string]interface{}  `json:"logo"`
             Slug string  `json:"slug"`
-            Name string  `json:"name"`
             PriorityOrder float64  `json:"priority_order"`
          
     }
     
-    // StoreManagerSerializer ...
-    type StoreManagerSerializer struct {
+    // StoreAddressSerializer ...
+    type StoreAddressSerializer struct {
 
         
-            Email string  `json:"email"`
-            MobileNo SellerPhoneNumber  `json:"mobile_no"`
+            Address1 string  `json:"address1"`
+            Country string  `json:"country"`
+            Landmark string  `json:"landmark"`
+            Address2 string  `json:"address2"`
+            Longitude float64  `json:"longitude"`
+            Pincode float64  `json:"pincode"`
+            State string  `json:"state"`
+            Latitude float64  `json:"latitude"`
+            City string  `json:"city"`
+         
+    }
+    
+    // CompanyStore ...
+    type CompanyStore struct {
+
+        
             Name string  `json:"name"`
+            CompanyType string  `json:"company_type"`
+            UID float64  `json:"uid"`
+            BusinessType string  `json:"business_type"`
          
     }
     
@@ -1043,14 +1043,14 @@ package application
     type AppStore struct {
 
         
-            Company CompanyStore  `json:"company"`
-            Address StoreAddressSerializer  `json:"address"`
-            UID float64  `json:"uid"`
+            Manager StoreManagerSerializer  `json:"manager"`
             ContactNumbers []SellerPhoneNumber  `json:"contact_numbers"`
             Departments []StoreDepartments  `json:"departments"`
             Name string  `json:"name"`
+            Address StoreAddressSerializer  `json:"address"`
+            Company CompanyStore  `json:"company"`
             StoreCode string  `json:"store_code"`
-            Manager StoreManagerSerializer  `json:"manager"`
+            UID float64  `json:"uid"`
          
     }
     
@@ -1058,9 +1058,9 @@ package application
     type ApplicationStoreListing struct {
 
         
-            Items []AppStore  `json:"items"`
             Filters []map[string]interface{}  `json:"filters"`
             Page Page  `json:"page"`
+            Items []AppStore  `json:"items"`
          
     }
     
@@ -1068,8 +1068,8 @@ package application
     type Time struct {
 
         
-            Hour float64  `json:"hour"`
             Minute float64  `json:"minute"`
+            Hour float64  `json:"hour"`
          
     }
     
@@ -1078,9 +1078,9 @@ package application
 
         
             Opening Time  `json:"opening"`
-            Weekday string  `json:"weekday"`
             Closing Time  `json:"closing"`
             Open bool  `json:"open"`
+            Weekday string  `json:"weekday"`
          
     }
     
@@ -1088,16 +1088,16 @@ package application
     type StoreDetails struct {
 
         
-            Company CompanyStore  `json:"company"`
-            Address StoreAddressSerializer  `json:"address"`
-            UID float64  `json:"uid"`
-            CustomJson map[string]interface{}  `json:"_custom_json"`
+            Manager StoreManagerSerializer  `json:"manager"`
             ContactNumbers []SellerPhoneNumber  `json:"contact_numbers"`
+            Timing []StoreTiming  `json:"timing"`
             Departments []StoreDepartments  `json:"departments"`
             Name string  `json:"name"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
+            Address StoreAddressSerializer  `json:"address"`
+            Company CompanyStore  `json:"company"`
             StoreCode string  `json:"store_code"`
-            Manager StoreManagerSerializer  `json:"manager"`
-            Timing []StoreTiming  `json:"timing"`
+            UID float64  `json:"uid"`
          
     }
     
@@ -1105,10 +1105,22 @@ package application
     type UserDetail struct {
 
         
-            Username string  `json:"username"`
             Contact string  `json:"contact"`
-            UserID string  `json:"user_id"`
             SuperUser bool  `json:"super_user"`
+            Username string  `json:"username"`
+            UserID string  `json:"user_id"`
+         
+    }
+    
+    // ProductGroupPrice ...
+    type ProductGroupPrice struct {
+
+        
+            MaxEffective float64  `json:"max_effective"`
+            Currency string  `json:"currency"`
+            MaxMarked float64  `json:"max_marked"`
+            MinMarked float64  `json:"min_marked"`
+            MinEffective float64  `json:"min_effective"`
          
     }
     
@@ -1116,27 +1128,27 @@ package application
     type ProductDetails struct {
 
         
-            RatingCount float64  `json:"rating_count"`
-            ItemCode string  `json:"item_code"`
-            OutOfStock bool  `json:"out_of_stock"`
-            Highlights []string  `json:"highlights"`
-            GroupedAttributes map[string]interface{}  `json:"grouped_attributes"`
-            Images []string  `json:"images"`
+            HasVariant bool  `json:"has_variant"`
+            ShortDescription string  `json:"short_description"`
             Rating float64  `json:"rating"`
             Media []map[string]interface{}  `json:"media"`
+            Slug string  `json:"slug"`
+            Description string  `json:"description"`
+            Highlights []string  `json:"highlights"`
             TemplateTag string  `json:"template_tag"`
             HsnCode float64  `json:"hsn_code"`
-            ShortDescription string  `json:"short_description"`
-            Description string  `json:"description"`
             Identifier map[string]interface{}  `json:"identifier"`
             ImageNature string  `json:"image_nature"`
-            Name string  `json:"name"`
-            Slug string  `json:"slug"`
-            BrandUID float64  `json:"brand_uid"`
-            IsSet bool  `json:"is_set"`
-            Attributes map[string]interface{}  `json:"attributes"`
+            ItemCode string  `json:"item_code"`
             CountryOfOrigin string  `json:"country_of_origin"`
-            HasVariant bool  `json:"has_variant"`
+            OutOfStock bool  `json:"out_of_stock"`
+            RatingCount float64  `json:"rating_count"`
+            Attributes map[string]interface{}  `json:"attributes"`
+            BrandUID float64  `json:"brand_uid"`
+            GroupedAttributes map[string]interface{}  `json:"grouped_attributes"`
+            Name string  `json:"name"`
+            Images []string  `json:"images"`
+            IsSet bool  `json:"is_set"`
          
     }
     
@@ -1146,20 +1158,8 @@ package application
         
             Value string  `json:"value"`
             Display string  `json:"display"`
-            Quantity float64  `json:"quantity"`
             IsAvailable bool  `json:"is_available"`
-         
-    }
-    
-    // ProductGroupPrice ...
-    type ProductGroupPrice struct {
-
-        
-            MinMarked float64  `json:"min_marked"`
-            Currency string  `json:"currency"`
-            MaxEffective float64  `json:"max_effective"`
-            MinEffective float64  `json:"min_effective"`
-            MaxMarked float64  `json:"max_marked"`
+            Quantity float64  `json:"quantity"`
          
     }
     
@@ -1167,15 +1167,15 @@ package application
     type ProductInGroup struct {
 
         
-            ProductUID float64  `json:"product_uid"`
-            ProductDetails ProductDetails  `json:"product_details"`
-            Sizes []Size  `json:"sizes"`
-            MaxQuantity float64  `json:"max_quantity"`
-            AutoSelect bool  `json:"auto_select"`
-            AllowRemove bool  `json:"allow_remove"`
             Price ProductGroupPrice  `json:"price"`
-            MinQuantity float64  `json:"min_quantity"`
+            ProductDetails ProductDetails  `json:"product_details"`
+            MaxQuantity float64  `json:"max_quantity"`
             AutoAddToCart bool  `json:"auto_add_to_cart"`
+            ProductUID float64  `json:"product_uid"`
+            AutoSelect bool  `json:"auto_select"`
+            MinQuantity float64  `json:"min_quantity"`
+            AllowRemove bool  `json:"allow_remove"`
+            Sizes []Size  `json:"sizes"`
          
     }
     
@@ -1183,23 +1183,23 @@ package application
     type ProductGroupingModel struct {
 
         
+            VerifiedOn string  `json:"verified_on"`
+            VerifiedBy UserDetail  `json:"verified_by"`
+            IsActive bool  `json:"is_active"`
+            ModifiedBy UserDetail  `json:"modified_by"`
+            Choice string  `json:"choice"`
+            SameStoreAssignment bool  `json:"same_store_assignment"`
+            ID interface{}  `json:"_id"`
+            Products []ProductInGroup  `json:"products"`
             CreatedBy UserDetail  `json:"created_by"`
+            Name string  `json:"name"`
+            CompanyID float64  `json:"company_id"`
             CreatedOn string  `json:"created_on"`
             PageVisibility []string  `json:"page_visibility"`
-            Products []ProductInGroup  `json:"products"`
-            Choice string  `json:"choice"`
-            ID interface{}  `json:"_id"`
-            IsActive bool  `json:"is_active"`
-            Logo string  `json:"logo"`
-            ModifiedOn string  `json:"modified_on"`
-            CompanyID float64  `json:"company_id"`
-            VerifiedOn string  `json:"verified_on"`
-            Slug string  `json:"slug"`
-            Name string  `json:"name"`
-            SameStoreAssignment bool  `json:"same_store_assignment"`
-            VerifiedBy UserDetail  `json:"verified_by"`
             Meta map[string]interface{}  `json:"meta"`
-            ModifiedBy UserDetail  `json:"modified_by"`
+            ModifiedOn string  `json:"modified_on"`
+            Logo string  `json:"logo"`
+            Slug string  `json:"slug"`
          
     }
     
@@ -1211,24 +1211,34 @@ package application
          
     }
     
+    // ProductStockPriceV3 ...
+    type ProductStockPriceV3 struct {
+
+        
+            Currency string  `json:"currency"`
+            Effective float64  `json:"effective"`
+            Marked float64  `json:"marked"`
+            Selling float64  `json:"selling"`
+         
+    }
+    
+    // ArticleAssignmentV3 ...
+    type ArticleAssignmentV3 struct {
+
+        
+            Level string  `json:"level"`
+            Strategy string  `json:"strategy"`
+         
+    }
+    
     // StrategyWiseListingSchemaV3 ...
     type StrategyWiseListingSchemaV3 struct {
 
         
-            Pincode float64  `json:"pincode"`
-            Tat float64  `json:"tat"`
             Distance float64  `json:"distance"`
             Quantity float64  `json:"quantity"`
-         
-    }
-    
-    // SellerV3 ...
-    type SellerV3 struct {
-
-        
-            Count float64  `json:"count"`
-            Name string  `json:"name"`
-            UID float64  `json:"uid"`
+            Pincode float64  `json:"pincode"`
+            Tat float64  `json:"tat"`
          
     }
     
@@ -1236,18 +1246,9 @@ package application
     type DetailsSchemaV3 struct {
 
         
+            Value string  `json:"value"`
             Type string  `json:"type"`
             Key string  `json:"key"`
-            Value string  `json:"value"`
-         
-    }
-    
-    // SellerGroupAttributes ...
-    type SellerGroupAttributes struct {
-
-        
-            Title string  `json:"title"`
-            Details []DetailsSchemaV3  `json:"details"`
          
     }
     
@@ -1260,56 +1261,14 @@ package application
          
     }
     
-    // ProductStockUnitPriceV3 ...
-    type ProductStockUnitPriceV3 struct {
-
-        
-            Unit string  `json:"unit"`
-            Price float64  `json:"price"`
-            CurrencySymbol string  `json:"currency_symbol"`
-            CurrencyCode string  `json:"currency_code"`
-         
-    }
-    
-    // StoreV3 ...
-    type StoreV3 struct {
-
-        
-            Count float64  `json:"count"`
-            Name string  `json:"name"`
-            UID float64  `json:"uid"`
-         
-    }
-    
-    // ProductStockPriceV3 ...
-    type ProductStockPriceV3 struct {
-
-        
-            Effective float64  `json:"effective"`
-            Selling float64  `json:"selling"`
-            Currency string  `json:"currency"`
-            Marked float64  `json:"marked"`
-         
-    }
-    
     // DiscountMeta ...
     type DiscountMeta struct {
 
         
             NumberOfMinutes float64  `json:"number_of_minutes"`
-            Timer bool  `json:"timer"`
             Start string  `json:"start"`
             End string  `json:"end"`
-         
-    }
-    
-    // ReturnConfigSchemaV3 ...
-    type ReturnConfigSchemaV3 struct {
-
-        
-            Returnable bool  `json:"returnable"`
-            Time float64  `json:"time"`
-            Unit string  `json:"unit"`
+            Timer bool  `json:"timer"`
          
     }
     
@@ -1334,17 +1293,58 @@ package application
     type ProductSetV3 struct {
 
         
-            SizeDistribution ProductSetDistributionV3  `json:"size_distribution"`
             Quantity float64  `json:"quantity"`
+            SizeDistribution ProductSetDistributionV3  `json:"size_distribution"`
          
     }
     
-    // ArticleAssignmentV3 ...
-    type ArticleAssignmentV3 struct {
+    // ProductStockUnitPriceV3 ...
+    type ProductStockUnitPriceV3 struct {
 
         
-            Strategy string  `json:"strategy"`
-            Level string  `json:"level"`
+            Price float64  `json:"price"`
+            CurrencyCode string  `json:"currency_code"`
+            Unit string  `json:"unit"`
+            CurrencySymbol string  `json:"currency_symbol"`
+         
+    }
+    
+    // ReturnConfigSchemaV3 ...
+    type ReturnConfigSchemaV3 struct {
+
+        
+            Time float64  `json:"time"`
+            Unit string  `json:"unit"`
+            Returnable bool  `json:"returnable"`
+         
+    }
+    
+    // SellerV3 ...
+    type SellerV3 struct {
+
+        
+            Name string  `json:"name"`
+            Count float64  `json:"count"`
+            UID float64  `json:"uid"`
+         
+    }
+    
+    // StoreV3 ...
+    type StoreV3 struct {
+
+        
+            Name string  `json:"name"`
+            Count float64  `json:"count"`
+            UID float64  `json:"uid"`
+         
+    }
+    
+    // SellerGroupAttributes ...
+    type SellerGroupAttributes struct {
+
+        
+            Title string  `json:"title"`
+            Details []DetailsSchemaV3  `json:"details"`
          
     }
     
@@ -1352,28 +1352,28 @@ package application
     type ProductSizePriceResponseV3 struct {
 
         
-            StrategyWiseListing []StrategyWiseListingSchemaV3  `json:"strategy_wise_listing"`
-            ArticleID string  `json:"article_id"`
-            Discount string  `json:"discount"`
-            LongLat []float64  `json:"long_lat"`
-            Seller SellerV3  `json:"seller"`
-            GroupedAttributes []SellerGroupAttributes  `json:"grouped_attributes"`
-            Quantity float64  `json:"quantity"`
-            MarketplaceAttributes []MarketPlaceSttributesSchemaV3  `json:"marketplace_attributes"`
-            PricePerUnit ProductStockUnitPriceV3  `json:"price_per_unit"`
-            Pincode float64  `json:"pincode"`
-            Store StoreV3  `json:"store"`
-            PricePerPiece ProductStockPriceV3  `json:"price_per_piece"`
-            DiscountMeta DiscountMeta  `json:"discount_meta"`
-            ItemType string  `json:"item_type"`
-            IsGift bool  `json:"is_gift"`
-            ReturnConfig ReturnConfigSchemaV3  `json:"return_config"`
-            IsCod bool  `json:"is_cod"`
-            Set ProductSetV3  `json:"set"`
-            SpecialBadge string  `json:"special_badge"`
-            SellerCount float64  `json:"seller_count"`
-            ArticleAssignment ArticleAssignmentV3  `json:"article_assignment"`
             Price ProductStockPriceV3  `json:"price"`
+            PricePerPiece ProductStockPriceV3  `json:"price_per_piece"`
+            ArticleAssignment ArticleAssignmentV3  `json:"article_assignment"`
+            SpecialBadge string  `json:"special_badge"`
+            Discount string  `json:"discount"`
+            StrategyWiseListing []StrategyWiseListingSchemaV3  `json:"strategy_wise_listing"`
+            Pincode float64  `json:"pincode"`
+            MarketplaceAttributes []MarketPlaceSttributesSchemaV3  `json:"marketplace_attributes"`
+            LongLat []float64  `json:"long_lat"`
+            DiscountMeta DiscountMeta  `json:"discount_meta"`
+            Set ProductSetV3  `json:"set"`
+            ItemType string  `json:"item_type"`
+            PricePerUnit ProductStockUnitPriceV3  `json:"price_per_unit"`
+            ReturnConfig ReturnConfigSchemaV3  `json:"return_config"`
+            Seller SellerV3  `json:"seller"`
+            Quantity float64  `json:"quantity"`
+            Store StoreV3  `json:"store"`
+            IsCod bool  `json:"is_cod"`
+            SellerCount float64  `json:"seller_count"`
+            ArticleID string  `json:"article_id"`
+            IsGift bool  `json:"is_gift"`
+            GroupedAttributes []SellerGroupAttributes  `json:"grouped_attributes"`
          
     }
     
@@ -1381,9 +1381,9 @@ package application
     type ProductSizeSellerFilterSchemaV3 struct {
 
         
-            Value string  `json:"value"`
             Name string  `json:"name"`
             IsSelected bool  `json:"is_selected"`
+            Value string  `json:"value"`
          
     }
     
@@ -1391,9 +1391,9 @@ package application
     type ProductSizeSellersResponseV3 struct {
 
         
-            Items []ProductSizePriceResponseV3  `json:"items"`
-            Page Page  `json:"page"`
             SortOn []ProductSizeSellerFilterSchemaV3  `json:"sort_on"`
+            Page Page  `json:"page"`
+            Items []ProductSizePriceResponseV3  `json:"items"`
          
     }
     
@@ -8822,15 +8822,15 @@ package application
     type AggregatorConfigDetail struct {
 
         
-            Pin string  `json:"pin"`
-            ConfigType string  `json:"config_type"`
-            API string  `json:"api"`
-            MerchantKey string  `json:"merchant_key"`
-            Key string  `json:"key"`
             UserID string  `json:"user_id"`
-            Secret string  `json:"secret"`
-            Sdk bool  `json:"sdk"`
+            MerchantKey string  `json:"merchant_key"`
+            API string  `json:"api"`
+            Pin string  `json:"pin"`
+            Key string  `json:"key"`
+            ConfigType string  `json:"config_type"`
             VerifyAPI string  `json:"verify_api"`
+            Sdk bool  `json:"sdk"`
+            Secret string  `json:"secret"`
             MerchantID string  `json:"merchant_id"`
          
     }
@@ -8839,16 +8839,16 @@ package application
     type AggregatorsConfigDetailResponse struct {
 
         
-            Success bool  `json:"success"`
-            Mswipe AggregatorConfigDetail  `json:"mswipe"`
-            Rupifi AggregatorConfigDetail  `json:"rupifi"`
             Juspay AggregatorConfigDetail  `json:"juspay"`
             Simpl AggregatorConfigDetail  `json:"simpl"`
+            Rupifi AggregatorConfigDetail  `json:"rupifi"`
             Payumoney AggregatorConfigDetail  `json:"payumoney"`
-            Stripe AggregatorConfigDetail  `json:"stripe"`
-            Env string  `json:"env"`
             Razorpay AggregatorConfigDetail  `json:"razorpay"`
             Ccavenue AggregatorConfigDetail  `json:"ccavenue"`
+            Mswipe AggregatorConfigDetail  `json:"mswipe"`
+            Stripe AggregatorConfigDetail  `json:"stripe"`
+            Env string  `json:"env"`
+            Success bool  `json:"success"`
          
     }
     
@@ -8874,10 +8874,10 @@ package application
     type AttachCardRequest struct {
 
         
+            Nickname string  `json:"nickname"`
+            Refresh bool  `json:"refresh"`
             NameOnCard string  `json:"name_on_card"`
             CardID string  `json:"card_id"`
-            Refresh bool  `json:"refresh"`
-            Nickname string  `json:"nickname"`
          
     }
     
@@ -8885,9 +8885,9 @@ package application
     type AttachCardsResponse struct {
 
         
-            Message string  `json:"message"`
-            Success bool  `json:"success"`
             Data map[string]interface{}  `json:"data"`
+            Success bool  `json:"success"`
+            Message string  `json:"message"`
          
     }
     
@@ -8895,9 +8895,9 @@ package application
     type CardPaymentGateway struct {
 
         
-            Aggregator string  `json:"aggregator"`
             API string  `json:"api"`
             CustomerID string  `json:"customer_id"`
+            Aggregator string  `json:"aggregator"`
          
     }
     
@@ -8905,9 +8905,9 @@ package application
     type ActiveCardPaymentGatewayResponse struct {
 
         
-            Message string  `json:"message"`
-            Success bool  `json:"success"`
             Cards CardPaymentGateway  `json:"cards"`
+            Success bool  `json:"success"`
+            Message string  `json:"message"`
          
     }
     
@@ -8915,23 +8915,23 @@ package application
     type Card struct {
 
         
-            ExpYear float64  `json:"exp_year"`
+            CardIsin string  `json:"card_isin"`
             CardToken string  `json:"card_token"`
-            CardIssuer string  `json:"card_issuer"`
-            CardName string  `json:"card_name"`
-            Expired bool  `json:"expired"`
-            CardReference string  `json:"card_reference"`
             CardFingerprint string  `json:"card_fingerprint"`
             AggregatorName string  `json:"aggregator_name"`
-            CardBrand string  `json:"card_brand"`
-            CardIsin string  `json:"card_isin"`
-            CardBrandImage string  `json:"card_brand_image"`
-            CardID string  `json:"card_id"`
             CardType string  `json:"card_type"`
-            CardNumber string  `json:"card_number"`
-            CompliantWithTokenisationGuidelines bool  `json:"compliant_with_tokenisation_guidelines"`
             Nickname string  `json:"nickname"`
+            CardBrandImage string  `json:"card_brand_image"`
+            Expired bool  `json:"expired"`
+            CardName string  `json:"card_name"`
+            ExpYear float64  `json:"exp_year"`
+            CardNumber string  `json:"card_number"`
             ExpMonth float64  `json:"exp_month"`
+            CardBrand string  `json:"card_brand"`
+            CardID string  `json:"card_id"`
+            CardReference string  `json:"card_reference"`
+            CompliantWithTokenisationGuidelines bool  `json:"compliant_with_tokenisation_guidelines"`
+            CardIssuer string  `json:"card_issuer"`
          
     }
     
@@ -8939,9 +8939,9 @@ package application
     type ListCardsResponse struct {
 
         
-            Message string  `json:"message"`
-            Success bool  `json:"success"`
             Data []Card  `json:"data"`
+            Success bool  `json:"success"`
+            Message string  `json:"message"`
          
     }
     
@@ -8957,8 +8957,8 @@ package application
     type DeleteCardsResponse struct {
 
         
-            Message string  `json:"message"`
             Success bool  `json:"success"`
+            Message string  `json:"message"`
          
     }
     
@@ -8966,14 +8966,14 @@ package application
     type ValidateCustomerRequest struct {
 
         
-            Aggregator string  `json:"aggregator"`
-            DeliveryAddress map[string]interface{}  `json:"delivery_address"`
-            PhoneNumber string  `json:"phone_number"`
-            TransactionAmountInPaise float64  `json:"transaction_amount_in_paise"`
-            BillingAddress map[string]interface{}  `json:"billing_address"`
-            MerchantParams map[string]interface{}  `json:"merchant_params"`
-            Payload string  `json:"payload"`
             OrderItems []map[string]interface{}  `json:"order_items"`
+            BillingAddress map[string]interface{}  `json:"billing_address"`
+            Aggregator string  `json:"aggregator"`
+            Payload string  `json:"payload"`
+            TransactionAmountInPaise float64  `json:"transaction_amount_in_paise"`
+            PhoneNumber string  `json:"phone_number"`
+            MerchantParams map[string]interface{}  `json:"merchant_params"`
+            DeliveryAddress map[string]interface{}  `json:"delivery_address"`
          
     }
     
@@ -8981,9 +8981,9 @@ package application
     type ValidateCustomerResponse struct {
 
         
-            Message string  `json:"message"`
-            Success bool  `json:"success"`
             Data map[string]interface{}  `json:"data"`
+            Success bool  `json:"success"`
+            Message string  `json:"message"`
          
     }
     
@@ -8992,10 +8992,10 @@ package application
 
         
             Aggregator string  `json:"aggregator"`
-            Verified bool  `json:"verified"`
             TransactionToken string  `json:"transaction_token"`
-            OrderID string  `json:"order_id"`
             Amount float64  `json:"amount"`
+            OrderID string  `json:"order_id"`
+            Verified bool  `json:"verified"`
          
     }
     
@@ -9003,13 +9003,13 @@ package application
     type ChargeCustomerResponse struct {
 
         
-            Aggregator string  `json:"aggregator"`
-            CartID string  `json:"cart_id"`
-            Success bool  `json:"success"`
-            Status string  `json:"status"`
             DeliveryAddressID string  `json:"delivery_address_id"`
-            OrderID string  `json:"order_id"`
+            Aggregator string  `json:"aggregator"`
             Message string  `json:"message"`
+            CartID string  `json:"cart_id"`
+            OrderID string  `json:"order_id"`
+            Status string  `json:"status"`
+            Success bool  `json:"success"`
          
     }
     
@@ -9017,19 +9017,19 @@ package application
     type PaymentInitializationRequest struct {
 
         
-            DeviceID string  `json:"device_id"`
-            RazorpayPaymentID string  `json:"razorpay_payment_id"`
-            Aggregator string  `json:"aggregator"`
-            Currency string  `json:"currency"`
-            OrderID string  `json:"order_id"`
-            Method string  `json:"method"`
-            Email string  `json:"email"`
-            Vpa string  `json:"vpa"`
             Contact string  `json:"contact"`
-            Timeout float64  `json:"timeout"`
-            Amount float64  `json:"amount"`
+            Method string  `json:"method"`
+            DeviceID string  `json:"device_id"`
+            Email string  `json:"email"`
             CustomerID string  `json:"customer_id"`
+            Aggregator string  `json:"aggregator"`
+            Vpa string  `json:"vpa"`
+            Amount float64  `json:"amount"`
+            Timeout float64  `json:"timeout"`
             MerchantOrderID string  `json:"merchant_order_id"`
+            OrderID string  `json:"order_id"`
+            Currency string  `json:"currency"`
+            RazorpayPaymentID string  `json:"razorpay_payment_id"`
          
     }
     
@@ -9037,23 +9037,23 @@ package application
     type PaymentInitializationResponse struct {
 
         
+            Method string  `json:"method"`
             DeviceID string  `json:"device_id"`
+            AggregatorOrderID string  `json:"aggregator_order_id"`
             Aggregator string  `json:"aggregator"`
-            RazorpayPaymentID string  `json:"razorpay_payment_id"`
-            Success bool  `json:"success"`
+            CustomerID string  `json:"customer_id"`
+            BqrImage string  `json:"bqr_image"`
+            Vpa string  `json:"vpa"`
+            UpiPollURL string  `json:"upi_poll_url"`
+            VirtualID string  `json:"virtual_id"`
+            MerchantOrderID string  `json:"merchant_order_id"`
+            Amount float64  `json:"amount"`
+            PollingURL string  `json:"polling_url"`
+            Timeout float64  `json:"timeout"`
             Currency string  `json:"currency"`
             Status string  `json:"status"`
-            PollingURL string  `json:"polling_url"`
-            AggregatorOrderID string  `json:"aggregator_order_id"`
-            BqrImage string  `json:"bqr_image"`
-            Method string  `json:"method"`
-            Vpa string  `json:"vpa"`
-            CustomerID string  `json:"customer_id"`
-            Timeout float64  `json:"timeout"`
-            Amount float64  `json:"amount"`
-            VirtualID string  `json:"virtual_id"`
-            UpiPollURL string  `json:"upi_poll_url"`
-            MerchantOrderID string  `json:"merchant_order_id"`
+            Success bool  `json:"success"`
+            RazorpayPaymentID string  `json:"razorpay_payment_id"`
          
     }
     
@@ -9061,19 +9061,19 @@ package application
     type PaymentStatusUpdateRequest struct {
 
         
+            Contact string  `json:"contact"`
+            Method string  `json:"method"`
+            DeviceID string  `json:"device_id"`
+            Email string  `json:"email"`
+            CustomerID string  `json:"customer_id"`
             Aggregator string  `json:"aggregator"`
+            Vpa string  `json:"vpa"`
+            Amount float64  `json:"amount"`
+            MerchantOrderID string  `json:"merchant_order_id"`
+            OrderID string  `json:"order_id"`
             Currency string  `json:"currency"`
             Status string  `json:"status"`
-            OrderID string  `json:"order_id"`
-            Method string  `json:"method"`
-            Email string  `json:"email"`
-            Vpa string  `json:"vpa"`
             MerchantTransactionID string  `json:"merchant_transaction_id"`
-            Contact string  `json:"contact"`
-            CustomerID string  `json:"customer_id"`
-            Amount float64  `json:"amount"`
-            DeviceID string  `json:"device_id"`
-            MerchantOrderID string  `json:"merchant_order_id"`
          
     }
     
@@ -9081,43 +9081,11 @@ package application
     type PaymentStatusUpdateResponse struct {
 
         
-            RedirectURL string  `json:"redirect_url"`
-            Success bool  `json:"success"`
-            AggregatorName string  `json:"aggregator_name"`
-            Status string  `json:"status"`
             Retry bool  `json:"retry"`
-         
-    }
-    
-    // AggregatorRoute ...
-    type AggregatorRoute struct {
-
-        
-            PaymentFlow string  `json:"payment_flow"`
-            Data map[string]interface{}  `json:"data"`
-            APILink string  `json:"api_link"`
-            PaymentFlowData string  `json:"payment_flow_data"`
-         
-    }
-    
-    // PaymentFlow ...
-    type PaymentFlow struct {
-
-        
-            Fynd AggregatorRoute  `json:"fynd"`
-            Rupifi AggregatorRoute  `json:"rupifi"`
-            Simpl AggregatorRoute  `json:"simpl"`
-            Juspay AggregatorRoute  `json:"juspay"`
-            Stripe AggregatorRoute  `json:"stripe"`
-            Payubiz AggregatorRoute  `json:"payubiz"`
-            Ajiodhan AggregatorRoute  `json:"ajiodhan"`
-            BqrRazorpay AggregatorRoute  `json:"bqr_razorpay"`
-            Razorpay AggregatorRoute  `json:"razorpay"`
-            Epaylater AggregatorRoute  `json:"epaylater"`
-            Jiopay AggregatorRoute  `json:"jiopay"`
-            Mswipe AggregatorRoute  `json:"mswipe"`
-            UpiRazorpay AggregatorRoute  `json:"upi_razorpay"`
-            Ccavenue AggregatorRoute  `json:"ccavenue"`
+            AggregatorName string  `json:"aggregator_name"`
+            RedirectURL string  `json:"redirect_url"`
+            Status string  `json:"status"`
+            Success bool  `json:"success"`
          
     }
     
@@ -9135,9 +9103,9 @@ package application
 
         
             DisplayName string  `json:"display_name"`
-            Logos PaymentModeLogo  `json:"logos"`
             Code string  `json:"code"`
             PackageName string  `json:"package_name"`
+            Logos PaymentModeLogo  `json:"logos"`
          
     }
     
@@ -9154,39 +9122,39 @@ package application
     type PaymentModeList struct {
 
         
-            CardIssuer string  `json:"card_issuer"`
-            CardName string  `json:"card_name"`
-            CardFingerprint string  `json:"card_fingerprint"`
-            AggregatorName string  `json:"aggregator_name"`
-            CardBrand string  `json:"card_brand"`
-            IntentApp []IntentApp  `json:"intent_app"`
-            CodLimitPerOrder float64  `json:"cod_limit_per_order"`
-            CardBrandImage string  `json:"card_brand_image"`
-            CardType string  `json:"card_type"`
-            RetryCount float64  `json:"retry_count"`
-            Nickname string  `json:"nickname"`
-            ExpMonth float64  `json:"exp_month"`
-            ExpYear float64  `json:"exp_year"`
-            CardToken string  `json:"card_token"`
-            IntentFlow bool  `json:"intent_flow"`
-            CodLimit float64  `json:"cod_limit"`
-            IntentAppErrorList []string  `json:"intent_app_error_list"`
-            LogoURL PaymentModeLogo  `json:"logo_url"`
-            CardNumber string  `json:"card_number"`
             DisplayPriority float64  `json:"display_priority"`
-            DisplayName string  `json:"display_name"`
-            RemainingLimit float64  `json:"remaining_limit"`
-            CardReference string  `json:"card_reference"`
-            MerchantCode string  `json:"merchant_code"`
-            Code string  `json:"code"`
-            Timeout float64  `json:"timeout"`
-            CompliantWithTokenisationGuidelines bool  `json:"compliant_with_tokenisation_guidelines"`
-            Expired bool  `json:"expired"`
-            Name string  `json:"name"`
-            CardIsin string  `json:"card_isin"`
-            CardID string  `json:"card_id"`
-            IntentAppErrorDictList []IntentAppErrorList  `json:"intent_app_error_dict_list"`
+            Nickname string  `json:"nickname"`
             FyndVpa string  `json:"fynd_vpa"`
+            Expired bool  `json:"expired"`
+            DisplayName string  `json:"display_name"`
+            ExpMonth float64  `json:"exp_month"`
+            CardID string  `json:"card_id"`
+            CompliantWithTokenisationGuidelines bool  `json:"compliant_with_tokenisation_guidelines"`
+            RetryCount float64  `json:"retry_count"`
+            IntentAppErrorList []string  `json:"intent_app_error_list"`
+            CardIssuer string  `json:"card_issuer"`
+            CardIsin string  `json:"card_isin"`
+            CodLimitPerOrder float64  `json:"cod_limit_per_order"`
+            CardType string  `json:"card_type"`
+            IntentApp []IntentApp  `json:"intent_app"`
+            Timeout float64  `json:"timeout"`
+            ExpYear float64  `json:"exp_year"`
+            CardNumber string  `json:"card_number"`
+            CardBrand string  `json:"card_brand"`
+            Name string  `json:"name"`
+            CardToken string  `json:"card_token"`
+            Code string  `json:"code"`
+            IntentAppErrorDictList []IntentAppErrorList  `json:"intent_app_error_dict_list"`
+            AggregatorName string  `json:"aggregator_name"`
+            CardBrandImage string  `json:"card_brand_image"`
+            CardReference string  `json:"card_reference"`
+            CodLimit float64  `json:"cod_limit"`
+            CardFingerprint string  `json:"card_fingerprint"`
+            MerchantCode string  `json:"merchant_code"`
+            IntentFlow bool  `json:"intent_flow"`
+            CardName string  `json:"card_name"`
+            LogoURL PaymentModeLogo  `json:"logo_url"`
+            RemainingLimit float64  `json:"remaining_limit"`
          
     }
     
@@ -9194,15 +9162,47 @@ package application
     type RootPaymentMode struct {
 
         
+            List []PaymentModeList  `json:"list"`
+            DisplayPriority float64  `json:"display_priority"`
+            AggregatorName string  `json:"aggregator_name"`
+            AddCardEnabled bool  `json:"add_card_enabled"`
+            AnonymousEnable bool  `json:"anonymous_enable"`
+            IsPayByCardPl bool  `json:"is_pay_by_card_pl"`
             DisplayName string  `json:"display_name"`
             Name string  `json:"name"`
-            AddCardEnabled bool  `json:"add_card_enabled"`
-            List []PaymentModeList  `json:"list"`
-            AggregatorName string  `json:"aggregator_name"`
-            AnonymousEnable bool  `json:"anonymous_enable"`
-            DisplayPriority float64  `json:"display_priority"`
             SaveCard bool  `json:"save_card"`
-            IsPayByCardPl bool  `json:"is_pay_by_card_pl"`
+         
+    }
+    
+    // AggregatorRoute ...
+    type AggregatorRoute struct {
+
+        
+            Data map[string]interface{}  `json:"data"`
+            APILink string  `json:"api_link"`
+            PaymentFlowData string  `json:"payment_flow_data"`
+            PaymentFlow string  `json:"payment_flow"`
+         
+    }
+    
+    // PaymentFlow ...
+    type PaymentFlow struct {
+
+        
+            Simpl AggregatorRoute  `json:"simpl"`
+            Juspay AggregatorRoute  `json:"juspay"`
+            Rupifi AggregatorRoute  `json:"rupifi"`
+            UpiRazorpay AggregatorRoute  `json:"upi_razorpay"`
+            Razorpay AggregatorRoute  `json:"razorpay"`
+            Ccavenue AggregatorRoute  `json:"ccavenue"`
+            Epaylater AggregatorRoute  `json:"epaylater"`
+            Mswipe AggregatorRoute  `json:"mswipe"`
+            Stripe AggregatorRoute  `json:"stripe"`
+            Payubiz AggregatorRoute  `json:"payubiz"`
+            Fynd AggregatorRoute  `json:"fynd"`
+            Ajiodhan AggregatorRoute  `json:"ajiodhan"`
+            Jiopay AggregatorRoute  `json:"jiopay"`
+            BqrRazorpay AggregatorRoute  `json:"bqr_razorpay"`
          
     }
     
@@ -9210,8 +9210,8 @@ package application
     type PaymentOptionAndFlow struct {
 
         
-            PaymentFlows PaymentFlow  `json:"payment_flows"`
             PaymentOption []RootPaymentMode  `json:"payment_option"`
+            PaymentFlows PaymentFlow  `json:"payment_flows"`
          
     }
     
@@ -9219,8 +9219,8 @@ package application
     type PaymentModeRouteResponse struct {
 
         
-            Success bool  `json:"success"`
             PaymentOptions PaymentOptionAndFlow  `json:"payment_options"`
+            Success bool  `json:"success"`
          
     }
     
@@ -9246,9 +9246,9 @@ package application
     type EpaylaterBannerData struct {
 
         
-            Status string  `json:"status"`
             Message string  `json:"message"`
             Display bool  `json:"display"`
+            Status string  `json:"status"`
          
     }
     
@@ -9266,8 +9266,8 @@ package application
 
         
             DeviceID string  `json:"device_id"`
-            RequestType string  `json:"request_type"`
             OrderID string  `json:"order_id"`
+            RequestType string  `json:"request_type"`
          
     }
     
@@ -9293,8 +9293,8 @@ package application
     type renderHTMLRequest struct {
 
         
-            Returntype string  `json:"returntype"`
             Base64Html string  `json:"base64_html"`
+            Returntype string  `json:"returntype"`
          
     }
     
@@ -9318,10 +9318,10 @@ package application
     type ValidateUPI struct {
 
         
-            Status string  `json:"status"`
+            UpiVpa string  `json:"upi_vpa"`
             CustomerName string  `json:"customer_name"`
             IsValid bool  `json:"is_valid"`
-            UpiVpa string  `json:"upi_vpa"`
+            Status string  `json:"status"`
          
     }
     
@@ -9339,21 +9339,21 @@ package application
 
         
             CardToken string  `json:"card_token"`
-            CardObject string  `json:"card_object"`
-            User string  `json:"user"`
             Status bool  `json:"status"`
-            CardExpMonth string  `json:"card_exp_month"`
-            CardBrand string  `json:"card_brand"`
-            Type string  `json:"type"`
-            CardExpYear string  `json:"card_exp_year"`
-            Country string  `json:"country"`
-            NameOnCard string  `json:"name_on_card"`
-            ExtendedCardType string  `json:"extended_card_type"`
-            CardSubType string  `json:"card_sub_type"`
-            ID string  `json:"id"`
-            Bank string  `json:"bank"`
-            IsDomesticCard bool  `json:"is_domestic_card"`
             BankCode string  `json:"bank_code"`
+            ExtendedCardType string  `json:"extended_card_type"`
+            CardExpYear string  `json:"card_exp_year"`
+            CardExpMonth string  `json:"card_exp_month"`
+            IsDomesticCard bool  `json:"is_domestic_card"`
+            User string  `json:"user"`
+            CardBrand string  `json:"card_brand"`
+            Country string  `json:"country"`
+            CardObject string  `json:"card_object"`
+            Type string  `json:"type"`
+            Bank string  `json:"bank"`
+            ID string  `json:"id"`
+            NameOnCard string  `json:"name_on_card"`
+            CardSubType string  `json:"card_sub_type"`
          
     }
     
@@ -9372,9 +9372,9 @@ package application
         
             DisplayName string  `json:"display_name"`
             Name string  `json:"name"`
-            LogoSmall string  `json:"logo_small"`
             LogoLarge string  `json:"logo_large"`
             ID float64  `json:"id"`
+            LogoSmall string  `json:"logo_small"`
          
     }
     
@@ -9416,25 +9416,25 @@ package application
     type OrderBeneficiaryDetails struct {
 
         
-            IfscCode string  `json:"ifsc_code"`
-            Mobile string  `json:"mobile"`
             Email string  `json:"email"`
-            Title string  `json:"title"`
-            Address string  `json:"address"`
-            DisplayName string  `json:"display_name"`
-            BeneficiaryID string  `json:"beneficiary_id"`
             Comment string  `json:"comment"`
-            BankName string  `json:"bank_name"`
-            DelightsUserName string  `json:"delights_user_name"`
-            ModifiedOn string  `json:"modified_on"`
-            AccountHolder string  `json:"account_holder"`
+            DisplayName string  `json:"display_name"`
             CreatedOn string  `json:"created_on"`
-            BranchName string  `json:"branch_name"`
-            Subtitle string  `json:"subtitle"`
             TransferMode string  `json:"transfer_mode"`
+            BeneficiaryID string  `json:"beneficiary_id"`
+            Title string  `json:"title"`
+            ModifiedOn string  `json:"modified_on"`
+            IfscCode string  `json:"ifsc_code"`
+            Subtitle string  `json:"subtitle"`
+            AccountHolder string  `json:"account_holder"`
+            Mobile string  `json:"mobile"`
             ID float64  `json:"id"`
+            BranchName string  `json:"branch_name"`
+            Address string  `json:"address"`
+            BankName string  `json:"bank_name"`
             AccountNo string  `json:"account_no"`
             IsActive bool  `json:"is_active"`
+            DelightsUserName string  `json:"delights_user_name"`
          
     }
     
@@ -9442,8 +9442,8 @@ package application
     type OrderBeneficiaryResponse struct {
 
         
-            Beneficiaries []OrderBeneficiaryDetails  `json:"beneficiaries"`
             ShowBeneficiaryDetails bool  `json:"show_beneficiary_details"`
+            Beneficiaries []OrderBeneficiaryDetails  `json:"beneficiaries"`
          
     }
     
@@ -9452,8 +9452,8 @@ package application
 
         
             Description string  `json:"description"`
-            Success bool  `json:"success"`
             Code string  `json:"code"`
+            Success bool  `json:"success"`
          
     }
     
@@ -9461,8 +9461,8 @@ package application
     type IfscCodeResponse struct {
 
         
-            BranchName string  `json:"branch_name"`
             BankName string  `json:"bank_name"`
+            BranchName string  `json:"branch_name"`
             Success bool  `json:"success"`
          
     }
@@ -9472,8 +9472,8 @@ package application
 
         
             Description string  `json:"description"`
-            Success bool  `json:"success"`
             Code string  `json:"code"`
+            Success bool  `json:"success"`
          
     }
     
@@ -9482,8 +9482,8 @@ package application
 
         
             Otp string  `json:"otp"`
-            HashKey string  `json:"hash_key"`
             RequestID string  `json:"request_id"`
+            HashKey string  `json:"hash_key"`
          
     }
     
@@ -9491,8 +9491,8 @@ package application
     type AddBeneficiaryViaOtpVerificationResponse struct {
 
         
-            Message string  `json:"message"`
             Success bool  `json:"success"`
+            Message string  `json:"message"`
          
     }
     
@@ -9510,17 +9510,17 @@ package application
     type BeneficiaryModeDetails struct {
 
         
-            IfscCode string  `json:"ifsc_code"`
-            Wallet string  `json:"wallet"`
+            BranchName string  `json:"branch_name"`
+            Email string  `json:"email"`
             Comment string  `json:"comment"`
-            BankName string  `json:"bank_name"`
-            Mobile string  `json:"mobile"`
             Address string  `json:"address"`
             Vpa string  `json:"vpa"`
-            Email string  `json:"email"`
-            BranchName string  `json:"branch_name"`
-            AccountHolder string  `json:"account_holder"`
+            IfscCode string  `json:"ifsc_code"`
+            Wallet string  `json:"wallet"`
+            BankName string  `json:"bank_name"`
             AccountNo string  `json:"account_no"`
+            AccountHolder string  `json:"account_holder"`
+            Mobile string  `json:"mobile"`
          
     }
     
@@ -9528,12 +9528,12 @@ package application
     type AddBeneficiaryDetailsRequest struct {
 
         
-            TransferMode string  `json:"transfer_mode"`
-            Delights bool  `json:"delights"`
-            Details BeneficiaryModeDetails  `json:"details"`
-            OrderID string  `json:"order_id"`
-            RequestID string  `json:"request_id"`
             Otp string  `json:"otp"`
+            Details BeneficiaryModeDetails  `json:"details"`
+            Delights bool  `json:"delights"`
+            OrderID string  `json:"order_id"`
+            TransferMode string  `json:"transfer_mode"`
+            RequestID string  `json:"request_id"`
             ShipmentID string  `json:"shipment_id"`
          
     }
@@ -9542,10 +9542,10 @@ package application
     type RefundAccountResponse struct {
 
         
-            Message string  `json:"message"`
             IsVerifiedFlag bool  `json:"is_verified_flag"`
-            Success bool  `json:"success"`
             Data map[string]interface{}  `json:"data"`
+            Success bool  `json:"success"`
+            Message string  `json:"message"`
          
     }
     
@@ -9553,11 +9553,11 @@ package application
     type BankDetailsForOTP struct {
 
         
-            AccountHolder string  `json:"account_holder"`
+            BranchName string  `json:"branch_name"`
             IfscCode string  `json:"ifsc_code"`
             BankName string  `json:"bank_name"`
-            BranchName string  `json:"branch_name"`
             AccountNo string  `json:"account_no"`
+            AccountHolder string  `json:"account_holder"`
          
     }
     
@@ -9583,9 +9583,9 @@ package application
     type WalletOtpResponse struct {
 
         
+            RequestID string  `json:"request_id"`
             Success bool  `json:"success"`
             IsVerifiedFlag string  `json:"is_verified_flag"`
-            RequestID string  `json:"request_id"`
          
     }
     
@@ -9602,8 +9602,8 @@ package application
     type SetDefaultBeneficiaryResponse struct {
 
         
-            Success bool  `json:"success"`
             IsBeneficiarySet bool  `json:"is_beneficiary_set"`
+            Success bool  `json:"success"`
          
     }
     
@@ -9611,15 +9611,15 @@ package application
     type GetPaymentLinkResponse struct {
 
         
-            Success bool  `json:"success"`
-            MerchantName string  `json:"merchant_name"`
-            ExternalOrderID string  `json:"external_order_id"`
             PollingTimeout float64  `json:"polling_timeout"`
+            PaymentLinkURL string  `json:"payment_link_url"`
+            Message string  `json:"message"`
             PaymentLinkCurrentStatus string  `json:"payment_link_current_status"`
+            ExternalOrderID string  `json:"external_order_id"`
+            MerchantName string  `json:"merchant_name"`
             Amount float64  `json:"amount"`
             StatusCode float64  `json:"status_code"`
-            Message string  `json:"message"`
-            PaymentLinkURL string  `json:"payment_link_url"`
+            Success bool  `json:"success"`
          
     }
     
@@ -9627,14 +9627,14 @@ package application
     type ErrorDescription struct {
 
         
-            Cancelled bool  `json:"cancelled"`
+            Msg string  `json:"msg"`
             MerchantName string  `json:"merchant_name"`
             InvalidID bool  `json:"invalid_id"`
-            Amount float64  `json:"amount"`
-            Msg string  `json:"msg"`
-            PaymentTransactionID string  `json:"payment_transaction_id"`
-            Expired bool  `json:"expired"`
             MerchantOrderID string  `json:"merchant_order_id"`
+            Amount float64  `json:"amount"`
+            Expired bool  `json:"expired"`
+            Cancelled bool  `json:"cancelled"`
+            PaymentTransactionID string  `json:"payment_transaction_id"`
          
     }
     
@@ -9642,10 +9642,10 @@ package application
     type ErrorResponse struct {
 
         
-            Error ErrorDescription  `json:"error"`
             StatusCode float64  `json:"status_code"`
-            Message string  `json:"message"`
+            Error ErrorDescription  `json:"error"`
             Success bool  `json:"success"`
+            Message string  `json:"message"`
          
     }
     
@@ -9653,11 +9653,11 @@ package application
     type CreatePaymentLinkMeta struct {
 
         
-            CartID string  `json:"cart_id"`
             AssignCardID string  `json:"assign_card_id"`
             Pincode string  `json:"pincode"`
-            Amount string  `json:"amount"`
+            CartID string  `json:"cart_id"`
             CheckoutMode string  `json:"checkout_mode"`
+            Amount string  `json:"amount"`
          
     }
     
@@ -9665,12 +9665,12 @@ package application
     type CreatePaymentLinkRequest struct {
 
         
-            MobileNumber string  `json:"mobile_number"`
-            ExternalOrderID string  `json:"external_order_id"`
-            Meta CreatePaymentLinkMeta  `json:"meta"`
             Email string  `json:"email"`
+            Meta CreatePaymentLinkMeta  `json:"meta"`
+            ExternalOrderID string  `json:"external_order_id"`
             Amount float64  `json:"amount"`
             Description string  `json:"description"`
+            MobileNumber string  `json:"mobile_number"`
          
     }
     
@@ -9678,12 +9678,12 @@ package application
     type CreatePaymentLinkResponse struct {
 
         
-            Success bool  `json:"success"`
-            PaymentLinkID string  `json:"payment_link_id"`
             PollingTimeout float64  `json:"polling_timeout"`
-            StatusCode float64  `json:"status_code"`
-            Message string  `json:"message"`
             PaymentLinkURL string  `json:"payment_link_url"`
+            Message string  `json:"message"`
+            PaymentLinkID string  `json:"payment_link_id"`
+            StatusCode float64  `json:"status_code"`
+            Success bool  `json:"success"`
          
     }
     
@@ -9699,10 +9699,10 @@ package application
     type ResendPaymentLinkResponse struct {
 
         
-            Message string  `json:"message"`
+            PollingTimeout float64  `json:"polling_timeout"`
             StatusCode float64  `json:"status_code"`
             Success bool  `json:"success"`
-            PollingTimeout float64  `json:"polling_timeout"`
+            Message string  `json:"message"`
          
     }
     
@@ -9710,9 +9710,9 @@ package application
     type CancelPaymentLinkResponse struct {
 
         
-            Message string  `json:"message"`
             StatusCode float64  `json:"status_code"`
             Success bool  `json:"success"`
+            Message string  `json:"message"`
          
     }
     
@@ -9720,16 +9720,16 @@ package application
     type PollingPaymentLinkResponse struct {
 
         
-            RedirectURL string  `json:"redirect_url"`
-            Success bool  `json:"success"`
-            PaymentLinkID string  `json:"payment_link_id"`
-            AggregatorName string  `json:"aggregator_name"`
-            Status string  `json:"status"`
-            OrderID string  `json:"order_id"`
-            HttpStatus float64  `json:"http_status"`
-            Amount float64  `json:"amount"`
-            StatusCode float64  `json:"status_code"`
             Message string  `json:"message"`
+            AggregatorName string  `json:"aggregator_name"`
+            RedirectURL string  `json:"redirect_url"`
+            Amount float64  `json:"amount"`
+            PaymentLinkID string  `json:"payment_link_id"`
+            HttpStatus float64  `json:"http_status"`
+            OrderID string  `json:"order_id"`
+            Status string  `json:"status"`
+            StatusCode float64  `json:"status_code"`
+            Success bool  `json:"success"`
          
     }
     
@@ -9737,9 +9737,9 @@ package application
     type PaymentMethodsMeta struct {
 
         
-            PaymentIdentifier string  `json:"payment_identifier"`
             MerchantCode string  `json:"merchant_code"`
             PaymentGateway string  `json:"payment_gateway"`
+            PaymentIdentifier string  `json:"payment_identifier"`
          
     }
     
@@ -9747,9 +9747,9 @@ package application
     type CreateOrderUserPaymentMethods struct {
 
         
-            Name string  `json:"name"`
-            Meta PaymentMethodsMeta  `json:"meta"`
             Mode string  `json:"mode"`
+            Meta PaymentMethodsMeta  `json:"meta"`
+            Name string  `json:"name"`
          
     }
     
@@ -9757,12 +9757,12 @@ package application
     type CreateOrderUserRequest struct {
 
         
+            SuccessCallbackURL string  `json:"success_callback_url"`
             FailureCallbackURL string  `json:"failure_callback_url"`
+            Meta map[string]interface{}  `json:"meta"`
             PaymentLinkID string  `json:"payment_link_id"`
             Currency string  `json:"currency"`
             PaymentMethods CreateOrderUserPaymentMethods  `json:"payment_methods"`
-            Meta map[string]interface{}  `json:"meta"`
-            SuccessCallbackURL string  `json:"success_callback_url"`
          
     }
     
@@ -9770,16 +9770,16 @@ package application
     type CreateOrderUserData struct {
 
         
-            Aggregator string  `json:"aggregator"`
-            CallbackURL string  `json:"callback_url"`
-            Currency string  `json:"currency"`
-            OrderID string  `json:"order_id"`
+            Contact string  `json:"contact"`
             Method string  `json:"method"`
             Email string  `json:"email"`
-            Contact string  `json:"contact"`
             CustomerID string  `json:"customer_id"`
+            Aggregator string  `json:"aggregator"`
             Amount float64  `json:"amount"`
             MerchantOrderID string  `json:"merchant_order_id"`
+            OrderID string  `json:"order_id"`
+            Currency string  `json:"currency"`
+            CallbackURL string  `json:"callback_url"`
          
     }
     
@@ -9787,13 +9787,13 @@ package application
     type CreateOrderUserResponse struct {
 
         
-            Data CreateOrderUserData  `json:"data"`
-            CallbackURL string  `json:"callback_url"`
-            Success bool  `json:"success"`
             PaymentConfirmURL string  `json:"payment_confirm_url"`
+            Message string  `json:"message"`
+            Data CreateOrderUserData  `json:"data"`
             OrderID string  `json:"order_id"`
             StatusCode float64  `json:"status_code"`
-            Message string  `json:"message"`
+            CallbackURL string  `json:"callback_url"`
+            Success bool  `json:"success"`
          
     }
     
@@ -9811,13 +9811,13 @@ package application
     type CreditSummary struct {
 
         
-            StatusMessage string  `json:"status_message"`
             BuyerStatus string  `json:"buyer_status"`
-            AmountAvailable BalanceDetails  `json:"amount_available"`
             Balance BalanceDetails  `json:"balance"`
-            Status string  `json:"status"`
             MerchantCustomerRefID string  `json:"merchant_customer_ref_id"`
+            Status string  `json:"status"`
+            AmountAvailable BalanceDetails  `json:"amount_available"`
             CreditLineID string  `json:"credit_line_id"`
+            StatusMessage string  `json:"status_message"`
          
     }
     
@@ -9853,8 +9853,8 @@ package application
 
         
             SignupURL string  `json:"signup_url"`
-            Status bool  `json:"status"`
             IsRegistered bool  `json:"is_registered"`
+            Status bool  `json:"status"`
          
     }
     
@@ -9867,45 +9867,13 @@ package application
          
     }
     
-    // KYCAddress ...
-    type KYCAddress struct {
-
-        
-            OwnershipType string  `json:"ownership_type"`
-            City string  `json:"city"`
-            LandMark string  `json:"land_mark"`
-            Pincode string  `json:"pincode"`
-            State string  `json:"state"`
-            Addressline2 string  `json:"addressline2"`
-            Addressline1 string  `json:"addressline1"`
-         
-    }
-    
-    // BusinessDetails ...
-    type BusinessDetails struct {
-
-        
-            Name string  `json:"name"`
-            Gstin string  `json:"gstin"`
-            Fssai string  `json:"fssai"`
-            BusinessOwnershipType string  `json:"business_ownership_type"`
-            BusinessType string  `json:"business_type"`
-            Address KYCAddress  `json:"address"`
-            ShopAndEstablishment map[string]interface{}  `json:"shop_and_establishment"`
-            Fda string  `json:"fda"`
-            EntityType string  `json:"entity_type"`
-            Vintage string  `json:"vintage"`
-            Pan string  `json:"pan"`
-         
-    }
-    
     // MarketplaceInfo ...
     type MarketplaceInfo struct {
 
         
+            MembershipID string  `json:"membership_id"`
             DateOfJoining string  `json:"date_of_joining"`
             Name string  `json:"name"`
-            MembershipID string  `json:"membership_id"`
          
     }
     
@@ -9913,13 +9881,27 @@ package application
     type DeviceDetails struct {
 
         
+            IdentifierType string  `json:"identifier_type"`
             DeviceMake string  `json:"device_make"`
             OsVersion string  `json:"os_version"`
-            DeviceModel string  `json:"device_model"`
-            IdentifierType string  `json:"identifier_type"`
-            IdentificationNumber string  `json:"identification_number"`
-            Os string  `json:"os"`
             DeviceType string  `json:"device_type"`
+            Os string  `json:"os"`
+            DeviceModel string  `json:"device_model"`
+            IdentificationNumber string  `json:"identification_number"`
+         
+    }
+    
+    // KYCAddress ...
+    type KYCAddress struct {
+
+        
+            Addressline2 string  `json:"addressline2"`
+            Pincode string  `json:"pincode"`
+            OwnershipType string  `json:"ownership_type"`
+            Addressline1 string  `json:"addressline1"`
+            LandMark string  `json:"land_mark"`
+            State string  `json:"state"`
+            City string  `json:"city"`
          
     }
     
@@ -9927,22 +9909,40 @@ package application
     type UserPersonalInfoInDetails struct {
 
         
+            MobileVerified bool  `json:"mobile_verified"`
+            Email string  `json:"email"`
+            Gender string  `json:"gender"`
+            Dob string  `json:"dob"`
+            FathersName string  `json:"fathers_name"`
+            VoterID string  `json:"voter_id"`
+            Passport string  `json:"passport"`
+            Phone string  `json:"phone"`
+            DrivingLicense string  `json:"driving_license"`
             EmailVerified bool  `json:"email_verified"`
             FirstName string  `json:"first_name"`
-            FathersName string  `json:"fathers_name"`
-            Passport string  `json:"passport"`
             LastName string  `json:"last_name"`
             AddressAsPerID KYCAddress  `json:"address_as_per_id"`
             MothersName string  `json:"mothers_name"`
-            MobileVerified bool  `json:"mobile_verified"`
-            VoterID string  `json:"voter_id"`
-            Email string  `json:"email"`
-            MiddleName string  `json:"middle_name"`
-            Gender string  `json:"gender"`
-            Dob string  `json:"dob"`
-            Phone string  `json:"phone"`
-            DrivingLicense string  `json:"driving_license"`
             Pan string  `json:"pan"`
+            MiddleName string  `json:"middle_name"`
+         
+    }
+    
+    // BusinessDetails ...
+    type BusinessDetails struct {
+
+        
+            Vintage string  `json:"vintage"`
+            Gstin string  `json:"gstin"`
+            Address KYCAddress  `json:"address"`
+            BusinessOwnershipType string  `json:"business_ownership_type"`
+            Fssai string  `json:"fssai"`
+            BusinessType string  `json:"business_type"`
+            Name string  `json:"name"`
+            ShopAndEstablishment map[string]interface{}  `json:"shop_and_establishment"`
+            Fda string  `json:"fda"`
+            Pan string  `json:"pan"`
+            EntityType string  `json:"entity_type"`
          
     }
     
@@ -9950,13 +9950,13 @@ package application
     type CustomerOnboardingRequest struct {
 
         
-            Aggregator string  `json:"aggregator"`
-            BusinessInfo BusinessDetails  `json:"business_info"`
-            MarketplaceInfo MarketplaceInfo  `json:"marketplace_info"`
             Mcc string  `json:"mcc"`
+            MarketplaceInfo MarketplaceInfo  `json:"marketplace_info"`
+            Aggregator string  `json:"aggregator"`
             Device DeviceDetails  `json:"device"`
             PersonalInfo UserPersonalInfoInDetails  `json:"personal_info"`
             Source string  `json:"source"`
+            BusinessInfo BusinessDetails  `json:"business_info"`
          
     }
     
@@ -9964,9 +9964,9 @@ package application
     type OnboardSummary struct {
 
         
+            Session map[string]interface{}  `json:"session"`
             RedirectURL string  `json:"redirect_url"`
             Status bool  `json:"status"`
-            Session map[string]interface{}  `json:"session"`
          
     }
     
@@ -9983,10 +9983,10 @@ package application
     type OutstandingOrderDetailsResponse struct {
 
         
-            Message string  `json:"message"`
             StatusCode float64  `json:"status_code"`
-            Success bool  `json:"success"`
             Data []map[string]interface{}  `json:"data"`
+            Success bool  `json:"success"`
+            Message string  `json:"message"`
          
     }
     
@@ -9994,117 +9994,24 @@ package application
     type PaidOrderDetailsResponse struct {
 
         
-            Message string  `json:"message"`
             StatusCode float64  `json:"status_code"`
-            Success bool  `json:"success"`
             Data []map[string]interface{}  `json:"data"`
+            Success bool  `json:"success"`
+            Message string  `json:"message"`
          
     }
     
 
-    
-    // OrderPage ...
-    type OrderPage struct {
-
-        
-            Size float64  `json:"size"`
-            Current float64  `json:"current"`
-            ItemTotal float64  `json:"item_total"`
-            Type string  `json:"type"`
-            HasNext bool  `json:"has_next"`
-         
-    }
-    
-    // BagsForReorderArticleAssignment ...
-    type BagsForReorderArticleAssignment struct {
-
-        
-            Strategy string  `json:"strategy"`
-            Level string  `json:"level"`
-         
-    }
-    
-    // BagsForReorder ...
-    type BagsForReorder struct {
-
-        
-            ItemSize string  `json:"item_size"`
-            StoreID float64  `json:"store_id"`
-            ItemID float64  `json:"item_id"`
-            Quantity float64  `json:"quantity"`
-            ArticleAssignment BagsForReorderArticleAssignment  `json:"article_assignment"`
-            SellerID float64  `json:"seller_id"`
-         
-    }
-    
-    // ShipmentUserInfo ...
-    type ShipmentUserInfo struct {
-
-        
-            Gender string  `json:"gender"`
-            Mobile string  `json:"mobile"`
-            Name string  `json:"name"`
-            Email string  `json:"email"`
-            FirstName string  `json:"first_name"`
-            LastName string  `json:"last_name"`
-         
-    }
     
     // BreakupValues ...
     type BreakupValues struct {
 
         
-            CurrencySymbol string  `json:"currency_symbol"`
-            Name string  `json:"name"`
-            CurrencyCode string  `json:"currency_code"`
             Value float64  `json:"value"`
-            Display string  `json:"display"`
-         
-    }
-    
-    // Invoice ...
-    type Invoice struct {
-
-        
-            InvoiceURL string  `json:"invoice_url"`
-            LabelURL string  `json:"label_url"`
-            UpdatedDate string  `json:"updated_date"`
-         
-    }
-    
-    // FulfillingStore ...
-    type FulfillingStore struct {
-
-        
-            CompanyName string  `json:"company_name"`
-            ID float64  `json:"id"`
+            CurrencyCode string  `json:"currency_code"`
             Name string  `json:"name"`
-            CompanyID float64  `json:"company_id"`
-            Code string  `json:"code"`
-         
-    }
-    
-    // NestedTrackingDetails ...
-    type NestedTrackingDetails struct {
-
-        
-            IsPassed bool  `json:"is_passed"`
-            Status string  `json:"status"`
-            Time string  `json:"time"`
-            IsCurrent bool  `json:"is_current"`
-         
-    }
-    
-    // TrackingDetails ...
-    type TrackingDetails struct {
-
-        
-            IsPassed bool  `json:"is_passed"`
-            Status string  `json:"status"`
-            Time string  `json:"time"`
-            IsCurrent bool  `json:"is_current"`
-            Value string  `json:"value"`
-            TrackingDetails []NestedTrackingDetails  `json:"tracking_details"`
+            CurrencySymbol string  `json:"currency_symbol"`
+            Display string  `json:"display"`
          
     }
     
@@ -10112,28 +10019,41 @@ package application
     type DeliveryAddress struct {
 
         
-            Name string  `json:"name"`
-            Email string  `json:"email"`
-            AddressCategory string  `json:"address_category"`
-            CreatedAt string  `json:"created_at"`
+            Country string  `json:"country"`
             State string  `json:"state"`
             Landmark string  `json:"landmark"`
-            UpdatedAt string  `json:"updated_at"`
-            CountryPhoneCode string  `json:"country_phone_code"`
-            Country string  `json:"country"`
-            Area string  `json:"area"`
-            ContactPerson string  `json:"contact_person"`
-            AddressType string  `json:"address_type"`
-            Address string  `json:"address"`
-            City string  `json:"city"`
-            Version string  `json:"version"`
-            Phone string  `json:"phone"`
-            Latitude float64  `json:"latitude"`
+            Email string  `json:"email"`
             Longitude float64  `json:"longitude"`
+            CountryPhoneCode string  `json:"country_phone_code"`
+            Area string  `json:"area"`
+            UpdatedAt string  `json:"updated_at"`
+            Version string  `json:"version"`
+            Pincode string  `json:"pincode"`
+            Name string  `json:"name"`
+            AddressType string  `json:"address_type"`
+            AddressCategory string  `json:"address_category"`
+            CreatedAt string  `json:"created_at"`
+            Address string  `json:"address"`
+            ContactPerson string  `json:"contact_person"`
             Address1 string  `json:"address1"`
+            City string  `json:"city"`
+            Latitude float64  `json:"latitude"`
             CountryIsoCode string  `json:"country_iso_code"`
             Address2 string  `json:"address2"`
-            Pincode string  `json:"pincode"`
+            Phone string  `json:"phone"`
+         
+    }
+    
+    // ShipmentPayment ...
+    type ShipmentPayment struct {
+
+        
+            Logo string  `json:"logo"`
+            Mop string  `json:"mop"`
+            Mode string  `json:"mode"`
+            Status string  `json:"status"`
+            PaymentMode string  `json:"payment_mode"`
+            DisplayName string  `json:"display_name"`
          
     }
     
@@ -10141,37 +10061,60 @@ package application
     type FulfillingCompany struct {
 
         
-            Name string  `json:"name"`
             ID float64  `json:"id"`
+            Name string  `json:"name"`
          
     }
     
-    // Prices ...
-    type Prices struct {
+    // Invoice ...
+    type Invoice struct {
 
         
-            CurrencySymbol string  `json:"currency_symbol"`
-            AddedToFyndCash bool  `json:"added_to_fynd_cash"`
-            AmountPaidRoundoff float64  `json:"amount_paid_roundoff"`
-            CashbackApplied float64  `json:"cashback_applied"`
-            BrandCalculatedAmount float64  `json:"brand_calculated_amount"`
-            CouponValue float64  `json:"coupon_value"`
-            Discount float64  `json:"discount"`
-            PriceMarked float64  `json:"price_marked"`
-            RefundAmount float64  `json:"refund_amount"`
-            AmountPaid float64  `json:"amount_paid"`
-            RefundCredit float64  `json:"refund_credit"`
-            TransferPrice float64  `json:"transfer_price"`
-            PromotionEffectiveDiscount float64  `json:"promotion_effective_discount"`
-            CodCharges float64  `json:"cod_charges"`
-            CurrencyCode string  `json:"currency_code"`
-            DeliveryCharge float64  `json:"delivery_charge"`
-            CouponEffectiveDiscount float64  `json:"coupon_effective_discount"`
-            ValueOfGood float64  `json:"value_of_good"`
-            Cashback float64  `json:"cashback"`
-            GstTaxPercentage float64  `json:"gst_tax_percentage"`
-            FyndCredits float64  `json:"fynd_credits"`
-            PriceEffective float64  `json:"price_effective"`
+            LabelURL string  `json:"label_url"`
+            UpdatedDate string  `json:"updated_date"`
+            InvoiceURL string  `json:"invoice_url"`
+         
+    }
+    
+    // TimeStampData ...
+    type TimeStampData struct {
+
+        
+            Max string  `json:"max"`
+            Min string  `json:"min"`
+         
+    }
+    
+    // Promise ...
+    type Promise struct {
+
+        
+            ShowPromise bool  `json:"show_promise"`
+            Timestamp TimeStampData  `json:"timestamp"`
+         
+    }
+    
+    // NestedTrackingDetails ...
+    type NestedTrackingDetails struct {
+
+        
+            IsCurrent bool  `json:"is_current"`
+            Status string  `json:"status"`
+            Time string  `json:"time"`
+            IsPassed bool  `json:"is_passed"`
+         
+    }
+    
+    // TrackingDetails ...
+    type TrackingDetails struct {
+
+        
+            IsCurrent bool  `json:"is_current"`
+            Value string  `json:"value"`
+            IsPassed bool  `json:"is_passed"`
+            Status string  `json:"status"`
+            Time string  `json:"time"`
+            TrackingDetails []NestedTrackingDetails  `json:"tracking_details"`
          
     }
     
@@ -10180,48 +10123,8 @@ package application
 
         
             Pieces float64  `json:"pieces"`
-            TotalPrice float64  `json:"total_price"`
             Sizes float64  `json:"sizes"`
-         
-    }
-    
-    // ShipmentPayment ...
-    type ShipmentPayment struct {
-
-        
-            Status string  `json:"status"`
-            Mop string  `json:"mop"`
-            PaymentMode string  `json:"payment_mode"`
-            Mode string  `json:"mode"`
-            Logo string  `json:"logo"`
-            DisplayName string  `json:"display_name"`
-         
-    }
-    
-    // ItemBrand ...
-    type ItemBrand struct {
-
-        
-            Name string  `json:"name"`
-            Logo string  `json:"logo"`
-         
-    }
-    
-    // Item ...
-    type Item struct {
-
-        
-            Size string  `json:"size"`
-            ID float64  `json:"id"`
-            Image []string  `json:"image"`
-            L2Categories []string  `json:"l2_categories"`
-            Name string  `json:"name"`
-            Brand ItemBrand  `json:"brand"`
-            L1Categories []string  `json:"l1_categories"`
-            L3CategoryName string  `json:"l3_category_name"`
-            Code string  `json:"code"`
-            SlugKey string  `json:"slug_key"`
-            SellerIdentifier string  `json:"seller_identifier"`
+            TotalPrice float64  `json:"total_price"`
          
     }
     
@@ -10229,10 +10132,10 @@ package application
     type AppliedFreeArticles struct {
 
         
-            Quantity float64  `json:"quantity"`
-            ParentItemIdentifier string  `json:"parent_item_identifier"`
             ArticleID string  `json:"article_id"`
+            ParentItemIdentifier string  `json:"parent_item_identifier"`
             FreeGiftItemDetails map[string]interface{}  `json:"free_gift_item_details"`
+            Quantity float64  `json:"quantity"`
          
     }
     
@@ -10240,13 +10143,13 @@ package application
     type AppliedPromos struct {
 
         
-            PromotionName string  `json:"promotion_name"`
+            AppliedFreeArticles []AppliedFreeArticles  `json:"applied_free_articles"`
             ArticleQuantity float64  `json:"article_quantity"`
             PromotionType string  `json:"promotion_type"`
-            PromoID string  `json:"promo_id"`
-            AppliedFreeArticles []AppliedFreeArticles  `json:"applied_free_articles"`
-            MrpPromotion bool  `json:"mrp_promotion"`
             Amount float64  `json:"amount"`
+            PromotionName string  `json:"promotion_name"`
+            MrpPromotion bool  `json:"mrp_promotion"`
+            PromoID string  `json:"promo_id"`
          
     }
     
@@ -10263,33 +10166,60 @@ package application
     type FinancialBreakup struct {
 
         
-            HsnCode string  `json:"hsn_code"`
-            AddedToFyndCash bool  `json:"added_to_fynd_cash"`
-            AmountPaidRoundoff float64  `json:"amount_paid_roundoff"`
-            ItemName string  `json:"item_name"`
-            CashbackApplied float64  `json:"cashback_applied"`
-            TotalUnits float64  `json:"total_units"`
-            BrandCalculatedAmount float64  `json:"brand_calculated_amount"`
-            CouponValue float64  `json:"coupon_value"`
-            Discount float64  `json:"discount"`
-            PriceMarked float64  `json:"price_marked"`
-            Size string  `json:"size"`
-            RefundAmount float64  `json:"refund_amount"`
-            RefundCredit float64  `json:"refund_credit"`
-            AmountPaid float64  `json:"amount_paid"`
-            TransferPrice float64  `json:"transfer_price"`
-            PromotionEffectiveDiscount float64  `json:"promotion_effective_discount"`
-            GstTag string  `json:"gst_tag"`
-            CodCharges float64  `json:"cod_charges"`
-            DeliveryCharge float64  `json:"delivery_charge"`
-            CouponEffectiveDiscount float64  `json:"coupon_effective_discount"`
             ValueOfGood float64  `json:"value_of_good"`
-            Cashback float64  `json:"cashback"`
+            RefundAmount float64  `json:"refund_amount"`
+            Size string  `json:"size"`
             GstTaxPercentage float64  `json:"gst_tax_percentage"`
+            RefundCredit float64  `json:"refund_credit"`
+            PriceMarked float64  `json:"price_marked"`
             FyndCredits float64  `json:"fynd_credits"`
-            GstFee float64  `json:"gst_fee"`
-            PriceEffective float64  `json:"price_effective"`
+            Cashback float64  `json:"cashback"`
             Identifiers Identifiers  `json:"identifiers"`
+            GstTag string  `json:"gst_tag"`
+            CashbackApplied float64  `json:"cashback_applied"`
+            Discount float64  `json:"discount"`
+            CodCharges float64  `json:"cod_charges"`
+            CouponValue float64  `json:"coupon_value"`
+            AmountPaid float64  `json:"amount_paid"`
+            AddedToFyndCash bool  `json:"added_to_fynd_cash"`
+            HsnCode string  `json:"hsn_code"`
+            ItemName string  `json:"item_name"`
+            PriceEffective float64  `json:"price_effective"`
+            CouponEffectiveDiscount float64  `json:"coupon_effective_discount"`
+            TotalUnits float64  `json:"total_units"`
+            TransferPrice float64  `json:"transfer_price"`
+            AmountPaidRoundoff float64  `json:"amount_paid_roundoff"`
+            DeliveryCharge float64  `json:"delivery_charge"`
+            BrandCalculatedAmount float64  `json:"brand_calculated_amount"`
+            GstFee float64  `json:"gst_fee"`
+            PromotionEffectiveDiscount float64  `json:"promotion_effective_discount"`
+         
+    }
+    
+    // ItemBrand ...
+    type ItemBrand struct {
+
+        
+            Name string  `json:"name"`
+            Logo string  `json:"logo"`
+         
+    }
+    
+    // Item ...
+    type Item struct {
+
+        
+            L3CategoryName string  `json:"l3_category_name"`
+            L1Categories []string  `json:"l1_categories"`
+            L2Categories []string  `json:"l2_categories"`
+            SellerIdentifier string  `json:"seller_identifier"`
+            Brand ItemBrand  `json:"brand"`
+            Code string  `json:"code"`
+            ID float64  `json:"id"`
+            SlugKey string  `json:"slug_key"`
+            Name string  `json:"name"`
+            Size string  `json:"size"`
+            Image []string  `json:"image"`
          
     }
     
@@ -10297,10 +10227,39 @@ package application
     type CurrentStatus struct {
 
         
-            Status string  `json:"status"`
-            Name string  `json:"name"`
             UpdatedAt string  `json:"updated_at"`
+            Name string  `json:"name"`
+            Status string  `json:"status"`
             JourneyType string  `json:"journey_type"`
+         
+    }
+    
+    // Prices ...
+    type Prices struct {
+
+        
+            CurrencyCode string  `json:"currency_code"`
+            RefundAmount float64  `json:"refund_amount"`
+            GstTaxPercentage float64  `json:"gst_tax_percentage"`
+            RefundCredit float64  `json:"refund_credit"`
+            PriceMarked float64  `json:"price_marked"`
+            FyndCredits float64  `json:"fynd_credits"`
+            Cashback float64  `json:"cashback"`
+            CashbackApplied float64  `json:"cashback_applied"`
+            Discount float64  `json:"discount"`
+            CodCharges float64  `json:"cod_charges"`
+            CouponValue float64  `json:"coupon_value"`
+            AmountPaid float64  `json:"amount_paid"`
+            AddedToFyndCash bool  `json:"added_to_fynd_cash"`
+            PromotionEffectiveDiscount float64  `json:"promotion_effective_discount"`
+            PriceEffective float64  `json:"price_effective"`
+            CouponEffectiveDiscount float64  `json:"coupon_effective_discount"`
+            TransferPrice float64  `json:"transfer_price"`
+            AmountPaidRoundoff float64  `json:"amount_paid_roundoff"`
+            DeliveryCharge float64  `json:"delivery_charge"`
+            BrandCalculatedAmount float64  `json:"brand_calculated_amount"`
+            CurrencySymbol string  `json:"currency_symbol"`
+            ValueOfGood float64  `json:"value_of_good"`
          
     }
     
@@ -10308,41 +10267,48 @@ package application
     type Bags struct {
 
         
-            ParentPromoBags map[string]interface{}  `json:"parent_promo_bags"`
-            ID float64  `json:"id"`
-            Prices Prices  `json:"prices"`
-            CanCancel bool  `json:"can_cancel"`
-            LineNumber float64  `json:"line_number"`
-            CurrencySymbol string  `json:"currency_symbol"`
-            DeliveryDate string  `json:"delivery_date"`
-            SellerIdentifier string  `json:"seller_identifier"`
-            Quantity float64  `json:"quantity"`
-            Item Item  `json:"item"`
-            ReturnableDate string  `json:"returnable_date"`
-            CurrencyCode string  `json:"currency_code"`
             AppliedPromos []AppliedPromos  `json:"applied_promos"`
-            FinancialBreakup []FinancialBreakup  `json:"financial_breakup"`
             CanReturn bool  `json:"can_return"`
-            CurrentStatus CurrentStatus  `json:"current_status"`
+            FinancialBreakup []FinancialBreakup  `json:"financial_breakup"`
+            ReturnableDate string  `json:"returnable_date"`
+            Quantity float64  `json:"quantity"`
+            LineNumber float64  `json:"line_number"`
+            Item Item  `json:"item"`
+            SellerIdentifier string  `json:"seller_identifier"`
             Meta map[string]interface{}  `json:"meta"`
+            CurrencyCode string  `json:"currency_code"`
+            ID float64  `json:"id"`
+            DeliveryDate string  `json:"delivery_date"`
+            ParentPromoBags map[string]interface{}  `json:"parent_promo_bags"`
+            CanCancel bool  `json:"can_cancel"`
+            CurrencySymbol string  `json:"currency_symbol"`
+            CurrentStatus CurrentStatus  `json:"current_status"`
+            Prices Prices  `json:"prices"`
          
     }
     
-    // TimeStampData ...
-    type TimeStampData struct {
+    // ShipmentUserInfo ...
+    type ShipmentUserInfo struct {
 
         
-            Min string  `json:"min"`
-            Max string  `json:"max"`
+            Email string  `json:"email"`
+            Gender string  `json:"gender"`
+            Mobile string  `json:"mobile"`
+            FirstName string  `json:"first_name"`
+            Name string  `json:"name"`
+            LastName string  `json:"last_name"`
          
     }
     
-    // Promise ...
-    type Promise struct {
+    // FulfillingStore ...
+    type FulfillingStore struct {
 
         
-            Timestamp TimeStampData  `json:"timestamp"`
-            ShowPromise bool  `json:"show_promise"`
+            CompanyID float64  `json:"company_id"`
+            CompanyName string  `json:"company_name"`
+            ID float64  `json:"id"`
+            Code string  `json:"code"`
+            Name string  `json:"name"`
          
     }
     
@@ -10350,8 +10316,8 @@ package application
     type ShipmentStatus struct {
 
         
-            HexCode string  `json:"hex_code"`
             Value string  `json:"value"`
+            HexCode string  `json:"hex_code"`
             Title string  `json:"title"`
          
     }
@@ -10360,42 +10326,64 @@ package application
     type Shipments struct {
 
         
-            ShowTrackLink bool  `json:"show_track_link"`
-            UserInfo ShipmentUserInfo  `json:"user_info"`
-            BreakupValues []BreakupValues  `json:"breakup_values"`
-            Invoice Invoice  `json:"invoice"`
-            TrakingNo string  `json:"traking_no"`
-            ShowDownloadInvoice bool  `json:"show_download_invoice"`
-            CustomMeta []map[string]interface{}  `json:"custom_meta"`
-            FulfillingStore FulfillingStore  `json:"fulfilling_store"`
-            TrackingDetails []TrackingDetails  `json:"tracking_details"`
-            NeedHelpURL string  `json:"need_help_url"`
             DeliveryAddress DeliveryAddress  `json:"delivery_address"`
-            CanBreak map[string]interface{}  `json:"can_break"`
-            FulfillingCompany FulfillingCompany  `json:"fulfilling_company"`
-            OrderType string  `json:"order_type"`
-            OrderID string  `json:"order_id"`
-            CanReturn bool  `json:"can_return"`
-            ReturnMeta map[string]interface{}  `json:"return_meta"`
-            Prices Prices  `json:"prices"`
-            ShipmentCreatedAt string  `json:"shipment_created_at"`
-            TrackURL string  `json:"track_url"`
-            SizeInfo map[string]interface{}  `json:"size_info"`
-            Comment string  `json:"comment"`
-            DpName string  `json:"dp_name"`
-            BeneficiaryDetails bool  `json:"beneficiary_details"`
-            TotalDetails ShipmentTotalDetails  `json:"total_details"`
-            Payment ShipmentPayment  `json:"payment"`
-            CanCancel bool  `json:"can_cancel"`
-            DeliveryDate string  `json:"delivery_date"`
-            Bags []Bags  `json:"bags"`
-            Promise Promise  `json:"promise"`
-            AwbNo string  `json:"awb_no"`
             ReturnableDate string  `json:"returnable_date"`
-            TotalBags float64  `json:"total_bags"`
-            ShipmentStatus ShipmentStatus  `json:"shipment_status"`
-            RefundDetails map[string]interface{}  `json:"refund_details"`
             ShipmentID string  `json:"shipment_id"`
+            Comment string  `json:"comment"`
+            ShowTrackLink bool  `json:"show_track_link"`
+            ShowDownloadInvoice bool  `json:"show_download_invoice"`
+            TotalBags float64  `json:"total_bags"`
+            DeliveryDate string  `json:"delivery_date"`
+            ShipmentCreatedAt string  `json:"shipment_created_at"`
+            BeneficiaryDetails bool  `json:"beneficiary_details"`
+            DpName string  `json:"dp_name"`
+            Payment ShipmentPayment  `json:"payment"`
+            NeedHelpURL string  `json:"need_help_url"`
+            FulfillingCompany FulfillingCompany  `json:"fulfilling_company"`
+            TrakingNo string  `json:"traking_no"`
+            Invoice Invoice  `json:"invoice"`
+            Promise Promise  `json:"promise"`
+            SizeInfo map[string]interface{}  `json:"size_info"`
+            OrderType string  `json:"order_type"`
+            TrackingDetails []TrackingDetails  `json:"tracking_details"`
+            TotalDetails ShipmentTotalDetails  `json:"total_details"`
+            CustomMeta []map[string]interface{}  `json:"custom_meta"`
+            CanReturn bool  `json:"can_return"`
+            RefundDetails map[string]interface{}  `json:"refund_details"`
+            Bags []Bags  `json:"bags"`
+            UserInfo ShipmentUserInfo  `json:"user_info"`
+            ReturnMeta map[string]interface{}  `json:"return_meta"`
+            OrderID string  `json:"order_id"`
+            Prices Prices  `json:"prices"`
+            BreakupValues []BreakupValues  `json:"breakup_values"`
+            TrackURL string  `json:"track_url"`
+            CanBreak map[string]interface{}  `json:"can_break"`
+            FulfillingStore FulfillingStore  `json:"fulfilling_store"`
+            CanCancel bool  `json:"can_cancel"`
+            AwbNo string  `json:"awb_no"`
+            ShipmentStatus ShipmentStatus  `json:"shipment_status"`
+         
+    }
+    
+    // BagsForReorderArticleAssignment ...
+    type BagsForReorderArticleAssignment struct {
+
+        
+            Level string  `json:"level"`
+            Strategy string  `json:"strategy"`
+         
+    }
+    
+    // BagsForReorder ...
+    type BagsForReorder struct {
+
+        
+            ArticleAssignment BagsForReorderArticleAssignment  `json:"article_assignment"`
+            Quantity float64  `json:"quantity"`
+            ItemID float64  `json:"item_id"`
+            StoreID float64  `json:"store_id"`
+            ItemSize string  `json:"item_size"`
+            SellerID float64  `json:"seller_id"`
          
     }
     
@@ -10403,11 +10391,11 @@ package application
     type UserInfo struct {
 
         
+            Email string  `json:"email"`
             Gender string  `json:"gender"`
             Mobile string  `json:"mobile"`
-            Name string  `json:"name"`
-            Email string  `json:"email"`
             FirstName string  `json:"first_name"`
+            Name string  `json:"name"`
             LastName string  `json:"last_name"`
          
     }
@@ -10416,10 +10404,10 @@ package application
     type OrderSchema struct {
 
         
-            BagsForReorder []BagsForReorder  `json:"bags_for_reorder"`
-            Shipments []Shipments  `json:"shipments"`
-            UserInfo UserInfo  `json:"user_info"`
             BreakupValues []BreakupValues  `json:"breakup_values"`
+            Shipments []Shipments  `json:"shipments"`
+            BagsForReorder []BagsForReorder  `json:"bags_for_reorder"`
+            UserInfo UserInfo  `json:"user_info"`
             OrderCreatedTime string  `json:"order_created_time"`
             TotalShipmentsInOrder float64  `json:"total_shipments_in_order"`
             OrderID string  `json:"order_id"`
@@ -10430,9 +10418,9 @@ package application
     type OrderStatuses struct {
 
         
+            IsSelected bool  `json:"is_selected"`
             Value float64  `json:"value"`
             Display string  `json:"display"`
-            IsSelected bool  `json:"is_selected"`
          
     }
     
@@ -10444,13 +10432,25 @@ package application
          
     }
     
+    // OrderPage ...
+    type OrderPage struct {
+
+        
+            Type string  `json:"type"`
+            HasNext bool  `json:"has_next"`
+            ItemTotal float64  `json:"item_total"`
+            Current float64  `json:"current"`
+            Size float64  `json:"size"`
+         
+    }
+    
     // OrderList ...
     type OrderList struct {
 
         
-            Page OrderPage  `json:"page"`
             Items []OrderSchema  `json:"items"`
             Filters OrderFilters  `json:"filters"`
+            Page OrderPage  `json:"page"`
          
     }
     
@@ -10483,10 +10483,10 @@ package application
     type ResponseGetInvoiceShipment struct {
 
         
+            ShipmentID string  `json:"shipment_id"`
             PresignedURL string  `json:"presigned_url"`
             PresignedType string  `json:"presigned_type"`
             Success bool  `json:"success"`
-            ShipmentID string  `json:"shipment_id"`
          
     }
     
@@ -10494,14 +10494,14 @@ package application
     type Track struct {
 
         
-            Status string  `json:"status"`
-            ShipmentType string  `json:"shipment_type"`
             Awb string  `json:"awb"`
-            LastLocationRecievedAt string  `json:"last_location_recieved_at"`
-            Reason string  `json:"reason"`
-            UpdatedAt string  `json:"updated_at"`
             UpdatedTime string  `json:"updated_time"`
+            ShipmentType string  `json:"shipment_type"`
             AccountName string  `json:"account_name"`
+            Status string  `json:"status"`
+            LastLocationRecievedAt string  `json:"last_location_recieved_at"`
+            UpdatedAt string  `json:"updated_at"`
+            Reason string  `json:"reason"`
          
     }
     
@@ -10517,11 +10517,11 @@ package application
     type CustomerDetailsResponse struct {
 
         
+            ShipmentID string  `json:"shipment_id"`
+            Country string  `json:"country"`
             Name string  `json:"name"`
             Phone string  `json:"phone"`
-            ShipmentID string  `json:"shipment_id"`
             OrderID string  `json:"order_id"`
-            Country string  `json:"country"`
          
     }
     
@@ -10553,6 +10553,14 @@ package application
          
     }
     
+    // BagReasonMeta ...
+    type BagReasonMeta struct {
+
+        
+            ShowTextArea bool  `json:"show_text_area"`
+         
+    }
+    
     // QuestionSet ...
     type QuestionSet struct {
 
@@ -10562,24 +10570,16 @@ package application
          
     }
     
-    // BagReasonMeta ...
-    type BagReasonMeta struct {
-
-        
-            ShowTextArea bool  `json:"show_text_area"`
-         
-    }
-    
     // BagReasons ...
     type BagReasons struct {
 
         
-            ID float64  `json:"id"`
             QcType []string  `json:"qc_type"`
+            Meta BagReasonMeta  `json:"meta"`
             Reasons []BagReasons  `json:"reasons"`
+            ID float64  `json:"id"`
             QuestionSet []QuestionSet  `json:"question_set"`
             DisplayName string  `json:"display_name"`
-            Meta BagReasonMeta  `json:"meta"`
          
     }
     
@@ -10587,8 +10587,8 @@ package application
     type ShipmentBagReasons struct {
 
         
-            Success bool  `json:"success"`
             Reasons []BagReasons  `json:"reasons"`
+            Success bool  `json:"success"`
          
     }
     
@@ -10596,12 +10596,12 @@ package application
     type ShipmentReason struct {
 
         
-            Priority float64  `json:"priority"`
-            ReasonID float64  `json:"reason_id"`
-            Flow string  `json:"flow"`
             FeedbackType string  `json:"feedback_type"`
-            ShowTextArea bool  `json:"show_text_area"`
+            Priority float64  `json:"priority"`
             ReasonText string  `json:"reason_text"`
+            ReasonID float64  `json:"reason_id"`
+            ShowTextArea bool  `json:"show_text_area"`
+            Flow string  `json:"flow"`
          
     }
     
@@ -10636,8 +10636,8 @@ package application
     type ProductsDataUpdates struct {
 
         
-            Data map[string]interface{}  `json:"data"`
             Filters []ProductsDataUpdatesFilters  `json:"filters"`
+            Data map[string]interface{}  `json:"data"`
          
     }
     
@@ -10645,8 +10645,8 @@ package application
     type EntitiesDataUpdates struct {
 
         
-            Data map[string]interface{}  `json:"data"`
             Filters []map[string]interface{}  `json:"filters"`
+            Data map[string]interface{}  `json:"data"`
          
     }
     
@@ -10656,15 +10656,6 @@ package application
         
             Products []ProductsDataUpdates  `json:"products"`
             Entities []EntitiesDataUpdates  `json:"entities"`
-         
-    }
-    
-    // ProductsReasonsData ...
-    type ProductsReasonsData struct {
-
-        
-            ReasonText string  `json:"reason_text"`
-            ReasonID float64  `json:"reason_id"`
          
     }
     
@@ -10678,12 +10669,21 @@ package application
          
     }
     
+    // ProductsReasonsData ...
+    type ProductsReasonsData struct {
+
+        
+            ReasonID float64  `json:"reason_id"`
+            ReasonText string  `json:"reason_text"`
+         
+    }
+    
     // ProductsReasons ...
     type ProductsReasons struct {
 
         
-            Data ProductsReasonsData  `json:"data"`
             Filters []ProductsReasonsFilters  `json:"filters"`
+            Data ProductsReasonsData  `json:"data"`
          
     }
     
@@ -10691,8 +10691,8 @@ package application
     type EntityReasonData struct {
 
         
-            ReasonText string  `json:"reason_text"`
             ReasonID float64  `json:"reason_id"`
+            ReasonText string  `json:"reason_text"`
          
     }
     
@@ -10700,8 +10700,8 @@ package application
     type EntitiesReasons struct {
 
         
-            Data EntityReasonData  `json:"data"`
             Filters []map[string]interface{}  `json:"filters"`
+            Data EntityReasonData  `json:"data"`
          
     }
     
@@ -10718,9 +10718,9 @@ package application
     type ShipmentsRequest struct {
 
         
-            Identifier string  `json:"identifier"`
             Products []Products  `json:"products"`
             DataUpdates DataUpdates  `json:"data_updates"`
+            Identifier string  `json:"identifier"`
             Reasons ReasonsData  `json:"reasons"`
          
     }
@@ -10729,9 +10729,9 @@ package application
     type StatuesRequest struct {
 
         
-            Status string  `json:"status"`
             ExcludeBagsNextState string  `json:"exclude_bags_next_state"`
             Shipments []ShipmentsRequest  `json:"shipments"`
+            Status string  `json:"status"`
          
     }
     
@@ -10739,11 +10739,11 @@ package application
     type UpdateShipmentStatusRequest struct {
 
         
-            LockAfterTransition bool  `json:"lock_after_transition"`
-            Statuses []StatuesRequest  `json:"statuses"`
             ForceTransition bool  `json:"force_transition"`
-            UnlockBeforeTransition bool  `json:"unlock_before_transition"`
             Task bool  `json:"task"`
+            LockAfterTransition bool  `json:"lock_after_transition"`
+            UnlockBeforeTransition bool  `json:"unlock_before_transition"`
+            Statuses []StatuesRequest  `json:"statuses"`
          
     }
     
@@ -10767,11 +10767,11 @@ package application
     type ErrorResponse struct {
 
         
-            Status float64  `json:"status"`
-            Message string  `json:"message"`
             Exception string  `json:"exception"`
-            StackTrace string  `json:"stack_trace"`
+            Message string  `json:"message"`
             Code string  `json:"code"`
+            Status float64  `json:"status"`
+            StackTrace string  `json:"stack_trace"`
          
     }
     
