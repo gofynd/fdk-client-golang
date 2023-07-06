@@ -87,6 +87,7 @@
     * [updateCartWithSharedItems](#updatecartwithshareditems)
     * [getPromotionOffers](#getpromotionoffers)
     * [getLadderOffers](#getladderoffers)
+    * [checkoutCartV2](#checkoutcartv2)
     
 
 * [Common](#Common)
@@ -239,6 +240,7 @@
     * [resendOrCancelPayment](#resendorcancelpayment)
     * [renderHTML](#renderhtml)
     * [validateVPA](#validatevpa)
+    * [cardDetails](#carddetails)
     * [getActiveRefundTransferModes](#getactiverefundtransfermodes)
     * [enableOrDisableRefundTransferMode](#enableordisablerefundtransfermode)
     * [getUserBeneficiariesDetail](#getuserbeneficiariesdetail)
@@ -262,6 +264,8 @@
     * [redirectToAggregator](#redirecttoaggregator)
     * [checkCredit](#checkcredit)
     * [customerOnboard](#customeronboard)
+    * [outstandingOrderDetails](#outstandingorderdetails)
+    * [paidOrderDetails](#paidorderdetails)
     
 
 * [Order](#Order)
@@ -277,6 +281,7 @@
     * [verifyOtpShipmentCustomer](#verifyotpshipmentcustomer)
     * [getShipmentBagReasons](#getshipmentbagreasons)
     * [getShipmentReasons](#getshipmentreasons)
+    * [updateShipmentStatus](#updateshipmentstatus)
     
 
 * [Rewards](#Rewards)
@@ -997,7 +1002,9 @@ List all the collections
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Tag`
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Tag`, `Q`
 
 
 
@@ -1046,7 +1053,13 @@ Get the items in a collection
 
 
 
-| xQuery | struct | Includes properties such as `F`, `Filters`, `SortOn`, `PageID`, `PageSize`
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `F`, `Q`, `Filters`, `SortOn`, `PageID`, `PageSize`, `PageNo`, `PageType`
 
 
 
@@ -1695,7 +1708,9 @@ Add items to cart
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`, `BuyNow`
+
+
+| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`, `BuyNow`, `ID`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -2908,6 +2923,7 @@ Sorry, item is out of stock
         "raw": {
           "cod_charge": 0,
           "convenience_fee": 0,
+          "gift_card": 0,
           "coupon": 0,
           "delivery_charge": 0,
           "discount": -202000,
@@ -2928,6 +2944,12 @@ Sorry, item is out of stock
           "message": "Sorry! Invalid Coupon"
         },
         "display": [
+          {
+            "display": "Gift Card",
+            "key": "gift_card",
+            "value": 0,
+            "currency_code": "INR"
+          },
           {
             "display": "MRP Total",
             "key": "mrp_total",
@@ -2971,6 +2993,13 @@ Sorry, item is out of stock
           },
           "article": {
             "type": "article",
+            "is_gift_visible": true,
+            "gift_card": {
+              "display_text": "",
+              "price": 30,
+              "gift_message": "",
+              "is_gift_applied": true
+            },
             "uid": "604_902_SSTC60401_636BLUE_1",
             "size": "1",
             "seller": {
@@ -3141,6 +3170,7 @@ Nothing updated
         "raw": {
           "cod_charge": 0,
           "convenience_fee": 0,
+          "gift_card": 30,
           "coupon": 0,
           "delivery_charge": 0,
           "discount": -202000,
@@ -3161,6 +3191,12 @@ Nothing updated
           "message": "Sorry! Invalid Coupon"
         },
         "display": [
+          {
+            "display": "Gift Card",
+            "key": "gift_card",
+            "value": 30,
+            "currency_code": "INR"
+          },
           {
             "display": "MRP Total",
             "key": "mrp_total",
@@ -3204,6 +3240,13 @@ Nothing updated
           },
           "article": {
             "type": "article",
+            "is_gift_visible": true,
+            "gift_card": {
+              "display_text": "",
+              "price": 30,
+              "gift_message": "",
+              "is_gift_applied": true
+            },
             "uid": "604_902_SSTC60401_636BLUE_1",
             "size": "1",
             "seller": {
@@ -4164,10 +4207,10 @@ Item updated in the cart
     "result": {
       "437414_7": {
         "success": true,
-        "message": "Item updated in the bag"
+        "message": "Quantity of item updated"
       }
     },
-    "message": "Item updated in the bag",
+    "message": "Quantity of item updated",
     "success": true
   }
 }
@@ -4871,7 +4914,15 @@ Verify the coupon eligibility against the payment mode
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`, `Iin`, `Network`, `Type`, `CardID`
 
 
 
@@ -5178,6 +5229,7 @@ Shipment Generated
       {
         "fulfillment_id": 3009,
         "shipment_type": "single_shipment",
+        "order_type": "HomeDelivery",
         "fulfillment_type": "store",
         "dp_id": "29",
         "dp_options": {
@@ -6473,7 +6525,9 @@ Fetch available promotions
 
 
 
-| xQuery | struct | Includes properties such as `Slug`, `PageSize`, `PromotionGroup`
+
+
+| xQuery | struct | Includes properties such as `Slug`, `PageSize`, `PromotionGroup`, `StoreID`
 
 
 
@@ -6531,6 +6585,422 @@ Success. Returns a object containing the applicable ladder price offers (if exis
 
 
 Schema: `LadderPriceOffers`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### checkoutCartV2
+Checkout all items in the cart
+
+```golang
+
+ data, err :=  Cart.CheckoutCartV2(xQuery, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `BuyNow`
+
+| body |  CartCheckoutDetailV2Request | "Request body" 
+
+
+Use this API to checkout all items in the cart for payment and order generation. For COD, order will be directly generated, whereas for other checkout modes, user will be redirected to a payment gateway.
+
+*Success Response:*
+
+
+
+Success. Returns the status of cart checkout. Refer `CartCheckoutResponseSchema` for more details.
+
+
+Schema: `CartCheckoutResponse`
+
+
+*Examples:*
+
+
+Address id not found
+```json
+{
+  "value": {
+    "success": false,
+    "message": "No address found with address id {address_id}"
+  }
+}
+```
+
+Missing address_id
+```json
+{
+  "value": {
+    "address_id": [
+      "Missing data for required field."
+    ]
+  }
+}
+```
+
+Successful checkout cod payment
+```json
+{
+  "value": {
+    "success": true,
+    "cart": {
+      "success": true,
+      "error_message": "Note: Your order delivery will be delayed by 7-10 Days",
+      "payment_options": {
+        "payment_option": [
+          {
+            "name": "COD",
+            "display_name": "Cash on Delivery",
+            "display_priority": 1,
+            "payment_mode_id": 11,
+            "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
+            "logo_url": {
+              "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
+              "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png"
+            },
+            "list": []
+          },
+          {
+            "name": "CARD",
+            "display_priority": 2,
+            "payment_mode_id": 2,
+            "display_name": "Card",
+            "list": []
+          },
+          {
+            "name": "NB",
+            "display_priority": 3,
+            "payment_mode_id": 3,
+            "display_name": "Net Banking",
+            "list": [
+              {
+                "aggregator_name": "Razorpay",
+                "bank_name": "ICICI Bank",
+                "bank_code": "ICIC",
+                "url": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
+                "logo_url": {
+                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
+                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png"
+                },
+                "merchant_code": "NB_ICICI",
+                "display_priority": 1
+              }
+            ]
+          },
+          {
+            "name": "WL",
+            "display_priority": 4,
+            "payment_mode_id": 4,
+            "display_name": "Wallet",
+            "list": [
+              {
+                "wallet_name": "Paytm",
+                "wallet_code": "paytm",
+                "wallet_id": 4,
+                "merchant_code": "PAYTM",
+                "logo_url": {
+                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_small.png",
+                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_large.png"
+                },
+                "aggregator_name": "Juspay",
+                "display_priority": 1
+              }
+            ]
+          },
+          {
+            "name": "UPI",
+            "display_priority": 9,
+            "payment_mode_id": 6,
+            "display_name": "UPI",
+            "list": [
+              {
+                "aggregator_name": "UPI_Razorpay",
+                "name": "UPI",
+                "display_name": "BHIM UPI",
+                "code": "UPI",
+                "logo_url": {
+                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_100x78.png",
+                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_150x100.png"
+                },
+                "merchant_code": "UPI",
+                "timeout": 240,
+                "retry_count": 0,
+                "fynd_vpa": "shopsense.rzp@hdfcbank",
+                "intent_flow": true,
+                "intent_app_error_list": [
+                  "com.csam.icici.bank.imobile",
+                  "in.org.npci.upiapp",
+                  "com.whatsapp"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "PL",
+            "display_priority": 11,
+            "payment_mode_id": 1,
+            "display_name": "Pay Later",
+            "list": [
+              {
+                "aggregator_name": "Simpl",
+                "name": "Simpl",
+                "code": "simpl",
+                "merchant_code": "SIMPL",
+                "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
+                "logo_url": {
+                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
+                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png"
+                }
+              }
+            ]
+          }
+        ],
+        "payment_flows": {
+          "Simpl": {
+            "data": {
+              "gateway": {
+                "route": "simpl",
+                "entity": "sdk",
+                "is_customer_validation_required": true,
+                "cust_validation_url": "https://api.addsale.com/gringotts/api/v1/validate-customer/",
+                "sdk": {
+                  "config": {
+                    "redirect": false,
+                    "callback_url": null,
+                    "action_url": "https://api.addsale.com/avis/api/v1/payments/charge-gringotts-transaction/"
+                  },
+                  "data": {
+                    "user_phone": "8452996729",
+                    "user_email": "paymentsdummy@gofynd.com"
+                  }
+                },
+                "return_url": null
+              }
+            },
+            "api_link": "",
+            "payment_flow": "sdk"
+          },
+          "Juspay": {
+            "data": {},
+            "api_link": "https://sandbox.juspay.in/txns",
+            "payment_flow": "api"
+          },
+          "Razorpay": {
+            "data": {},
+            "api_link": "",
+            "payment_flow": "sdk"
+          },
+          "UPI_Razorpay": {
+            "data": {},
+            "api_link": "https://api.addsale.com/gringotts/api/v1/external/payment-initialisation/",
+            "payment_flow": "api"
+          },
+          "Fynd": {
+            "data": {},
+            "api_link": "",
+            "payment_flow": "api"
+          }
+        },
+        "default": {}
+      },
+      "user_type": "Store User",
+      "cod_charges": 0,
+      "order_id": "FY5D5E215CF287584CE6",
+      "cod_available": true,
+      "cod_message": "No additional COD charges applicable",
+      "delivery_charges": 0,
+      "delivery_charge_order_value": 0,
+      "delivery_slots": [
+        {
+          "date": "Sat, 24 Aug",
+          "delivery_slot": [
+            {
+              "delivery_slot_timing": "By 9:00 PM",
+              "default": true,
+              "delivery_slot_id": 1
+            }
+          ]
+        }
+      ],
+      "store_code": "",
+      "store_emps": [],
+      "breakup_values": {
+        "coupon": {
+          "type": "cash",
+          "code": "",
+          "uid": null,
+          "value": 0,
+          "is_applied": false,
+          "message": "Sorry! Invalid Coupon"
+        },
+        "loyalty_points": {
+          "total": 0,
+          "applicable": 0,
+          "is_applied": false,
+          "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
+        },
+        "raw": {
+          "cod_charge": 0,
+          "convenience_fee": 0,
+          "coupon": 0,
+          "delivery_charge": 0,
+          "discount": 0,
+          "fynd_cash": 0,
+          "gst_charges": 214.18,
+          "mrp_total": 1999,
+          "subtotal": 1999,
+          "total": 1999,
+          "vog": 1784.82,
+          "you_saved": 0
+        },
+        "display": [
+          {
+            "display": "MRP Total",
+            "key": "mrp_total",
+            "value": 1999,
+            "currency_code": "INR"
+          },
+          {
+            "display": "Subtotal",
+            "key": "subtotal",
+            "value": 1999,
+            "currency_code": "INR"
+          },
+          {
+            "display": "Total",
+            "key": "total",
+            "value": 1999,
+            "currency_code": "INR"
+          }
+        ]
+      },
+      "items": [
+        {
+          "key": "820312_L",
+          "message": "",
+          "bulk_offer": {},
+          "price": {
+            "base": {
+              "add_on": 1999,
+              "marked": 1999,
+              "effective": 1999,
+              "selling": 1999,
+              "currency_code": "INR"
+            },
+            "converted": {
+              "add_on": 1999,
+              "marked": 1999,
+              "effective": 1999,
+              "selling": 1999,
+              "currency_code": "INR"
+            }
+          },
+          "quantity": 1,
+          "discount": "",
+          "product": {
+            "type": "product",
+            "uid": 820312,
+            "name": "Navy Blue Melange Shorts",
+            "slug": "883-police-navy-blue-melange-shorts-820312-4943a8",
+            "brand": {
+              "uid": 610,
+              "name": "883 Police"
+            },
+            "categories": [
+              {
+                "uid": 193,
+                "name": "Shorts"
+              }
+            ],
+            "images": [
+              {
+                "aspect_ratio": "16:25",
+                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg",
+                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg"
+              }
+            ],
+            "action": {
+              "type": "product",
+              "url": "https://api.addsale.com/platform/content/v1/products/883-police-navy-blue-melange-shorts-820312-4943a8/",
+              "query": {
+                "product_slug": [
+                  "883-police-navy-blue-melange-shorts-820312-4943a8"
+                ]
+              }
+            }
+          },
+          "article": {
+            "type": "article",
+            "uid": "381_610_IGPL01_SPIRAL19ANAVY_L",
+            "size": "L",
+            "seller": {
+              "uid": 381,
+              "name": "INTERSOURCE GARMENTS PVT LTD"
+            },
+            "store": {
+              "uid": 3009,
+              "name": "Kormangala"
+            },
+            "quantity": 2,
+            "price": {
+              "base": {
+                "marked": 1999,
+                "effective": 1999,
+                "currency_code": "INR"
+              },
+              "converted": {
+                "marked": 1999,
+                "effective": 1999,
+                "currency_code": "INR"
+              }
+            }
+          },
+          "coupon_message": "",
+          "availability": {
+            "sizes": [
+              "L",
+              "XL",
+              "XXL"
+            ],
+            "other_store_quantity": 1,
+            "out_of_stock": false,
+            "deliverable": true,
+            "is_valid": true
+          }
+        }
+      ],
+      "delivery_charge_info": "",
+      "coupon_text": "View all offers",
+      "cart_id": 7483,
+      "uid": "7483",
+      "gstin": null,
+      "checkout_mode": "self",
+      "last_modified": "Thu, 22 Aug 2019 04:58:44 GMT",
+      "restrict_checkout": false,
+      "is_valid": true
+    },
+    "callback_url": "https://api.addsale.com/gringotts/api/v1/external/payment-callback/",
+    "app_intercept_url": "http://uniket-testing.addsale.link/cart/order-status",
+    "message": "",
+    "data": {
+      "order_id": "FY5D5E215CF287584CE6"
+    },
+    "order_id": "FY5D5E215CF287584CE6"
+  }
+}
+```
 
 
 
@@ -17041,7 +17511,7 @@ Initiates an upload and returns a storage link that is valid for 30 minutes. You
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Namespace | string | Name of the bucket created for storing objects. | 
+| Namespace | string | Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. | 
 
 
 | body |  StartRequest | "Request body" 
@@ -17098,7 +17568,7 @@ Completes the upload process. After successfully uploading a file, call this API
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Namespace | string | Name of the bucket created for storing objects. | 
+| Namespace | string | Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. | 
 
 
 | body |  StartResponse | "Request body" 
@@ -17188,7 +17658,7 @@ Schema: `SignUrlResponse`
 
 
 #### getApplication
-Get current application details
+Get current sales channel details
 
 ```golang
 
@@ -17200,7 +17670,7 @@ Get current application details
 
 
 
-Use this API to get the current application details which includes configurations that indicate the status of the website, domain, ID, tokens, images, etc.
+Use this API to get the current sales channel details which includes configurations that indicate the status of the website, domain, ID, tokens, images, etc.
 
 *Success Response:*
 
@@ -17223,7 +17693,7 @@ Schema: `Application`
 
 
 #### getOwnerInfo
-Get application, owner and seller information
+Get sales channel, owner and seller information
 
 ```golang
 
@@ -17235,7 +17705,7 @@ Get application, owner and seller information
 
 
 
-Use this API to get the current application details which includes channel name, description, banner, logo, favicon, domain details, etc. This API also retrieves the seller and owner information such as address, email address, and phone number.
+Use this API to get the current sales channel details which includes channel name, description, banner, logo, favicon, domain details, etc. This API also retrieves the seller and owner information such as address, email address, and phone number.
 
 *Success Response:*
 
@@ -17258,7 +17728,7 @@ Schema: `ApplicationAboutResponse`
 
 
 #### getBasicDetails
-Get basic application details
+Get basic details of the application
 
 ```golang
 
@@ -17328,7 +17798,7 @@ Schema: `AppTokenResponse`
 
 
 #### getOrderingStores
-Get deployment stores
+Get all deployment stores
 
 ```golang
 
@@ -17598,7 +18068,7 @@ Get list of languages
 
 
 
-Use this API to get a list of languages supported in the application.
+Use this API to get a list of languages supported in the application
 
 *Success Response:*
 
@@ -18504,6 +18974,47 @@ Schema: `ValidateVPAResponse`
 ---
 
 
+#### cardDetails
+API to get Card info from PG
+
+```golang
+
+ data, err :=  Payment.CardDetails(CardInfo, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CardInfo | string | Card first 6 digit IIN(prefix) number. | 
+
+
+
+| xQuery | struct | Includes properties such as `Aggregator`
+
+
+
+API to get Card info from PG
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `CardDetailsResponseSchema` for more details.
+
+
+Schema: `CardDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getActiveRefundTransferModes
 Lists the mode of refund
 
@@ -19351,6 +19862,82 @@ Schema: `CustomerOnboardingResponse`
 ---
 
 
+#### outstandingOrderDetails
+API to fetch the outstanding order details
+
+```golang
+
+ data, err :=  Payment.OutstandingOrderDetails(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Aggregator`
+
+
+
+Use this API to fetch the outstanding order details.
+
+*Success Response:*
+
+
+
+Success. Returns the status of API. Check the example shown below or refer `PaidOrderDetailsResponseSchema` for more details.
+
+
+Schema: `OutstandingOrderDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### paidOrderDetails
+API to fetch the paid order details
+
+```golang
+
+ data, err :=  Payment.PaidOrderDetails(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Aggregator`
+
+
+
+Use this API to fetch the paid order details.
+
+*Success Response:*
+
+
+
+Success. Returns the status of API. Check the example shown below or refer `PaidOrderDetailsResponseSchema` for more details.
+
+
+Schema: `PaidOrderDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ---
 
@@ -19469,7 +20056,7 @@ Use this API to retrieve a POS order and all its details such as tracking detail
 Success. Check the example shown below or refer `PosOrderById` for more details.
 
 
-Schema: `OrderList`
+Schema: `OrderById`
 
 
 
@@ -19787,6 +20374,45 @@ Success. Check the example shown below or refer `ShipmentBagReasons` for more de
 
 
 Schema: `ShipmentReasons`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateShipmentStatus
+Update the shipment status
+
+```golang
+
+ data, err :=  Order.UpdateShipmentStatus(ShipmentID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. | 
+
+
+| body |  UpdateShipmentStatusRequest | "Request body" 
+
+
+Use this API to update the status of a shipment using its shipment ID.
+
+*Success Response:*
+
+
+
+Successfully updateShipmentStatus!
+
+
+Schema: `ShipmentApplicationStatusResponse`
 
 
 
@@ -20432,7 +21058,9 @@ Add items to cart
 
 
 
-| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`, `BuyNow`
+
+
+| xQuery | struct | Includes properties such as `I`, `B`, `AreaCode`, `BuyNow`, `ID`
 
 | body |  AddCartRequest | "Request body" 
 
@@ -21645,6 +22273,7 @@ Sorry, item is out of stock
         "raw": {
           "cod_charge": 0,
           "convenience_fee": 0,
+          "gift_card": 0,
           "coupon": 0,
           "delivery_charge": 0,
           "discount": -202000,
@@ -21665,6 +22294,12 @@ Sorry, item is out of stock
           "message": "Sorry! Invalid Coupon"
         },
         "display": [
+          {
+            "display": "Gift Card",
+            "key": "gift_card",
+            "value": 0,
+            "currency_code": "INR"
+          },
           {
             "display": "MRP Total",
             "key": "mrp_total",
@@ -21708,6 +22343,13 @@ Sorry, item is out of stock
           },
           "article": {
             "type": "article",
+            "is_gift_visible": true,
+            "gift_card": {
+              "display_text": "",
+              "price": 30,
+              "gift_message": "",
+              "is_gift_applied": true
+            },
             "uid": "604_902_SSTC60401_636BLUE_1",
             "size": "1",
             "seller": {
@@ -21878,6 +22520,7 @@ Nothing updated
         "raw": {
           "cod_charge": 0,
           "convenience_fee": 0,
+          "gift_card": 30,
           "coupon": 0,
           "delivery_charge": 0,
           "discount": -202000,
@@ -21898,6 +22541,12 @@ Nothing updated
           "message": "Sorry! Invalid Coupon"
         },
         "display": [
+          {
+            "display": "Gift Card",
+            "key": "gift_card",
+            "value": 30,
+            "currency_code": "INR"
+          },
           {
             "display": "MRP Total",
             "key": "mrp_total",
@@ -21941,6 +22590,13 @@ Nothing updated
           },
           "article": {
             "type": "article",
+            "is_gift_visible": true,
+            "gift_card": {
+              "display_text": "",
+              "price": 30,
+              "gift_message": "",
+              "is_gift_applied": true
+            },
             "uid": "604_902_SSTC60401_636BLUE_1",
             "size": "1",
             "seller": {
@@ -22901,10 +23557,10 @@ Item updated in the cart
     "result": {
       "437414_7": {
         "success": true,
-        "message": "Item updated in the bag"
+        "message": "Quantity of item updated"
       }
     },
-    "message": "Item updated in the bag",
+    "message": "Quantity of item updated",
     "success": true
   }
 }
@@ -23570,7 +24226,15 @@ Verify the coupon eligibility against the payment mode
 
 
 
-| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `ID`, `BuyNow`, `AddressID`, `PaymentMode`, `PaymentIdentifier`, `AggregatorName`, `MerchantCode`, `Iin`, `Network`, `Type`, `CardID`
 
 
 
@@ -24306,7 +24970,9 @@ Update shipment delivery type and quantity before checkout
 
 
 
-| xQuery | struct | Includes properties such as `I`, `P`, `ID`, `AddressID`, `OrderType`
+
+
+| xQuery | struct | Includes properties such as `I`, `P`, `ID`, `AddressID`, `AreaCode`, `OrderType`
 
 | body |  UpdateCartShipmentRequest | "Request body" 
 
