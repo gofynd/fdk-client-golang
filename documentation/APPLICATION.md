@@ -284,7 +284,6 @@
     * [getShipmentBagReasons](#getshipmentbagreasons)
     * [getShipmentReasons](#getshipmentreasons)
     * [updateShipmentStatus](#updateshipmentstatus)
-    * [getProducts](#getproducts)
     
 
 * [Rewards](#Rewards)
@@ -25108,7 +25107,7 @@ Get Invoice of a shipment
 
 ```golang
 
- data, err :=  Order.GetInvoiceByShipmentId(ShipmentID, xQuery);
+ data, err :=  Order.GetInvoiceByShipmentId(ShipmentID);
 ```
 
 | Argument  |  Type  | Description |
@@ -25116,9 +25115,6 @@ Get Invoice of a shipment
 
 | ShipmentID | string | ID of the shipment. | 
 
-
-
-| xQuery | struct | Includes properties such as `DocumentType`
 
 
 
@@ -25412,54 +25408,6 @@ Successfully updateShipmentStatus!
 
 
 Schema: `ShipmentApplicationStatusResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getProducts
-
-
-```golang
-
- data, err :=  Order.GetProducts(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `Status`, `PageNo`, `PageSize`, `FromDate`, `ToDate`, `SearchValue`
-
-
-
-
-
-*Success Response:*
-
-
-
-Successfully retrived all the given shipments details!
-
-
-Schema: `ProductListResponse`
 
 
 
