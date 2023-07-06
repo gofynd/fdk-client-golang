@@ -282,6 +282,7 @@
     * [getShipmentBagReasons](#getshipmentbagreasons)
     * [getShipmentReasons](#getshipmentreasons)
     * [updateShipmentStatus](#updateshipmentstatus)
+    * [updateShipmentStatus1](#updateshipmentstatus1)
     
 
 * [Rewards](#Rewards)
@@ -18181,7 +18182,9 @@ Get a list of staff.
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `OrderIncent`, `OrderingStore`, `User`
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `OrderIncent`, `OrderingStore`, `User`, `UserName`
 
 
 
@@ -20404,6 +20407,45 @@ Update the shipment status
 
 
 Use this API to update the status of a shipment using its shipment ID.
+
+*Success Response:*
+
+
+
+Successfully updateShipmentStatus!
+
+
+Schema: `ShipmentApplicationStatusResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateShipmentStatus1
+
+
+```golang
+
+ data, err :=  Order.UpdateShipmentStatus1(ShipmentID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ShipmentID | string |  | 
+
+
+| body |  UpdateShipmentStatusRequest1 | "Request body" 
+
+
+updateShipmentStatus
 
 *Success Response:*
 
