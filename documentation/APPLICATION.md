@@ -16,6 +16,7 @@
 * [Order](#Order) - Handles Platform websites OMS 
 * [Rewards](#Rewards) - Earn and redeem reward points 
 * [PosCart](#PosCart) - Cart APIs 
+* [Logistic](#Logistic) - Handles Platform websites OMS 
 
 ----
 ----
@@ -319,6 +320,13 @@
     * [getCartShareLink](#getcartsharelink)
     * [getCartSharedItems](#getcartshareditems)
     * [updateCartWithSharedItems](#updatecartwithshareditems)
+    
+
+* [Logistic](#Logistic)
+  * Methods
+    * [getTatProduct](#gettatproduct)
+    * [getPincodeZones](#getpincodezones)
+    * [getPincodeCity](#getpincodecity)
     
 
 
@@ -23242,6 +23250,123 @@ Cart Merged/Replaced
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+---
+
+
+
+---
+
+
+## Logistic
+
+
+#### getTatProduct
+Get TAT of a product
+
+```golang
+
+ data, err :=  Logistic.GetTatProduct(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  GetTatProductReqBody | "Request body" 
+
+
+Use this API to know the delivery turnaround time (TAT) by entering the product details along with the PIN Code of the location.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `GetTatProductResponse` for more details.
+
+
+Schema: `GetTatProductResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPincodeZones
+Get Pincode Zones
+
+```golang
+
+ data, err :=  Logistic.GetPincodeZones(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  GetPincodeZonesReqBody | "Request body" 
+
+
+Get to know the zones of a specefic pincode
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `GetTatProductResponse` for more details.
+
+
+Schema: `GetPincodeZonesResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPincodeCity
+Get city from PIN Code
+
+```golang
+
+ data, err :=  Logistic.GetPincodeCity(Pincode);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| Pincode | string | The PIN Code of the area, e.g. 400059 | 
+
+
+
+
+Use this API to retrieve a city by its PIN Code.
+
+*Success Response:*
+
+
+
+Success. Returns a JSON object containing the city name, state and country identified by its PIN Code. Check the example shown below or refer `GetPincodeCityResponse` for more details.
+
+
+Schema: `GetPincodeCityResponse`
 
 
 

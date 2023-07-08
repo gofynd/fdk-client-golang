@@ -40,6 +40,8 @@ type Client struct {
 	
 		PosCart  *PosCart
 	
+		Logistic  *Logistic
+	
 }
 
 // NewAppClient provides application client
@@ -75,6 +77,8 @@ func NewAppClient(config *AppConfig) *Client {
 				Rewards:  NewRewards(config),
 			
 				PosCart:  NewPosCart(config),
+			
+				Logistic:  NewLogistic(config),
 			
 		}
 }
@@ -15761,6 +15765,189 @@ func NewAppClient(config *AppConfig) *Client {
             return SharedCartResponse{}, common.NewFDKError(err.Error())
         }
          return updateCartWithSharedItemsResponse, nil
+        
+    }
+          
+    
+
+    // Logistic ...
+    type Logistic struct {
+        config *AppConfig
+    }
+    // NewLogistic ...
+    func NewLogistic(config *AppConfig) *Logistic {
+        return &Logistic{config}
+    }
+    
+    
+    
+  
+    
+    
+    // GetTatProduct Get TAT of a product
+    func (lo *Logistic)  GetTatProduct(body  GetTatProductReqBody) (GetTatProductResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getTatProductResponse GetTatProductResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return GetTatProductResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return GetTatProductResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.config,
+            "post",
+            "/service/application/logistics/v1.0",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetTatProductResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getTatProductResponse)
+        if err != nil {
+            return GetTatProductResponse{}, common.NewFDKError(err.Error())
+        }
+         return getTatProductResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetPincodeZones Get Pincode Zones
+    func (lo *Logistic)  GetPincodeZones(body  GetPincodeZonesReqBody) (GetPincodeZonesResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getPincodeZonesResponse GetPincodeZonesResponse
+	    )
+
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return GetPincodeZonesResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return GetPincodeZonesResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.config,
+            "post",
+            "/service/application/logistics/v1.0/pincode/zones",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetPincodeZonesResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPincodeZonesResponse)
+        if err != nil {
+            return GetPincodeZonesResponse{}, common.NewFDKError(err.Error())
+        }
+         return getPincodeZonesResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    // GetPincodeCity Get city from PIN Code
+    func (lo *Logistic)  GetPincodeCity(Pincode string) (GetPincodeCityResponse, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             getPincodeCityResponse GetPincodeCityResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+    
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            lo.config,
+            "get",
+            fmt.Sprintf("/service/application/logistics/v1.0/pincode/%s",Pincode),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetPincodeCityResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPincodeCityResponse)
+        if err != nil {
+            return GetPincodeCityResponse{}, common.NewFDKError(err.Error())
+        }
+         return getPincodeCityResponse, nil
         
     }
           
