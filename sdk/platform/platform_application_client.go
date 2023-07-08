@@ -25,8 +25,6 @@ type ApplicationClient struct {
 	 
 		Payment  *PlatformAppPayment
 	 
-		Order  *PlatformAppOrder
-	 
 		Catalog  *PlatformAppCatalog
 	 
 		FileStorage  *PlatformAppFileStorage
@@ -36,8 +34,6 @@ type ApplicationClient struct {
 		Configuration  *PlatformAppConfiguration
 	 
 		Cart  *PlatformAppCart
-	 
-		Rewards  *PlatformAppRewards
 	 
 		Analytics  *PlatformAppAnalytics
 	 
@@ -64,8 +60,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 			 
 				Payment:  NewPlatformAppPayment(config, appID),
 			 
-				Order:  NewPlatformAppOrder(config, appID),
-			 
 				Catalog:  NewPlatformAppCatalog(config, appID),
 			 
 				FileStorage:  NewPlatformAppFileStorage(config, appID),
@@ -75,8 +69,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 				Configuration:  NewPlatformAppConfiguration(config, appID),
 			 
 				Cart:  NewPlatformAppCart(config, appID),
-			 
-				Rewards:  NewPlatformAppRewards(config, appID),
 			 
 				Analytics:  NewPlatformAppAnalytics(config, appID),
 			 
@@ -11159,25 +11151,73 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // AddBeneficiaryDetails Save bank details for cancelled/returned order
-     func (pa *PlatformAppPayment)  AddBeneficiaryDetails(body  AddBeneficiaryDetailsRequest) (RefundAccountResponse, error) {
+    //PlatformAppGetBankAccountDetailsOpenAPIXQuery holds query params
+    type PlatformAppGetBankAccountDetailsOpenAPIXQuery struct { 
+        OrderID string  `url:"order_id,omitempty"` 
+        RequestHash string  `url:"request_hash,omitempty"`  
+    }
+    
+    // GetBankAccountDetailsOpenAPI Get bank details
+     func (pa *PlatformAppPayment)  GetBankAccountDetailsOpenAPI(xQuery PlatformAppGetBankAccountDetailsOpenAPIXQuery) (RefundAccountResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            addBeneficiaryDetailsResponse RefundAccountResponse
+            getBankAccountDetailsOpenAPIResponse RefundAccountResponse
 	    )
 
         
+
+         
+            
+                
+            
+                
             
         
-            
+
         
-            
         
-            
+         
         
-            
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/refund/account",pa.CompanyID, pa.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return RefundAccountResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getBankAccountDetailsOpenAPIResponse)
+        if err != nil {
+            return RefundAccountResponse{}, common.NewFDKError(err.Error())
+        }
+        return getBankAccountDetailsOpenAPIResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // AddRefundBankAccountUsingOTP Save bank details for cancelled/returned order
+     func (pa *PlatformAppPayment)  AddRefundBankAccountUsingOTP(body  AddBeneficiaryDetailsOTPRequest) (RefundAccountResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            addRefundBankAccountUsingOTPResponse RefundAccountResponse
+	    )
+
         
             
         
@@ -11217,11 +11257,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return RefundAccountResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &addBeneficiaryDetailsResponse)
+        err = json.Unmarshal(response, &addRefundBankAccountUsingOTPResponse)
         if err != nil {
             return RefundAccountResponse{}, common.NewFDKError(err.Error())
         }
-        return addBeneficiaryDetailsResponse, nil
+        return addRefundBankAccountUsingOTPResponse, nil
         
     }
            
@@ -11402,87 +11442,29 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
            
        
     
-
- 
-	 
-   // PlatformAppOrder holds PlatformAppOrder object properties
-    type PlatformAppOrder struct {
-        config *PlatformConfig
-        CompanyID string
-        ApplicationID string
-    }
-    // NewPlatformAppOrder returns new PlatformAppOrder instance
-    func NewPlatformAppOrder(config *PlatformConfig, appID string) *PlatformAppOrder {
-        return &PlatformAppOrder{config, config.CompanyID, appID}
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
   
 
     
-    //PlatformAppGetApplicationShipmentsXQuery holds query params
-    type PlatformAppGetApplicationShipmentsXQuery struct { 
-        Lane string  `url:"lane,omitempty"` 
-        SearchType string  `url:"search_type,omitempty"` 
-        SearchID string  `url:"search_id,omitempty"` 
-        FromDate string  `url:"from_date,omitempty"` 
-        ToDate string  `url:"to_date,omitempty"` 
-        DpIds string  `url:"dp_ids,omitempty"` 
-        OrderingCompanyID string  `url:"ordering_company_id,omitempty"` 
-        Stores string  `url:"stores,omitempty"` 
-        SalesChannel string  `url:"sales_channel,omitempty"` 
-        RequestByExt string  `url:"request_by_ext,omitempty"` 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"` 
-        CustomerID string  `url:"customer_id,omitempty"` 
-        IsPrioritySort bool  `url:"is_priority_sort,omitempty"`  
+    //PlatformAppGetUserCODlimitRoutesXQuery holds query params
+    type PlatformAppGetUserCODlimitRoutesXQuery struct { 
+        MerchantUserID string  `url:"merchant_user_id,omitempty"` 
+        MobileNo string  `url:"mobile_no,omitempty"`  
     }
     
-    // GetApplicationShipments 
-     func (or *PlatformAppOrder)  GetApplicationShipments(xQuery PlatformAppGetApplicationShipmentsXQuery) (ShipmentInternalPlatformViewResponse, error) {
+    // GetUserCODlimitRoutes Get COD limit for user
+     func (pa *PlatformAppPayment)  GetUserCODlimitRoutes(xQuery PlatformAppGetUserCODlimitRoutesXQuery) (GetUserCODLimitResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getApplicationShipmentsResponse ShipmentInternalPlatformViewResponse
+            getUserCODlimitRoutesResponse GetUserCODLimitResponse
 	    )
 
         
 
          
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
             
                 
             
@@ -11497,81 +11479,22 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
         //API call
         rawRequest = NewRequest(
-            or.config,
+            pa.config,
             "get",
-            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/application/%s/shipments/",or.CompanyID, or.ApplicationID),
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/user-cod",pa.CompanyID, pa.ApplicationID),
             nil,
             xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ShipmentInternalPlatformViewResponse{}, err
+            return GetUserCODLimitResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getApplicationShipmentsResponse)
+        err = json.Unmarshal(response, &getUserCODlimitRoutesResponse)
         if err != nil {
-            return ShipmentInternalPlatformViewResponse{}, common.NewFDKError(err.Error())
+            return GetUserCODLimitResponse{}, common.NewFDKError(err.Error())
         }
-        return getApplicationShipmentsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-    
-    
-    
-    
-  
-
-    
-    //PlatformAppGetAppOrderShipmentDetailsXQuery holds query params
-    type PlatformAppGetAppOrderShipmentDetailsXQuery struct { 
-        OrderID string  `url:"order_id,omitempty"`  
-    }
-    
-    // GetAppOrderShipmentDetails 
-     func (or *PlatformAppOrder)  GetAppOrderShipmentDetails(xQuery PlatformAppGetAppOrderShipmentDetailsXQuery) (ShipmentDetailsResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAppOrderShipmentDetailsResponse ShipmentDetailsResponse
-	    )
-
-        
-
-         
-            
-                
-            
-        
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            or.config,
-            "get",
-            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/application/%s/order-details",or.CompanyID, or.ApplicationID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ShipmentDetailsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAppOrderShipmentDetailsResponse)
-        if err != nil {
-            return ShipmentDetailsResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAppOrderShipmentDetailsResponse, nil
+        return getUserCODlimitRoutesResponse, nil
         
     }
            
@@ -11582,44 +11505,61 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // TrackPlatformShipment Track shipment
-     func (or *PlatformAppOrder)  TrackPlatformShipment(ShipmentID string) (PlatformShipmentTrack, error) {
+    // SetUserCODlimitRoutes Set COD option for user for payment
+     func (pa *PlatformAppPayment)  SetUserCODlimitRoutes(body  SetCODForUserRequest) (SetCODOptionResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            trackPlatformShipmentResponse PlatformShipmentTrack
+            setUserCODlimitRoutesResponse SetCODOptionResponse
 	    )
 
         
+            
+        
+            
+        
+            
+        
 
          
 
         
         
-        
-        
          
         
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return SetCODOptionResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return SetCODOptionResponse{}, common.NewFDKError(err.Error())       
+        }
         
         //API call
         rawRequest = NewRequest(
-            or.config,
-            "get",
-            fmt.Sprintf("/service/platform/orders/v1.0/company/%s/application/%s/orders/shipments/%s/track",or.CompanyID, or.ApplicationID, ShipmentID),
+            pa.config,
+            "put",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/user-cod",pa.CompanyID, pa.ApplicationID),
             nil,
             nil,
-            nil)
+            reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return PlatformShipmentTrack{}, err
+            return SetCODOptionResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &trackPlatformShipmentResponse)
+        err = json.Unmarshal(response, &setUserCODlimitRoutesResponse)
         if err != nil {
-            return PlatformShipmentTrack{}, common.NewFDKError(err.Error())
+            return SetCODOptionResponse{}, common.NewFDKError(err.Error())
         }
-        return trackPlatformShipmentResponse, nil
+        return setUserCODlimitRoutesResponse, nil
         
     }
            
@@ -11627,31 +11567,64 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
+  
+
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    // PaymentStatusBulk Get Payment status and information for a list of order_ids
+     func (pa *PlatformAppPayment)  PaymentStatusBulk(body  PaymentStatusBulkHandlerRequest) (PaymentStatusBulkHandlerResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            paymentStatusBulkResponse PaymentStatusBulkHandlerResponse
+	    )
+
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PaymentStatusBulkHandlerResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PaymentStatusBulkHandlerResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "post",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/payment-status-bulk/",pa.CompanyID, pa.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PaymentStatusBulkHandlerResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &paymentStatusBulkResponse)
+        if err != nil {
+            return PaymentStatusBulkHandlerResponse{}, common.NewFDKError(err.Error())
+        }
+        return paymentStatusBulkResponse, nil
+        
+    }
+           
+       
     
 
  
@@ -11743,54 +11716,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetSearchKeywords Get a Search Keywords Details
-     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getSearchKeywordsResponse GetSearchWordsDetailResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetSearchWordsDetailResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getSearchKeywordsResponse)
-        if err != nil {
-            return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
-        }
-        return getSearchKeywordsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // DeleteSearchKeywords Delete a Search Keywords
      func (ca *PlatformAppCatalog)  DeleteSearchKeywords(ID string) (DeleteResponse, error) {
         var (
@@ -11829,6 +11754,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return DeleteResponse{}, common.NewFDKError(err.Error())
         }
         return deleteSearchKeywordsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetSearchKeywords Get a Search Keywords Details
+     func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getSearchKeywordsResponse GetSearchWordsDetailResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetSearchWordsDetailResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getSearchKeywordsResponse)
+        if err != nil {
+            return GetSearchWordsDetailResponse{}, common.NewFDKError(err.Error())
+        }
+        return getSearchKeywordsResponse, nil
         
     }
            
@@ -12025,54 +11998,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
-     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAutocompleteKeywordDetailResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // DeleteAutocompleteKeyword Delete a Autocomplete Keywords
      func (ca *PlatformAppCatalog)  DeleteAutocompleteKeyword(ID string) (DeleteResponse, error) {
         var (
@@ -12111,6 +12036,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return DeleteResponse{}, common.NewFDKError(err.Error())
         }
         return deleteAutocompleteKeywordResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
+     func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAutocompleteKeywordDetailResponse GetAutocompleteWordsResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAutocompleteKeywordDetailResponse)
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAutocompleteKeywordDetailResponse, nil
         
     }
            
@@ -12252,6 +12225,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // GetAppProduct Get company application product data.
+     func (ca *PlatformAppCatalog)  GetAppProduct(ItemID string) (OwnerAppItemResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAppProductResponse OwnerAppItemResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product/%s/",ca.CompanyID, ca.ApplicationID, ItemID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return OwnerAppItemResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAppProductResponse)
+        if err != nil {
+            return OwnerAppItemResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAppProductResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // UpdateAppProduct Update a single custom meta.
      func (ca *PlatformAppCatalog)  UpdateAppProduct(ItemID string, body  ApplicationItemMeta) (SuccessResponse1, error) {
         var (
@@ -12317,54 +12338,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return SuccessResponse1{}, common.NewFDKError(err.Error())
         }
         return updateAppProductResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetAppProduct Get company application product data.
-     func (ca *PlatformAppCatalog)  GetAppProduct(ItemID string) (OwnerAppItemResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAppProductResponse OwnerAppItemResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product/%s/",ca.CompanyID, ca.ApplicationID, ItemID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return OwnerAppItemResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAppProductResponse)
-        if err != nil {
-            return OwnerAppItemResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAppProductResponse, nil
         
     }
            
@@ -19901,877 +19874,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return UpdateCartDetailResponse{}, common.NewFDKError(err.Error())
         }
         return updateCartResponse, nil
-        
-    }
-           
-       
-    
-
- 
-	 
-   // PlatformAppRewards holds PlatformAppRewards object properties
-    type PlatformAppRewards struct {
-        config *PlatformConfig
-        CompanyID string
-        ApplicationID string
-    }
-    // NewPlatformAppRewards returns new PlatformAppRewards instance
-    func NewPlatformAppRewards(config *PlatformConfig, appID string) *PlatformAppRewards {
-        return &PlatformAppRewards{config, config.CompanyID, appID}
-    }
-    
-    
-    
-  
-
-    
-    //PlatformAppShowGiveawaysXQuery holds query params
-    type PlatformAppShowGiveawaysXQuery struct { 
-        PageID string  `url:"page_id,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
-    }
-    
-    // ShowGiveaways List of giveaways of the current application.
-     func (re *PlatformAppRewards)  ShowGiveaways(xQuery PlatformAppShowGiveawaysXQuery) (GiveawayResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            showGiveawaysResponse GiveawayResponse
-	    )
-
-        
-
-         
-            
-                
-            
-                
-            
-        
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            re.config,
-            "get",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/giveaways",re.CompanyID, re.ApplicationID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GiveawayResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &showGiveawaysResponse)
-        if err != nil {
-            return GiveawayResponse{}, common.NewFDKError(err.Error())
-        }
-        return showGiveawaysResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // SaveGiveAway List of giveaways of the current application.
-     func (re *PlatformAppRewards)  SaveGiveAway(body  Giveaway) (Giveaway, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            saveGiveAwayResponse Giveaway
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return Giveaway{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return Giveaway{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            re.config,
-            "post",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/giveaways",re.CompanyID, re.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return Giveaway{}, err
-	    }
-        
-        err = json.Unmarshal(response, &saveGiveAwayResponse)
-        if err != nil {
-            return Giveaway{}, common.NewFDKError(err.Error())
-        }
-        return saveGiveAwayResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetGiveawayById Get giveaway by ID.
-     func (re *PlatformAppRewards)  GetGiveawayById(ID string) (Giveaway, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getGiveawayByIdResponse Giveaway
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            re.config,
-            "get",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/giveaways/%s",re.CompanyID, re.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return Giveaway{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getGiveawayByIdResponse)
-        if err != nil {
-            return Giveaway{}, common.NewFDKError(err.Error())
-        }
-        return getGiveawayByIdResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // UpdateGiveAway Updates the giveaway by it's ID.
-     func (re *PlatformAppRewards)  UpdateGiveAway(ID string, body  Giveaway) (Giveaway, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateGiveAwayResponse Giveaway
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return Giveaway{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return Giveaway{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            re.config,
-            "put",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/giveaways/%s",re.CompanyID, re.ApplicationID, ID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return Giveaway{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateGiveAwayResponse)
-        if err != nil {
-            return Giveaway{}, common.NewFDKError(err.Error())
-        }
-        return updateGiveAwayResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetGiveawayAudienceStatus Get the Giveaway audience status
-     func (re *PlatformAppRewards)  GetGiveawayAudienceStatus(AudienceID string, ) (GiveawayAudience, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getGiveawayAudienceStatusResponse GiveawayAudience
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            re.config,
-            "get",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/giveaways/audience/%s/status",AudienceID, re.CompanyID, re.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GiveawayAudience{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getGiveawayAudienceStatusResponse)
-        if err != nil {
-            return GiveawayAudience{}, common.NewFDKError(err.Error())
-        }
-        return getGiveawayAudienceStatusResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // ShowOffers List of offers of the current application.
-     func (re *PlatformAppRewards)  ShowOffers() ([]Offer, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            showOffersResponse []Offer
-	    )
-
-        
-
-         
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            re.config,
-            "get",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/offers/",re.CompanyID, re.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return []Offer{}, err
-	    }
-        
-        err = json.Unmarshal(response, &showOffersResponse)
-        if err != nil {
-            return []Offer{}, common.NewFDKError(err.Error())
-        }
-        return showOffersResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetOfferByName Get offer by name
-     func (re *PlatformAppRewards)  GetOfferByName(Name string, Cookie string) (Offer, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getOfferByNameResponse Offer
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-        
-        //Adding extra headers
-        var xHeaders = make(map[string]string) 
-        
-         
-         xHeaders["cookie"] =  Cookie
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            re.config,
-            "get",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/offers/%s/",Name, re.CompanyID, re.ApplicationID),
-            xHeaders,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return Offer{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getOfferByNameResponse)
-        if err != nil {
-            return Offer{}, common.NewFDKError(err.Error())
-        }
-        return getOfferByNameResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // UpdateOfferByName Update offer by name
-     func (re *PlatformAppRewards)  UpdateOfferByName(Name string, body  Offer) (Offer, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateOfferByNameResponse Offer
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return Offer{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return Offer{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            re.config,
-            "put",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/offers/%s/",Name, re.CompanyID, re.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return Offer{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateOfferByNameResponse)
-        if err != nil {
-            return Offer{}, common.NewFDKError(err.Error())
-        }
-        return updateOfferByNameResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // UpdateUserStatus Update user status
-     func (re *PlatformAppRewards)  UpdateUserStatus(UserID string, body  AppUser) (AppUser, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateUserStatusResponse AppUser
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return AppUser{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return AppUser{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            re.config,
-            "patch",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/users/%s/",UserID, re.CompanyID, re.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return AppUser{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateUserStatusResponse)
-        if err != nil {
-            return AppUser{}, common.NewFDKError(err.Error())
-        }
-        return updateUserStatusResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // User Get user reward details
-     func (re *PlatformAppRewards)  User(UserID string, ) (UserRes, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            userResponse UserRes
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            re.config,
-            "get",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/users/%s/",UserID, re.CompanyID, re.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return UserRes{}, err
-	    }
-        
-        err = json.Unmarshal(response, &userResponse)
-        if err != nil {
-            return UserRes{}, common.NewFDKError(err.Error())
-        }
-        return userResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    //PlatformAppGetUserPointsHistoryXQuery holds query params
-    type PlatformAppGetUserPointsHistoryXQuery struct { 
-        PageID string  `url:"page_id,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
-    }
-    
-    // GetUserPointsHistory Get all transactions of reward points
-     func (re *PlatformAppRewards)  GetUserPointsHistory(UserID string, xQuery PlatformAppGetUserPointsHistoryXQuery) (HistoryRes, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getUserPointsHistoryResponse HistoryRes
-	    )
-
-        
-
-         
-            
-                
-            
-                
-            
-        
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            re.config,
-            "get",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/users/%s/points/history/",UserID, re.CompanyID, re.ApplicationID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return HistoryRes{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getUserPointsHistoryResponse)
-        if err != nil {
-            return HistoryRes{}, common.NewFDKError(err.Error())
-        }
-        return getUserPointsHistoryResponse, nil
-        
-    }
-           
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetUserPointsHistoryPaginator Get all transactions of reward points  
-            func (re *PlatformAppRewards)  GetUserPointsHistoryPaginator(UserID string ,  xQuery PlatformAppGetUserPointsHistoryXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("cursor")
-                
-                
-                 
-                 xQuery.PageID = paginator.NextID
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := re.GetUserPointsHistory(UserID, xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
-       
-    
-    
-    
-  
-
-    
-    // GetRewardsConfiguration Get all valid android paths
-     func (re *PlatformAppRewards)  GetRewardsConfiguration() (ConfigurationRes, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getRewardsConfigurationResponse ConfigurationRes
-	    )
-
-        
-
-         
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            re.config,
-            "get",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/configuration/",re.CompanyID, re.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ConfigurationRes{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getRewardsConfigurationResponse)
-        if err != nil {
-            return ConfigurationRes{}, common.NewFDKError(err.Error())
-        }
-        return getRewardsConfigurationResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // SetRewardsConfiguration Updates the collection with given android paths.
-     func (re *PlatformAppRewards)  SetRewardsConfiguration(body  ConfigurationRequest) (SetConfigurationRes, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            setRewardsConfigurationResponse SetConfigurationRes
-	    )
-
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return SetConfigurationRes{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return SetConfigurationRes{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            re.config,
-            "post",
-            fmt.Sprintf("/service/platform/rewards/v1.0/company/%s/application/%s/configuration/",re.CompanyID, re.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return SetConfigurationRes{}, err
-	    }
-        
-        err = json.Unmarshal(response, &setRewardsConfigurationResponse)
-        if err != nil {
-            return SetConfigurationRes{}, common.NewFDKError(err.Error())
-        }
-        return setRewardsConfigurationResponse, nil
         
     }
            

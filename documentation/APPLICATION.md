@@ -14,9 +14,8 @@
 * [Configuration](#Configuration) - Application configuration apis 
 * [Payment](#Payment) - Collect payment through many payment gateway i.e Stripe, Razorpay, Juspay etc.into Fynd or Self account 
 * [Order](#Order) - Handles Platform websites OMS 
-* [Rewards](#Rewards) - Earn and redeem reward points 
 * [PosCart](#PosCart) - Cart APIs 
-* [Logistic](#Logistic) - Handles Platform websites OMS 
+* [Logistic](#Logistic) - Logistics Promise Engine APIs allows you to configure zone, pincode, TAT, logistics and many more useful features.  
 
 ----
 ----
@@ -238,6 +237,8 @@
     * [getRupifiBannerDetails](#getrupifibannerdetails)
     * [getEpaylaterBannerDetails](#getepaylaterbannerdetails)
     * [resendOrCancelPayment](#resendorcancelpayment)
+    * [renderHTML](#renderhtml)
+    * [validateVPA](#validatevpa)
     * [getActiveRefundTransferModes](#getactiverefundtransfermodes)
     * [enableOrDisableRefundTransferMode](#enableordisablerefundtransfermode)
     * [getUserBeneficiariesDetail](#getuserbeneficiariesdetail)
@@ -248,6 +249,15 @@
     * [addRefundBankAccountUsingOTP](#addrefundbankaccountusingotp)
     * [verifyOtpAndAddBeneficiaryForWallet](#verifyotpandaddbeneficiaryforwallet)
     * [updateDefaultBeneficiary](#updatedefaultbeneficiary)
+    * [getPaymentLink](#getpaymentlink)
+    * [createPaymentLink](#createpaymentlink)
+    * [resendPaymentLink](#resendpaymentlink)
+    * [cancelPaymentLink](#cancelpaymentlink)
+    * [getPaymentModeRoutesPaymentLink](#getpaymentmoderoutespaymentlink)
+    * [pollingPaymentLink](#pollingpaymentlink)
+    * [createOrderHandlerPaymentLink](#createorderhandlerpaymentlink)
+    * [initialisePaymentPaymentLink](#initialisepaymentpaymentlink)
+    * [checkAndUpdatePaymentStatusPaymentLink](#checkandupdatepaymentstatuspaymentlink)
     * [customerCreditSummary](#customercreditsummary)
     * [redirectToAggregator](#redirecttoaggregator)
     * [checkCredit](#checkcredit)
@@ -266,17 +276,6 @@
     * [getCustomerDetailsByShipmentId](#getcustomerdetailsbyshipmentid)
     * [sendOtpToShipmentCustomer](#sendotptoshipmentcustomer)
     * [verifyOtpShipmentCustomer](#verifyotpshipmentcustomer)
-    
-
-* [Rewards](#Rewards)
-  * Methods
-    * [getOfferByName](#getofferbyname)
-    * [catalogueOrder](#catalogueorder)
-    * [getUserPointsHistory](#getuserpointshistory)
-    * [getUserPoints](#getuserpoints)
-    * [getUserReferralDetails](#getuserreferraldetails)
-    * [getOrderDiscount](#getorderdiscount)
-    * [redeemReferralCode](#redeemreferralcode)
     
 
 * [PosCart](#PosCart)
@@ -312,8 +311,11 @@
 
 * [Logistic](#Logistic)
   * Methods
-    * [getTatProduct](#gettatproduct)
     * [getPincodeCity](#getpincodecity)
+    * [getTatProduct](#gettatproduct)
+    * [getAllCountries](#getallcountries)
+    * [getPincodeZones](#getpincodezones)
+    * [getOptimalLocations](#getoptimallocations)
     
 
 
@@ -16947,6 +16949,49 @@ Success. Check the example shown below or refer `ValidateCustomerResponse` for m
 Schema: `ValidateCustomerResponse`
 
 
+*Examples:*
+
+
+success is True i.e user is allowed
+```json
+{
+  "value": {
+    "success": true,
+    "message": "data fetched",
+    "data": {
+      "api_version": 2,
+      "data": {
+        "approved": true,
+        "button_text": "Buy Now, Pay Later",
+        "first_transaction": false
+      },
+      "aggregator": "Simpl"
+    }
+  }
+}
+```
+
+success is True i.e user not allowed
+```json
+{
+  "value": {
+    "success": false,
+    "message": "data fetched",
+    "error": {
+      "api_version": 2,
+      "data": {
+        "approved": false,
+        "button_text": "Buy Now, Pay Later",
+        "first_transaction": false
+      },
+      "aggregator": "Simpl"
+    },
+    "data": {}
+  }
+}
+```
+
+
 
 
 
@@ -17335,6 +17380,78 @@ request_type is resend
 ---
 
 
+#### renderHTML
+Convert base64 string to HTML form
+
+```golang
+
+ data, err :=  Payment.RenderHTML(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  renderHTMLRequest | "Request body" 
+
+
+Use this API to decode base64 html form to plain HTML string.
+
+*Success Response:*
+
+
+
+Success and return HTML decoded text
+
+
+Schema: `renderHTMLResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### validateVPA
+API to Validate UPI ID
+
+```golang
+
+ data, err :=  Payment.ValidateVPA(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  ValidateVPARequest | "Request body" 
+
+
+API to Validate UPI ID
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `ValidateVPAResponseSchema` for more details.
+
+
+Schema: `ValidateVPAResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getActiveRefundTransferModes
 Lists the mode of refund
 
@@ -17688,6 +17805,336 @@ Success. Check the example shown below or refer `SetDefaultBeneficiaryResponse` 
 
 
 Schema: `SetDefaultBeneficiaryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPaymentLink
+Get payment link
+
+```golang
+
+ data, err :=  Payment.GetPaymentLink(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `PaymentLinkID`
+
+
+
+Use this API to get a payment link
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `GetPaymentLinkResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createPaymentLink
+Create payment link
+
+```golang
+
+ data, err :=  Payment.CreatePaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  CreatePaymentLinkRequest | "Request body" 
+
+
+Use this API to create a payment link for the customer
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `CreatePaymentLinkResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### resendPaymentLink
+Resend payment link
+
+```golang
+
+ data, err :=  Payment.ResendPaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  CancelOrResendPaymentLinkRequest | "Request body" 
+
+
+Use this API to resend a payment link for the customer
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `ResendPaymentLinkResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### cancelPaymentLink
+Cancel payment link
+
+```golang
+
+ data, err :=  Payment.CancelPaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  CancelOrResendPaymentLinkRequest | "Request body" 
+
+
+Use this API to cancel a payment link for the customer
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `CancelPaymentLinkResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPaymentModeRoutesPaymentLink
+Get applicable payment options for payment link
+
+```golang
+
+ data, err :=  Payment.GetPaymentModeRoutesPaymentLink(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `PaymentLinkID`
+
+
+
+Use this API to get all valid payment options for doing a payment through payment link
+
+*Success Response:*
+
+
+
+Success. Returns all available options for payment. Check the example shown below or refer `PaymentModeRouteResponse` for more details.
+
+
+Schema: `PaymentModeRouteResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### pollingPaymentLink
+Used for polling if payment successful or not
+
+```golang
+
+ data, err :=  Payment.PollingPaymentLink(xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `PaymentLinkID`
+
+
+
+Use this API to poll if payment through payment was successful or not
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `PollingPaymentLinkResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createOrderHandlerPaymentLink
+Create Order user
+
+```golang
+
+ data, err :=  Payment.CreateOrderHandlerPaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  CreateOrderUserRequest | "Request body" 
+
+
+Use this API to create a order and payment on aggregator side
+
+*Success Response:*
+
+
+
+Success. Check the example shown below
+
+
+Schema: `CreateOrderUserResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### initialisePaymentPaymentLink
+Initialize a payment (server-to-server) for UPI and BharatQR
+
+```golang
+
+ data, err :=  Payment.InitialisePaymentPaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  PaymentInitializationRequest | "Request body" 
+
+
+Use this API to inititate payment using UPI, BharatQR, wherein the UPI requests are send to the app and QR code is displayed on the screen.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `PaymentInitializationResponse` for more details.
+
+
+Schema: `PaymentInitializationResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### checkAndUpdatePaymentStatusPaymentLink
+Performs continuous polling to check status of payment on the server
+
+```golang
+
+ data, err :=  Payment.CheckAndUpdatePaymentStatusPaymentLink(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  PaymentStatusUpdateRequest | "Request body" 
+
+
+Use this API to perform continuous polling at intervals to check the status of payment until timeout.
+
+*Success Response:*
+
+
+
+Success. Returns the status of payment. Check the example shown below or refer `PaymentStatusUpdateResponse` for more details.
+
+
+Schema: `PaymentStatusUpdateResponse`
 
 
 
@@ -18246,269 +18693,6 @@ Success, the code is valid and returns a session token
 
 
 Schema: `ResponseVerifyOTPShipment`
-
-
-
-
-
-
-
-
-
----
-
-
-
----
-
-
-## Rewards
-
-
-#### getOfferByName
-Get offer by name
-
-```golang
-
- data, err :=  Rewards.GetOfferByName(Name);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| Name | string | The name given to the offer. | 
-
-
-
-
-Use this API to get the offer details and configuration by entering the name of the offer.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `Offer` for more details.
-
-
-Schema: `Offer`
-
-
-
-
-
-
-
-
-
----
-
-
-#### catalogueOrder
-Get all transactions of reward points
-
-```golang
-
- data, err :=  Rewards.CatalogueOrder(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  CatalogueOrderRequest | "Request body" 
-
-
-Use this API to evaluate the amount of reward points that could be earned on any catalogue product.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `CatalogueOrderResponse` for more details.
-
-
-Schema: `CatalogueOrderResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getUserPointsHistory
-Get all transactions of reward points
-
-```golang
-
- data, err :=  Rewards.GetUserPointsHistory(xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-
-| xQuery | struct | Includes properties such as `PageID`, `PageSize`
-
-
-
-Use this API to get a list of points transactions.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `PointsHistoryResponse` for more details.
-
-
-Schema: `PointsHistoryResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getUserPoints
-Get referral details of a user
-
-```golang
-
- data, err :=  Rewards.GetUserPoints();
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-Use this API to retrieve total available points of a user for current application
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `PointsResponse` for more details.
-
-
-Schema: `PointsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getUserReferralDetails
-Get referral details of a user
-
-```golang
-
- data, err :=  Rewards.GetUserReferralDetails();
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-Use this API to retrieve the referral details a user has configured in the application.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `ReferralDetailsResponse` for more details.
-
-
-Schema: `ReferralDetailsResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getOrderDiscount
-Calculates the discount on order-amount
-
-```golang
-
- data, err :=  Rewards.GetOrderDiscount(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  OrderDiscountRequest | "Request body" 
-
-
-Use this API to calculate the discount on order-amount based on all the amount range configured in order_discount.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `OrderDiscountResponse` for more details.
-
-
-Schema: `OrderDiscountResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### redeemReferralCode
-Redeems a referral code and credits reward points to users
-
-```golang
-
- data, err :=  Rewards.RedeemReferralCode(body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| body |  RedeemReferralCodeRequest | "Request body" 
-
-
-Use this API to enter a referral code following which, the configured points would be credited to a user's reward points account.
-
-*Success Response:*
-
-
-
-Success. Check example below or refer `RedeemReferralCodeResponse` for more details.
-
-
-Schema: `RedeemReferralCodeResponse`
 
 
 
@@ -22723,30 +22907,127 @@ Cart Merged/Replaced
 ## Logistic
 
 
-#### getTatProduct
-Get TAT of a product
+#### getPincodeCity
+Get Pincode API
 
 ```golang
 
- data, err :=  Logistic.GetTatProduct(body);
+ data, err :=  Logistic.GetPincodeCity(Pincode);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| body |  GetTatProductReqBody | "Request body" 
+| Pincode | string | A `pincode` contains a specific address of a location. | 
 
 
-Use this API to know the delivery turnaround time (TAT) by entering the product details along with the PIN Code of the location.
+
+
+Get pincode data
 
 *Success Response:*
 
 
 
-Success. Check the example shown below or refer `GetTatProductResponse` for more details.
+Get pincode data
 
 
-Schema: `GetTatProductResponse`
+Schema: `PincodeApiResponse`
+
+
+*Examples:*
+
+
+Pincode data found
+```json
+{
+  "value": {
+    "data": [
+      {
+        "sub_type": "pincode",
+        "name": "421202",
+        "error": {
+          "type": null,
+          "value": null,
+          "message": null
+        },
+        "uid": "pincode:INDIA|MAHARASHTRA|MUMBAI|421202",
+        "display_name": "421202",
+        "meta": {
+          "zone": "West",
+          "internal_zone_id": 4
+        },
+        "meta_code": {
+          "country_code": "IND",
+          "isd_code": "+91"
+        },
+        "parents": [
+          {
+            "sub_type": "country",
+            "name": "India",
+            "display_name": "India",
+            "uid": "country:INDIA"
+          },
+          {
+            "sub_type": "state",
+            "name": "Maharashtra",
+            "display_name": "Maharashtra",
+            "uid": "state:INDIA|MAHARASHTRA"
+          },
+          {
+            "sub_type": "city",
+            "name": "Thane",
+            "display_name": "Thane",
+            "uid": "city:INDIA|MAHARASHTRA|MUMBAI"
+          }
+        ],
+        "lat_long": {
+          "type": "Point",
+          "coordinates": [
+            3.8858955,
+            7.2272335
+          ]
+        }
+      }
+    ],
+    "request_uuid": "fce9f431215e71c9ee0e86e792ae1dce4",
+    "stormbreaker_uuid": "56cca764-9fab-41f4-adb8-6e9683532aa5",
+    "error": {
+      "type": null,
+      "value": null,
+      "message": null
+    },
+    "success": true
+  }
+}
+```
+
+Pincode not found
+```json
+{
+  "value": {
+    "data": [
+      {
+        "sub_type": "pincode",
+        "name": "999999",
+        "error": {
+          "type": "DoesNotExist",
+          "value": "999999",
+          "message": "pincode 999999 does not exist"
+        }
+      }
+    ],
+    "request_uuid": "fce9fb9215e71c9ee0e86e792ae1dce4",
+    "stormbreaker_uuid": "03b353ed-9dbd-4629-80b2-2be337859a20",
+    "error": {
+      "type": null,
+      "value": null,
+      "message": null
+    },
+    "success": false
+  }
+}
+```
 
 
 
@@ -22759,32 +23040,244 @@ Schema: `GetTatProductResponse`
 ---
 
 
-#### getPincodeCity
-Get city from PIN Code
+#### getTatProduct
+Get TAT API
 
 ```golang
 
- data, err :=  Logistic.GetPincodeCity(Pincode);
+ data, err :=  Logistic.GetTatProduct(body);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Pincode | string | The PIN Code of the area, e.g. 400059 | 
+| body |  TATViewRequest | "Request body" 
 
 
-
-
-Use this API to retrieve a city by its PIN Code.
+Get TAT data
 
 *Success Response:*
 
 
 
-Success. Returns a JSON object containing the city name, state and country identified by its PIN Code. Check the example shown below or refer `GetPincodeCityResponse` for more details.
+Get TAT  data
 
 
-Schema: `GetPincodeCityResponse`
+Schema: `TATViewResponse`
+
+
+*Examples:*
+
+
+Pincode data found
+```json
+{
+  "value": {
+    "source": "FYND-APP",
+    "identifier": "PDP",
+    "journey": "forward",
+    "action": "get_tat",
+    "to_pincode": "143001",
+    "location_details": [
+      {
+        "fulfillment_id": 8,
+        "from_pincode": "560023",
+        "articles": [
+          {
+            "category": {
+              "level": "l3",
+              "id": 155
+            },
+            "manufacturing_time": 2,
+            "manufacturing_time_unit": "days",
+            "promise": {
+              "timestamp": {
+                "min": 1663564548,
+                "max": 1663650948
+              },
+              "formatted": {
+                "min": "19 Sep, Monday",
+                "max": "20 Sep, Tuesday"
+              }
+            },
+            "error": {
+              "type": null,
+              "value": null,
+              "message": null
+            },
+            "is_cod_available": true,
+            "_manufacturing_time_seconds": 172800
+          }
+        ]
+      }
+    ],
+    "request_uuid": "b4adf5508e34f17971817c3581e16310",
+    "stormbreaker_uuid": "4b8084d4-ea74-45af-8ddc-c38e29bf0cfb",
+    "error": {
+      "type": null,
+      "value": null,
+      "message": null
+    },
+    "to_city": "Amritsar",
+    "payment_mode": "prepaid",
+    "is_cod_available": true,
+    "success": true
+  }
+}
+```
+
+Pincode not found
+```json
+{
+  "value": {
+    "source": "FYND-APP",
+    "identifier": "PDP",
+    "journey": "forward",
+    "action": "get_tat",
+    "to_pincode": "99999",
+    "location_details": [
+      {
+        "fulfillment_id": 8,
+        "from_pincode": "560023",
+        "articles": [
+          {
+            "category": {
+              "level": "l3",
+              "id": 155
+            },
+            "manufacturing_time": 2,
+            "manufacturing_time_unit": "days",
+            "promise": null,
+            "error": {
+              "type": "ValueError",
+              "value": "99999",
+              "message": "We are not delivering to 99999"
+            }
+          }
+        ]
+      }
+    ],
+    "request_uuid": "4b99d15fddb2b9fc2d6ab99a1c933010",
+    "stormbreaker_uuid": "6a847909-1d59-43e7-9ae0-15f5de8fc7d7",
+    "error": {
+      "type": "ValueError",
+      "value": "99999",
+      "message": "All of the items in your cart are not deliverable to 99999"
+    },
+    "to_city": "",
+    "payment_mode": "prepaid",
+    "is_cod_available": true,
+    "success": false
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAllCountries
+Get Country List
+
+```golang
+
+ data, err :=  Logistic.GetAllCountries();
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+
+Get all countries
+
+*Success Response:*
+
+
+
+Get Country List
+
+
+Schema: `CountryListResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPincodeZones
+GET zone from the Pincode.
+
+```golang
+
+ data, err :=  Logistic.GetPincodeZones(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  GetZoneFromPincodeViewRequest | "Request body" 
+
+
+This API returns zone from the Pincode View.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `GetZoneFromPincodeViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOptimalLocations
+GET zone from the Pincode.
+
+```golang
+
+ data, err :=  Logistic.GetOptimalLocations(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  ReAssignStoreRequest | "Request body" 
+
+
+This API returns zone from the Pincode View.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `ReAssignStoreResponse`
 
 
 
