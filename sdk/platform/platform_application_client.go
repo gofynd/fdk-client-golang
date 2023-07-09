@@ -7683,66 +7683,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetCampaignsPaginator Get campaigns  
-            func (co *PlatformAppCommunication)  GetCampaignsPaginator( xQuery PlatformAppGetCampaignsXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetCampaigns(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
@@ -8056,66 +7996,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetAudiencesPaginator Get audiences  
-            func (co *PlatformAppCommunication)  GetAudiencesPaginator( xQuery PlatformAppGetAudiencesXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetAudiences(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
@@ -8509,66 +8389,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetEmailProvidersPaginator Get email providers  
-            func (co *PlatformAppCommunication)  GetEmailProvidersPaginator( xQuery PlatformAppGetEmailProvidersXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetEmailProviders(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
@@ -8822,66 +8642,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetEmailTemplatesPaginator Get email templates  
-            func (co *PlatformAppCommunication)  GetEmailTemplatesPaginator( xQuery PlatformAppGetEmailTemplatesXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetEmailTemplates(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
@@ -9028,66 +8788,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetSystemEmailTemplatesPaginator Get system email templates  
-            func (co *PlatformAppCommunication)  GetSystemEmailTemplatesPaginator( xQuery PlatformAppGetSystemEmailTemplatesXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetSystemEmailTemplates(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
@@ -9458,66 +9158,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetEventSubscriptionsPaginator Get event subscriptions  
-            func (co *PlatformAppCommunication)  GetEventSubscriptionsPaginator( xQuery PlatformAppGetEventSubscriptionsXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetEventSubscriptions(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
@@ -9579,66 +9219,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetJobsPaginator Get jobs  
-            func (co *PlatformAppCommunication)  GetJobsPaginator( xQuery PlatformAppGetJobsXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetJobs(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
@@ -9761,66 +9341,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetJobLogsPaginator Get job logs  
-            func (co *PlatformAppCommunication)  GetJobLogsPaginator( xQuery PlatformAppGetJobLogsXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetJobLogs(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
@@ -9885,76 +9405,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetCommunicationLogsPaginator Get communication logs  
-            func (co *PlatformAppCommunication)  GetCommunicationLogsPaginator( xQuery PlatformAppGetCommunicationLogsXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("cursor")
-                
-                
-                 
-                 xQuery.PageID = paginator.NextID
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetCommunicationLogs(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
@@ -10146,66 +9596,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetSmsProvidersPaginator Get sms providers  
-            func (co *PlatformAppCommunication)  GetSmsProvidersPaginator( xQuery PlatformAppGetSmsProvidersXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetSmsProviders(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
@@ -10463,66 +9853,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetSmsTemplatesPaginator Get sms templates  
-            func (co *PlatformAppCommunication)  GetSmsTemplatesPaginator( xQuery PlatformAppGetSmsTemplatesXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetSmsTemplates(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
@@ -10824,66 +10154,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetSystemSystemTemplatesPaginator Get system sms templates  
-            func (co *PlatformAppCommunication)  GetSystemSystemTemplatesPaginator( xQuery PlatformAppGetSystemSystemTemplatesXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetSystemSystemTemplates(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
 
@@ -12196,6 +11466,77 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // UpdateSearchKeywords Update Search Keyword
+     func (ca *PlatformAppCatalog)  UpdateSearchKeywords(ID string, body  CreateSearchKeyword) (GetSearchWordsData, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateSearchKeywordsResponse GetSearchWordsData
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return GetSearchWordsData{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return GetSearchWordsData{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "put",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetSearchWordsData{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateSearchKeywordsResponse)
+        if err != nil {
+            return GetSearchWordsData{}, common.NewFDKError(err.Error())
+        }
+        return updateSearchKeywordsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // GetSearchKeywords Get a Search Keywords Details
      func (ca *PlatformAppCatalog)  GetSearchKeywords(ID string) (GetSearchWordsDetailResponse, error) {
         var (
@@ -12282,77 +11623,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return DeleteResponse{}, common.NewFDKError(err.Error())
         }
         return deleteSearchKeywordsResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // UpdateSearchKeywords Update Search Keyword
-     func (ca *PlatformAppCatalog)  UpdateSearchKeywords(ID string, body  CreateSearchKeyword) (GetSearchWordsData, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateSearchKeywordsResponse GetSearchWordsData
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return GetSearchWordsData{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return GetSearchWordsData{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "put",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/keyword/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetSearchWordsData{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateSearchKeywordsResponse)
-        if err != nil {
-            return GetSearchWordsData{}, common.NewFDKError(err.Error())
-        }
-        return updateSearchKeywordsResponse, nil
         
     }
            
@@ -12478,6 +11748,77 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // UpdateAutocompleteKeyword Create & Update Autocomplete Keyword
+     func (ca *PlatformAppCatalog)  UpdateAutocompleteKeyword(ID string, body  CreateAutocompleteKeyword) (GetAutocompleteWordsResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateAutocompleteKeywordResponse GetAutocompleteWordsResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "put",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateAutocompleteKeywordResponse)
+        if err != nil {
+            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
+        }
+        return updateAutocompleteKeywordResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // GetAutocompleteKeywordDetail Get a Autocomplete Keywords Details
      func (ca *PlatformAppCatalog)  GetAutocompleteKeywordDetail(ID string) (GetAutocompleteWordsResponse, error) {
         var (
@@ -12564,77 +11905,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return DeleteResponse{}, common.NewFDKError(err.Error())
         }
         return deleteAutocompleteKeywordResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // UpdateAutocompleteKeyword Create & Update Autocomplete Keyword
-     func (ca *PlatformAppCatalog)  UpdateAutocompleteKeyword(ID string, body  CreateAutocompleteKeyword) (GetAutocompleteWordsResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            updateAutocompleteKeywordResponse GetAutocompleteWordsResponse
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "put",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/search/autocomplete/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &updateAutocompleteKeywordResponse)
-        if err != nil {
-            return GetAutocompleteWordsResponse{}, common.NewFDKError(err.Error())
-        }
-        return updateAutocompleteKeywordResponse, nil
         
     }
            
@@ -13100,56 +12370,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteGroupConfiguration Delete configuration of the product config type of the application.
-     func (ca *PlatformAppCatalog)  DeleteGroupConfiguration(ConfigType string, GroupSlug string) (ConfigSuccessResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteGroupConfigurationResponse ConfigSuccessResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/application/%s/product-configuration/%s/groups/%s",ca.CompanyID, ca.ApplicationID, ConfigType, GroupSlug),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ConfigSuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteGroupConfigurationResponse)
-        if err != nil {
-            return ConfigSuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteGroupConfigurationResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // UpdateGroupConfiguration Update the group configurations for the application.
      func (ca *PlatformAppCatalog)  UpdateGroupConfiguration(ConfigType string, GroupSlug string, body  AppConfigurationDetail) (AppConfigurationDetail, error) {
         var (
@@ -13221,6 +12441,56 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return AppConfigurationDetail{}, common.NewFDKError(err.Error())
         }
         return updateGroupConfigurationResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteGroupConfiguration Delete configuration of the product config type of the application.
+     func (ca *PlatformAppCatalog)  DeleteGroupConfiguration(ConfigType string, GroupSlug string) (ConfigSuccessResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteGroupConfigurationResponse ConfigSuccessResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/application/%s/product-configuration/%s/groups/%s",ca.CompanyID, ca.ApplicationID, ConfigType, GroupSlug),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ConfigSuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteGroupConfigurationResponse)
+        if err != nil {
+            return ConfigSuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteGroupConfigurationResponse, nil
         
     }
            
@@ -13371,56 +12641,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteListingConfiguration Delete configuration for listings
-     func (ca *PlatformAppCatalog)  DeleteListingConfiguration(ConfigType string, ConfigID string) (ConfigSuccessResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteListingConfigurationResponse ConfigSuccessResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/application/%s/product-configuration/%s/item/%s/",ca.CompanyID, ca.ApplicationID, ConfigType, ConfigID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ConfigSuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteListingConfigurationResponse)
-        if err != nil {
-            return ConfigSuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteListingConfigurationResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // UpdateListingConfiguration Update configuration for listings
      func (ca *PlatformAppCatalog)  UpdateListingConfiguration(ConfigType string, ConfigID string, body  AppConfigurationsSort) (AppConfigurationsSort, error) {
         var (
@@ -13490,6 +12710,56 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return AppConfigurationsSort{}, common.NewFDKError(err.Error())
         }
         return updateListingConfigurationResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteListingConfiguration Delete configuration for listings
+     func (ca *PlatformAppCatalog)  DeleteListingConfiguration(ConfigType string, ConfigID string) (ConfigSuccessResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteListingConfigurationResponse ConfigSuccessResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/application/%s/product-configuration/%s/item/%s/",ca.CompanyID, ca.ApplicationID, ConfigType, ConfigID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ConfigSuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteListingConfigurationResponse)
+        if err != nil {
+            return ConfigSuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteListingConfigurationResponse, nil
         
     }
            
@@ -14198,54 +13468,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // DeleteCollection Delete a Collection
-     func (ca *PlatformAppCatalog)  DeleteCollection(ID string) (DeleteResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            deleteCollectionResponse DeleteResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "delete",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/collections/%s/",ca.CompanyID, ca.ApplicationID, ID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return DeleteResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &deleteCollectionResponse)
-        if err != nil {
-            return DeleteResponse{}, common.NewFDKError(err.Error())
-        }
-        return deleteCollectionResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // UpdateCollection Update a collection
      func (ca *PlatformAppCatalog)  UpdateCollection(ID string, body  UpdateCollection) (UpdateCollection, error) {
         var (
@@ -14343,6 +13565,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return UpdateCollection{}, common.NewFDKError(err.Error())
         }
         return updateCollectionResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteCollection Delete a Collection
+     func (ca *PlatformAppCatalog)  DeleteCollection(ID string) (DeleteResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteCollectionResponse DeleteResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/collections/%s/",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DeleteResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteCollectionResponse)
+        if err != nil {
+            return DeleteResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteCollectionResponse, nil
         
     }
            
