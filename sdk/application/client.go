@@ -3977,7 +3977,8 @@ func NewAppClient(config *AppConfig) *Client {
         ID string  `url:"id,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"` 
         AddressID string  `url:"address_id,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"`  
+        AreaCode string  `url:"area_code,omitempty"` 
+        OrderType string  `url:"order_type,omitempty"`  
     }
     
     // GetShipments Get delivery date and options before checkout
@@ -3992,6 +3993,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             
@@ -16672,194 +16675,6 @@ func NewAppClient(config *AppConfig) *Client {
             return ReAssignStoreResponse{}, common.NewFDKError(err.Error())
         }
          return getOptimalLocationsResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // GetCountries Get list of all countries API
-    func (lo *Logistic)  GetCountries() (GetCountries, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getCountriesResponse GetCountries
-	    )
-
-        
-
-        
-
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            lo.config,
-            "get",
-            "/service/application/logistics/v1.0/country",
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetCountries{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getCountriesResponse)
-        if err != nil {
-            return GetCountries{}, common.NewFDKError(err.Error())
-        }
-         return getCountriesResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // GetCountry Get single Country API
-    func (lo *Logistic)  GetCountry(UID string) (GetCountry, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getCountryResponse GetCountry
-	    )
-
-        
-
-        
-
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            lo.config,
-            "get",
-            fmt.Sprintf("/service/application/logistics/v1.0/country/%s",UID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetCountry{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getCountryResponse)
-        if err != nil {
-            return GetCountry{}, common.NewFDKError(err.Error())
-        }
-         return getCountryResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // GetLocalities Get Localities API
-    func (lo *Logistic)  GetLocalities(Region string) (GetLocalities, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getLocalitiesResponse GetLocalities
-	    )
-
-        
-
-        
-
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            lo.config,
-            "get",
-            fmt.Sprintf("/service/application/logistics/v1.0/locality/%s",Region),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetLocalities{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getLocalitiesResponse)
-        if err != nil {
-            return GetLocalities{}, common.NewFDKError(err.Error())
-        }
-         return getLocalitiesResponse, nil
-        
-    }
-          
-    
-    
-    
-  
-    
-    
-    // GetLocality Get Locality API
-    func (lo *Logistic)  GetLocality(Region string, Value string) (GetLocality, error){
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-             getLocalityResponse GetLocality
-	    )
-
-        
-
-        
-
-        
-        
-        
-        
-        
-    
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            lo.config,
-            "get",
-            fmt.Sprintf("/service/application/logistics/v1.0/locality/%s/%s",Region,Value),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return GetLocality{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getLocalityResponse)
-        if err != nil {
-            return GetLocality{}, common.NewFDKError(err.Error())
-        }
-         return getLocalityResponse, nil
         
     }
           

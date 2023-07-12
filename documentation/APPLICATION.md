@@ -336,10 +336,6 @@
     * [getAllCountries](#getallcountries)
     * [getPincodeZones](#getpincodezones)
     * [getOptimalLocations](#getoptimallocations)
-    * [getCountries](#getcountries)
-    * [getCountry](#getcountry)
-    * [getLocalities](#getlocalities)
-    * [getLocality](#getlocality)
     
 
 
@@ -4981,7 +4977,9 @@ Get delivery date and options before checkout
 
 
 
-| xQuery | struct | Includes properties such as `P`, `ID`, `BuyNow`, `AddressID`, `AreaCode`
+
+
+| xQuery | struct | Includes properties such as `P`, `ID`, `BuyNow`, `AddressID`, `AreaCode`, `OrderType`
 
 
 
@@ -32025,158 +32023,6 @@ Response status_code
 
 
 Schema: `ReAssignStoreResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getCountries
-Get list of all countries API
-
-```golang
-
- data, err :=  Logistic.GetCountries();
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-
-
-Get countries data
-
-*Success Response:*
-
-
-
-Get countries data
-
-
-Schema: `GetCountries`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getCountry
-Get single Country API
-
-```golang
-
- data, err :=  Logistic.GetCountry(UID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| UID | string | A `uid` contains a specific unique name of a region. | 
-
-
-
-
-Get country data
-
-*Success Response:*
-
-
-
-Get country data
-
-
-Schema: `GetCountry`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getLocalities
-Get Localities API
-
-```golang
-
- data, err :=  Logistic.GetLocalities(Region);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| Region | string | A `region` contains a specific unique name. | 
-
-
-
-
-Get Localities data
-
-*Success Response:*
-
-
-
-Get Localities data
-
-
-Schema: `GetLocalities`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getLocality
-Get Locality API
-
-```golang
-
- data, err :=  Logistic.GetLocality(Region, Value);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| Region | string | A `region` contains a specific unique name. | 
-
-
-| Value | string | A `value` contains a specific value of the region. | 
-
-
-
-
-Get Locality data
-
-*Success Response:*
-
-
-
-Get Locality data
-
-
-Schema: `GetLocality`
 
 
 
