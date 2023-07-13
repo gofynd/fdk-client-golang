@@ -2847,7 +2847,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         CustomMeta string  `url:"custom_meta,omitempty"` 
         OrderingChannel string  `url:"ordering_channel,omitempty"` 
         CompanyAffiliateTag string  `url:"company_affiliate_tag,omitempty"` 
-        MyOrders bool  `url:"my_orders,omitempty"`  
+        MyOrders bool  `url:"my_orders,omitempty"` 
+        PlatformUserID string  `url:"platform_user_id,omitempty"`  
     }
     
 
@@ -2865,6 +2866,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
 
         
+            
+                
             
                 
             
@@ -10391,7 +10394,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         rawRequest = NewRequest(
             ca.Config,
             "post",
-            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/inventory/%s/",ca.CompanyID, ItemID, SellerIdentifier),
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/inventory/%s",ca.CompanyID, ItemID, SellerIdentifier),
             nil,
             nil,
             reqBody)
@@ -10464,7 +10467,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         rawRequest = NewRequest(
             ca.Config,
             "delete",
-            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/inventory/%s/",ca.CompanyID, ItemID, SellerIdentifier),
+            fmt.Sprintf("/service/platform/catalog/v2.0/company/%s/products/undefined/inventory/%s",ca.CompanyID, ItemID, SellerIdentifier),
             nil,
             nil,
             reqBody)
@@ -16402,58 +16405,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetZoneDataView Zone Data View of application.
-     func (se *PlatformServiceability)  GetZoneDataView(ZoneID string) (GetSingleZoneDataViewResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getZoneDataViewResponse GetSingleZoneDataViewResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            se.Config,
-            "get",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/zone/%s",se.CompanyID, ZoneID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return GetSingleZoneDataViewResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getZoneDataViewResponse)
-        if err != nil {
-             return GetSingleZoneDataViewResponse{}, common.NewFDKError(err.Error())
-        }
-        return getZoneDataViewResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
     // UpdateZoneControllerView Updation of zone collections in database.
      func (se *PlatformServiceability)  UpdateZoneControllerView(ZoneID string, body  ZoneUpdateRequest) (ZoneSuccessResponse, error){
         
@@ -16510,6 +16461,58 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return ZoneSuccessResponse{}, common.NewFDKError(err.Error())
         }
         return updateZoneControllerViewResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetZoneDataView Zone Data View of application.
+     func (se *PlatformServiceability)  GetZoneDataView(ZoneID string) (GetSingleZoneDataViewResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getZoneDataViewResponse GetSingleZoneDataViewResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.Config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/zone/%s",se.CompanyID, ZoneID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return GetSingleZoneDataViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getZoneDataViewResponse)
+        if err != nil {
+             return GetSingleZoneDataViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return getZoneDataViewResponse, nil
         
     }
          
@@ -16997,58 +17000,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetDpRules Fetching of DpRules from database.
-     func (se *PlatformServiceability)  GetDpRules(RuleUID string) (DpRuleSuccessResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getDpRulesResponse DpRuleSuccessResponse
-	    )
-
-        
-
-        
-
-        
-        
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            se.Config,
-            "get",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/courier/rules/%s",se.CompanyID, RuleUID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return DpRuleSuccessResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getDpRulesResponse)
-        if err != nil {
-             return DpRuleSuccessResponse{}, common.NewFDKError(err.Error())
-        }
-        return getDpRulesResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
     // UpdateDpRule Updating of DpRules from database.
      func (se *PlatformServiceability)  UpdateDpRule(RuleUID string, body  DpRulesUpdateRequest) (DpRuleUpdateSuccessResponse, error){
         
@@ -17109,6 +17060,58 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return DpRuleUpdateSuccessResponse{}, common.NewFDKError(err.Error())
         }
         return updateDpRuleResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetDpRules Fetching of DpRules from database.
+     func (se *PlatformServiceability)  GetDpRules(RuleUID string) (DpRuleSuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getDpRulesResponse DpRuleSuccessResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.Config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/courier/rules/%s",se.CompanyID, RuleUID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return DpRuleSuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getDpRulesResponse)
+        if err != nil {
+             return DpRuleSuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return getDpRulesResponse, nil
         
     }
          
@@ -17257,56 +17260,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetDpCompanyRules Get All DpCompanyRules applied to company from database.
-     func (se *PlatformServiceability)  GetDpCompanyRules() (DPCompanyRuleResponse, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getDpCompanyRulesResponse DPCompanyRuleResponse
-	    )
-
-        
-
-        
-
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            se.Config,
-            "get",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/courier/priority",se.CompanyID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return DPCompanyRuleResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getDpCompanyRulesResponse)
-        if err != nil {
-             return DPCompanyRuleResponse{}, common.NewFDKError(err.Error())
-        }
-        return getDpCompanyRulesResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
-
-
     // UpsertDpCompanyRules Upsert of DpCompanyRules in database.
      func (se *PlatformServiceability)  UpsertDpCompanyRules(body  DPCompanyRuleRequest) (DPCompanyRuleResponse, error){
         
@@ -17359,6 +17312,56 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return DPCompanyRuleResponse{}, common.NewFDKError(err.Error())
         }
         return upsertDpCompanyRulesResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetDpCompanyRules Get All DpCompanyRules applied to company from database.
+     func (se *PlatformServiceability)  GetDpCompanyRules() (DPCompanyRuleResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getDpCompanyRulesResponse DPCompanyRuleResponse
+	    )
+
+        
+
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.Config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/courier/priority",se.CompanyID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return DPCompanyRuleResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getDpCompanyRulesResponse)
+        if err != nil {
+             return DPCompanyRuleResponse{}, common.NewFDKError(err.Error())
+        }
+        return getDpCompanyRulesResponse, nil
         
     }
          

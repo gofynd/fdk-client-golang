@@ -361,8 +361,8 @@
     * [createSizeGuide](#createsizeguide)
     * [updateSizeGuide](#updatesizeguide)
     * [getSizeGuide](#getsizeguide)
-    * [updateAppProduct](#updateappproduct)
     * [getAppProduct](#getappproduct)
+    * [updateAppProduct](#updateappproduct)
     * [getConfigurationMetadata](#getconfigurationmetadata)
     * [getGroupConfigurations](#getgroupconfigurations)
     * [createGroupConfiguration](#creategroupconfiguration)
@@ -698,8 +698,8 @@
     * [getEntityRegionView](#getentityregionview)
     * [getListView](#getlistview)
     * [getCompanyStoreView](#getcompanystoreview)
-    * [getZoneDataView](#getzonedataview)
     * [updateZoneControllerView](#updatezonecontrollerview)
+    * [getZoneDataView](#getzonedataview)
     * [createZone](#createzone)
     * [getZoneFromPincodeView](#getzonefrompincodeview)
     * [getZonesFromApplicationIdView](#getzonesfromapplicationidview)
@@ -715,16 +715,16 @@
     * [updatePincodeAuditHistory](#updatepincodeaudithistory)
     * [upsertDpAccount](#upsertdpaccount)
     * [getDpAccount](#getdpaccount)
-    * [getDpRules](#getdprules)
     * [updateDpRule](#updatedprule)
+    * [getDpRules](#getdprules)
     * [upsertDpRules](#upsertdprules)
     * [getDpRuleInsert](#getdpruleinsert)
-    * [getDpCompanyRules](#getdpcompanyrules)
     * [upsertDpCompanyRules](#upsertdpcompanyrules)
-    * [getDpApplicationRules](#getdpapplicationrules)
+    * [getDpCompanyRules](#getdpcompanyrules)
     * [upsertDpApplicationRules](#upsertdpapplicationrules)
-    * [getApplicationServiceabilitySelfShipment](#getapplicationserviceabilityselfshipment)
+    * [getDpApplicationRules](#getdpapplicationrules)
     * [patchApplicationServiceabilitySelfShipment](#patchapplicationserviceabilityselfshipment)
+    * [getApplicationServiceabilitySelfShipment](#getapplicationserviceabilityselfshipment)
     
 
 * [Finance](#Finance)
@@ -54119,7 +54119,9 @@ data, err := Order.GetShipments(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `Lane`, `BagStatus`, `StatusOverrideLane`, `TimeToDispatch`, `SearchType`, `SearchValue`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PageNo`, `PageSize`, `FetchActiveShipment`, `ExcludeLockedShipments`, `PaymentMethods`, `ChannelShipmentID`, `ChannelOrderID`, `CustomMeta`, `OrderingChannel`, `CompanyAffiliateTag`, `MyOrders`
+
+
+| xQuery | struct | Includes properties such as `Lane`, `BagStatus`, `StatusOverrideLane`, `TimeToDispatch`, `SearchType`, `SearchValue`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PageNo`, `PageSize`, `FetchActiveShipment`, `ExcludeLockedShipments`, `PaymentMethods`, `ChannelShipmentID`, `ChannelOrderID`, `CustomMeta`, `OrderingChannel`, `CompanyAffiliateTag`, `MyOrders`, `PlatformUserID`
 
 
 
@@ -56606,6 +56608,49 @@ Schema: `SizeGuideResponse`
 ---
 
 
+#### getAppProduct
+Get company application product data.
+
+```golang
+
+data, err := Catalog.GetAppProduct(CompanyID, ApplicationID, ItemID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| ItemID | string | product id for a particular product. | 
+
+
+
+Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
+
+*Success Response:*
+
+
+
+The Company Applicaton Product Data(MOQ/SEO).
+
+
+Schema: `OwnerAppItemResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### updateAppProduct
 Update a single custom meta.
 
@@ -56638,49 +56683,6 @@ Returns a success response
 
 
 Schema: `SuccessResponse1`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getAppProduct
-Get company application product data.
-
-```golang
-
-data, err := Catalog.GetAppProduct(CompanyID, ApplicationID, ItemID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
-
-
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
-
-
-| ItemID | string | product id for a particular product. | 
-
-
-
-Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
-
-*Success Response:*
-
-
-
-The Company Applicaton Product Data(MOQ/SEO).
-
-
-Schema: `OwnerAppItemResponse`
 
 
 
@@ -76051,46 +76053,6 @@ Schema: `CompanyStoreView_Response`
 ---
 
 
-#### getZoneDataView
-Zone Data View of application.
-
-```golang
-
-data, err := Serviceability.GetZoneDataView(CompanyID, ZoneID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
-
-
-
-This API returns Zone Data View of the application.
-
-*Success Response:*
-
-
-
-Get Application Zone Data
-
-
-Schema: `GetSingleZoneDataViewResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateZoneControllerView
 Updation of zone collections in database.
 
@@ -76120,6 +76082,46 @@ Response status_code
 
 
 Schema: `ZoneSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getZoneDataView
+Zone Data View of application.
+
+```golang
+
+data, err := Serviceability.GetZoneDataView(CompanyID, ZoneID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
+
+
+
+This API returns Zone Data View of the application.
+
+*Success Response:*
+
+
+
+Get Application Zone Data
+
+
+Schema: `GetSingleZoneDataViewResponse`
 
 
 
@@ -76763,46 +76765,6 @@ Schema: `CompanyDpAccountListResponse`
 ---
 
 
-#### getDpRules
-Fetching of DpRules from database.
-
-```golang
-
-data, err := Serviceability.GetDpRules(CompanyID, RuleUID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-| RuleUID | string | A `rule_uid` is a unique identifier for a particular Dp. | 
-
-
-
-This API returns response of DpRules from mongo database.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `DpRuleSuccessResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### updateDpRule
 Updating of DpRules from database.
 
@@ -76832,6 +76794,46 @@ Response status_code
 
 
 Schema: `DpRuleUpdateSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDpRules
+Fetching of DpRules from database.
+
+```golang
+
+data, err := Serviceability.GetDpRules(CompanyID, RuleUID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| RuleUID | string | A `rule_uid` is a unique identifier for a particular Dp. | 
+
+
+
+This API returns response of DpRules from mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `DpRuleSuccessResponse`
 
 
 
@@ -76924,43 +76926,6 @@ Schema: `DpMultipleRuleSuccessResponse`
 ---
 
 
-#### getDpCompanyRules
-Get All DpCompanyRules applied to company from database.
-
-```golang
-
-data, err := Serviceability.GetDpCompanyRules(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
-
-
-
-This API returns response of all DpCompanyRules from mongo database.
-
-*Success Response:*
-
-
-
-Response status_code
-
-
-Schema: `DPCompanyRuleResponse`
-
-
-
-
-
-
-
-
-
----
-
-
 #### upsertDpCompanyRules
 Upsert of DpCompanyRules in database.
 
@@ -76999,12 +76964,12 @@ Schema: `DPCompanyRuleResponse`
 ---
 
 
-#### getDpApplicationRules
-Get All DpApplicationRules rules added at application level from database.
+#### getDpCompanyRules
+Get All DpCompanyRules applied to company from database.
 
 ```golang
 
-data, err := Serviceability.GetDpApplicationRules(CompanyID, ApplicationID);
+data, err := Serviceability.GetDpCompanyRules(CompanyID);
 ```
 
 | Argument  |  Type  | Description |
@@ -77013,11 +76978,8 @@ data, err := Serviceability.GetDpApplicationRules(CompanyID, ApplicationID);
 | CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
 
 
-| ApplicationID | string | A `application_id` is a unique identifier for a particular application channel. | 
 
-
-
-This API returns response of all rules of DpApplicationRules from mongo database.
+This API returns response of all DpCompanyRules from mongo database.
 
 *Success Response:*
 
@@ -77026,7 +76988,7 @@ This API returns response of all rules of DpApplicationRules from mongo database
 Response status_code
 
 
-Schema: `DPApplicationRuleResponse`
+Schema: `DPCompanyRuleResponse`
 
 
 
@@ -77080,34 +77042,34 @@ Schema: `DPApplicationRuleResponse`
 ---
 
 
-#### getApplicationServiceabilitySelfShipment
-Self-ship configuration of application.
+#### getDpApplicationRules
+Get All DpApplicationRules rules added at application level from database.
 
 ```golang
 
-data, err := Serviceability.GetApplicationServiceabilitySelfShipment(CompanyID, ApplicationID);
+data, err := Serviceability.GetDpApplicationRules(CompanyID, ApplicationID);
 ```
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
 
 
-| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+| ApplicationID | string | A `application_id` is a unique identifier for a particular application channel. | 
 
 
 
-This API returns Self-ship configuration of the application.
+This API returns response of all rules of DpApplicationRules from mongo database.
 
 *Success Response:*
 
 
 
-Response Data
+Response status_code
 
 
-Schema: `ApplicationSelfShipConfigResponse`
+Schema: `DPApplicationRuleResponse`
 
 
 
@@ -77140,6 +77102,46 @@ data, err := Serviceability.PatchApplicationServiceabilitySelfShipment(CompanyID
 | body |  SelfShipResponse | "Request body" 
 
 This API updates Self-ship configuration of the application.
+
+*Success Response:*
+
+
+
+Response Data
+
+
+Schema: `ApplicationSelfShipConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getApplicationServiceabilitySelfShipment
+Self-ship configuration of application.
+
+```golang
+
+data, err := Serviceability.GetApplicationServiceabilitySelfShipment(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+
+This API returns Self-ship configuration of the application.
 
 *Success Response:*
 

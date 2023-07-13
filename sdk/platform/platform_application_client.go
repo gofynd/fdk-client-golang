@@ -13323,6 +13323,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // GetAppProduct Get company application product data.
+     func (ca *PlatformAppCatalog)  GetAppProduct(ItemID string) (OwnerAppItemResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAppProductResponse OwnerAppItemResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "get",
+            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product/%s/",ca.CompanyID, ca.ApplicationID, ItemID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return OwnerAppItemResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAppProductResponse)
+        if err != nil {
+            return OwnerAppItemResponse{}, common.NewFDKError(err.Error())
+        }
+        return getAppProductResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // UpdateAppProduct Update a single custom meta.
      func (ca *PlatformAppCatalog)  UpdateAppProduct(ItemID string, body  ApplicationItemMeta) (SuccessResponse1, error) {
         var (
@@ -13388,54 +13436,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return SuccessResponse1{}, common.NewFDKError(err.Error())
         }
         return updateAppProductResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetAppProduct Get company application product data.
-     func (ca *PlatformAppCatalog)  GetAppProduct(ItemID string) (OwnerAppItemResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAppProductResponse OwnerAppItemResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            ca.config,
-            "get",
-            fmt.Sprintf("/service/platform/catalog/v1.0/company/%s/application/%s/product/%s/",ca.CompanyID, ca.ApplicationID, ItemID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return OwnerAppItemResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAppProductResponse)
-        if err != nil {
-            return OwnerAppItemResponse{}, common.NewFDKError(err.Error())
-        }
-        return getAppProductResponse, nil
         
     }
            
@@ -25502,52 +25502,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetDpApplicationRules Get All DpApplicationRules rules added at application level from database.
-     func (se *PlatformAppServiceability)  GetDpApplicationRules() (DPApplicationRuleResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getDpApplicationRulesResponse DPApplicationRuleResponse
-	    )
-
-        
-
-         
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            se.config,
-            "get",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/courier/priority",se.CompanyID, se.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return DPApplicationRuleResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getDpApplicationRulesResponse)
-        if err != nil {
-            return DPApplicationRuleResponse{}, common.NewFDKError(err.Error())
-        }
-        return getDpApplicationRulesResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
     // UpsertDpApplicationRules Upsert of DpApplicationRules in database.
      func (se *PlatformAppServiceability)  UpsertDpApplicationRules(body  DPApplicationRuleRequest) (DPApplicationRuleResponse, error) {
         var (
@@ -25609,13 +25563,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetApplicationServiceabilitySelfShipment Self-ship configuration of application.
-     func (se *PlatformAppServiceability)  GetApplicationServiceabilitySelfShipment() (ApplicationSelfShipConfigResponse, error) {
+    // GetDpApplicationRules Get All DpApplicationRules rules added at application level from database.
+     func (se *PlatformAppServiceability)  GetDpApplicationRules() (DPApplicationRuleResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getApplicationServiceabilitySelfShipmentResponse ApplicationSelfShipConfigResponse
+            getDpApplicationRulesResponse DPApplicationRuleResponse
 	    )
 
         
@@ -25631,20 +25585,20 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             se.config,
             "get",
-            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/selfship",se.CompanyID, se.ApplicationID),
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/courier/priority",se.CompanyID, se.ApplicationID),
             nil,
             nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ApplicationSelfShipConfigResponse{}, err
+            return DPApplicationRuleResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getApplicationServiceabilitySelfShipmentResponse)
+        err = json.Unmarshal(response, &getDpApplicationRulesResponse)
         if err != nil {
-            return ApplicationSelfShipConfigResponse{}, common.NewFDKError(err.Error())
+            return DPApplicationRuleResponse{}, common.NewFDKError(err.Error())
         }
-        return getApplicationServiceabilitySelfShipmentResponse, nil
+        return getDpApplicationRulesResponse, nil
         
     }
            
@@ -25708,6 +25662,52 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return ApplicationSelfShipConfigResponse{}, common.NewFDKError(err.Error())
         }
         return patchApplicationServiceabilitySelfShipmentResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetApplicationServiceabilitySelfShipment Self-ship configuration of application.
+     func (se *PlatformAppServiceability)  GetApplicationServiceabilitySelfShipment() (ApplicationSelfShipConfigResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getApplicationServiceabilitySelfShipmentResponse ApplicationSelfShipConfigResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/selfship",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationSelfShipConfigResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getApplicationServiceabilitySelfShipmentResponse)
+        if err != nil {
+            return ApplicationSelfShipConfigResponse{}, common.NewFDKError(err.Error())
+        }
+        return getApplicationServiceabilitySelfShipmentResponse, nil
         
     }
            
