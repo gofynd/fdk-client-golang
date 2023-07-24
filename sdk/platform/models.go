@@ -1541,7 +1541,7 @@ package platform
     type PromotionsResponse struct {
 
         
-            Items PromotionListItem  `json:"items"`
+            Items []PromotionListItem  `json:"items"`
             Page Page  `json:"page"`
          
     }
