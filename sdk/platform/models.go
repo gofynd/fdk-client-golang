@@ -10962,7 +10962,7 @@ package platform
             Address InformationAddress  `json:"address"`
             Support InformationSupport  `json:"support"`
             SocialLinks SocialLinks  `json:"social_links"`
-            Links Links  `json:"links"`
+            Links []Links  `json:"links"`
             CopyrightText string  `json:"copyright_text"`
             ID string  `json:"_id"`
             BusinessHighlights BusinessHighlights  `json:"business_highlights"`
@@ -10979,7 +10979,7 @@ package platform
         
             Loc string  `json:"loc"`
             AddressLine []string  `json:"address_line"`
-            Phone InformationPhone  `json:"phone"`
+            Phone []InformationPhone  `json:"phone"`
             City string  `json:"city"`
             Country string  `json:"country"`
             Pincode float64  `json:"pincode"`
@@ -18592,17 +18592,64 @@ package platform
          
     }
     
+    // PayoutCustomer used by Payment
+    type PayoutCustomer struct {
+
+        
+            UniqueExternalID string  `json:"unique_external_id"`
+            Mobile string  `json:"mobile"`
+            Name string  `json:"name"`
+            Email string  `json:"email"`
+            ID float64  `json:"id"`
+         
+    }
+    
+    // PayoutMoreAttributes used by Payment
+    type PayoutMoreAttributes struct {
+
+        
+            BranchName string  `json:"branch_name"`
+            City string  `json:"city"`
+            AccountNo string  `json:"account_no"`
+            Country string  `json:"country"`
+            State string  `json:"state"`
+            AccountHolder string  `json:"account_holder"`
+            IfscCode string  `json:"ifsc_code"`
+            AccountType string  `json:"account_type"`
+            BankName string  `json:"bank_name"`
+         
+    }
+    
+    // PayoutAggregator used by Payment
+    type PayoutAggregator struct {
+
+        
+            AggregatorID float64  `json:"aggregator_id"`
+            AggregatorFundID float64  `json:"aggregator_fund_id"`
+            PayoutDetailsID float64  `json:"payout_details_id"`
+         
+    }
+    
+    // Payout used by Payment
+    type Payout struct {
+
+        
+            Customers PayoutCustomer  `json:"customers"`
+            MoreAttributes PayoutMoreAttributes  `json:"more_attributes"`
+            IsDefault bool  `json:"is_default"`
+            PayoutsAggregators []PayoutAggregator  `json:"payouts_aggregators"`
+            UniqueTransferNo string  `json:"unique_transfer_no"`
+            IsActive bool  `json:"is_active"`
+            TransferType string  `json:"transfer_type"`
+         
+    }
+    
     // PayoutsResponse used by Payment
     type PayoutsResponse struct {
 
         
-            MoreAttributes map[string]interface{}  `json:"more_attributes"`
-            Customers map[string]interface{}  `json:"customers"`
-            UniqueTransferNo map[string]interface{}  `json:"unique_transfer_no"`
-            IsDefault bool  `json:"is_default"`
-            IsActive bool  `json:"is_active"`
-            TransferType string  `json:"transfer_type"`
-            PayoutsAggregators []map[string]interface{}  `json:"payouts_aggregators"`
+            Success bool  `json:"success"`
+            Items []Payout  `json:"items"`
          
     }
     
