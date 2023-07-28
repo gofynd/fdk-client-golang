@@ -1678,6 +1678,95 @@ package platform
          
     }
     
+    // Article used by Cart
+    type Article struct {
+
+        
+            Meta map[string]interface{}  `json:"meta"`
+            ArticleID string  `json:"article_id"`
+            Type string  `json:"type"`
+            Value float64  `json:"value"`
+            Code string  `json:"code"`
+         
+    }
+    
+    // Collection used by Cart
+    type Collection struct {
+
+        
+            RefundBy string  `json:"refund_by"`
+            CollectedBy string  `json:"collected_by"`
+         
+    }
+    
+    // PriceAdjustmentUpdate used by Cart
+    type PriceAdjustmentUpdate struct {
+
+        
+            ApplyExpiry string  `json:"apply_expiry"`
+            CartID string  `json:"cart_id"`
+            CartValue float64  `json:"cart_value"`
+            Meta map[string]interface{}  `json:"meta"`
+            Type string  `json:"type"`
+            Value float64  `json:"value"`
+            ArticleLevelDistribution bool  `json:"article_level_distribution"`
+            ArticleIds []Article  `json:"article_ids"`
+            ModifiedBy string  `json:"modified_by"`
+            IsAuthenticated bool  `json:"is_authenticated"`
+            AllowedRefund bool  `json:"allowed_refund"`
+            Message string  `json:"message"`
+            Collection Collection  `json:"collection"`
+         
+    }
+    
+    // PriceAdjustment used by Cart
+    type PriceAdjustment struct {
+
+        
+            ApplyExpiry string  `json:"apply_expiry"`
+            CartID string  `json:"cart_id"`
+            CartValue float64  `json:"cart_value"`
+            Meta map[string]interface{}  `json:"meta"`
+            Type string  `json:"type"`
+            Value float64  `json:"value"`
+            ArticleLevelDistribution bool  `json:"article_level_distribution"`
+            ArticleIds []Article  `json:"article_ids"`
+            ID string  `json:"id"`
+            IsAuthenticated bool  `json:"is_authenticated"`
+            AllowedRefund bool  `json:"allowed_refund"`
+            Message string  `json:"message"`
+            Collection Collection  `json:"collection"`
+         
+    }
+    
+    // PriceAdjustmentResponse used by Cart
+    type PriceAdjustmentResponse struct {
+
+        
+            Data PriceAdjustment  `json:"data"`
+         
+    }
+    
+    // PriceAdjustmentAdd used by Cart
+    type PriceAdjustmentAdd struct {
+
+        
+            ApplyExpiry string  `json:"apply_expiry"`
+            CartID string  `json:"cart_id"`
+            CartValue float64  `json:"cart_value"`
+            Meta map[string]interface{}  `json:"meta"`
+            Type string  `json:"type"`
+            CreatedBy string  `json:"created_by"`
+            Value float64  `json:"value"`
+            ArticleLevelDistribution bool  `json:"article_level_distribution"`
+            ArticleIds []Article  `json:"article_ids"`
+            IsAuthenticated bool  `json:"is_authenticated"`
+            AllowedRefund bool  `json:"allowed_refund"`
+            Message string  `json:"message"`
+            Collection Collection  `json:"collection"`
+         
+    }
+    
     // CartItem used by Cart
     type CartItem struct {
 
@@ -7409,6 +7498,10 @@ package platform
             ID string  `json:"_id"`
             DefaultCurrency LocationDefaultCurrency  `json:"default_currency"`
             DefaultLanguage LocationDefaultLanguage  `json:"default_language"`
+            StateCode string  `json:"state_code"`
+            CountryCode string  `json:"country_code"`
+            Latitude string  `json:"latitude"`
+            Longitude string  `json:"longitude"`
          
     }
     
@@ -10728,6 +10821,7 @@ package platform
             AppType string  `json:"app_type"`
             MobileLogo SecureUrl  `json:"mobile_logo"`
             Domain Domain  `json:"domain"`
+            Slug string  `json:"slug"`
          
     }
     
@@ -10868,7 +10962,7 @@ package platform
             Address InformationAddress  `json:"address"`
             Support InformationSupport  `json:"support"`
             SocialLinks SocialLinks  `json:"social_links"`
-            Links Links  `json:"links"`
+            Links []Links  `json:"links"`
             CopyrightText string  `json:"copyright_text"`
             ID string  `json:"_id"`
             BusinessHighlights BusinessHighlights  `json:"business_highlights"`
@@ -10885,7 +10979,7 @@ package platform
         
             Loc string  `json:"loc"`
             AddressLine []string  `json:"address_line"`
-            Phone InformationPhone  `json:"phone"`
+            Phone []InformationPhone  `json:"phone"`
             City string  `json:"city"`
             Country string  `json:"country"`
             Pincode float64  `json:"pincode"`
@@ -18498,17 +18592,64 @@ package platform
          
     }
     
+    // PayoutCustomer used by Payment
+    type PayoutCustomer struct {
+
+        
+            UniqueExternalID string  `json:"unique_external_id"`
+            Mobile string  `json:"mobile"`
+            Name string  `json:"name"`
+            Email string  `json:"email"`
+            ID float64  `json:"id"`
+         
+    }
+    
+    // PayoutMoreAttributes used by Payment
+    type PayoutMoreAttributes struct {
+
+        
+            BranchName string  `json:"branch_name"`
+            City string  `json:"city"`
+            AccountNo string  `json:"account_no"`
+            Country string  `json:"country"`
+            State string  `json:"state"`
+            AccountHolder string  `json:"account_holder"`
+            IfscCode string  `json:"ifsc_code"`
+            AccountType string  `json:"account_type"`
+            BankName string  `json:"bank_name"`
+         
+    }
+    
+    // PayoutAggregator used by Payment
+    type PayoutAggregator struct {
+
+        
+            AggregatorID float64  `json:"aggregator_id"`
+            AggregatorFundID float64  `json:"aggregator_fund_id"`
+            PayoutDetailsID float64  `json:"payout_details_id"`
+         
+    }
+    
+    // Payout used by Payment
+    type Payout struct {
+
+        
+            Customers PayoutCustomer  `json:"customers"`
+            MoreAttributes PayoutMoreAttributes  `json:"more_attributes"`
+            IsDefault bool  `json:"is_default"`
+            PayoutsAggregators []PayoutAggregator  `json:"payouts_aggregators"`
+            UniqueTransferNo string  `json:"unique_transfer_no"`
+            IsActive bool  `json:"is_active"`
+            TransferType string  `json:"transfer_type"`
+         
+    }
+    
     // PayoutsResponse used by Payment
     type PayoutsResponse struct {
 
         
-            MoreAttributes map[string]interface{}  `json:"more_attributes"`
-            Customers map[string]interface{}  `json:"customers"`
-            UniqueTransferNo map[string]interface{}  `json:"unique_transfer_no"`
-            IsDefault bool  `json:"is_default"`
-            IsActive bool  `json:"is_active"`
-            TransferType string  `json:"transfer_type"`
-            PayoutsAggregators []map[string]interface{}  `json:"payouts_aggregators"`
+            Success bool  `json:"success"`
+            Items []Payout  `json:"items"`
          
     }
     
