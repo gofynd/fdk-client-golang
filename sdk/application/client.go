@@ -1493,7 +1493,8 @@ func NewAppClient(config *AppConfig) *Client {
         ID string  `url:"id,omitempty"` 
         BuyNow bool  `url:"buy_now,omitempty"` 
         AddressID string  `url:"address_id,omitempty"` 
-        AreaCode string  `url:"area_code,omitempty"`  
+        AreaCode string  `url:"area_code,omitempty"` 
+        OrderType string  `url:"order_type,omitempty"`  
     }
     
     // GetShipments Get delivery date and options before checkout
@@ -1508,6 +1509,8 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
             
                 
             

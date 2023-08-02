@@ -1345,6 +1345,226 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // UpdatePriceAdjustment Update price adjustment configuration
+     func (ca *PlatformAppCart)  UpdatePriceAdjustment(ID string, body  PriceAdjustmentUpdate) (PriceAdjustmentResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updatePriceAdjustmentResponse PriceAdjustmentResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PriceAdjustmentResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PriceAdjustmentResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "put",
+            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/price-adjustment/%s",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PriceAdjustmentResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updatePriceAdjustmentResponse)
+        if err != nil {
+            return PriceAdjustmentResponse{}, common.NewFDKError(err.Error())
+        }
+        return updatePriceAdjustmentResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // RemovePriceAdjustment Remove price adjustment
+     func (ca *PlatformAppCart)  RemovePriceAdjustment(ID string) (SuccessMessage, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            removePriceAdjustmentResponse SuccessMessage
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "delete",
+            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/price-adjustment/%s",ca.CompanyID, ca.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return SuccessMessage{}, err
+	    }
+        
+        err = json.Unmarshal(response, &removePriceAdjustmentResponse)
+        if err != nil {
+            return SuccessMessage{}, common.NewFDKError(err.Error())
+        }
+        return removePriceAdjustmentResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // AddPriceAdjustment Create new price adjustment
+     func (ca *PlatformAppCart)  AddPriceAdjustment(body  PriceAdjustmentAdd) (PriceAdjustmentResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            addPriceAdjustmentResponse PriceAdjustmentResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PriceAdjustmentResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PriceAdjustmentResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            ca.config,
+            "post",
+            fmt.Sprintf("/service/platform/cart/v1.0/company/%s/application/%s/price-adjustment",ca.CompanyID, ca.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PriceAdjustmentResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &addPriceAdjustmentResponse)
+        if err != nil {
+            return PriceAdjustmentResponse{}, common.NewFDKError(err.Error())
+        }
+        return addPriceAdjustmentResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // FetchAndvalidateCartItems Fetch Cart Details
      func (ca *PlatformAppCart)  FetchAndvalidateCartItems(body  OpenapiCartDetailsRequest) (OpenapiCartDetailsResponse, error) {
         var (

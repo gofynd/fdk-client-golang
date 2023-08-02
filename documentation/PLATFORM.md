@@ -72,6 +72,9 @@
     * [updateCartMetaConfig](#updatecartmetaconfig)
     * [fetchCartMetaConfig](#fetchcartmetaconfig)
     * [createCartMetaConfig](#createcartmetaconfig)
+    * [updatePriceAdjustment](#updatepriceadjustment)
+    * [removePriceAdjustment](#removepriceadjustment)
+    * [addPriceAdjustment](#addpriceadjustment)
     * [fetchAndvalidateCartItems](#fetchandvalidatecartitems)
     * [checkCartServiceability](#checkcartserviceability)
     * [checkoutCart](#checkoutcart)
@@ -3583,6 +3586,134 @@ Cart Meta Config Created successfully
 
 
 Schema: `CartMetaConfigAdd`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updatePriceAdjustment
+Update price adjustment configuration
+
+```golang
+
+data, err := Cart.UpdatePriceAdjustment(CompanyID, ApplicationID, ID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current Application _id | 
+
+
+| ID | string |  | 
+
+
+| body |  PriceAdjustmentUpdate | "Request body" 
+
+Update price adjustment configuration
+
+*Success Response:*
+
+
+
+Price Adjustment Updated successfully
+
+
+Schema: `PriceAdjustmentResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### removePriceAdjustment
+Remove price adjustment
+
+```golang
+
+data, err := Cart.RemovePriceAdjustment(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current Application _id | 
+
+
+| ID | string |  | 
+
+
+
+Remove price adjustment
+
+*Success Response:*
+
+
+
+Price Adjustment data Removed successfully
+
+
+Schema: `SuccessMessage`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### addPriceAdjustment
+Create new price adjustment
+
+```golang
+
+data, err := Cart.AddPriceAdjustment(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Current company id | 
+
+
+| ApplicationID | string | Current Application _id | 
+
+
+| body |  PriceAdjustmentAdd | "Request body" 
+
+Create new price adjustment
+
+*Success Response:*
+
+
+
+Price Adjustment Created successfully
+
+
+Schema: `PriceAdjustmentResponse`
 
 
 
