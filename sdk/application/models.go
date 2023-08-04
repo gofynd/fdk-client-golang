@@ -1343,6 +1343,16 @@ package application
          
     }
     
+    // ProductSizesPrice ...
+    type ProductSizesPrice struct {
+
+        
+            Effective Price  `json:"effective"`
+            Marked Price  `json:"marked"`
+            Selling Price  `json:"selling"`
+         
+    }
+    
     // ProductDetail ...
     type ProductDetail struct {
 
@@ -1413,6 +1423,17 @@ package application
             Unit string  `json:"unit"`
             Shipping float64  `json:"shipping"`
             IsDefault bool  `json:"is_default"`
+         
+    }
+    
+    // DiscountMeta ...
+    type DiscountMeta struct {
+
+        
+            Timer bool  `json:"timer"`
+            StartTimerInMinutes float64  `json:"start_timer_in_minutes"`
+            Start string  `json:"start"`
+            End string  `json:"end"`
          
     }
     
@@ -1492,12 +1513,13 @@ package application
 
         
             Sizes []ProductSize  `json:"sizes"`
-            Price ProductListingPrice  `json:"price"`
+            Price ProductSizesPrice  `json:"price"`
             SizeChart SizeChart  `json:"size_chart"`
             Sellable bool  `json:"sellable"`
             MultiSize bool  `json:"multi_size"`
             Discount string  `json:"discount"`
             Stores ProductSizeStores  `json:"stores"`
+            DiscountMeta DiscountMeta  `json:"discount_meta"`
          
     }
     
@@ -2497,8 +2519,10 @@ package application
 
         
             Effective float64  `json:"effective"`
-            Currency string  `json:"currency"`
+            CurrencyCode string  `json:"currency_code"`
+            CurrencySymbol string  `json:"currency_symbol"`
             Marked float64  `json:"marked"`
+            Selling float64  `json:"selling"`
          
     }
     
@@ -2532,6 +2556,15 @@ package application
          
     }
     
+    // PromiseSchema ...
+    type PromiseSchema struct {
+
+        
+            Min string  `json:"min"`
+            Max string  `json:"max"`
+         
+    }
+    
     // ProductSizePriceResponseV3 ...
     type ProductSizePriceResponseV3 struct {
 
@@ -2549,6 +2582,7 @@ package application
             Set ProductSetV3  `json:"set"`
             SellerCount float64  `json:"seller_count"`
             PricePerPiece ProductStockPriceV3  `json:"price_per_piece"`
+            DiscountMeta DiscountMeta  `json:"discount_meta"`
             Discount string  `json:"discount"`
             LongLat []float64  `json:"long_lat"`
             SpecialBadge string  `json:"special_badge"`
@@ -2557,6 +2591,7 @@ package application
             Pincode float64  `json:"pincode"`
             MarketplaceAttributes []MarketPlaceSttributesSchemaV3  `json:"marketplace_attributes"`
             Seller SellerV3  `json:"seller"`
+            DeliveryPromise PromiseSchema  `json:"delivery_promise"`
          
     }
     
@@ -10251,6 +10286,7 @@ package application
             Action string  `json:"action"`
             Token string  `json:"token"`
             RegisterToken string  `json:"register_token"`
+            CaptchaCode string  `json:"captcha_code"`
          
     }
     

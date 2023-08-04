@@ -17792,7 +17792,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             fi.config,
             "post",
-            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/namespaces/%s/upload/start/",Namespace, fi.CompanyID, fi.ApplicationID),
+            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/namespaces/%s/upload/start",Namespace, fi.CompanyID, fi.ApplicationID),
             nil,
             nil,
             reqBody)
@@ -17873,7 +17873,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             fi.config,
             "post",
-            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/namespaces/%s/upload/complete/",Namespace, fi.CompanyID, fi.ApplicationID),
+            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/namespaces/%s/upload/complete",Namespace, fi.CompanyID, fi.ApplicationID),
             nil,
             nil,
             reqBody)
@@ -17907,16 +17907,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // AppCopyFiles Copy Files
-     func (fi *PlatformAppFileStorage)  AppCopyFiles(xQuery PlatformAppAppCopyFilesXQuery, body  BulkRequest) (BulkUploadResponse, error) {
+     func (fi *PlatformAppFileStorage)  AppCopyFiles(xQuery PlatformAppAppCopyFilesXQuery, body  CopyFiles) (BulkUploadSyncMode, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            appCopyFilesResponse BulkUploadResponse
+            appCopyFilesResponse BulkUploadSyncMode
 	    )
 
-        
-            
         
             
         
@@ -17939,30 +17937,30 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
             
-             return BulkUploadResponse{}, common.NewFDKError(err.Error())
+             return BulkUploadSyncMode{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
             
-             return BulkUploadResponse{}, common.NewFDKError(err.Error())       
+             return BulkUploadSyncMode{}, common.NewFDKError(err.Error())       
         }
         
         //API call
         rawRequest = NewRequest(
             fi.config,
             "post",
-            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/uploads/copy/",fi.CompanyID, fi.ApplicationID),
+            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/uploads/copy",fi.CompanyID, fi.ApplicationID),
             nil,
             xQuery,
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return BulkUploadResponse{}, err
+            return BulkUploadSyncMode{}, err
 	    }
         
         err = json.Unmarshal(response, &appCopyFilesResponse)
         if err != nil {
-            return BulkUploadResponse{}, common.NewFDKError(err.Error())
+            return BulkUploadSyncMode{}, common.NewFDKError(err.Error())
         }
         return appCopyFilesResponse, nil
         
@@ -17979,7 +17977,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     //PlatformAppAppbrowseXQuery holds query params
     type PlatformAppAppbrowseXQuery struct { 
-        PageNo float64  `url:"page_no,omitempty"`  
+        Page float64  `url:"page,omitempty"` 
+        Limit float64  `url:"limit,omitempty"`  
     }
     
     // Appbrowse Browse Files
@@ -17997,6 +17996,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             
                 
             
+                
+            
         
 
         
@@ -18010,7 +18011,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             fi.config,
             "get",
-            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/namespaces/%s/browse/",Namespace, fi.CompanyID, fi.ApplicationID),
+            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/namespaces/%s/browse",Namespace, fi.CompanyID, fi.ApplicationID),
             nil,
             xQuery,
             nil)
@@ -18027,53 +18028,358 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            // AppbrowsePaginator Browse Files  
-            func (fi *PlatformAppFileStorage)  AppbrowsePaginator(Namespace string ,  xQuery PlatformAppAppbrowseXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := fi.Appbrowse(Namespace, xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
+    
+    
+    
+  
+
+    
+    // GetPdfTypes Get all the supported invoice pdf types
+     func (fi *PlatformAppFileStorage)  GetPdfTypes() ([]InvoiceTypesResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getPdfTypesResponse []InvoiceTypesResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.config,
+            "get",
+            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/pdf/types",fi.CompanyID, fi.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return []InvoiceTypesResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPdfTypesResponse)
+        if err != nil {
+            return []InvoiceTypesResponse{}, common.NewFDKError(err.Error())
+        }
+        return getPdfTypesResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppGetDefaultPdfDataXQuery holds query params
+    type PlatformAppGetDefaultPdfDataXQuery struct { 
+        PdfTypeID float64  `url:"pdf_type_id,omitempty"`  
+    }
+    
+    // GetDefaultPdfData Get Dummy pdf data for invoice or label
+     func (fi *PlatformAppFileStorage)  GetDefaultPdfData(xQuery PlatformAppGetDefaultPdfDataXQuery) ([]DummyTemplateDataItems, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getDefaultPdfDataResponse []DummyTemplateDataItems
+	    )
+
+        
+
+         
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.config,
+            "get",
+            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/pdf/mapper",fi.CompanyID, fi.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return []DummyTemplateDataItems{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getDefaultPdfDataResponse)
+        if err != nil {
+            return []DummyTemplateDataItems{}, common.NewFDKError(err.Error())
+        }
+        return getDefaultPdfDataResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppGetDefaultHtmlTemplateXQuery holds query params
+    type PlatformAppGetDefaultHtmlTemplateXQuery struct { 
+        PdfTypeID float64  `url:"pdf_type_id,omitempty"` 
+        Format string  `url:"format,omitempty"`  
+    }
+    
+    // GetDefaultHtmlTemplate Get html template for sales channel
+     func (fi *PlatformAppFileStorage)  GetDefaultHtmlTemplate(xQuery PlatformAppGetDefaultHtmlTemplateXQuery) ([]interface{}, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getDefaultHtmlTemplateResponse []interface{}
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.config,
+            "get",
+            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/pdf/config",fi.CompanyID, fi.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return []interface{}{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getDefaultHtmlTemplateResponse)
+        if err != nil {
+            return []interface{}{}, common.NewFDKError(err.Error())
+        }
+        return getDefaultHtmlTemplateResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // SaveHtmlTemplate Update html template for invoice or label
+     func (fi *PlatformAppFileStorage)  SaveHtmlTemplate(ID float64, body  pdfConfig) (map[string]interface{}, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            saveHtmlTemplateResponse map[string]interface{}
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return map[string]interface{}{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return map[string]interface{}{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.config,
+            "put",
+            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/pdf/config",fi.CompanyID, fi.ApplicationID, ID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return map[string]interface{}{}, err
+	    }
+        
+        err = json.Unmarshal(response, &saveHtmlTemplateResponse)
+        if err != nil {
+            return map[string]interface{}{}, common.NewFDKError(err.Error())
+        }
+        return saveHtmlTemplateResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // PreviewTemplate Preview HTML template
+     func (fi *PlatformAppFileStorage)  PreviewTemplate(body  pdfRender) (string, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            previewTemplateResponse string
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return "", common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return "", common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.config,
+            "post",
+            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/pdf/render",fi.CompanyID, fi.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return "", err
+	    }
+        
+        err = json.Unmarshal(response, &previewTemplateResponse)
+        if err != nil {
+            return "", common.NewFDKError(err.Error())
+        }
+        return previewTemplateResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppGetDefaultPdfTemplateXQuery holds query params
+    type PlatformAppGetDefaultPdfTemplateXQuery struct { 
+        PdfTypeID float64  `url:"pdf_type_id,omitempty"` 
+        Format string  `url:"format,omitempty"`  
+    }
+    
+    // GetDefaultPdfTemplate Default html template
+     func (fi *PlatformAppFileStorage)  GetDefaultPdfTemplate(xQuery PlatformAppGetDefaultPdfTemplateXQuery) ([]interface{}, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getDefaultPdfTemplateResponse []interface{}
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.config,
+            "get",
+            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/pdf/default-template",fi.CompanyID, fi.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return []interface{}{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getDefaultPdfTemplateResponse)
+        if err != nil {
+            return []interface{}{}, common.NewFDKError(err.Error())
+        }
+        return getDefaultPdfTemplateResponse, nil
+        
+    }
+           
+       
     
 
  
@@ -18924,6 +19230,10 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     func NewPlatformAppOrder(config *PlatformConfig, appID string) *PlatformAppOrder {
         return &PlatformAppOrder{config, config.CompanyID, appID}
     }
+    
+    
+    
+    
     
     
     
@@ -21358,6 +21668,438 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetPaymentCodeResponse{}, common.NewFDKError(err.Error())
         }
         return getPaymentCodeOptionResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdatePaymentSession API to update status of a payment.
+     func (pa *PlatformAppPayment)  UpdatePaymentSession(Gid string, body  PaymentSessionRequestSerializer) (PaymentSessionResponseSerializer, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updatePaymentSessionResponse PaymentSessionResponseSerializer
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PaymentSessionResponseSerializer{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PaymentSessionResponseSerializer{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "put",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/session/%s",pa.CompanyID, pa.ApplicationID, Gid),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PaymentSessionResponseSerializer{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updatePaymentSessionResponse)
+        if err != nil {
+            return PaymentSessionResponseSerializer{}, common.NewFDKError(err.Error())
+        }
+        return updatePaymentSessionResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdateRefundSession API to update the status of a refund
+     func (pa *PlatformAppPayment)  UpdateRefundSession(Gid string, RequestID string, body  RefundSessionRequestSerializer) (RefundSessionResponseSerializer, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateRefundSessionResponse RefundSessionResponseSerializer
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return RefundSessionResponseSerializer{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return RefundSessionResponseSerializer{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "put",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/%s/refund/session/%s",pa.CompanyID, pa.ApplicationID, Gid, RequestID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return RefundSessionResponseSerializer{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateRefundSessionResponse)
+        if err != nil {
+            return RefundSessionResponseSerializer{}, common.NewFDKError(err.Error())
+        }
+        return updateRefundSessionResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetMerchantPaymentOption Get Payment modes and COD details.
+     func (pa *PlatformAppPayment)  GetMerchantPaymentOption() (MerchnatPaymentModeResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getMerchantPaymentOptionResponse MerchnatPaymentModeResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/options/configuration",pa.CompanyID, pa.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return MerchnatPaymentModeResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getMerchantPaymentOptionResponse)
+        if err != nil {
+            return MerchnatPaymentModeResponse{}, common.NewFDKError(err.Error())
+        }
+        return getMerchantPaymentOptionResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // PatchMerchantPaymentOption Update Payment modes and COD details.
+     func (pa *PlatformAppPayment)  PatchMerchantPaymentOption(body  MerchnatPaymentModeResponse) (MerchnatPaymentModeResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            patchMerchantPaymentOptionResponse MerchnatPaymentModeResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return MerchnatPaymentModeResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return MerchnatPaymentModeResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "patch",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/options/configuration",pa.CompanyID, pa.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return MerchnatPaymentModeResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &patchMerchantPaymentOptionResponse)
+        if err != nil {
+            return MerchnatPaymentModeResponse{}, common.NewFDKError(err.Error())
+        }
+        return patchMerchantPaymentOptionResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppGetMerchantAggregatorPaymentModeDetailsXQuery holds query params
+    type PlatformAppGetMerchantAggregatorPaymentModeDetailsXQuery struct { 
+        BusinessUnit string  `url:"business_unit,omitempty"` 
+        Device string  `url:"device,omitempty"`  
+    }
+    
+    // GetMerchantAggregatorPaymentModeDetails Get Aggregator, payment mode and sub payment mode.
+     func (pa *PlatformAppPayment)  GetMerchantAggregatorPaymentModeDetails(AggregatorID float64, xQuery PlatformAppGetMerchantAggregatorPaymentModeDetailsXQuery) (MerchnatPaymentModeResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getMerchantAggregatorPaymentModeDetailsResponse MerchnatPaymentModeResponse
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/options/aggregators/undefined",pa.CompanyID, pa.ApplicationID, AggregatorID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return MerchnatPaymentModeResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getMerchantAggregatorPaymentModeDetailsResponse)
+        if err != nil {
+            return MerchnatPaymentModeResponse{}, common.NewFDKError(err.Error())
+        }
+        return getMerchantAggregatorPaymentModeDetailsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // PatchMerchantAggregatorPaymentModeDetails Update Aggregator, payment mode and sub payment mode.
+     func (pa *PlatformAppPayment)  PatchMerchantAggregatorPaymentModeDetails(AggregatorID float64, body  MerchnatPaymentModeResponse) (MerchnatPaymentModeResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            patchMerchantAggregatorPaymentModeDetailsResponse MerchnatPaymentModeResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return MerchnatPaymentModeResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return MerchnatPaymentModeResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "patch",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/options/aggregators/undefined",pa.CompanyID, pa.ApplicationID, AggregatorID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return MerchnatPaymentModeResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &patchMerchantAggregatorPaymentModeDetailsResponse)
+        if err != nil {
+            return MerchnatPaymentModeResponse{}, common.NewFDKError(err.Error())
+        }
+        return patchMerchantAggregatorPaymentModeDetailsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetPGConfigAggregators Get Aggregators available to be added as PG.
+     func (pa *PlatformAppPayment)  GetPGConfigAggregators() (MerchnatPaymentModeResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getPGConfigAggregatorsResponse MerchnatPaymentModeResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/options/configuration/aggregator",pa.CompanyID, pa.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return MerchnatPaymentModeResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPGConfigAggregatorsResponse)
+        if err != nil {
+            return MerchnatPaymentModeResponse{}, common.NewFDKError(err.Error())
+        }
+        return getPGConfigAggregatorsResponse, nil
         
     }
            

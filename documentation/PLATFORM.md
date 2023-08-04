@@ -11,7 +11,8 @@
 * [Configuration](#Configuration) - Application configuration apis 
 * [Content](#Content) - Content System 
 * [Discount](#Discount) - Discount 
-* [FileStorage](#FileStorage) - File Storage 
+* [FileStorage](#FileStorage) - This service provides functionality to manage assets and generate pdf. You can upload the assets, get the cdn link for the assets, proxy the assets and many more things.
+ 
 * [Finance](#Finance) - Handles all finance related activities 
 * [Inventory](#Inventory) -  
 * [Lead](#Lead) - Handles communication between Administrator <-> Staff and Staff <-> Users 
@@ -317,6 +318,7 @@
     * [getLocationDetail](#getlocationdetail)
     * [updateLocation](#updatelocation)
     * [createLocationBulk](#createlocationbulk)
+    * [getLocationTags](#getlocationtags)
     
 
 * [Configuration](#Configuration)
@@ -471,6 +473,12 @@
     * [browse](#browse)
     * [appbrowse](#appbrowse)
     * [proxy](#proxy)
+    * [getPdfTypes](#getpdftypes)
+    * [getDefaultPdfData](#getdefaultpdfdata)
+    * [getDefaultHtmlTemplate](#getdefaulthtmltemplate)
+    * [saveHtmlTemplate](#savehtmltemplate)
+    * [previewTemplate](#previewtemplate)
+    * [getDefaultPdfTemplate](#getdefaultpdftemplate)
     
 
 * [Finance](#Finance)
@@ -488,6 +496,17 @@
     * [invoiceType](#invoicetype)
     * [invoiceListing](#invoicelisting)
     * [invoicePDF](#invoicepdf)
+    * [isCnRefundMethod](#iscnrefundmethod)
+    * [createSellerCreditNoteConfig](#createsellercreditnoteconfig)
+    * [deleteConfig](#deleteconfig)
+    * [channelDisplayName](#channeldisplayname)
+    * [getPdfUrlView](#getpdfurlview)
+    * [creditNoteDetails](#creditnotedetails)
+    * [getCustomerCreditBalance](#getcustomercreditbalance)
+    * [getCnConfig](#getcnconfig)
+    * [generateReportCustomerCn](#generatereportcustomercn)
+    * [downloadReportCustomerCn](#downloadreportcustomercn)
+    * [getReportingFilters](#getreportingfilters)
     
 
 * [Inventory](#Inventory)
@@ -557,11 +576,13 @@
     * [orderUpdate](#orderupdate)
     * [checkOrderStatus](#checkorderstatus)
     * [getStateTransitionMap](#getstatetransitionmap)
+    * [getRoleBaseStateTransition](#getrolebasestatetransition)
     * [fetchCreditBalanceDetail](#fetchcreditbalancedetail)
     * [fetchRefundModeConfig](#fetchrefundmodeconfig)
     * [attachOrderUser](#attachorderuser)
     * [sendUserMobileOTP](#sendusermobileotp)
     * [verifyMobileOTP](#verifymobileotp)
+    * [downloadLanesReport](#downloadlanesreport)
     * [getShipments](#getshipments)
     * [getShipmentById](#getshipmentbyid)
     * [getOrderById](#getorderbyid)
@@ -642,6 +663,13 @@
     * [resendPaymentLink](#resendpaymentlink)
     * [cancelPaymentLink](#cancelpaymentlink)
     * [getPaymentCodeOption](#getpaymentcodeoption)
+    * [updatePaymentSession](#updatepaymentsession)
+    * [updateRefundSession](#updaterefundsession)
+    * [getMerchantPaymentOption](#getmerchantpaymentoption)
+    * [patchMerchantPaymentOption](#patchmerchantpaymentoption)
+    * [getMerchantAggregatorPaymentModeDetails](#getmerchantaggregatorpaymentmodedetails)
+    * [patchMerchantAggregatorPaymentModeDetails](#patchmerchantaggregatorpaymentmodedetails)
+    * [getPGConfigAggregators](#getpgconfigaggregators)
     
 
 * [Rewards](#Rewards)
@@ -13750,7 +13778,7 @@ Validate Product Template Schema
 
 ```golang
 
-data, err := Catalog.ValidateProductTemplate(CompanyID, Slug);
+data, err := Catalog.ValidateProductTemplate(CompanyID, Slug, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -13761,6 +13789,11 @@ data, err := Catalog.ValidateProductTemplate(CompanyID, Slug);
 
 | Slug | string | A `slug` is a unique identifier for a particular template. | 
 
+
+
+
+
+| xQuery | struct | Includes properties such as `ItemType`, `Bulk`
 
 
 Allows you to list all product templates validation values for all the fields present in the database
@@ -13790,7 +13823,7 @@ Download Product Template View
 
 ```golang
 
-data, err := Catalog.DownloadProductTemplateViews(CompanyID, Slug);
+data, err := Catalog.DownloadProductTemplateViews(CompanyID, Slug, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -13801,6 +13834,11 @@ data, err := Catalog.DownloadProductTemplateViews(CompanyID, Slug);
 
 | Slug | string | A `slug` is a unique identifier for a particular template. | 
 
+
+
+
+
+| xQuery | struct | Includes properties such as `ItemType`, `Type`
 
 
 Allows you to download product template data
@@ -21191,6 +21229,70 @@ Returns a success response
 
 
 Schema: `ProfileSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getLocationTags
+Get tags associated with locations for a company.
+
+```golang
+
+data, err := CompanyProfile.GetLocationTags(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Id of the company inside which the location is to be created. | 
+
+
+
+This API fetches all the tags associated to a company.
+
+*Success Response:*
+
+
+
+Tags list. See example below or refer `StoreTagsResponseSchema` for details
+
+
+Schema: `StoreTagsResponseSchema`
+
+
+*Examples:*
+
+
+TagsFound
+```json
+{
+  "value": {
+    "tags": [
+      "hyperlocale",
+      "instant"
+    ],
+    "success": true
+  }
+}
+```
+
+NoTagsFound
+```json
+{
+  "value": {
+    "tags": [],
+    "success": true
+  }
+}
+```
 
 
 
@@ -30227,7 +30329,7 @@ data, err := FileStorage.StartUpload(Namespace, CompanyID, body);
 | Namespace | string | Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. | 
 
 
-| CompanyID | float64 | company_id | 
+| CompanyID | float64 |  | 
 
 
 | body |  StartRequest | "Request body" 
@@ -30256,10 +30358,51 @@ This operation will return the url for the uploaded file.
 
 
 
-Success
+Success. Returns a response containing relaving and absolute_url of storage service
 
 
 Schema: `StartResponse`
+
+
+*Examples:*
+
+
+success
+```json
+{
+  "value": {
+    "file_name": "shirt.png",
+    "file_path": {
+      "value": "/path/qwertyuiop-shirt.png",
+      "summary": "path of the file in bucket without the bucket prefix for staging envs"
+    },
+    "content_type": "image/png",
+    "method": "PUT",
+    "namespace": {
+      "value": "products-item-images",
+      "summary": "Segregation of different types of files(products, orders, logistics etc)"
+    },
+    "operation": "putObject",
+    "tags": [
+      "clothing",
+      "shirt"
+    ],
+    "size": {
+      "value": 9999,
+      "summary": "size of the file being uploaded in bytes, should less than max size defined for the corresponding namesapce."
+    },
+    "cdn": {
+      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
+      "absolute_url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
+      "relative_url": "products/pictures/free/original/qwertyuiop-shirt.png"
+    },
+    "upload": {
+      "expiry": 5000,
+      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png?AWSAccessKeyId=xxx&Content-Type=image%2Fpng&Expires=5000&Signature=xxx&x-amz-acl=public-read"
+    }
+  }
+}
+```
 
 
 
@@ -30286,7 +30429,7 @@ data, err := FileStorage.CompleteUpload(Namespace, CompanyID, body);
 | Namespace | string | Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. | 
 
 
-| CompanyID | float64 | company_id | 
+| CompanyID | float64 |  | 
 
 
 | body |  StartResponse | "Request body" 
@@ -30321,6 +30464,43 @@ Success
 Schema: `CompleteResponse`
 
 
+*Examples:*
+
+
+success
+```json
+{
+  "value": {
+    "_id": "xxxxxxxxxxxxxxxxxxxxxx",
+    "file_name": "shirt.png",
+    "file_path": {
+      "value": "/path/qwertyuiop-shirt.png",
+      "summary": "path of the file in bucket without the bucket prefix for staging envs"
+    },
+    "content_type": "image/png",
+    "method": "PUT",
+    "namespace": {
+      "value": "products-item-images",
+      "summary": "Segregation of different types of files(products, orders, logistics etc)"
+    },
+    "operation": "putObject",
+    "size": 9999,
+    "cdn": {
+      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
+      "absolute_url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
+      "relative_url": "products/pictures/free/original/qwertyuiop-shirt.png"
+    },
+    "upload": {
+      "expiry": 5000,
+      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png?AWSAccessKeyId=xxx&Content-Type=image%2Fpng&Expires=5000&Signature=xxx&x-amz-acl=public-read"
+    },
+    "created_on": "2020-02-03T09:50:04.240Z",
+    "modified_on": "2020-02-03T09:50:04.240Z"
+  }
+}
+```
+
+
 
 
 
@@ -30345,10 +30525,10 @@ data, err := FileStorage.AppStartUpload(Namespace, CompanyID, ApplicationID, bod
 | Namespace | string | Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. | 
 
 
-| CompanyID | float64 | company_id | 
+| CompanyID | float64 |  | 
 
 
-| ApplicationID | string | application id | 
+| ApplicationID | float64 |  | 
 
 
 | body |  StartRequest | "Request body" 
@@ -30383,6 +30563,47 @@ Success
 Schema: `StartResponse`
 
 
+*Examples:*
+
+
+success
+```json
+{
+  "value": {
+    "file_name": "shirt.png",
+    "file_path": {
+      "value": "/path/qwertyuiop-shirt.png",
+      "summary": "path of the file in bucket without the bucket prefix for staging envs"
+    },
+    "content_type": "image/png",
+    "method": "PUT",
+    "namespace": {
+      "value": "products-item-images",
+      "summary": "Segregation of different types of files(products, orders, logistics etc)"
+    },
+    "operation": "putObject",
+    "tags": [
+      "clothing",
+      "shirt"
+    ],
+    "size": {
+      "value": 9999,
+      "summary": "size of the file being uploaded in bytes, should less than max size defined for the corresponding namesapce."
+    },
+    "cdn": {
+      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
+      "absolute_url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
+      "relative_url": "products/pictures/free/original/qwertyuiop-shirt.png"
+    },
+    "upload": {
+      "expiry": 5000,
+      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png?AWSAccessKeyId=xxx&Content-Type=image%2Fpng&Expires=5000&Signature=xxx&x-amz-acl=public-read"
+    }
+  }
+}
+```
+
+
 
 
 
@@ -30407,10 +30628,10 @@ data, err := FileStorage.AppCompleteUpload(Namespace, CompanyID, ApplicationID, 
 | Namespace | string | Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. | 
 
 
-| CompanyID | float64 | company_id | 
+| CompanyID | float64 |  | 
 
 
-| ApplicationID | string | application id | 
+| ApplicationID | float64 |  | 
 
 
 | body |  StartResponse | "Request body" 
@@ -30445,6 +30666,43 @@ Success
 Schema: `CompleteResponse`
 
 
+*Examples:*
+
+
+success
+```json
+{
+  "value": {
+    "_id": "xxxxxxxxxxxxxxxxxxxxxx",
+    "file_name": "shirt.png",
+    "file_path": {
+      "value": "/path/qwertyuiop-shirt.png",
+      "summary": "path of the file in bucket without the bucket prefix for staging envs"
+    },
+    "content_type": "image/png",
+    "method": "PUT",
+    "namespace": {
+      "value": "products-item-images",
+      "summary": "Segregation of different types of files(products, orders, logistics etc)"
+    },
+    "operation": "putObject",
+    "size": 9999,
+    "cdn": {
+      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
+      "absolute_url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
+      "relative_url": "products/pictures/free/original/qwertyuiop-shirt.png"
+    },
+    "upload": {
+      "expiry": 5000,
+      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png?AWSAccessKeyId=xxx&Content-Type=image%2Fpng&Expires=5000&Signature=xxx&x-amz-acl=public-read"
+    },
+    "created_on": "2020-02-03T09:50:04.240Z",
+    "modified_on": "2020-02-03T09:50:04.240Z"
+  }
+}
+```
+
+
 
 
 
@@ -30466,7 +30724,7 @@ data, err := FileStorage.GetSignUrls(CompanyID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | company_id | 
+| CompanyID | float64 |  | 
 
 
 | body |  SignUrlRequest | "Request body" 
@@ -30481,6 +30739,25 @@ Success
 
 
 Schema: `SignUrlResponse`
+
+
+*Examples:*
+
+
+success
+```json
+{
+  "value": {
+    "urls": [
+      {
+        "url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/x0/documents/manifest/PDFs/test/s3EtYk5p9-new_fee.pdf",
+        "signed_url": "https://fynd-staging-assets-private.s3-accelerate.amazonaws.com/addsale/v2/falling-surf-7c8bb8/fyndnp/wrkr/x0/documents/manifest/PDFs/test/s3EtYk5p9-new_fee.pdf",
+        "expiry": 1800
+      }
+    ]
+  }
+}
+```
 
 
 
@@ -30506,11 +30783,11 @@ data, err := FileStorage.CopyFiles(CompanyID, xQuery, body);
 
 
 
-| CompanyID | float64 | company_id | 
+| CompanyID | float64 |  | 
 
 | xQuery | struct | Includes properties such as `Sync`
 
-| body |  BulkRequest | "Request body" 
+| body |  CopyFiles | "Request body" 
 
 Copy Files
 
@@ -30521,7 +30798,200 @@ Copy Files
 Success
 
 
-Schema: `BulkUploadResponse`
+Schema: `BulkUploadSyncMode`
+
+
+*Examples:*
+
+
+successInSyncMode
+```json
+{
+  "value": {
+    "oneOf": [
+      {
+        "status": {
+          "total": 1,
+          "failed": 0,
+          "succeeded": 1,
+          "result": "SUCCESS"
+        },
+        "files": [
+          {
+            "success": true,
+            "file": {
+              "src": {
+                "method": "GET",
+                "url": "https://hdn-1.fynd.com/platform/pictures/free-logo/original/7qdHNTFe--platform-logo.png",
+                "meta": {},
+                "namespace": "test"
+              },
+              "dest": {
+                "ETag": "\"a2fdd91e5a6e1c080a44966c923f7d3b\"",
+                "ServerSideEncryption": "AES256",
+                "Location": "https://fynd-staging-assets.s3-accelerate.amazonaws.com/addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
+                "key": "addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
+                "Key": "addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
+                "Bucket": "fynd-staging-assets",
+                "cdn": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
+                "absolute_url": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
+                "relative_url": "addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png"
+              }
+            },
+            "extracted_data": {
+              "sharp": {
+                "metadata": {
+                  "format": "png",
+                  "size": 20859,
+                  "width": 1147,
+                  "height": 315,
+                  "space": "srgb",
+                  "channels": 4,
+                  "depth": "uchar",
+                  "density": 144,
+                  "isProgressive": false,
+                  "hasProfile": false,
+                  "hasAlpha": true
+                },
+                "stats": {
+                  "channels": [
+                    {
+                      "min": 0,
+                      "max": 255,
+                      "sum": 18581166,
+                      "squaresSum": 2720454498,
+                      "mean": 51.42792377631087,
+                      "stdev": 69.89066964116273,
+                      "minX": 0,
+                      "minY": 32,
+                      "maxX": 767,
+                      "maxY": 162
+                    },
+                    {
+                      "min": 0,
+                      "max": 255,
+                      "sum": 23074718,
+                      "squaresSum": 3794972074,
+                      "mean": 63.86492852299304,
+                      "stdev": 80.15486600126069,
+                      "minX": 0,
+                      "minY": 32,
+                      "maxX": 767,
+                      "maxY": 162
+                    },
+                    {
+                      "min": 0,
+                      "max": 255,
+                      "sum": 43651277,
+                      "squaresSum": 8829856965,
+                      "mean": 120.81559070591328,
+                      "stdev": 99.20892161899766,
+                      "minX": 0,
+                      "minY": 32,
+                      "maxX": 767,
+                      "maxY": 162
+                    },
+                    {
+                      "min": 0,
+                      "max": 255,
+                      "sum": 55673911,
+                      "squaresSum": 14147207369,
+                      "mean": 154.09117227826906,
+                      "stdev": 124.14431740073556,
+                      "minX": 0,
+                      "minY": 32,
+                      "maxX": 33,
+                      "maxY": 32
+                    }
+                  ],
+                  "isOpaque": false,
+                  "entropy": 2.2912313200504286,
+                  "sharpness": 3.3113732303662036,
+                  "dominant": {
+                    "r": 8,
+                    "g": 8,
+                    "b": 8
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+successInSyncModeWithRewrite
+```json
+{
+  "value": {
+    "oneOf": [
+      {
+        "status": {
+          "total": 1,
+          "failed": 1,
+          "succeeded": 0,
+          "result": "FAIL"
+        },
+        "files": [
+          {
+            "success": false,
+            "error": "Request failed with status code 400",
+            "file": {
+              "src": {
+                "method": "GET",
+                "url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/x0/documents/manifest/PDFs/test/s3EtYk5p9-new_fee.pdf",
+                "meta": {},
+                "namespace": "test"
+              }
+            },
+            "stage": "AXIOS_FETCH",
+            "axios_request": {
+              "url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/x0/documents/manifest/PDFs/test/s3EtYk5p9-new_fee.pdf",
+              "method": "GET",
+              "meta": {},
+              "namespace": "test",
+              "responseType": "stream"
+            }
+          }
+        ],
+        "task": {
+          "id": "83419",
+          "name": "__default__",
+          "data": {
+            "urls": [
+              "https://hdn-1.fynd.com/platform/pictures/free-logo/original/7qdHNTFe--platform-logo.png"
+            ],
+            "destination": {
+              "basepath": "/domaine/path",
+              "rewrite": "{{basepath}}/foo/"
+            }
+          },
+          "opts": {
+            "attempts": 2,
+            "backoff": {
+              "type": "fixed",
+              "delay": 1000
+            },
+            "delay": 0,
+            "timestamp": 1690669093201
+          },
+          "progress": 0,
+          "delay": 0,
+          "timestamp": 1690669093201,
+          "attemptsMade": 0,
+          "stacktrace": [],
+          "returnvalue": null,
+          "finishedOn": null,
+          "processedOn": null
+        }
+      }
+    ]
+  }
+}
+```
 
 
 
@@ -30547,14 +31017,14 @@ data, err := FileStorage.AppCopyFiles(CompanyID, ApplicationID, xQuery, body);
 
 
 
-| CompanyID | float64 | company_id | 
+| CompanyID | float64 |  | 
 
 
-| ApplicationID | float64 | application_id | 
+| ApplicationID | float64 |  | 
 
 | xQuery | struct | Includes properties such as `Sync`
 
-| body |  BulkRequest | "Request body" 
+| body |  CopyFiles | "Request body" 
 
 Copy Files
 
@@ -30565,7 +31035,200 @@ Copy Files
 Success
 
 
-Schema: `BulkUploadResponse`
+Schema: `BulkUploadSyncMode`
+
+
+*Examples:*
+
+
+successInSyncMode
+```json
+{
+  "value": {
+    "oneOf": [
+      {
+        "status": {
+          "total": 1,
+          "failed": 0,
+          "succeeded": 1,
+          "result": "SUCCESS"
+        },
+        "files": [
+          {
+            "success": true,
+            "file": {
+              "src": {
+                "method": "GET",
+                "url": "https://hdn-1.fynd.com/platform/pictures/free-logo/original/7qdHNTFe--platform-logo.png",
+                "meta": {},
+                "namespace": "test"
+              },
+              "dest": {
+                "ETag": "\"a2fdd91e5a6e1c080a44966c923f7d3b\"",
+                "ServerSideEncryption": "AES256",
+                "Location": "https://fynd-staging-assets.s3-accelerate.amazonaws.com/addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
+                "key": "addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
+                "Key": "addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
+                "Bucket": "fynd-staging-assets",
+                "cdn": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
+                "absolute_url": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
+                "relative_url": "addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png"
+              }
+            },
+            "extracted_data": {
+              "sharp": {
+                "metadata": {
+                  "format": "png",
+                  "size": 20859,
+                  "width": 1147,
+                  "height": 315,
+                  "space": "srgb",
+                  "channels": 4,
+                  "depth": "uchar",
+                  "density": 144,
+                  "isProgressive": false,
+                  "hasProfile": false,
+                  "hasAlpha": true
+                },
+                "stats": {
+                  "channels": [
+                    {
+                      "min": 0,
+                      "max": 255,
+                      "sum": 18581166,
+                      "squaresSum": 2720454498,
+                      "mean": 51.42792377631087,
+                      "stdev": 69.89066964116273,
+                      "minX": 0,
+                      "minY": 32,
+                      "maxX": 767,
+                      "maxY": 162
+                    },
+                    {
+                      "min": 0,
+                      "max": 255,
+                      "sum": 23074718,
+                      "squaresSum": 3794972074,
+                      "mean": 63.86492852299304,
+                      "stdev": 80.15486600126069,
+                      "minX": 0,
+                      "minY": 32,
+                      "maxX": 767,
+                      "maxY": 162
+                    },
+                    {
+                      "min": 0,
+                      "max": 255,
+                      "sum": 43651277,
+                      "squaresSum": 8829856965,
+                      "mean": 120.81559070591328,
+                      "stdev": 99.20892161899766,
+                      "minX": 0,
+                      "minY": 32,
+                      "maxX": 767,
+                      "maxY": 162
+                    },
+                    {
+                      "min": 0,
+                      "max": 255,
+                      "sum": 55673911,
+                      "squaresSum": 14147207369,
+                      "mean": 154.09117227826906,
+                      "stdev": 124.14431740073556,
+                      "minX": 0,
+                      "minY": 32,
+                      "maxX": 33,
+                      "maxY": 32
+                    }
+                  ],
+                  "isOpaque": false,
+                  "entropy": 2.2912313200504286,
+                  "sharpness": 3.3113732303662036,
+                  "dominant": {
+                    "r": 8,
+                    "g": 8,
+                    "b": 8
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+successInSyncModeWithRewrite
+```json
+{
+  "value": {
+    "oneOf": [
+      {
+        "status": {
+          "total": 1,
+          "failed": 1,
+          "succeeded": 0,
+          "result": "FAIL"
+        },
+        "files": [
+          {
+            "success": false,
+            "error": "Request failed with status code 400",
+            "file": {
+              "src": {
+                "method": "GET",
+                "url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/x0/documents/manifest/PDFs/test/s3EtYk5p9-new_fee.pdf",
+                "meta": {},
+                "namespace": "test"
+              }
+            },
+            "stage": "AXIOS_FETCH",
+            "axios_request": {
+              "url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/x0/documents/manifest/PDFs/test/s3EtYk5p9-new_fee.pdf",
+              "method": "GET",
+              "meta": {},
+              "namespace": "test",
+              "responseType": "stream"
+            }
+          }
+        ],
+        "task": {
+          "id": "83419",
+          "name": "__default__",
+          "data": {
+            "urls": [
+              "https://hdn-1.fynd.com/platform/pictures/free-logo/original/7qdHNTFe--platform-logo.png"
+            ],
+            "destination": {
+              "basepath": "/domaine/path",
+              "rewrite": "{{basepath}}/foo/"
+            }
+          },
+          "opts": {
+            "attempts": 2,
+            "backoff": {
+              "type": "fixed",
+              "delay": 1000
+            },
+            "delay": 0,
+            "timestamp": 1690669093201
+          },
+          "progress": 0,
+          "delay": 0,
+          "timestamp": 1690669093201,
+          "attemptsMade": 0,
+          "stacktrace": [],
+          "returnvalue": null,
+          "finishedOn": null,
+          "processedOn": null
+        }
+      }
+    ]
+  }
+}
+```
 
 
 
@@ -30589,14 +31252,16 @@ data, err := FileStorage.Browse(Namespace, CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Namespace | string | bucket name | 
+| Namespace | string | Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. | 
 
 
-| CompanyID | float64 | company_id | 
+| CompanyID | float64 |  | 
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`
+
+
+| xQuery | struct | Includes properties such as `Page`, `Limit`
 
 
 Browse Files
@@ -30632,17 +31297,19 @@ data, err := FileStorage.Appbrowse(Namespace, CompanyID, ApplicationID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Namespace | string | bucket name | 
+| Namespace | string | Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. | 
 
 
-| CompanyID | float64 | company_id | 
+| CompanyID | float64 |  | 
 
 
-| ApplicationID | float64 | application_id | 
+| ApplicationID | float64 |  | 
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`
+
+
+| xQuery | struct | Includes properties such as `Page`, `Limit`
 
 
 Browse Files
@@ -30678,7 +31345,7 @@ data, err := FileStorage.Proxy(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | company_id | 
+| CompanyID | float64 |  | 
 
 
 
@@ -30707,6 +31374,563 @@ Schema: `string`
 ---
 
 
+#### getPdfTypes
+Get all the supported invoice pdf types
+
+```golang
+
+data, err := FileStorage.GetPdfTypes(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| ApplicationID | float64 |  | 
+
+
+
+Get all the supported invoice pdf types such as Invoice, Label, Deliver challan
+
+*Success Response:*
+
+
+
+Get all the invoice types and its format
+
+
+Schema: `Array<InvoiceTypesResponse>`
+
+
+*Examples:*
+
+
+success
+```json
+{
+  "value": {
+    "oneOf": [
+      {
+        "_id": "64b7ec2556a0cba523196426",
+        "pdf_type_id": 1,
+        "name": "invoice",
+        "format": [
+          "A4 A6 POS"
+        ],
+        "visibility": true,
+        "schema": {},
+        "__v": 0
+      },
+      {
+        "_id": "64b7ec3356a0cba523196428",
+        "pdf_type_id": 2,
+        "name": "label",
+        "format": [
+          "A4 A6 POS"
+        ],
+        "visibility": true,
+        "schema": {},
+        "__v": 0
+      }
+    ]
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDefaultPdfData
+Get Dummy pdf data for invoice or label
+
+```golang
+
+data, err := FileStorage.GetDefaultPdfData(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| ApplicationID | float64 |  | 
+
+
+
+| xQuery | struct | Includes properties such as `PdfTypeID`
+
+
+Get Dummy pdf data for invoice or label
+
+*Success Response:*
+
+
+
+Get dummy json data for invoice
+
+
+Schema: `Array<DummyTemplateDataItems>`
+
+
+*Examples:*
+
+
+success
+```json
+{
+  "value": [
+    {
+      "_id": "64b7f52d56a0cba5231964b0",
+      "pdf_type_id": 1,
+      "payload": {
+        "currency_code": "INR",
+        "shipment_id": "16811182420541695489",
+        "amount_to_be_collected": 0,
+        "amount_paid": 100,
+        "awb_number_barcode": "",
+        "signed_qrcode": "",
+        "shipment_id_barcode": "",
+        "upi_qrcode": "",
+        "is_self_ship": false,
+        "is_self_pickup": true,
+        "is_test": false,
+        "image": {
+          "sales_channel_logo": ""
+        },
+        "payments": {
+          "payment_type": "Net Banking",
+          "date": "10/04/2023",
+          "transaction_id": "10022310053248709000",
+          "amount": 35
+        },
+        "invoice_detail": {
+          "invoice_id": "2352313215236713",
+          "invoice_date": "10/04/2023",
+          "irn": "",
+          "external_order_id": "",
+          "shipment_id": "16811182420541695489",
+          "order_id": "73982433",
+          "channel_order_id": "affiliate_details.channel_order_id"
+        },
+        "company_detail": {
+          "name": "RELIANCE RETAIL LIMITED",
+          "address": "1ST FLOOR, WEWORK VIJAY DIAMOND, CROSS RD B, AJIT NAGAR, KONDIVITA, ANDHERI EAST, MUMBAI, MAHARASHTR",
+          "city": "MUMBAI",
+          "state": "MAHARASHTRA",
+          "country": "INDIA",
+          "zip_code": "400093",
+          "state_code": "27",
+          "country_code": "IN",
+          "gstin": "27AABCR1718E1ZP",
+          "pan": "AABCR1718E",
+          "phone_no": "9594495254",
+          "cin": "U45200MH1992PTC066474",
+          "website_url": "https://freshpik.hostx1.de",
+          "email": ""
+        },
+        "store_detail": {
+          "store_name": "FreshPik",
+          "address": "FRESHPIK, JIO WORLD DRIVE, MAKERS MAXITY,STORE UNIT - G 22,23&24 BANDRA EAST FSSAI NO: 11521005000512",
+          "city": "Mumbai",
+          "state": "Maharashtra",
+          "country": "India",
+          "country_code": "IN",
+          "zip_code": "400093",
+          "state_code": "27",
+          "gstin": "27AABCR1718E1ZP"
+        },
+        "customer_shipping_detail": {
+          "name": "Megha Golecha",
+          "phone_no": "9769199489",
+          "address": "1001 Badri Vishal, Sahakar Nagar, Andheri West, 400053, Near Building No. 33, Shanti Nagar,Test,Mumbai,Maharashtra,India,400053",
+          "city": "Mumbai",
+          "state": "Maharashtra",
+          "country": "India",
+          "country_code": "IN",
+          "zip_code": "400053",
+          "state_code": "27",
+          "gstin": ""
+        },
+        "return_detail": {
+          "address": "FRESHPIK, JIO WORLD DRIVE, MAKERS MAXITY,STORE UNIT - G 22,23&24 BANDRA EAST FSSAI NO: 11521005000512",
+          "city": "Mumbai",
+          "state": "Maharashtra",
+          "country": "India",
+          "country_code": "IN",
+          "zip_code": "400053",
+          "state_code": "27",
+          "gstin": ""
+        },
+        "product_table": {
+          "total_items": 1,
+          "products": [
+            {
+              "name": "So Good Unsweetened Soy Milk 200 ml (Tetra Pak)",
+              "size": "200ML",
+              "item_code": "",
+              "seller_identifier": "490001550",
+              "hsn_code": "62060000",
+              "total_units": 1,
+              "mrp": 35,
+              "discount": 123,
+              "taxable_amount": 33.33,
+              "total_taxable_amount": 33.33,
+              "tax": {
+                "cgst": {
+                  "value": 0.83,
+                  "percent": 2.5
+                },
+                "sgst": {
+                  "value": 0.83,
+                  "percent": 2.5
+                },
+                "igst": {
+                  "value": 0.83,
+                  "percent": 2.5
+                }
+              },
+              "total": 35,
+              "brand": {
+                "logo": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/brands/pictures/square-logo/original/gi4glSy7T-EX5Teqb1K-Logo.jpeg",
+                "name": "Freshpik"
+              }
+            }
+          ],
+          "grand_total": 35,
+          "delivery_charges": 0,
+          "delivery_charge_text": "",
+          "cod_charges": 0,
+          "fynd_discounts": 0,
+          "total_in_words": "Thirty Five Rupees Only"
+        },
+        "tax_table": {
+          "taxes": [
+            {
+              "hsn_code": "62060000",
+              "tax": {
+                "cgst": {
+                  "value": 0.83,
+                  "percent": 2.5
+                },
+                "sgst": {
+                  "value": 0.83,
+                  "percent": 2.5
+                },
+                "igst": {
+                  "value": 0,
+                  "percent": 0
+                }
+              },
+              "total": 123
+            }
+          ],
+          "grand_total": 1.67,
+          "tax_in_words": "One Rupees and Sixty Seven Paise Only"
+        },
+        "declaration_texts": [
+          "1. Products being sent under this invoice are for personal consumption for the customer and not for resale or commercial purposes.",
+          "2. Whether tax is payable under reverse charge - No",
+          "3. This invoice shows the actual price of the goods described above and that all particulars are true and accurate.",
+          "4. In case of any queries, please reach out to care@gofynd.com.",
+          "5. In the event of any loss or non-delivery, the goods shall be returned to the address specified below. this.shipment.invoice.rto_address"
+        ],
+        "registered_company_detail": {
+          "address": "1ST FLOOR, WEWORK VIJAY DIAMOND, CROSS RD B, AJIT NAGAR, KONDIVITA, ANDHERI EAST, MUMBAI, MAHARASHTR",
+          "city": "MUMBAI",
+          "state": "MAHARASHTRA",
+          "country": "INDIA",
+          "zip_code": "400093",
+          "state_code": "27",
+          "country_code": "IN"
+        },
+        "disclaimer": "An Electronic document issued in accordance with the provisions of the Information Technology Act, 2000 (21 of 2000)",
+        "meta": {
+          "generator": {
+            "signed_qrcode_generator": {
+              "method": "signedqrcode",
+              "kwargs": {
+                "value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkVEQzU3REUxMzU4QjMwMEJBOUY3OTM0MEE2Njk2ODMxRjNDODUwNDciLCJ0eXAiOiJKV1QiLCJ4NXQiOiI3Y1Y5NFRXTE1BdXA5NU5BcG1sb01mUElVRWMifQ.eyJkYXRhIjoie1wiU2VsbGVyR3N0aW5cIjpcIjI3QUFCUFA2NTAzRTAwM1wiLFwiQnV5ZXJHc3RpblwiOlwiMjdBQUxDQTA0NDJMMVpNXCIsXCJEb2NOb1wiOlwiQTAwMDExMzMzQTAwMDAwM1wiLFwiRG9jVHlwXCI6XCJJTlZcIixcIkRvY0R0XCI6XCIxMS8xMC8yMDIyXCIsXCJUb3RJbnZWYWxcIjoyNDk5OTkuNzYsXCJJdGVtQ250XCI6MSxcIk1haW5Ic25Db2RlXCI6XCI5NDAxXCIsXCJJcm5cIjpcImUzNjE5M2YzNGQyZmY4OTM3MzI2NTcxN2RmYzY5YzVmYjU2MTI1N2U1M2MxOThhMDAzMGRkM2RlZGUxNDhmMmZcIixcIklybkR0XCI6XCIyMDIyLTEwLTExIDE0OjIxOjAwXCJ9IiwiaXNzIjoiTklDIn0.OtYrnBt311QrqdXCSuTOpzNuYA9M8ejRoyeRioJRyGImljXrNvBLU_JJpXVLtDI4dkbIEHVbbOuucYD3fn_nnH_KZA0kLkUuok417ztLxWN35D9xZaYg5GSWI8hss9KV7i-H-k_95pHBYPEwFFGw8IqlpgeS-unjkbbmY7UgQTerMIXrig-ZWc2R-NDFoHs7I48TuWzOxQfiEDVsMHzPjcjuqKA6KDoJKX0nZzZo84GL2k2pM0Klhq5sfJIC9Zp7E_xP_Bst6-cRhdZ2EA08xhJYSgB1fsYxGaxemXgdsXw0mqlGohOryvqwhHPSMEocK6ZHWWJvjZJwNx_e-oCyzg"
+              }
+            },
+            "shipment_id_barcode_generator": {
+              "method": "barcode",
+              "kwargs": {
+                "value": "dsgffdghfghgj"
+              }
+            },
+            "upi_qrcode_generator": {
+              "method": "qrcode",
+              "kwargs": {
+                "qr_data": "upi://pay?pa=delhivery1.PAYU@HDFCBANK&pn=www.delhivery.com&mc=4214&tr=O-zo0ou2yTjZCx-dk2b&am=6581.0&cu=INR&ver=01&mode=15&orgId=000000&gstBreakup=GST:30.0%7CCGST:0.0%7CSGST:0.0%7CIGST:30.0%7CCESS:0.0%7CGSTIncentive:12.0%7CGSTPCT:None&invoiceNo=UT/23-24/198&invoiceDate=2023-05-02T16:45:42&invoiceName=UT%2F23-24%2F198&gstIn=07ANLPC8083H1ZS&qrMedium=04",
+                "qr_url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyprod/wrkr/logistics/qr-code/Delhivery/original/Hv0blbPtA-16830153113571272087.png"
+              }
+            },
+            "awb_number_barcode_generator": {
+              "method": "barcode",
+              "kwargs": {
+                "value": "7923787945"
+              }
+            },
+            "digital_signature_generator": {
+              "method": "digitalsignature",
+              "kwargs": {
+                "value": "8345jhkdfn"
+              }
+            },
+            "awb_number_label_barcode_generator": {
+              "method": "barcode",
+              "kwargs": {
+                "value": [
+                  "9901090772264",
+                  "9901090772264"
+                ]
+              }
+            }
+          }
+        },
+        "delivery_partner_detail": {
+          "name": "fyndr",
+          "awb_number": "",
+          "dp_sort_code": "ABC/DEF",
+          "origin": "1678236",
+          "destination": "142345"
+        },
+        "customer_billing_detail": {
+          "name": "Megha Golecha",
+          "phone_no": "9769199489",
+          "address": "1001 Badri Vishal, Sahakar Nagar, Andheri West, 400053, Near Building No. 33, Shanti Nagar,Test,Mumbai,Maharashtra,India,400053",
+          "city": "Mumbai",
+          "state": "Maharashtra",
+          "country": "India",
+          "country_code": "IN",
+          "zip_code": "400053",
+          "state_code": "27",
+          "gstin": "",
+          "email": "shipment.hand_over_contact_json.email"
+        }
+      },
+      "__v": 0
+    }
+  ]
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDefaultHtmlTemplate
+Get html template for sales channel
+
+```golang
+
+data, err := FileStorage.GetDefaultHtmlTemplate(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| ApplicationID | float64 |  | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PdfTypeID`, `Format`
+
+
+Get default html template for invoice or label
+
+*Success Response:*
+
+
+
+Get last saved html template for invoice
+
+
+Schema: `Array<Object>`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### saveHtmlTemplate
+Update html template for invoice or label
+
+```golang
+
+data, err := FileStorage.SaveHtmlTemplate(CompanyID, ApplicationID, ID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| ApplicationID | float64 |  | 
+
+
+| ID | float64 |  | 
+
+
+| body |  pdfConfig | "Request body" 
+
+Update html template for invoice such as Invoice, Label, Deliver challan
+
+*Success Response:*
+
+
+
+Saved html template for invoice
+
+
+Schema: `Object`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### previewTemplate
+Preview HTML template
+
+```golang
+
+data, err := FileStorage.PreviewTemplate(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| ApplicationID | float64 |  | 
+
+
+| body |  pdfRender | "Request body" 
+
+Rendered HTML template with dummy json data
+
+*Success Response:*
+
+
+
+Get rendered html with dummy json payload
+
+
+Schema: `string`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDefaultPdfTemplate
+Default html template
+
+```golang
+
+data, err := FileStorage.GetDefaultPdfTemplate(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| ApplicationID | float64 |  | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PdfTypeID`, `Format`
+
+
+Get default html template data for invoice or label
+
+*Success Response:*
+
+
+
+Get rendered html with dummy json payload
+
+
+Schema: `Array<Object>`
+
+
+*Examples:*
+
+
+success
+```json
+{
+  "value": [
+    {
+      "_id": "64b7f21156a0cba523196482",
+      "pdf_type_id": 1,
+      "format": "A4",
+      "template": "<p> Hello World </p>",
+      "__v": 0
+    }
+  ]
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ---
 
@@ -30715,7 +31939,7 @@ Schema: `string`
 
 
 #### generateReport
-
+Generate finance reports.
 
 ```golang
 
@@ -30730,7 +31954,7 @@ data, err := Finance.GenerateReport(CompanyID, body);
 
 | body |  GenerateReportRequest | "Request body" 
 
-
+Generate finance reports.
 
 *Success Response:*
 
@@ -30753,7 +31977,7 @@ Schema: `GenerateReportJson`
 
 
 #### downloadReport
-
+Gives list of all downloaded reports.
 
 ```golang
 
@@ -30768,7 +31992,7 @@ data, err := Finance.DownloadReport(CompanyID, body);
 
 | body |  DownloadReport | "Request body" 
 
-
+Gives list of all downloaded reports.
 
 *Success Response:*
 
@@ -30791,7 +32015,7 @@ Schema: `DownloadReportList`
 
 
 #### getData
-
+Gives list of columns for table provided.
 
 ```golang
 
@@ -30806,7 +32030,7 @@ data, err := Finance.GetData(CompanyID, body);
 
 | body |  GetEngineRequest | "Request body" 
 
-
+Gives list of columns for table provided.
 
 *Success Response:*
 
@@ -30829,7 +32053,7 @@ Schema: `GetEngineResponse`
 
 
 #### getReason
-
+Gives list of the reasons.
 
 ```golang
 
@@ -30844,7 +32068,7 @@ data, err := Finance.GetReason(CompanyID, body);
 
 | body |  GetReasonRequest | "Request body" 
 
-
+Gives list of the reasons.
 
 *Success Response:*
 
@@ -30867,7 +32091,7 @@ Schema: `GetReasonResponse`
 
 
 #### getReportList
-
+Get the list of available reports for a company.
 
 ```golang
 
@@ -30877,12 +32101,12 @@ data, err := Finance.GetReportList(CompanyID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+| CompanyID | string | Company ID for which the data will be returned. Company_id is required. | 
 
 
 | body |  GetReportListRequest | "Request body" 
 
-
+Gives list of reports.
 
 *Success Response:*
 
@@ -30891,7 +32115,7 @@ data, err := Finance.GetReportList(CompanyID, body);
 Success
 
 
-Schema: `GetEngineResponse`
+Schema: `GetReportListResponse`
 
 
 
@@ -30905,7 +32129,7 @@ Schema: `GetEngineResponse`
 
 
 #### getAffiliate
-
+Gives list of affiliates for company.
 
 ```golang
 
@@ -30920,7 +32144,7 @@ data, err := Finance.GetAffiliate(CompanyID, body);
 
 | body |  GetAffiliate | "Request body" 
 
-
+Gives list of affiliates for company.
 
 *Success Response:*
 
@@ -30943,7 +32167,7 @@ Schema: `GetAffiliateResponse`
 
 
 #### downloadCreditDebitNote
-
+Download credit debit note pdf.
 
 ```golang
 
@@ -30958,7 +32182,7 @@ data, err := Finance.DownloadCreditDebitNote(CompanyID, body);
 
 | body |  DownloadCreditDebitNoteRequest | "Request body" 
 
-
+Download credit debit note pdf.
 
 *Success Response:*
 
@@ -30981,7 +32205,7 @@ Schema: `DownloadCreditDebitNoteResponse`
 
 
 #### paymentProcess
-
+Payment Processing API.
 
 ```golang
 
@@ -30996,7 +32220,7 @@ data, err := Finance.PaymentProcess(CompanyID, body);
 
 | body |  PaymentProcessRequest | "Request body" 
 
-
+Payment Processing API.
 
 *Success Response:*
 
@@ -31019,7 +32243,7 @@ Schema: `PaymentProcessResponse`
 
 
 #### creditlineDataplatform
-
+Used to fetch creditline data.
 
 ```golang
 
@@ -31034,7 +32258,7 @@ data, err := Finance.CreditlineDataplatform(CompanyID, body);
 
 | body |  CreditlineDataPlatformRequest | "Request body" 
 
-
+Used to fetch creditline data.
 
 *Success Response:*
 
@@ -31057,7 +32281,7 @@ Schema: `CreditlineDataPlatformResponse`
 
 
 #### isCreditlinePlatform
-
+Checks if seller has opted for creditline or not.
 
 ```golang
 
@@ -31072,7 +32296,7 @@ data, err := Finance.IsCreditlinePlatform(CompanyID, body);
 
 | body |  IsCreditlinePlatformRequest | "Request body" 
 
-
+Checks if seller has opted for creditline or not.
 
 *Success Response:*
 
@@ -31095,7 +32319,7 @@ Schema: `IsCreditlinePlatformResponse`
 
 
 #### invoiceType
-
+Gives list of active invoice type.
 
 ```golang
 
@@ -31110,7 +32334,7 @@ data, err := Finance.InvoiceType(CompanyID, body);
 
 | body |  InvoiceTypeRequest | "Request body" 
 
-
+Gives list of active invoice type.
 
 *Success Response:*
 
@@ -31133,7 +32357,7 @@ Schema: `InvoiceTypeResponse`
 
 
 #### invoiceListing
-
+Gives list of invoices.
 
 ```golang
 
@@ -31148,7 +32372,7 @@ data, err := Finance.InvoiceListing(CompanyID, body);
 
 | body |  InvoiceListingRequest | "Request body" 
 
-
+Gives list of invoices.
 
 *Success Response:*
 
@@ -31171,7 +32395,7 @@ Schema: `InvoiceListingResponse`
 
 
 #### invoicePDF
-
+Gives pdf view of invoice.
 
 ```golang
 
@@ -31186,7 +32410,7 @@ data, err := Finance.InvoicePDF(CompanyID, body);
 
 | body |  InvoicePdfRequest | "Request body" 
 
-
+Gives pdf view of invoice.
 
 *Success Response:*
 
@@ -31196,6 +32420,430 @@ Success
 
 
 Schema: `InvoicePdfResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### isCnRefundMethod
+Checks if seller has obtained cn as refund method or not.
+
+```golang
+
+data, err := Finance.IsCnRefundMethod(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  IsCnRefundMethodRequest | "Request body" 
+
+Checks if seller has obtained cn as refund method or not.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `IsCnRefundMethodResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createSellerCreditNoteConfig
+Creates credit note config.
+
+```golang
+
+data, err := Finance.CreateSellerCreditNoteConfig(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  CreateSellerCreditNoteConfigRequest | "Request body" 
+
+Creates credit note config.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `CreateSellerCreditNoteConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteConfig
+Deletes credit note config.
+
+```golang
+
+data, err := Finance.DeleteConfig(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  DeleteConfigRequest | "Request body" 
+
+Deletes credit note config.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `DeleteConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### channelDisplayName
+Provide channel display name dict.
+
+```golang
+
+data, err := Finance.ChannelDisplayName(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+
+| xQuery | struct | Includes properties such as `FilterKey`
+
+
+Provide channel display name dict.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `ChannelDisplayNameResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPdfUrlView
+Gives cn pdf url.
+
+```golang
+
+data, err := Finance.GetPdfUrlView(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  GetPdfUrlViewRequest | "Request body" 
+
+Gives cn pdf url.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetPdfUrlViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### creditNoteDetails
+Gives credit note details.
+
+```golang
+
+data, err := Finance.CreditNoteDetails(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  CreditNoteDetailsRequest | "Request body" 
+
+Gives credit note details.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `CreditNoteDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCustomerCreditBalance
+Gives customer credit balance.
+
+```golang
+
+data, err := Finance.GetCustomerCreditBalance(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  GetCustomerCreditBalanceRequest | "Request body" 
+
+Gives customer credit balance.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetCustomerCreditBalanceResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCnConfig
+Gives credit note config.
+
+```golang
+
+data, err := Finance.GetCnConfig(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  GetCnConfigRequest | "Request body" 
+
+Gives credit note config.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetCnConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### generateReportCustomerCn
+Generate Credit Note report and gives Note details.
+
+```golang
+
+data, err := Finance.GenerateReportCustomerCn(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  GenerateReportCustomerCnRequest | "Request body" 
+
+Generate Credit Note report and gives Note details.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GenerateReportCustomerCnResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### downloadReportCustomerCn
+Gives list of downloaded reports.
+
+```golang
+
+data, err := Finance.DownloadReportCustomerCn(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  DownloadReportCustomerCnRequest | "Request body" 
+
+Gives list of downloaded reports.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `DownloadReportCustomerCnResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getReportingFilters
+Gets all customer Cn filters and search.
+
+```golang
+
+data, err := Finance.GetReportingFilters(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `FilterKey`, `AffiliateID`
+
+
+Gets all customer Cn filters and search.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetReportingFiltersResponse`
 
 
 
@@ -36193,6 +37841,68 @@ Schema: `BagStateTransitionMap`
 ---
 
 
+#### getRoleBaseStateTransition
+To fetch next state transitions.
+
+```golang
+
+data, err := Order.GetRoleBaseStateTransition(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company ID | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `OrderingChannel`, `Status`
+
+
+This endpoint will fetch next possible states based on logged in user
+
+
+*Success Response:*
+
+
+
+Role wise state transition mapping, for next possible state
+
+
+Schema: `RoleBaseStateTransitionMapping`
+
+
+*Examples:*
+
+
+send state transition success
+```json
+{
+  "value": {
+    "success": true,
+    "next_statuses": [
+      "bag_picked",
+      "delivery_done",
+      "rto_bag_delivered",
+      "rto_in_transit"
+    ]
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
 #### fetchCreditBalanceDetail
 
 
@@ -36383,6 +38093,58 @@ Schema: `VerifyOtpResponse`
 ---
 
 
+#### downloadLanesReport
+
+
+```golang
+
+data, err := Order.DownloadLanesReport(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  BulkReportsDownloadRequest | "Request body" 
+
+
+
+*Success Response:*
+
+
+
+Bulk Report creation initiated.
+
+
+Schema: `BulkReportsDownloadResponse`
+
+
+*Examples:*
+
+
+success
+```json
+true
+```
+
+batch_id
+```json
+"0000-1111-2222-3333"
+```
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getShipments
 
 
@@ -36442,7 +38204,9 @@ data, err := Order.GetShipments(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `Lane`, `BagStatus`, `StatusOverrideLane`, `TimeToDispatch`, `SearchType`, `SearchValue`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PageNo`, `PageSize`, `FetchActiveShipment`, `ExcludeLockedShipments`, `PaymentMethods`, `ChannelShipmentID`, `ChannelOrderID`, `CustomMeta`, `OrderingChannel`, `CompanyAffiliateTag`, `MyOrders`, `PlatformUserID`
+
+
+| xQuery | struct | Includes properties such as `Lane`, `BagStatus`, `StatusOverrideLane`, `TimeToDispatch`, `SearchType`, `SearchValue`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PageNo`, `PageSize`, `FetchActiveShipment`, `ExcludeLockedShipments`, `PaymentMethods`, `ChannelShipmentID`, `ChannelOrderID`, `CustomMeta`, `OrderingChannel`, `CompanyAffiliateTag`, `MyOrders`, `PlatformUserID`, `Tags`
 
 
 
@@ -39637,6 +41401,446 @@ List Order Beneficiary
 
 
 Schema: `GetPaymentCodeResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updatePaymentSession
+API to update status of a payment.
+
+```golang
+
+data, err := Payment.UpdatePaymentSession(CompanyID, ApplicationID, Gid, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| Gid | string | global identifier of the entity (e.g. order, cart etc.) against which payment_session was initiated. This is generated by Fynd payments platform and is unique. | 
+
+
+| body |  PaymentSessionRequestSerializer | "Request body" 
+
+A payment_session is initiated against a global identifier (gid) which is identifies the entity payment is initiated against. e.g. order_id, cart_id. This endpoint is to update the status of the said payment_session.
+
+*Success Response:*
+
+
+
+Success. Returns the status of Update or not. Check the example shown below or refer `PaymentSessionResponseSerializer` for more details.
+
+
+Schema: `PaymentSessionResponseSerializer`
+
+
+*Examples:*
+
+
+status_update_success
+```json
+{
+  "summary": "payment status updated successfully",
+  "value": {
+    "gid": "Payment Received",
+    "status": "initiated",
+    "total_amount": 100,
+    "currency": "INR",
+    "platform_transaction_details": [
+      {
+        "object": "platform_payment",
+        "transaction_id": "pay_wtt5r23mpebexcjsxzylyjhn7a",
+        "payment_id": "pay_wtt5r23mpebexcjsxzylyjhn7a"
+      }
+    ]
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateRefundSession
+API to update the status of a refund
+
+```golang
+
+data, err := Payment.UpdateRefundSession(CompanyID, ApplicationID, Gid, RequestID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| Gid | string | global identifier of the entity (e.g. order, cart etc.) against which payment_session was initiated. This is generated by Fynd payments platform and is unique. | 
+
+
+| RequestID | string | A unique id that was used to initiate a refund session. This is generated by Fynd platform and is usually shipment_id. | 
+
+
+| body |  RefundSessionRequestSerializer | "Request body" 
+
+A refund_session is initiated against a refund request, and this endpoint is to update the status against the refund request_id. A gid is unique indentifier of the entity against which payment was received e.g. an order.
+
+*Success Response:*
+
+
+
+Returns the response weather it is success or not. Check the example shown below or refer `RefundSessionResponseSerializer` for more details.
+
+
+Schema: `RefundSessionResponseSerializer`
+
+
+*Examples:*
+
+
+status_update_success
+```json
+{
+  "summary": "refund status is updated successfully",
+  "value": {
+    "gid": "FY615DE25839C4AF3A1A",
+    "status": "initiated",
+    "total_refund_amount": 100,
+    "currency": "INR",
+    "platform_refund_details": [
+      {
+        "transaction_id": "pay_wtt5r23mpebexcjsxzylyjhn7a",
+        "refund_id": "act_4lan4lrf2bxexdbinmqoln4nda"
+      }
+    ]
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getMerchantPaymentOption
+Get Payment modes and COD details.
+
+```golang
+
+data, err := Payment.GetMerchantPaymentOption(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+
+This api fetches all the available PGs for merchant and its offline payment mode details.
+
+*Success Response:*
+
+
+
+Success.
+
+
+Schema: `MerchnatPaymentModeResponse`
+
+
+*Examples:*
+
+
+merchant_payment_response_success
+```json
+{
+  "summary": "List of active PGs for merchant and its offline payment configurations",
+  "value": {
+    "success": true,
+    "message": "",
+    "items": {
+      "online": {
+        "is_active": true,
+        "aggregators": [
+          {
+            "id": 1,
+            "name": "Simpl",
+            "logo": "https://hdn-1.fynd.com/payment/simpl-pg-logo.jpg"
+          }
+        ]
+      },
+      "offline": {
+        "is_active": true,
+        "payment_modes": {
+          "cod": [
+            {
+              "user_cod_limit": 0,
+              "cod_charges": 0,
+              "anonymous_cod": false,
+              "cod_max_order_value": 0,
+              "cod_min_order_value": 0,
+              "cod_charges_max_value": 0,
+              "cod_charges_min_value": 0
+            }
+          ]
+        }
+      },
+      "split": {
+        "is_active": true,
+        "payment_modes": {
+          "split_payment": {}
+        }
+      }
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### patchMerchantPaymentOption
+Update Payment modes and COD details.
+
+```golang
+
+data, err := Payment.PatchMerchantPaymentOption(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| body |  MerchnatPaymentModeResponse | "Request body" 
+
+To updated online payment as active/inactive or offline payment configuration like cod charges, anonymous cod allowed flags.
+
+*Success Response:*
+
+
+
+Success.
+
+
+Schema: `MerchnatPaymentModeResponse`
+
+
+*Examples:*
+
+
+merchant_payment_response_success
+```json
+{
+  "summary": "updated payment mode configurations.",
+  "value": {
+    "success": true,
+    "message": "",
+    "items": {
+      "aggregators": [
+        {
+          "id": 1,
+          "name": "Simpl"
+        }
+      ]
+    },
+    "offline": {
+      "is_active": true,
+      "payment_modes": {
+        "cod": {
+          "cod_charges": 0,
+          "user_cod_limit": 0,
+          "cod_min_order_value": 0,
+          "cod_max_order_value": 10000,
+          "cod_charges_min_value": 100,
+          "cod_charges_max_value": 49000,
+          "anonymous_cod": false
+        },
+        "split": {
+          "is_active": false
+        }
+      }
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getMerchantAggregatorPaymentModeDetails
+Get Aggregator, payment mode and sub payment mode.
+
+```golang
+
+data, err := Payment.GetMerchantAggregatorPaymentModeDetails(CompanyID, ApplicationID, AggregatorID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| AggregatorID | float64 | Aggregators Id | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `BusinessUnit`, `Device`
+
+
+Get Aggregator, payment mode and sub payment mode details.
+
+*Success Response:*
+
+
+
+Success.
+
+
+Schema: `MerchnatPaymentModeResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### patchMerchantAggregatorPaymentModeDetails
+Update Aggregator, payment mode and sub payment mode.
+
+```golang
+
+data, err := Payment.PatchMerchantAggregatorPaymentModeDetails(CompanyID, ApplicationID, AggregatorID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| AggregatorID | float64 | Aggregators Id | 
+
+
+| body |  MerchnatPaymentModeResponse | "Request body" 
+
+Update Aggregator, payment mode and sub payment mode details.
+
+*Success Response:*
+
+
+
+Success.
+
+
+Schema: `MerchnatPaymentModeResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPGConfigAggregators
+Get Aggregators available to be added as PG.
+
+```golang
+
+data, err := Payment.GetPGConfigAggregators(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+
+Get Aggregators available to be added as PG.
+
+*Success Response:*
+
+
+
+Success.
+
+
+Schema: `MerchnatPaymentModeResponse`
 
 
 
