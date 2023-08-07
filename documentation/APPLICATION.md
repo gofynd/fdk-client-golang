@@ -1,7 +1,7 @@
 # FDK Application Front API Documentaion
 
 
-* [Cart](#Cart) - Cart APIs 
+* [Cart](#Cart) - Manages Cart, Coupons, Promotions, Checkout 
 * [Catalog](#Catalog) - Catalog API's allows you to access list of products, prices, seller details, similar features, variants and many more useful features.  
 * [Common](#Common) - Application configuration apis 
 * [Communication](#Communication) - Manages email, sms, push notifications sent to users 
@@ -1178,7 +1178,7 @@ Product has been added to your cart
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -1192,6 +1192,7 @@ Product has been added to your cart
             "parent_item_id": 7501190,
             "parent_item_size": "OS"
           },
+          "identifiers": {},
           "moq": {},
           "delivery_promise": {
             "timestamp": {
@@ -1302,6 +1303,7 @@ Product has been added to your cart
         {
           "key": "246228_S",
           "moq": {},
+          "identifiers": {},
           "delivery_promise": {
             "timestamp": {
               "min": 1646257339,
@@ -1415,6 +1417,7 @@ Product has been added to your cart
         {
           "key": "443175_S",
           "moq": {},
+          "identifiers": {},
           "delivery_promise": {
             "timestamp": {
               "min": 1646257339,
@@ -1527,6 +1530,7 @@ Product has been added to your cart
         {
           "key": "778937_OS",
           "moq": {},
+          "identifiers": {},
           "delivery_promise": {
             "timestamp": {
               "min": 1646257339,
@@ -1639,9 +1643,9 @@ Product has been added to your cart
       "buy_now": false,
       "cart_id": 7927,
       "uid": "7927",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
-      "last_modified": "Tue, 03 Sep 2019 06:00:43 GMT",
+      "last_modified": "2020-03-09T00:00:00.000Z",
       "restrict_checkout": false,
       "is_valid": true
     },
@@ -1676,7 +1680,7 @@ Sorry, item is out of stock
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -1729,6 +1733,7 @@ Sorry, item is out of stock
             "parent_item_id": 7501190,
             "parent_item_size": "OS"
           },
+          "identifiers": {},
           "article": {
             "type": "article",
             "is_gift_visible": true,
@@ -1837,11 +1842,11 @@ Sorry, item is out of stock
       "buy_now": false,
       "cart_id": 54,
       "uid": "54",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
       "restrict_checkout": false,
       "is_valid": false,
-      "last_modified": "Tue, 03 Sep 2019 09:55:40 GMT"
+      "last_modified": "2020-03-09T00:00:00.000Z"
     },
     "result": {}
   }
@@ -1884,7 +1889,7 @@ Update items in the cart
 | body |  UpdateCartRequest | "Request body" 
 
 
-<p>Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/:slug/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/:identifier​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
+Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs operation:  Operation for current api call. update_item for update items. remove_item for removing items. item_id "/platform/content/v1/products/" item_size "/platform/content/v1/products/:slug/sizes/" quantity item quantity (must be greater than or equal to 1) article_id "/content​/v1​/products​/:identifier​/sizes​/price​/" item_index item position in the cart (must be greater than or equal to 0)
 
 *Success Response:*
 
@@ -1923,7 +1928,7 @@ Nothing updated
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -1976,6 +1981,7 @@ Nothing updated
             "parent_item_id": 7501190,
             "parent_item_size": "OS"
           },
+          "identifiers": {},
           "article": {
             "type": "article",
             "is_gift_visible": true,
@@ -2084,11 +2090,11 @@ Nothing updated
       "buy_now": false,
       "cart_id": 54,
       "uid": "54",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
       "restrict_checkout": false,
       "is_valid": true,
-      "last_modified": "Tue, 03 Sep 2019 10:19:20 GMT"
+      "last_modified": "2020-03-09T00:00:00.000Z"
     },
     "result": {
       "707569_90": {
@@ -2764,7 +2770,7 @@ Item updated in the cart
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -2870,6 +2876,7 @@ Item updated in the cart
             "parent_item_id": 7501190,
             "parent_item_size": "OS"
           },
+          "identifiers": {},
           "moq": {},
           "delivery_promise": {
             "timestamp": {
@@ -2936,9 +2943,9 @@ Item updated in the cart
       "buy_now": false,
       "cart_id": 12426,
       "uid": "12426",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
-      "last_modified": "Thu, 22 Aug 2019 04:51:42 GMT",
+      "last_modified": "2020-03-09T00:00:00.000Z",
       "restrict_checkout": false,
       "is_valid": true
     },
@@ -3356,7 +3363,7 @@ Fetch address
 
 
 
-Use this API to get all the addresses associated with an account. If successful, returns a Address resource in the response body specified in GetAddressesResponse.attibutes listed below are optional <ul> <li> <font color="monochrome">uid</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
+Use this API to get all the addresses associated with an account. If successful, returns a Address resource in the response body specified in GetAddressesResponse.attibutes listed below are optional uid address_id mobile_no checkout_mode tags default
 
 *Success Response:*
 
@@ -3443,7 +3450,7 @@ Fetch a single address by its ID
 
 
 
-Use this API to get an addresses using its ID. If successful, returns a Address resource in the response body specified in `Address`. Attibutes listed below are optional <ul> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
+Use this API to get an addresses using its ID. If successful, returns a Address resource in the response body specified in `Address`. Attibutes listed below are optional mobile_no checkout_mode tags default
 
 *Success Response:*
 
@@ -3482,7 +3489,7 @@ Update address added to an account
 | body |  Address | "Request body" 
 
 
-<p>Use this API to update an existing address in the account. Request object should contain attributes mentioned in  <font color="blue">Address </font> can be updated. These attributes are:</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
+Use this API to update an existing address in the account. Request object should contain attributes mentioned in Address can be updated. These attributes are: is_default_address landmark area pincode email address_type name address_id address
 
 *Success Response:*
 
@@ -3565,7 +3572,7 @@ Select an address from available addresses
 | body |  SelectCartAddressRequest | "Request body" 
 
 
-<p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul></p>
+Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. address_id billing_address_id uid
 
 *Success Response:*
 
@@ -3925,7 +3932,7 @@ Shipment Generated
       "coupon": {
         "type": "cash",
         "code": "",
-        "uid": null,
+        "uid": "",
         "value": 0,
         "is_applied": false,
         "message": "Sorry! Invalid Coupon"
@@ -4010,6 +4017,7 @@ Shipment Generated
         "items": [
           {
             "quantity": 1,
+            "identifiers": {},
             "product": {
               "type": "product",
               "uid": 820312,
@@ -4106,9 +4114,9 @@ Shipment Generated
     ],
     "delivery_charge_info": "",
     "coupon_text": "View all offers",
-    "gstin": null,
+    "gstin": "",
     "checkout_mode": "self",
-    "last_modified": "Thu, 22 Aug 2019 20:21:48 GMT",
+    "last_modified": "2020-03-09T00:00:00.000Z",
     "restrict_checkout": false,
     "is_valid": true
   }
@@ -4313,7 +4321,7 @@ Shipment Generation Failed
       "coupon": {
         "type": "cash",
         "code": "",
-        "uid": null,
+        "uid": "",
         "value": 0,
         "is_applied": false,
         "message": "Sorry! Invalid Coupon"
@@ -4357,9 +4365,9 @@ Shipment Generation Failed
     "message": "Shipments could not be generated. Please Try again after some time.",
     "delivery_charge_info": "",
     "coupon_text": "View all offers",
-    "gstin": null,
+    "gstin": "",
     "checkout_mode": "self",
-    "last_modified": "Thu, 22 Aug 2019 20:21:48 GMT",
+    "last_modified": "2020-03-09T00:00:00.000Z",
     "restrict_checkout": false,
     "is_valid": false
   }
@@ -4620,7 +4628,7 @@ Successful checkout cod payment
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -4669,6 +4677,7 @@ Successful checkout cod payment
       "items": [
         {
           "key": "820312_L",
+          "identifiers": {},
           "message": "",
           "bulk_offer": {},
           "price": {
@@ -4765,9 +4774,9 @@ Successful checkout cod payment
       "coupon_text": "View all offers",
       "cart_id": 7483,
       "uid": "7483",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
-      "last_modified": "Thu, 22 Aug 2019 04:58:44 GMT",
+      "last_modified": "2020-03-09T00:00:00.000Z",
       "restrict_checkout": false,
       "is_valid": true
     },
@@ -4979,6 +4988,7 @@ Cart Merged/Replaced
       "items": [
         {
           "key": "791651_6",
+          "identifiers": {},
           "discount": "",
           "bulk_offer": {},
           "coupon_message": "",
@@ -5074,6 +5084,7 @@ Cart Merged/Replaced
         },
         {
           "key": "791651_7",
+          "identifiers": {},
           "discount": "",
           "bulk_offer": {},
           "coupon_message": "",
@@ -5194,7 +5205,7 @@ Cart Merged/Replaced
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid coupon"
@@ -5222,17 +5233,17 @@ Cart Merged/Replaced
       },
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
-      "gstin": null,
+      "gstin": "",
       "comment": "",
       "checkout_mode": "self",
       "payment_selection_lock": {
         "enabled": false,
         "default_options": "COD",
-        "payment_identifier": null
+        "payment_identifier": ""
       },
       "restrict_checkout": false,
       "is_valid": true,
-      "last_modified": "Mon, 16 Dec 2019 07:02:18 GMT"
+      "last_modified": "2020-03-09T00:00:00.000Z"
     }
   }
 }
@@ -5580,7 +5591,7 @@ Successful checkout cod payment
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -5629,6 +5640,7 @@ Successful checkout cod payment
       "items": [
         {
           "key": "820312_L",
+          "identifiers": {},
           "message": "",
           "bulk_offer": {},
           "price": {
@@ -5725,9 +5737,9 @@ Successful checkout cod payment
       "coupon_text": "View all offers",
       "cart_id": 7483,
       "uid": "7483",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
-      "last_modified": "Thu, 22 Aug 2019 04:58:44 GMT",
+      "last_modified": "2020-03-09T00:00:00.000Z",
       "restrict_checkout": false,
       "is_valid": true
     },
@@ -7085,7 +7097,7 @@ Get countries, states, cities
 
 
 
-
+Get countries, states, cities
 
 *Success Response:*
 
@@ -8471,7 +8483,7 @@ default
   "value": {
     "_id": "5eaa451a21a4dd75f0fd96c5",
     "application": "5d3ebd89f540e7506b8b3548",
-    "_custom_json": null,
+    "_custom_json": {},
     "slug": "pnc-landing",
     "action": {
       "page": {
@@ -8602,7 +8614,7 @@ Get the navigation
 
 
 
-Use this API to fetch the navigations details which includes the items of the navigation pane. It also shows the links and sub-navigations.
+Use this API to fetch the navigations details which includes the items of the navigation panel. It also shows the links and sub-navigations.
 
 *Success Response:*
 
@@ -9582,8 +9594,8 @@ Default
       "company_id": "884"
     },
     "content": {
-      "title": "SOme title Response",
-      "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
+      "title": "Tickets",
+      "description": "Tickets Data",
       "attachments": []
     },
     "status": {
@@ -9847,7 +9859,7 @@ Default
         }
       }
     },
-    "created_by": "5d1363adf599d850df93175e",
+    "created_by": {},
     "createdAt": "2021-02-03T12:55:46.808Z",
     "updatedAt": "2021-02-03T12:55:46.808Z",
     "__v": 0
@@ -9904,8 +9916,8 @@ Default
       "company_id": "884"
     },
     "content": {
-      "title": "SOme title Response",
-      "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
+      "title": "Some title Response",
+      "description": "description",
       "attachments": []
     },
     "status": {
@@ -10139,6 +10151,7 @@ Default
 ```json
 {
   "value": {
+    "priority": "high",
     "login_required": false,
     "should_notify": false,
     "inputs": [
@@ -10239,8 +10252,8 @@ Default
         "company_id": "884"
       },
       "content": {
-        "title": "SOme title Response",
-        "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
+        "title": "Some title Response",
+        "description": "description",
         "attachments": []
       },
       "status": {
@@ -10626,8 +10639,8 @@ Pincode data found
         "lat_long": {
           "type": "Point",
           "coordinates": [
-            3.8858955,
-            7.2272335
+            "3.8858955",
+            "7.2272335"
           ]
         }
       }
@@ -10789,7 +10802,7 @@ Pincode not found
             },
             "manufacturing_time": 2,
             "manufacturing_time_unit": "days",
-            "promise": null,
+            "promise": {},
             "error": {
               "type": "ValueError",
               "value": "99999",
@@ -14474,7 +14487,7 @@ Product has been added to your cart
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -14482,6 +14495,7 @@ Product has been added to your cart
       },
       "items": [
         {
+          "identifiers": {},
           "key": "751083_10",
           "parent_item_identifiers": {
             "identifier": "ZASFF",
@@ -14597,6 +14611,7 @@ Product has been added to your cart
         },
         {
           "key": "246228_S",
+          "identifiers": {},
           "moq": {},
           "delivery_promise": {
             "timestamp": {
@@ -14711,6 +14726,7 @@ Product has been added to your cart
         {
           "key": "443175_S",
           "moq": {},
+          "identifiers": {},
           "delivery_promise": {
             "timestamp": {
               "min": 1646257339,
@@ -14822,6 +14838,7 @@ Product has been added to your cart
         },
         {
           "key": "778937_OS",
+          "identifiers": {},
           "moq": {},
           "delivery_promise": {
             "timestamp": {
@@ -14935,9 +14952,9 @@ Product has been added to your cart
       "buy_now": false,
       "cart_id": 7927,
       "uid": "7927",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
-      "last_modified": "Tue, 03 Sep 2019 06:00:43 GMT",
+      "last_modified": "2019-09-03T00:00:00.000Z",
       "restrict_checkout": false,
       "is_valid": true
     },
@@ -14972,7 +14989,7 @@ Sorry, item is out of stock
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -15019,6 +15036,7 @@ Sorry, item is out of stock
       "items": [
         {
           "bulk_offer": {},
+          "identifiers": {},
           "discount": "67% OFF",
           "parent_item_identifiers": {
             "identifier": "ZASFF",
@@ -15133,11 +15151,11 @@ Sorry, item is out of stock
       "buy_now": false,
       "cart_id": 54,
       "uid": "54",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
       "restrict_checkout": false,
       "is_valid": false,
-      "last_modified": "Tue, 03 Sep 2019 09:55:40 GMT"
+      "last_modified": "2019-09-03T00:00:00.000Z"
     },
     "result": {}
   }
@@ -15180,7 +15198,7 @@ Update items in the cart
 | body |  UpdateCartRequest | "Request body" 
 
 
-<p>Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/:slug/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/:identifier​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
+Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size.
 
 *Success Response:*
 
@@ -15219,7 +15237,7 @@ Nothing updated
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -15266,6 +15284,7 @@ Nothing updated
       "items": [
         {
           "bulk_offer": {},
+          "identifiers": {},
           "discount": "67% OFF",
           "parent_item_identifiers": {
             "identifier": "ZASFF",
@@ -15380,11 +15399,11 @@ Nothing updated
       "buy_now": false,
       "cart_id": 54,
       "uid": "54",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
       "restrict_checkout": false,
       "is_valid": true,
-      "last_modified": "Tue, 03 Sep 2019 10:19:20 GMT"
+      "last_modified": "2019-09-03T00:00:00.000Z"
     },
     "result": {
       "707569_90": {
@@ -16060,7 +16079,7 @@ Item updated in the cart
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -16111,6 +16130,7 @@ Item updated in the cart
           "key": "437414_7",
           "message": "",
           "bulk_offer": {},
+          "identifiers": {},
           "price": {
             "base": {
               "add_on": 5499,
@@ -16232,9 +16252,9 @@ Item updated in the cart
       "buy_now": false,
       "cart_id": 12426,
       "uid": "12426",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
-      "last_modified": "Thu, 22 Aug 2019 04:51:42 GMT",
+      "last_modified": "2019-08-22T00:00:00.000Z",
       "restrict_checkout": false,
       "is_valid": true
     },
@@ -16614,7 +16634,7 @@ Fetch address
 
 
 
-Use this API to get all the addresses associated with an account. If successful, returns a Address resource in the response body specified in GetAddressesResponse.attibutes listed below are optional <ul> <li> <font color="monochrome">uid</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
+Use this API to get all the addresses associated with an account. If successful, returns a Address resource in the response body specified in GetAddressesResponse.attibutes listed below are optional 
 
 *Success Response:*
 
@@ -16701,7 +16721,7 @@ Fetch a single address by its ID
 
 
 
-Use this API to get an addresses using its ID. If successful, returns a Address resource in the response body specified in `Address`. Attibutes listed below are optional <ul> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
+Use this API to get an addresses using its ID. If successful, returns a Address resource in the response body specified in `Address`. Attibutes listed below are optional 
 
 *Success Response:*
 
@@ -16740,7 +16760,7 @@ Update address added to an account
 | body |  Address | "Request body" 
 
 
-<p>Use this API to update an existing address in the account. Request object should contain attributes mentioned in  <font color="blue">Address </font> can be updated. These attributes are:</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
+Use this API to update an existing address in the account. Request object should contain attributes mentioned in Address  can be updated.
 
 *Success Response:*
 
@@ -16823,7 +16843,7 @@ Select an address from available addresses
 | body |  SelectCartAddressRequest | "Request body" 
 
 
-<p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul></p>
+Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. 
 
 *Success Response:*
 
@@ -17184,7 +17204,7 @@ Shipment Generated
       "coupon": {
         "type": "cash",
         "code": "",
-        "uid": null,
+        "uid": "",
         "value": 0,
         "is_applied": false,
         "message": "Sorry! Invalid Coupon"
@@ -17302,6 +17322,7 @@ Shipment Generated
             },
             "discount": "",
             "bulk_offer": {},
+            "identifiers": {},
             "key": "820312_L",
             "price": {
               "base": {
@@ -17364,9 +17385,9 @@ Shipment Generated
     ],
     "delivery_charge_info": "",
     "coupon_text": "View all offers",
-    "gstin": null,
+    "gstin": "",
     "checkout_mode": "self",
-    "last_modified": "Thu, 22 Aug 2019 20:21:48 GMT",
+    "last_modified": "2019-08-22T00:00:00.000Z",
     "restrict_checkout": false,
     "is_valid": true
   }
@@ -17570,7 +17591,7 @@ Shipment Generation Failed
       "coupon": {
         "type": "cash",
         "code": "",
-        "uid": null,
+        "uid": "",
         "value": 0,
         "is_applied": false,
         "message": "Sorry! Invalid Coupon"
@@ -17614,9 +17635,9 @@ Shipment Generation Failed
     "message": "Shipments could not be generated. Please Try again after some time.",
     "delivery_charge_info": "",
     "coupon_text": "View all offers",
-    "gstin": null,
+    "gstin": "",
     "checkout_mode": "self",
-    "last_modified": "Thu, 22 Aug 2019 20:21:48 GMT",
+    "last_modified": "2019-08-22T00:00:00.000Z",
     "restrict_checkout": false,
     "is_valid": false
   }
@@ -17873,7 +17894,7 @@ Shipment Generated
       "coupon": {
         "type": "cash",
         "code": "",
-        "uid": null,
+        "uid": "",
         "value": 0,
         "is_applied": false,
         "message": "Sorry! Invalid Coupon"
@@ -17992,6 +18013,7 @@ Shipment Generated
             },
             "discount": "",
             "bulk_offer": {},
+            "identifiers": {},
             "key": "820312_L",
             "price": {
               "base": {
@@ -18054,9 +18076,9 @@ Shipment Generated
     ],
     "delivery_charge_info": "",
     "coupon_text": "View all offers",
-    "gstin": null,
+    "gstin": "",
     "checkout_mode": "self",
-    "last_modified": "Thu, 22 Aug 2019 20:21:48 GMT",
+    "last_modified": "2019-08-22T00:00:00.000Z",
     "restrict_checkout": false,
     "is_valid": true
   }
@@ -18260,7 +18282,7 @@ Shipment Generation Failed
       "coupon": {
         "type": "cash",
         "code": "",
-        "uid": null,
+        "uid": "",
         "value": 0,
         "is_applied": false,
         "message": "Sorry! Invalid Coupon"
@@ -18304,9 +18326,9 @@ Shipment Generation Failed
     "message": "Shipments could not be generated. Please Try again after some time.",
     "delivery_charge_info": "",
     "coupon_text": "View all offers",
-    "gstin": null,
+    "gstin": "",
     "checkout_mode": "self",
-    "last_modified": "Thu, 22 Aug 2019 20:21:48 GMT",
+    "last_modified": "2019-08-22T00:00:00.000Z",
     "restrict_checkout": false,
     "is_valid": false
   }
@@ -18567,7 +18589,7 @@ Successful checkout cod payment
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -18618,6 +18640,7 @@ Successful checkout cod payment
           "key": "820312_L",
           "message": "",
           "bulk_offer": {},
+          "identifiers": {},
           "price": {
             "base": {
               "add_on": 1999,
@@ -18712,9 +18735,9 @@ Successful checkout cod payment
       "coupon_text": "View all offers",
       "cart_id": 7483,
       "uid": "7483",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
-      "last_modified": "Thu, 22 Aug 2019 04:58:44 GMT",
+      "last_modified": "2019-08-22T00:00:00.000Z",
       "restrict_checkout": false,
       "is_valid": true
     },
@@ -19006,6 +19029,7 @@ Cart Merged/Replaced
           "key": "791651_6",
           "discount": "",
           "bulk_offer": {},
+          "identifiers": {},
           "coupon_message": "",
           "article": {
             "type": "article",
@@ -19101,6 +19125,7 @@ Cart Merged/Replaced
           "key": "791651_7",
           "discount": "",
           "bulk_offer": {},
+          "identifiers": {},
           "coupon_message": "",
           "article": {
             "type": "article",
@@ -19219,7 +19244,7 @@ Cart Merged/Replaced
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid coupon"
@@ -19247,17 +19272,17 @@ Cart Merged/Replaced
       },
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
-      "gstin": null,
+      "gstin": "",
       "comment": "",
       "checkout_mode": "self",
       "payment_selection_lock": {
         "enabled": false,
         "default_options": "COD",
-        "payment_identifier": null
+        "payment_identifier": ""
       },
       "restrict_checkout": false,
       "is_valid": true,
-      "last_modified": "Mon, 16 Dec 2019 07:02:18 GMT"
+      "last_modified": "2019-12-16T00:00:00.000Z"
     }
   }
 }
@@ -19717,14 +19742,14 @@ Success
       "currency": "INR",
       "percent": 0,
       "display_absoulte": "0.00",
-      "display_percent": 0
+      "display_percent": "0%"
     },
     "base_discount": {
       "absolute": 0,
       "currency": "INR",
       "percent": 0,
       "display_absoulte": "0.00",
-      "display_percent": 0
+      "display_percent": "0"
     },
     "points": 0,
     "applied_rule_bucket": {

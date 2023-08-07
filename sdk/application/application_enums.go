@@ -268,12 +268,16 @@ import (
             COMMENT HistoryTypeEnum = "comment"
             
             
+            //THREAD defines constant for the `thread` 
+            THREAD HistoryTypeEnum = "thread"
+            
+            
        )
 
     //IsValid return error if enum is invalid
     func (hi HistoryTypeEnum) IsValid() error {
       switch hi {
-        case  RATING, LOG, COMMENT : 
+        case  RATING, LOG, COMMENT, THREAD : 
         return nil
       }
       return errors.New("Invalid HistoryTypeEnum type")
@@ -357,36 +361,6 @@ import (
         return nil
       }
       return errors.New("Invalid TicketSourceEnum type")
-    }
-
-
-
-    //TicketIntegrationDetails used by Lead
-    type TicketIntegrationDetails  string
-    
-    const (
-            
-            //DEFAULT defines constant for the `default` 
-            DEFAULT TicketIntegrationDetails = "default"
-            
-            
-            //FRESHDESK defines constant for the `freshdesk` 
-            FRESHDESK TicketIntegrationDetails = "freshdesk"
-            
-            
-            //KAPTURE defines constant for the `kapture` 
-            KAPTURE TicketIntegrationDetails = "kapture"
-            
-            
-       )
-
-    //IsValid return error if enum is invalid
-    func (ti TicketIntegrationDetails) IsValid() error {
-      switch ti {
-        case  DEFAULT, FRESHDESK, KAPTURE : 
-        return nil
-      }
-      return errors.New("Invalid TicketIntegrationDetails type")
     }
 
 

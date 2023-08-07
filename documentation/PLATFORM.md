@@ -7,18 +7,19 @@
 * [Catalog](#Catalog) - Catalog - Platform Front API's' API's allows you to access list of products, prices, seller details, similar features, variants and many more useful features.  
 * [Common](#Common) - Application configuration apis 
 * [Communication](#Communication) - Manages email, sms, push notifications sent to users 
-* [CompanyProfile](#CompanyProfile) -  
+* [CompanyProfile](#CompanyProfile) - Catalog CBS - platform Front API's 
 * [Configuration](#Configuration) - Application configuration apis 
 * [Content](#Content) - Content System 
 * [Discount](#Discount) - Discount 
 * [FileStorage](#FileStorage) - File Storage 
 * [Finance](#Finance) - Handles all finance related activities 
-* [Inventory](#Inventory) -  
-* [Lead](#Lead) - Handles communication between Administrator <-> Staff and Staff <-> Users 
+* [Inventory](#Inventory) - Catalog - Platform Front API's' API's allows you to access list of products, prices, seller details, similar features, variants and many more useful features.  
+* [Lead](#Lead) - Handles communication between Administrator 
 * [Order](#Order) - Handles all platform order and shipment api(s) 
 * [Partner](#Partner) - Partner configuration apis 
 * [Payment](#Payment) - Collect payment through many payment gateway i.e Stripe, Razorpay, Juspay etc.into Fynd or Self account 
 * [Rewards](#Rewards) - Earn and redeem reward points 
+* [Serviceability](#Serviceability) - Logistics Configuration API's allows you to configure zone, application logistics and many more useful features.  
 * [Share](#Share) - Short link and QR Code 
 * [Theme](#Theme) - Responsible for themes 
 * [User](#User) - Authentication Service 
@@ -317,6 +318,7 @@
     * [getLocationDetail](#getlocationdetail)
     * [updateLocation](#updatelocation)
     * [createLocationBulk](#createlocationbulk)
+    * [getLocationTags](#getlocationtags)
     
 
 * [Configuration](#Configuration)
@@ -488,6 +490,17 @@
     * [invoiceType](#invoicetype)
     * [invoiceListing](#invoicelisting)
     * [invoicePDF](#invoicepdf)
+    * [isCnRefundMethod](#iscnrefundmethod)
+    * [createSellerCreditNoteConfig](#createsellercreditnoteconfig)
+    * [deleteConfig](#deleteconfig)
+    * [channelDisplayName](#channeldisplayname)
+    * [getPdfUrlView](#getpdfurlview)
+    * [creditNoteDetails](#creditnotedetails)
+    * [getCustomerCreditBalance](#getcustomercreditbalance)
+    * [getCnConfig](#getcnconfig)
+    * [generateReportCustomerCn](#generatereportcustomercn)
+    * [downloadReportCustomerCn](#downloadreportcustomercn)
+    * [getReportingFilters](#getreportingfilters)
     
 
 * [Inventory](#Inventory)
@@ -510,25 +523,25 @@
   * Methods
     * [getTickets](#gettickets)
     * [createTicket](#createticket)
-    * [getTickets](#gettickets)
+    * [getNewTickets](#getnewtickets)
     * [getTicket](#getticket)
     * [editTicket](#editticket)
-    * [getTicket](#getticket)
-    * [editTicket](#editticket)
+    * [getNewTicket](#getnewticket)
+    * [editNewTicket](#editnewticket)
     * [createHistory](#createhistory)
     * [getTicketHistory](#gettickethistory)
     * [getFeedbacks](#getfeedbacks)
     * [submitFeedback](#submitfeedback)
-    * [createHistory](#createhistory)
-    * [getTicketHistory](#gettickethistory)
+    * [createNewHistory](#createnewhistory)
+    * [getNewTicketHistory](#getnewtickethistory)
     * [getCustomForm](#getcustomform)
     * [editCustomForm](#editcustomform)
     * [getCustomForms](#getcustomforms)
     * [createCustomForm](#createcustomform)
     * [getTokenForVideoRoom](#gettokenforvideoroom)
-    * [getTokenForVideoRoom](#gettokenforvideoroom)
+    * [getNewTokenForVideoRoom](#getnewtokenforvideoroom)
     * [getVideoParticipants](#getvideoparticipants)
-    * [getVideoParticipants](#getvideoparticipants)
+    * [getNewVideoParticipants](#getnewvideoparticipants)
     * [openVideoRoom](#openvideoroom)
     * [closeVideoRoom](#closevideoroom)
     * [getGeneralConfig](#getgeneralconfig)
@@ -557,11 +570,13 @@
     * [orderUpdate](#orderupdate)
     * [checkOrderStatus](#checkorderstatus)
     * [getStateTransitionMap](#getstatetransitionmap)
+    * [getAllowedStateTransition](#getallowedstatetransition)
     * [fetchCreditBalanceDetail](#fetchcreditbalancedetail)
     * [fetchRefundModeConfig](#fetchrefundmodeconfig)
     * [attachOrderUser](#attachorderuser)
     * [sendUserMobileOTP](#sendusermobileotp)
     * [verifyMobileOTP](#verifymobileotp)
+    * [downloadLanesReport](#downloadlanesreport)
     * [getShipments](#getshipments)
     * [getShipmentById](#getshipmentbyid)
     * [getOrderById](#getorderbyid)
@@ -642,6 +657,13 @@
     * [resendPaymentLink](#resendpaymentlink)
     * [cancelPaymentLink](#cancelpaymentlink)
     * [getPaymentCodeOption](#getpaymentcodeoption)
+    * [updatePaymentSession](#updatepaymentsession)
+    * [updateRefundSession](#updaterefundsession)
+    * [getMerchantPaymentOption](#getmerchantpaymentoption)
+    * [patchMerchantPaymentOption](#patchmerchantpaymentoption)
+    * [getMerchantAggregatorPaymentModeDetails](#getmerchantaggregatorpaymentmodedetails)
+    * [patchMerchantAggregatorPaymentModeDetails](#patchmerchantaggregatorpaymentmodedetails)
+    * [getPGConfigAggregators](#getpgconfigaggregators)
     
 
 * [Rewards](#Rewards)
@@ -658,6 +680,41 @@
     * [getUserPointsHistory](#getuserpointshistory)
     * [getRewardsConfiguration](#getrewardsconfiguration)
     * [setRewardsConfiguration](#setrewardsconfiguration)
+    
+
+* [Serviceability](#Serviceability)
+  * Methods
+    * [getApplicationServiceability](#getapplicationserviceability)
+    * [getEntityRegionView](#getentityregionview)
+    * [getListView](#getlistview)
+    * [getCompanyStoreView](#getcompanystoreview)
+    * [updateZoneControllerView](#updatezonecontrollerview)
+    * [getZoneDataView](#getzonedataview)
+    * [createZone](#createzone)
+    * [getZoneFromPincodeView](#getzonefrompincodeview)
+    * [getZonesFromApplicationIdView](#getzonesfromapplicationidview)
+    * [getZoneListView](#getzonelistview)
+    * [getStore](#getstore)
+    * [getAllStores](#getallstores)
+    * [getOptimalLocations](#getoptimallocations)
+    * [addAppDp](#addappdp)
+    * [deleteAppDp](#deleteappdp)
+    * [updatePincodeMopView](#updatepincodemopview)
+    * [updatePincodeBulkView](#updatepincodebulkview)
+    * [updatePincodeCoDListing](#updatepincodecodlisting)
+    * [updatePincodeAuditHistory](#updatepincodeaudithistory)
+    * [upsertDpAccount](#upsertdpaccount)
+    * [getDpAccount](#getdpaccount)
+    * [updateDpRule](#updatedprule)
+    * [getDpRules](#getdprules)
+    * [upsertDpRules](#upsertdprules)
+    * [getDpRuleInsert](#getdpruleinsert)
+    * [upsertDpCompanyRules](#upsertdpcompanyrules)
+    * [getDpCompanyRules](#getdpcompanyrules)
+    * [upsertDpApplicationRules](#upsertdpapplicationrules)
+    * [getDpApplicationRules](#getdpapplicationrules)
+    * [patchApplicationServiceabilitySelfShipment](#patchapplicationserviceabilityselfshipment)
+    * [getApplicationServiceabilitySelfShipment](#getapplicationserviceabilityselfshipment)
     
 
 * [Share](#Share)
@@ -752,7 +809,11 @@ data, err := AuditTrail.GetAuditLogs(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `Qs`
+
+
+
+
+| xQuery | struct | Includes properties such as `Qs`, `Limit`, `Sort`
 
 
 Get a paginated set of logs that can be filtered using the available set of parameters and get the relevant group of logs
@@ -792,7 +853,7 @@ default
           }
         },
         "_id": "634eef735e84e7e1b09aa07c",
-        "application": null,
+        "application": "",
         "date": "2022-10-18T18:24:51.329Z",
         "created_at": "2022-10-18T18:24:51.400Z",
         "modified_at": "2022-10-18T18:24:51.400Z"
@@ -1348,7 +1409,6 @@ default
           "phone": "91 1234567890",
           "address_lines": [
             "TV TOWER, Foot Over Bridge Khar",
-            null,
             "Mumbai, 400079, Maharashtra, India"
           ]
         },
@@ -1393,7 +1453,7 @@ default
         "modified_at": "2020-12-16T07:00:22.980Z",
         "hash_identifier": "575999aca03e36f0fa54db5235bc7f25",
         "payment_method": {
-          "pg_payment_method_id": null
+          "pg_payment_method_id": ""
         },
         "invoice_items": [
           {
@@ -1630,7 +1690,6 @@ default
       "client": {
         "address_lines": [
           "TV TOWER, Foot Over Bridge Khar",
-          null,
           "Mumbai, 400079, Maharashtra, India"
         ],
         "name": "RELIANCE RETAIL LTD",
@@ -1675,7 +1734,7 @@ default
       "modified_at": "2020-12-16T07:00:22.980Z",
       "hash_identifier": "575999aca03e36f0fa54db5235bc7f25",
       "payment_method": {
-        "pg_payment_method_id": null
+        "pg_payment_method_id": ""
       }
     },
     "invoice_items": [
@@ -2348,7 +2407,7 @@ Active subscription
       "hash_identifier": "987abf78c61bfef585242bbbeaab1b59",
       "pdf_url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/company/13781/self/subscription/documents/invoices/original/U6ffgNlo_-PS-P-A00515-FY24-paid.pdf"
     },
-    "mandate_amount": 630000,
+    "mandate_amount": "630000",
     "current_subscriptions": [
       {
         "current_period": {
@@ -2873,44 +2932,51 @@ Coupon list for sent filter and page size
 ```json
 {
   "value": {
-    "items": [
-      {
-        "_id": "5e1d9bec6d6b7e000146c840",
-        "display_meta": {
-          "title": "percent50 title"
-        },
-        "_schedule": {
-          "next_schedule": [
-            {
-              "start": "2020-01-14T10:45:03.600000+00:00",
-              "end": "2020-01-16T10:45:03+00:00"
-            }
-          ],
-          "duration": null,
-          "start": "2020-01-14T10:45:03.600000+00:00",
-          "end": "2020-01-16T10:45:03+00:00",
-          "cron": ""
-        },
-        "state": {
-          "is_public": true,
-          "is_display": true,
-          "is_archived": false
-        },
-        "ownership": {
-          "payable_category": "seller",
-          "payable_by": ""
-        },
-        "code": "percent50",
-        "rule_definition": {
-          "type": "percentage",
-          "scope": [
-            "category_id"
-          ],
-          "applicable_on": "quantity"
-        }
+    "items": {
+      "_id": "5e1d9bec6d6b7e000146c840",
+      "rule": [],
+      "identifiers": {},
+      "validity": {
+        "priority": 0
+      },
+      "type_slug": "bundle_quantity_absolute",
+      "display_meta": {
+        "title": "percent50 title"
+      },
+      "_schedule": {
+        "next_schedule": [
+          {
+            "start": "2020-01-14T10:45:03.600000+00:00",
+            "end": "2020-01-16T10:45:03+00:00"
+          }
+        ],
+        "duration": null,
+        "start": "2020-01-14T10:45:03.600000+00:00",
+        "end": "2020-01-16T10:45:03+00:00",
+        "cron": ""
+      },
+      "state": {
+        "is_public": true,
+        "is_display": true,
+        "is_archived": false
+      },
+      "ownership": {
+        "payable_category": "seller",
+        "payable_by": ""
+      },
+      "code": "percent50",
+      "rule_definition": {
+        "type": "percentage",
+        "scope": [
+          "category_id"
+        ],
+        "applicable_on": "quantity",
+        "calculate_on": "esp",
+        "value_type": "percentage"
       }
-    ],
+    },
     "page": {
+      "type": "",
       "has_next": true,
       "size": 10,
       "current": 1,
@@ -3184,7 +3250,9 @@ Promotion list for sent filter and page size
     "items": [
       {
         "_id": "61dc8dc9adf45b2273a70a6e",
+        "application_id": "000000000000000000000004",
         "promo_group": "product",
+        "promotion_type": "bogo",
         "date_meta": {
           "modified_on": "2022-01-11T05:47:11.503000+00:00",
           "created_on": "2022-01-10T19:49:29.917000+00:00"
@@ -3192,26 +3260,66 @@ Promotion list for sent filter and page size
         "display_meta": {
           "name": "Test BOGO promo"
         },
+        "ownership": {
+          "payable_category": "seller",
+          "payable_by": ""
+        },
         "author": {
           "created_by": "5",
           "modified_by": "5"
         },
         "_schedule": {
           "start": "2022-01-10T18:45:36.311000+00:00",
-          "end": null,
+          "end": "2025-01-10T18:45:36.311000+00:00",
           "published": true,
           "next_schedule": [
             {
               "start": "2022-01-10T18:45:36.311000+00:00",
-              "end": null
+              "end": null,
+              "cron": ""
             }
           ],
-          "cron": "",
           "duration": 0
-        }
+        },
+        "discount_rules": [
+          {
+            "buy_condition": "( rule#1 )",
+            "offer": {
+              "max_offer_quantity": 2
+            },
+            "discount_type": "bogo",
+            "item_criteria": {
+              "item_brand": [
+                2,
+                14,
+                65
+              ]
+            }
+          }
+        ],
+        "buy_rules": {
+          "rule#1": {
+            "cart_quantity": {
+              "greater_than_equals": 5
+            },
+            "item_brand": [
+              1,
+              2,
+              14,
+              16,
+              29,
+              39,
+              43,
+              65,
+              73
+            ]
+          }
+        },
+        "mode": "promotion"
       }
     ],
     "page": {
+      "type": "number",
       "has_next": true,
       "size": 10,
       "current": 1,
@@ -3808,6 +3916,9 @@ Valid pincode
     "items": [
       {
         "quantity": 1,
+        "identifiers": {
+          "identifier": "5mPyy88URXuh3Lo35uaTg"
+        },
         "message": "",
         "coupon_message": "",
         "product": {
@@ -3944,6 +4055,9 @@ Valid pincode
       },
       {
         "quantity": 1,
+        "identifiers": {
+          "identifier": "5mPyy88URXuh3Lo35uaTg"
+        },
         "message": "Out of stock. Please remove item",
         "coupon_message": "",
         "product": {
@@ -4079,6 +4193,9 @@ Invalid pincode
     "items": [
       {
         "discount": "15% OFF",
+        "identifiers": {
+          "identifier": "5mPyy88URXuh3Lo35uaTg"
+        },
         "price": {
           "base": {
             "add_on": 0,
@@ -4131,7 +4248,16 @@ Invalid pincode
         "bulk_offer": {},
         "key": "876245_6",
         "message": "We are not delivering to 800108",
-        "delivery_promise": null,
+        "delivery_promise": {
+          "timestamp": {
+            "min": 1646257339,
+            "max": 1646689339,
+            "formatted": {
+              "min": "03 Mar, Thursday",
+              "max": "08 Mar, Tuesday"
+            }
+          }
+        },
         "coupon_message": "",
         "availability": {
           "sizes": [
@@ -4202,6 +4328,9 @@ Invalid pincode
       },
       {
         "discount": "15% OFF",
+        "identifiers": {
+          "identifier": "gIq0E94RSMueSdDRAk_Txg"
+        },
         "price": {
           "base": {
             "add_on": 0,
@@ -4522,7 +4651,7 @@ Abandoned Cart list for sent filter and page size
           "currency_code": "INR",
           "code": null,
           "type": "cart",
-          "uid": null,
+          "uid": "",
           "id": null
         },
         "promotion": {
@@ -4549,7 +4678,7 @@ Abandoned Cart list for sent filter and page size
         "cashback": {
           "amount": 0,
           "currency_code": "FC",
-          "uid": null
+          "uid": ""
         },
         "payments": {},
         "is_archive": false,
@@ -4742,7 +4871,7 @@ Product has been added to your cart
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "25_44_A7050_NEMIEL@GREENBRITISH_S",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -4751,6 +4880,9 @@ Product has been added to your cart
       "items": [
         {
           "key": "751083_10",
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "parent_item_identifiers": {
             "identifier": "ZASFF",
             "parent_item_id": 7501190,
@@ -4846,7 +4978,10 @@ Product has been added to your cart
           "discount": "41% OFF"
         },
         {
-          "key": "246228_S",
+          "key": "246228_",
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "article": {
             "type": "article",
             "uid": "46_235_TM62_M11029ONDSXNS_S",
@@ -4941,7 +5076,10 @@ Product has been added to your cart
           "discount": ""
         },
         {
-          "key": "443175_S",
+          "key": "443175_s",
+          "identifiers": {
+            "identifier": "gIq0E94RSMueSdDRAk_Txg"
+          },
           "article": {
             "type": "article",
             "uid": "162_207_1271_LJ03LBLUDN88_S",
@@ -5036,6 +5174,9 @@ Product has been added to your cart
         },
         {
           "key": "778937_OS",
+          "identifiers": {
+            "identifier": "gIq0E94RSMueSdDRAk_Txg"
+          },
           "article": {
             "type": "article",
             "uid": "686_963_IC68601_PWUPC01977_OS",
@@ -5131,9 +5272,9 @@ Product has been added to your cart
       "buy_now": false,
       "cart_id": 7927,
       "uid": "7927",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
-      "last_modified": "Tue, 03 Sep 2019 06:00:43 GMT",
+      "last_modified": "2023-03-03",
       "restrict_checkout": false,
       "is_valid": true
     },
@@ -5167,7 +5308,7 @@ Sorry, item is out of stock
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -5208,6 +5349,9 @@ Sorry, item is out of stock
       "items": [
         {
           "bulk_offer": {},
+          "identifiers": {
+            "identifier": "gIq0E94RSMueSdDRAk_Txg"
+          },
           "discount": "67% OFF",
           "parent_item_identifiers": {
             "identifier": "ZASFF",
@@ -5315,11 +5459,11 @@ Sorry, item is out of stock
       "buy_now": false,
       "cart_id": 54,
       "uid": "54",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
       "restrict_checkout": false,
       "is_valid": false,
-      "last_modified": "Tue, 03 Sep 2019 09:55:40 GMT"
+      "last_modified": "2023-03-03"
     },
     "result": {}
   }
@@ -5362,7 +5506,7 @@ data, err := Cart.UpdateCart(CompanyID, ApplicationID, CartID, xQuery, body);
 
 | body |  UpdateCartRequest | "Request body" 
 
-<p>Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/:slug/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/:identifier​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
+Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs operation Operation for current api call.update_item for update items. remove_item for removing items. item_id "/platform/content/v1/products/" "/platform/content/v1/products/:slug/sizes/" quantity item quantity (must be greater than or equal to 1) article_id "/content​/v1​/products​/:identifier​/sizes​/price​/"  item position in the cart (must be greater than or equal to 0)
 
 *Success Response:*
 
@@ -5400,7 +5544,7 @@ Nothing updated
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -5441,6 +5585,9 @@ Nothing updated
       "items": [
         {
           "bulk_offer": {},
+          "identifiers": {
+            "identifier": "gIq0E94RSMueSdDRAk_Txg"
+          },
           "discount": "67% OFF",
           "parent_item_identifiers": {
             "identifier": "ZASFF",
@@ -5548,11 +5695,11 @@ Nothing updated
       "buy_now": false,
       "cart_id": 54,
       "uid": "54",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
       "restrict_checkout": false,
       "is_valid": true,
-      "last_modified": "Tue, 03 Sep 2019 10:19:20 GMT"
+      "last_modified": "2023-03-03"
     },
     "result": {
       "707569_90": {
@@ -5591,7 +5738,7 @@ Item updated in the cart
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid coupon"
@@ -5680,7 +5827,9 @@ Item updated in the cart
             "type": "article",
             "uid": "618c1a6874b93908c98f6d18",
             "size": "XL",
-            "product_group_tags": null,
+            "product_group_tags": [
+              "tag1"
+            ],
             "seller": {
               "uid": 61,
               "name": "FUCHSIA VINE DESIGNS PRIVATE LIMITED"
@@ -5857,7 +6006,7 @@ Item updated in the cart
             }
           ],
           "key": "75252592_XL",
-          "delivery_promise": null,
+          "delivery_promise": {},
           "coupon_message": ""
         }
       ],
@@ -5865,7 +6014,7 @@ Item updated in the cart
       "id": "62d4ff76d6aec8db897de407",
       "uid": "22251",
       "buy_now": false,
-      "gstin": null,
+      "gstin": "",
       "comment": "",
       "checkout_mode": "self",
       "restrict_checkout": false,
@@ -5874,7 +6023,7 @@ Item updated in the cart
         "code": "INR",
         "symbol": "₹"
       },
-      "last_modified": "Mon, 01 Aug 2022 09:33:20 GMT"
+      "last_modified": "2023-03-03"
     },
     "message": "Quantity of item updated",
     "success": true
@@ -6271,6 +6420,9 @@ Cart Merged/Replaced
       "items": [
         {
           "key": "791651_6",
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "discount": "",
           "bulk_offer": {},
           "coupon_message": "",
@@ -6366,6 +6518,9 @@ Cart Merged/Replaced
         },
         {
           "key": "791651_7",
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "discount": "",
           "bulk_offer": {},
           "coupon_message": "",
@@ -6486,7 +6641,7 @@ Cart Merged/Replaced
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid coupon"
@@ -6514,17 +6669,17 @@ Cart Merged/Replaced
       },
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
-      "gstin": null,
+      "gstin": "",
       "comment": "",
       "checkout_mode": "self",
       "payment_selection_lock": {
         "enabled": false,
         "default_options": "COD",
-        "payment_identifier": null
+        "payment_identifier": "JIOPP"
       },
       "restrict_checkout": false,
       "is_valid": true,
-      "last_modified": "Mon, 16 Dec 2019 07:02:18 GMT"
+      "last_modified": "2023-03-03"
     }
   }
 }
@@ -6591,7 +6746,7 @@ Cart list for pos platform
           "mobile": 7777996559,
           "email": "test_pickup_customer@gmail.com"
         },
-        "created_on": 1675780233,
+        "created_on": "1675780233",
         "cart_value": 1999,
         "cart_id": "63e213d45e4206d94485935f",
         "item_counts": 1,
@@ -6599,7 +6754,7 @@ Cart list for pos platform
       },
       {
         "pick_up_customer_details": {},
-        "created_on": 1675779508,
+        "created_on": "1675779508",
         "cart_value": 5997,
         "cart_id": "63e210d03437dfb6c731062a",
         "item_counts": 3,
@@ -6709,7 +6864,7 @@ Update and map cart user
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid coupon"
@@ -6957,7 +7112,7 @@ Update and map cart user
       "id": "63e210d03437dfb6c731062a",
       "uid": "436470",
       "buy_now": false,
-      "gstin": null,
+      "gstin": "",
       "comment": "",
       "checkout_mode": "self",
       "restrict_checkout": false,
@@ -6966,7 +7121,7 @@ Update and map cart user
         "code": "INR",
         "symbol": "₹"
       },
-      "last_modified": "Tue, 07 Feb 2023 09:01:56 GMT"
+      "last_modified": "2023-03-03T00:00:00.000Z"
     },
     "user": {
       "uid": "63693036ef136d40c32c0ac8",
@@ -6976,9 +7131,9 @@ Update and map cart user
       "email": "neelgajjar@gofynd.com",
       "mobile": "7096263966",
       "gender": "male",
-      "created_at": 1667838020,
-      "modified_on": 1668514790,
-      "external_id": null
+      "created_at": "1667838020",
+      "modified_on": "1668514790",
+      "external_id": ""
     }
   }
 }
@@ -7148,7 +7303,7 @@ Product has been added to your cart
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -7157,6 +7312,9 @@ Product has been added to your cart
       "items": [
         {
           "key": "751083_10",
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "parent_item_identifiers": {
             "identifier": "ZASFF",
             "parent_item_id": 7501190,
@@ -7253,6 +7411,9 @@ Product has been added to your cart
         },
         {
           "key": "246228_S",
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "article": {
             "type": "article",
             "uid": "46_235_TM62_M11029ONDSXNS_S",
@@ -7348,6 +7509,9 @@ Product has been added to your cart
         },
         {
           "key": "443175_S",
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "article": {
             "type": "article",
             "uid": "162_207_1271_LJ03LBLUDN88_S",
@@ -7442,6 +7606,9 @@ Product has been added to your cart
         },
         {
           "key": "778937_OS",
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "article": {
             "type": "article",
             "uid": "686_963_IC68601_PWUPC01977_OS",
@@ -7537,9 +7704,9 @@ Product has been added to your cart
       "buy_now": false,
       "cart_id": 7927,
       "uid": "7927",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
-      "last_modified": "Tue, 03 Sep 2019 06:00:43 GMT",
+      "last_modified": "2023-03-03T00:00:00.000Z",
       "restrict_checkout": false,
       "is_valid": true
     },
@@ -7573,7 +7740,7 @@ Sorry, item is out of stock
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -7614,6 +7781,9 @@ Sorry, item is out of stock
       "items": [
         {
           "bulk_offer": {},
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "discount": "67% OFF",
           "parent_item_identifiers": {
             "identifier": "ZASFF",
@@ -7721,11 +7891,11 @@ Sorry, item is out of stock
       "buy_now": false,
       "cart_id": 54,
       "uid": "54",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
       "restrict_checkout": false,
       "is_valid": false,
-      "last_modified": "Tue, 03 Sep 2019 09:55:40 GMT"
+      "last_modified": "2023-03-03T00:00:00.000Z"
     },
     "result": {}
   }
@@ -7771,7 +7941,7 @@ data, err := Cart.PlatformUpdateCart(CompanyID, ApplicationID, xQuery, body);
 
 | body |  PlatformUpdateCartRequest | "Request body" 
 
-<p>Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/:slug/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/:identifier​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
+Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs operation Operation for current api call. update_item for update items. remove_item for removing items.item_id "/platform/content/v1/products/" item_size "/platform/content/v1/products/:slug/sizes/" quantity  item quantity (must be greater than or equal to 1) article_id "/content​/v1​/products​/:identifier​/sizes​/price​/" item_index item position in the cart (must be greater than or equal to 0)
 
 *Success Response:*
 
@@ -7809,7 +7979,7 @@ Nothing updated
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -7850,6 +8020,9 @@ Nothing updated
       "items": [
         {
           "bulk_offer": {},
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "discount": "67% OFF",
           "parent_item_identifiers": {
             "identifier": "ZASFF",
@@ -7957,11 +8130,11 @@ Nothing updated
       "buy_now": false,
       "cart_id": 54,
       "uid": "54",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
       "restrict_checkout": false,
       "is_valid": true,
-      "last_modified": "Tue, 03 Sep 2019 10:19:20 GMT"
+      "last_modified": "2023-03-03T00:00:00.000Z"
     },
     "result": {
       "707569_90": {
@@ -7984,7 +8157,7 @@ Item updated in the cart
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -8033,6 +8206,9 @@ Item updated in the cart
       "items": [
         {
           "key": "437414_7",
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "message": "",
           "bulk_offer": {},
           "price": {
@@ -8138,9 +8314,9 @@ Item updated in the cart
       "buy_now": false,
       "cart_id": 12426,
       "uid": "12426",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
-      "last_modified": "Thu, 22 Aug 2019 04:51:42 GMT",
+      "last_modified": "2023-02-02T00:00:00.000Z",
       "restrict_checkout": false,
       "is_valid": true
     },
@@ -8431,7 +8607,7 @@ data, err := Cart.GetAddresses(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`, `UserID`
 
 
-Use this API to get all the addresses associated with an account. If successful, returns a Address resource in the response body specified in GetAddressesResponse.attibutes listed below are optional <ul> <li> <font color="monochrome">uid</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
+Use this API to get all the addresses associated with an account. If successful, returns a Address resource in the response body specified in GetAddressesResponse.attibutes listed below are optional uid address_id  mobile_no checkout_mode tags default
 
 *Success Response:*
 
@@ -8530,7 +8706,7 @@ data, err := Cart.GetAddressById(CompanyID, ApplicationID, ID, xQuery);
 | xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`, `UserID`
 
 
-Use this API to get an addresses using its ID. If successful, returns a Address resource in the response body specified in `PlatformAddress`. Attibutes listed below are optional <ul> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
+Use this API to get an addresses using its ID. If successful, returns a Address resource in the response body specified in `PlatformAddress`. Attibutes listed below are optional mobile_no checkout_mode tags default
 
 *Success Response:*
 
@@ -8574,7 +8750,7 @@ data, err := Cart.UpdateAddress(CompanyID, ApplicationID, ID, body);
 
 | body |  PlatformAddress | "Request body" 
 
-<p>Use this API to update an existing address in the account. Request object should contain attributes mentioned in  <font color="blue">Address </font> can be updated. These attributes are:</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
+Use this API to update an existing address in the account. Request object should contain attributes mentioned in Address can be updated. These attributes are:is_default_address landmark area pincode email address_type name address_id address
 
 *Success Response:*
 
@@ -8670,7 +8846,7 @@ data, err := Cart.SelectAddress(CompanyID, ApplicationID, xQuery, body);
 
 | body |  PlatformSelectCartAddressRequest | "Request body" 
 
-<p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `PlatformSelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul></p>
+Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `PlatformSelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. address_id billing_address_id uid
 
 *Success Response:*
 
@@ -8939,7 +9115,7 @@ Shipment Generated
       "coupon": {
         "type": "cash",
         "code": "",
-        "uid": null,
+        "uid": "304_1054_9036_R1005753_7",
         "value": 0,
         "is_applied": false,
         "message": "Sorry! Invalid Coupon"
@@ -9023,6 +9199,9 @@ Shipment Generated
         "items": [
           {
             "quantity": 1,
+            "identifiers": {
+              "identifier": "5mPyy88URXuh3Lo35uaTg"
+            },
             "product": {
               "type": "product",
               "uid": 820312,
@@ -9119,9 +9298,9 @@ Shipment Generated
     ],
     "delivery_charge_info": "",
     "coupon_text": "View all offers",
-    "gstin": null,
+    "gstin": "",
     "checkout_mode": "self",
-    "last_modified": "Thu, 22 Aug 2019 20:21:48 GMT",
+    "last_modified": "2023-03-03",
     "restrict_checkout": false,
     "is_valid": true
   }
@@ -9325,7 +9504,7 @@ Shipment Generation Failed
       "coupon": {
         "type": "cash",
         "code": "",
-        "uid": null,
+        "uid": "304_1054_9036_R1005753_7",
         "value": 0,
         "is_applied": false,
         "message": "Sorry! Invalid Coupon"
@@ -9369,9 +9548,9 @@ Shipment Generation Failed
     "message": "Shipments could not be generated. Please Try again after some time.",
     "delivery_charge_info": "",
     "coupon_text": "View all offers",
-    "gstin": null,
+    "gstin": "",
     "checkout_mode": "self",
-    "last_modified": "Thu, 22 Aug 2019 20:21:48 GMT",
+    "last_modified": "2023-03-03",
     "restrict_checkout": false,
     "is_valid": false
   }
@@ -9633,7 +9812,7 @@ Shipment Generated
       "coupon": {
         "type": "cash",
         "code": "",
-        "uid": null,
+        "uid": "304_1054_9036_R1005753_6",
         "value": 0,
         "is_applied": false,
         "message": "Sorry! Invalid Coupon"
@@ -9718,6 +9897,9 @@ Shipment Generated
         "items": [
           {
             "quantity": 1,
+            "identifiers": {
+              "identifier": "5mPyy88URXuh3Lo35uaTg"
+            },
             "product": {
               "type": "product",
               "uid": 820312,
@@ -9814,9 +9996,9 @@ Shipment Generated
     ],
     "delivery_charge_info": "",
     "coupon_text": "View all offers",
-    "gstin": null,
+    "gstin": "",
     "checkout_mode": "self",
-    "last_modified": "Thu, 22 Aug 2019 20:21:48 GMT",
+    "last_modified": "2023-03-03",
     "restrict_checkout": false,
     "is_valid": true
   }
@@ -10020,7 +10202,7 @@ Shipment Generation Failed
       "coupon": {
         "type": "cash",
         "code": "",
-        "uid": null,
+        "uid": "304_1054_9036_R1005753_6",
         "value": 0,
         "is_applied": false,
         "message": "Sorry! Invalid Coupon"
@@ -10064,9 +10246,9 @@ Shipment Generation Failed
     "message": "Shipments could not be generated. Please Try again after some time.",
     "delivery_charge_info": "",
     "coupon_text": "View all offers",
-    "gstin": null,
+    "gstin": "",
     "checkout_mode": "self",
-    "last_modified": "Thu, 22 Aug 2019 20:21:48 GMT",
+    "last_modified": "2023-03-03",
     "restrict_checkout": false,
     "is_valid": false
   }
@@ -10378,7 +10560,7 @@ Successful checkout cod payment
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -10427,6 +10609,9 @@ Successful checkout cod payment
       "items": [
         {
           "key": "820312_L",
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "message": "",
           "bulk_offer": {},
           "price": {
@@ -10523,9 +10708,9 @@ Successful checkout cod payment
       "coupon_text": "View all offers",
       "cart_id": 7483,
       "uid": "7483",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
-      "last_modified": "Thu, 22 Aug 2019 04:58:44 GMT",
+      "last_modified": "2023-03-03T00:00:00.000Z",
       "restrict_checkout": false,
       "is_valid": true
     },
@@ -10990,7 +11175,7 @@ Successful checkout cod payment
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -11039,6 +11224,9 @@ Successful checkout cod payment
       "items": [
         {
           "key": "820312_L",
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "message": "",
           "bulk_offer": {},
           "price": {
@@ -11135,9 +11323,9 @@ Successful checkout cod payment
       "coupon_text": "View all offers",
       "cart_id": 7483,
       "uid": "7483",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
-      "last_modified": "Thu, 22 Aug 2019 04:58:44 GMT",
+      "last_modified": "2023-02-02T00:00:00.000Z",
       "restrict_checkout": false,
       "is_valid": true
     },
@@ -13750,7 +13938,7 @@ Validate Product Template Schema
 
 ```golang
 
-data, err := Catalog.ValidateProductTemplate(CompanyID, Slug);
+data, err := Catalog.ValidateProductTemplate(CompanyID, Slug, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -13761,6 +13949,11 @@ data, err := Catalog.ValidateProductTemplate(CompanyID, Slug);
 
 | Slug | string | A `slug` is a unique identifier for a particular template. | 
 
+
+
+
+
+| xQuery | struct | Includes properties such as `ItemType`, `Bulk`
 
 
 Allows you to list all product templates validation values for all the fields present in the database
@@ -13790,7 +13983,7 @@ Download Product Template View
 
 ```golang
 
-data, err := Catalog.DownloadProductTemplateViews(CompanyID, Slug);
+data, err := Catalog.DownloadProductTemplateViews(CompanyID, Slug, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -13801,6 +13994,11 @@ data, err := Catalog.DownloadProductTemplateViews(CompanyID, Slug);
 
 | Slug | string | A `slug` is a unique identifier for a particular template. | 
 
+
+
+
+
+| xQuery | struct | Includes properties such as `ItemType`, `Type`
 
 
 Allows you to download product template data
@@ -16436,7 +16634,7 @@ data, err := Catalog.GetOptimalLocations(CompanyID, body);
 
 | body |  AssignStore | "Request body" 
 
-
+Location Reassignment
 
 *Success Response:*
 
@@ -16894,7 +17092,7 @@ data, err := Common.GetLocations(xQuery);
 | xQuery | struct | Includes properties such as `LocationType`, `ID`
 
 
-
+Retrieve a list of countries, states, or cities based on the provided location_type and id parameters.
 
 *Success Response:*
 
@@ -17326,26 +17524,24 @@ Schema: `GetStats`
 default
 ```json
 {
-  "value": [
-    {
-      "_id": "6009a1ea1f6a61d88e80a867",
-      "imported": {
-        "count": 2
+  "value": {
+    "_id": "6009a1ea1f6a61d88e80a867",
+    "imported": {
+      "count": 2
+    },
+    "processed": {
+      "email": {
+        "success": 2,
+        "failed": 0,
+        "suppressed": 0
       },
-      "processed": {
-        "email": {
-          "success": 2,
-          "failed": 0,
-          "suppressed": 0
-        },
-        "sms": {
-          "success": 0,
-          "failed": 0,
-          "suppressed": 0
-        }
+      "sms": {
+        "success": 0,
+        "failed": 0,
+        "suppressed": 0
       }
     }
-  ]
+  }
 }
 ```
 
@@ -17798,15 +17994,13 @@ Schema: `GetNRecordsCsvRes`
 default
 ```json
 {
-  "value": [
-    {
-      "phone_number": "1234567890",
-      "email": "abcxyz@gofynd.com",
-      "firstname": "Abc",
-      "lastname": "Xyz",
-      "orderid": "1"
-    }
-  ]
+  "value": {
+    "phone_number": "1234567890",
+    "email": "abcxyz@gofynd.com",
+    "firstname": "Abc",
+    "lastname": "Xyz",
+    "orderid": "1"
+  }
 }
 ```
 
@@ -18823,7 +19017,7 @@ default
         "template": {
           "sms": {
             "subscribed": true,
-            "template": null
+            "template": ""
           },
           "email": {
             "subscribed": true,
@@ -18843,7 +19037,7 @@ default
         "template": {
           "sms": {
             "subscribed": true,
-            "template": null
+            "template": ""
           },
           "email": {
             "subscribed": true,
@@ -18863,7 +19057,7 @@ default
         "template": {
           "sms": {
             "subscribed": true,
-            "template": null
+            "template": ""
           },
           "email": {
             "subscribed": true,
@@ -18883,7 +19077,7 @@ default
         "template": {
           "sms": {
             "subscribed": true,
-            "template": null
+            "template": ""
           },
           "email": {
             "subscribed": true,
@@ -19187,7 +19381,7 @@ default
           },
           "email": {
             "subscribed": true,
-            "template": null
+            "template": ""
           }
         },
         "is_default": true,
@@ -19207,7 +19401,7 @@ default
           },
           "email": {
             "subscribed": true,
-            "template": null
+            "template": ""
           }
         },
         "is_default": true,
@@ -19227,7 +19421,7 @@ default
           },
           "email": {
             "subscribed": true,
-            "template": null
+            "template": ""
           }
         },
         "is_default": true,
@@ -19243,7 +19437,7 @@ default
         "template": {
           "sms": {
             "subscribed": true,
-            "template": null
+            "template": ""
           },
           "email": {
             "subscribed": true,
@@ -19267,7 +19461,7 @@ default
           },
           "email": {
             "subscribed": true,
-            "template": null
+            "template": ""
           }
         },
         "is_default": true,
@@ -19287,7 +19481,7 @@ default
           },
           "email": {
             "subscribed": true,
-            "template": null
+            "template": ""
           }
         },
         "is_default": true,
@@ -19307,7 +19501,7 @@ default
           },
           "email": {
             "subscribed": true,
-            "template": null
+            "template": ""
           }
         },
         "is_default": true,
@@ -19367,7 +19561,7 @@ default
           },
           "email": {
             "subscribed": true,
-            "template": null
+            "template": ""
           }
         },
         "is_default": true,
@@ -19700,7 +19894,7 @@ default
     ],
     "page": {
       "type": "cursor",
-      "next_id": null,
+      "next_id": "",
       "has_previous": false,
       "has_next": false
     }
@@ -21191,6 +21385,70 @@ Returns a success response
 
 
 Schema: `ProfileSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getLocationTags
+Get tags associated with locations for a company.
+
+```golang
+
+data, err := CompanyProfile.GetLocationTags(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Id of the company inside which the location is to be created. | 
+
+
+
+This API fetches all the tags associated to a company.
+
+*Success Response:*
+
+
+
+Tags list. See example below or refer `StoreTagsResponseSchema` for details
+
+
+Schema: `StoreTagsResponseSchema`
+
+
+*Examples:*
+
+
+TagsFound
+```json
+{
+  "value": {
+    "tags": [
+      "hyperlocale",
+      "instant"
+    ],
+    "success": true
+  }
+}
+```
+
+NoTagsFound
+```json
+{
+  "value": {
+    "tags": [],
+    "success": true
+  }
+}
+```
 
 
 
@@ -23304,10 +23562,10 @@ success
         },
         "_schedule": {
           "published": true,
-          "cron": null,
+          "cron": "",
           "start": "2021-02-10T20:40:00.000Z",
           "end": "2021-02-18T22:00:00.000Z",
-          "duration": null,
+          "duration": 0,
           "next_schedule": [
             {
               "start": "2021-02-10T20:40:00.000Z",
@@ -23513,10 +23771,10 @@ success
           "end": "2021-02-18T22:00:00.000Z"
         }
       ],
-      "cron": null,
+      "cron": "",
       "start": "2021-02-10T20:40:00.000Z",
       "end": "2021-02-18T22:00:00.000Z",
-      "duration": null
+      "duration": 0
     },
     "app": "000000000000000000000001",
     "author": {
@@ -25113,7 +25371,7 @@ default
         },
         "application": "5cd3db5e9d692cfe5302a7bb",
         "archived": false,
-        "_custom_json": null,
+        "_custom_json": {},
         "__v": 0
       }
     ],
@@ -25179,7 +25437,7 @@ default
   "value": {
     "_id": "5eaa451a21a4dd75f0fd96c5",
     "application": "5d3ebd89f540e7506b8b3548",
-    "_custom_json": null,
+    "_custom_json": {},
     "slug": "pnc-landing",
     "action": {
       "page": {
@@ -25257,7 +25515,7 @@ default
   "value": {
     "_id": "5eaa451a21a4dd75f0fd96c5",
     "application": "5d3ebd89f540e7506b8b3548",
-    "_custom_json": null,
+    "_custom_json": {},
     "slug": "pnc-landing",
     "action": {
       "page": {
@@ -25334,7 +25592,7 @@ default
   "value": {
     "_id": "5eaa451a21a4dd75f0fd96c5",
     "application": "5d3ebd89f540e7506b8b3548",
-    "_custom_json": null,
+    "_custom_json": {},
     "slug": "pnc-landing",
     "action": {
       "page": {
@@ -30227,7 +30485,7 @@ data, err := FileStorage.StartUpload(Namespace, CompanyID, body);
 | Namespace | string | Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. | 
 
 
-| CompanyID | float64 | company_id | 
+| CompanyID | float64 |  | 
 
 
 | body |  StartRequest | "Request body" 
@@ -30256,7 +30514,7 @@ This operation will return the url for the uploaded file.
 
 
 
-Success
+Success. Returns a response containing relaving and absolute_url of storage service
 
 
 Schema: `StartResponse`
@@ -30286,7 +30544,7 @@ data, err := FileStorage.CompleteUpload(Namespace, CompanyID, body);
 | Namespace | string | Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. | 
 
 
-| CompanyID | float64 | company_id | 
+| CompanyID | float64 |  | 
 
 
 | body |  StartResponse | "Request body" 
@@ -30345,10 +30603,10 @@ data, err := FileStorage.AppStartUpload(Namespace, CompanyID, ApplicationID, bod
 | Namespace | string | Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. | 
 
 
-| CompanyID | float64 | company_id | 
+| CompanyID | float64 |  | 
 
 
-| ApplicationID | string | application id | 
+| ApplicationID | string |  | 
 
 
 | body |  StartRequest | "Request body" 
@@ -30407,10 +30665,10 @@ data, err := FileStorage.AppCompleteUpload(Namespace, CompanyID, ApplicationID, 
 | Namespace | string | Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. | 
 
 
-| CompanyID | float64 | company_id | 
+| CompanyID | float64 |  | 
 
 
-| ApplicationID | string | application id | 
+| ApplicationID | string |  | 
 
 
 | body |  StartResponse | "Request body" 
@@ -30466,7 +30724,7 @@ data, err := FileStorage.GetSignUrls(CompanyID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | company_id | 
+| CompanyID | float64 |  | 
 
 
 | body |  SignUrlRequest | "Request body" 
@@ -30481,6 +30739,25 @@ Success
 
 
 Schema: `SignUrlResponse`
+
+
+*Examples:*
+
+
+success
+```json
+{
+  "value": {
+    "urls": [
+      {
+        "url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/x0/documents/manifest/PDFs/test/s3EtYk5p9-new_fee.pdf",
+        "signed_url": "https://fynd-staging-assets-private.s3-accelerate.amazonaws.com/addsale/v2/falling-surf-7c8bb8/fyndnp/wrkr/x0/documents/manifest/PDFs/test/s3EtYk5p9-new_fee.pdf",
+        "expiry": 1800
+      }
+    ]
+  }
+}
+```
 
 
 
@@ -30506,7 +30783,7 @@ data, err := FileStorage.CopyFiles(CompanyID, xQuery, body);
 
 
 
-| CompanyID | float64 | company_id | 
+| CompanyID | float64 |  | 
 
 | xQuery | struct | Includes properties such as `Sync`
 
@@ -30547,10 +30824,10 @@ data, err := FileStorage.AppCopyFiles(CompanyID, ApplicationID, xQuery, body);
 
 
 
-| CompanyID | float64 | company_id | 
+| CompanyID | float64 |  | 
 
 
-| ApplicationID | float64 | application_id | 
+| ApplicationID | string |  | 
 
 | xQuery | struct | Includes properties such as `Sync`
 
@@ -30589,14 +30866,16 @@ data, err := FileStorage.Browse(Namespace, CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Namespace | string | bucket name | 
+| Namespace | string | Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. | 
 
 
-| CompanyID | float64 | company_id | 
+| CompanyID | float64 |  | 
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`
+
+
+| xQuery | struct | Includes properties such as `Page`, `Limit`
 
 
 Browse Files
@@ -30632,17 +30911,19 @@ data, err := FileStorage.Appbrowse(Namespace, CompanyID, ApplicationID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| Namespace | string | bucket name | 
+| Namespace | string | Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. | 
 
 
-| CompanyID | float64 | company_id | 
+| CompanyID | float64 |  | 
 
 
-| ApplicationID | float64 | application_id | 
+| ApplicationID | string |  | 
 
 
 
-| xQuery | struct | Includes properties such as `PageNo`
+
+
+| xQuery | struct | Includes properties such as `Page`, `Limit`
 
 
 Browse Files
@@ -30678,7 +30959,7 @@ data, err := FileStorage.Proxy(CompanyID, xQuery);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | company_id | 
+| CompanyID | float64 |  | 
 
 
 
@@ -30715,7 +30996,7 @@ Schema: `string`
 
 
 #### generateReport
-
+Generate finance reports.
 
 ```golang
 
@@ -30730,7 +31011,7 @@ data, err := Finance.GenerateReport(CompanyID, body);
 
 | body |  GenerateReportRequest | "Request body" 
 
-
+Generate finance reports.
 
 *Success Response:*
 
@@ -30753,7 +31034,7 @@ Schema: `GenerateReportJson`
 
 
 #### downloadReport
-
+Gives list of all downloaded reports.
 
 ```golang
 
@@ -30768,7 +31049,7 @@ data, err := Finance.DownloadReport(CompanyID, body);
 
 | body |  DownloadReport | "Request body" 
 
-
+Gives list of all downloaded reports.
 
 *Success Response:*
 
@@ -30791,7 +31072,7 @@ Schema: `DownloadReportList`
 
 
 #### getData
-
+Gives list of columns for table provided.
 
 ```golang
 
@@ -30806,7 +31087,7 @@ data, err := Finance.GetData(CompanyID, body);
 
 | body |  GetEngineRequest | "Request body" 
 
-
+Gives list of columns for table provided.
 
 *Success Response:*
 
@@ -30829,7 +31110,7 @@ Schema: `GetEngineResponse`
 
 
 #### getReason
-
+Gives list of the reasons.
 
 ```golang
 
@@ -30844,7 +31125,7 @@ data, err := Finance.GetReason(CompanyID, body);
 
 | body |  GetReasonRequest | "Request body" 
 
-
+Gives list of the reasons.
 
 *Success Response:*
 
@@ -30867,7 +31148,7 @@ Schema: `GetReasonResponse`
 
 
 #### getReportList
-
+Get the list of available reports for a company.
 
 ```golang
 
@@ -30877,12 +31158,12 @@ data, err := Finance.GetReportList(CompanyID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+| CompanyID | string | Company ID for which the data will be returned. Company_id is required. | 
 
 
 | body |  GetReportListRequest | "Request body" 
 
-
+Gives list of reports.
 
 *Success Response:*
 
@@ -30891,7 +31172,7 @@ data, err := Finance.GetReportList(CompanyID, body);
 Success
 
 
-Schema: `GetEngineResponse`
+Schema: `GetReportListResponse`
 
 
 
@@ -30905,7 +31186,7 @@ Schema: `GetEngineResponse`
 
 
 #### getAffiliate
-
+Gives list of affiliates for company.
 
 ```golang
 
@@ -30920,7 +31201,7 @@ data, err := Finance.GetAffiliate(CompanyID, body);
 
 | body |  GetAffiliate | "Request body" 
 
-
+Gives list of affiliates for company.
 
 *Success Response:*
 
@@ -30943,7 +31224,7 @@ Schema: `GetAffiliateResponse`
 
 
 #### downloadCreditDebitNote
-
+Download credit debit note pdf.
 
 ```golang
 
@@ -30958,7 +31239,7 @@ data, err := Finance.DownloadCreditDebitNote(CompanyID, body);
 
 | body |  DownloadCreditDebitNoteRequest | "Request body" 
 
-
+Download credit debit note pdf.
 
 *Success Response:*
 
@@ -30981,7 +31262,7 @@ Schema: `DownloadCreditDebitNoteResponse`
 
 
 #### paymentProcess
-
+Payment Processing API.
 
 ```golang
 
@@ -30996,7 +31277,7 @@ data, err := Finance.PaymentProcess(CompanyID, body);
 
 | body |  PaymentProcessRequest | "Request body" 
 
-
+Payment Processing API.
 
 *Success Response:*
 
@@ -31019,7 +31300,7 @@ Schema: `PaymentProcessResponse`
 
 
 #### creditlineDataplatform
-
+Used to fetch creditline data.
 
 ```golang
 
@@ -31034,7 +31315,7 @@ data, err := Finance.CreditlineDataplatform(CompanyID, body);
 
 | body |  CreditlineDataPlatformRequest | "Request body" 
 
-
+Used to fetch creditline data.
 
 *Success Response:*
 
@@ -31057,7 +31338,7 @@ Schema: `CreditlineDataPlatformResponse`
 
 
 #### isCreditlinePlatform
-
+Checks if seller has opted for creditline or not.
 
 ```golang
 
@@ -31072,7 +31353,7 @@ data, err := Finance.IsCreditlinePlatform(CompanyID, body);
 
 | body |  IsCreditlinePlatformRequest | "Request body" 
 
-
+Checks if seller has opted for creditline or not.
 
 *Success Response:*
 
@@ -31095,7 +31376,7 @@ Schema: `IsCreditlinePlatformResponse`
 
 
 #### invoiceType
-
+Gives list of active invoice type.
 
 ```golang
 
@@ -31110,7 +31391,7 @@ data, err := Finance.InvoiceType(CompanyID, body);
 
 | body |  InvoiceTypeRequest | "Request body" 
 
-
+Gives list of active invoice type.
 
 *Success Response:*
 
@@ -31133,7 +31414,7 @@ Schema: `InvoiceTypeResponse`
 
 
 #### invoiceListing
-
+Gives list of invoices.
 
 ```golang
 
@@ -31148,7 +31429,7 @@ data, err := Finance.InvoiceListing(CompanyID, body);
 
 | body |  InvoiceListingRequest | "Request body" 
 
-
+Gives list of invoices.
 
 *Success Response:*
 
@@ -31171,7 +31452,7 @@ Schema: `InvoiceListingResponse`
 
 
 #### invoicePDF
-
+Gives pdf view of invoice.
 
 ```golang
 
@@ -31186,7 +31467,7 @@ data, err := Finance.InvoicePDF(CompanyID, body);
 
 | body |  InvoicePdfRequest | "Request body" 
 
-
+Gives pdf view of invoice.
 
 *Success Response:*
 
@@ -31196,6 +31477,430 @@ Success
 
 
 Schema: `InvoicePdfResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### isCnRefundMethod
+Checks if seller has obtained cn as refund method or not.
+
+```golang
+
+data, err := Finance.IsCnRefundMethod(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  IsCnRefundMethodRequest | "Request body" 
+
+Checks if seller has obtained cn as refund method or not.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `IsCnRefundMethodResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createSellerCreditNoteConfig
+Creates credit note config.
+
+```golang
+
+data, err := Finance.CreateSellerCreditNoteConfig(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  CreateSellerCreditNoteConfigRequest | "Request body" 
+
+Creates credit note config.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `CreateSellerCreditNoteConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteConfig
+Deletes credit note config.
+
+```golang
+
+data, err := Finance.DeleteConfig(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  DeleteConfigRequest | "Request body" 
+
+Deletes credit note config.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `DeleteConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### channelDisplayName
+Provide channel display name dict.
+
+```golang
+
+data, err := Finance.ChannelDisplayName(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+
+| xQuery | struct | Includes properties such as `FilterKey`
+
+
+Provide channel display name dict.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `ChannelDisplayNameResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPdfUrlView
+Gives cn pdf url.
+
+```golang
+
+data, err := Finance.GetPdfUrlView(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  GetPdfUrlViewRequest | "Request body" 
+
+Gives cn pdf url.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetPdfUrlViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### creditNoteDetails
+Gives credit note details.
+
+```golang
+
+data, err := Finance.CreditNoteDetails(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  CreditNoteDetailsRequest | "Request body" 
+
+Gives credit note details.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `CreditNoteDetailsResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCustomerCreditBalance
+Gives customer credit balance.
+
+```golang
+
+data, err := Finance.GetCustomerCreditBalance(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  GetCustomerCreditBalanceRequest | "Request body" 
+
+Gives customer credit balance.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetCustomerCreditBalanceResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCnConfig
+Gives credit note config.
+
+```golang
+
+data, err := Finance.GetCnConfig(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  GetCnConfigRequest | "Request body" 
+
+Gives credit note config.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetCnConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### generateReportCustomerCn
+Generate Credit Note report and gives Note details.
+
+```golang
+
+data, err := Finance.GenerateReportCustomerCn(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  GenerateReportCustomerCnRequest | "Request body" 
+
+Generate Credit Note report and gives Note details.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GenerateReportCustomerCnResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### downloadReportCustomerCn
+Gives list of downloaded reports.
+
+```golang
+
+data, err := Finance.DownloadReportCustomerCn(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+| body |  DownloadReportCustomerCnRequest | "Request body" 
+
+Gives list of downloaded reports.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `DownloadReportCustomerCnResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getReportingFilters
+Gets all customer Cn filters and search.
+
+```golang
+
+data, err := Finance.GetReportingFilters(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID for which the data will be returned.Company_id is required. | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `FilterKey`, `AffiliateID`
+
+
+Gets all customer Cn filters and search.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetReportingFiltersResponse`
 
 
 
@@ -32179,7 +32884,7 @@ Default
     },
     "content": {
       "title": "SOme title Response",
-      "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
+      "description": "Handles communication between Administrator",
       "attachments": []
     },
     "status": {
@@ -32378,12 +33083,12 @@ Default
 ---
 
 
-#### getTickets
+#### getNewTickets
 Gets the list of Application level Tickets and/or ticket filters depending on query params
 
 ```golang
 
-data, err := Lead.GetTickets(CompanyID, ApplicationID, xQuery);
+data, err := Lead.GetNewTickets(CompanyID, ApplicationID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -32847,7 +33552,7 @@ Default
     },
     "content": {
       "title": "SOme title Response",
-      "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
+      "description": "Handles communication between Administrator",
       "attachments": []
     },
     "status": {
@@ -33089,7 +33794,7 @@ Default
     },
     "content": {
       "title": "SOme title Response",
-      "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
+      "description": "Handles communication between Administrator",
       "attachments": []
     },
     "status": {
@@ -33288,12 +33993,12 @@ Default
 ---
 
 
-#### getTicket
+#### getNewTicket
 Retreives ticket details of a application level ticket
 
 ```golang
 
-data, err := Lead.GetTicket(CompanyID, ApplicationID, ID);
+data, err := Lead.GetNewTicket(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -33334,7 +34039,7 @@ Default
     },
     "content": {
       "title": "SOme title Response",
-      "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
+      "description": "Handles communication between Administrator",
       "attachments": []
     },
     "status": {
@@ -33533,12 +34238,12 @@ Default
 ---
 
 
-#### editTicket
+#### editNewTicket
 Edits ticket details of a application level ticket
 
 ```golang
 
-data, err := Lead.EditTicket(CompanyID, ApplicationID, ID, body);
+data, err := Lead.EditNewTicket(CompanyID, ApplicationID, ID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -33580,7 +34285,7 @@ Default
     },
     "content": {
       "title": "SOme title Response",
-      "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
+      "description": "Handles communication between Administrator",
       "attachments": []
     },
     "status": {
@@ -33846,7 +34551,9 @@ Default
         }
       }
     },
-    "created_by": "5d1363adf599d850df93175e",
+    "created_by": {
+      "5d1363adf599d850df93175e": null
+    },
     "createdAt": "2021-02-03T12:55:46.808Z",
     "updatedAt": "2021-02-03T12:55:46.808Z",
     "__v": 0
@@ -34037,7 +34744,9 @@ Default
     ],
     "total": 2,
     "limit": 100,
-    "page": 1,
+    "page": {
+      "type": ""
+    },
     "pages": 1
   }
 }
@@ -34102,10 +34811,15 @@ Default
           "user_id": "5f8147abbd1a0a870f61f1a6"
         },
         "category": "customers",
-        "response": {
-          "audio": 2,
-          "video": 6
-        },
+        "response": [
+          {
+            "audio": 2,
+            "video": 6,
+            "display": "",
+            "key": "",
+            "value": ""
+          }
+        ],
         "createdAt": "2021-06-10T18:11:11.349Z",
         "updatedAt": "2021-06-10T18:11:11.349Z",
         "__v": 0
@@ -34173,10 +34887,15 @@ Default
       "user_id": "5f8147abbd1a0a870f61f1a6"
     },
     "category": "customers",
-    "response": {
-      "audio": 2,
-      "video": 6
-    },
+    "response": [
+      {
+        "audio": 2,
+        "video": 6,
+        "display": "",
+        "key": "",
+        "value": ""
+      }
+    ],
     "createdAt": "2021-06-10T18:11:11.349Z",
     "updatedAt": "2021-06-10T18:11:11.349Z",
     "__v": 0
@@ -34195,12 +34914,12 @@ Default
 ---
 
 
-#### createHistory
+#### createNewHistory
 Create history for specific application level ticket
 
 ```golang
 
-data, err := Lead.CreateHistory(CompanyID, ApplicationID, ID, body);
+data, err := Lead.CreateNewHistory(CompanyID, ApplicationID, ID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -34265,7 +34984,9 @@ Default
         }
       }
     },
-    "created_by": "5d1363adf599d850df93175e",
+    "created_by": {
+      "5d1363adf599d850df93175e": null
+    },
     "createdAt": "2021-02-03T12:55:46.808Z",
     "updatedAt": "2021-02-03T12:55:46.808Z",
     "__v": 0
@@ -34284,12 +35005,12 @@ Default
 ---
 
 
-#### getTicketHistory
+#### getNewTicketHistory
 Gets history list for specific application level ticket
 
 ```golang
 
-data, err := Lead.GetTicketHistory(CompanyID, ApplicationID, ID);
+data, err := Lead.GetNewTicketHistory(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -34459,7 +35180,9 @@ Default
     ],
     "total": 2,
     "limit": 100,
-    "page": 1,
+    "page": {
+      "type": ""
+    },
     "pages": 1
   }
 }
@@ -34515,51 +35238,54 @@ Schema: `CustomForm`
 Default
 ```json
 {
-  "value": {
-    "login_required": false,
-    "should_notify": false,
-    "inputs": [
-      {
-        "required": false,
-        "type": "text",
-        "display": "Name",
-        "placeholder": "Please enter your name",
-        "key": "name"
-      }
-    ],
-    "available_assignees": [],
-    "_id": "5fd258a9088f957f34c288fc",
-    "title": "trail form",
-    "description": "Trail form description",
-    "slug": "trail-form",
-    "application_id": "000000000000000000000003",
-    "created_on": {
-      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-      "platform": "web",
-      "meta": {
-        "browser": {
-          "name": "Chrome",
-          "version": "87.0.4280.88"
-        },
-        "os": {
-          "name": "macOS",
-          "version": "10.15.6",
-          "versionName": "Catalina"
-        },
-        "platform": {
-          "type": "desktop",
-          "vendor": "Apple"
-        },
-        "engine": {
-          "name": "Blink"
+  "value": [
+    {
+      "required": false,
+      "login_required": false,
+      "should_notify": false,
+      "inputs": [
+        {
+          "required": false,
+          "type": "text",
+          "display": "Name",
+          "placeholder": "Please enter your name",
+          "key": "name"
         }
-      }
-    },
-    "created_by": "5d1363adf599d850df93175e",
-    "createdAt": "2020-12-10T17:19:37.515Z",
-    "updatedAt": "2020-12-10T17:19:43.214Z",
-    "__v": 0
-  }
+      ],
+      "available_assignees": [],
+      "_id": "5fd258a9088f957f34c288fc",
+      "title": "trail form",
+      "description": "Trail form description",
+      "slug": "trail-form",
+      "application_id": "000000000000000000000003",
+      "created_on": {
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
+        "platform": "web",
+        "meta": {
+          "browser": {
+            "name": "Chrome",
+            "version": "87.0.4280.88"
+          },
+          "os": {
+            "name": "macOS",
+            "version": "10.15.6",
+            "versionName": "Catalina"
+          },
+          "platform": {
+            "type": "desktop",
+            "vendor": "Apple"
+          },
+          "engine": {
+            "name": "Blink"
+          }
+        }
+      },
+      "created_by": "5d1363adf599d850df93175e",
+      "createdAt": "2020-12-10T17:19:37.515Z",
+      "updatedAt": "2020-12-10T17:19:43.214Z",
+      "__v": 0
+    }
+  ]
 }
 ```
 
@@ -34614,61 +35340,64 @@ Schema: `CustomForm`
 Default
 ```json
 {
-  "value": {
-    "login_required": false,
-    "should_notify": false,
-    "inputs": [
-      {
-        "type": "email",
-        "showRegexInput": true,
-        "enum": [],
-        "regex": "\\S+@\\S+\\.\\S+",
-        "display": "email",
-        "required": true,
-        "key": "email"
-      },
-      {
-        "type": "number",
-        "showRegexInput": false,
-        "enum": [],
-        "display": "Enter your fav number",
-        "placeholder": "123",
-        "key": "enter-your-fav-number"
-      }
-    ],
-    "available_assignees": [],
-    "_id": "602e900a2042255c03cadaf0",
-    "title": "service-test-satyen",
-    "description": "testing form from service",
-    "slug": "service-test-satyen",
-    "header_image": "https://hdn-1.addsale.com/x0/support-ticket/files/free/original/KZL86aN5l-service-test-satyen.jpeg",
-    "application_id": "000000000000000000000001",
-    "created_on": {
-      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
-      "platform": "web",
-      "meta": {
-        "browser": {
-          "name": "Chrome",
-          "version": "88.0.4324.150"
+  "value": [
+    {
+      "required": false,
+      "login_required": false,
+      "should_notify": false,
+      "inputs": [
+        {
+          "type": "email",
+          "showRegexInput": true,
+          "enum": [],
+          "regex": "\\S+@\\S+\\.\\S+",
+          "display": "email",
+          "required": true,
+          "key": "email"
         },
-        "os": {
-          "name": "macOS",
-          "version": "11.2.0"
-        },
-        "platform": {
-          "type": "desktop",
-          "vendor": "Apple"
-        },
-        "engine": {
-          "name": "Blink"
+        {
+          "type": "number",
+          "showRegexInput": false,
+          "enum": [],
+          "display": "Enter your fav number",
+          "placeholder": "123",
+          "key": "enter-your-fav-number"
         }
-      }
-    },
-    "created_by": "5f8147abbd1a0a870f61f1a6",
-    "createdAt": "2021-02-18T16:04:26.495Z",
-    "updatedAt": "2021-02-26T10:16:49.272Z",
-    "__v": 0
-  }
+      ],
+      "available_assignees": [],
+      "_id": "602e900a2042255c03cadaf0",
+      "title": "service-test-satyen",
+      "description": "testing form from service",
+      "slug": "service-test-satyen",
+      "header_image": "https://hdn-1.addsale.com/x0/support-ticket/files/free/original/KZL86aN5l-service-test-satyen.jpeg",
+      "application_id": "000000000000000000000001",
+      "created_on": {
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
+        "platform": "web",
+        "meta": {
+          "browser": {
+            "name": "Chrome",
+            "version": "88.0.4324.150"
+          },
+          "os": {
+            "name": "macOS",
+            "version": "11.2.0"
+          },
+          "platform": {
+            "type": "desktop",
+            "vendor": "Apple"
+          },
+          "engine": {
+            "name": "Blink"
+          }
+        }
+      },
+      "created_by": "5f8147abbd1a0a870f61f1a6",
+      "createdAt": "2021-02-18T16:04:26.495Z",
+      "updatedAt": "2021-02-26T10:16:49.272Z",
+      "__v": 0
+    }
+  ]
 }
 ```
 
@@ -34850,7 +35579,9 @@ Default
     ],
     "total": 2,
     "limit": 10,
-    "page": 1,
+    "page": {
+      "type": ""
+    },
     "pages": 1
   }
 }
@@ -34904,61 +35635,64 @@ Schema: `CustomForm`
 Default
 ```json
 {
-  "value": {
-    "login_required": false,
-    "should_notify": false,
-    "inputs": [
-      {
-        "type": "email",
-        "showRegexInput": true,
-        "enum": [],
-        "regex": "\\S+@\\S+\\.\\S+",
-        "display": "email",
-        "required": true,
-        "key": "email"
-      },
-      {
-        "type": "number",
-        "showRegexInput": false,
-        "enum": [],
-        "display": "Enter your fav number",
-        "placeholder": "123",
-        "key": "enter-your-fav-number"
-      }
-    ],
-    "available_assignees": [],
-    "_id": "602e900a2042255c03cadaf0",
-    "title": "service-test-satyen",
-    "description": "testing form from service",
-    "slug": "service-test-satyen",
-    "header_image": "https://hdn-1.addsale.com/x0/support-ticket/files/free/original/KZL86aN5l-service-test-satyen.jpeg",
-    "application_id": "000000000000000000000001",
-    "created_on": {
-      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
-      "platform": "web",
-      "meta": {
-        "browser": {
-          "name": "Chrome",
-          "version": "88.0.4324.150"
+  "value": [
+    {
+      "required": false,
+      "login_required": false,
+      "should_notify": false,
+      "inputs": [
+        {
+          "type": "email",
+          "showRegexInput": true,
+          "enum": [],
+          "regex": "\\S+@\\S+\\.\\S+",
+          "display": "email",
+          "required": true,
+          "key": "email"
         },
-        "os": {
-          "name": "macOS",
-          "version": "11.2.0"
-        },
-        "platform": {
-          "type": "desktop",
-          "vendor": "Apple"
-        },
-        "engine": {
-          "name": "Blink"
+        {
+          "type": "number",
+          "showRegexInput": false,
+          "enum": [],
+          "display": "Enter your fav number",
+          "placeholder": "123",
+          "key": "enter-your-fav-number"
         }
-      }
-    },
-    "created_by": "5f8147abbd1a0a870f61f1a6",
-    "createdAt": "2021-02-18T16:04:26.495Z",
-    "updatedAt": "2021-02-26T10:16:49.272Z",
-    "__v": 0
-  }
+      ],
+      "available_assignees": [],
+      "_id": "602e900a2042255c03cadaf0",
+      "title": "service-test-satyen",
+      "description": "testing form from service",
+      "slug": "service-test-satyen",
+      "header_image": "https://hdn-1.addsale.com/x0/support-ticket/files/free/original/KZL86aN5l-service-test-satyen.jpeg",
+      "application_id": "000000000000000000000001",
+      "created_on": {
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
+        "platform": "web",
+        "meta": {
+          "browser": {
+            "name": "Chrome",
+            "version": "88.0.4324.150"
+          },
+          "os": {
+            "name": "macOS",
+            "version": "11.2.0"
+          },
+          "platform": {
+            "type": "desktop",
+            "vendor": "Apple"
+          },
+          "engine": {
+            "name": "Blink"
+          }
+        }
+      },
+      "created_by": "5f8147abbd1a0a870f61f1a6",
+      "createdAt": "2021-02-18T16:04:26.495Z",
+      "updatedAt": "2021-02-26T10:16:49.272Z",
+      "__v": 0
+    }
+  ]
 }
 ```
 
@@ -35026,12 +35760,12 @@ Default
 ---
 
 
-#### getTokenForVideoRoom
+#### getNewTokenForVideoRoom
 Get Token to join a specific Video Room using it's unqiue name
 
 ```golang
 
-data, err := Lead.GetTokenForVideoRoom(CompanyID, ApplicationID, UniqueName);
+data, err := Lead.GetNewTokenForVideoRoom(CompanyID, ApplicationID, UniqueName);
 ```
 
 | Argument  |  Type  | Description |
@@ -35135,12 +35869,12 @@ Default
 ---
 
 
-#### getVideoParticipants
+#### getNewVideoParticipants
 Get participants of a specific Video Room using it's unique name
 
 ```golang
 
-data, err := Lead.GetVideoParticipants(CompanyID, ApplicationID, UniqueName);
+data, err := Lead.GetNewVideoParticipants(CompanyID, ApplicationID, UniqueName);
 ```
 
 | Argument  |  Type  | Description |
@@ -35490,7 +36224,7 @@ data, err := Order.GetAnnouncements(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `Date`
 
 
-
+Get Announcements
 
 *Success Response:*
 
@@ -35552,7 +36286,7 @@ data, err := Order.UpdateAddress(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `ShipmentID`, `Name`, `Address`, `AddressType`, `Pincode`, `Phone`, `Email`, `Landmark`, `AddressCategory`, `City`, `State`, `Country`
 
 
-
+Update Address for the order
 
 *Success Response:*
 
@@ -35600,7 +36334,7 @@ data, err := Order.Click2Call(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `Caller`, `Receiver`, `BagID`, `CallerID`, `Method`
 
 
-
+Click to Call
 
 *Success Response:*
 
@@ -35676,7 +36410,7 @@ data, err := Order.ProcessManifest(CompanyID, body);
 
 | body |  CreateOrderPayload | "Request body" 
 
-
+Process Manifest
 
 *Success Response:*
 
@@ -35714,7 +36448,7 @@ data, err := Order.DispatchManifest(CompanyID, body);
 
 | body |  DispatchManifest | "Request body" 
 
-
+Dispatch Manifest
 
 *Success Response:*
 
@@ -35751,7 +36485,7 @@ data, err := Order.GetRoleBasedActions(CompanyID);
 
 
 
-
+Get Role Based Actions
 
 *Success Response:*
 
@@ -35793,7 +36527,7 @@ data, err := Order.GetShipmentHistory(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
 
 
-
+Get Shipment History
 
 *Success Response:*
 
@@ -35831,7 +36565,7 @@ data, err := Order.PostShipmentHistory(CompanyID, body);
 
 | body |  PostShipmentHistory | "Request body" 
 
-
+Post shipment history
 
 *Success Response:*
 
@@ -35869,7 +36603,7 @@ data, err := Order.SendSmsNinja(CompanyID, body);
 
 | body |  SendSmsPayload | "Request body" 
 
-
+Send SMS Ninja Panel
 
 *Success Response:*
 
@@ -35907,7 +36641,7 @@ data, err := Order.UpdatePackagingDimensions(CompanyID, body);
 
 | body |  UpdatePackagingDimensionsPayload | "Request body" 
 
-
+Update Packaging Dimensions
 
 *Success Response:*
 
@@ -35945,7 +36679,7 @@ data, err := Order.CreateOrder(CompanyID, body);
 
 | body |  CreateOrderAPI | "Request body" 
 
-
+Create Order
 
 *Success Response:*
 
@@ -36058,7 +36792,7 @@ data, err := Order.UploadConsent(CompanyID, body);
 
 | body |  UploadConsent | "Request body" 
 
-
+Upload Consent
 
 *Success Response:*
 
@@ -36096,7 +36830,7 @@ data, err := Order.OrderUpdate(CompanyID, body);
 
 | body |  PlatformOrderUpdate | "Request body" 
 
-
+Update Order
 
 *Success Response:*
 
@@ -36134,7 +36868,7 @@ data, err := Order.CheckOrderStatus(CompanyID, body);
 
 | body |  OrderStatus | "Request body" 
 
-
+Check order status
 
 *Success Response:*
 
@@ -36171,7 +36905,7 @@ data, err := Order.GetStateTransitionMap(CompanyID);
 
 
 
-
+Get State Transition Map
 
 *Success Response:*
 
@@ -36181,6 +36915,68 @@ State Transition Mapping, for next possible state
 
 
 Schema: `BagStateTransitionMap`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAllowedStateTransition
+To fetch next state transitions.
+
+```golang
+
+data, err := Order.GetAllowedStateTransition(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company ID | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `OrderingChannel`, `Status`
+
+
+This endpoint will fetch next possible states based on logged in user
+
+
+*Success Response:*
+
+
+
+Role wise state transition mapping, for next possible state
+
+
+Schema: `RoleBaseStateTransitionMapping`
+
+
+*Examples:*
+
+
+send state transition success
+```json
+{
+  "value": {
+    "success": true,
+    "next_statuses": [
+      "bag_picked",
+      "delivery_done",
+      "rto_bag_delivered",
+      "rto_in_transit"
+    ]
+  }
+}
+```
 
 
 
@@ -36209,7 +37005,7 @@ data, err := Order.FetchCreditBalanceDetail(CompanyID, body);
 
 | body |  FetchCreditBalanceRequestPayload | "Request body" 
 
-
+Fetch Credit Balance Detail
 
 *Success Response:*
 
@@ -36247,7 +37043,7 @@ data, err := Order.FetchRefundModeConfig(CompanyID, body);
 
 | body |  RefundModeConfigRequestPayload | "Request body" 
 
-
+Fetch Refund Mode Config
 
 *Success Response:*
 
@@ -36285,7 +37081,7 @@ data, err := Order.AttachOrderUser(CompanyID, body);
 
 | body |  AttachOrderUser | "Request body" 
 
-
+Attach Order User
 
 *Success Response:*
 
@@ -36323,7 +37119,7 @@ data, err := Order.SendUserMobileOTP(CompanyID, body);
 
 | body |  SendUserMobileOTP | "Request body" 
 
-
+Send User Mobile OTP
 
 *Success Response:*
 
@@ -36361,7 +37157,7 @@ data, err := Order.VerifyMobileOTP(CompanyID, body);
 
 | body |  VerifyMobileOTP | "Request body" 
 
-
+Verify Mobile OTP
 
 *Success Response:*
 
@@ -36371,6 +37167,58 @@ Verify OTP
 
 
 Schema: `VerifyOtpResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### downloadLanesReport
+
+
+```golang
+
+data, err := Order.DownloadLanesReport(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  BulkReportsDownloadRequest | "Request body" 
+
+downloads lanes shipment/orders.
+
+*Success Response:*
+
+
+
+Bulk Report creation initiated.
+
+
+Schema: `BulkReportsDownloadResponse`
+
+
+*Examples:*
+
+
+BulkReportsSucessfulEventSample
+```json
+{
+  "value": {
+    "success": true,
+    "batch_id": "0000-1111-2222-3333"
+  }
+}
+```
 
 
 
@@ -36442,10 +37290,12 @@ data, err := Order.GetShipments(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `Lane`, `BagStatus`, `StatusOverrideLane`, `TimeToDispatch`, `SearchType`, `SearchValue`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PageNo`, `PageSize`, `FetchActiveShipment`, `ExcludeLockedShipments`, `PaymentMethods`, `ChannelShipmentID`, `ChannelOrderID`, `CustomMeta`, `OrderingChannel`, `CompanyAffiliateTag`, `MyOrders`, `PlatformUserID`
 
 
+| xQuery | struct | Includes properties such as `Lane`, `BagStatus`, `StatusOverrideLane`, `TimeToDispatch`, `SearchType`, `SearchValue`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PageNo`, `PageSize`, `FetchActiveShipment`, `ExcludeLockedShipments`, `PaymentMethods`, `ChannelShipmentID`, `ChannelOrderID`, `CustomMeta`, `OrderingChannel`, `CompanyAffiliateTag`, `MyOrders`, `PlatformUserID`, `Tags`
 
+
+Get Shipments Listing for the company id
 
 *Success Response:*
 
@@ -36487,7 +37337,7 @@ data, err := Order.GetShipmentById(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `ChannelShipmentID`, `ShipmentID`
 
 
-
+Get shipment details for the given shipment.
 
 *Success Response:*
 
@@ -36527,7 +37377,7 @@ data, err := Order.GetOrderById(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `OrderID`
 
 
-
+Get Order Details by ID
 
 *Success Response:*
 
@@ -36595,7 +37445,7 @@ data, err := Order.GetLaneConfig(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `SuperLane`, `GroupEntity`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PaymentMode`, `BagStatus`, `SearchType`, `SearchValue`, `Tags`, `TimeToDispatch`, `PaymentMethods`, `MyOrders`
 
 
-
+Get lane config for the order
 
 *Success Response:*
 
@@ -36667,7 +37517,7 @@ data, err := Order.GetOrders(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `Lane`, `SearchType`, `BagStatus`, `TimeToDispatch`, `PaymentMethods`, `Tags`, `SearchValue`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PageNo`, `PageSize`, `IsPrioritySort`, `CustomMeta`, `MyOrders`
 
 
-
+Get Orders Listing
 
 *Success Response:*
 
@@ -36752,7 +37602,7 @@ data, err := Order.Getfilters(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `View`, `GroupEntity`
 
 
-
+Get Listing Filters
 
 *Success Response:*
 
@@ -36814,7 +37664,7 @@ data, err := Order.GetBulkShipmentExcelFile(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `SalesChannels`, `DpIds`, `FromDate`, `ToDate`, `Stores`, `Tags`, `BagStatus`, `PaymentMethods`, `FileType`, `TimeToDispatch`, `PageNo`, `PageSize`
 
 
-
+Generate Bulk Shipment Excel Report.
 
 *Success Response:*
 
@@ -36851,7 +37701,7 @@ data, err := Order.GetBulkActionTemplate(CompanyID);
 
 
 
-
+Get Bulk Action seller templates.
 
 *Success Response:*
 
@@ -36891,7 +37741,7 @@ data, err := Order.DownloadBulkActionTemplate(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `TemplateSlug`
 
 
-
+Download bulk actions seller templates.
 
 *Success Response:*
 
@@ -37024,7 +37874,7 @@ data, err := Order.GetBagById(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `BagID`, `ChannelBagID`, `ChannelID`
 
 
-
+Get Order Bag Details.
 
 *Success Response:*
 
@@ -37080,7 +37930,7 @@ data, err := Order.GetBags(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `BagIds`, `ShipmentIds`, `OrderIds`, `ChannelBagIds`, `ChannelShipmentIds`, `ChannelOrderIds`, `ChannelID`, `PageNo`, `PageSize`
 
 
-
+Get Bags for the order
 
 *Success Response:*
 
@@ -37125,7 +37975,7 @@ data, err := Order.GeneratePOSReceiptByOrderId(CompanyID, OrderID, xQuery);
 | xQuery | struct | Includes properties such as `ShipmentID`, `DocumentType`
 
 
-
+Generate POS recipt by order id.
 
 *Success Response:*
 
@@ -39649,6 +40499,450 @@ Schema: `GetPaymentCodeResponse`
 ---
 
 
+#### updatePaymentSession
+API to update status of a payment.
+
+```golang
+
+data, err := Payment.UpdatePaymentSession(CompanyID, ApplicationID, Gid, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| Gid | string | global identifier of the entity (e.g. order, cart etc.) against which payment_session was initiated. This is generated by Fynd payments platform and is unique. | 
+
+
+| body |  PaymentSessionRequestSerializer | "Request body" 
+
+A payment_session is initiated against a global identifier (gid) which is identifies the entity payment is initiated against. e.g. order_id, cart_id. This endpoint is to update the status of the said payment_session.
+
+*Success Response:*
+
+
+
+Success. Returns the status of Update or not. Check the example shown below or refer `PaymentSessionResponseSerializer` for more details.
+
+
+Schema: `PaymentSessionResponseSerializer`
+
+
+*Examples:*
+
+
+status_update_success
+```json
+{
+  "summary": "payment status updated successfully",
+  "value": {
+    "gid": "Payment Received",
+    "status": "initiated",
+    "total_amount": 100,
+    "currency": "INR",
+    "platform_transaction_details": [
+      {
+        "object": "platform_payment",
+        "transaction_id": "pay_wtt5r23mpebexcjsxzylyjhn7a",
+        "payment_id": "pay_wtt5r23mpebexcjsxzylyjhn7a"
+      }
+    ]
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateRefundSession
+API to update the status of a refund
+
+```golang
+
+data, err := Payment.UpdateRefundSession(CompanyID, ApplicationID, Gid, RequestID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| Gid | string | global identifier of the entity (e.g. order, cart etc.) against which payment_session was initiated. This is generated by Fynd payments platform and is unique. | 
+
+
+| RequestID | string | A unique id that was used to initiate a refund session. This is generated by Fynd platform and is usually shipment_id. | 
+
+
+| body |  RefundSessionRequestSerializer | "Request body" 
+
+A refund_session is initiated against a refund request, and this endpoint is to update the status against the refund request_id. A gid is unique indentifier of the entity against which payment was received e.g. an order.
+
+*Success Response:*
+
+
+
+Returns the response weather it is success or not. Check the example shown below or refer `RefundSessionResponseSerializer` for more details.
+
+
+Schema: `RefundSessionResponseSerializer`
+
+
+*Examples:*
+
+
+status_update_success
+```json
+{
+  "summary": "refund status is updated successfully",
+  "value": {
+    "gid": "FY615DE25839C4AF3A1A",
+    "status": "initiated",
+    "total_refund_amount": 100,
+    "currency": "INR",
+    "platform_refund_details": [
+      {
+        "transaction_id": "pay_wtt5r23mpebexcjsxzylyjhn7a",
+        "refund_id": "act_4lan4lrf2bxexdbinmqoln4nda"
+      }
+    ]
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getMerchantPaymentOption
+Get Payment modes and COD details.
+
+```golang
+
+data, err := Payment.GetMerchantPaymentOption(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+
+This api fetches all the available PGs for merchant and its offline payment mode details.
+
+*Success Response:*
+
+
+
+Success.
+
+
+Schema: `MerchnatPaymentModeResponse`
+
+
+*Examples:*
+
+
+merchant_payment_response_success
+```json
+{
+  "summary": "List of active PGs for merchant and its offline payment configurations",
+  "value": {
+    "success": true,
+    "message": "",
+    "items": [
+      {
+        "online": {
+          "is_active": true,
+          "aggregators": [
+            {
+              "id": 1,
+              "name": "Simpl",
+              "logo": "https://hdn-1.fynd.com/payment/simpl-pg-logo.jpg"
+            }
+          ]
+        },
+        "offline": {
+          "is_active": true,
+          "payment_modes": {
+            "cod": [
+              {
+                "user_cod_limit": 0,
+                "cod_charges": 0,
+                "anonymous_cod": false,
+                "cod_max_order_value": 0,
+                "cod_min_order_value": 0,
+                "cod_charges_max_value": 0,
+                "cod_charges_min_value": 0
+              }
+            ]
+          }
+        },
+        "split": {
+          "is_active": true,
+          "payment_modes": {
+            "split_payment": {}
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### patchMerchantPaymentOption
+Update Payment modes and COD details.
+
+```golang
+
+data, err := Payment.PatchMerchantPaymentOption(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| body |  MerchnatPaymentModeResponse | "Request body" 
+
+To updated online payment as active/inactive or offline payment configuration like cod charges, anonymous cod allowed flags.
+
+*Success Response:*
+
+
+
+Success.
+
+
+Schema: `MerchnatPaymentModeResponse`
+
+
+*Examples:*
+
+
+merchant_payment_response_success
+```json
+{
+  "summary": "updated payment mode configurations.",
+  "value": {
+    "success": true,
+    "message": "",
+    "items": [
+      {
+        "aggregators": [
+          {
+            "id": 1,
+            "name": "Simpl"
+          }
+        ]
+      }
+    ],
+    "offline": {
+      "is_active": true,
+      "payment_modes": {
+        "cod": {
+          "cod_charges": 0,
+          "user_cod_limit": 0,
+          "cod_min_order_value": 0,
+          "cod_max_order_value": 10000,
+          "cod_charges_min_value": 100,
+          "cod_charges_max_value": 49000,
+          "anonymous_cod": false
+        },
+        "split": {
+          "is_active": false
+        }
+      }
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getMerchantAggregatorPaymentModeDetails
+Get Aggregator, payment mode and sub payment mode.
+
+```golang
+
+data, err := Payment.GetMerchantAggregatorPaymentModeDetails(CompanyID, ApplicationID, AggregatorID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| AggregatorID | float64 | Aggregators Id | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `BusinessUnit`, `Device`
+
+
+Get Aggregator, payment mode and sub payment mode details.
+
+*Success Response:*
+
+
+
+Success.
+
+
+Schema: `MerchnatPaymentModeResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### patchMerchantAggregatorPaymentModeDetails
+Update Aggregator, payment mode and sub payment mode.
+
+```golang
+
+data, err := Payment.PatchMerchantAggregatorPaymentModeDetails(CompanyID, ApplicationID, AggregatorID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| AggregatorID | float64 | Aggregators Id | 
+
+
+| body |  MerchnatPaymentModeResponse | "Request body" 
+
+Update Aggregator, payment mode and sub payment mode details.
+
+*Success Response:*
+
+
+
+Success.
+
+
+Schema: `MerchnatPaymentModeResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPGConfigAggregators
+Get Aggregators available to be added as PG.
+
+```golang
+
+data, err := Payment.GetPGConfigAggregators(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company Id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+
+Get Aggregators available to be added as PG.
+
+*Success Response:*
+
+
+
+Success.
+
+
+Schema: `MerchnatPaymentModeResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 
 ---
 
@@ -39752,6 +41046,7 @@ Success
       }
     ],
     "page": {
+      "type": "string",
       "item_total": 2,
       "size": 10,
       "current": 1,
@@ -40801,6 +42096,1293 @@ Success
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+---
+
+
+
+---
+
+
+## Serviceability
+
+
+#### getApplicationServiceability
+Zone configuration of application.
+
+```golang
+
+data, err := Serviceability.GetApplicationServiceability(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+
+This API returns serviceability config of the application.
+
+*Success Response:*
+
+
+
+Response Data
+
+
+Schema: `ApplicationServiceabilityConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getEntityRegionView
+Get country and state list
+
+```golang
+
+data, err := Serviceability.GetEntityRegionView(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  EntityRegionView_Request | "Request body" 
+
+This API returns response for Entity Region View.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `EntityRegionView_Response`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getListView
+Zone List of application.
+
+```golang
+
+data, err := Serviceability.GetListView(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNumber`, `PageSize`, `Name`, `IsActive`, `ChannelIds`, `Q`
+
+
+This API returns Zone List View of the application.
+
+*Success Response:*
+
+
+
+Zone List of application in descending order of their last modified date.
+
+
+Schema: `ListViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCompanyStoreView
+Company Store View of application.
+
+```golang
+
+data, err := Serviceability.GetCompanyStoreView(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular company. | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNumber`, `PageSize`
+
+
+This API returns Company Store View of the application.
+
+*Success Response:*
+
+
+
+Get Company Store View Data
+
+
+Schema: `CompanyStoreView_Response`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateZoneControllerView
+Updation of zone collections in database.
+
+```golang
+
+data, err := Serviceability.UpdateZoneControllerView(ZoneID, CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
+
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  ZoneUpdateRequest | "Request body" 
+
+This API returns response of updation of zone in mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `ZoneSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getZoneDataView
+Zone Data View of application.
+
+```golang
+
+data, err := Serviceability.GetZoneDataView(CompanyID, ZoneID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| ZoneID | string | A `zone_id` is a unique identifier for a particular zone. | 
+
+
+
+This API returns Zone Data View of the application.
+
+*Success Response:*
+
+
+
+Get Application Zone Data
+
+
+Schema: `GetSingleZoneDataViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createZone
+Creation of a new zone
+
+```golang
+
+data, err := Serviceability.CreateZone(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  ZoneRequest | "Request body" 
+
+This API allows you to create a new zone with the specified information. A zone enables serviceability based on given pincodes or regions. By creating a zone and including specific pincodes or regions, you can ensure that the stores associated with the zone are serviceable for those added pincodes or regions. This functionality is particularly useful when you need to ensure serviceability for multiple pincodes or regions by grouping them into a single zone.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `ZoneResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getZoneFromPincodeView
+GET zone from the Pincode.
+
+```golang
+
+data, err := Serviceability.GetZoneFromPincodeView(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` contains a specific ID of a company. | 
+
+
+| ApplicationID | string | A `application_id` contains a unique ID. | 
+
+
+| body |  GetZoneFromPincodeViewRequest | "Request body" 
+
+This API returns zone from the Pincode View.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `GetZoneFromPincodeViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getZonesFromApplicationIdView
+GET zones from the application_id.
+
+```golang
+
+data, err := Serviceability.GetZonesFromApplicationIdView(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` contains a specific ID of a company. | 
+
+
+| ApplicationID | string | A `application_id` contains a unique ID. | 
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `ZoneID`, `Q`
+
+
+This API returns zones from the application_id View.
+
+*Success Response:*
+
+
+
+List of zones for the given application_id
+
+
+Schema: `GetZoneFromApplicationIdViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getZoneListView
+Zone List of application.
+
+```golang
+
+data, err := Serviceability.GetZoneListView(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNumber`, `PageNo`, `PageSize`, `Name`, `IsActive`, `ChannelIds`, `Q`, `ZoneID`
+
+
+This API returns Zone List View of the application.
+
+*Success Response:*
+
+
+
+Zone List of application in descending order of their last modified date.
+
+
+Schema: `ListViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getStore
+GET stores data
+
+```golang
+
+data, err := Serviceability.GetStore(CompanyID, StoreUID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| StoreUID | float64 | A `store_uid` contains a specific ID of a store. | 
+
+
+
+This API returns stores data.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `GetStoresViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAllStores
+GET stores data
+
+```golang
+
+data, err := Serviceability.GetAllStores(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+
+This API returns stores data.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `GetStoresViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getOptimalLocations
+Get serviceable store of the item
+
+```golang
+
+data, err := Serviceability.GetOptimalLocations(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  ReAssignStoreRequest | "Request body" 
+
+This API returns serviceable store of the item.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `ReAssignStoreResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### addAppDp
+Add application dp data
+
+```golang
+
+data, err := Serviceability.AddAppDp(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier of a particular sale channel. | 
+
+
+| body |  ApplicationCompanyDpViewRequest | "Request body" 
+
+This API add application dp data.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `ApplicationCompanyDpViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteAppDp
+Delete application dp data
+
+```golang
+
+data, err := Serviceability.DeleteAppDp(CompanyID, ApplicationID, CourierPartnerID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier of a particular sale channel. | 
+
+
+| CourierPartnerID | float64 | A `courier_partner_id` is a unique identifier of a particular delivery partner. | 
+
+
+
+This API remove application dp data.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `ApplicationCompanyDpViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updatePincodeMopView
+PincodeView update of MOP.
+
+```golang
+
+data, err := Serviceability.UpdatePincodeMopView(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  PincodeMopData | "Request body" 
+
+This API updates Pincode method of payment.
+
+*Success Response:*
+
+
+
+Response Data
+
+
+Schema: `PincodeMOPresponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updatePincodeBulkView
+Bulk Update of pincode in the application.
+
+```golang
+
+data, err := Serviceability.UpdatePincodeBulkView(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  PincodeMopBulkData | "Request body" 
+
+This API constructs bulk write operations to update the MOP data for each pincode in the payload.
+
+*Success Response:*
+
+
+
+Response Data
+
+
+Schema: `PincodeBulkViewResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updatePincodeCoDListing
+Pincode count view of application.
+
+```golang
+
+data, err := Serviceability.UpdatePincodeCoDListing(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  PincodeCodStatusListingRequest | "Request body" 
+
+This API returns count of active pincode.
+
+*Success Response:*
+
+
+
+Response Data
+
+
+Schema: `PincodeCodStatusListingResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updatePincodeAuditHistory
+Auditlog configuration of application.
+
+```golang
+
+data, err := Serviceability.UpdatePincodeAuditHistory(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  PincodeMopUpdateAuditHistoryRequest | "Request body" 
+
+This API returns Audit logs of Pincode.
+
+*Success Response:*
+
+
+
+Response Data
+
+
+Schema: `PincodeMopUpdateAuditHistoryResponseData`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### upsertDpAccount
+Upsertion of DpAccount in database.
+
+```golang
+
+data, err := Serviceability.UpsertDpAccount(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  CompanyDpAccountRequest | "Request body" 
+
+This API returns response of upsertion of DpAccount in mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `CompanyDpAccountResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDpAccount
+Getting DpAccount of a company from database.
+
+```golang
+
+data, err := Serviceability.GetDpAccount(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNumber`, `PageSize`, `Stage`, `PaymentMode`, `TransportType`
+
+
+This API returns response DpAccount of a company from mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `CompanyDpAccountListResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateDpRule
+Updating of DpRules from database.
+
+```golang
+
+data, err := Serviceability.UpdateDpRule(CompanyID, RuleUID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| RuleUID | string | A `rule_uid` is a unique identifier for a particular Dp. | 
+
+
+| body |  DpRulesUpdateRequest | "Request body" 
+
+This API updates and returns response of DpRules from mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `DpRuleUpdateSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDpRules
+Fetching of DpRules from database.
+
+```golang
+
+data, err := Serviceability.GetDpRules(CompanyID, RuleUID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| RuleUID | string | A `rule_uid` is a unique identifier for a particular Dp. | 
+
+
+
+This API returns response of DpRules from mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `DpRuleSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### upsertDpRules
+Upsert of DpRules in database.
+
+```golang
+
+data, err := Serviceability.UpsertDpRules(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  DpRuleRequest | "Request body" 
+
+This API returns response of upsert of DpRules in mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `DpRuleSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDpRuleInsert
+Fetching of DpRules from database.
+
+```golang
+
+data, err := Serviceability.GetDpRuleInsert(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNumber`, `PageSize`
+
+
+This API returns response of DpRules from mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `DpMultipleRuleSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### upsertDpCompanyRules
+Upsert of DpCompanyRules in database.
+
+```golang
+
+data, err := Serviceability.UpsertDpCompanyRules(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  DPCompanyRuleRequest | "Request body" 
+
+This API returns response of upsert of DpCompanyRules in mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `DPCompanyRuleResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDpCompanyRules
+Get All DpCompanyRules applied to company from database.
+
+```golang
+
+data, err := Serviceability.GetDpCompanyRules(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+
+This API returns response of all DpCompanyRules from mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `DPCompanyRuleResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### upsertDpApplicationRules
+Upsert of DpApplicationRules in database.
+
+```golang
+
+data, err := Serviceability.UpsertDpApplicationRules(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular application channel. | 
+
+
+| body |  DPApplicationRuleRequest | "Request body" 
+
+This API returns response of upsert of DpApplicationRules in mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `DPApplicationRuleResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDpApplicationRules
+Get All DpApplicationRules rules added at application level from database.
+
+```golang
+
+data, err := Serviceability.GetDpApplicationRules(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | A `company_id` is a unique identifier for a particular sale channel. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular application channel. | 
+
+
+
+This API returns response of all rules of DpApplicationRules from mongo database.
+
+*Success Response:*
+
+
+
+Response status_code
+
+
+Schema: `DPApplicationRuleResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### patchApplicationServiceabilitySelfShipment
+Self-ship configuration of application.
+
+```golang
+
+data, err := Serviceability.PatchApplicationServiceabilitySelfShipment(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+| body |  SelfShipResponse | "Request body" 
+
+This API updates Self-ship configuration of the application.
+
+*Success Response:*
+
+
+
+Response Data
+
+
+Schema: `ApplicationSelfShipConfigResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getApplicationServiceabilitySelfShipment
+Self-ship configuration of application.
+
+```golang
+
+data, err := Serviceability.GetApplicationServiceabilitySelfShipment(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | A `company_id` is a unique identifier for a particular seller account. | 
+
+
+| ApplicationID | string | A `application_id` is a unique identifier for a particular sale channel. | 
+
+
+
+This API returns Self-ship configuration of the application.
+
+*Success Response:*
+
+
+
+Response Data
+
+
+Schema: `ApplicationSelfShipConfigResponse`
 
 
 
@@ -58328,26 +60910,24 @@ Success
 {
   "value": {
     "kind": "webfonts#webfontList",
-    "items": [
-      {
-        "family": "ABeeZee",
-        "variants": [
-          "regular",
-          "italic"
-        ],
-        "subsets": [
-          "latin"
-        ],
-        "version": "v14",
-        "last_modified": "2020-09-02",
-        "files": {
-          "regular": "http://fonts.gstatic.com/s/abeezee/v14/esDR31xSG-6AGleN6tKukbcHCpE.ttf",
-          "italic": "http://fonts.gstatic.com/s/abeezee/v14/esDT31xSG-6AGleN2tCklZUCGpG-GQ.ttf"
-        },
-        "category": "sans-serif",
-        "kind": "webfonts#webfont"
-      }
-    ]
+    "items": {
+      "family": "ABeeZee",
+      "variants": [
+        "regular",
+        "italic"
+      ],
+      "subsets": [
+        "latin"
+      ],
+      "version": "v14",
+      "last_modified": "2020-09-02",
+      "files": {
+        "regular": "http://fonts.gstatic.com/s/abeezee/v14/esDR31xSG-6AGleN6tKukbcHCpE.ttf",
+        "italic": "http://fonts.gstatic.com/s/abeezee/v14/esDT31xSG-6AGleN2tCklZUCGpG-GQ.ttf"
+      },
+      "category": "sans-serif",
+      "kind": "webfonts#webfont"
+    }
   }
 }
 ```
@@ -76397,8 +78977,20 @@ Success
 {
   "value": {
     "items": [
-      "sess:123",
-      "sess:456"
+      {
+        "session_id": "134",
+        "user_agent": "134",
+        "ip": "134",
+        "domain": "134",
+        "expire_in": "134"
+      },
+      {
+        "session_id": "134",
+        "user_agent": "134",
+        "ip": "134",
+        "domain": "134",
+        "expire_in": "134"
+      }
     ]
   }
 }

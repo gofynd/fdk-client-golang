@@ -35,6 +35,8 @@ type ApplicationClient struct {
 	 
 		Rewards  *PlatformAppRewards
 	 
+		Serviceability  *PlatformAppServiceability
+	 
 		Share  *PlatformAppShare
 	 
 		Theme  *PlatformAppTheme
@@ -71,6 +73,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 				Payment:  NewPlatformAppPayment(config, appID),
 			 
 				Rewards:  NewPlatformAppRewards(config, appID),
+			 
+				Serviceability:  NewPlatformAppServiceability(config, appID),
 			 
 				Share:  NewPlatformAppShare(config, appID),
 			 
@@ -17792,7 +17796,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             fi.config,
             "post",
-            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/namespaces/%s/upload/start/",Namespace, fi.CompanyID, fi.ApplicationID),
+            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/namespaces/%s/upload/start",Namespace, fi.CompanyID, fi.ApplicationID),
             nil,
             nil,
             reqBody)
@@ -17873,7 +17877,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             fi.config,
             "post",
-            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/namespaces/%s/upload/complete/",Namespace, fi.CompanyID, fi.ApplicationID),
+            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/namespaces/%s/upload/complete",Namespace, fi.CompanyID, fi.ApplicationID),
             nil,
             nil,
             reqBody)
@@ -17920,8 +17924,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
             
         
-            
-        
 
          
             
@@ -17951,7 +17953,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             fi.config,
             "post",
-            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/uploads/copy/",fi.CompanyID, fi.ApplicationID),
+            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/uploads/copy",fi.CompanyID, fi.ApplicationID),
             nil,
             xQuery,
             reqBody)
@@ -17979,7 +17981,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     //PlatformAppAppbrowseXQuery holds query params
     type PlatformAppAppbrowseXQuery struct { 
-        PageNo float64  `url:"page_no,omitempty"`  
+        Page float64  `url:"page,omitempty"` 
+        Limit float64  `url:"limit,omitempty"`  
     }
     
     // Appbrowse Browse Files
@@ -17997,6 +18000,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             
                 
             
+                
+            
         
 
         
@@ -18010,7 +18015,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             fi.config,
             "get",
-            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/namespaces/%s/browse/",Namespace, fi.CompanyID, fi.ApplicationID),
+            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/namespaces/%s/browse",Namespace, fi.CompanyID, fi.ApplicationID),
             nil,
             xQuery,
             nil)
@@ -18027,50 +18032,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            // AppbrowsePaginator Browse Files  
-            func (fi *PlatformAppFileStorage)  AppbrowsePaginator(Namespace string ,  xQuery PlatformAppAppbrowseXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := fi.Appbrowse(Namespace, xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
@@ -18098,8 +18059,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    //PlatformAppGetTicketsXQuery holds query params
-    type PlatformAppGetTicketsXQuery struct { 
+    //PlatformAppGetNewTicketsXQuery holds query params
+    type PlatformAppGetNewTicketsXQuery struct { 
         Items bool  `url:"items,omitempty"` 
         Filters bool  `url:"filters,omitempty"` 
         Q string  `url:"q,omitempty"` 
@@ -18108,13 +18069,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         Category string  `url:"category,omitempty"`  
     }
     
-    // GetTickets Gets the list of Application level Tickets and/or ticket filters depending on query params
-     func (le *PlatformAppLead)  GetTickets(xQuery PlatformAppGetTicketsXQuery) (TicketList, error) {
+    // GetNewTickets Gets the list of Application level Tickets and/or ticket filters depending on query params
+     func (le *PlatformAppLead)  GetNewTickets(xQuery PlatformAppGetNewTicketsXQuery) (TicketList, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getTicketsResponse TicketList
+            getNewTicketsResponse TicketList
 	    )
 
         
@@ -18160,11 +18121,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return TicketList{}, err
 	    }
         
-        err = json.Unmarshal(response, &getTicketsResponse)
+        err = json.Unmarshal(response, &getNewTicketsResponse)
         if err != nil {
             return TicketList{}, common.NewFDKError(err.Error())
         }
-        return getTicketsResponse, nil
+        return getNewTicketsResponse, nil
         
     }
            
@@ -18179,13 +18140,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetTicket Retreives ticket details of a application level ticket
-     func (le *PlatformAppLead)  GetTicket(ID string) (Ticket, error) {
+    // GetNewTicket Retreives ticket details of a application level ticket
+     func (le *PlatformAppLead)  GetNewTicket(ID string) (Ticket, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getTicketResponse Ticket
+            getNewTicketResponse Ticket
 	    )
 
         
@@ -18212,11 +18173,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return Ticket{}, err
 	    }
         
-        err = json.Unmarshal(response, &getTicketResponse)
+        err = json.Unmarshal(response, &getNewTicketResponse)
         if err != nil {
             return Ticket{}, common.NewFDKError(err.Error())
         }
-        return getTicketResponse, nil
+        return getNewTicketResponse, nil
         
     }
            
@@ -18227,13 +18188,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // EditTicket Edits ticket details of a application level ticket
-     func (le *PlatformAppLead)  EditTicket(ID string, body  EditTicketPayload) (Ticket, error) {
+    // EditNewTicket Edits ticket details of a application level ticket
+     func (le *PlatformAppLead)  EditNewTicket(ID string, body  EditTicketPayload) (Ticket, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            editTicketResponse Ticket
+            editNewTicketResponse Ticket
 	    )
 
         
@@ -18296,11 +18257,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return Ticket{}, err
 	    }
         
-        err = json.Unmarshal(response, &editTicketResponse)
+        err = json.Unmarshal(response, &editNewTicketResponse)
         if err != nil {
             return Ticket{}, common.NewFDKError(err.Error())
         }
-        return editTicketResponse, nil
+        return editNewTicketResponse, nil
         
     }
            
@@ -18319,13 +18280,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // CreateHistory Create history for specific application level ticket
-     func (le *PlatformAppLead)  CreateHistory(ID string, body  TicketHistoryPayload) (TicketHistory, error) {
+    // CreateNewHistory Create history for specific application level ticket
+     func (le *PlatformAppLead)  CreateNewHistory(ID string, body  TicketHistoryPayload) (TicketHistory, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            createHistoryResponse TicketHistory
+            createNewHistoryResponse TicketHistory
 	    )
 
         
@@ -18376,11 +18337,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return TicketHistory{}, err
 	    }
         
-        err = json.Unmarshal(response, &createHistoryResponse)
+        err = json.Unmarshal(response, &createNewHistoryResponse)
         if err != nil {
             return TicketHistory{}, common.NewFDKError(err.Error())
         }
-        return createHistoryResponse, nil
+        return createNewHistoryResponse, nil
         
     }
            
@@ -18391,13 +18352,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetTicketHistory Gets history list for specific application level ticket
-     func (le *PlatformAppLead)  GetTicketHistory(ID string) (TicketHistoryList, error) {
+    // GetNewTicketHistory Gets history list for specific application level ticket
+     func (le *PlatformAppLead)  GetNewTicketHistory(ID string) (TicketHistoryList, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getTicketHistoryResponse TicketHistoryList
+            getNewTicketHistoryResponse TicketHistoryList
 	    )
 
         
@@ -18424,11 +18385,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return TicketHistoryList{}, err
 	    }
         
-        err = json.Unmarshal(response, &getTicketHistoryResponse)
+        err = json.Unmarshal(response, &getNewTicketHistoryResponse)
         if err != nil {
             return TicketHistoryList{}, common.NewFDKError(err.Error())
         }
-        return getTicketHistoryResponse, nil
+        return getNewTicketHistoryResponse, nil
         
     }
            
@@ -18705,13 +18666,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetTokenForVideoRoom Get Token to join a specific Video Room using it's unqiue name
-     func (le *PlatformAppLead)  GetTokenForVideoRoom(UniqueName string) (GetTokenForVideoRoomResponse, error) {
+    // GetNewTokenForVideoRoom Get Token to join a specific Video Room using it's unqiue name
+     func (le *PlatformAppLead)  GetNewTokenForVideoRoom(UniqueName string) (GetTokenForVideoRoomResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getTokenForVideoRoomResponse GetTokenForVideoRoomResponse
+            getNewTokenForVideoRoomResponse GetTokenForVideoRoomResponse
 	    )
 
         
@@ -18738,11 +18699,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetTokenForVideoRoomResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getTokenForVideoRoomResponse)
+        err = json.Unmarshal(response, &getNewTokenForVideoRoomResponse)
         if err != nil {
             return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
         }
-        return getTokenForVideoRoomResponse, nil
+        return getNewTokenForVideoRoomResponse, nil
         
     }
            
@@ -18755,13 +18716,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetVideoParticipants Get participants of a specific Video Room using it's unique name
-     func (le *PlatformAppLead)  GetVideoParticipants(UniqueName string) (GetParticipantsInsideVideoRoomResponse, error) {
+    // GetNewVideoParticipants Get participants of a specific Video Room using it's unique name
+     func (le *PlatformAppLead)  GetNewVideoParticipants(UniqueName string) (GetParticipantsInsideVideoRoomResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getVideoParticipantsResponse GetParticipantsInsideVideoRoomResponse
+            getNewVideoParticipantsResponse GetParticipantsInsideVideoRoomResponse
 	    )
 
         
@@ -18788,11 +18749,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetParticipantsInsideVideoRoomResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getVideoParticipantsResponse)
+        err = json.Unmarshal(response, &getNewVideoParticipantsResponse)
         if err != nil {
             return GetParticipantsInsideVideoRoomResponse{}, common.NewFDKError(err.Error())
         }
-        return getVideoParticipantsResponse, nil
+        return getNewVideoParticipantsResponse, nil
         
     }
            
@@ -18924,6 +18885,10 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     func NewPlatformAppOrder(config *PlatformConfig, appID string) *PlatformAppOrder {
         return &PlatformAppOrder{config, config.CompanyID, appID}
     }
+    
+    
+    
+    
     
     
     
@@ -19164,7 +19129,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             pa.config,
             "get",
-            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/application/%s/proxy/{extension_id}",pa.CompanyID, pa.ApplicationID),
+            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/application/%s/proxy/%s",pa.CompanyID, pa.ApplicationID, ExtensionID),
             nil,
             nil,
             nil)
@@ -19279,7 +19244,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             pa.config,
             "get",
-            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/application/%s/proxy/{extension_id}/{attached_path}",pa.CompanyID, pa.ApplicationID),
+            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/application/%s/proxy/%s/%s",pa.CompanyID, pa.ApplicationID, ExtensionID, AttachedPath),
             nil,
             nil,
             nil)
@@ -21363,6 +21328,438 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
            
        
     
+    
+    
+  
+
+    
+    // UpdatePaymentSession API to update status of a payment.
+     func (pa *PlatformAppPayment)  UpdatePaymentSession(Gid string, body  PaymentSessionRequestSerializer) (PaymentSessionResponseSerializer, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updatePaymentSessionResponse PaymentSessionResponseSerializer
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PaymentSessionResponseSerializer{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PaymentSessionResponseSerializer{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "put",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/session/%s",pa.CompanyID, pa.ApplicationID, Gid),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PaymentSessionResponseSerializer{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updatePaymentSessionResponse)
+        if err != nil {
+            return PaymentSessionResponseSerializer{}, common.NewFDKError(err.Error())
+        }
+        return updatePaymentSessionResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdateRefundSession API to update the status of a refund
+     func (pa *PlatformAppPayment)  UpdateRefundSession(Gid string, RequestID string, body  RefundSessionRequestSerializer) (RefundSessionResponseSerializer, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateRefundSessionResponse RefundSessionResponseSerializer
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return RefundSessionResponseSerializer{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return RefundSessionResponseSerializer{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "put",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/%s/refund/session/%s",pa.CompanyID, pa.ApplicationID, Gid, RequestID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return RefundSessionResponseSerializer{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateRefundSessionResponse)
+        if err != nil {
+            return RefundSessionResponseSerializer{}, common.NewFDKError(err.Error())
+        }
+        return updateRefundSessionResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetMerchantPaymentOption Get Payment modes and COD details.
+     func (pa *PlatformAppPayment)  GetMerchantPaymentOption() (MerchnatPaymentModeResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getMerchantPaymentOptionResponse MerchnatPaymentModeResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/options/configuration",pa.CompanyID, pa.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return MerchnatPaymentModeResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getMerchantPaymentOptionResponse)
+        if err != nil {
+            return MerchnatPaymentModeResponse{}, common.NewFDKError(err.Error())
+        }
+        return getMerchantPaymentOptionResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // PatchMerchantPaymentOption Update Payment modes and COD details.
+     func (pa *PlatformAppPayment)  PatchMerchantPaymentOption(body  MerchnatPaymentModeResponse) (MerchnatPaymentModeResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            patchMerchantPaymentOptionResponse MerchnatPaymentModeResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return MerchnatPaymentModeResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return MerchnatPaymentModeResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "patch",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/options/configuration",pa.CompanyID, pa.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return MerchnatPaymentModeResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &patchMerchantPaymentOptionResponse)
+        if err != nil {
+            return MerchnatPaymentModeResponse{}, common.NewFDKError(err.Error())
+        }
+        return patchMerchantPaymentOptionResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppGetMerchantAggregatorPaymentModeDetailsXQuery holds query params
+    type PlatformAppGetMerchantAggregatorPaymentModeDetailsXQuery struct { 
+        BusinessUnit string  `url:"business_unit,omitempty"` 
+        Device string  `url:"device,omitempty"`  
+    }
+    
+    // GetMerchantAggregatorPaymentModeDetails Get Aggregator, payment mode and sub payment mode.
+     func (pa *PlatformAppPayment)  GetMerchantAggregatorPaymentModeDetails(AggregatorID float64, xQuery PlatformAppGetMerchantAggregatorPaymentModeDetailsXQuery) (MerchnatPaymentModeResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getMerchantAggregatorPaymentModeDetailsResponse MerchnatPaymentModeResponse
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/options/aggregators/undefined",pa.CompanyID, pa.ApplicationID, AggregatorID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return MerchnatPaymentModeResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getMerchantAggregatorPaymentModeDetailsResponse)
+        if err != nil {
+            return MerchnatPaymentModeResponse{}, common.NewFDKError(err.Error())
+        }
+        return getMerchantAggregatorPaymentModeDetailsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // PatchMerchantAggregatorPaymentModeDetails Update Aggregator, payment mode and sub payment mode.
+     func (pa *PlatformAppPayment)  PatchMerchantAggregatorPaymentModeDetails(AggregatorID float64, body  MerchnatPaymentModeResponse) (MerchnatPaymentModeResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            patchMerchantAggregatorPaymentModeDetailsResponse MerchnatPaymentModeResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return MerchnatPaymentModeResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return MerchnatPaymentModeResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "patch",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/options/aggregators/undefined",pa.CompanyID, pa.ApplicationID, AggregatorID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return MerchnatPaymentModeResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &patchMerchantAggregatorPaymentModeDetailsResponse)
+        if err != nil {
+            return MerchnatPaymentModeResponse{}, common.NewFDKError(err.Error())
+        }
+        return patchMerchantAggregatorPaymentModeDetailsResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetPGConfigAggregators Get Aggregators available to be added as PG.
+     func (pa *PlatformAppPayment)  GetPGConfigAggregators() (MerchnatPaymentModeResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getPGConfigAggregatorsResponse MerchnatPaymentModeResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            pa.config,
+            "get",
+            fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/payment/options/configuration/aggregator",pa.CompanyID, pa.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return MerchnatPaymentModeResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPGConfigAggregatorsResponse)
+        if err != nil {
+            return MerchnatPaymentModeResponse{}, common.NewFDKError(err.Error())
+        }
+        return getPGConfigAggregatorsResponse, nil
+        
+    }
+           
+       
+    
 
  
 	 
@@ -22183,6 +22580,814 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
  
 	 
+   // PlatformAppServiceability holds PlatformAppServiceability object properties
+    type PlatformAppServiceability struct {
+        config *PlatformConfig
+        CompanyID string
+        ApplicationID string
+    }
+    // NewPlatformAppServiceability returns new PlatformAppServiceability instance
+    func NewPlatformAppServiceability(config *PlatformConfig, appID string) *PlatformAppServiceability {
+        return &PlatformAppServiceability{config, config.CompanyID, appID}
+    }
+    
+    
+    
+  
+
+    
+    // GetApplicationServiceability Zone configuration of application.
+     func (se *PlatformAppServiceability)  GetApplicationServiceability() (ApplicationServiceabilityConfigResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getApplicationServiceabilityResponse ApplicationServiceabilityConfigResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/serviceability",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationServiceabilityConfigResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getApplicationServiceabilityResponse)
+        if err != nil {
+            return ApplicationServiceabilityConfigResponse{}, common.NewFDKError(err.Error())
+        }
+        return getApplicationServiceabilityResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+    
+    // GetZoneFromPincodeView GET zone from the Pincode.
+     func (se *PlatformAppServiceability)  GetZoneFromPincodeView(body  GetZoneFromPincodeViewRequest) (GetZoneFromPincodeViewResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getZoneFromPincodeViewResponse GetZoneFromPincodeViewResponse
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/zones",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetZoneFromPincodeViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getZoneFromPincodeViewResponse)
+        if err != nil {
+            return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return getZoneFromPincodeViewResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppGetZonesFromApplicationIdViewXQuery holds query params
+    type PlatformAppGetZonesFromApplicationIdViewXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        ZoneID []string  `url:"zone_id,omitempty"` 
+        Q string  `url:"q,omitempty"`  
+    }
+    
+    // GetZonesFromApplicationIdView GET zones from the application_id.
+     func (se *PlatformAppServiceability)  GetZonesFromApplicationIdView(xQuery PlatformAppGetZonesFromApplicationIdViewXQuery) (GetZoneFromApplicationIdViewResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getZonesFromApplicationIdViewResponse GetZoneFromApplicationIdViewResponse
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/zones",se.CompanyID, se.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetZoneFromApplicationIdViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getZonesFromApplicationIdViewResponse)
+        if err != nil {
+            return GetZoneFromApplicationIdViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return getZonesFromApplicationIdViewResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+    
+    // AddAppDp Add application dp data
+     func (se *PlatformAppServiceability)  AddAppDp(body  ApplicationCompanyDpViewRequest) (ApplicationCompanyDpViewResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            addAppDpResponse ApplicationCompanyDpViewResponse
+	    )
+
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return ApplicationCompanyDpViewResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return ApplicationCompanyDpViewResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationCompanyDpViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &addAppDpResponse)
+        if err != nil {
+            return ApplicationCompanyDpViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return addAppDpResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteAppDp Delete application dp data
+     func (se *PlatformAppServiceability)  DeleteAppDp(CourierPartnerID float64) (ApplicationCompanyDpViewResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteAppDpResponse ApplicationCompanyDpViewResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "delete",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/courier-partner/undefined",se.CompanyID, se.ApplicationID, CourierPartnerID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationCompanyDpViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteAppDpResponse)
+        if err != nil {
+            return ApplicationCompanyDpViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteAppDpResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdatePincodeMopView PincodeView update of MOP.
+     func (se *PlatformAppServiceability)  UpdatePincodeMopView(body  PincodeMopData) (PincodeMOPresponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updatePincodeMopViewResponse PincodeMOPresponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PincodeMOPresponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PincodeMOPresponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/pincode-mop-update",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PincodeMOPresponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updatePincodeMopViewResponse)
+        if err != nil {
+            return PincodeMOPresponse{}, common.NewFDKError(err.Error())
+        }
+        return updatePincodeMopViewResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdatePincodeBulkView Bulk Update of pincode in the application.
+     func (se *PlatformAppServiceability)  UpdatePincodeBulkView(body  PincodeMopBulkData) (PincodeBulkViewResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updatePincodeBulkViewResponse PincodeBulkViewResponse
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PincodeBulkViewResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PincodeBulkViewResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/pincode-mop-bulk-update",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PincodeBulkViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updatePincodeBulkViewResponse)
+        if err != nil {
+            return PincodeBulkViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return updatePincodeBulkViewResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdatePincodeCoDListing Pincode count view of application.
+     func (se *PlatformAppServiceability)  UpdatePincodeCoDListing(body  PincodeCodStatusListingRequest) (PincodeCodStatusListingResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updatePincodeCoDListingResponse PincodeCodStatusListingResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PincodeCodStatusListingResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PincodeCodStatusListingResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/pincode-mop-data",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PincodeCodStatusListingResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updatePincodeCoDListingResponse)
+        if err != nil {
+            return PincodeCodStatusListingResponse{}, common.NewFDKError(err.Error())
+        }
+        return updatePincodeCoDListingResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdatePincodeAuditHistory Auditlog configuration of application.
+     func (se *PlatformAppServiceability)  UpdatePincodeAuditHistory(body  PincodeMopUpdateAuditHistoryRequest) (PincodeMopUpdateAuditHistoryResponseData, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updatePincodeAuditHistoryResponse PincodeMopUpdateAuditHistoryResponseData
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PincodeMopUpdateAuditHistoryResponseData{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PincodeMopUpdateAuditHistoryResponseData{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/history",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PincodeMopUpdateAuditHistoryResponseData{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updatePincodeAuditHistoryResponse)
+        if err != nil {
+            return PincodeMopUpdateAuditHistoryResponseData{}, common.NewFDKError(err.Error())
+        }
+        return updatePincodeAuditHistoryResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+    
+    // UpsertDpApplicationRules Upsert of DpApplicationRules in database.
+     func (se *PlatformAppServiceability)  UpsertDpApplicationRules(body  DPApplicationRuleRequest) (DPApplicationRuleResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            upsertDpApplicationRulesResponse DPApplicationRuleResponse
+	    )
+
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return DPApplicationRuleResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return DPApplicationRuleResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "put",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/courier/priority",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DPApplicationRuleResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &upsertDpApplicationRulesResponse)
+        if err != nil {
+            return DPApplicationRuleResponse{}, common.NewFDKError(err.Error())
+        }
+        return upsertDpApplicationRulesResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetDpApplicationRules Get All DpApplicationRules rules added at application level from database.
+     func (se *PlatformAppServiceability)  GetDpApplicationRules() (DPApplicationRuleResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getDpApplicationRulesResponse DPApplicationRuleResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/courier/priority",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DPApplicationRuleResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getDpApplicationRulesResponse)
+        if err != nil {
+            return DPApplicationRuleResponse{}, common.NewFDKError(err.Error())
+        }
+        return getDpApplicationRulesResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // PatchApplicationServiceabilitySelfShipment Self-ship configuration of application.
+     func (se *PlatformAppServiceability)  PatchApplicationServiceabilitySelfShipment(body  SelfShipResponse) (ApplicationSelfShipConfigResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            patchApplicationServiceabilitySelfShipmentResponse ApplicationSelfShipConfigResponse
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return ApplicationSelfShipConfigResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return ApplicationSelfShipConfigResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "patch",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/selfship",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationSelfShipConfigResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &patchApplicationServiceabilitySelfShipmentResponse)
+        if err != nil {
+            return ApplicationSelfShipConfigResponse{}, common.NewFDKError(err.Error())
+        }
+        return patchApplicationServiceabilitySelfShipmentResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetApplicationServiceabilitySelfShipment Self-ship configuration of application.
+     func (se *PlatformAppServiceability)  GetApplicationServiceabilitySelfShipment() (ApplicationSelfShipConfigResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getApplicationServiceabilitySelfShipmentResponse ApplicationSelfShipConfigResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/selfship",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationSelfShipConfigResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getApplicationServiceabilitySelfShipmentResponse)
+        if err != nil {
+            return ApplicationSelfShipConfigResponse{}, common.NewFDKError(err.Error())
+        }
+        return getApplicationServiceabilitySelfShipmentResponse, nil
+        
+    }
+           
+       
+    
+
+ 
+	 
    // PlatformAppShare holds PlatformAppShare object properties
     type PlatformAppShare struct {
         config *PlatformConfig
@@ -22342,86 +23547,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetShortLinksPaginator Get short links  
-            func (sh *PlatformAppShare)  GetShortLinksPaginator( xQuery PlatformAppGetShortLinksXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := sh.GetShortLinks(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     
