@@ -5692,6 +5692,7 @@ package application
             Category string  `json:"category"`
             Content TicketContent  `json:"content"`
             CustomJson map[string]interface{}  `json:"_custom_json"`
+            Subscribers []string  `json:"subscribers"`
          
     }
     
