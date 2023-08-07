@@ -4829,6 +4829,7 @@ package application
             Category string  `json:"category"`
             Content TicketContent  `json:"content"`
             CustomJson map[string]interface{}  `json:"_custom_json"`
+            Subscribers []string  `json:"subscribers"`
          
     }
     
@@ -8676,6 +8677,14 @@ package application
     
 
     
+    // AllAvailablePageSchema ...
+    type AllAvailablePageSchema struct {
+
+        
+            Pages []AvailablePageSchema  `json:"pages"`
+         
+    }
+    
     // AvailablePageSchema ...
     type AvailablePageSchema struct {
 
@@ -8724,6 +8733,16 @@ package application
          
     }
     
+    // AvailablePagePredicate ...
+    type AvailablePagePredicate struct {
+
+        
+            Screen AvailablePageScreenPredicate  `json:"screen"`
+            User AvailablePageUserPredicate  `json:"user"`
+            Route AvailablePageRoutePredicate  `json:"route"`
+         
+    }
+    
     // AvailablePageScreenPredicate ...
     type AvailablePageScreenPredicate struct {
 
@@ -8753,29 +8772,560 @@ package application
          
     }
     
-    // AvailablePagePredicate ...
-    type AvailablePagePredicate struct {
+    // ThemesSchema ...
+    type ThemesSchema struct {
 
         
-            Screen AvailablePageScreenPredicate  `json:"screen"`
-            User AvailablePageUserPredicate  `json:"user"`
-            Route AvailablePageRoutePredicate  `json:"route"`
+            Font Font  `json:"font"`
+            Config Config  `json:"config"`
+            Applied bool  `json:"applied"`
+            IsPrivate bool  `json:"is_private"`
+            Tags []string  `json:"tags"`
+            ID string  `json:"_id"`
+            ApplicationID string  `json:"application_id"`
+            MarketplaceThemeID string  `json:"marketplace_theme_id"`
+            Meta Meta  `json:"meta"`
+            Name string  `json:"name"`
+            TemplateThemeID string  `json:"template_theme_id"`
+            Version string  `json:"version"`
+            Styles map[string]interface{}  `json:"styles"`
+            CreatedAt string  `json:"created_at"`
+            UpdatedAt string  `json:"updated_at"`
+            Assets Assets  `json:"assets"`
+            AvailableSections []SectionItem  `json:"available_sections"`
          
     }
     
-    // AllAvailablePageSchema ...
-    type AllAvailablePageSchema struct {
+    // Font ...
+    type Font struct {
 
         
-            Pages []AvailablePageSchema  `json:"pages"`
+            Variants FontVariants  `json:"variants"`
+            Family string  `json:"family"`
          
     }
     
-    // BlitzkriegApiErrorSchema ...
-    type BlitzkriegApiErrorSchema struct {
+    // FontVariants ...
+    type FontVariants struct {
 
         
-            Message string  `json:"message"`
+            Light FontVariant  `json:"light"`
+            Regular FontVariant  `json:"regular"`
+            Medium FontVariant  `json:"medium"`
+            SemiBold FontVariant  `json:"semi_bold"`
+            Bold FontVariant  `json:"bold"`
+         
+    }
+    
+    // FontVariant ...
+    type FontVariant struct {
+
+        
+            Name string  `json:"name"`
+            File string  `json:"file"`
+         
+    }
+    
+    // Config ...
+    type Config struct {
+
+        
+            Current string  `json:"current"`
+            List []ThemeConfiguration  `json:"list"`
+            GlobalSchema GlobalSchema  `json:"global_schema"`
+            Preset Preset  `json:"preset"`
+         
+    }
+    
+    // ThemeConfiguration ...
+    type ThemeConfiguration struct {
+
+        
+            Name string  `json:"name"`
+            GlobalConfig GlobalConfig  `json:"global_config"`
+            Custom CustomConfig  `json:"custom"`
+            Page []string  `json:"page"`
+         
+    }
+    
+    // CustomConfig ...
+    type CustomConfig struct {
+
+        
+            Props CustomProps  `json:"props"`
+         
+    }
+    
+    // CustomProps ...
+    type CustomProps struct {
+
+        
+            HeaderBgColor string  `json:"header_bg_color"`
+            HeaderTextColor string  `json:"header_text_color"`
+            HeaderBorderColor string  `json:"header_border_color"`
+            HeaderIconColor string  `json:"header_icon_color"`
+            HeaderCartNotificationBgColor string  `json:"header_cart_notification_bg_color"`
+            HeaderCartNotificationTextColor string  `json:"header_cart_notification_text_color"`
+            HeaderNavHoverColor string  `json:"header_nav_hover_color"`
+            ButtonPrimaryColor string  `json:"button_primary_color"`
+            ButtonPrimaryLabelColor string  `json:"button_primary_label_color"`
+            ButtonAddToCartColor string  `json:"button_add_to_cart_color"`
+            ButtonAddToCartLabelColor string  `json:"button_add_to_cart_label_color"`
+            ButtonSecondaryColor string  `json:"button_secondary_color"`
+            ButtonSecondaryLabelColor string  `json:"button_secondary_label_color"`
+            ButtonTertiaryColor string  `json:"button_tertiary_color"`
+            ButtonTertiaryLabelColor string  `json:"button_tertiary_label_color"`
+            ButtonTertiaryHoverColor string  `json:"button_tertiary_hover_color"`
+            ButtonTertiaryHoverTextColor string  `json:"button_tertiary_hover_text_color"`
+            TextHeadingLinkColor string  `json:"text_heading_link_color"`
+            TextBodyColor string  `json:"text_body_color"`
+            TextPriceColor string  `json:"text_price_color"`
+            TextSalePriceColor string  `json:"text_sale_price_color"`
+            TextStrikethroughPriceColor string  `json:"text_strikethrough_price_color"`
+            TextDiscountColor string  `json:"text_discount_color"`
+            FooterBgColor string  `json:"footer_bg_color"`
+            FooterTextColor string  `json:"footer_text_color"`
+            FooterBorderColor string  `json:"footer_border_color"`
+            FooterNavHoverColor string  `json:"footer_nav_hover_color"`
+            DisableCart bool  `json:"disable_cart"`
+            IsMenuBelowLogo bool  `json:"is_menu_below_logo"`
+            MenuPosition string  `json:"menu_position"`
+         
+    }
+    
+    // GlobalConfig ...
+    type GlobalConfig struct {
+
+        
+            Statics StaticConfig  `json:"statics"`
+            Auth AuthConfig  `json:"auth"`
+            Palette PaletteConfig  `json:"palette"`
+         
+    }
+    
+    // PaletteConfig ...
+    type PaletteConfig struct {
+
+        
+            GeneralSetting GeneralSetting  `json:"general_setting"`
+            AdvanceSetting AdvanceSetting  `json:"advance_setting"`
+         
+    }
+    
+    // GeneralSetting ...
+    type GeneralSetting struct {
+
+        
+            Theme ThemeSetting  `json:"theme"`
+            Text TextSetting  `json:"text"`
+            Button ButtonSetting  `json:"button"`
+            SaleDiscount SaleDiscountSetting  `json:"sale_discount"`
+            Header HeaderSetting  `json:"header"`
+            Footer FooterSetting  `json:"footer"`
+         
+    }
+    
+    // AdvanceSetting ...
+    type AdvanceSetting struct {
+
+        
+            OverlayPopup OverlayPopupSetting  `json:"overlay_popup"`
+            DividerStrokeHighlight DividerStrokeHighlightSetting  `json:"divider_stroke_highlight"`
+            UserAlerts UserAlertsSetting  `json:"user_alerts"`
+         
+    }
+    
+    // UserAlertsSetting ...
+    type UserAlertsSetting struct {
+
+        
+            SuccessBackground string  `json:"success_background"`
+            SuccessText string  `json:"success_text"`
+            ErrorBackground string  `json:"error_background"`
+            ErrorText string  `json:"error_text"`
+            InfoBackground string  `json:"info_background"`
+            InfoText string  `json:"info_text"`
+         
+    }
+    
+    // ThemeSetting ...
+    type ThemeSetting struct {
+
+        
+            PageBackground string  `json:"page_background"`
+            ThemeAccent string  `json:"theme_accent"`
+         
+    }
+    
+    // TextSetting ...
+    type TextSetting struct {
+
+        
+            TextHeading string  `json:"text_heading"`
+            TextBody string  `json:"text_body"`
+            TextLabel string  `json:"text_label"`
+            TextSecondary string  `json:"text_secondary"`
+         
+    }
+    
+    // ButtonSetting ...
+    type ButtonSetting struct {
+
+        
+            ButtonPrimary string  `json:"button_primary"`
+            ButtonSecondary string  `json:"button_secondary"`
+            ButtonLink string  `json:"button_link"`
+         
+    }
+    
+    // SaleDiscountSetting ...
+    type SaleDiscountSetting struct {
+
+        
+            SaleBadgeBackground string  `json:"sale_badge_background"`
+            SaleBadgeText string  `json:"sale_badge_text"`
+            SaleDiscountText string  `json:"sale_discount_text"`
+            SaleTimer string  `json:"sale_timer"`
+         
+    }
+    
+    // HeaderSetting ...
+    type HeaderSetting struct {
+
+        
+            HeaderBackground string  `json:"header_background"`
+            HeaderNav string  `json:"header_nav"`
+            HeaderIcon string  `json:"header_icon"`
+         
+    }
+    
+    // FooterSetting ...
+    type FooterSetting struct {
+
+        
+            FooterBackground string  `json:"footer_background"`
+            FooterBottomBackground string  `json:"footer_bottom_background"`
+            FooterHeadingText string  `json:"footer_heading_text"`
+            FooterBodyText string  `json:"footer_body_text"`
+            FooterIcon string  `json:"footer_icon"`
+         
+    }
+    
+    // OverlayPopupSetting ...
+    type OverlayPopupSetting struct {
+
+        
+            DialogBackgroung string  `json:"dialog_backgroung"`
+            Overlay string  `json:"overlay"`
+         
+    }
+    
+    // DividerStrokeHighlightSetting ...
+    type DividerStrokeHighlightSetting struct {
+
+        
+            DividerStrokes string  `json:"divider_strokes"`
+            Highlight string  `json:"highlight"`
+         
+    }
+    
+    // StaticConfig ...
+    type StaticConfig struct {
+
+        
+            Props StaticProps  `json:"props"`
+         
+    }
+    
+    // StaticProps ...
+    type StaticProps struct {
+
+        
+            Colors Colors  `json:"colors"`
+            Auth AuthConfig  `json:"auth"`
+         
+    }
+    
+    // AuthConfig ...
+    type AuthConfig struct {
+
+        
+            ShowHeaderAuth bool  `json:"show_header_auth"`
+            ShowFooterAuth bool  `json:"show_footer_auth"`
+         
+    }
+    
+    // Colors ...
+    type Colors struct {
+
+        
+            PrimaryColor string  `json:"primary_color"`
+            SecondaryColor string  `json:"secondary_color"`
+            AccentColor string  `json:"accent_color"`
+            LinkColor string  `json:"link_color"`
+            ButtonSecondaryColor string  `json:"button_secondary_color"`
+            BgColor string  `json:"bg_color"`
+         
+    }
+    
+    // Meta ...
+    type Meta struct {
+
+        
+            Payment ThemePayment  `json:"payment"`
+            Description string  `json:"description"`
+            Industry []string  `json:"industry"`
+            Release Release  `json:"release"`
+            Images Images  `json:"images"`
+            Slug string  `json:"slug"`
+            Name string  `json:"name"`
+         
+    }
+    
+    // ThemePayment ...
+    type ThemePayment struct {
+
+        
+            IsPaid bool  `json:"is_paid"`
+            Amount float64  `json:"amount"`
+         
+    }
+    
+    // Release ...
+    type Release struct {
+
+        
+            Notes string  `json:"notes"`
+            Version string  `json:"version"`
+         
+    }
+    
+    // Images ...
+    type Images struct {
+
+        
+            Desktop string  `json:"desktop"`
+            Mobile string  `json:"mobile"`
+         
+    }
+    
+    // Assets ...
+    type Assets struct {
+
+        
+            UmdJs UMDJs  `json:"umd_js"`
+            CommonJs CommonJS  `json:"common_js"`
+            Css CSS  `json:"css"`
+         
+    }
+    
+    // UMDJs ...
+    type UMDJs struct {
+
+        
+            Links []string  `json:"links"`
+         
+    }
+    
+    // CommonJS ...
+    type CommonJS struct {
+
+        
+            Link string  `json:"link"`
+         
+    }
+    
+    // CSS ...
+    type CSS struct {
+
+        
+            Links []string  `json:"links"`
+         
+    }
+    
+    // SectionItem ...
+    type SectionItem struct {
+
+        
+            Props []interface{}  `json:"props"`
+            Blocks []interface{}  `json:"blocks"`
+            Name string  `json:"name"`
+            Label string  `json:"label"`
+         
+    }
+    
+    // GlobalSchema ...
+    type GlobalSchema struct {
+
+        
+            Props []Prop  `json:"props"`
+         
+    }
+    
+    // Prop ...
+    type Prop struct {
+
+        
+            Type string  `json:"type"`
+            Category string  `json:"category"`
+            ID string  `json:"id"`
+            Label string  `json:"label"`
+            Info string  `json:"info"`
+         
+    }
+    
+    // Preset ...
+    type Preset struct {
+
+        
+            Pages []Page  `json:"pages"`
+         
+    }
+    
+    // Page ...
+    type Page struct {
+
+        
+            ItemTotal float64  `json:"item_total"`
+            NextID string  `json:"next_id"`
+            HasPrevious bool  `json:"has_previous"`
+            HasNext bool  `json:"has_next"`
+            Current float64  `json:"current"`
+            Type string  `json:"type"`
+            Size float64  `json:"size"`
+         
+    }
+    
+    // SectionProps ...
+    type SectionProps struct {
+
+        
+            Title TextProp  `json:"title"`
+            ItemMargin TextProp  `json:"item_margin"`
+            Autoplay CheckboxProp  `json:"autoplay"`
+            SlideInterval RangeProp  `json:"slide_interval"`
+         
+    }
+    
+    // SectionPreset ...
+    type SectionPreset struct {
+
+        
+            Blocks []Block  `json:"blocks"`
+         
+    }
+    
+    // ImagePickerProp ...
+    type ImagePickerProp struct {
+
+        
+            Type string  `json:"type"`
+            Value string  `json:"value"`
+         
+    }
+    
+    // UrlProp ...
+    type UrlProp struct {
+
+        
+            Type string  `json:"type"`
+            Value string  `json:"value"`
+         
+    }
+    
+    // BlockProps ...
+    type BlockProps struct {
+
+        
+            Image ImagePickerProp  `json:"image"`
+            SlideLink UrlProp  `json:"slide_link"`
+         
+    }
+    
+    // TextProp ...
+    type TextProp struct {
+
+        
+            Value string  `json:"value"`
+            Type string  `json:"type"`
+         
+    }
+    
+    // CheckboxProp ...
+    type CheckboxProp struct {
+
+        
+            Value bool  `json:"value"`
+            Type string  `json:"type"`
+         
+    }
+    
+    // RangeProp ...
+    type RangeProp struct {
+
+        
+            Value float64  `json:"value"`
+            Type string  `json:"type"`
+         
+    }
+    
+    // Section ...
+    type Section struct {
+
+        
+            Blocks []Block  `json:"blocks"`
+            Predicate Predicate  `json:"predicate"`
+            Name string  `json:"name"`
+            Props SectionProps  `json:"props"`
+            Preset SectionPreset  `json:"preset"`
+         
+    }
+    
+    // Block ...
+    type Block struct {
+
+        
+            Type string  `json:"type"`
+            Name string  `json:"name"`
+            Props BlockProps  `json:"props"`
+         
+    }
+    
+    // Predicate ...
+    type Predicate struct {
+
+        
+            Screen Screen  `json:"screen"`
+            User ThemeUserSchema  `json:"user"`
+            Route Route  `json:"route"`
+         
+    }
+    
+    // Screen ...
+    type Screen struct {
+
+        
+            Mobile bool  `json:"mobile"`
+            Desktop bool  `json:"desktop"`
+            Tablet bool  `json:"tablet"`
+         
+    }
+    
+    // ThemeUserSchema ...
+    type ThemeUserSchema struct {
+
+        
+            Authenticated bool  `json:"authenticated"`
+            Anonymous bool  `json:"anonymous"`
+         
+    }
+    
+    // Route ...
+    type Route struct {
+
+        
+            Selected string  `json:"selected"`
+            ExactURL string  `json:"exact_url"`
          
     }
     
@@ -8787,264 +9337,11 @@ package application
          
     }
     
-    // ThemesSchema ...
-    type ThemesSchema struct {
+    // BlitzkriegApiErrorSchema ...
+    type BlitzkriegApiErrorSchema struct {
 
         
-            Application string  `json:"application"`
-            Applied bool  `json:"applied"`
-            Customized bool  `json:"customized"`
-            Published bool  `json:"published"`
-            Archived bool  `json:"archived"`
-            CreatedAt string  `json:"created_at"`
-            UpdatedAt string  `json:"updated_at"`
-            Version string  `json:"version"`
-            ParentThemeVersion string  `json:"parent_theme_version"`
-            ParentTheme string  `json:"parent_theme"`
-            Information Information  `json:"information"`
-            Tags []string  `json:"tags"`
-            Src Src  `json:"src"`
-            Assets AssetsSchema  `json:"assets"`
-            AvailableSections []availableSectionSchema  `json:"available_sections"`
-            Styles map[string]interface{}  `json:"styles"`
-            Config Config  `json:"config"`
-            Font Font  `json:"font"`
-            ID string  `json:"_id"`
-            V float64  `json:"__v"`
-            Colors Colors  `json:"colors"`
-         
-    }
-    
-    // availableSectionSchema ...
-    type availableSectionSchema struct {
-
-        
-            Blocks []Blocks  `json:"blocks"`
-            Name string  `json:"name"`
-            Label string  `json:"label"`
-            Props []BlocksProps  `json:"props"`
-         
-    }
-    
-    // Information ...
-    type Information struct {
-
-        
-            Images Images  `json:"images"`
-            Features []string  `json:"features"`
-            Name string  `json:"name"`
-            Description string  `json:"description"`
-         
-    }
-    
-    // Images ...
-    type Images struct {
-
-        
-            Desktop []string  `json:"desktop"`
-            Android []string  `json:"android"`
-            Ios []string  `json:"ios"`
-            Thumbnail []string  `json:"thumbnail"`
-         
-    }
-    
-    // Src ...
-    type Src struct {
-
-        
-            Link string  `json:"link"`
-         
-    }
-    
-    // AssetsSchema ...
-    type AssetsSchema struct {
-
-        
-            UmdJs UmdJs  `json:"umd_js"`
-            CommonJs CommonJs  `json:"common_js"`
-            Css Css  `json:"css"`
-         
-    }
-    
-    // UmdJs ...
-    type UmdJs struct {
-
-        
-            Link string  `json:"link"`
-            Links []string  `json:"links"`
-         
-    }
-    
-    // CommonJs ...
-    type CommonJs struct {
-
-        
-            Link string  `json:"link"`
-         
-    }
-    
-    // Css ...
-    type Css struct {
-
-        
-            Link string  `json:"link"`
-            Links []string  `json:"links"`
-         
-    }
-    
-    // Config ...
-    type Config struct {
-
-        
-            Preset Preset  `json:"preset"`
-            GlobalSchema GlobalSchema  `json:"global_schema"`
-            Current string  `json:"current"`
-            List []ListSchemaItem  `json:"list"`
-         
-    }
-    
-    // Preset ...
-    type Preset struct {
-
-        
-            Pages []AvailablePageSchema  `json:"pages"`
-         
-    }
-    
-    // GlobalSchema ...
-    type GlobalSchema struct {
-
-        
-            Props []GlobalSchemaProps  `json:"props"`
-         
-    }
-    
-    // ListSchemaItem ...
-    type ListSchemaItem struct {
-
-        
-            GlobalConfig map[string]interface{}  `json:"global_config"`
-            Page []ConfigPage  `json:"page"`
-            Name string  `json:"name"`
-         
-    }
-    
-    // Colors ...
-    type Colors struct {
-
-        
-            BgColor string  `json:"bg_color"`
-            PrimaryColor string  `json:"primary_color"`
-            SecondaryColor string  `json:"secondary_color"`
-            AccentColor string  `json:"accent_color"`
-            LinkColor string  `json:"link_color"`
-            ButtonSecondaryColor string  `json:"button_secondary_color"`
-         
-    }
-    
-    // ConfigPage ...
-    type ConfigPage struct {
-
-        
-            Settings map[string]interface{}  `json:"settings"`
-            Page string  `json:"page"`
-         
-    }
-    
-    // Font ...
-    type Font struct {
-
-        
-            Family string  `json:"family"`
-            Variants Variants  `json:"variants"`
-         
-    }
-    
-    // Variants ...
-    type Variants struct {
-
-        
-            Medium Medium  `json:"medium"`
-            SemiBold SemiBold  `json:"semi_bold"`
-            Bold Bold  `json:"bold"`
-            Light Light  `json:"light"`
-            Regular Regular  `json:"regular"`
-         
-    }
-    
-    // Medium ...
-    type Medium struct {
-
-        
-            Name string  `json:"name"`
-            File string  `json:"file"`
-         
-    }
-    
-    // SemiBold ...
-    type SemiBold struct {
-
-        
-            Name string  `json:"name"`
-            File string  `json:"file"`
-         
-    }
-    
-    // Bold ...
-    type Bold struct {
-
-        
-            Name string  `json:"name"`
-            File string  `json:"file"`
-         
-    }
-    
-    // Light ...
-    type Light struct {
-
-        
-            Name string  `json:"name"`
-            File string  `json:"file"`
-         
-    }
-    
-    // Regular ...
-    type Regular struct {
-
-        
-            Name string  `json:"name"`
-            File string  `json:"file"`
-         
-    }
-    
-    // Blocks ...
-    type Blocks struct {
-
-        
-            Type string  `json:"type"`
-            Name string  `json:"name"`
-            Props []BlocksProps  `json:"props"`
-         
-    }
-    
-    // GlobalSchemaProps ...
-    type GlobalSchemaProps struct {
-
-        
-            ID string  `json:"id"`
-            Label string  `json:"label"`
-            Type string  `json:"type"`
-            Category string  `json:"category"`
-         
-    }
-    
-    // BlocksProps ...
-    type BlocksProps struct {
-
-        
-            ID string  `json:"id"`
-            Label string  `json:"label"`
-            Type string  `json:"type"`
+            Message string  `json:"message"`
          
     }
     

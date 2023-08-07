@@ -5271,9 +5271,9 @@ package platform
     type Trader struct {
 
         
-            Name interface{}  `json:"name"`
-            Type string  `json:"type"`
             Address []string  `json:"address"`
+            Name string  `json:"name"`
+            Type string  `json:"type"`
          
     }
     
@@ -5281,8 +5281,8 @@ package platform
     type NetQuantity struct {
 
         
-            Unit interface{}  `json:"unit"`
             Value float64  `json:"value"`
+            Unit string  `json:"unit"`
          
     }
     
@@ -14759,6 +14759,7 @@ package platform
             Success bool  `json:"success"`
             Message string  `json:"message"`
             ErrorTrace string  `json:"error_trace"`
+            Error string  `json:"error"`
          
     }
     
@@ -15126,6 +15127,7 @@ package platform
             Weight map[string]interface{}  `json:"weight"`
             Attributes map[string]interface{}  `json:"attributes"`
             Quantity float64  `json:"quantity"`
+            Status map[string]interface{}  `json:"status"`
          
     }
     
@@ -15150,6 +15152,9 @@ package platform
             DpID float64  `json:"dp_id"`
             Meta map[string]interface{}  `json:"meta"`
             AffiliateShipmentID string  `json:"affiliate_shipment_id"`
+            LockStatus bool  `json:"lock_status"`
+            LockMessage string  `json:"lock_message"`
+            ActionToStatus map[string]interface{}  `json:"action_to_status"`
          
     }
     
@@ -16795,16 +16800,6 @@ package platform
          
     }
     
-    // ShipmentDetails1 used by Order
-    type ShipmentDetails1 struct {
-
-        
-            LockStatus bool  `json:"lock_status"`
-            LockMessage string  `json:"lock_message"`
-            ActionToStatus map[string]interface{}  `json:"action_to_status"`
-         
-    }
-    
     // PhoneDetails used by Order
     type PhoneDetails struct {
 
@@ -17269,7 +17264,7 @@ package platform
             BillingDetails UserDetailsData  `json:"billing_details"`
             ForwardShipmentID string  `json:"forward_shipment_id"`
             FulfilmentPriority float64  `json:"fulfilment_priority"`
-            ShipmentDetails ShipmentDetails1  `json:"shipment_details"`
+            ShipmentDetails ShipmentDetails  `json:"shipment_details"`
             CustomMeta []map[string]interface{}  `json:"custom_meta"`
             ShipmentQuantity float64  `json:"shipment_quantity"`
             CompanyDetails CompanyDetails  `json:"company_details"`
@@ -17671,14 +17666,6 @@ package platform
          
     }
     
-    // ArticleDetails1 used by Order
-    type ArticleDetails1 struct {
-
-        
-            Status map[string]interface{}  `json:"status"`
-         
-    }
-    
     // StoreAddress used by Order
     type StoreAddress struct {
 
@@ -17915,7 +17902,7 @@ package platform
             BagStatus []BagStatusHistory  `json:"bag_status"`
             SellerIdentifier string  `json:"seller_identifier"`
             OriginalBagList []float64  `json:"original_bag_list"`
-            ArticleDetails ArticleDetails1  `json:"article_details"`
+            ArticleDetails ArticleDetails  `json:"article_details"`
             CurrentOperationalStatus BagStatusHistory  `json:"current_operational_status"`
             OrderingStore Store  `json:"ordering_store"`
             Article Article  `json:"article"`
@@ -17945,15 +17932,6 @@ package platform
             OperationalStatus string  `json:"operational_status"`
             EntityType string  `json:"entity_type"`
             Status BagReturnableCancelableStatus1  `json:"status"`
-         
-    }
-    
-    // ErrorResponse1 used by Order
-    type ErrorResponse1 struct {
-
-        
-            Message string  `json:"message"`
-            Error string  `json:"error"`
          
     }
     
@@ -19991,6 +19969,1041 @@ package platform
     
 
     
+    // ServiceabilityPayloadSchema used by Serviceability
+    type ServiceabilityPayloadSchema struct {
+
+        
+            ServiceabilityType string  `json:"serviceability_type"`
+         
+    }
+    
+    // ServiceabilityErrorResponse used by Serviceability
+    type ServiceabilityErrorResponse struct {
+
+        
+            Message string  `json:"message"`
+            Value string  `json:"value"`
+            Type string  `json:"type"`
+         
+    }
+    
+    // ApplicationServiceabilityConfig used by Serviceability
+    type ApplicationServiceabilityConfig struct {
+
+        
+            ChannelID string  `json:"channel_id"`
+            ServiceabilityType string  `json:"serviceability_type"`
+            ChannelType string  `json:"channel_type"`
+         
+    }
+    
+    // ApplicationServiceabilityConfigResponse used by Serviceability
+    type ApplicationServiceabilityConfigResponse struct {
+
+        
+            Error ServiceabilityErrorResponse  `json:"error"`
+            Data ApplicationServiceabilityConfig  `json:"data"`
+            Success bool  `json:"success"`
+         
+    }
+    
+    // EntityRegionView_Request used by Serviceability
+    type EntityRegionView_Request struct {
+
+        
+            SubType []string  `json:"sub_type"`
+            ParentID []string  `json:"parent_id"`
+         
+    }
+    
+    // EntityRegionView_Error used by Serviceability
+    type EntityRegionView_Error struct {
+
+        
+            Message string  `json:"message"`
+            Value string  `json:"value"`
+            Type string  `json:"type"`
+         
+    }
+    
+    // EntityRegionView_page used by Serviceability
+    type EntityRegionView_page struct {
+
+        
+            Type string  `json:"type"`
+            HasNext bool  `json:"has_next"`
+            ItemTotal float64  `json:"item_total"`
+            Size float64  `json:"size"`
+            Current float64  `json:"current"`
+         
+    }
+    
+    // EntityRegionView_Items used by Serviceability
+    type EntityRegionView_Items struct {
+
+        
+            SubType string  `json:"sub_type"`
+            UID string  `json:"uid"`
+            Name string  `json:"name"`
+         
+    }
+    
+    // EntityRegionView_Response used by Serviceability
+    type EntityRegionView_Response struct {
+
+        
+            Error EntityRegionView_Error  `json:"error"`
+            Page EntityRegionView_page  `json:"page"`
+            Data []EntityRegionView_Items  `json:"data"`
+            Success bool  `json:"success"`
+         
+    }
+    
+    // ListViewSummary used by Serviceability
+    type ListViewSummary struct {
+
+        
+            TotalZones float64  `json:"total_zones"`
+            TotalPincodesServed float64  `json:"total_pincodes_served"`
+            TotalActiveZones float64  `json:"total_active_zones"`
+         
+    }
+    
+    // ZoneDataItem used by Serviceability
+    type ZoneDataItem struct {
+
+        
+            HasNext bool  `json:"has_next"`
+            ItemTotal float64  `json:"item_total"`
+            Size float64  `json:"size"`
+            Current float64  `json:"current"`
+            Type string  `json:"type"`
+         
+    }
+    
+    // ListViewProduct used by Serviceability
+    type ListViewProduct struct {
+
+        
+            Count float64  `json:"count"`
+            Type string  `json:"type"`
+         
+    }
+    
+    // ListViewChannels used by Serviceability
+    type ListViewChannels struct {
+
+        
+            ChannelID string  `json:"channel_id"`
+            ChannelType string  `json:"channel_type"`
+         
+    }
+    
+    // ListViewItems used by Serviceability
+    type ListViewItems struct {
+
+        
+            ZoneID string  `json:"zone_id"`
+            Name string  `json:"name"`
+            Slug string  `json:"slug"`
+            StoresCount float64  `json:"stores_count"`
+            IsActive bool  `json:"is_active"`
+            Product ListViewProduct  `json:"product"`
+            PincodesCount float64  `json:"pincodes_count"`
+            CompanyID float64  `json:"company_id"`
+            Channels ListViewChannels  `json:"channels"`
+         
+    }
+    
+    // ListViewResponse used by Serviceability
+    type ListViewResponse struct {
+
+        
+            Summary []ListViewSummary  `json:"summary"`
+            Page []ZoneDataItem  `json:"page"`
+            Items []ListViewItems  `json:"items"`
+         
+    }
+    
+    // CompanyStoreView_PageItems used by Serviceability
+    type CompanyStoreView_PageItems struct {
+
+        
+            Type string  `json:"type"`
+            HasNext bool  `json:"has_next"`
+            ItemTotal float64  `json:"item_total"`
+            Size float64  `json:"size"`
+            Current float64  `json:"current"`
+         
+    }
+    
+    // CompanyStoreView_Response used by Serviceability
+    type CompanyStoreView_Response struct {
+
+        
+            Page []CompanyStoreView_PageItems  `json:"page"`
+            Items []map[string]interface{}  `json:"items"`
+         
+    }
+    
+    // GetZoneDataViewChannels used by Serviceability
+    type GetZoneDataViewChannels struct {
+
+        
+            ChannelID string  `json:"channel_id"`
+            ChannelType string  `json:"channel_type"`
+         
+    }
+    
+    // ZoneProductTypes used by Serviceability
+    type ZoneProductTypes struct {
+
+        
+            Type string  `json:"type"`
+            Tags []string  `json:"tags"`
+         
+    }
+    
+    // ZoneMappingType used by Serviceability
+    type ZoneMappingType struct {
+
+        
+            Country string  `json:"country"`
+            Pincode []string  `json:"pincode"`
+            State []string  `json:"state"`
+         
+    }
+    
+    // UpdateZoneData used by Serviceability
+    type UpdateZoneData struct {
+
+        
+            ZoneID string  `json:"zone_id"`
+            Name string  `json:"name"`
+            Slug string  `json:"slug"`
+            CompanyID float64  `json:"company_id"`
+            IsActive bool  `json:"is_active"`
+            Channels []GetZoneDataViewChannels  `json:"channels"`
+            Product ZoneProductTypes  `json:"product"`
+            StoreIds []float64  `json:"store_ids"`
+            RegionType string  `json:"region_type"`
+            Mapping []ZoneMappingType  `json:"mapping"`
+            AssignmentPreference string  `json:"assignment_preference"`
+         
+    }
+    
+    // ZoneUpdateRequest used by Serviceability
+    type ZoneUpdateRequest struct {
+
+        
+            Identifier string  `json:"identifier"`
+            Data UpdateZoneData  `json:"data"`
+         
+    }
+    
+    // ZoneSuccessResponse used by Serviceability
+    type ZoneSuccessResponse struct {
+
+        
+            StatusCode float64  `json:"status_code"`
+            Success bool  `json:"success"`
+         
+    }
+    
+    // GetZoneDataViewItems used by Serviceability
+    type GetZoneDataViewItems struct {
+
+        
+            ZoneID string  `json:"zone_id"`
+            Name string  `json:"name"`
+            Slug string  `json:"slug"`
+            CompanyID float64  `json:"company_id"`
+            IsActive bool  `json:"is_active"`
+            Channels []GetZoneDataViewChannels  `json:"channels"`
+            Product ZoneProductTypes  `json:"product"`
+            StoreIds []float64  `json:"store_ids"`
+            RegionType string  `json:"region_type"`
+            Mapping []ZoneMappingType  `json:"mapping"`
+            AssignmentPreference string  `json:"assignment_preference"`
+            StoresCount float64  `json:"stores_count"`
+            PincodesCount float64  `json:"pincodes_count"`
+         
+    }
+    
+    // GetSingleZoneDataViewResponse used by Serviceability
+    type GetSingleZoneDataViewResponse struct {
+
+        
+            Data GetZoneDataViewItems  `json:"data"`
+         
+    }
+    
+    // CreateZoneData used by Serviceability
+    type CreateZoneData struct {
+
+        
+            Name string  `json:"name"`
+            Slug string  `json:"slug"`
+            CompanyID float64  `json:"company_id"`
+            IsActive bool  `json:"is_active"`
+            Channels []GetZoneDataViewChannels  `json:"channels"`
+            Product ZoneProductTypes  `json:"product"`
+            StoreIds []float64  `json:"store_ids"`
+            RegionType string  `json:"region_type"`
+            Mapping []ZoneMappingType  `json:"mapping"`
+            AssignmentPreference string  `json:"assignment_preference"`
+         
+    }
+    
+    // ZoneRequest used by Serviceability
+    type ZoneRequest struct {
+
+        
+            Identifier string  `json:"identifier"`
+            Data CreateZoneData  `json:"data"`
+         
+    }
+    
+    // ZoneResponse used by Serviceability
+    type ZoneResponse struct {
+
+        
+            StatusCode float64  `json:"status_code"`
+            ZoneID string  `json:"zone_id"`
+            Success bool  `json:"success"`
+         
+    }
+    
+    // GetZoneFromPincodeViewRequest used by Serviceability
+    type GetZoneFromPincodeViewRequest struct {
+
+        
+            Country string  `json:"country"`
+            Pincode string  `json:"pincode"`
+         
+    }
+    
+    // Zone used by Serviceability
+    type Zone struct {
+
+        
+            ZoneID string  `json:"zone_id"`
+            Type string  `json:"type"`
+            Name string  `json:"name"`
+            Tags []string  `json:"tags"`
+            Slug string  `json:"slug"`
+            IsActive bool  `json:"is_active"`
+            StoreIds []float64  `json:"store_ids"`
+            AssignmentPreference string  `json:"assignment_preference"`
+         
+    }
+    
+    // GetZoneFromPincodeViewResponse used by Serviceability
+    type GetZoneFromPincodeViewResponse struct {
+
+        
+            ServiceabilityType string  `json:"serviceability_type"`
+            Zones []Zone  `json:"zones"`
+         
+    }
+    
+    // GetZoneFromApplicationIdViewResponse used by Serviceability
+    type GetZoneFromApplicationIdViewResponse struct {
+
+        
+            Page []ZoneDataItem  `json:"page"`
+            Items []ListViewItems  `json:"items"`
+         
+    }
+    
+    // ServiceabilityPageResponse used by Serviceability
+    type ServiceabilityPageResponse struct {
+
+        
+            Type string  `json:"type"`
+            HasNext bool  `json:"has_next"`
+            ItemTotal float64  `json:"item_total"`
+            Size float64  `json:"size"`
+            Current float64  `json:"current"`
+         
+    }
+    
+    // MobileNo used by Serviceability
+    type MobileNo struct {
+
+        
+            Number string  `json:"number"`
+            CountryCode float64  `json:"country_code"`
+         
+    }
+    
+    // ManagerResponse used by Serviceability
+    type ManagerResponse struct {
+
+        
+            Email string  `json:"email"`
+            MobileNo MobileNo  `json:"mobile_no"`
+            Name string  `json:"name"`
+         
+    }
+    
+    // ModifiedByResponse used by Serviceability
+    type ModifiedByResponse struct {
+
+        
+            Username string  `json:"username"`
+            UserID string  `json:"user_id"`
+         
+    }
+    
+    // IntegrationTypeResponse used by Serviceability
+    type IntegrationTypeResponse struct {
+
+        
+            Inventory string  `json:"inventory"`
+            Order string  `json:"order"`
+         
+    }
+    
+    // ProductReturnConfigResponse used by Serviceability
+    type ProductReturnConfigResponse struct {
+
+        
+            OnSameStore bool  `json:"on_same_store"`
+         
+    }
+    
+    // ContactNumberResponse used by Serviceability
+    type ContactNumberResponse struct {
+
+        
+            Number string  `json:"number"`
+            CountryCode float64  `json:"country_code"`
+         
+    }
+    
+    // AddressResponse used by Serviceability
+    type AddressResponse struct {
+
+        
+            City string  `json:"city"`
+            Address1 string  `json:"address1"`
+            Pincode float64  `json:"pincode"`
+            Address2 string  `json:"address2"`
+            Landmark string  `json:"landmark"`
+            State string  `json:"state"`
+            Country string  `json:"country"`
+            Latitude float64  `json:"latitude"`
+            Longitude float64  `json:"longitude"`
+         
+    }
+    
+    // CreatedByResponse used by Serviceability
+    type CreatedByResponse struct {
+
+        
+            Username string  `json:"username"`
+            UserID string  `json:"user_id"`
+         
+    }
+    
+    // EwayBillResponse used by Serviceability
+    type EwayBillResponse struct {
+
+        
+            Enabled bool  `json:"enabled"`
+         
+    }
+    
+    // EinvoiceResponse used by Serviceability
+    type EinvoiceResponse struct {
+
+        
+            Enabled bool  `json:"enabled"`
+         
+    }
+    
+    // GstCredentialsResponse used by Serviceability
+    type GstCredentialsResponse struct {
+
+        
+            EWaybill EwayBillResponse  `json:"e_waybill"`
+            EInvoice EinvoiceResponse  `json:"e_invoice"`
+         
+    }
+    
+    // WarningsResponse used by Serviceability
+    type WarningsResponse struct {
+
+        
+            StoreAddress string  `json:"store_address"`
+         
+    }
+    
+    // OpeningClosing used by Serviceability
+    type OpeningClosing struct {
+
+        
+            Minute float64  `json:"minute"`
+            Hour float64  `json:"hour"`
+         
+    }
+    
+    // TimmingResponse used by Serviceability
+    type TimmingResponse struct {
+
+        
+            Open bool  `json:"open"`
+            Weekday string  `json:"weekday"`
+            Closing OpeningClosing  `json:"closing"`
+            Opening OpeningClosing  `json:"opening"`
+         
+    }
+    
+    // DocumentsResponse used by Serviceability
+    type DocumentsResponse struct {
+
+        
+            LegalName string  `json:"legal_name"`
+            Value string  `json:"value"`
+            Type string  `json:"type"`
+            Verified bool  `json:"verified"`
+         
+    }
+    
+    // Dp used by Serviceability
+    type Dp struct {
+
+        
+            FmPriority float64  `json:"fm_priority"`
+            RvpPriority float64  `json:"rvp_priority"`
+            LmPriority float64  `json:"lm_priority"`
+            InternalAccountID string  `json:"internal_account_id"`
+            AreaCode float64  `json:"area_code"`
+            PaymentMode string  `json:"payment_mode"`
+            Operations []string  `json:"operations"`
+            ExternalAccountID string  `json:"external_account_id"`
+            TransportMode string  `json:"transport_mode"`
+            AssignDpFromSb bool  `json:"assign_dp_from_sb"`
+         
+    }
+    
+    // LogisticsResponse used by Serviceability
+    type LogisticsResponse struct {
+
+        
+            Override bool  `json:"override"`
+            Dp Dp  `json:"dp"`
+         
+    }
+    
+    // ItemResponse used by Serviceability
+    type ItemResponse struct {
+
+        
+            CreatedOn string  `json:"created_on"`
+            Manager ManagerResponse  `json:"manager"`
+            ModifiedBy ModifiedByResponse  `json:"modified_by"`
+            IntegrationType IntegrationTypeResponse  `json:"integration_type"`
+            VerifiedOn string  `json:"verified_on"`
+            ProductReturnConfig ProductReturnConfigResponse  `json:"product_return_config"`
+            ContactNumbers []ContactNumberResponse  `json:"contact_numbers"`
+            VerifiedBy ModifiedByResponse  `json:"verified_by"`
+            Stage string  `json:"stage"`
+            Address AddressResponse  `json:"address"`
+            ModifiedOn string  `json:"modified_on"`
+            CreatedBy CreatedByResponse  `json:"created_by"`
+            GstCredentials GstCredentialsResponse  `json:"gst_credentials"`
+            DisplayName string  `json:"display_name"`
+            CompanyID float64  `json:"company_id"`
+            UID float64  `json:"uid"`
+            CustomJson map[string]interface{}  `json:"_custom_json"`
+            Code string  `json:"code"`
+            Warnings WarningsResponse  `json:"warnings"`
+            Name string  `json:"name"`
+            Timing []TimmingResponse  `json:"timing"`
+            Documents []DocumentsResponse  `json:"documents"`
+            StoreType string  `json:"store_type"`
+            SubType string  `json:"sub_type"`
+            Company float64  `json:"company"`
+            Cls string  `json:"_cls"`
+            Logistics LogisticsResponse  `json:"logistics"`
+            NotificationEmails []string  `json:"notification_emails"`
+         
+    }
+    
+    // GetStoresViewResponse used by Serviceability
+    type GetStoresViewResponse struct {
+
+        
+            Page ServiceabilityPageResponse  `json:"page"`
+            Items []ItemResponse  `json:"items"`
+         
+    }
+    
+    // ReAssignStoreRequest used by Serviceability
+    type ReAssignStoreRequest struct {
+
+        
+            ToPincode string  `json:"to_pincode"`
+            Identifier string  `json:"identifier"`
+            Configuration map[string]interface{}  `json:"configuration"`
+            IgnoredLocations []string  `json:"ignored_locations"`
+            Articles []map[string]interface{}  `json:"articles"`
+         
+    }
+    
+    // ReAssignStoreResponse used by Serviceability
+    type ReAssignStoreResponse struct {
+
+        
+            ToPincode string  `json:"to_pincode"`
+            Success bool  `json:"success"`
+            Error map[string]interface{}  `json:"error"`
+            Articles []map[string]interface{}  `json:"articles"`
+         
+    }
+    
+    // ApplicationCompanyDpViewResponse used by Serviceability
+    type ApplicationCompanyDpViewResponse struct {
+
+        
+            CourierPartnerID float64  `json:"courier_partner_id"`
+            CompanyID float64  `json:"company_id"`
+            ApplicationID string  `json:"application_id"`
+            Success bool  `json:"success"`
+         
+    }
+    
+    // ApplicationCompanyDpViewRequest used by Serviceability
+    type ApplicationCompanyDpViewRequest struct {
+
+        
+            DpID string  `json:"dp_id"`
+         
+    }
+    
+    // PincodeMopData used by Serviceability
+    type PincodeMopData struct {
+
+        
+            Pincodes []float64  `json:"pincodes"`
+            Country string  `json:"country"`
+            Action string  `json:"action"`
+         
+    }
+    
+    // PincodeMopUpdateResponse used by Serviceability
+    type PincodeMopUpdateResponse struct {
+
+        
+            Pincode float64  `json:"pincode"`
+            ChannelID string  `json:"channel_id"`
+            Country string  `json:"country"`
+            IsActive bool  `json:"is_active"`
+         
+    }
+    
+    // PincodeMOPresponse used by Serviceability
+    type PincodeMOPresponse struct {
+
+        
+            Success bool  `json:"success"`
+            StatusCode float64  `json:"status_code"`
+            BatchID string  `json:"batch_id"`
+            Country string  `json:"country"`
+            Action string  `json:"action"`
+            Pincodes []float64  `json:"pincodes"`
+            UpdatedPincodes []PincodeMopUpdateResponse  `json:"updated_pincodes"`
+         
+    }
+    
+    // CommonError used by Serviceability
+    type CommonError struct {
+
+        
+            StatusCode string  `json:"status_code"`
+            Error interface{}  `json:"error"`
+            Success string  `json:"success"`
+         
+    }
+    
+    // PincodeMopBulkData used by Serviceability
+    type PincodeMopBulkData struct {
+
+        
+            BatchID string  `json:"batch_id"`
+            S3URL string  `json:"s3_url"`
+         
+    }
+    
+    // PincodeBulkViewResponse used by Serviceability
+    type PincodeBulkViewResponse struct {
+
+        
+            BatchID string  `json:"batch_id"`
+            S3URL string  `json:"s3_url"`
+         
+    }
+    
+    // PincodeCodStatusListingRequest used by Serviceability
+    type PincodeCodStatusListingRequest struct {
+
+        
+            Country string  `json:"country"`
+            IsActive bool  `json:"is_active"`
+            Pincode float64  `json:"pincode"`
+            Current float64  `json:"current"`
+            PageSize float64  `json:"page_size"`
+         
+    }
+    
+    // PincodeCodStatusListingResponse used by Serviceability
+    type PincodeCodStatusListingResponse struct {
+
+        
+            Country string  `json:"country"`
+            Data []PincodeCodStatusListingResponse  `json:"data"`
+            Success bool  `json:"success"`
+            Errors []Error  `json:"errors"`
+            Page PincodeCodStatusListingPage  `json:"page"`
+            Summary PincodeCodStatusListingSummary  `json:"summary"`
+         
+    }
+    
+    // Error used by Serviceability
+    type Error struct {
+
+        
+            Type string  `json:"type"`
+            Value string  `json:"value"`
+            Message string  `json:"message"`
+         
+    }
+    
+    // PincodeCodStatusListingPage used by Serviceability
+    type PincodeCodStatusListingPage struct {
+
+        
+            Type string  `json:"type"`
+            HasNext bool  `json:"has_next"`
+            ItemTotal float64  `json:"item_total"`
+            Size float64  `json:"size"`
+            Current float64  `json:"current"`
+         
+    }
+    
+    // PincodeCodStatusListingSummary used by Serviceability
+    type PincodeCodStatusListingSummary struct {
+
+        
+            TotalActivePincodes float64  `json:"total_active_pincodes"`
+            TotalInactivePincodes float64  `json:"total_inactive_pincodes"`
+         
+    }
+    
+    // PincodeMopUpdateAuditHistoryRequest used by Serviceability
+    type PincodeMopUpdateAuditHistoryRequest struct {
+
+        
+            EntityType string  `json:"entity_type"`
+            FileName string  `json:"file_name"`
+         
+    }
+    
+    // PincodeMopUpdateAuditHistoryPaging used by Serviceability
+    type PincodeMopUpdateAuditHistoryPaging struct {
+
+        
+            Type string  `json:"type"`
+            Size float64  `json:"size"`
+            Current float64  `json:"current"`
+            HasNext bool  `json:"has_next"`
+            ItemTotal float64  `json:"item_total"`
+         
+    }
+    
+    // PincodeMopUpdateAuditHistoryResponse used by Serviceability
+    type PincodeMopUpdateAuditHistoryResponse struct {
+
+        
+            BatchID string  `json:"batch_id"`
+            EntityType string  `json:"entity_type"`
+            ErrorFileS3URL string  `json:"error_file_s3_url"`
+            S3URL string  `json:"s3_url"`
+            FileName string  `json:"file_name"`
+            UpdatedAt string  `json:"updated_at"`
+            UpdatedBy string  `json:"updated_by"`
+            Success bool  `json:"success"`
+         
+    }
+    
+    // PincodeMopUpdateAuditHistoryResponseData used by Serviceability
+    type PincodeMopUpdateAuditHistoryResponseData struct {
+
+        
+            EntityType string  `json:"entity_type"`
+            Page PincodeMopUpdateAuditHistoryPaging  `json:"page"`
+            Data []PincodeMopUpdateAuditHistoryResponse  `json:"data"`
+         
+    }
+    
+    // Dp1 used by Serviceability
+    type Dp1 struct {
+
+        
+            IsSelfShip bool  `json:"is_self_ship"`
+            Name string  `json:"name"`
+            PlanID string  `json:"plan_id"`
+            Stage string  `json:"stage"`
+            AccountID string  `json:"account_id"`
+            DpID string  `json:"dp_id"`
+            PlanRules map[string]interface{}  `json:"plan_rules"`
+         
+    }
+    
+    // CompanyDpAccountRequest used by Serviceability
+    type CompanyDpAccountRequest struct {
+
+        
+            Data []Dp1  `json:"data"`
+         
+    }
+    
+    // CompanyDpAccountResponse used by Serviceability
+    type CompanyDpAccountResponse struct {
+
+        
+            Success bool  `json:"success"`
+         
+    }
+    
+    // ErrorResponse used by Serviceability
+    type ErrorResponse struct {
+
+        
+            Message string  `json:"message"`
+            Value string  `json:"value"`
+            Type string  `json:"type"`
+         
+    }
+    
+    // DpAccountFailureResponse used by Serviceability
+    type DpAccountFailureResponse struct {
+
+        
+            StatusCode float64  `json:"status_code"`
+            Error []ErrorResponse  `json:"error"`
+            Success bool  `json:"success"`
+         
+    }
+    
+    // Page used by Serviceability
+    type Page struct {
+
+        
+            ItemTotal float64  `json:"item_total"`
+            NextID string  `json:"next_id"`
+            HasPrevious bool  `json:"has_previous"`
+            HasNext bool  `json:"has_next"`
+            Current float64  `json:"current"`
+            Type string  `json:"type"`
+            Size float64  `json:"size"`
+         
+    }
+    
+    // CompanyDpAccountListResponse used by Serviceability
+    type CompanyDpAccountListResponse struct {
+
+        
+            Success bool  `json:"success"`
+            Page Page  `json:"page"`
+            Items []Dp1  `json:"items"`
+         
+    }
+    
+    // DpRulesUpdateRequest used by Serviceability
+    type DpRulesUpdateRequest struct {
+
+        
+            IsActive bool  `json:"is_active"`
+            Conditions []map[string]interface{}  `json:"conditions"`
+            DpIds map[string]map[string]interface{}  `json:"dp_ids"`
+            Name string  `json:"name"`
+         
+    }
+    
+    // DpRuleResponse used by Serviceability
+    type DpRuleResponse struct {
+
+        
+            CreatedOn string  `json:"created_on"`
+            Name string  `json:"name"`
+            ModifiedBy map[string]interface{}  `json:"modified_by"`
+            DpIds map[string]interface{}  `json:"dp_ids"`
+            IsActive bool  `json:"is_active"`
+            ModifiedOn string  `json:"modified_on"`
+            UID string  `json:"uid"`
+            CreatedBy map[string]interface{}  `json:"created_by"`
+            CompanyID float64  `json:"company_id"`
+            Conditions []string  `json:"conditions"`
+         
+    }
+    
+    // DpRuleUpdateSuccessResponse used by Serviceability
+    type DpRuleUpdateSuccessResponse struct {
+
+        
+            StatusCode float64  `json:"status_code"`
+            Data DpRuleResponse  `json:"data"`
+            Success bool  `json:"success"`
+         
+    }
+    
+    // FailureResponse used by Serviceability
+    type FailureResponse struct {
+
+        
+            StatusCode float64  `json:"status_code"`
+            Error []ErrorResponse  `json:"error"`
+            Success bool  `json:"success"`
+         
+    }
+    
+    // DpSchemaInRuleListing used by Serviceability
+    type DpSchemaInRuleListing struct {
+
+        
+            IsSelfShip bool  `json:"is_self_ship"`
+            Name string  `json:"name"`
+            PlanID string  `json:"plan_id"`
+            Stage string  `json:"stage"`
+            AccountID string  `json:"account_id"`
+            Priority float64  `json:"priority"`
+            DpID string  `json:"dp_id"`
+            PlanRules map[string]interface{}  `json:"plan_rules"`
+         
+    }
+    
+    // DpRule used by Serviceability
+    type DpRule struct {
+
+        
+            Name string  `json:"name"`
+            DpIds map[string]DpSchemaInRuleListing  `json:"dp_ids"`
+            IsActive bool  `json:"is_active"`
+            CompanyID float64  `json:"company_id"`
+            Conditions []map[string]interface{}  `json:"conditions"`
+         
+    }
+    
+    // DpRuleSuccessResponse used by Serviceability
+    type DpRuleSuccessResponse struct {
+
+        
+            StatusCode float64  `json:"status_code"`
+            Data DpRule  `json:"data"`
+            Success bool  `json:"success"`
+         
+    }
+    
+    // DpIds used by Serviceability
+    type DpIds struct {
+
+        
+            Enabled bool  `json:"enabled"`
+            Priority float64  `json:"priority"`
+            Meta map[string]interface{}  `json:"meta"`
+         
+    }
+    
+    // DpRuleRequest used by Serviceability
+    type DpRuleRequest struct {
+
+        
+            Name string  `json:"name"`
+            DpIds map[string]DpIds  `json:"dp_ids"`
+            IsActive bool  `json:"is_active"`
+            CompanyID float64  `json:"company_id"`
+            Conditions []map[string]interface{}  `json:"conditions"`
+         
+    }
+    
+    // DpMultipleRuleSuccessResponse used by Serviceability
+    type DpMultipleRuleSuccessResponse struct {
+
+        
+            Success bool  `json:"success"`
+            Page Page  `json:"page"`
+            Items []DpRule  `json:"items"`
+         
+    }
+    
+    // DPCompanyRuleRequest used by Serviceability
+    type DPCompanyRuleRequest struct {
+
+        
+            RuleIds []string  `json:"rule_ids"`
+         
+    }
+    
+    // DPCompanyRuleResponse used by Serviceability
+    type DPCompanyRuleResponse struct {
+
+        
+            StatusCode float64  `json:"status_code"`
+            Data []DpRuleResponse  `json:"data"`
+            Success bool  `json:"success"`
+         
+    }
+    
+    // DPApplicationRuleRequest used by Serviceability
+    type DPApplicationRuleRequest struct {
+
+        
+            ShippingRules []string  `json:"shipping_rules"`
+         
+    }
+    
+    // DPApplicationRuleResponse used by Serviceability
+    type DPApplicationRuleResponse struct {
+
+        
+            StatusCode bool  `json:"status_code"`
+            Data []DpRuleResponse  `json:"data"`
+            Success bool  `json:"success"`
+         
+    }
+    
+    // SelfShipResponse used by Serviceability
+    type SelfShipResponse struct {
+
+        
+            IsActive bool  `json:"is_active"`
+            Tat float64  `json:"tat"`
+         
+    }
+    
+    // ApplicationSelfShipConfig used by Serviceability
+    type ApplicationSelfShipConfig struct {
+
+        
+            SelfShip map[string]interface{}  `json:"self_ship"`
+         
+    }
+    
+    // ApplicationSelfShipConfigResponse used by Serviceability
+    type ApplicationSelfShipConfigResponse struct {
+
+        
+            Error ServiceabilityErrorResponse  `json:"error"`
+            Data ApplicationSelfShipConfig  `json:"data"`
+            Success bool  `json:"success"`
+         
+    }
+    
+
+    
     // ClickStatsResponse used by Share
     type ClickStatsResponse struct {
 
@@ -20153,6 +21166,67 @@ package platform
     
 
     
+    // ThemeReq used by Theme
+    type ThemeReq struct {
+
+        
+            MarketplaceThemeID string  `json:"marketplace_theme_id"`
+         
+    }
+    
+    // CompanyThemeSchema used by Theme
+    type CompanyThemeSchema struct {
+
+        
+            ID string  `json:"_id"`
+            Name string  `json:"name"`
+            MarketplaceThemeID MarketplaceThemeId  `json:"marketplace_theme_id"`
+            CompanyID float64  `json:"company_id"`
+            Meta ThemeMeta  `json:"meta"`
+            CreatedAt string  `json:"created_at"`
+            UpdatedAt string  `json:"updated_at"`
+         
+    }
+    
+    // MarketplaceThemeId used by Theme
+    type MarketplaceThemeId struct {
+
+        
+            ID string  `json:"_id"`
+            IsDefault bool  `json:"is_default"`
+         
+    }
+    
+    // ThemeMeta used by Theme
+    type ThemeMeta struct {
+
+        
+            Payment ThemePayment  `json:"payment"`
+            Industry []string  `json:"industry"`
+            Description string  `json:"description"`
+            Images ThemeImages  `json:"images"`
+            Slug string  `json:"slug"`
+         
+    }
+    
+    // ThemePayment used by Theme
+    type ThemePayment struct {
+
+        
+            IsPaid bool  `json:"is_paid"`
+            Amount float64  `json:"amount"`
+         
+    }
+    
+    // ThemeImages used by Theme
+    type ThemeImages struct {
+
+        
+            Desktop string  `json:"desktop"`
+            Mobile string  `json:"mobile"`
+         
+    }
+    
     // AvailablePageSchema used by Theme
     type AvailablePageSchema struct {
 
@@ -20248,42 +21322,11 @@ package platform
          
     }
     
-    // PaginationSchema used by Theme
-    type PaginationSchema struct {
-
-        
-            Size float64  `json:"size"`
-            ItemTotal float64  `json:"item_total"`
-            HasNext bool  `json:"has_next"`
-            Type string  `json:"type"`
-            Current float64  `json:"current"`
-         
-    }
-    
-    // ThemesListingResponseSchema used by Theme
-    type ThemesListingResponseSchema struct {
-
-        
-            Items []ThemesSchema  `json:"items"`
-            Page PaginationSchema  `json:"page"`
-         
-    }
-    
     // AddThemeRequestSchema used by Theme
     type AddThemeRequestSchema struct {
 
         
             ThemeID string  `json:"theme_id"`
-         
-    }
-    
-    // UpgradableThemeSchema used by Theme
-    type UpgradableThemeSchema struct {
-
-        
-            ParentTheme string  `json:"parent_theme"`
-            AppliedTheme string  `json:"applied_theme"`
-            Upgrade bool  `json:"upgrade"`
          
     }
     
@@ -20341,163 +21384,50 @@ package platform
     type ThemesSchema struct {
 
         
-            Application string  `json:"application"`
+            Font Font  `json:"font"`
+            Config Config  `json:"config"`
             Applied bool  `json:"applied"`
-            Customized bool  `json:"customized"`
-            Published bool  `json:"published"`
-            Archived bool  `json:"archived"`
+            IsPrivate bool  `json:"is_private"`
+            Tags []string  `json:"tags"`
+            ID string  `json:"_id"`
+            ApplicationID string  `json:"application_id"`
+            MarketplaceThemeID string  `json:"marketplace_theme_id"`
+            Meta Meta  `json:"meta"`
+            Name string  `json:"name"`
+            TemplateThemeID string  `json:"template_theme_id"`
+            Version string  `json:"version"`
+            Styles map[string]interface{}  `json:"styles"`
             CreatedAt string  `json:"created_at"`
             UpdatedAt string  `json:"updated_at"`
-            Version string  `json:"version"`
-            ParentThemeVersion string  `json:"parent_theme_version"`
-            ParentTheme string  `json:"parent_theme"`
-            Information Information  `json:"information"`
-            Tags []string  `json:"tags"`
-            Src Src  `json:"src"`
-            Assets AssetsSchema  `json:"assets"`
-            AvailableSections []availableSectionSchema  `json:"available_sections"`
-            Styles map[string]interface{}  `json:"styles"`
+            Assets Assets  `json:"assets"`
+            AvailableSections []SectionItem  `json:"available_sections"`
+         
+    }
+    
+    // ThemeUpgradableResponse used by Theme
+    type ThemeUpgradableResponse struct {
+
+        
+            Upgrade bool  `json:"upgrade"`
+            Versions ThemeVersions  `json:"versions"`
+            Message string  `json:"message"`
+         
+    }
+    
+    // UpdateThemeNameRequestBody used by Theme
+    type UpdateThemeNameRequestBody struct {
+
+        
+            Name string  `json:"name"`
+         
+    }
+    
+    // UpdateThemeRequestBody used by Theme
+    type UpdateThemeRequestBody struct {
+
+        
             Config Config  `json:"config"`
             Font Font  `json:"font"`
-            ID string  `json:"_id"`
-            V float64  `json:"__v"`
-            Colors Colors  `json:"colors"`
-         
-    }
-    
-    // availableSectionSchema used by Theme
-    type availableSectionSchema struct {
-
-        
-            Blocks []Blocks  `json:"blocks"`
-            Name string  `json:"name"`
-            Label string  `json:"label"`
-            Props []BlocksProps  `json:"props"`
-         
-    }
-    
-    // Information used by Theme
-    type Information struct {
-
-        
-            Images Images  `json:"images"`
-            Features []string  `json:"features"`
-            Name string  `json:"name"`
-            Description string  `json:"description"`
-         
-    }
-    
-    // Images used by Theme
-    type Images struct {
-
-        
-            Desktop []string  `json:"desktop"`
-            Android []string  `json:"android"`
-            Ios []string  `json:"ios"`
-            Thumbnail []string  `json:"thumbnail"`
-         
-    }
-    
-    // Src used by Theme
-    type Src struct {
-
-        
-            Link string  `json:"link"`
-         
-    }
-    
-    // AssetsSchema used by Theme
-    type AssetsSchema struct {
-
-        
-            UmdJs UmdJs  `json:"umd_js"`
-            CommonJs CommonJs  `json:"common_js"`
-            Css Css  `json:"css"`
-         
-    }
-    
-    // UmdJs used by Theme
-    type UmdJs struct {
-
-        
-            Link string  `json:"link"`
-            Links []string  `json:"links"`
-         
-    }
-    
-    // CommonJs used by Theme
-    type CommonJs struct {
-
-        
-            Link string  `json:"link"`
-         
-    }
-    
-    // Css used by Theme
-    type Css struct {
-
-        
-            Link string  `json:"link"`
-            Links []string  `json:"links"`
-         
-    }
-    
-    // Config used by Theme
-    type Config struct {
-
-        
-            Preset Preset  `json:"preset"`
-            GlobalSchema GlobalSchema  `json:"global_schema"`
-            Current string  `json:"current"`
-            List []ListSchemaItem  `json:"list"`
-         
-    }
-    
-    // Preset used by Theme
-    type Preset struct {
-
-        
-            Pages []AvailablePageSchema  `json:"pages"`
-         
-    }
-    
-    // GlobalSchema used by Theme
-    type GlobalSchema struct {
-
-        
-            Props []GlobalSchemaProps  `json:"props"`
-         
-    }
-    
-    // ListSchemaItem used by Theme
-    type ListSchemaItem struct {
-
-        
-            GlobalConfig map[string]interface{}  `json:"global_config"`
-            Page []ConfigPage  `json:"page"`
-            Name string  `json:"name"`
-         
-    }
-    
-    // Colors used by Theme
-    type Colors struct {
-
-        
-            BgColor string  `json:"bg_color"`
-            PrimaryColor string  `json:"primary_color"`
-            SecondaryColor string  `json:"secondary_color"`
-            AccentColor string  `json:"accent_color"`
-            LinkColor string  `json:"link_color"`
-            ButtonSecondaryColor string  `json:"button_secondary_color"`
-         
-    }
-    
-    // ConfigPage used by Theme
-    type ConfigPage struct {
-
-        
-            Settings map[string]interface{}  `json:"settings"`
-            Page string  `json:"page"`
          
     }
     
@@ -20505,34 +21435,25 @@ package platform
     type Font struct {
 
         
+            Variants FontVariants  `json:"variants"`
             Family string  `json:"family"`
-            Variants Variants  `json:"variants"`
          
     }
     
-    // Variants used by Theme
-    type Variants struct {
+    // FontVariants used by Theme
+    type FontVariants struct {
 
         
-            Medium Medium  `json:"medium"`
-            SemiBold SemiBold  `json:"semi_bold"`
-            Bold Bold  `json:"bold"`
-            Light Light  `json:"light"`
-            Regular Regular  `json:"regular"`
+            Light FontVariant  `json:"light"`
+            Regular FontVariant  `json:"regular"`
+            Medium FontVariant  `json:"medium"`
+            SemiBold FontVariant  `json:"semi_bold"`
+            Bold FontVariant  `json:"bold"`
          
     }
     
-    // Medium used by Theme
-    type Medium struct {
-
-        
-            Name string  `json:"name"`
-            File string  `json:"file"`
-         
-    }
-    
-    // SemiBold used by Theme
-    type SemiBold struct {
+    // FontVariant used by Theme
+    type FontVariant struct {
 
         
             Name string  `json:"name"`
@@ -20540,61 +21461,514 @@ package platform
          
     }
     
-    // Bold used by Theme
-    type Bold struct {
+    // Config used by Theme
+    type Config struct {
 
         
-            Name string  `json:"name"`
-            File string  `json:"file"`
+            Current string  `json:"current"`
+            List []ThemeConfiguration  `json:"list"`
+            GlobalSchema GlobalSchema  `json:"global_schema"`
+            Preset Preset  `json:"preset"`
          
     }
     
-    // Light used by Theme
-    type Light struct {
+    // ThemeConfiguration used by Theme
+    type ThemeConfiguration struct {
 
         
             Name string  `json:"name"`
-            File string  `json:"file"`
+            GlobalConfig GlobalConfig  `json:"global_config"`
+            Custom CustomConfig  `json:"custom"`
+            Page []string  `json:"page"`
          
     }
     
-    // Regular used by Theme
-    type Regular struct {
+    // GlobalConfig used by Theme
+    type GlobalConfig struct {
 
         
+            Statics StaticConfig  `json:"statics"`
+            Auth AuthConfig  `json:"auth"`
+            Palette PaletteConfig  `json:"palette"`
+         
+    }
+    
+    // StaticConfig used by Theme
+    type StaticConfig struct {
+
+        
+            Props StaticProps  `json:"props"`
+         
+    }
+    
+    // AuthConfig used by Theme
+    type AuthConfig struct {
+
+        
+            ShowHeaderAuth bool  `json:"show_header_auth"`
+            ShowFooterAuth bool  `json:"show_footer_auth"`
+         
+    }
+    
+    // PaletteConfig used by Theme
+    type PaletteConfig struct {
+
+        
+            GeneralSetting GeneralSetting  `json:"general_setting"`
+            AdvanceSetting AdvanceSetting  `json:"advance_setting"`
+         
+    }
+    
+    // CustomConfig used by Theme
+    type CustomConfig struct {
+
+        
+            Props CustomProps  `json:"props"`
+         
+    }
+    
+    // Meta used by Theme
+    type Meta struct {
+
+        
+            Payment ThemePayment  `json:"payment"`
+            Description string  `json:"description"`
+            Industry []string  `json:"industry"`
+            Release Release  `json:"release"`
+            Images Images  `json:"images"`
+            Slug string  `json:"slug"`
             Name string  `json:"name"`
-            File string  `json:"file"`
          
     }
     
-    // Blocks used by Theme
-    type Blocks struct {
+    // Release used by Theme
+    type Release struct {
 
         
-            Type string  `json:"type"`
-            Name string  `json:"name"`
-            Props []BlocksProps  `json:"props"`
+            Notes string  `json:"notes"`
+            Version string  `json:"version"`
          
     }
     
-    // GlobalSchemaProps used by Theme
-    type GlobalSchemaProps struct {
+    // Images used by Theme
+    type Images struct {
 
         
-            ID string  `json:"id"`
-            Label string  `json:"label"`
+            Desktop string  `json:"desktop"`
+            Mobile string  `json:"mobile"`
+         
+    }
+    
+    // StaticProps used by Theme
+    type StaticProps struct {
+
+        
+            Colors Colors  `json:"colors"`
+            Auth AuthConfig  `json:"auth"`
+         
+    }
+    
+    // Colors used by Theme
+    type Colors struct {
+
+        
+            PrimaryColor string  `json:"primary_color"`
+            SecondaryColor string  `json:"secondary_color"`
+            AccentColor string  `json:"accent_color"`
+            LinkColor string  `json:"link_color"`
+            ButtonSecondaryColor string  `json:"button_secondary_color"`
+            BgColor string  `json:"bg_color"`
+         
+    }
+    
+    // GeneralSetting used by Theme
+    type GeneralSetting struct {
+
+        
+            Theme ThemeSetting  `json:"theme"`
+            Text TextSetting  `json:"text"`
+            Button ButtonSetting  `json:"button"`
+            SaleDiscount SaleDiscountSetting  `json:"sale_discount"`
+            Header HeaderSetting  `json:"header"`
+            Footer FooterSetting  `json:"footer"`
+         
+    }
+    
+    // AdvanceSetting used by Theme
+    type AdvanceSetting struct {
+
+        
+            OverlayPopup OverlayPopupSetting  `json:"overlay_popup"`
+            DividerStrokeHighlight DividerStrokeHighlightSetting  `json:"divider_stroke_highlight"`
+            UserAlerts UserAlertsSetting  `json:"user_alerts"`
+         
+    }
+    
+    // ThemeSetting used by Theme
+    type ThemeSetting struct {
+
+        
+            PageBackground string  `json:"page_background"`
+            ThemeAccent string  `json:"theme_accent"`
+         
+    }
+    
+    // TextSetting used by Theme
+    type TextSetting struct {
+
+        
+            TextHeading string  `json:"text_heading"`
+            TextBody string  `json:"text_body"`
+            TextLabel string  `json:"text_label"`
+            TextSecondary string  `json:"text_secondary"`
+         
+    }
+    
+    // ButtonSetting used by Theme
+    type ButtonSetting struct {
+
+        
+            ButtonPrimary string  `json:"button_primary"`
+            ButtonSecondary string  `json:"button_secondary"`
+            ButtonLink string  `json:"button_link"`
+         
+    }
+    
+    // SaleDiscountSetting used by Theme
+    type SaleDiscountSetting struct {
+
+        
+            SaleBadgeBackground string  `json:"sale_badge_background"`
+            SaleBadgeText string  `json:"sale_badge_text"`
+            SaleDiscountText string  `json:"sale_discount_text"`
+            SaleTimer string  `json:"sale_timer"`
+         
+    }
+    
+    // HeaderSetting used by Theme
+    type HeaderSetting struct {
+
+        
+            HeaderBackground string  `json:"header_background"`
+            HeaderNav string  `json:"header_nav"`
+            HeaderIcon string  `json:"header_icon"`
+         
+    }
+    
+    // FooterSetting used by Theme
+    type FooterSetting struct {
+
+        
+            FooterBackground string  `json:"footer_background"`
+            FooterBottomBackground string  `json:"footer_bottom_background"`
+            FooterHeadingText string  `json:"footer_heading_text"`
+            FooterBodyText string  `json:"footer_body_text"`
+            FooterIcon string  `json:"footer_icon"`
+         
+    }
+    
+    // OverlayPopupSetting used by Theme
+    type OverlayPopupSetting struct {
+
+        
+            DialogBackgroung string  `json:"dialog_backgroung"`
+            Overlay string  `json:"overlay"`
+         
+    }
+    
+    // DividerStrokeHighlightSetting used by Theme
+    type DividerStrokeHighlightSetting struct {
+
+        
+            DividerStrokes string  `json:"divider_strokes"`
+            Highlight string  `json:"highlight"`
+         
+    }
+    
+    // UserAlertsSetting used by Theme
+    type UserAlertsSetting struct {
+
+        
+            SuccessBackground string  `json:"success_background"`
+            SuccessText string  `json:"success_text"`
+            ErrorBackground string  `json:"error_background"`
+            ErrorText string  `json:"error_text"`
+            InfoBackground string  `json:"info_background"`
+            InfoText string  `json:"info_text"`
+         
+    }
+    
+    // CustomProps used by Theme
+    type CustomProps struct {
+
+        
+            HeaderBgColor string  `json:"header_bg_color"`
+            HeaderTextColor string  `json:"header_text_color"`
+            HeaderBorderColor string  `json:"header_border_color"`
+            HeaderIconColor string  `json:"header_icon_color"`
+            HeaderCartNotificationBgColor string  `json:"header_cart_notification_bg_color"`
+            HeaderCartNotificationTextColor string  `json:"header_cart_notification_text_color"`
+            HeaderNavHoverColor string  `json:"header_nav_hover_color"`
+            ButtonPrimaryColor string  `json:"button_primary_color"`
+            ButtonPrimaryLabelColor string  `json:"button_primary_label_color"`
+            ButtonAddToCartColor string  `json:"button_add_to_cart_color"`
+            ButtonAddToCartLabelColor string  `json:"button_add_to_cart_label_color"`
+            ButtonSecondaryColor string  `json:"button_secondary_color"`
+            ButtonSecondaryLabelColor string  `json:"button_secondary_label_color"`
+            ButtonTertiaryColor string  `json:"button_tertiary_color"`
+            ButtonTertiaryLabelColor string  `json:"button_tertiary_label_color"`
+            ButtonTertiaryHoverColor string  `json:"button_tertiary_hover_color"`
+            ButtonTertiaryHoverTextColor string  `json:"button_tertiary_hover_text_color"`
+            TextHeadingLinkColor string  `json:"text_heading_link_color"`
+            TextBodyColor string  `json:"text_body_color"`
+            TextPriceColor string  `json:"text_price_color"`
+            TextSalePriceColor string  `json:"text_sale_price_color"`
+            TextStrikethroughPriceColor string  `json:"text_strikethrough_price_color"`
+            TextDiscountColor string  `json:"text_discount_color"`
+            FooterBgColor string  `json:"footer_bg_color"`
+            FooterTextColor string  `json:"footer_text_color"`
+            FooterBorderColor string  `json:"footer_border_color"`
+            FooterNavHoverColor string  `json:"footer_nav_hover_color"`
+            DisableCart bool  `json:"disable_cart"`
+            IsMenuBelowLogo bool  `json:"is_menu_below_logo"`
+            MenuPosition string  `json:"menu_position"`
+         
+    }
+    
+    // GlobalSchema used by Theme
+    type GlobalSchema struct {
+
+        
+            Props []Prop  `json:"props"`
+         
+    }
+    
+    // Prop used by Theme
+    type Prop struct {
+
+        
             Type string  `json:"type"`
             Category string  `json:"category"`
+            ID string  `json:"id"`
+            Label string  `json:"label"`
+            Info string  `json:"info"`
          
     }
     
-    // BlocksProps used by Theme
-    type BlocksProps struct {
+    // Assets used by Theme
+    type Assets struct {
 
         
-            ID string  `json:"id"`
+            UmdJs UMDJs  `json:"umd_js"`
+            CommonJs CommonJS  `json:"common_js"`
+            Css CSS  `json:"css"`
+         
+    }
+    
+    // UMDJs used by Theme
+    type UMDJs struct {
+
+        
+            Links []string  `json:"links"`
+         
+    }
+    
+    // CommonJS used by Theme
+    type CommonJS struct {
+
+        
+            Link string  `json:"link"`
+         
+    }
+    
+    // CSS used by Theme
+    type CSS struct {
+
+        
+            Links []string  `json:"links"`
+         
+    }
+    
+    // SectionItem used by Theme
+    type SectionItem struct {
+
+        
+            Props []interface{}  `json:"props"`
+            Blocks []interface{}  `json:"blocks"`
+            Name string  `json:"name"`
             Label string  `json:"label"`
+         
+    }
+    
+    // Preset used by Theme
+    type Preset struct {
+
+        
+            Pages []Page  `json:"pages"`
+         
+    }
+    
+    // Page used by Theme
+    type Page struct {
+
+        
+            ItemTotal float64  `json:"item_total"`
+            NextID string  `json:"next_id"`
+            HasPrevious bool  `json:"has_previous"`
+            HasNext bool  `json:"has_next"`
+            Current float64  `json:"current"`
             Type string  `json:"type"`
+            Size float64  `json:"size"`
+         
+    }
+    
+    // Section used by Theme
+    type Section struct {
+
+        
+            Blocks []Block  `json:"blocks"`
+            Predicate Predicate  `json:"predicate"`
+            Name string  `json:"name"`
+            Props SectionProps  `json:"props"`
+            Preset SectionPreset  `json:"preset"`
+         
+    }
+    
+    // Block used by Theme
+    type Block struct {
+
+        
+            Type string  `json:"type"`
+            Name string  `json:"name"`
+            Props BlockProps  `json:"props"`
+         
+    }
+    
+    // Predicate used by Theme
+    type Predicate struct {
+
+        
+            Screen Screen  `json:"screen"`
+            User ThemeUserSchema  `json:"user"`
+            Route Route  `json:"route"`
+         
+    }
+    
+    // Screen used by Theme
+    type Screen struct {
+
+        
+            Mobile bool  `json:"mobile"`
+            Desktop bool  `json:"desktop"`
+            Tablet bool  `json:"tablet"`
+         
+    }
+    
+    // ThemeUserSchema used by Theme
+    type ThemeUserSchema struct {
+
+        
+            Authenticated bool  `json:"authenticated"`
+            Anonymous bool  `json:"anonymous"`
+         
+    }
+    
+    // Route used by Theme
+    type Route struct {
+
+        
+            Selected string  `json:"selected"`
+            ExactURL string  `json:"exact_url"`
+         
+    }
+    
+    // SectionProps used by Theme
+    type SectionProps struct {
+
+        
+            Title TextProp  `json:"title"`
+            ItemMargin TextProp  `json:"item_margin"`
+            Autoplay CheckboxProp  `json:"autoplay"`
+            SlideInterval RangeProp  `json:"slide_interval"`
+         
+    }
+    
+    // SectionPreset used by Theme
+    type SectionPreset struct {
+
+        
+            Blocks []Block  `json:"blocks"`
+         
+    }
+    
+    // BlockProps used by Theme
+    type BlockProps struct {
+
+        
+            Image ImagePickerProp  `json:"image"`
+            SlideLink UrlProp  `json:"slide_link"`
+         
+    }
+    
+    // TextProp used by Theme
+    type TextProp struct {
+
+        
+            Value string  `json:"value"`
+            Type string  `json:"type"`
+         
+    }
+    
+    // CheckboxProp used by Theme
+    type CheckboxProp struct {
+
+        
+            Value bool  `json:"value"`
+            Type string  `json:"type"`
+         
+    }
+    
+    // RangeProp used by Theme
+    type RangeProp struct {
+
+        
+            Value float64  `json:"value"`
+            Type string  `json:"type"`
+         
+    }
+    
+    // ImagePickerProp used by Theme
+    type ImagePickerProp struct {
+
+        
+            Type string  `json:"type"`
+            Value string  `json:"value"`
+         
+    }
+    
+    // UrlProp used by Theme
+    type UrlProp struct {
+
+        
+            Type string  `json:"type"`
+            Value string  `json:"value"`
+         
+    }
+    
+    // ThemeVersions used by Theme
+    type ThemeVersions struct {
+
+        
+            ParentTheme string  `json:"parent_theme"`
+            AppliedTheme string  `json:"applied_theme"`
+         
+    }
+    
+    // DummyResponse used by Theme
+    type DummyResponse struct {
+
+        
+            Message string  `json:"message"`
          
     }
     

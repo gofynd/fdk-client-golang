@@ -268,12 +268,16 @@ import (
             COMMENT HistoryTypeEnum = "comment"
             
             
+            //THREAD defines constant for the `thread` 
+            THREAD HistoryTypeEnum = "thread"
+            
+            
        )
 
     //IsValid return error if enum is invalid
     func (hi HistoryTypeEnum) IsValid() error {
       switch hi {
-        case  RATING, LOG, COMMENT : 
+        case  RATING, LOG, COMMENT, THREAD : 
         return nil
       }
       return errors.New("Invalid HistoryTypeEnum type")

@@ -35,6 +35,8 @@ type ApplicationClient struct {
 	 
 		Rewards  *PlatformAppRewards
 	 
+		Serviceability  *PlatformAppServiceability
+	 
 		Share  *PlatformAppShare
 	 
 		Theme  *PlatformAppTheme
@@ -71,6 +73,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 				Payment:  NewPlatformAppPayment(config, appID),
 			 
 				Rewards:  NewPlatformAppRewards(config, appID),
+			 
+				Serviceability:  NewPlatformAppServiceability(config, appID),
 			 
 				Share:  NewPlatformAppShare(config, appID),
 			 
@@ -22576,6 +22580,875 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
  
 	 
+   // PlatformAppServiceability holds PlatformAppServiceability object properties
+    type PlatformAppServiceability struct {
+        config *PlatformConfig
+        CompanyID string
+        ApplicationID string
+    }
+    // NewPlatformAppServiceability returns new PlatformAppServiceability instance
+    func NewPlatformAppServiceability(config *PlatformConfig, appID string) *PlatformAppServiceability {
+        return &PlatformAppServiceability{config, config.CompanyID, appID}
+    }
+    
+    
+    
+  
+
+    
+    // GetApplicationServiceability Zone configuration of application.
+     func (se *PlatformAppServiceability)  GetApplicationServiceability() (ApplicationServiceabilityConfigResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getApplicationServiceabilityResponse ApplicationServiceabilityConfigResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/serviceability",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationServiceabilityConfigResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getApplicationServiceabilityResponse)
+        if err != nil {
+            return ApplicationServiceabilityConfigResponse{}, common.NewFDKError(err.Error())
+        }
+        return getApplicationServiceabilityResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdateApplicationServiceability Zone configuration of application.
+     func (se *PlatformAppServiceability)  UpdateApplicationServiceability(body  ServiceabilityPayloadSchema) (ApplicationServiceabilityConfigResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateApplicationServiceabilityResponse ApplicationServiceabilityConfigResponse
+	    )
+
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return ApplicationServiceabilityConfigResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return ApplicationServiceabilityConfigResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/serviceability",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationServiceabilityConfigResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateApplicationServiceabilityResponse)
+        if err != nil {
+            return ApplicationServiceabilityConfigResponse{}, common.NewFDKError(err.Error())
+        }
+        return updateApplicationServiceabilityResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+    
+    // GetZoneFromPincodeView GET zone from the Pincode.
+     func (se *PlatformAppServiceability)  GetZoneFromPincodeView(body  GetZoneFromPincodeViewRequest) (GetZoneFromPincodeViewResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getZoneFromPincodeViewResponse GetZoneFromPincodeViewResponse
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/zones",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetZoneFromPincodeViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getZoneFromPincodeViewResponse)
+        if err != nil {
+            return GetZoneFromPincodeViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return getZoneFromPincodeViewResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppGetZonesFromApplicationIdViewXQuery holds query params
+    type PlatformAppGetZonesFromApplicationIdViewXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        ZoneID []string  `url:"zone_id,omitempty"` 
+        Q string  `url:"q,omitempty"`  
+    }
+    
+    // GetZonesFromApplicationIdView GET zones from the application_id.
+     func (se *PlatformAppServiceability)  GetZonesFromApplicationIdView(xQuery PlatformAppGetZonesFromApplicationIdViewXQuery) (GetZoneFromApplicationIdViewResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getZonesFromApplicationIdViewResponse GetZoneFromApplicationIdViewResponse
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/zones",se.CompanyID, se.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetZoneFromApplicationIdViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getZonesFromApplicationIdViewResponse)
+        if err != nil {
+            return GetZoneFromApplicationIdViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return getZonesFromApplicationIdViewResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+    
+    // AddAppDp Add application dp data
+     func (se *PlatformAppServiceability)  AddAppDp(body  ApplicationCompanyDpViewRequest) (ApplicationCompanyDpViewResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            addAppDpResponse ApplicationCompanyDpViewResponse
+	    )
+
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return ApplicationCompanyDpViewResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return ApplicationCompanyDpViewResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationCompanyDpViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &addAppDpResponse)
+        if err != nil {
+            return ApplicationCompanyDpViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return addAppDpResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteAppDp Delete application dp data
+     func (se *PlatformAppServiceability)  DeleteAppDp(CourierPartnerID float64) (ApplicationCompanyDpViewResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteAppDpResponse ApplicationCompanyDpViewResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "delete",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/courier-partner/undefined",se.CompanyID, se.ApplicationID, CourierPartnerID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationCompanyDpViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteAppDpResponse)
+        if err != nil {
+            return ApplicationCompanyDpViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return deleteAppDpResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdatePincodeMopView PincodeView update of MOP.
+     func (se *PlatformAppServiceability)  UpdatePincodeMopView(body  PincodeMopData) (PincodeMOPresponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updatePincodeMopViewResponse PincodeMOPresponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PincodeMOPresponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PincodeMOPresponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/pincode-mop-update",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PincodeMOPresponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updatePincodeMopViewResponse)
+        if err != nil {
+            return PincodeMOPresponse{}, common.NewFDKError(err.Error())
+        }
+        return updatePincodeMopViewResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdatePincodeBulkView Bulk Update of pincode in the application.
+     func (se *PlatformAppServiceability)  UpdatePincodeBulkView(body  PincodeMopBulkData) (PincodeBulkViewResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updatePincodeBulkViewResponse PincodeBulkViewResponse
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PincodeBulkViewResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PincodeBulkViewResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/pincode-mop-bulk-update",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PincodeBulkViewResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updatePincodeBulkViewResponse)
+        if err != nil {
+            return PincodeBulkViewResponse{}, common.NewFDKError(err.Error())
+        }
+        return updatePincodeBulkViewResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdatePincodeCoDListing Pincode count view of application.
+     func (se *PlatformAppServiceability)  UpdatePincodeCoDListing(body  PincodeCodStatusListingRequest) (PincodeCodStatusListingResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updatePincodeCoDListingResponse PincodeCodStatusListingResponse
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PincodeCodStatusListingResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PincodeCodStatusListingResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/pincode-mop-data",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PincodeCodStatusListingResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updatePincodeCoDListingResponse)
+        if err != nil {
+            return PincodeCodStatusListingResponse{}, common.NewFDKError(err.Error())
+        }
+        return updatePincodeCoDListingResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdatePincodeAuditHistory Auditlog configuration of application.
+     func (se *PlatformAppServiceability)  UpdatePincodeAuditHistory(body  PincodeMopUpdateAuditHistoryRequest) (PincodeMopUpdateAuditHistoryResponseData, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updatePincodeAuditHistoryResponse PincodeMopUpdateAuditHistoryResponseData
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return PincodeMopUpdateAuditHistoryResponseData{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return PincodeMopUpdateAuditHistoryResponseData{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "post",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/history",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return PincodeMopUpdateAuditHistoryResponseData{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updatePincodeAuditHistoryResponse)
+        if err != nil {
+            return PincodeMopUpdateAuditHistoryResponseData{}, common.NewFDKError(err.Error())
+        }
+        return updatePincodeAuditHistoryResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+    
+    // UpsertDpApplicationRules Upsert of DpApplicationRules in database.
+     func (se *PlatformAppServiceability)  UpsertDpApplicationRules(body  DPApplicationRuleRequest) (DPApplicationRuleResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            upsertDpApplicationRulesResponse DPApplicationRuleResponse
+	    )
+
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return DPApplicationRuleResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return DPApplicationRuleResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "put",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/courier/priority",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DPApplicationRuleResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &upsertDpApplicationRulesResponse)
+        if err != nil {
+            return DPApplicationRuleResponse{}, common.NewFDKError(err.Error())
+        }
+        return upsertDpApplicationRulesResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetDpApplicationRules Get All DpApplicationRules rules added at application level from database.
+     func (se *PlatformAppServiceability)  GetDpApplicationRules() (DPApplicationRuleResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getDpApplicationRulesResponse DPApplicationRuleResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/courier/priority",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DPApplicationRuleResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getDpApplicationRulesResponse)
+        if err != nil {
+            return DPApplicationRuleResponse{}, common.NewFDKError(err.Error())
+        }
+        return getDpApplicationRulesResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdateSelfShip Self-ship configuration of application.
+     func (se *PlatformAppServiceability)  UpdateSelfShip(body  SelfShipResponse) (ApplicationSelfShipConfigResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateSelfShipResponse ApplicationSelfShipConfigResponse
+	    )
+
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return ApplicationSelfShipConfigResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return ApplicationSelfShipConfigResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "patch",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/selfship",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationSelfShipConfigResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateSelfShipResponse)
+        if err != nil {
+            return ApplicationSelfShipConfigResponse{}, common.NewFDKError(err.Error())
+        }
+        return updateSelfShipResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetSelfShip Self-ship configuration of application.
+     func (se *PlatformAppServiceability)  GetSelfShip() (ApplicationSelfShipConfigResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getSelfShipResponse ApplicationSelfShipConfigResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            se.config,
+            "get",
+            fmt.Sprintf("/service/platform/logistics/v1.0/company/%s/application/%s/selfship",se.CompanyID, se.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ApplicationSelfShipConfigResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getSelfShipResponse)
+        if err != nil {
+            return ApplicationSelfShipConfigResponse{}, common.NewFDKError(err.Error())
+        }
+        return getSelfShipResponse, nil
+        
+    }
+           
+       
+    
+
+ 
+	 
    // PlatformAppShare holds PlatformAppShare object properties
     type PlatformAppShare struct {
         config *PlatformConfig
@@ -23326,12 +24199,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetThemeLibrary Get a list of themes from the theme library
-     func (th *PlatformAppTheme)  GetThemeLibrary(xQuery PlatformAppGetThemeLibraryXQuery) (ThemesListingResponseSchema, error) {
+     func (th *PlatformAppTheme)  GetThemeLibrary(xQuery PlatformAppGetThemeLibraryXQuery) (DummyResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getThemeLibraryResponse ThemesListingResponseSchema
+            getThemeLibraryResponse DummyResponse
 	    )
 
         
@@ -23359,12 +24232,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ThemesListingResponseSchema{}, err
+            return DummyResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &getThemeLibraryResponse)
         if err != nil {
-            return ThemesListingResponseSchema{}, common.NewFDKError(err.Error())
+            return DummyResponse{}, common.NewFDKError(err.Error())
         }
         return getThemeLibraryResponse, nil
         
@@ -23378,12 +24251,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
     
     // AddToThemeLibrary Add a theme to the theme library
-     func (th *PlatformAppTheme)  AddToThemeLibrary(body  AddThemeRequestSchema) (ThemesSchema, error) {
+     func (th *PlatformAppTheme)  AddToThemeLibrary(body  AddThemeRequestSchema) (DummyResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            addToThemeLibraryResponse ThemesSchema
+            addToThemeLibraryResponse DummyResponse
 	    )
 
         
@@ -23402,12 +24275,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
             
-             return ThemesSchema{}, common.NewFDKError(err.Error())
+             return DummyResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
             
-             return ThemesSchema{}, common.NewFDKError(err.Error())       
+             return DummyResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -23420,171 +24293,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ThemesSchema{}, err
+            return DummyResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &addToThemeLibraryResponse)
         if err != nil {
-            return ThemesSchema{}, common.NewFDKError(err.Error())
+            return DummyResponse{}, common.NewFDKError(err.Error())
         }
         return addToThemeLibraryResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // ApplyTheme Apply a theme
-     func (th *PlatformAppTheme)  ApplyTheme(body  AddThemeRequestSchema) (ThemesSchema, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            applyThemeResponse ThemesSchema
-	    )
-
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return ThemesSchema{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return ThemesSchema{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            th.config,
-            "post",
-            fmt.Sprintf("/service/platform/theme/v1.0/company/%s/application/%s/apply",th.CompanyID, th.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ThemesSchema{}, err
-	    }
-        
-        err = json.Unmarshal(response, &applyThemeResponse)
-        if err != nil {
-            return ThemesSchema{}, common.NewFDKError(err.Error())
-        }
-        return applyThemeResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // IsUpgradable Checks if theme is upgradable
-     func (th *PlatformAppTheme)  IsUpgradable(ThemeID string) (UpgradableThemeSchema, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            isUpgradableResponse UpgradableThemeSchema
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            th.config,
-            "get",
-            fmt.Sprintf("/service/platform/theme/v1.0/company/%s/application/%s/%s/upgradable",th.CompanyID, th.ApplicationID, ThemeID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return UpgradableThemeSchema{}, err
-	    }
-        
-        err = json.Unmarshal(response, &isUpgradableResponse)
-        if err != nil {
-            return UpgradableThemeSchema{}, common.NewFDKError(err.Error())
-        }
-        return isUpgradableResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // UpgradeTheme Upgrade a theme
-     func (th *PlatformAppTheme)  UpgradeTheme(ThemeID string) (ThemesSchema, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            upgradeThemeResponse ThemesSchema
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            th.config,
-            "put",
-            fmt.Sprintf("/service/platform/theme/v1.0/company/%s/application/%s/%s/upgrade",th.CompanyID, th.ApplicationID, ThemeID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ThemesSchema{}, err
-	    }
-        
-        err = json.Unmarshal(response, &upgradeThemeResponse)
-        if err != nil {
-            return ThemesSchema{}, common.NewFDKError(err.Error())
-        }
-        return upgradeThemeResponse, nil
         
     }
            
@@ -23602,12 +24318,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetPublicThemes Get all public themes
-     func (th *PlatformAppTheme)  GetPublicThemes(xQuery PlatformAppGetPublicThemesXQuery) (ThemesListingResponseSchema, error) {
+     func (th *PlatformAppTheme)  GetPublicThemes(xQuery PlatformAppGetPublicThemesXQuery) (DummyResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getPublicThemesResponse ThemesListingResponseSchema
+            getPublicThemesResponse DummyResponse
 	    )
 
         
@@ -23635,161 +24351,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ThemesListingResponseSchema{}, err
+            return DummyResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &getPublicThemesResponse)
         if err != nil {
-            return ThemesListingResponseSchema{}, common.NewFDKError(err.Error())
+            return DummyResponse{}, common.NewFDKError(err.Error())
         }
         return getPublicThemesResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // CreateTheme Create a new theme
-     func (th *PlatformAppTheme)  CreateTheme(body  ThemesSchema) (ThemesSchema, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            createThemeResponse ThemesSchema
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return ThemesSchema{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return ThemesSchema{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            th.config,
-            "post",
-            fmt.Sprintf("/service/platform/theme/v1.0/company/%s/application/%s/",th.CompanyID, th.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ThemesSchema{}, err
-	    }
-        
-        err = json.Unmarshal(response, &createThemeResponse)
-        if err != nil {
-            return ThemesSchema{}, common.NewFDKError(err.Error())
-        }
-        return createThemeResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetAppliedTheme Get the applied theme
-     func (th *PlatformAppTheme)  GetAppliedTheme() (ThemesSchema, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getAppliedThemeResponse ThemesSchema
-	    )
-
-        
-
-         
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            th.config,
-            "get",
-            fmt.Sprintf("/service/platform/theme/v1.0/company/%s/application/%s/",th.CompanyID, th.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ThemesSchema{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getAppliedThemeResponse)
-        if err != nil {
-            return ThemesSchema{}, common.NewFDKError(err.Error())
-        }
-        return getAppliedThemeResponse, nil
         
     }
            
@@ -23846,7 +24415,297 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetThemeById Gets theme by id
+    // PublishTheme Publish a theme
+     func (th *PlatformAppTheme)  PublishTheme(ThemeID string) (DummyResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            publishThemeResponse DummyResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            th.config,
+            "put",
+            fmt.Sprintf("/service/platform/theme/v1.0/company/%s/application/%s/%s/publish",th.CompanyID, th.ApplicationID, ThemeID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DummyResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &publishThemeResponse)
+        if err != nil {
+            return DummyResponse{}, common.NewFDKError(err.Error())
+        }
+        return publishThemeResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UnpublishTheme Unpublish a theme
+     func (th *PlatformAppTheme)  UnpublishTheme(ThemeID string) (DummyResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            unpublishThemeResponse DummyResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            th.config,
+            "put",
+            fmt.Sprintf("/service/platform/theme/v1.0/company/%s/application/%s/%s/unpublish",th.CompanyID, th.ApplicationID, ThemeID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DummyResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &unpublishThemeResponse)
+        if err != nil {
+            return DummyResponse{}, common.NewFDKError(err.Error())
+        }
+        return unpublishThemeResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // ArchiveTheme Archive a theme
+     func (th *PlatformAppTheme)  ArchiveTheme(ThemeID string) (DummyResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            archiveThemeResponse DummyResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            th.config,
+            "put",
+            fmt.Sprintf("/service/platform/theme/v1.0/company/%s/application/%s/%s/archive",th.CompanyID, th.ApplicationID, ThemeID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DummyResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &archiveThemeResponse)
+        if err != nil {
+            return DummyResponse{}, common.NewFDKError(err.Error())
+        }
+        return archiveThemeResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UnarchiveTheme Unarchive a theme
+     func (th *PlatformAppTheme)  UnarchiveTheme(ThemeID string) (DummyResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            unarchiveThemeResponse DummyResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            th.config,
+            "put",
+            fmt.Sprintf("/service/platform/theme/v1.0/company/%s/application/%s/%s/unarchive",th.CompanyID, th.ApplicationID, ThemeID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DummyResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &unarchiveThemeResponse)
+        if err != nil {
+            return DummyResponse{}, common.NewFDKError(err.Error())
+        }
+        return unarchiveThemeResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+    
+    // GetApplicationThemes Get all the themes for a specific application
+     func (th *PlatformAppTheme)  GetApplicationThemes() ([]ThemesSchema, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getApplicationThemesResponse []ThemesSchema
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            th.config,
+            "get",
+            fmt.Sprintf("/service/platform/theme/v2.0/company/%s/application/%s/themes",th.CompanyID, th.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return []ThemesSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getApplicationThemesResponse)
+        if err != nil {
+            return []ThemesSchema{}, common.NewFDKError(err.Error())
+        }
+        return getApplicationThemesResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetApplicationThemesCount Get the count of themes for a specific application
+     func (th *PlatformAppTheme)  GetApplicationThemesCount() (map[string]interface{}, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getApplicationThemesCountResponse map[string]interface{}
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            th.config,
+            "get",
+            fmt.Sprintf("/service/platform/theme/v2.0/company/%s/application/%s/application_themes_count",th.CompanyID, th.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return map[string]interface{}{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getApplicationThemesCountResponse)
+        if err != nil {
+            return map[string]interface{}{}, common.NewFDKError(err.Error())
+        }
+        return getApplicationThemesCountResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetThemeById Get Theme By Theme Id
      func (th *PlatformAppTheme)  GetThemeById(ThemeID string) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -23870,7 +24729,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             th.config,
             "get",
-            fmt.Sprintf("/service/platform/theme/v1.0/company/%s/application/%s/%s",th.CompanyID, th.ApplicationID, ThemeID),
+            fmt.Sprintf("/service/platform/theme/v2.0/company/%s/application/%s/%s",th.CompanyID, th.ApplicationID, ThemeID),
             nil,
             nil,
             nil)
@@ -23894,8 +24753,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // UpdateTheme Update a theme
-     func (th *PlatformAppTheme)  UpdateTheme(ThemeID string, body  ThemesSchema) (ThemesSchema, error) {
+    // UpdateTheme Update theme for a specific company and application
+     func (th *PlatformAppTheme)  UpdateTheme(ThemeID string, body  UpdateThemeRequestBody) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -23903,44 +24762,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             updateThemeResponse ThemesSchema
 	    )
 
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
         
             
         
@@ -23973,7 +24794,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             th.config,
             "put",
-            fmt.Sprintf("/service/platform/theme/v1.0/company/%s/application/%s/%s",th.CompanyID, th.ApplicationID, ThemeID),
+            fmt.Sprintf("/service/platform/theme/v2.0/company/%s/application/%s/%s",th.CompanyID, th.ApplicationID, ThemeID),
             nil,
             nil,
             reqBody)
@@ -24021,7 +24842,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             th.config,
             "delete",
-            fmt.Sprintf("/service/platform/theme/v1.0/company/%s/application/%s/%s",th.CompanyID, th.ApplicationID, ThemeID),
+            fmt.Sprintf("/service/platform/theme/v2.0/company/%s/application/%s/%s",th.CompanyID, th.ApplicationID, ThemeID),
             nil,
             nil,
             nil)
@@ -24045,7 +24866,285 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetThemeForPreview Get a theme preview
+    // AddThemeToApplication Add a theme to an application
+     func (th *PlatformAppTheme)  AddThemeToApplication(body  CompanyThemeSchema) (ThemesSchema, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            addThemeToApplicationResponse ThemesSchema
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return ThemesSchema{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return ThemesSchema{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            th.config,
+            "post",
+            fmt.Sprintf("/service/platform/theme/v2.0/company/%s/application/%s/",th.CompanyID, th.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ThemesSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &addThemeToApplicationResponse)
+        if err != nil {
+            return ThemesSchema{}, common.NewFDKError(err.Error())
+        }
+        return addThemeToApplicationResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdateThemeName Update Theme Name
+     func (th *PlatformAppTheme)  UpdateThemeName(ThemeID string, body  UpdateThemeNameRequestBody) (ThemesSchema, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateThemeNameResponse ThemesSchema
+	    )
+
+        
+            
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return ThemesSchema{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return ThemesSchema{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            th.config,
+            "patch",
+            fmt.Sprintf("/service/platform/theme/v2.0/company/%s/application/%s/%s/name",th.CompanyID, th.ApplicationID, ThemeID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ThemesSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateThemeNameResponse)
+        if err != nil {
+            return ThemesSchema{}, common.NewFDKError(err.Error())
+        }
+        return updateThemeNameResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // ApplyTheme Apply theme to a specific application
+     func (th *PlatformAppTheme)  ApplyTheme(ThemeID string) (ThemesSchema, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            applyThemeResponse ThemesSchema
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            th.config,
+            "patch",
+            fmt.Sprintf("/service/platform/theme/v2.0/company/%s/application/%s/%s/apply",th.CompanyID, th.ApplicationID, ThemeID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ThemesSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &applyThemeResponse)
+        if err != nil {
+            return ThemesSchema{}, common.NewFDKError(err.Error())
+        }
+        return applyThemeResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DuplicateTheme Duplicate a Theme
+     func (th *PlatformAppTheme)  DuplicateTheme(ThemeID string) (ThemesSchema, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            duplicateThemeResponse ThemesSchema
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            th.config,
+            "post",
+            fmt.Sprintf("/service/platform/theme/v2.0/company/%s/application/%s/%s/duplicate",th.CompanyID, th.ApplicationID, ThemeID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ThemesSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &duplicateThemeResponse)
+        if err != nil {
+            return ThemesSchema{}, common.NewFDKError(err.Error())
+        }
+        return duplicateThemeResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetAppliedTheme Get the Applied theme of an Application
+     func (th *PlatformAppTheme)  GetAppliedTheme() (ThemesSchema, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAppliedThemeResponse ThemesSchema
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            th.config,
+            "get",
+            fmt.Sprintf("/service/platform/theme/v2.0/company/%s/application/%s",th.CompanyID, th.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ThemesSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAppliedThemeResponse)
+        if err != nil {
+            return ThemesSchema{}, common.NewFDKError(err.Error())
+        }
+        return getAppliedThemeResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetThemeForPreview Get Theme Preview By Theme Id
      func (th *PlatformAppTheme)  GetThemeForPreview(ThemeID string) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
@@ -24069,7 +25168,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             th.config,
             "get",
-            fmt.Sprintf("/service/platform/theme/v1.0/company/%s/application/%s/%s/preview",th.CompanyID, th.ApplicationID, ThemeID),
+            fmt.Sprintf("/service/platform/theme/v2.0/company/%s/application/%s/%s/preview",th.CompanyID, th.ApplicationID, ThemeID),
             nil,
             nil,
             nil)
@@ -24083,198 +25182,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return ThemesSchema{}, common.NewFDKError(err.Error())
         }
         return getThemeForPreviewResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // PublishTheme Publish a theme
-     func (th *PlatformAppTheme)  PublishTheme(ThemeID string) (ThemesSchema, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            publishThemeResponse ThemesSchema
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            th.config,
-            "put",
-            fmt.Sprintf("/service/platform/theme/v1.0/company/%s/application/%s/%s/publish",th.CompanyID, th.ApplicationID, ThemeID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ThemesSchema{}, err
-	    }
-        
-        err = json.Unmarshal(response, &publishThemeResponse)
-        if err != nil {
-            return ThemesSchema{}, common.NewFDKError(err.Error())
-        }
-        return publishThemeResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // UnpublishTheme Unpublish a theme
-     func (th *PlatformAppTheme)  UnpublishTheme(ThemeID string) (ThemesSchema, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            unpublishThemeResponse ThemesSchema
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            th.config,
-            "put",
-            fmt.Sprintf("/service/platform/theme/v1.0/company/%s/application/%s/%s/unpublish",th.CompanyID, th.ApplicationID, ThemeID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ThemesSchema{}, err
-	    }
-        
-        err = json.Unmarshal(response, &unpublishThemeResponse)
-        if err != nil {
-            return ThemesSchema{}, common.NewFDKError(err.Error())
-        }
-        return unpublishThemeResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // ArchiveTheme Archive a theme
-     func (th *PlatformAppTheme)  ArchiveTheme(ThemeID string) (ThemesSchema, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            archiveThemeResponse ThemesSchema
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            th.config,
-            "put",
-            fmt.Sprintf("/service/platform/theme/v1.0/company/%s/application/%s/%s/archive",th.CompanyID, th.ApplicationID, ThemeID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ThemesSchema{}, err
-	    }
-        
-        err = json.Unmarshal(response, &archiveThemeResponse)
-        if err != nil {
-            return ThemesSchema{}, common.NewFDKError(err.Error())
-        }
-        return archiveThemeResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // UnarchiveTheme Unarchive a theme
-     func (th *PlatformAppTheme)  UnarchiveTheme(ThemeID string) (ThemesSchema, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            unarchiveThemeResponse ThemesSchema
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            th.config,
-            "put",
-            fmt.Sprintf("/service/platform/theme/v1.0/company/%s/application/%s/%s/unarchive",th.CompanyID, th.ApplicationID, ThemeID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return ThemesSchema{}, err
-	    }
-        
-        err = json.Unmarshal(response, &unarchiveThemeResponse)
-        if err != nil {
-            return ThemesSchema{}, common.NewFDKError(err.Error())
-        }
-        return unarchiveThemeResponse, nil
         
     }
            
@@ -24309,7 +25216,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             th.config,
             "head",
-            fmt.Sprintf("/service/platform/theme/v1.0/company/%s/application/%s/%s/polling",th.CompanyID, th.ApplicationID, ThemeID),
+            fmt.Sprintf("/service/platform/theme/v2.0/company/%s/application/%s/%s/polling",th.CompanyID, th.ApplicationID, ThemeID),
             nil,
             nil,
             nil)
@@ -24319,6 +25226,102 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 	    }
         
         return response, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // IsUpgradable Check if the theme is upgradable
+     func (th *PlatformAppTheme)  IsUpgradable(ThemeID string) (ThemeUpgradableResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            isUpgradableResponse ThemeUpgradableResponse
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            th.config,
+            "get",
+            fmt.Sprintf("/service/platform/theme/v2.0/company/%s/application/%s/%s/upgradable",th.CompanyID, th.ApplicationID, ThemeID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ThemeUpgradableResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &isUpgradableResponse)
+        if err != nil {
+            return ThemeUpgradableResponse{}, common.NewFDKError(err.Error())
+        }
+        return isUpgradableResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpgradeTheme Upgrade an application
+     func (th *PlatformAppTheme)  UpgradeTheme(ThemeID string) (ThemesSchema, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            upgradeThemeResponse ThemesSchema
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            th.config,
+            "put",
+            fmt.Sprintf("/service/platform/theme/v2.0/company/%s/application/%s/%s/upgrade",th.CompanyID, th.ApplicationID, ThemeID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ThemesSchema{}, err
+	    }
+        
+        err = json.Unmarshal(response, &upgradeThemeResponse)
+        if err != nil {
+            return ThemesSchema{}, common.NewFDKError(err.Error())
+        }
+        return upgradeThemeResponse, nil
         
     }
            
@@ -24406,7 +25409,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     //PlatformAppSearchUsersXQuery holds query params
     type PlatformAppSearchUsersXQuery struct { 
-        Q string  `url:"q,omitempty"`  
+        Q string  `url:"q,omitempty"` 
+        Query []interface{}  `url:"query,omitempty"`  
     }
     
     // SearchUsers Search an existing user.
@@ -24421,6 +25425,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
 
          
+            
+                
             
                 
             

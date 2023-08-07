@@ -7357,6 +7357,8 @@ func NewAppClient(config *AppConfig) *Client {
         
             
         
+            
+        
 
         
 
@@ -14073,7 +14075,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             th.config,
             "get",
-            "/service/application/theme/v1.0/applied-theme",
+            "/service/application/theme/v2.0/applied-theme",
             nil,
             nil,
             nil)
@@ -14120,7 +14122,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             th.config,
             "get",
-            fmt.Sprintf("/service/application/theme/v1.0/%s/preview",ThemeID),
+            fmt.Sprintf("/service/application/theme/v2.0/%s/preview",ThemeID),
             nil,
             nil,
             nil)
