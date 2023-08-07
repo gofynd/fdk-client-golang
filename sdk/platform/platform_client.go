@@ -9356,7 +9356,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         rawRequest = NewRequest(
             co.Config,
             "get",
-            fmt.Sprintf("/service/platform/configuration/v1.0/company/%s/other-seller-applications/",co.CompanyID),
+            fmt.Sprintf("/service/platform/configuration/v1.0/company/%s/other-seller-applications",co.CompanyID),
             nil,
             xQuery,
             nil)
@@ -9638,6 +9638,124 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
     }
          
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            
+            // GetDiscountsPaginator Fetch discount list.  
+            func (di *PlatformDiscount)  GetDiscountsPaginator(
+              xQuery PlatformGetDiscountsXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := di.GetDiscounts(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
         
        
     
@@ -10574,13 +10692,13 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
 
     // CopyFiles Copy Files
-     func (fi *PlatformFileStorage)  CopyFiles(xQuery PlatformCopyFilesXQuery, body  CopyFiles) (BulkUploadSyncMode, error){
+     func (fi *PlatformFileStorage)  CopyFiles(xQuery PlatformCopyFilesXQuery, body  BulkRequest) (BulkUploadResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            copyFilesResponse BulkUploadSyncMode
+            copyFilesResponse BulkUploadResponse
 	    )
 
         
@@ -10605,12 +10723,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
              
-             return BulkUploadSyncMode{}, common.NewFDKError(err.Error())
+             return BulkUploadResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
                
-             return BulkUploadSyncMode{}, common.NewFDKError(err.Error())
+             return BulkUploadResponse{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -10623,12 +10741,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-             return BulkUploadSyncMode{}, err
+             return BulkUploadResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &copyFilesResponse)
         if err != nil {
-             return BulkUploadSyncMode{}, common.NewFDKError(err.Error())
+             return BulkUploadResponse{}, common.NewFDKError(err.Error())
         }
         return copyFilesResponse, nil
         
@@ -10759,18 +10877,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
          
         
        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 
 
@@ -15391,22 +15497,22 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    //PlatformGetRoleBaseStateTransitionXQuery holds query params
-    type PlatformGetRoleBaseStateTransitionXQuery struct { 
+    //PlatformGetAllowedStateTransitionXQuery holds query params
+    type PlatformGetAllowedStateTransitionXQuery struct { 
         OrderingChannel string  `url:"ordering_channel,omitempty"` 
         Status string  `url:"status,omitempty"`  
     }
     
 
 
-    // GetRoleBaseStateTransition To fetch next state transitions.
-     func (or *PlatformOrder)  GetRoleBaseStateTransition(xQuery PlatformGetRoleBaseStateTransitionXQuery) (RoleBaseStateTransitionMapping, error){
+    // GetAllowedStateTransition To fetch next state transitions.
+     func (or *PlatformOrder)  GetAllowedStateTransition(xQuery PlatformGetAllowedStateTransitionXQuery) (RoleBaseStateTransitionMapping, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getRoleBaseStateTransitionResponse RoleBaseStateTransitionMapping
+            getAllowedStateTransitionResponse RoleBaseStateTransitionMapping
 	    )
 
         
@@ -15428,7 +15534,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         rawRequest = NewRequest(
             or.Config,
             "get",
-            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/role/state/transitions/next",or.CompanyID),
+            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/allowed/state/transition",or.CompanyID),
             nil,
             xQuery,
             nil)
@@ -15437,11 +15543,11 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return RoleBaseStateTransitionMapping{}, err
 	    }
         
-        err = json.Unmarshal(response, &getRoleBaseStateTransitionResponse)
+        err = json.Unmarshal(response, &getAllowedStateTransitionResponse)
         if err != nil {
              return RoleBaseStateTransitionMapping{}, common.NewFDKError(err.Error())
         }
-        return getRoleBaseStateTransitionResponse, nil
+        return getAllowedStateTransitionResponse, nil
         
     }
          
@@ -15884,7 +15990,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         Lane string  `url:"lane,omitempty"` 
         BagStatus string  `url:"bag_status,omitempty"` 
         StatusOverrideLane bool  `url:"status_override_lane,omitempty"` 
-        TimeToDispatch string  `url:"time_to_dispatch,omitempty"` 
+        TimeToDispatch float64  `url:"time_to_dispatch,omitempty"` 
         SearchType string  `url:"search_type,omitempty"` 
         SearchValue string  `url:"search_value,omitempty"` 
         FromDate string  `url:"from_date,omitempty"` 
@@ -17209,7 +17315,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     type PlatformGetPrivateExtensionsXQuery struct { 
         PageSize float64  `url:"page_size,omitempty"` 
         PageNo float64  `url:"page_no,omitempty"` 
-        Query string  `url:"query,omitempty"`  
+        Query map[string]interface{}  `url:"query,omitempty"`  
     }
     
 

@@ -17907,12 +17907,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // AppCopyFiles Copy Files
-     func (fi *PlatformAppFileStorage)  AppCopyFiles(xQuery PlatformAppAppCopyFilesXQuery, body  CopyFiles) (BulkUploadSyncMode, error) {
+     func (fi *PlatformAppFileStorage)  AppCopyFiles(xQuery PlatformAppAppCopyFilesXQuery, body  BulkRequest) (BulkUploadResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            appCopyFilesResponse BulkUploadSyncMode
+            appCopyFilesResponse BulkUploadResponse
 	    )
 
         
@@ -17937,12 +17937,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
             
-             return BulkUploadSyncMode{}, common.NewFDKError(err.Error())
+             return BulkUploadResponse{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
             
-             return BulkUploadSyncMode{}, common.NewFDKError(err.Error())       
+             return BulkUploadResponse{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -17955,12 +17955,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return BulkUploadSyncMode{}, err
+            return BulkUploadResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &appCopyFilesResponse)
         if err != nil {
-            return BulkUploadSyncMode{}, common.NewFDKError(err.Error())
+            return BulkUploadResponse{}, common.NewFDKError(err.Error())
         }
         return appCopyFilesResponse, nil
         
@@ -18032,355 +18032,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
-    
-    
-  
-
-    
-    // GetPdfTypes Get all the supported invoice pdf types
-     func (fi *PlatformAppFileStorage)  GetPdfTypes() ([]InvoiceTypesResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getPdfTypesResponse []InvoiceTypesResponse
-	    )
-
-        
-
-         
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            fi.config,
-            "get",
-            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/pdf/types",fi.CompanyID, fi.ApplicationID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return []InvoiceTypesResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getPdfTypesResponse)
-        if err != nil {
-            return []InvoiceTypesResponse{}, common.NewFDKError(err.Error())
-        }
-        return getPdfTypesResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    //PlatformAppGetDefaultPdfDataXQuery holds query params
-    type PlatformAppGetDefaultPdfDataXQuery struct { 
-        PdfTypeID float64  `url:"pdf_type_id,omitempty"`  
-    }
-    
-    // GetDefaultPdfData Get Dummy pdf data for invoice or label
-     func (fi *PlatformAppFileStorage)  GetDefaultPdfData(xQuery PlatformAppGetDefaultPdfDataXQuery) ([]DummyTemplateDataItems, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getDefaultPdfDataResponse []DummyTemplateDataItems
-	    )
-
-        
-
-         
-            
-                
-            
-        
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            fi.config,
-            "get",
-            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/pdf/mapper",fi.CompanyID, fi.ApplicationID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return []DummyTemplateDataItems{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getDefaultPdfDataResponse)
-        if err != nil {
-            return []DummyTemplateDataItems{}, common.NewFDKError(err.Error())
-        }
-        return getDefaultPdfDataResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    //PlatformAppGetDefaultHtmlTemplateXQuery holds query params
-    type PlatformAppGetDefaultHtmlTemplateXQuery struct { 
-        PdfTypeID float64  `url:"pdf_type_id,omitempty"` 
-        Format string  `url:"format,omitempty"`  
-    }
-    
-    // GetDefaultHtmlTemplate Get html template for sales channel
-     func (fi *PlatformAppFileStorage)  GetDefaultHtmlTemplate(xQuery PlatformAppGetDefaultHtmlTemplateXQuery) ([]interface{}, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getDefaultHtmlTemplateResponse []interface{}
-	    )
-
-        
-
-         
-            
-                
-            
-                
-            
-        
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            fi.config,
-            "get",
-            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/pdf/config",fi.CompanyID, fi.ApplicationID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return []interface{}{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getDefaultHtmlTemplateResponse)
-        if err != nil {
-            return []interface{}{}, common.NewFDKError(err.Error())
-        }
-        return getDefaultHtmlTemplateResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // SaveHtmlTemplate Update html template for invoice or label
-     func (fi *PlatformAppFileStorage)  SaveHtmlTemplate(ID float64, body  pdfConfig) (map[string]interface{}, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            saveHtmlTemplateResponse map[string]interface{}
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return map[string]interface{}{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return map[string]interface{}{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            fi.config,
-            "put",
-            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/pdf/config",fi.CompanyID, fi.ApplicationID, ID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return map[string]interface{}{}, err
-	    }
-        
-        err = json.Unmarshal(response, &saveHtmlTemplateResponse)
-        if err != nil {
-            return map[string]interface{}{}, common.NewFDKError(err.Error())
-        }
-        return saveHtmlTemplateResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // PreviewTemplate Preview HTML template
-     func (fi *PlatformAppFileStorage)  PreviewTemplate(body  pdfRender) (string, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            previewTemplateResponse string
-	    )
-
-        
-            
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return "", common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return "", common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            fi.config,
-            "post",
-            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/pdf/render",fi.CompanyID, fi.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return "", err
-	    }
-        
-        err = json.Unmarshal(response, &previewTemplateResponse)
-        if err != nil {
-            return "", common.NewFDKError(err.Error())
-        }
-        return previewTemplateResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    //PlatformAppGetDefaultPdfTemplateXQuery holds query params
-    type PlatformAppGetDefaultPdfTemplateXQuery struct { 
-        PdfTypeID float64  `url:"pdf_type_id,omitempty"` 
-        Format string  `url:"format,omitempty"`  
-    }
-    
-    // GetDefaultPdfTemplate Default html template
-     func (fi *PlatformAppFileStorage)  GetDefaultPdfTemplate(xQuery PlatformAppGetDefaultPdfTemplateXQuery) ([]interface{}, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getDefaultPdfTemplateResponse []interface{}
-	    )
-
-        
-
-         
-            
-                
-            
-                
-            
-        
-
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            fi.config,
-            "get",
-            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/pdf/default-template",fi.CompanyID, fi.ApplicationID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return []interface{}{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getDefaultPdfTemplateResponse)
-        if err != nil {
-            return []interface{}{}, common.NewFDKError(err.Error())
-        }
-        return getDefaultPdfTemplateResponse, nil
-        
-    }
-           
-       
-    
 
  
 	 
@@ -18404,8 +18055,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    //PlatformAppGetTicketsXQuery holds query params
-    type PlatformAppGetTicketsXQuery struct { 
+    //PlatformAppGetNewTicketsXQuery holds query params
+    type PlatformAppGetNewTicketsXQuery struct { 
         Items bool  `url:"items,omitempty"` 
         Filters bool  `url:"filters,omitempty"` 
         Q string  `url:"q,omitempty"` 
@@ -18414,13 +18065,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         Category string  `url:"category,omitempty"`  
     }
     
-    // GetTickets Gets the list of Application level Tickets and/or ticket filters depending on query params
-     func (le *PlatformAppLead)  GetTickets(xQuery PlatformAppGetTicketsXQuery) (TicketList, error) {
+    // GetNewTickets Gets the list of Application level Tickets and/or ticket filters depending on query params
+     func (le *PlatformAppLead)  GetNewTickets(xQuery PlatformAppGetNewTicketsXQuery) (TicketList, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getTicketsResponse TicketList
+            getNewTicketsResponse TicketList
 	    )
 
         
@@ -18466,11 +18117,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return TicketList{}, err
 	    }
         
-        err = json.Unmarshal(response, &getTicketsResponse)
+        err = json.Unmarshal(response, &getNewTicketsResponse)
         if err != nil {
             return TicketList{}, common.NewFDKError(err.Error())
         }
-        return getTicketsResponse, nil
+        return getNewTicketsResponse, nil
         
     }
            
@@ -18485,13 +18136,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetTicket Retreives ticket details of a application level ticket
-     func (le *PlatformAppLead)  GetTicket(ID string) (Ticket, error) {
+    // GetNewTicket Retreives ticket details of a application level ticket
+     func (le *PlatformAppLead)  GetNewTicket(ID string) (Ticket, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getTicketResponse Ticket
+            getNewTicketResponse Ticket
 	    )
 
         
@@ -18518,11 +18169,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return Ticket{}, err
 	    }
         
-        err = json.Unmarshal(response, &getTicketResponse)
+        err = json.Unmarshal(response, &getNewTicketResponse)
         if err != nil {
             return Ticket{}, common.NewFDKError(err.Error())
         }
-        return getTicketResponse, nil
+        return getNewTicketResponse, nil
         
     }
            
@@ -18533,13 +18184,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // EditTicket Edits ticket details of a application level ticket
-     func (le *PlatformAppLead)  EditTicket(ID string, body  EditTicketPayload) (Ticket, error) {
+    // EditNewTicket Edits ticket details of a application level ticket
+     func (le *PlatformAppLead)  EditNewTicket(ID string, body  EditTicketPayload) (Ticket, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            editTicketResponse Ticket
+            editNewTicketResponse Ticket
 	    )
 
         
@@ -18602,11 +18253,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return Ticket{}, err
 	    }
         
-        err = json.Unmarshal(response, &editTicketResponse)
+        err = json.Unmarshal(response, &editNewTicketResponse)
         if err != nil {
             return Ticket{}, common.NewFDKError(err.Error())
         }
-        return editTicketResponse, nil
+        return editNewTicketResponse, nil
         
     }
            
@@ -18625,13 +18276,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // CreateHistory Create history for specific application level ticket
-     func (le *PlatformAppLead)  CreateHistory(ID string, body  TicketHistoryPayload) (TicketHistory, error) {
+    // CreateNewHistory Create history for specific application level ticket
+     func (le *PlatformAppLead)  CreateNewHistory(ID string, body  TicketHistoryPayload) (TicketHistory, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            createHistoryResponse TicketHistory
+            createNewHistoryResponse TicketHistory
 	    )
 
         
@@ -18682,11 +18333,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return TicketHistory{}, err
 	    }
         
-        err = json.Unmarshal(response, &createHistoryResponse)
+        err = json.Unmarshal(response, &createNewHistoryResponse)
         if err != nil {
             return TicketHistory{}, common.NewFDKError(err.Error())
         }
-        return createHistoryResponse, nil
+        return createNewHistoryResponse, nil
         
     }
            
@@ -18697,13 +18348,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetTicketHistory Gets history list for specific application level ticket
-     func (le *PlatformAppLead)  GetTicketHistory(ID string) (TicketHistoryList, error) {
+    // GetNewTicketHistory Gets history list for specific application level ticket
+     func (le *PlatformAppLead)  GetNewTicketHistory(ID string) (TicketHistoryList, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getTicketHistoryResponse TicketHistoryList
+            getNewTicketHistoryResponse TicketHistoryList
 	    )
 
         
@@ -18730,11 +18381,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return TicketHistoryList{}, err
 	    }
         
-        err = json.Unmarshal(response, &getTicketHistoryResponse)
+        err = json.Unmarshal(response, &getNewTicketHistoryResponse)
         if err != nil {
             return TicketHistoryList{}, common.NewFDKError(err.Error())
         }
-        return getTicketHistoryResponse, nil
+        return getNewTicketHistoryResponse, nil
         
     }
            
@@ -19011,13 +18662,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetTokenForVideoRoom Get Token to join a specific Video Room using it's unqiue name
-     func (le *PlatformAppLead)  GetTokenForVideoRoom(UniqueName string) (GetTokenForVideoRoomResponse, error) {
+    // GetNewTokenForVideoRoom Get Token to join a specific Video Room using it's unqiue name
+     func (le *PlatformAppLead)  GetNewTokenForVideoRoom(UniqueName string) (GetTokenForVideoRoomResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getTokenForVideoRoomResponse GetTokenForVideoRoomResponse
+            getNewTokenForVideoRoomResponse GetTokenForVideoRoomResponse
 	    )
 
         
@@ -19044,11 +18695,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetTokenForVideoRoomResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getTokenForVideoRoomResponse)
+        err = json.Unmarshal(response, &getNewTokenForVideoRoomResponse)
         if err != nil {
             return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
         }
-        return getTokenForVideoRoomResponse, nil
+        return getNewTokenForVideoRoomResponse, nil
         
     }
            
@@ -19061,13 +18712,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetVideoParticipants Get participants of a specific Video Room using it's unique name
-     func (le *PlatformAppLead)  GetVideoParticipants(UniqueName string) (GetParticipantsInsideVideoRoomResponse, error) {
+    // GetNewVideoParticipants Get participants of a specific Video Room using it's unique name
+     func (le *PlatformAppLead)  GetNewVideoParticipants(UniqueName string) (GetParticipantsInsideVideoRoomResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getVideoParticipantsResponse GetParticipantsInsideVideoRoomResponse
+            getNewVideoParticipantsResponse GetParticipantsInsideVideoRoomResponse
 	    )
 
         
@@ -19094,11 +18745,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetParticipantsInsideVideoRoomResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getVideoParticipantsResponse)
+        err = json.Unmarshal(response, &getNewVideoParticipantsResponse)
         if err != nil {
             return GetParticipantsInsideVideoRoomResponse{}, common.NewFDKError(err.Error())
         }
-        return getVideoParticipantsResponse, nil
+        return getNewVideoParticipantsResponse, nil
         
     }
            
@@ -19474,7 +19125,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             pa.config,
             "get",
-            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/application/%s/proxy/{extension_id}",pa.CompanyID, pa.ApplicationID),
+            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/application/%s/proxy/%s",pa.CompanyID, pa.ApplicationID, ExtensionID),
             nil,
             nil,
             nil)
@@ -19589,7 +19240,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             pa.config,
             "get",
-            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/application/%s/proxy/{extension_id}/{attached_path}",pa.CompanyID, pa.ApplicationID),
+            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/application/%s/proxy/%s/%s",pa.CompanyID, pa.ApplicationID, ExtensionID, AttachedPath),
             nil,
             nil,
             nil)
@@ -23084,86 +22735,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
-            
-            
-            
-            
-            
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // GetShortLinksPaginator Get short links  
-            func (sh *PlatformAppShare)  GetShortLinksPaginator( xQuery PlatformAppGetShortLinksXQuery ) *common.Paginator {
-                paginator := common.NewPaginator("number")
-                
-                
-                 xQuery.PageNo  = paginator.PageNo
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                paginator.Next = func() (interface{}, error) {
-                    response, err := sh.GetShortLinks(xQuery)
-                    if response.Page.HasNext {
-                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
-                    }
-                    return response, err
-                }
-                return paginator
-            }
-        
        
     
     

@@ -7,15 +7,14 @@
 * [Catalog](#Catalog) - Catalog - Platform Front API's' API's allows you to access list of products, prices, seller details, similar features, variants and many more useful features.  
 * [Common](#Common) - Application configuration apis 
 * [Communication](#Communication) - Manages email, sms, push notifications sent to users 
-* [CompanyProfile](#CompanyProfile) -  
+* [CompanyProfile](#CompanyProfile) - Catalog CBS - platform Front API's 
 * [Configuration](#Configuration) - Application configuration apis 
 * [Content](#Content) - Content System 
 * [Discount](#Discount) - Discount 
-* [FileStorage](#FileStorage) - This service provides functionality to manage assets and generate pdf. You can upload the assets, get the cdn link for the assets, proxy the assets and many more things.
- 
+* [FileStorage](#FileStorage) - File Storage 
 * [Finance](#Finance) - Handles all finance related activities 
-* [Inventory](#Inventory) -  
-* [Lead](#Lead) - Handles communication between Administrator <-> Staff and Staff <-> Users 
+* [Inventory](#Inventory) - Catalog - Platform Front API's' API's allows you to access list of products, prices, seller details, similar features, variants and many more useful features.  
+* [Lead](#Lead) - Handles communication between Administrator 
 * [Order](#Order) - Handles all platform order and shipment api(s) 
 * [Partner](#Partner) - Partner configuration apis 
 * [Payment](#Payment) - Collect payment through many payment gateway i.e Stripe, Razorpay, Juspay etc.into Fynd or Self account 
@@ -473,12 +472,6 @@
     * [browse](#browse)
     * [appbrowse](#appbrowse)
     * [proxy](#proxy)
-    * [getPdfTypes](#getpdftypes)
-    * [getDefaultPdfData](#getdefaultpdfdata)
-    * [getDefaultHtmlTemplate](#getdefaulthtmltemplate)
-    * [saveHtmlTemplate](#savehtmltemplate)
-    * [previewTemplate](#previewtemplate)
-    * [getDefaultPdfTemplate](#getdefaultpdftemplate)
     
 
 * [Finance](#Finance)
@@ -529,25 +522,25 @@
   * Methods
     * [getTickets](#gettickets)
     * [createTicket](#createticket)
-    * [getTickets](#gettickets)
+    * [getNewTickets](#getnewtickets)
     * [getTicket](#getticket)
     * [editTicket](#editticket)
-    * [getTicket](#getticket)
-    * [editTicket](#editticket)
+    * [getNewTicket](#getnewticket)
+    * [editNewTicket](#editnewticket)
     * [createHistory](#createhistory)
     * [getTicketHistory](#gettickethistory)
     * [getFeedbacks](#getfeedbacks)
     * [submitFeedback](#submitfeedback)
-    * [createHistory](#createhistory)
-    * [getTicketHistory](#gettickethistory)
+    * [createNewHistory](#createnewhistory)
+    * [getNewTicketHistory](#getnewtickethistory)
     * [getCustomForm](#getcustomform)
     * [editCustomForm](#editcustomform)
     * [getCustomForms](#getcustomforms)
     * [createCustomForm](#createcustomform)
     * [getTokenForVideoRoom](#gettokenforvideoroom)
-    * [getTokenForVideoRoom](#gettokenforvideoroom)
+    * [getNewTokenForVideoRoom](#getnewtokenforvideoroom)
     * [getVideoParticipants](#getvideoparticipants)
-    * [getVideoParticipants](#getvideoparticipants)
+    * [getNewVideoParticipants](#getnewvideoparticipants)
     * [openVideoRoom](#openvideoroom)
     * [closeVideoRoom](#closevideoroom)
     * [getGeneralConfig](#getgeneralconfig)
@@ -576,7 +569,7 @@
     * [orderUpdate](#orderupdate)
     * [checkOrderStatus](#checkorderstatus)
     * [getStateTransitionMap](#getstatetransitionmap)
-    * [getRoleBaseStateTransition](#getrolebasestatetransition)
+    * [getAllowedStateTransition](#getallowedstatetransition)
     * [fetchCreditBalanceDetail](#fetchcreditbalancedetail)
     * [fetchRefundModeConfig](#fetchrefundmodeconfig)
     * [attachOrderUser](#attachorderuser)
@@ -820,7 +813,7 @@ default
           }
         },
         "_id": "634eef735e84e7e1b09aa07c",
-        "application": null,
+        "application": "",
         "date": "2022-10-18T18:24:51.329Z",
         "created_at": "2022-10-18T18:24:51.400Z",
         "modified_at": "2022-10-18T18:24:51.400Z"
@@ -1376,7 +1369,6 @@ default
           "phone": "91 1234567890",
           "address_lines": [
             "TV TOWER, Foot Over Bridge Khar",
-            null,
             "Mumbai, 400079, Maharashtra, India"
           ]
         },
@@ -1421,7 +1413,7 @@ default
         "modified_at": "2020-12-16T07:00:22.980Z",
         "hash_identifier": "575999aca03e36f0fa54db5235bc7f25",
         "payment_method": {
-          "pg_payment_method_id": null
+          "pg_payment_method_id": ""
         },
         "invoice_items": [
           {
@@ -1658,7 +1650,6 @@ default
       "client": {
         "address_lines": [
           "TV TOWER, Foot Over Bridge Khar",
-          null,
           "Mumbai, 400079, Maharashtra, India"
         ],
         "name": "RELIANCE RETAIL LTD",
@@ -1703,7 +1694,7 @@ default
       "modified_at": "2020-12-16T07:00:22.980Z",
       "hash_identifier": "575999aca03e36f0fa54db5235bc7f25",
       "payment_method": {
-        "pg_payment_method_id": null
+        "pg_payment_method_id": ""
       }
     },
     "invoice_items": [
@@ -2376,7 +2367,7 @@ Active subscription
       "hash_identifier": "987abf78c61bfef585242bbbeaab1b59",
       "pdf_url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/company/13781/self/subscription/documents/invoices/original/U6ffgNlo_-PS-P-A00515-FY24-paid.pdf"
     },
-    "mandate_amount": 630000,
+    "mandate_amount": "630000",
     "current_subscriptions": [
       {
         "current_period": {
@@ -2901,44 +2892,51 @@ Coupon list for sent filter and page size
 ```json
 {
   "value": {
-    "items": [
-      {
-        "_id": "5e1d9bec6d6b7e000146c840",
-        "display_meta": {
-          "title": "percent50 title"
-        },
-        "_schedule": {
-          "next_schedule": [
-            {
-              "start": "2020-01-14T10:45:03.600000+00:00",
-              "end": "2020-01-16T10:45:03+00:00"
-            }
-          ],
-          "duration": null,
-          "start": "2020-01-14T10:45:03.600000+00:00",
-          "end": "2020-01-16T10:45:03+00:00",
-          "cron": ""
-        },
-        "state": {
-          "is_public": true,
-          "is_display": true,
-          "is_archived": false
-        },
-        "ownership": {
-          "payable_category": "seller",
-          "payable_by": ""
-        },
-        "code": "percent50",
-        "rule_definition": {
-          "type": "percentage",
-          "scope": [
-            "category_id"
-          ],
-          "applicable_on": "quantity"
-        }
+    "items": {
+      "_id": "5e1d9bec6d6b7e000146c840",
+      "rule": [],
+      "identifiers": {},
+      "validity": {
+        "priority": 0
+      },
+      "type_slug": "bundle_quantity_absolute",
+      "display_meta": {
+        "title": "percent50 title"
+      },
+      "_schedule": {
+        "next_schedule": [
+          {
+            "start": "2020-01-14T10:45:03.600000+00:00",
+            "end": "2020-01-16T10:45:03+00:00"
+          }
+        ],
+        "duration": null,
+        "start": "2020-01-14T10:45:03.600000+00:00",
+        "end": "2020-01-16T10:45:03+00:00",
+        "cron": ""
+      },
+      "state": {
+        "is_public": true,
+        "is_display": true,
+        "is_archived": false
+      },
+      "ownership": {
+        "payable_category": "seller",
+        "payable_by": ""
+      },
+      "code": "percent50",
+      "rule_definition": {
+        "type": "percentage",
+        "scope": [
+          "category_id"
+        ],
+        "applicable_on": "quantity",
+        "calculate_on": "esp",
+        "value_type": "percentage"
       }
-    ],
+    },
     "page": {
+      "type": "",
       "has_next": true,
       "size": 10,
       "current": 1,
@@ -3212,7 +3210,9 @@ Promotion list for sent filter and page size
     "items": [
       {
         "_id": "61dc8dc9adf45b2273a70a6e",
+        "application_id": "000000000000000000000004",
         "promo_group": "product",
+        "promotion_type": "bogo",
         "date_meta": {
           "modified_on": "2022-01-11T05:47:11.503000+00:00",
           "created_on": "2022-01-10T19:49:29.917000+00:00"
@@ -3220,26 +3220,66 @@ Promotion list for sent filter and page size
         "display_meta": {
           "name": "Test BOGO promo"
         },
+        "ownership": {
+          "payable_category": "seller",
+          "payable_by": ""
+        },
         "author": {
           "created_by": "5",
           "modified_by": "5"
         },
         "_schedule": {
           "start": "2022-01-10T18:45:36.311000+00:00",
-          "end": null,
+          "end": "2025-01-10T18:45:36.311000+00:00",
           "published": true,
           "next_schedule": [
             {
               "start": "2022-01-10T18:45:36.311000+00:00",
-              "end": null
+              "end": null,
+              "cron": ""
             }
           ],
-          "cron": "",
           "duration": 0
-        }
+        },
+        "discount_rules": [
+          {
+            "buy_condition": "( rule#1 )",
+            "offer": {
+              "max_offer_quantity": 2
+            },
+            "discount_type": "bogo",
+            "item_criteria": {
+              "item_brand": [
+                2,
+                14,
+                65
+              ]
+            }
+          }
+        ],
+        "buy_rules": {
+          "rule#1": {
+            "cart_quantity": {
+              "greater_than_equals": 5
+            },
+            "item_brand": [
+              1,
+              2,
+              14,
+              16,
+              29,
+              39,
+              43,
+              65,
+              73
+            ]
+          }
+        },
+        "mode": "promotion"
       }
     ],
     "page": {
+      "type": "number",
       "has_next": true,
       "size": 10,
       "current": 1,
@@ -3836,6 +3876,9 @@ Valid pincode
     "items": [
       {
         "quantity": 1,
+        "identifiers": {
+          "identifier": "5mPyy88URXuh3Lo35uaTg"
+        },
         "message": "",
         "coupon_message": "",
         "product": {
@@ -3972,6 +4015,9 @@ Valid pincode
       },
       {
         "quantity": 1,
+        "identifiers": {
+          "identifier": "5mPyy88URXuh3Lo35uaTg"
+        },
         "message": "Out of stock. Please remove item",
         "coupon_message": "",
         "product": {
@@ -4107,6 +4153,9 @@ Invalid pincode
     "items": [
       {
         "discount": "15% OFF",
+        "identifiers": {
+          "identifier": "5mPyy88URXuh3Lo35uaTg"
+        },
         "price": {
           "base": {
             "add_on": 0,
@@ -4159,7 +4208,16 @@ Invalid pincode
         "bulk_offer": {},
         "key": "876245_6",
         "message": "We are not delivering to 800108",
-        "delivery_promise": null,
+        "delivery_promise": {
+          "timestamp": {
+            "min": 1646257339,
+            "max": 1646689339,
+            "formatted": {
+              "min": "03 Mar, Thursday",
+              "max": "08 Mar, Tuesday"
+            }
+          }
+        },
         "coupon_message": "",
         "availability": {
           "sizes": [
@@ -4230,6 +4288,9 @@ Invalid pincode
       },
       {
         "discount": "15% OFF",
+        "identifiers": {
+          "identifier": "gIq0E94RSMueSdDRAk_Txg"
+        },
         "price": {
           "base": {
             "add_on": 0,
@@ -4550,7 +4611,7 @@ Abandoned Cart list for sent filter and page size
           "currency_code": "INR",
           "code": null,
           "type": "cart",
-          "uid": null,
+          "uid": "",
           "id": null
         },
         "promotion": {
@@ -4577,7 +4638,7 @@ Abandoned Cart list for sent filter and page size
         "cashback": {
           "amount": 0,
           "currency_code": "FC",
-          "uid": null
+          "uid": ""
         },
         "payments": {},
         "is_archive": false,
@@ -4770,7 +4831,7 @@ Product has been added to your cart
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "25_44_A7050_NEMIEL@GREENBRITISH_S",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -4779,6 +4840,9 @@ Product has been added to your cart
       "items": [
         {
           "key": "751083_10",
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "parent_item_identifiers": {
             "identifier": "ZASFF",
             "parent_item_id": 7501190,
@@ -4874,7 +4938,10 @@ Product has been added to your cart
           "discount": "41% OFF"
         },
         {
-          "key": "246228_S",
+          "key": "246228_",
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "article": {
             "type": "article",
             "uid": "46_235_TM62_M11029ONDSXNS_S",
@@ -4969,7 +5036,10 @@ Product has been added to your cart
           "discount": ""
         },
         {
-          "key": "443175_S",
+          "key": "443175_s",
+          "identifiers": {
+            "identifier": "gIq0E94RSMueSdDRAk_Txg"
+          },
           "article": {
             "type": "article",
             "uid": "162_207_1271_LJ03LBLUDN88_S",
@@ -5064,6 +5134,9 @@ Product has been added to your cart
         },
         {
           "key": "778937_OS",
+          "identifiers": {
+            "identifier": "gIq0E94RSMueSdDRAk_Txg"
+          },
           "article": {
             "type": "article",
             "uid": "686_963_IC68601_PWUPC01977_OS",
@@ -5159,9 +5232,9 @@ Product has been added to your cart
       "buy_now": false,
       "cart_id": 7927,
       "uid": "7927",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
-      "last_modified": "Tue, 03 Sep 2019 06:00:43 GMT",
+      "last_modified": "2023-03-03",
       "restrict_checkout": false,
       "is_valid": true
     },
@@ -5195,7 +5268,7 @@ Sorry, item is out of stock
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -5236,6 +5309,9 @@ Sorry, item is out of stock
       "items": [
         {
           "bulk_offer": {},
+          "identifiers": {
+            "identifier": "gIq0E94RSMueSdDRAk_Txg"
+          },
           "discount": "67% OFF",
           "parent_item_identifiers": {
             "identifier": "ZASFF",
@@ -5343,11 +5419,11 @@ Sorry, item is out of stock
       "buy_now": false,
       "cart_id": 54,
       "uid": "54",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
       "restrict_checkout": false,
       "is_valid": false,
-      "last_modified": "Tue, 03 Sep 2019 09:55:40 GMT"
+      "last_modified": "2023-03-03"
     },
     "result": {}
   }
@@ -5390,7 +5466,7 @@ data, err := Cart.UpdateCart(CompanyID, ApplicationID, CartID, xQuery, body);
 
 | body |  UpdateCartRequest | "Request body" 
 
-<p>Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/:slug/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/:identifier​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
+Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs operation Operation for current api call.update_item for update items. remove_item for removing items. item_id "/platform/content/v1/products/" "/platform/content/v1/products/:slug/sizes/" quantity item quantity (must be greater than or equal to 1) article_id "/content​/v1​/products​/:identifier​/sizes​/price​/"  item position in the cart (must be greater than or equal to 0)
 
 *Success Response:*
 
@@ -5428,7 +5504,7 @@ Nothing updated
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -5469,6 +5545,9 @@ Nothing updated
       "items": [
         {
           "bulk_offer": {},
+          "identifiers": {
+            "identifier": "gIq0E94RSMueSdDRAk_Txg"
+          },
           "discount": "67% OFF",
           "parent_item_identifiers": {
             "identifier": "ZASFF",
@@ -5576,11 +5655,11 @@ Nothing updated
       "buy_now": false,
       "cart_id": 54,
       "uid": "54",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
       "restrict_checkout": false,
       "is_valid": true,
-      "last_modified": "Tue, 03 Sep 2019 10:19:20 GMT"
+      "last_modified": "2023-03-03"
     },
     "result": {
       "707569_90": {
@@ -5619,7 +5698,7 @@ Item updated in the cart
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid coupon"
@@ -5708,7 +5787,9 @@ Item updated in the cart
             "type": "article",
             "uid": "618c1a6874b93908c98f6d18",
             "size": "XL",
-            "product_group_tags": null,
+            "product_group_tags": [
+              "tag1"
+            ],
             "seller": {
               "uid": 61,
               "name": "FUCHSIA VINE DESIGNS PRIVATE LIMITED"
@@ -5885,7 +5966,7 @@ Item updated in the cart
             }
           ],
           "key": "75252592_XL",
-          "delivery_promise": null,
+          "delivery_promise": {},
           "coupon_message": ""
         }
       ],
@@ -5893,7 +5974,7 @@ Item updated in the cart
       "id": "62d4ff76d6aec8db897de407",
       "uid": "22251",
       "buy_now": false,
-      "gstin": null,
+      "gstin": "",
       "comment": "",
       "checkout_mode": "self",
       "restrict_checkout": false,
@@ -5902,7 +5983,7 @@ Item updated in the cart
         "code": "INR",
         "symbol": "₹"
       },
-      "last_modified": "Mon, 01 Aug 2022 09:33:20 GMT"
+      "last_modified": "2023-03-03"
     },
     "message": "Quantity of item updated",
     "success": true
@@ -6299,6 +6380,9 @@ Cart Merged/Replaced
       "items": [
         {
           "key": "791651_6",
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "discount": "",
           "bulk_offer": {},
           "coupon_message": "",
@@ -6394,6 +6478,9 @@ Cart Merged/Replaced
         },
         {
           "key": "791651_7",
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "discount": "",
           "bulk_offer": {},
           "coupon_message": "",
@@ -6514,7 +6601,7 @@ Cart Merged/Replaced
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid coupon"
@@ -6542,17 +6629,17 @@ Cart Merged/Replaced
       },
       "delivery_charge_info": "",
       "coupon_text": "View all offers",
-      "gstin": null,
+      "gstin": "",
       "comment": "",
       "checkout_mode": "self",
       "payment_selection_lock": {
         "enabled": false,
         "default_options": "COD",
-        "payment_identifier": null
+        "payment_identifier": "JIOPP"
       },
       "restrict_checkout": false,
       "is_valid": true,
-      "last_modified": "Mon, 16 Dec 2019 07:02:18 GMT"
+      "last_modified": "2023-03-03"
     }
   }
 }
@@ -6619,7 +6706,7 @@ Cart list for pos platform
           "mobile": 7777996559,
           "email": "test_pickup_customer@gmail.com"
         },
-        "created_on": 1675780233,
+        "created_on": "1675780233",
         "cart_value": 1999,
         "cart_id": "63e213d45e4206d94485935f",
         "item_counts": 1,
@@ -6627,7 +6714,7 @@ Cart list for pos platform
       },
       {
         "pick_up_customer_details": {},
-        "created_on": 1675779508,
+        "created_on": "1675779508",
         "cart_value": 5997,
         "cart_id": "63e210d03437dfb6c731062a",
         "item_counts": 3,
@@ -6737,7 +6824,7 @@ Update and map cart user
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid coupon"
@@ -6985,7 +7072,7 @@ Update and map cart user
       "id": "63e210d03437dfb6c731062a",
       "uid": "436470",
       "buy_now": false,
-      "gstin": null,
+      "gstin": "",
       "comment": "",
       "checkout_mode": "self",
       "restrict_checkout": false,
@@ -6994,7 +7081,7 @@ Update and map cart user
         "code": "INR",
         "symbol": "₹"
       },
-      "last_modified": "Tue, 07 Feb 2023 09:01:56 GMT"
+      "last_modified": "2023-03-03T00:00:00.000Z"
     },
     "user": {
       "uid": "63693036ef136d40c32c0ac8",
@@ -7004,9 +7091,9 @@ Update and map cart user
       "email": "neelgajjar@gofynd.com",
       "mobile": "7096263966",
       "gender": "male",
-      "created_at": 1667838020,
-      "modified_on": 1668514790,
-      "external_id": null
+      "created_at": "1667838020",
+      "modified_on": "1668514790",
+      "external_id": ""
     }
   }
 }
@@ -7176,7 +7263,7 @@ Product has been added to your cart
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -7185,6 +7272,9 @@ Product has been added to your cart
       "items": [
         {
           "key": "751083_10",
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "parent_item_identifiers": {
             "identifier": "ZASFF",
             "parent_item_id": 7501190,
@@ -7281,6 +7371,9 @@ Product has been added to your cart
         },
         {
           "key": "246228_S",
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "article": {
             "type": "article",
             "uid": "46_235_TM62_M11029ONDSXNS_S",
@@ -7376,6 +7469,9 @@ Product has been added to your cart
         },
         {
           "key": "443175_S",
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "article": {
             "type": "article",
             "uid": "162_207_1271_LJ03LBLUDN88_S",
@@ -7470,6 +7566,9 @@ Product has been added to your cart
         },
         {
           "key": "778937_OS",
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "article": {
             "type": "article",
             "uid": "686_963_IC68601_PWUPC01977_OS",
@@ -7565,9 +7664,9 @@ Product has been added to your cart
       "buy_now": false,
       "cart_id": 7927,
       "uid": "7927",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
-      "last_modified": "Tue, 03 Sep 2019 06:00:43 GMT",
+      "last_modified": "2023-03-03T00:00:00.000Z",
       "restrict_checkout": false,
       "is_valid": true
     },
@@ -7601,7 +7700,7 @@ Sorry, item is out of stock
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -7642,6 +7741,9 @@ Sorry, item is out of stock
       "items": [
         {
           "bulk_offer": {},
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "discount": "67% OFF",
           "parent_item_identifiers": {
             "identifier": "ZASFF",
@@ -7749,11 +7851,11 @@ Sorry, item is out of stock
       "buy_now": false,
       "cart_id": 54,
       "uid": "54",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
       "restrict_checkout": false,
       "is_valid": false,
-      "last_modified": "Tue, 03 Sep 2019 09:55:40 GMT"
+      "last_modified": "2023-03-03T00:00:00.000Z"
     },
     "result": {}
   }
@@ -7799,7 +7901,7 @@ data, err := Cart.PlatformUpdateCart(CompanyID, ApplicationID, xQuery, body);
 
 | body |  PlatformUpdateCartRequest | "Request body" 
 
-<p>Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/:slug/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/:identifier​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
+Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs operation Operation for current api call. update_item for update items. remove_item for removing items.item_id "/platform/content/v1/products/" item_size "/platform/content/v1/products/:slug/sizes/" quantity  item quantity (must be greater than or equal to 1) article_id "/content​/v1​/products​/:identifier​/sizes​/price​/" item_index item position in the cart (must be greater than or equal to 0)
 
 *Success Response:*
 
@@ -7837,7 +7939,7 @@ Nothing updated
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -7878,6 +7980,9 @@ Nothing updated
       "items": [
         {
           "bulk_offer": {},
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "discount": "67% OFF",
           "parent_item_identifiers": {
             "identifier": "ZASFF",
@@ -7985,11 +8090,11 @@ Nothing updated
       "buy_now": false,
       "cart_id": 54,
       "uid": "54",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
       "restrict_checkout": false,
       "is_valid": true,
-      "last_modified": "Tue, 03 Sep 2019 10:19:20 GMT"
+      "last_modified": "2023-03-03T00:00:00.000Z"
     },
     "result": {
       "707569_90": {
@@ -8012,7 +8117,7 @@ Item updated in the cart
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -8061,6 +8166,9 @@ Item updated in the cart
       "items": [
         {
           "key": "437414_7",
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "message": "",
           "bulk_offer": {},
           "price": {
@@ -8166,9 +8274,9 @@ Item updated in the cart
       "buy_now": false,
       "cart_id": 12426,
       "uid": "12426",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
-      "last_modified": "Thu, 22 Aug 2019 04:51:42 GMT",
+      "last_modified": "2023-02-02T00:00:00.000Z",
       "restrict_checkout": false,
       "is_valid": true
     },
@@ -8459,7 +8567,7 @@ data, err := Cart.GetAddresses(CompanyID, ApplicationID, xQuery);
 | xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`, `UserID`
 
 
-Use this API to get all the addresses associated with an account. If successful, returns a Address resource in the response body specified in GetAddressesResponse.attibutes listed below are optional <ul> <li> <font color="monochrome">uid</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
+Use this API to get all the addresses associated with an account. If successful, returns a Address resource in the response body specified in GetAddressesResponse.attibutes listed below are optional uid address_id  mobile_no checkout_mode tags default
 
 *Success Response:*
 
@@ -8558,7 +8666,7 @@ data, err := Cart.GetAddressById(CompanyID, ApplicationID, ID, xQuery);
 | xQuery | struct | Includes properties such as `CartID`, `BuyNow`, `MobileNo`, `CheckoutMode`, `Tags`, `IsDefault`, `UserID`
 
 
-Use this API to get an addresses using its ID. If successful, returns a Address resource in the response body specified in `PlatformAddress`. Attibutes listed below are optional <ul> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
+Use this API to get an addresses using its ID. If successful, returns a Address resource in the response body specified in `PlatformAddress`. Attibutes listed below are optional mobile_no checkout_mode tags default
 
 *Success Response:*
 
@@ -8602,7 +8710,7 @@ data, err := Cart.UpdateAddress(CompanyID, ApplicationID, ID, body);
 
 | body |  PlatformAddress | "Request body" 
 
-<p>Use this API to update an existing address in the account. Request object should contain attributes mentioned in  <font color="blue">Address </font> can be updated. These attributes are:</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
+Use this API to update an existing address in the account. Request object should contain attributes mentioned in Address can be updated. These attributes are:is_default_address landmark area pincode email address_type name address_id address
 
 *Success Response:*
 
@@ -8698,7 +8806,7 @@ data, err := Cart.SelectAddress(CompanyID, ApplicationID, xQuery, body);
 
 | body |  PlatformSelectCartAddressRequest | "Request body" 
 
-<p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `PlatformSelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul></p>
+Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `PlatformSelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. address_id billing_address_id uid
 
 *Success Response:*
 
@@ -8967,7 +9075,7 @@ Shipment Generated
       "coupon": {
         "type": "cash",
         "code": "",
-        "uid": null,
+        "uid": "304_1054_9036_R1005753_7",
         "value": 0,
         "is_applied": false,
         "message": "Sorry! Invalid Coupon"
@@ -9051,6 +9159,9 @@ Shipment Generated
         "items": [
           {
             "quantity": 1,
+            "identifiers": {
+              "identifier": "5mPyy88URXuh3Lo35uaTg"
+            },
             "product": {
               "type": "product",
               "uid": 820312,
@@ -9147,9 +9258,9 @@ Shipment Generated
     ],
     "delivery_charge_info": "",
     "coupon_text": "View all offers",
-    "gstin": null,
+    "gstin": "",
     "checkout_mode": "self",
-    "last_modified": "Thu, 22 Aug 2019 20:21:48 GMT",
+    "last_modified": "2023-03-03",
     "restrict_checkout": false,
     "is_valid": true
   }
@@ -9353,7 +9464,7 @@ Shipment Generation Failed
       "coupon": {
         "type": "cash",
         "code": "",
-        "uid": null,
+        "uid": "304_1054_9036_R1005753_7",
         "value": 0,
         "is_applied": false,
         "message": "Sorry! Invalid Coupon"
@@ -9397,9 +9508,9 @@ Shipment Generation Failed
     "message": "Shipments could not be generated. Please Try again after some time.",
     "delivery_charge_info": "",
     "coupon_text": "View all offers",
-    "gstin": null,
+    "gstin": "",
     "checkout_mode": "self",
-    "last_modified": "Thu, 22 Aug 2019 20:21:48 GMT",
+    "last_modified": "2023-03-03",
     "restrict_checkout": false,
     "is_valid": false
   }
@@ -9661,7 +9772,7 @@ Shipment Generated
       "coupon": {
         "type": "cash",
         "code": "",
-        "uid": null,
+        "uid": "304_1054_9036_R1005753_6",
         "value": 0,
         "is_applied": false,
         "message": "Sorry! Invalid Coupon"
@@ -9746,6 +9857,9 @@ Shipment Generated
         "items": [
           {
             "quantity": 1,
+            "identifiers": {
+              "identifier": "5mPyy88URXuh3Lo35uaTg"
+            },
             "product": {
               "type": "product",
               "uid": 820312,
@@ -9842,9 +9956,9 @@ Shipment Generated
     ],
     "delivery_charge_info": "",
     "coupon_text": "View all offers",
-    "gstin": null,
+    "gstin": "",
     "checkout_mode": "self",
-    "last_modified": "Thu, 22 Aug 2019 20:21:48 GMT",
+    "last_modified": "2023-03-03",
     "restrict_checkout": false,
     "is_valid": true
   }
@@ -10048,7 +10162,7 @@ Shipment Generation Failed
       "coupon": {
         "type": "cash",
         "code": "",
-        "uid": null,
+        "uid": "304_1054_9036_R1005753_6",
         "value": 0,
         "is_applied": false,
         "message": "Sorry! Invalid Coupon"
@@ -10092,9 +10206,9 @@ Shipment Generation Failed
     "message": "Shipments could not be generated. Please Try again after some time.",
     "delivery_charge_info": "",
     "coupon_text": "View all offers",
-    "gstin": null,
+    "gstin": "",
     "checkout_mode": "self",
-    "last_modified": "Thu, 22 Aug 2019 20:21:48 GMT",
+    "last_modified": "2023-03-03",
     "restrict_checkout": false,
     "is_valid": false
   }
@@ -10406,7 +10520,7 @@ Successful checkout cod payment
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -10455,6 +10569,9 @@ Successful checkout cod payment
       "items": [
         {
           "key": "820312_L",
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "message": "",
           "bulk_offer": {},
           "price": {
@@ -10551,9 +10668,9 @@ Successful checkout cod payment
       "coupon_text": "View all offers",
       "cart_id": 7483,
       "uid": "7483",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
-      "last_modified": "Thu, 22 Aug 2019 04:58:44 GMT",
+      "last_modified": "2023-03-03T00:00:00.000Z",
       "restrict_checkout": false,
       "is_valid": true
     },
@@ -11018,7 +11135,7 @@ Successful checkout cod payment
         "coupon": {
           "type": "cash",
           "code": "",
-          "uid": null,
+          "uid": "",
           "value": 0,
           "is_applied": false,
           "message": "Sorry! Invalid Coupon"
@@ -11067,6 +11184,9 @@ Successful checkout cod payment
       "items": [
         {
           "key": "820312_L",
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
           "message": "",
           "bulk_offer": {},
           "price": {
@@ -11163,9 +11283,9 @@ Successful checkout cod payment
       "coupon_text": "View all offers",
       "cart_id": 7483,
       "uid": "7483",
-      "gstin": null,
+      "gstin": "",
       "checkout_mode": "self",
-      "last_modified": "Thu, 22 Aug 2019 04:58:44 GMT",
+      "last_modified": "2023-02-02T00:00:00.000Z",
       "restrict_checkout": false,
       "is_valid": true
     },
@@ -16474,7 +16594,7 @@ data, err := Catalog.GetOptimalLocations(CompanyID, body);
 
 | body |  AssignStore | "Request body" 
 
-
+Location Reassignment
 
 *Success Response:*
 
@@ -16932,7 +17052,7 @@ data, err := Common.GetLocations(xQuery);
 | xQuery | struct | Includes properties such as `LocationType`, `ID`
 
 
-
+Retrieve a list of countries, states, or cities based on the provided location_type and id parameters.
 
 *Success Response:*
 
@@ -17364,26 +17484,24 @@ Schema: `GetStats`
 default
 ```json
 {
-  "value": [
-    {
-      "_id": "6009a1ea1f6a61d88e80a867",
-      "imported": {
-        "count": 2
+  "value": {
+    "_id": "6009a1ea1f6a61d88e80a867",
+    "imported": {
+      "count": 2
+    },
+    "processed": {
+      "email": {
+        "success": 2,
+        "failed": 0,
+        "suppressed": 0
       },
-      "processed": {
-        "email": {
-          "success": 2,
-          "failed": 0,
-          "suppressed": 0
-        },
-        "sms": {
-          "success": 0,
-          "failed": 0,
-          "suppressed": 0
-        }
+      "sms": {
+        "success": 0,
+        "failed": 0,
+        "suppressed": 0
       }
     }
-  ]
+  }
 }
 ```
 
@@ -17836,15 +17954,13 @@ Schema: `GetNRecordsCsvRes`
 default
 ```json
 {
-  "value": [
-    {
-      "phone_number": "1234567890",
-      "email": "abcxyz@gofynd.com",
-      "firstname": "Abc",
-      "lastname": "Xyz",
-      "orderid": "1"
-    }
-  ]
+  "value": {
+    "phone_number": "1234567890",
+    "email": "abcxyz@gofynd.com",
+    "firstname": "Abc",
+    "lastname": "Xyz",
+    "orderid": "1"
+  }
 }
 ```
 
@@ -18861,7 +18977,7 @@ default
         "template": {
           "sms": {
             "subscribed": true,
-            "template": null
+            "template": ""
           },
           "email": {
             "subscribed": true,
@@ -18881,7 +18997,7 @@ default
         "template": {
           "sms": {
             "subscribed": true,
-            "template": null
+            "template": ""
           },
           "email": {
             "subscribed": true,
@@ -18901,7 +19017,7 @@ default
         "template": {
           "sms": {
             "subscribed": true,
-            "template": null
+            "template": ""
           },
           "email": {
             "subscribed": true,
@@ -18921,7 +19037,7 @@ default
         "template": {
           "sms": {
             "subscribed": true,
-            "template": null
+            "template": ""
           },
           "email": {
             "subscribed": true,
@@ -19225,7 +19341,7 @@ default
           },
           "email": {
             "subscribed": true,
-            "template": null
+            "template": ""
           }
         },
         "is_default": true,
@@ -19245,7 +19361,7 @@ default
           },
           "email": {
             "subscribed": true,
-            "template": null
+            "template": ""
           }
         },
         "is_default": true,
@@ -19265,7 +19381,7 @@ default
           },
           "email": {
             "subscribed": true,
-            "template": null
+            "template": ""
           }
         },
         "is_default": true,
@@ -19281,7 +19397,7 @@ default
         "template": {
           "sms": {
             "subscribed": true,
-            "template": null
+            "template": ""
           },
           "email": {
             "subscribed": true,
@@ -19305,7 +19421,7 @@ default
           },
           "email": {
             "subscribed": true,
-            "template": null
+            "template": ""
           }
         },
         "is_default": true,
@@ -19325,7 +19441,7 @@ default
           },
           "email": {
             "subscribed": true,
-            "template": null
+            "template": ""
           }
         },
         "is_default": true,
@@ -19345,7 +19461,7 @@ default
           },
           "email": {
             "subscribed": true,
-            "template": null
+            "template": ""
           }
         },
         "is_default": true,
@@ -19405,7 +19521,7 @@ default
           },
           "email": {
             "subscribed": true,
-            "template": null
+            "template": ""
           }
         },
         "is_default": true,
@@ -19738,7 +19854,7 @@ default
     ],
     "page": {
       "type": "cursor",
-      "next_id": null,
+      "next_id": "",
       "has_previous": false,
       "has_next": false
     }
@@ -23406,10 +23522,10 @@ success
         },
         "_schedule": {
           "published": true,
-          "cron": null,
+          "cron": "",
           "start": "2021-02-10T20:40:00.000Z",
           "end": "2021-02-18T22:00:00.000Z",
-          "duration": null,
+          "duration": 0,
           "next_schedule": [
             {
               "start": "2021-02-10T20:40:00.000Z",
@@ -23615,10 +23731,10 @@ success
           "end": "2021-02-18T22:00:00.000Z"
         }
       ],
-      "cron": null,
+      "cron": "",
       "start": "2021-02-10T20:40:00.000Z",
       "end": "2021-02-18T22:00:00.000Z",
-      "duration": null
+      "duration": 0
     },
     "app": "000000000000000000000001",
     "author": {
@@ -25215,7 +25331,7 @@ default
         },
         "application": "5cd3db5e9d692cfe5302a7bb",
         "archived": false,
-        "_custom_json": null,
+        "_custom_json": {},
         "__v": 0
       }
     ],
@@ -25281,7 +25397,7 @@ default
   "value": {
     "_id": "5eaa451a21a4dd75f0fd96c5",
     "application": "5d3ebd89f540e7506b8b3548",
-    "_custom_json": null,
+    "_custom_json": {},
     "slug": "pnc-landing",
     "action": {
       "page": {
@@ -25359,7 +25475,7 @@ default
   "value": {
     "_id": "5eaa451a21a4dd75f0fd96c5",
     "application": "5d3ebd89f540e7506b8b3548",
-    "_custom_json": null,
+    "_custom_json": {},
     "slug": "pnc-landing",
     "action": {
       "page": {
@@ -25436,7 +25552,7 @@ default
   "value": {
     "_id": "5eaa451a21a4dd75f0fd96c5",
     "application": "5d3ebd89f540e7506b8b3548",
-    "_custom_json": null,
+    "_custom_json": {},
     "slug": "pnc-landing",
     "action": {
       "page": {
@@ -30364,47 +30480,6 @@ Success. Returns a response containing relaving and absolute_url of storage serv
 Schema: `StartResponse`
 
 
-*Examples:*
-
-
-success
-```json
-{
-  "value": {
-    "file_name": "shirt.png",
-    "file_path": {
-      "value": "/path/qwertyuiop-shirt.png",
-      "summary": "path of the file in bucket without the bucket prefix for staging envs"
-    },
-    "content_type": "image/png",
-    "method": "PUT",
-    "namespace": {
-      "value": "products-item-images",
-      "summary": "Segregation of different types of files(products, orders, logistics etc)"
-    },
-    "operation": "putObject",
-    "tags": [
-      "clothing",
-      "shirt"
-    ],
-    "size": {
-      "value": 9999,
-      "summary": "size of the file being uploaded in bytes, should less than max size defined for the corresponding namesapce."
-    },
-    "cdn": {
-      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
-      "absolute_url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
-      "relative_url": "products/pictures/free/original/qwertyuiop-shirt.png"
-    },
-    "upload": {
-      "expiry": 5000,
-      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png?AWSAccessKeyId=xxx&Content-Type=image%2Fpng&Expires=5000&Signature=xxx&x-amz-acl=public-read"
-    }
-  }
-}
-```
-
-
 
 
 
@@ -30464,43 +30539,6 @@ Success
 Schema: `CompleteResponse`
 
 
-*Examples:*
-
-
-success
-```json
-{
-  "value": {
-    "_id": "xxxxxxxxxxxxxxxxxxxxxx",
-    "file_name": "shirt.png",
-    "file_path": {
-      "value": "/path/qwertyuiop-shirt.png",
-      "summary": "path of the file in bucket without the bucket prefix for staging envs"
-    },
-    "content_type": "image/png",
-    "method": "PUT",
-    "namespace": {
-      "value": "products-item-images",
-      "summary": "Segregation of different types of files(products, orders, logistics etc)"
-    },
-    "operation": "putObject",
-    "size": 9999,
-    "cdn": {
-      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
-      "absolute_url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
-      "relative_url": "products/pictures/free/original/qwertyuiop-shirt.png"
-    },
-    "upload": {
-      "expiry": 5000,
-      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png?AWSAccessKeyId=xxx&Content-Type=image%2Fpng&Expires=5000&Signature=xxx&x-amz-acl=public-read"
-    },
-    "created_on": "2020-02-03T09:50:04.240Z",
-    "modified_on": "2020-02-03T09:50:04.240Z"
-  }
-}
-```
-
-
 
 
 
@@ -30528,7 +30566,7 @@ data, err := FileStorage.AppStartUpload(Namespace, CompanyID, ApplicationID, bod
 | CompanyID | float64 |  | 
 
 
-| ApplicationID | float64 |  | 
+| ApplicationID | string |  | 
 
 
 | body |  StartRequest | "Request body" 
@@ -30563,47 +30601,6 @@ Success
 Schema: `StartResponse`
 
 
-*Examples:*
-
-
-success
-```json
-{
-  "value": {
-    "file_name": "shirt.png",
-    "file_path": {
-      "value": "/path/qwertyuiop-shirt.png",
-      "summary": "path of the file in bucket without the bucket prefix for staging envs"
-    },
-    "content_type": "image/png",
-    "method": "PUT",
-    "namespace": {
-      "value": "products-item-images",
-      "summary": "Segregation of different types of files(products, orders, logistics etc)"
-    },
-    "operation": "putObject",
-    "tags": [
-      "clothing",
-      "shirt"
-    ],
-    "size": {
-      "value": 9999,
-      "summary": "size of the file being uploaded in bytes, should less than max size defined for the corresponding namesapce."
-    },
-    "cdn": {
-      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
-      "absolute_url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
-      "relative_url": "products/pictures/free/original/qwertyuiop-shirt.png"
-    },
-    "upload": {
-      "expiry": 5000,
-      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png?AWSAccessKeyId=xxx&Content-Type=image%2Fpng&Expires=5000&Signature=xxx&x-amz-acl=public-read"
-    }
-  }
-}
-```
-
-
 
 
 
@@ -30631,7 +30628,7 @@ data, err := FileStorage.AppCompleteUpload(Namespace, CompanyID, ApplicationID, 
 | CompanyID | float64 |  | 
 
 
-| ApplicationID | float64 |  | 
+| ApplicationID | string |  | 
 
 
 | body |  StartResponse | "Request body" 
@@ -30664,43 +30661,6 @@ Success
 
 
 Schema: `CompleteResponse`
-
-
-*Examples:*
-
-
-success
-```json
-{
-  "value": {
-    "_id": "xxxxxxxxxxxxxxxxxxxxxx",
-    "file_name": "shirt.png",
-    "file_path": {
-      "value": "/path/qwertyuiop-shirt.png",
-      "summary": "path of the file in bucket without the bucket prefix for staging envs"
-    },
-    "content_type": "image/png",
-    "method": "PUT",
-    "namespace": {
-      "value": "products-item-images",
-      "summary": "Segregation of different types of files(products, orders, logistics etc)"
-    },
-    "operation": "putObject",
-    "size": 9999,
-    "cdn": {
-      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
-      "absolute_url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
-      "relative_url": "products/pictures/free/original/qwertyuiop-shirt.png"
-    },
-    "upload": {
-      "expiry": 5000,
-      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png?AWSAccessKeyId=xxx&Content-Type=image%2Fpng&Expires=5000&Signature=xxx&x-amz-acl=public-read"
-    },
-    "created_on": "2020-02-03T09:50:04.240Z",
-    "modified_on": "2020-02-03T09:50:04.240Z"
-  }
-}
-```
 
 
 
@@ -30787,7 +30747,7 @@ data, err := FileStorage.CopyFiles(CompanyID, xQuery, body);
 
 | xQuery | struct | Includes properties such as `Sync`
 
-| body |  CopyFiles | "Request body" 
+| body |  BulkRequest | "Request body" 
 
 Copy Files
 
@@ -30798,200 +30758,7 @@ Copy Files
 Success
 
 
-Schema: `BulkUploadSyncMode`
-
-
-*Examples:*
-
-
-successInSyncMode
-```json
-{
-  "value": {
-    "oneOf": [
-      {
-        "status": {
-          "total": 1,
-          "failed": 0,
-          "succeeded": 1,
-          "result": "SUCCESS"
-        },
-        "files": [
-          {
-            "success": true,
-            "file": {
-              "src": {
-                "method": "GET",
-                "url": "https://hdn-1.fynd.com/platform/pictures/free-logo/original/7qdHNTFe--platform-logo.png",
-                "meta": {},
-                "namespace": "test"
-              },
-              "dest": {
-                "ETag": "\"a2fdd91e5a6e1c080a44966c923f7d3b\"",
-                "ServerSideEncryption": "AES256",
-                "Location": "https://fynd-staging-assets.s3-accelerate.amazonaws.com/addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
-                "key": "addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
-                "Key": "addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
-                "Bucket": "fynd-staging-assets",
-                "cdn": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
-                "absolute_url": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
-                "relative_url": "addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png"
-              }
-            },
-            "extracted_data": {
-              "sharp": {
-                "metadata": {
-                  "format": "png",
-                  "size": 20859,
-                  "width": 1147,
-                  "height": 315,
-                  "space": "srgb",
-                  "channels": 4,
-                  "depth": "uchar",
-                  "density": 144,
-                  "isProgressive": false,
-                  "hasProfile": false,
-                  "hasAlpha": true
-                },
-                "stats": {
-                  "channels": [
-                    {
-                      "min": 0,
-                      "max": 255,
-                      "sum": 18581166,
-                      "squaresSum": 2720454498,
-                      "mean": 51.42792377631087,
-                      "stdev": 69.89066964116273,
-                      "minX": 0,
-                      "minY": 32,
-                      "maxX": 767,
-                      "maxY": 162
-                    },
-                    {
-                      "min": 0,
-                      "max": 255,
-                      "sum": 23074718,
-                      "squaresSum": 3794972074,
-                      "mean": 63.86492852299304,
-                      "stdev": 80.15486600126069,
-                      "minX": 0,
-                      "minY": 32,
-                      "maxX": 767,
-                      "maxY": 162
-                    },
-                    {
-                      "min": 0,
-                      "max": 255,
-                      "sum": 43651277,
-                      "squaresSum": 8829856965,
-                      "mean": 120.81559070591328,
-                      "stdev": 99.20892161899766,
-                      "minX": 0,
-                      "minY": 32,
-                      "maxX": 767,
-                      "maxY": 162
-                    },
-                    {
-                      "min": 0,
-                      "max": 255,
-                      "sum": 55673911,
-                      "squaresSum": 14147207369,
-                      "mean": 154.09117227826906,
-                      "stdev": 124.14431740073556,
-                      "minX": 0,
-                      "minY": 32,
-                      "maxX": 33,
-                      "maxY": 32
-                    }
-                  ],
-                  "isOpaque": false,
-                  "entropy": 2.2912313200504286,
-                  "sharpness": 3.3113732303662036,
-                  "dominant": {
-                    "r": 8,
-                    "g": 8,
-                    "b": 8
-                  }
-                }
-              }
-            }
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-successInSyncModeWithRewrite
-```json
-{
-  "value": {
-    "oneOf": [
-      {
-        "status": {
-          "total": 1,
-          "failed": 1,
-          "succeeded": 0,
-          "result": "FAIL"
-        },
-        "files": [
-          {
-            "success": false,
-            "error": "Request failed with status code 400",
-            "file": {
-              "src": {
-                "method": "GET",
-                "url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/x0/documents/manifest/PDFs/test/s3EtYk5p9-new_fee.pdf",
-                "meta": {},
-                "namespace": "test"
-              }
-            },
-            "stage": "AXIOS_FETCH",
-            "axios_request": {
-              "url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/x0/documents/manifest/PDFs/test/s3EtYk5p9-new_fee.pdf",
-              "method": "GET",
-              "meta": {},
-              "namespace": "test",
-              "responseType": "stream"
-            }
-          }
-        ],
-        "task": {
-          "id": "83419",
-          "name": "__default__",
-          "data": {
-            "urls": [
-              "https://hdn-1.fynd.com/platform/pictures/free-logo/original/7qdHNTFe--platform-logo.png"
-            ],
-            "destination": {
-              "basepath": "/domaine/path",
-              "rewrite": "{{basepath}}/foo/"
-            }
-          },
-          "opts": {
-            "attempts": 2,
-            "backoff": {
-              "type": "fixed",
-              "delay": 1000
-            },
-            "delay": 0,
-            "timestamp": 1690669093201
-          },
-          "progress": 0,
-          "delay": 0,
-          "timestamp": 1690669093201,
-          "attemptsMade": 0,
-          "stacktrace": [],
-          "returnvalue": null,
-          "finishedOn": null,
-          "processedOn": null
-        }
-      }
-    ]
-  }
-}
-```
+Schema: `BulkUploadResponse`
 
 
 
@@ -31020,11 +30787,11 @@ data, err := FileStorage.AppCopyFiles(CompanyID, ApplicationID, xQuery, body);
 | CompanyID | float64 |  | 
 
 
-| ApplicationID | float64 |  | 
+| ApplicationID | string |  | 
 
 | xQuery | struct | Includes properties such as `Sync`
 
-| body |  CopyFiles | "Request body" 
+| body |  BulkRequest | "Request body" 
 
 Copy Files
 
@@ -31035,200 +30802,7 @@ Copy Files
 Success
 
 
-Schema: `BulkUploadSyncMode`
-
-
-*Examples:*
-
-
-successInSyncMode
-```json
-{
-  "value": {
-    "oneOf": [
-      {
-        "status": {
-          "total": 1,
-          "failed": 0,
-          "succeeded": 1,
-          "result": "SUCCESS"
-        },
-        "files": [
-          {
-            "success": true,
-            "file": {
-              "src": {
-                "method": "GET",
-                "url": "https://hdn-1.fynd.com/platform/pictures/free-logo/original/7qdHNTFe--platform-logo.png",
-                "meta": {},
-                "namespace": "test"
-              },
-              "dest": {
-                "ETag": "\"a2fdd91e5a6e1c080a44966c923f7d3b\"",
-                "ServerSideEncryption": "AES256",
-                "Location": "https://fynd-staging-assets.s3-accelerate.amazonaws.com/addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
-                "key": "addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
-                "Key": "addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
-                "Bucket": "fynd-staging-assets",
-                "cdn": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
-                "absolute_url": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
-                "relative_url": "addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png"
-              }
-            },
-            "extracted_data": {
-              "sharp": {
-                "metadata": {
-                  "format": "png",
-                  "size": 20859,
-                  "width": 1147,
-                  "height": 315,
-                  "space": "srgb",
-                  "channels": 4,
-                  "depth": "uchar",
-                  "density": 144,
-                  "isProgressive": false,
-                  "hasProfile": false,
-                  "hasAlpha": true
-                },
-                "stats": {
-                  "channels": [
-                    {
-                      "min": 0,
-                      "max": 255,
-                      "sum": 18581166,
-                      "squaresSum": 2720454498,
-                      "mean": 51.42792377631087,
-                      "stdev": 69.89066964116273,
-                      "minX": 0,
-                      "minY": 32,
-                      "maxX": 767,
-                      "maxY": 162
-                    },
-                    {
-                      "min": 0,
-                      "max": 255,
-                      "sum": 23074718,
-                      "squaresSum": 3794972074,
-                      "mean": 63.86492852299304,
-                      "stdev": 80.15486600126069,
-                      "minX": 0,
-                      "minY": 32,
-                      "maxX": 767,
-                      "maxY": 162
-                    },
-                    {
-                      "min": 0,
-                      "max": 255,
-                      "sum": 43651277,
-                      "squaresSum": 8829856965,
-                      "mean": 120.81559070591328,
-                      "stdev": 99.20892161899766,
-                      "minX": 0,
-                      "minY": 32,
-                      "maxX": 767,
-                      "maxY": 162
-                    },
-                    {
-                      "min": 0,
-                      "max": 255,
-                      "sum": 55673911,
-                      "squaresSum": 14147207369,
-                      "mean": 154.09117227826906,
-                      "stdev": 124.14431740073556,
-                      "minX": 0,
-                      "minY": 32,
-                      "maxX": 33,
-                      "maxY": 32
-                    }
-                  ],
-                  "isOpaque": false,
-                  "entropy": 2.2912313200504286,
-                  "sharpness": 3.3113732303662036,
-                  "dominant": {
-                    "r": 8,
-                    "g": 8,
-                    "b": 8
-                  }
-                }
-              }
-            }
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-successInSyncModeWithRewrite
-```json
-{
-  "value": {
-    "oneOf": [
-      {
-        "status": {
-          "total": 1,
-          "failed": 1,
-          "succeeded": 0,
-          "result": "FAIL"
-        },
-        "files": [
-          {
-            "success": false,
-            "error": "Request failed with status code 400",
-            "file": {
-              "src": {
-                "method": "GET",
-                "url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/x0/documents/manifest/PDFs/test/s3EtYk5p9-new_fee.pdf",
-                "meta": {},
-                "namespace": "test"
-              }
-            },
-            "stage": "AXIOS_FETCH",
-            "axios_request": {
-              "url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/x0/documents/manifest/PDFs/test/s3EtYk5p9-new_fee.pdf",
-              "method": "GET",
-              "meta": {},
-              "namespace": "test",
-              "responseType": "stream"
-            }
-          }
-        ],
-        "task": {
-          "id": "83419",
-          "name": "__default__",
-          "data": {
-            "urls": [
-              "https://hdn-1.fynd.com/platform/pictures/free-logo/original/7qdHNTFe--platform-logo.png"
-            ],
-            "destination": {
-              "basepath": "/domaine/path",
-              "rewrite": "{{basepath}}/foo/"
-            }
-          },
-          "opts": {
-            "attempts": 2,
-            "backoff": {
-              "type": "fixed",
-              "delay": 1000
-            },
-            "delay": 0,
-            "timestamp": 1690669093201
-          },
-          "progress": 0,
-          "delay": 0,
-          "timestamp": 1690669093201,
-          "attemptsMade": 0,
-          "stacktrace": [],
-          "returnvalue": null,
-          "finishedOn": null,
-          "processedOn": null
-        }
-      }
-    ]
-  }
-}
-```
+Schema: `BulkUploadResponse`
 
 
 
@@ -31303,7 +30877,7 @@ data, err := FileStorage.Appbrowse(Namespace, CompanyID, ApplicationID, xQuery);
 | CompanyID | float64 |  | 
 
 
-| ApplicationID | float64 |  | 
+| ApplicationID | string |  | 
 
 
 
@@ -31362,563 +30936,6 @@ Success
 
 
 Schema: `string`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPdfTypes
-Get all the supported invoice pdf types
-
-```golang
-
-data, err := FileStorage.GetPdfTypes(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| ApplicationID | float64 |  | 
-
-
-
-Get all the supported invoice pdf types such as Invoice, Label, Deliver challan
-
-*Success Response:*
-
-
-
-Get all the invoice types and its format
-
-
-Schema: `Array<InvoiceTypesResponse>`
-
-
-*Examples:*
-
-
-success
-```json
-{
-  "value": {
-    "oneOf": [
-      {
-        "_id": "64b7ec2556a0cba523196426",
-        "pdf_type_id": 1,
-        "name": "invoice",
-        "format": [
-          "A4 A6 POS"
-        ],
-        "visibility": true,
-        "schema": {},
-        "__v": 0
-      },
-      {
-        "_id": "64b7ec3356a0cba523196428",
-        "pdf_type_id": 2,
-        "name": "label",
-        "format": [
-          "A4 A6 POS"
-        ],
-        "visibility": true,
-        "schema": {},
-        "__v": 0
-      }
-    ]
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getDefaultPdfData
-Get Dummy pdf data for invoice or label
-
-```golang
-
-data, err := FileStorage.GetDefaultPdfData(CompanyID, ApplicationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| ApplicationID | float64 |  | 
-
-
-
-| xQuery | struct | Includes properties such as `PdfTypeID`
-
-
-Get Dummy pdf data for invoice or label
-
-*Success Response:*
-
-
-
-Get dummy json data for invoice
-
-
-Schema: `Array<DummyTemplateDataItems>`
-
-
-*Examples:*
-
-
-success
-```json
-{
-  "value": [
-    {
-      "_id": "64b7f52d56a0cba5231964b0",
-      "pdf_type_id": 1,
-      "payload": {
-        "currency_code": "INR",
-        "shipment_id": "16811182420541695489",
-        "amount_to_be_collected": 0,
-        "amount_paid": 100,
-        "awb_number_barcode": "",
-        "signed_qrcode": "",
-        "shipment_id_barcode": "",
-        "upi_qrcode": "",
-        "is_self_ship": false,
-        "is_self_pickup": true,
-        "is_test": false,
-        "image": {
-          "sales_channel_logo": ""
-        },
-        "payments": {
-          "payment_type": "Net Banking",
-          "date": "10/04/2023",
-          "transaction_id": "10022310053248709000",
-          "amount": 35
-        },
-        "invoice_detail": {
-          "invoice_id": "2352313215236713",
-          "invoice_date": "10/04/2023",
-          "irn": "",
-          "external_order_id": "",
-          "shipment_id": "16811182420541695489",
-          "order_id": "73982433",
-          "channel_order_id": "affiliate_details.channel_order_id"
-        },
-        "company_detail": {
-          "name": "RELIANCE RETAIL LIMITED",
-          "address": "1ST FLOOR, WEWORK VIJAY DIAMOND, CROSS RD B, AJIT NAGAR, KONDIVITA, ANDHERI EAST, MUMBAI, MAHARASHTR",
-          "city": "MUMBAI",
-          "state": "MAHARASHTRA",
-          "country": "INDIA",
-          "zip_code": "400093",
-          "state_code": "27",
-          "country_code": "IN",
-          "gstin": "27AABCR1718E1ZP",
-          "pan": "AABCR1718E",
-          "phone_no": "9594495254",
-          "cin": "U45200MH1992PTC066474",
-          "website_url": "https://freshpik.hostx1.de",
-          "email": ""
-        },
-        "store_detail": {
-          "store_name": "FreshPik",
-          "address": "FRESHPIK, JIO WORLD DRIVE, MAKERS MAXITY,STORE UNIT - G 22,23&24 BANDRA EAST FSSAI NO: 11521005000512",
-          "city": "Mumbai",
-          "state": "Maharashtra",
-          "country": "India",
-          "country_code": "IN",
-          "zip_code": "400093",
-          "state_code": "27",
-          "gstin": "27AABCR1718E1ZP"
-        },
-        "customer_shipping_detail": {
-          "name": "Megha Golecha",
-          "phone_no": "9769199489",
-          "address": "1001 Badri Vishal, Sahakar Nagar, Andheri West, 400053, Near Building No. 33, Shanti Nagar,Test,Mumbai,Maharashtra,India,400053",
-          "city": "Mumbai",
-          "state": "Maharashtra",
-          "country": "India",
-          "country_code": "IN",
-          "zip_code": "400053",
-          "state_code": "27",
-          "gstin": ""
-        },
-        "return_detail": {
-          "address": "FRESHPIK, JIO WORLD DRIVE, MAKERS MAXITY,STORE UNIT - G 22,23&24 BANDRA EAST FSSAI NO: 11521005000512",
-          "city": "Mumbai",
-          "state": "Maharashtra",
-          "country": "India",
-          "country_code": "IN",
-          "zip_code": "400053",
-          "state_code": "27",
-          "gstin": ""
-        },
-        "product_table": {
-          "total_items": 1,
-          "products": [
-            {
-              "name": "So Good Unsweetened Soy Milk 200 ml (Tetra Pak)",
-              "size": "200ML",
-              "item_code": "",
-              "seller_identifier": "490001550",
-              "hsn_code": "62060000",
-              "total_units": 1,
-              "mrp": 35,
-              "discount": 123,
-              "taxable_amount": 33.33,
-              "total_taxable_amount": 33.33,
-              "tax": {
-                "cgst": {
-                  "value": 0.83,
-                  "percent": 2.5
-                },
-                "sgst": {
-                  "value": 0.83,
-                  "percent": 2.5
-                },
-                "igst": {
-                  "value": 0.83,
-                  "percent": 2.5
-                }
-              },
-              "total": 35,
-              "brand": {
-                "logo": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/brands/pictures/square-logo/original/gi4glSy7T-EX5Teqb1K-Logo.jpeg",
-                "name": "Freshpik"
-              }
-            }
-          ],
-          "grand_total": 35,
-          "delivery_charges": 0,
-          "delivery_charge_text": "",
-          "cod_charges": 0,
-          "fynd_discounts": 0,
-          "total_in_words": "Thirty Five Rupees Only"
-        },
-        "tax_table": {
-          "taxes": [
-            {
-              "hsn_code": "62060000",
-              "tax": {
-                "cgst": {
-                  "value": 0.83,
-                  "percent": 2.5
-                },
-                "sgst": {
-                  "value": 0.83,
-                  "percent": 2.5
-                },
-                "igst": {
-                  "value": 0,
-                  "percent": 0
-                }
-              },
-              "total": 123
-            }
-          ],
-          "grand_total": 1.67,
-          "tax_in_words": "One Rupees and Sixty Seven Paise Only"
-        },
-        "declaration_texts": [
-          "1. Products being sent under this invoice are for personal consumption for the customer and not for resale or commercial purposes.",
-          "2. Whether tax is payable under reverse charge - No",
-          "3. This invoice shows the actual price of the goods described above and that all particulars are true and accurate.",
-          "4. In case of any queries, please reach out to care@gofynd.com.",
-          "5. In the event of any loss or non-delivery, the goods shall be returned to the address specified below. this.shipment.invoice.rto_address"
-        ],
-        "registered_company_detail": {
-          "address": "1ST FLOOR, WEWORK VIJAY DIAMOND, CROSS RD B, AJIT NAGAR, KONDIVITA, ANDHERI EAST, MUMBAI, MAHARASHTR",
-          "city": "MUMBAI",
-          "state": "MAHARASHTRA",
-          "country": "INDIA",
-          "zip_code": "400093",
-          "state_code": "27",
-          "country_code": "IN"
-        },
-        "disclaimer": "An Electronic document issued in accordance with the provisions of the Information Technology Act, 2000 (21 of 2000)",
-        "meta": {
-          "generator": {
-            "signed_qrcode_generator": {
-              "method": "signedqrcode",
-              "kwargs": {
-                "value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkVEQzU3REUxMzU4QjMwMEJBOUY3OTM0MEE2Njk2ODMxRjNDODUwNDciLCJ0eXAiOiJKV1QiLCJ4NXQiOiI3Y1Y5NFRXTE1BdXA5NU5BcG1sb01mUElVRWMifQ.eyJkYXRhIjoie1wiU2VsbGVyR3N0aW5cIjpcIjI3QUFCUFA2NTAzRTAwM1wiLFwiQnV5ZXJHc3RpblwiOlwiMjdBQUxDQTA0NDJMMVpNXCIsXCJEb2NOb1wiOlwiQTAwMDExMzMzQTAwMDAwM1wiLFwiRG9jVHlwXCI6XCJJTlZcIixcIkRvY0R0XCI6XCIxMS8xMC8yMDIyXCIsXCJUb3RJbnZWYWxcIjoyNDk5OTkuNzYsXCJJdGVtQ250XCI6MSxcIk1haW5Ic25Db2RlXCI6XCI5NDAxXCIsXCJJcm5cIjpcImUzNjE5M2YzNGQyZmY4OTM3MzI2NTcxN2RmYzY5YzVmYjU2MTI1N2U1M2MxOThhMDAzMGRkM2RlZGUxNDhmMmZcIixcIklybkR0XCI6XCIyMDIyLTEwLTExIDE0OjIxOjAwXCJ9IiwiaXNzIjoiTklDIn0.OtYrnBt311QrqdXCSuTOpzNuYA9M8ejRoyeRioJRyGImljXrNvBLU_JJpXVLtDI4dkbIEHVbbOuucYD3fn_nnH_KZA0kLkUuok417ztLxWN35D9xZaYg5GSWI8hss9KV7i-H-k_95pHBYPEwFFGw8IqlpgeS-unjkbbmY7UgQTerMIXrig-ZWc2R-NDFoHs7I48TuWzOxQfiEDVsMHzPjcjuqKA6KDoJKX0nZzZo84GL2k2pM0Klhq5sfJIC9Zp7E_xP_Bst6-cRhdZ2EA08xhJYSgB1fsYxGaxemXgdsXw0mqlGohOryvqwhHPSMEocK6ZHWWJvjZJwNx_e-oCyzg"
-              }
-            },
-            "shipment_id_barcode_generator": {
-              "method": "barcode",
-              "kwargs": {
-                "value": "dsgffdghfghgj"
-              }
-            },
-            "upi_qrcode_generator": {
-              "method": "qrcode",
-              "kwargs": {
-                "qr_data": "upi://pay?pa=delhivery1.PAYU@HDFCBANK&pn=www.delhivery.com&mc=4214&tr=O-zo0ou2yTjZCx-dk2b&am=6581.0&cu=INR&ver=01&mode=15&orgId=000000&gstBreakup=GST:30.0%7CCGST:0.0%7CSGST:0.0%7CIGST:30.0%7CCESS:0.0%7CGSTIncentive:12.0%7CGSTPCT:None&invoiceNo=UT/23-24/198&invoiceDate=2023-05-02T16:45:42&invoiceName=UT%2F23-24%2F198&gstIn=07ANLPC8083H1ZS&qrMedium=04",
-                "qr_url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyprod/wrkr/logistics/qr-code/Delhivery/original/Hv0blbPtA-16830153113571272087.png"
-              }
-            },
-            "awb_number_barcode_generator": {
-              "method": "barcode",
-              "kwargs": {
-                "value": "7923787945"
-              }
-            },
-            "digital_signature_generator": {
-              "method": "digitalsignature",
-              "kwargs": {
-                "value": "8345jhkdfn"
-              }
-            },
-            "awb_number_label_barcode_generator": {
-              "method": "barcode",
-              "kwargs": {
-                "value": [
-                  "9901090772264",
-                  "9901090772264"
-                ]
-              }
-            }
-          }
-        },
-        "delivery_partner_detail": {
-          "name": "fyndr",
-          "awb_number": "",
-          "dp_sort_code": "ABC/DEF",
-          "origin": "1678236",
-          "destination": "142345"
-        },
-        "customer_billing_detail": {
-          "name": "Megha Golecha",
-          "phone_no": "9769199489",
-          "address": "1001 Badri Vishal, Sahakar Nagar, Andheri West, 400053, Near Building No. 33, Shanti Nagar,Test,Mumbai,Maharashtra,India,400053",
-          "city": "Mumbai",
-          "state": "Maharashtra",
-          "country": "India",
-          "country_code": "IN",
-          "zip_code": "400053",
-          "state_code": "27",
-          "gstin": "",
-          "email": "shipment.hand_over_contact_json.email"
-        }
-      },
-      "__v": 0
-    }
-  ]
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getDefaultHtmlTemplate
-Get html template for sales channel
-
-```golang
-
-data, err := FileStorage.GetDefaultHtmlTemplate(CompanyID, ApplicationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| ApplicationID | float64 |  | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PdfTypeID`, `Format`
-
-
-Get default html template for invoice or label
-
-*Success Response:*
-
-
-
-Get last saved html template for invoice
-
-
-Schema: `Array<Object>`
-
-
-
-
-
-
-
-
-
----
-
-
-#### saveHtmlTemplate
-Update html template for invoice or label
-
-```golang
-
-data, err := FileStorage.SaveHtmlTemplate(CompanyID, ApplicationID, ID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| ApplicationID | float64 |  | 
-
-
-| ID | float64 |  | 
-
-
-| body |  pdfConfig | "Request body" 
-
-Update html template for invoice such as Invoice, Label, Deliver challan
-
-*Success Response:*
-
-
-
-Saved html template for invoice
-
-
-Schema: `Object`
-
-
-
-
-
-
-
-
-
----
-
-
-#### previewTemplate
-Preview HTML template
-
-```golang
-
-data, err := FileStorage.PreviewTemplate(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| ApplicationID | float64 |  | 
-
-
-| body |  pdfRender | "Request body" 
-
-Rendered HTML template with dummy json data
-
-*Success Response:*
-
-
-
-Get rendered html with dummy json payload
-
-
-Schema: `string`
-
-
-
-
-
-
-
-
-
----
-
-
-#### getDefaultPdfTemplate
-Default html template
-
-```golang
-
-data, err := FileStorage.GetDefaultPdfTemplate(CompanyID, ApplicationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 |  | 
-
-
-| ApplicationID | float64 |  | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PdfTypeID`, `Format`
-
-
-Get default html template data for invoice or label
-
-*Success Response:*
-
-
-
-Get rendered html with dummy json payload
-
-
-Schema: `Array<Object>`
-
-
-*Examples:*
-
-
-success
-```json
-{
-  "value": [
-    {
-      "_id": "64b7f21156a0cba523196482",
-      "pdf_type_id": 1,
-      "format": "A4",
-      "template": "<p> Hello World </p>",
-      "__v": 0
-    }
-  ]
-}
-```
 
 
 
@@ -33827,7 +32844,7 @@ Default
     },
     "content": {
       "title": "SOme title Response",
-      "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
+      "description": "Handles communication between Administrator",
       "attachments": []
     },
     "status": {
@@ -34026,12 +33043,12 @@ Default
 ---
 
 
-#### getTickets
+#### getNewTickets
 Gets the list of Application level Tickets and/or ticket filters depending on query params
 
 ```golang
 
-data, err := Lead.GetTickets(CompanyID, ApplicationID, xQuery);
+data, err := Lead.GetNewTickets(CompanyID, ApplicationID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -34495,7 +33512,7 @@ Default
     },
     "content": {
       "title": "SOme title Response",
-      "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
+      "description": "Handles communication between Administrator",
       "attachments": []
     },
     "status": {
@@ -34737,7 +33754,7 @@ Default
     },
     "content": {
       "title": "SOme title Response",
-      "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
+      "description": "Handles communication between Administrator",
       "attachments": []
     },
     "status": {
@@ -34936,12 +33953,12 @@ Default
 ---
 
 
-#### getTicket
+#### getNewTicket
 Retreives ticket details of a application level ticket
 
 ```golang
 
-data, err := Lead.GetTicket(CompanyID, ApplicationID, ID);
+data, err := Lead.GetNewTicket(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -34982,7 +33999,7 @@ Default
     },
     "content": {
       "title": "SOme title Response",
-      "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
+      "description": "Handles communication between Administrator",
       "attachments": []
     },
     "status": {
@@ -35181,12 +34198,12 @@ Default
 ---
 
 
-#### editTicket
+#### editNewTicket
 Edits ticket details of a application level ticket
 
 ```golang
 
-data, err := Lead.EditTicket(CompanyID, ApplicationID, ID, body);
+data, err := Lead.EditNewTicket(CompanyID, ApplicationID, ID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -35228,7 +34245,7 @@ Default
     },
     "content": {
       "title": "SOme title Response",
-      "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
+      "description": "Handles communication between Administrator",
       "attachments": []
     },
     "status": {
@@ -35494,7 +34511,9 @@ Default
         }
       }
     },
-    "created_by": "5d1363adf599d850df93175e",
+    "created_by": {
+      "5d1363adf599d850df93175e": null
+    },
     "createdAt": "2021-02-03T12:55:46.808Z",
     "updatedAt": "2021-02-03T12:55:46.808Z",
     "__v": 0
@@ -35685,7 +34704,9 @@ Default
     ],
     "total": 2,
     "limit": 100,
-    "page": 1,
+    "page": {
+      "type": ""
+    },
     "pages": 1
   }
 }
@@ -35750,10 +34771,15 @@ Default
           "user_id": "5f8147abbd1a0a870f61f1a6"
         },
         "category": "customers",
-        "response": {
-          "audio": 2,
-          "video": 6
-        },
+        "response": [
+          {
+            "audio": 2,
+            "video": 6,
+            "display": "",
+            "key": "",
+            "value": ""
+          }
+        ],
         "createdAt": "2021-06-10T18:11:11.349Z",
         "updatedAt": "2021-06-10T18:11:11.349Z",
         "__v": 0
@@ -35821,10 +34847,15 @@ Default
       "user_id": "5f8147abbd1a0a870f61f1a6"
     },
     "category": "customers",
-    "response": {
-      "audio": 2,
-      "video": 6
-    },
+    "response": [
+      {
+        "audio": 2,
+        "video": 6,
+        "display": "",
+        "key": "",
+        "value": ""
+      }
+    ],
     "createdAt": "2021-06-10T18:11:11.349Z",
     "updatedAt": "2021-06-10T18:11:11.349Z",
     "__v": 0
@@ -35843,12 +34874,12 @@ Default
 ---
 
 
-#### createHistory
+#### createNewHistory
 Create history for specific application level ticket
 
 ```golang
 
-data, err := Lead.CreateHistory(CompanyID, ApplicationID, ID, body);
+data, err := Lead.CreateNewHistory(CompanyID, ApplicationID, ID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -35913,7 +34944,9 @@ Default
         }
       }
     },
-    "created_by": "5d1363adf599d850df93175e",
+    "created_by": {
+      "5d1363adf599d850df93175e": null
+    },
     "createdAt": "2021-02-03T12:55:46.808Z",
     "updatedAt": "2021-02-03T12:55:46.808Z",
     "__v": 0
@@ -35932,12 +34965,12 @@ Default
 ---
 
 
-#### getTicketHistory
+#### getNewTicketHistory
 Gets history list for specific application level ticket
 
 ```golang
 
-data, err := Lead.GetTicketHistory(CompanyID, ApplicationID, ID);
+data, err := Lead.GetNewTicketHistory(CompanyID, ApplicationID, ID);
 ```
 
 | Argument  |  Type  | Description |
@@ -36107,7 +35140,9 @@ Default
     ],
     "total": 2,
     "limit": 100,
-    "page": 1,
+    "page": {
+      "type": ""
+    },
     "pages": 1
   }
 }
@@ -36163,51 +35198,54 @@ Schema: `CustomForm`
 Default
 ```json
 {
-  "value": {
-    "login_required": false,
-    "should_notify": false,
-    "inputs": [
-      {
-        "required": false,
-        "type": "text",
-        "display": "Name",
-        "placeholder": "Please enter your name",
-        "key": "name"
-      }
-    ],
-    "available_assignees": [],
-    "_id": "5fd258a9088f957f34c288fc",
-    "title": "trail form",
-    "description": "Trail form description",
-    "slug": "trail-form",
-    "application_id": "000000000000000000000003",
-    "created_on": {
-      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-      "platform": "web",
-      "meta": {
-        "browser": {
-          "name": "Chrome",
-          "version": "87.0.4280.88"
-        },
-        "os": {
-          "name": "macOS",
-          "version": "10.15.6",
-          "versionName": "Catalina"
-        },
-        "platform": {
-          "type": "desktop",
-          "vendor": "Apple"
-        },
-        "engine": {
-          "name": "Blink"
+  "value": [
+    {
+      "required": false,
+      "login_required": false,
+      "should_notify": false,
+      "inputs": [
+        {
+          "required": false,
+          "type": "text",
+          "display": "Name",
+          "placeholder": "Please enter your name",
+          "key": "name"
         }
-      }
-    },
-    "created_by": "5d1363adf599d850df93175e",
-    "createdAt": "2020-12-10T17:19:37.515Z",
-    "updatedAt": "2020-12-10T17:19:43.214Z",
-    "__v": 0
-  }
+      ],
+      "available_assignees": [],
+      "_id": "5fd258a9088f957f34c288fc",
+      "title": "trail form",
+      "description": "Trail form description",
+      "slug": "trail-form",
+      "application_id": "000000000000000000000003",
+      "created_on": {
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
+        "platform": "web",
+        "meta": {
+          "browser": {
+            "name": "Chrome",
+            "version": "87.0.4280.88"
+          },
+          "os": {
+            "name": "macOS",
+            "version": "10.15.6",
+            "versionName": "Catalina"
+          },
+          "platform": {
+            "type": "desktop",
+            "vendor": "Apple"
+          },
+          "engine": {
+            "name": "Blink"
+          }
+        }
+      },
+      "created_by": "5d1363adf599d850df93175e",
+      "createdAt": "2020-12-10T17:19:37.515Z",
+      "updatedAt": "2020-12-10T17:19:43.214Z",
+      "__v": 0
+    }
+  ]
 }
 ```
 
@@ -36262,61 +35300,64 @@ Schema: `CustomForm`
 Default
 ```json
 {
-  "value": {
-    "login_required": false,
-    "should_notify": false,
-    "inputs": [
-      {
-        "type": "email",
-        "showRegexInput": true,
-        "enum": [],
-        "regex": "\\S+@\\S+\\.\\S+",
-        "display": "email",
-        "required": true,
-        "key": "email"
-      },
-      {
-        "type": "number",
-        "showRegexInput": false,
-        "enum": [],
-        "display": "Enter your fav number",
-        "placeholder": "123",
-        "key": "enter-your-fav-number"
-      }
-    ],
-    "available_assignees": [],
-    "_id": "602e900a2042255c03cadaf0",
-    "title": "service-test-satyen",
-    "description": "testing form from service",
-    "slug": "service-test-satyen",
-    "header_image": "https://hdn-1.addsale.com/x0/support-ticket/files/free/original/KZL86aN5l-service-test-satyen.jpeg",
-    "application_id": "000000000000000000000001",
-    "created_on": {
-      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
-      "platform": "web",
-      "meta": {
-        "browser": {
-          "name": "Chrome",
-          "version": "88.0.4324.150"
+  "value": [
+    {
+      "required": false,
+      "login_required": false,
+      "should_notify": false,
+      "inputs": [
+        {
+          "type": "email",
+          "showRegexInput": true,
+          "enum": [],
+          "regex": "\\S+@\\S+\\.\\S+",
+          "display": "email",
+          "required": true,
+          "key": "email"
         },
-        "os": {
-          "name": "macOS",
-          "version": "11.2.0"
-        },
-        "platform": {
-          "type": "desktop",
-          "vendor": "Apple"
-        },
-        "engine": {
-          "name": "Blink"
+        {
+          "type": "number",
+          "showRegexInput": false,
+          "enum": [],
+          "display": "Enter your fav number",
+          "placeholder": "123",
+          "key": "enter-your-fav-number"
         }
-      }
-    },
-    "created_by": "5f8147abbd1a0a870f61f1a6",
-    "createdAt": "2021-02-18T16:04:26.495Z",
-    "updatedAt": "2021-02-26T10:16:49.272Z",
-    "__v": 0
-  }
+      ],
+      "available_assignees": [],
+      "_id": "602e900a2042255c03cadaf0",
+      "title": "service-test-satyen",
+      "description": "testing form from service",
+      "slug": "service-test-satyen",
+      "header_image": "https://hdn-1.addsale.com/x0/support-ticket/files/free/original/KZL86aN5l-service-test-satyen.jpeg",
+      "application_id": "000000000000000000000001",
+      "created_on": {
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
+        "platform": "web",
+        "meta": {
+          "browser": {
+            "name": "Chrome",
+            "version": "88.0.4324.150"
+          },
+          "os": {
+            "name": "macOS",
+            "version": "11.2.0"
+          },
+          "platform": {
+            "type": "desktop",
+            "vendor": "Apple"
+          },
+          "engine": {
+            "name": "Blink"
+          }
+        }
+      },
+      "created_by": "5f8147abbd1a0a870f61f1a6",
+      "createdAt": "2021-02-18T16:04:26.495Z",
+      "updatedAt": "2021-02-26T10:16:49.272Z",
+      "__v": 0
+    }
+  ]
 }
 ```
 
@@ -36498,7 +35539,9 @@ Default
     ],
     "total": 2,
     "limit": 10,
-    "page": 1,
+    "page": {
+      "type": ""
+    },
     "pages": 1
   }
 }
@@ -36552,61 +35595,64 @@ Schema: `CustomForm`
 Default
 ```json
 {
-  "value": {
-    "login_required": false,
-    "should_notify": false,
-    "inputs": [
-      {
-        "type": "email",
-        "showRegexInput": true,
-        "enum": [],
-        "regex": "\\S+@\\S+\\.\\S+",
-        "display": "email",
-        "required": true,
-        "key": "email"
-      },
-      {
-        "type": "number",
-        "showRegexInput": false,
-        "enum": [],
-        "display": "Enter your fav number",
-        "placeholder": "123",
-        "key": "enter-your-fav-number"
-      }
-    ],
-    "available_assignees": [],
-    "_id": "602e900a2042255c03cadaf0",
-    "title": "service-test-satyen",
-    "description": "testing form from service",
-    "slug": "service-test-satyen",
-    "header_image": "https://hdn-1.addsale.com/x0/support-ticket/files/free/original/KZL86aN5l-service-test-satyen.jpeg",
-    "application_id": "000000000000000000000001",
-    "created_on": {
-      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
-      "platform": "web",
-      "meta": {
-        "browser": {
-          "name": "Chrome",
-          "version": "88.0.4324.150"
+  "value": [
+    {
+      "required": false,
+      "login_required": false,
+      "should_notify": false,
+      "inputs": [
+        {
+          "type": "email",
+          "showRegexInput": true,
+          "enum": [],
+          "regex": "\\S+@\\S+\\.\\S+",
+          "display": "email",
+          "required": true,
+          "key": "email"
         },
-        "os": {
-          "name": "macOS",
-          "version": "11.2.0"
-        },
-        "platform": {
-          "type": "desktop",
-          "vendor": "Apple"
-        },
-        "engine": {
-          "name": "Blink"
+        {
+          "type": "number",
+          "showRegexInput": false,
+          "enum": [],
+          "display": "Enter your fav number",
+          "placeholder": "123",
+          "key": "enter-your-fav-number"
         }
-      }
-    },
-    "created_by": "5f8147abbd1a0a870f61f1a6",
-    "createdAt": "2021-02-18T16:04:26.495Z",
-    "updatedAt": "2021-02-26T10:16:49.272Z",
-    "__v": 0
-  }
+      ],
+      "available_assignees": [],
+      "_id": "602e900a2042255c03cadaf0",
+      "title": "service-test-satyen",
+      "description": "testing form from service",
+      "slug": "service-test-satyen",
+      "header_image": "https://hdn-1.addsale.com/x0/support-ticket/files/free/original/KZL86aN5l-service-test-satyen.jpeg",
+      "application_id": "000000000000000000000001",
+      "created_on": {
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
+        "platform": "web",
+        "meta": {
+          "browser": {
+            "name": "Chrome",
+            "version": "88.0.4324.150"
+          },
+          "os": {
+            "name": "macOS",
+            "version": "11.2.0"
+          },
+          "platform": {
+            "type": "desktop",
+            "vendor": "Apple"
+          },
+          "engine": {
+            "name": "Blink"
+          }
+        }
+      },
+      "created_by": "5f8147abbd1a0a870f61f1a6",
+      "createdAt": "2021-02-18T16:04:26.495Z",
+      "updatedAt": "2021-02-26T10:16:49.272Z",
+      "__v": 0
+    }
+  ]
 }
 ```
 
@@ -36674,12 +35720,12 @@ Default
 ---
 
 
-#### getTokenForVideoRoom
+#### getNewTokenForVideoRoom
 Get Token to join a specific Video Room using it's unqiue name
 
 ```golang
 
-data, err := Lead.GetTokenForVideoRoom(CompanyID, ApplicationID, UniqueName);
+data, err := Lead.GetNewTokenForVideoRoom(CompanyID, ApplicationID, UniqueName);
 ```
 
 | Argument  |  Type  | Description |
@@ -36783,12 +35829,12 @@ Default
 ---
 
 
-#### getVideoParticipants
+#### getNewVideoParticipants
 Get participants of a specific Video Room using it's unique name
 
 ```golang
 
-data, err := Lead.GetVideoParticipants(CompanyID, ApplicationID, UniqueName);
+data, err := Lead.GetNewVideoParticipants(CompanyID, ApplicationID, UniqueName);
 ```
 
 | Argument  |  Type  | Description |
@@ -37138,7 +36184,7 @@ data, err := Order.GetAnnouncements(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `Date`
 
 
-
+Get Announcements
 
 *Success Response:*
 
@@ -37200,7 +36246,7 @@ data, err := Order.UpdateAddress(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `ShipmentID`, `Name`, `Address`, `AddressType`, `Pincode`, `Phone`, `Email`, `Landmark`, `AddressCategory`, `City`, `State`, `Country`
 
 
-
+Update Address for the order
 
 *Success Response:*
 
@@ -37248,7 +36294,7 @@ data, err := Order.Click2Call(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `Caller`, `Receiver`, `BagID`, `CallerID`, `Method`
 
 
-
+Click to Call
 
 *Success Response:*
 
@@ -37324,7 +36370,7 @@ data, err := Order.ProcessManifest(CompanyID, body);
 
 | body |  CreateOrderPayload | "Request body" 
 
-
+Process Manifest
 
 *Success Response:*
 
@@ -37362,7 +36408,7 @@ data, err := Order.DispatchManifest(CompanyID, body);
 
 | body |  DispatchManifest | "Request body" 
 
-
+Dispatch Manifest
 
 *Success Response:*
 
@@ -37399,7 +36445,7 @@ data, err := Order.GetRoleBasedActions(CompanyID);
 
 
 
-
+Get Role Based Actions
 
 *Success Response:*
 
@@ -37441,7 +36487,7 @@ data, err := Order.GetShipmentHistory(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `ShipmentID`, `BagID`
 
 
-
+Get Shipment History
 
 *Success Response:*
 
@@ -37479,7 +36525,7 @@ data, err := Order.PostShipmentHistory(CompanyID, body);
 
 | body |  PostShipmentHistory | "Request body" 
 
-
+Post shipment history
 
 *Success Response:*
 
@@ -37517,7 +36563,7 @@ data, err := Order.SendSmsNinja(CompanyID, body);
 
 | body |  SendSmsPayload | "Request body" 
 
-
+Send SMS Ninja Panel
 
 *Success Response:*
 
@@ -37555,7 +36601,7 @@ data, err := Order.UpdatePackagingDimensions(CompanyID, body);
 
 | body |  UpdatePackagingDimensionsPayload | "Request body" 
 
-
+Update Packaging Dimensions
 
 *Success Response:*
 
@@ -37593,7 +36639,7 @@ data, err := Order.CreateOrder(CompanyID, body);
 
 | body |  CreateOrderAPI | "Request body" 
 
-
+Create Order
 
 *Success Response:*
 
@@ -37706,7 +36752,7 @@ data, err := Order.UploadConsent(CompanyID, body);
 
 | body |  UploadConsent | "Request body" 
 
-
+Upload Consent
 
 *Success Response:*
 
@@ -37744,7 +36790,7 @@ data, err := Order.OrderUpdate(CompanyID, body);
 
 | body |  PlatformOrderUpdate | "Request body" 
 
-
+Update Order
 
 *Success Response:*
 
@@ -37782,7 +36828,7 @@ data, err := Order.CheckOrderStatus(CompanyID, body);
 
 | body |  OrderStatus | "Request body" 
 
-
+Check order status
 
 *Success Response:*
 
@@ -37819,7 +36865,7 @@ data, err := Order.GetStateTransitionMap(CompanyID);
 
 
 
-
+Get State Transition Map
 
 *Success Response:*
 
@@ -37841,12 +36887,12 @@ Schema: `BagStateTransitionMap`
 ---
 
 
-#### getRoleBaseStateTransition
+#### getAllowedStateTransition
 To fetch next state transitions.
 
 ```golang
 
-data, err := Order.GetRoleBaseStateTransition(CompanyID, xQuery);
+data, err := Order.GetAllowedStateTransition(CompanyID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -37919,7 +36965,7 @@ data, err := Order.FetchCreditBalanceDetail(CompanyID, body);
 
 | body |  FetchCreditBalanceRequestPayload | "Request body" 
 
-
+Fetch Credit Balance Detail
 
 *Success Response:*
 
@@ -37957,7 +37003,7 @@ data, err := Order.FetchRefundModeConfig(CompanyID, body);
 
 | body |  RefundModeConfigRequestPayload | "Request body" 
 
-
+Fetch Refund Mode Config
 
 *Success Response:*
 
@@ -37995,7 +37041,7 @@ data, err := Order.AttachOrderUser(CompanyID, body);
 
 | body |  AttachOrderUser | "Request body" 
 
-
+Attach Order User
 
 *Success Response:*
 
@@ -38033,7 +37079,7 @@ data, err := Order.SendUserMobileOTP(CompanyID, body);
 
 | body |  SendUserMobileOTP | "Request body" 
 
-
+Send User Mobile OTP
 
 *Success Response:*
 
@@ -38071,7 +37117,7 @@ data, err := Order.VerifyMobileOTP(CompanyID, body);
 
 | body |  VerifyMobileOTP | "Request body" 
 
-
+Verify Mobile OTP
 
 *Success Response:*
 
@@ -38109,7 +37155,7 @@ data, err := Order.DownloadLanesReport(CompanyID, body);
 
 | body |  BulkReportsDownloadRequest | "Request body" 
 
-
+downloads lanes shipment/orders.
 
 *Success Response:*
 
@@ -38124,14 +37170,14 @@ Schema: `BulkReportsDownloadResponse`
 *Examples:*
 
 
-success
+BulkReportsSucessfulEventSample
 ```json
-true
-```
-
-batch_id
-```json
-"0000-1111-2222-3333"
+{
+  "value": {
+    "success": true,
+    "batch_id": "0000-1111-2222-3333"
+  }
+}
 ```
 
 
@@ -38209,7 +37255,7 @@ data, err := Order.GetShipments(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `Lane`, `BagStatus`, `StatusOverrideLane`, `TimeToDispatch`, `SearchType`, `SearchValue`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PageNo`, `PageSize`, `FetchActiveShipment`, `ExcludeLockedShipments`, `PaymentMethods`, `ChannelShipmentID`, `ChannelOrderID`, `CustomMeta`, `OrderingChannel`, `CompanyAffiliateTag`, `MyOrders`, `PlatformUserID`, `Tags`
 
 
-
+Get Shipments Listing for the company id
 
 *Success Response:*
 
@@ -38251,7 +37297,7 @@ data, err := Order.GetShipmentById(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `ChannelShipmentID`, `ShipmentID`
 
 
-
+Get shipment details for the given shipment.
 
 *Success Response:*
 
@@ -38291,7 +37337,7 @@ data, err := Order.GetOrderById(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `OrderID`
 
 
-
+Get Order Details by ID
 
 *Success Response:*
 
@@ -38359,7 +37405,7 @@ data, err := Order.GetLaneConfig(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `SuperLane`, `GroupEntity`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PaymentMode`, `BagStatus`, `SearchType`, `SearchValue`, `Tags`, `TimeToDispatch`, `PaymentMethods`, `MyOrders`
 
 
-
+Get lane config for the order
 
 *Success Response:*
 
@@ -38431,7 +37477,7 @@ data, err := Order.GetOrders(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `Lane`, `SearchType`, `BagStatus`, `TimeToDispatch`, `PaymentMethods`, `Tags`, `SearchValue`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PageNo`, `PageSize`, `IsPrioritySort`, `CustomMeta`, `MyOrders`
 
 
-
+Get Orders Listing
 
 *Success Response:*
 
@@ -38516,7 +37562,7 @@ data, err := Order.Getfilters(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `View`, `GroupEntity`
 
 
-
+Get Listing Filters
 
 *Success Response:*
 
@@ -38578,7 +37624,7 @@ data, err := Order.GetBulkShipmentExcelFile(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `SalesChannels`, `DpIds`, `FromDate`, `ToDate`, `Stores`, `Tags`, `BagStatus`, `PaymentMethods`, `FileType`, `TimeToDispatch`, `PageNo`, `PageSize`
 
 
-
+Generate Bulk Shipment Excel Report.
 
 *Success Response:*
 
@@ -38615,7 +37661,7 @@ data, err := Order.GetBulkActionTemplate(CompanyID);
 
 
 
-
+Get Bulk Action seller templates.
 
 *Success Response:*
 
@@ -38655,7 +37701,7 @@ data, err := Order.DownloadBulkActionTemplate(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `TemplateSlug`
 
 
-
+Download bulk actions seller templates.
 
 *Success Response:*
 
@@ -38788,7 +37834,7 @@ data, err := Order.GetBagById(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `BagID`, `ChannelBagID`, `ChannelID`
 
 
-
+Get Order Bag Details.
 
 *Success Response:*
 
@@ -38844,7 +37890,7 @@ data, err := Order.GetBags(CompanyID, xQuery);
 | xQuery | struct | Includes properties such as `BagIds`, `ShipmentIds`, `OrderIds`, `ChannelBagIds`, `ChannelShipmentIds`, `ChannelOrderIds`, `ChannelID`, `PageNo`, `PageSize`
 
 
-
+Get Bags for the order
 
 *Success Response:*
 
@@ -38889,7 +37935,7 @@ data, err := Order.GeneratePOSReceiptByOrderId(CompanyID, OrderID, xQuery);
 | xQuery | struct | Includes properties such as `ShipmentID`, `DocumentType`
 
 
-
+Generate POS recipt by order id.
 
 *Success Response:*
 
@@ -41591,40 +40637,42 @@ merchant_payment_response_success
   "value": {
     "success": true,
     "message": "",
-    "items": {
-      "online": {
-        "is_active": true,
-        "aggregators": [
-          {
-            "id": 1,
-            "name": "Simpl",
-            "logo": "https://hdn-1.fynd.com/payment/simpl-pg-logo.jpg"
-          }
-        ]
-      },
-      "offline": {
-        "is_active": true,
-        "payment_modes": {
-          "cod": [
+    "items": [
+      {
+        "online": {
+          "is_active": true,
+          "aggregators": [
             {
-              "user_cod_limit": 0,
-              "cod_charges": 0,
-              "anonymous_cod": false,
-              "cod_max_order_value": 0,
-              "cod_min_order_value": 0,
-              "cod_charges_max_value": 0,
-              "cod_charges_min_value": 0
+              "id": 1,
+              "name": "Simpl",
+              "logo": "https://hdn-1.fynd.com/payment/simpl-pg-logo.jpg"
             }
           ]
-        }
-      },
-      "split": {
-        "is_active": true,
-        "payment_modes": {
-          "split_payment": {}
+        },
+        "offline": {
+          "is_active": true,
+          "payment_modes": {
+            "cod": [
+              {
+                "user_cod_limit": 0,
+                "cod_charges": 0,
+                "anonymous_cod": false,
+                "cod_max_order_value": 0,
+                "cod_min_order_value": 0,
+                "cod_charges_max_value": 0,
+                "cod_charges_min_value": 0
+              }
+            ]
+          }
+        },
+        "split": {
+          "is_active": true,
+          "payment_modes": {
+            "split_payment": {}
+          }
         }
       }
-    }
+    ]
   }
 }
 ```
@@ -41681,14 +40729,16 @@ merchant_payment_response_success
   "value": {
     "success": true,
     "message": "",
-    "items": {
-      "aggregators": [
-        {
-          "id": 1,
-          "name": "Simpl"
-        }
-      ]
-    },
+    "items": [
+      {
+        "aggregators": [
+          {
+            "id": 1,
+            "name": "Simpl"
+          }
+        ]
+      }
+    ],
     "offline": {
       "is_active": true,
       "payment_modes": {
@@ -41956,6 +41006,7 @@ Success
       }
     ],
     "page": {
+      "type": "string",
       "item_total": 2,
       "size": 10,
       "current": 1,
@@ -60532,26 +59583,24 @@ Success
 {
   "value": {
     "kind": "webfonts#webfontList",
-    "items": [
-      {
-        "family": "ABeeZee",
-        "variants": [
-          "regular",
-          "italic"
-        ],
-        "subsets": [
-          "latin"
-        ],
-        "version": "v14",
-        "last_modified": "2020-09-02",
-        "files": {
-          "regular": "http://fonts.gstatic.com/s/abeezee/v14/esDR31xSG-6AGleN6tKukbcHCpE.ttf",
-          "italic": "http://fonts.gstatic.com/s/abeezee/v14/esDT31xSG-6AGleN2tCklZUCGpG-GQ.ttf"
-        },
-        "category": "sans-serif",
-        "kind": "webfonts#webfont"
-      }
-    ]
+    "items": {
+      "family": "ABeeZee",
+      "variants": [
+        "regular",
+        "italic"
+      ],
+      "subsets": [
+        "latin"
+      ],
+      "version": "v14",
+      "last_modified": "2020-09-02",
+      "files": {
+        "regular": "http://fonts.gstatic.com/s/abeezee/v14/esDR31xSG-6AGleN6tKukbcHCpE.ttf",
+        "italic": "http://fonts.gstatic.com/s/abeezee/v14/esDT31xSG-6AGleN2tCklZUCGpG-GQ.ttf"
+      },
+      "category": "sans-serif",
+      "kind": "webfonts#webfont"
+    }
   }
 }
 ```
@@ -78601,8 +77650,20 @@ Success
 {
   "value": {
     "items": [
-      "sess:123",
-      "sess:456"
+      {
+        "session_id": "134",
+        "user_agent": "134",
+        "ip": "134",
+        "domain": "134",
+        "expire_in": "134"
+      },
+      {
+        "session_id": "134",
+        "user_agent": "134",
+        "ip": "134",
+        "domain": "134",
+        "expire_in": "134"
+      }
     ]
   }
 }
