@@ -19893,8 +19893,8 @@ package platform
     type ListViewResponse struct {
 
         
-            Summary []ListViewSummary  `json:"summary"`
-            Page []ZoneDataItem  `json:"page"`
+            Summary ListViewSummary  `json:"summary"`
+            Page ZoneDataItem  `json:"page"`
             Items []ListViewItems  `json:"items"`
          
     }
