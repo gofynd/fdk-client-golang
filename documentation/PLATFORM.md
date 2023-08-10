@@ -23,7 +23,7 @@
 * [Share](#Share) - Short link and QR Code 
 * [Theme](#Theme) - Responsible for themes 
 * [User](#User) - Authentication Service 
-* [Webhook](#Webhook) - Webhook dispatcher with retry and one event to many subscriber vice versa 
+* [Webhook](#Webhook) - This service provides functionality to emits different events to the subscribed webhook url's. It auto retry three times for all the failed events after certain interval as well as you can also retry manually the failed events and can view the reports. 
 
 ----
 ----
@@ -772,12 +772,22 @@
 
 * [Webhook](#Webhook)
   * Methods
+    * [manualRetryOfFailedEvent](#manualretryoffailedevent)
+    * [getEventCounts](#geteventcounts)
+    * [getManualRetryStatus](#getmanualretrystatus)
+    * [manualRetryCancel](#manualretrycancel)
+    * [getDeliveryReports](#getdeliveryreports)
+    * [downloadDeliveryReport](#downloaddeliveryreport)
+    * [pingWebhook](#pingwebhook)
+    * [fetchAllEventConfigurations](#fetchalleventconfigurations)
+    * [getReportFilters](#getreportfilters)
+    * [getHistoricalReports](#gethistoricalreports)
+    * [cancelJobByName](#canceljobbyname)
     * [getSubscribersByCompany](#getsubscribersbycompany)
     * [registerSubscriberToEvent](#registersubscribertoevent)
     * [updateSubscriberConfig](#updatesubscriberconfig)
-    * [getSubscribersByExtensionId](#getsubscribersbyextensionid)
     * [getSubscriberById](#getsubscriberbyid)
-    * [fetchAllEventConfigurations](#fetchalleventconfigurations)
+    * [getSubscribersByExtensionId](#getsubscribersbyextensionid)
     
 
 
@@ -87032,6 +87042,563 @@ Schema: `UserGroupResponseSchema`
 ## Webhook
 
 
+#### manualRetryOfFailedEvent
+Initiate a manual retry for event processing.
+
+```golang
+
+data, err := Webhook.ManualRetryOfFailedEvent(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+
+
+| body |  EventProcessRequest | "Request body" 
+
+Initiates a manual retry for event processing for a specific company. This endpoint allows the user to specify the date range (start_date and end_date) within which the events should be retried.
+
+
+*Success Response:*
+
+
+
+Manual Retry Processed Started Successfully
+
+
+Schema: `EventProcessedSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getEventCounts
+Get the count of failed events for a company within a specified date range.
+
+```golang
+
+data, err := Webhook.GetEventCounts(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+
+
+| body |  EventProcessRequest | "Request body" 
+
+Retrieves the count of failed events for a specific company within the specified date range. The user can filter the count based on specific event types if provided.
+
+
+*Success Response:*
+
+
+
+Successful response with the count of failed events.
+
+
+Schema: `FailedEventsCountSuccessResponse`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "items": [
+      {
+        "status": "FAILED",
+        "count": 2297
+      }
+    ]
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getManualRetryStatus
+Get the retry status for a company's failed events.
+
+```golang
+
+data, err := Webhook.GetManualRetryStatus(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+
+
+
+Retrieves the status of retry for a specific company's failed events. This endpoint returns the total number of events, the count of successfully retried events, the count of failed retry attempts, and the overall status of the retry process.
+
+
+*Success Response:*
+
+
+
+Successful response with the retry status.
+
+
+Schema: `RetryStatusResponse`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "total_event": 100,
+    "success_count": 60,
+    "failure_count": 40,
+    "status": "in_progress"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### manualRetryCancel
+Cancel the active manual retry for a company's failed events.
+
+```golang
+
+data, err := Webhook.ManualRetryCancel(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+
+
+
+Cancels the active manual retry for a specific company's failed events. If a manual retry is currently in progress, it will be cancelled.
+
+
+*Success Response:*
+
+
+
+Manual retry cancelled successfully.
+
+
+Schema: `EventSuccessResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDeliveryReports
+Get processed events report for a company
+
+```golang
+
+data, err := Webhook.GetDeliveryReports(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+
+
+| body |  EventProcessRequest | "Request body" 
+
+Retrieve a list of processed events for a specific company based on the provided filters.
+
+*Success Response:*
+
+
+
+Successfully retrieved the processed events report.
+
+
+Schema: `EventProcessReports`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### downloadDeliveryReport
+Download processed events report for a company
+
+```golang
+
+data, err := Webhook.DownloadDeliveryReport(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+
+
+| body |  EventProcessRequest | "Request body" 
+
+Download reports for a specific company based on the provided filters.
+
+*Success Response:*
+
+
+
+Successfully downloaded the report.
+
+
+Schema: `Object`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### pingWebhook
+Ping and validate webhook url
+
+```golang
+
+data, err := Webhook.PingWebhook(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+
+
+| body |  PingWebhook | "Request body" 
+
+Ping and validate webhook url
+
+*Success Response:*
+
+
+
+Successfully retrieved the processed events report.
+
+
+Schema: `PingWebhookResponse`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "status": "SUCCESS",
+    "message": "",
+    "code": 200
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### fetchAllEventConfigurations
+
+
+```golang
+
+data, err := Webhook.FetchAllEventConfigurations(CompanyID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+
+
+
+Get All Webhook Events
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `EventConfigResponse`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "event_configs": [
+      {
+        "id": 1,
+        "event_name": "article",
+        "event_type": "create",
+        "event_category": "application",
+        "version": "1",
+        "display_name": "article",
+        "description": "This event gets triggered when an article is created",
+        "event_schema": {},
+        "created_on": "2021-12-20T17:38:22.922Z",
+        "updated_on": "2023-07-26T12:30:30.930Z"
+      }
+    ]
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getReportFilters
+Get filters for a company
+
+```golang
+
+data, err := Webhook.GetReportFilters(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+
+
+| body |  ReportFiltersPayload | "Request body" 
+
+Retrieve filters for a specific company based on the provided subscriber IDs.
+
+*Success Response:*
+
+
+
+Successfully retrieved the filters.
+
+
+Schema: `ReportFilterResponse`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": [
+    {
+      "filter_name": "Event",
+      "values": [
+        {
+          "text": "article.create-v1 (company)",
+          "value": {
+            "event_name": "article",
+            "event_type": "create",
+            "event_category": "company",
+            "version": "1"
+          }
+        },
+        {
+          "text": "article.delete-v1 (company)",
+          "value": {
+            "event_name": "article",
+            "event_type": "delete",
+            "event_category": "company",
+            "version": "1"
+          }
+        },
+        {
+          "text": "article.update-v1 (company)",
+          "value": {
+            "event_name": "article",
+            "event_type": "update",
+            "event_category": "company",
+            "version": "1"
+          }
+        }
+      ]
+    },
+    {
+      "filter_name": "Subscriber Name",
+      "values": [
+        {
+          "text": "3AugWebhook",
+          "value": 93
+        },
+        {
+          "text": "Alda.Kuhn",
+          "value": 51
+        },
+        {
+          "text": "Alfred.Crona69",
+          "value": 59
+        }
+      ]
+    }
+  ]
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getHistoricalReports
+Get report download history
+
+```golang
+
+data, err := Webhook.GetHistoricalReports(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+
+
+| body |  HistoryPayload | "Request body" 
+
+Retrieve history reports for a specific company based on the provided filters.
+
+*Success Response:*
+
+
+
+Successfully retrieved the history reports.
+
+
+Schema: `HistoryResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### cancelJobByName
+Cancel a report export
+
+```golang
+
+data, err := Webhook.CancelJobByName(CompanyID, Filename);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+
+
+| Filename | string | Filename of the specific report export to cancel. | 
+
+
+
+Cancel the export of a specific report for a company.
+
+*Success Response:*
+
+
+
+Report export canceled successfully.
+
+
+Schema: `CancelResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getSubscribersByCompany
 Get Subscribers By Company ID
 
@@ -87047,9 +87614,9 @@ data, err := Webhook.GetSubscribersByCompany(CompanyID, xQuery);
 
 
 
-| CompanyID | float64 | Company ID of the application | 
 
 
+| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
 
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `ExtensionID`
 
@@ -87064,6 +87631,76 @@ Success
 
 
 Schema: `SubscriberResponse`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "items": [
+      {
+        "id": 1,
+        "name": "sub23",
+        "webhook_url": "https://webhook.site/512b843c-4a3b-4263-9acf-6fc9ad50c042",
+        "association": {
+          "company_id": 1,
+          "application_id": [
+            "64aed377b1fd04565d0dff30",
+            "64c00b72c07acacc1357503b",
+            "64c0ff70eb99eb4a878a7f81",
+            "64c117dbeb99eb4a878a9621",
+            "000000000000000000000001",
+            "000000000000000000000004"
+          ],
+          "criteria": "SPECIFIC-EVENTS"
+        },
+        "status": "inactive",
+        "custom_headers": {},
+        "auth_meta": {
+          "type": "hmac",
+          "secret": "test1234"
+        },
+        "email_id": "nikhil@gmail112.com",
+        "type": null,
+        "created_on": "2023-07-26T12:30:30.235Z",
+        "updated_on": "2023-07-31T14:45:50.860Z",
+        "modified_by": "Shailendrapal Shekhawat",
+        "event_configs": [
+          {
+            "id": 1,
+            "event_name": "article",
+            "event_type": "create",
+            "event_category": "application",
+            "version": "1",
+            "display_name": "article",
+            "description": "This event gets triggered when an article is created",
+            "event_schema": {},
+            "created_on": "2021-12-20T17:38:22.922Z",
+            "updated_on": "2023-07-26T12:30:30.930Z",
+            "subscriber_event_mapping": {
+              "id": 765,
+              "event_id": 1,
+              "subscriber_id": 1,
+              "created_on": "2023-07-26T12:30:30.305Z"
+            }
+          }
+        ]
+      }
+    ],
+    "page": {
+      "current": 1,
+      "has_next": false,
+      "has_previous": false,
+      "item_total": 1,
+      "size": 10,
+      "type": "number"
+    }
+  }
+}
+```
 
 
 
@@ -87087,7 +87724,7 @@ data, err := Webhook.RegisterSubscriberToEvent(CompanyID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | Company Id of the application | 
+| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
 
 
 | body |  SubscriberConfig | "Request body" 
@@ -87102,6 +87739,37 @@ Success
 
 
 Schema: `SubscriberConfig`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "id": 35,
+    "name": "xyz webhook",
+    "webhook_url": "https://xyz.requestcatcher.com/test",
+    "association": {
+      "company_id": 2,
+      "application_id": [
+        "63a0490757475baff6154585",
+        "63a42b512df5d4731c5eb601"
+      ]
+    },
+    "custom_headers": {},
+    "status": "active",
+    "email_id": "axyz@gofynd.com",
+    "auth_meta": {},
+    "event_id": [
+      10,
+      11,
+      17
+    ]
+  }
+}
+```
 
 
 
@@ -87142,6 +87810,437 @@ Success
 Schema: `SubscriberConfig`
 
 
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "id": 35,
+    "name": "xyz webhook",
+    "webhook_url": "https://xyz.requestcatcher.com/test",
+    "association": {
+      "company_id": 2,
+      "application_id": [
+        "63a0490757475baff6154585",
+        "63a42b512df5d4731c5eb601"
+      ]
+    },
+    "custom_headers": {},
+    "status": "active",
+    "email_id": "axyz@gofynd.com",
+    "auth_meta": {},
+    "event_id": [
+      10,
+      11,
+      17
+    ]
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSubscriberById
+Get Subscriber By Subscriber ID
+
+```golang
+
+data, err := Webhook.GetSubscriberById(CompanyID, SubscriberID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+
+
+| SubscriberID | float64 | The ID of the company for which manual retry is to be initiated. | 
+
+
+
+Get Subscriber By Subscriber ID
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `SubscriberResponse`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "id": 35,
+    "name": "Deepa webhook",
+    "webhook_url": "https://webhook.site/67493d35-6468-4c0a-8226-9a50954eb4c3",
+    "association": {
+      "company_id": 2,
+      "application_id": [],
+      "criteria": "EMPTY"
+    },
+    "status": "active",
+    "custom_headers": {},
+    "auth_meta": {},
+    "email_id": "abc@gofynd.com",
+    "type": null,
+    "created_on": "2023-06-07T06:57:24.567Z",
+    "updated_on": "2023-06-07T06:57:24.567Z",
+    "modified_by": null,
+    "event_configs": [
+      {
+        "id": 10,
+        "event_name": "article",
+        "event_type": "create",
+        "event_category": "company",
+        "version": "1",
+        "display_name": "article",
+        "description": "This event gets triggered when article is created",
+        "event_schema": {
+          "type": "object",
+          "required": [
+            "data"
+          ],
+          "properties": {
+            "data": {
+              "type": "object",
+              "required": [
+                "payload"
+              ],
+              "properties": {
+                "payload": {
+                  "type": "object",
+                  "required": [
+                    "articles"
+                  ],
+                  "properties": {
+                    "articles": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "uid",
+                          "item_id",
+                          "fynd_item_code",
+                          "store",
+                          "brand",
+                          "company",
+                          "size",
+                          "identifier",
+                          "seller_identifier",
+                          "price",
+                          "total_quantity",
+                          "dimension",
+                          "weight",
+                          "manufacturer",
+                          "country_of_origin"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "uid": {
+                            "type": "string"
+                          },
+                          "size": {
+                            "type": "string"
+                          },
+                          "brand": {
+                            "type": "object",
+                            "required": [
+                              "id"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "price": {
+                            "type": "object",
+                            "required": [
+                              "transfer",
+                              "effective",
+                              "marked",
+                              "currency"
+                            ],
+                            "properties": {
+                              "marked": {
+                                "type": "number"
+                              },
+                              "currency": {
+                                "type": "string"
+                              },
+                              "transfer": {
+                                "type": "number"
+                              },
+                              "effective": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "stage": {
+                            "type": "string"
+                          },
+                          "store": {
+                            "type": "object",
+                            "required": [
+                              "id"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "is_set": {
+                            "type": "boolean"
+                          },
+                          "weight": {
+                            "type": "object",
+                            "required": [
+                              "unit",
+                              "shipping"
+                            ],
+                            "properties": {
+                              "unit": {
+                                "type": "string"
+                              },
+                              "shipping": {
+                                "type": "integer"
+                              },
+                              "is_default": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "company": {
+                            "type": "object",
+                            "required": [
+                              "id"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "item_id": {
+                            "type": "integer"
+                          },
+                          "date_meta": {
+                            "type": "object",
+                            "required": [
+                              "created_on",
+                              "modified_on"
+                            ],
+                            "properties": {
+                              "created_on": {
+                                "type": "string"
+                              },
+                              "modified_on": {
+                                "type": "string"
+                              },
+                              "added_on_store": {
+                                "type": "string"
+                              },
+                              "inventory_updated_on": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "dimension": {
+                            "type": "object",
+                            "required": [
+                              "unit",
+                              "height",
+                              "width",
+                              "length"
+                            ],
+                            "properties": {
+                              "unit": {
+                                "type": "string"
+                              },
+                              "width": {
+                                "type": "integer"
+                              },
+                              "height": {
+                                "type": "integer"
+                              },
+                              "length": {
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "is_active": {
+                            "type": "boolean"
+                          },
+                          "identifier": {
+                            "type": "object"
+                          },
+                          "quantities": {
+                            "type": "object",
+                            "required": [
+                              "sellable"
+                            ],
+                            "properties": {
+                              "damaged": {
+                                "type": [
+                                  "object",
+                                  "null"
+                                ],
+                                "required": [
+                                  "count",
+                                  "updated_at"
+                                ],
+                                "properties": {
+                                  "count": {
+                                    "type": "integer"
+                                  },
+                                  "updated_at": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "sellable": {
+                                "type": "object",
+                                "required": [
+                                  "count",
+                                  "updated_at"
+                                ],
+                                "properties": {
+                                  "count": {
+                                    "type": "integer"
+                                  },
+                                  "updated_at": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "not_available": {
+                                "type": [
+                                  "object",
+                                  "null"
+                                ],
+                                "required": [
+                                  "count",
+                                  "updated_at"
+                                ],
+                                "properties": {
+                                  "count": {
+                                    "type": "integer"
+                                  },
+                                  "updated_at": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "_custom_json": {
+                            "type": "object"
+                          },
+                          "manufacturer": {
+                            "type": "object",
+                            "required": [
+                              "name",
+                              "address"
+                            ],
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "address": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "return_config": {
+                            "type": "object",
+                            "required": [
+                              "returnable"
+                            ],
+                            "properties": {
+                              "time": {
+                                "type": "integer"
+                              },
+                              "unit": {
+                                "enum": [
+                                  "days",
+                                  "hours"
+                                ],
+                                "type": "string"
+                              },
+                              "returnable": {
+                                "type": "boolean"
+                              }
+                            }
+                          },
+                          "fynd_item_code": {
+                            "type": "string"
+                          },
+                          "tax_identifier": {
+                            "type": "object"
+                          },
+                          "total_quantity": {
+                            "type": "integer"
+                          },
+                          "expiration_date": {
+                            "type": "string"
+                          },
+                          "track_inventory": {
+                            "type": "boolean"
+                          },
+                          "country_of_origin": {
+                            "type": "string"
+                          },
+                          "fynd_article_code": {
+                            "type": "string"
+                          },
+                          "seller_identifier": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "created_on": "2021-07-05T11:16:18.175Z",
+        "updated_on": "2023-01-02T05:04:24.492Z",
+        "subscriber_event_mapping": {
+          "id": 77,
+          "event_id": 10,
+          "subscriber_id": 35,
+          "created_on": "2023-06-07T06:57:24.592Z"
+        }
+      }
+    ]
+  }
+}
+```
+
+
 
 
 
@@ -87167,10 +88266,10 @@ data, err := Webhook.GetSubscribersByExtensionId(CompanyID, ExtensionID, xQuery)
 
 
 
-| CompanyID | float64 | Company ID of the application | 
+| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
 
 
-| ExtensionID | string | Extension ID | 
+| ExtensionID | float64 | The ID of the company for which manual retry is to be initiated. | 
 
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`
 
@@ -87187,81 +88286,68 @@ Success
 Schema: `SubscriberConfigList`
 
 
+*Examples:*
 
 
-
-
-
-
-
----
-
-
-#### getSubscriberById
-Get Subscriber By Subscriber ID
-
-```golang
-
-data, err := Webhook.GetSubscriberById(CompanyID, SubscriberID);
+default
+```json
+{
+  "value": {
+    "items": [
+      {
+        "id": 3,
+        "name": "64b3dc661a1b16dea7fadc22",
+        "webhook_url": "https://reviews.extensions.fyndx1.de/ext/reviews-webhook",
+        "association": {
+          "company_id": 47,
+          "extension_id": "64b3dc661a1b16dea7fadc22",
+          "application_id": [],
+          "criteria": "ALL"
+        },
+        "status": "active",
+        "custom_headers": {},
+        "auth_meta": {
+          "type": "hmac",
+          "secret": "9gX_S6e28DY1mRP"
+        },
+        "email_id": "devas@gofynd.com",
+        "type": null,
+        "created_on": "2023-07-26T12:30:41.525Z",
+        "updated_on": "2023-08-01T07:21:33.982Z",
+        "modified_by": "Sneha Mohite",
+        "event_configs": [
+          {
+            "id": 84,
+            "event_name": "shipment",
+            "event_type": "update",
+            "event_category": "application",
+            "version": "1",
+            "display_name": "shipment",
+            "description": "This event gets triggered when shipment is update",
+            "event_schema": null,
+            "created_on": "2021-07-02T13:25:34.804Z",
+            "updated_on": "2021-07-02T13:25:34.804Z",
+            "subscriber_event_mapping": {
+              "id": 779,
+              "event_id": 84,
+              "subscriber_id": 3,
+              "created_on": "2023-07-26T12:30:41.532Z"
+            }
+          }
+        ]
+      }
+    ],
+    "page": {
+      "current": 1,
+      "has_next": false,
+      "has_previous": false,
+      "item_total": 1,
+      "size": 10,
+      "type": "number"
+    }
+  }
+}
 ```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID of the application | 
-
-
-| SubscriberID | float64 | Subscriber ID | 
-
-
-
-Get Subscriber By Subscriber ID
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `SubscriberResponse`
-
-
-
-
-
-
-
-
-
----
-
-
-#### fetchAllEventConfigurations
-
-
-```golang
-
-data, err := Webhook.FetchAllEventConfigurations(CompanyID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | float64 | Company ID of the application | 
-
-
-
-Get All Webhook Events
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `EventConfigResponse`
 
 
 

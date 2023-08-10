@@ -9103,7 +9103,7 @@ package platform
         
             Criteria string  `json:"criteria"`
             Stores []interface{}  `json:"stores"`
-            Rules AppStoreRules  `json:"rules"`
+            Rules []AppStoreRules  `json:"rules"`
          
     }
     
@@ -14759,6 +14759,7 @@ package platform
             Success bool  `json:"success"`
             Message string  `json:"message"`
             ErrorTrace string  `json:"error_trace"`
+            Error string  `json:"error"`
          
     }
     
@@ -15126,6 +15127,7 @@ package platform
             Weight map[string]interface{}  `json:"weight"`
             Attributes map[string]interface{}  `json:"attributes"`
             Quantity float64  `json:"quantity"`
+            Status map[string]interface{}  `json:"status"`
          
     }
     
@@ -15150,6 +15152,9 @@ package platform
             DpID float64  `json:"dp_id"`
             Meta map[string]interface{}  `json:"meta"`
             AffiliateShipmentID string  `json:"affiliate_shipment_id"`
+            LockStatus bool  `json:"lock_status"`
+            LockMessage string  `json:"lock_message"`
+            ActionToStatus map[string]interface{}  `json:"action_to_status"`
          
     }
     
@@ -16795,16 +16800,6 @@ package platform
          
     }
     
-    // ShipmentDetails1 used by Order
-    type ShipmentDetails1 struct {
-
-        
-            LockStatus bool  `json:"lock_status"`
-            LockMessage string  `json:"lock_message"`
-            ActionToStatus map[string]interface{}  `json:"action_to_status"`
-         
-    }
-    
     // PhoneDetails used by Order
     type PhoneDetails struct {
 
@@ -17269,7 +17264,7 @@ package platform
             BillingDetails UserDetailsData  `json:"billing_details"`
             ForwardShipmentID string  `json:"forward_shipment_id"`
             FulfilmentPriority float64  `json:"fulfilment_priority"`
-            ShipmentDetails ShipmentDetails1  `json:"shipment_details"`
+            ShipmentDetails ShipmentDetails  `json:"shipment_details"`
             CustomMeta []map[string]interface{}  `json:"custom_meta"`
             ShipmentQuantity float64  `json:"shipment_quantity"`
             CompanyDetails CompanyDetails  `json:"company_details"`
@@ -17671,14 +17666,6 @@ package platform
          
     }
     
-    // ArticleDetails1 used by Order
-    type ArticleDetails1 struct {
-
-        
-            Status map[string]interface{}  `json:"status"`
-         
-    }
-    
     // StoreAddress used by Order
     type StoreAddress struct {
 
@@ -17915,7 +17902,7 @@ package platform
             BagStatus []BagStatusHistory  `json:"bag_status"`
             SellerIdentifier string  `json:"seller_identifier"`
             OriginalBagList []float64  `json:"original_bag_list"`
-            ArticleDetails ArticleDetails1  `json:"article_details"`
+            ArticleDetails ArticleDetails  `json:"article_details"`
             CurrentOperationalStatus BagStatusHistory  `json:"current_operational_status"`
             OrderingStore Store  `json:"ordering_store"`
             Article Article  `json:"article"`
@@ -17945,15 +17932,6 @@ package platform
             OperationalStatus string  `json:"operational_status"`
             EntityType string  `json:"entity_type"`
             Status BagReturnableCancelableStatus1  `json:"status"`
-         
-    }
-    
-    // ErrorResponse1 used by Order
-    type ErrorResponse1 struct {
-
-        
-            Message string  `json:"message"`
-            Error string  `json:"error"`
          
     }
     
@@ -22011,6 +21989,183 @@ package platform
     
 
     
+    // CancelResponse used by Webhook
+    type CancelResponse struct {
+
+        
+            Code float64  `json:"code"`
+         
+    }
+    
+    // EventProcessRequest used by Webhook
+    type EventProcessRequest struct {
+
+        
+            SearchText string  `json:"search_text"`
+            EndDate string  `json:"end_date"`
+            StartDate string  `json:"start_date"`
+            SubscriberIds []float64  `json:"subscriber_ids"`
+            Event []Event  `json:"event"`
+         
+    }
+    
+    // Event used by Webhook
+    type Event struct {
+
+        
+            EventName string  `json:"event_name"`
+            EventType string  `json:"event_type"`
+            EventCategory string  `json:"event_category"`
+            Version string  `json:"version"`
+         
+    }
+    
+    // ManualRetryFailedResponse used by Webhook
+    type ManualRetryFailedResponse struct {
+
+        
+            Success bool  `json:"success"`
+            Message string  `json:"message"`
+            RequestID string  `json:"request_id"`
+            Meta map[string]interface{}  `json:"meta"`
+            StackTrace string  `json:"stack_trace"`
+         
+    }
+    
+    // FailedEventsCountSuccessResponse used by Webhook
+    type FailedEventsCountSuccessResponse struct {
+
+        
+            Items []EventCountItem  `json:"items"`
+         
+    }
+    
+    // EventCountItem used by Webhook
+    type EventCountItem struct {
+
+        
+            Status string  `json:"status"`
+            Count float64  `json:"count"`
+         
+    }
+    
+    // RetryStatusResponse used by Webhook
+    type RetryStatusResponse struct {
+
+        
+            TotalEvent float64  `json:"total_event"`
+            SuccessCount float64  `json:"success_count"`
+            FailureCount float64  `json:"failure_count"`
+            Status string  `json:"status"`
+         
+    }
+    
+    // EventSuccessResponse used by Webhook
+    type EventSuccessResponse struct {
+
+        
+            Success bool  `json:"success"`
+            Message string  `json:"message"`
+         
+    }
+    
+    // EventProcessedSuccessResponse used by Webhook
+    type EventProcessedSuccessResponse struct {
+
+        
+            Success bool  `json:"success"`
+            Message string  `json:"message"`
+         
+    }
+    
+    // Error used by Webhook
+    type Error struct {
+
+        
+            Error string  `json:"error"`
+         
+    }
+    
+    // EventProcessReportObject used by Webhook
+    type EventProcessReportObject struct {
+
+        
+            EventName string  `json:"event_name"`
+            ResponseCode float64  `json:"response_code"`
+            ResponseMessage string  `json:"response_message"`
+            Data string  `json:"data"`
+            Attempt float64  `json:"attempt"`
+            LastAttemptedOn float64  `json:"last_attempted_on"`
+            Status string  `json:"status"`
+            Name string  `json:"name"`
+            WebhookURL string  `json:"webhook_url"`
+            ResponseTime float64  `json:"response_time"`
+         
+    }
+    
+    // EventProcessReports used by Webhook
+    type EventProcessReports struct {
+
+        
+            Rows []EventProcessReportObject  `json:"rows"`
+            Page Page  `json:"page"`
+         
+    }
+    
+    // PingWebhook used by Webhook
+    type PingWebhook struct {
+
+        
+            WebhookURL string  `json:"webhook_url"`
+            AuthMeta map[string]interface{}  `json:"auth_meta"`
+            CustomHeaders map[string]interface{}  `json:"custom_headers"`
+         
+    }
+    
+    // PingWebhookResponse used by Webhook
+    type PingWebhookResponse struct {
+
+        
+            Status string  `json:"status"`
+            Message string  `json:"message"`
+            Code float64  `json:"code"`
+         
+    }
+    
+    // ReportFiltersPayload used by Webhook
+    type ReportFiltersPayload struct {
+
+        
+            SubscriberIds []float64  `json:"subscriber_ids"`
+         
+    }
+    
+    // FilterValues used by Webhook
+    type FilterValues struct {
+
+        
+            Text string  `json:"text"`
+            Value map[string]interface{}  `json:"value"`
+         
+    }
+    
+    // FilterResponseObject used by Webhook
+    type FilterResponseObject struct {
+
+        
+            FilterName string  `json:"filter_name"`
+            Values []FilterValues  `json:"values"`
+         
+    }
+    
+    // EventConfigResponse used by Webhook
+    type EventConfigResponse struct {
+
+        
+            EventConfigs []EventConfig  `json:"event_configs"`
+         
+    }
+    
     // EventConfig used by Webhook
     type EventConfig struct {
 
@@ -22026,20 +22181,81 @@ package platform
          
     }
     
-    // EventConfigResponse used by Webhook
-    type EventConfigResponse struct {
+    // ReportFilterResponse used by Webhook
+    type ReportFilterResponse struct {
 
         
-            EventConfigs []EventConfig  `json:"event_configs"`
+            Items []FilterResponseObject  `json:"items"`
          
     }
     
-    // SubscriberConfigList used by Webhook
-    type SubscriberConfigList struct {
+    // HistoryPayload used by Webhook
+    type HistoryPayload struct {
 
         
-            Items []SubscriberResponse  `json:"items"`
-            Page Page  `json:"page"`
+            Type string  `json:"type"`
+            PageNo float64  `json:"page_no"`
+            PageSize float64  `json:"page_size"`
+         
+    }
+    
+    // HistoryFilters used by Webhook
+    type HistoryFilters struct {
+
+        
+            Status string  `json:"status"`
+            EndDate string  `json:"end_date"`
+            StartDate string  `json:"start_date"`
+            Subscribers []float64  `json:"subscribers"`
+         
+    }
+    
+    // Url used by Webhook
+    type Url struct {
+
+        
+            URL string  `json:"url"`
+            Name string  `json:"name"`
+         
+    }
+    
+    // CdnObject used by Webhook
+    type CdnObject struct {
+
+        
+            Urls []Url  `json:"urls"`
+         
+    }
+    
+    // UploadServiceObject used by Webhook
+    type UploadServiceObject struct {
+
+        
+            Cdn CdnObject  `json:"cdn"`
+         
+    }
+    
+    // HistoryResponseObject used by Webhook
+    type HistoryResponseObject struct {
+
+        
+            ID float64  `json:"id"`
+            Association AssociationDetails  `json:"association"`
+            Filters HistoryFilters  `json:"filters"`
+            Filename string  `json:"filename"`
+            Status string  `json:"status"`
+            UploadServiceResponse UploadServiceObject  `json:"upload_service_response"`
+            CreatedOn string  `json:"created_on"`
+            UpdatedOn string  `json:"updated_on"`
+            Message string  `json:"message"`
+         
+    }
+    
+    // HistoryResponse used by Webhook
+    type HistoryResponse struct {
+
+        
+            Items []HistoryResponseObject  `json:"items"`
          
     }
     
@@ -22057,19 +22273,11 @@ package platform
          
     }
     
-    // SubscriberConfig used by Webhook
-    type SubscriberConfig struct {
+    // AssociationDetails used by Webhook
+    type AssociationDetails struct {
 
         
-            ID float64  `json:"id"`
-            Name string  `json:"name"`
-            WebhookURL string  `json:"webhook_url"`
-            Association Association  `json:"association"`
-            CustomHeaders map[string]interface{}  `json:"custom_headers"`
-            Status SubscriberStatus  `json:"status"`
-            EmailID string  `json:"email_id"`
-            AuthMeta AuthMeta  `json:"auth_meta"`
-            EventID []float64  `json:"event_id"`
+            CompanyID float64  `json:"company_id"`
          
     }
     
@@ -22108,6 +22316,31 @@ package platform
             ApplicationID []string  `json:"application_id"`
             ExtensionID string  `json:"extension_id"`
             Criteria string  `json:"criteria"`
+         
+    }
+    
+    // SubscriberConfig used by Webhook
+    type SubscriberConfig struct {
+
+        
+            ID float64  `json:"id"`
+            Name string  `json:"name"`
+            WebhookURL string  `json:"webhook_url"`
+            Association Association  `json:"association"`
+            CustomHeaders map[string]interface{}  `json:"custom_headers"`
+            Status SubscriberStatus  `json:"status"`
+            EmailID string  `json:"email_id"`
+            AuthMeta AuthMeta  `json:"auth_meta"`
+            EventID []float64  `json:"event_id"`
+         
+    }
+    
+    // SubscriberConfigList used by Webhook
+    type SubscriberConfigList struct {
+
+        
+            Items []SubscriberResponse  `json:"items"`
+            Page Page  `json:"page"`
          
     }
     

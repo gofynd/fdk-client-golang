@@ -19160,11 +19160,708 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+
+
+    // ManualRetryOfFailedEvent Initiate a manual retry for event processing.
+     func (we *PlatformWebhook)  ManualRetryOfFailedEvent(body  EventProcessRequest) (EventProcessedSuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            manualRetryOfFailedEventResponse EventProcessedSuccessResponse
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return EventProcessedSuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return EventProcessedSuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            we.Config,
+            "post",
+            fmt.Sprintf("/service/platform/webhook/v1.0/company/%s/retry",we.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return EventProcessedSuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &manualRetryOfFailedEventResponse)
+        if err != nil {
+             return EventProcessedSuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return manualRetryOfFailedEventResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetEventCounts Get the count of failed events for a company within a specified date range.
+     func (we *PlatformWebhook)  GetEventCounts(body  EventProcessRequest) (FailedEventsCountSuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getEventCountsResponse FailedEventsCountSuccessResponse
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return FailedEventsCountSuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return FailedEventsCountSuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            we.Config,
+            "post",
+            fmt.Sprintf("/service/platform/webhook/v1.0/company/%s/retry/events/counts",we.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return FailedEventsCountSuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getEventCountsResponse)
+        if err != nil {
+             return FailedEventsCountSuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return getEventCountsResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetManualRetryStatus Get the retry status for a company's failed events.
+     func (we *PlatformWebhook)  GetManualRetryStatus() (RetryStatusResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getManualRetryStatusResponse RetryStatusResponse
+	    )
+
+        
+
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            we.Config,
+            "get",
+            fmt.Sprintf("/service/platform/webhook/v1.0/company/%s/retry/status",we.CompanyID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return RetryStatusResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getManualRetryStatusResponse)
+        if err != nil {
+             return RetryStatusResponse{}, common.NewFDKError(err.Error())
+        }
+        return getManualRetryStatusResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // ManualRetryCancel Cancel the active manual retry for a company's failed events.
+     func (we *PlatformWebhook)  ManualRetryCancel() (EventSuccessResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            manualRetryCancelResponse EventSuccessResponse
+	    )
+
+        
+
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            we.Config,
+            "delete",
+            fmt.Sprintf("/service/platform/webhook/v1.0/company/%s/retry/cancel",we.CompanyID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return EventSuccessResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &manualRetryCancelResponse)
+        if err != nil {
+             return EventSuccessResponse{}, common.NewFDKError(err.Error())
+        }
+        return manualRetryCancelResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetDeliveryReports Get processed events report for a company
+     func (we *PlatformWebhook)  GetDeliveryReports(body  EventProcessRequest) (EventProcessReports, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getDeliveryReportsResponse EventProcessReports
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return EventProcessReports{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return EventProcessReports{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            we.Config,
+            "post",
+            fmt.Sprintf("/service/platform/webhook/v1.0/company/%s/reports/event_processed",we.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return EventProcessReports{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getDeliveryReportsResponse)
+        if err != nil {
+             return EventProcessReports{}, common.NewFDKError(err.Error())
+        }
+        return getDeliveryReportsResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // DownloadDeliveryReport Download processed events report for a company
+     func (we *PlatformWebhook)  DownloadDeliveryReport(body  EventProcessRequest) (map[string]interface{}, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            downloadDeliveryReportResponse map[string]interface{}
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return map[string]interface{}{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return map[string]interface{}{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            we.Config,
+            "post",
+            fmt.Sprintf("/service/platform/webhook/v1.0/company/%s/reports/download",we.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return map[string]interface{}{}, err
+	    }
+        
+        err = json.Unmarshal(response, &downloadDeliveryReportResponse)
+        if err != nil {
+             return map[string]interface{}{}, common.NewFDKError(err.Error())
+        }
+        return downloadDeliveryReportResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // PingWebhook Ping and validate webhook url
+     func (we *PlatformWebhook)  PingWebhook(body  PingWebhook) (PingWebhookResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            pingWebhookResponse PingWebhookResponse
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return PingWebhookResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return PingWebhookResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            we.Config,
+            "post",
+            fmt.Sprintf("/service/platform/webhook/v1.0/company/%s/subscriber/ping",we.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return PingWebhookResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &pingWebhookResponse)
+        if err != nil {
+             return PingWebhookResponse{}, common.NewFDKError(err.Error())
+        }
+        return pingWebhookResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // FetchAllEventConfigurations 
+     func (we *PlatformWebhook)  FetchAllEventConfigurations() (EventConfigResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            fetchAllEventConfigurationsResponse EventConfigResponse
+	    )
+
+        
+
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            we.Config,
+            "get",
+            fmt.Sprintf("/service/platform/webhook/v1.0/company/%s/events",we.CompanyID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return EventConfigResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &fetchAllEventConfigurationsResponse)
+        if err != nil {
+             return EventConfigResponse{}, common.NewFDKError(err.Error())
+        }
+        return fetchAllEventConfigurationsResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetReportFilters Get filters for a company
+     func (we *PlatformWebhook)  GetReportFilters(body  ReportFiltersPayload) (ReportFilterResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getReportFiltersResponse ReportFilterResponse
+	    )
+
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return ReportFilterResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return ReportFilterResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            we.Config,
+            "post",
+            fmt.Sprintf("/service/platform/webhook/v1.0/company/%s/filters",we.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return ReportFilterResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getReportFiltersResponse)
+        if err != nil {
+             return ReportFilterResponse{}, common.NewFDKError(err.Error())
+        }
+        return getReportFiltersResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // GetHistoricalReports Get report download history
+     func (we *PlatformWebhook)  GetHistoricalReports(body  HistoryPayload) (HistoryResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getHistoricalReportsResponse HistoryResponse
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return HistoryResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return HistoryResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            we.Config,
+            "post",
+            fmt.Sprintf("/service/platform/webhook/v1.0/company/%s/reports/history",we.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return HistoryResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getHistoricalReportsResponse)
+        if err != nil {
+             return HistoryResponse{}, common.NewFDKError(err.Error())
+        }
+        return getHistoricalReportsResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // CancelJobByName Cancel a report export
+     func (we *PlatformWebhook)  CancelJobByName(Filename string) (CancelResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            cancelJobByNameResponse CancelResponse
+	    )
+
+        
+
+        
+
+        
+        
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            we.Config,
+            "get",
+            fmt.Sprintf("/service/platform/webhook/v1.0/company/%s/reports/cancel/file/%s",we.CompanyID, Filename),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return CancelResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &cancelJobByNameResponse)
+        if err != nil {
+             return CancelResponse{}, common.NewFDKError(err.Error())
+        }
+        return cancelJobByNameResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
     //PlatformGetSubscribersByCompanyXQuery holds query params
     type PlatformGetSubscribersByCompanyXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
-        ExtensionID string  `url:"extension_id,omitempty"`  
+        ExtensionID float64  `url:"extension_id,omitempty"`  
     }
     
 
@@ -19401,70 +20098,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    //PlatformGetSubscribersByExtensionIdXQuery holds query params
-    type PlatformGetSubscribersByExtensionIdXQuery struct { 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"`  
-    }
-    
-
-
-    // GetSubscribersByExtensionId Get Subscribers By Extension ID
-     func (we *PlatformWebhook)  GetSubscribersByExtensionId(ExtensionID string, xQuery PlatformGetSubscribersByExtensionIdXQuery) (SubscriberConfigList, error){
-        
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getSubscribersByExtensionIdResponse SubscriberConfigList
-	    )
-
-        
-
-        
-            
-                
-            
-                
-            
-        
-
-        
-        
-        
-
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            we.Config,
-            "get",
-            fmt.Sprintf("/service/platform/webhook/v1.0/company/%s/extension/%s/subscriber",we.CompanyID, ExtensionID),
-            nil,
-            xQuery,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-             return SubscriberConfigList{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getSubscribersByExtensionIdResponse)
-        if err != nil {
-             return SubscriberConfigList{}, common.NewFDKError(err.Error())
-        }
-        return getSubscribersByExtensionIdResponse, nil
-        
-    }
-         
-        
-       
-    
-    
-   
-  
-    
-    
 
 
     // GetSubscriberById Get Subscriber By Subscriber ID
@@ -19517,22 +20150,36 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformGetSubscribersByExtensionIdXQuery holds query params
+    type PlatformGetSubscribersByExtensionIdXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
 
 
-    // FetchAllEventConfigurations 
-     func (we *PlatformWebhook)  FetchAllEventConfigurations() (EventConfigResponse, error){
+    // GetSubscribersByExtensionId Get Subscribers By Extension ID
+     func (we *PlatformWebhook)  GetSubscribersByExtensionId(ExtensionID float64, xQuery PlatformGetSubscribersByExtensionIdXQuery) (SubscriberConfigList, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            fetchAllEventConfigurationsResponse EventConfigResponse
+            getSubscribersByExtensionIdResponse SubscriberConfigList
 	    )
 
         
 
         
+            
+                
+            
+                
+            
+        
 
+        
+        
         
 
          
@@ -19542,20 +20189,20 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         rawRequest = NewRequest(
             we.Config,
             "get",
-            fmt.Sprintf("/service/platform/webhook/v1.0/company/%s/events",we.CompanyID),
+            fmt.Sprintf("/service/platform/webhook/v1.0/company/%s/extension/undefined/subscriber",we.CompanyID, ExtensionID),
             nil,
-            nil,
+            xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-             return EventConfigResponse{}, err
+             return SubscriberConfigList{}, err
 	    }
         
-        err = json.Unmarshal(response, &fetchAllEventConfigurationsResponse)
+        err = json.Unmarshal(response, &getSubscribersByExtensionIdResponse)
         if err != nil {
-             return EventConfigResponse{}, common.NewFDKError(err.Error())
+             return SubscriberConfigList{}, common.NewFDKError(err.Error())
         }
-        return fetchAllEventConfigurationsResponse, nil
+        return getSubscribersByExtensionIdResponse, nil
         
     }
          
