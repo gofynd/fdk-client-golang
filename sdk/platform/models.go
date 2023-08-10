@@ -19819,6 +19819,7 @@ package platform
             SubType string  `json:"sub_type"`
             UID string  `json:"uid"`
             Name string  `json:"name"`
+            DisplayName string  `json:"display_name"`
          
     }
     
