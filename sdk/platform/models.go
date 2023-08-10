@@ -1308,7 +1308,7 @@ package platform
 
         
             Payments []PromotionPaymentModes  `json:"payments"`
-            UserRegistered string  `json:"user_registered"`
+            UserRegistered map[string]interface{}  `json:"user_registered"`
             Platforms []string  `json:"platforms"`
             PostOrder PostOrder1  `json:"post_order"`
             UserGroups []float64  `json:"user_groups"`
@@ -14759,7 +14759,6 @@ package platform
             Success bool  `json:"success"`
             Message string  `json:"message"`
             ErrorTrace string  `json:"error_trace"`
-            Error string  `json:"error"`
          
     }
     
@@ -15127,7 +15126,6 @@ package platform
             Weight map[string]interface{}  `json:"weight"`
             Attributes map[string]interface{}  `json:"attributes"`
             Quantity float64  `json:"quantity"`
-            Status map[string]interface{}  `json:"status"`
          
     }
     
@@ -15152,9 +15150,6 @@ package platform
             DpID float64  `json:"dp_id"`
             Meta map[string]interface{}  `json:"meta"`
             AffiliateShipmentID string  `json:"affiliate_shipment_id"`
-            LockStatus bool  `json:"lock_status"`
-            LockMessage string  `json:"lock_message"`
-            ActionToStatus map[string]interface{}  `json:"action_to_status"`
          
     }
     
@@ -16800,6 +16795,16 @@ package platform
          
     }
     
+    // ShipmentDetails1 used by Order
+    type ShipmentDetails1 struct {
+
+        
+            LockStatus bool  `json:"lock_status"`
+            LockMessage string  `json:"lock_message"`
+            ActionToStatus map[string]interface{}  `json:"action_to_status"`
+         
+    }
+    
     // PhoneDetails used by Order
     type PhoneDetails struct {
 
@@ -17264,7 +17269,7 @@ package platform
             BillingDetails UserDetailsData  `json:"billing_details"`
             ForwardShipmentID string  `json:"forward_shipment_id"`
             FulfilmentPriority float64  `json:"fulfilment_priority"`
-            ShipmentDetails ShipmentDetails  `json:"shipment_details"`
+            ShipmentDetails ShipmentDetails1  `json:"shipment_details"`
             CustomMeta []map[string]interface{}  `json:"custom_meta"`
             ShipmentQuantity float64  `json:"shipment_quantity"`
             CompanyDetails CompanyDetails  `json:"company_details"`
@@ -17666,6 +17671,14 @@ package platform
          
     }
     
+    // ArticleDetails1 used by Order
+    type ArticleDetails1 struct {
+
+        
+            Status map[string]interface{}  `json:"status"`
+         
+    }
+    
     // StoreAddress used by Order
     type StoreAddress struct {
 
@@ -17902,7 +17915,7 @@ package platform
             BagStatus []BagStatusHistory  `json:"bag_status"`
             SellerIdentifier string  `json:"seller_identifier"`
             OriginalBagList []float64  `json:"original_bag_list"`
-            ArticleDetails ArticleDetails  `json:"article_details"`
+            ArticleDetails ArticleDetails1  `json:"article_details"`
             CurrentOperationalStatus BagStatusHistory  `json:"current_operational_status"`
             OrderingStore Store  `json:"ordering_store"`
             Article Article  `json:"article"`
@@ -17932,6 +17945,15 @@ package platform
             OperationalStatus string  `json:"operational_status"`
             EntityType string  `json:"entity_type"`
             Status BagReturnableCancelableStatus1  `json:"status"`
+         
+    }
+    
+    // ErrorResponse1 used by Order
+    type ErrorResponse1 struct {
+
+        
+            Message string  `json:"message"`
+            Error string  `json:"error"`
          
     }
     
@@ -17971,478 +17993,6 @@ package platform
     
 
     
-    // ExtensionResponse used by Partner
-    type ExtensionResponse struct {
-
-        
-            Items []ExtensionListItems  `json:"items"`
-            Page Pagination  `json:"page"`
-         
-    }
-    
-    // ExtensionListItems used by Partner
-    type ExtensionListItems struct {
-
-        
-            BaseURL string  `json:"base_url"`
-            Callbacks Callback  `json:"callbacks"`
-            ContactEmail string  `json:"contact_email"`
-            CurrentStatus string  `json:"current_status"`
-            Description string  `json:"description"`
-            DevelopedByName string  `json:"developed_by_name"`
-            ExtVersion string  `json:"ext_version"`
-            ExtentionType string  `json:"extention_type"`
-            IsApplicationLevel bool  `json:"is_application_level"`
-            IsComingSoon bool  `json:"is_coming_soon"`
-            IsSaleschannel bool  `json:"is_saleschannel"`
-            Logo Logo  `json:"logo"`
-            Name string  `json:"name"`
-            Scope []string  `json:"scope"`
-            CreatedAt string  `json:"created_at"`
-            IsHidden bool  `json:"is_hidden"`
-            ModifiedAt string  `json:"modified_at"`
-            OrganizationID string  `json:"organization_id"`
-            WhitelistedUrls []string  `json:"whitelisted_urls"`
-            ID string  `json:"_id"`
-         
-    }
-    
-    // ExtensionCommon used by Partner
-    type ExtensionCommon struct {
-
-        
-            BaseURL string  `json:"base_url"`
-            Callbacks Callback  `json:"callbacks"`
-            ContactEmail string  `json:"contact_email"`
-            CurrentStatus string  `json:"current_status"`
-            Description string  `json:"description"`
-            DevelopedByName string  `json:"developed_by_name"`
-            ExtVersion string  `json:"ext_version"`
-            ExtentionType string  `json:"extention_type"`
-            IsApplicationLevel bool  `json:"is_application_level"`
-            IsComingSoon bool  `json:"is_coming_soon"`
-            IsSaleschannel bool  `json:"is_saleschannel"`
-            Logo Logo  `json:"logo"`
-            Name string  `json:"name"`
-            Scope []string  `json:"scope"`
-         
-    }
-    
-    // ExtensionList used by Partner
-    type ExtensionList struct {
-
-        
-            Items []ExtensionItems  `json:"items"`
-            Page Pagination  `json:"page"`
-         
-    }
-    
-    // ExtensionItems used by Partner
-    type ExtensionItems struct {
-
-        
-            BaseURL string  `json:"base_url"`
-            Company string  `json:"company"`
-            Description string  `json:"description"`
-            DevelopedByName string  `json:"developed_by_name"`
-            ExtVersion string  `json:"ext_version"`
-            ExtensionID string  `json:"extension_id"`
-            ExtentionType string  `json:"extention_type"`
-            Installed bool  `json:"installed"`
-            IsSaleschannel bool  `json:"is_saleschannel"`
-            LaunchURL string  `json:"launch_url"`
-            Name string  `json:"name"`
-            Logo Logo  `json:"logo"`
-            Scope []Scope  `json:"scope"`
-         
-    }
-    
-    // Scope used by Partner
-    type Scope struct {
-
-        
-            Description string  `json:"description"`
-            Name string  `json:"name"`
-         
-    }
-    
-    // Pagination used by Partner
-    type Pagination struct {
-
-        
-            Current float64  `json:"current"`
-            HasNext bool  `json:"has_next"`
-            ItemTotal float64  `json:"item_total"`
-            Size float64  `json:"size"`
-            Type string  `json:"type"`
-         
-    }
-    
-    // ExtensionSuggestionList used by Partner
-    type ExtensionSuggestionList struct {
-
-        
-            Items []ExtensionSuggestion  `json:"items"`
-         
-    }
-    
-    // OrganizationBasicInfo used by Partner
-    type OrganizationBasicInfo struct {
-
-        
-            Name string  `json:"name"`
-            Slug string  `json:"slug"`
-         
-    }
-    
-    // ExtensionSuggestion used by Partner
-    type ExtensionSuggestion struct {
-
-        
-            ListingInfo ListingInfo  `json:"listing_info"`
-            Organization OrganizationBasicInfo  `json:"organization"`
-            OrganizationID string  `json:"organization_id"`
-            Plans []Plan  `json:"plans"`
-            Slug string  `json:"slug"`
-         
-    }
-    
-    // Plan used by Partner
-    type Plan struct {
-
-        
-            AdditionalCharges string  `json:"additional_charges"`
-            Features string  `json:"features"`
-            Name string  `json:"name"`
-            TrialDays float64  `json:"trial_days"`
-            Type string  `json:"type"`
-            Price Price  `json:"price"`
-         
-    }
-    
-    // ListingInfo used by Partner
-    type ListingInfo struct {
-
-        
-            Icon string  `json:"icon"`
-            Name string  `json:"name"`
-            Tagline string  `json:"tagline"`
-            Keywords []string  `json:"keywords"`
-         
-    }
-    
-    // Callback used by Partner
-    type Callback struct {
-
-        
-            Auth string  `json:"auth"`
-            AutoInstall string  `json:"auto_install"`
-            Install string  `json:"install"`
-            Setup string  `json:"setup"`
-            Uninstall string  `json:"uninstall"`
-         
-    }
-    
-    // Logo used by Partner
-    type Logo struct {
-
-        
-            Large string  `json:"large"`
-            Small string  `json:"small"`
-         
-    }
-    
-    // Category used by Partner
-    type Category struct {
-
-        
-            CategoryL1 []CategoryL1  `json:"category_l1"`
-            CategoryL2 []CategoryL2  `json:"category_l2"`
-         
-    }
-    
-    // CommingSoon used by Partner
-    type CommingSoon struct {
-
-        
-            IsComingSoon bool  `json:"is_coming_soon"`
-            UpvoteCount float64  `json:"upvote_count"`
-         
-    }
-    
-    // ContactInfo used by Partner
-    type ContactInfo struct {
-
-        
-            Support Support  `json:"support"`
-         
-    }
-    
-    // Benefits used by Partner
-    type Benefits struct {
-
-        
-            Title string  `json:"title"`
-            Description string  `json:"description"`
-         
-    }
-    
-    // Screenshots used by Partner
-    type Screenshots struct {
-
-        
-            Desktop []string  `json:"desktop"`
-            Mobile []string  `json:"mobile"`
-         
-    }
-    
-    // ExtensionDetails used by Partner
-    type ExtensionDetails struct {
-
-        
-            Benefits []Benefits  `json:"benefits"`
-            DemoURL string  `json:"demo_url"`
-            Description string  `json:"description"`
-            Integration []string  `json:"integration"`
-            VideoURL []map[string]interface{}  `json:"video_url"`
-            Youtube []string  `json:"youtube"`
-            Screenshots Screenshots  `json:"screenshots"`
-         
-    }
-    
-    // Plans used by Partner
-    type Plans struct {
-
-        
-            AdditionalCharges string  `json:"additional_charges"`
-            Features string  `json:"features"`
-            Name string  `json:"name"`
-            Price Price  `json:"price"`
-            TrialDays float64  `json:"trial_days"`
-            Type string  `json:"type"`
-         
-    }
-    
-    // PublicExtension used by Partner
-    type PublicExtension struct {
-
-        
-            Category Category  `json:"category"`
-            ComingSoon CommingSoon  `json:"coming_soon"`
-            ContactInfo ContactInfo  `json:"contact_info"`
-            CreatedAt string  `json:"created_at"`
-            CurrentStatus string  `json:"current_status"`
-            Details ExtensionDetails  `json:"details"`
-            ExtensionID string  `json:"extension_id"`
-            IsComingSoon bool  `json:"is_coming_soon"`
-            ListingInfo ListingInfo  `json:"listing_info"`
-            ModifiedAt string  `json:"modified_at"`
-            Organization OrganizationBasicInfo  `json:"organization"`
-            OrganizationID string  `json:"organization_id"`
-            PlanType string  `json:"plan_type"`
-            Plans []Plans  `json:"plans"`
-            PlansURL string  `json:"plans_url"`
-            ReviewInstructions string  `json:"review_instructions"`
-            Scope []string  `json:"scope"`
-            Slug string  `json:"slug"`
-            ID string  `json:"_id"`
-         
-    }
-    
-    // CategoryL1 used by Partner
-    type CategoryL1 struct {
-
-        
-            Description string  `json:"description"`
-            Display string  `json:"display"`
-            Level float64  `json:"level"`
-            Logo string  `json:"logo"`
-            Slug string  `json:"slug"`
-            Value string  `json:"value"`
-            ID string  `json:"_id"`
-         
-    }
-    
-    // CategoryL2 used by Partner
-    type CategoryL2 struct {
-
-        
-            Parent string  `json:"parent"`
-            Display string  `json:"display"`
-            Level float64  `json:"level"`
-            Slug string  `json:"slug"`
-            Value string  `json:"value"`
-            ID string  `json:"_id"`
-         
-    }
-    
-    // Support used by Partner
-    type Support struct {
-
-        
-            Email string  `json:"email"`
-            FaqURL string  `json:"faq_url"`
-            Phone string  `json:"phone"`
-            PrivacyPolicyURL string  `json:"privacy_policy_url"`
-            WebsiteURL string  `json:"website_url"`
-         
-    }
-    
-    // Price used by Partner
-    type Price struct {
-
-        
-            Amount float64  `json:"amount"`
-            Currency string  `json:"currency"`
-         
-    }
-    
-    // UninstallExtension used by Partner
-    type UninstallExtension struct {
-
-        
-            Success bool  `json:"success"`
-         
-    }
-    
-    // SubscriptionRequest used by Partner
-    type SubscriptionRequest struct {
-
-        
-            Approved string  `json:"approved"`
-            ClientID string  `json:"client_id"`
-            CompanyID string  `json:"company_id"`
-            CreditBalance string  `json:"credit_balance"`
-            RequestID string  `json:"request_id"`
-         
-    }
-    
-    // SubscriptionRes used by Partner
-    type SubscriptionRes struct {
-
-        
-            RedirectURL string  `json:"redirect_url"`
-         
-    }
-    
-    // PartnerInviteDetails used by Partner
-    type PartnerInviteDetails struct {
-
-        
-            AccountType string  `json:"account_type"`
-            ApprovedPermissions ApprovedPermissions  `json:"approved_permissions"`
-            Comment string  `json:"comment"`
-            CompanyID float64  `json:"company_id"`
-            CompanyName string  `json:"company_name"`
-            CreatedAt string  `json:"created_at"`
-            ModifiedAt string  `json:"modified_at"`
-            OrganizationID string  `json:"organization_id"`
-            OrganizationName string  `json:"organization_name"`
-            RequestStatus string  `json:"request_status"`
-            RequestedPermissions RequestedPermissions  `json:"requested_permissions"`
-            UserID string  `json:"user_id"`
-            ID string  `json:"_id"`
-         
-    }
-    
-    // ApprovedPermissions used by Partner
-    type ApprovedPermissions struct {
-
-        
-            ApplicationRole []string  `json:"application_role"`
-            CompanyPermissions []string  `json:"company_permissions"`
-            CompanyRole []string  `json:"company_role"`
-         
-    }
-    
-    // RequestedPermissions used by Partner
-    type RequestedPermissions struct {
-
-        
-            ApplicationPermissions []string  `json:"application_permissions"`
-            ApplicationRole []string  `json:"application_role"`
-            CompanyPermissions []string  `json:"company_permissions"`
-            CompanyRole []string  `json:"company_role"`
-         
-    }
-    
-    // ModifyPartnerReq used by Partner
-    type ModifyPartnerReq struct {
-
-        
-            AccountType string  `json:"account_type"`
-            ApprovedPermissions ApprovedPermissionsInfo  `json:"approved_permissions"`
-            Comment string  `json:"comment"`
-            CompanyID float64  `json:"company_id"`
-            CompanyName string  `json:"company_name"`
-            OrganizationID string  `json:"organization_id"`
-            OrganizationName string  `json:"organization_name"`
-            RequestStatus string  `json:"request_status"`
-            RequestedPermissions RequestedPermissions  `json:"requested_permissions"`
-            UserID string  `json:"user_id"`
-            ID string  `json:"_id"`
-         
-    }
-    
-    // ApprovedPermissionsInfo used by Partner
-    type ApprovedPermissionsInfo struct {
-
-        
-            ApplicationPermissions map[string]ApplicationPermissions  `json:"application_permissions"`
-            CompanyPermissions []string  `json:"company_permissions"`
-         
-    }
-    
-    // ApplicationPermissions used by Partner
-    type ApplicationPermissions struct {
-
-        
-            Permissions []string  `json:"permissions"`
-            Roles []string  `json:"roles"`
-         
-    }
-    
-    // PartnerRequestList used by Partner
-    type PartnerRequestList struct {
-
-        
-            Items PartnerList  `json:"items"`
-            Page Pagination  `json:"page"`
-         
-    }
-    
-    // PartnerList used by Partner
-    type PartnerList struct {
-
-        
-            AccountType string  `json:"account_type"`
-            ApprovedPermissions ApprovedPermissionsInfo  `json:"approved_permissions"`
-            ApproverID string  `json:"approver_id"`
-            Comment string  `json:"comment"`
-            CompanyID float64  `json:"company_id"`
-            CompanyName string  `json:"company_name"`
-            CreatedAt string  `json:"created_at"`
-            ModifiedAt string  `json:"modified_at"`
-            OrganizationID string  `json:"organization_id"`
-            OrganizationName string  `json:"organization_name"`
-            RequestStatus string  `json:"request_status"`
-            RequestedPermissions RequestedPermissions  `json:"requested_permissions"`
-            UserID string  `json:"user_id"`
-            ID string  `json:"_id"`
-         
-    }
-    
-    // SetupProductRes used by Partner
-    type SetupProductRes struct {
-
-        
-            Message string  `json:"message"`
-            RequestID string  `json:"request_id"`
-            NextStep float64  `json:"next_step"`
-            CliWaitTime float64  `json:"cli_wait_time"`
-         
-    }
-    
     // AddProxyReq used by Partner
     type AddProxyReq struct {
 
@@ -18464,15 +18014,6 @@ package platform
             ExtensionID string  `json:"extension_id"`
             CreatedAt string  `json:"created_at"`
             ModifiedAt string  `json:"modified_at"`
-         
-    }
-    
-    // getProxyPathRes used by Partner
-    type getProxyPathRes struct {
-
-        
-            Page Pagination  `json:"page"`
-            Items []AddProxyResponse  `json:"items"`
          
     }
     
@@ -19588,6 +19129,15 @@ package platform
          
     }
     
+    // MerchnatPaymentModeRequest used by Payment
+    type MerchnatPaymentModeRequest struct {
+
+        
+            Offline map[string]interface{}  `json:"offline"`
+            Online map[string]interface{}  `json:"online"`
+         
+    }
+    
     // AddressDetail used by Payment
     type AddressDetail struct {
 
@@ -20119,8 +19669,8 @@ package platform
     type ListViewResponse struct {
 
         
-            Summary []ListViewSummary  `json:"summary"`
-            Page []ZoneDataItem  `json:"page"`
+            Summary ListViewSummary  `json:"summary"`
+            Page ZoneDataItem  `json:"page"`
             Items []ListViewItems  `json:"items"`
          
     }

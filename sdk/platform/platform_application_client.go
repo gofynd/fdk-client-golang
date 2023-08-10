@@ -19080,76 +19080,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-  
-
-    
-    // GetProxyPath Proxy
-     func (pa *PlatformAppPartner)  GetProxyPath(ExtensionID string) (getProxyPathRes, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getProxyPathResponse getProxyPathRes
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "get",
-            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/application/%s/proxy/%s",pa.CompanyID, pa.ApplicationID, ExtensionID),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return getProxyPathRes{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProxyPathResponse)
-        if err != nil {
-            return getProxyPathRes{}, common.NewFDKError(err.Error())
-        }
-        return getProxyPathResponse, nil
-        
-    }
-           
-       
-    
-    
-    
   
 
     
@@ -19208,56 +19138,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return AddProxyResponse{}, common.NewFDKError(err.Error())
         }
         return addProxyPathResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetProxyPathAttachedPath Proxy
-     func (pa *PlatformAppPartner)  GetProxyPathAttachedPath(ExtensionID string, AttachedPath string) (AddProxyResponse, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getProxyPathAttachedPathResponse AddProxyResponse
-	    )
-
-        
-
-         
-
-        
-        
-        
-        
-        
-        
-         
-        
-        
-        //API call
-        rawRequest = NewRequest(
-            pa.config,
-            "get",
-            fmt.Sprintf("/service/platform/partners/v1.0/company/%s/application/%s/proxy/%s/%s",pa.CompanyID, pa.ApplicationID, ExtensionID, AttachedPath),
-            nil,
-            nil,
-            nil)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return AddProxyResponse{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getProxyPathAttachedPathResponse)
-        if err != nil {
-            return AddProxyResponse{}, common.NewFDKError(err.Error())
-        }
-        return getProxyPathAttachedPathResponse, nil
         
     }
            
@@ -21528,7 +21408,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
     
     // PatchMerchantPaymentOption Update Payment modes and COD details.
-     func (pa *PlatformAppPayment)  PatchMerchantPaymentOption(body  MerchnatPaymentModeResponse) (MerchnatPaymentModeResponse, error) {
+     func (pa *PlatformAppPayment)  PatchMerchantPaymentOption(body  MerchnatPaymentModeRequest) (MerchnatPaymentModeResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -21536,8 +21416,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             patchMerchantPaymentOptionResponse MerchnatPaymentModeResponse
 	    )
 
-        
-            
         
             
         
