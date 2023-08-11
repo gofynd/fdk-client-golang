@@ -22291,7 +22291,7 @@ package platform
             Association Association  `json:"association"`
             CustomHeaders map[string]interface{}  `json:"custom_headers"`
             EmailID string  `json:"email_id"`
-            Status SubscriberStatus  `json:"status"`
+            Status string  `json:"status"`
             AuthMeta AuthMeta  `json:"auth_meta"`
             CreatedOn string  `json:"created_on"`
             UpdatedOn string  `json:"updated_on"`
@@ -22328,7 +22328,7 @@ package platform
             WebhookURL string  `json:"webhook_url"`
             Association Association  `json:"association"`
             CustomHeaders map[string]interface{}  `json:"custom_headers"`
-            Status SubscriberStatus  `json:"status"`
+            Status string  `json:"status"`
             EmailID string  `json:"email_id"`
             AuthMeta AuthMeta  `json:"auth_meta"`
             EventID []float64  `json:"event_id"`
