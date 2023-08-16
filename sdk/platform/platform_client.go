@@ -1199,6 +1199,125 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
        
     
+    
+   
+  
+    
+    
+
+
+    // GetEnterprisePlans Get Enterprise Plans
+     func (bi *PlatformBilling)  GetEnterprisePlans() ([]Plan, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getEnterprisePlansResponse []Plan
+	    )
+
+        
+
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            bi.Config,
+            "get",
+            fmt.Sprintf("/service/platform/billing/v1.0/company/%s/plans",bi.CompanyID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return []Plan{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getEnterprisePlansResponse)
+        if err != nil {
+             return []Plan{}, common.NewFDKError(err.Error())
+        }
+        return getEnterprisePlansResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // PlanStatusUpdate Update Status of The plan
+     func (bi *PlatformBilling)  PlanStatusUpdate(body  PlanStatusUpdateReq) (Plan, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            planStatusUpdateResponse Plan
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return Plan{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return Plan{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            bi.Config,
+            "patch",
+            fmt.Sprintf("/service/platform/billing/v1.0/company/%s/plan/status",bi.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return Plan{}, err
+	    }
+        
+        err = json.Unmarshal(response, &planStatusUpdateResponse)
+        if err != nil {
+             return Plan{}, common.NewFDKError(err.Error())
+        }
+        return planStatusUpdateResponse, nil
+        
+    }
+         
+        
+       
+    
 
 
 	
@@ -6908,6 +7027,54 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     }
          
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            
+            // GetSystemNotificationsPaginator Get system notifications  
+            func (co *PlatformCommunication)  GetSystemNotificationsPaginator(
+              xQuery PlatformGetSystemNotificationsXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := co.GetSystemNotifications(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+        
        
     
     
@@ -8599,6 +8766,54 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     }
          
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            
+            // GetAvailableOptInsPaginator Get all available integration opt-ins  
+            func (co *PlatformConfiguration)  GetAvailableOptInsPaginator(
+              xQuery PlatformGetAvailableOptInsXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := co.GetAvailableOptIns(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+        
        
     
     
@@ -8664,6 +8879,62 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
     }
          
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            
+            // GetSelectedOptInsPaginator Get company/store level integration opt-ins  
+            func (co *PlatformConfiguration)  GetSelectedOptInsPaginator(Level string  , UID float64  , 
+              xQuery PlatformGetSelectedOptInsXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := co.GetSelectedOptIns(Level, UID, xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
         
        
     
