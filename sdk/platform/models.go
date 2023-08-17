@@ -7371,11 +7371,82 @@ package platform
     type Locations struct {
 
         
-            Items LocationCountry  `json:"items"`
+            Items []LocationCountry  `json:"items"`
          
     }
     
 
+    
+    // AppProvider used by Communication
+    type AppProvider struct {
+
+        
+            Email AppProviderRes  `json:"email"`
+            Sms AppProviderRes  `json:"sms"`
+            Voice AppProviderResVoice  `json:"voice"`
+            ID string  `json:"_id"`
+            Application string  `json:"application"`
+            CreatedAt string  `json:"created_at"`
+            UpdatedAt string  `json:"updated_at"`
+            V float64  `json:"__v"`
+         
+    }
+    
+    // AppProviderRes used by Communication
+    type AppProviderRes struct {
+
+        
+            Transaction AppProviderResObj  `json:"transaction"`
+            Promotional AppProviderResObj  `json:"promotional"`
+            Otp AppProviderResObj  `json:"otp"`
+         
+    }
+    
+    // AppProviderResVoice used by Communication
+    type AppProviderResVoice struct {
+
+        
+            Transaction AppProviderResObj  `json:"transaction"`
+            Otp AppProviderResObj  `json:"otp"`
+         
+    }
+    
+    // AppProviderResObj used by Communication
+    type AppProviderResObj struct {
+
+        
+            Provider string  `json:"provider"`
+         
+    }
+    
+    // GlobalProviders used by Communication
+    type GlobalProviders struct {
+
+        
+            Email []GlobalProvidersResObj  `json:"email"`
+            Sms []GlobalProvidersResObj  `json:"sms"`
+            Voice []GlobalProvidersResObj  `json:"voice"`
+         
+    }
+    
+    // GlobalProvidersResObj used by Communication
+    type GlobalProvidersResObj struct {
+
+        
+            ID string  `json:"_id"`
+            Name string  `json:"name"`
+         
+    }
+    
+    // AppProviderReq used by Communication
+    type AppProviderReq struct {
+
+        
+            Email AppProviderRes  `json:"email"`
+            Sms AppProviderRes  `json:"sms"`
+            Voice AppProviderResVoice  `json:"voice"`
+         
+    }
     
     // StatsImported used by Communication
     type StatsImported struct {
@@ -7531,29 +7602,47 @@ package platform
          
     }
     
-    // BigqueryHeadersReq used by Communication
-    type BigqueryHeadersReq struct {
-
-        
-            Query string  `json:"query"`
-            Type string  `json:"type"`
-         
-    }
-    
-    // BigqueryHeadersResHeaders used by Communication
-    type BigqueryHeadersResHeaders struct {
+    // AudienceReq used by Communication
+    type AudienceReq struct {
 
         
             Name string  `json:"name"`
+            Description string  `json:"description"`
+            Tags []string  `json:"tags"`
+            FileURL string  `json:"file_url"`
             Type string  `json:"type"`
+            RecordsCount float64  `json:"records_count"`
+            Headers []string  `json:"headers"`
          
     }
     
-    // BigqueryHeadersRes used by Communication
-    type BigqueryHeadersRes struct {
+    // Audience used by Communication
+    type Audience struct {
 
         
-            Headers []BigqueryHeadersResHeaders  `json:"headers"`
+            ID string  `json:"_id"`
+            Application string  `json:"application"`
+            Name string  `json:"name"`
+            Description string  `json:"description"`
+            RecordsCount float64  `json:"records_count"`
+            Type string  `json:"type"`
+            Tags []string  `json:"tags"`
+            Headers []string  `json:"headers"`
+            FileURL string  `json:"file_url"`
+            IsActive bool  `json:"is_active"`
+            CreatedAt string  `json:"created_at"`
+            UpdatedAt string  `json:"updated_at"`
+            Slug string  `json:"slug"`
+            V float64  `json:"__v"`
+         
+    }
+    
+    // Audiences used by Communication
+    type Audiences struct {
+
+        
+            Items []Audience  `json:"items"`
+            Page Page  `json:"page"`
          
     }
     
@@ -7587,49 +7676,29 @@ package platform
          
     }
     
-    // AudienceReq used by Communication
-    type AudienceReq struct {
+    // DummyDatasources used by Communication
+    type DummyDatasources struct {
 
         
-            Description string  `json:"description"`
-            Tags []string  `json:"tags"`
-            Headers []string  `json:"headers"`
-            IsActive bool  `json:"is_active"`
+            ID float64  `json:"id"`
             Name string  `json:"name"`
-            FileURL string  `json:"file_url"`
-            Type string  `json:"type"`
-            RecordsCount float64  `json:"records_count"`
-            Application string  `json:"application"`
          
     }
     
-    // Audience used by Communication
-    type Audience struct {
+    // DummyDatasourcesMeta used by Communication
+    type DummyDatasourcesMeta struct {
 
         
-            Description string  `json:"description"`
-            Tags []string  `json:"tags"`
-            Headers []string  `json:"headers"`
-            IsActive bool  `json:"is_active"`
-            ID string  `json:"_id"`
-            Name string  `json:"name"`
-            FileURL string  `json:"file_url"`
-            Type string  `json:"type"`
-            RecordsCount float64  `json:"records_count"`
-            Application string  `json:"application"`
-            CreatedAt string  `json:"created_at"`
-            UpdatedAt string  `json:"updated_at"`
-            Slug string  `json:"slug"`
-            V float64  `json:"__v"`
+            ID float64  `json:"id"`
+            Data DummyDatasourcesMetaObj  `json:"data"`
          
     }
     
-    // Audiences used by Communication
-    type Audiences struct {
+    // DummyDatasourcesMetaObj used by Communication
+    type DummyDatasourcesMetaObj struct {
 
         
-            Items []Audience  `json:"items"`
-            Page Page  `json:"page"`
+            B float64  `json:"b"`
          
     }
     
@@ -7684,24 +7753,6 @@ package platform
          
     }
     
-    // EmailTemplateDeleteSuccessRes used by Communication
-    type EmailTemplateDeleteSuccessRes struct {
-
-        
-            Success bool  `json:"success"`
-            Message string  `json:"message"`
-         
-    }
-    
-    // EmailTemplateDeleteFailureRes used by Communication
-    type EmailTemplateDeleteFailureRes struct {
-
-        
-            Success bool  `json:"success"`
-            Message string  `json:"message"`
-         
-    }
-    
     // EmailTemplateKeys used by Communication
     type EmailTemplateKeys struct {
 
@@ -7727,17 +7778,23 @@ package platform
         
             Name string  `json:"name"`
             Description string  `json:"description"`
-            Keys EmailTemplateKeys  `json:"keys"`
+            FromName string  `json:"from_name"`
             StaticTo []string  `json:"static_to"`
             StaticCc []string  `json:"static_cc"`
             StaticBcc []string  `json:"static_bcc"`
             ReplyTo string  `json:"reply_to"`
-            Headers []EmailTemplateHeaders  `json:"headers"`
+            Priority string  `json:"priority"`
+            Tags []string  `json:"tags"`
+            TemplateVariables map[string]interface{}  `json:"template_variables"`
+            Published bool  `json:"published"`
             Subject TemplateAndType  `json:"subject"`
             Html TemplateAndType  `json:"html"`
+            EditorType string  `json:"editor_type"`
+            EditorMeta string  `json:"editor_meta"`
+            Attachments []float64  `json:"attachments"`
+            Headers []EmailTemplateHeaders  `json:"headers"`
+            Keys EmailTemplateKeys  `json:"keys"`
             Text TemplateAndType  `json:"text"`
-            Attachments []interface{}  `json:"attachments"`
-            Priority string  `json:"priority"`
          
     }
     
@@ -7750,60 +7807,38 @@ package platform
          
     }
     
-    // EmailTemplateRes used by Communication
-    type EmailTemplateRes struct {
-
-        
-            IsSystem bool  `json:"is_system"`
-            IsInternal bool  `json:"is_internal"`
-            Description string  `json:"description"`
-            StaticTo []string  `json:"static_to"`
-            StaticCc []string  `json:"static_cc"`
-            StaticBcc []string  `json:"static_bcc"`
-            Tags []interface{}  `json:"tags"`
-            Priority string  `json:"priority"`
-            Published bool  `json:"published"`
-            ID string  `json:"_id"`
-            Name string  `json:"name"`
-            Keys EmailTemplateKeys  `json:"keys"`
-            ReplyTo string  `json:"reply_to"`
-            Headers []EmailTemplateHeaders  `json:"headers"`
-            Subject TemplateAndType  `json:"subject"`
-            Html TemplateAndType  `json:"html"`
-            Text TemplateAndType  `json:"text"`
-            Attachments []interface{}  `json:"attachments"`
-            CreatedAt string  `json:"created_at"`
-            UpdatedAt string  `json:"updated_at"`
-            Slug string  `json:"slug"`
-            V float64  `json:"__v"`
-         
-    }
-    
     // EmailTemplate used by Communication
     type EmailTemplate struct {
 
         
+            Application string  `json:"application"`
             IsSystem bool  `json:"is_system"`
             IsInternal bool  `json:"is_internal"`
-            Description string  `json:"description"`
-            StaticTo []interface{}  `json:"static_to"`
-            StaticCc []interface{}  `json:"static_cc"`
-            StaticBcc []interface{}  `json:"static_bcc"`
-            Tags []interface{}  `json:"tags"`
-            Priority string  `json:"priority"`
-            Published bool  `json:"published"`
-            ID string  `json:"_id"`
-            Slug string  `json:"slug"`
             Name string  `json:"name"`
-            FromName string  `json:"from_name"`
+            Description string  `json:"description"`
+            EditorType string  `json:"editor_type"`
+            EditorMeta string  `json:"editor_meta"`
+            StaticTo []string  `json:"static_to"`
+            StaticCc []string  `json:"static_cc"`
+            StaticBcc []string  `json:"static_bcc"`
+            ReplyTo string  `json:"reply_to"`
+            Tags []string  `json:"tags"`
             Subject TemplateAndType  `json:"subject"`
             Html TemplateAndType  `json:"html"`
-            Text TemplateAndType  `json:"text"`
-            Headers []interface{}  `json:"headers"`
-            Attachments []interface{}  `json:"attachments"`
+            URLShorten EnabledObj  `json:"url_shorten"`
+            Priority string  `json:"priority"`
+            TemplateVariables map[string]interface{}  `json:"template_variables"`
+            Published bool  `json:"published"`
+            Category string  `json:"category"`
+            ID string  `json:"_id"`
+            Headers []EmailTemplateHeaders  `json:"headers"`
+            Attachments []float64  `json:"attachments"`
             CreatedAt string  `json:"created_at"`
             UpdatedAt string  `json:"updated_at"`
+            Slug string  `json:"slug"`
             V float64  `json:"__v"`
+            FromName string  `json:"from_name"`
+            Text TemplateAndType  `json:"text"`
          
     }
     
@@ -7813,25 +7848,27 @@ package platform
         
             IsSystem bool  `json:"is_system"`
             IsInternal bool  `json:"is_internal"`
-            Description string  `json:"description"`
-            StaticTo []interface{}  `json:"static_to"`
-            StaticCc []interface{}  `json:"static_cc"`
-            StaticBcc []interface{}  `json:"static_bcc"`
-            Tags []interface{}  `json:"tags"`
-            Priority string  `json:"priority"`
-            Published bool  `json:"published"`
-            ID string  `json:"_id"`
-            Slug string  `json:"slug"`
             Name string  `json:"name"`
-            FromName string  `json:"from_name"`
+            Description string  `json:"description"`
+            StaticTo []string  `json:"static_to"`
+            StaticCc []string  `json:"static_cc"`
+            StaticBcc []string  `json:"static_bcc"`
+            Tags []string  `json:"tags"`
             Subject TemplateAndType  `json:"subject"`
             Html TemplateAndType  `json:"html"`
-            Text TemplateAndType  `json:"text"`
-            Headers []interface{}  `json:"headers"`
-            Attachments []interface{}  `json:"attachments"`
+            URLShorten EnabledObj  `json:"url_shorten"`
+            Priority string  `json:"priority"`
+            TemplateVariables map[string]interface{}  `json:"template_variables"`
+            Published bool  `json:"published"`
+            Category string  `json:"category"`
+            ID string  `json:"_id"`
+            Headers []EmailTemplateHeaders  `json:"headers"`
+            Attachments []float64  `json:"attachments"`
             CreatedAt string  `json:"created_at"`
             UpdatedAt string  `json:"updated_at"`
+            Slug string  `json:"slug"`
             V float64  `json:"__v"`
+            Text TemplateAndType  `json:"text"`
          
     }
     
@@ -7849,7 +7886,6 @@ package platform
 
         
             Items []SystemEmailTemplate  `json:"items"`
-            Page Page  `json:"page"`
          
     }
     
@@ -7996,6 +8032,51 @@ package platform
          
     }
     
+    // TriggerJobResponse used by Communication
+    type TriggerJobResponse struct {
+
+        
+            Status float64  `json:"status"`
+         
+    }
+    
+    // TriggerJobRequest used by Communication
+    type TriggerJobRequest struct {
+
+        
+            JobID string  `json:"job_id"`
+         
+    }
+    
+    // GlobalVariablesGetResponse used by Communication
+    type GlobalVariablesGetResponse struct {
+
+        
+            ReadOnly map[string]interface{}  `json:"read_only"`
+            Editable map[string]interface{}  `json:"editable"`
+         
+    }
+    
+    // GlobalVariablesPostResponse used by Communication
+    type GlobalVariablesPostResponse struct {
+
+        
+            ID string  `json:"_id"`
+            Category string  `json:"category"`
+            Application string  `json:"application"`
+            GlobalVariables map[string]interface{}  `json:"global_variables"`
+            CreatedAt string  `json:"created_at"`
+         
+    }
+    
+    // GlobalVariablesReq used by Communication
+    type GlobalVariablesReq struct {
+
+        
+            GlobalVariables map[string]interface{}  `json:"global_variables"`
+         
+    }
+    
     // Job used by Communication
     type Job struct {
 
@@ -8044,22 +8125,6 @@ package platform
          
     }
     
-    // TriggerJobResponse used by Communication
-    type TriggerJobResponse struct {
-
-        
-            Status float64  `json:"status"`
-         
-    }
-    
-    // TriggerJobRequest used by Communication
-    type TriggerJobRequest struct {
-
-        
-            JobID string  `json:"job_id"`
-         
-    }
-    
     // LogEmail used by Communication
     type LogEmail struct {
 
@@ -8100,8 +8165,6 @@ package platform
             Application string  `json:"application"`
             Service string  `json:"service"`
             Step string  `json:"step"`
-            Source string  `json:"source"`
-            ChannelType string  `json:"channel_type"`
             Status string  `json:"status"`
             Data interface{}  `json:"data"`
             ExpireAt string  `json:"expire_at"`
@@ -8145,15 +8208,6 @@ package platform
          
     }
     
-    // SendOtpEmailCommsProvider used by Communication
-    type SendOtpEmailCommsProvider struct {
-
-        
-            Slug string  `json:"slug"`
-            ID string  `json:"_id"`
-         
-    }
-    
     // SendOtpCommsReqData used by Communication
     type SendOtpCommsReqData struct {
 
@@ -8183,7 +8237,6 @@ package platform
             OtpLength float64  `json:"otp_length"`
             Expiry float64  `json:"expiry"`
             Template SendOtpEmailCommsTemplate  `json:"template"`
-            Provider SendOtpEmailCommsProvider  `json:"provider"`
          
     }
     
@@ -8304,21 +8357,13 @@ package platform
          
     }
     
-    // SmsTemplateDeleteSuccessRes used by Communication
-    type SmsTemplateDeleteSuccessRes struct {
+    // DefaultSmsProviders used by Communication
+    type DefaultSmsProviders struct {
 
         
-            Success bool  `json:"success"`
-            Message string  `json:"message"`
-         
-    }
-    
-    // SmsTemplateDeleteFailureRes used by Communication
-    type SmsTemplateDeleteFailureRes struct {
-
-        
-            Success bool  `json:"success"`
-            Message string  `json:"message"`
+            ID string  `json:"_id"`
+            Name string  `json:"name"`
+            IsDefault bool  `json:"is_default"`
          
     }
     
@@ -8331,82 +8376,6 @@ package platform
          
     }
     
-    // SmsTemplateReq used by Communication
-    type SmsTemplateReq struct {
-
-        
-            Name string  `json:"name"`
-            Description string  `json:"description"`
-            Message SmsTemplateMessage  `json:"message"`
-            TemplateVariables interface{}  `json:"template_variables"`
-            Attachments []interface{}  `json:"attachments"`
-            Priority string  `json:"priority"`
-         
-    }
-    
-    // SmsTemplateRes used by Communication
-    type SmsTemplateRes struct {
-
-        
-            IsSystem bool  `json:"is_system"`
-            IsInternal bool  `json:"is_internal"`
-            Description string  `json:"description"`
-            Tags []interface{}  `json:"tags"`
-            Priority string  `json:"priority"`
-            Published bool  `json:"published"`
-            ID string  `json:"_id"`
-            Name string  `json:"name"`
-            Message SmsTemplateMessage  `json:"message"`
-            TemplateVariables interface{}  `json:"template_variables"`
-            CreatedAt string  `json:"created_at"`
-            UpdatedAt string  `json:"updated_at"`
-            Slug string  `json:"slug"`
-            V float64  `json:"__v"`
-         
-    }
-    
-    // SmsTemplate used by Communication
-    type SmsTemplate struct {
-
-        
-            IsSystem bool  `json:"is_system"`
-            IsInternal bool  `json:"is_internal"`
-            Description string  `json:"description"`
-            Priority string  `json:"priority"`
-            Tags []interface{}  `json:"tags"`
-            Published bool  `json:"published"`
-            ID string  `json:"_id"`
-            Slug string  `json:"slug"`
-            Name string  `json:"name"`
-            Message SmsTemplateMessage  `json:"message"`
-            TemplateVariables interface{}  `json:"template_variables"`
-            CreatedAt string  `json:"created_at"`
-            UpdatedAt string  `json:"updated_at"`
-            V float64  `json:"__v"`
-         
-    }
-    
-    // SystemSmsTemplate used by Communication
-    type SystemSmsTemplate struct {
-
-        
-            IsSystem bool  `json:"is_system"`
-            IsInternal bool  `json:"is_internal"`
-            Description string  `json:"description"`
-            Tags []interface{}  `json:"tags"`
-            Priority string  `json:"priority"`
-            Published bool  `json:"published"`
-            ID string  `json:"_id"`
-            Slug string  `json:"slug"`
-            Name string  `json:"name"`
-            Message SmsTemplateMessage  `json:"message"`
-            TemplateVariables interface{}  `json:"template_variables"`
-            CreatedAt string  `json:"created_at"`
-            UpdatedAt string  `json:"updated_at"`
-            V float64  `json:"__v"`
-         
-    }
-    
     // SmsTemplates used by Communication
     type SmsTemplates struct {
 
@@ -8416,12 +8385,78 @@ package platform
          
     }
     
+    // SmsTemplate used by Communication
+    type SmsTemplate struct {
+
+        
+            URLShorten EnabledObj  `json:"url_shorten"`
+            ID string  `json:"_id"`
+            Application string  `json:"application"`
+            IsSystem bool  `json:"is_system"`
+            IsInternal bool  `json:"is_internal"`
+            Meta metaObj  `json:"meta"`
+            Name string  `json:"name"`
+            Description string  `json:"description"`
+            Message SmsTemplateMessage  `json:"message"`
+            Priority string  `json:"priority"`
+            Tags []string  `json:"tags"`
+            TemplateVariables map[string]interface{}  `json:"template_variables"`
+            TemplateID string  `json:"template_id"`
+            Published bool  `json:"published"`
+            Category string  `json:"category"`
+            CreatedAt string  `json:"created_at"`
+            UpdatedAt string  `json:"updated_at"`
+            Slug string  `json:"slug"`
+            V float64  `json:"__v"`
+         
+    }
+    
     // SystemSmsTemplates used by Communication
     type SystemSmsTemplates struct {
 
         
-            Items []SystemSmsTemplate  `json:"items"`
-            Page Page  `json:"page"`
+            URLShorten EnabledObj  `json:"url_shorten"`
+            ID string  `json:"_id"`
+            IsSystem bool  `json:"is_system"`
+            IsInternal bool  `json:"is_internal"`
+            Name string  `json:"name"`
+            Description string  `json:"description"`
+            Message SmsTemplateMessage  `json:"message"`
+            Priority string  `json:"priority"`
+            Tags []string  `json:"tags"`
+            TemplateVariables map[string]interface{}  `json:"template_variables"`
+            TemplateID string  `json:"template_id"`
+            Published bool  `json:"published"`
+            Category string  `json:"category"`
+            CreatedAt string  `json:"created_at"`
+            UpdatedAt string  `json:"updated_at"`
+            Slug string  `json:"slug"`
+            V float64  `json:"__v"`
+         
+    }
+    
+    // metaObj used by Communication
+    type metaObj struct {
+
+        
+            Type string  `json:"type"`
+            IsSystem bool  `json:"is_system"`
+            Template string  `json:"template"`
+         
+    }
+    
+    // SmsTemplateReq used by Communication
+    type SmsTemplateReq struct {
+
+        
+            Name string  `json:"name"`
+            Description string  `json:"description"`
+            Priority string  `json:"priority"`
+            TemplateID string  `json:"template_id"`
+            Meta metaObj  `json:"meta"`
+            TemplateVariables map[string]interface{}  `json:"template_variables"`
+            Published bool  `json:"published"`
+            Message SmsTemplateMessage  `json:"message"`
          
     }
     
@@ -8481,6 +8516,45 @@ package platform
             Current float64  `json:"current"`
             Type string  `json:"type"`
             Size float64  `json:"size"`
+         
+    }
+    
+    // GenericError used by Communication
+    type GenericError struct {
+
+        
+            Message Message  `json:"message"`
+            Sentry string  `json:"sentry"`
+         
+    }
+    
+    // GenericDelete used by Communication
+    type GenericDelete struct {
+
+        
+            Message string  `json:"message"`
+            Acknowledged bool  `json:"acknowledged"`
+            Affected float64  `json:"affected"`
+            Operation string  `json:"operation"`
+         
+    }
+    
+    // Message used by Communication
+    type Message struct {
+
+        
+            Message string  `json:"message"`
+            Success bool  `json:"success"`
+            Info string  `json:"info"`
+            Operation string  `json:"operation"`
+         
+    }
+    
+    // EnabledObj used by Communication
+    type EnabledObj struct {
+
+        
+            Enabled bool  `json:"enabled"`
          
     }
     
@@ -9219,7 +9293,7 @@ package platform
 
         
             Enabled bool  `json:"enabled"`
-            Charges Charges  `json:"charges"`
+            Charges []Charges  `json:"charges"`
          
     }
     

@@ -8669,6 +8669,163 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // GetAppProviders Get app providers
+     func (co *PlatformAppCommunication)  GetAppProviders() (AppProvider, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getAppProvidersResponse AppProvider
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/app-provider/get-provider",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return AppProvider{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getAppProvidersResponse)
+        if err != nil {
+            return AppProvider{}, common.NewFDKError(err.Error())
+        }
+        return getAppProvidersResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // UpdateAppProviders update app providers
+     func (co *PlatformAppCommunication)  UpdateAppProviders(body  AppProviderReq) (AppProvider, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateAppProvidersResponse AppProvider
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return AppProvider{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return AppProvider{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "post",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/app-provider/update-provider",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return AppProvider{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateAppProvidersResponse)
+        if err != nil {
+            return AppProvider{}, common.NewFDKError(err.Error())
+        }
+        return updateAppProvidersResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetGlobalProviders Get global providers
+     func (co *PlatformAppCommunication)  GetGlobalProviders() (GlobalProviders, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getGlobalProvidersResponse GlobalProviders
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/app-provider/global-providers",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GlobalProviders{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getGlobalProvidersResponse)
+        if err != nil {
+            return GlobalProviders{}, common.NewFDKError(err.Error())
+        }
+        return getGlobalProvidersResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     //PlatformAppGetCampaignsXQuery holds query params
     type PlatformAppGetCampaignsXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
@@ -9042,6 +9199,286 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // GetBigQueryRowCountById Get big query row count by id
+     func (co *PlatformAppCommunication)  GetBigQueryRowCountById(ID string) (map[string]interface{}, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getBigQueryRowCountByIdResponse map[string]interface{}
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/sources/bigquery-row-count/%s",co.CompanyID, co.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return map[string]interface{}{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getBigQueryRowCountByIdResponse)
+        if err != nil {
+            return map[string]interface{}{}, common.NewFDKError(err.Error())
+        }
+        return getBigQueryRowCountByIdResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // CreateBigQueryRowCount Create big query row count
+     func (co *PlatformAppCommunication)  CreateBigQueryRowCount() (map[string]interface{}, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            createBigQueryRowCountResponse map[string]interface{}
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "post",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/sources/bigquery-row-count",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return map[string]interface{}{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createBigQueryRowCountResponse)
+        if err != nil {
+            return map[string]interface{}{}, common.NewFDKError(err.Error())
+        }
+        return createBigQueryRowCountResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetBigQueryHeadersById Get big query headers by id
+     func (co *PlatformAppCommunication)  GetBigQueryHeadersById(ID string) (map[string]interface{}, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getBigQueryHeadersByIdResponse map[string]interface{}
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/sources/bigquery-headers/%s",co.CompanyID, co.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return map[string]interface{}{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getBigQueryHeadersByIdResponse)
+        if err != nil {
+            return map[string]interface{}{}, common.NewFDKError(err.Error())
+        }
+        return getBigQueryHeadersByIdResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // CreateBigQueryNCount Create big query n count
+     func (co *PlatformAppCommunication)  CreateBigQueryNCount() (map[string]interface{}, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            createBigQueryNCountResponse map[string]interface{}
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "post",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/sources/bigquery-n-records",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return map[string]interface{}{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createBigQueryNCountResponse)
+        if err != nil {
+            return map[string]interface{}{}, common.NewFDKError(err.Error())
+        }
+        return createBigQueryNCountResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // CreateBigQueryHeaders Create big query headers
+     func (co *PlatformAppCommunication)  CreateBigQueryHeaders() (map[string]interface{}, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            createBigQueryHeadersResponse map[string]interface{}
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "post",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/sources/bigquery-headers",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return map[string]interface{}{}, err
+	    }
+        
+        err = json.Unmarshal(response, &createBigQueryHeadersResponse)
+        if err != nil {
+            return map[string]interface{}{}, common.NewFDKError(err.Error())
+        }
+        return createBigQueryHeadersResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetSystemAudiences Get system audiences
+     func (co *PlatformAppCommunication)  GetSystemAudiences() (map[string]interface{}, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getSystemAudiencesResponse map[string]interface{}
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/sources/system-datasources",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return map[string]interface{}{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getSystemAudiencesResponse)
+        if err != nil {
+            return map[string]interface{}{}, common.NewFDKError(err.Error())
+        }
+        return getSystemAudiencesResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     //PlatformAppGetAudiencesXQuery holds query params
     type PlatformAppGetAudiencesXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
@@ -9187,10 +9624,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
             
         
-            
-        
-            
-        
 
          
 
@@ -9230,69 +9663,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return Audience{}, common.NewFDKError(err.Error())
         }
         return createAudienceResponse, nil
-        
-    }
-           
-       
-    
-    
-    
-  
-
-    
-    // GetBigqueryHeaders Get bigquery headers
-     func (co *PlatformAppCommunication)  GetBigqueryHeaders(body  BigqueryHeadersReq) (BigqueryHeadersRes, error) {
-        var (
-            rawRequest  *RawRequest
-            response    []byte
-            err         error
-            getBigqueryHeadersResponse BigqueryHeadersRes
-	    )
-
-        
-            
-        
-            
-        
-
-         
-
-        
-        
-         
-        
-        
-        //Parse req body to map
-        var reqBody map[string]interface{}
-        reqBodyJSON, err := json.Marshal(body)
-        if err != nil {
-            
-             return BigqueryHeadersRes{}, common.NewFDKError(err.Error())
-        }
-        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
-        if err != nil {
-            
-             return BigqueryHeadersRes{}, common.NewFDKError(err.Error())       
-        }
-        
-        //API call
-        rawRequest = NewRequest(
-            co.config,
-            "post",
-            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/sources/bigquery-headers",co.CompanyID, co.ApplicationID),
-            nil,
-            nil,
-            reqBody)
-        response, err = rawRequest.Execute()
-        if err != nil {
-            return BigqueryHeadersRes{}, err
-	    }
-        
-        err = json.Unmarshal(response, &getBigqueryHeadersResponse)
-        if err != nil {
-            return BigqueryHeadersRes{}, common.NewFDKError(err.Error())
-        }
-        return getBigqueryHeadersResponse, nil
         
     }
            
@@ -9375,10 +9745,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
             
         
-            
-        
-            
-        
 
          
 
@@ -9420,6 +9786,100 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return Audience{}, common.NewFDKError(err.Error())
         }
         return updateAudienceByIdResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteAudienceById Delete audience by id
+     func (co *PlatformAppCommunication)  DeleteAudienceById(ID string) (GenericDelete, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteAudienceByIdResponse GenericDelete
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "delete",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/sources/datasources/%s",co.CompanyID, co.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GenericDelete{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteAudienceByIdResponse)
+        if err != nil {
+            return GenericDelete{}, common.NewFDKError(err.Error())
+        }
+        return deleteAudienceByIdResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetNSampleRecordsFromCsvByGet Get n sample records from csv
+     func (co *PlatformAppCommunication)  GetNSampleRecordsFromCsvByGet() (GetNRecordsCsvRes, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getNSampleRecordsFromCsvByGetResponse GetNRecordsCsvRes
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/sources/get-n-records",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GetNRecordsCsvRes{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getNSampleRecordsFromCsvByGetResponse)
+        if err != nil {
+            return GetNRecordsCsvRes{}, common.NewFDKError(err.Error())
+        }
+        return getNSampleRecordsFromCsvByGetResponse, nil
         
     }
            
@@ -9495,6 +9955,100 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // GetDummyDatasources Get dummy data sources
+     func (co *PlatformAppCommunication)  GetDummyDatasources() ([]DummyDatasources, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getDummyDatasourcesResponse []DummyDatasources
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/sources/datasources/dummy-data-sources",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return []DummyDatasources{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getDummyDatasourcesResponse)
+        if err != nil {
+            return []DummyDatasources{}, common.NewFDKError(err.Error())
+        }
+        return getDummyDatasourcesResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetDummyDatasourcesMeta Get dummy data sources meta
+     func (co *PlatformAppCommunication)  GetDummyDatasourcesMeta(ID float64) (DummyDatasourcesMeta, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getDummyDatasourcesMetaResponse DummyDatasourcesMeta
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/sources/datasources/dummy-data-sources-meta/undefined",co.CompanyID, co.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return DummyDatasourcesMeta{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getDummyDatasourcesMetaResponse)
+        if err != nil {
+            return DummyDatasourcesMeta{}, common.NewFDKError(err.Error())
+        }
+        return getDummyDatasourcesMetaResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     //PlatformAppGetEmailProvidersXQuery holds query params
     type PlatformAppGetEmailProvidersXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
@@ -9549,6 +10103,66 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
+            
+            
+            
+            
+            
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            // GetEmailProvidersPaginator Get email providers  
+            func (co *PlatformAppCommunication)  GetEmailProvidersPaginator( xQuery PlatformAppGetEmailProvidersXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                
+                
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := co.GetEmailProviders(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+        
        
     
     
@@ -9748,6 +10362,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // DeleteEmailProviderById Delete email provider by id
+     func (co *PlatformAppCommunication)  DeleteEmailProviderById(ID string) (GenericDelete, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteEmailProviderByIdResponse GenericDelete
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "delete",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/email/providers/%s",co.CompanyID, co.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GenericDelete{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteEmailProviderByIdResponse)
+        if err != nil {
+            return GenericDelete{}, common.NewFDKError(err.Error())
+        }
+        return deleteEmailProviderByIdResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     //PlatformAppGetEmailTemplatesXQuery holds query params
     type PlatformAppGetEmailTemplatesXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
@@ -9802,6 +10464,66 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
+            
+            
+            
+            
+            
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            // GetEmailTemplatesPaginator Get email templates  
+            func (co *PlatformAppCommunication)  GetEmailTemplatesPaginator( xQuery PlatformAppGetEmailTemplatesXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                
+                
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := co.GetEmailTemplates(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+        
        
     
     
@@ -9810,14 +10532,26 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
     
     // CreateEmailTemplate Create email template
-     func (co *PlatformAppCommunication)  CreateEmailTemplate(body  EmailTemplateReq) (EmailTemplateRes, error) {
+     func (co *PlatformAppCommunication)  CreateEmailTemplate(body  EmailTemplateReq) (EmailTemplate, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            createEmailTemplateResponse EmailTemplateRes
+            createEmailTemplateResponse EmailTemplate
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
         
             
         
@@ -9858,12 +10592,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
             
-             return EmailTemplateRes{}, common.NewFDKError(err.Error())
+             return EmailTemplate{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
             
-             return EmailTemplateRes{}, common.NewFDKError(err.Error())       
+             return EmailTemplate{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -9876,12 +10610,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return EmailTemplateRes{}, err
+            return EmailTemplate{}, err
 	    }
         
         err = json.Unmarshal(response, &createEmailTemplateResponse)
         if err != nil {
-            return EmailTemplateRes{}, common.NewFDKError(err.Error())
+            return EmailTemplate{}, common.NewFDKError(err.Error())
         }
         return createEmailTemplateResponse, nil
         
@@ -9894,15 +10628,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    //PlatformAppGetSystemEmailTemplatesXQuery holds query params
-    type PlatformAppGetSystemEmailTemplatesXQuery struct { 
-        PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"` 
-        Sort map[string]interface{}  `url:"sort,omitempty"`  
-    }
-    
     // GetSystemEmailTemplates Get system email templates
-     func (co *PlatformAppCommunication)  GetSystemEmailTemplates(xQuery PlatformAppGetSystemEmailTemplatesXQuery) (SystemEmailTemplates, error) {
+     func (co *PlatformAppCommunication)  GetSystemEmailTemplates() (SystemEmailTemplates, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -9913,14 +10640,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
 
          
-            
-                
-            
-                
-            
-                
-            
-        
 
         
         
@@ -9933,7 +10652,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             "get",
             fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/email/system-templates",co.CompanyID, co.ApplicationID),
             nil,
-            xQuery,
+            nil,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
@@ -10004,14 +10723,26 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
     
     // UpdateEmailTemplateById Update email template by id
-     func (co *PlatformAppCommunication)  UpdateEmailTemplateById(ID string, body  EmailTemplateReq) (EmailTemplateRes, error) {
+     func (co *PlatformAppCommunication)  UpdateEmailTemplateById(ID string, body  EmailTemplateReq) (EmailTemplate, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            updateEmailTemplateByIdResponse EmailTemplateRes
+            updateEmailTemplateByIdResponse EmailTemplate
 	    )
 
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
         
             
         
@@ -10054,12 +10785,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
             
-             return EmailTemplateRes{}, common.NewFDKError(err.Error())
+             return EmailTemplate{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
             
-             return EmailTemplateRes{}, common.NewFDKError(err.Error())       
+             return EmailTemplate{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -10072,12 +10803,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return EmailTemplateRes{}, err
+            return EmailTemplate{}, err
 	    }
         
         err = json.Unmarshal(response, &updateEmailTemplateByIdResponse)
         if err != nil {
-            return EmailTemplateRes{}, common.NewFDKError(err.Error())
+            return EmailTemplate{}, common.NewFDKError(err.Error())
         }
         return updateEmailTemplateByIdResponse, nil
         
@@ -10091,12 +10822,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
     
     // DeleteEmailTemplateById Delete email template by id
-     func (co *PlatformAppCommunication)  DeleteEmailTemplateById(ID string) (EmailTemplateDeleteSuccessRes, error) {
+     func (co *PlatformAppCommunication)  DeleteEmailTemplateById(ID string) (GenericDelete, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            deleteEmailTemplateByIdResponse EmailTemplateDeleteSuccessRes
+            deleteEmailTemplateByIdResponse GenericDelete
 	    )
 
         
@@ -10120,17 +10851,125 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return EmailTemplateDeleteSuccessRes{}, err
+            return GenericDelete{}, err
 	    }
         
         err = json.Unmarshal(response, &deleteEmailTemplateByIdResponse)
         if err != nil {
-            return EmailTemplateDeleteSuccessRes{}, common.NewFDKError(err.Error())
+            return GenericDelete{}, common.NewFDKError(err.Error())
         }
         return deleteEmailTemplateByIdResponse, nil
         
     }
            
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppGetSubscribedEmailTemplatesXQuery holds query params
+    type PlatformAppGetSubscribedEmailTemplatesXQuery struct { 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+    // GetSubscribedEmailTemplates Get subscribed email templates
+     func (co *PlatformAppCommunication)  GetSubscribedEmailTemplates(xQuery PlatformAppGetSubscribedEmailTemplatesXQuery) (EmailTemplates, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getSubscribedEmailTemplatesResponse EmailTemplates
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/email/subscribedTemplates",co.CompanyID, co.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return EmailTemplates{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getSubscribedEmailTemplatesResponse)
+        if err != nil {
+            return EmailTemplates{}, common.NewFDKError(err.Error())
+        }
+        return getSubscribedEmailTemplatesResponse, nil
+        
+    }
+           
+            
+            
+            
+            
+            
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            // GetSubscribedEmailTemplatesPaginator Get subscribed email templates  
+            func (co *PlatformAppCommunication)  GetSubscribedEmailTemplatesPaginator( xQuery PlatformAppGetSubscribedEmailTemplatesXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                
+                
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := co.GetSubscribedEmailTemplates(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+        
        
     
     
@@ -10385,6 +11224,113 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // GetGlobalVariables get global variables
+     func (co *PlatformAppCommunication)  GetGlobalVariables() (GlobalVariablesGetResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getGlobalVariablesResponse GlobalVariablesGetResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/global-variables",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GlobalVariablesGetResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getGlobalVariablesResponse)
+        if err != nil {
+            return GlobalVariablesGetResponse{}, common.NewFDKError(err.Error())
+        }
+        return getGlobalVariablesResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // PostGlobalVariables post global variables
+     func (co *PlatformAppCommunication)  PostGlobalVariables(body  GlobalVariablesReq) (GlobalVariablesPostResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            postGlobalVariablesResponse GlobalVariablesPostResponse
+	    )
+
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return GlobalVariablesPostResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return GlobalVariablesPostResponse{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "post",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/global-variables",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GlobalVariablesPostResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &postGlobalVariablesResponse)
+        if err != nil {
+            return GlobalVariablesPostResponse{}, common.NewFDKError(err.Error())
+        }
+        return postGlobalVariablesResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     //PlatformAppGetJobsXQuery holds query params
     type PlatformAppGetJobsXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
@@ -10621,6 +11567,66 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
     }
            
+            
+            
+            
+            
+            
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+             
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            // GetJobLogsPaginator Get job logs  
+            func (co *PlatformAppCommunication)  GetJobLogsPaginator( xQuery PlatformAppGetJobLogsXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                
+                
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := co.GetJobLogs(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+        
        
     
     
@@ -11086,6 +12092,52 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    // GetDefaultSmsProviders Get default sms providers
+     func (co *PlatformAppCommunication)  GetDefaultSmsProviders() ([]DefaultSmsProviders, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getDefaultSmsProvidersResponse []DefaultSmsProviders
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/sms/default-providers",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return []DefaultSmsProviders{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getDefaultSmsProvidersResponse)
+        if err != nil {
+            return []DefaultSmsProviders{}, common.NewFDKError(err.Error())
+        }
+        return getDefaultSmsProvidersResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
     // GetSmsProviderById Get sms provider by id
      func (co *PlatformAppCommunication)  GetSmsProviderById(ID string) (SmsProvider, error) {
         var (
@@ -11199,6 +12251,54 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return SmsProvider{}, common.NewFDKError(err.Error())
         }
         return updateSmsProviderByIdResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // DeleteSmsProviderById Delete sms provider by id
+     func (co *PlatformAppCommunication)  DeleteSmsProviderById(ID string) (GenericDelete, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            deleteSmsProviderByIdResponse GenericDelete
+	    )
+
+        
+
+         
+
+        
+        
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "delete",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/sms/providers/%s",co.CompanyID, co.ApplicationID, ID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return GenericDelete{}, err
+	    }
+        
+        err = json.Unmarshal(response, &deleteSmsProviderByIdResponse)
+        if err != nil {
+            return GenericDelete{}, common.NewFDKError(err.Error())
+        }
+        return deleteSmsProviderByIdResponse, nil
         
     }
            
@@ -11331,14 +12431,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
     
     // CreateSmsTemplate Create sms template
-     func (co *PlatformAppCommunication)  CreateSmsTemplate(body  SmsTemplateReq) (SmsTemplateRes, error) {
+     func (co *PlatformAppCommunication)  CreateSmsTemplate(body  SmsTemplateReq) (SmsTemplate, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            createSmsTemplateResponse SmsTemplateRes
+            createSmsTemplateResponse SmsTemplate
 	    )
 
+        
+            
+        
+            
         
             
         
@@ -11365,12 +12469,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
             
-             return SmsTemplateRes{}, common.NewFDKError(err.Error())
+             return SmsTemplate{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
             
-             return SmsTemplateRes{}, common.NewFDKError(err.Error())       
+             return SmsTemplate{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -11383,14 +12487,60 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return SmsTemplateRes{}, err
+            return SmsTemplate{}, err
 	    }
         
         err = json.Unmarshal(response, &createSmsTemplateResponse)
         if err != nil {
-            return SmsTemplateRes{}, common.NewFDKError(err.Error())
+            return SmsTemplate{}, common.NewFDKError(err.Error())
         }
         return createSmsTemplateResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetSystemSmsTemplates Get system sms templates
+     func (co *PlatformAppCommunication)  GetSystemSmsTemplates() ([]SystemSmsTemplates, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getSystemSmsTemplatesResponse []SystemSmsTemplates
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/sms/system-templates",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return []SystemSmsTemplates{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getSystemSmsTemplatesResponse)
+        if err != nil {
+            return []SystemSmsTemplates{}, common.NewFDKError(err.Error())
+        }
+        return getSystemSmsTemplatesResponse, nil
         
     }
            
@@ -11450,14 +12600,18 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
     
     // UpdateSmsTemplateById Update sms template by id
-     func (co *PlatformAppCommunication)  UpdateSmsTemplateById(ID string, body  SmsTemplateReq) (SmsTemplateRes, error) {
+     func (co *PlatformAppCommunication)  UpdateSmsTemplateById(ID string, body  SmsTemplateReq) (SmsTemplate, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            updateSmsTemplateByIdResponse SmsTemplateRes
+            updateSmsTemplateByIdResponse SmsTemplate
 	    )
 
+        
+            
+        
+            
         
             
         
@@ -11486,12 +12640,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
             
-             return SmsTemplateRes{}, common.NewFDKError(err.Error())
+             return SmsTemplate{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
             
-             return SmsTemplateRes{}, common.NewFDKError(err.Error())       
+             return SmsTemplate{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -11504,12 +12658,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return SmsTemplateRes{}, err
+            return SmsTemplate{}, err
 	    }
         
         err = json.Unmarshal(response, &updateSmsTemplateByIdResponse)
         if err != nil {
-            return SmsTemplateRes{}, common.NewFDKError(err.Error())
+            return SmsTemplate{}, common.NewFDKError(err.Error())
         }
         return updateSmsTemplateByIdResponse, nil
         
@@ -11523,12 +12677,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
     
     // DeleteSmsTemplateById Delete sms template by id
-     func (co *PlatformAppCommunication)  DeleteSmsTemplateById(ID string) (SmsTemplateDeleteSuccessRes, error) {
+     func (co *PlatformAppCommunication)  DeleteSmsTemplateById(ID string) (GenericDelete, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            deleteSmsTemplateByIdResponse SmsTemplateDeleteSuccessRes
+            deleteSmsTemplateByIdResponse GenericDelete
 	    )
 
         
@@ -11552,12 +12706,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return SmsTemplateDeleteSuccessRes{}, err
+            return GenericDelete{}, err
 	    }
         
         err = json.Unmarshal(response, &deleteSmsTemplateByIdResponse)
         if err != nil {
-            return SmsTemplateDeleteSuccessRes{}, common.NewFDKError(err.Error())
+            return GenericDelete{}, common.NewFDKError(err.Error())
         }
         return deleteSmsTemplateByIdResponse, nil
         
@@ -11570,27 +12724,24 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    //PlatformAppGetSystemSystemTemplatesXQuery holds query params
-    type PlatformAppGetSystemSystemTemplatesXQuery struct { 
+    //PlatformAppGetSubscribedSmsTemplatesXQuery holds query params
+    type PlatformAppGetSubscribedSmsTemplatesXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
-        PageSize float64  `url:"page_size,omitempty"` 
-        Sort map[string]interface{}  `url:"sort,omitempty"`  
+        PageSize float64  `url:"page_size,omitempty"`  
     }
     
-    // GetSystemSystemTemplates Get system sms templates
-     func (co *PlatformAppCommunication)  GetSystemSystemTemplates(xQuery PlatformAppGetSystemSystemTemplatesXQuery) (SystemSmsTemplates, error) {
+    // GetSubscribedSmsTemplates Get subscribed sms templates
+     func (co *PlatformAppCommunication)  GetSubscribedSmsTemplates(xQuery PlatformAppGetSubscribedSmsTemplatesXQuery) (SmsTemplates, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getSystemSystemTemplatesResponse SystemSmsTemplates
+            getSubscribedSmsTemplatesResponse SmsTemplates
 	    )
 
         
 
          
-            
-                
             
                 
             
@@ -11607,20 +12758,20 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         rawRequest = NewRequest(
             co.config,
             "get",
-            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/sms/system-templates",co.CompanyID, co.ApplicationID),
+            fmt.Sprintf("/service/platform/communication/v1.0/company/%s/application/%s/sms/subscribedTemplates",co.CompanyID, co.ApplicationID),
             nil,
             xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return SystemSmsTemplates{}, err
+            return SmsTemplates{}, err
 	    }
         
-        err = json.Unmarshal(response, &getSystemSystemTemplatesResponse)
+        err = json.Unmarshal(response, &getSubscribedSmsTemplatesResponse)
         if err != nil {
-            return SystemSmsTemplates{}, common.NewFDKError(err.Error())
+            return SmsTemplates{}, common.NewFDKError(err.Error())
         }
-        return getSystemSystemTemplatesResponse, nil
+        return getSubscribedSmsTemplatesResponse, nil
         
     }
            
@@ -11643,7 +12794,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
              
             
             
-             
             
             
             
@@ -11651,13 +12801,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             
             
             
-            
-            
-            
-            
-            
-            // GetSystemSystemTemplatesPaginator Get system sms templates  
-            func (co *PlatformAppCommunication)  GetSystemSystemTemplatesPaginator( xQuery PlatformAppGetSystemSystemTemplatesXQuery ) *common.Paginator {
+            // GetSubscribedSmsTemplatesPaginator Get subscribed sms templates  
+            func (co *PlatformAppCommunication)  GetSubscribedSmsTemplatesPaginator( xQuery PlatformAppGetSubscribedSmsTemplatesXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
                 
                 
@@ -11670,12 +12815,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
                  
                  
                  
-                 
-                 
-                 
-                 
                 paginator.Next = func() (interface{}, error) {
-                    response, err := co.GetSystemSystemTemplates(xQuery)
+                    response, err := co.GetSubscribedSmsTemplates(xQuery)
                     if response.Page.HasNext {
                         paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
                     }
@@ -13187,6 +14328,52 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return DeploymentMeta{}, common.NewFDKError(err.Error())
         }
         return updateOrderingStoreConfigResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // GetOrderingStoreConfig Get ordering store config
+     func (co *PlatformAppConfiguration)  GetOrderingStoreConfig() (OrderingStoreConfig, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getOrderingStoreConfigResponse OrderingStoreConfig
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            co.config,
+            "get",
+            fmt.Sprintf("/service/platform/configuration/v1.0/company/%s/application/%s/ordering-store",co.CompanyID, co.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return OrderingStoreConfig{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getOrderingStoreConfigResponse)
+        if err != nil {
+            return OrderingStoreConfig{}, common.NewFDKError(err.Error())
+        }
+        return getOrderingStoreConfigResponse, nil
         
     }
            
@@ -18553,8 +19740,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    //PlatformAppGetNewTicketsXQuery holds query params
-    type PlatformAppGetNewTicketsXQuery struct { 
+    //PlatformAppGetTicketsXQuery holds query params
+    type PlatformAppGetTicketsXQuery struct { 
         Items bool  `url:"items,omitempty"` 
         Filters bool  `url:"filters,omitempty"` 
         Q string  `url:"q,omitempty"` 
@@ -18563,13 +19750,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         Category string  `url:"category,omitempty"`  
     }
     
-    // GetNewTickets Gets the list of Application level Tickets and/or ticket filters depending on query params
-     func (le *PlatformAppLead)  GetNewTickets(xQuery PlatformAppGetNewTicketsXQuery) (TicketList, error) {
+    // GetTickets Gets the list of Application level Tickets and/or ticket filters depending on query params
+     func (le *PlatformAppLead)  GetTickets(xQuery PlatformAppGetTicketsXQuery) (TicketList, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getNewTicketsResponse TicketList
+            getTicketsResponse TicketList
 	    )
 
         
@@ -18615,11 +19802,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return TicketList{}, err
 	    }
         
-        err = json.Unmarshal(response, &getNewTicketsResponse)
+        err = json.Unmarshal(response, &getTicketsResponse)
         if err != nil {
             return TicketList{}, common.NewFDKError(err.Error())
         }
-        return getNewTicketsResponse, nil
+        return getTicketsResponse, nil
         
     }
            
@@ -18634,13 +19821,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetNewTicket Retreives ticket details of a application level ticket
-     func (le *PlatformAppLead)  GetNewTicket(ID string) (Ticket, error) {
+    // GetTicket Retreives ticket details of a application level ticket
+     func (le *PlatformAppLead)  GetTicket(ID string) (Ticket, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getNewTicketResponse Ticket
+            getTicketResponse Ticket
 	    )
 
         
@@ -18667,11 +19854,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return Ticket{}, err
 	    }
         
-        err = json.Unmarshal(response, &getNewTicketResponse)
+        err = json.Unmarshal(response, &getTicketResponse)
         if err != nil {
             return Ticket{}, common.NewFDKError(err.Error())
         }
-        return getNewTicketResponse, nil
+        return getTicketResponse, nil
         
     }
            
@@ -18682,13 +19869,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // EditNewTicket Edits ticket details of a application level ticket
-     func (le *PlatformAppLead)  EditNewTicket(ID string, body  EditTicketPayload) (Ticket, error) {
+    // EditTicket Edits ticket details of a application level ticket
+     func (le *PlatformAppLead)  EditTicket(ID string, body  EditTicketPayload) (Ticket, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            editNewTicketResponse Ticket
+            editTicketResponse Ticket
 	    )
 
         
@@ -18751,11 +19938,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return Ticket{}, err
 	    }
         
-        err = json.Unmarshal(response, &editNewTicketResponse)
+        err = json.Unmarshal(response, &editTicketResponse)
         if err != nil {
             return Ticket{}, common.NewFDKError(err.Error())
         }
-        return editNewTicketResponse, nil
+        return editTicketResponse, nil
         
     }
            
@@ -18774,13 +19961,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // CreateNewHistory Create history for specific application level ticket
-     func (le *PlatformAppLead)  CreateNewHistory(ID string, body  TicketHistoryPayload) (TicketHistory, error) {
+    // CreateHistory Create history for specific application level ticket
+     func (le *PlatformAppLead)  CreateHistory(ID string, body  TicketHistoryPayload) (TicketHistory, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            createNewHistoryResponse TicketHistory
+            createHistoryResponse TicketHistory
 	    )
 
         
@@ -18831,11 +20018,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return TicketHistory{}, err
 	    }
         
-        err = json.Unmarshal(response, &createNewHistoryResponse)
+        err = json.Unmarshal(response, &createHistoryResponse)
         if err != nil {
             return TicketHistory{}, common.NewFDKError(err.Error())
         }
-        return createNewHistoryResponse, nil
+        return createHistoryResponse, nil
         
     }
            
@@ -18846,13 +20033,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetNewTicketHistory Gets history list for specific application level ticket
-     func (le *PlatformAppLead)  GetNewTicketHistory(ID string) (TicketHistoryList, error) {
+    // GetTicketHistory Gets history list for specific application level ticket
+     func (le *PlatformAppLead)  GetTicketHistory(ID string) (TicketHistoryList, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getNewTicketHistoryResponse TicketHistoryList
+            getTicketHistoryResponse TicketHistoryList
 	    )
 
         
@@ -18879,11 +20066,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return TicketHistoryList{}, err
 	    }
         
-        err = json.Unmarshal(response, &getNewTicketHistoryResponse)
+        err = json.Unmarshal(response, &getTicketHistoryResponse)
         if err != nil {
             return TicketHistoryList{}, common.NewFDKError(err.Error())
         }
-        return getNewTicketHistoryResponse, nil
+        return getTicketHistoryResponse, nil
         
     }
            
@@ -19160,13 +20347,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetNewTokenForVideoRoom Get Token to join a specific Video Room using it's unqiue name
-     func (le *PlatformAppLead)  GetNewTokenForVideoRoom(UniqueName string) (GetTokenForVideoRoomResponse, error) {
+    // GetTokenForVideoRoom Get Token to join a specific Video Room using it's unqiue name
+     func (le *PlatformAppLead)  GetTokenForVideoRoom(UniqueName string) (GetTokenForVideoRoomResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getNewTokenForVideoRoomResponse GetTokenForVideoRoomResponse
+            getTokenForVideoRoomResponse GetTokenForVideoRoomResponse
 	    )
 
         
@@ -19193,11 +20380,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetTokenForVideoRoomResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getNewTokenForVideoRoomResponse)
+        err = json.Unmarshal(response, &getTokenForVideoRoomResponse)
         if err != nil {
             return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
         }
-        return getNewTokenForVideoRoomResponse, nil
+        return getTokenForVideoRoomResponse, nil
         
     }
            
@@ -19210,13 +20397,13 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
-    // GetNewVideoParticipants Get participants of a specific Video Room using it's unique name
-     func (le *PlatformAppLead)  GetNewVideoParticipants(UniqueName string) (GetParticipantsInsideVideoRoomResponse, error) {
+    // GetVideoParticipants Get participants of a specific Video Room using it's unique name
+     func (le *PlatformAppLead)  GetVideoParticipants(UniqueName string) (GetParticipantsInsideVideoRoomResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getNewVideoParticipantsResponse GetParticipantsInsideVideoRoomResponse
+            getVideoParticipantsResponse GetParticipantsInsideVideoRoomResponse
 	    )
 
         
@@ -19243,11 +20430,11 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             return GetParticipantsInsideVideoRoomResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getNewVideoParticipantsResponse)
+        err = json.Unmarshal(response, &getVideoParticipantsResponse)
         if err != nil {
             return GetParticipantsInsideVideoRoomResponse{}, common.NewFDKError(err.Error())
         }
-        return getNewVideoParticipantsResponse, nil
+        return getVideoParticipantsResponse, nil
         
     }
            

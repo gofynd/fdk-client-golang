@@ -6968,6 +6968,38 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
    
   
     
@@ -7076,6 +7108,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             }
         
        
+    
+    
+    
+    
+    
+    
     
     
     
@@ -8286,6 +8324,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     func NewPlatformConfiguration(config *PlatformConfig) *PlatformConfiguration {
         return &PlatformConfiguration{Config: config, CompanyID: config.CompanyID}
     }
+    
+    
     
     
     
@@ -13501,8 +13541,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
-    //PlatformGetTicketsXQuery holds query params
-    type PlatformGetTicketsXQuery struct { 
+    //PlatformGetPlatformTicketsXQuery holds query params
+    type PlatformGetPlatformTicketsXQuery struct { 
         Items bool  `url:"items,omitempty"` 
         Filters bool  `url:"filters,omitempty"` 
         Q string  `url:"q,omitempty"` 
@@ -13515,14 +13555,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetTickets Gets the list of company level tickets and/or ticket filters depending on query params
-     func (le *PlatformLead)  GetTickets(xQuery PlatformGetTicketsXQuery) (TicketList, error){
+    // GetPlatformTickets Gets the list of company level tickets and/or ticket filters depending on query params
+     func (le *PlatformLead)  GetPlatformTickets(xQuery PlatformGetPlatformTicketsXQuery) (TicketList, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getTicketsResponse TicketList
+            getPlatformTicketsResponse TicketList
 	    )
 
         
@@ -13572,11 +13612,11 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return TicketList{}, err
 	    }
         
-        err = json.Unmarshal(response, &getTicketsResponse)
+        err = json.Unmarshal(response, &getPlatformTicketsResponse)
         if err != nil {
              return TicketList{}, common.NewFDKError(err.Error())
         }
-        return getTicketsResponse, nil
+        return getPlatformTicketsResponse, nil
         
     }
          
@@ -13640,9 +13680,9 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
         
             
-            // GetTicketsPaginator Gets the list of company level tickets and/or ticket filters depending on query params  
-            func (le *PlatformLead)  GetTicketsPaginator(
-              xQuery PlatformGetTicketsXQuery ) *common.Paginator {
+            // GetPlatformTicketsPaginator Gets the list of company level tickets and/or ticket filters depending on query params  
+            func (le *PlatformLead)  GetPlatformTicketsPaginator(
+              xQuery PlatformGetPlatformTicketsXQuery ) *common.Paginator {
                 paginator := common.NewPaginator("number")
                 
                  
@@ -13680,7 +13720,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
                  
                  
                 paginator.Next = func() (interface{}, error) {
-                    response, err := le.GetTickets(xQuery)
+                    response, err := le.GetPlatformTickets(xQuery)
                     if response.Page.HasNext {
                         paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
                     }
@@ -13782,14 +13822,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetTicket Retreives ticket details of a company level ticket with ticket ID
-     func (le *PlatformLead)  GetTicket(ID string) (Ticket, error){
+    // GetPlatformTicket Retreives ticket details of a company level ticket with ticket ID
+     func (le *PlatformLead)  GetPlatformTicket(ID string) (Ticket, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getTicketResponse Ticket
+            getPlatformTicketResponse Ticket
 	    )
 
         
@@ -13816,11 +13856,11 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return Ticket{}, err
 	    }
         
-        err = json.Unmarshal(response, &getTicketResponse)
+        err = json.Unmarshal(response, &getPlatformTicketResponse)
         if err != nil {
              return Ticket{}, common.NewFDKError(err.Error())
         }
-        return getTicketResponse, nil
+        return getPlatformTicketResponse, nil
         
     }
          
@@ -13834,14 +13874,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // EditTicket Edits ticket details of a company level ticket
-     func (le *PlatformLead)  EditTicket(ID string, body  EditTicketPayload) (Ticket, error){
+    // EditPlatformTicket Edits ticket details of a company level ticket
+     func (le *PlatformLead)  EditPlatformTicket(ID string, body  EditTicketPayload) (Ticket, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            editTicketResponse Ticket
+            editPlatformTicketResponse Ticket
 	    )
 
         
@@ -13904,11 +13944,11 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return Ticket{}, err
 	    }
         
-        err = json.Unmarshal(response, &editTicketResponse)
+        err = json.Unmarshal(response, &editPlatformTicketResponse)
         if err != nil {
              return Ticket{}, common.NewFDKError(err.Error())
         }
-        return editTicketResponse, nil
+        return editPlatformTicketResponse, nil
         
     }
          
@@ -13926,14 +13966,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // CreateHistory Create history for specific company level ticket
-     func (le *PlatformLead)  CreateHistory(ID string, body  TicketHistoryPayload) (TicketHistory, error){
+    // CreatePlatformTicketHistory Create history for specific company level ticket
+     func (le *PlatformLead)  CreatePlatformTicketHistory(ID string, body  TicketHistoryPayload) (TicketHistory, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            createHistoryResponse TicketHistory
+            createPlatformTicketHistoryResponse TicketHistory
 	    )
 
         
@@ -13984,11 +14024,11 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return TicketHistory{}, err
 	    }
         
-        err = json.Unmarshal(response, &createHistoryResponse)
+        err = json.Unmarshal(response, &createPlatformTicketHistoryResponse)
         if err != nil {
              return TicketHistory{}, common.NewFDKError(err.Error())
         }
-        return createHistoryResponse, nil
+        return createPlatformTicketHistoryResponse, nil
         
     }
          
@@ -14002,14 +14042,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetTicketHistory Gets history list for specific company level ticket
-     func (le *PlatformLead)  GetTicketHistory(ID string) (TicketHistoryList, error){
+    // GetPlatformTicketHistory Gets history list for specific company level ticket
+     func (le *PlatformLead)  GetPlatformTicketHistory(ID string) (TicketHistoryList, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getTicketHistoryResponse TicketHistoryList
+            getPlatformTicketHistoryResponse TicketHistoryList
 	    )
 
         
@@ -14036,11 +14076,11 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return TicketHistoryList{}, err
 	    }
         
-        err = json.Unmarshal(response, &getTicketHistoryResponse)
+        err = json.Unmarshal(response, &getPlatformTicketHistoryResponse)
         if err != nil {
              return TicketHistoryList{}, common.NewFDKError(err.Error())
         }
-        return getTicketHistoryResponse, nil
+        return getPlatformTicketHistoryResponse, nil
         
     }
          
@@ -14185,14 +14225,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetTokenForVideoRoom Get Token to join a specific Video Room using it's unqiue name
-     func (le *PlatformLead)  GetTokenForVideoRoom(UniqueName string) (GetTokenForVideoRoomResponse, error){
+    // GetTokenForPlatformVideoRoom Get Token to join a specific Video Room using it's unqiue name
+     func (le *PlatformLead)  GetTokenForPlatformVideoRoom(UniqueName string) (GetTokenForVideoRoomResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getTokenForVideoRoomResponse GetTokenForVideoRoomResponse
+            getTokenForPlatformVideoRoomResponse GetTokenForVideoRoomResponse
 	    )
 
         
@@ -14219,11 +14259,11 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return GetTokenForVideoRoomResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getTokenForVideoRoomResponse)
+        err = json.Unmarshal(response, &getTokenForPlatformVideoRoomResponse)
         if err != nil {
              return GetTokenForVideoRoomResponse{}, common.NewFDKError(err.Error())
         }
-        return getTokenForVideoRoomResponse, nil
+        return getTokenForPlatformVideoRoomResponse, nil
         
     }
          
@@ -14239,14 +14279,14 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
 
 
-    // GetVideoParticipants Get participants of a specific Video Room using it's unique name
-     func (le *PlatformLead)  GetVideoParticipants(UniqueName string) (GetParticipantsInsideVideoRoomResponse, error){
+    // GetPlatformVideoParticipants Get participants of a specific Video Room using it's unique name
+     func (le *PlatformLead)  GetPlatformVideoParticipants(UniqueName string) (GetParticipantsInsideVideoRoomResponse, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getVideoParticipantsResponse GetParticipantsInsideVideoRoomResponse
+            getPlatformVideoParticipantsResponse GetParticipantsInsideVideoRoomResponse
 	    )
 
         
@@ -14273,11 +14313,11 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return GetParticipantsInsideVideoRoomResponse{}, err
 	    }
         
-        err = json.Unmarshal(response, &getVideoParticipantsResponse)
+        err = json.Unmarshal(response, &getPlatformVideoParticipantsResponse)
         if err != nil {
              return GetParticipantsInsideVideoRoomResponse{}, common.NewFDKError(err.Error())
         }
-        return getVideoParticipantsResponse, nil
+        return getPlatformVideoParticipantsResponse, nil
         
     }
          
