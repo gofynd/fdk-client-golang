@@ -12355,59 +12355,20 @@ package platform
          
     }
     
-    // Opts used by FileStorage
-    type Opts struct {
-
-        
-            Attempts float64  `json:"attempts"`
-            Timestamp float64  `json:"timestamp"`
-            Delay float64  `json:"delay"`
-         
-    }
-    
-    // CopyFileTask used by FileStorage
-    type CopyFileTask struct {
-
-        
-            ID string  `json:"id"`
-            Name string  `json:"name"`
-            Data BulkRequest  `json:"data"`
-            Opts Opts  `json:"opts"`
-            Progress float64  `json:"progress"`
-            Delay float64  `json:"delay"`
-            Timestamp float64  `json:"timestamp"`
-            AttemptsMade float64  `json:"attempts_made"`
-            Stacktrace []string  `json:"stacktrace"`
-            FinishedOn float64  `json:"finished_on"`
-            ProcessedOn float64  `json:"processed_on"`
-         
-    }
-    
-    // BulkUploadResponse used by FileStorage
-    type BulkUploadResponse struct {
-
-        
-            TrackingURL string  `json:"tracking_url"`
-            Task CopyFileTask  `json:"task"`
-         
-    }
-    
-    // Destination used by FileStorage
-    type Destination struct {
+    // DestinationNamespace used by FileStorage
+    type DestinationNamespace struct {
 
         
             Namespace string  `json:"namespace"`
-            Rewrite string  `json:"rewrite"`
-            Basepath string  `json:"basepath"`
          
     }
     
-    // BulkRequest used by FileStorage
-    type BulkRequest struct {
+    // CopyFiles used by FileStorage
+    type CopyFiles struct {
 
         
             Urls []string  `json:"urls"`
-            Destination Destination  `json:"destination"`
+            Destination DestinationNamespace  `json:"destination"`
          
     }
     
@@ -12480,6 +12441,31 @@ package platform
          
     }
     
+    // InvoiceTypesResponse used by FileStorage
+    type InvoiceTypesResponse struct {
+
+        
+            ID string  `json:"_id"`
+            PdfTypeID float64  `json:"pdf_type_id"`
+            Name string  `json:"name"`
+            Format []string  `json:"format"`
+            V float64  `json:"__v"`
+            Visibility bool  `json:"visibility"`
+            Schema map[string]interface{}  `json:"schema"`
+         
+    }
+    
+    // DummyTemplateDataItems used by FileStorage
+    type DummyTemplateDataItems struct {
+
+        
+            ID string  `json:"_id"`
+            PdfTypeID float64  `json:"pdf_type_id"`
+            Payload map[string]interface{}  `json:"payload"`
+            V float64  `json:"__v"`
+         
+    }
+    
     // Status used by FileStorage
     type Status struct {
 
@@ -12509,14 +12495,21 @@ package platform
          
     }
     
-    // BulkUploadFailFileResponseItems used by FileStorage
-    type BulkUploadFailFileResponseItems struct {
+    // FilesSuccess used by FileStorage
+    type FilesSuccess struct {
 
         
             Success bool  `json:"success"`
-            Error string  `json:"error"`
             File File  `json:"file"`
-            Stage string  `json:"stage"`
+         
+    }
+    
+    // BulkUploadSyncMode used by FileStorage
+    type BulkUploadSyncMode struct {
+
+        
+            Status Status  `json:"status"`
+            Files []FilesSuccess  `json:"files"`
          
     }
     
@@ -12525,7 +12518,66 @@ package platform
 
         
             Status Status  `json:"status"`
-            Files []BulkUploadFailFileResponseItems  `json:"files"`
+         
+    }
+    
+    // pdfRender used by FileStorage
+    type pdfRender struct {
+
+        
+            Format string  `json:"format"`
+            Payload map[string]interface{}  `json:"payload"`
+            Template string  `json:"template"`
+         
+    }
+    
+    // pdfConfig used by FileStorage
+    type pdfConfig struct {
+
+        
+            Format string  `json:"format"`
+            Template string  `json:"template"`
+            PdfTypeID float64  `json:"pdf_type_id"`
+         
+    }
+    
+    // PdfConfigSuccess used by FileStorage
+    type PdfConfigSuccess struct {
+
+        
+            ID string  `json:"_id"`
+            CompanyID float64  `json:"company_id"`
+            ApplicationID string  `json:"application_id"`
+            PdfTypeID float64  `json:"pdf_type_id"`
+            Format string  `json:"format"`
+            Template string  `json:"template"`
+            V float64  `json:"__v"`
+         
+    }
+    
+    // PdfConfigSaveSuccess used by FileStorage
+    type PdfConfigSaveSuccess struct {
+
+        
+            ID string  `json:"_id"`
+            CompanyID float64  `json:"company_id"`
+            ApplicationID string  `json:"application_id"`
+            PdfTypeID float64  `json:"pdf_type_id"`
+            Format string  `json:"format"`
+            Template string  `json:"template"`
+            V float64  `json:"__v"`
+         
+    }
+    
+    // PdfDefaultTemplateSuccess used by FileStorage
+    type PdfDefaultTemplateSuccess struct {
+
+        
+            ID string  `json:"_id"`
+            PdfTypeID float64  `json:"pdf_type_id"`
+            Format string  `json:"format"`
+            Template string  `json:"template"`
+            V float64  `json:"__v"`
          
     }
     

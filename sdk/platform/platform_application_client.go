@@ -19592,12 +19592,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // AppCopyFiles Copy Files
-     func (fi *PlatformAppFileStorage)  AppCopyFiles(xQuery PlatformAppAppCopyFilesXQuery, body  BulkRequest) (BulkUploadResponse, error) {
+     func (fi *PlatformAppFileStorage)  AppCopyFiles(xQuery PlatformAppAppCopyFilesXQuery, body  CopyFiles) (BulkUploadSyncMode, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            appCopyFilesResponse BulkUploadResponse
+            appCopyFilesResponse BulkUploadSyncMode
 	    )
 
         
@@ -19622,12 +19622,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
             
-             return BulkUploadResponse{}, common.NewFDKError(err.Error())
+             return BulkUploadSyncMode{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
             
-             return BulkUploadResponse{}, common.NewFDKError(err.Error())       
+             return BulkUploadSyncMode{}, common.NewFDKError(err.Error())       
         }
         
         //API call
@@ -19640,12 +19640,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-            return BulkUploadResponse{}, err
+            return BulkUploadSyncMode{}, err
 	    }
         
         err = json.Unmarshal(response, &appCopyFilesResponse)
         if err != nil {
-            return BulkUploadResponse{}, common.NewFDKError(err.Error())
+            return BulkUploadSyncMode{}, common.NewFDKError(err.Error())
         }
         return appCopyFilesResponse, nil
         
@@ -19716,6 +19716,353 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
        
     
     
+    
+    
+    
+  
+
+    
+    // GetPdfTypes Get all the supported invoice pdf types
+     func (fi *PlatformAppFileStorage)  GetPdfTypes() ([]InvoiceTypesResponse, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getPdfTypesResponse []InvoiceTypesResponse
+	    )
+
+        
+
+         
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.config,
+            "get",
+            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/pdf/types",fi.CompanyID, fi.ApplicationID),
+            nil,
+            nil,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return []InvoiceTypesResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getPdfTypesResponse)
+        if err != nil {
+            return []InvoiceTypesResponse{}, common.NewFDKError(err.Error())
+        }
+        return getPdfTypesResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppGetDefaultPdfDataXQuery holds query params
+    type PlatformAppGetDefaultPdfDataXQuery struct { 
+        PdfTypeID float64  `url:"pdf_type_id,omitempty"`  
+    }
+    
+    // GetDefaultPdfData Get Dummy pdf data for invoice or label
+     func (fi *PlatformAppFileStorage)  GetDefaultPdfData(xQuery PlatformAppGetDefaultPdfDataXQuery) ([]DummyTemplateDataItems, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getDefaultPdfDataResponse []DummyTemplateDataItems
+	    )
+
+        
+
+         
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.config,
+            "get",
+            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/pdf/mapper",fi.CompanyID, fi.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return []DummyTemplateDataItems{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getDefaultPdfDataResponse)
+        if err != nil {
+            return []DummyTemplateDataItems{}, common.NewFDKError(err.Error())
+        }
+        return getDefaultPdfDataResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppGetDefaultHtmlTemplateXQuery holds query params
+    type PlatformAppGetDefaultHtmlTemplateXQuery struct { 
+        PdfTypeID float64  `url:"pdf_type_id,omitempty"` 
+        Format string  `url:"format,omitempty"`  
+    }
+    
+    // GetDefaultHtmlTemplate Get html template for sales channel
+     func (fi *PlatformAppFileStorage)  GetDefaultHtmlTemplate(xQuery PlatformAppGetDefaultHtmlTemplateXQuery) ([]PdfConfigSuccess, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getDefaultHtmlTemplateResponse []PdfConfigSuccess
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.config,
+            "get",
+            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/pdf/config",fi.CompanyID, fi.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return []PdfConfigSuccess{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getDefaultHtmlTemplateResponse)
+        if err != nil {
+            return []PdfConfigSuccess{}, common.NewFDKError(err.Error())
+        }
+        return getDefaultHtmlTemplateResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // SaveHtmlTemplate Update html template for invoice or label
+     func (fi *PlatformAppFileStorage)  SaveHtmlTemplate(body  pdfConfig) ([]PdfConfigSaveSuccess, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            saveHtmlTemplateResponse []PdfConfigSaveSuccess
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return []PdfConfigSaveSuccess{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return []PdfConfigSaveSuccess{}, common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.config,
+            "put",
+            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/pdf/config",fi.CompanyID, fi.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return []PdfConfigSaveSuccess{}, err
+	    }
+        
+        err = json.Unmarshal(response, &saveHtmlTemplateResponse)
+        if err != nil {
+            return []PdfConfigSaveSuccess{}, common.NewFDKError(err.Error())
+        }
+        return saveHtmlTemplateResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    // PreviewTemplate Preview HTML template
+     func (fi *PlatformAppFileStorage)  PreviewTemplate(body  pdfRender) (string, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            previewTemplateResponse string
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+         
+
+        
+        
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+            
+             return "", common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+            
+             return "", common.NewFDKError(err.Error())       
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.config,
+            "post",
+            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/pdf/render",fi.CompanyID, fi.ApplicationID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return "", err
+	    }
+        
+        err = json.Unmarshal(response, &previewTemplateResponse)
+        if err != nil {
+            return "", common.NewFDKError(err.Error())
+        }
+        return previewTemplateResponse, nil
+        
+    }
+           
+       
+    
+    
+    
+  
+
+    
+    //PlatformAppGetDefaultPdfTemplateXQuery holds query params
+    type PlatformAppGetDefaultPdfTemplateXQuery struct { 
+        PdfTypeID float64  `url:"pdf_type_id,omitempty"` 
+        Format string  `url:"format,omitempty"`  
+    }
+    
+    // GetDefaultPdfTemplate Default html template
+     func (fi *PlatformAppFileStorage)  GetDefaultPdfTemplate(xQuery PlatformAppGetDefaultPdfTemplateXQuery) ([]PdfDefaultTemplateSuccess, error) {
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            getDefaultPdfTemplateResponse []PdfDefaultTemplateSuccess
+	    )
+
+        
+
+         
+            
+                
+            
+                
+            
+        
+
+        
+        
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            fi.config,
+            "get",
+            fmt.Sprintf("/service/platform/assets/v1.0/company/%s/application/%s/pdf/default-template",fi.CompanyID, fi.ApplicationID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return []PdfDefaultTemplateSuccess{}, err
+	    }
+        
+        err = json.Unmarshal(response, &getDefaultPdfTemplateResponse)
+        if err != nil {
+            return []PdfDefaultTemplateSuccess{}, common.NewFDKError(err.Error())
+        }
+        return getDefaultPdfTemplateResponse, nil
+        
+    }
+           
+       
     
 
  
@@ -26969,7 +27316,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     //PlatformAppSearchUsersXQuery holds query params
     type PlatformAppSearchUsersXQuery struct { 
         Q string  `url:"q,omitempty"` 
-        Query []interface{}  `url:"query,omitempty"`  
+        Query []string  `url:"query,omitempty"`  
     }
     
     // SearchUsers Search an existing user.

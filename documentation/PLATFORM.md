@@ -11,7 +11,8 @@
 * [Configuration](#Configuration) - Application configuration apis 
 * [Content](#Content) - Content System 
 * [Discount](#Discount) - Discount 
-* [FileStorage](#FileStorage) - File Storage 
+* [FileStorage](#FileStorage) - This service provides functionality to manage assets and generate pdf. You can upload the assets, get the cdn link for the assets, proxy the assets and many more things.
+ 
 * [Finance](#Finance) - Handles all finance related activities 
 * [Inventory](#Inventory) - Catalog - Platform Front API's' API's allows you to access list of products, prices, seller details, similar features, variants and many more useful features.  
 * [Lead](#Lead) - Handles communication between Administrator 
@@ -495,6 +496,12 @@
     * [browse](#browse)
     * [appbrowse](#appbrowse)
     * [proxy](#proxy)
+    * [getPdfTypes](#getpdftypes)
+    * [getDefaultPdfData](#getdefaultpdfdata)
+    * [getDefaultHtmlTemplate](#getdefaulthtmltemplate)
+    * [saveHtmlTemplate](#savehtmltemplate)
+    * [previewTemplate](#previewtemplate)
+    * [getDefaultPdfTemplate](#getdefaultpdftemplate)
     
 
 * [Finance](#Finance)
@@ -32361,6 +32368,38 @@ Success. Returns a response containing relaving and absolute_url of storage serv
 Schema: `StartResponse`
 
 
+*Examples:*
+
+
+success
+```json
+{
+  "value": {
+    "file_name": "shirt.png",
+    "file_path": "/path/qwertyuiop-shirt.png",
+    "content_type": "image/png",
+    "method": "PUT",
+    "namespace": "products-item-images",
+    "operation": "putObject",
+    "tags": [
+      "clothing",
+      "shirt"
+    ],
+    "size": 9999,
+    "cdn": {
+      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
+      "absolute_url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
+      "relative_url": "products/pictures/free/original/qwertyuiop-shirt.png"
+    },
+    "upload": {
+      "expiry": 5000,
+      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png?AWSAccessKeyId=xxx&Content-Type=image%2Fpng&Expires=5000&Signature=xxx&x-amz-acl=public-read"
+    }
+  }
+}
+```
+
+
 
 
 
@@ -32418,6 +32457,38 @@ Success
 
 
 Schema: `CompleteResponse`
+
+
+*Examples:*
+
+
+success
+```json
+{
+  "value": {
+    "success": true,
+    "_id": "xxxxxxxxxxxxxxxxxxxxxx",
+    "file_name": "shirt.png",
+    "file_path": "/path/qwertyuiop-shirt.png",
+    "content_type": "image/png",
+    "method": "PUT",
+    "namespace": "products-item-images",
+    "operation": "putObject",
+    "size": 9999,
+    "cdn": {
+      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
+      "absolute_url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
+      "relative_url": "products/pictures/free/original/qwertyuiop-shirt.png"
+    },
+    "upload": {
+      "expiry": 5000,
+      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png?AWSAccessKeyId=xxx&Content-Type=image%2Fpng&Expires=5000&Signature=xxx&x-amz-acl=public-read"
+    },
+    "created_on": "2020-02-03T09:50:04.240Z",
+    "modified_on": "2020-02-03T09:50:04.240Z"
+  }
+}
+```
 
 
 
@@ -32482,6 +32553,38 @@ Success
 Schema: `StartResponse`
 
 
+*Examples:*
+
+
+success
+```json
+{
+  "value": {
+    "file_name": "shirt.png",
+    "file_path": "/path/qwertyuiop-shirt.png",
+    "content_type": "image/png",
+    "method": "PUT",
+    "namespace": "products-item-images",
+    "operation": "putObject",
+    "tags": [
+      "clothing",
+      "shirt"
+    ],
+    "size": 9999,
+    "cdn": {
+      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
+      "absolute_url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
+      "relative_url": "products/pictures/free/original/qwertyuiop-shirt.png"
+    },
+    "upload": {
+      "expiry": 5000,
+      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png?AWSAccessKeyId=xxx&Content-Type=image%2Fpng&Expires=5000&Signature=xxx&x-amz-acl=public-read"
+    }
+  }
+}
+```
+
+
 
 
 
@@ -32542,6 +32645,38 @@ Success
 
 
 Schema: `CompleteResponse`
+
+
+*Examples:*
+
+
+success
+```json
+{
+  "value": {
+    "success": true,
+    "_id": "xxxxxxxxxxxxxxxxxxxxxx",
+    "file_name": "shirt.png",
+    "file_path": "/path/qwertyuiop-shirt.png",
+    "content_type": "image/png",
+    "method": "PUT",
+    "namespace": "products-item-images",
+    "operation": "putObject",
+    "size": 9999,
+    "cdn": {
+      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
+      "absolute_url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
+      "relative_url": "products/pictures/free/original/qwertyuiop-shirt.png"
+    },
+    "upload": {
+      "expiry": 5000,
+      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png?AWSAccessKeyId=xxx&Content-Type=image%2Fpng&Expires=5000&Signature=xxx&x-amz-acl=public-read"
+    },
+    "created_on": "2020-02-03T09:50:04.240Z",
+    "modified_on": "2020-02-03T09:50:04.240Z"
+  }
+}
+```
 
 
 
@@ -32628,7 +32763,7 @@ data, err := FileStorage.CopyFiles(CompanyID, xQuery, body);
 
 | xQuery | struct | Includes properties such as `Sync`
 
-| body |  BulkRequest | "Request body" 
+| body |  CopyFiles | "Request body" 
 
 Copy Files
 
@@ -32639,7 +32774,126 @@ Copy Files
 Success
 
 
-Schema: `BulkUploadResponse`
+Schema: `BulkUploadSyncMode`
+
+
+*Examples:*
+
+
+successInSyncMode
+```json
+{
+  "value": {
+    "status": {
+      "total": 1,
+      "failed": 0,
+      "succeeded": 1,
+      "result": "SUCCESS"
+    },
+    "files": [
+      {
+        "success": true,
+        "file": {
+          "src": {
+            "method": "GET",
+            "url": "https://hdn-1.fynd.com/platform/pictures/free-logo/original/7qdHNTFe--platform-logo.png",
+            "meta": {},
+            "namespace": "test"
+          },
+          "dest": {
+            "ETag": "\"a2fdd91e5a6e1c080a44966c923f7d3b\"",
+            "ServerSideEncryption": "AES256",
+            "Location": "https://fynd-staging-assets.s3-accelerate.amazonaws.com/addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
+            "key": "addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
+            "Key": "addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
+            "Bucket": "fynd-staging-assets",
+            "cdn": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
+            "absolute_url": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
+            "relative_url": "addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png"
+          }
+        },
+        "extracted_data": {
+          "sharp": {
+            "metadata": {
+              "format": "png",
+              "size": 20859,
+              "width": 1147,
+              "height": 315,
+              "space": "srgb",
+              "channels": 4,
+              "depth": "uchar",
+              "density": 144,
+              "isProgressive": false,
+              "hasProfile": false,
+              "hasAlpha": true
+            },
+            "stats": {
+              "channels": [
+                {
+                  "min": 0,
+                  "max": 255,
+                  "sum": 18581166,
+                  "squaresSum": 2720454498,
+                  "mean": 51.42792377631087,
+                  "stdev": 69.89066964116273,
+                  "minX": 0,
+                  "minY": 32,
+                  "maxX": 767,
+                  "maxY": 162
+                },
+                {
+                  "min": 0,
+                  "max": 255,
+                  "sum": 23074718,
+                  "squaresSum": 3794972074,
+                  "mean": 63.86492852299304,
+                  "stdev": 80.15486600126069,
+                  "minX": 0,
+                  "minY": 32,
+                  "maxX": 767,
+                  "maxY": 162
+                },
+                {
+                  "min": 0,
+                  "max": 255,
+                  "sum": 43651277,
+                  "squaresSum": 8829856965,
+                  "mean": 120.81559070591328,
+                  "stdev": 99.20892161899766,
+                  "minX": 0,
+                  "minY": 32,
+                  "maxX": 767,
+                  "maxY": 162
+                },
+                {
+                  "min": 0,
+                  "max": 255,
+                  "sum": 55673911,
+                  "squaresSum": 14147207369,
+                  "mean": 154.09117227826906,
+                  "stdev": 124.14431740073556,
+                  "minX": 0,
+                  "minY": 32,
+                  "maxX": 33,
+                  "maxY": 32
+                }
+              ],
+              "isOpaque": false,
+              "entropy": 2.2912313200504286,
+              "sharpness": 3.3113732303662036,
+              "dominant": {
+                "r": 8,
+                "g": 8,
+                "b": 8
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+```
 
 
 
@@ -32672,7 +32926,7 @@ data, err := FileStorage.AppCopyFiles(CompanyID, ApplicationID, xQuery, body);
 
 | xQuery | struct | Includes properties such as `Sync`
 
-| body |  BulkRequest | "Request body" 
+| body |  CopyFiles | "Request body" 
 
 Copy Files
 
@@ -32683,7 +32937,192 @@ Copy Files
 Success
 
 
-Schema: `BulkUploadResponse`
+Schema: `BulkUploadSyncMode`
+
+
+*Examples:*
+
+
+successInSyncMode
+```json
+{
+  "value": {
+    "status": {
+      "total": 1,
+      "failed": 0,
+      "succeeded": 1,
+      "result": "SUCCESS"
+    },
+    "files": [
+      {
+        "success": true,
+        "file": {
+          "src": {
+            "method": "GET",
+            "url": "https://hdn-1.fynd.com/platform/pictures/free-logo/original/7qdHNTFe--platform-logo.png",
+            "meta": {},
+            "namespace": "test"
+          },
+          "dest": {
+            "ETag": "\"a2fdd91e5a6e1c080a44966c923f7d3b\"",
+            "ServerSideEncryption": "AES256",
+            "Location": "https://fynd-staging-assets.s3-accelerate.amazonaws.com/addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
+            "key": "addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
+            "Key": "addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
+            "Bucket": "fynd-staging-assets",
+            "cdn": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
+            "absolute_url": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png",
+            "relative_url": "addsale/test/general/free/original/4q7uySVcYQ-7qdHNTFe-platform-logo.png"
+          }
+        },
+        "extracted_data": {
+          "sharp": {
+            "metadata": {
+              "format": "png",
+              "size": 20859,
+              "width": 1147,
+              "height": 315,
+              "space": "srgb",
+              "channels": 4,
+              "depth": "uchar",
+              "density": 144,
+              "isProgressive": false,
+              "hasProfile": false,
+              "hasAlpha": true
+            },
+            "stats": {
+              "channels": [
+                {
+                  "min": 0,
+                  "max": 255,
+                  "sum": 18581166,
+                  "squaresSum": 2720454498,
+                  "mean": 51.42792377631087,
+                  "stdev": 69.89066964116273,
+                  "minX": 0,
+                  "minY": 32,
+                  "maxX": 767,
+                  "maxY": 162
+                },
+                {
+                  "min": 0,
+                  "max": 255,
+                  "sum": 23074718,
+                  "squaresSum": 3794972074,
+                  "mean": 63.86492852299304,
+                  "stdev": 80.15486600126069,
+                  "minX": 0,
+                  "minY": 32,
+                  "maxX": 767,
+                  "maxY": 162
+                },
+                {
+                  "min": 0,
+                  "max": 255,
+                  "sum": 43651277,
+                  "squaresSum": 8829856965,
+                  "mean": 120.81559070591328,
+                  "stdev": 99.20892161899766,
+                  "minX": 0,
+                  "minY": 32,
+                  "maxX": 767,
+                  "maxY": 162
+                },
+                {
+                  "min": 0,
+                  "max": 255,
+                  "sum": 55673911,
+                  "squaresSum": 14147207369,
+                  "mean": 154.09117227826906,
+                  "stdev": 124.14431740073556,
+                  "minX": 0,
+                  "minY": 32,
+                  "maxX": 33,
+                  "maxY": 32
+                }
+              ],
+              "isOpaque": false,
+              "entropy": 2.2912313200504286,
+              "sharpness": 3.3113732303662036,
+              "dominant": {
+                "r": 8,
+                "g": 8,
+                "b": 8
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+successInSyncModeWithRewrite
+```json
+{
+  "value": {
+    "status": {
+      "total": 1,
+      "failed": 1,
+      "succeeded": 0,
+      "result": "FAIL"
+    },
+    "files": [
+      {
+        "success": false,
+        "error": "Request failed with status code 400",
+        "file": {
+          "src": {
+            "method": "GET",
+            "url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/x0/documents/manifest/PDFs/test/s3EtYk5p9-new_fee.pdf",
+            "meta": {},
+            "namespace": "test"
+          }
+        },
+        "stage": "AXIOS_FETCH",
+        "axios_request": {
+          "url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/x0/documents/manifest/PDFs/test/s3EtYk5p9-new_fee.pdf",
+          "method": "GET",
+          "meta": {},
+          "namespace": "test",
+          "responseType": "stream"
+        }
+      }
+    ],
+    "task": {
+      "id": "83419",
+      "name": "__default__",
+      "data": {
+        "urls": [
+          "https://hdn-1.fynd.com/platform/pictures/free-logo/original/7qdHNTFe--platform-logo.png"
+        ],
+        "destination": {
+          "basepath": "/domaine/path",
+          "rewrite": "{{basepath}}/foo/"
+        }
+      },
+      "opts": {
+        "attempts": 2,
+        "backoff": {
+          "type": "fixed",
+          "delay": 1000
+        },
+        "delay": 0,
+        "timestamp": 1690669093201
+      },
+      "progress": 0,
+      "delay": 0,
+      "timestamp": 1690669093201,
+      "attemptsMade": 0,
+      "stacktrace": [],
+      "returnvalue": null,
+      "finishedOn": null,
+      "processedOn": null
+    }
+  }
+}
+```
 
 
 
@@ -32817,6 +33256,593 @@ Success
 
 
 Schema: `string`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPdfTypes
+Get all the supported invoice pdf types
+
+```golang
+
+data, err := FileStorage.GetPdfTypes(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| ApplicationID | string |  | 
+
+
+
+Get all the supported invoice pdf types such as Invoice, Label, Deliver challan
+
+*Success Response:*
+
+
+
+Get all the invoice types and its format
+
+
+Schema: `Array<InvoiceTypesResponse>`
+
+
+*Examples:*
+
+
+success
+```json
+{
+  "value": [
+    {
+      "_id": "64b7ec2556a0cba523196426",
+      "pdf_type_id": 1,
+      "name": "invoice",
+      "format": [
+        "A4",
+        "A6",
+        "POS"
+      ],
+      "visibility": true,
+      "schema": {},
+      "__v": 0
+    }
+  ]
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDefaultPdfData
+Get Dummy pdf data for invoice or label
+
+```golang
+
+data, err := FileStorage.GetDefaultPdfData(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| ApplicationID | string |  | 
+
+
+
+| xQuery | struct | Includes properties such as `PdfTypeID`
+
+
+Get Dummy pdf data for invoice or label
+
+*Success Response:*
+
+
+
+Get dummy json data for invoice
+
+
+Schema: `Array<DummyTemplateDataItems>`
+
+
+*Examples:*
+
+
+success
+```json
+{
+  "value": [
+    {
+      "_id": "64b7f52d56a0cba5231964b0",
+      "pdf_type_id": 1,
+      "payload": {
+        "currency_code": "INR",
+        "shipment_id": "16811182420541695489",
+        "amount_to_be_collected": 0,
+        "amount_paid": 100,
+        "awb_number_barcode": "",
+        "signed_qrcode": "",
+        "shipment_id_barcode": "",
+        "upi_qrcode": "",
+        "is_self_ship": false,
+        "is_self_pickup": true,
+        "is_test": false,
+        "image": {
+          "sales_channel_logo": ""
+        },
+        "payments": [
+          {
+            "payment_type": "Net Banking",
+            "date": "10/04/2023",
+            "transaction_id": "10022310053248709000",
+            "amount": 35
+          }
+        ],
+        "invoice_detail": {
+          "invoice_id": "2352313215236713",
+          "invoice_date": "10/04/2023",
+          "irn": "",
+          "external_order_id": "",
+          "shipment_id": "16811182420541695489",
+          "order_id": "73982433",
+          "channel_order_id": "affiliate_details.channel_order_id"
+        },
+        "company_detail": {
+          "name": "RELIANCE RETAIL LIMITED",
+          "address": "1ST FLOOR, WEWORK VIJAY DIAMOND, CROSS RD B, AJIT NAGAR, KONDIVITA, ANDHERI EAST, MUMBAI, MAHARASHTR",
+          "city": "MUMBAI",
+          "state": "MAHARASHTRA",
+          "country": "INDIA",
+          "zip_code": "400093",
+          "state_code": "27",
+          "country_code": "IN",
+          "gstin": "27AABCR1718E1ZP",
+          "pan": "AABCR1718E",
+          "phone_no": "9594495254",
+          "cin": "U45200MH1992PTC066474",
+          "website_url": "https://freshpik.hostx1.de",
+          "email": ""
+        },
+        "store_detail": {
+          "store_name": "FreshPik",
+          "address": "FRESHPIK, JIO WORLD DRIVE, MAKERS MAXITY,STORE UNIT - G 22,23&24 BANDRA EAST FSSAI NO: 11521005000512",
+          "city": "Mumbai",
+          "state": "Maharashtra",
+          "country": "India",
+          "country_code": "IN",
+          "zip_code": "400093",
+          "state_code": "27",
+          "gstin": "27AABCR1718E1ZP"
+        },
+        "customer_shipping_detail": {
+          "name": "Megha Golecha",
+          "phone_no": "9769199489",
+          "address": "1001 Badri Vishal, Sahakar Nagar, Andheri West, 400053, Near Building No. 33, Shanti Nagar,Test,Mumbai,Maharashtra,India,400053",
+          "city": "Mumbai",
+          "state": "Maharashtra",
+          "country": "India",
+          "country_code": "IN",
+          "zip_code": "400053",
+          "state_code": "27",
+          "gstin": ""
+        },
+        "return_detail": {
+          "address": "FRESHPIK, JIO WORLD DRIVE, MAKERS MAXITY,STORE UNIT - G 22,23&24 BANDRA EAST FSSAI NO: 11521005000512",
+          "city": "Mumbai",
+          "state": "Maharashtra",
+          "country": "India",
+          "country_code": "IN",
+          "zip_code": "400053",
+          "state_code": "27",
+          "gstin": ""
+        },
+        "product_table": {
+          "total_items": 1,
+          "products": [
+            {
+              "name": "So Good Unsweetened Soy Milk 200 ml (Tetra Pak)",
+              "size": "200ML",
+              "item_code": "",
+              "seller_identifier": "490001550",
+              "hsn_code": "62060000",
+              "total_units": 1,
+              "mrp": 35,
+              "discount": 123,
+              "taxable_amount": 33.33,
+              "total_taxable_amount": 33.33,
+              "tax": {
+                "cgst": {
+                  "value": 0.83,
+                  "percent": 2.5
+                },
+                "sgst": {
+                  "value": 0.83,
+                  "percent": 2.5
+                },
+                "igst": {
+                  "value": 0.83,
+                  "percent": 2.5
+                }
+              },
+              "total": 35,
+              "brand": {
+                "logo": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/brands/pictures/square-logo/original/gi4glSy7T-EX5Teqb1K-Logo.jpeg",
+                "name": "Freshpik"
+              }
+            }
+          ],
+          "grand_total": 35,
+          "delivery_charges": 0,
+          "delivery_charge_text": "",
+          "cod_charges": 0,
+          "fynd_discounts": 0,
+          "total_in_words": "Thirty Five Rupees Only"
+        },
+        "tax_table": {
+          "taxes": [
+            {
+              "hsn_code": "62060000",
+              "tax": {
+                "cgst": {
+                  "value": 0.83,
+                  "percent": 2.5
+                },
+                "sgst": {
+                  "value": 0.83,
+                  "percent": 2.5
+                },
+                "igst": {
+                  "value": 0,
+                  "percent": 0
+                }
+              },
+              "total": 123
+            }
+          ],
+          "grand_total": 1.67,
+          "tax_in_words": "One Rupees and Sixty Seven Paise Only"
+        },
+        "declaration_texts": [
+          "1. Products being sent under this invoice are for personal consumption for the customer and not for resale or commercial purposes.",
+          "2. Whether tax is payable under reverse charge - No",
+          "3. This invoice shows the actual price of the goods described above and that all particulars are true and accurate.",
+          "4. In case of any queries, please reach out to care@gofynd.com.",
+          "5. In the event of any loss or non-delivery, the goods shall be returned to the address specified below. this.shipment.invoice.rto_address"
+        ],
+        "registered_company_detail": {
+          "address": "1ST FLOOR, WEWORK VIJAY DIAMOND, CROSS RD B, AJIT NAGAR, KONDIVITA, ANDHERI EAST, MUMBAI, MAHARASHTR",
+          "city": "MUMBAI",
+          "state": "MAHARASHTRA",
+          "country": "INDIA",
+          "zip_code": "400093",
+          "state_code": "27",
+          "country_code": "IN"
+        },
+        "disclaimer": "An Electronic document issued in accordance with the provisions of the Information Technology Act, 2000 (21 of 2000)",
+        "meta": {
+          "generator": {
+            "signed_qrcode_generator": {
+              "method": "signedqrcode",
+              "kwargs": {
+                "value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkVEQzU3REUxMzU4QjMwMEJBOUY3OTM0MEE2Njk2ODMxRjNDODUwNDciLCJ0eXAiOiJKV1QiLCJ4NXQiOiI3Y1Y5NFRXTE1BdXA5NU5BcG1sb01mUElVRWMifQ.eyJkYXRhIjoie1wiU2VsbGVyR3N0aW5cIjpcIjI3QUFCUFA2NTAzRTAwM1wiLFwiQnV5ZXJHc3RpblwiOlwiMjdBQUxDQTA0NDJMMVpNXCIsXCJEb2NOb1wiOlwiQTAwMDExMzMzQTAwMDAwM1wiLFwiRG9jVHlwXCI6XCJJTlZcIixcIkRvY0R0XCI6XCIxMS8xMC8yMDIyXCIsXCJUb3RJbnZWYWxcIjoyNDk5OTkuNzYsXCJJdGVtQ250XCI6MSxcIk1haW5Ic25Db2RlXCI6XCI5NDAxXCIsXCJJcm5cIjpcImUzNjE5M2YzNGQyZmY4OTM3MzI2NTcxN2RmYzY5YzVmYjU2MTI1N2U1M2MxOThhMDAzMGRkM2RlZGUxNDhmMmZcIixcIklybkR0XCI6XCIyMDIyLTEwLTExIDE0OjIxOjAwXCJ9IiwiaXNzIjoiTklDIn0.OtYrnBt311QrqdXCSuTOpzNuYA9M8ejRoyeRioJRyGImljXrNvBLU_JJpXVLtDI4dkbIEHVbbOuucYD3fn_nnH_KZA0kLkUuok417ztLxWN35D9xZaYg5GSWI8hss9KV7i-H-k_95pHBYPEwFFGw8IqlpgeS-unjkbbmY7UgQTerMIXrig-ZWc2R-NDFoHs7I48TuWzOxQfiEDVsMHzPjcjuqKA6KDoJKX0nZzZo84GL2k2pM0Klhq5sfJIC9Zp7E_xP_Bst6-cRhdZ2EA08xhJYSgB1fsYxGaxemXgdsXw0mqlGohOryvqwhHPSMEocK6ZHWWJvjZJwNx_e-oCyzg"
+              }
+            },
+            "shipment_id_barcode_generator": {
+              "method": "barcode",
+              "kwargs": {
+                "value": "dsgffdghfghgj"
+              }
+            },
+            "upi_qrcode_generator": {
+              "method": "qrcode",
+              "kwargs": {
+                "qr_data": "upi://pay?pa=delhivery1.PAYU@HDFCBANK&pn=www.delhivery.com&mc=4214&tr=O-zo0ou2yTjZCx-dk2b&am=6581.0&cu=INR&ver=01&mode=15&orgId=000000&gstBreakup=GST:30.0%7CCGST:0.0%7CSGST:0.0%7CIGST:30.0%7CCESS:0.0%7CGSTIncentive:12.0%7CGSTPCT:None&invoiceNo=UT/23-24/198&invoiceDate=2023-05-02T16:45:42&invoiceName=UT%2F23-24%2F198&gstIn=07ANLPC8083H1ZS&qrMedium=04",
+                "qr_url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyprod/wrkr/logistics/qr-code/Delhivery/original/Hv0blbPtA-16830153113571272087.png"
+              }
+            },
+            "awb_number_barcode_generator": {
+              "method": "barcode",
+              "kwargs": {
+                "value": "7923787945"
+              }
+            },
+            "digital_signature_generator": {
+              "method": "digitalsignature",
+              "kwargs": {
+                "value": "8345jhkdfn"
+              }
+            },
+            "awb_number_label_barcode_generator": {
+              "method": "barcode",
+              "kwargs": {
+                "value": [
+                  "9901090772264",
+                  "9901090772264"
+                ]
+              }
+            }
+          }
+        },
+        "delivery_partner_detail": {
+          "name": "fyndr",
+          "awb_number": "",
+          "dp_sort_code": "ABC/DEF",
+          "origin": "1678236",
+          "destination": "142345"
+        },
+        "customer_billing_detail": {
+          "name": "Megha Golecha",
+          "phone_no": "9769199489",
+          "address": "1001 Badri Vishal, Sahakar Nagar, Andheri West, 400053, Near Building No. 33, Shanti Nagar,Test,Mumbai,Maharashtra,India,400053",
+          "city": "Mumbai",
+          "state": "Maharashtra",
+          "country": "India",
+          "country_code": "IN",
+          "zip_code": "400053",
+          "state_code": "27",
+          "gstin": "",
+          "email": "shipment.hand_over_contact_json.email"
+        }
+      },
+      "__v": 0
+    }
+  ]
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDefaultHtmlTemplate
+Get html template for sales channel
+
+```golang
+
+data, err := FileStorage.GetDefaultHtmlTemplate(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| ApplicationID | string |  | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PdfTypeID`, `Format`
+
+
+Get default html template for invoice or label
+
+*Success Response:*
+
+
+
+Get last saved html template for invoice
+
+
+Schema: `Array<PdfConfigSuccess>`
+
+
+*Examples:*
+
+
+success
+```json
+{
+  "value": [
+    {
+      "_id": "64b7f52d56a0cba5231964b0",
+      "company_id": 1,
+      "application_id": "64aed475db2cfb5b8a9f623d",
+      "pdf_type_id": 1,
+      "format": "A4",
+      "template": "<p>Hello world</p>",
+      "__v": 0
+    }
+  ]
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### saveHtmlTemplate
+Update html template for invoice or label
+
+```golang
+
+data, err := FileStorage.SaveHtmlTemplate(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| ApplicationID | string |  | 
+
+
+| body |  pdfConfig | "Request body" 
+
+Update html template for invoice such as Invoice, Label, Deliver challan
+
+*Success Response:*
+
+
+
+Saved html template for invoice
+
+
+Schema: `Array<PdfConfigSaveSuccess>`
+
+
+*Examples:*
+
+
+success
+```json
+{
+  "value": [
+    {
+      "_id": "64b7f52d56a0cba5231964b0",
+      "company_id": 1,
+      "application_id": "64aed475db2cfb5b8a9f623d",
+      "pdf_type_id": 1,
+      "format": "A4",
+      "template": "<p>Hello world</p>",
+      "__v": 0
+    }
+  ]
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### previewTemplate
+Preview HTML template
+
+```golang
+
+data, err := FileStorage.PreviewTemplate(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| ApplicationID | string |  | 
+
+
+| body |  pdfRender | "Request body" 
+
+Rendered HTML template with dummy json data
+
+*Success Response:*
+
+
+
+Get rendered html with dummy json payload
+
+
+Schema: `string`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDefaultPdfTemplate
+Default html template
+
+```golang
+
+data, err := FileStorage.GetDefaultPdfTemplate(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| ApplicationID | string |  | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PdfTypeID`, `Format`
+
+
+Get default html template data for invoice or label
+
+*Success Response:*
+
+
+
+Get rendered html with dummy json payload
+
+
+Schema: `Array<PdfDefaultTemplateSuccess>`
+
+
+*Examples:*
+
+
+success
+```json
+{
+  "value": [
+    {
+      "_id": "64b7f21156a0cba523196482",
+      "pdf_type_id": 1,
+      "format": "A4",
+      "template": "<p> Hello World </p>",
+      "__v": 0
+    }
+  ]
+}
+```
 
 
 
