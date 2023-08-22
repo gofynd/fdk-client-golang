@@ -5247,12 +5247,146 @@ package application
          
     }
     
+    // CountryHierarchy ...
+    type CountryHierarchy struct {
+
+        
+            Name string  `json:"name"`
+            Slug string  `json:"slug"`
+         
+    }
+    
+    // CountryObject ...
+    type CountryObject struct {
+
+        
+            ID string  `json:"id"`
+            Name string  `json:"name"`
+            DisplayName string  `json:"display_name"`
+            Iso2 string  `json:"iso2"`
+            Iso3 string  `json:"iso3"`
+            Timezones []string  `json:"timezones"`
+            Hierarchy []CountryHierarchy  `json:"hierarchy"`
+            PhoneCode string  `json:"phone_code"`
+            Currency string  `json:"currency"`
+            Type string  `json:"type"`
+         
+    }
+    
     // GetCountries ...
     type GetCountries struct {
 
         
-            Page map[string]interface{}  `json:"page"`
-            Items []map[string]interface{}  `json:"items"`
+            Items []CountryObject  `json:"items"`
+            Page Page  `json:"page"`
+         
+    }
+    
+    // GetOneOrAllPath ...
+    type GetOneOrAllPath struct {
+
+        
+            LocalityType string  `json:"locality_type"`
+            LocalityValue string  `json:"locality_value"`
+         
+    }
+    
+    // GetOneOrAllQuery ...
+    type GetOneOrAllQuery struct {
+
+        
+            Country string  `json:"country"`
+            State string  `json:"state"`
+            City string  `json:"city"`
+            Sector string  `json:"sector"`
+         
+    }
+    
+    // GetOneOrAllParams ...
+    type GetOneOrAllParams struct {
+
+        
+            Path GetOneOrAllPath  `json:"path"`
+            Query GetOneOrAllQuery  `json:"query"`
+         
+    }
+    
+    // GetOneOrAll ...
+    type GetOneOrAll struct {
+
+        
+            OperationID string  `json:"operation_id"`
+            Params GetOneOrAllParams  `json:"params"`
+         
+    }
+    
+    // LengthValidation ...
+    type LengthValidation struct {
+
+        
+            Min float64  `json:"min"`
+            Max float64  `json:"max"`
+         
+    }
+    
+    // FieldValidationRegex ...
+    type FieldValidationRegex struct {
+
+        
+            Value string  `json:"value"`
+            Length LengthValidation  `json:"length"`
+         
+    }
+    
+    // FieldValidation ...
+    type FieldValidation struct {
+
+        
+            Type string  `json:"type"`
+            Regex FieldValidationRegex  `json:"regex"`
+         
+    }
+    
+    // GetCountryFieldsAddressValues ...
+    type GetCountryFieldsAddressValues struct {
+
+        
+            GetOne GetOneOrAll  `json:"get_one"`
+            GetAll GetOneOrAll  `json:"get_all"`
+         
+    }
+    
+    // GetCountryFieldsAddress ...
+    type GetCountryFieldsAddress struct {
+
+        
+            DisplayName string  `json:"display_name"`
+            Slug string  `json:"slug"`
+            Required bool  `json:"required"`
+            Edit bool  `json:"edit"`
+            Input string  `json:"input"`
+            Validation FieldValidation  `json:"validation"`
+            Values GetCountryFieldsAddressValues  `json:"values"`
+            ErrorText string  `json:"error_text"`
+         
+    }
+    
+    // GetCountryFieldsAddressTemplate ...
+    type GetCountryFieldsAddressTemplate struct {
+
+        
+            CheckoutForm string  `json:"checkout_form"`
+            InvoiceDisplay string  `json:"invoice_display"`
+         
+    }
+    
+    // GetCountryFields ...
+    type GetCountryFields struct {
+
+        
+            Address []GetCountryFieldsAddress  `json:"address"`
+            ServiceabilityFields []string  `json:"serviceability_fields"`
+            AddressTemplate GetCountryFieldsAddressTemplate  `json:"address_template"`
          
     }
     
@@ -5260,16 +5394,17 @@ package application
     type GetCountry struct {
 
         
-            Actions map[string]interface{}  `json:"actions"`
-            Ios2 string  `json:"ios2"`
+            ID string  `json:"id"`
+            Name string  `json:"name"`
+            DisplayName string  `json:"display_name"`
+            Iso2 string  `json:"iso2"`
+            Iso3 string  `json:"iso3"`
             Timezones []string  `json:"timezones"`
-            Hierarchy map[string]interface{}  `json:"hierarchy"`
-            Ios3 string  `json:"ios3"`
+            Hierarchy []CountryHierarchy  `json:"hierarchy"`
             PhoneCode string  `json:"phone_code"`
             Currency string  `json:"currency"`
-            SubType string  `json:"sub_type"`
-            Name string  `json:"name"`
-            UID string  `json:"uid"`
+            Type string  `json:"type"`
+            Fields GetCountryFields  `json:"fields"`
          
     }
     
@@ -5287,27 +5422,15 @@ package application
          
     }
     
-    // LogisticsDPSchema ...
-    type LogisticsDPSchema struct {
+    // Localities ...
+    type Localities struct {
 
         
-            Dp map[string]interface{}  `json:"dp"`
-         
-    }
-    
-    // Locality ...
-    type Locality struct {
-
-        
-            IsActive bool  `json:"is_active"`
-            ParentID []string  `json:"parent_id"`
-            Meta map[string]interface{}  `json:"meta"`
-            Logistics LogisticsDPSchema  `json:"logistics"`
-            UID string  `json:"uid"`
-            SubType string  `json:"sub_type"`
+            ID string  `json:"id"`
             Name string  `json:"name"`
-            Type string  `json:"type"`
             DisplayName string  `json:"display_name"`
+            ParentIds []string  `json:"parent_ids"`
+            Type string  `json:"type"`
          
     }
     
@@ -5315,8 +5438,8 @@ package application
     type GetLocalities struct {
 
         
+            Items []Localities  `json:"items"`
             Page Page  `json:"page"`
-            Regions []Locality  `json:"regions"`
          
     }
     
@@ -5324,7 +5447,12 @@ package application
     type GetLocality struct {
 
         
-            Regions Locality  `json:"regions"`
+            ID string  `json:"id"`
+            Name string  `json:"name"`
+            DisplayName string  `json:"display_name"`
+            ParentIds []string  `json:"parent_ids"`
+            Type string  `json:"type"`
+            Localities []Localities  `json:"localities"`
          
     }
     
@@ -5332,7 +5460,7 @@ package application
     type ErrorResponse struct {
 
         
-            Error string  `json:"error"`
+            Message string  `json:"message"`
          
     }
     
@@ -7111,9 +7239,11 @@ package application
             CreditLineID string  `json:"credit_line_id"`
             AmountAvailable BalanceDetails  `json:"amount_available"`
             DueAmount BalanceDetails  `json:"due_amount"`
+            DueDate string  `json:"due_date"`
             Balance BalanceDetails  `json:"balance"`
             StatusMessage string  `json:"status_message"`
             RepaymentURL string  `json:"repayment_url"`
+            SoaURL string  `json:"soa_url"`
             IsEligibleForTxn bool  `json:"is_eligible_for_txn"`
             MerchantCustomerRefID string  `json:"merchant_customer_ref_id"`
             BuyerStatus string  `json:"buyer_status"`

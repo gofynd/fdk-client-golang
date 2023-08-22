@@ -14759,6 +14759,7 @@ package platform
             Success bool  `json:"success"`
             Message string  `json:"message"`
             ErrorTrace string  `json:"error_trace"`
+            Error string  `json:"error"`
          
     }
     
@@ -15126,6 +15127,7 @@ package platform
             Weight map[string]interface{}  `json:"weight"`
             Attributes map[string]interface{}  `json:"attributes"`
             Quantity float64  `json:"quantity"`
+            Status map[string]interface{}  `json:"status"`
          
     }
     
@@ -15150,6 +15152,9 @@ package platform
             DpID float64  `json:"dp_id"`
             Meta map[string]interface{}  `json:"meta"`
             AffiliateShipmentID string  `json:"affiliate_shipment_id"`
+            LockStatus bool  `json:"lock_status"`
+            LockMessage string  `json:"lock_message"`
+            ActionToStatus map[string]interface{}  `json:"action_to_status"`
          
     }
     
@@ -16795,16 +16800,6 @@ package platform
          
     }
     
-    // ShipmentDetails1 used by Order
-    type ShipmentDetails1 struct {
-
-        
-            LockStatus bool  `json:"lock_status"`
-            LockMessage string  `json:"lock_message"`
-            ActionToStatus map[string]interface{}  `json:"action_to_status"`
-         
-    }
-    
     // PhoneDetails used by Order
     type PhoneDetails struct {
 
@@ -17269,7 +17264,7 @@ package platform
             BillingDetails UserDetailsData  `json:"billing_details"`
             ForwardShipmentID string  `json:"forward_shipment_id"`
             FulfilmentPriority float64  `json:"fulfilment_priority"`
-            ShipmentDetails ShipmentDetails1  `json:"shipment_details"`
+            ShipmentDetails ShipmentDetails  `json:"shipment_details"`
             CustomMeta []map[string]interface{}  `json:"custom_meta"`
             ShipmentQuantity float64  `json:"shipment_quantity"`
             CompanyDetails CompanyDetails  `json:"company_details"`
@@ -17671,14 +17666,6 @@ package platform
          
     }
     
-    // ArticleDetails1 used by Order
-    type ArticleDetails1 struct {
-
-        
-            Status map[string]interface{}  `json:"status"`
-         
-    }
-    
     // StoreAddress used by Order
     type StoreAddress struct {
 
@@ -17915,7 +17902,7 @@ package platform
             BagStatus []BagStatusHistory  `json:"bag_status"`
             SellerIdentifier string  `json:"seller_identifier"`
             OriginalBagList []float64  `json:"original_bag_list"`
-            ArticleDetails ArticleDetails1  `json:"article_details"`
+            ArticleDetails ArticleDetails  `json:"article_details"`
             CurrentOperationalStatus BagStatusHistory  `json:"current_operational_status"`
             OrderingStore Store  `json:"ordering_store"`
             Article Article  `json:"article"`
@@ -17945,15 +17932,6 @@ package platform
             OperationalStatus string  `json:"operational_status"`
             EntityType string  `json:"entity_type"`
             Status BagReturnableCancelableStatus1  `json:"status"`
-         
-    }
-    
-    // ErrorResponse1 used by Order
-    type ErrorResponse1 struct {
-
-        
-            Message string  `json:"message"`
-            Error string  `json:"error"`
          
     }
     

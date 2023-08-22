@@ -154,7 +154,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         rawRequest = NewRequest(
             au.Config,
             "get",
-            fmt.Sprintf("/service/platform/audit-trail/v1.0/company/%s/logs/",au.CompanyID),
+            fmt.Sprintf("/service/platform/webhook/v1.0/company/%s/audit-trail/logs",au.CompanyID),
             nil,
             xQuery,
             nil)
@@ -221,7 +221,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         rawRequest = NewRequest(
             au.Config,
             "post",
-            fmt.Sprintf("/service/platform/audit-trail/v1.0/company/%s/logs/",au.CompanyID),
+            fmt.Sprintf("/service/platform/webhook/v1.0/company/%s/audit-trail/logs",au.CompanyID),
             nil,
             nil,
             reqBody)
@@ -273,7 +273,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         rawRequest = NewRequest(
             au.Config,
             "get",
-            fmt.Sprintf("/service/platform/audit-trail/v1.0/company/%s/logs/%s",au.CompanyID, ID),
+            fmt.Sprintf("/service/platform/webhook/v1.0/company/%s/audit-trail/logs/%s",au.CompanyID, ID),
             nil,
             nil,
             nil)
@@ -323,7 +323,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         rawRequest = NewRequest(
             au.Config,
             "get",
-            fmt.Sprintf("/service/platform/audit-trail/v1.0/company/%s/entity-types",au.CompanyID),
+            fmt.Sprintf("/service/platform/webhook/v1.0/company/%s/audit-trail/entity-types",au.CompanyID),
             nil,
             nil,
             nil)
@@ -6908,6 +6908,54 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     }
          
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            
+            // GetSystemNotificationsPaginator Get system notifications  
+            func (co *PlatformCommunication)  GetSystemNotificationsPaginator(
+              xQuery PlatformGetSystemNotificationsXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := co.GetSystemNotifications(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+        
        
     
     
@@ -8599,6 +8647,54 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     }
          
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            
+            // GetAvailableOptInsPaginator Get all available integration opt-ins  
+            func (co *PlatformConfiguration)  GetAvailableOptInsPaginator(
+              xQuery PlatformGetAvailableOptInsXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := co.GetAvailableOptIns(xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
+        
        
     
     
@@ -8664,6 +8760,62 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
     }
          
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            
+            // GetSelectedOptInsPaginator Get company/store level integration opt-ins  
+            func (co *PlatformConfiguration)  GetSelectedOptInsPaginator(Level string  , UID float64  , 
+              xQuery PlatformGetSelectedOptInsXQuery ) *common.Paginator {
+                paginator := common.NewPaginator("number")
+                
+                 
+                 xQuery.PageNo  = paginator.PageNo
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                paginator.Next = func() (interface{}, error) {
+                    response, err := co.GetSelectedOptIns(Level, UID, xQuery)
+                    if response.Page.HasNext {
+                        paginator.SetPaginator(response.Page.HasNext, int(response.Page.Current+1), response.Page.NextID)
+                    }
+                    return response, err
+                }
+                return paginator
+            }
         
        
     

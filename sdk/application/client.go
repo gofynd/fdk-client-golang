@@ -7916,7 +7916,10 @@ func NewAppClient(config *AppConfig) *Client {
     
     //LogisticGetCountriesXQuery holds query params
     type LogisticGetCountriesXQuery struct { 
-        Onboarding bool  `url:"onboarding,omitempty"`  
+        Onboarding bool  `url:"onboarding,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        Q string  `url:"q,omitempty"`  
     }
     
     // GetCountries Get all countries and associated data.
@@ -7931,6 +7934,12 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
+            
+                
+            
+                
             
                 
             
@@ -8019,7 +8028,10 @@ func NewAppClient(config *AppConfig) *Client {
     type LogisticGetLocalitiesXQuery struct { 
         Country string  `url:"country,omitempty"` 
         State string  `url:"state,omitempty"` 
-        City string  `url:"city,omitempty"`  
+        City string  `url:"city,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"` 
+        Q string  `url:"q,omitempty"`  
     }
     
     // GetLocalities Get Localities.
@@ -8034,6 +8046,12 @@ func NewAppClient(config *AppConfig) *Client {
         
 
         
+            
+                
+            
+                
+            
+                
             
                 
             
