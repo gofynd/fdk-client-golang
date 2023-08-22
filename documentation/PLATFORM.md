@@ -60931,7 +60931,7 @@ data, err := Theme.AddThemeToApplication(CompanyID, ApplicationID, body);
 | ApplicationID | string | Alphanumeric ID allotted to an application created within a business account. | 
 
 
-| body |  CompanyThemeSchema | "Request body" 
+| body |  ThemeReq | "Request body" 
 
 Add a theme to an application by providing the marketplace theme ID.
 

@@ -4093,6 +4093,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
             
         
+            
+        
 
          
             
@@ -26773,7 +26775,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
 
     
     // AddThemeToApplication Add a theme to an application
-     func (th *PlatformAppTheme)  AddThemeToApplication(body  CompanyThemeSchema) (ThemesSchema, error) {
+     func (th *PlatformAppTheme)  AddThemeToApplication(body  ThemeReq) (ThemesSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -26781,18 +26783,6 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             addThemeToApplicationResponse ThemesSchema
 	    )
 
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
         
             
         
