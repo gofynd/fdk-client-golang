@@ -16303,6 +16303,47 @@ package platform
          
     }
     
+    // CourierPartnerTrackingDetails used by Order
+    type CourierPartnerTrackingDetails struct {
+
+        
+            OperationalStatus string  `json:"operational_status"`
+            DpStatus string  `json:"dp_status"`
+            ShipmentID string  `json:"shipment_id"`
+            Awb string  `json:"awb"`
+            DpStatusUpdatedAt string  `json:"dp_status_updated_at"`
+            Remark string  `json:"remark"`
+            ID float64  `json:"id"`
+            DpLocation string  `json:"dp_location"`
+            EstimatedDeliveryDate string  `json:"estimated_delivery_date"`
+            Journey string  `json:"journey"`
+            Meta map[string]interface{}  `json:"meta"`
+            DpName string  `json:"dp_name"`
+            PromisedDeliveryDate string  `json:"promised_delivery_date"`
+         
+    }
+    
+    // PageDetails used by Order
+    type PageDetails struct {
+
+        
+            ItemTotal float64  `json:"item_total"`
+            Current float64  `json:"current"`
+            Size float64  `json:"size"`
+            Type string  `json:"type"`
+            HasNext bool  `json:"has_next"`
+         
+    }
+    
+    // CourierPartnerTrackingResponse used by Order
+    type CourierPartnerTrackingResponse struct {
+
+        
+            Items []CourierPartnerTrackingDetails  `json:"items"`
+            Page PageDetails  `json:"page"`
+         
+    }
+    
     // BulkReportsDownloadRequest used by Order
     type BulkReportsDownloadRequest struct {
 

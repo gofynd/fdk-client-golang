@@ -16318,6 +16318,163 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
   
     
     
+    //PlatformTrackShipmentXQuery holds query params
+    type PlatformTrackShipmentXQuery struct { 
+        ShipmentID string  `url:"shipment_id,omitempty"` 
+        Awb string  `url:"awb,omitempty"` 
+        PageNo float64  `url:"page_no,omitempty"` 
+        PageSize float64  `url:"page_size,omitempty"`  
+    }
+    
+
+
+    // TrackShipment Get courier partner tracking details
+     func (or *PlatformOrder)  TrackShipment(xQuery PlatformTrackShipmentXQuery) (CourierPartnerTrackingResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            trackShipmentResponse CourierPartnerTrackingResponse
+	    )
+
+        
+
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+
+        
+
+         
+        
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "get",
+            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/tracking",or.CompanyID),
+            nil,
+            xQuery,
+            nil)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return CourierPartnerTrackingResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &trackShipmentResponse)
+        if err != nil {
+             return CourierPartnerTrackingResponse{}, common.NewFDKError(err.Error())
+        }
+        return trackShipmentResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // UpdateShipmentTracking Post courier partner tracking details
+     func (or *PlatformOrder)  UpdateShipmentTracking(body  CourierPartnerTrackingDetails) (CourierPartnerTrackingDetails, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            updateShipmentTrackingResponse CourierPartnerTrackingDetails
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return CourierPartnerTrackingDetails{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return CourierPartnerTrackingDetails{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "post",
+            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/tracking",or.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return CourierPartnerTrackingDetails{}, err
+	    }
+        
+        err = json.Unmarshal(response, &updateShipmentTrackingResponse)
+        if err != nil {
+             return CourierPartnerTrackingDetails{}, common.NewFDKError(err.Error())
+        }
+        return updateShipmentTrackingResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
     //PlatformGetShipmentsXQuery holds query params
     type PlatformGetShipmentsXQuery struct { 
         Lane string  `url:"lane,omitempty"` 
@@ -16343,6 +16500,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         CompanyAffiliateTag string  `url:"company_affiliate_tag,omitempty"` 
         MyOrders bool  `url:"my_orders,omitempty"` 
         PlatformUserID string  `url:"platform_user_id,omitempty"` 
+        SortType string  `url:"sort_type,omitempty"` 
+        ShowCrossCompanyData bool  `url:"show_cross_company_data,omitempty"` 
         Tags string  `url:"tags,omitempty"` 
         CustomerID string  `url:"customer_id,omitempty"`  
     }
@@ -16362,6 +16521,10 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
 
         
+            
+                
+            
+                
             
                 
             
@@ -16586,7 +16749,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         Tags string  `url:"tags,omitempty"` 
         TimeToDispatch string  `url:"time_to_dispatch,omitempty"` 
         PaymentMethods string  `url:"payment_methods,omitempty"` 
-        MyOrders bool  `url:"my_orders,omitempty"`  
+        MyOrders bool  `url:"my_orders,omitempty"` 
+        ShowCrossCompanyData bool  `url:"show_cross_company_data,omitempty"`  
     }
     
 
@@ -16604,6 +16768,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
 
         
+            
+                
             
                 
             
@@ -16690,6 +16856,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         IsPrioritySort bool  `url:"is_priority_sort,omitempty"` 
         CustomMeta string  `url:"custom_meta,omitempty"` 
         MyOrders bool  `url:"my_orders,omitempty"` 
+        ShowCrossCompanyData bool  `url:"show_cross_company_data,omitempty"` 
         CustomerID string  `url:"customer_id,omitempty"`  
     }
     
@@ -16708,6 +16875,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
 
         
+            
+                
             
                 
             

@@ -606,6 +606,8 @@
     * [sendUserMobileOTP](#sendusermobileotp)
     * [verifyMobileOTP](#verifymobileotp)
     * [downloadLanesReport](#downloadlanesreport)
+    * [trackShipment](#trackshipment)
+    * [updateShipmentTracking](#updateshipmenttracking)
     * [getShipments](#getshipments)
     * [getShipmentById](#getshipmentbyid)
     * [getOrderById](#getorderbyid)
@@ -40098,6 +40100,149 @@ BulkReportsSucessfulEventSample
 ---
 
 
+#### trackShipment
+Get courier partner tracking details
+
+```golang
+
+data, err := Order.TrackShipment(CompanyID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company ID | 
+
+
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `ShipmentID`, `Awb`, `PageNo`, `PageSize`
+
+
+This endpoint allows users to get courier partner tracking details for a given shipment id or awb no. The service will fetch courier partner statuses that are pushed to oms.
+
+*Success Response:*
+
+
+
+Shipment Tracking fetched successfully
+
+
+Schema: `CourierPartnerTrackingResponse`
+
+
+*Examples:*
+
+
+success
+```json
+{
+  "value": {
+    "items": [
+      {
+        "awb": "713191641",
+        "dp_location": "Mumbai",
+        "dp_name": "Ecom b2b",
+        "dp_status": "dp_assigned",
+        "dp_status_updated_at": "2023-07-12T20:17:46.384Z",
+        "estimated_delivery_date": "2023-07-12T20:17:46.384Z",
+        "id": 370,
+        "journey": "forward",
+        "operational_status": "dp_assigned",
+        "promised_delivery_date": "2023-07-12T20:17:46.384Z",
+        "remark": "UD -Manifested",
+        "shipment_id": "16908065964581066182"
+      }
+    ],
+    "page": {
+      "type": "number",
+      "size": 200,
+      "current": 1,
+      "has_next": true,
+      "item_total": 3
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateShipmentTracking
+Post courier partner tracking details
+
+```golang
+
+data, err := Order.UpdateShipmentTracking(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 | Company ID | 
+
+
+| body |  CourierPartnerTrackingDetails | "Request body" 
+
+This endpoint allows users to post courier partner tracking details for a given shipment id or awb no. The service will add entry for courier partner statuses and will be saved to oms.
+
+*Success Response:*
+
+
+
+Shipment Tracking updated successfully
+
+
+Schema: `CourierPartnerTrackingDetails`
+
+
+*Examples:*
+
+
+success
+```json
+{
+  "value": {
+    "awb": "713191641",
+    "dp_location": "Mumbai",
+    "dp_name": "Ecom b2b",
+    "dp_status": "dp_assigned",
+    "dp_status_updated_at": "2023-07-12T20:17:46.384Z",
+    "estimated_delivery_date": "2023-07-12T20:17:46.384Z",
+    "id": 370,
+    "journey": "forward",
+    "operational_status": "dp_assigned",
+    "promised_delivery_date": "2023-07-12T20:17:46.384Z",
+    "remark": "UD -Manifested",
+    "shipment_id": "16908065964581066182"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getShipments
 
 
@@ -40161,7 +40306,11 @@ data, err := Order.GetShipments(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `Lane`, `BagStatus`, `StatusOverrideLane`, `TimeToDispatch`, `SearchType`, `SearchValue`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PageNo`, `PageSize`, `FetchActiveShipment`, `ExcludeLockedShipments`, `PaymentMethods`, `ChannelShipmentID`, `ChannelOrderID`, `CustomMeta`, `OrderingChannel`, `CompanyAffiliateTag`, `MyOrders`, `PlatformUserID`, `Tags`, `CustomerID`
+
+
+
+
+| xQuery | struct | Includes properties such as `Lane`, `BagStatus`, `StatusOverrideLane`, `TimeToDispatch`, `SearchType`, `SearchValue`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PageNo`, `PageSize`, `FetchActiveShipment`, `ExcludeLockedShipments`, `PaymentMethods`, `ChannelShipmentID`, `ChannelOrderID`, `CustomMeta`, `OrderingChannel`, `CompanyAffiliateTag`, `MyOrders`, `PlatformUserID`, `SortType`, `ShowCrossCompanyData`, `Tags`, `CustomerID`
 
 
 Get Shipments Listing for the company id
@@ -40311,7 +40460,9 @@ data, err := Order.GetLaneConfig(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `SuperLane`, `GroupEntity`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PaymentMode`, `BagStatus`, `SearchType`, `SearchValue`, `Tags`, `TimeToDispatch`, `PaymentMethods`, `MyOrders`
+
+
+| xQuery | struct | Includes properties such as `SuperLane`, `GroupEntity`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PaymentMode`, `BagStatus`, `SearchType`, `SearchValue`, `Tags`, `TimeToDispatch`, `PaymentMethods`, `MyOrders`, `ShowCrossCompanyData`
 
 
 Get lane config for the order
@@ -40385,7 +40536,9 @@ data, err := Order.GetOrders(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `BagStatus`, `TimeToDispatch`, `PaymentMethods`, `Tags`, `SearchValue`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PageNo`, `PageSize`, `IsPrioritySort`, `CustomMeta`, `MyOrders`, `CustomerID`
+
+
+| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `BagStatus`, `TimeToDispatch`, `PaymentMethods`, `Tags`, `SearchValue`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PageNo`, `PageSize`, `IsPrioritySort`, `CustomMeta`, `MyOrders`, `ShowCrossCompanyData`, `CustomerID`
 
 
 Get Orders Listing
