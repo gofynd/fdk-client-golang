@@ -21204,7 +21204,7 @@ package platform
 
         
             Name string  `json:"name"`
-            GlobalConfig GlobalConfig  `json:"global_config"`
+            GlobalConfig map[string]interface{}  `json:"global_config"`
             Custom CustomConfig  `json:"custom"`
             Page []string  `json:"page"`
          
@@ -21215,8 +21215,7 @@ package platform
 
         
             Statics StaticConfig  `json:"statics"`
-            Auth AuthConfig  `json:"auth"`
-            Palette PaletteConfig  `json:"palette"`
+            Custom CustomConfig  `json:"custom"`
          
     }
     
@@ -21225,24 +21224,6 @@ package platform
 
         
             Props StaticProps  `json:"props"`
-         
-    }
-    
-    // AuthConfig used by Theme
-    type AuthConfig struct {
-
-        
-            ShowHeaderAuth bool  `json:"show_header_auth"`
-            ShowFooterAuth bool  `json:"show_footer_auth"`
-         
-    }
-    
-    // PaletteConfig used by Theme
-    type PaletteConfig struct {
-
-        
-            GeneralSetting GeneralSetting  `json:"general_setting"`
-            AdvanceSetting AdvanceSetting  `json:"advance_setting"`
          
     }
     
@@ -21292,6 +21273,7 @@ package platform
         
             Colors Colors  `json:"colors"`
             Auth AuthConfig  `json:"auth"`
+            Palette PaletteConfig  `json:"palette"`
          
     }
     
@@ -21305,6 +21287,24 @@ package platform
             LinkColor string  `json:"link_color"`
             ButtonSecondaryColor string  `json:"button_secondary_color"`
             BgColor string  `json:"bg_color"`
+         
+    }
+    
+    // AuthConfig used by Theme
+    type AuthConfig struct {
+
+        
+            ShowHeaderAuth bool  `json:"show_header_auth"`
+            ShowFooterAuth bool  `json:"show_footer_auth"`
+         
+    }
+    
+    // PaletteConfig used by Theme
+    type PaletteConfig struct {
+
+        
+            GeneralSetting GeneralSetting  `json:"general_setting"`
+            AdvanceSetting AdvanceSetting  `json:"advance_setting"`
          
     }
     
