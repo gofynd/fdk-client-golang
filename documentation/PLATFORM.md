@@ -266,6 +266,17 @@
     * [getAppProviders](#getappproviders)
     * [updateAppProviders](#updateappproviders)
     * [getGlobalProviders](#getglobalproviders)
+    * [getEmailProviders](#getemailproviders)
+    * [createEmailProvider](#createemailprovider)
+    * [getEmailProviderById](#getemailproviderbyid)
+    * [updateEmailProviderById](#updateemailproviderbyid)
+    * [deleteEmailProviderById](#deleteemailproviderbyid)
+    * [getSmsProviders](#getsmsproviders)
+    * [createSmsProvider](#createsmsprovider)
+    * [getDefaultSmsProviders](#getdefaultsmsproviders)
+    * [getSmsProviderById](#getsmsproviderbyid)
+    * [updateSmsProviderById](#updatesmsproviderbyid)
+    * [deleteSmsProviderById](#deletesmsproviderbyid)
     * [getCampaigns](#getcampaigns)
     * [createCampaign](#createcampaign)
     * [getCampaignById](#getcampaignbyid)
@@ -282,15 +293,10 @@
     * [getAudienceById](#getaudiencebyid)
     * [updateAudienceById](#updateaudiencebyid)
     * [deleteAudienceById](#deleteaudiencebyid)
-    * [getNSampleRecordsFromCsvByGet](#getnsamplerecordsfromcsvbyget)
-    * [getNSampleRecordsFromCsv](#getnsamplerecordsfromcsv)
     * [getDummyDatasources](#getdummydatasources)
     * [getDummyDatasourcesMeta](#getdummydatasourcesmeta)
-    * [getEmailProviders](#getemailproviders)
-    * [createEmailProvider](#createemailprovider)
-    * [getEmailProviderById](#getemailproviderbyid)
-    * [updateEmailProviderById](#updateemailproviderbyid)
-    * [deleteEmailProviderById](#deleteemailproviderbyid)
+    * [getNSampleRecordsFromCsvByGet](#getnsamplerecordsfromcsvbyget)
+    * [getNSampleRecordsFromCsv](#getnsamplerecordsfromcsv)
     * [getEmailTemplates](#getemailtemplates)
     * [createEmailTemplate](#createemailtemplate)
     * [getSystemEmailTemplates](#getsystememailtemplates)
@@ -298,6 +304,13 @@
     * [updateEmailTemplateById](#updateemailtemplatebyid)
     * [deleteEmailTemplateById](#deleteemailtemplatebyid)
     * [getSubscribedEmailTemplates](#getsubscribedemailtemplates)
+    * [getSmsTemplates](#getsmstemplates)
+    * [createSmsTemplate](#createsmstemplate)
+    * [getSystemSmsTemplates](#getsystemsmstemplates)
+    * [getSmsTemplateById](#getsmstemplatebyid)
+    * [updateSmsTemplateById](#updatesmstemplatebyid)
+    * [deleteSmsTemplateById](#deletesmstemplatebyid)
+    * [getSubscribedSmsTemplates](#getsubscribedsmstemplates)
     * [sendCommunicationSynchronously](#sendcommunicationsynchronously)
     * [sendCommunicationAsynchronously](#sendcommunicationasynchronously)
     * [getEventSubscriptions](#geteventsubscriptions)
@@ -310,19 +323,6 @@
     * [getSystemNotifications](#getsystemnotifications)
     * [sendOtp](#sendotp)
     * [verfiyOtp](#verfiyotp)
-    * [getSmsProviders](#getsmsproviders)
-    * [createSmsProvider](#createsmsprovider)
-    * [getDefaultSmsProviders](#getdefaultsmsproviders)
-    * [getSmsProviderById](#getsmsproviderbyid)
-    * [updateSmsProviderById](#updatesmsproviderbyid)
-    * [deleteSmsProviderById](#deletesmsproviderbyid)
-    * [getSmsTemplates](#getsmstemplates)
-    * [createSmsTemplate](#createsmstemplate)
-    * [getSystemSmsTemplates](#getsystemsmstemplates)
-    * [getSmsTemplateById](#getsmstemplatebyid)
-    * [updateSmsTemplateById](#updatesmstemplatebyid)
-    * [deleteSmsTemplateById](#deletesmstemplatebyid)
-    * [getSubscribedSmsTemplates](#getsubscribedsmstemplates)
     
 
 * [CompanyProfile](#CompanyProfile)
@@ -606,6 +606,7 @@
     * [sendUserMobileOTP](#sendusermobileotp)
     * [verifyMobileOTP](#verifymobileotp)
     * [downloadLanesReport](#downloadlanesreport)
+    * [eInvoiceRetry](#einvoiceretry)
     * [trackShipment](#trackshipment)
     * [updateShipmentTracking](#updateshipmenttracking)
     * [getShipments](#getshipments)
@@ -17828,6 +17829,777 @@ default
 ---
 
 
+#### getEmailProviders
+Get email providers
+
+```golang
+
+data, err := Communication.GetEmailProviders(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Sort`
+
+
+Get email providers
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `EmailProviders`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "items": [
+      {
+        "type": "application",
+        "provider": "falconide",
+        "from_address": [
+          {
+            "is_default": true,
+            "name": "abc",
+            "email": "abc@test.com"
+          }
+        ],
+        "_id": "5fd9fd44c474a7e3d5d376d6",
+        "name": "test falconide",
+        "description": "test",
+        "api_key": "testtttt",
+        "application": "000000000000000000000004",
+        "created_at": "2020-12-16T12:27:48.051Z",
+        "updated_at": "2020-12-16T12:27:48.051Z",
+        "slug": "test-falconide-application-falconide-ZTD-D7wbB",
+        "__v": 0
+      }
+    ],
+    "page": {
+      "type": "number",
+      "current": 1,
+      "size": 10,
+      "item_total": 1,
+      "has_next": false
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createEmailProvider
+Create email provider
+
+```golang
+
+data, err := Communication.CreateEmailProvider(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| body |  EmailProviderReq | "Request body" 
+
+Create email provider
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `EmailProvider`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "type": "application",
+    "provider": "falconide",
+    "from_address": [
+      {
+        "is_default": true,
+        "name": "abc",
+        "email": "abc@test.com"
+      }
+    ],
+    "_id": "5fd9fd44c474a7e3d5d376d6",
+    "name": "test falconide",
+    "description": "test",
+    "api_key": "testtttt",
+    "application": "000000000000000000000004",
+    "created_at": "2020-12-16T12:27:48.051Z",
+    "updated_at": "2020-12-16T12:27:48.051Z",
+    "slug": "test-falconide-application-falconide-ZTD-D7wbB",
+    "__v": 0
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getEmailProviderById
+Get email provider by id
+
+```golang
+
+data, err := Communication.GetEmailProviderById(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| ID | string | Email provider id | 
+
+
+
+Get email provider by id
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `EmailProvider`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "type": "application",
+    "provider": "falconide",
+    "from_address": [
+      {
+        "is_default": true,
+        "name": "abc",
+        "email": "abc@test.com"
+      }
+    ],
+    "_id": "5fd9fd44c474a7e3d5d376d6",
+    "name": "test falconide",
+    "description": "test",
+    "api_key": "testtttt",
+    "application": "000000000000000000000004",
+    "created_at": "2020-12-16T12:27:48.051Z",
+    "updated_at": "2020-12-16T12:27:48.051Z",
+    "slug": "test-falconide-application-falconide-ZTD-D7wbB",
+    "__v": 0
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateEmailProviderById
+Update email provider by id
+
+```golang
+
+data, err := Communication.UpdateEmailProviderById(CompanyID, ApplicationID, ID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| ID | string | Email provider id | 
+
+
+| body |  EmailProviderReq | "Request body" 
+
+Update email provider by id
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `EmailProvider`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "type": "application",
+    "provider": "falconide",
+    "from_address": [
+      {
+        "is_default": true,
+        "name": "abc",
+        "email": "abc@test.com"
+      }
+    ],
+    "_id": "5fd9fd44c474a7e3d5d376d6",
+    "name": "test falconide",
+    "description": "test",
+    "api_key": "testtttt",
+    "application": "000000000000000000000004",
+    "created_at": "2020-12-16T12:27:48.051Z",
+    "updated_at": "2020-12-16T12:27:48.051Z",
+    "slug": "test-falconide-application-falconide-ZTD-D7wbB",
+    "__v": 0
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteEmailProviderById
+Delete email provider by id
+
+```golang
+
+data, err := Communication.DeleteEmailProviderById(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| ID | string | Email provider id | 
+
+
+
+Delete email provider by id
+
+*Success Response:*
+
+
+
+Refer `GenericDelete` schema for more details.
+
+
+Schema: `GenericDelete`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "message": "Deletion Successfull",
+    "acknowledged": true,
+    "affected": 1,
+    "operation": "TEMP-ST-DEL:ID"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSmsProviders
+Get sms providers
+
+```golang
+
+data, err := Communication.GetSmsProviders(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Sort`
+
+
+Get sms providers
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `Object`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "items": [
+      {
+        "rpt": 1,
+        "type": "application",
+        "provider": "telspiel",
+        "_id": "5fd9fd07c474a7710dd376d5",
+        "name": "test telspiel",
+        "description": "test",
+        "sender": "test",
+        "username": "test",
+        "authkey": "test",
+        "application": "000000000000000000000004",
+        "created_at": "2020-12-16T12:26:47.794Z",
+        "updated_at": "2020-12-16T12:26:47.794Z",
+        "slug": "test-telspiel-application-telspiel-p9UY1r7nG",
+        "__v": 0
+      }
+    ],
+    "page": {
+      "type": "number",
+      "current": 1,
+      "size": 1,
+      "item_total": 1,
+      "has_next": false
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createSmsProvider
+Create sms provider
+
+```golang
+
+data, err := Communication.CreateSmsProvider(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| body |  SmsProviderReq | "Request body" 
+
+Create sms provider
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `Object`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "rpt": 1,
+    "type": "application",
+    "provider": "telspiel",
+    "_id": "5fd9fd07c474a7710dd376d5",
+    "name": "test telspiel",
+    "description": "test",
+    "sender": "test",
+    "username": "test",
+    "authkey": "test",
+    "application": "000000000000000000000004",
+    "created_at": "2020-12-16T12:26:47.794Z",
+    "updated_at": "2020-12-16T12:26:47.794Z",
+    "slug": "test-telspiel-application-telspiel-p9UY1r7nG",
+    "__v": 0
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDefaultSmsProviders
+Get default sms providers
+
+```golang
+
+data, err := Communication.GetDefaultSmsProviders(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+
+Get default sms providers
+
+*Success Response:*
+
+
+
+Successful retrieval of the default SMS providers list
+
+
+Schema: `Array<DefaultSmsProviders>`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": [
+    {
+      "_id": "63db8c68975237fff4f2133e",
+      "name": "Fynd timesinternet",
+      "is_default": true
+    }
+  ]
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSmsProviderById
+Get sms provider by id
+
+```golang
+
+data, err := Communication.GetSmsProviderById(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| ID | string | Sms provider id | 
+
+
+
+Get sms provider by id
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `Object`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "rpt": 1,
+    "type": "application",
+    "provider": "telspiel",
+    "_id": "5fd9fd07c474a7710dd376d5",
+    "name": "test telspiel",
+    "description": "test",
+    "sender": "test",
+    "username": "test",
+    "authkey": "test",
+    "application": "000000000000000000000004",
+    "created_at": "2020-12-16T12:26:47.794Z",
+    "updated_at": "2020-12-16T12:26:47.794Z",
+    "slug": "test-telspiel-application-telspiel-p9UY1r7nG",
+    "__v": 0
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateSmsProviderById
+Update sms provider by id
+
+```golang
+
+data, err := Communication.UpdateSmsProviderById(CompanyID, ApplicationID, ID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| ID | string | Sms provider id | 
+
+
+| body |  SmsProviderReq | "Request body" 
+
+Update sms provider by id
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `Object`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "rpt": 1,
+    "type": "application",
+    "provider": "telspiel",
+    "_id": "5fd9fd07c474a7710dd376d5",
+    "name": "test telspiel",
+    "description": "test",
+    "sender": "test",
+    "username": "test",
+    "authkey": "test",
+    "application": "000000000000000000000004",
+    "created_at": "2020-12-16T12:26:47.794Z",
+    "updated_at": "2020-12-16T12:26:47.794Z",
+    "slug": "test-telspiel-application-telspiel-p9UY1r7nG",
+    "__v": 0
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteSmsProviderById
+Delete sms provider by id
+
+```golang
+
+data, err := Communication.DeleteSmsProviderById(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| ID | string | Sms provider id | 
+
+
+
+Delete sms provider by id
+
+*Success Response:*
+
+
+
+Refer `GenericDelete` schema for more details.
+
+
+Schema: `GenericDelete`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "message": "Deletion Successfull",
+    "acknowledged": true,
+    "affected": 1,
+    "operation": "TEMP-ST-DEL:ID"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getCampaigns
 Get campaigns
 
@@ -18952,129 +19724,6 @@ default
 ---
 
 
-#### getNSampleRecordsFromCsvByGet
-Get n sample records from csv
-
-```golang
-
-data, err := Communication.GetNSampleRecordsFromCsvByGet(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-
-Audience is used to import CSV files containing emails, phone numbers, and other variables in order to populate email/SMS templates for bulk delivery via a Campaign. Use this API to get n sample records from csv.
-
-*Success Response:*
-
-
-
-Refer `GetNRecordsCsvRes` schema for more details.
-
-
-Schema: `GetNRecordsCsvRes`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "value": {
-    "items": [
-      {
-        "phone_number": "1234567890",
-        "email": "abcxyz@gofynd.com",
-        "firstname": "Abc",
-        "lastname": "Xyz",
-        "orderid": "1"
-      }
-    ]
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getNSampleRecordsFromCsv
-Get n sample records from csv
-
-```golang
-
-data, err := Communication.GetNSampleRecordsFromCsv(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| body |  GetNRecordsCsvReq | "Request body" 
-
-Audience is used to import CSV files containing emails, phone numbers, and other variables in order to populate email/SMS templates for bulk delivery via a Campaign. Use this API to get n sample records from csv
-
-*Success Response:*
-
-
-
-Refer `GetNRecordsCsvRes` schema for more details.
-
-
-Schema: `GetNRecordsCsvRes`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "value": {
-    "items": [
-      {
-        "phone_number": "1234567890",
-        "email": "abcxyz@gofynd.com",
-        "firstname": "Abc",
-        "lastname": "Xyz",
-        "orderid": "1"
-      }
-    ]
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
 #### getDummyDatasources
 Get dummy data sources
 
@@ -19194,12 +19843,12 @@ default
 ---
 
 
-#### getEmailProviders
-Get email providers
+#### getNSampleRecordsFromCsvByGet
+Get n sample records from csv
 
 ```golang
 
-data, err := Communication.GetEmailProviders(CompanyID, ApplicationID, xQuery);
+data, err := Communication.GetNSampleRecordsFromCsvByGet(CompanyID, ApplicationID);
 ```
 
 | Argument  |  Type  | Description |
@@ -19212,23 +19861,16 @@ data, err := Communication.GetEmailProviders(CompanyID, ApplicationID, xQuery);
 
 
 
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Sort`
-
-
-Get email providers
+Audience is used to import CSV files containing emails, phone numbers, and other variables in order to populate email/SMS templates for bulk delivery via a Campaign. Use this API to get n sample records from csv.
 
 *Success Response:*
 
 
 
-Success
+Refer `GetNRecordsCsvRes` schema for more details.
 
 
-Schema: `EmailProviders`
+Schema: `GetNRecordsCsvRes`
 
 
 *Examples:*
@@ -19240,33 +19882,13 @@ default
   "value": {
     "items": [
       {
-        "type": "application",
-        "provider": "falconide",
-        "from_address": [
-          {
-            "is_default": true,
-            "name": "abc",
-            "email": "abc@test.com"
-          }
-        ],
-        "_id": "5fd9fd44c474a7e3d5d376d6",
-        "name": "test falconide",
-        "description": "test",
-        "api_key": "testtttt",
-        "application": "000000000000000000000004",
-        "created_at": "2020-12-16T12:27:48.051Z",
-        "updated_at": "2020-12-16T12:27:48.051Z",
-        "slug": "test-falconide-application-falconide-ZTD-D7wbB",
-        "__v": 0
+        "phone_number": "1234567890",
+        "email": "abcxyz@gofynd.com",
+        "firstname": "Abc",
+        "lastname": "Xyz",
+        "orderid": "1"
       }
-    ],
-    "page": {
-      "type": "number",
-      "current": 1,
-      "size": 10,
-      "item_total": 1,
-      "has_next": false
-    }
+    ]
   }
 }
 ```
@@ -19282,12 +19904,12 @@ default
 ---
 
 
-#### createEmailProvider
-Create email provider
+#### getNSampleRecordsFromCsv
+Get n sample records from csv
 
 ```golang
 
-data, err := Communication.CreateEmailProvider(CompanyID, ApplicationID, body);
+data, err := Communication.GetNSampleRecordsFromCsv(CompanyID, ApplicationID, body);
 ```
 
 | Argument  |  Type  | Description |
@@ -19299,18 +19921,18 @@ data, err := Communication.CreateEmailProvider(CompanyID, ApplicationID, body);
 | ApplicationID | string | Application id | 
 
 
-| body |  EmailProviderReq | "Request body" 
+| body |  GetNRecordsCsvReq | "Request body" 
 
-Create email provider
+Audience is used to import CSV files containing emails, phone numbers, and other variables in order to populate email/SMS templates for bulk delivery via a Campaign. Use this API to get n sample records from csv
 
 *Success Response:*
 
 
 
-Success
+Refer `GetNRecordsCsvRes` schema for more details.
 
 
-Schema: `EmailProvider`
+Schema: `GetNRecordsCsvRes`
 
 
 *Examples:*
@@ -19320,230 +19942,15 @@ default
 ```json
 {
   "value": {
-    "type": "application",
-    "provider": "falconide",
-    "from_address": [
+    "items": [
       {
-        "is_default": true,
-        "name": "abc",
-        "email": "abc@test.com"
+        "phone_number": "1234567890",
+        "email": "abcxyz@gofynd.com",
+        "firstname": "Abc",
+        "lastname": "Xyz",
+        "orderid": "1"
       }
-    ],
-    "_id": "5fd9fd44c474a7e3d5d376d6",
-    "name": "test falconide",
-    "description": "test",
-    "api_key": "testtttt",
-    "application": "000000000000000000000004",
-    "created_at": "2020-12-16T12:27:48.051Z",
-    "updated_at": "2020-12-16T12:27:48.051Z",
-    "slug": "test-falconide-application-falconide-ZTD-D7wbB",
-    "__v": 0
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getEmailProviderById
-Get email provider by id
-
-```golang
-
-data, err := Communication.GetEmailProviderById(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| ID | string | Email provider id | 
-
-
-
-Get email provider by id
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `EmailProvider`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "value": {
-    "type": "application",
-    "provider": "falconide",
-    "from_address": [
-      {
-        "is_default": true,
-        "name": "abc",
-        "email": "abc@test.com"
-      }
-    ],
-    "_id": "5fd9fd44c474a7e3d5d376d6",
-    "name": "test falconide",
-    "description": "test",
-    "api_key": "testtttt",
-    "application": "000000000000000000000004",
-    "created_at": "2020-12-16T12:27:48.051Z",
-    "updated_at": "2020-12-16T12:27:48.051Z",
-    "slug": "test-falconide-application-falconide-ZTD-D7wbB",
-    "__v": 0
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateEmailProviderById
-Update email provider by id
-
-```golang
-
-data, err := Communication.UpdateEmailProviderById(CompanyID, ApplicationID, ID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| ID | string | Email provider id | 
-
-
-| body |  EmailProviderReq | "Request body" 
-
-Update email provider by id
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `EmailProvider`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "value": {
-    "type": "application",
-    "provider": "falconide",
-    "from_address": [
-      {
-        "is_default": true,
-        "name": "abc",
-        "email": "abc@test.com"
-      }
-    ],
-    "_id": "5fd9fd44c474a7e3d5d376d6",
-    "name": "test falconide",
-    "description": "test",
-    "api_key": "testtttt",
-    "application": "000000000000000000000004",
-    "created_at": "2020-12-16T12:27:48.051Z",
-    "updated_at": "2020-12-16T12:27:48.051Z",
-    "slug": "test-falconide-application-falconide-ZTD-D7wbB",
-    "__v": 0
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteEmailProviderById
-Delete email provider by id
-
-```golang
-
-data, err := Communication.DeleteEmailProviderById(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| ID | string | Email provider id | 
-
-
-
-Delete email provider by id
-
-*Success Response:*
-
-
-
-Refer `GenericDelete` schema for more details.
-
-
-Schema: `GenericDelete`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "value": {
-    "message": "Deletion Successfull",
-    "acknowledged": true,
-    "affected": 1,
-    "operation": "TEMP-ST-DEL:ID"
+    ]
   }
 }
 ```
@@ -20224,6 +20631,641 @@ default
       "current": 1,
       "size": 1,
       "item_total": 66,
+      "has_next": true
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSmsTemplates
+Get sms templates
+
+```golang
+
+data, err := Communication.GetSmsTemplates(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Sort`
+
+
+SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to get all sms templates.
+
+*Success Response:*
+
+
+
+Refer `SmsTemplates` schema for more details.
+
+
+Schema: `SmsTemplates`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "items": [
+      {
+        "url_shorten": {
+          "enabled": false
+        },
+        "_id": "649968feca21d7edd0595b35",
+        "application": "637b6355dc65337da9b5c951",
+        "is_system": false,
+        "is_internal": false,
+        "meta": {
+          "type": "cloned",
+          "template": "61963d42ce3af81bde44a67d",
+          "is_system": true
+        },
+        "name": "TD sms templates",
+        "description": "description",
+        "message": {
+          "template_type": "nunjucks",
+          "template": "This is a test message"
+        },
+        "priority": "low",
+        "tags": [
+          "tag1",
+          "tag2"
+        ],
+        "template_variables": {
+          "hello": "world"
+        },
+        "template_id": "1234567891234567890123",
+        "published": true,
+        "category": "website",
+        "created_at": "2023-06-26T10:31:26.212Z",
+        "updated_at": "2023-06-26T10:31:26.212Z",
+        "slug": "TD-sms-templates-KwtzEUcpn",
+        "__v": 0
+      }
+    ],
+    "page": {
+      "type": "number",
+      "current": 1,
+      "size": 10,
+      "item_total": 17,
+      "has_next": true
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### createSmsTemplate
+Create sms template
+
+```golang
+
+data, err := Communication.CreateSmsTemplate(CompanyID, ApplicationID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| body |  SmsTemplateReq | "Request body" 
+
+SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to create an sms template.
+
+*Success Response:*
+
+
+
+Refer `SmsTemplate` schema for more details.
+
+
+Schema: `SmsTemplate`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "url_shorten": {
+      "enabled": false
+    },
+    "_id": "649968feca21d7edd0595b35",
+    "application": "637b6355dc65337da9b5c951",
+    "is_system": false,
+    "is_internal": false,
+    "meta": {
+      "type": "cloned",
+      "template": "61963d42ce3af81bde44a67d",
+      "is_system": true
+    },
+    "name": "TD sms templates",
+    "description": "description",
+    "message": {
+      "template_type": "nunjucks",
+      "template": "This is a test message"
+    },
+    "priority": "low",
+    "tags": [
+      "tag1",
+      "tag2"
+    ],
+    "template_variables": {
+      "hello": "world"
+    },
+    "template_id": "1234567891234567890123",
+    "published": true,
+    "category": "website",
+    "created_at": "2023-06-26T10:31:26.212Z",
+    "updated_at": "2023-06-26T10:31:26.212Z",
+    "slug": "TD-sms-templates-KwtzEUcpn",
+    "__v": 0
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSystemSmsTemplates
+Get system sms templates
+
+```golang
+
+data, err := Communication.GetSystemSmsTemplates(CompanyID, ApplicationID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+
+SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to get all system sms templates.
+
+*Success Response:*
+
+
+
+Refer `SystemSmsTemplates` schema for more details.
+
+
+Schema: `Array<SystemSmsTemplates>`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": [
+    {
+      "url_shorten": {
+        "enabled": false
+      },
+      "_id": "646b73e7e10612283cfd9773",
+      "is_system": true,
+      "is_internal": false,
+      "name": "Order Arrived at Store",
+      "description": "Use this SMS template, for notifying the customers, that their requested order has arrived at the store.",
+      "slug": "arrived_at_store-sms",
+      "message": {
+        "template_type": "nunjucks",
+        "template": "Delivered. Your shipment for {{ articles }} with {{ orderID }} has been delivered today at {{ delivered_at }}. You can collect it from store on or before {{ collection_date }}. Notification via Fynd"
+      },
+      "priority": "low",
+      "tags": [],
+      "template_variables": {
+        "email": "care@fynd.com",
+        "orderID": "Order ID FY5E53AFAA091115C235",
+        "brand": "SAPPER",
+        "name": "Alwira Sheikh",
+        "tracking_url": "http://go.fyndi.ng/track-order",
+        "articles": "Blue Solid Slim Fit Trackpants (28)",
+        "contact": 8767087087,
+        "ordering_channel": "ECOMM",
+        "delivered_at": "GT_Store, Vashi",
+        "collection_date": "Fri, Nov 15",
+        "credits": 0,
+        "slot": "By 9:00 PM",
+        "datetime": "Feb 28",
+        "cashback": 0,
+        "ref_application": {
+          "support_email": "care@fynd.com",
+          "app_information": {
+            "additional_data": {
+              "address_line": "Kurar village,Malad",
+              "city_pincode": "Mumbai - 400097",
+              "contactUs": "https://uniket-testing.addsale.link/contact-us",
+              "domain": "uniket-testing.addsale.link",
+              "privacyPolicy": "https://fynd.freshdesk.com/support/solutions/articles/33000214398-privacy-policy"
+            }
+          },
+          "domain": {
+            "name": "https://fynd.com"
+          },
+          "logo": {
+            "secure_url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1587981831/production/system/pointblank/fynd_logo_square_vunk4f.png"
+          }
+        }
+      },
+      "template_id": "1007569169965694807",
+      "published": true,
+      "category": "website",
+      "created_at": "2023-05-22T13:53:43.439Z",
+      "updated_at": "2023-05-22T13:53:43.439Z",
+      "__v": 0
+    }
+  ]
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSmsTemplateById
+Get sms template by id
+
+```golang
+
+data, err := Communication.GetSmsTemplateById(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| ID | string | Sms template id | 
+
+
+
+SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to get an sms template by ID.
+
+*Success Response:*
+
+
+
+Refer `SmsTemplate` schema for more details.
+
+
+Schema: `SmsTemplate`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "url_shorten": {
+      "enabled": false
+    },
+    "_id": "649968feca21d7edd0595b35",
+    "application": "637b6355dc65337da9b5c951",
+    "is_system": false,
+    "is_internal": false,
+    "meta": {
+      "type": "cloned",
+      "template": "61963d42ce3af81bde44a67d",
+      "is_system": true
+    },
+    "name": "TD sms templates",
+    "description": "description",
+    "message": {
+      "template_type": "nunjucks",
+      "template": "This is a test message"
+    },
+    "priority": "low",
+    "tags": [
+      "tag1",
+      "tag2"
+    ],
+    "template_variables": {
+      "hello": "world"
+    },
+    "template_id": "1234567891234567890123",
+    "published": true,
+    "category": "website",
+    "created_at": "2023-06-26T10:31:26.212Z",
+    "updated_at": "2023-06-26T10:31:26.212Z",
+    "slug": "TD-sms-templates-KwtzEUcpn",
+    "__v": 0
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateSmsTemplateById
+Update sms template by id
+
+```golang
+
+data, err := Communication.UpdateSmsTemplateById(CompanyID, ApplicationID, ID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| ID | string | Sms template id | 
+
+
+| body |  SmsTemplateReq | "Request body" 
+
+SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to update an sms template by ID.
+
+*Success Response:*
+
+
+
+Refer `SmsTemplate` schema for more details.
+
+
+Schema: `SmsTemplate`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "url_shorten": {
+      "enabled": false
+    },
+    "_id": "649968feca21d7edd0595b35",
+    "application": "637b6355dc65337da9b5c951",
+    "is_system": false,
+    "is_internal": false,
+    "meta": {
+      "type": "cloned",
+      "template": "61963d42ce3af81bde44a67d",
+      "is_system": true
+    },
+    "name": "TD sms templates",
+    "description": "description",
+    "message": {
+      "template_type": "nunjucks",
+      "template": "This is a test message"
+    },
+    "priority": "low",
+    "tags": [
+      "tag1",
+      "tag2"
+    ],
+    "template_variables": {
+      "hello": "world"
+    },
+    "template_id": "1234567891234567890123",
+    "published": true,
+    "category": "website",
+    "created_at": "2023-06-26T10:31:26.212Z",
+    "updated_at": "2023-06-26T10:31:26.212Z",
+    "slug": "TD-sms-templates-KwtzEUcpn",
+    "__v": 0
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteSmsTemplateById
+Delete sms template by id
+
+```golang
+
+data, err := Communication.DeleteSmsTemplateById(CompanyID, ApplicationID, ID);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+| ID | string | Sms template id | 
+
+
+
+SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to delete an sms template by ID.
+
+*Success Response:*
+
+
+
+Refer `GenericDelete` schema for more details.
+
+
+Schema: `GenericDelete`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "message": "Deletion Successfull",
+    "acknowledged": true,
+    "affected": 1,
+    "operation": "TEMP-ST-DEL:ID"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSubscribedSmsTemplates
+Get subscribed sms templates
+
+```golang
+
+data, err := Communication.GetSubscribedSmsTemplates(CompanyID, ApplicationID, xQuery);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Company id | 
+
+
+| ApplicationID | string | Application id | 
+
+
+
+
+
+| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
+
+
+SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to get all subscribed sms templates.
+
+*Success Response:*
+
+
+
+Refer `SmsTemplates` schema for more details.
+
+
+Schema: `SmsTemplates`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "items": [
+      {
+        "url_shorten": {
+          "enabled": false
+        },
+        "_id": "649968feca21d7edd0595b35",
+        "application": "637b6355dc65337da9b5c951",
+        "is_system": false,
+        "is_internal": false,
+        "meta": {
+          "type": "cloned",
+          "template": "61963d42ce3af81bde44a67d",
+          "is_system": true
+        },
+        "name": "TD sms templates",
+        "description": "description",
+        "message": {
+          "template_type": "nunjucks",
+          "template": "This is a test message"
+        },
+        "priority": "low",
+        "tags": [
+          "tag1",
+          "tag2"
+        ],
+        "template_variables": {
+          "hello": "world"
+        },
+        "template_id": "1234567891234567890123",
+        "published": true,
+        "category": "website",
+        "created_at": "2023-06-26T10:31:26.212Z",
+        "updated_at": "2023-06-26T10:31:26.212Z",
+        "slug": "TD-sms-templates-KwtzEUcpn",
+        "__v": 0
+      }
+    ],
+    "page": {
+      "type": "number",
+      "current": 1,
+      "size": 10,
+      "item_total": 17,
       "has_next": true
     }
   }
@@ -21624,1047 +22666,6 @@ default
     "mobile": "9096686804",
     "country_code": "91",
     "message": "OTP verified"
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getSmsProviders
-Get sms providers
-
-```golang
-
-data, err := Communication.GetSmsProviders(CompanyID, ApplicationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Sort`
-
-
-Get sms providers
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `SmsProviders`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "value": {
-    "items": [
-      {
-        "rpt": 1,
-        "type": "application",
-        "provider": "telspiel",
-        "_id": "5fd9fd07c474a7710dd376d5",
-        "name": "test telspiel",
-        "description": "test",
-        "sender": "test",
-        "username": "test",
-        "authkey": "test",
-        "application": "000000000000000000000004",
-        "created_at": "2020-12-16T12:26:47.794Z",
-        "updated_at": "2020-12-16T12:26:47.794Z",
-        "slug": "test-telspiel-application-telspiel-p9UY1r7nG",
-        "__v": 0
-      }
-    ],
-    "page": {
-      "type": "number",
-      "current": 1,
-      "size": 1,
-      "item_total": 1,
-      "has_next": false
-    }
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### createSmsProvider
-Create sms provider
-
-```golang
-
-data, err := Communication.CreateSmsProvider(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| body |  SmsProviderReq | "Request body" 
-
-Create sms provider
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `SmsProvider`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "value": {
-    "rpt": 1,
-    "type": "application",
-    "provider": "telspiel",
-    "_id": "5fd9fd07c474a7710dd376d5",
-    "name": "test telspiel",
-    "description": "test",
-    "sender": "test",
-    "username": "test",
-    "authkey": "test",
-    "application": "000000000000000000000004",
-    "created_at": "2020-12-16T12:26:47.794Z",
-    "updated_at": "2020-12-16T12:26:47.794Z",
-    "slug": "test-telspiel-application-telspiel-p9UY1r7nG",
-    "__v": 0
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getDefaultSmsProviders
-Get default sms providers
-
-```golang
-
-data, err := Communication.GetDefaultSmsProviders(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-
-Get default sms providers
-
-*Success Response:*
-
-
-
-Successful retrieval of the default SMS providers list
-
-
-Schema: `Array<DefaultSmsProviders>`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "value": [
-    {
-      "_id": "63db8c68975237fff4f2133e",
-      "name": "Fynd timesinternet",
-      "is_default": true
-    }
-  ]
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getSmsProviderById
-Get sms provider by id
-
-```golang
-
-data, err := Communication.GetSmsProviderById(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| ID | string | Sms provider id | 
-
-
-
-Get sms provider by id
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `SmsProvider`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "value": {
-    "rpt": 1,
-    "type": "application",
-    "provider": "telspiel",
-    "_id": "5fd9fd07c474a7710dd376d5",
-    "name": "test telspiel",
-    "description": "test",
-    "sender": "test",
-    "username": "test",
-    "authkey": "test",
-    "application": "000000000000000000000004",
-    "created_at": "2020-12-16T12:26:47.794Z",
-    "updated_at": "2020-12-16T12:26:47.794Z",
-    "slug": "test-telspiel-application-telspiel-p9UY1r7nG",
-    "__v": 0
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateSmsProviderById
-Update sms provider by id
-
-```golang
-
-data, err := Communication.UpdateSmsProviderById(CompanyID, ApplicationID, ID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| ID | string | Sms provider id | 
-
-
-| body |  SmsProviderReq | "Request body" 
-
-Update sms provider by id
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `SmsProvider`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "value": {
-    "rpt": 1,
-    "type": "application",
-    "provider": "telspiel",
-    "_id": "5fd9fd07c474a7710dd376d5",
-    "name": "test telspiel",
-    "description": "test",
-    "sender": "test",
-    "username": "test",
-    "authkey": "test",
-    "application": "000000000000000000000004",
-    "created_at": "2020-12-16T12:26:47.794Z",
-    "updated_at": "2020-12-16T12:26:47.794Z",
-    "slug": "test-telspiel-application-telspiel-p9UY1r7nG",
-    "__v": 0
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteSmsProviderById
-Delete sms provider by id
-
-```golang
-
-data, err := Communication.DeleteSmsProviderById(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| ID | string | Sms provider id | 
-
-
-
-Delete sms provider by id
-
-*Success Response:*
-
-
-
-Refer `GenericDelete` schema for more details.
-
-
-Schema: `GenericDelete`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "value": {
-    "message": "Deletion Successfull",
-    "acknowledged": true,
-    "affected": 1,
-    "operation": "TEMP-ST-DEL:ID"
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getSmsTemplates
-Get sms templates
-
-```golang
-
-data, err := Communication.GetSmsTemplates(CompanyID, ApplicationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `Sort`
-
-
-SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to get all sms templates.
-
-*Success Response:*
-
-
-
-Refer `SmsTemplates` schema for more details.
-
-
-Schema: `SmsTemplates`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "value": {
-    "items": [
-      {
-        "url_shorten": {
-          "enabled": false
-        },
-        "_id": "649968feca21d7edd0595b35",
-        "application": "637b6355dc65337da9b5c951",
-        "is_system": false,
-        "is_internal": false,
-        "meta": {
-          "type": "cloned",
-          "template": "61963d42ce3af81bde44a67d",
-          "is_system": true
-        },
-        "name": "TD sms templates",
-        "description": "description",
-        "message": {
-          "template_type": "nunjucks",
-          "template": "This is a test message"
-        },
-        "priority": "low",
-        "tags": [
-          "tag1",
-          "tag2"
-        ],
-        "template_variables": {
-          "hello": "world"
-        },
-        "template_id": "1234567891234567890123",
-        "published": true,
-        "category": "website",
-        "created_at": "2023-06-26T10:31:26.212Z",
-        "updated_at": "2023-06-26T10:31:26.212Z",
-        "slug": "TD-sms-templates-KwtzEUcpn",
-        "__v": 0
-      }
-    ],
-    "page": {
-      "type": "number",
-      "current": 1,
-      "size": 10,
-      "item_total": 17,
-      "has_next": true
-    }
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### createSmsTemplate
-Create sms template
-
-```golang
-
-data, err := Communication.CreateSmsTemplate(CompanyID, ApplicationID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| body |  SmsTemplateReq | "Request body" 
-
-SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to create an sms template.
-
-*Success Response:*
-
-
-
-Refer `SmsTemplate` schema for more details.
-
-
-Schema: `SmsTemplate`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "value": {
-    "url_shorten": {
-      "enabled": false
-    },
-    "_id": "649968feca21d7edd0595b35",
-    "application": "637b6355dc65337da9b5c951",
-    "is_system": false,
-    "is_internal": false,
-    "meta": {
-      "type": "cloned",
-      "template": "61963d42ce3af81bde44a67d",
-      "is_system": true
-    },
-    "name": "TD sms templates",
-    "description": "description",
-    "message": {
-      "template_type": "nunjucks",
-      "template": "This is a test message"
-    },
-    "priority": "low",
-    "tags": [
-      "tag1",
-      "tag2"
-    ],
-    "template_variables": {
-      "hello": "world"
-    },
-    "template_id": "1234567891234567890123",
-    "published": true,
-    "category": "website",
-    "created_at": "2023-06-26T10:31:26.212Z",
-    "updated_at": "2023-06-26T10:31:26.212Z",
-    "slug": "TD-sms-templates-KwtzEUcpn",
-    "__v": 0
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getSystemSmsTemplates
-Get system sms templates
-
-```golang
-
-data, err := Communication.GetSystemSmsTemplates(CompanyID, ApplicationID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-
-SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to get all system sms templates.
-
-*Success Response:*
-
-
-
-Refer `SystemSmsTemplates` schema for more details.
-
-
-Schema: `Array<SystemSmsTemplates>`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "value": [
-    {
-      "url_shorten": {
-        "enabled": false
-      },
-      "_id": "646b73e7e10612283cfd9773",
-      "is_system": true,
-      "is_internal": false,
-      "name": "Order Arrived at Store",
-      "description": "Use this SMS template, for notifying the customers, that their requested order has arrived at the store.",
-      "slug": "arrived_at_store-sms",
-      "message": {
-        "template_type": "nunjucks",
-        "template": "Delivered. Your shipment for {{ articles }} with {{ orderID }} has been delivered today at {{ delivered_at }}. You can collect it from store on or before {{ collection_date }}. Notification via Fynd"
-      },
-      "priority": "low",
-      "tags": [],
-      "template_variables": {
-        "email": "care@fynd.com",
-        "orderID": "Order ID FY5E53AFAA091115C235",
-        "brand": "SAPPER",
-        "name": "Alwira Sheikh",
-        "tracking_url": "http://go.fyndi.ng/track-order",
-        "articles": "Blue Solid Slim Fit Trackpants (28)",
-        "contact": 8767087087,
-        "ordering_channel": "ECOMM",
-        "delivered_at": "GT_Store, Vashi",
-        "collection_date": "Fri, Nov 15",
-        "credits": 0,
-        "slot": "By 9:00 PM",
-        "datetime": "Feb 28",
-        "cashback": 0,
-        "ref_application": {
-          "support_email": "care@fynd.com",
-          "app_information": {
-            "additional_data": {
-              "address_line": "Kurar village,Malad",
-              "city_pincode": "Mumbai - 400097",
-              "contactUs": "https://uniket-testing.addsale.link/contact-us",
-              "domain": "uniket-testing.addsale.link",
-              "privacyPolicy": "https://fynd.freshdesk.com/support/solutions/articles/33000214398-privacy-policy"
-            }
-          },
-          "domain": {
-            "name": "https://fynd.com"
-          },
-          "logo": {
-            "secure_url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1587981831/production/system/pointblank/fynd_logo_square_vunk4f.png"
-          }
-        }
-      },
-      "template_id": "1007569169965694807",
-      "published": true,
-      "category": "website",
-      "created_at": "2023-05-22T13:53:43.439Z",
-      "updated_at": "2023-05-22T13:53:43.439Z",
-      "__v": 0
-    }
-  ]
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getSmsTemplateById
-Get sms template by id
-
-```golang
-
-data, err := Communication.GetSmsTemplateById(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| ID | string | Sms template id | 
-
-
-
-SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to get an sms template by ID.
-
-*Success Response:*
-
-
-
-Refer `SmsTemplate` schema for more details.
-
-
-Schema: `SmsTemplate`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "value": {
-    "url_shorten": {
-      "enabled": false
-    },
-    "_id": "649968feca21d7edd0595b35",
-    "application": "637b6355dc65337da9b5c951",
-    "is_system": false,
-    "is_internal": false,
-    "meta": {
-      "type": "cloned",
-      "template": "61963d42ce3af81bde44a67d",
-      "is_system": true
-    },
-    "name": "TD sms templates",
-    "description": "description",
-    "message": {
-      "template_type": "nunjucks",
-      "template": "This is a test message"
-    },
-    "priority": "low",
-    "tags": [
-      "tag1",
-      "tag2"
-    ],
-    "template_variables": {
-      "hello": "world"
-    },
-    "template_id": "1234567891234567890123",
-    "published": true,
-    "category": "website",
-    "created_at": "2023-06-26T10:31:26.212Z",
-    "updated_at": "2023-06-26T10:31:26.212Z",
-    "slug": "TD-sms-templates-KwtzEUcpn",
-    "__v": 0
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateSmsTemplateById
-Update sms template by id
-
-```golang
-
-data, err := Communication.UpdateSmsTemplateById(CompanyID, ApplicationID, ID, body);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| ID | string | Sms template id | 
-
-
-| body |  SmsTemplateReq | "Request body" 
-
-SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to update an sms template by ID.
-
-*Success Response:*
-
-
-
-Refer `SmsTemplate` schema for more details.
-
-
-Schema: `SmsTemplate`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "value": {
-    "url_shorten": {
-      "enabled": false
-    },
-    "_id": "649968feca21d7edd0595b35",
-    "application": "637b6355dc65337da9b5c951",
-    "is_system": false,
-    "is_internal": false,
-    "meta": {
-      "type": "cloned",
-      "template": "61963d42ce3af81bde44a67d",
-      "is_system": true
-    },
-    "name": "TD sms templates",
-    "description": "description",
-    "message": {
-      "template_type": "nunjucks",
-      "template": "This is a test message"
-    },
-    "priority": "low",
-    "tags": [
-      "tag1",
-      "tag2"
-    ],
-    "template_variables": {
-      "hello": "world"
-    },
-    "template_id": "1234567891234567890123",
-    "published": true,
-    "category": "website",
-    "created_at": "2023-06-26T10:31:26.212Z",
-    "updated_at": "2023-06-26T10:31:26.212Z",
-    "slug": "TD-sms-templates-KwtzEUcpn",
-    "__v": 0
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### deleteSmsTemplateById
-Delete sms template by id
-
-```golang
-
-data, err := Communication.DeleteSmsTemplateById(CompanyID, ApplicationID, ID);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-| ID | string | Sms template id | 
-
-
-
-SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to delete an sms template by ID.
-
-*Success Response:*
-
-
-
-Refer `GenericDelete` schema for more details.
-
-
-Schema: `GenericDelete`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "value": {
-    "message": "Deletion Successfull",
-    "acknowledged": true,
-    "affected": 1,
-    "operation": "TEMP-ST-DEL:ID"
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getSubscribedSmsTemplates
-Get subscribed sms templates
-
-```golang
-
-data, err := Communication.GetSubscribedSmsTemplates(CompanyID, ApplicationID, xQuery);
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |
-
-| CompanyID | string | Company id | 
-
-
-| ApplicationID | string | Application id | 
-
-
-
-
-
-| xQuery | struct | Includes properties such as `PageNo`, `PageSize`
-
-
-SMS templates are predefined message formats linked to various events for delivering messages to users. Use this API to get all subscribed sms templates.
-
-*Success Response:*
-
-
-
-Refer `SmsTemplates` schema for more details.
-
-
-Schema: `SmsTemplates`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "value": {
-    "items": [
-      {
-        "url_shorten": {
-          "enabled": false
-        },
-        "_id": "649968feca21d7edd0595b35",
-        "application": "637b6355dc65337da9b5c951",
-        "is_system": false,
-        "is_internal": false,
-        "meta": {
-          "type": "cloned",
-          "template": "61963d42ce3af81bde44a67d",
-          "is_system": true
-        },
-        "name": "TD sms templates",
-        "description": "description",
-        "message": {
-          "template_type": "nunjucks",
-          "template": "This is a test message"
-        },
-        "priority": "low",
-        "tags": [
-          "tag1",
-          "tag2"
-        ],
-        "template_variables": {
-          "hello": "world"
-        },
-        "template_id": "1234567891234567890123",
-        "published": true,
-        "category": "website",
-        "created_at": "2023-06-26T10:31:26.212Z",
-        "updated_at": "2023-06-26T10:31:26.212Z",
-        "slug": "TD-sms-templates-KwtzEUcpn",
-        "__v": 0
-      }
-    ],
-    "page": {
-      "type": "number",
-      "current": 1,
-      "size": 10,
-      "item_total": 17,
-      "has_next": true
-    }
   }
 }
 ```
@@ -40085,6 +40086,66 @@ BulkReportsSucessfulEventSample
   "value": {
     "success": true,
     "batch_id": "0000-1111-2222-3333"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### eInvoiceRetry
+
+
+```golang
+
+data, err := Order.EInvoiceRetry(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | float64 |  | 
+
+
+| body |  EInvoiceRetry | "Request body" 
+
+Retry e-invoice after failure
+
+*Success Response:*
+
+
+
+E-invoice Retry Successfully!!
+
+
+Schema: `EInvoiceRetryResponse`
+
+
+*Examples:*
+
+
+sample1
+```json
+{
+  "value": {
+    "response_data": [
+      {
+        "shipment_id": "16342342342343423",
+        "success": true,
+        "message": "IRN already generated, for e-invoice type: invoice"
+      }
+    ],
+    "success_count": 1,
+    "message": "Success Count: 1 out of 1",
+    "success": true
   }
 }
 ```

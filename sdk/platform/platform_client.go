@@ -7000,6 +7000,32 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
    
   
     
@@ -7108,32 +7134,6 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             }
         
        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -16307,6 +16307,71 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
              return BulkReportsDownloadResponse{}, common.NewFDKError(err.Error())
         }
         return downloadLanesReportResponse, nil
+        
+    }
+         
+        
+       
+    
+    
+   
+  
+    
+    
+
+
+    // EInvoiceRetry 
+     func (or *PlatformOrder)  EInvoiceRetry(body  EInvoiceRetry) (EInvoiceRetryResponse, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            eInvoiceRetryResponse EInvoiceRetryResponse
+	    )
+
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return EInvoiceRetryResponse{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return EInvoiceRetryResponse{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            or.Config,
+            "post",
+            fmt.Sprintf("/service/platform/order-manage/v1.0/company/%s/einvoice/retry/irn",or.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return EInvoiceRetryResponse{}, err
+	    }
+        
+        err = json.Unmarshal(response, &eInvoiceRetryResponse)
+        if err != nil {
+             return EInvoiceRetryResponse{}, common.NewFDKError(err.Error())
+        }
+        return eInvoiceRetryResponse, nil
         
     }
          

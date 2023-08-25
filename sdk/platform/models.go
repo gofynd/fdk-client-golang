@@ -8334,6 +8334,18 @@ package platform
             Authkey string  `json:"authkey"`
             Type string  `json:"type"`
             Provider string  `json:"provider"`
+            Password string  `json:"password"`
+            Senderid string  `json:"senderid"`
+            Feedid string  `json:"feedid"`
+            Entityid string  `json:"entityid"`
+            OverrideDnd bool  `json:"override_dnd"`
+            Host string  `json:"host"`
+            Port float64  `json:"port"`
+            EntityID string  `json:"entity_id"`
+            Apikey string  `json:"apikey"`
+            VersionID float64  `json:"version_id"`
+            SenderID string  `json:"sender_id"`
+            APIKey string  `json:"api_key"`
          
     }
     
@@ -16381,6 +16393,48 @@ package platform
         
             Status bool  `json:"status"`
             Error string  `json:"error"`
+         
+    }
+    
+    // EInvoiceRetryShipmentData used by Order
+    type EInvoiceRetryShipmentData struct {
+
+        
+            ShipmentID string  `json:"shipment_id"`
+         
+    }
+    
+    // EInvoiceRetry used by Order
+    type EInvoiceRetry struct {
+
+        
+            ShipmentsData []EInvoiceRetryShipmentData  `json:"shipments_data"`
+         
+    }
+    
+    // EInvoiceResponseData used by Order
+    type EInvoiceResponseData struct {
+
+        
+            ShipmentID string  `json:"shipment_id"`
+            Message string  `json:"message"`
+            Success bool  `json:"success"`
+            AckNo string  `json:"ack_no"`
+            Irn string  `json:"irn"`
+            AckDt string  `json:"ack_dt"`
+            Timeout float64  `json:"timeout"`
+            TimeoutUnit string  `json:"timeout_unit"`
+         
+    }
+    
+    // EInvoiceRetryResponse used by Order
+    type EInvoiceRetryResponse struct {
+
+        
+            Success bool  `json:"success"`
+            SuccessCount float64  `json:"success_count"`
+            Message string  `json:"message"`
+            ResponseData []EInvoiceResponseData  `json:"response_data"`
          
     }
     
