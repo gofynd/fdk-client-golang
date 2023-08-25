@@ -9061,6 +9061,11 @@ package platform
             VerifiedBy UserSerializer  `json:"verified_by"`
             NotificationEmails []string  `json:"notification_emails"`
             ModifiedBy UserSerializer  `json:"modified_by"`
+            Tags []string  `json:"tags"`
+            DefaultOrderAcceptanceTiming bool  `json:"default_order_acceptance_timing"`
+            OrderAcceptanceTiming []LocationDayWiseSerializer  `json:"order_acceptance_timing"`
+            AvgOrderProcessingTime AverageOrderProcessingTime  `json:"avg_order_processing_time"`
+            BulkShipment bool  `json:"bulk_shipment"`
          
     }
     
