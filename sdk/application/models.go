@@ -69,6 +69,7 @@ package application
             Amount float64  `json:"amount"`
             DiscountRules []DiscountRulesApp  `json:"discount_rules"`
             Ownership Ownership  `json:"ownership"`
+            Currency CartCurrency  `json:"currency"`
             ArticleQuantity float64  `json:"article_quantity"`
             AppliedFreeArticles []AppliedFreeArticles  `json:"applied_free_articles"`
             PromotionType string  `json:"promotion_type"`
@@ -7505,6 +7506,7 @@ package application
             PromoID string  `json:"promo_id"`
             AppliedFreeArticles []AppliedFreeArticles  `json:"applied_free_articles"`
             Ownership Ownership  `json:"ownership"`
+            Currency CartCurrency  `json:"currency"`
             PromotionGroup string  `json:"promotion_group"`
          
     }

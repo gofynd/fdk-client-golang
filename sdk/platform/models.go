@@ -1909,6 +1909,7 @@ package platform
         
             ArticleQuantity float64  `json:"article_quantity"`
             Ownership Ownership2  `json:"ownership"`
+            Currency CartCurrency  `json:"currency"`
             DiscountRules []DiscountRulesApp  `json:"discount_rules"`
             AppliedFreeArticles []AppliedFreeArticles  `json:"applied_free_articles"`
             PromotionName string  `json:"promotion_name"`
@@ -2523,6 +2524,7 @@ package platform
             CartValue float64  `json:"cart_value"`
             CreatedOn string  `json:"created_on"`
             UserID string  `json:"user_id"`
+            CurrencyCode string  `json:"currency_code"`
             ItemCounts float64  `json:"item_counts"`
          
     }
