@@ -58,6 +58,7 @@
     * [cancelSubscriptionPlan](#cancelsubscriptionplan)
     * [getEnterprisePlans](#getenterpriseplans)
     * [planStatusUpdate](#planstatusupdate)
+    * [subscripePlan](#subscripeplan)
     
 
 * [Cart](#Cart)
@@ -3315,6 +3316,64 @@ default
         "display_text": "Email"
       }
     ]
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### subscripePlan
+Subscribe plan.
+
+```golang
+
+data, err := Billing.SubscripePlan(CompanyID, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| CompanyID | string | Customer unique id. In case of company it will be company id. | 
+
+
+| body |  SunscribePlan | "Request body" 
+
+It will subscribe a plan.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `SubscribePlanRes`
+
+
+*Examples:*
+
+
+default
+```json
+{
+  "value": {
+    "redirect_url": "https://platform.fyndx1.de/company/8029/subscription/renew-plan?plan_id=64e8c18e548ddf67f0c4cb1f&transaction_id=64ec54e3202d2b0bd9fcd120&renew=true&callback_url=https://platform.fyndx1.de/company/8029/billing/bills&meta={\"subscribe\":true,\"is_custom_plan\":true,\"is_plan_upgrade\":false}",
+    "transaction_id": "64ec54e3202d2b0bd9fcd120",
+    "current_status": "initiated",
+    "meta": {
+      "subscribe": true,
+      "is_custom_plan": true,
+      "is_plan_upgrade": false
+    }
   }
 }
 ```

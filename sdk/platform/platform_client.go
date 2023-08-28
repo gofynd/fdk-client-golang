@@ -1318,6 +1318,79 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
        
     
+    
+   
+  
+    
+    
+
+
+    // SubscripePlan Subscribe plan.
+     func (bi *PlatformBilling)  SubscripePlan(body  SunscribePlan) (SubscribePlanRes, error){
+        
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+            subscripePlanResponse SubscribePlanRes
+	    )
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+             
+             return SubscribePlanRes{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+               
+             return SubscribePlanRes{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            bi.Config,
+            "post",
+            fmt.Sprintf("/service/platform/billing/v1.0/company/%s/payment/initiate",bi.CompanyID),
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+             return SubscribePlanRes{}, err
+	    }
+        
+        err = json.Unmarshal(response, &subscripePlanResponse)
+        if err != nil {
+             return SubscribePlanRes{}, common.NewFDKError(err.Error())
+        }
+        return subscripePlanResponse, nil
+        
+    }
+         
+        
+       
+    
 
 
 	

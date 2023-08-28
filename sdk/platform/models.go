@@ -843,6 +843,39 @@ package platform
          
     }
     
+    // SunscribePlan used by Billing
+    type SunscribePlan struct {
+
+        
+            EntityType string  `json:"entity_type"`
+            CollectionType string  `json:"collection_type"`
+            PlanID string  `json:"plan_id"`
+            CallbackURL string  `json:"callback_url"`
+            Meta Meta  `json:"meta"`
+         
+    }
+    
+    // Meta used by Billing
+    type Meta struct {
+
+        
+            Subscribe bool  `json:"subscribe"`
+            IsCustomPlan bool  `json:"is_custom_plan"`
+            IsPlanUpgrade bool  `json:"is_plan_upgrade"`
+         
+    }
+    
+    // SubscribePlanRes used by Billing
+    type SubscribePlanRes struct {
+
+        
+            RedirectURL string  `json:"redirect_url"`
+            TransactionID string  `json:"transaction_id"`
+            CurrentStatus string  `json:"current_status"`
+            Meta Meta  `json:"meta"`
+         
+    }
+    
 
     
     // CouponDateMeta used by Cart
@@ -1554,11 +1587,12 @@ package platform
     type Article struct {
 
         
-            Meta map[string]interface{}  `json:"meta"`
-            ArticleID string  `json:"article_id"`
-            Type string  `json:"type"`
             Value float64  `json:"value"`
             Code string  `json:"code"`
+            Type string  `json:"type"`
+            ArticleID string  `json:"article_id"`
+            Quantity float64  `json:"quantity"`
+            Meta map[string]interface{}  `json:"meta"`
          
     }
     
@@ -1575,19 +1609,18 @@ package platform
     type PriceAdjustmentUpdate struct {
 
         
-            ApplyExpiry string  `json:"apply_expiry"`
-            CartID string  `json:"cart_id"`
-            CartValue float64  `json:"cart_value"`
-            Meta map[string]interface{}  `json:"meta"`
-            Type string  `json:"type"`
-            Value float64  `json:"value"`
-            ArticleLevelDistribution bool  `json:"article_level_distribution"`
-            ArticleIds []Article  `json:"article_ids"`
             ModifiedBy string  `json:"modified_by"`
-            IsAuthenticated bool  `json:"is_authenticated"`
-            AllowedRefund bool  `json:"allowed_refund"`
+            Value float64  `json:"value"`
             Message string  `json:"message"`
+            ApplyExpiry string  `json:"apply_expiry"`
+            ArticleLevelDistribution bool  `json:"article_level_distribution"`
             Collection Collection  `json:"collection"`
+            Type string  `json:"type"`
+            AllowedRefund bool  `json:"allowed_refund"`
+            IsAuthenticated bool  `json:"is_authenticated"`
+            ArticleIds []Article  `json:"article_ids"`
+            Meta map[string]interface{}  `json:"meta"`
+            CartID string  `json:"cart_id"`
          
     }
     
@@ -1595,19 +1628,18 @@ package platform
     type PriceAdjustment struct {
 
         
-            ApplyExpiry string  `json:"apply_expiry"`
-            CartID string  `json:"cart_id"`
-            CartValue float64  `json:"cart_value"`
-            Meta map[string]interface{}  `json:"meta"`
-            Type string  `json:"type"`
             Value float64  `json:"value"`
-            ArticleLevelDistribution bool  `json:"article_level_distribution"`
-            ArticleIds []Article  `json:"article_ids"`
-            ID string  `json:"id"`
-            IsAuthenticated bool  `json:"is_authenticated"`
-            AllowedRefund bool  `json:"allowed_refund"`
             Message string  `json:"message"`
+            ApplyExpiry string  `json:"apply_expiry"`
+            ArticleLevelDistribution bool  `json:"article_level_distribution"`
+            ID string  `json:"id"`
             Collection Collection  `json:"collection"`
+            Type string  `json:"type"`
+            AllowedRefund bool  `json:"allowed_refund"`
+            IsAuthenticated bool  `json:"is_authenticated"`
+            ArticleIds []Article  `json:"article_ids"`
+            Meta map[string]interface{}  `json:"meta"`
+            CartID string  `json:"cart_id"`
          
     }
     
@@ -1623,19 +1655,18 @@ package platform
     type PriceAdjustmentAdd struct {
 
         
-            ApplyExpiry string  `json:"apply_expiry"`
-            CartID string  `json:"cart_id"`
-            CartValue float64  `json:"cart_value"`
-            Meta map[string]interface{}  `json:"meta"`
-            Type string  `json:"type"`
-            CreatedBy string  `json:"created_by"`
             Value float64  `json:"value"`
-            ArticleLevelDistribution bool  `json:"article_level_distribution"`
-            ArticleIds []Article  `json:"article_ids"`
-            IsAuthenticated bool  `json:"is_authenticated"`
-            AllowedRefund bool  `json:"allowed_refund"`
             Message string  `json:"message"`
+            ApplyExpiry string  `json:"apply_expiry"`
+            CreatedBy string  `json:"created_by"`
+            ArticleLevelDistribution bool  `json:"article_level_distribution"`
             Collection Collection  `json:"collection"`
+            Type string  `json:"type"`
+            AllowedRefund bool  `json:"allowed_refund"`
+            IsAuthenticated bool  `json:"is_authenticated"`
+            ArticleIds []Article  `json:"article_ids"`
+            Meta map[string]interface{}  `json:"meta"`
+            CartID string  `json:"cart_id"`
          
     }
     
