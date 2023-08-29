@@ -595,70 +595,10 @@ import (
 
 
 
-    //TicketIntegrationDetails used by Lead
-    type TicketIntegrationDetails  string
-    
-    const (
-            
-            //DEFAULT defines constant for the `default` 
-            DEFAULT TicketIntegrationDetails = "default"
-            
-            
-            //FRESHDESK defines constant for the `freshdesk` 
-            FRESHDESK TicketIntegrationDetails = "freshdesk"
-            
-            
-            //KAPTURE defines constant for the `kapture` 
-            KAPTURE TicketIntegrationDetails = "kapture"
-            
-            
-       )
-
-    //IsValid return error if enum is invalid
-    func (ti TicketIntegrationDetails) IsValid() error {
-      switch ti {
-        case  DEFAULT, FRESHDESK, KAPTURE : 
-        return nil
-      }
-      return errors.New("Invalid TicketIntegrationDetails type")
-    }
 
 
 
 
 
 
-
-
-
-
-
-
-    //SubscriberStatus used by Webhook
-    type SubscriberStatus  string
-    
-    const (
-            
-            //ACTIVE defines constant for the `active` 
-            ACTIVE SubscriberStatus = "active"
-            
-            
-            //INACTIVE defines constant for the `inactive` 
-            INACTIVE SubscriberStatus = "inactive"
-            
-            
-            //BLOCKED defines constant for the `blocked` 
-            BLOCKED SubscriberStatus = "blocked"
-            
-            
-       )
-
-    //IsValid return error if enum is invalid
-    func (su SubscriberStatus) IsValid() error {
-      switch su {
-        case  ACTIVE, INACTIVE, BLOCKED : 
-        return nil
-      }
-      return errors.New("Invalid SubscriberStatus type")
-    }
 
