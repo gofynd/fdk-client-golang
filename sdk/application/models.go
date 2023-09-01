@@ -363,6 +363,7 @@ package application
             DeliveryCharge float64  `json:"delivery_charge"`
             GstCharges float64  `json:"gst_charges"`
             MrpTotal float64  `json:"mrp_total"`
+            MopTotal float64  `json:"mop_total"`
             Coupon float64  `json:"coupon"`
             Total float64  `json:"total"`
             GiftCard float64  `json:"gift_card"`

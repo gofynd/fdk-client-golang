@@ -20491,7 +20491,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     type PlatformGetSubscribersByCompanyXQuery struct { 
         PageNo float64  `url:"page_no,omitempty"` 
         PageSize float64  `url:"page_size,omitempty"` 
-        ExtensionID float64  `url:"extension_id,omitempty"`  
+        ExtensionID string  `url:"extension_id,omitempty"`  
     }
     
 
@@ -20775,7 +20775,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
 
     // GetSubscribersByExtensionId Get Subscribers By Extension ID
-     func (we *PlatformWebhook)  GetSubscribersByExtensionId(ExtensionID float64, xQuery PlatformGetSubscribersByExtensionIdXQuery) (SubscriberConfigList, error){
+     func (we *PlatformWebhook)  GetSubscribersByExtensionId(ExtensionID string, xQuery PlatformGetSubscribersByExtensionIdXQuery) (SubscriberConfigList, error){
         
         var (
             rawRequest  *RawRequest
@@ -20805,7 +20805,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         rawRequest = NewRequest(
             we.Config,
             "get",
-            fmt.Sprintf("/service/platform/webhook/v1.0/company/%s/extension/undefined/subscriber",we.CompanyID, ExtensionID),
+            fmt.Sprintf("/service/platform/webhook/v1.0/company/%s/extension/%s/subscriber",we.CompanyID, ExtensionID),
             nil,
             xQuery,
             nil)

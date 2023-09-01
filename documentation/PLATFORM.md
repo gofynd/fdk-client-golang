@@ -90188,7 +90188,7 @@ data, err := Webhook.ManualRetryOfFailedEvent(CompanyID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+| CompanyID | float64 | The company id of the application | 
 
 
 | body |  EventProcessRequest | "Request body" 
@@ -90227,7 +90227,7 @@ data, err := Webhook.GetEventCounts(CompanyID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+| CompanyID | float64 | The company id of the application | 
 
 
 | body |  EventProcessRequest | "Request body" 
@@ -90284,7 +90284,7 @@ data, err := Webhook.GetManualRetryStatus(CompanyID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+| CompanyID | float64 | The company id of the application | 
 
 
 
@@ -90338,7 +90338,7 @@ data, err := Webhook.ManualRetryCancel(CompanyID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+| CompanyID | float64 | The company id of the application | 
 
 
 
@@ -90376,7 +90376,7 @@ data, err := Webhook.GetDeliveryReports(CompanyID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+| CompanyID | float64 | The company id of the application | 
 
 
 | body |  EventProcessRequest | "Request body" 
@@ -90414,7 +90414,7 @@ data, err := Webhook.DownloadDeliveryReport(CompanyID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+| CompanyID | float64 | The company id of the application | 
 
 
 | body |  EventProcessRequest | "Request body" 
@@ -90452,7 +90452,7 @@ data, err := Webhook.PingWebhook(CompanyID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+| CompanyID | float64 | The company id of the application | 
 
 
 | body |  PingWebhook | "Request body" 
@@ -90505,7 +90505,7 @@ data, err := Webhook.FetchAllEventConfigurations(CompanyID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+| CompanyID | float64 | The company id of the application | 
 
 
 
@@ -90568,7 +90568,7 @@ data, err := Webhook.GetReportFilters(CompanyID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+| CompanyID | float64 | The company id of the application | 
 
 
 | body |  ReportFiltersPayload | "Request body" 
@@ -90667,7 +90667,7 @@ data, err := Webhook.GetHistoricalReports(CompanyID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+| CompanyID | float64 | The company id of the application | 
 
 
 | body |  HistoryPayload | "Request body" 
@@ -90705,7 +90705,7 @@ data, err := Webhook.CancelJobByName(CompanyID, Filename);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+| CompanyID | float64 | The company id of the application | 
 
 
 | Filename | string | Filename of the specific report export to cancel. | 
@@ -90751,7 +90751,7 @@ data, err := Webhook.GetSubscribersByCompany(CompanyID, xQuery);
 
 
 
-| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+| CompanyID | float64 | The company id of the application | 
 
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`, `ExtensionID`
 
@@ -90859,7 +90859,7 @@ data, err := Webhook.RegisterSubscriberToEvent(CompanyID, body);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+| CompanyID | float64 | The company id of the application | 
 
 
 | body |  SubscriberConfig | "Request body" 
@@ -90997,10 +90997,10 @@ data, err := Webhook.GetSubscriberById(CompanyID, SubscriberID);
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+| CompanyID | float64 | The company id of the application | 
 
 
-| SubscriberID | float64 | The ID of the company for which manual retry is to be initiated. | 
+| SubscriberID | float64 | subscriber id | 
 
 
 
@@ -91401,10 +91401,10 @@ data, err := Webhook.GetSubscribersByExtensionId(CompanyID, ExtensionID, xQuery)
 
 
 
-| CompanyID | float64 | The ID of the company for which manual retry is to be initiated. | 
+| CompanyID | float64 | The company id of the application | 
 
 
-| ExtensionID | float64 | The ID of the company for which manual retry is to be initiated. | 
+| ExtensionID | string | extension id | 
 
 | xQuery | struct | Includes properties such as `PageNo`, `PageSize`
 
