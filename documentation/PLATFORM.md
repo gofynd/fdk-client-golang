@@ -41250,7 +41250,7 @@ Get All Brand Payment Gateway Config Secret
 
 ```golang
 
-data, err := Payment.GetBrandPaymentGatewayConfig(CompanyID, ApplicationID);
+data, err := Payment.GetBrandPaymentGatewayConfig(CompanyID, ApplicationID, xQuery);
 ```
 
 | Argument  |  Type  | Description |
@@ -41261,6 +41261,11 @@ data, err := Payment.GetBrandPaymentGatewayConfig(CompanyID, ApplicationID);
 
 | ApplicationID | string | Application id | 
 
+
+
+
+
+| xQuery | struct | Includes properties such as `Aggregator`, `ConfigType`
 
 
 Get All Brand Payment Gateway Config Secret

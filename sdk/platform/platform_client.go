@@ -20576,6 +20576,13 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
         
         
+        //enum validation inside request body
+        err = body.Status.IsValid()
+        if err != nil {
+             
+             return SubscriberConfig{}, common.NewFDKError(err.Error())
+        }
+        
         
         
         
@@ -20656,6 +20663,13 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
         
         
+        
+        //enum validation inside request body
+        err = body.Status.IsValid()
+        if err != nil {
+             
+             return SubscriberConfig{}, common.NewFDKError(err.Error())
+        }
         
         
         

@@ -21232,8 +21232,14 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
   
 
     
+    //PlatformAppGetBrandPaymentGatewayConfigXQuery holds query params
+    type PlatformAppGetBrandPaymentGatewayConfigXQuery struct { 
+        Aggregator string  `url:"aggregator,omitempty"` 
+        ConfigType string  `url:"config_type,omitempty"`  
+    }
+    
     // GetBrandPaymentGatewayConfig Get All Brand Payment Gateway Config Secret
-     func (pa *PlatformAppPayment)  GetBrandPaymentGatewayConfig() (PaymentGatewayConfigResponse, error) {
+     func (pa *PlatformAppPayment)  GetBrandPaymentGatewayConfig(xQuery PlatformAppGetBrandPaymentGatewayConfigXQuery) (PaymentGatewayConfigResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
@@ -21244,6 +21250,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
 
          
+            
+                
+            
+                
+            
+        
 
         
         
@@ -21256,7 +21268,7 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             "get",
             fmt.Sprintf("/service/platform/payment/v1.0/company/%s/application/%s/aggregator/request",pa.CompanyID, pa.ApplicationID),
             nil,
-            nil,
+            xQuery,
             nil)
         response, err = rawRequest.Execute()
         if err != nil {

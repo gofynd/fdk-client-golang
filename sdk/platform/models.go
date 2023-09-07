@@ -16548,12 +16548,12 @@ package platform
             IgstTaxPercentage float64  `json:"igst_tax_percentage"`
             GstTaxPercentage float64  `json:"gst_tax_percentage"`
             HsnCodeID string  `json:"hsn_code_id"`
-            IgstGstFee string  `json:"igst_gst_fee"`
+            IgstGstFee float64  `json:"igst_gst_fee"`
             IsDefaultHsnCode bool  `json:"is_default_hsn_code"`
-            SgstGstFee string  `json:"sgst_gst_fee"`
+            SgstGstFee float64  `json:"sgst_gst_fee"`
             TaxCollectedAtSource float64  `json:"tax_collected_at_source"`
             BrandCalculatedAmount float64  `json:"brand_calculated_amount"`
-            CgstGstFee string  `json:"cgst_gst_fee"`
+            CgstGstFee float64  `json:"cgst_gst_fee"`
             GstTag string  `json:"gst_tag"`
             SgstTaxPercentage float64  `json:"sgst_tax_percentage"`
             HsnCode string  `json:"hsn_code"`
@@ -17664,7 +17664,7 @@ package platform
             OrderChildEntities []string  `json:"order_child_entities"`
             OrderType string  `json:"order_type"`
             OrderPlatform string  `json:"order_platform"`
-            EmployeeID float64  `json:"employee_id"`
+            EmployeeID string  `json:"employee_id"`
             OrderTags []map[string]interface{}  `json:"order_tags"`
             CustomerNote string  `json:"customer_note"`
             Staff map[string]interface{}  `json:"staff"`
@@ -18388,6 +18388,25 @@ package platform
          
     }
     
+    // ProductCODData used by Payment
+    type ProductCODData struct {
+
+        
+            Items map[string]interface{}  `json:"items"`
+            CodCharges map[string]interface{}  `json:"cod_charges"`
+         
+    }
+    
+    // CODChargesLimitsResponse used by Payment
+    type CODChargesLimitsResponse struct {
+
+        
+            MaxCartValue float64  `json:"max_cart_value"`
+            MinCartValue float64  `json:"min_cart_value"`
+            CodCharge float64  `json:"cod_charge"`
+         
+    }
+    
     // PaymentModeLogo used by Payment
     type PaymentModeLogo struct {
 
@@ -18438,6 +18457,8 @@ package platform
             LogoURL map[string]interface{}  `json:"logo_url"`
             CardToken string  `json:"card_token"`
             AggregatorName string  `json:"aggregator_name"`
+            CodCharges float64  `json:"cod_charges"`
+            ProductCodData map[string]interface{}  `json:"product_cod_data"`
             CodLimit float64  `json:"cod_limit"`
             IntentApp []IntentApp  `json:"intent_app"`
             Nickname string  `json:"nickname"`
@@ -21301,23 +21322,6 @@ package platform
          
     }
     
-    // GlobalConfig used by Theme
-    type GlobalConfig struct {
-
-        
-            Statics StaticConfig  `json:"statics"`
-            Custom CustomConfig  `json:"custom"`
-         
-    }
-    
-    // StaticConfig used by Theme
-    type StaticConfig struct {
-
-        
-            Props StaticProps  `json:"props"`
-         
-    }
-    
     // CustomConfig used by Theme
     type CustomConfig struct {
 
@@ -21355,164 +21359,6 @@ package platform
         
             Desktop string  `json:"desktop"`
             Mobile string  `json:"mobile"`
-         
-    }
-    
-    // StaticProps used by Theme
-    type StaticProps struct {
-
-        
-            Colors Colors  `json:"colors"`
-            Auth AuthConfig  `json:"auth"`
-            Palette PaletteConfig  `json:"palette"`
-         
-    }
-    
-    // Colors used by Theme
-    type Colors struct {
-
-        
-            PrimaryColor string  `json:"primary_color"`
-            SecondaryColor string  `json:"secondary_color"`
-            AccentColor string  `json:"accent_color"`
-            LinkColor string  `json:"link_color"`
-            ButtonSecondaryColor string  `json:"button_secondary_color"`
-            BgColor string  `json:"bg_color"`
-         
-    }
-    
-    // AuthConfig used by Theme
-    type AuthConfig struct {
-
-        
-            ShowHeaderAuth bool  `json:"show_header_auth"`
-            ShowFooterAuth bool  `json:"show_footer_auth"`
-         
-    }
-    
-    // PaletteConfig used by Theme
-    type PaletteConfig struct {
-
-        
-            GeneralSetting GeneralSetting  `json:"general_setting"`
-            AdvanceSetting AdvanceSetting  `json:"advance_setting"`
-         
-    }
-    
-    // GeneralSetting used by Theme
-    type GeneralSetting struct {
-
-        
-            Theme ThemeSetting  `json:"theme"`
-            Text TextSetting  `json:"text"`
-            Button ButtonSetting  `json:"button"`
-            SaleDiscount SaleDiscountSetting  `json:"sale_discount"`
-            Header HeaderSetting  `json:"header"`
-            Footer FooterSetting  `json:"footer"`
-         
-    }
-    
-    // AdvanceSetting used by Theme
-    type AdvanceSetting struct {
-
-        
-            OverlayPopup OverlayPopupSetting  `json:"overlay_popup"`
-            DividerStrokeHighlight DividerStrokeHighlightSetting  `json:"divider_stroke_highlight"`
-            UserAlerts UserAlertsSetting  `json:"user_alerts"`
-         
-    }
-    
-    // ThemeSetting used by Theme
-    type ThemeSetting struct {
-
-        
-            PageBackground string  `json:"page_background"`
-            ThemeAccent string  `json:"theme_accent"`
-         
-    }
-    
-    // TextSetting used by Theme
-    type TextSetting struct {
-
-        
-            TextHeading string  `json:"text_heading"`
-            TextBody string  `json:"text_body"`
-            TextLabel string  `json:"text_label"`
-            TextSecondary string  `json:"text_secondary"`
-         
-    }
-    
-    // ButtonSetting used by Theme
-    type ButtonSetting struct {
-
-        
-            ButtonPrimary string  `json:"button_primary"`
-            ButtonSecondary string  `json:"button_secondary"`
-            ButtonLink string  `json:"button_link"`
-         
-    }
-    
-    // SaleDiscountSetting used by Theme
-    type SaleDiscountSetting struct {
-
-        
-            SaleBadgeBackground string  `json:"sale_badge_background"`
-            SaleBadgeText string  `json:"sale_badge_text"`
-            SaleDiscountText string  `json:"sale_discount_text"`
-            SaleTimer string  `json:"sale_timer"`
-         
-    }
-    
-    // HeaderSetting used by Theme
-    type HeaderSetting struct {
-
-        
-            HeaderBackground string  `json:"header_background"`
-            HeaderNav string  `json:"header_nav"`
-            HeaderIcon string  `json:"header_icon"`
-         
-    }
-    
-    // FooterSetting used by Theme
-    type FooterSetting struct {
-
-        
-            FooterBackground string  `json:"footer_background"`
-            FooterBottomBackground string  `json:"footer_bottom_background"`
-            FooterHeadingText string  `json:"footer_heading_text"`
-            FooterBodyText string  `json:"footer_body_text"`
-            FooterIcon string  `json:"footer_icon"`
-         
-    }
-    
-    // OverlayPopupSetting used by Theme
-    type OverlayPopupSetting struct {
-
-        
-            DialogBackgroung string  `json:"dialog_backgroung"`
-            Overlay string  `json:"overlay"`
-         
-    }
-    
-    // DividerStrokeHighlightSetting used by Theme
-    type DividerStrokeHighlightSetting struct {
-
-        
-            DividerStrokes string  `json:"divider_strokes"`
-            Highlight string  `json:"highlight"`
-         
-    }
-    
-    // UserAlertsSetting used by Theme
-    type UserAlertsSetting struct {
-
-        
-            SuccessBackground string  `json:"success_background"`
-            SuccessText string  `json:"success_text"`
-            ErrorBackground string  `json:"error_background"`
-            ErrorText string  `json:"error_text"`
-            InfoBackground string  `json:"info_background"`
-            InfoText string  `json:"info_text"`
          
     }
     
@@ -22581,7 +22427,7 @@ package platform
             Association Association  `json:"association"`
             CustomHeaders map[string]interface{}  `json:"custom_headers"`
             EmailID string  `json:"email_id"`
-            Status string  `json:"status"`
+            Status SubscriberStatus  `json:"status"`
             AuthMeta AuthMeta  `json:"auth_meta"`
             CreatedOn string  `json:"created_on"`
             UpdatedOn string  `json:"updated_on"`
@@ -22618,7 +22464,7 @@ package platform
             WebhookURL string  `json:"webhook_url"`
             Association Association  `json:"association"`
             CustomHeaders map[string]interface{}  `json:"custom_headers"`
-            Status string  `json:"status"`
+            Status SubscriberStatus  `json:"status"`
             EmailID string  `json:"email_id"`
             AuthMeta AuthMeta  `json:"auth_meta"`
             EventID []float64  `json:"event_id"`
