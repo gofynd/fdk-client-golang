@@ -7727,12 +7727,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // GetAppProducts Get applicationwise products
-     func (ca *PlatformAppCatalog)  GetAppProducts(xQuery PlatformAppGetAppProductsXQuery) (ProductListingResponse, error) {
+     func (ca *PlatformAppCatalog)  GetAppProducts(xQuery PlatformAppGetAppProductsXQuery) (RawProductListingResponse, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            getAppProductsResponse ProductListingResponse
+            getAppProductsResponse RawProductListingResponse
 	    )
 
         
@@ -7772,12 +7772,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return ProductListingResponse{}, err
+            return RawProductListingResponse{}, err
 	    }
         
         err = json.Unmarshal(response, &getAppProductsResponse)
         if err != nil {
-            return ProductListingResponse{}, common.NewFDKError(err.Error())
+            return RawProductListingResponse{}, common.NewFDKError(err.Error())
         }
         return getAppProductsResponse, nil
         

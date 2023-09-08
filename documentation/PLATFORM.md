@@ -17068,7 +17068,7 @@ Products are the core resource of an application. Products can be associated by 
 The Product object. See example below or refer `ApplicationProductListingResponseDatabasePowered` for details.
 
 
-Schema: `ProductListingResponse`
+Schema: `RawProductListingResponse`
 
 
 

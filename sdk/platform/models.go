@@ -5311,6 +5311,84 @@ package platform
          
     }
     
+    // RawProduct used by Catalog
+    type RawProduct struct {
+
+        
+            CustomJson map[string]interface{}  `json:"_custom_json"`
+            AllCompanyIds []float64  `json:"all_company_ids"`
+            AllIdentifiers []string  `json:"all_identifiers"`
+            AllSizes []map[string]interface{}  `json:"all_sizes"`
+            Attributes map[string]interface{}  `json:"attributes"`
+            Brand Brand  `json:"brand"`
+            BrandUID float64  `json:"brand_uid"`
+            Category map[string]interface{}  `json:"category"`
+            CategorySlug string  `json:"category_slug"`
+            CategoryUID float64  `json:"category_uid"`
+            Color string  `json:"color"`
+            CompanyID float64  `json:"company_id"`
+            CountryOfOrigin string  `json:"country_of_origin"`
+            CreatedBy map[string]interface{}  `json:"created_by"`
+            CreatedOn string  `json:"created_on"`
+            Currency string  `json:"currency"`
+            CustomOrder map[string]interface{}  `json:"custom_order"`
+            Departments []float64  `json:"departments"`
+            Description string  `json:"description"`
+            Highlights []string  `json:"highlights"`
+            HsnCode string  `json:"hsn_code"`
+            ID string  `json:"id"`
+            ImageNature string  `json:"image_nature"`
+            Images []string  `json:"images"`
+            IsActive bool  `json:"is_active"`
+            IsDependent bool  `json:"is_dependent"`
+            IsExpirable bool  `json:"is_expirable"`
+            IsImageLessProduct bool  `json:"is_image_less_product"`
+            IsPhysical bool  `json:"is_physical"`
+            IsSet bool  `json:"is_set"`
+            ItemCode string  `json:"item_code"`
+            ItemType string  `json:"item_type"`
+            L3Mapping []string  `json:"l3_mapping"`
+            Media []Media  `json:"media"`
+            ModifiedBy map[string]interface{}  `json:"modified_by"`
+            ModifiedOn string  `json:"modified_on"`
+            Moq map[string]interface{}  `json:"moq"`
+            MultiSize bool  `json:"multi_size"`
+            Name string  `json:"name"`
+            NetQuantity NetQuantityResponse  `json:"net_quantity"`
+            NoOfBoxes float64  `json:"no_of_boxes"`
+            Pending string  `json:"pending"`
+            PrimaryColor string  `json:"primary_color"`
+            ProductGroupTag []string  `json:"product_group_tag"`
+            ProductPublish ProductPublished  `json:"product_publish"`
+            ReturnConfig ReturnConfigResponse  `json:"return_config"`
+            ShortDescription string  `json:"short_description"`
+            SizeGuide string  `json:"size_guide"`
+            Sizes []map[string]interface{}  `json:"sizes"`
+            Slug string  `json:"slug"`
+            Stage string  `json:"stage"`
+            Tags []string  `json:"tags"`
+            TaxIdentifier map[string]interface{}  `json:"tax_identifier"`
+            TeaserTag map[string]interface{}  `json:"teaser_tag"`
+            TemplateTag string  `json:"template_tag"`
+            Trader []Trader  `json:"trader"`
+            UID float64  `json:"uid"`
+            VariantGroup map[string]interface{}  `json:"variant_group"`
+            VariantMedia map[string]interface{}  `json:"variant_media"`
+            Variants map[string]interface{}  `json:"variants"`
+            VerifiedBy VerifiedBy  `json:"verified_by"`
+            VerifiedOn string  `json:"verified_on"`
+         
+    }
+    
+    // RawProductListingResponse used by Catalog
+    type RawProductListingResponse struct {
+
+        
+            Items []RawProduct  `json:"items"`
+            Page Page  `json:"page"`
+         
+    }
+    
     // ReturnConfig used by Catalog
     type ReturnConfig struct {
 
