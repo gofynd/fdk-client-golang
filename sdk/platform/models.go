@@ -17529,7 +17529,7 @@ package platform
             ID float64  `json:"id"`
             CreatedAt string  `json:"created_at"`
             ShipmentID string  `json:"shipment_id"`
-            UpdatedAt float64  `json:"updated_at"`
+            UpdatedAt string  `json:"updated_at"`
             BagStateMapper BagStateMapper  `json:"bag_state_mapper"`
             BagID float64  `json:"bag_id"`
             Status string  `json:"status"`
