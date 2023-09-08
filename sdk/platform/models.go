@@ -15619,6 +15619,7 @@ package platform
         
             App AffiliateAppConfig  `json:"app"`
             Inventory AffiliateInventoryConfig  `json:"inventory"`
+            AppCompanyID float64  `json:"app_company_id"`
          
     }
     
@@ -17145,6 +17146,7 @@ package platform
             OrderingChannelLogo map[string]interface{}  `json:"ordering_channel_logo"`
             OrderValue string  `json:"order_value"`
             OrderingChannel string  `json:"ordering_channel"`
+            Meta OrderMeta  `json:"meta"`
          
     }
     
@@ -17341,6 +17343,7 @@ package platform
             CompanyAffiliateTag string  `json:"company_affiliate_tag"`
             AffiliateOrderID string  `json:"affiliate_order_id"`
             PdfLinks PDFLinks  `json:"pdf_links"`
+            Config AffiliateConfig  `json:"config"`
             AffiliateID string  `json:"affiliate_id"`
             AffiliateStoreID string  `json:"affiliate_store_id"`
             AffiliateBagID string  `json:"affiliate_bag_id"`
@@ -17664,6 +17667,10 @@ package platform
             Status ShipmentStatusData  `json:"status"`
             TotalBags float64  `json:"total_bags"`
             ShipmentCreatedAt string  `json:"shipment_created_at"`
+            PreviousShipmentID string  `json:"previous_shipment_id"`
+            ShipmentUpdateTime float64  `json:"shipment_update_time"`
+            RtoAddress PlatformDeliveryAddress  `json:"rto_address"`
+            CreditNoteID string  `json:"credit_note_id"`
          
     }
     
