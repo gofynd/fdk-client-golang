@@ -11,181 +11,6 @@ import (
 
 
 
-    //PriorityEnum used by Lead
-    type PriorityEnum  string
-    
-    const (
-            
-            //LOW defines constant for the `low` 
-            LOW PriorityEnum = "low"
-            
-            
-            //MEDIUM defines constant for the `medium` 
-            MEDIUM PriorityEnum = "medium"
-            
-            
-            //HIGH defines constant for the `high` 
-            HIGH PriorityEnum = "high"
-            
-            
-            //URGENT defines constant for the `urgent` 
-            URGENT PriorityEnum = "urgent"
-            
-            
-       )
-
-    //IsValid return error if enum is invalid
-    func (pr PriorityEnum) IsValid() error {
-      switch pr {
-        case  LOW, MEDIUM, HIGH, URGENT : 
-        return nil
-      }
-      return errors.New("Invalid PriorityEnum type")
-    }
-
-
-
-    //HistoryTypeEnum used by Lead
-    type HistoryTypeEnum  string
-    
-    const (
-            
-            //RATING defines constant for the `rating` 
-            RATING HistoryTypeEnum = "rating"
-            
-            
-            //LOG defines constant for the `log` 
-            LOG HistoryTypeEnum = "log"
-            
-            
-            //COMMENT defines constant for the `comment` 
-            COMMENT HistoryTypeEnum = "comment"
-            
-            
-       )
-
-    //IsValid return error if enum is invalid
-    func (hi HistoryTypeEnum) IsValid() error {
-      switch hi {
-        case  RATING, LOG, COMMENT : 
-        return nil
-      }
-      return errors.New("Invalid HistoryTypeEnum type")
-    }
-
-
-
-    //TicketAssetTypeEnum used by Lead
-    type TicketAssetTypeEnum  string
-    
-    const (
-            
-            //IMAGE defines constant for the `image` 
-            IMAGE TicketAssetTypeEnum = "image"
-            
-            
-            //VIDEO defines constant for the `video` 
-            VIDEO TicketAssetTypeEnum = "video"
-            
-            
-            //FILE defines constant for the `file` 
-            FILE TicketAssetTypeEnum = "file"
-            
-            
-            //YOUTUBE defines constant for the `youtube` 
-            YOUTUBE TicketAssetTypeEnum = "youtube"
-            
-            
-            //PRODUCT defines constant for the `product` 
-            PRODUCT TicketAssetTypeEnum = "product"
-            
-            
-            //COLLECTION defines constant for the `collection` 
-            COLLECTION TicketAssetTypeEnum = "collection"
-            
-            
-            //BRAND defines constant for the `brand` 
-            BRAND TicketAssetTypeEnum = "brand"
-            
-            
-            //SHIPMENT defines constant for the `shipment` 
-            SHIPMENT TicketAssetTypeEnum = "shipment"
-            
-            
-            //ORDER defines constant for the `order` 
-            ORDER TicketAssetTypeEnum = "order"
-            
-            
-       )
-
-    //IsValid return error if enum is invalid
-    func (ti TicketAssetTypeEnum) IsValid() error {
-      switch ti {
-        case  IMAGE, VIDEO, FILE, YOUTUBE, PRODUCT, COLLECTION, BRAND, SHIPMENT, ORDER : 
-        return nil
-      }
-      return errors.New("Invalid TicketAssetTypeEnum type")
-    }
-
-
-
-    //TicketSourceEnum used by Lead
-    type TicketSourceEnum  string
-    
-    const (
-            
-            //PLATFORM_PANEL defines constant for the `platform_panel` 
-            PLATFORM_PANEL TicketSourceEnum = "platform_panel"
-            
-            
-            //SALES_CHANNEL defines constant for the `sales_channel` 
-            SALES_CHANNEL TicketSourceEnum = "sales_channel"
-            
-            
-       )
-
-    //IsValid return error if enum is invalid
-    func (ti TicketSourceEnum) IsValid() error {
-      switch ti {
-        case  PLATFORM_PANEL, SALES_CHANNEL : 
-        return nil
-      }
-      return errors.New("Invalid TicketSourceEnum type")
-    }
-
-
-
-    //TicketIntegrationDetails used by Lead
-    type TicketIntegrationDetails  string
-    
-    const (
-            
-            //DEFAULT defines constant for the `default` 
-            DEFAULT TicketIntegrationDetails = "default"
-            
-            
-            //FRESHDESK defines constant for the `freshdesk` 
-            FRESHDESK TicketIntegrationDetails = "freshdesk"
-            
-            
-            //KAPTURE defines constant for the `kapture` 
-            KAPTURE TicketIntegrationDetails = "kapture"
-            
-            
-       )
-
-    //IsValid return error if enum is invalid
-    func (ti TicketIntegrationDetails) IsValid() error {
-      switch ti {
-        case  DEFAULT, FRESHDESK, KAPTURE : 
-        return nil
-      }
-      return errors.New("Invalid TicketIntegrationDetails type")
-    }
-
-
-
-
 
 
     //PageType used by Content
@@ -275,14 +100,6 @@ import (
             
             //PRODUCT defines constant for the `product` 
             PRODUCT PageType = "product"
-            
-            
-            //PRODUCT-REVIEWS defines constant for the `product-reviews` 
-            PRODUCT-REVIEWS PageType = "product-reviews"
-            
-            
-            //ADD-PRODUCT-REVIEW defines constant for the `add-product-review` 
-            ADD-PRODUCT-REVIEW PageType = "add-product-review"
             
             
             //PRODUCT-REQUEST defines constant for the `product-request` 
@@ -381,17 +198,170 @@ import (
             RETURN-POLICY PageType = "return-policy"
             
             
+            //ORDER-STATUS defines constant for the `order-status` 
+            ORDER-STATUS PageType = "order-status"
+            
+            
        )
 
     //IsValid return error if enum is invalid
     func (pa PageType) IsValid() error {
       switch pa {
-        case  ABOUT-US, ADDRESSES, BLOG, BRANDS, CARDS, CART, CATEGORIES, BRAND, CATEGORY, COLLECTION, COLLECTIONS, CONTACT-US, EXTERNAL, FAQ, FRESHCHAT, HOME, NOTIFICATION-SETTINGS, ORDERS, PAGE, POLICY, PRODUCT, PRODUCT-REVIEWS, ADD-PRODUCT-REVIEW, PRODUCT-REQUEST, PRODUCTS, PROFILE, PROFILE-ORDER-SHIPMENT, PROFILE-BASIC, PROFILE-COMPANY, PROFILE-EMAILS, PROFILE-PHONES, RATE-US, REFER-EARN, SETTINGS, SHARED-CART, TNC, TRACK-ORDER, WISHLIST, SECTIONS, FORM, CART-DELIVERY, CART-PAYMENT, CART-REVIEW, LOGIN, REGISTER, SHIPPING-POLICY, RETURN-POLICY : 
+        case  ABOUT-US, ADDRESSES, BLOG, BRANDS, CARDS, CART, CATEGORIES, BRAND, CATEGORY, COLLECTION, COLLECTIONS, CONTACT-US, EXTERNAL, FAQ, FRESHCHAT, HOME, NOTIFICATION-SETTINGS, ORDERS, PAGE, POLICY, PRODUCT, PRODUCT-REQUEST, PRODUCTS, PROFILE, PROFILE-ORDER-SHIPMENT, PROFILE-BASIC, PROFILE-COMPANY, PROFILE-EMAILS, PROFILE-PHONES, RATE-US, REFER-EARN, SETTINGS, SHARED-CART, TNC, TRACK-ORDER, WISHLIST, SECTIONS, FORM, CART-DELIVERY, CART-PAYMENT, CART-REVIEW, LOGIN, REGISTER, SHIPPING-POLICY, RETURN-POLICY, ORDER-STATUS : 
         return nil
       }
       return errors.New("Invalid PageType type")
     }
 
+
+
+
+
+    //PriorityEnum used by Lead
+    type PriorityEnum  string
+    
+    const (
+            
+            //LOW defines constant for the `low` 
+            LOW PriorityEnum = "low"
+            
+            
+            //MEDIUM defines constant for the `medium` 
+            MEDIUM PriorityEnum = "medium"
+            
+            
+            //HIGH defines constant for the `high` 
+            HIGH PriorityEnum = "high"
+            
+            
+            //URGENT defines constant for the `urgent` 
+            URGENT PriorityEnum = "urgent"
+            
+            
+       )
+
+    //IsValid return error if enum is invalid
+    func (pr PriorityEnum) IsValid() error {
+      switch pr {
+        case  LOW, MEDIUM, HIGH, URGENT : 
+        return nil
+      }
+      return errors.New("Invalid PriorityEnum type")
+    }
+
+
+
+    //HistoryTypeEnum used by Lead
+    type HistoryTypeEnum  string
+    
+    const (
+            
+            //RATING defines constant for the `rating` 
+            RATING HistoryTypeEnum = "rating"
+            
+            
+            //LOG defines constant for the `log` 
+            LOG HistoryTypeEnum = "log"
+            
+            
+            //COMMENT defines constant for the `comment` 
+            COMMENT HistoryTypeEnum = "comment"
+            
+            
+            //THREAD defines constant for the `thread` 
+            THREAD HistoryTypeEnum = "thread"
+            
+            
+       )
+
+    //IsValid return error if enum is invalid
+    func (hi HistoryTypeEnum) IsValid() error {
+      switch hi {
+        case  RATING, LOG, COMMENT, THREAD : 
+        return nil
+      }
+      return errors.New("Invalid HistoryTypeEnum type")
+    }
+
+
+
+    //TicketAssetTypeEnum used by Lead
+    type TicketAssetTypeEnum  string
+    
+    const (
+            
+            //IMAGE defines constant for the `image` 
+            IMAGE TicketAssetTypeEnum = "image"
+            
+            
+            //VIDEO defines constant for the `video` 
+            VIDEO TicketAssetTypeEnum = "video"
+            
+            
+            //FILE defines constant for the `file` 
+            FILE TicketAssetTypeEnum = "file"
+            
+            
+            //YOUTUBE defines constant for the `youtube` 
+            YOUTUBE TicketAssetTypeEnum = "youtube"
+            
+            
+            //PRODUCT defines constant for the `product` 
+            PRODUCT TicketAssetTypeEnum = "product"
+            
+            
+            //COLLECTION defines constant for the `collection` 
+            COLLECTION TicketAssetTypeEnum = "collection"
+            
+            
+            //BRAND defines constant for the `brand` 
+            BRAND TicketAssetTypeEnum = "brand"
+            
+            
+            //SHIPMENT defines constant for the `shipment` 
+            SHIPMENT TicketAssetTypeEnum = "shipment"
+            
+            
+            //ORDER defines constant for the `order` 
+            ORDER TicketAssetTypeEnum = "order"
+            
+            
+       )
+
+    //IsValid return error if enum is invalid
+    func (ti TicketAssetTypeEnum) IsValid() error {
+      switch ti {
+        case  IMAGE, VIDEO, FILE, YOUTUBE, PRODUCT, COLLECTION, BRAND, SHIPMENT, ORDER : 
+        return nil
+      }
+      return errors.New("Invalid TicketAssetTypeEnum type")
+    }
+
+
+
+    //TicketSourceEnum used by Lead
+    type TicketSourceEnum  string
+    
+    const (
+            
+            //PLATFORM_PANEL defines constant for the `platform_panel` 
+            PLATFORM_PANEL TicketSourceEnum = "platform_panel"
+            
+            
+            //SALES_CHANNEL defines constant for the `sales_channel` 
+            SALES_CHANNEL TicketSourceEnum = "sales_channel"
+            
+            
+       )
+
+    //IsValid return error if enum is invalid
+    func (ti TicketSourceEnum) IsValid() error {
+      switch ti {
+        case  PLATFORM_PANEL, SALES_CHANNEL : 
+        return nil
+      }
+      return errors.New("Invalid TicketSourceEnum type")
+    }
 
 
 
