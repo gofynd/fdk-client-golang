@@ -1122,6 +1122,7 @@ package platform
             Identifiers Identifier  `json:"identifiers"`
             Validity Validity  `json:"validity"`
             RuleDefinition RuleDefinition  `json:"rule_definition"`
+            ID string  `json:"_id"`
          
     }
     
@@ -1143,7 +1144,7 @@ package platform
     type CouponsResponse struct {
 
         
-            Items CouponAdd  `json:"items"`
+            Items []CouponAdd  `json:"items"`
             Page Page  `json:"page"`
          
     }
@@ -17069,6 +17070,7 @@ package platform
             CustomerNote string  `json:"customer_note"`
             TotalBags float64  `json:"total_bags"`
             ShipmentCreatedAt string  `json:"shipment_created_at"`
+            ModeOfPayment string  `json:"mode_of_payment"`
          
     }
     
@@ -17307,6 +17309,7 @@ package platform
             ForwardAffiliateOrderID string  `json:"forward_affiliate_order_id"`
             ReturnAffiliateOrderID string  `json:"return_affiliate_order_id"`
             BagWeight map[string]interface{}  `json:"bag_weight"`
+            RefundTo string  `json:"refund_to"`
          
     }
     
@@ -17567,6 +17570,7 @@ package platform
             CurrentStatus CurrentStatus  `json:"current_status"`
             BagID float64  `json:"bag_id"`
             EntityType string  `json:"entity_type"`
+            IsParent bool  `json:"is_parent"`
          
     }
     
@@ -17671,6 +17675,8 @@ package platform
             ShipmentUpdateTime float64  `json:"shipment_update_time"`
             RtoAddress PlatformDeliveryAddress  `json:"rto_address"`
             CreditNoteID string  `json:"credit_note_id"`
+            IsSelfShip bool  `json:"is_self_ship"`
+            ModeOfPayment string  `json:"mode_of_payment"`
          
     }
     
@@ -17754,6 +17760,7 @@ package platform
             CustomerNote string  `json:"customer_note"`
             Staff map[string]interface{}  `json:"staff"`
             CartID float64  `json:"cart_id"`
+            CartObjectID string  `json:"cart_object_id"`
          
     }
     

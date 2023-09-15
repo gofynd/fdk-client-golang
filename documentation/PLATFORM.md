@@ -3450,49 +3450,51 @@ Coupon list for sent filter and page size
 ```json
 {
   "value": {
-    "items": {
-      "_id": "5e1d9bec6d6b7e000146c840",
-      "rule": [],
-      "identifiers": {},
-      "validity": {
-        "priority": 0
-      },
-      "type_slug": "bundle_quantity_absolute",
-      "display_meta": {
-        "title": "percent50 title"
-      },
-      "_schedule": {
-        "next_schedule": [
-          {
-            "start": "2020-01-14T10:45:03.600000+00:00",
-            "end": "2020-01-16T10:45:03+00:00"
-          }
-        ],
-        "duration": null,
-        "start": "2020-01-14T10:45:03.600000+00:00",
-        "end": "2020-01-16T10:45:03+00:00",
-        "cron": ""
-      },
-      "state": {
-        "is_public": true,
-        "is_display": true,
-        "is_archived": false
-      },
-      "ownership": {
-        "payable_category": "seller",
-        "payable_by": ""
-      },
-      "code": "percent50",
-      "rule_definition": {
-        "type": "percentage",
-        "scope": [
-          "category_id"
-        ],
-        "applicable_on": "quantity",
-        "calculate_on": "esp",
-        "value_type": "percentage"
+    "items": [
+      {
+        "_id": "5e1d9bec6d6b7e000146c840",
+        "rule": [],
+        "identifiers": {},
+        "validity": {
+          "priority": 0
+        },
+        "type_slug": "bundle_quantity_absolute",
+        "display_meta": {
+          "title": "percent50 title"
+        },
+        "_schedule": {
+          "next_schedule": [
+            {
+              "start": "2020-01-14T10:45:03.600000+00:00",
+              "end": "2020-01-16T10:45:03+00:00"
+            }
+          ],
+          "duration": null,
+          "start": "2020-01-14T10:45:03.600000+00:00",
+          "end": "2020-01-16T10:45:03+00:00",
+          "cron": ""
+        },
+        "state": {
+          "is_public": true,
+          "is_display": true,
+          "is_archived": false
+        },
+        "ownership": {
+          "payable_category": "seller",
+          "payable_by": ""
+        },
+        "code": "percent50",
+        "rule_definition": {
+          "type": "percentage",
+          "scope": [
+            "category_id"
+          ],
+          "applicable_on": "quantity",
+          "calculate_on": "esp",
+          "value_type": "percentage"
+        }
       }
-    },
+    ],
     "page": {
       "type": "",
       "has_next": true,
@@ -40430,7 +40432,9 @@ data, err := Order.GetShipments(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `Lane`, `BagStatus`, `StatusOverrideLane`, `TimeToDispatch`, `SearchType`, `SearchValue`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PageNo`, `PageSize`, `FetchActiveShipment`, `ExcludeLockedShipments`, `PaymentMethods`, `ChannelShipmentID`, `ChannelOrderID`, `CustomMeta`, `OrderingChannel`, `CompanyAffiliateTag`, `MyOrders`, `PlatformUserID`, `SortType`, `ShowCrossCompanyData`, `Tags`, `CustomerID`
+
+
+| xQuery | struct | Includes properties such as `Lane`, `BagStatus`, `StatusOverrideLane`, `TimeToDispatch`, `SearchType`, `SearchValue`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PageNo`, `PageSize`, `FetchActiveShipment`, `ExcludeLockedShipments`, `PaymentMethods`, `ChannelShipmentID`, `ChannelOrderID`, `CustomMeta`, `OrderingChannel`, `CompanyAffiliateTag`, `MyOrders`, `PlatformUserID`, `SortType`, `ShowCrossCompanyData`, `Tags`, `CustomerID`, `OrderType`
 
 
 Get Shipments Listing for the company id
@@ -40582,7 +40586,9 @@ data, err := Order.GetLaneConfig(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `SuperLane`, `GroupEntity`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PaymentMode`, `BagStatus`, `SearchType`, `SearchValue`, `Tags`, `TimeToDispatch`, `PaymentMethods`, `MyOrders`, `ShowCrossCompanyData`
+
+
+| xQuery | struct | Includes properties such as `SuperLane`, `GroupEntity`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PaymentMode`, `BagStatus`, `SearchType`, `SearchValue`, `Tags`, `TimeToDispatch`, `PaymentMethods`, `MyOrders`, `ShowCrossCompanyData`, `OrderType`
 
 
 Get lane config for the order
@@ -40658,7 +40664,9 @@ data, err := Order.GetOrders(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `BagStatus`, `TimeToDispatch`, `PaymentMethods`, `Tags`, `SearchValue`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PageNo`, `PageSize`, `IsPrioritySort`, `CustomMeta`, `MyOrders`, `ShowCrossCompanyData`, `CustomerID`
+
+
+| xQuery | struct | Includes properties such as `Lane`, `SearchType`, `BagStatus`, `TimeToDispatch`, `PaymentMethods`, `Tags`, `SearchValue`, `FromDate`, `ToDate`, `DpIds`, `Stores`, `SalesChannels`, `PageNo`, `PageSize`, `IsPrioritySort`, `CustomMeta`, `MyOrders`, `ShowCrossCompanyData`, `CustomerID`, `OrderType`
 
 
 Get Orders Listing
