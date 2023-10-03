@@ -875,6 +875,7 @@ package application
             PaymentParams map[string]interface{}  `json:"payment_params"`
             BillingAddressID string  `json:"billing_address_id"`
             Meta map[string]interface{}  `json:"meta"`
+            PaymentExtraIdentifiers map[string]interface{}  `json:"payment_extra_identifiers"`
          
     }
     
@@ -1165,6 +1166,7 @@ package application
             Payment string  `json:"payment"`
             Amount float64  `json:"amount"`
             Name string  `json:"name"`
+            PaymentExtraIdentifiers map[string]interface{}  `json:"payment_extra_identifiers"`
          
     }
     
@@ -8843,8 +8845,7 @@ package application
 
         
             Name string  `json:"name"`
-            GlobalConfig GlobalConfig  `json:"global_config"`
-            Custom CustomConfig  `json:"custom"`
+            GlobalConfig map[string]interface{}  `json:"global_config"`
             Page []string  `json:"page"`
          
     }
@@ -8899,17 +8900,7 @@ package application
 
         
             Statics StaticConfig  `json:"statics"`
-            Auth AuthConfig  `json:"auth"`
-            Palette PaletteConfig  `json:"palette"`
-         
-    }
-    
-    // PaletteConfig ...
-    type PaletteConfig struct {
-
-        
-            GeneralSetting GeneralSetting  `json:"general_setting"`
-            AdvanceSetting AdvanceSetting  `json:"advance_setting"`
+            Custom CustomConfig  `json:"custom"`
          
     }
     
@@ -9044,15 +9035,7 @@ package application
         
             Colors Colors  `json:"colors"`
             Auth AuthConfig  `json:"auth"`
-         
-    }
-    
-    // AuthConfig ...
-    type AuthConfig struct {
-
-        
-            ShowHeaderAuth bool  `json:"show_header_auth"`
-            ShowFooterAuth bool  `json:"show_footer_auth"`
+            Palette PaletteConfig  `json:"palette"`
          
     }
     
@@ -9066,6 +9049,24 @@ package application
             LinkColor string  `json:"link_color"`
             ButtonSecondaryColor string  `json:"button_secondary_color"`
             BgColor string  `json:"bg_color"`
+         
+    }
+    
+    // AuthConfig ...
+    type AuthConfig struct {
+
+        
+            ShowHeaderAuth bool  `json:"show_header_auth"`
+            ShowFooterAuth bool  `json:"show_footer_auth"`
+         
+    }
+    
+    // PaletteConfig ...
+    type PaletteConfig struct {
+
+        
+            GeneralSetting GeneralSetting  `json:"general_setting"`
+            AdvanceSetting AdvanceSetting  `json:"advance_setting"`
          
     }
     
