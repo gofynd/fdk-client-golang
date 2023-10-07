@@ -308,6 +308,7 @@
     * [sendResetPasswordEmail](#sendresetpasswordemail)
     * [sendResetPasswordMobile](#sendresetpasswordmobile)
     * [forgotPassword](#forgotpassword)
+    * [resetForgotPassword](#resetforgotpassword)
     * [sendResetToken](#sendresettoken)
     * [loginWithToken](#loginwithtoken)
     * [registerWithForm](#registerwithform)
@@ -318,9 +319,13 @@
     * [deleteUser](#deleteuser)
     * [logout](#logout)
     * [sendOTPOnMobile](#sendotponmobile)
+    * [sendForgotOTPOnMobile](#sendforgototponmobile)
     * [verifyMobileOTP](#verifymobileotp)
+    * [verifyMobileForgotOTP](#verifymobileforgototp)
     * [sendOTPOnEmail](#sendotponemail)
+    * [sendForgotOTPOnEmail](#sendforgototponemail)
     * [verifyEmailOTP](#verifyemailotp)
+    * [verifyEmailForgotOTP](#verifyemailforgototp)
     * [getLoggedInUser](#getloggedinuser)
     * [getListOfActiveSessions](#getlistofactivesessions)
     * [getPlatformConfig](#getplatformconfig)
@@ -9443,10 +9448,42 @@ This operation will return the URL of the uploaded file.
 
 
 
-Success. Next, call the `completeUpload` API and pass the response payload of this API to finish the upload process.
+Success. Returns a response containing relaving and absolute_url of storage service
 
 
 Schema: `StartResponse`
+
+
+*Examples:*
+
+
+success
+```json
+{
+  "value": {
+    "file_name": "shirt.png",
+    "file_path": "/path/qwertyuiop-shirt.png",
+    "content_type": "image/png",
+    "method": "PUT",
+    "namespace": "products-item-images",
+    "operation": "putObject",
+    "tags": [
+      "clothing",
+      "shirt"
+    ],
+    "size": 9999,
+    "cdn": {
+      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
+      "absolute_url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
+      "relative_url": "products/pictures/free/original/qwertyuiop-shirt.png"
+    },
+    "upload": {
+      "expiry": 5000,
+      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png?AWSAccessKeyId=xxx&Content-Type=image%2Fpng&Expires=5000&Signature=xxx&x-amz-acl=public-read"
+    }
+  }
+}
+```
 
 
 
@@ -9506,6 +9543,45 @@ Success
 Schema: `CompleteResponse`
 
 
+*Examples:*
+
+
+success
+```json
+{
+  "value": {
+    "success": true,
+    "_id": "xxxxxxxxxxxxxxxxxxxxxx",
+    "file_name": "shirt.png",
+    "file_path": "/path/qwertyuiop-shirt.png",
+    "content_type": "image/png",
+    "namespace": "products-item-images",
+    "operation": "putObject",
+    "company_id": 2,
+    "tags": [
+      "clothing",
+      "shirt"
+    ],
+    "size": 9999,
+    "cdn": {
+      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
+      "absolute_url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png",
+      "relative_url": "products/pictures/free/original/qwertyuiop-shirt.png"
+    },
+    "upload": {
+      "expiry": 5000,
+      "url": "https://xxx.xxx.xxx/products/pictures/free/original/qwertyuiop-shirt.png?AWSAccessKeyId=xxx&Content-Type=image%2Fpng&Expires=5000&Signature=xxx&x-amz-acl=public-read"
+    },
+    "created_on": "2020-02-03T09:50:04.240Z",
+    "modified_on": "2020-02-03T09:50:04.240Z",
+    "created_by": {
+      "username": "app@fynd.com"
+    }
+  }
+}
+```
+
+
 
 
 
@@ -9540,6 +9616,25 @@ Success
 
 
 Schema: `SignUrlResponse`
+
+
+*Examples:*
+
+
+success
+```json
+{
+  "value": {
+    "urls": [
+      {
+        "url": "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/x0/documents/manifest/PDFs/test/s3EtYk5p9-new_fee.pdf",
+        "signed_url": "https://fynd-staging-assets-private.s3-accelerate.amazonaws.com/addsale/v2/falling-surf-7c8bb8/fyndnp/wrkr/x0/documents/manifest/PDFs/test/s3EtYk5p9-new_fee.pdf",
+        "expiry": 1800
+      }
+    ]
+  }
+}
+```
 
 
 
@@ -25065,6 +25160,55 @@ Success
 ---
 
 
+#### resetForgotPassword
+Reset forgot Password
+
+```golang
+
+ data, err :=  User.ResetForgotPassword(body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+| body |  ForgotPasswordRequestSchema | "Request body" 
+
+
+Use this API to reset a password using the code sent on email or SMS.
+
+*Success Response:*
+
+
+
+Success. Check the example shown below or refer `ResetForgotPasswordSuccess` for more details.
+
+
+Schema: `ResetForgotPasswordSuccess`
+
+
+*Examples:*
+
+
+reset forgot password success
+```json
+{
+  "value": {
+    "success": true
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
 #### sendResetToken
 Reset Password using token
 
@@ -25487,6 +25631,64 @@ Schema: `OtpSuccess`
 ---
 
 
+#### sendForgotOTPOnMobile
+Send Forgot OTP on mobile
+
+```golang
+
+ data, err :=  User.SendForgotOTPOnMobile(xQuery, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Platform`
+
+| body |  SendMobileForgotOtpRequestSchema | "Request body" 
+
+
+Use this API to send an Forgot OTP to a mobile number.
+
+*Success Response:*
+
+
+
+Success. Returns a JSON object as shown below. Refer `OtpSuccess` for more details.
+
+
+Schema: `OtpSuccess`
+
+
+*Examples:*
+
+
+send forgot otp on mobile success
+```json
+{
+  "value": {
+    "success": true,
+    "request_id": "01503005aeab87cbed93d40f46cc2749",
+    "message": "OTP sent",
+    "mobile": "8652523958",
+    "country_code": "91",
+    "resend_timer": 30,
+    "resend_token": "18fc3d60-66e5-11eb-9399-0312fbf2c2a6"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
 #### verifyMobileOTP
 Verify OTP on mobile
 
@@ -25585,6 +25787,59 @@ default
 ---
 
 
+#### verifyMobileForgotOTP
+Verify Forgot OTP on mobile
+
+```golang
+
+ data, err :=  User.VerifyMobileForgotOTP(xQuery, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Platform`
+
+| body |  VerifyMobileForgotOtpRequestSchema | "Request body" 
+
+
+Use this API to verify the Forgot OTP received on a mobile number.
+
+*Success Response:*
+
+
+
+Success. Returns a JSON object as shown below. Refer `VerifyForgotOtpSuccess` for more details.
+
+
+Schema: `VerifyForgotOtpSuccess`
+
+
+*Examples:*
+
+
+verify forgot otp on mobile success
+```json
+{
+  "value": {
+    "success": true,
+    "forgot_token": "d6c9df22-7e65-41be-9852-8207a8d2d54d"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
 #### sendOTPOnEmail
 Send OTP on email
 
@@ -25612,6 +25867,58 @@ Success. Returns a JSON object as shown below. Refer `EmailOtpSuccess` for more 
 
 
 Schema: `EmailOtpSuccess`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### sendForgotOTPOnEmail
+Send Forgot OTP on email
+
+```golang
+
+ data, err :=  User.SendForgotOTPOnEmail(xQuery, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Platform`
+
+| body |  SendEmailForgotOtpRequestSchema | "Request body" 
+
+
+Use this API to send an Forgot OTP to an email ID.
+
+*Success Response:*
+
+
+
+Success. Returns a JSON object as shown below. Refer `EmailOtpSuccess` for more details.
+
+
+Schema: `EmailOtpSuccess`
+
+
+*Examples:*
+
+
+send forgot otp on email success
+```json
+{
+  "value": {
+    "success": true
+  }
+}
+```
 
 
 
@@ -25707,6 +26014,59 @@ default
       "created_at": "2020-03-11T09:28:41.982Z",
       "updated_at": "2021-02-04T10:10:44.981Z"
     }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### verifyEmailForgotOTP
+Verify Forgot OTP on email
+
+```golang
+
+ data, err :=  User.VerifyEmailForgotOTP(xQuery, body);
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+
+| xQuery | struct | Includes properties such as `Platform`
+
+| body |  VerifyEmailForgotOtpRequestSchema | "Request body" 
+
+
+Use this API to verify the Forgot OTP received on an email ID.
+
+*Success Response:*
+
+
+
+Success. Returns a JSON object as shown below. Refer `VerifyForgotOtpSuccess` for more details.
+
+
+Schema: `VerifyForgotOtpSuccess`
+
+
+*Examples:*
+
+
+verify forgot otp on email success
+```json
+{
+  "value": {
+    "success": true,
+    "forgot_token": "d6c9df22-7e65-41be-9852-8207a8d2d54d"
   }
 }
 ```

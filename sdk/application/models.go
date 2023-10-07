@@ -1260,6 +1260,17 @@ package application
          
     }
     
+    // ProductDepartment ...
+    type ProductDepartment struct {
+
+        
+            UID float64  `json:"uid"`
+            Logo Media  `json:"logo"`
+            Slug string  `json:"slug"`
+            Name string  `json:"name"`
+         
+    }
+    
     // ProductCategoryMap ...
     type ProductCategoryMap struct {
 
@@ -1395,6 +1406,7 @@ package application
             Highlights []string  `json:"highlights"`
             Price ProductListingPrice  `json:"price"`
             Brand ProductBrand  `json:"brand"`
+            Department ProductDepartment  `json:"department"`
             TeaserTag string  `json:"teaser_tag"`
          
     }
@@ -4572,14 +4584,6 @@ package application
     
 
     
-    // FailedResponse ...
-    type FailedResponse struct {
-
-        
-            Message string  `json:"message"`
-         
-    }
-    
     // CDN ...
     type CDN struct {
 
@@ -4616,6 +4620,14 @@ package application
          
     }
     
+    // Params ...
+    type Params struct {
+
+        
+            Subpath string  `json:"subpath"`
+         
+    }
+    
     // StartRequest ...
     type StartRequest struct {
 
@@ -4624,7 +4636,15 @@ package application
             ContentType string  `json:"content_type"`
             Size float64  `json:"size"`
             Tags []string  `json:"tags"`
-            Params map[string]interface{}  `json:"params"`
+            Params Params  `json:"params"`
+         
+    }
+    
+    // CreatedBy ...
+    type CreatedBy struct {
+
+        
+            Username string  `json:"username"`
          
     }
     
@@ -4645,6 +4665,7 @@ package application
             Tags []string  `json:"tags"`
             CreatedOn string  `json:"created_on"`
             ModifiedOn string  `json:"modified_on"`
+            CreatedBy CreatedBy  `json:"created_by"`
          
     }
     
@@ -9429,6 +9450,16 @@ package application
          
     }
     
+    // SendEmailForgotOtpRequestSchema ...
+    type SendEmailForgotOtpRequestSchema struct {
+
+        
+            Email string  `json:"email"`
+            Action string  `json:"action"`
+            Token string  `json:"token"`
+         
+    }
+    
     // VerifyEmailOtpRequestSchema ...
     type VerifyEmailOtpRequestSchema struct {
 
@@ -9440,12 +9471,30 @@ package application
          
     }
     
+    // VerifyEmailForgotOtpRequestSchema ...
+    type VerifyEmailForgotOtpRequestSchema struct {
+
+        
+            Email string  `json:"email"`
+            Otp string  `json:"otp"`
+         
+    }
+    
     // VerifyOtpRequestSchema ...
     type VerifyOtpRequestSchema struct {
 
         
             RequestID string  `json:"request_id"`
             RegisterToken string  `json:"register_token"`
+            Otp string  `json:"otp"`
+         
+    }
+    
+    // VerifyMobileForgotOtpRequestSchema ...
+    type VerifyMobileForgotOtpRequestSchema struct {
+
+        
+            RequestID string  `json:"request_id"`
             Otp string  `json:"otp"`
          
     }
@@ -9461,6 +9510,18 @@ package application
             AndroidHash string  `json:"android_hash"`
             Force string  `json:"force"`
             CaptchaCode string  `json:"captcha_code"`
+         
+    }
+    
+    // SendMobileForgotOtpRequestSchema ...
+    type SendMobileForgotOtpRequestSchema struct {
+
+        
+            Mobile string  `json:"mobile"`
+            CountryCode string  `json:"country_code"`
+            Action string  `json:"action"`
+            Token string  `json:"token"`
+            AndroidHash string  `json:"android_hash"`
          
     }
     
@@ -9642,6 +9703,14 @@ package application
          
     }
     
+    // ResetForgotPasswordSuccess ...
+    type ResetForgotPasswordSuccess struct {
+
+        
+            Success bool  `json:"success"`
+         
+    }
+    
     // VerifyOtpSuccess ...
     type VerifyOtpSuccess struct {
 
@@ -9649,6 +9718,15 @@ package application
             User UserSchema  `json:"user"`
             UserExists bool  `json:"user_exists"`
             RegisterToken string  `json:"register_token"`
+         
+    }
+    
+    // VerifyForgotOtpSuccess ...
+    type VerifyForgotOtpSuccess struct {
+
+        
+            Success bool  `json:"success"`
+            ForgotToken string  `json:"forgot_token"`
          
     }
     
@@ -9790,6 +9868,18 @@ package application
 
         
             Message string  `json:"message"`
+         
+    }
+    
+    // APIError ...
+    type APIError struct {
+
+        
+            Code string  `json:"code"`
+            Message string  `json:"message"`
+            Info string  `json:"info"`
+            RequestID string  `json:"request_id"`
+            Meta map[string]interface{}  `json:"meta"`
          
     }
     
