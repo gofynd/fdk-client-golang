@@ -11098,13 +11098,13 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
 
     // CopyFiles Copy Files
-     func (fi *PlatformFileStorage)  CopyFiles(xQuery PlatformCopyFilesXQuery, body  CopyFiles) (BulkUploadSyncMode, error){
+     func (fi *PlatformFileStorage)  CopyFiles(xQuery PlatformCopyFilesXQuery, body  CopyFiles) (map[string]interface{}, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            copyFilesResponse BulkUploadSyncMode
+            copyFilesResponse map[string]interface{}
 	    )
 
         
@@ -11129,12 +11129,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         reqBodyJSON, err := json.Marshal(body)
         if err != nil {
              
-             return BulkUploadSyncMode{}, common.NewFDKError(err.Error())
+             return map[string]interface{}{}, common.NewFDKError(err.Error())
         }
         err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
         if err != nil {
                
-             return BulkUploadSyncMode{}, common.NewFDKError(err.Error())
+             return map[string]interface{}{}, common.NewFDKError(err.Error())
         }
         
         //API call
@@ -11147,12 +11147,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             reqBody)
         response, err = rawRequest.Execute()
         if err != nil {
-             return BulkUploadSyncMode{}, err
+             return map[string]interface{}{}, err
 	    }
         
         err = json.Unmarshal(response, &copyFilesResponse)
         if err != nil {
-             return BulkUploadSyncMode{}, common.NewFDKError(err.Error())
+             return map[string]interface{}{}, common.NewFDKError(err.Error())
         }
         return copyFilesResponse, nil
         
@@ -11177,13 +11177,13 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
 
     // Browse Browse Files
-     func (fi *PlatformFileStorage)  Browse(Namespace string, xQuery PlatformBrowseXQuery) (BrowseResponse, error){
+     func (fi *PlatformFileStorage)  Browse(Namespace string, xQuery PlatformBrowseXQuery) (map[string]interface{}, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            browseResponse BrowseResponse
+            browseResponse map[string]interface{}
 	    )
 
         
@@ -11213,12 +11213,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-             return BrowseResponse{}, err
+             return map[string]interface{}{}, err
 	    }
         
         err = json.Unmarshal(response, &browseResponse)
         if err != nil {
-             return BrowseResponse{}, common.NewFDKError(err.Error())
+             return map[string]interface{}{}, common.NewFDKError(err.Error())
         }
         return browseResponse, nil
         
@@ -11242,13 +11242,13 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
 
 
     // Proxy Proxy
-     func (fi *PlatformFileStorage)  Proxy(xQuery PlatformProxyXQuery) ([]byte, error){
+     func (fi *PlatformFileStorage)  Proxy(xQuery PlatformProxyXQuery) (string, error){
         
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            
+            proxyResponse string
 	    )
 
         
@@ -11274,15 +11274,21 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-             return []byte{}, err
+             return "", err
 	    }
         
-        return response, nil
+        err = json.Unmarshal(response, &proxyResponse)
+        if err != nil {
+             return "", common.NewFDKError(err.Error())
+        }
+        return proxyResponse, nil
         
     }
          
         
        
+    
+    
     
     
     
@@ -17208,7 +17214,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         SearchType string  `url:"search_type,omitempty"` 
         SearchValue string  `url:"search_value,omitempty"` 
         Tags string  `url:"tags,omitempty"` 
-        TimeToDispatch string  `url:"time_to_dispatch,omitempty"` 
+        TimeToDispatch float64  `url:"time_to_dispatch,omitempty"` 
         PaymentMethods string  `url:"payment_methods,omitempty"` 
         MyOrders bool  `url:"my_orders,omitempty"` 
         ShowCrossCompanyData bool  `url:"show_cross_company_data,omitempty"` 
@@ -17306,7 +17312,7 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         Lane string  `url:"lane,omitempty"` 
         SearchType string  `url:"search_type,omitempty"` 
         BagStatus string  `url:"bag_status,omitempty"` 
-        TimeToDispatch string  `url:"time_to_dispatch,omitempty"` 
+        TimeToDispatch float64  `url:"time_to_dispatch,omitempty"` 
         PaymentMethods string  `url:"payment_methods,omitempty"` 
         Tags string  `url:"tags,omitempty"` 
         SearchValue string  `url:"search_value,omitempty"` 
@@ -18826,6 +18832,12 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
          
         
        
+    
+    
+    
+    
+    
+    
     
     
     

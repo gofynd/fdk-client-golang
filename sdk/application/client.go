@@ -7037,7 +7037,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fi.config,
             "post",
-            fmt.Sprintf("/service/application/assets/v1.0/namespaces/%s/upload/start/",Namespace),
+            fmt.Sprintf("/service/application/assets/v1.0/namespaces/%s/upload/start",Namespace),
             nil,
             nil,
             reqBody)
@@ -7117,7 +7117,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fi.config,
             "post",
-            fmt.Sprintf("/service/application/assets/v1.0/namespaces/%s/upload/complete/",Namespace),
+            fmt.Sprintf("/service/application/assets/v1.0/namespaces/%s/upload/complete",Namespace),
             nil,
             nil,
             reqBody)
@@ -7179,7 +7179,7 @@ func NewAppClient(config *AppConfig) *Client {
         rawRequest = NewRequest(
             fi.config,
             "post",
-            "/service/application/assets/v1.0/sign-urls/",
+            "/service/application/assets/v1.0/sign-urls",
             nil,
             nil,
             reqBody)
@@ -14867,6 +14867,68 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    // ResetForgotPassword Reset forgot Password
+    func (us *User)  ResetForgotPassword(body  ForgotPasswordRequestSchema) (ResetForgotPasswordSuccess, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             resetForgotPasswordResponse ResetForgotPasswordSuccess
+	    )
+
+        
+            
+        
+            
+        
+
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return ResetForgotPasswordSuccess{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return ResetForgotPasswordSuccess{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "post",
+            "/service/application/user/authentication/v1.0/login/password/forgot",
+            nil,
+            nil,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return ResetForgotPasswordSuccess{}, err
+	    }
+        
+        err = json.Unmarshal(response, &resetForgotPasswordResponse)
+        if err != nil {
+            return ResetForgotPasswordSuccess{}, common.NewFDKError(err.Error())
+        }
+         return resetForgotPasswordResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     // SendResetToken Reset Password using token
     func (us *User)  SendResetToken(body  CodeRequestBodySchema) (ResetPasswordSuccess, error){
         var (
@@ -15489,6 +15551,83 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //UserSendForgotOTPOnMobileXQuery holds query params
+    type UserSendForgotOTPOnMobileXQuery struct { 
+        Platform string  `url:"platform,omitempty"`  
+    }
+    
+    // SendForgotOTPOnMobile Send Forgot OTP on mobile
+    func (us *User)  SendForgotOTPOnMobile(xQuery UserSendForgotOTPOnMobileXQuery, body  SendMobileForgotOtpRequestSchema) (OtpSuccess, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             sendForgotOTPOnMobileResponse OtpSuccess
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return OtpSuccess{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return OtpSuccess{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "post",
+            "/service/application/user/authentication/v1.0/otp/forgot/mobile/send",
+            nil,
+            xQuery,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return OtpSuccess{}, err
+	    }
+        
+        err = json.Unmarshal(response, &sendForgotOTPOnMobileResponse)
+        if err != nil {
+            return OtpSuccess{}, common.NewFDKError(err.Error())
+        }
+         return sendForgotOTPOnMobileResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     //UserVerifyMobileOTPXQuery holds query params
     type UserVerifyMobileOTPXQuery struct { 
         Platform string  `url:"platform,omitempty"`  
@@ -15553,6 +15692,77 @@ func NewAppClient(config *AppConfig) *Client {
             return VerifyOtpSuccess{}, common.NewFDKError(err.Error())
         }
          return verifyMobileOTPResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //UserVerifyMobileForgotOTPXQuery holds query params
+    type UserVerifyMobileForgotOTPXQuery struct { 
+        Platform string  `url:"platform,omitempty"`  
+    }
+    
+    // VerifyMobileForgotOTP Verify Forgot OTP on mobile
+    func (us *User)  VerifyMobileForgotOTP(xQuery UserVerifyMobileForgotOTPXQuery, body  VerifyMobileForgotOtpRequestSchema) (VerifyForgotOtpSuccess, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             verifyMobileForgotOTPResponse VerifyForgotOtpSuccess
+	    )
+
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return VerifyForgotOtpSuccess{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return VerifyForgotOtpSuccess{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "post",
+            "/service/application/user/authentication/v1.0/otp/forgot/mobile/verify",
+            nil,
+            xQuery,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return VerifyForgotOtpSuccess{}, err
+	    }
+        
+        err = json.Unmarshal(response, &verifyMobileForgotOTPResponse)
+        if err != nil {
+            return VerifyForgotOtpSuccess{}, common.NewFDKError(err.Error())
+        }
+         return verifyMobileForgotOTPResponse, nil
         
     }
           
@@ -15639,6 +15849,79 @@ func NewAppClient(config *AppConfig) *Client {
   
     
     
+    //UserSendForgotOTPOnEmailXQuery holds query params
+    type UserSendForgotOTPOnEmailXQuery struct { 
+        Platform string  `url:"platform,omitempty"`  
+    }
+    
+    // SendForgotOTPOnEmail Send Forgot OTP on email
+    func (us *User)  SendForgotOTPOnEmail(xQuery UserSendForgotOTPOnEmailXQuery, body  SendEmailForgotOtpRequestSchema) (EmailOtpSuccess, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             sendForgotOTPOnEmailResponse EmailOtpSuccess
+	    )
+
+        
+            
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return EmailOtpSuccess{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return EmailOtpSuccess{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "post",
+            "/service/application/user/authentication/v1.0/otp/forgot/email/send",
+            nil,
+            xQuery,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return EmailOtpSuccess{}, err
+	    }
+        
+        err = json.Unmarshal(response, &sendForgotOTPOnEmailResponse)
+        if err != nil {
+            return EmailOtpSuccess{}, common.NewFDKError(err.Error())
+        }
+         return sendForgotOTPOnEmailResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
     //UserVerifyEmailOTPXQuery holds query params
     type UserVerifyEmailOTPXQuery struct { 
         Platform string  `url:"platform,omitempty"`  
@@ -15705,6 +15988,77 @@ func NewAppClient(config *AppConfig) *Client {
             return VerifyOtpSuccess{}, common.NewFDKError(err.Error())
         }
          return verifyEmailOTPResponse, nil
+        
+    }
+          
+    
+    
+    
+  
+    
+    
+    //UserVerifyEmailForgotOTPXQuery holds query params
+    type UserVerifyEmailForgotOTPXQuery struct { 
+        Platform string  `url:"platform,omitempty"`  
+    }
+    
+    // VerifyEmailForgotOTP Verify Forgot OTP on email
+    func (us *User)  VerifyEmailForgotOTP(xQuery UserVerifyEmailForgotOTPXQuery, body  VerifyEmailForgotOtpRequestSchema) (VerifyForgotOtpSuccess, error){
+        var (
+            rawRequest  *RawRequest
+            response    []byte
+            err         error
+             verifyEmailForgotOTPResponse VerifyForgotOtpSuccess
+	    )
+
+        
+            
+        
+            
+        
+
+        
+            
+                
+            
+        
+
+        
+    
+         
+        
+        
+        //Parse req body to map
+        var reqBody map[string]interface{}
+        reqBodyJSON, err := json.Marshal(body)
+        if err != nil {
+          
+             return VerifyForgotOtpSuccess{}, common.NewFDKError(err.Error())
+        }
+        err = json.Unmarshal([]byte(reqBodyJSON), &reqBody)
+        if err != nil {
+             
+             return VerifyForgotOtpSuccess{}, common.NewFDKError(err.Error())
+        }
+        
+        //API call
+        rawRequest = NewRequest(
+            us.config,
+            "post",
+            "/service/application/user/authentication/v1.0/otp/forgot/email/verify",
+            nil,
+            xQuery,
+            reqBody)
+        response, err = rawRequest.Execute()
+        if err != nil {
+            return VerifyForgotOtpSuccess{}, err
+	    }
+        
+        err = json.Unmarshal(response, &verifyEmailForgotOTPResponse)
+        if err != nil {
+            return VerifyForgotOtpSuccess{}, common.NewFDKError(err.Error())
+        }
+         return verifyEmailForgotOTPResponse, nil
         
     }
           

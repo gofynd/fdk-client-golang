@@ -12570,6 +12570,14 @@ package platform
          
     }
     
+    // Params used by FileStorage
+    type Params struct {
+
+        
+            Subpath string  `json:"subpath"`
+         
+    }
+    
     // StartRequest used by FileStorage
     type StartRequest struct {
 
@@ -12578,7 +12586,15 @@ package platform
             ContentType string  `json:"content_type"`
             Size float64  `json:"size"`
             Tags []string  `json:"tags"`
-            Params map[string]interface{}  `json:"params"`
+            Params Params  `json:"params"`
+         
+    }
+    
+    // CreatedBy used by FileStorage
+    type CreatedBy struct {
+
+        
+            Username string  `json:"username"`
          
     }
     
@@ -12592,6 +12608,7 @@ package platform
             ContentType string  `json:"content_type"`
             Namespace string  `json:"namespace"`
             Operation string  `json:"operation"`
+            CompanyID float64  `json:"company_id"`
             Size float64  `json:"size"`
             Upload Upload  `json:"upload"`
             Cdn CDN  `json:"cdn"`
@@ -12599,6 +12616,7 @@ package platform
             Tags []string  `json:"tags"`
             CreatedOn string  `json:"created_on"`
             ModifiedOn string  `json:"modified_on"`
+            CreatedBy CreatedBy  `json:"created_by"`
          
     }
     
@@ -12646,45 +12664,18 @@ package platform
          
     }
     
-    // Page used by FileStorage
-    type Page struct {
+    // InvoiceTypesDataResponse used by FileStorage
+    type InvoiceTypesDataResponse struct {
 
         
-            ItemTotal float64  `json:"item_total"`
-            NextID string  `json:"next_id"`
-            HasPrevious bool  `json:"has_previous"`
-            HasNext bool  `json:"has_next"`
-            Current float64  `json:"current"`
-            Type string  `json:"type"`
-            Size float64  `json:"size"`
-         
-    }
-    
-    // DbRecord used by FileStorage
-    type DbRecord struct {
-
-        
-            Success bool  `json:"success"`
-            Tags []string  `json:"tags"`
+            Status bool  `json:"status"`
             ID string  `json:"_id"`
-            FileName string  `json:"file_name"`
-            Operation string  `json:"operation"`
-            Namespace string  `json:"namespace"`
-            ContentType string  `json:"content_type"`
-            FilePath string  `json:"file_path"`
-            Upload Upload  `json:"upload"`
-            Cdn CDN  `json:"cdn"`
-            CreatedOn string  `json:"created_on"`
-            ModifiedOn string  `json:"modified_on"`
-         
-    }
-    
-    // BrowseResponse used by FileStorage
-    type BrowseResponse struct {
-
-        
-            Items []DbRecord  `json:"items"`
-            Page Page  `json:"page"`
+            PdfTypeID float64  `json:"pdf_type_id"`
+            Name string  `json:"name"`
+            Format []string  `json:"format"`
+            V float64  `json:"__v"`
+            Visibility bool  `json:"visibility"`
+            CountryCode string  `json:"country_code"`
          
     }
     
@@ -12692,13 +12683,437 @@ package platform
     type InvoiceTypesResponse struct {
 
         
+            Data []InvoiceTypesDataResponse  `json:"data"`
+            Success bool  `json:"success"`
+         
+    }
+    
+    // Inr used by FileStorage
+    type Inr struct {
+
+        
+            Name string  `json:"name"`
+            Value float64  `json:"value"`
+            Symbol string  `json:"symbol"`
+            SubUnit string  `json:"sub_unit"`
+         
+    }
+    
+    // Usd used by FileStorage
+    type Usd struct {
+
+        
+            Name string  `json:"name"`
+            Value float64  `json:"value"`
+            Symbol string  `json:"symbol"`
+            SubUnit string  `json:"sub_unit"`
+         
+    }
+    
+    // Rates used by FileStorage
+    type Rates struct {
+
+        
+            Inr Inr  `json:"inr"`
+            Usd Usd  `json:"usd"`
+         
+    }
+    
+    // ConversionRate used by FileStorage
+    type ConversionRate struct {
+
+        
+            Base string  `json:"base"`
+            Rates Rates  `json:"rates"`
+            Timestamp float64  `json:"timestamp"`
+         
+    }
+    
+    // DeliveryPartnerDetail used by FileStorage
+    type DeliveryPartnerDetail struct {
+
+        
+            Name string  `json:"name"`
+            AwbNumberBarcode string  `json:"awb_number_barcode"`
+            AwbNumber string  `json:"awb_number"`
+            EwayBillNumber string  `json:"eway_bill_number"`
+         
+    }
+    
+    // Image used by FileStorage
+    type Image struct {
+
+        
+            SalesChannelLogo string  `json:"sales_channel_logo"`
+         
+    }
+    
+    // PaymentData used by FileStorage
+    type PaymentData struct {
+
+        
+            PaymentType string  `json:"payment_type"`
+            Amount float64  `json:"amount"`
+            Date string  `json:"date"`
+            TransactionID string  `json:"transaction_id"`
+         
+    }
+    
+    // InvoiceDetail used by FileStorage
+    type InvoiceDetail struct {
+
+        
+            InvoiceID string  `json:"invoice_id"`
+            InvoiceDate string  `json:"invoice_date"`
+            Irn string  `json:"irn"`
+            ExternalOrderID string  `json:"external_order_id"`
+            ShipmentID string  `json:"shipment_id"`
+            SignedQrcode string  `json:"signed_qrcode"`
+            UpiQrcode string  `json:"upi_qrcode"`
+         
+    }
+    
+    // CompanyDetail used by FileStorage
+    type CompanyDetail struct {
+
+        
+            Name string  `json:"name"`
+            Address string  `json:"address"`
+            City string  `json:"city"`
+            State string  `json:"state"`
+            Country string  `json:"country"`
+            ZipCode float64  `json:"zip_code"`
+            StateCode string  `json:"state_code"`
+            CountryCode string  `json:"country_code"`
+            Gstin string  `json:"gstin"`
+            Pan string  `json:"pan"`
+            PhoneNo string  `json:"phone_no"`
+            Cin string  `json:"cin"`
+            WebsiteURL string  `json:"website_url"`
+            Email string  `json:"email"`
+         
+    }
+    
+    // StoreDetail used by FileStorage
+    type StoreDetail struct {
+
+        
+            StoreName string  `json:"store_name"`
+            Address string  `json:"address"`
+            City string  `json:"city"`
+            State string  `json:"state"`
+            Country string  `json:"country"`
+            CountryCode string  `json:"country_code"`
+            ZipCode string  `json:"zip_code"`
+            StateCode string  `json:"state_code"`
+            Gstin string  `json:"gstin"`
+         
+    }
+    
+    // CustomerBillingDetail used by FileStorage
+    type CustomerBillingDetail struct {
+
+        
+            Name string  `json:"name"`
+            PhoneNo string  `json:"phone_no"`
+            Address string  `json:"address"`
+            City string  `json:"city"`
+            State string  `json:"state"`
+            Country string  `json:"country"`
+            CountryCode string  `json:"country_code"`
+            ZipCode string  `json:"zip_code"`
+            StateCode string  `json:"state_code"`
+            Gstin string  `json:"gstin"`
+         
+    }
+    
+    // CustomerShippingDetail used by FileStorage
+    type CustomerShippingDetail struct {
+
+        
+            Name string  `json:"name"`
+            PhoneNo string  `json:"phone_no"`
+            Address string  `json:"address"`
+            City string  `json:"city"`
+            State string  `json:"state"`
+            Country string  `json:"country"`
+            CountryCode string  `json:"country_code"`
+            ZipCode string  `json:"zip_code"`
+            StateCode string  `json:"state_code"`
+            Gstin string  `json:"gstin"`
+         
+    }
+    
+    // ReturnDetail used by FileStorage
+    type ReturnDetail struct {
+
+        
+            Address string  `json:"address"`
+            City string  `json:"city"`
+            State string  `json:"state"`
+            Country string  `json:"country"`
+            CountryCode string  `json:"country_code"`
+            ZipCode string  `json:"zip_code"`
+            StateCode string  `json:"state_code"`
+            Gstin string  `json:"gstin"`
+         
+    }
+    
+    // Brand used by FileStorage
+    type Brand struct {
+
+        
+            Logo string  `json:"logo"`
+            Name string  `json:"name"`
+         
+    }
+    
+    // Cgst used by FileStorage
+    type Cgst struct {
+
+        
+            Value float64  `json:"value"`
+            Percent float64  `json:"percent"`
+         
+    }
+    
+    // Sgst used by FileStorage
+    type Sgst struct {
+
+        
+            Value float64  `json:"value"`
+            Percent float64  `json:"percent"`
+         
+    }
+    
+    // Igst used by FileStorage
+    type Igst struct {
+
+        
+            Value float64  `json:"value"`
+            Percent float64  `json:"percent"`
+         
+    }
+    
+    // Tax used by FileStorage
+    type Tax struct {
+
+        
+            Cgst Cgst  `json:"cgst"`
+            Sgst Sgst  `json:"sgst"`
+            Igst Igst  `json:"igst"`
+         
+    }
+    
+    // ItemsProductTable used by FileStorage
+    type ItemsProductTable struct {
+
+        
+            Name string  `json:"name"`
+            SellerIdentifier string  `json:"seller_identifier"`
+            Total float64  `json:"total"`
+            Brand Brand  `json:"brand"`
+            HsnCode string  `json:"hsn_code"`
+            ItemCode string  `json:"item_code"`
+            TotalUnits float64  `json:"total_units"`
+            Size string  `json:"size"`
+            Mrp float64  `json:"mrp"`
+            Discount float64  `json:"discount"`
+            TaxableAmount float64  `json:"taxable_amount"`
+            TotalTaxableAmount float64  `json:"total_taxable_amount"`
+            Tax Tax  `json:"tax"`
+         
+    }
+    
+    // ProductTable used by FileStorage
+    type ProductTable struct {
+
+        
+            TotalItems float64  `json:"total_items"`
+            Products []ItemsProductTable  `json:"products"`
+            GrandTotal float64  `json:"grand_total"`
+            DeliveryCharges float64  `json:"delivery_charges"`
+            DeliveryChargeText string  `json:"delivery_charge_text"`
+            CodCharges float64  `json:"cod_charges"`
+            FyndDiscounts float64  `json:"fynd_discounts"`
+            TotalInWords string  `json:"total_in_words"`
+         
+    }
+    
+    // Taxes used by FileStorage
+    type Taxes struct {
+
+        
+            HsnCode string  `json:"hsn_code"`
+            Tax Tax  `json:"tax"`
+            TotalTaxValue float64  `json:"total_tax_value"`
+         
+    }
+    
+    // TaxTable used by FileStorage
+    type TaxTable struct {
+
+        
+            Taxes []Taxes  `json:"taxes"`
+            TotalTax float64  `json:"total_tax"`
+            TaxInWords string  `json:"tax_in_words"`
+         
+    }
+    
+    // RegisteredCompanyDetail used by FileStorage
+    type RegisteredCompanyDetail struct {
+
+        
+            Address string  `json:"address"`
+            City string  `json:"city"`
+            State string  `json:"state"`
+            Country string  `json:"country"`
+            CountryCode string  `json:"country_code"`
+            ZipCode float64  `json:"zip_code"`
+            StateCode string  `json:"state_code"`
+         
+    }
+    
+    // Kwargs used by FileStorage
+    type Kwargs struct {
+
+        
+            Value string  `json:"value"`
+         
+    }
+    
+    // ShipmentIdBarcodeGenerator used by FileStorage
+    type ShipmentIdBarcodeGenerator struct {
+
+        
+            Method string  `json:"method"`
+            Kwargs Kwargs  `json:"kwargs"`
+         
+    }
+    
+    // SignedQrcodeGenerator used by FileStorage
+    type SignedQrcodeGenerator struct {
+
+        
+            Method string  `json:"method"`
+            Kwargs Kwargs  `json:"kwargs"`
+         
+    }
+    
+    // KwargsUpiQrcode used by FileStorage
+    type KwargsUpiQrcode struct {
+
+        
+            QrData string  `json:"qr_data"`
+            QrURL string  `json:"qr_url"`
+         
+    }
+    
+    // UpiQrcodeGenerator used by FileStorage
+    type UpiQrcodeGenerator struct {
+
+        
+            Method string  `json:"method"`
+            Kwargs KwargsUpiQrcode  `json:"kwargs"`
+         
+    }
+    
+    // DigitalsignatureGenerator used by FileStorage
+    type DigitalsignatureGenerator struct {
+
+        
+            Method string  `json:"method"`
+            Kwargs Kwargs  `json:"kwargs"`
+         
+    }
+    
+    // KwargsAwbNumber used by FileStorage
+    type KwargsAwbNumber struct {
+
+        
+            Value []map[string]interface{}  `json:"value"`
+         
+    }
+    
+    // AwbNumberLabelBarcodeGenerator used by FileStorage
+    type AwbNumberLabelBarcodeGenerator struct {
+
+        
+            Method string  `json:"method"`
+            Kwargs KwargsAwbNumber  `json:"kwargs"`
+         
+    }
+    
+    // MetaProperty used by FileStorage
+    type MetaProperty struct {
+
+        
+            ShipmentIDBarcodeGenerator ShipmentIdBarcodeGenerator  `json:"shipment_id_barcode_generator"`
+            SignedQrcodeGenerator SignedQrcodeGenerator  `json:"signed_qrcode_generator"`
+            UpiQrcodeGenerator UpiQrcodeGenerator  `json:"upi_qrcode_generator"`
+            DigitalsignatureGenerator DigitalsignatureGenerator  `json:"digitalsignature_generator"`
+            AwbNumberLabelBarcodeGenerator AwbNumberLabelBarcodeGenerator  `json:"awb_number_label_barcode_generator"`
+         
+    }
+    
+    // Meta used by FileStorage
+    type Meta struct {
+
+        
+            Generator MetaProperty  `json:"generator"`
+         
+    }
+    
+    // DummyTemplateDataPayload used by FileStorage
+    type DummyTemplateDataPayload struct {
+
+        
+            IsInternational bool  `json:"is_international"`
+            AppDomainName string  `json:"app_domain_name"`
+            ConversionRate ConversionRate  `json:"conversion_rate"`
+            CurrencyCode string  `json:"currency_code"`
+            ShipmentID string  `json:"shipment_id"`
+            DeliveryPartnerDetail DeliveryPartnerDetail  `json:"delivery_partner_detail"`
+            Image Image  `json:"image"`
+            Payments []PaymentData  `json:"payments"`
+            InvoiceDetail InvoiceDetail  `json:"invoice_detail"`
+            CompanyDetail CompanyDetail  `json:"company_detail"`
+            StoreDetail StoreDetail  `json:"store_detail"`
+            CustomerBillingDetail CustomerBillingDetail  `json:"customer_billing_detail"`
+            CustomerShippingDetail CustomerShippingDetail  `json:"customer_shipping_detail"`
+            ReturnDetail ReturnDetail  `json:"return_detail"`
+            ProductTable ProductTable  `json:"product_table"`
+            TaxTable TaxTable  `json:"tax_table"`
+            DeclarationTexts []string  `json:"declaration_texts"`
+            RegisteredCompanyDetail RegisteredCompanyDetail  `json:"registered_company_detail"`
+            Disclaimer string  `json:"disclaimer"`
+            Meta Meta  `json:"meta"`
+            IsSelfShip bool  `json:"is_self_ship"`
+            Mode string  `json:"mode"`
+            IsSelfPickup bool  `json:"is_self_pickup"`
+            PlatformName string  `json:"platform_name"`
+            AmountToBeCollected float64  `json:"amount_to_be_collected"`
+            AmountPaid float64  `json:"amount_paid"`
+            Waybills []map[string]interface{}  `json:"waybills"`
+            TotalItems float64  `json:"total_items"`
+            BrandLogo string  `json:"brand_logo"`
+            ShipmentIDBarcode string  `json:"shipment_id_barcode"`
+            SignedQrcode string  `json:"signed_qrcode"`
+            UpiQrcode string  `json:"upi_qrcode"`
+            Digitalsignature string  `json:"digitalsignature"`
+            AwbNumberBarcode string  `json:"awb_number_barcode"`
+            UID string  `json:"uid"`
+         
+    }
+    
+    // DummyTemplateData used by FileStorage
+    type DummyTemplateData struct {
+
+        
             ID string  `json:"_id"`
             PdfTypeID float64  `json:"pdf_type_id"`
-            Name string  `json:"name"`
-            Format []string  `json:"format"`
+            Payload DummyTemplateDataPayload  `json:"payload"`
             V float64  `json:"__v"`
-            Visibility bool  `json:"visibility"`
-            Schema map[string]interface{}  `json:"schema"`
          
     }
     
@@ -12706,90 +13121,47 @@ package platform
     type DummyTemplateDataItems struct {
 
         
-            ID string  `json:"_id"`
-            PdfTypeID float64  `json:"pdf_type_id"`
-            Payload map[string]interface{}  `json:"payload"`
-            V float64  `json:"__v"`
-         
-    }
-    
-    // Status used by FileStorage
-    type Status struct {
-
-        
-            Total float64  `json:"total"`
-            Failed float64  `json:"failed"`
-            Succeeded float64  `json:"succeeded"`
-            Result string  `json:"result"`
-         
-    }
-    
-    // FileSrc used by FileStorage
-    type FileSrc struct {
-
-        
-            Method string  `json:"method"`
-            URL string  `json:"url"`
-            Namespace string  `json:"namespace"`
-         
-    }
-    
-    // File used by FileStorage
-    type File struct {
-
-        
-            Src FileSrc  `json:"src"`
-         
-    }
-    
-    // FilesSuccess used by FileStorage
-    type FilesSuccess struct {
-
-        
+            Data []DummyTemplateData  `json:"data"`
             Success bool  `json:"success"`
-            File File  `json:"file"`
          
     }
     
-    // BulkUploadSyncMode used by FileStorage
-    type BulkUploadSyncMode struct {
-
-        
-            Status Status  `json:"status"`
-            Files []FilesSuccess  `json:"files"`
-         
-    }
-    
-    // BulkUploadFailResponse used by FileStorage
-    type BulkUploadFailResponse struct {
-
-        
-            Status Status  `json:"status"`
-         
-    }
-    
-    // pdfRender used by FileStorage
-    type pdfRender struct {
-
-        
-            Format string  `json:"format"`
-            Payload map[string]interface{}  `json:"payload"`
-            Template string  `json:"template"`
-         
-    }
-    
-    // pdfConfig used by FileStorage
-    type pdfConfig struct {
+    // PdfConfig used by FileStorage
+    type PdfConfig struct {
 
         
             Format string  `json:"format"`
             Template string  `json:"template"`
             PdfTypeID float64  `json:"pdf_type_id"`
+         
+    }
+    
+    // PdfConfigSuccessData used by FileStorage
+    type PdfConfigSuccessData struct {
+
+        
+            ID string  `json:"_id"`
+            CompanyID float64  `json:"company_id"`
+            ApplicationID string  `json:"application_id"`
+            PdfTypeID float64  `json:"pdf_type_id"`
+            Format string  `json:"format"`
+            Template string  `json:"template"`
+            V float64  `json:"__v"`
+            CountryCode string  `json:"country_code"`
          
     }
     
     // PdfConfigSuccess used by FileStorage
     type PdfConfigSuccess struct {
+
+        
+            Data []PdfConfigSuccessData  `json:"data"`
+            Success bool  `json:"success"`
+         
+    }
+    
+    // PdfConfigSaveSuccessData used by FileStorage
+    type PdfConfigSaveSuccessData struct {
 
         
             ID string  `json:"_id"`
@@ -12806,13 +13178,8 @@ package platform
     type PdfConfigSaveSuccess struct {
 
         
-            ID string  `json:"_id"`
-            CompanyID float64  `json:"company_id"`
-            ApplicationID string  `json:"application_id"`
-            PdfTypeID float64  `json:"pdf_type_id"`
-            Format string  `json:"format"`
-            Template string  `json:"template"`
-            V float64  `json:"__v"`
+            Data PdfConfigSaveSuccessData  `json:"data"`
+            Success bool  `json:"success"`
          
     }
     
@@ -12820,11 +13187,122 @@ package platform
     type PdfDefaultTemplateSuccess struct {
 
         
+            Data []Document  `json:"data"`
+            Success bool  `json:"success"`
+         
+    }
+    
+    // Document used by FileStorage
+    type Document struct {
+
+        
             ID string  `json:"_id"`
             PdfTypeID float64  `json:"pdf_type_id"`
             Format string  `json:"format"`
             Template string  `json:"template"`
+            CountryCode string  `json:"country_code"`
             V float64  `json:"__v"`
+         
+    }
+    
+    // PaymentReceiptRequestBody used by FileStorage
+    type PaymentReceiptRequestBody struct {
+
+        
+            Payload PaymentReceiptPayload  `json:"payload"`
+            Meta PaymentReceiptMeta  `json:"meta"`
+         
+    }
+    
+    // PaymentReceiptOrderDetails used by FileStorage
+    type PaymentReceiptOrderDetails struct {
+
+        
+            JiomartOrderID string  `json:"jiomart_order_id"`
+            TotalItems float64  `json:"total_items"`
+            FinalAmount float64  `json:"final_amount"`
+            FinalAmountInWords string  `json:"final_amount_in_words"`
+            OrderCreatedDate string  `json:"order_created_date"`
+            OrderCreatedTime string  `json:"order_created_time"`
+            PrmID string  `json:"prm_id"`
+            ReceiptNo string  `json:"receipt_no"`
+            Taxes PaymentReceiptTaxes  `json:"taxes"`
+         
+    }
+    
+    // PaymentReceiptCustomerDetails used by FileStorage
+    type PaymentReceiptCustomerDetails struct {
+
+        
+            ID string  `json:"id"`
+            EmailID string  `json:"email_id"`
+            LastName string  `json:"last_name"`
+            FirstName string  `json:"first_name"`
+            MobileNumber string  `json:"mobile_number"`
+         
+    }
+    
+    // PaymentReceiptPayments used by FileStorage
+    type PaymentReceiptPayments struct {
+
+        
+            PaymentDesc string  `json:"payment_desc"`
+            TxnDate string  `json:"txn_date"`
+         
+    }
+    
+    // PaymentReceiptFormat used by FileStorage
+    type PaymentReceiptFormat struct {
+
+        
+            PaymentReceipt []string  `json:"payment_receipt"`
+         
+    }
+    
+    // PaymentReceiptService used by FileStorage
+    type PaymentReceiptService struct {
+
+        
+            Name string  `json:"name"`
+         
+    }
+    
+    // PaymentReceiptTaxes used by FileStorage
+    type PaymentReceiptTaxes struct {
+
+        
+            Gstin string  `json:"gstin"`
+            Pancard string  `json:"pancard"`
+         
+    }
+    
+    // PaymentReceiptPayload used by FileStorage
+    type PaymentReceiptPayload struct {
+
+        
+            UID string  `json:"uid"`
+            OrderDetail PaymentReceiptOrderDetails  `json:"order_detail"`
+            CustomerDetail PaymentReceiptCustomerDetails  `json:"customer_detail"`
+            Payments []PaymentReceiptPayments  `json:"payments"`
+         
+    }
+    
+    // PaymentReceiptMeta used by FileStorage
+    type PaymentReceiptMeta struct {
+
+        
+            JobType string  `json:"job_type"`
+            Action string  `json:"action"`
+            Event map[string]interface{}  `json:"event"`
+            OrganizatonID string  `json:"organizaton_id"`
+            CompanyID float64  `json:"company_id"`
+            ApplicationID []string  `json:"application_id"`
+            Format PaymentReceiptFormat  `json:"format"`
+            TraceID []string  `json:"trace_id"`
+            CreatedTimestamp float64  `json:"created_timestamp"`
+            Service PaymentReceiptService  `json:"service"`
+            EventTraceInfo map[string]interface{}  `json:"event_trace_info"`
+            Trace string  `json:"trace"`
          
     }
     
@@ -17121,6 +17599,7 @@ package platform
 
         
             SameStoreAvailable bool  `json:"same_store_available"`
+            IsSelfShip bool  `json:"is_self_ship"`
             IsInternational bool  `json:"is_international"`
             Formatted Formatted  `json:"formatted"`
             DebugInfo map[string]interface{}  `json:"debug_info"`
@@ -17380,11 +17859,14 @@ package platform
     type ShipmentMeta struct {
 
         
+            TrackingURL string  `json:"tracking_url"`
+            EstimatedDeliveryDate string  `json:"estimated_delivery_date"`
             SameStoreAvailable bool  `json:"same_store_available"`
             B2bBuyerDetails BuyerDetails  `json:"b2b_buyer_details"`
             Formatted Formatted  `json:"formatted"`
             DebugInfo DebugInfo  `json:"debug_info"`
             ReturnAwbNumber string  `json:"return_awb_number"`
+            IsSelfShip bool  `json:"is_self_ship"`
             BoxType string  `json:"box_type"`
             EinvoiceInfo EinvoiceInfo  `json:"einvoice_info"`
             ReturnAffiliateShipmentID string  `json:"return_affiliate_shipment_id"`
@@ -19761,6 +20243,37 @@ package platform
             PlatformRefundDetails []map[string]interface{}  `json:"platform_refund_details"`
             Status string  `json:"status"`
             Currency string  `json:"currency"`
+         
+    }
+    
+    // RefundSourcesPriority used by Payment
+    type RefundSourcesPriority struct {
+
+        
+            Description string  `json:"description"`
+            Priority float64  `json:"priority"`
+            Source string  `json:"source"`
+         
+    }
+    
+    // RefundPriorityResponseSerializer used by Payment
+    type RefundPriorityResponseSerializer struct {
+
+        
+            Configuration string  `json:"configuration"`
+            Success bool  `json:"success"`
+            Apportion bool  `json:"apportion"`
+            RefundSourcesPriority []RefundSourcesPriority  `json:"refund_sources_priority"`
+            Message string  `json:"message"`
+         
+    }
+    
+    // RefundPriorityRequestSerializer used by Payment
+    type RefundPriorityRequestSerializer struct {
+
+        
+            Apportion bool  `json:"apportion"`
+            RefundSourcesPriority []RefundSourcesPriority  `json:"refund_sources_priority"`
          
     }
     
@@ -22239,6 +22752,29 @@ package platform
             Name string  `json:"name"`
             Description string  `json:"description"`
             FileURL string  `json:"file_url"`
+         
+    }
+    
+    // PartialUserGroupUpdateSchema used by User
+    type PartialUserGroupUpdateSchema struct {
+
+        
+            Type string  `json:"type"`
+            Name string  `json:"name"`
+            Description string  `json:"description"`
+            FileURL string  `json:"file_url"`
+            UserData []UserGroupUpdateData  `json:"user_data"`
+         
+    }
+    
+    // UserGroupUpdateData used by User
+    type UserGroupUpdateData struct {
+
+        
+            UserID string  `json:"user_id"`
+            PhoneNumber string  `json:"phone_number"`
+            Email string  `json:"email"`
+            Action string  `json:"action"`
          
     }
     
