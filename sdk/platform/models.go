@@ -6244,7 +6244,7 @@ package platform
     type ProductBulkRequestList struct {
 
         
-            Items ProductBulkRequest  `json:"items"`
+            Items []ProductBulkRequest  `json:"items"`
             Page Page  `json:"page"`
          
     }
