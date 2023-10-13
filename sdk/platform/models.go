@@ -6222,12 +6222,12 @@ package platform
 
         
             Cancelled float64  `json:"cancelled"`
-            CancelledRecords []string  `json:"cancelled_records"`
+            CancelledRecords []map[string]interface{}  `json:"cancelled_records"`
             CompanyID float64  `json:"company_id"`
             CreatedBy UserDetail1  `json:"created_by"`
             CreatedOn string  `json:"created_on"`
             Failed float64  `json:"failed"`
-            FailedRecords []string  `json:"failed_records"`
+            FailedRecords []map[string]interface{}  `json:"failed_records"`
             FilePath string  `json:"file_path"`
             IsActive bool  `json:"is_active"`
             ModifiedBy UserDetail1  `json:"modified_by"`
@@ -16579,6 +16579,7 @@ package platform
             Meta map[string]interface{}  `json:"meta"`
             Priority float64  `json:"priority"`
             LocationID float64  `json:"location_id"`
+            OrderType string  `json:"order_type"`
          
     }
     
@@ -18206,6 +18207,7 @@ package platform
             ShipmentID string  `json:"shipment_id"`
             Status string  `json:"status"`
             DisplayName string  `json:"display_name"`
+            CurrentShipmentStatus string  `json:"current_shipment_status"`
          
     }
     
