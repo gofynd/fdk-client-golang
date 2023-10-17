@@ -15343,6 +15343,7 @@ package platform
             ID string  `json:"_id"`
             CreatedAt string  `json:"created_at"`
             UpdatedAt string  `json:"updated_at"`
+            ExternalID string  `json:"external_id"`
          
     }
     
@@ -16579,7 +16580,6 @@ package platform
             Meta map[string]interface{}  `json:"meta"`
             Priority float64  `json:"priority"`
             LocationID float64  `json:"location_id"`
-            OrderType string  `json:"order_type"`
          
     }
     
@@ -18207,7 +18207,6 @@ package platform
             ShipmentID string  `json:"shipment_id"`
             Status string  `json:"status"`
             DisplayName string  `json:"display_name"`
-            CurrentShipmentStatus string  `json:"current_shipment_status"`
          
     }
     
@@ -22519,6 +22518,7 @@ package platform
             Gender string  `json:"gender"`
             Username string  `json:"username"`
             Meta map[string]interface{}  `json:"meta"`
+            ExternalID string  `json:"external_id"`
          
     }
     
@@ -22837,6 +22837,7 @@ package platform
             ID string  `json:"_id"`
             CreatedAt string  `json:"created_at"`
             UpdatedAt string  `json:"updated_at"`
+            ExternalID string  `json:"external_id"`
          
     }
     
