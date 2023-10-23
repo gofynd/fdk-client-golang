@@ -15503,6 +15503,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
         
         
+        
+        
 
         
 
@@ -17143,7 +17145,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
     
     //PlatformGetOrderByIdXQuery holds query params
     type PlatformGetOrderByIdXQuery struct { 
-        OrderID string  `url:"order_id,omitempty"`  
+        OrderID string  `url:"order_id,omitempty"` 
+        MyOrders bool  `url:"my_orders,omitempty"`  
     }
     
 
@@ -17161,6 +17164,8 @@ func (p *PlatformClient) SetPlatformApplicationClient(appID string) {
         
 
         
+            
+                
             
                 
             

@@ -3066,6 +3066,7 @@ package platform
             AddressType string  `json:"address_type"`
             Area string  `json:"area"`
             ID float64  `json:"id"`
+            StoreManagerName string  `json:"store_manager_name"`
             Name string  `json:"name"`
             StoreCode string  `json:"store_code"`
             Landmark string  `json:"landmark"`
@@ -3370,6 +3371,7 @@ package platform
             IsGift bool  `json:"is_gift"`
             Moq ApplicationItemMOQ  `json:"moq"`
             Seo ApplicationItemSEO  `json:"seo"`
+            SizePromotionThreshold SizePromotionThreshold  `json:"size_promotion_threshold"`
          
     }
     
@@ -6867,12 +6869,78 @@ package platform
          
     }
     
+    // Sitemap used by Catalog
+    type Sitemap struct {
+
+        
+            Priority float64  `json:"priority"`
+            Frequency string  `json:"frequency"`
+         
+    }
+    
+    // ApplicationItemSeoAction used by Catalog
+    type ApplicationItemSeoAction struct {
+
+        
+            Page map[string]interface{}  `json:"page"`
+            Type string  `json:"type"`
+         
+    }
+    
+    // ApplicationItemSeoBreadcrumbs used by Catalog
+    type ApplicationItemSeoBreadcrumbs struct {
+
+        
+            URL string  `json:"url"`
+            Action []ApplicationItemSeoAction  `json:"action"`
+         
+    }
+    
+    // ApplicationItemSeoMetaTagItem used by Catalog
+    type ApplicationItemSeoMetaTagItem struct {
+
+        
+            Key string  `json:"key"`
+            Value string  `json:"value"`
+         
+    }
+    
+    // ApplicationItemSeoMetaTags used by Catalog
+    type ApplicationItemSeoMetaTags struct {
+
+        
+            Title string  `json:"title"`
+            Items []ApplicationItemSeoMetaTagItem  `json:"items"`
+         
+    }
+    
+    // Metatags used by Catalog
+    type Metatags struct {
+
+        
+            Title string  `json:"title"`
+            Items []ApplicationItemSeoMetaTags  `json:"items"`
+         
+    }
+    
+    // SizePromotionThreshold used by Catalog
+    type SizePromotionThreshold struct {
+
+        
+            ThresholdType string  `json:"threshold_type"`
+            ThresholdValue float64  `json:"threshold_value"`
+         
+    }
+    
     // SEOData used by Catalog
     type SEOData struct {
 
         
             Description string  `json:"description"`
             Title string  `json:"title"`
+            Sitemap Sitemap  `json:"sitemap"`
+            Breadcrumbs []ApplicationItemSeoBreadcrumbs  `json:"breadcrumbs"`
+            MetaTags []Metatags  `json:"meta_tags"`
          
     }
     
@@ -6924,6 +6992,9 @@ package platform
         
             Description string  `json:"description"`
             Title string  `json:"title"`
+            Sitemap map[string]interface{}  `json:"sitemap"`
+            Breadcrumbs []ApplicationItemSeoBreadcrumbs  `json:"breadcrumbs"`
+            MetaTags []Metatags  `json:"meta_tags"`
          
     }
     
@@ -12455,6 +12526,7 @@ package platform
             Type string  `json:"type"`
             FileType string  `json:"file_type"`
             ID string  `json:"_id"`
+            FilePath string  `json:"file_path"`
          
     }
     
@@ -16580,6 +16652,7 @@ package platform
             Meta map[string]interface{}  `json:"meta"`
             Priority float64  `json:"priority"`
             LocationID float64  `json:"location_id"`
+            OrderType string  `json:"order_type"`
          
     }
     
@@ -16644,6 +16717,20 @@ package platform
          
     }
     
+    // UserInfo used by Order
+    type UserInfo struct {
+
+        
+            UserID string  `json:"user_id"`
+            UserType string  `json:"user_type"`
+            Email string  `json:"email"`
+            Gender string  `json:"gender"`
+            FirstName string  `json:"first_name"`
+            LastName string  `json:"last_name"`
+            Mobile string  `json:"mobile"`
+         
+    }
+    
     // TaxInfo used by Order
     type TaxInfo struct {
 
@@ -16692,6 +16779,7 @@ package platform
             TaxInfo TaxInfo  `json:"tax_info"`
             Config map[string]interface{}  `json:"config"`
             PaymentInfo PaymentInfo  `json:"payment_info"`
+            UserInfo UserInfo  `json:"user_info"`
          
     }
     
@@ -18207,6 +18295,7 @@ package platform
             ShipmentID string  `json:"shipment_id"`
             Status string  `json:"status"`
             DisplayName string  `json:"display_name"`
+            CurrentShipmentStatus string  `json:"current_shipment_status"`
          
     }
     
@@ -20111,29 +20200,42 @@ package platform
          
     }
     
+    // OrderDetail used by Payment
+    type OrderDetail struct {
+
+        
+            Gid string  `json:"gid"`
+            Amount float64  `json:"amount"`
+            Status string  `json:"status"`
+            Currency string  `json:"currency"`
+            AggregatorOrderDetails map[string]interface{}  `json:"aggregator_order_details"`
+            Aggregator string  `json:"aggregator"`
+         
+    }
+    
     // AddressDetail used by Payment
     type AddressDetail struct {
 
         
-            CountryIsoCode string  `json:"country_iso_code"`
             GoogleMapPoint map[string]interface{}  `json:"google_map_point"`
-            Country string  `json:"country"`
-            Email string  `json:"email"`
-            AreaCode string  `json:"area_code"`
-            City string  `json:"city"`
-            Phone string  `json:"phone"`
-            ExpireAt string  `json:"expire_at"`
-            Address string  `json:"address"`
-            GAddressID string  `json:"g_address_id"`
-            Tags []map[string]interface{}  `json:"tags"`
-            Name string  `json:"name"`
-            State string  `json:"state"`
             Landmark string  `json:"landmark"`
-            Area string  `json:"area"`
-            AreaCodeSlug string  `json:"area_code_slug"`
-            AddressType string  `json:"address_type"`
-            CountryPhoneCode string  `json:"country_phone_code"`
+            Phone string  `json:"phone"`
+            CountryIsoCode string  `json:"country_iso_code"`
+            AreaCode string  `json:"area_code"`
+            Country string  `json:"country"`
+            ExpireAt string  `json:"expire_at"`
             GeoLocation map[string]interface{}  `json:"geo_location"`
+            State string  `json:"state"`
+            Area string  `json:"area"`
+            GAddressID string  `json:"g_address_id"`
+            AreaCodeSlug string  `json:"area_code_slug"`
+            CountryPhoneCode string  `json:"country_phone_code"`
+            Name string  `json:"name"`
+            AddressType string  `json:"address_type"`
+            Address string  `json:"address"`
+            Email string  `json:"email"`
+            City string  `json:"city"`
+            Tags []map[string]interface{}  `json:"tags"`
          
     }
     
@@ -20141,40 +20243,27 @@ package platform
     type PaymentSessionDetail struct {
 
         
-            AggregatorOrderID string  `json:"aggregator_order_id"`
-            ShippingAddress AddressDetail  `json:"shipping_address"`
-            AmountCaptured float64  `json:"amount_captured"`
-            AmountRefunded float64  `json:"amount_refunded"`
-            AggregatorCustomerID string  `json:"aggregator_customer_id"`
-            CancelURL string  `json:"cancel_url"`
             PaymentID string  `json:"payment_id"`
-            PaymentMethods []map[string]interface{}  `json:"payment_methods"`
-            Created string  `json:"created"`
+            Mode string  `json:"mode"`
+            Amount float64  `json:"amount"`
+            SuccessURL string  `json:"success_url"`
+            ShippingAddress AddressDetail  `json:"shipping_address"`
             GUserID string  `json:"g_user_id"`
             Currency string  `json:"currency"`
-            Locale string  `json:"locale"`
-            Gid string  `json:"gid"`
-            Amount float64  `json:"amount"`
-            BillingAddress AddressDetail  `json:"billing_address"`
-            SuccessURL string  `json:"success_url"`
-            Kind string  `json:"kind"`
-            Mode string  `json:"mode"`
-            Status string  `json:"status"`
             MerchantLocale string  `json:"merchant_locale"`
-            Captured bool  `json:"captured"`
-         
-    }
-    
-    // OrderDetail used by Payment
-    type OrderDetail struct {
-
-        
+            Locale string  `json:"locale"`
+            AggregatorOrderID string  `json:"aggregator_order_id"`
             Gid string  `json:"gid"`
-            Aggregator string  `json:"aggregator"`
-            Amount float64  `json:"amount"`
-            AggregatorOrderDetails map[string]interface{}  `json:"aggregator_order_details"`
+            CancelURL string  `json:"cancel_url"`
+            AmountRefunded float64  `json:"amount_refunded"`
+            Captured bool  `json:"captured"`
+            Created string  `json:"created"`
             Status string  `json:"status"`
-            Currency string  `json:"currency"`
+            Kind string  `json:"kind"`
+            AggregatorCustomerID string  `json:"aggregator_customer_id"`
+            PaymentMethods []map[string]interface{}  `json:"payment_methods"`
+            BillingAddress AddressDetail  `json:"billing_address"`
+            AmountCaptured float64  `json:"amount_captured"`
          
     }
     
@@ -20182,12 +20271,13 @@ package platform
     type PaymentSessionRequestSerializer struct {
 
         
+            Meta map[string]interface{}  `json:"meta"`
             Gid string  `json:"gid"`
+            OrderDetails OrderDetail  `json:"order_details"`
+            Status string  `json:"status"`
+            Currency string  `json:"currency"`
             PaymentDetails []PaymentSessionDetail  `json:"payment_details"`
             TotalAmount float64  `json:"total_amount"`
-            Status string  `json:"status"`
-            OrderDetails OrderDetail  `json:"order_details"`
-            Currency string  `json:"currency"`
          
     }
     
@@ -20197,9 +20287,9 @@ package platform
         
             Gid string  `json:"gid"`
             PlatformTransactionDetails []map[string]interface{}  `json:"platform_transaction_details"`
-            TotalAmount float64  `json:"total_amount"`
             Status string  `json:"status"`
             Currency string  `json:"currency"`
+            TotalAmount float64  `json:"total_amount"`
          
     }
     
@@ -20208,17 +20298,17 @@ package platform
 
         
             RefundUtr string  `json:"refund_utr"`
-            ReceiptNumber string  `json:"receipt_number"`
-            BalanceTransaction string  `json:"balance_transaction"`
-            PaymentID string  `json:"payment_id"`
-            Created string  `json:"created"`
             RequestID string  `json:"request_id"`
-            TransferReversal string  `json:"transfer_reversal"`
+            PaymentID string  `json:"payment_id"`
             Amount float64  `json:"amount"`
-            Status string  `json:"status"`
-            SourceTransferReversal string  `json:"source_transfer_reversal"`
-            Currency string  `json:"currency"`
             Reason string  `json:"reason"`
+            Status string  `json:"status"`
+            Created string  `json:"created"`
+            SourceTransferReversal string  `json:"source_transfer_reversal"`
+            ReceiptNumber string  `json:"receipt_number"`
+            Currency string  `json:"currency"`
+            TransferReversal string  `json:"transfer_reversal"`
+            BalanceTransaction string  `json:"balance_transaction"`
          
     }
     
@@ -20226,12 +20316,13 @@ package platform
     type RefundSessionRequestSerializer struct {
 
         
+            Meta map[string]interface{}  `json:"meta"`
             Gid string  `json:"gid"`
-            PaymentDetails PaymentSessionDetail  `json:"payment_details"`
-            TotalAmount float64  `json:"total_amount"`
-            RefundDetails []RefundSessionDetail  `json:"refund_details"`
             Status string  `json:"status"`
             Currency string  `json:"currency"`
+            PaymentDetails PaymentSessionDetail  `json:"payment_details"`
+            RefundDetails []RefundSessionDetail  `json:"refund_details"`
+            TotalAmount float64  `json:"total_amount"`
          
     }
     
@@ -20239,11 +20330,11 @@ package platform
     type RefundSessionResponseSerializer struct {
 
         
-            TotalRefundAmount float64  `json:"total_refund_amount"`
             Gid string  `json:"gid"`
-            PlatformRefundDetails []map[string]interface{}  `json:"platform_refund_details"`
             Status string  `json:"status"`
             Currency string  `json:"currency"`
+            PlatformRefundDetails []map[string]interface{}  `json:"platform_refund_details"`
+            TotalRefundAmount float64  `json:"total_refund_amount"`
          
     }
     

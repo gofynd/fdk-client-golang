@@ -6684,6 +6684,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
             
         
+            
+        
 
          
 
@@ -23652,6 +23654,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
             
         
+            
+        
 
          
 
@@ -23712,6 +23716,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             updateRefundSessionResponse RefundSessionResponseSerializer
 	    )
 
+        
+            
         
             
         
