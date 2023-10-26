@@ -6684,6 +6684,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
             
         
+            
+        
 
          
 
@@ -23652,6 +23654,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
             
         
+            
+        
 
          
 
@@ -23712,6 +23716,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             updateRefundSessionResponse RefundSessionResponseSerializer
 	    )
 
+        
+            
         
             
         
@@ -27950,6 +27956,8 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
         
             
         
+            
+        
 
          
 
@@ -28453,12 +28461,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
     }
     
     // DeleteActiveSessions Delete a list of all session for a user
-     func (us *PlatformAppUser)  DeleteActiveSessions(xQuery PlatformAppDeleteActiveSessionsXQuery) (SessionDeleteResponseSchema, error) {
+     func (us *PlatformAppUser)  DeleteActiveSessions(xQuery PlatformAppDeleteActiveSessionsXQuery) (SessionsDeleteResponseSchema, error) {
         var (
             rawRequest  *RawRequest
             response    []byte
             err         error
-            deleteActiveSessionsResponse SessionDeleteResponseSchema
+            deleteActiveSessionsResponse SessionsDeleteResponseSchema
 	    )
 
         
@@ -28486,12 +28494,12 @@ func NewApplicationClient(appID string, config *PlatformConfig) *ApplicationClie
             nil)
         response, err = rawRequest.Execute()
         if err != nil {
-            return SessionDeleteResponseSchema{}, err
+            return SessionsDeleteResponseSchema{}, err
 	    }
         
         err = json.Unmarshal(response, &deleteActiveSessionsResponse)
         if err != nil {
-            return SessionDeleteResponseSchema{}, common.NewFDKError(err.Error())
+            return SessionsDeleteResponseSchema{}, common.NewFDKError(err.Error())
         }
         return deleteActiveSessionsResponse, nil
         

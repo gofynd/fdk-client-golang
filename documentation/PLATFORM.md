@@ -4,7 +4,7 @@
 * [AuditTrail](#AuditTrail) - Audit Logging Service that logs the crucial updates on the Platform 
 * [Billing](#Billing) - Handle platform subscription 
 * [Cart](#Cart) - Cart APIs 
-* [Catalog](#Catalog) - Catalog - Platform Front API's' API's allows you to access list of products, prices, seller details, similar features, variants and many more useful features.  
+* [Catalog](#Catalog) - Catalog - Platform Front API's' API's allows you to access list of products, prices, seller details, similar features, variants and many more useful features. 
 * [Common](#Common) - Application configuration apis 
 * [Communication](#Communication) - Manages email, sms, push notifications sent to users 
 * [CompanyProfile](#CompanyProfile) - Catalog CBS - platform Front API's 
@@ -40785,7 +40785,9 @@ data, err := Order.GetOrderById(CompanyID, xQuery);
 
 
 
-| xQuery | struct | Includes properties such as `OrderID`
+
+
+| xQuery | struct | Includes properties such as `OrderID`, `MyOrders`
 
 
 Get Order Details by ID
@@ -90289,10 +90291,8 @@ Success
 ```json
 {
   "value": {
-    "items": [
-      "sess:123",
-      "sess:456"
-    ]
+    "user_id": "61f02c3dcc701256044ed6c0",
+    "session_id": "sess:123"
   }
 }
 ```
@@ -90408,10 +90408,10 @@ Use this API to Delete a list of session of customers who have registered in the
 
 
 
-Success. Refer `SessionDeleteResponseSchema` for more details.
+Success. Refer `SessionsDeleteResponseSchema` for more details.
 
 
-Schema: `SessionDeleteResponseSchema`
+Schema: `SessionsDeleteResponseSchema`
 
 
 *Examples:*
@@ -90421,7 +90421,8 @@ Success
 ```json
 {
   "value": {
-    "items": [
+    "user_id": "61f02c3dcc701256044ed6c0",
+    "session_ids": [
       "sess:123",
       "sess:456"
     ]

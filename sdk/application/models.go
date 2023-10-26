@@ -5473,6 +5473,7 @@ package application
             SlugKey string  `json:"slug_key"`
             L2Categories []string  `json:"l2_categories"`
             Size string  `json:"size"`
+            Attributes map[string]interface{}  `json:"attributes"`
          
     }
     
